@@ -4,7 +4,7 @@ Standalone C++20 market-microstructure research project. Correctness precedes
 performance. No live trading, broker connection or GIG Quant Terminal dependency.
 The initial README and all Git history are preserved in repository history.
 
-## Current status — Phase 3 in validation
+## Current status — Phase 3
 
 IMPLEMENTED: strong types and validated event contracts, a deterministic single-owner
 order-level book, strict multi-stream replay, explicit reset/recovery, owned accepted-
