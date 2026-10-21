@@ -61,6 +61,13 @@ target_link_libraries(gig_engine_demo PRIVATE gig::microstructure)
 gig_project_target(gig_engine_demo)
 
 if(BUILD_TESTING)
+  find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter)
+  add_executable(gig_numeric_tests tests/test_numeric.cpp)
+  target_link_libraries(gig_numeric_tests PRIVATE gig::microstructure)
+  gig_project_target(gig_numeric_tests)
+  add_test(NAME numeric.contracts COMMAND gig_numeric_tests contracts)
+  add_test(NAME numeric.independent_reference COMMAND ${Python3_EXECUTABLE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_numeric_reference.py $<TARGET_FILE:gig_numeric_tests>)
   add_executable(gig_engine_tests tests/test_types.cpp)
   target_link_libraries(gig_engine_tests PRIVATE gig::microstructure)
   gig_project_target(gig_engine_tests)
