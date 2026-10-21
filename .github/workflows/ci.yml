@@ -2,15 +2,29 @@ name: C++ CI
 on:
   push:
   pull_request:
-
+permissions:
+  contents: read
 jobs:
   build-and-test:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+        preset: [debug, release, asan-ubsan]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Select compiler
+        shell: bash
+        run: |
+          if [ "${{ matrix.compiler }}" = clang ]; then
+            echo 'CXX=clang++' >> "$GITHUB_ENV"
+          else
+            echo 'CXX=g++' >> "$GITHUB_ENV"
+          fi
       - name: Configure
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+        run: cmake --preset ${{ matrix.preset }}
       - name: Build
-        run: cmake --build build --parallel 2
+        run: cmake --build --preset ${{ matrix.preset }}
       - name: Test
-        run: ctest --test-dir build --output-on-failure
+        run: ctest --preset ${{ matrix.preset }} --output-junit build/${{ matrix.preset }}/tests.xml
