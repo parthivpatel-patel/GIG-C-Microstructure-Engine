@@ -24,3 +24,8 @@ if(BUILD_TESTING)
   add_test(NAME benchmark.book_smoke COMMAND ${Python3_EXECUTABLE}
     ${PROJECT_SOURCE_DIR}/scripts/check_book_benchmark.py $<TARGET_FILE:gig_book_benchmark>)
 endif()
+
+add_executable(gig_research_benchmark research_benchmark.cpp)
+target_link_libraries(gig_research_benchmark PRIVATE gig::microstructure)
+target_include_directories(gig_research_benchmark PRIVATE ${PROJECT_SOURCE_DIR})
+gig_project_target(gig_research_benchmark)

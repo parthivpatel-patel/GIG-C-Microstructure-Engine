@@ -4,13 +4,13 @@ Standalone C++20 market-microstructure research project. Correctness precedes
 performance. No live trading, broker connection or GIG Quant Terminal dependency.
 The initial README and all Git history are preserved in repository history.
 
-## Current status — Phase 2
+## Current status — Phase 3 in validation
 
 IMPLEMENTED: strong types and validated event contracts, a deterministic single-owner
 order-level book, strict multi-stream replay, explicit reset/recovery, owned accepted-
 event provenance and canonical outputs. Historical reconstruction never matches orders.
 The demo replays an entirely synthetic 11-record workflow; `--canonical` emits its
-canonical result. No analytics, matching, execution simulation or Python integration.
+canonical result. Book-state exact analytics are implemented; no matching, execution simulation or Python integration yet.
 
 See [book semantics](docs/PHASE_2_BOOK.md), [replay contracts](docs/PHASE_2_REPLAY.md),
 [benchmark methodology](docs/PHASE_2_BENCHMARKS.md) and [limitations](docs/LIMITATIONS.md).
@@ -48,4 +48,5 @@ production-readiness claim follows from using C++.
 Use `feat/bootstrap-cpp20-engine` for approved development; never force-push or
 merge main without approval. GitHub is the durable source of truth: verified
 checkpoints must be pushed and their remote SHAs checked before substantial new
-work. Phase 2 is authorized; Phase 3 requires separate user approval.
+work. Phases 3–9 are authorized by [the autonomous mandate](docs/AUTONOMOUS_MANDATE.md).
+Proceed sequentially through validated checkpoints; no merge to main or release publication.
