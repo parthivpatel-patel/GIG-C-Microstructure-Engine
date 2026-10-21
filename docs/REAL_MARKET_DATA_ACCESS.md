@@ -1,5 +1,244 @@
 # Phase P1B — official data access and sample inventory
 
+## Latest investigation — official NASDAQ historical sample
+
+Review date: 2026-10-21 UTC. Resumed baseline:
+`8ab92dab20f9f66639b530a2b099788f7f66c0cc`.
+Repository: `parthivpatel-patel/GIG-C-Microstructure-Engine`.
+Branch: `feat/bootstrap-cpp20-engine`.
+
+**Result: no suitable, permitted small NASDAQ historical ITCH 5.0 sample has been
+verified in the official resources reached. NO-GO for market-data download or adapter
+implementation at this checkpoint.** This is not a claim that NASDAQ has no sample
+anywhere; the search is bounded by unavailable product pages and a blocked official
+product host. The documentation supports an account-based historical-data route,
+not an established free evaluation entitlement. No historical data file was requested,
+no agreement accepted, no account created and no purchase or paid resource initiated.
+
+LOBSTER was **not retried**. No proxy bypass, HTTP downgrade, certificate-verification
+disablement, third-party mirror or unauthorized outreach was used. The C++ engine,
+recovery rules and journal are unchanged. Earlier specification findings and access
+attempts are preserved in the historical record below, not represented as fresh tests.
+
+### Repository and network observations
+
+The working tree was clean at entry. Local HEAD and the exact remote development HEAD
+were both the resumed baseline above. Existing P1A, institutional audit and remediation
+report/evidence were fingerprinted and remain unchanged. No branch switch or history
+rewrite was performed. Only this access report is changed and normally committed/pushed.
+Main is preserved.
+
+The cloud runtime skill and networking reference were read. Runtime status reported
+connected/current observations, both prior custom allowed hosts still listed, but
+network-policy state `unknown` in this invocation. Do not replace the earlier recorded
+`enforced` observation with a claim of currently verified enforcement. The actual
+HTTPS responses below establish the reachability of the specific paths tested.
+The local policy remains restricted with VPN unconfigured; no configuration update
+was made. `www.nasdaq.com` is a different hostname from `www.nasdaqtrader.com`.
+
+### Official discovery and source-access ledger
+
+The NASDAQ Trader homepage was retrieved and its actual navigation/footer links were
+inspected. The Historical ITCH, TotalView, global-data, data-agreement, copyright and
+US Equity Tick History URLs below are taken from that official homepage. The initial
+Historical ITCH query was a discovery probe and was subsequently confirmed to be a
+homepage link; no guessed archive filename was requested. Times are UTC request
+completion/recording times. Requests preserved the configured proxy and TLS validation.
+
+| Official resource | Recorded UTC | Observed result |
+|---|---|---|
+| https://www.nasdaqtrader.com/ | 2026-10-21T22:53:44.109920+00:00 | curl0, HTTP200, 171,787-byte homepage; relevant official navigation links inspected |
+| https://www.nasdaqtrader.com/Trader.aspx?id=ITCH | 2026-10-21T22:53:44.868324+00:00 | HTTP302 toward `http://www.nasdaqtrader.com/ErrorPage404.aspx?path=%2fTrader.aspx%3fid%3dITCH`; curl1 because HTTP redirect is disabled |
+| https://www.nasdaqtrader.com/Trader.aspx?id=Totalview2 | 2026-10-21T22:54:02.656772+00:00 | HTTP302 toward the same ErrorPage404 path with its own encoded query; HTTP redirect not followed |
+| https://www.nasdaqtrader.com/Trader.aspx?id=Global_Market_Data | 2026-10-21T22:54:03.072598+00:00 | Same HTTP302/ErrorPage404 behavior; HTTP redirect not followed |
+| https://www.nasdaqtrader.com/Trader.aspx?id=AgreementsData | 2026-10-21T22:54:03.064093+00:00 | Same HTTP302/ErrorPage404 behavior; actual data-agreement terms not retrieved |
+| https://www.nasdaq.com/solutions/US-Equity-Tick-History | 2026-10-21T22:54:01.994010+00:00 | curl56, proxy CONNECT403, origin HTTP000, zero downloaded body bytes |
+| https://www.nasdaqtrader.com/Trader.aspx?id=CopyDisclaimMain | 2026-10-21T22:54:34.122775+00:00 | curl0, HTTP200, 89,748-byte copyright/trademarks/disclaimer page, relevant terms inspected |
+| https://www.nasdaqtrader.com/robots.txt | 2026-10-21T22:54:34.045236+00:00 | Final HTTP200 at `https://www.nasdaqtrader.com/Trader.aspx?id=http404`, title “Page Not Available”; not a robots document |
+| https://www.nasdaqtrader.com/sitemap.xml | 2026-10-21T22:54:33.889457+00:00 | Same final HTTP200 error page, 42,995 bytes; not a sample index or XML sitemap |
+
+A 302 Location naming ErrorPage404 is not a measured HTTP404 response; the downgrade
+was not followed. Likewise, HTTP200 HTML titled “Page Not Available” does not verify
+that a sitemap exists. No missing/blocked page was treated as a successful sample or
+license discovery. The `www.nasdaq.com` failure establishes a present access blocker
+for that official product page, not that its data are unavailable or necessarily paid.
+No LOBSTER request or repeated unchanged retry was issued.
+
+Command shape, with exact arguments/return codes retained outside Git:
+
+```sh
+curl --proto '=https' --proto-redir '=https' --location \
+  --max-time 25 --max-filesize 5000000 --silent --show-error \
+  --output /tmp/gig-p1b-nasdaq-sample/<name>.html \
+  --write-out '%{http_code} %{size_download} %{url_effective}' '<official URL>'
+```
+
+The final three policy/discovery probes used 20 seconds and a 3,000,000-byte limit.
+The private evidence root is mode0700 and outside the repository. No JavaScript or
+third-party tracking resources were executed. No market-data archives, byte ranges
+or SFTP files were downloaded. Website HTML/metadata were inspected solely for
+source discovery and terms; no website quote/statistic rows are reproduced here.
+
+| Local evidence artifact | SHA256 |
+|---|---|
+| Exact homepage HTML | `ec90772938d3089172723a8fc37dfa2615c0aaf6f3668f4e1134e12a63c053a8` |
+| Exact copyright-page HTML | `efb6ff02796530ed6b1ca5abe25f3f5086a5472ede7f34741a52fb7370688b5d` |
+| Nine-request metadata ledger | `d293691090c0df35a6780c028f746381657c73c7bddbbd7b86c47c3be39b39d5` |
+
+These are documentation/discovery identities, not market-data hashes. Raw pages,
+error pages and request metadata remain external and are not distributed in Git.
+The three prior official specification hashes remain recorded in the historical
+section; those documents were reused, not redownloaded in this investigation.
+
+### Six requested verification questions
+
+| Question | Finding and evidence boundary |
+|---|---|
+| 1. Exact official sample download location | **Not established.** No verified direct URL to a small free/evaluation ITCH5 archive was found in the reached official resources. The prior access guide identifies `sftp://itchdata.nasdaq.com:22`, `ITCHFiles_v5`, and filename convention `SMMDDYY-v50.txt.gz`, but that is a documented account-based route, not an authenticated listing or a publicly licensed sample URL. The guide's illustrative filename/date is not a selected sample. |
+| 2. Free access or agreement | **Unresolved for a sample.** The guide requires a Historical TotalView-ITCH account username/password; it does not identify a free anonymous evaluation entitlement. No account or entitlement was supplied/verified. Account-based does not by itself prove a fee; no fee amount or mandatory purchase is invented. The specific data-agreement link was unavailable as recorded above. |
+| 3. Licensing and retention | **No sample-specific grant or retention conditions established.** Website copyright terms were read, as detailed below, but do not establish an ITCH historical sample entitlement or blanket research use. No assumption of perpetual retention, cloud permission or raw/derived redistribution is made. |
+| 4. Size/date/format/sequence coverage | **No selected sample metadata available.** Compressed/uncompressed size, trading date, row/message counts, first/last record, source sequence extent, truncation and scope are unknown. The official wire/BinaryFile formats are documented; a sample's actual adherence/coverage has not been inspected. |
+| 5. Defensible initial L3 state | **Not established.** There is no actual sample or initialized order-level state to examine. An account guide, date filename, first observed add or market-open flag is insufficient. A complete initial boundary plus all relevant displayed-order history, or a complete identified order snapshot with priorities/boundaries, is needed. |
+| 6. Existing engine compatibility | **Conditional at specification level only.** Displayed adds, reductions/deletes and identified resting-price executions fit existing contracts given complete state. Execution-price overrides, printable flags, trade breaks, auction/status detail and large initial snapshots have the limitations described below and in P1A. No empirical compatibility or reconstruction pass is claimed. |
+
+### Licensing facts actually observed
+
+The official copyright page, headed “Copyright, Trademarks and Disclaimers,” says
+website Content is owned by Nasdaq or affiliates unless otherwise stated. Its
+Copyright section generally requires prior written consent for copying/storage/use,
+subject to stated fair-use and limited-copy exceptions. It describes one temporary
+copy in one computer's memory and one unaltered permanent copy for the viewer's
+**personal and non-commercial use only**, with required permission notice and copyright
+citation. It says other use may require prior written consent and a fee, except where
+separate agreements permit it. The disclaimer also disclaims accuracy/completeness.
+
+This is a scoped observation of the website wording, not legal advice or a conclusion
+that this project's intended research qualifies under an exception. **Private is not
+a synonym for personal/non-commercial.** The page does not identify a particular ITCH
+sample, grant its data entitlement, establish its governing agreement, or specify a
+historical-sample retention/deletion period. It cannot justify downloading unidentified
+historical market data. It is not an open-data license. Any future acquisition needs
+verified applicable sample/evaluation terms or written permission covering the actual
+use. Do not distribute raw data, long specification excerpts or these HTML pages in
+Git. Only source metadata, limited paraphrase and links are recorded here.
+
+The previously read BinaryFILE phrase “Current Restrictions: None known” describes a
+technical protocol document, not market-data licensing or unlimited retention.
+The access guide's “most recent three months” directory descriptions concern stated
+server availability, not a licensee's allowed retention period; even current server
+availability has not been independently inspected. Do not conflate these meanings.
+
+### Initial-state and engine fit gates for any future offered extract
+
+A useful smallest evaluation extract would contain one named NASDAQ instrument,
+one identified session/date, and a source-supported initial displayed state followed
+by complete relevant order lifecycle updates. A small midday time slice without
+initial state is not enough. A symbol filter needs explicit context/coverage and
+must not omit deeper orders that can later enter the compared depth. A full-market
+file may be much larger than a small sample and cannot be declared feasible before
+its metadata and required history are known.
+
+The current source still requires:
+
+- Positive, nonfabricated IDs and exact price/share conversion. Reference IDs and
+  stock locates must respect the verified daily scope. No invented order ID is
+  introduced for a zero-reference non-displayed trade.
+- `src/book/order_book.cpp:162–181`: known resting order, matching resting side/price,
+  and sufficient remaining size for executions/cancels; no implicit state creation.
+- `src/book/order_book.cpp:233–267` and
+  `include/gig/events/contracts.hpp:156–160`: complete order-level recovery only,
+  at most64 snapshot orders. Aggregate levels cannot initialize FIFO; splitting one
+  full initial snapshot into multiple “complete” recoveries is invalid.
+- `src/replay/replay.cpp:38–49,71–115`: proven initial state, scoped contiguous native
+  ordering and explicit journal bounds. Default4,096 and maximum100,000 retained
+  records remain in force. Prior measured JournalEntry size is15,944 bytes on the
+  reviewed x86_64 ABI; no new performance/memory measurements or optimizations here.
+- An actual BinaryFile session boundary and complete lifecycle/sequence coverage,
+  not merely its terminal zero-length marker. That marker detects a missing terminal
+  indication but does not independently prove no upstream exchange events were lost.
+  Any local normalized sequence must be labeled derived, not an exchange sequence.
+
+Specification-level classifications remain: A/E/X/D displayed mutations are E with
+valid prior state and exact units; F and U are qualified projections with external
+attribution/inherited context and explicit priority policy; P is nonmutating A with
+missing aggressor (its modern side field is constantB); Q is A only for representable
+positive-size print projection, with zero-share Q unsupported as current TradePrint.
+C requires extra capability for faithful execution-price/printability semantics;
+B can be externally classified as nonmutating for an expressly book-only replay but
+needs correction support for tape/statistics. Full auctions/hidden queues and detailed
+administrative semantics remain outside scope. These are code/spec facts, not a sample
+histogram or an independently validated market run.
+
+No recovered state, IDs, queues, source timestamps or executions will be fabricated
+to make an eventual sample pass. No currently verified real-data interval exists.
+
+### Smallest practical next step
+
+**Ask NASDAQ Client Success for a no-cost, private evaluation extract and explicit
+terms before attempting any data download.** The contact `Clientsuccess@nasdaq.com`
+is verified in the official access guide; no email/message has been sent, since
+outreach has not been authorized. The user can ask through that official channel:
+
+> Is there a no-cost, officially distributed historical TotalView-ITCH5.0 evaluation
+> file for offline private research validation? Please provide the exact official
+> URL/access method and governing evaluation terms, including agreement/entitlement
+> requirements, allowed cloud/local use, retention/deletion period, and restrictions
+> on raw data, derived outputs and non-data validation reports. Prefer one instrument
+> with documented session/date, framing, complete initial state and update coverage,
+> plus compressed/uncompressed sizes, checksum, first/last source boundaries and any
+> independently supplied reference depth states. No paid subscription is requested.
+
+Prefer a complete low-activity instrument/session or a publisher-provided self-contained
+extract whose full state-building history fits the current bounded journal. A few
+thousand retained normalized records would keep the first experiment near the default
+4,096-record budget; this is a project practicality preference, not a claim such a
+sample exists, a mandatory NASDAQ distribution size or an institutional SLA. If a
+larger complete history is necessary, reassess resources rather than clipping away
+required orders or changing the engine under P1B. Request aggregate reference states
+for comparison, while recognizing they are not a substitute for initial L3 identity.
+
+Alternatively, a supported narrow allowlist addition for `www.nasdaq.com` would let
+this environment inspect the homepage-linked US Equity Tick History product page.
+That may reveal current evaluation terms/contact instructions, but is not known to
+provide a small order-level ITCH5 sample and does not itself establish rights. No
+network change was saved in this investigation: the smallest recommended step is the
+specific official sample/terms inquiry, rather than broadening access or provisioning
+an account without an identified permitted artifact. No LOBSTER action is required
+for this NASDAQ-specific inquiry.
+
+If NASDAQ confirms no suitable no-cost sample, stop acquisition and report that
+confirmation. Do not substitute a licensed vendor file, unauthorized mirror, modern
+trade/quote dataset or synthetic fixture and call it historical order-level validation.
+Adapter implementation remains a separate authorization after rights, initial state,
+metadata/resource feasibility and comparison coverage have been established.
+
+### Checks and stop
+
+Verified here: clean baseline and exact remote SHA; official navigation links;
+request-level results and HTTPS-only handling; actual website copyright text;
+prior document hashes and retained source/spec limitations; preserved prior report,
+audit/remediation evidence; documentation-only diff and checks. No market-data file
+or byte range was requested, no LOBSTER request was made, and no C++/Python tests or
+benchmarks were rerun because implementation/build/schema/package files are unchanged.
+No source acquisition, numerical reconstruction or performance success is claimed.
+
+Only this report is committed and pushed to the existing development branch. The
+completion response supplies the remotely verified final SHA. Stop after this
+investigation; no adapter, engine change, main merge, release, live integration,
+Terminal modification, subscription or paid resource is authorized or performed.
+
+## Earlier P1B evidence — retained historical record
+
+The sections below document earlier official-specification/access investigations.
+They remain useful provenance but their references to a pending next action are
+superseded by the NASDAQ-specific recommendation above. No destination was retried
+merely to reproduce those historical results.
+
+<details>
+<summary>Earlier P1B access report and specification review</summary>
+
+# Phase P1B — official data access and sample inventory
+
 Current update: 2026-10-21 UTC, after the user published the two-domain network change.
 Resumed baseline: `557f1237a3bd7d8598b0dcc6cd8d00aab8fff0ca`.
 Repository: `parthivpatel-patel/GIG-C-Microstructure-Engine`.
@@ -588,5 +827,7 @@ main merge, release, purchase or paid resource is created.
 acquisition and validated replay until the required access, rights and state evidence
 are obtained. Continue only after the identified environment action; do not implement
 the adapter under this P1B authorization.**
+
+</details>
 
 </details>
