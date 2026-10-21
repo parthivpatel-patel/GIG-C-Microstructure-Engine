@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string_view>
 #include "gig/memory/tracked_resource.hpp"
-#include "tests/support/phase2_fixtures.hpp"
+#include "fixtures/synthetic/book_events.hpp"
 #include "tests/support/book_reference.hpp"
 using namespace gig;using namespace gig::fixtures;
 namespace {
@@ -157,7 +157,10 @@ int main(int argc,char** argv) {
                             payload=ReplaceOrder{number<OrderId>(item.id),number<OrderId>(item.id),item.side,number<PriceTicks>(retain?item.price:static_cast<std::int64_t>((item.side==Side::buy?100:200)+rng(state_rng)%8)),number<QuantityLots>(retain?amount:rng(state_rng)%50+1),retain?ReplacePriority::retain_only_same_price_reduction:ReplacePriority::lose};
                         }
                     }
-                    check(reference.apply(payload),"reference generated valid operation");must(b.apply(book_event(payload)));compare(b,reference);
+                    check(reference.apply(payload),"reference generated valid operation");
+                    auto input=book_event(payload);input.metadata.provenance.generator_seed=Available<std::uint64_t>::known(seed_value);
+                    input.metadata.provenance.lineage.items[0]->operation=text("phase2-random-operations");
+                    must(b.apply(input));check(b.last_metadata()->provenance.generator_seed.data==seed_value,"actual randomized seed preserved");compare(b,reference);
                 }
             }
             std::cout << "reference operations=20000, seeds=1,42,1729,999\n";

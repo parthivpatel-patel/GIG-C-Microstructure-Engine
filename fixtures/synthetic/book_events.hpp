@@ -13,7 +13,8 @@ inline MarketEvent book_event(EventPayload payload,std::uint64_t sequence=0,std:
     m.scope=Available<StreamScope>::known({number<StreamId>(stream),session.session,session.epoch,SequenceUnit::message});
     m.capture_ordinal=Available<std::uint64_t>::known(sequence);
     m.source_record=Available<Identity>::known(text("record:"+std::to_string(stream)+":"+std::to_string(sequence)));
-    m.provenance.generator_seed=Available<std::uint64_t>::known(1729);
+    m.provenance.generator_seed=Available<std::uint64_t>::known(0);
+    m.provenance.lineage.items[0]->operation=text("phase2-explicit-fixture");
     return {m,std::move(payload)};
 }
 inline AddOrder add(std::uint64_t id,Side side=Side::buy,std::int64_t price=100,std::uint64_t quantity=10) {
