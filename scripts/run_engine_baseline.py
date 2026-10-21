@@ -13,8 +13,8 @@ def summary(raw):
   return {name:{'median_operations_per_second':statistics.median(m['operations_per_repetition']*1e9/s['elapsed_ns'] for s in m['bulk_samples']),**{f'p{q}_service_ns':sorted(m['service_time_ns'])[math.ceil(len(m['service_time_ns'])*q/100)-1] for q in [50,95,99]},'worst_observed_service_ns':max(m['service_time_ns'])} for name,m in raw['measurements'].items()}
  return {'median_operations_per_second':statistics.median(raw['operations_per_repetition']*1e9/x for x in raw['bulk_ns']),**{f'p{q}_service_ns':sorted(raw['service_ns'])[math.ceil(len(raw['service_ns'])*q/100)-1] for q in [50,95,99]},'worst_observed_service_ns':max(raw['service_ns'])}
 def main():
- p=argparse.ArgumentParser();p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--allow-dirty',action='store_true',help='development check only; archived baseline must be clean');a=p.parse_args()
- output=a.output_dir.resolve();build=ROOT/'build/release';head=run('git','rev-parse','HEAD').strip();status=run('git','status','--porcelain');initial_sources=source_hashes()
+ p=argparse.ArgumentParser();p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--build-dir',type=Path,default=ROOT/'build/release');p.add_argument('--allow-dirty',action='store_true',help='development check only; archived baseline must be clean');a=p.parse_args()
+ output=a.output_dir.resolve();build=a.build_dir.resolve();head=run('git','rev-parse','HEAD').strip();status=run('git','status','--porcelain');initial_sources=source_hashes()
  if status and not a.allow_dirty:raise SystemExit('requires clean verified code checkpoint')
  if output.exists():raise SystemExit('refusing to overwrite existing evidence')
  if ROOT in output.parents and subprocess.run(['git','check-ignore','-q',str(output)],cwd=ROOT).returncode:raise SystemExit('output must be ignored or outside checkout')

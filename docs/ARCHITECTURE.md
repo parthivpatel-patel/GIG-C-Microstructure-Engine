@@ -1,9 +1,10 @@
 # Approved architecture — Phase 0B
 
-Status: implemented through Phase 6: strong types/events, deterministic reconstruction
+Status: implemented through Phase 9: strong types/events, deterministic reconstruction
 and replay, exact book/flow analytics, separate synthetic matching/latency, execution
-schedules and TCA. Phase 7 measures/profiles the correctness baseline. Python/versioned
-consumer schemas remain Phase 8. No live/broker or Terminal dependency.
+schedules and TCA. Phase 7 measured/profiled the correctness baseline without speculative optimization.
+Phase 8 provides optional Python/versioned consumer schemas; Phase 9 validates
+reproducibility and documents platform boundaries. No live/broker or Terminal dependency.
 See PHASE_2_BOOK.md through PHASE_6_CONTRACTS.md for actual semantics and limitations.
 
 ## Priorities and boundaries
@@ -38,7 +39,7 @@ retained history. This baseline deliberately retains standard containers.
 See decisions/0001-approved-contracts.md for mandatory atomic mutation,
 multi-stream ordering, provenance and baseline gates. See MARKET_MODEL.md for
 units and exclusions, VALIDATION.md for test gates, BENCHMARK_METHODOLOGY.md for
-measurement, and GIG_INTEGRATION.md for the future consumer boundary.
+measurement, and GIG_INTEGRATION.md for the standalone consumer boundary.
 
 All major components must document purpose, assumptions, complexity, memory,
 alternatives, failures and tests. Interview rationale: simple deterministic

@@ -4,7 +4,7 @@ Standalone C++20 market-microstructure research project. Correctness precedes
 performance. No live trading, broker connection or GIG Quant Terminal dependency.
 The initial README and all Git history are preserved in repository history.
 
-## Current status — Phase 8
+## Current status — Phase 9
 
 IMPLEMENTED: strong types and validated event contracts, a deterministic single-owner
 order-level book, strict multi-stream replay, explicit reset/recovery, owned accepted-
@@ -16,6 +16,9 @@ See [book semantics](docs/PHASE_2_BOOK.md), [replay contracts](docs/PHASE_2_REPL
 [benchmark methodology](docs/PHASE_2_BENCHMARKS.md) and [limitations](docs/LIMITATIONS.md).
 [Phase 2 completion report](docs/PHASE_2_REPORT.md) records evidence and acceptance.
 Phase 1's [field contracts](docs/PHASE_1_CONTRACTS.md) still apply.
+
+Final validation, reproducibility and acceptance: [final report](docs/FINAL_REPORT.md),
+[reproducibility guide](docs/REPRODUCIBILITY.md) and [security review](docs/SECURITY_AND_DEPENDENCIES.md).
 
 ## Build and test
 

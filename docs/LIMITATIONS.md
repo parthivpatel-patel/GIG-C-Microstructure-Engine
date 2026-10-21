@@ -1,10 +1,11 @@
 # Limitations and truth boundaries
 
-Implemented through Phase 6: single-owner reconstructed book/replay, exact book-state
+Implemented through Phase 9: single-owner reconstructed book/replay, exact book-state
 and causal flow analytics, separate offline synthetic matching/latency, exact-lot
 TWAP/VWAP/POV and TCA. See each PHASE_n_CONTRACTS.md and reports for evidence.
 Historical replay NEVER matches. Simulator fills are always synthetic/simulated.
-Python bindings, GIG consumer schemas and real-feed adapters remain future work.
+Optional Python bindings and versioned GIG consumer schemas are implemented.
+Real-feed adapters remain future work.
 No live/broker/Terminal integration or released production interface.
 
 No exchange certification: auctions, hidden/iceberg/pro-rata/pegged priority, routing,
@@ -30,7 +31,8 @@ Debug scans invariants after every mutation; Release tests and benchmark preflig
 scan explicitly. PMR counts exclude allocator overhead and driver allocations. Peak
 RSS includes fixtures, oracle, timing arrays and driver. Shared-cloud synthetic
 measurements do not establish production, real-feed or ultra-low-latency performance.
-Native ARM64, local Clang, Windows and macOS remain unverified. Hosted CI evidence
+Native ARM64, Windows and macOS remain unverified. Local x86_64 GCC14 and
+Clang19 are tested; no native ARM or cross-compilation claim. Hosted CI evidence
 must be reported separately from local tests; inaccessible checks are not successes.
 
 IMPLEMENTED != VERIFIED; BENCHMARKED != FAST; SYNTHETIC != OBSERVED;
@@ -49,3 +51,9 @@ adverse selection/impact/hidden liquidity. See PHASE_4/5/6_CONTRACTS.md.
 Linux wait-accounted RSS may include an inherited pre-exec worker floor. Phase 7
 also records native /proc VmHWM after exec; neither includes only engine data.
 No optimization is inferred from different-phase/flag/workload/noisy timing results.
+
+Python sanitizer coverage uses active-interpreter leak checks plus a positive
+leak-detection control; late interpreter-finalization leaks remain unverified.
+See PHASE_8_REPORT.md for the isolated CPython shutdown issue and exact settings.
+Only CPython3.12/Linux was exercised; other declared compatible Python versions
+are not locally validated. Local wheels are private artifacts, not published releases.

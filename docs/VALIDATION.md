@@ -57,7 +57,7 @@ six planner, 42 integrated-execution and one TCA output position. Every inherite
 book/replay and arbitrary-precision numeric reference remains active. See phase
 reports for actual results and correctness-gated benchmark scopes.
 
-## Future phase gates (not implemented)
+## Phase gates and final evidence
 
 Phase 1 IMPLEMENTED: strong types, exact conversion, malformed events, checked arithmetic.
 Phase 2 IMPLEMENTED: FIFO/conservation/index invariants, independent reference book,
@@ -66,9 +66,13 @@ Phase 3 IMPLEMENTED: independent exact book metrics and unavailable states.
 Phase 4 IMPLEMENTED: OFI/signing assumptions, causal horizons and sampling.
 Phase 5 IMPLEMENTED: separate matching, cancellation races and seeded latency.
 Phase 6 IMPLEMENTED: schedule constraints, inventory/cost reconciliation, no look-ahead.
-Phase 7: correctness-validated before/after benchmarks; concurrency needs TSan.
-Phase 8: exact schema/Python round trips, ownership and standalone compatibility.
-Phase 9: native ARM64 and x86_64 reproducibility, complete portfolio documentation.
+Phase 7 VERIFIED locally: common correctness baseline/profile; no justified optimization,
+so before/after optimization comparison is inapplicable; concurrency remains absent.
+Phase 8 VERIFIED locally: 63 Debug/Release outcomes including schema/Python checks;
+64 GCC ASan/UBSan outcomes including the active-leak positive control. Late Python
+finalization leaks are excluded explicitly, not suppressed.
+Phase 9: fresh x86_64 GCC/Clang validation and standalone packaging/reproduction;
+native ARM64 unavailable and not tested. See FINAL_REPORT.md for actual outcomes.
 
 Every coherent checkpoint: inspect diff, test, review, commit, push designated
 private development branch, compare remote SHA exactly; only then continue.
