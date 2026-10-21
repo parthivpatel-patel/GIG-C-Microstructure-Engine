@@ -3,7 +3,7 @@
 #include "gig/analytics/exact.hpp"
 #include "gig/replay/replay.hpp"
 namespace gig::analytics {
-enum class Unavailable { none, empty_book, one_sided, insufficient_depth, zero_denominator, missing_observation, gap_or_reset, horizon_pending, unknown_direction, arithmetic_capacity };
+enum class Unavailable { none, empty_book, one_sided, insufficient_depth, zero_denominator, missing_observation, gap_or_reset, horizon_pending, unknown_direction, arithmetic_capacity, nonpositive_reference };
 struct Metric {
     std::optional<exact::Fraction> value;
     Unavailable unavailable{Unavailable::missing_observation};

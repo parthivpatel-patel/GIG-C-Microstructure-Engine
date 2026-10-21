@@ -29,3 +29,8 @@ add_executable(gig_research_benchmark research_benchmark.cpp)
 target_link_libraries(gig_research_benchmark PRIVATE gig::microstructure)
 target_include_directories(gig_research_benchmark PRIVATE ${PROJECT_SOURCE_DIR})
 gig_project_target(gig_research_benchmark)
+
+add_executable(gig_flow_benchmark flow_benchmark.cpp)
+target_link_libraries(gig_flow_benchmark PRIVATE gig::microstructure)
+target_include_directories(gig_flow_benchmark PRIVATE ${PROJECT_SOURCE_DIR})
+gig_project_target(gig_flow_benchmark)
