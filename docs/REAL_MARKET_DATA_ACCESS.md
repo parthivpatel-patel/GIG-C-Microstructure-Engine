@@ -1,5 +1,262 @@
 # Phase P1B — official data access and sample inventory
 
+Current update: 2026-10-21 UTC, after the user published the two-domain network change.
+Resumed baseline: `557f1237a3bd7d8598b0dcc6cd8d00aab8fff0ca`.
+Repository: `parthivpatel-patel/GIG-C-Microstructure-Engine`.
+Branch: `feat/bootstrap-cpp20-engine`.
+
+## Current recommendation
+
+**NO-GO for adapter implementation or claimed real-data validation at this checkpoint.**
+Official NASDAQ documentation is now reachable and inspected. LOBSTER remains blocked
+at the environment proxy, despite its domain being present in the enforced policy.
+No market-data sample has been acquired, no LOBSTER usage terms or sample listing
+has been read, and no actual initial L3 state or eligible validation interval has
+been established. Do not equate successful specification retrieval with dataset
+acquisition or permission to use historical data.
+
+**GO for further official-document review; CONDITIONAL GO for resuming sample
+acquisition** once LOBSTER access and actual evaluation rights are resolved. The user
+already authorized that P1B investigation. No new blanket research authorization is
+needed, but adapter implementation remains outside P1B and requires separate approval.
+No engine or adapter changes have been made.
+
+This current section supersedes the earlier pending-publication assessment, retained
+below as historical evidence. The unchanged
+[Phase P1A design](REAL_MARKET_DATA_FEASIBILITY.md) still governs initial-state and
+validation requirements. Source facts newly verified here supersede its corresponding
+NASDAQ format hypotheses; LOBSTER format hypotheses remain unverified.
+
+## Repository and runtime verification after publication
+
+- Starting working tree: clean. Local HEAD and exact remote development HEAD:
+  `557f1237a3bd7d8598b0dcc6cd8d00aab8fff0ca`.
+- Branch: `feat/bootstrap-cpp20-engine`. No checkout/reset/rebase was performed.
+- Main remains `165c5038336887116d69160b0d8e5a1a5ef59d16`.
+- Runtime status: `connectivity: connected`, `observations_current: true`,
+  restricted network policy **`state: enforced`**, custom allowed hosts exactly
+  `data.lobsterdata.com` and `www.nasdaqtrader.com`, both present in effective hosts.
+- `/etc/codex/network-policy.json` independently contains both destination rules;
+  `vpn_configured: false`. The policy file was read, not changed.
+- A subsequent runtime-status check still reports the same enforced allowlist;
+  `network_diagnostics: null`. The supported diagnostic metadata listing reports
+  `history_status: not_found`, zero retained records and no legacy snapshot. No
+  diagnostic logs or credentials were requested or disclosed.
+
+The user's publication resolved the **saved-versus-active configuration** blocker.
+It did not resolve every destination request. Publishing the same unchanged draft
+again is not an evidence-based remedy for the remaining LOBSTER denial. No additional
+network configuration, domain wildcard, proxy override, alternate route, certificate
+bypass, mirror or paid resource was used in this resumed investigation.
+
+## Current official-source access ledger
+
+Times are UTC completion/recording times from the request recorder. Every request
+used the inherited proxy and normal TLS verification. Redirects were HTTPS-only.
+
+| Resource and exact URL | Recorded UTC | Result | Bytes / interpretation |
+|---|---|---|---|
+| LOBSTER sample index: https://data.lobsterdata.com/info/DataSamples.php | 2026-10-21T22:42:53.459874+00:00 | curl 56; CONNECT 403; origin HTTP `000` | 0 downloaded body bytes; no response-body file created |
+| NASDAQ access guide: https://www.nasdaqtrader.com/content/technicalSupport/specifications/dataproducts/ITCHFTP.pdf | 2026-10-21T22:42:55.235654+00:00 | curl 0; HTTP 200 | 133,895-byte PDF retrieved and read |
+| Linked ITCH 5.0 specification: https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf | 2026-10-21T22:43:23.809605+00:00 | curl 0; HTTP 200 | 1,200,722-byte PDF retrieved and inspected |
+| Linked BinaryFile specification: https://www.nasdaqtrader.com/content/technicalSupport/specifications/dataproducts/binaryfile.pdf | 2026-10-21T22:43:24.719651+00:00 | curl 0; HTTP 200 | 84,384-byte PDF retrieved and read |
+
+The two technical-specification links were extracted from annotations in the official
+access guide; their `http` links were requested using HTTPS on the same approved
+hostname. No guessed sample filename, mirror or new host was requested. No SFTP
+connection was attempted. Nasdaq guide retrieval received `application/pdf`; PDF
+structure and text were inspected locally with `pdfinfo`, `pdftotext` and PDF link
+extraction. No cookie/authentication header values are included in this report.
+
+Reproducible command shape (actual filenames differ by resource):
+
+```sh
+curl --proto '=https' --proto-redir '=https' --location \
+  --max-time 40 --max-filesize 15000000 --silent --show-error \
+  --dump-header /tmp/gig-p1b-resumed/<name>.headers \
+  --output /tmp/gig-p1b-resumed/<name>.body \
+  --write-out '%{http_code} %{size_download} %{url_effective}' '<official URL>'
+pdftotext -layout /tmp/gig-p1b-resumed/nasdaq.body /tmp/gig-p1b-resumed/ITCHFTP.txt
+```
+
+The linked-specification requests used a 25-second timeout and the same size/TLS
+restrictions. Recorder files separately retain return code, result, URL and UTC time.
+All documents and temporary evidence are in mode-0700 `/tmp/gig-p1b-resumed`, outside
+Git. The historical-data files themselves have **not** been downloaded.
+
+### Document identities — not market-data sample hashes
+
+| Retrieved official document | PDF pages | SHA256 of exact retrieved bytes |
+|---|---:|---|
+| ITCHFTP access guide | 5 | `77d0c9a5e86866951d99e58e5fda76b54ccf0316f19cbd7428492d459dee8177` |
+| TotalView-ITCH 5.0 specification | 36 | `45e0531d1b4b3beb886e9618b2ab824a5aa9bda3a99c0dff03509306e68aacc3` |
+| BinaryFILE 1.00 specification | 2 | `a1f443400728b3ce44953e9ae263e4846fe6ad68420e7a635829872aefdfff60` |
+
+The access guide's visible title is “Accessing NASDAQ Historical TotalView-ITCH Data
+via SFTP”; its embedded metadata still says FTP. It has creation/modification metadata
+January 12, 2024. The retrieved ITCH specification has metadata February 28, 2024,
+while its newest listed revision-log entry is April 28, 2023. Metadata, HTTP
+Last-Modified and semantic specification revision are different facts; none proves
+a particular historical archive uses all features in this document. BinaryFILE
+identifies version 1.00 with revision notes dated 2008/2010. These exact document
+hashes pin what was reviewed, not a claim that each document is the latest revision
+for every trading date.
+
+LOBSTER's proxy header file SHA256 is
+`18d753fd47b0d900fb245c70d205e2f8e380db074101939018f69da24db62bd1`.
+It identifies a 403 error header, not official page content or a sample hash.
+Temporary evidence is not distributed by this documentation commit.
+
+## Verified NASDAQ findings and licensing boundary
+
+**Access guide, pages 1 and 3–5:** historical access is described via
+`sftp://itchdata.nasdaq.com`, port 22, with a NASDAQ Historical TotalView-ITCH account
+username and password. The guide lists the `ITCHFiles_v5` directory, gzip filenames
+such as the pattern `SMMDDYY-v50.txt.gz`, and instructs users to process ITCH 5.0 files
+using BinaryFile. These are documentation statements, not an authenticated server
+listing, current retention guarantee, entitlement verification or successful file
+transfer. No account was created, credentials requested, purchase made or server
+connection attempted. Existing environment access to public HTTPS specifications
+does not establish permission/access to that separate SFTP service.
+
+The guide names `Clientsuccess@nasdaq.com` for access problems. This is a verified
+official contact, not an authorization to send outreach; no message was sent.
+
+**No free historical sample or evaluation license is established by these three
+PDFs.** The access guide describes account-based access but does not establish a
+public anonymous market-data sample or a grant for the proposed private evaluation
+and redistribution. BinaryFile's “Current Restrictions: None known” is a statement
+inside a technical protocol document, **not a historical-data license**. Public
+access to specifications is not a market-data use grant. Actual NASDAQ data-use,
+redistribution and entitlement terms remain unresolved. No particular fee or purchase
+requirement is inferred merely from the account-based workflow.
+
+LOBSTER sample listings, format documentation and evaluation terms remain unread
+because its official index is unreachable. Their existence, smallest sample, permitted
+uses, redistribution clauses and actual download URLs are not guessed. Sample
+acquisition is stopped until the applicable permission can be verified. No data
+account or paid subscription is needed merely to continue inspecting the public
+specifications already retrieved, but that does not resolve the sample objective.
+
+## Source facts now verified from the official specifications
+
+| Official source section | Observed specification statement | Consequence for the existing engine |
+|---|---|---|
+| ITCH, Data Types p.4 | Integers are big-endian, unsigned unless noted; alpha fields are space-padded ASCII; Price(4) has four implied decimals; timestamp is nanoseconds since midnight | Exact parsing and rational source quantum are appropriate; do not infer UTC, receive time or an exchange minimum trading tick from precision |
+| ITCH, Architecture p.3 / System Event pp.4–5 | Delivery protocols normally provide sequencing; locate codes are assigned daily; non-stock messages use locate 0; tracking number is an internal tracking number | Preserve date/scope and source order; do not use tracking number as a transport sequence or assign symbol identity to global controls without explicit normalization |
+| ITCH, Add Order pp.12–13 | New displayed orders have day-unique references; A includes side/shares/symbol/price, F adds attribution | Prior generic reuse ambiguity is narrowed for this NASDAQ specification: enforce day scope and preserve lifetimes; native AddOrder fits the displayed mutation, not MPID attribution |
+| ITCH, Executed/Cancel/Delete pp.14–15 | Updates reference earlier adds; executions and partial cancellations reduce displayed shares; deletion removes all remaining shares | E/X/D fit current mutation contracts when prior order state exists; missing orders remain errors |
+| ITCH, Executed With Price pp.14–15 | C executes at a different price from the initial display price and carries printable Y/N; non-printable executions should not be included again in tape/volume totals | Current BookExecution cannot faithfully encode both resting price and actual execution price/printability; a book-only decrement is a qualified projection, not complete trade/TCA validation |
+| ITCH, Replace pp.15–16 | U removes the old remainder and supplies a new reference, total displayed quantity and price; side/symbol/MPID are inherited | Native atomic ReplaceOrder can project the mutation with explicit priority policy; raw attributes/lifecycle must remain recoverable. Do not claim this paragraph independently validates all exchange priority rules |
+| ITCH, Non-Cross Trade pp.16–17 | P describes non-displayed executions, has no displayed-book effect; reference field is zero from December 6, 2010; side field is always B from July 14, 2014 regardless of resting side | Never turn P's reference into a positive displayed OrderId; never infer aggressor or resting side from that constant B. TradePrint with missing aggressor is a qualified projection |
+| ITCH, Cross pp.17–18 | Q is a bulk cross print; shares may be zero when interest is insufficient; avoid double-counting non-printable executions | A legitimate zero-share Q cannot be forced through current positive-quantity TradePrint validation. Preserve as a source observation; full cross/tape semantics need explicit handling |
+| ITCH, Broken Trade p.18 | B has no impact on the current book and may be ignored for book-only construction, but tape/statistics users must process it | This resolves P1A's open book-restoration question for the retrieved spec: do not restore liquidity. Native trade-break/statistics correction remains unsupported; an explicit book-only external disposition is defensible |
+| ITCH, System Event p.5 | Deletes and broken trades can arrive after end-of-system-hours; end-of-messages is a distinct event | Do not stop at market close or clear state on halt/close without a proper boundary. This alone does not prove a selected archive starts from an empty complete book |
+| ITCH, Direct Listing p.20 / revision log p.22 | O direct-listing capital-raise discovery is present; latest listed log entry April 28, 2023 | P1A's extension-existence hypothesis is confirmed for this document, not every historical date; no auction model is added |
+| BinaryFILE §§1.1–1.2, p.1 | One session per file; session ID is external; messages have a 2-byte big-endian payload length; zero length ends session; missing zero marker indicates incompleteness | A future historical-file parser must validate framing/terminal marker and external session identity. This is not raw MoldUDP64 or proof of upstream packet completeness |
+
+Classifications are **E** (exact displayed mutation with valid state), **A** (qualified
+projection), **U** (unsupported in minimal scope), **C** (additional native capability
+for full semantics). For NASDAQ, A/E/X/D mutation semantics above are now confirmed
+at the specification level; F/U/P/Q/status records have explicit A limitations;
+C execution-price fidelity and B tape correction remain C. Zero-share Q is U as a
+current TradePrint even though it is a legitimate source observation. Hidden queues,
+auction allocation and many administrative/imbalance attributes remain outside core
+book scope. All raw headers/flags need external preservation. This classification
+is not evidence of seeing any particular event in an actual data sample.
+
+LOBSTER's conventional type mappings in P1A remain conditional E/A/U/C hypotheses;
+they cannot be independently verified or counted until its official format and sample
+are accessible. No vendor format should be inferred to equal raw ITCH merely because
+its events have similar names. No adapter, source parser or normalization artifact
+was created during this documentation investigation.
+
+## Actual market-sample inventory and initial-state decision
+
+| Requested measurement | Current result |
+|---|---|
+| Official market-data archives downloaded / message-book pairs extracted | 0 / 0 |
+| Selected sample URL, filenames, symbol and trading date | Not established |
+| Archive/member SHA256 and compressed/uncompressed sizes | Unavailable; the document hashes above are not sample hashes |
+| Message/reference rows, timestamp range and event-type histogram | Not measured |
+| LOBSTER schema, scaling, sentinel conventions, depth and row alignment | Not verified |
+| ITCH schema | Official wire/framing documents inspected; no archive bytes parsed |
+| Initial L3 IDs, quantities, FIFO priorities and completeness boundaries | No actual sample evidence |
+| Eligible real-data validation interval | Not established |
+| Exact matches/mismatches, real-data memory and throughput | Not run / not measured |
+
+The preferred acquisition remains the smallest suitable officially offered LOBSTER
+message/reference pair after terms verification. No market-data directory was populated
+in this resumed phase. Public PDF documentation and all evidence remain outside Git;
+no raw or normalized market rows are committed or redistributed.
+
+The initial-state blockers from P1A remain. A complete day from a documented initial
+boundary may be a route, but a sample starting at 09:30, an aggregate ladder or a system
+open code is not sufficient evidence on its own. Current native recovery requires a
+complete order-level snapshot and supports at most 64 snapshot orders; aggregated
+depth cannot establish IDs or FIFO. All necessary history also counts toward the
+100,000-record journal ceiling and its previously measured 15,944-byte entry cost.
+No resource optimization, limit change, invented state or later-reference backfill
+was performed. Thus **we cannot yet recommend adapter implementation as a validated
+path for an actual selected sample**, even though more NASDAQ wire semantics are known.
+
+## Remaining blocker and precise next action
+
+The LOBSTER request at 2026-10-21 22:42:53 UTC failed with
+`curl: (56) CONNECT tunnel failed, response 403`, before an origin HTTP response,
+while the runtime reports both domains present and policy enforced. The response
+header is from envoy. No supported retained diagnostic evidence explains the policy
+mismatch. **The root cause beyond that observed proxy denial is unknown.** Do not
+claim a vendor 403, a licensing refusal, global site outage or an unapplied draft.
+
+Required user/platform action: have the cloud-environment administrator/support
+investigate HTTPS egress to `data.lobsterdata.com:443` under this environment's
+already-enforced custom allowlist, providing the exact URL, UTC timestamp, curl56 /
+CONNECT403 outcome and the contrast with successful NASDAQ HTTPS requests. Enable a
+supported working route to the same official hostname if policy permits. No new
+wildcard or duplicate-domain publication is requested. After a meaningful access
+change, resume P1B and recheck the official index and linked terms before acquisition.
+
+Official resources for that follow-up:
+
+- [LOBSTER samples](https://data.lobsterdata.com/info/DataSamples.php)
+- [NASDAQ historical access guide](https://www.nasdaqtrader.com/content/technicalSupport/specifications/dataproducts/ITCHFTP.pdf)
+- [NASDAQ ITCH 5.0 specification](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf)
+- [NASDAQ BinaryFile specification](https://www.nasdaqtrader.com/content/technicalSupport/specifications/dataproducts/binaryfile.pdf)
+
+If NASDAQ becomes the sample route instead, establish an already-permitted evaluation
+artifact/entitlement and applicable terms first; the guide's account-based SFTP
+workflow is not permission to purchase, create an account or request credentials in
+chat. No account or transport access is requested merely to mask the blocked LOBSTER
+sample investigation.
+
+## Verification and scope of this update
+
+Only `docs/REAL_MARKET_DATA_ACCESS.md` is modified. P1A, the institutional audit,
+remediation report/evidence and engine implementation are checked unchanged. The
+working tree and remote SHA are verified at completion; the documentation commit
+hash is provided in the completion response. No C++/Python tests or benchmarks were
+rerun: no implementation, build definition, schema or package changed. Document
+identities, local PDF extraction, access results, preservation and diff checks are
+the validation performed here. Prior test results are not represented as fresh runs.
+
+**Stop here: no adapter implementation, main merge, release, Terminal work, live
+connection, paid resource or market-data acquisition without verified rights.**
+
+## Historical pre-publication record — superseded access status
+
+The following retained record describes the earlier attempt from commit
+`2b2c23a02c8d485d1aaab7d3db47079c4d3abc57` through
+`557f1237a3bd7d8598b0dcc6cd8d00aab8fff0ca`. Its pending-publication instructions,
+all-URLs-blocked result and statements that the PDFs were unread are historical and
+are superseded by the current findings above. It is retained to preserve evidence;
+do not use it as the current runtime or access recommendation.
+
+<details>
+<summary>Earlier P1B report, before the user's publication</summary>
+
+# Phase P1B — official data access and sample inventory
+
 Review date: 2026-10-21 UTC. Repository:
 `parthivpatel-patel/GIG-C-Microstructure-Engine`.
 Starting commit: `2b2c23a02c8d485d1aaab7d3db47079c4d3abc57`.
@@ -331,3 +588,5 @@ main merge, release, purchase or paid resource is created.
 acquisition and validated replay until the required access, rights and state evidence
 are obtained. Continue only after the identified environment action; do not implement
 the adapter under this P1B authorization.**
+
+</details>
