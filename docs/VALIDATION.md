@@ -17,15 +17,14 @@ cmake --build --preset asan-ubsan
 ctest --preset asan-ubsan
 ```
 
-With benchmark targets enabled (the default presets), three additional checks
-exercise benchmark correctness and rejection of zero/malformed sizes. Total: 16
-CTest outcomes per preset, including three expected-failure checks.
-
-Eleven named runtime type cases exercise the existing validator, plus one demo
-smoke and one deliberately failing harness case with an exact-exit/diagnostic wrapper. Runtime checks
-remain active with NDEBUG; an unknown case fails. The expected-failure wrapper rejects crashes and sanitizer diagnostics; it proves
-failure exits are observable in Debug and Release, not domain correctness.
-No zero-test success is accepted. Tests do not validate future event semantics.
+Phase 1 presets register 29 CTest outcomes: 2 numeric groups (including 10624
+independent Python integer/Fraction cases), 11 event-contract groups, 11 migrated
+scaffold boundary cases, 1 demo, 1 benchmark correctness case and 3 negative checks.
+Each negative check requires exit 1 and its intended diagnostic, rejecting crashes
+and sanitizer findings. All runtime assertions remain active under NDEBUG.
+Event groups test all eight variants, metadata/provenance ownership, enum rejection,
+snapshot duplicates/capacity and input preservation. No zero-test run is accepted.
+No event serialization/canonical wire representation is included in Phase 1.
 
 Warnings are private to project executables. ASan/UBSan abort on findings and use
 frame pointers; no suppressions. TSan has a separate configuration switch but is
@@ -34,7 +33,7 @@ support is gated to GCC/Clang; actual runtime/platform support still needs testi
 
 ## Future phase gates (not implemented)
 
-Phase 1: strong types, exact conversion, malformed events, checked arithmetic.
+Phase 1 IMPLEMENTED: strong types, exact conversion, malformed events, checked arithmetic.
 Phase 2: FIFO/conservation/index invariants, independent reference book, randomized
 seeded streams, canonical replay, sequence recovery and allocation fault injection.
 Phase 3: independent basic-metric numeric references and invalid states.

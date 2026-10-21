@@ -1,6 +1,15 @@
-# Reproducible scaffold baseline
+# Reproducible versioned payload baseline
 
-## Scope and correctness gate
+## Phase 1 workload revision
+
+Current workload version 2 measures AddOrder payload validation ONLY, including
+side, price/quantity bounds and instrument-rule checks; it excludes metadata and
+provenance. Required types and fixture categories changed. See PHASE_1_CONTRACTS.md.
+Version-1 Phase 0B evidence below remains historical and unchanged. Do not compare
+these workloads as a speedup or regression. The runner hashes current headers,
+validation implementation and fixture source as well as benchmark code.
+
+## Historical Phase 0B scope and correctness gate
 
 Phase 0B measures ONLY the existing AddOrder field validator. It does not measure
 book mutation, matching, replay, analytics, order throughput or economic outcomes.
@@ -10,7 +19,7 @@ Deterministic xorshift64 fixture version 1, seed 42, has eight repeating categor
 valid buy, valid sell, zero ID, zero price, negative price, zero quantity, zero
 sequence, valid extreme values. The independent construction labels determine
 expected answers; every event and each batch are checked outside timing. The
-original validator intentionally remains unchanged, including its known enum gap.
+original validator was unchanged, including its known enum gap; Phase 1 replaces it.
 The harness is not a claim that the event contract is complete.
 
 The timed function lives in a separate translation unit; IPO is disabled. It
@@ -21,7 +30,7 @@ Current baseline: 262144 records, 64 batches/repetition, 2 warmup repetitions,
 unbounded allocation; invalid CLI arguments fail. FNV-1a hashes explicit
 little-endian field encodings, never padding; it is not a security hash.
 
-## Reproduce from repository root
+## Reproduce current workload from repository root
 
 ```sh
 cmake --preset release

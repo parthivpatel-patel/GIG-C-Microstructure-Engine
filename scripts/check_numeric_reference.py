@@ -20,6 +20,8 @@ for signed in (True,False):
     for a,b in pairs:
         for suffix,result in [('add',a+b),('sub',a-b),('mul',a*b)]:
             case(('s' if signed else 'u')+suffix+f' {a} {b}',result if bounds[0]<=result<=bounds[1] else 'error')
+        quotient=a//b if b and a%b==0 else None
+        case(('s' if signed else 'u')+f'div {a} {b}',quotient if quotient is not None and bounds[0]<=quotient<=bounds[1] else 'error')
 for decimal in ['0','0.0','1','-1','0.1','0.3','-0.3','0.31','9223372036854775807','-9223372036854775808','18446744073709551615','0.000000000000000001']:
     for n,d in [(1,1),(1,10),(1,100),(3,10),(1,10**18),(umax,umax)]:
         ratio=Fraction(decimal)/Fraction(n,d)

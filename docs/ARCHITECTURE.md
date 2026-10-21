@@ -1,8 +1,8 @@
 # Approved architecture — Phase 0B
 
-Status: architecture approved; bootstrap partially implemented. The event model,
-LOB, replay, analytics, simulation and integration implementations are NOT IMPLEMENTED.
-The existing numeric aliases and AddOrder are a temporary scaffold, not strong contracts.
+Status: architecture approved; Phase 1 strong types, event contracts and stateless
+validation IMPLEMENTED. LOB, replay, analytics, simulation and integration remain
+NOT IMPLEMENTED. See PHASE_1_CONTRACTS.md for field-level semantics and limits.
 
 ## Priorities and boundaries
 

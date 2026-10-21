@@ -93,6 +93,18 @@ constexpr Result<T> checked_multiply(T value, I factor) noexcept {
     if (!std::in_range<typename T::rep>(factor)) return Result<T>::failure(ErrorCode::invalid_range);
     return detail::wrap<T>(detail::multiply(value.value(), static_cast<typename T::rep>(factor)));
 }
+template<class T, std::integral I> requires (T::arithmetic && !std::same_as<I, bool>)
+constexpr Result<T> checked_divide_exact(T value, I divisor) noexcept {
+    using R=typename T::rep;
+    if (!std::in_range<R>(divisor)) return Result<T>::failure(ErrorCode::invalid_range);
+    const auto b=static_cast<R>(divisor),a=value.value();
+    if (b==0) return Result<T>::failure(ErrorCode::invalid_range);
+    if constexpr (std::is_signed_v<R>) {
+        if (a==std::numeric_limits<R>::min() && b==-1) return Result<T>::failure(ErrorCode::overflow);
+    }
+    if (a%b!=0) return Result<T>::failure(ErrorCode::off_unit);
+    return T::make(static_cast<R>(a/b));
+}
 template<std::integral R, class T> requires (!std::same_as<R, bool>)
 constexpr Result<R> checked_cast(T value) noexcept {
     if (!std::in_range<R>(value.value())) return Result<R>::failure(ErrorCode::invalid_range);
@@ -111,7 +123,7 @@ constexpr Result<SequenceNumber> next_sequence(SequenceNumber sequence) noexcept
 }
 
 enum class TimestampUnit : std::uint8_t { nanoseconds, microseconds, milliseconds, seconds };
-template<class T, std::integral I> requires (std::same_as<T, EventTimestamp> || std::same_as<T, ReceiveTimestamp> || std::same_as<T, SimulationTime> || std::same_as<T, Duration>)
+template<class T, std::integral I> requires (std::same_as<T, EventTimestamp> || std::same_as<T, ReceiveTimestamp> || std::same_as<T, SimulationTime> || std::same_as<T, Duration>) && (!std::same_as<I, bool>)
 constexpr Result<T> timestamp_from_count(I count, TimestampUnit unit) noexcept {
     if (!std::in_range<std::int64_t>(count)) return Result<T>::failure(ErrorCode::invalid_range);
     std::int64_t factor{};

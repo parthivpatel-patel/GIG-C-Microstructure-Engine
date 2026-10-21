@@ -7,6 +7,8 @@
 #include <string_view>
 #include <vector>
 #include "validator_batch.hpp"
+#include "fixtures/synthetic/phase1.hpp"
+using gig::fixtures::number;
 
 namespace {
 std::uint64_t number(const char* text, std::uint64_t limit) {
@@ -32,6 +34,8 @@ int main(int argc, char** argv) {
         const auto batches = number(argv[4], 1000);
         const auto seed = number(argv[5], std::numeric_limits<std::uint64_t>::max());
         auto state = seed;
+        auto rules=gig::fixtures::rules();
+        rules.maximum_price=number<gig::PriceTicks>(1000000);
         std::vector<gig::AddOrder> events;
         events.reserve(static_cast<std::size_t>(size));
         std::uint64_t oracle = 0;
@@ -44,35 +48,35 @@ int main(int argc, char** argv) {
             }
         };
         for (std::uint64_t i = 0; i < size; ++i) {
-            gig::AddOrder event{i + 1, gig::Side::buy,
-                static_cast<gig::PriceTicks>(next(state) % 1000000U + 1U),
-                next(state) % 10000U + 1U, i + 1};
+            gig::AddOrder event{number<gig::OrderId>(i+1), gig::Side::buy,
+                number<gig::PriceTicks>(next(state) % 1000000U + 1U),
+                number<gig::QuantityLots>(next(state) % 10000U + 1U)};
             // Independent truth comes from construction categories, not valid().
             switch (i % 8U) {
             case 0: ++oracle; break;
             case 1: event.side = gig::Side::sell; ++oracle; break;
-            case 2: event.order_id = 0; break;
-            case 3: event.price_ticks = 0; break;
-            case 4: event.price_ticks = -1; break;
-            case 5: event.quantity = 0; break;
-            case 6: event.sequence = 0; break;
+            case 2: event.side = static_cast<gig::Side>(255); break;
+            case 3: event.price_ticks = number<gig::PriceTicks>(0); break;
+            case 4: event.price_ticks = number<gig::PriceTicks>(-1); break;
+            case 5: event.quantity = number<gig::QuantityLots>(0); break;
+            case 6: event.price_ticks = number<gig::PriceTicks>(1000001); break;
             case 7:
-                event.price_ticks = std::numeric_limits<gig::PriceTicks>::max();
-                event.quantity = std::numeric_limits<gig::Quantity>::max();
+                event.price_ticks = number<gig::PriceTicks>(1000000);
+                event.quantity = number<gig::QuantityLots>(UINT64_MAX);
                 ++oracle; break;
             }
             // Check each item, so aggregate cancellation cannot hide disagreement.
             const bool expected = i % 8U == 0 || i % 8U == 1 || i % 8U == 7;
-            if (gig::valid(event) != expected) throw std::runtime_error("oracle mismatch");
-            hash(event.order_id); hash(static_cast<std::uint64_t>(event.side));
-            hash(static_cast<std::uint64_t>(event.price_ticks));
-            hash(event.quantity); hash(event.sequence);
+            if ((!gig::validate(event,rules)) != expected) throw std::runtime_error("oracle mismatch");
+            hash(event.order_id.value()); hash(static_cast<std::uint64_t>(event.side));
+            hash(static_cast<std::uint64_t>(event.price_ticks.value()));
+            hash(event.quantity.value());
             events.push_back(event);
         }
-        if (count_valid(events) != oracle) throw std::runtime_error("batch oracle mismatch");
-        const auto run = [&events, batches]() {
+        if (count_valid(events,rules) != oracle) throw std::runtime_error("batch oracle mismatch");
+        const auto run = [&events, &rules, batches]() {
             std::uint64_t count = 0;
-            for (std::uint64_t b = 0; b < batches; ++b) count += count_valid(events);
+            for (std::uint64_t b = 0; b < batches; ++b) count += count_valid(events,rules);
             return count;
         };
         const auto expected = oracle * batches; // bounded <= 1e9
@@ -86,11 +90,11 @@ int main(int argc, char** argv) {
 #else
                   << "unknown"
 #endif
-                  << "\",\"scope\":\"validated_scaffold_only\",\"workload_version\":1,"
+                  << "\",\"scope\":\"validated_add_order_payload_only\",\"workload_version\":2,"
                   << "\"events\":" << size << ",\"seed\":" << seed
                   << ",\"batches\":" << batches << ",\"warmup\":" << warmup
                   << ",\"repetitions\":" << repetitions << ",\"threads\":1,"
-                  << "\"oracle_valid_per_batch\":" << oracle
+                  << "\"instrument_max_price_ticks\":1000000,\"oracle_valid_per_batch\":" << oracle
                   << ",\"workload_fnv1a64\":\"" << fingerprint << "\",\"samples\":[";
         for (std::uint64_t r = 0; r < repetitions; ++r) {
             const auto start = std::chrono::steady_clock::now();

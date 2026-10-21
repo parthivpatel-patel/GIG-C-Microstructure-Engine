@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the scaffold baseline; emit a complete checksummed manifest, not a speed claim."""
+"""Run the versioned AddOrder payload baseline; emit a complete checksummed manifest, not a speed claim."""
 import argparse
 import datetime
 import hashlib
@@ -49,7 +49,9 @@ def main():
     exe = build / 'benchmarks/gig_validator_benchmark'
     status_before = command('git', 'status', '--porcelain=v1', '--untracked-files=all')
     head_before = command('git', 'rev-parse', 'HEAD')
-    source_paths = ['include/gig/market_event.hpp', 'benchmarks/validator_benchmark.cpp',
+    source_paths = ['include/gig/market_event.hpp', 'include/gig/events/contracts.hpp',
+                    'include/gig/core/numeric.hpp', 'include/gig/core/result.hpp',
+                    'src/events/validation.cpp', 'fixtures/synthetic/phase1.hpp', 'benchmarks/validator_benchmark.cpp',
                     'benchmarks/validator_batch.cpp', 'benchmarks/validator_batch.hpp',
                     'benchmarks/CMakeLists.txt', 'CMakeLists.txt', 'CMakePresets.json',
                     'scripts/run_benchmark.py']
@@ -82,7 +84,7 @@ def main():
         'schema_version': 1, 'complete': True,
         'recorded_at_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'provenance': {'origin':'synthetic', 'source':'deterministic_fixture_generator',
-                       'transformation':'measured_scaffold_validation', 'parent_artifacts':[],
+                       'transformation':'measured_add_order_payload_validation', 'parent_artifacts':[],
                        'license':'repository synthetic fixture; no external market data'},
         'git': {'commit':head_before,'dirty':bool(status_before)},
         'source_sha256':source_hashes, 'executable_sha256':sha(exe),
@@ -102,7 +104,7 @@ def main():
         'summary': {'median_batch_elapsed_ns':statistics.median(durations),
                     'median_events_per_second':statistics.median(work*1e9/ns for ns in durations),
                     'min_batch_elapsed_ns':min(durations),'max_batch_elapsed_ns':max(durations)},
-        'limitations':['validator only; no LOB/replay/analytics',
+        'limitations':['AddOrder payload only; no envelope/LOB/replay/analytics',
                        'batch throughput; no per-event latency percentiles',
                        'no allocation or peak-memory measurements',
                        'workload fingerprint is noncryptographic; source/result hashes provide integrity']}

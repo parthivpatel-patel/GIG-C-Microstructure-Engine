@@ -7,7 +7,8 @@ using namespace gig;
 using namespace gig::types;
 
 template<class A, class B> constexpr bool separated = std::same_as<A,B> ||
-    (!std::is_convertible_v<A,B> && !std::is_constructible_v<A,B>);
+    (!std::is_convertible_v<A,B> && !std::is_convertible_v<B,A> &&
+     !std::is_constructible_v<A,B> && !std::is_constructible_v<B,A>);
 template<class... T> struct Separation;
 template<class A, class... Rest> struct Separation<A,Rest...> {
     static constexpr bool value = (separated<A,Rest> && ...) && Separation<Rest...>::value;
@@ -73,16 +74,18 @@ int main(int argc, char** argv) {
             std::string decimal; std::uint64_t n{},d{};
             if (!(std::cin >> decimal >> n >> d)) return 2;
             if (op == "ticks") emit(to_ticks(decimal,{n,d})); else emit(to_lots(decimal,{n,d}));
-        } else if (op == "sadd" || op == "ssub" || op == "smul") {
+        } else if (op == "sadd" || op == "ssub" || op == "smul" || op == "sdiv") {
             std::int64_t a{},b{}; if (!(std::cin >> a >> b)) return 2;
             auto x=*PriceTicks::make(a).data, y=*PriceTicks::make(b).data;
             if (op == "sadd") emit(checked_add(x,y));
-            else if (op == "ssub") emit(checked_subtract(x,y)); else emit(checked_multiply(x,b));
-        } else if (op == "uadd" || op == "usub" || op == "umul") {
+            else if (op == "ssub") emit(checked_subtract(x,y));
+            else if (op == "sdiv") emit(checked_divide_exact(x,b)); else emit(checked_multiply(x,b));
+        } else if (op == "uadd" || op == "usub" || op == "umul" || op == "udiv") {
             std::uint64_t a{},b{}; if (!(std::cin >> a >> b)) return 2;
             auto x=*QuantityLots::make(a).data,y=*QuantityLots::make(b).data;
             if (op == "uadd") emit(checked_add(x,y));
-            else if (op == "usub") emit(checked_subtract(x,y)); else emit(checked_multiply(x,b));
+            else if (op == "usub") emit(checked_subtract(x,y));
+            else if (op == "udiv") emit(checked_divide_exact(x,b)); else emit(checked_multiply(x,b));
         } else return 2;
     }
     return std::cin.eof() ? 0 : 2;
