@@ -1,0 +1,36 @@
+{
+  "packages": [
+    {
+      "package": "clang-19",
+      "version": "1:19.1.7-3+b1",
+      "archive": "clang-19_1%3a19.1.7-3+b1_amd64.deb",
+      "sha256": "bbb74458d782b7792b61b0eed92746df5e6d033778c045cf8c2b3835b7c4efc4",
+      "matches_signed_repository_metadata": true
+    },
+    {
+      "package": "libclang-common-19-dev",
+      "version": "1:19.1.7-3+b1",
+      "archive": "libclang-common-19-dev_1%3a19.1.7-3+b1_amd64.deb",
+      "sha256": "4018e40e2d4144fe38c45822e68cca63c1bf6c7872c3073ebb262ad4b2f9b8bc",
+      "matches_signed_repository_metadata": true
+    },
+    {
+      "package": "libclang-cpp19",
+      "version": "1:19.1.7-3+b1",
+      "archive": "libclang-cpp19_1%3a19.1.7-3+b1_amd64.deb",
+      "sha256": "a7d2b6df51050834f6ea5c0d5e34869c2298b0bcdaa91eff17ba3db2cd545c47",
+      "matches_signed_repository_metadata": true
+    },
+    {
+      "package": "libclang-rt-19-dev",
+      "version": "1:19.1.7-3+b1",
+      "archive": "libclang-rt-19-dev_1%3a19.1.7-3+b1_amd64.deb",
+      "sha256": "0c03a0a8fa37228e2de6c36d02ff0806643885c515a8137d1bcd22e248497cd6",
+      "matches_signed_repository_metadata": true
+    }
+  ],
+  "repository": "https://deb.debian.org/debian trixie main",
+  "trusted_keyring": "/usr/share/keyrings/debian-archive-keyring.gpg",
+  "signature_verification": "apt signed InRelease/Packages; no insecure/unauthenticated override",
+  "system_packages_installed": false
+}
