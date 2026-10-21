@@ -1,8 +1,8 @@
 # Approved architecture — Phase 0B
 
-Status: architecture approved; Phase 1 strong types, event contracts and stateless
-validation IMPLEMENTED. LOB, replay, analytics, simulation and integration remain
-NOT IMPLEMENTED. See PHASE_1_CONTRACTS.md for field-level semantics and limits.
+Status: Phase 2 book and strict replay IMPLEMENTED, building on Phase 1 strong types
+and event contracts. Analytics, matching, simulation and integration remain future
+work. See PHASE_2_BOOK.md and PHASE_2_REPLAY.md for implemented contracts.
 
 ## Priorities and boundaries
 
@@ -22,12 +22,14 @@ counting feed executions twice. Quote-only data cannot establish order FIFO.
 ## Ownership and baseline storage
 
 One owner mutates a book. Ordered price maps, FIFO lists and a scoped ID index form
-the proposed correctness baseline: O(log L) level lookup, expected O(1) ID lookup
+the implemented correctness baseline: O(log L) level lookup, expected O(1) ID lookup
 (linear worst case), O(D) aggregated depth snapshot, O(N+L) memory with node and
 allocator overhead. Partial fills retain priority; same-price quantity reduction
 retains priority; increases and price/side changes lose it in the initial model.
 Intrusive pools, dense ladders and flat containers remain measured alternatives.
-No storage implementation exists yet.
+State uses caller-owned PMR resources with staged node transfers and explicit
+allocation-failure tests. The accepted journal owns full events; memory grows with
+retained history. This baseline deliberately retains standard containers.
 
 ## Decisions and evidence
 

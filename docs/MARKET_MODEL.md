@@ -11,8 +11,12 @@ Adds, quantity/all cancels, replacements and identified executions have distinct
 contracts. Print-only trades and quotes do not mutate order-level state. Book
 resets and snapshots carry coverage and sequence boundaries. Unknown enums,
 off-tick values, duplicate active IDs and ambiguous input are rejected in Phase 1+.
-Phase 1 implements self-contained type/event checks. Stateful ID uniqueness,
-sequence continuity and book invariants remain Phase 2. See PHASE_1_CONTRACTS.md.
+Phase 1 implements self-contained type/event checks; Phase 2 adds scoped active-ID
+uniqueness, sequence continuity, FIFO and conservation checks. See PHASE_1_CONTRACTS.md,
+PHASE_2_BOOK.md and PHASE_2_REPLAY.md. Every accepted event is a consistent boundary:
+bid > ask is rejected, locked observations are allowed, and transient crossed bundles
+are unsupported. Identified executions may name non-head orders without inferring
+an aggressor; surviving FIFO order remains intact.
 
 No auctions, hidden/iceberg/pro-rata/pegged priority, routing, venue certification,
 self-trade-prevention model or live orders. A reconstructed book is not an

@@ -4,14 +4,17 @@ Standalone C++20 market-microstructure research project. Correctness precedes
 performance. No live trading, broker connection or GIG Quant Terminal dependency.
 The initial README and all Git history are preserved in repository history.
 
-## Current status — Phase 1
+## Current status — Phase 2
 
-IMPLEMENTED: eleven strong numeric types, checked arithmetic and exact unit
-conversion, eight typed event families, explicit metadata/provenance and structured
-allocation-free validation. [Phase 1 contracts](docs/PHASE_1_CONTRACTS.md) specify
-required fields, missing states, limits and errors. The demo validates a synthetic
-event; it does not replay a market. No LOB, matching, analytics, execution or Python
-implementation exists. See [limitations](docs/LIMITATIONS.md).
+IMPLEMENTED: strong types and validated event contracts, a deterministic single-owner
+order-level book, strict multi-stream replay, explicit reset/recovery, owned accepted-
+event provenance and canonical outputs. Historical reconstruction never matches orders.
+The demo replays an entirely synthetic 11-record workflow; `--canonical` emits its
+canonical result. No analytics, matching, execution simulation or Python integration.
+
+See [book semantics](docs/PHASE_2_BOOK.md), [replay contracts](docs/PHASE_2_REPLAY.md),
+[benchmark methodology](docs/PHASE_2_BENCHMARKS.md) and [limitations](docs/LIMITATIONS.md).
+Phase 1's [field contracts](docs/PHASE_1_CONTRACTS.md) still apply.
 
 ## Build and test
 
@@ -35,7 +38,7 @@ export PATH=/workspace/gig-tools/bin:$PATH
 ```
 
 [Architecture](docs/ARCHITECTURE.md) and [approved contracts](docs/decisions/0001-approved-contracts.md)
-define the planned engine. [Benchmark methodology](docs/BENCHMARK_METHODOLOGY.md)
+define the engine boundaries. [Benchmark methodology](docs/BENCHMARK_METHODOLOGY.md)
 describes the versioned payload baseline, not LOB performance. No performance or
 production-readiness claim follows from using C++.
 
@@ -44,4 +47,4 @@ production-readiness claim follows from using C++.
 Use `feat/bootstrap-cpp20-engine` for approved development; never force-push or
 merge main without approval. GitHub is the durable source of truth: verified
 checkpoints must be pushed and their remote SHAs checked before substantial new
-work. Phase 1 is authorized; Phase 2 requires separate user approval.
+work. Phase 2 is authorized; Phase 3 requires separate user approval.

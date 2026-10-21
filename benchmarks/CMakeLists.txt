@@ -14,3 +14,13 @@ if(BUILD_TESTING)
       -P ${PROJECT_SOURCE_DIR}/cmake/ExpectFailure.cmake)
   endforeach()
 endif()
+
+add_executable(gig_book_benchmark book_benchmark.cpp copy_probe.cpp)
+target_link_libraries(gig_book_benchmark PRIVATE gig::microstructure)
+target_include_directories(gig_book_benchmark PRIVATE ${PROJECT_SOURCE_DIR})
+set_target_properties(gig_book_benchmark PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+gig_project_target(gig_book_benchmark)
+if(BUILD_TESTING)
+  add_test(NAME benchmark.book_smoke COMMAND ${Python3_EXECUTABLE}
+    ${PROJECT_SOURCE_DIR}/scripts/check_book_benchmark.py $<TARGET_FILE:gig_book_benchmark>)
+endif()
