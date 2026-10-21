@@ -219,9 +219,13 @@ Private0.1.1 wheel and sdist are local artifacts only, never published. Installe
 consumer checks use their own venv and confirm installed import/native paths.
 Seven interface tests and six export-contract tests pass against the new wheel;
 the self-contained Python example also runs and checks both counterparties.
-Source-archive reconstruction and final evidence are recorded in the evidence
-checkpoint below after completion; no release portability or binary reproducibility
-claim follows from a local wheel build.
+The final source archive was unpacked and rebuilt offline into a wheel, then
+installed in the separate consumer venv:7/7 interface and6/6 export-contract tests
+passed, with0 failures/skips. All14 schema files retain their original bytes and
+third-party notices are present. The example and four-seed jitter comparison passed.
+Final runtime/fixture/test sources in that archive match the implementation commit;
+subsequent changes are documentation/evidence only. No release portability or binary
+reproducibility claim follows from a local wheel build.
 
 ## Benchmark reproducibility and an isolated additional limitation
 
@@ -243,7 +247,7 @@ The initial cross-compiler book comparison failed because of the v1 generator
 argument-order issue. This was first isolated with compiler-specific pre/post
 hashes; the resumed user instruction then authorized its repair. Generator v2 now
 specifies draw order and records revised provenance. Final full-run cross-compiler
-hash comparisons, including book input and replay, are required and archived in the
+hash comparisons, including book input and replay, passed and are archived in the
 completion evidence. Old GCC hashes7d16448f…/09dfc157… and old Clang
 fb99c0d1…/7486fe5e… remain historical v1 evidence, not v2 expectations.
 No cross-version/cross-workload speedup is claimed.
@@ -287,15 +291,92 @@ was introduced. Stop after this correctness remediation.
 
 ## Commit traceability, file inventory and durable evidence
 
-Implementation checkpoint: containing code/report commit, normally pushed and exact
-remote SHA verified before collecting clean-checkpoint benchmark evidence. The final
-evidence/report checkpoint records that source SHA and final validation artifacts;
-the final user report gives its exact ending SHA. A document cannot embed its own
-Git commit hash. Historical baselines and reports are not rewritten.
+Verified implementation checkpoint: `26514722c878d9011d36258fd80a95ab794d8246`,
+committed and normally pushed to the existing development branch. Git ls-remote
+returned that exact SHA; main remained unchanged. The final evidence/report commit
+is a descendant containing documentation and evidence only; its exact SHA is reported
+in the completion response. A document cannot embed its own commit SHA. Historical
+baselines and reports have not been rewritten.
 
-The complete inventory is finalized with the evidence checkpoint below.
+Durable evidence: [remediation-validation.json](baselines/remediation-validation.json).
+It records the nine final JUnit/log hashes and counts, six original-red regression
+logs, targeted greens, installed-wheel/source-archive hashes, compiler identities,
+canonical artifacts, unchanged application hashes, audit preservation and limits.
+Raw evidence remains in ignored `build/remediation/`; recorded hashes are identifiers,
+not a claim that ignored files are available from a fresh clone. Regenerate with the
+commands below. Original red evidence remains locally available and its hashes are
+retained; the historical baseline can also be inspected without changing this branch.
 
-### Changed files at the implementation checkpoint
+### Final clean-checkpoint experiments
+
+All runners completed at source commit26514722c878d9011d36258fd80a95ab794d8246
+with dirty=false, serially on the shared host. GCC and Clang runners each reran65/65
+CTest outcomes; Python reran68/68; the legacy book runner and Phase2 runner each
+reran65/65. All had zero failed/errors/skipped/disabled. Correctness checks and
+expected checksums passed. Full manifests include raw service samples, build commands,
+executable hashes and qualified memory measurements; durable evidence retains their
+hashes, summaries and canonical artifact identities. No timing threshold or speedup
+claim is inferred from these shared-host observations.
+
+```sh
+export PATH=/workspace/gig-tools/bin:$PATH
+python scripts/run_engine_baseline.py --build-dir build/phase9-clean-release --output-dir build/remediation/verified-gcc
+python scripts/run_engine_baseline.py --build-dir build/phase9-clang-release --output-dir build/remediation/verified-clang
+python scripts/benchmark_python.py --build-dir build/python-release --output-dir build/remediation/verified-python
+python scripts/run_research_benchmark.py --component book --output build/remediation/verified-legacy-book.json
+python scripts/run_phase2_benchmark.py --build-dir build/phase9-clean-release --output-dir build/remediation/verified-phase2 --orders 32 --repetitions 2 --warmup 1
+python tests/test_benchmark_metadata.py --manifest build/remediation/verified-gcc/manifest.json GNU
+python tests/test_benchmark_metadata.py --manifest build/remediation/verified-clang/manifest.json Clang
+```
+
+Use new output paths to rerun: runners intentionally refuse to overwrite evidence.
+Their next code_sha will identify the current clean documentation descendant.
+Build each matrix tree with its existing compiler/sanitizer configuration, then use
+`ctest --test-dir <tree> --output-on-failure --no-tests=error --output-junit <new.xml>`.
+The exact selected source files are unchanged after the tested implementation commit.
+For package reproduction use the source-build/consumer commands in REPRODUCIBILITY.md
+and also run `tests/test_export_contracts.py` with the installed consumer interpreter.
+No package upload or release was performed.
+
+All five GCC/Clang artifact sets are equal. Book metrics and flow hashes are unchanged
+from the historical baseline. Simulation and execution-parent hashes intentionally
+change for maker reports/v2; book/replay hashes intentionally change for generator,
+dataset and container v2 provenance. Representative final SHA256 values:
+
+| Artifact | SHA256 |
+|---|---|
+| Book workload | `5acd23e7b7ae0f5e3baed41b77cdfeb39c75ace3f7bba8ebd43751345cb57911` |
+| Replay | `d83d57a15e35fb499429bcacb3967ffb12a7b782b6f9f6d071aaa87b014f8979` |
+| Simulation | `7877560d4add7189bbca57b42f71207f0424ae762fe190dcbd3ab7c37123fbd0` |
+| Execution parent | `4f7bc286df9da64295f086dcd16269e7c3ac5757d0e574c2cc4dac59019e8c95` |
+
+A final512-order, seed1729 dump agrees byte-for-byte between compilers; prices,
+quantities, IDs and sides equal the original GCC dump when excluding the explicitly
+versioned header. The separate16-case arbitrary-precision fixture reference passed
+in every matrix tree. A manual evidence invocation initially swapped count/seed;
+correcting that invocation produced the documented512/1729 comparison without any
+implementation change or suppressed regression.
+
+Hosted Actions status is **UNVERIFIED**. The exact-commit GitHub API request failed
+with curl56, CONNECT tunnel proxy403 (HTTP000). This is unavailable evidence, not a
+failed Actions result or a successful run. Native ARM64, real-market calibration,
+other Python platforms and late CPython-finalization leak coverage remain unverified.
+
+### Remediation acceptance
+
+- [x] Preserve baseline history, development branch and the original audit verbatim.
+- [x] Reproduce all five original issues, add red/green regressions and minimal repairs.
+- [x] Repair the additionally authorized RNG fixture sequencing with explicit v2 provenance.
+- [x] Pass six native and three optional Python configurations; no failures/skips.
+- [x] Preserve replay determinism, independent numerical references and atomicity checks.
+- [x] Validate installed0.1.1 source-rebuilt consumer, example, schemas and export contracts.
+- [x] Verify clean-checkpoint canonical artifacts across GCC/Clang and selected compilers.
+- [x] Record journal memory and a separate benchmark-gated plan; do not optimize it.
+- [x] Push implementation normally and verify exact remote SHA; final report commit follows.
+- [ ] Hosted CI success: unavailable, not claimed.
+- [ ] ARM64/observed-market/production qualification: outside this local evidence.
+
+### Complete changed-file inventory versus baseline
 
 - `.github/workflows/ci.yml`
 - `CMakeLists.txt`
@@ -311,6 +392,7 @@ The complete inventory is finalized with the evidence checkpoint below.
 - `docs/PHASE_8_INTERFACE.md`
 - `docs/REPRODUCIBILITY.md`
 - `docs/VALIDATION.md`
+- `docs/baselines/remediation-validation.json`
 - `examples/python_research.py`
 - `fixtures/synthetic/phase2_workload.hpp`
 - `include/gig/simulation/simulator.hpp`
