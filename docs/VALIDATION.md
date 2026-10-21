@@ -17,9 +17,13 @@ cmake --build --preset asan-ubsan
 ctest --preset asan-ubsan
 ```
 
+With benchmark targets enabled (the default presets), three additional checks
+exercise benchmark correctness and rejection of zero/malformed sizes. Total: 16
+CTest outcomes per preset, including three expected-failure checks.
+
 Eleven named runtime type cases exercise the existing validator, plus one demo
-smoke and one deliberately failing harness case marked WILL_FAIL. Runtime checks
-remain active with NDEBUG; an unknown case fails. The expected-failure test proves
+smoke and one deliberately failing harness case with an exact-exit/diagnostic wrapper. Runtime checks
+remain active with NDEBUG; an unknown case fails. The expected-failure wrapper rejects crashes and sanitizer diagnostics; it proves
 failure exits are observable in Debug and Release, not domain correctness.
 No zero-test success is accepted. Tests do not validate future event semantics.
 

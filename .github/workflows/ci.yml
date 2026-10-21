@@ -28,3 +28,6 @@ jobs:
         run: cmake --build --preset ${{ matrix.preset }}
       - name: Test
         run: ctest --preset ${{ matrix.preset }} --output-junit build/${{ matrix.preset }}/tests.xml
+      - name: Benchmark correctness and metadata smoke (no performance gate)
+        if: matrix.preset == 'release'
+        run: python3 scripts/run_benchmark.py --events 4096 --batches 2 --repetitions 2 --warmup 1 --output build/ci-benchmark.json

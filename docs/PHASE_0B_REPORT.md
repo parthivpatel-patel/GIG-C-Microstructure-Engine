@@ -30,3 +30,19 @@ correctness gates are design contracts, not implemented engine behavior.
 Minimal validator-only benchmark with independent oracle, bounded input options,
 reproducible workload, raw repetition samples and checksummed environment manifest.
 No engine timing or economic claim.
+
+## Checkpoint 2: correctness-validated scaffold harness
+
+Checkpoint 1 remote SHA verified:
+c61ecba556619914780a5aa9ee2211c4637e1955.
+
+Final suites have 16 CTest outcomes each: 11 scaffold domain cases, 1 demo,
+1 benchmark oracle check and 3 explicitly expected-failure checks. Negative checks
+require exit 1 and the intended diagnostic; sanitizer errors/crashes cannot pass.
+The harness uses an independent construction oracle, separate compiled timed
+batch, bounded options and consumed result counts. A temporary deliberately broken
+always-true validator was rejected with oracle mismatch. Repeated seed 42 produced
+the same workload fingerprint/count; seed 43 changed the fingerprint. Runner
+rejected Debug evidence and overwrite attempts. Smoke manifest emitted successfully.
+Full clean-commit timing evidence is captured only after committing the harness.
+No optimization or Phase 1 core changes were made.

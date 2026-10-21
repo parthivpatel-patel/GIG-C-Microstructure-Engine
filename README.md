@@ -10,7 +10,7 @@ IMPLEMENTED: small AddOrder validation scaffold, demo, explicit runtime checks,
 CMake Debug/Release and sanitizer configurations. Verification evidence is recorded
 in docs/PHASE_0B_REPORT.md when available. Planned features are NOT implemented:
 strong core contracts, LOB, replay, analytics, matching, execution and Python.
-See [limitations](docs/LIMITATIONS.md); this is not a working market engine.
+An optional reproducible validator-only benchmark is included. See [limitations](docs/LIMITATIONS.md); this is not a working market engine.
 
 ## Build and test
 
