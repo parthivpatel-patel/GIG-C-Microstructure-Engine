@@ -150,3 +150,19 @@ invalid side, zero/negative price, zero quantity, price above instrument maximum
 and valid maximum quantity at maximum instrument price. Fingerprint fields and
 semantics changed; the immutable Phase 0B version-1 baseline remains historical
 and is NOT comparable as a speedup/regression. No optimization has been made.
+
+## Final local validation
+
+Debug/Release/ASan+UBSan each passed 29 CTest outcomes with zero failures/errors/
+skips in the actual JUnit reports. Numeric: 10624 independent integer/Fraction
+reference cases and 27 direct runtime contracts; events: 755 assertions across
+11 groups, including fixture and input-preservation checks. Compile-time pairwise
+separation checks cover all eleven types. No sanitizer findings were reported.
+A fresh external CMake Release consumer linked with tests disabled and exercised
+invalid-side rejection. The event variant occupies 12208 bytes on this GCC/x86_64
+build; bounded ownership trades larger copies for predictable failure behavior.
+
+The clean version-2 payload baseline is preserved in
+baselines/phase1-add-order-payload.json. It excludes metadata/provenance validation
+and cannot be compared with the historical Phase 0B version-1 numbers. No engine
+optimization or Phase 2 implementation occurred.
