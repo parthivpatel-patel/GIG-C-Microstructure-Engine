@@ -101,7 +101,8 @@ class InterfaceTests(unittest.TestCase):
         self.assertEqual(s.queue_position('2'),{'orders_ahead':'1','quantity_ahead':'10'})
         s.submit('0',order(3,'0',101,15,'1'));s.advance('0');state=s.snapshot();self.assertEqual(len(state['data']['state']['exchange_fills']),2)
         self.assertFalse(any(r['kind']=='5' for r in state['data']['state']['client_reports']))
-        s.advance('5');self.assertEqual(sum(int(r['quantity']) for r in s.snapshot()['data']['state']['client_reports'] if r['kind']=='5'),15)
+        s.advance('5');self.assertEqual(sum(int(r['quantity']) for r in s.snapshot()['data']['state']['client_reports'] if r['kind']=='5' and r['order']=='3'),15)
+        self.assertEqual(sum(int(r['quantity']) for r in s.snapshot()['data']['state']['client_reports'] if r['kind']=='5' and r['order'] in ['1','2']),15)
         before=s.canonical();bad=order(4);bad['tif']='255'
         with self.assertRaises(gig.EngineError):s.submit('5',bad)
         self.assertEqual(before,s.canonical())

@@ -94,3 +94,19 @@ JUnit and logs stay in ignored build output; regenerate them from the exact reco
 code/parameters and compare hashes/sizes. Timing values, executable hashes and JUnit
 hashes depend on the environment and are not deterministic cross-machine claims.
 No optimization or benchmark speed threshold is introduced in Phase 2.
+
+## Deterministic fixture remediation — generator v2
+
+The old function-argument RNG calls could assign successive draws to price and
+quantity in different orders under GCC and Clang. Generator v2 draws quantity first,
+then price in separate statements. This preserves established GCC price/quantity
+values while making the sequence portable; IDs, sides, ranges and seeds are unchanged.
+Lineage operation is phase2-benchmark-generator-v2 and lineage version2. Historical
+v1 canonical hashes remain historical; v2 is explicitly rebaselined. A separately
+implemented Python RNG reference covers four seeds and counts through2048 in each
+compiler's CTest suite. See CORRECTNESS_REMEDIATION.md for red/green tests and exact
+cross-compiler artifact evidence. No journal optimization accompanies this change.
+The v2 generator also declares dataset version2 in event provenance and stream
+configuration. Book benchmark raw workload_version and the internal canonical
+container identifier (gig.phase2.workload.v2) advance together. The Phase2 runner
+records generator-v2/dataset2; wire event schema1.0 remains unchanged.

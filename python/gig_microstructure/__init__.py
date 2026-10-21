@@ -297,6 +297,66 @@ def transaction_costs(config, fills):
 def run_manifest(data):
     return validate_document({'schema':'gig.run_manifest','version':SCHEMA_VERSION,'data':deepcopy(data)})
 
+def _validate_export_references(manifest, documents):
+    """Shared consistency checks, after input-byte integrity has been established."""
+    inputs = manifest['data']['inputs']
+    input_by_name = {a['identity']: a for a in inputs}
+    input_names = set(input_by_name)
+    def check_digest(identity, digest, kind):
+        # An artifact identity names exactly the retained bytes, not an implicit transformation.
+        # Unknown hashes remain unknown; known contradictory hashes are never silently replaced.
+        if digest['reason'] == '0' and digest['value'] != input_by_name[identity]['sha256']:
+            raise SchemaError('export.' + kind + '_digest_mismatch')
+    source_runs = {manifest['data']['run_id']} | {p['run_id'] for p in manifest['data']['parents']}
+    input_hashes = {a['sha256'] for a in inputs}
+    if any(p['manifest_sha256'] not in input_hashes for p in manifest['data']['parents']):
+        raise SchemaError('export.parent_manifest_not_retained')
+    for document in documents:
+        doc = _plain(document); data = doc['data'];refs = []
+        if doc['schema'] == 'gig.event':
+            provenance = data['metadata']['provenance']
+            dataset = provenance['dataset']['value']
+            if dataset is not None and dataset['identity'] not in input_names:
+                raise SchemaError('export.dataset_artifact_not_retained')
+            if dataset is not None:
+                check_digest(dataset['identity'], dataset['sha256'], 'dataset')
+            if provenance['generator_seed']['reason'] == '0' and provenance['generator_seed']['value'] not in manifest['data']['seeds']:
+                raise SchemaError('export.generator_seed_not_declared')
+            for parent in provenance['parents']:
+                if parent['identity'] not in input_names:
+                    raise SchemaError('export.parent_artifact_not_retained')
+                check_digest(parent['identity'], parent['sha256'], 'parent')
+        elif doc['schema'] == 'gig.book_snapshot':
+            refs.append(data['run_id'])
+        elif doc['schema'] == 'gig.simulation_output':
+            refs.append(data['state']['config']['run_id'])
+            if data['state']['config']['seed'] not in manifest['data']['seeds']:
+                raise SchemaError('export.simulation_seed_not_declared')
+        elif doc['schema'] == 'gig.execution_schedule':
+            refs.append(data['config']['run_id'])
+            if data['algorithm'] == '1':
+                profile = data['profile']
+                if profile['reason'] != '0' or profile['value'] not in input_names:
+                    raise SchemaError('export.profile_artifact_not_retained')
+            if data['algorithm'] == '2' and any(v['source_artifact'] not in input_names for v in data['volumes']):
+                raise SchemaError('export.volume_artifact_not_retained')
+            if data['oracle'] and manifest['data']['parameters'].get('oracle_benchmark') is not True:
+                raise SchemaError('export.oracle_label_required')
+        elif doc['schema'] == 'gig.metric_result':
+            result = data['result']
+            if data['kind'] == 'book': refs.append(result['source']['run_id'])
+            elif data['kind'] == 'flow': refs += [p['run_id'] for p in result['parents']]
+            elif data['kind'] == 'cost':
+                refs += [result['config']['run_id'],result['config']['simulation_run_id']]
+                benchmarks = [result['config']['arrival'],result['config']['terminal']] + [p['decision_benchmark'] for p in result['parents']]
+                if any(b['source_artifact'] not in input_names for b in benchmarks):
+                    raise SchemaError('export.benchmark_artifact_not_retained')
+        if any(r not in source_runs for r in refs):
+            raise SchemaError('export.unresolved_parent_run')
+        if manifest['data']['schema_versions'].get(doc['schema']) != SCHEMA_VERSION:
+            raise SchemaError('export.schema_version_not_declared')
+
+
 def export_run(directory, manifest, artifacts, *, input_artifacts):
     """Local no-overwrite export. Incomplete marker persists until all checksummed files finalize."""
     if type(artifacts) is not dict or type(input_artifacts) is not dict:
@@ -321,45 +381,7 @@ def export_run(directory, manifest, artifacts, *, input_artifacts):
         input_bytes[artifact['identity']] = data
     if sum(map(len, input_bytes.values())) + sum(map(len, encoded.values())) > 128*1024*1024:
         raise SchemaError('export.run_byte_limit')
-    source_runs = {manifest['data']['run_id']} | {p['run_id'] for p in manifest['data']['parents']}
-    input_hashes = {a['sha256'] for a in inputs}
-    if any(p['manifest_sha256'] not in input_hashes for p in manifest['data']['parents']):
-        raise SchemaError('export.parent_manifest_not_retained')
-    for document in artifacts.values():
-        doc = _plain(document); data = doc['data'];refs = []
-        if doc['schema'] == 'gig.event':
-            provenance = data['metadata']['provenance']
-            dataset = provenance['dataset']['value']
-            if dataset is not None and dataset['identity'] not in input_artifacts:
-                raise SchemaError('export.dataset_artifact_not_retained')
-            if provenance['generator_seed']['reason'] == '0' and provenance['generator_seed']['value'] not in manifest['data']['seeds']:
-                raise SchemaError('export.generator_seed_not_declared')
-            for parent in provenance['parents']:
-                if parent['identity'] not in input_artifacts:
-                    raise SchemaError('export.parent_artifact_not_retained')
-        elif doc['schema'] == 'gig.book_snapshot':
-            refs.append(data['run_id'])
-        elif doc['schema'] == 'gig.simulation_output':
-            refs.append(data['state']['config']['run_id'])
-            if data['state']['config']['seed'] not in manifest['data']['seeds']:
-                raise SchemaError('export.simulation_seed_not_declared')
-        elif doc['schema'] == 'gig.execution_schedule':
-            refs.append(data['config']['run_id'])
-            if data['oracle'] and manifest['data']['parameters'].get('oracle_benchmark') is not True:
-                raise SchemaError('export.oracle_label_required')
-        elif doc['schema'] == 'gig.metric_result':
-            result = data['result']
-            if data['kind'] == 'book': refs.append(result['source']['run_id'])
-            elif data['kind'] == 'flow': refs += [p['run_id'] for p in result['parents']]
-            elif data['kind'] == 'cost':
-                refs += [result['config']['run_id'],result['config']['simulation_run_id']]
-                benchmarks = [result['config']['arrival'],result['config']['terminal']] + [p['decision_benchmark'] for p in result['parents']]
-                if any(b['source_artifact'] not in input_artifacts for b in benchmarks):
-                    raise SchemaError('export.benchmark_artifact_not_retained')
-        if any(r not in source_runs for r in refs):
-            raise SchemaError('export.unresolved_parent_run')
-        if manifest['data']['schema_versions'].get(doc['schema']) != SCHEMA_VERSION:
-            raise SchemaError('export.schema_version_not_declared')
+    _validate_export_references(manifest, artifacts.values())
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False)
     incomplete = directory/'manifest.incomplete.json'
@@ -432,21 +454,25 @@ def verify_export(directory):
         encoded = _read_export_file(path);verified_bytes += len(encoded)
         if verified_bytes > 128*1024*1024 or hashlib.sha256(encoded).hexdigest() != artifact['sha256']:
             raise SchemaError('export.input_integrity')
-    for artifact in manifest['data']['outputs']:
-        name = artifact['identity']
-        if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\.json', name):
-            raise SchemaError('export.artifact_name')
-        path = directory/name
-        if path.is_symlink() or not path.resolve().is_relative_to(directory.resolve()):
-            raise SchemaError('export.path')
-        encoded = _read_export_file(path);verified_bytes += len(encoded)
-        if verified_bytes > 128*1024*1024:
-            raise SchemaError('export.run_byte_limit')
-        if hashlib.sha256(encoded).hexdigest() != artifact['sha256']:
-            raise SchemaError('export.output_integrity')
-        doc = loads(encoded)
-        if doc['schema'] != artifact['schema'] or doc['version'] != artifact['version']:
-            raise SchemaError('export.output_schema')
+    def documents():
+        nonlocal verified_bytes
+        for artifact in manifest['data']['outputs']:
+            name = artifact['identity']
+            if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,127}\.json', name):
+                raise SchemaError('export.artifact_name')
+            path = directory/name
+            if path.is_symlink() or not path.resolve().is_relative_to(directory.resolve()):
+                raise SchemaError('export.path')
+            encoded = _read_export_file(path);verified_bytes += len(encoded)
+            if verified_bytes > 128*1024*1024:
+                raise SchemaError('export.run_byte_limit')
+            if hashlib.sha256(encoded).hexdigest() != artifact['sha256']:
+                raise SchemaError('export.output_integrity')
+            doc = loads(encoded)
+            if doc['schema'] != artifact['schema'] or doc['version'] != artifact['version']:
+                raise SchemaError('export.output_schema')
+            yield doc
+    _validate_export_references(manifest, documents())
     return manifest
 
 def native_build_info():

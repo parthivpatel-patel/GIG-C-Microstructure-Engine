@@ -21,6 +21,7 @@ struct Resting {SimOrder order;std::uint64_t priority;std::size_t source_command
 struct SimFill {
     Identity run_id;std::uint64_t seed;OrderId maker,taker;Side taker_side;PriceTicks price;QuantityLots quantity;
     SimulationTime matched_at,reported_at;std::size_t maker_command,taker_command;
+    // reported_at is shared by the maker and taker reports for this fill.
     // All fills in this subsystem are SYNTHETIC / SIMULATED, never observed executions.
     bool operator==(const SimFill&)const=default;
 };

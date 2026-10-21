@@ -57,3 +57,13 @@ leak-detection control; late interpreter-finalization leaks remain unverified.
 See PHASE_8_REPORT.md for the isolated CPython shutdown issue and exact settings.
 Only CPython3.12/Linux was exercised; other declared compatible Python versions
 are not locally validated. Local wheels are private artifacts, not published releases.
+
+Correctness remediation0.1.1 fixes maker client reports, TCA fill quantity bounds,
+retained VWAP/POV source references, known dataset/parent digest consistency, and
+selected-compiler benchmark metadata. Historical audit text is preserved with an
+addendum; these repairs do not close its broader research/operational gaps.
+Simulation canonical output is v2 and now includes both counterparty reports.
+Wire1.0 fields are unchanged; consumers must filter reports by order before summing.
+Hash consistency does not prove profile derivation, source authenticity or full
+external graph completeness. JournalEntry remains15,944 bytes on the measured
+GCC x86_64 ABI. No journal representation or allocator optimization was performed.

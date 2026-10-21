@@ -20,6 +20,9 @@ Phase 1's [field contracts](docs/PHASE_1_CONTRACTS.md) still apply.
 Final validation, reproducibility and acceptance: [final report](docs/FINAL_REPORT.md),
 [reproducibility guide](docs/REPRODUCIBILITY.md) and [security review](docs/SECURITY_AND_DEPENDENCIES.md).
 
+Correctness follow-up: [remediation report](docs/CORRECTNESS_REMEDIATION.md) records
+maker-report, TCA-boundary, export-consistency and compiler-metadata repairs.
+
 ## Build and test
 
 Requires C++20 GCC/Clang, CMake >=3.20 and Ninja; tests additionally require

@@ -77,3 +77,13 @@ native ARM64 unavailable and not tested. See FINAL_REPORT.md for actual outcomes
 Every coherent checkpoint: inspect diff, test, review, commit, push designated
 private development branch, compare remote SHA exactly; only then continue.
 Never force-push, rewrite published history or merge main without approval.
+
+## Correctness remediation follow-up
+
+Current suites have65 native CTest outcomes in each GCC/Clang Debug/Release/
+ASan+UBSan configuration,68 with ordinary optional Python and69 with Python ASan.
+New coverage includes both-side client reports, TCA quantity limits, consistent
+retained export references/digests, selected-compiler metadata and a16-case independent
+fixed-width RNG fixture reference. Historical phase counts above remain historical.
+See CORRECTNESS_REMEDIATION.md for actual results, intentional v2 canonical/generator
+changes, raw-evidence hashes and unchanged sanitizer/platform qualifications.

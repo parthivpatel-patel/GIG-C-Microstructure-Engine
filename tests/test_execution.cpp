@@ -25,6 +25,26 @@ void costs(){
     c=cost_config(20,Side::sell);fills[0]=cost_fill(10,99,Side::sell);fills[0].decision_benchmark=benchmark(100,5);fills[0].fee_ticks_per_lot=exact::Fraction::ratio(-1,10);auto sell=take(transaction_costs(c,fills));check(sell.summary().fees.str()=="-1/1" && sell.summary().slippage.str()=="10/1");
     auto empty=take(transaction_costs(cost_config(),{}));check(!empty.summary().execution_vwap.value && empty.summary().filled_lots==0 && empty.summary().implementation_shortfall.str()=="80/1");
 }
+void cost_limits(){
+    for(auto side:{Side::buy,Side::sell})for(bool maker:{false,true}){
+        auto c=cost_config(20,side);c.rules.maximum_quantity=number<QuantityLots>(10);
+        auto f=cost_fill(10,103,side);
+        if(maker){f.child=f.fill.maker;f.fill.taker_side=side==Side::buy?Side::sell:Side::buy;}
+        std::array<CostFill,1> rows{f};check(take(transaction_costs(c,rows)).summary().filled_lots==10);
+        for(auto invalid:{0ULL,11ULL}){
+            rows[0].fill.quantity=number<QuantityLots>(invalid);const auto before=rows[0].fill;
+            TrackedResource resource;resource.fail_after(0);auto result=transaction_costs(c,rows,&resource);
+            check(!result && result.error.code==ErrorCode::invalid_range && result.error.field=="cost.fill" && result.error.index==0);
+            check(rows[0].fill==before && resource.stats().attempts==0 && resource.stats().live_bytes==0);
+        }
+        std::array<CostFill,2> valid{f,f};valid[1].fill.maker=number<OrderId>(2);valid[1].fill.maker_command=2;
+        if(maker)valid[1].child=valid[1].fill.maker;
+        check(take(transaction_costs(c,valid)).summary().filled_lots==20);
+    }
+    auto maximum=cost_config(UINT64_MAX);std::array<CostFill,1> row{cost_fill(UINT64_MAX)};
+    check(take(transaction_costs(maximum,row)).summary().filled_lots==UINT64_MAX);
+    maximum.rules.maximum_quantity=number<QuantityLots>(UINT64_MAX-1);check(!transaction_costs(maximum,row));
+}
 void integration(){
     auto c=plan_config(10,2);auto p=take(twap(c));auto config=sim_config();config.run_id=c.run_id;std::array<simulation::SimOrder,1> liquidity{sim_order(1,Side::sell,100,100)};auto run=take(simulate(p,config,liquidity,sim_time(1000)));std::uint64_t filled=0;for(const auto& f:run.simulator.exchange_fills())filled+=f.quantity.value();check(filled==10 && !run.simulator.check_invariants());
     auto forged_children=std::pmr::vector<ChildSlice>(p.children());forged_children[0].order.quantity=number<QuantityLots>(100);
@@ -48,5 +68,5 @@ int main(int argc,char** argv){try{
             else return 1;
         }return 0;
     }
-    std::string_view group=argc==2?argv[1]:"schedules";if(group=="schedules")schedules();else if(group=="costs")costs();else if(group=="integration")integration();else return 1;std::cout<<"PASS: "<<group<<", "<<checks<<" checks\n";
+    std::string_view group=argc==2?argv[1]:"schedules";if(group=="schedules")schedules();else if(group=="costs")costs();else if(group=="cost_limits")cost_limits();else if(group=="integration")integration();else return 1;std::cout<<"PASS: "<<group<<", "<<checks<<" checks\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

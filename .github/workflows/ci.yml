@@ -52,4 +52,5 @@ jobs:
           .venv/bin/python -m venv build/wheel-consumer
           build/wheel-consumer/bin/python -m pip install --constraint requirements-python.lock build/wheels/*.whl
           build/wheel-consumer/bin/python tests/test_python.py
+          build/wheel-consumer/bin/python tests/test_export_contracts.py
           build/wheel-consumer/bin/python examples/python_research.py

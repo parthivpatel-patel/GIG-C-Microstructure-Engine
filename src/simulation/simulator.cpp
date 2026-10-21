@@ -46,7 +46,12 @@ struct Simulator::State {
     void report(ReportKind kind,RejectReason reason,OrderId id,std::uint64_t quantity,const SimConfig& c,std::optional<std::size_t> index={}){
         const auto at=after(now,kind==ReportKind::fill?c.execution:c.acknowledgment);
         schedule(at,ClientReport{c.run_id,kind,reason,id,at,lots(quantity),index},c);
-        if(index)fills[*index].reported_at=at;
+        if(index){
+            // One modeled execution-report latency per fill, shared by both counterparties.
+            // Keep the original taker-first tie order and RNG draw sequence.
+            auto& fill=fills[*index];fill.reported_at=at;
+            schedule(at,ClientReport{c.run_id,kind,reason,fill.maker,at,lots(quantity),index},c);
+        }
     }
     std::optional<std::size_t> best(const SimOrder& incoming)const{
         std::optional<std::size_t> result;
@@ -160,7 +165,7 @@ Error Simulator::check_invariants()const noexcept{
     return {};
 }
 Result<std::pmr::string> Simulator::canonical()const noexcept{
-    try{std::pmr::string out(resource_);detail::CanonicalWriter w(out);w.raw("gig.simulated.v1;");w.token(config_.run_id);w.number(config_.seed);detail::canonical_rules(w,config_.rules);
+    try{std::pmr::string out(resource_);detail::CanonicalWriter w(out);w.raw("gig.simulated.v2;");w.token(config_.run_id);w.number(config_.seed);detail::canonical_rules(w,config_.rules);
         for(const auto l:{config_.arrival,config_.cancel,config_.acknowledgment,config_.execution}){w.number(l.base.value());w.number(l.jitter.value());}
         for(auto n:{config_.max_orders,config_.max_events,config_.max_fills,config_.max_commands,config_.max_reports})w.number(n);
         w.number(state_->now.value());w.number(state_->rng);w.number(state_->ordinal);w.number(state_->priority);

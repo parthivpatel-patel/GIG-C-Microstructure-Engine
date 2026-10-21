@@ -14,6 +14,40 @@ void basic(){
     check(e.exchange_fills()[0].price.value()==100 && e.exchange_fills()[0].run_id==e.config().run_id && e.exchange_fills()[0].seed==1729);
     must(e.cancel_at(sim_time(0),number<OrderId>(2)));must(e.advance_to(sim_time(0)));check(e.exchange_orders().empty() && e.conservation()==Conservation{45,30,15,0,0});check(!e.check_invariants());
 }
+void reports(){
+    auto c=sim_config();c.acknowledgment.base=number<Duration>(7);c.execution.base=number<Duration>(5);
+    auto e=take(Simulator::create(c));
+    must(e.submit_at(sim_time(0),sim_order(1,Side::sell,100,10)));
+    must(e.submit_at(sim_time(0),sim_order(2,Side::sell,100,20)));
+    must(e.submit_at(sim_time(0),sim_order(3,Side::buy,101,15,TimeInForce::ioc)));
+    must(e.advance_to(sim_time(0)));check(e.exchange_fills().size()==2 && e.client_reports().empty());
+    must(e.advance_to(sim_time(4)));check(e.client_reports().empty());
+    must(e.advance_to(sim_time(5)));
+    std::array<std::uint64_t,4> filled{};
+    for(const auto& r:e.client_reports()){
+        check(r.kind==ReportKind::fill && r.fill_index && r.delivered_at==sim_time(5));
+        const auto& f=e.exchange_fills()[*r.fill_index];
+        check((r.order==f.maker || r.order==f.taker) && r.quantity==f.quantity && f.reported_at==r.delivered_at);
+        filled[static_cast<std::size_t>(r.order.value())]+=r.quantity.value();
+    }
+    check(filled[1]==10 && filled[2]==5 && filled[3]==15);
+    // Both sides are delivered before ACK; later cancellation removes only residual maker quantity.
+    must(e.cancel_at(sim_time(5),number<OrderId>(2)));must(e.advance_to(sim_time(20)));
+    std::array<std::int64_t,4> remaining{};
+    for(const auto& r:e.client_reports()){
+        const auto id=static_cast<std::size_t>(r.order.value());
+        if(r.kind==ReportKind::accepted)remaining[id]+=static_cast<std::int64_t>(r.quantity.value());
+        if(r.kind==ReportKind::fill || r.kind==ReportKind::cancelled || r.kind==ReportKind::expired)remaining[id]-=static_cast<std::int64_t>(r.quantity.value());
+    }
+    check(remaining[1]==0 && remaining[2]==0 && remaining[3]==0 && e.exchange_orders().empty());
+    // The second counterparty report must participate in atomic queue/report capacity checks.
+    for(bool queued:{true,false}){
+        auto limited=sim_config();if(queued)limited.max_events=2;else limited.max_reports=3;
+        auto model=take(Simulator::create(limited));must(model.submit_at(sim_time(0),sim_order(1,Side::sell,100,10)));must(model.advance_to(sim_time(0)));
+        must(model.submit_at(sim_time(0),sim_order(2,Side::buy,100,10)));const auto before=sim_state(model);
+        check(model.advance_to(sim_time(0)).code==ErrorCode::capacity && sim_state(model)==before && !model.check_invariants());
+    }
+}
 void tif(){
     auto e=take(Simulator::create(sim_config()));must(e.submit_at(sim_time(0),sim_order(1,Side::sell,100,10)));must(e.advance_to(sim_time(0)));
     must(e.submit_at(sim_time(0),sim_order(2,Side::buy,100,11,TimeInForce::fok)));must(e.advance_to(sim_time(0)));check(e.exchange_fills().empty() && e.conservation().rejected==11);
@@ -70,9 +104,11 @@ int main(int argc,char** argv){try{
             else if(operation=='C'){if(!(std::cin>>id))return 1;must(e.cancel_at(sim_time(0),number<OrderId>(id)));}else return 1;
             must(e.advance_to(sim_time(0)));check(!e.check_invariants());
             std::cout<<e.exchange_orders().size();for(const auto& o:e.exchange_orders())std::cout<<' '<<o.order.id.value()<<':'<<static_cast<int>(o.order.side)<<':'<<o.order.limit.value()<<':'<<o.order.quantity.value()<<':'<<o.priority;
-            std::cout<<" |";for(const auto& f:e.exchange_fills())std::cout<<' '<<f.maker.value()<<':'<<f.taker.value()<<':'<<f.price.value()<<':'<<f.quantity.value();auto l=e.conservation();std::cout<<" | "<<l.submitted<<':'<<l.executed_sides<<':'<<l.cancelled<<':'<<l.expired<<':'<<l.rejected<<'\n';
+            std::cout<<" |";for(const auto& f:e.exchange_fills())std::cout<<' '<<f.maker.value()<<':'<<f.taker.value()<<':'<<f.price.value()<<':'<<f.quantity.value();auto l=e.conservation();std::cout<<" | "<<l.submitted<<':'<<l.executed_sides<<':'<<l.cancelled<<':'<<l.expired<<':'<<l.rejected<<" |";
+            for(const auto& r:e.client_reports())std::cout<<' '<<r.order.value()<<':'<<static_cast<unsigned>(r.kind)<<':'<<static_cast<unsigned>(r.reason)<<':'<<r.quantity.value()<<':'<<(r.fill_index?std::to_string(*r.fill_index):"-");
+            std::cout<<'\n';
         }return 0;
     }
-    std::string_view group=argc==2?argv[1]:"basic";if(group=="basic")basic();else if(group=="tif")tif();else if(group=="latency")latency();else if(group=="faults")faults();else return 1;
+    std::string_view group=argc==2?argv[1]:"basic";if(group=="basic")basic();else if(group=="reports")reports();else if(group=="tif")tif();else if(group=="latency")latency();else if(group=="faults")faults();else return 1;
     std::cout<<"PASS: "<<group<<", "<<checks<<" checks\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

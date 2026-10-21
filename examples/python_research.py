@@ -28,7 +28,8 @@ def main():
     simulation.advance('5')
     result=simulation.snapshot()
     assert result['data']['origin']=='synthetic' and result['data']['transformation']=='simulated'
-    assert sum(int(r['quantity']) for r in result['data']['state']['client_reports'] if r['kind']=='5')==5
+    assert sum(int(r['quantity']) for r in result['data']['state']['client_reports'] if r['kind']=='5' and r['order']=='2')==5
+    assert sum(int(r['quantity']) for r in result['data']['state']['client_reports'] if r['kind']=='5' and r['order']=='1')==5
     print(gig.dumps(result))
 
 if __name__=='__main__':main()

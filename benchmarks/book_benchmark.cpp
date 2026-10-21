@@ -110,7 +110,7 @@ void write_file(const std::filesystem::path& path,std::string_view bytes) {
     require(!std::filesystem::exists(path),"refusing to overwrite benchmark artifact");std::ofstream out(path,std::ios::binary);out.exceptions(std::ios::badbit|std::ios::failbit);out.write(bytes.data(),static_cast<std::streamsize>(bytes.size()));
 }
 void artifacts(const Phase2Workload& w,const std::filesystem::path& directory) {
-    std::pmr::string data;detail::CanonicalWriter writer(data);writer.raw("gig.phase2.workload.v1;");writer.number(w.seed);
+    std::pmr::string data;detail::CanonicalWriter writer(data);writer.raw("gig.phase2.workload.v2;");writer.number(w.seed);
     for (const auto* list:{&w.adds,&w.cancels,&w.executions,&w.replay}) {writer.number(list->size());for (const auto& e:*list) detail::canonical_event(writer,e);}
     detail::canonical_event(writer,w.copy_snapshot);write_file(directory/"workload.canonical",data);
     auto replay=take(ReplayEngine::create(rules(),w.config));auto batch=replay.run(w.replay);require(bool(batch),"artifact replay failed");
@@ -131,7 +131,7 @@ int main(int argc,char** argv) {
         std::vector<std::int64_t> timer;
         for (int i=0;i<10000;++i) {const auto a=BenchClock::now();const auto b=BenchClock::now();timer.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(b-a).count());}
         const std::array<std::string_view,8> names{"add","cancel","execution","depth_snapshot","replay","event_copy_add","event_copy_snapshot","payload_copy"};
-        std::cout << "{\"phase2_correctness_validated\":true,\"workload_version\":1,\"orders\":" << count << ",\"seed\":" << seed << ",\"warmup\":" << warmup << ",\"repetitions\":" << repeats << ",\"threads\":1,"
+        std::cout << "{\"phase2_correctness_validated\":true,\"workload_version\":2,\"orders\":" << count << ",\"seed\":" << seed << ",\"warmup\":" << warmup << ",\"repetitions\":" << repeats << ",\"threads\":1,"
                   << "\"sizeof_market_event\":" << sizeof(MarketEvent) << ",\"sizeof_metadata\":" << sizeof(Metadata) << ",\"sizeof_add_order\":" << sizeof(AddOrder) << ",\"sizeof_journal_entry\":" << sizeof(JournalEntry)
                   << ",\"sizeof_order_book\":" << sizeof(OrderBook) << ",\"sizeof_replay_engine\":" << sizeof(ReplayEngine)
                   << ",\"input_event_storage_bytes\":" << (w.adds.capacity()+w.cancels.capacity()+w.executions.capacity()+w.replay.capacity())*sizeof(MarketEvent)

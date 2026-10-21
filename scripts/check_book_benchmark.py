@@ -8,7 +8,7 @@ import tempfile
 with tempfile.TemporaryDirectory(prefix='gig-book-smoke-') as directory:
     result=subprocess.run([sys.argv[1],'16','2','1','1729',directory],text=True,capture_output=True,check=True)
     data=json.loads(result.stdout)
-    if not data['phase2_correctness_validated'] or len(data['measurements'])!=8:
+    if data['workload_version']!=2 or not data['phase2_correctness_validated'] or len(data['measurements'])!=8:
         raise SystemExit('benchmark correctness gate did not complete')
     for name,measurement in data['measurements'].items():
         if len(measurement['bulk_samples'])!=2 or len(measurement['service_time_ns'])!=measurement['operations_per_repetition']*2:

@@ -189,3 +189,28 @@ code/input/binary hashes. Schema/immutable/native conversion overhead is INCLUDE
 fixtures/setup/export excluded. It is a research-interface rate, not C++ core speed.
 Descriptor tables must be updated when native contracts change; C++20 has no automatic
 field reflection. CI tests schema drift and complete current-field round trips.
+
+## Correctness remediation compatibility (private package0.1.1)
+
+Simulation now emits both maker and taker client fill reports at the shared fill
+report time, in stable taker-first order, with one latency draw. Filter by order
+before aggregating client inventory; the exchange fill is still a single trade.
+The native canonical model identifier advances to gig.simulated.v2. Wire schema1.0
+fields/codes remain unchanged; schemas continue to be validated unchanged.
+
+Complete export and read-only verification now share reference consistency checks.
+A VWAP profile (including a hindsight/oracle profile) must resolve to a retained
+input artifact; each POV volume source must also resolve. TWAP has no profile
+requirement. Known event dataset and parent hashes must equal the manifest's hash
+for the same retained artifact identity, which is checked against the actual bytes.
+An identity names that exact retained byte artifact. If normalization/aggregation
+produces another artifact, give it a distinct identity and retain an explicit parent
+mapping; do not silently compare hashes of different byte scopes under one identity.
+Unavailable hashes remain unavailable; no digest is invented or silently replaced.
+
+Export rejects these contradictions before creating its output directory; the
+verifier is read-only and rechecks them even when output/manifest hashes have been
+self-consistently recomputed. This establishes internal consistency, not source
+signatures, licenses, authentic timestamps, proof that profile bytes produced the
+inline weights, or completeness of an arbitrary external provenance graph. See
+CORRECTNESS_REMEDIATION.md for exact tests and remaining limits.

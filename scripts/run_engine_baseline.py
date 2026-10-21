@@ -1,10 +1,30 @@
 #!/usr/bin/env python3
 """Common-code sequential engine baseline; no optimization or performance threshold."""
-import argparse,hashlib,json,math,os,platform,statistics,subprocess,sys,xml.etree.ElementTree as ET
+import argparse,hashlib,json,math,os,platform,re,shlex,statistics,subprocess,sys,xml.etree.ElementTree as ET
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def run(*args):return subprocess.check_output(args,cwd=ROOT,text=True)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def compiler_metadata(build):
+ """Read the selected build's generated compiler identity; never fall back to ambient c++."""
+ cache=(build/'CMakeCache.txt').read_text()
+ def cache_version(part):
+  match=re.search(r'^CMAKE_CACHE_'+part+r'_VERSION:INTERNAL=([0-9]+)$',cache,re.MULTILINE)
+  if not match:raise ValueError('missing selected CMake cache version')
+  return match.group(1)
+ cmake_version='.'.join(cache_version(p) for p in ['MAJOR','MINOR','PATCH'])
+ metadata=build/'CMakeFiles'/cmake_version/'CMakeCXXCompiler.cmake';contents=metadata.read_text()
+ def setting(name,optional=False):
+  match=re.search(r'^set\('+re.escape(name)+r' "([^"\r\n]*)"\)$',contents,re.MULTILINE)
+  if match:return match.group(1)
+  if optional:return ''
+  raise ValueError('missing selected '+name)
+ executable=setting('CMAKE_CXX_COMPILER');arg1=setting('CMAKE_CXX_COMPILER_ARG1',True)
+ return {'compiler':run(executable,*shlex.split(arg1),'--version'),
+         'compiler_executable':executable,'compiler_arg1':arg1,
+         'compiler_id':setting('CMAKE_CXX_COMPILER_ID'),
+         'compiler_version':setting('CMAKE_CXX_COMPILER_VERSION'),
+         'compiler_metadata_sha256':sha(metadata)}
 def source_hashes():
  files=subprocess.check_output(['git','ls-files','-c','-o','--exclude-standard','-z'],cwd=ROOT).split(b'\0')
  return {f.decode():sha(ROOT/f.decode()) for f in sorted(set(files)) if f and (f.decode().startswith(('include/','src/','benchmarks/','fixtures/','tests/','scripts/','cmake/')) or f.decode() in ['CMakeLists.txt','CMakePresets.json'])}
@@ -46,7 +66,7 @@ def main():
   assert head==run('git','rev-parse','HEAD').strip() and status==run('git','status','--porcelain')
   manifest={'schema_version':1,'complete':True,'code_sha':head,'dirty':bool(status),'origin':'synthetic','cases':cases,'source_sha256':sources,
    'correctness':{'ctest_outcomes':int(tests.get('tests')),'failures':0,'errors':0,'skipped':0,'junit_sha256':sha(output/'tests.xml')},
-   'environment':{'cpu':cpu,'architecture':platform.machine(),'os':platform.platform(),'compiler':run('c++','--version'),'cmake':run('cmake','--version'),'compile_commands':compile_commands,'affinity':sorted(os.sched_getaffinity(0)),'threads_per_engine':1,'execution':'sequential benchmarks; shared host scheduling/frequency uncontrolled'},
+   'environment':{'cpu':cpu,'architecture':platform.machine(),'os':platform.platform(),**compiler_metadata(build),'cmake':run('cmake','--version'),'compile_commands':compile_commands,'affinity':sorted(os.sched_getaffinity(0)),'threads_per_engine':1,'execution':'sequential benchmarks; shared host scheduling/frequency uncontrolled'},
    'methodology':{'throughput':'median bulk-wrapper operations/s; setup/export outside interval','service_times':'separate serial wrapper pass, clock/checksum/lifecycle overhead; no external arrival queue; simulated scheduler still runs','percentiles':'nearest rank, finite observations','memory':'native_vm_hwm_bytes is post-exec /proc/self/status high-water; wait-accounted child RSS may retain inherited worker floor; both include native fixture/oracle/export/driver/proc-read, not engine-only RAM; PMR separately scoped','cpu_seconds':'whole child CPU, includes setup/preflight/export','artifacts':'deterministic canonical inputs/results regenerated from exact code/workload; generated files ignored, durable hashes retained','limitations':'no production/ultra-low-latency claim; copy control is not semantically equivalent to full event; no optimization inferred from noisy samples'}}
   with (output/'manifest.json').open('x') as f:json.dump(manifest,f,indent=2,sort_keys=True);f.write('\n')
   print(json.dumps({'code_sha':head,'dirty':bool(status),'cases':{k:{'peak_rss_bytes':v['peak_process_rss_bytes'],'summary':v['summary']} for k,v in cases.items()}}))

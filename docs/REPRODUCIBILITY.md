@@ -22,7 +22,7 @@ cmake --build --preset debug
 ctest --preset debug --output-junit build/debug/tests.xml
 ```
 
-Repeat with release and asan-ubsan. Each native suite has 61 outcomes, including
+Repeat with release and asan-ubsan. Each current native suite has 65 outcomes (including the remediation regressions), including
 independent Python arbitrary-precision reference programs; the native library does
 not depend on a Python development module or pybind11. Reference scripts require
 an interpreter. Explicit CXX avoids inherited SDK compiler settings. For Clang use

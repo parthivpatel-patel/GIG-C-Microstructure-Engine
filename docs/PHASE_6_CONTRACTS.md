@@ -137,3 +137,12 @@ Benchmark fixes the hand example using actual simulator fills, validates first, 
 complete parent canonical simulation plus declared plan/cost assumptions, then separately
 measures planning+TCA wrappers (not matching, setup or export). Raw timing/selected PMR
 counts are scoped, finite shared-cloud evidence; no optimality or production speed claim.
+
+## Correctness remediation: fill quantity rules
+
+TCA validates every supplied fill quantity against the same per-fill
+`InstrumentRules.maximum_quantity` boundary as events/model orders, in addition
+to positivity and aggregate target constraints. A parent target and sum of several
+valid fills may exceed the per-fill maximum. Invalid fills return invalid_range,
+field `cost.fill`, with the row index before allocating a report. Cost formulas
+and valid financial results are unchanged. See CORRECTNESS_REMEDIATION.md.

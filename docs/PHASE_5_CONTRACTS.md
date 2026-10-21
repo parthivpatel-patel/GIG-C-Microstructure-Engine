@@ -118,3 +118,21 @@ all repeated canonical outputs must match and end with 128 fills and exact ledge
 Selected PMR allocation deltas exclude setup, lifetime peak includes setup/staging;
 all bytes freed after owners. Manifest embeds canonical complete simulated run,
 code/flags/CPU/seed/raw timings; finite shared-cloud samples, not production latency.
+
+## Correctness remediation: counterparty reports (model v2)
+
+Every order submitted to this model is in the modeled client scope, including
+resting makers/seed liquidity. Each execution now schedules one taker and one
+maker fill report, both referencing the same fill index and `reported_at`. One
+execution latency draw is shared by the pair; the original taker-first stable tie
+order is retained and no extra PRNG draw changes subsequent modeled latency.
+Consumers must filter reports by order/client scope; summing both sides counts
+2*q lots. Exchange fills still count one economic trade, and executed_sides still
+counts2*q. Extra reports consume existing queue/report capacities and participate
+in the same all-or-nothing staged command. A model has no separate ownership flags
+or independently calibrated participant latency distributions.
+
+Canonical simulation output is now `gig.simulated.v2;`; the v1 hashes in historical
+reports remain historical evidence, not expected v2 hashes. JSON wire1.0 field
+shapes/codes are unchanged. The private package patch version is0.1.1. See
+CORRECTNESS_REMEDIATION.md for regression/compatibility evidence and actual results.

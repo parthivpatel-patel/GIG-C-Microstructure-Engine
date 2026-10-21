@@ -67,3 +67,19 @@ Define event service vs queueing latency, arrival schedule and timer overhead;
 report p50/p95/p99/worst observed latency with adequate samples, raw repetitions
 and coordinated-omission controls. Throughput is never reciprocal latency.
 No target values or production-readiness claims are assumed.
+
+## Correctness remediation: compiler provenance
+
+The common engine runner obtains compiler executable, optional first arguments,
+ID and version from the selected build's CMake-generated compiler metadata, using
+the cache's exact CMake version directory. It records that metadata's SHA256 and
+runs that compiler's --version command. Missing selected metadata is an error;
+ambient c++ is never a fallback. Compile commands/flags and executable hashes
+remain recorded. Existing manifests are historical and are not rewritten. GCC and
+Clang selection regressions and actual-run checks are in CORRECTNESS_REMEDIATION.md.
+
+Generator v2 additionally removes compiler-dependent argument evaluation from the
+book workload. Quantity and price draws are explicitly sequenced and tested against
+an independent fixed-width reference. Compare only identical generator/model
+versions and input hashes; historical v1 runs are not silently treated as v2.
+The legacy research runner also uses the shared selected-build compiler helper.
