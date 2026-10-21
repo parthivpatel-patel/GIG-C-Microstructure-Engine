@@ -4,13 +4,13 @@ Standalone C++20 market-microstructure research project. Correctness precedes
 performance. No live trading, broker connection or GIG Quant Terminal dependency.
 The initial README and all Git history are preserved in repository history.
 
-## Current status — Phase 4
+## Current status — Phase 5
 
 IMPLEMENTED: strong types and validated event contracts, a deterministic single-owner
 order-level book, strict multi-stream replay, explicit reset/recovery, owned accepted-
 event provenance and canonical outputs. Historical reconstruction never matches orders.
 The demo replays an entirely synthetic 11-record workflow; `--canonical` emits its
-canonical result. Exact book-state and causal windowed flow analytics are implemented; no matching, execution simulation or Python integration yet.
+canonical result. Exact book-state and causal windowed flow analytics are implemented; separate synthetic matching and latency simulation are implemented. No Python integration yet.
 
 See [book semantics](docs/PHASE_2_BOOK.md), [replay contracts](docs/PHASE_2_REPLAY.md),
 [benchmark methodology](docs/PHASE_2_BENCHMARKS.md) and [limitations](docs/LIMITATIONS.md).
