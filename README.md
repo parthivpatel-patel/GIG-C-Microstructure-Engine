@@ -14,6 +14,7 @@ canonical result. No analytics, matching, execution simulation or Python integra
 
 See [book semantics](docs/PHASE_2_BOOK.md), [replay contracts](docs/PHASE_2_REPLAY.md),
 [benchmark methodology](docs/PHASE_2_BENCHMARKS.md) and [limitations](docs/LIMITATIONS.md).
+[Phase 2 completion report](docs/PHASE_2_REPORT.md) records evidence and acceptance.
 Phase 1's [field contracts](docs/PHASE_1_CONTRACTS.md) still apply.
 
 ## Build and test
