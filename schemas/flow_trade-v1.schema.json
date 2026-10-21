@@ -1,0 +1,194 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "price": {
+      "maxLength": 20,
+      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+      "type": "string",
+      "x-integer-maximum": "9223372036854775807",
+      "x-integer-minimum": "-9223372036854775808"
+    },
+    "quantity": {
+      "maxLength": 20,
+      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+      "type": "string",
+      "x-integer-maximum": "18446744073709551615",
+      "x-integer-minimum": "0"
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "journal_prefix": {
+          "maxLength": 20,
+          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+          "type": "string",
+          "x-integer-maximum": "18446744073709551615",
+          "x-integer-minimum": "0"
+        },
+        "revision": {
+          "maxLength": 20,
+          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+          "type": "string",
+          "x-integer-maximum": "18446744073709551615",
+          "x-integer-minimum": "0"
+        },
+        "rules": {
+          "additionalProperties": false,
+          "properties": {
+            "instrument": {
+              "maxLength": 20,
+              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "18446744073709551615",
+              "x-integer-minimum": "1"
+            },
+            "lot_size": {
+              "additionalProperties": false,
+              "properties": {
+                "denominator": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "numerator": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                }
+              },
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "type": "object"
+            },
+            "maximum_price": {
+              "maxLength": 20,
+              "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "9223372036854775807",
+              "x-integer-minimum": "-9223372036854775808"
+            },
+            "maximum_quantity": {
+              "maxLength": 20,
+              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "18446744073709551615",
+              "x-integer-minimum": "0"
+            },
+            "minimum_price": {
+              "maxLength": 20,
+              "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "9223372036854775807",
+              "x-integer-minimum": "-9223372036854775808"
+            },
+            "tick_size": {
+              "additionalProperties": false,
+              "properties": {
+                "denominator": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "numerator": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                }
+              },
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "type": "object"
+            },
+            "venue": {
+              "maxLength": 20,
+              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "18446744073709551615",
+              "x-integer-minimum": "1"
+            }
+          },
+          "required": [
+            "instrument",
+            "venue",
+            "minimum_price",
+            "maximum_price",
+            "maximum_quantity",
+            "tick_size",
+            "lot_size"
+          ],
+          "type": "object"
+        },
+        "run_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[!-~]+$(?![\\s\\S])",
+          "type": "string"
+        },
+        "session": {
+          "additionalProperties": false,
+          "properties": {
+            "epoch": {
+              "maxLength": 20,
+              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "18446744073709551615",
+              "x-integer-minimum": "0"
+            },
+            "session": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[!-~]+$(?![\\s\\S])",
+              "type": "string"
+            }
+          },
+          "required": [
+            "session",
+            "epoch"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "run_id",
+        "journal_prefix",
+        "revision",
+        "rules",
+        "session"
+      ],
+      "type": "object"
+    },
+    "timestamp": {
+      "maxLength": 20,
+      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+      "type": "string",
+      "x-integer-maximum": "9223372036854775807",
+      "x-integer-minimum": "-9223372036854775808"
+    },
+    "utc_clock": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$(?![\\s\\S])",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "timestamp",
+    "utc_clock",
+    "price",
+    "quantity"
+  ],
+  "type": "object"
+}

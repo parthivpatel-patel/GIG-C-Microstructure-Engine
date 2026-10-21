@@ -1,0 +1,631 @@
+{
+  "$id": "urn:gig.simulation_output:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "const": "synthetic"
+        },
+        "state": {
+          "additionalProperties": false,
+          "properties": {
+            "canonical": {
+              "maxLength": 33554432,
+              "type": "string"
+            },
+            "client_reports": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "delivered_at": {
+                    "maxLength": 20,
+                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "9223372036854775807",
+                    "x-integer-minimum": "0"
+                  },
+                  "fill_index": {
+                    "anyOf": [
+                      {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "0"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "kind": {
+                    "enum": [
+                      "0",
+                      "1",
+                      "2",
+                      "3",
+                      "4",
+                      "5"
+                    ]
+                  },
+                  "order": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "1"
+                  },
+                  "quantity": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "reason": {
+                    "enum": [
+                      "0",
+                      "1",
+                      "2",
+                      "3"
+                    ]
+                  },
+                  "run_id": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[!-~]+$(?![\\s\\S])",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "run_id",
+                  "kind",
+                  "reason",
+                  "order",
+                  "delivered_at",
+                  "quantity",
+                  "fill_index"
+                ],
+                "type": "object"
+              },
+              "maxItems": 100000,
+              "type": "array",
+              "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+            },
+            "config": {
+              "additionalProperties": false,
+              "properties": {
+                "acknowledgment": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "jitter": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "base",
+                    "jitter"
+                  ],
+                  "type": "object"
+                },
+                "arrival": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "jitter": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "base",
+                    "jitter"
+                  ],
+                  "type": "object"
+                },
+                "cancel": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "jitter": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "base",
+                    "jitter"
+                  ],
+                  "type": "object"
+                },
+                "execution": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "base": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "jitter": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "base",
+                    "jitter"
+                  ],
+                  "type": "object"
+                },
+                "max_commands": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "max_events": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "max_fills": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "max_orders": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "max_reports": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "rules": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "instrument": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "1"
+                    },
+                    "lot_size": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        },
+                        "numerator": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object"
+                    },
+                    "maximum_price": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "-9223372036854775808"
+                    },
+                    "maximum_quantity": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    },
+                    "minimum_price": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "-9223372036854775808"
+                    },
+                    "tick_size": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        },
+                        "numerator": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object"
+                    },
+                    "venue": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "1"
+                    }
+                  },
+                  "required": [
+                    "instrument",
+                    "venue",
+                    "minimum_price",
+                    "maximum_price",
+                    "maximum_quantity",
+                    "tick_size",
+                    "lot_size"
+                  ],
+                  "type": "object"
+                },
+                "run_id": {
+                  "maxLength": 128,
+                  "minLength": 1,
+                  "pattern": "^[!-~]+$(?![\\s\\S])",
+                  "type": "string"
+                },
+                "seed": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                }
+              },
+              "required": [
+                "run_id",
+                "rules",
+                "seed",
+                "arrival",
+                "cancel",
+                "acknowledgment",
+                "execution",
+                "max_orders",
+                "max_events",
+                "max_fills",
+                "max_commands",
+                "max_reports"
+              ],
+              "type": "object"
+            },
+            "conservation": {
+              "additionalProperties": false,
+              "properties": {
+                "cancelled": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "executed_sides": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "expired": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "rejected": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "submitted": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                }
+              },
+              "required": [
+                "submitted",
+                "executed_sides",
+                "cancelled",
+                "expired",
+                "rejected"
+              ],
+              "type": "object"
+            },
+            "exchange_fills": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "maker": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "1"
+                  },
+                  "maker_command": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "matched_at": {
+                    "maxLength": 20,
+                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "9223372036854775807",
+                    "x-integer-minimum": "0"
+                  },
+                  "price": {
+                    "maxLength": 20,
+                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "9223372036854775807",
+                    "x-integer-minimum": "-9223372036854775808"
+                  },
+                  "quantity": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "reported_at": {
+                    "maxLength": 20,
+                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "9223372036854775807",
+                    "x-integer-minimum": "0"
+                  },
+                  "run_id": {
+                    "maxLength": 128,
+                    "minLength": 1,
+                    "pattern": "^[!-~]+$(?![\\s\\S])",
+                    "type": "string"
+                  },
+                  "seed": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "taker": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "1"
+                  },
+                  "taker_command": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "taker_side": {
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  }
+                },
+                "required": [
+                  "run_id",
+                  "seed",
+                  "maker",
+                  "taker",
+                  "taker_side",
+                  "price",
+                  "quantity",
+                  "matched_at",
+                  "reported_at",
+                  "maker_command",
+                  "taker_command"
+                ],
+                "type": "object"
+              },
+              "maxItems": 100000,
+              "type": "array",
+              "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+            },
+            "exchange_orders": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "order": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "1"
+                      },
+                      "limit": {
+                        "maxLength": 20,
+                        "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "9223372036854775807",
+                        "x-integer-minimum": "-9223372036854775808"
+                      },
+                      "post_only": {
+                        "type": "boolean"
+                      },
+                      "quantity": {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "0"
+                      },
+                      "side": {
+                        "enum": [
+                          "0",
+                          "1"
+                        ]
+                      },
+                      "tif": {
+                        "enum": [
+                          "0",
+                          "1",
+                          "2"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "side",
+                      "limit",
+                      "quantity",
+                      "tif",
+                      "post_only"
+                    ],
+                    "type": "object"
+                  },
+                  "priority": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  },
+                  "source_command": {
+                    "maxLength": 20,
+                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                    "type": "string",
+                    "x-integer-maximum": "18446744073709551615",
+                    "x-integer-minimum": "0"
+                  }
+                },
+                "required": [
+                  "order",
+                  "priority",
+                  "source_command"
+                ],
+                "type": "object"
+              },
+              "maxItems": 100000,
+              "type": "array",
+              "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+            },
+            "now": {
+              "maxLength": 20,
+              "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+              "type": "string",
+              "x-integer-maximum": "9223372036854775807",
+              "x-integer-minimum": "0"
+            }
+          },
+          "required": [
+            "config",
+            "now",
+            "conservation",
+            "exchange_orders",
+            "exchange_fills",
+            "client_reports",
+            "canonical"
+          ],
+          "type": "object"
+        },
+        "transformation": {
+          "const": "simulated"
+        }
+      },
+      "required": [
+        "origin",
+        "transformation",
+        "state"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "gig.simulation_output"
+    },
+    "version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "data"
+  ],
+  "type": "object"
+}

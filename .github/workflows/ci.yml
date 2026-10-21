@@ -22,8 +22,19 @@ jobs:
           else
             echo 'CXX=g++' >> "$GITHUB_ENV"
           fi
+      - name: Prepare pinned Python research dependencies
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r requirements-python.lock
       - name: Configure
-        run: cmake --preset ${{ matrix.preset }}
+        shell: bash
+        run: |
+          if [ "${{ matrix.compiler }}" = gcc ] && [ "${{ matrix.preset }}" = release ]; then
+            cmake --preset release -DGIG_BUILD_PYTHON=ON -DPython3_EXECUTABLE="${{ github.workspace }}/.venv/bin/python" -Dpybind11_DIR="$(.venv/bin/python -m pybind11 --cmakedir)"
+          else
+            cmake --preset ${{ matrix.preset }}
+          fi
       - name: Build
         run: cmake --build --preset ${{ matrix.preset }}
       - name: Test
@@ -34,3 +45,11 @@ jobs:
       - name: Phase 2 correctness and evidence smoke (no performance gate)
         if: matrix.preset == 'release'
         run: python3 scripts/run_phase2_benchmark.py --orders 32 --repetitions 2 --warmup 1 --output-dir build/ci-phase2
+      - name: Build and validate private local wheel (no publication)
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        run: |
+          .venv/bin/python -m build --wheel --no-isolation --outdir build/wheels
+          .venv/bin/python -m venv build/wheel-consumer
+          build/wheel-consumer/bin/python -m pip install --constraint requirements-python.lock build/wheels/*.whl
+          build/wheel-consumer/bin/python tests/test_python.py
+          build/wheel-consumer/bin/python examples/python_research.py
