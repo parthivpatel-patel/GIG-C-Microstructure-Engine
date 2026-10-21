@@ -1,3 +1,4 @@
+#include "memory_stats.hpp"
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -21,5 +22,5 @@ int main(int argc,char** argv){try{
     if(argc==2){if(std::filesystem::exists(argv[1]))throw std::runtime_error("refusing overwrite");std::ofstream f(argv[1],std::ios::binary);f.exceptions(std::ios::badbit|std::ios::failbit);f.write(reference.data(),static_cast<std::streamsize>(reference.size()));}else if(argc!=1)throw std::runtime_error("usage: [new-canonical-path]");
     std::cout<<"{\"case\":\"synthetic_ioc_matching_v1\",\"seed\":1729,\"warmup\":2,\"repetitions\":7,\"operations_per_repetition\":128,\"checksum\":"<<checksum<<",\"bulk_ns\":[";
     for(std::size_t i=0;i<bulk.size();++i){if(i)std::cout<<',';std::cout<<bulk[i];}std::cout<<"],\"service_ns\":[";for(std::size_t i=0;i<latency.size();++i){if(i)std::cout<<',';std::cout<<latency[i];}
-    std::cout<<"],\"pmr_bulk_allocations\":[";for(std::size_t i=0;i<allocations.size();++i){if(i)std::cout<<',';std::cout<<allocations[i];}std::cout<<"],\"pmr_peak_bytes_including_setup\":[";for(std::size_t i=0;i<peaks.size();++i){if(i)std::cout<<',';std::cout<<peaks[i];}std::cout<<"]}\n";
+    std::cout<<"],\"pmr_bulk_allocations\":[";for(std::size_t i=0;i<allocations.size();++i){if(i)std::cout<<',';std::cout<<allocations[i];}std::cout<<"],\"pmr_peak_bytes_including_setup\":[";for(std::size_t i=0;i<peaks.size();++i){if(i)std::cout<<',';std::cout<<peaks[i];}std::cout<<"]";gig::benchmark_memory::emit_native_peak_rss();std::cout<<"}\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

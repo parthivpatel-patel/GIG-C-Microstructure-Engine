@@ -46,15 +46,26 @@ The benchmark runner reruns the complete Release suite before measurements, chec
 its workload against the independent oracle, records raw samples/source hashes/code
 SHA, and rejects source changes during the run. See PHASE_2_BENCHMARKS.md.
 
+## Phases 3–6 additions
+
+Presets now execute 61 CTest outcomes: the Phase 2 48 plus two book-analytics groups,
+two flow groups, five synthetic-simulation groups and four execution/TCA groups.
+Independent Python references: 2650 exact book cases (seed3071), 2000 exact flow
+cases (4099), 1000 matching/cancel states (5/42/1729/2027), and 2600 execution/cost
+cases (6011). Allocation injection additionally reaches two flow, 28 simulation,
+six planner, 42 integrated-execution and one TCA output position. Every inherited
+book/replay and arbitrary-precision numeric reference remains active. See phase
+reports for actual results and correctness-gated benchmark scopes.
+
 ## Future phase gates (not implemented)
 
 Phase 1 IMPLEMENTED: strong types, exact conversion, malformed events, checked arithmetic.
 Phase 2 IMPLEMENTED: FIFO/conservation/index invariants, independent reference book,
 seeded streams, canonical replay, sequence recovery and allocation fault injection.
-Phase 3: independent basic-metric numeric references and invalid states.
-Phase 4: OFI/classification assumptions, causal horizons and sampling.
-Phase 5: separate matching/reconstruction, cancellation races and seeded latency.
-Phase 6: schedule constraints, inventory/cost reconciliation, no look-ahead.
+Phase 3 IMPLEMENTED: independent exact book metrics and unavailable states.
+Phase 4 IMPLEMENTED: OFI/signing assumptions, causal horizons and sampling.
+Phase 5 IMPLEMENTED: separate matching, cancellation races and seeded latency.
+Phase 6 IMPLEMENTED: schedule constraints, inventory/cost reconciliation, no look-ahead.
 Phase 7: correctness-validated before/after benchmarks; concurrency needs TSan.
 Phase 8: exact schema/Python round trips, ownership and standalone compatibility.
 Phase 9: native ARM64 and x86_64 reproducibility, complete portfolio documentation.

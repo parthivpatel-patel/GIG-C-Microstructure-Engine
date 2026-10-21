@@ -1,3 +1,4 @@
+#include "memory_stats.hpp"
 #include <algorithm>
 #include <charconv>
 #include <chrono>
@@ -160,6 +161,7 @@ int main(int argc,char** argv) {
 #else
         std::cout << "null";
 #endif
+        gig::benchmark_memory::emit_native_peak_rss();
         std::cout << "}\n";return 0;
     } catch (const std::exception& error) {std::cerr << error.what() << '\n';return 1;}
 }

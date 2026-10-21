@@ -1,13 +1,14 @@
 # Limitations and truth boundaries
 
-Phase 2 implements a single-owner, single-instrument/venue reconstructed book and
-strict multi-stream replay. See PHASE_2_BOOK.md and PHASE_2_REPLAY.md for exact scope,
-mutation, sequence and recovery rules. It never matches incoming orders.
+Implemented through Phase 6: single-owner reconstructed book/replay, exact book-state
+and causal flow analytics, separate offline synthetic matching/latency, exact-lot
+TWAP/VWAP/POV and TCA. See each PHASE_n_CONTRACTS.md and reports for evidence.
+Historical replay NEVER matches. Simulator fills are always synthetic/simulated.
+Python bindings, GIG consumer schemas and real-feed adapters remain future work.
+No live/broker/Terminal integration or released production interface.
 
-No analytics, synthetic matching, execution simulation, Python bindings, GIG Terminal
-integration, real-feed adapter, broker connection or live trading is implemented.
 No exchange certification: auctions, hidden/iceberg/pro-rata/pegged priority, routing,
-STP, atomic transient-crossed message bundles and exchange-specific corrections are
+STP, atomic transient-crossed reconstruction bundles and exchange-specific corrections are
 unsupported. Channel-local order IDs need an explicitly reviewed adapter mapping.
 
 Replay defaults to requiring a complete order snapshot; declaring empty is an explicit
@@ -34,3 +35,17 @@ must be reported separately from local tests; inaccessible checks are not succes
 
 IMPLEMENTED != VERIFIED; BENCHMARKED != FAST; SYNTHETIC != OBSERVED;
 LOCAL_TESTED != PRODUCTION_VALIDATED.
+
+Flow analytics need declared common UTC clocks and complete sequences/top updates;
+quote/tick signs are estimates, not observed aggression. No Kyle/VPIN calibration.
+General exact fractions require GCC/Clang 128-bit support and bounded intermediates;
+volatility sqrt is approximate long double. Simulation uses assumed discrete-uniform
+latencies and full bounded State clones; exchange truth is not the delayed client
+information set. Execution schedules cap submitted inventory and may underexecute;
+VWAP forecasts need ex-ante availability, hindsight profiles remain oracle-labeled.
+TCA fees/midpoints/opportunity conventions are supplied assumptions, not calibrated
+adverse selection/impact/hidden liquidity. See PHASE_4/5/6_CONTRACTS.md.
+
+Linux wait-accounted RSS may include an inherited pre-exec worker floor. Phase 7
+also records native /proc VmHWM after exec; neither includes only engine data.
+No optimization is inferred from different-phase/flag/workload/noisy timing results.

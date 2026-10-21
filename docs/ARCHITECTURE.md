@@ -1,8 +1,10 @@
 # Approved architecture — Phase 0B
 
-Status: Phase 2 book and strict replay IMPLEMENTED, building on Phase 1 strong types
-and event contracts. Analytics, matching, simulation and integration remain future
-work. See PHASE_2_BOOK.md and PHASE_2_REPLAY.md for implemented contracts.
+Status: implemented through Phase 6: strong types/events, deterministic reconstruction
+and replay, exact book/flow analytics, separate synthetic matching/latency, execution
+schedules and TCA. Phase 7 measures/profiles the correctness baseline. Python/versioned
+consumer schemas remain Phase 8. No live/broker or Terminal dependency.
+See PHASE_2_BOOK.md through PHASE_6_CONTRACTS.md for actual semantics and limitations.
 
 ## Priorities and boundaries
 

@@ -1,3 +1,4 @@
+#include "memory_stats.hpp"
 #include <chrono>
 #include <iostream>
 #include <fstream>
@@ -30,6 +31,6 @@ int main(int argc,char** argv) {
         for (int i=0;i<35000;++i) {auto a=Clock::now();auto m=take(analytics::calculate(snapshot,1));checksum+=static_cast<std::uint64_t>(m.get(analytics::BookMetric::microprice).value->numerator());auto z=Clock::now();latencies.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(z-a).count());}
         std::cout << "{\"case\":\"book_metrics_depth1\",\"seed\":0,\"warmup\":2,\"repetitions\":7,\"operations_per_repetition\":5000,\"checksum\":" << checksum << ",\"bulk_ns\":[";
         for(std::size_t i=0;i<bulk.size();++i){if(i)std::cout<<',';std::cout<<bulk[i];}std::cout<<"],\"service_ns\":[";
-        for(std::size_t i=0;i<latencies.size();++i){if(i)std::cout<<',';std::cout<<latencies[i];}std::cout<<"]}\n";
+        for(std::size_t i=0;i<latencies.size();++i){if(i)std::cout<<',';std::cout<<latencies[i];}std::cout<<"]";gig::benchmark_memory::emit_native_peak_rss();std::cout<<"}\n";
     }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
 }

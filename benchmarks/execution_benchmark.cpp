@@ -1,3 +1,4 @@
+#include "memory_stats.hpp"
 #include <chrono>
 #include <filesystem>
 #include <fstream>
@@ -18,5 +19,5 @@ int main(int argc,char** argv){try{
     for(int i=0;i<35000;++i){auto a=BenchClock::now();operation();auto z=BenchClock::now();latency.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(z-a).count());}
     auto stats=resource.stats();if(stats.live_bytes)return 1;
     std::cout<<"{\"case\":\"schedule_and_tca_v1\",\"seed\":1729,\"warmup\":2,\"repetitions\":7,\"operations_per_repetition\":5000,\"checksum\":"<<checksum<<",\"pmr_allocations_including_warmup_and_service\":"<<stats.allocations<<",\"pmr_peak_bytes\":"<<stats.peak_bytes<<",\"bulk_ns\":[";
-    for(std::size_t i=0;i<bulk.size();++i){if(i)std::cout<<',';std::cout<<bulk[i];}std::cout<<"],\"service_ns\":[";for(std::size_t i=0;i<latency.size();++i){if(i)std::cout<<',';std::cout<<latency[i];}std::cout<<"]}\n";
+    for(std::size_t i=0;i<bulk.size();++i){if(i)std::cout<<',';std::cout<<bulk[i];}std::cout<<"],\"service_ns\":[";for(std::size_t i=0;i<latency.size();++i){if(i)std::cout<<',';std::cout<<latency[i];}std::cout<<"]";gig::benchmark_memory::emit_native_peak_rss();std::cout<<"}\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
