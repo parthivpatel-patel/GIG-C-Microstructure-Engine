@@ -22,7 +22,7 @@ cmake --build --preset debug
 ctest --preset debug --output-junit build/debug/tests.xml
 ```
 
-Repeat with release and asan-ubsan. Each current native suite has 65 outcomes (including the remediation regressions), including
+Repeat with release and asan-ubsan. Each current native suite has 74 outcomes (65 existing outcomes including the remediation regressions, plus 9 P1E wire checks), including
 independent Python arbitrary-precision reference programs; the native library does
 not depend on a Python development module or pybind11. Reference scripts require
 an interpreter. Explicit CXX avoids inherited SDK compiler settings. For Clang use
@@ -84,3 +84,20 @@ PHASE_8_INTERFACE.md for workload, memory and provenance definitions.
 Download locked wheels with `pip download --only-binary=:all: --no-deps -r
 requirements-python.lock --dest build/review-wheels` before the read-only dependency
 review. Its PyPI advisory response is a dated snapshot, not a universal CVE audit.
+
+
+## Synthetic BinaryFile / ITCH wire foundation (P1E)
+
+The independent `gig::itch` target does not enter the engine/Python runtime path.
+`ctest --test-dir build/debug -R '^itch\.' --output-on-failure` selects its nine
+outcomes when benchmarks are enabled. The full native suite has 74 outcomes;
+Python Debug/Release have 77 and GCC Python ASan/UBSan 78, including its live-LSan
+control. These are local Linux x86_64 results, not hosted CI or real-data evidence.
+
+See [P1E_VALIDATION_REPORT.md](P1E_VALIDATION_REPORT.md) for exact interfaces,
+commands, source policy, memory bounds, final matrix and limitations;
+[P1E_MATRIX_COVERAGE.md](P1E_MATRIX_COVERAGE.md) accounts for all 62 proposed synthetic
+rows and 8 observed gates. [P1E_EVIDENCE.json](P1E_EVIDENCE.json) retains the verified
+implementation SHA, source/JUnit/package hashes and scoped synthetic measurements.
+Raw run logs remain ignored under `build/p1e/evidence/`. Do not acquire market data
+or infer valid L3 initialization from a successful wire parse.
