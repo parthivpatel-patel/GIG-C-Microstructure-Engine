@@ -44,3 +44,12 @@ add_executable(gig_execution_benchmark execution_benchmark.cpp)
 target_link_libraries(gig_execution_benchmark PRIVATE gig::microstructure)
 target_include_directories(gig_execution_benchmark PRIVATE ${PROJECT_SOURCE_DIR})
 gig_project_target(gig_execution_benchmark)
+
+add_executable(gig_itch_benchmark itch_benchmark.cpp)
+target_link_libraries(gig_itch_benchmark PRIVATE gig::itch)
+set_target_properties(gig_itch_benchmark PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+gig_project_target(gig_itch_benchmark)
+if(BUILD_TESTING)
+  add_test(NAME itch.benchmark_correctness COMMAND ${Python3_EXECUTABLE}
+    ${PROJECT_SOURCE_DIR}/scripts/check_itch_benchmark.py $<TARGET_FILE:gig_itch_benchmark>)
+endif()

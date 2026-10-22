@@ -1,0 +1,109 @@
+#include "gig/itch/decoder.hpp"
+#include <limits>
+
+namespace gig::itch {
+std::optional<std::size_t> expected_length(std::uint8_t type) noexcept {
+    switch(type){
+    case 'S':return 12;case 'R':return 39;case 'H':return 25;case 'Y':return 20;
+    case 'L':return 26;case 'V':return 35;case 'W':return 12;case 'K':return 28;
+    case 'J':return 35;case 'h':return 21;case 'A':return 36;case 'F':return 40;
+    case 'E':return 31;case 'C':return 36;case 'X':return 23;case 'D':return 19;
+    case 'U':return 35;case 'P':return 44;case 'Q':return 40;case 'B':return 19;
+    case 'I':return 50;case 'N':return 20;case 'O':return 48;default:return std::nullopt;
+    }
+}
+namespace {
+struct Reader {
+    std::span<const std::byte> bytes; Location location; Error error{};
+    std::uint64_t number(std::size_t at,std::size_t width)const noexcept {
+        std::uint64_t out=0;
+        for(std::size_t i=0;i<width;++i) out=(out<<8U)|std::to_integer<std::uint8_t>(bytes[at+i]);
+        return out;
+    }
+    char character(std::size_t at)const noexcept { return static_cast<char>(std::to_integer<unsigned char>(bytes[at])); }
+    void bad(Code code,std::size_t at,std::string_view field,std::uint64_t expected,std::uint64_t actual) noexcept {
+        if(!error) error={code,ByteOffset{location.payload_offset.value()+at},field,expected,actual};
+    }
+    char enumeration(std::size_t at,std::string_view choices,std::string_view field) noexcept {
+        const auto c=character(at);
+        if(choices.find(c)==std::string_view::npos) bad(Code::invalid_enum,at,field,0,number(at,1));
+        return c;
+    }
+    template<std::size_t N> Text<N> text(std::size_t at,std::string_view field) noexcept {
+        Text<N> out;
+        for(std::size_t i=0;i<N;++i){
+            const auto c=number(at+i,1);
+            if(c<32||c>126) bad(Code::invalid_value,at+i,field,0,c);
+            out.bytes[i]=character(at+i);
+        }
+        return out;
+    }
+    Price4 price(std::size_t at,std::string_view field) noexcept {
+        auto n=number(at,4);if(n>2000000000ULL)bad(Code::invalid_value,at,field,2000000000,n);
+        return Price4{static_cast<std::uint32_t>(n)};
+    }
+    OrderReference reference(std::size_t at,std::string_view)noexcept {return OrderReference{number(at,8)};}
+    Shares shares(std::size_t at,std::string_view)noexcept{return Shares{static_cast<std::uint32_t>(number(at,4))};}
+    AddOrder add()noexcept{return {reference(11,"order_reference"),static_cast<Side>(enumeration(19,"BS","side")),shares(20,"shares"),text<8>(24,"stock"),price(32,"price")};}
+    OrderExecuted executed()noexcept{return {reference(11,"order_reference"),shares(19,"executed_shares"),MatchNumber{number(23,8)}};}
+};
+}
+Result<DecodedRecord> decode(std::span<const std::byte> payload,Location location,Provenance provenance) noexcept {
+    constexpr auto max=std::numeric_limits<std::uint64_t>::max();
+    if(location.frame_offset.value()>max-2 || location.payload_offset.value()>max-payload.size())
+        return Result<DecodedRecord>::failure({Code::offset_overflow,location.frame_offset,"location",0,0});
+    if(location.payload_offset.value()!=location.frame_offset.value()+2)
+        return Result<DecodedRecord>::failure({Code::invalid_location,location.payload_offset,"payload_offset",location.frame_offset.value()+2,location.payload_offset.value()});
+    if(static_cast<unsigned>(provenance.origin)>static_cast<unsigned>(Origin::observed))
+        return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"provenance.origin",0,static_cast<unsigned>(provenance.origin)});
+    if(payload.empty())return Result<DecodedRecord>::failure({Code::truncated_payload,location.payload_offset,"type",1,0});
+    const auto type=std::to_integer<std::uint8_t>(payload[0]);
+    const auto length=expected_length(type);
+    if(!length)return Result<DecodedRecord>::failure({Code::unknown_type,location.payload_offset,"type",0,type});
+    if(payload.size()!=*length)return Result<DecodedRecord>::failure({Code::length_mismatch,location.payload_offset,"payload",*length,payload.size()});
+    Reader r{payload,location};
+    DecodedRecord out;
+    out.type=type;out.location=location;out.provenance=provenance;
+    out.header={StockLocate{static_cast<std::uint16_t>(r.number(1,2))},TrackingNumber{static_cast<std::uint16_t>(r.number(3,2))},TimestampNanoseconds{r.number(5,6)}};
+    switch(type){
+    case 'S':out.message=SystemEvent{r.enumeration(11,"OSQMEC","event_code")};break;
+    case 'R':{
+        StockDirectory d;
+        d.stock=r.text<8>(11,"stock");d.market_category=r.enumeration(19,"QGSNAPZV ","market_category");
+        d.financial_status=r.enumeration(20,"DEQSGHJKCN ","financial_status");
+        d.round_lot_size=static_cast<std::uint32_t>(r.number(21,4));d.round_lots_only=r.enumeration(25,"YN","round_lots_only");
+        d.issue_classification=r.text<1>(26,"issue_classification").bytes[0];d.issue_subtype=r.text<2>(27,"issue_subtype");
+        d.authenticity=r.enumeration(29,"PT","authenticity");d.short_sale_threshold=r.enumeration(30,"YN ","short_sale_threshold");
+        d.ipo_flag=r.enumeration(31,"YN ","ipo_flag");d.luld_tier=r.enumeration(32,"12 ","luld_tier");
+        d.etp_flag=r.enumeration(33,"YN ","etp_flag");d.etp_leverage=static_cast<std::uint32_t>(r.number(34,4));
+        d.inverse=r.enumeration(38,"YN","inverse");out.message=d;break;
+    }
+    case 'A':out.message=r.add();break;
+    case 'F':out.message=AddAttributedOrder{r.add(),r.text<4>(36,"attribution")};break;
+    case 'E':out.message=r.executed();break;
+    case 'C':out.message=OrderExecutedWithPrice{r.executed(),r.enumeration(31,"YN","printable"),r.price(32,"execution_price")};break;
+    case 'X':out.message=OrderCancel{r.reference(11,"order_reference"),r.shares(19,"cancelled_shares")};break;
+    case 'D':out.message=OrderDelete{r.reference(11,"order_reference")};break;
+    case 'U':out.message=OrderReplace{r.reference(11,"original_reference"),r.reference(19,"new_reference"),r.shares(27,"shares"),r.price(31,"price")};break;
+    case 'P':{
+        auto& trade=out.message.emplace<Trade>();
+        trade.order_reference=OrderReference{r.number(11,8)};
+        trade.side=static_cast<Side>(r.enumeration(19,"BS","side"));
+        trade.shares=r.shares(20,"shares");trade.stock=r.text<8>(24,"stock");
+        trade.price=r.price(32,"price");trade.match_number=MatchNumber{r.number(36,8)};
+        break;
+    }
+    case 'Q':{
+        auto& cross=out.message.emplace<CrossTrade>();
+        cross.shares=CrossShares{r.number(11,8)};cross.stock=r.text<8>(19,"stock");
+        cross.cross_price=r.price(27,"cross_price");cross.match_number=MatchNumber{r.number(31,8)};
+        cross.cross_type=r.enumeration(39,"OCH","cross_type");
+        break;
+    }
+    case 'B':out.message=BrokenTrade{MatchNumber{r.number(11,8)}};break;
+    default:return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
+    }
+    if(r.error)return Result<DecodedRecord>::failure(r.error);
+    return Result<DecodedRecord>::success(out);
+}
+} // namespace gig::itch
