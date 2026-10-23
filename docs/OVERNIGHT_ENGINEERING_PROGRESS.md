@@ -199,3 +199,23 @@ acquired, no actual historical H/Y payload revalidation, no hosted CI/ARM64 clai
 Exact next action: finish documentation delivery, verify feature remote/clean tree
 and unchanged main, then stop. Any repeat4KiB real-prefix experiment needs new
 explicit authorization. No background engineering continues after the final report.
+
+## Real H/Y bounded-prefix validation complete — October 23, 2026
+
+Entry20e07ec89987368c121eae657e21060aea7dc0b9 clean/local/remote verified.
+Exactly one separately authorized GET returned206, range0–4095/3524013057,
+4096 bytes with expected133d9417... digest. Python/native decompression14267 bytes,
+350 complete frames S1/R345/H2/Y2, complete boundary14257 plus10 residual.
+Default346 decoded/4 unsupported; opt-in H/Y350 decoded/0 unsupported/0 rejected.
+Independent ordered field hashes and4 H/Y directory associations agree, zero
+provenance/roundtrip errors. No actual decoder defect reproduced.
+35 local safety controls and9 focused synthetic H/Y tests passed before GET.
+Prior1,189-outcome evidence and source hashes preserved; full matrix not rerun.
+Acquisition/inspection0.537s, sampled combined RSS29,298,688 bytes; all caps held.
+Anonymous raw descriptor closed, children exited, zero raw market bytes retained.
+No observed SourceContext/book/reconstructor instantiated or initialized.
+
+Reports: docs/NASDAQ_HY_PREFIX_VALIDATION.md and accompanying evidence JSON.
+Exact next action: commit/push documentation only, verify clean feature remote and
+unchanged main, then stop. Another request requires a separate resource preflight
+and explicit authorization; no running/background acquisition remains.

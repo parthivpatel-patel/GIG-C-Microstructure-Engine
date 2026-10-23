@@ -1,5 +1,16 @@
 # Phase P1B — official data access and sample inventory
 
+## Subsequent observed-prefix verification — October 23, 2026
+
+The separately authorized repeat4KiB inspection now passes all350 complete frames
+under opt-in v2 (S1,R345,H2,Y2); default v1 retains346 decoded/4 unsupported.
+Both observed H states are T with blank reason/reserved space; both Y actions are0.
+Independent typed-field hashes and all4 directory associations agree. This does
+not establish full historical compatibility, source completeness or initial L3 state.
+No observed context/book reconstruction occurred. See
+[NASDAQ_HY_PREFIX_VALIDATION.md](NASDAQ_HY_PREFIX_VALIDATION.md) and its evidence.
+Statements below describe their original checkpoint unless explicitly updated.
+
 ## Offline H/Y support update — October 23, 2026
 
 An explicitly selected status-observations_v2 profile now provides synthetic-tested
