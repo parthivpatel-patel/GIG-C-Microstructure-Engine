@@ -22,7 +22,9 @@ cmake --build --preset debug
 ctest --preset debug --output-junit build/debug/tests.xml
 ```
 
-Repeat with release and asan-ubsan. Each current native suite has 85 outcomes (65 original outcomes, 9 P1E wire checks and 11 P1F context checks), including
+Repeat with release and asan-ubsan. With optional streaming and benchmarks enabled,
+the P1I/P1J native suite has122 CTest outcomes; Python Debug/Release125 and
+GCC Python sanitizer126. Historical P1F had85 native outcomes, including
 independent Python arbitrary-precision reference programs; the native library does
 not depend on a Python development module or pybind11. Reference scripts require
 an interpreter. Explicit CXX avoids inherited SDK compiler settings. For Clang use
@@ -90,8 +92,8 @@ review. Its PyPI advisory response is a dated snapshot, not a universal CVE audi
 
 The independent `gig::itch` target does not enter the engine/Python runtime path.
 P1E contributed nine outcomes when benchmarks are enabled.
-`ctest --test-dir build/debug -R '^itch\.' --output-on-failure` now selects those
-nine plus the eleven P1F context outcomes. At the P1E checkpoint the full native suite had 74 outcomes;
+At P1F, `ctest --test-dir build/debug -R '^itch\.' --output-on-failure` selected those
+nine plus the eleven P1F context outcomes; later phases add further ITCH tests. At the P1E checkpoint the full native suite had 74 outcomes;
 Python Debug/Release had 77 and GCC Python ASan/UBSan had 78, including its live-LSan
 control. These are local Linux x86_64 results, not hosted CI or real-data evidence.
 
@@ -117,9 +119,9 @@ python scripts/check_itch_context_benchmark.py build/release/benchmarks/gig_itch
 build/release/benchmarks/gig_itch_context_benchmark 512 7
 ```
 
-Run the complete suite for each required compiler/configuration as well. Current
-native counts are 85; GCC Python Debug/Release 88 and ASan/UBSan 89, including its
-existing live-LSan control. The current context oracle checks 515 sessions and 12,104
+Run the complete suite for each required compiler/configuration as well. At P1F,
+native counts were85; GCC Python Debug/Release88 and ASan/UBSan89, including its
+existing live-LSan control. The context oracle checks 515 sessions and 12,104
 outcomes; prior P1E checks remain active. See
 [P1F_VALIDATION_REPORT.md](P1F_VALIDATION_REPORT.md),
 [P1F_CONTEXT_DESIGN.md](P1F_CONTEXT_DESIGN.md) and
@@ -248,3 +250,26 @@ or regenerate them; a missing artifact is not a pass. Final native/package resto
 and nine-row test results are in [the P1J audit](P1J_INDEPENDENT_AUDIT_REPORT.md).
 The audit's advisory, hosted, platform, fresh-machine and observed-data limitations
 remain open regardless of successful local commands.
+
+
+## Release-candidate evidence closure
+
+See [RC_CANDIDATE_EVALUATION.md](RC_CANDIDATE_EVALUATION.md) for the independently
+hashed source-archive path, fresh Ubuntu rootfs/toolchain reproduction, qualified
+private zlib prefix, installed consumers and unchanged canonical identities.
+An archive consumer test now requires explicit `GIG_TEST_SOURCE_COMMIT` supplied
+from its verified source manifest; it fails if absent/malformed and rejects a
+conflicting value in a Git checkout. Archive tests conservatively mark checkout
+cleanliness as unknown/dirty, rather than inventing a clean Git state.
+This changes test provenance handling only, not package/engine contracts.
+
+Ubuntu24.04 distribution zlib reports1.3 and does not meet the optional streaming
+minimum1.3.1. Use `bash scripts/build_ci_zlib.sh /absolute/new/private-prefix`
+(optionally with the recorded official archive as a second argument), then supply
+`-DZLIB_ROOT=/absolute/new/private-prefix`. The helper verifies the pinned digest
+before extraction/build, refuses an existing prefix/work directory and verifies
+header/runtime1.3.1. It requires curl,TLS CA trust,C/C++ compilers,CMake,Ninja,tar
+and sha256sum. It does not replace system libraries or lower the minimum.
+
+Fresh-container results do not certify a separate machine. RC13,RC16 andRC17
+retain explicit evidence boundaries in [RC_EVIDENCE_CLOSURE_REPORT.md](RC_EVIDENCE_CLOSURE_REPORT.md).

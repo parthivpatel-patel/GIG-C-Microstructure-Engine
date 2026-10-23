@@ -23,11 +23,11 @@ post-repair compiler/package outcomes are recorded in the completed audit report
 | RC10 oracle integrity | PASS | Separate review agents, independent byte/maps/Fraction models, deliberate wrong-model controls and hashes. Shared machine/organization limits independence; agreement is not exchange certification. |
 | RC11 final toolchains | PASS | Full nine-row final qualification passed after verifier repairs:1,108 outcomes; exact actual counts/hashes in final evidence, no suppressed assertions/sanitizers or disabled required tests. |
 | RC12 Python boundary | PASS | Direct/source-built private installed consumers, paths, exports, example and optional-zlib boundary; scope CPython3.12/Linux only despite broader package metadata. Other versions unqualified. |
-| RC13 independent fresh restoration | BLOCKED | Same-host native source-archive restoration and independent fresh installed-wheel venv succeed. A genuinely independent fresh-machine/toolchain bootstrap has not been performed; do not advertise that stronger result. |
+| RC13 independent fresh restoration | BLOCKED | Closure review adds a fresh official Ubuntu24.04 rootfs, independent GCC13/Clang18/tooling and clean source-archive restoration, plus installed consumers and measured memory (see RC_EVIDENCE_CLOSURE_REPORT.md). Kernel/daemon remain shared: strict separate-machine reproduction is still unperformed, so decision remains BLOCKED. |
 | RC14 memory | PASS | Explicit two-book128-live/1024-journal one-level profile,128MiB shared PMR, queries/restart/cap/fault results. No all-maxima or whole-process PMR promise; journal15,944B unchanged. |
 | RC15 performance | PASS | Equivalent stored-block synthetic fixture, correctness preflight,2 warmups/7 samples, actual source/compiler/executable/CPU/RSS. Batch scope only, no tail-latency or institutional SLA. |
-| RC16 security applicability | BLOCKED | Twelve PyPI metadata/hash checks pass; limited native official-page snapshots do not clear compiler/CPython/distro/kernel reachable advisories. Close with dated version/backport applicability review. |
-| RC17 hosted CI | BLOCKED | Candidate-head API request exits1 Forbidden; no usable Actions run conclusion. Actual Ubuntu zlib/header/runtime and tests must be observed; YAML is not success or failure evidence. |
+| RC16 security applicability | BLOCKED | Dated RC_SECURITY_APPLICABILITY.md adds actual outer/fresh runtime identities, official CPython/Expat/zlib fixes and installed Ubuntu backports. Specific unused paths classified; unresolved platform/OpenSSL/Expat/provider applicability remains BLOCKED. No empty-feed clearance. |
+| RC17 hosted CI | BLOCKED | Exact bounded API diagnostic: curl56, proxy CONNECT403, originHTTP000/no response; Actions authorization/settings/conclusion unknown. Fresh Ubuntu reproduced distrozlib1.3 rejection; checksum-pinned1.3.1 private-prefix workflow repair validated locally. No hosted run ID/conclusion, so BLOCKED; see RC_OWNER_ACTIONS.md. |
 | RC18 platform expansion | NOT RUN | ARM64, other OS/stdlib/Python versions not tested. Keep outside qualified claims; no new platform work or cloud resources inferred. |
 | RC19 documentation/evidence | PASS | Versioned output, exact identities, reviewed raw reports/JUnit/source/archive, limits and historical/current checkpoints separated. Tool checks local consistency, not execution attestation or full dependency-graph coverage. |
 | RC20 data/secrets/repo | PASS | Full feature diff, tracked file types and content indicators reviewed; restricted data/binaries/credentials not introduced; Terminal/live/engine core preserved. Bounded scans are not a proof no secret can exist. |
@@ -45,3 +45,15 @@ or production trading.** Complete audit execution does not make every gate pass.
 No current candidate-scope FAIL is retained after verified repairs; BLOCKED/NOT RUN
 rows stay open with concrete evidence requirements above. The source-level review
 reports and findings register describe residual risks and effort.
+
+
+## Evidence closure reconciliation (2026-10-23)
+
+The RC13/RC16/RC17 evidence improved; none of these three formal decisions is
+changed to PASS. The strict matrix remains18 PASS,6 BLOCKED,2 NOT RUN,1 OUT OF
+SCOPE,zero retained candidate-scope FAIL. Closure fixes affect CI dependency/count
+checks and Python archive-test provenance only; all protected implementation bytes
+remain unchanged. New actual execution counts and private manifest are recorded in
+[RC_EVIDENCE_CLOSURE_REPORT.md](RC_EVIDENCE_CLOSURE_REPORT.md) and
+[RC_CLOSURE_EVIDENCE.json](RC_CLOSURE_EVIDENCE.json). Original P1J raw/JUnit/source
+evidence remains immutable and is reverified against its historical Git blobs.

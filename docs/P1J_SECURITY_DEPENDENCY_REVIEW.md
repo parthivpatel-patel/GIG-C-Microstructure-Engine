@@ -103,3 +103,14 @@ retained in dependency-review.json. This is an inventory, not a complete SBOM or
 license opinion. No dependency wheel is incorporated wholesale into this project
 wheel; redistribution of a bundled wheelhouse would require its own complete
 notice/manifest review.
+
+## Later closure evidence (2026-10-23)
+
+The bounded review above is preserved as the P1J checkpoint. Subsequent closure
+work reproduced the Ubuntu distro-zlib minimum-version failure, validated an
+official checksum-pinned private1.3.1 prefix, and collected dated CPython/Expat/
+zlib/vendor-backport evidence. See [RC_SECURITY_APPLICABILITY.md](RC_SECURITY_APPLICABILITY.md)
+and [RC_EVIDENCE_CLOSURE_REPORT.md](RC_EVIDENCE_CLOSURE_REPORT.md). SEC01/RC16 and
+hosted SEC02/RC17 remain BLOCKED for explicitly documented evidence gaps. A local
+runner dependency repair is no longer merely a hypothesis; hosted success still
+has not been observed. No project/raw-data distribution permission is inferred.

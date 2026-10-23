@@ -241,3 +241,32 @@ schedule. Keep raw prefixes, row-bearing diagnostics and correspondence outside 
 and private. LOBSTER support case17931099 is separate; no retry or network change
 was performed. Real-market validation remains NO-GO today; a later resource-bounded
 format-only pilot is CONDITIONAL GO after its explicit authorization and preflight.
+
+
+## Release-candidate closure review — October23,2026
+
+No source request or market bytes were acquired. The smallest recommended next
+experiment remains the **separately authorized format-only4KiB compressed prefix
+from byte0** of the exact official artifact above. It is not an L3 replay or an
+archive-integrity test. An owner-authorized later attempt may increase the cumulative
+compressed allowance up to1MiB; there is no automatic escalation in the first run.
+
+Predeclare the existing32MiB decompressed/4096-frame limits,64KiB buffers,128MiB
+PMR/256MiB native RSS ceilings,64MiB private free-disk preflight and30s wall time.
+RSS/PMR values are proposed pilot gates, not measured observed-market requirements.
+Actual prefix output can stop much earlier due to full-market directory/ID budgets.
+Stop on byte/time/resource exhaustion, ignored/contradictory Range, changing
+validators, invalid framing/gzip, unknown profile or missing rights. Treat a normal
+prefix gzip EOF/trailer absence as incomplete, never as full archive validation.
+Retain exact offset/extents, timestamp of acquisition, SHA256 for received bytes,
+compressed/decompressed counts, message-type/length inventory, first/last complete
+source timestamps, partial-byte accounting and every error. Publish no raw rows.
+
+Keep raw prefix/row diagnostics in a private directory outside Git; no compressed
+archive, market row or correspondence belongs in the source repository. The
+user-provided download/use statement establishes neither a specific retention period
+nor unrestricted redistribution. Owner must declare retention/deletion policy and
+private cloud handling before acquisition; no expiry is invented here.
+A prefix digest authenticates only the locally received extent, not the full
+3,524,013,057-byte archive. Observed trading date, initial L3 eligibility, external
+reference and empirical agreement stay unverified even if the format probe passes.

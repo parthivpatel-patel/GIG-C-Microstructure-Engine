@@ -49,3 +49,96 @@ Main unchanged: `165c5038336887116d69160b0d8e5a1a5ef59d16`.
 
 No execution is implied after the session stops. On resumption inspect all modified
 files and current logs; preserve work and continue the exact next action above.
+
+
+## Release-candidate evidence closure — in progress
+
+Directive baseline `9171f4ecdaf638e2a1ff3b5bf1645be33f277b67`, verified clean and
+remote-equal on feat/bootstrap-cpp20-engine; main165c503 unchanged.
+CI repair checkpoint `108b423d1576ebae28d7a81598ee2ef1dbfe3a4a` committed and pushed
+(subject to final source/remote recheck); engine/Python implementation unchanged.
+
+- RC17 exact diagnostic: curl56, proxy CONNECT403, origin HTTP000/no response for
+  api.github.com. No token/settings/workflow conclusion can be inferred. Owner must
+  publish allowed api.github.com access or provide authorized run/log artifacts.
+- Fresh Ubuntu24.04 Docker rootfs provisioned from official pinned image digest;
+  no host compiler/build outputs mounted. Kernel/daemon remain shared, so do not
+  relabel this as an independently provisioned VM/machine.
+- Original distro-zlib recipe reproduced CMake failure: installed upstream1.3 is
+  below minimum1.3.1. Checksum-pinned official1.3.1 private-prefix helper now passes
+  online/offline build, runtime/header checks and fresh CMake configure. Initial helper
+  draft's Make assumption corrected to explicit Ninja before qualification.
+- Six CI-equivalent GCC13/Clang18 configurations running in the fresh rootfs; first
+  GCC Debug122/122 passed with all five canonical identities unchanged. Python release
+  row uses restored locked dependencies; do not claim remaining rows before completion.
+- Security applicability review now includes official CPython3.12.15 and Expat2.8.5
+  changes, actual older outer runtime and Ubuntu vendor backports. Known component
+  advisories must be classified by actual call path, not hidden by version claims.
+- Private raw evidence: build/rc-closure/evidence; source/inputs are separate under
+  build/rc-closure/input. Existing P1E–P1J evidence preserved.
+- Exact next action: finish fresh matrix, installed/source-built consumers and memory
+  probe; complete dated component applicability, reconcile gates conservatively,
+  prepare candidate manifest/pilot bounds/owner actions, commit/push docs and verify
+  remote/clean tree/main. No real data, release, main merge or live integration.
+
+### Closure checkpoint: exported-source test provenance repair
+
+- Fresh preliminary GCC Release failed1/125: the interface export test assumed
+  `.git` existed in a deliberately clean source archive. Failing log/JUnit retained
+  under build/rc-closure/evidence/fresh (not overwritten).
+- Commit5349789edfc198f5bf74438cf412e403cef14fa9 changes only test provenance:
+  explicit independently verified archive commit required; invalid/missing/conflicting
+  identity rejected; source bytes hashed; archive cleanliness conservatively dirty.
+  New internal regression plus manifest export pass in checkout and archive;
+  all8 archive interface cases pass. No package/engine contract changed.
+- New final archiveSHA5045243c2cb32b4b490f23f5d207a1d9a0da6e71907637805befab4a6974ed35.
+  Fresh final GCC Debug122,Release125,ASan+UBSan122 pass with five stable hashes.
+  Clang rows underway; no completion claimed yet. Original1108 evidence re-verifies
+  from historical Git blobs;63 protected source/schema/CMake files unchanged.
+- Workflow summary additionally requires exact per-job counts and Python case names;
+  positive native/Python JUnit controls pass, missing-Python negative rejects.
+- Exact next action: complete Clang rows, run queued private package consumers and
+  sequential memory profile, collect immutable closure manifests, finalize review
+  docs, commit/push verified feature work and verify remote/main/clean tree.
+
+### Release-candidate closure: available engineering work complete
+
+Current phase: evidence closure only,2026-10-23. Last remotely verified code/CI
+checkpoint `9f9f488048df3a5f81aac0671e171cc4f3a5c4b3` (fast-forward push verified);
+main remains `165c5038336887116d69160b0d8e5a1a5ef59d16`. The final documentation
+commit containing this section is a descendant; its exact delivered remote SHA is
+reported at handoff and can be verified with `git ls-remote`.
+
+- Final frozen source5349789edfc198f5bf74438cf412e403cef14fa9 qualified in fresh
+  Ubuntu24.04.5 rootfs/toolchain: GCC13/Clang18 Debug,Release,ASan+UBSan all pass;
+  five native rows122 each,GCC Python Release125:735 final CTest outcomes,zero
+  failed/skipped/disabled. Five canonical identities unchanged.
+- Failed-before archive Python1/125 and missing Clang sanitizer runtime linker
+  logs preserved. Signed libclang-rt-18-dev installed; only affected row repeated
+  in a new build directory. Initial distro-zlib configure failure and helper-draft
+  Make failure also retained,not relabeled passing executions.
+- Both installed original/private source-built wheel consumers pass8 interface+
+  6 export cases each,installed paths and canonical example hash. Focused existing
+  checkout Python Debug/Release/ASan interface tests pass1/1 each. Original1108
+  matrices were not rerun; historical raw/source evidence reverified.
+- Memory probe after builds stop:peak PMR77,281,358B,RSS78,487,552B GCC/
+  78,630,912B Clang,45 query allocation fault sites,zero tracked live bytes after
+  destruction. Container build/package/cache peak hit3GiB with max/reclaim events
+  butzero OOM/kill; this differs from the engine-process RSS. Journal15944B unchanged.
+- 63 protected implementation/schema/CMake files and7 historical audit/evidence
+  files remain byte-identical.140 raw evidence identities,all6 final JUnit rows
+  and27 decisions checked. Candidate manifest/private artifacts retained.
+- RC13/16/17 remain BLOCKED under strict definitions. Matrix18PASS,6BLOCKED,
+  2NOT RUN,1OUT OF SCOPE. No hosted run conclusion,independent machine,full security
+  clearance,observed-market validation or release permission claimed.
+- Exact next action:owner publishes supported api.github.com access or supplies
+  authorized exact-SHA Actions run/JUnit evidence; obtain provider/vendor security
+  applicability disposition and independent authorized machine/runner bootstrap.
+  Follow docs/RC_OWNER_ACTIONS.md. No routine engine phase is needed for these gates.
+  Any NASDAQ format-only4KiB prefix requires separate acquisition authorization;
+  none was downloaded here. No LOBSTER retry,main merge,tag,distribution or release.
+
+No tests are represented as running after handoff. Preserve all raw evidence and
+private artifacts;do not repeat completed matrices without a changed source or
+specific qualification need. Resume by verifying Git/current remote and these
+owner-supplied evidence prerequisites.
