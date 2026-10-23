@@ -88,6 +88,12 @@ foreach(sanitizer ASAN UBSAN TSAN)
   endif()
 endforeach()
 
+# Synthetic semantic context is independent of native book/replay integration.
+add_library(gig_itch_context STATIC src/itch/context.cpp)
+add_library(gig::itch_context ALIAS gig_itch_context)
+target_link_libraries(gig_itch_context PUBLIC gig::itch)
+gig_project_target(gig_itch_context)
+
 add_executable(gig_engine_demo src/main.cpp)
 target_link_libraries(gig_engine_demo PRIVATE gig::microstructure)
 target_include_directories(gig_engine_demo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
@@ -112,6 +118,19 @@ if(BUILD_TESTING)
     ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_reference.py $<TARGET_FILE:gig_itch_reference_driver>)
   add_test(NAME itch.oracle_negative_control COMMAND ${Python3_EXECUTABLE}
     ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_reference.py $<TARGET_FILE:gig_itch_reference_driver> --negative-control)
+  add_executable(gig_itch_context_tests tests/test_itch_context.cpp)
+  target_link_libraries(gig_itch_context_tests PRIVATE gig::itch_context)
+  gig_project_target(gig_itch_context_tests)
+  foreach(case lifecycle identity observations policies limits allocation numeric provenance)
+    add_test(NAME itch.context_${case} COMMAND gig_itch_context_tests ${case})
+  endforeach()
+  add_executable(gig_itch_context_reference_driver tests/itch_context_reference_driver.cpp)
+  target_link_libraries(gig_itch_context_reference_driver PRIVATE gig::itch_context)
+  gig_project_target(gig_itch_context_reference_driver)
+  add_test(NAME itch.context_reference COMMAND ${Python3_EXECUTABLE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_context_reference.py $<TARGET_FILE:gig_itch_context_reference_driver>)
+  add_test(NAME itch.context_oracle_negative_control COMMAND ${Python3_EXECUTABLE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_context_reference.py $<TARGET_FILE:gig_itch_context_reference_driver> --negative-control)
   add_executable(gig_execution_tests tests/test_execution.cpp)
   target_link_libraries(gig_execution_tests PRIVATE gig::microstructure)
   target_include_directories(gig_execution_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

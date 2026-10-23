@@ -53,3 +53,12 @@ if(BUILD_TESTING)
   add_test(NAME itch.benchmark_correctness COMMAND ${Python3_EXECUTABLE}
     ${PROJECT_SOURCE_DIR}/scripts/check_itch_benchmark.py $<TARGET_FILE:gig_itch_benchmark>)
 endif()
+
+add_executable(gig_itch_context_benchmark itch_context_benchmark.cpp)
+target_link_libraries(gig_itch_context_benchmark PRIVATE gig::itch_context)
+set_target_properties(gig_itch_context_benchmark PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+gig_project_target(gig_itch_context_benchmark)
+if(BUILD_TESTING)
+  add_test(NAME itch.context_benchmark_correctness COMMAND ${Python3_EXECUTABLE}
+    ${PROJECT_SOURCE_DIR}/scripts/check_itch_context_benchmark.py $<TARGET_FILE:gig_itch_context_benchmark>)
+endif()
