@@ -14,7 +14,8 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "BUILD_TESTING": "ON",
         "GIG_WARNINGS_AS_ERRORS": "ON",
-        "GIG_BUILD_BENCHMARKS": "ON"
+        "GIG_BUILD_BENCHMARKS": "ON",
+        "GIG_BUILD_ITCH_STREAMING": "ON"
       }
     },
     {
@@ -25,7 +26,8 @@
         "CMAKE_BUILD_TYPE": "Release",
         "BUILD_TESTING": "ON",
         "GIG_WARNINGS_AS_ERRORS": "ON",
-        "GIG_BUILD_BENCHMARKS": "ON"
+        "GIG_BUILD_BENCHMARKS": "ON",
+        "GIG_BUILD_ITCH_STREAMING": "ON"
       }
     },
     {
@@ -38,7 +40,8 @@
         "GIG_WARNINGS_AS_ERRORS": "ON",
         "GIG_ENABLE_ASAN": "ON",
         "GIG_ENABLE_UBSAN": "ON",
-        "GIG_BUILD_BENCHMARKS": "ON"
+        "GIG_BUILD_BENCHMARKS": "ON",
+        "GIG_BUILD_ITCH_STREAMING": "ON"
       }
     }
   ],

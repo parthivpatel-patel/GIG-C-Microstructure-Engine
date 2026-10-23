@@ -49,5 +49,6 @@ public:
     std::uint64_t records() const noexcept { return records_; }
     std::size_t allocated_payload_bytes() const noexcept { return buffer_?limits_.buffer_bytes:0; }
     bool terminated() const noexcept { return terminal_; }
+    std::uint64_t residual_bytes() const noexcept { return prefix_size_+payload_size_; }
 };
 } // namespace gig::itch
