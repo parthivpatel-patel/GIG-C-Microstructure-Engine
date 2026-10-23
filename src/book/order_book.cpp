@@ -95,9 +95,12 @@ struct OrderBook::State {
         staged_index.emplace(order.order_id,Location{order.side,order.price_ticks,staged_fifo.begin()});
         auto index_node=staged_index.extract(order.order_id);
         // Rehash is the LAST potentially throwing operation. Bucket capacity is not canonical state.
-        if (after_count>index.bucket_count()) {
+        // An empty unordered_map may report one sentinel bucket while its first
+        // insertion still allocates real buckets. Establish insertion capacity
+        // before transferring any level/list node, including that first insert.
+        if (index.empty() || after_count>index.bucket_count()) {
             const auto desired=std::max(after_count,std::min(limits.max_orders,index.bucket_count()*2U));
-            index.rehash(desired);
+            index.reserve(desired);
         }
         if (removed) {
             auto old=index.find(*removed);

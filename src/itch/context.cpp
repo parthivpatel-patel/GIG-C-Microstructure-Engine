@@ -1,5 +1,6 @@
 #include "gig/itch/context.hpp"
 #include <algorithm>
+#include <atomic>
 #include <limits>
 #include <type_traits>
 
@@ -10,6 +11,17 @@ static_assert(std::is_nothrow_copy_constructible_v<OrderState> && std::is_nothro
 static_assert(std::is_nothrow_copy_constructible_v<MatchState> && std::is_nothrow_copy_assignable_v<MatchState>);
 static_assert(std::is_nothrow_copy_constructible_v<NormalizedRecord> && std::is_nothrow_move_constructible_v<NormalizedRecord>);
 static_assert(std::is_nothrow_move_constructible_v<ContextResult>);
+static_assert(std::is_nothrow_move_constructible_v<PreparedContext> && std::is_nothrow_move_constructible_v<ContextPreparation>);
+// Distinguishes object lifetimes even when a caller reuses the same storage.
+// This opaque guard never enters semantic output or deterministic serialization.
+std::atomic<std::uint64_t> next_instance{1};
+std::optional<std::uint64_t> allocate_instance() noexcept {
+    auto current=next_instance.load(std::memory_order_relaxed);
+    while(current!=UINT64_MAX){
+        if(next_instance.compare_exchange_weak(current,current+1,std::memory_order_relaxed))return current;
+    }
+    return std::nullopt;
+}
 constexpr std::size_t absent=std::numeric_limits<std::size_t>::max();
 ContextResult rejected(ContextStatus status,ContextCode code,Location location,std::string_view field,std::uint64_t expected=0,std::uint64_t actual=0) noexcept {
     return {status,std::nullopt,{code,location,field,expected,actual,{}}};
@@ -26,7 +38,7 @@ SourceContext::SourceContext(SourceContext&& other) noexcept
 :manifest_(std::move(other.manifest_)),policy_(other.policy_),directories_(std::move(other.directories_)),
  orders_(std::move(other.orders_)),matches_(std::move(other.matches_)),summary_(other.summary_),
  lifecycle_stage_(other.lifecycle_stage_),next_location_(other.next_location_),
- cursor_exhausted_(other.cursor_exhausted_),moved_from_(other.moved_from_) {other.moved_from_=true;}
+ cursor_exhausted_(other.cursor_exhausted_),moved_from_(other.moved_from_),instance_(other.instance_) {other.moved_from_=true;}
 std::optional<std::size_t> SourceContext::required_bytes(const ContextPolicy& p) noexcept {
     constexpr auto max=std::numeric_limits<std::size_t>::max();std::size_t total=0;
     const auto add=[&](std::size_t count,std::size_t size){if(count>(max-total)/size)return false;total+=count*size;return true;};
@@ -44,6 +56,9 @@ Result<SourceContext> SourceContext::create(SourceManifest m,ContextPolicy p,std
         return Result<SourceContext>::failure({Code::invalid_config,p.first_location.frame_offset,"context",p.memory_budget_bytes,bytes.value_or(UINT64_MAX)});
     try {
         SourceContext out(std::move(m),p,resource);
+        const auto instance=allocate_instance();
+        if(!instance)return Result<SourceContext>::failure({Code::resource_exhausted,p.first_location.frame_offset,"context.instance",0,UINT64_MAX});
+        out.instance_=*instance;
         out.directories_.reserve(p.max_directories);out.orders_.reserve(p.max_lifetime_orders);out.matches_.reserve(p.max_matches);
         auto actual=p;actual.max_directories=out.directories_.capacity();actual.max_lifetime_orders=out.orders_.capacity();actual.max_matches=out.matches_.capacity();
         const auto reserved=required_bytes(actual);out.summary_.reserved_bytes=reserved.value_or(SIZE_MAX);
@@ -56,7 +71,7 @@ ContextResult SourceContext::disposition(const Error& error,Location location)co
         ContextCode::unsupported_source,location,error.field,error.expected,error.actual);
     result.error.source_error=error;return result;
 }
-ContextResult SourceContext::apply(std::span<const std::byte> payload,Location location,Provenance provenance) noexcept {
+ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Location location,Provenance provenance) const noexcept {
     if(moved_from_)return rejected(ContextStatus::context_invalid,ContextCode::invalid_config,location,"moved_from");
     auto decoded=decode(payload,location,provenance);if(!decoded)return disposition(decoded.error,location);
     if(summary_.finished)return rejected(ContextStatus::context_invalid,ContextCode::already_finished,location,"finished");
@@ -210,20 +225,56 @@ ContextResult SourceContext::apply(std::span<const std::byte> payload,Location l
     }else if(normalized.integration==IntegrationClass::book_only_projection||normalized.integration==IntegrationClass::unsupported){
         status=ContextStatus::integration_ineligible;error={ContextCode::unsupported_source,location,"native_contract",0,0,{}};
     }
-    // All checks precede this nonallocating commit; vectors were fully reserved at creation.
-    if(add_directory)directories_.push_back(*add_directory);
-    if(update_order)orders_[order_slot]=*update_order;
-    if(add_order)orders_.push_back(*add_order);
-    if(add_match)matches_.push_back(*add_match);
-    if(update_match)matches_[match_slot]=*update_match;
-    lifecycle_stage_=next_stage;
+    PreparedContext token{this,instance_,summary_.accepted_records,{status,std::move(normalized),error}};
+    token.add_directory_=add_directory;token.add_order_=add_order;token.update_order_=update_order;
+    token.add_match_=add_match;token.update_match_=update_match;
+    token.order_slot_=order_slot;token.match_slot_=match_slot;token.next_stage_=next_stage;
+    const auto end=location.payload_offset.value()+payload.size();
+    token.cursor_exhausted_=end>UINT64_MAX-2||location.ordinal.value()==UINT64_MAX;
+    if(!token.cursor_exhausted_)token.next_location_={ByteOffset{end},ByteOffset{end+2},RecordOrdinal{location.ordinal.value()+1}};
+    return {status,error,std::move(token)};
+}
+PreparedContext::PreparedContext(const SourceContext* owner,std::uint64_t instance,std::uint64_t generation,ContextResult result) noexcept
+:owner_(owner),instance_(instance),generation_(generation),result_(std::move(result)),valid_(true) {}
+PreparedContext::PreparedContext(PreparedContext&& other) noexcept
+:owner_(other.owner_),instance_(other.instance_),generation_(other.generation_),result_(std::move(other.result_)),
+ add_directory_(other.add_directory_),add_order_(other.add_order_),update_order_(other.update_order_),
+ add_match_(other.add_match_),update_match_(other.update_match_),order_slot_(other.order_slot_),match_slot_(other.match_slot_),
+ next_stage_(other.next_stage_),next_location_(other.next_location_),cursor_exhausted_(other.cursor_exhausted_),valid_(other.valid_) {other.valid_=false;}
+ContextError SourceContext::validate_prepared(const PreparedContext& token)const noexcept {
+    const auto location=token.result_.record?token.result_.record->source.location:Location{};
+    if(!token.valid_||token.owner_!=this||token.instance_!=instance_||moved_from_)
+        return {ContextCode::invalid_prepared,location,"prepared.owner",0,0,{}};
+    if(summary_.finished||token.generation_!=summary_.accepted_records)
+        return {ContextCode::stale_prepared,location,"prepared.generation",summary_.accepted_records,token.generation_,{}};
+    return {};
+}
+ContextResult SourceContext::commit(PreparedContext&& token) noexcept {
+    const auto error=validate_prepared(token);
+    if(error.code!=ContextCode::none)return {ContextStatus::context_invalid,std::nullopt,error};
+    return commit_validated(std::move(token));
+}
+ContextResult SourceContext::commit_validated(PreparedContext&& token) noexcept {
+    // The owning adapter validates before its sole fallible native apply. Its private
+    // context cannot move or change while that operation runs. No allocation or
+    // input-dependent validation remains after successful native application.
+    if(token.add_directory_)directories_.push_back(*token.add_directory_);
+    if(token.update_order_)orders_[token.order_slot_]=*token.update_order_;
+    if(token.add_order_)orders_.push_back(*token.add_order_);
+    if(token.add_match_)matches_.push_back(*token.add_match_);
+    if(token.update_match_)matches_[token.match_slot_]=*token.update_match_;
+    lifecycle_stage_=token.next_stage_;
     ++summary_.accepted_records;summary_.directories=directories_.size();summary_.lifetime_orders=orders_.size();summary_.matches=matches_.size();
     summary_.active_orders=static_cast<std::size_t>(std::count_if(orders_.begin(),orders_.end(),[](const auto& o){return o.active;}));
-    summary_.last_location=location;summary_.last_timestamp=raw.header.timestamp;
-    const auto end=location.payload_offset.value()+payload.size();
-    cursor_exhausted_=end>UINT64_MAX-2||location.ordinal.value()==UINT64_MAX;
-    if(!cursor_exhausted_)next_location_={ByteOffset{end},ByteOffset{end+2},RecordOrdinal{location.ordinal.value()+1}};
-    return {status,std::move(normalized),error};
+    summary_.last_location=token.record().source.location;summary_.last_timestamp=token.record().source.header.timestamp;
+    cursor_exhausted_=token.cursor_exhausted_;next_location_=token.next_location_;
+    token.valid_=false;
+    return std::move(token.result_);
+}
+ContextResult SourceContext::apply(std::span<const std::byte> payload,Location location,Provenance provenance) noexcept {
+    auto prepared=prepare(payload,location,std::move(provenance));
+    if(!prepared)return {prepared.status,std::nullopt,prepared.error};
+    return commit_validated(std::move(*prepared.prepared));
 }
 ContextSummary SourceContext::finish(ContextEnd kind) noexcept {
     if(moved_from_){auto result=summary_;result.finish_error=ContextCode::invalid_config;return result;}

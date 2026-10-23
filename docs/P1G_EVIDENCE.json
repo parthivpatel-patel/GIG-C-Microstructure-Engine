@@ -1,0 +1,291 @@
+{
+  "starting_commit": "1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282",
+  "matrix": [
+    {
+      "configuration": "phase9-clean-debug",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 29.21,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "e30cb8df447a2702e9f700798503e67c41453b130efd40627d8b9833c734dc40",
+      "log_sha256": "ee23462554956d388e627fe64e2d33682767bb9af7988c3ff59b8e4c7e36849c"
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 21.74,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "c047906a013377db5e06939f92f435fb3a81a00fe0fae0b4770a44654ab9096a",
+      "log_sha256": "c65374f8f05cd305523ea0ad896c5470a7aaf777e883765edc10fcde8c92f408"
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 81.65,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "f1028aef08614643eb9db5b5c86ec808824f8d13616e52882c5abc576b3d4e4a",
+      "log_sha256": "24ec5fcd65336688a0c88d4711a18579f78ad11ef44b51c619728c72b80f103c"
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 27.89,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "d538b37ee38a891950da55c98cb1497e89f112aae1adaa4f64bfe454471dd1c6",
+      "log_sha256": "b72481006e06fd49d3e84cbe87f01abc5f4a8179f8044ca3517570bd4cba95f2"
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 27.51,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "5419c8b8224371a936f90492f6878a9fac51a1247f2ade84029fd31fff5fbb81",
+      "log_sha256": "a93f76013012d991256751ebf6515186d03aaabe0484f624ac0930be05bf80a9"
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 65.22,
+      "tests": 103,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "5a3b908e5481fe7a67739c72d7a6cedb171837e7cc47c47e1a630d47f5f5ac65",
+      "log_sha256": "862291143d2d91107af94711f301b8a2fc34ce4cb63ccf7f91768705d01dd936"
+    },
+    {
+      "configuration": "python-debug",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 29.97,
+      "tests": 106,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "560f7e86b966ba7818940b8b63e3eaa122ffecf47f337f500f11beeaeb26a468",
+      "log_sha256": "22e28bf7958f1cea87e772fb9ffa53d9acec73a53260ddc66d0fed46122b6b13"
+    },
+    {
+      "configuration": "python-release",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 26.76,
+      "tests": 106,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "354a1ae64d135f1b6f01c2cb153a656a509593ba8d9491ac507c9a0520841865",
+      "log_sha256": "324ce5beff207154900d978712f23003855a4f401d5f0e598503a90fb274f13c"
+    },
+    {
+      "configuration": "python-asan-ubsan",
+      "build_exit": 0,
+      "test_exit": 0,
+      "elapsed_seconds": 63.84,
+      "tests": 107,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0,
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991"
+      },
+      "junit_sha256": "0e19361fc6aefc7e22c94a3c0522bf87f81798b4badcc840c4bf3e905c19998b",
+      "log_sha256": "26a7151f53bf732bcf93e32c9f63d7e3c7ad4ab6008611263d61b37b0d750537"
+    }
+  ],
+  "total_ctest_outcomes": 937,
+  "frozen_source_sha256": {
+    "CMakeLists.txt": "0b6c4663c401d893f8a750ecf9ef2c9ff59081b17bdf674e9411374d83e60713",
+    "benchmarks/CMakeLists.txt": "9d1614b14f4603109589d0a0023ba0b585902440eb83fa46c0c6db7422195670",
+    "benchmarks/itch_benchmark.cpp": "a6a16b5ee440b9628bdf2be784f28d14a709ff916a71bbea88b4da461a84d9b6",
+    "benchmarks/itch_context_benchmark.cpp": "93334896c090b8962acb338644f46d1f6e022427b22416c44951e96fb43a5d3c",
+    "benchmarks/itch_reconstruction_benchmark.cpp": "77b0fc3851ab43f648d1ecfd9b351c672c9f66d6c6732d76684bdb054ae97be5",
+    "include/gig/itch/binary_file.hpp": "54b2bd4cbb372e57d9c292b3a266ad40aafb6277720e04225d161e23a4d42163",
+    "include/gig/itch/context.hpp": "c3d2a0aec48af9b883da385a824915f81d31e30b0be2bd1d371499e115e6ee42",
+    "include/gig/itch/decoder.hpp": "9ec7cb0f210f8d7de1538cf5f375fd8ac6546bec38640457e4b255899e091768",
+    "include/gig/itch/reconstruction.hpp": "fa3eaf811e374e8af7d4eca5d15d4948641bc6003e28acb0f5f6af4b489b10c3",
+    "include/gig/itch/restart.hpp": "d8c57e611c17c1eab8ef8251397b61ea1c7e1a20b323b9374660f400fa6684d5",
+    "include/gig/itch/sha256.hpp": "eeb411b30706e1297a5a0b82d9d9297a4f1c78b6d31197f03587f18d411768b1",
+    "include/gig/itch/wire.hpp": "4f7baba66b91ed293ea773fb49bf0341c5ff229d0e3542f3edd6499b072f9921",
+    "scripts/check_itch_benchmark.py": "44b509eeecac02ef8439d7fd1721de56feded60171aea45a98e9804e5da3b8d4",
+    "scripts/check_itch_context_benchmark.py": "050ade3446ea9c956d5d201aaf2efe41969e68be19787e0cf358db87660e4247",
+    "scripts/check_itch_context_reference.py": "b0b3c5682ff30abe002fbe3952596e8e224cbc86fb56e1cceacb87d768dde61d",
+    "scripts/check_itch_l3_reference.py": "00248e9794d2424ea09f53d806eca72a0eaf8cb187e54eba78c941ffe48186cd",
+    "scripts/check_itch_reconstruction_benchmark.py": "2d4d0ea66dae7d3d56583a4b84b565b96bdea34cafb87f1c63a55aa1bcb33d86",
+    "scripts/check_itch_reference.py": "ee59d9e8dbc9c12af2b5702995d082e2baa4dec51adc364dd0c5b396c025d567",
+    "scripts/check_itch_sha256_reference.py": "2cb557c932899714e4861f2fc273c3f3c79c9887e8b4c378dc2066984775952b",
+    "src/book/order_book.cpp": "b751d6144e271e8bdaa45e65078f3f083c1786d86c3ca8303da79e2f6c70b4df",
+    "src/itch/binary_file.cpp": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6",
+    "src/itch/context.cpp": "24ef57a9b9cc4e652791658a4d9f939c8e95d93c1246ad6e1b4b3809c98fd116",
+    "src/itch/decoder.cpp": "a6782e2796892c07e6aef45a11b56cb7ca27fa4672c78f8e1f0aa0b2563a0921",
+    "src/itch/reconstruction.cpp": "15f9194f7b6143f4e9ab352311c10a3a57744093f0445bff7e23be36dfce2f05",
+    "src/itch/restart.cpp": "84bc6c8645ac023c863a7ab9a60ebc4118fe572542877f9743db8ecd3477e620",
+    "src/itch/sha256.cpp": "376756916be1add85aa261c23d8c1bf5e983d863697d1a30734469143b85aed3",
+    "tests/itch_context_reference_driver.cpp": "122816b9a5ec35003cdfccfe3f8bbe6b8e3565ee3ee97f40647476c5392cce3a",
+    "tests/itch_l3_reference_driver.cpp": "583a0447c2f0535287e262c41814f37faaf73a6e4a28b0f08398c156de768cc7",
+    "tests/itch_reference_driver.cpp": "f3ad2770eea404e317df64d855165c74e5fccd77ea8f7c52f25ab968cf4d4009",
+    "tests/support/itch_reconstruction_fixture.hpp": "f686a33524471c32c35a3dc5b0c6e3c1e1eb38615a8a04404d6c7c8217b73660",
+    "tests/test_itch_context.cpp": "52f23e9bb9a5870c826b040d8c87f883323d0fa08a4ea0d539a2f627ec15e8db",
+    "tests/test_itch_context_prepare.cpp": "fe1ac46dd9d18ee9f73e58d56ae377df94a4a15e50557b00aaa432dca0dabb4d",
+    "tests/test_itch_decoder.cpp": "f3a550d27e48002d4ff82774a2ad729747571550d2d88720e9e159ed399b5912",
+    "tests/test_itch_reconstruction.cpp": "92e65026403815de41626005a7a1ed098804bf850e53151eea688fe518adffa6",
+    "tests/test_itch_reconstruction_framing.cpp": "416dc221ad9fe2f3130b135fcbbd6caf0069fac2978c44fea8a4493011a4ed64",
+    "tests/test_itch_restart.cpp": "c7ff3bb5470d70bde2474bce10951de9e7c72d3339e90ed361cdfcf79faf2b22"
+  },
+  "source_manifest_sha256": "723fa3edde249696b660091f2abc83db4e00bf307f89f02f658bf3e5cb54ce95",
+  "package": {
+    "steps": [
+      {
+        "name": "consumer-venv",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "consumer-install",
+        "exit_code": 0,
+        "stdout_sha256": "b74e31f4fa3daa78b0f50627fe465b8bb5af80173f2821efd2caa42b0aba2eae"
+      },
+      {
+        "name": "wheel-interface",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "wheel-export",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "wheel-example",
+        "exit_code": 0,
+        "stdout_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+      },
+      {
+        "name": "wheel-module-path",
+        "exit_code": 0,
+        "stdout_sha256": "bda9ea5b67e31bef76cd457522877778830722680fcd858b5e4b8b97255aa3d6"
+      },
+      {
+        "name": "source-wheel-build",
+        "exit_code": 0,
+        "stdout_sha256": "7c446e94b63c71d45c7764473b658e9bb2a39d1acf8cdbfb3189afa17bc7b402"
+      },
+      {
+        "name": "source-wheel-install",
+        "exit_code": 0,
+        "stdout_sha256": "97b17d2f98d3aa3d44e7f7684fefdbc3884d79a64044fd8e9b0819650b7c15e6"
+      },
+      {
+        "name": "source-wheel-interface",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "source-wheel-export",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "source-wheel-example",
+        "exit_code": 0,
+        "stdout_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+      },
+      {
+        "name": "source-wheel-module-path",
+        "exit_code": 0,
+        "stdout_sha256": "bda9ea5b67e31bef76cd457522877778830722680fcd858b5e4b8b97255aa3d6"
+      }
+    ],
+    "source_archive_frozen_files": 36,
+    "wheel": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+    "example_identical_between_builds": true,
+    "artifact_sha256": {
+      "dist/gig_microstructure-0.1.1.tar.gz": "667799255df9fa5a02b887d26be6fe409fd8439a8a31ea217f11741048c4be44",
+      "dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": "e56f07abc55bf115dbda28fa75d1810cd4a0f8a0c8d7327c77886b676787c656",
+      "source-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": "2374e1dbed30d0751f3002df8aa5fd07edd9b225262553f75a63eb9bf26d92d0"
+    }
+  },
+  "oracle_memory": {
+    "command": [
+      "/workspace/gig-tools/bin/python3",
+      "scripts/check_itch_l3_reference.py",
+      "build/phase9-clean-release/gig_itch_l3_reference_driver"
+    ],
+    "returncode": 0,
+    "stdout": "sessions=10032 source_candidates=65186 rejected_candidates=10025 seed=5255495 canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991\n",
+    "stderr": "",
+    "peak_wait_accounted_rss_bytes": 65748992,
+    "accounting": "Linux RUSAGE_CHILDREN maxRSS for oracle child; not sum of concurrent process RSS"
+  },
+  "original_book_regression": {
+    "command": "/tmp/gig-p1g-original-book-regression allocation",
+    "baseline_book_source": "1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282:src/book/order_book.cpp",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "direct first-add failure leaves no transferred FIFO/level/index/ledger state\n"
+  },
+  "scope": "synthetic-only; no market bytes acquired; hosted CI and ARM64 unverified",
+  "measurements": "pending correctness-verified implementation checkpoint"
+}

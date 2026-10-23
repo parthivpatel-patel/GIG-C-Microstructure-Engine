@@ -1,5 +1,49 @@
 # Phase P1B — official data access and sample inventory
 
+## Current rights/access update — synthetic engineering assignment
+
+Recorded October 23, 2026 UTC (October 22, America/New_York), from the user's
+P1G/P1H authorization. This section supersedes acquisition-rights recommendations
+in the historical investigations below; it does not replace their recorded HTTP
+results or turn them into current observations.
+
+The user supplies this written statement attributed to Nasdaq Client Support
+representative **Dan Vizconde**:
+
+> The EMI site you visited is publicly accessible, so you may download the sample
+> data available on the site and use it as needed.
+
+**Evidence class: user-provided correspondence quotation.** The original email,
+headers, date and any attachments were not independently inspected/authenticated
+in this update. No additional wording or conditions are inferred. The supplied
+statement supports downloading and using the publicly available sample for this
+project; the prior absence of a sample-use statement is no longer the same blocker.
+It does **not independently establish unrestricted redistribution/publication rights**,
+an open-data license, or an explicit retention/deletion schedule. Record any further
+applicable terms before a broader use, and preserve the supplied correspondence
+privately. Do not put raw data or correspondence containing private details in Git.
+
+| Ledger item | Current evidence and consequence |
+|---|---|
+| Official directory | `https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/`, previously reached in P1C as reported in the subsequent conversation; no fresh request made here |
+| Selected archive lead | `12302019.NASDAQ_ITCH50.gz`; direct official location is the directory plus this exact filename |
+| Prior compressed length | **3,524,013,057 bytes** (about3.282GiB), prior reported observation; not remeasured in this update |
+| Prior transport capability | HTTP Range support was reported verified; that does not establish content immutability, full archive integrity, actual session date or initial L3 completeness |
+| Permission basis | User-supplied Dan Vizconde quotation above supports sample download/use; no paid account or purchase is proposed |
+| Retention/cloud/publication | No explicit duration, deletion schedule, raw redistribution or derived-output publication grant is established by the quoted wording alone; no unrestricted grant is asserted |
+| Current acquisition authorization | **Not authorized in this assignment.** The user expressly forbids real-market-data downloads; a separate resource-verified acquisition authorization is required |
+| Current data inventory | No archive bytes downloaded or parsed in this update. No full/prefix sample SHA256, decompressed size, record count or empirical validation result is newly available |
+| LOBSTER | Separate Support Case #17931099; no repeated diagnostics or acquisition, and no dependency for synthetic P1G/P1H work |
+
+**Recommendation: GO for authorized synthetic engineering and offline acquisition
+planning; CONDITIONAL GO for a later bounded private sample pilot after explicit
+acquisition authorization and resource checks; NO-GO for claims of observed-market
+validation now.** Valid initial L3 state, historical schema compatibility and independent
+observed reference comparisons remain unverified regardless of download permission.
+See [NASDAQ_REAL_DATA_PILOT_PLAN.md](NASDAQ_REAL_DATA_PILOT_PLAN.md) for the proposed
+resource/integrity/initialization gates. This update changes documentation only and
+performs no network request, agreement acceptance, dataset acquisition or publication.
+
 ## Latest investigation — official NASDAQ historical sample
 
 Review date: 2026-10-21 UTC. Resumed baseline:

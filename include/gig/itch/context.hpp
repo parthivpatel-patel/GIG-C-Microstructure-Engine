@@ -6,7 +6,7 @@
 namespace gig::itch {
 // Synthetic semantic-policy module, not a native replay adapter or L3 validator.
 enum class ContextStatus : std::uint8_t { accepted, source_invalid, context_invalid, unsupported, integration_ineligible, resource_limit };
-enum class ContextCode : std::uint8_t { none, invalid_config, allocation_failure, provenance_conflict, discontinuity, timestamp_policy, lifecycle, unknown_locate, directory_conflict, stock_conflict, invalid_reference, duplicate_reference, missing_order, inactive_order, invalid_quantity, quantity_underflow, equal_cancel, duplicate_match, missing_match, broken_match, capacity, unit_conversion, unsupported_source, already_finished };
+enum class ContextCode : std::uint8_t { none, invalid_config, allocation_failure, provenance_conflict, discontinuity, timestamp_policy, lifecycle, unknown_locate, directory_conflict, stock_conflict, invalid_reference, duplicate_reference, missing_order, inactive_order, invalid_quantity, quantity_underflow, equal_cancel, duplicate_match, missing_match, broken_match, capacity, unit_conversion, unsupported_source, already_finished, invalid_prepared, stale_prepared };
 struct ContextError {
     ContextCode code{ContextCode::none}; Location location{}; std::string_view field{}; std::uint64_t expected{},actual{}; Error source_error{};
     bool operator==(const ContextError&)const=default;
@@ -76,13 +76,51 @@ struct ContextSummary {
     ContextCode finish_error{ContextCode::none};
     bool operator==(const ContextSummary&)const=default;
 };
+class SourceContext;
+class SyntheticReconstructor;
+// Owned single-use semantic delta. Preparation never changes accepted context.
+// Moving a token consumes the donor; destroying an uncommitted token is rollback.
+class PreparedContext {
+    friend class SourceContext;
+    const SourceContext* owner_{};
+    std::uint64_t instance_{},generation_{};
+    ContextResult result_;
+    std::optional<DirectoryState> add_directory_;
+    std::optional<OrderState> add_order_,update_order_;
+    std::optional<MatchState> add_match_,update_match_;
+    std::size_t order_slot_{},match_slot_{};
+    std::uint8_t next_stage_{};
+    Location next_location_{};
+    bool cursor_exhausted_{},valid_{};
+    PreparedContext(const SourceContext*,std::uint64_t,std::uint64_t,ContextResult) noexcept;
+public:
+    PreparedContext(PreparedContext&&) noexcept;
+    PreparedContext& operator=(PreparedContext&&)=delete;
+    PreparedContext(const PreparedContext&)=delete;
+    PreparedContext& operator=(const PreparedContext&)=delete;
+    const NormalizedRecord& record()const noexcept{return *result_.record;}
+    ContextStatus status()const noexcept{return result_.status;}
+    const ContextError& error()const noexcept{return result_.error;}
+};
+struct ContextPreparation {
+    ContextStatus status{ContextStatus::context_invalid}; ContextError error{};
+    std::optional<PreparedContext> prepared;
+    ContextPreparation() noexcept=default;
+    ContextPreparation(ContextStatus s,ContextError e,PreparedContext token) noexcept
+        :status(s),error(e),prepared(std::move(token)) {}
+    ContextPreparation(ContextResult rejection) noexcept:status(rejection.status),error(rejection.error) {}
+    explicit operator bool()const noexcept{return prepared.has_value();}
+};
 class SourceContext {
+    friend class SyntheticReconstructor;
     SourceManifest manifest_; ContextPolicy policy_;
     std::pmr::vector<DirectoryState> directories_;
     std::pmr::vector<OrderState> orders_;
     std::pmr::vector<MatchState> matches_;
     ContextSummary summary_{}; std::uint8_t lifecycle_stage_{}; Location next_location_{};
     bool cursor_exhausted_{},moved_from_{};
+    std::uint64_t instance_{};
+    ContextResult commit_validated(PreparedContext&&) noexcept;
     SourceContext(SourceManifest,ContextPolicy,std::pmr::memory_resource*) noexcept;
 public:
     SourceContext(SourceContext&&) noexcept;
@@ -94,6 +132,11 @@ public:
     // Rejects never advance cursors or ledgers. Unsupported/unknown records return an
     // explicit stop disposition; callers must not skip source records after rejection.
     // There is no silent skip API or automatic recovery/reset.
+    ContextPreparation prepare(std::span<const std::byte>,Location,Provenance={}) const noexcept;
+    // Validate immediately before any native mutation. The private nofail commit is
+    // available only to the stable, single-threaded owning reconstruction adapter.
+    ContextError validate_prepared(const PreparedContext&)const noexcept;
+    ContextResult commit(PreparedContext&&) noexcept;
     ContextResult apply(std::span<const std::byte>,Location,Provenance={}) noexcept;
     ContextResult disposition(const Error& source_error,Location)const noexcept;
     ContextSummary finish(ContextEnd) noexcept;
