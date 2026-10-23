@@ -50,7 +50,7 @@ jobs:
           root = ET.parse(pathlib.Path('build/${{ matrix.preset }}/tests.xml')).getroot()
           counts = {key: int(root.get(key, '0')) for key in ('tests', 'failures', 'skipped', 'disabled')}
           python_enabled = '${{ matrix.compiler }}' == 'gcc' and '${{ matrix.preset }}' == 'release'
-          if counts['tests'] != (125 if python_enabled else 122) or any(counts[k] for k in ('failures', 'skipped', 'disabled')):
+          if counts['tests'] != (134 if python_enabled else 131) or any(counts[k] for k in ('failures', 'skipped', 'disabled')):
             raise SystemExit('required CTest outcomes missing, failed, skipped or disabled')
           expected = {
             'itch.independent_reference': '142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e',
@@ -58,6 +58,7 @@ jobs:
             'itch.l3_reference': 'bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991',
             'itch.streaming_reference': 'be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5',
             'itch.validation_demo_reference': '4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520',
+            'itch.hy_reference': 'ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af',
           }
           cases = {case.get('name'): case for case in root.findall('testcase')}
           if python_enabled and not {'python.research_interface', 'python.export_contracts', 'python.schema_compatibility'} <= cases.keys():

@@ -49,6 +49,9 @@ struct Reader {
 };
 }
 Result<DecodedRecord> decode(std::span<const std::byte> payload,Location location,Provenance provenance) noexcept {
+    return decode(payload,location,std::move(provenance),DecodeProfile::baseline_v1);
+}
+Result<DecodedRecord> decode(std::span<const std::byte> payload,Location location,Provenance provenance,DecodeProfile profile) noexcept {
     constexpr auto max=std::numeric_limits<std::uint64_t>::max();
     if(location.frame_offset.value()>max-2 || location.payload_offset.value()>max-payload.size())
         return Result<DecodedRecord>::failure({Code::offset_overflow,location.frame_offset,"location",0,0});
@@ -56,6 +59,8 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
         return Result<DecodedRecord>::failure({Code::invalid_location,location.payload_offset,"payload_offset",location.frame_offset.value()+2,location.payload_offset.value()});
     if(static_cast<unsigned>(provenance.origin)>static_cast<unsigned>(Origin::observed))
         return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"provenance.origin",0,static_cast<unsigned>(provenance.origin)});
+    if(static_cast<unsigned>(profile)>static_cast<unsigned>(DecodeProfile::status_observations_v2))
+        return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"decode.profile",0,static_cast<unsigned>(profile)});
     if(payload.empty())return Result<DecodedRecord>::failure({Code::truncated_payload,location.payload_offset,"type",1,0});
     const auto type=std::to_integer<std::uint8_t>(payload[0]);
     const auto length=expected_length(type);
@@ -66,6 +71,17 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
     out.type=type;out.location=location;out.provenance=provenance;
     out.header={StockLocate{static_cast<std::uint16_t>(r.number(1,2))},TrackingNumber{static_cast<std::uint16_t>(r.number(3,2))},TimestampNanoseconds{r.number(5,6)}};
     switch(type){
+    case 'H':{
+        if(profile==DecodeProfile::baseline_v1)return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
+        StockTradingAction h;h.stock=r.text<8>(11,"stock");h.trading_state=r.enumeration(19,"HPQT","trading_state");
+        // The official layout specifies Alpha, but no fixed reserved value or
+        // exhaustive historical reason enum. Preserve printable fields exactly.
+        h.reserved=r.text<1>(20,"reserved").bytes[0];h.reason=r.text<4>(21,"reason");out.message=h;break;
+    }
+    case 'Y':{
+        if(profile==DecodeProfile::baseline_v1)return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
+        out.message=RegShoRestriction{r.text<8>(11,"stock"),r.enumeration(19,"012","reg_sho_action")};break;
+    }
     case 'S':out.message=SystemEvent{r.enumeration(11,"OSQMEC","event_code")};break;
     case 'R':{
         StockDirectory d;

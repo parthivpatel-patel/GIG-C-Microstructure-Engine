@@ -28,6 +28,8 @@ template<std::size_t N> struct Text {
     bool operator==(const Text&) const = default;
 };
 enum class Side : char { buy='B', sell='S' };
+// Explicit extension: baseline results remain stable for previously unsupported H/Y.
+enum class DecodeProfile : std::uint8_t { baseline_v1, status_observations_v2 };
 struct Header { StockLocate stock_locate{}; TrackingNumber tracking_number{}; TimestampNanoseconds timestamp{}; bool operator==(const Header&) const=default; };
 struct SystemEvent { char event_code{}; bool operator==(const SystemEvent&)const=default; };
 // Classification/subtype are retained as printable ASCII, not appendix-enum certified.
@@ -49,7 +51,15 @@ struct OrderReplace { OrderReference original_reference{},new_reference{}; Share
 struct Trade { OrderReference order_reference{}; Side side{}; Shares shares{}; Text<8> stock; Price4 price{}; MatchNumber match_number{}; bool operator==(const Trade&)const=default; };
 struct CrossTrade { CrossShares shares{}; Text<8> stock; Price4 cross_price{}; MatchNumber match_number{}; char cross_type{}; bool operator==(const CrossTrade&)const=default; };
 struct BrokenTrade { MatchNumber match_number{}; bool operator==(const BrokenTrade&)const=default; };
-using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade>;
+struct StockTradingAction {
+    Text<8> stock; char trading_state{}; char reserved{}; Text<4> reason;
+    bool operator==(const StockTradingAction&)const=default;
+};
+struct RegShoRestriction {
+    Text<8> stock; char action{};
+    bool operator==(const RegShoRestriction&)const=default;
+};
+using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade,StockTradingAction,RegShoRestriction>;
 struct DecodedRecord {
     std::uint8_t type{}; Header header; Message message; Location location; Provenance provenance;
     bool operator==(const DecodedRecord&)const=default;
@@ -63,4 +73,6 @@ std::optional<std::size_t> expected_length(std::uint8_t type) noexcept;
 // Default describes a single BinaryFile frame at byte zero. Output owns every byte.
 Result<DecodedRecord> decode(std::span<const std::byte> payload,
     Location location={ByteOffset{0},ByteOffset{2},RecordOrdinal{0}}, Provenance provenance={}) noexcept;
+Result<DecodedRecord> decode(std::span<const std::byte> payload,
+    Location location, Provenance provenance, DecodeProfile profile) noexcept;
 } // namespace gig::itch

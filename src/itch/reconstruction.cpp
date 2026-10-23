@@ -173,6 +173,8 @@ ReconstructionStep SyntheticReconstructor::process(std::span<const std::byte> pa
         const Text<8>* stock=nullptr;
         if(n.after)stock=&n.after->stock;
         if(n.kind==SemanticKind::directory)stock=&std::get<StockDirectory>(n.source.message).stock;
+        if(n.kind==SemanticKind::trading_action)stock=&std::get<StockTradingAction>(n.source.message).stock;
+        if(n.kind==SemanticKind::reg_sho_restriction)stock=&std::get<RegShoRestriction>(n.source.message).stock;
         if(n.source.type=='P')stock=&std::get<Trade>(n.source.message).stock;
         if(n.source.type=='Q')stock=&std::get<CrossTrade>(n.source.message).stock;
         if(stock&&*stock!=b.stock){step.native_error={gig::ErrorCode::identity_mismatch,"binding.stock"};return reject(step);}

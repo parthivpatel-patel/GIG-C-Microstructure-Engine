@@ -30,6 +30,7 @@ struct ContextPolicy {
     bool require_lifecycle_order{true}, allow_equal_cancel{false};
     // Explicit hypothetical native conversion only. No inferred instrument units.
     std::uint32_t price_quantum{1}, lot_size{1};
+    DecodeProfile decode_profile{DecodeProfile::baseline_v1};
     bool operator==(const ContextPolicy&)const=default;
 };
 struct DirectoryState { StockLocate locate{}; StockDirectory directory; bool operator==(const DirectoryState&)const=default; };
@@ -41,7 +42,7 @@ struct OrderState {
 };
 enum class MatchKind : std::uint8_t { displayed_execution, non_displayed_trade, cross };
 struct MatchState { MatchNumber number{}; StockLocate locate{}; MatchKind kind{}; bool broken{}; bool operator==(const MatchState&)const=default; };
-enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade };
+enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade, trading_action, reg_sho_restriction };
 enum class IntegrationClass : std::uint8_t { external_observation, exact_candidate, book_only_projection, unsupported };
 struct NormalizedRecord {
     DecodedRecord source; SourceManifest manifest; SemanticKind kind{};
