@@ -227,3 +227,24 @@ were installed privately and checked from consumer environments. This establishe
 same-host source/package restoration, not a fresh VM, ARM64, other Python version,
 bit-identical binary build or hosted-CI qualification. See
 [P1I validation](P1I_VALIDATION_REPORT.md) for actual evidence and limitations.
+
+## P1J post-audit qualification
+
+The same native demonstration/oracle/profile commands above apply. P1J changes only
+the offline evidence verifier and its tests; no native/Python engine API changed.
+Current verifier unit coverage is47 cases. With the matching private final artifacts:
+
+```sh
+python3 tests/test_validation_evidence.py
+python3 scripts/check_validation_evidence.py docs/P1J_EVIDENCE.json --raw-root build/p1j-validation/evidence --candidate-profile
+```
+
+The source/measurement profile enforces a reviewed20-file protected minimum, not a
+complete transitive build graph; all136 declared final source files are independently
+checked at the recorded repair commit. Copied raw/report measurement, toolchain,
+environment and package fields must agree type-exactly. No checksum or tool result
+is a signature or proof of execution. Preserve the actual raw archives/logs privately
+or regenerate them; a missing artifact is not a pass. Final native/package restoration
+and nine-row test results are in [the P1J audit](P1J_INDEPENDENT_AUDIT_REPORT.md).
+The audit's advisory, hosted, platform, fresh-machine and observed-data limitations
+remain open regardless of successful local commands.

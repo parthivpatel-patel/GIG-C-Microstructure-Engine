@@ -4,8 +4,9 @@ Starting feature checkpoint: `f3869b2e3c5b0ad4003f974499b78e265d5f820e`,
 `feat/bootstrap-cpp20-engine`; local/remote equality and initially clean tree verified.
 Main remains `165c5038336887116d69160b0d8e5a1a5ef59d16`.
 
-Status: **P1I local acceptance complete**, including final measurements and evidence
-verification; final evidence push/remote verification pending. No P1J execution yet.
+Status: **P1I complete, pushed and remotely verified** at
+`5584ce34de5b839d2a78fabcd8e6603cec1185f3`. The results below describe its frozen
+implementation. Subsequent P1J verifier repairs and qualification are in its audit report.
 This report is completed only when actual final results and implementation identity
 are recorded below. No NASDAQ/LOBSTER bytes were acquired; no observed initialization,
 market-reference comparison, production readiness, release or main merge is claimed.
@@ -172,7 +173,6 @@ late interpreter-finalization limitation remains explicit. The two confirmed def
 were in new validation interfaces and are repaired; no critical/high correctness
 defect remained reproduced within the declared synthetic scope at this checkpoint.
 
-Mandatory P1I synthetic gates have passed locally. Commit/push this completed evidence,
-verify feature remote SHA/clean tree/unchanged main, then begin the separately authorized
-P1J source/evidence/security audit. See [reproduction](REPRODUCIBILITY.md) and the
+Mandatory P1I synthetic gates passed and its push/remote verification completed before
+the separately authorized P1J source/evidence/security audit began. See [reproduction](REPRODUCIBILITY.md) and the
 committed P1J gate definitions. No real data acquisition or release is authorized here.

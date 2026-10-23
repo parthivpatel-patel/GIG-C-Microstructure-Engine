@@ -199,3 +199,45 @@ do not use the newly supplied permission as authorization to download in this ta
 NASDAQ initial state/reference evidence and LOBSTER Support Case #17931099 are
 independent. Neither the November5 target nor November12 contingency can substitute
 for missing observed evidence or authorize unrestricted redistribution.
+
+
+## P1I/P1J readiness update — October23,2026 America/New_York
+
+P1I was pushed and verified at `5584ce34de5b839d2a78fabcd8e6603cec1185f3`;
+P1J independently reviews that checkpoint and any subsequent scoped evidence-tool
+repairs. The bounded synthetic pipeline now exists and its two-book/default-journal
+selected profile has measured restart coexistence below the128MiB PMR proposal.
+This replaces only the earlier plan's pending synthetic prerequisite, not its
+observed-source gates. No market bytes were downloaded or inventoried.
+
+The current reconstructor factory still requires synthetic authored-empty evidence.
+Unknown symbol bindings and unsupported historical administrative/auction/status
+messages stop explicitly. A full-market prelude can exhaust directory/lifetime/match/
+source budgets before a useful target interval. Native snapshot capacity64 does not
+supply a complete source-context/FIFO seed. Single-member gzip policy must be checked
+against the actual artifact member structure rather than relaxed silently.
+
+**Smallest next step:** separately authorize a format-only byte0 prefix inspector,
+using standalone bounded gzip/framer/decoder APIs, not the synthetic L3 factory with
+an observed artifact relabeled synthetic. Recheck private disk/free-space, memory,
+monotonic time and actual byte limits immediately before the run. Start at the
+existing4KiB proposal, no automatic growth past its separately reviewed1MiB maximum;
+32MiB raw output and4,096 considered frames remain independent caps. A prefix may
+end before useful metadata and must be reported inconclusive, not session-complete.
+Resource observations from this host do not reserve storage or guarantee throughput.
+No full3,524,013,057-byte archive is authorized by this update.
+
+Record expected and observed transport extents, validators, SHA256, framing/message
+histogram, unsupported records, residual/truncated state and exact cutoff. A bounded
+compressed prefix cannot establish whole-gzip CRC/integrity or exchange completeness.
+Only after actual inventory/profile review should a separately authorized source-
+scope/observed-provenance/initialization adapter be designed. Independent observed
+snapshot/order reference and predeclared alignment are required for externally
+referenced L3 correctness; model agreement alone is differential validation.
+
+The user-provided Nasdaq statement supports download/use of official samples; it
+does not establish unrestricted redistribution/publication or an explicit retention
+schedule. Keep raw prefixes, row-bearing diagnostics and correspondence outside Git
+and private. LOBSTER support case17931099 is separate; no retry or network change
+was performed. Real-market validation remains NO-GO today; a later resource-bounded
+format-only pilot is CONDITIONAL GO after its explicit authorization and preflight.
