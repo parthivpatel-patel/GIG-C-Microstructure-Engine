@@ -22,7 +22,7 @@ cmake --build --preset debug
 ctest --preset debug --output-junit build/debug/tests.xml
 ```
 
-Repeat with release and asan-ubsan. Each current native suite has 74 outcomes (65 existing outcomes including the remediation regressions, plus 9 P1E wire checks), including
+Repeat with release and asan-ubsan. Each current native suite has 85 outcomes (65 original outcomes, 9 P1E wire checks and 11 P1F context checks), including
 independent Python arbitrary-precision reference programs; the native library does
 not depend on a Python development module or pybind11. Reference scripts require
 an interpreter. Explicit CXX avoids inherited SDK compiler settings. For Clang use
@@ -89,9 +89,10 @@ review. Its PyPI advisory response is a dated snapshot, not a universal CVE audi
 ## Synthetic BinaryFile / ITCH wire foundation (P1E)
 
 The independent `gig::itch` target does not enter the engine/Python runtime path.
-`ctest --test-dir build/debug -R '^itch\.' --output-on-failure` selects its nine
-outcomes when benchmarks are enabled. The full native suite has 74 outcomes;
-Python Debug/Release have 77 and GCC Python ASan/UBSan 78, including its live-LSan
+P1E contributed nine outcomes when benchmarks are enabled.
+`ctest --test-dir build/debug -R '^itch\.' --output-on-failure` now selects those
+nine plus the eleven P1F context outcomes. At the P1E checkpoint the full native suite had 74 outcomes;
+Python Debug/Release had 77 and GCC Python ASan/UBSan had 78, including its live-LSan
 control. These are local Linux x86_64 results, not hosted CI or real-data evidence.
 
 See [P1E_VALIDATION_REPORT.md](P1E_VALIDATION_REPORT.md) for exact interfaces,
@@ -101,3 +102,27 @@ rows and 8 observed gates. [P1E_EVIDENCE.json](P1E_EVIDENCE.json) retains the ve
 implementation SHA, source/JUnit/package hashes and scoped synthetic measurements.
 Raw run logs remain ignored under `build/p1e/evidence/`. Do not acquire market data
 or infer valid L3 initialization from a successful wire parse.
+
+
+## Synthetic source context and normalization (P1F)
+
+Build with the existing presets. The standalone `gig::itch_context` target links
+only to `gig::itch`; it does not enter engine or Python runtime paths.
+
+```sh
+ctest --test-dir build/debug -R '^itch.context' --output-on-failure
+python scripts/check_itch_context_reference.py build/debug/gig_itch_context_reference_driver
+python scripts/check_itch_context_reference.py build/debug/gig_itch_context_reference_driver --negative-control
+python scripts/check_itch_context_benchmark.py build/release/benchmarks/gig_itch_context_benchmark
+build/release/benchmarks/gig_itch_context_benchmark 512 7
+```
+
+Run the complete suite for each required compiler/configuration as well. Current
+native counts are 85; GCC Python Debug/Release 88 and ASan/UBSan 89, including its
+existing live-LSan control. The current context oracle checks 515 sessions and 12,104
+outcomes; prior P1E checks remain active. See
+[P1F_VALIDATION_REPORT.md](P1F_VALIDATION_REPORT.md),
+[P1F_CONTEXT_DESIGN.md](P1F_CONTEXT_DESIGN.md) and
+[P1F_EVIDENCE.json](P1F_EVIDENCE.json) for exact policies, versioned normalization
+provenance, hashes, local results, resource measurements and deferred integration.
+No source-completion assertion grants L3 initialization eligibility.
