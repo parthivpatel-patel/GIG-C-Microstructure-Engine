@@ -4,7 +4,7 @@ Starting checkpoint: `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`, feature branch
 `feat/bootstrap-cpp20-engine`; local and remote HEAD verified equal, clean tree.
 Main remains `165c5038336887116d69160b0d8e5a1a5ef59d16`.
 
-## Current phase: P1I implementation authorized and in progress
+## Current phase: P1I local acceptance complete; remote evidence checkpoint pending
 
 P1G completed, committed and pushed. Last verified feature remote/local checkpoint:
 `c3c3d8caef8f5b60aa4ce29f0f0875dc3bdd91c4`; main unchanged at
@@ -48,9 +48,13 @@ No streaming implementation or P1H final validation had completed at interruptio
   the final matrix/package reproduction uses the revised frozen sources.
 - Final revised frozen-source matrix passed1,108/1,108; clean native archive122/122;
   both wheel consumers and fresh-direct checks passed. No observed sanitizer findings.
-- Exact next action: inspect matrix/package logs, reproduce clean native source archive,
-  measure final Release profiles, collect/report evidence, then commit/push/verify P1I
-  before the separate P1J audit.
+- Implementation/clean measurement checkpoint: `5ff7c8596f8705d92b7d97f55f860d0cb8d409fb`.
+- Final profile:77,281,358-byte shared PMR peak; max process RSS76,070,912 bytes;
+ 45 reached query allocation faults; cap stops matched independent prefixes.
+- Offline final evidence verifier passed136 source files,92 raw files,3 artifacts
+  and all1,108 final JUnit outcomes. Both new validation-interface defects repaired.
+- Exact next action: commit/push completed P1I evidence, verify feature remote SHA,
+  clean tree and unchanged main, then begin the authorized P1J independent audit.
 - See P1H_DELIVERY_AND_CRITICAL_PATH.md for inventory, remaining gates and dates.
 - Restrictions: no real data acquisition, journal redesign, main merge, release,
   live trading, Terminal changes or network configuration changes.
