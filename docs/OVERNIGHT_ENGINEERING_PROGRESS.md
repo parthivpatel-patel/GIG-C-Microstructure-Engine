@@ -142,3 +142,60 @@ No tests are represented as running after handoff. Preserve all raw evidence and
 private artifacts;do not repeat completed matrices without a changed source or
 specific qualification need. Resume by verifying Git/current remote and these
 owner-supplied evidence prerequisites.
+
+## Offline H/Y compatibility — in progress, October 23, 2026
+
+Entry clean/local/remote `160de7febd4e16f10e3b1dc7b136bceb6db03873`, feature branch;
+main165c503 unchanged. User authorizes offline bounded H/Y implementation, not
+additional market downloads or real L3. Retained official spec body SHA45e0531d...
+verified locally, sections1.2.2/1.2.3/pages8–9. No network data acquisition.
+
+Implemented explicit DecodeProfile::status_observations_v2, leaving baseline_v1
+as default. Added exact H/Y wire structs, finite state/action enum checks, printable
+opaque reserved/reason fields, contextual symbol/locate/lifecycle checks, external
+observations and routing identity checks. Normalization version2/profile retained;
+no new per-symbol mutable status table, no L3 mutation or initialization relaxation.
+Nine focused tests pass. New independent oracle8002 wire cases+16000 context
+candidates/320 sessions, expected-first canonicalad982777...; negative control passes.
+Fragmented partial-frame counter regression included. Context reserve3 real fault
+sites,zero-allocation observations,synthetic streaming failure/restart tests pass.
+
+Full regression running via /tmp/run-hy-matrix.py in three groups; private logs
+build/hy-validation/evidence. First GCC/Clang Debug131/131,Python Debug134/134 pass;
+all5 pre-existing hashes unchanged and newHY hash matches. Remaining Release/
+sanitizer rows must be observed before completion. Early test-only compile typo/
+misleading indentation and explicit Location{} fixture bug corrected;original logs
+preserved. No warning/assertion/sanitizer suppression.
+
+Exact next action:finish9-row matrix(expected1189 CTest outcomes),review/commit
+validated implementation,build/install checkout+sdist wheels from that checkpoint,
+finalize compatibility matrix/spec assumptions/evidence,commit/push docs,verify
+remote/clean tree/main. Do not restart completed checks without new changes or
+failures. Do not fetch Nasdaq/LOBSTER or claim actual prior H/Y payload revalidation.
+
+## Offline H/Y completion and packaging closure — October 23, 2026
+
+Supersedes the preceding in-progress entry. Implementation committed and remotely
+verified at `0f6e0a1ce3085dc7a8ffd73229119e182110d847`. Packaging repair checkpoint
+`d6df74d` removes unanchored basename and recursive force-includes. Main preserved.
+All nine configurations passed1,189/1,189, zero failed/skipped/disabled; all five
+old canonical hashes unchanged and the new independent H/Y canonical identical.
+Resume verified source and raw JUnit/log hashes, without rerunning this full matrix.
+
+Packaging inventory exposed two stages: original ignored build-tree leak; an
+incomplete root-anchor repair still force-included Python caches. Both retained
+as private failing-before evidence. Final complete inventory passes269 safe,
+intended members with complete required source trees and no build/cache entries.
+Three pinned-backend packaging regressions pass, including both negative controls.
+Fresh direct and source-built wheel consumers each pass8 interface+6 export tests
+(28 final installed cases), module-location checks and identical research examples.
+The inventory archive differs from the installed source-wheel input only in two
+report documents; non-documentation members are independently hash-identical.
+
+Full evidence: docs/HY_VALIDATION_EVIDENCE.json; reports:
+docs/HY_HISTORICAL_COMPATIBILITY.md and docs/ITCH_HISTORICAL_COMPATIBILITY_MATRIX.md.
+No outstanding confirmed defect in this bounded scope; no additional market bytes
+acquired, no actual historical H/Y payload revalidation, no hosted CI/ARM64 claim.
+Exact next action: finish documentation delivery, verify feature remote/clean tree
+and unchanged main, then stop. Any repeat4KiB real-prefix experiment needs new
+explicit authorization. No background engineering continues after the final report.

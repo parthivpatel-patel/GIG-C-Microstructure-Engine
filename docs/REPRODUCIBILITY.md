@@ -273,3 +273,34 @@ and sha256sum. It does not replace system libraries or lower the minimum.
 
 Fresh-container results do not certify a separate machine. RC13,RC16 andRC17
 retain explicit evidence boundaries in [RC_EVIDENCE_CLOSURE_REPORT.md](RC_EVIDENCE_CLOSURE_REPORT.md).
+
+## Offline H/Y status-observation extension
+
+See [HY_HISTORICAL_COMPATIBILITY.md](HY_HISTORICAL_COMPATIBILITY.md) and
+[ITCH_HISTORICAL_COMPATIBILITY_MATRIX.md](ITCH_HISTORICAL_COMPATIBILITY_MATRIX.md).
+H/Y support is explicitly selected with `DecodeProfile::status_observations_v2`
+and `ContextPolicy::decode_profile`;default v1 and its five canonical hashes stay
+unchanged. This adds no Python H/Y API or observed-market initialization path.
+
+With tests,benchmarks and optional streaming enabled,the H/Y checkpoint has131
+native CTest outcomes,Python Debug/Release134,and GCC Python ASan+UBSan135.
+The earlier122/125/126 counts above belong to P1I/P1J/closure checkpoints. Reproduce:
+
+```sh
+cmake --build build/phase9-clean-debug --parallel 2
+ctest --test-dir build/phase9-clean-debug -R '^itch.hy_' --output-on-failure
+python3 scripts/check_itch_hy_reference.py build/phase9-clean-debug/gig_itch_hy_tests
+python3 scripts/check_itch_hy_reference.py build/phase9-clean-debug/gig_itch_hy_tests --negative-control
+```
+
+Configure the existing compiler/sanitizer/Python profiles before using a new build
+directory;do not mix compilers inside a cache. Full actual results and artifact
+identities are in HY_VALIDATION_EVIDENCE.json. No Nasdaq request is part of these
+commands. A future approved prefix inspection must select v2 explicitly and use
+correct complete-frame-versus-consumed accounting.
+
+Source-distribution closure also runs the standalone packaging-only regressions:
+`/workspace/gig-tools/bin/python tests/test_sdist_patterns.py` (three cases), then
+`scripts/check_sdist_inventory.py ARCHIVE --source-root . --manifest MANIFEST`.
+Use the exact source snapshot for byte comparison. Recursive force-includes are
+intentionally absent so ignored build outputs and Python caches stay excluded.

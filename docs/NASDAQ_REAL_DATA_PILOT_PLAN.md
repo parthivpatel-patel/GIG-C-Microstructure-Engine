@@ -1,5 +1,16 @@
 # NASDAQ real-data pilot — resource and validation plan
 
+## Offline H/Y support update — October 23, 2026
+
+An explicitly selected status-observations_v2 profile now provides synthetic-tested
+H/Y decoding and contextual observations,while default baseline_v1 preserves old
+unsupported outcomes/hashes. See [HY_HISTORICAL_COMPATIBILITY.md](HY_HISTORICAL_COMPATIBILITY.md)
+and [ITCH_HISTORICAL_COMPATIBILITY_MATRIX.md](ITCH_HISTORICAL_COMPATIBILITY_MATRIX.md).
+No additional download or reinspection of the released real prefix occurred.
+Actual historical H/Y values,full source completeness and valid initial L3 state
+remain unverified. Another4KiB format-only request needs separate authorization;
+no larger range or observed reconstruction is authorized by this offline study.
+
 ## Latest authorized prefix result — October 23, 2026, America/New_York
 
 The single authorized GET returned206 with exact `bytes 0-4095/3524013057`,

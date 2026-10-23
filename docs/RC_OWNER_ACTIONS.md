@@ -20,6 +20,11 @@ make one authorized bounded request for the **final delivered SHA**. Private
 Actions read authorization may then be needed; do not paste credentials into
 reports. Alternatively provide authorized run/job/log/JUnit exports for that SHA.
 
+The122/125 counts below refer to the frozen closure checkpoint. For the later
+H/Y extension,require131 native/134 GCC Python Release outcomes and the additional
+`itch.hy_reference` hash listed in HY_VALIDATION_EVIDENCE.json. No hosted success
+is implied by these local results.
+
 Required evidence: run ID, head SHA, event, all six compiler/preset jobs, runner
 versions, checksum-pinned zlib header/runtime1.3.1, actual CTest counts122 except
 GCC Release125, zero failed/skipped/disabled, all five canonical hashes, Python
