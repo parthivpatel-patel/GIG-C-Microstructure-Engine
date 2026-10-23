@@ -1,9 +1,12 @@
 # P1G synthetic reconstruction validation report
 
-Status: **correctness, toolchain and package gates passed; measurements and remote
-checkpoint pending. P1H not started**.
+Status: **P1G local acceptance complete; final documentation push/remote verification
+pending. P1H remains gated on that verification**.
 Starting feature HEAD: `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`.
 Main: `165c5038336887116d69160b0d8e5a1a5ef59d16`. Initial tree was clean.
+Verified implementation checkpoint: `997007f32cf94af1968b48a31504302de40085a0`.
+Final evidence is a subsequent documentation commit; exact remote SHA is recorded
+in the delivery/checkpoint response, avoiding a self-referential commit hash.
 No market bytes were downloaded. This phase establishes synthetic-only behavior,
 not exchange-equivalent reconstruction, empirical NASDAQ validation or production
 trading readiness.
@@ -88,6 +91,72 @@ No Python API/schema/package-version change or publication occurred.
 Local raw logs/JUnit/package hashes are retained under `build/p1g/evidence/`;
 [P1G_EVIDENCE.json](P1G_EVIDENCE.json) retains the source/JUnit/package hashes and
 actual counts. Hosted CI is unverified; no local result is presented as hosted success.
+
+## Measurements and reproducible demonstration
+
+Sequential unsanitized Release runs from clean implementation commit997007f, after
+all correctness/package gates. CPU: Intel Xeon Platinum8573C, five exposed logical
+CPUs; shared virtualized host. Two warmups and seven actual measured repetitions.
+Fixture generation is outside timing; create/decode/context/native journal/receipts,
+validation and destruction are inside. These are batch averages, not event-service
+or tail-latency distributions. No production/exchange throughput claim is made.
+
+| Orders per symbol | Source records | GCC median ns/record | Clang median ns/record | Peak selected PMR bytes |
+|---:|---:|---:|---:|---:|
+|8|67|11042.6|9463.67|1303504|
+|32|259|12007.4|11354.6|5207280|
+|128|1027|12155.6|11169.1|20822320|
+|256|2051|14812.7|13530.0|41642160|
+
+All eight measured fixtures receive independent Python packing/SHA/count/checksum/
+source-to-native mapping checks. Raw repetitions, compiler strings, fixture hashes,
+CPU time and executable hashes are retained in the evidence JSON. Selected PMR peak
+stays below128MiB; each run releases all tracked bytes. The largest measured native
+process high-water is64,323,584 bytes, below the proposed256MiB unsanitized ceiling.
+Wait-accounted RSS includes process/allocator and possibly inherited pre-exec floors;
+it is not engine-only memory or a sum of concurrent process-tree high-waters.
+The separate default-profile independent oracle peaks at65,748,992 bytes (<128MiB).
+
+Both compilers measure SourceContext808, PreparedContext1496, SourceReceipt344,
+SyntheticReconstructor98264 and JournalEntry15944 bytes. Default4096 receipt slots
+reserve1,409,024 element bytes. The n256 workload has1024 journal entries per book:
+32,653,312 retained journal element bytes; one growth with the other journal full
+can coexist at40,816,640 journal bytes before other state. Actual peak41,642,160
+includes tracked context/receipts/books. No journal optimization was performed.
+
+Equivalent standalone context checks (same P1F fixture, seven repetitions) now measure
+GCC599.064/1001.17 ns per record at n128/512 and Clang254.895/632.751. Prior P1F
+measurements were465.556/842.051 and210.321/593.165 respectively. The new prepared
+ownership path adds work, and these shared-host observations are slower; this is not
+a controlled causal estimate or speedup claim. Full L3 timings have a different scope
+and must not be compared directly to standalone context throughput.
+
+Reproduce offline with the existing toolchains/presets:
+
+```sh
+CXX=g++ cmake --preset release
+cmake --build --preset release -j2
+ctest --preset release --output-on-failure
+python3 scripts/run_synthetic_l3_demo.py build/release/gig_itch_l3_reference_driver
+python3 scripts/check_itch_l3_reference.py build/release/gig_itch_l3_reference_driver
+build/release/benchmarks/gig_itch_reconstruction_benchmark 128 7
+```
+
+The documented release preset uses `build/release`; the validation host reused `build/phase9-clean-release`. The actual demonstration yields13 source
+records:7 native commits and6 external observations. Book1 has ID103,15lots@101,
+FIFO ticket2, six journal/revisions, ledger45in/30out; book2 has ID201,20lots@200,
+one journal/revision. Every step is compared independently. The source/session is
+an incomplete synthetic prefix, with no market reference or clock/date inference.
+`build/p1g/evidence/synthetic-demo.txt` retains actual output.
+
+## Acceptance and next phase
+
+All mandatory P1G synthetic gates have local evidence in the34-row coverage ledger,
+including justified unsupported complete-context seeding and observed-data exclusions.
+After the documentation commit is pushed and remote HEAD verified, P1H may begin.
+Its gzip/container/streaming gates are not implied by P1G and have not run here.
+The NASDAQ rights quotation and separately authorized pilot plan are recorded in
+[NASDAQ_REAL_DATA_PILOT_PLAN.md](NASDAQ_REAL_DATA_PILOT_PLAN.md); no acquisition occurs.
 
 ## Limitations
 

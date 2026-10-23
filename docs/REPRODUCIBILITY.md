@@ -126,3 +126,28 @@ outcomes; prior P1E checks remain active. See
 [P1F_EVIDENCE.json](P1F_EVIDENCE.json) for exact policies, versioned normalization
 provenance, hashes, local results, resource measurements and deferred integration.
 No source-completion assertion grants L3 initialization eligibility.
+
+## P1G synthetic L3 reconstruction checkpoint
+
+P1G adds a separate `gig::itch_reconstruction` target; existing simulator/execution/
+Python behavior is preserved. See [P1G_VALIDATION_REPORT.md](P1G_VALIDATION_REPORT.md)
+for final executed evidence and limitations. At this checkpoint native CTest has103
+outcomes per configuration, GCC Python Debug/Release106 and sanitizer107 (937 across
+nine configurations). Historical P1E/P1F counts above describe their own checkpoints.
+
+```sh
+CXX=g++ cmake --preset release
+cmake --build --preset release -j2
+ctest --preset release --output-on-failure
+python3 scripts/run_synthetic_l3_demo.py build/release/gig_itch_l3_reference_driver
+python3 scripts/check_itch_l3_reference.py build/release/gig_itch_l3_reference_driver
+python3 scripts/check_itch_reconstruction_benchmark.py build/release/benchmarks/gig_itch_reconstruction_benchmark
+build/release/benchmarks/gig_itch_reconstruction_benchmark 128 7
+```
+
+Use the existing compiler/sanitizer and pinned offline Python package instructions
+above for the corresponding matrices. The example uses independently authored
+synthetic source bytes and an explicit empty start. It does not download data,
+claim a valid historical start or expose a real-market trading interface. P1G has
+no gzip/archive reader; P1H requires its own evidence. The native journal remains
+15,944 bytes per entry on the measured ABI; bounded replay is not unlimited history.

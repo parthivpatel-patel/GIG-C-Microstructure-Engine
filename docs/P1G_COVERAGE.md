@@ -6,13 +6,14 @@ independent evidence that every registered test has executed. The final frozen-s
 compiler, sanitizer, packaging and benchmark results belong in
 `P1G_VALIDATION_REPORT.md`. Earlier P1E/P1F evidence remains separate.
 
-At this document's initial preparation, focused native development evidence contains
-12 passing CTest outcomes in `build/p1g/evidence/focused-native.xml`. The additional
-checkpoint development run reports 32 reached allocation failpoints and the separate
-Python `hashlib` comparison reports 1,268 cases in
-`build/p1g/evidence/restart-focused.json`. These are focused results, not the final
-GCC/Clang or Python matrix. The independent L3 campaign and final configuration matrix
-must be recorded from their actual executed outputs before the P1G gate is closed.
+Final local evidence:937/937 CTest outcomes across nine configurations, both installed
+wheel consumers (7 interface+6 export cases each),65,186 independent candidates,
+10,025 explicit rejections, six negative controls and2,027 framing schedules.
+Full results/source/JUnit/package hashes and actual measurements are in
+[P1G_VALIDATION_REPORT.md](P1G_VALIDATION_REPORT.md) and
+[P1G_EVIDENCE.json](P1G_EVIDENCE.json). Historical “at initial preparation” statements
+in the row notes describe how evidence was assembled; the final report closes the
+matrix/performance/campaign gates. They do not confer observed-data acceptance.
 
 ## Requirement map
 
