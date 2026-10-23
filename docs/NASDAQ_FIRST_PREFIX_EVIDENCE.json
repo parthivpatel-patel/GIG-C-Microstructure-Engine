@@ -1,0 +1,256 @@
+{
+  "schema": "gig.nasdaq_first_prefix_inspection.v1",
+  "review_date": "2026-10-23",
+  "timezone": "America/New_York",
+  "starting_commit": "e1211cc9c996ae43d736e97a72aa5a5fc41c2d43",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "main_baseline": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "overall_assessment": "INCONCLUSIVE for complete historical decoder compatibility and L3;transport and bounded format identification PASS",
+  "single_request_run": {
+    "started_at_utc": "2026-10-23T21:43:26Z",
+    "outcome": "BLOCKED",
+    "official_get_budget": 1,
+    "network_body_bytes": 4096,
+    "peak_polled_process_tree_rss_bytes": 29155328,
+    "memory_caps": {
+      "supervisor_soft_address_space": 67108864,
+      "worker_hard_address_space": 201326592,
+      "sum_managed_address_space_caps": 268435456
+    },
+    "raw_retained_files": 0,
+    "worker": {
+      "compressed_body_bytes": 4096,
+      "compressed_consumed": 4096,
+      "decompressed_absolute_cap": 33554432,
+      "decompressed_bytes": 14267,
+      "decompressed_effective_cap": 589824,
+      "decompressed_sha256": "97e045b089ab2037d05c1746aa82766c2826b205cf5141487605995b29a077d4",
+      "elapsed_seconds": 0.41575708299933467,
+      "framing": {
+        "complete_frames": 350,
+        "frame_limit_reached": false,
+        "framing_consumed": 14257,
+        "length_mismatches": 0,
+        "residual_decompressed_bytes": 10,
+        "terminal": false,
+        "timestamp_max_ns_since_midnight": 11354339842618,
+        "timestamp_min_ns_since_midnight": 11072057543747,
+        "timestamp_outside_day": 0,
+        "type_counts": {
+          "H": 2,
+          "R": 345,
+          "S": 1,
+          "Y": 2
+        },
+        "unknown_type_frames": 0
+      },
+      "gzip_crc_trailer_verified": false,
+      "gzip_header": {
+        "flags": 0,
+        "header_bytes": 10,
+        "header_complete": true,
+        "header_crc_present": false,
+        "method": 8,
+        "mtime": 0,
+        "os_code": 0,
+        "xfl": 0
+      },
+      "gzip_member_complete": false,
+      "header_bytes_read": 401,
+      "http_requests_attempted": 1,
+      "http_status": 206,
+      "method": "GET",
+      "outcome": "PASS",
+      "peak_rss_bytes": 17956864,
+      "prefix_sha256": "133d94175e46e156baf6c7284f1fdad7e00f0fd4700bd09ed87a5afc98a700c2",
+      "ratio": 128,
+      "requested_range": "bytes=0-4095",
+      "response_headers": {
+        "Accept-Ranges": [
+          "bytes"
+        ],
+        "Content-Length": [
+          "4096"
+        ],
+        "Content-Range": [
+          "bytes 0-4095/3524013057"
+        ],
+        "Content-Type": [
+          "application/x-gzip"
+        ],
+        "ETag": [
+          "\"64b3281599bfd51:0\""
+        ],
+        "Last-Modified": [
+          "Tue, 31 Dec 2019 05:13:48 GMT"
+        ]
+      },
+      "slack_bytes": 65536,
+      "url": "https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/12302019.NASDAQ_ITCH50.gz"
+    },
+    "prefix_sha256": "133d94175e46e156baf6c7284f1fdad7e00f0fd4700bd09ed87a5afc98a700c2",
+    "native": {
+      "compressed_bytes": 4096,
+      "compressed_consumed": 4096,
+      "decompressed_bytes": 14267,
+      "decompressed_sha256": "97e045b089ab2037d05c1746aa82766c2826b205cf5141487605995b29a077d4",
+      "gzip_error_code": 0,
+      "gzip_complete": false,
+      "member_verified": false,
+      "frames": 350,
+      "framing_consumed": 14267,
+      "residual_bytes": 10,
+      "finish_error_code": 0,
+      "terminal": false,
+      "decoded": 346,
+      "unsupported": 4,
+      "rejected": 0,
+      "type_octet_counts": {
+        "72": 2,
+        "82": 345,
+        "83": 1,
+        "89": 2
+      },
+      "error_code_counts": {
+        "14": 4
+      }
+    },
+    "stop_reason": "independent.native_mismatch",
+    "private_memory_extent_bytes": 4096,
+    "anonymous_prefix_closed": true,
+    "raw_market_bytes_retained_after_run": 0,
+    "elapsed_seconds": 0.5017105820006691,
+    "supervisor_peak_rss_bytes": 10878976,
+    "children_peak_wait_accounted_rss_bytes": 18087936,
+    "retained_directory_bytes": 99771,
+    "inspector_sha256": "b326e4d499315d4ff3f4ba47b04ae3b027682d39419a9783bf3bee3dfce5cae8",
+    "native_checker_sha256": "2162675f97fb0e763556bac794a317b8750010eba7e4f6b47fa7c2551c23fefc"
+  },
+  "accounting_review": {
+    "review_kind": "offline aggregate accounting reconciliation; no market bytes or network access",
+    "local_synthetic_reproduction": {
+      "input_origin": "authored synthetic S frame plus10-byte R frame prefix",
+      "total_bytes": 24,
+      "python_complete_frame_boundary": 14,
+      "native_consumed_bytes": 24,
+      "residual_bytes": 10
+    },
+    "actual_aggregate_checks": {
+      "decompressed_size": true,
+      "decompressed_sha256": true,
+      "complete_frames": true,
+      "type_histogram": true,
+      "residual_bytes": true,
+      "native_consumed_including_residual": true,
+      "complete_frame_bytes": true,
+      "gzip_prefix_status": true
+    },
+    "harness_issue": "run_once.py compared complete-frame boundary to total native bytes consumed including a partial frame. Original BLOCKED result preserved. No engine defect inferred.",
+    "correct_counter_relation": "native consumed = independent complete frame bytes + independent residual bytes",
+    "transport": "PASS",
+    "bounded_format_identification": "PASS",
+    "native_observed_type_coverage": "PARTIAL:346 decoded;4 explicitly unsupported H/Y;zero rejected supported frames",
+    "overall": "INCONCLUSIVE for full decoder/historical profile compatibility and all L3 claims; bounded format evidence established",
+    "official_GET_attempts": 1,
+    "further_requests": 0,
+    "raw_retained_bytes": 0
+  },
+  "local_safety": {
+    "cases_passed": 27,
+    "failures": 0,
+    "names": [
+      "reject-status-200-before-body",
+      "reject-status-301-before-body",
+      "reject-status-302-before-body",
+      "reject-status-307-before-body",
+      "reject-status-403-before-body",
+      "reject-status-416-before-body",
+      "reject-metadata-Content-Length",
+      "reject-metadata-Content-Length",
+      "reject-metadata-Content-Range",
+      "reject-metadata-ETag",
+      "reject-metadata-Content-Encoding",
+      "reject-metadata-Transfer-Encoding",
+      "read-boundary-no-4097th-byte",
+      "short-response-explicit",
+      "duplicate-header-rejected",
+      "header-budget",
+      "complete-synthetic-gzip",
+      "independent-frame-type-length",
+      "bounded-trailer-not-corruption",
+      "bad-magic",
+      "crc-corruption",
+      "concatenated-members",
+      "expansion-stop-before-576KiB",
+      "native-valid",
+      "native-prefix",
+      "allocation-limit",
+      "slow-work-watchdog"
+    ],
+    "official_requests": 0,
+    "inspector_sha256": "b326e4d499315d4ff3f4ba47b04ae3b027682d39419a9783bf3bee3dfce5cae8",
+    "native_checker_sha256": "2162675f97fb0e763556bac794a317b8750010eba7e4f6b47fa7c2551c23fefc"
+  },
+  "supplemental_safety": {
+    "TLS_verification_enabled": true,
+    "redirect_handler_disabled": true,
+    "supervisor_to_worker_memory_transition": true,
+    "official_requests": 0,
+    "temporary_draft_issue": "removed obsolete HTTPSHandler._check_hostname reference before any request"
+  },
+  "read_boundary_contract": "Response metadata validated before application entity-body reads. Each read1 request<=remaining4096;no cap+one read,no drain,retries or redirects. TLS/kernel buffering excluded from application body count, as approved in preflight.",
+  "resource_notes": {
+    "managed_address_space_caps_bytes": 268435456,
+    "max_compressed_body_bytes": 4096,
+    "max_decompressed_absolute_bytes": 33554432,
+    "max_decompressed_ratio_guard_bytes": 589824,
+    "max_disk_bytes": 8388608,
+    "max_wall_seconds": 30,
+    "retained_private_directory_bytes_after_review": 104649,
+    "raw_market_bytes_retained": 0,
+    "prefix_storage": "anonymous memfd,closed by supervisor after native validation",
+    "decompressed_storage": "worker/native process memory only;no named file",
+    "retention": "No raw prefix or row-bearing diagnostics retained;metadata/hashes only. Seven-day raw retention maximum satisfied by immediate release. No scheduled deletion service promised.",
+    "runtime_draft_correction": "HTTPSHandler no longer exposes _check_hostname on this runtime;removed obsolete private attribute access and reran local safety checks before the sole request.",
+    "timing_scope": "Acquisition plus both inspections in0.502s;preparation/compilation/local controls occurred beforehand;postrun review uses metadata and authored synthetic bytes only."
+  },
+  "native_checker_inputs_sha256": {
+    "build/phase9-clean-release/libgig_itch_streaming.a": "c2002419247152e4c4d73ce90e6181ecd7bba56516218cbec8aaea39b96e1373",
+    "build/phase9-clean-release/libgig_itch_reconstruction.a": "eb2ba5ee62a1e7043b112dfc504e67bf78d4c59731c7b1c2e4bb5031f345847b",
+    "build/phase9-clean-release/libgig_itch.a": "5d3989a74cc29836b371c7584bd6726369da46e9b5402bd045bee1c8339502c3"
+  },
+  "native_compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+  "python_zlib": {
+    "header": "1.3.2",
+    "runtime": "1.3.2"
+  },
+  "native_dynamic_libraries": "\tlinux-vdso.so.1 (0x00007f8403520000)\n\tlibz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007f84034c8000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f8403262000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f8403235000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f8403041000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f8402f4f000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f8403522000)\n",
+  "private_evidence_root": "/workspace/nasdaq-first-inspection-20261023",
+  "private_file_sha256": {
+    "__pycache__/inspector.cpython-312.pyc": "9f5323b1b36ce7819821aaba4ea38f45a61436ea8260dd5352ef62999a350a4f",
+    "accounting-review.json": "35b147304b9c5111b1f58e7dcbea9e5b7bfe4e06894c00b688404e73b955a46e",
+    "inspector.py": "b326e4d499315d4ff3f4ba47b04ae3b027682d39419a9783bf3bee3dfce5cae8",
+    "native.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native.stdout": "cd6e62099e0b5ef089e84d8b92ac39f97d76714dc7cae515cb28896d6f7751ab",
+    "native_check": "2162675f97fb0e763556bac794a317b8750010eba7e4f6b47fa7c2551c23fefc",
+    "native_check.cpp": "3a8aa025e86411940813afff6225b284e9875ab2a72d4e9a1d146968d8397f5b",
+    "request.started": "9cd2e905563baedae5ed2c524da6cda64c430005c945264c5ada61c731bff653",
+    "result.json": "eccef92aa060f96d93f2722d70ca51c4bee447d708cf3684e6fa4366e35015a6",
+    "run_once.py": "bb569af50ae80cd9bfa34670472ab51b33d929fe8941b22dba39938e1484f49d",
+    "safety-results.json": "041dd6649ae2bcc6f8b360ff46cf0ed6f86bd43970b81b9c9f38927adfccd001",
+    "safety_checks.py": "116918dcf1091ac84412c268b2e284f816393b2ae4b9cc7afb71d2e0413119b3",
+    "supplemental-safety.json": "e47c800c769d5eee7ec019252da8b415865669168d99ab3a2d2afda2285025c8",
+    "worker-result.json": "afdc3a7c1fd1ce5b7da5ea495e36c795e5f5046f104fefca808c25f8e1dae2a2",
+    "worker.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits_of_claim": [
+    "Single observed prefix only,not complete archive",
+    "No full member CRC/trailer,terminal marker or source completeness",
+    "No inferred trading date,receive clock or initial order book",
+    "H/Y known-length but intentionally unsupported in current typed decoder",
+    "No source-context transaction,L3 reconstruction,matching or journal mutation",
+    "No second request or larger range",
+    "No engine source/test/ABI change or fresh full synthetic matrix claim"
+  ]
+}

@@ -1,5 +1,21 @@
 # NASDAQ real-data pilot — resource and validation plan
 
+## Latest authorized prefix result — October 23, 2026, America/New_York
+
+The single authorized GET returned206 with exact `bytes 0-4095/3524013057`,
+4096 body bytes and a matching preflight validator. No second request occurred.
+Observed gzip output14267 bytes contains350 complete S/R/H/Y BinaryFile frames
+and10 residual bytes. Native decoding accepts346 S/R frames and explicitly
+classifies4 H/Y frames unsupported. Format identification passes;complete
+historical/engine compatibility remains INCONCLUSIVE. No L3 reconstruction.
+The temporary supervisor's complete-boundary/total-consumption comparison defect
+was reconciled offline using recorded aggregates and a synthetic partial-frame
+control;the original blocked diagnostic remains preserved. Raw bytes existed only
+in anonymous memory and are no longer retained. See
+[NASDAQ_FIRST_PREFIX_INSPECTION.md](NASDAQ_FIRST_PREFIX_INSPECTION.md).
+Earlier preflight and acquisition-rights observations below are historical;this
+result does not authorize another request,larger range or integration work.
+
 Latest resource/access assessment: [NASDAQ_PILOT_PREFLIGHT.md](NASDAQ_PILOT_PREFLIGHT.md),
 October 23, 2026 (America/New_York). Metadata-only HEAD confirms reported size
 and accessibility; current GET Range behavior remains unverified after a HEAD
