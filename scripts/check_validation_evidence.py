@@ -29,6 +29,19 @@ CANDIDATE_CONFIGURATIONS = frozenset({
     "phase9-clang-debug", "phase9-clang-release", "phase9-clang-asan-ubsan",
     "python-debug", "python-release", "python-asan-ubsan",
 })
+# Minimum reviewed P1E--P1H path coverage, shared by the historical H/I freezes.
+# This is a protected subset, not a complete transitive build dependency inventory.
+CANDIDATE_SOURCE_PATHS = frozenset({
+    "CMakeLists.txt", "include/gig/itch/wire.hpp",
+    "src/itch/binary_file.cpp", "src/itch/decoder.cpp", "src/itch/context.cpp",
+    "src/itch/reconstruction.cpp", "src/itch/restart.cpp", "src/itch/sha256.cpp",
+    "src/itch/gzip.cpp", "src/itch/streaming.cpp",
+    "scripts/check_itch_reference.py", "scripts/check_itch_context_reference.py",
+    "scripts/check_itch_l3_reference.py", "scripts/check_itch_streaming_reference.py",
+    "tests/itch_reference_driver.cpp", "tests/itch_context_reference_driver.cpp",
+    "tests/itch_l3_reference_driver.cpp", "tests/itch_streaming_reference_driver.cpp",
+    "tests/test_itch_streaming.cpp", "tests/test_itch_gzip.cpp",
+})
 # Reviewed P1E--P1H contracts; adding a future oracle does not remove these gates.
 CANDIDATE_CANONICAL = {
     "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
@@ -45,6 +58,14 @@ class EvidenceError(ValueError):
 def require(condition: bool, reason: str) -> None:
     if not condition:
         raise EvidenceError(reason)
+
+
+def exact_json(value: object) -> str:
+    """Compare JSON values without Python's bool/int/float equality coercions."""
+    try:
+        return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    except (ValueError, RecursionError) as exc:
+        raise EvidenceError("invalid finite JSON value") from exc
 
 
 def invalid_constant(value: str) -> None:
@@ -181,6 +202,8 @@ def junit(data: bytes, row: dict) -> dict:
 
 
 def candidate_contract(report: dict) -> None:
+    frozen = bounded_map(report.get("frozen_source_sha256"), "frozen_source_sha256")
+    require(CANDIDATE_SOURCE_PATHS <= frozen.keys(), "candidate protected source coverage missing")
     rows = report.get("matrix")
     require(type(rows) is list and len(rows) == len(CANDIDATE_CONFIGURATIONS),
             "candidate requires all nine configurations")
@@ -218,6 +241,29 @@ def verify(evidence: Path, raw_root: Path, source_root: Path, *, working_tree: b
     raw_map = bounded_map(report.get("raw_evidence_sha256"), "raw_evidence_sha256")
     for name, expected in raw_map.items():
         reader.digest(local_path(raw_root, name), expected)
+    # Bind duplicated report assertions to the already hash-verified raw documents.
+    # H uses a historical object-shaped measurement record with separate raw files;
+    # I's list-shaped record has one mandatory consolidated measurements.json.
+    require(type(report.get("measurements")) is not list or "measurements.json" in raw_map,
+            "list measurements require raw measurements.json")
+    for raw_name, field in (("measurements.json", "measurements"),
+                            ("measurement-environment.json", "measurement_environment"),
+                            ("toolchains.json", "toolchains")):
+        if raw_name in raw_map:
+            raw_path = local_path(raw_root, raw_name)
+            if field == "measurements":
+                # Reader.document intentionally requires objects; measurements is a list.
+                data = reader.data(raw_path, MAX_DOCUMENT)
+                require(hashlib.sha256(data).hexdigest() == raw_map[raw_name],
+                        "SHA256 mismatch: " + str(raw_path))
+                try:
+                    actual = json.loads(data, object_pairs_hook=duplicate_free,
+                                        parse_constant=invalid_constant)
+                except (json.JSONDecodeError, UnicodeError, RecursionError) as exc:
+                    raise EvidenceError("invalid bounded measurements JSON") from exc
+            else:
+                actual = reader.document(raw_path)
+            require(exact_json(actual) == exact_json(report.get(field)), "raw/report contradiction: " + field)
     rows = report.get("matrix")
     require(type(rows) is list and 0 < len(rows) <= 64, "invalid matrix")
     seen: set[str] = set()
@@ -248,7 +294,8 @@ def verify(evidence: Path, raw_root: Path, source_root: Path, *, working_tree: b
     for name, expected in artifacts.items():
         reader.digest(local_path(raw_root.parent, name), expected)
     if "package.json" in raw_map:
-        require(reader.document(local_path(raw_root, "package.json")) == package, "package record contradiction")
+        require(exact_json(reader.document(local_path(raw_root, "package.json"))) == exact_json(package),
+                "package record contradiction")
     steps = package.get("steps")
     require(type(steps) is list and 0 < len(steps) <= 256, "invalid package steps")
     step_names: set[str] = set()

@@ -100,8 +100,88 @@ class EvidenceTests(unittest.TestCase):
             (self.raw / (name + ".log")).write_bytes(b"actual command output\n")
             self.value["raw_evidence_sha256"][name + ".xml"] = sha(xml)
             self.value["raw_evidence_sha256"][name + ".log"] = sha(b"actual command output\n")
+        # Independent literal protected path fixture; all are immutable Git blobs.
+        protected = ["CMakeLists.txt", "include/gig/itch/wire.hpp",
+                     "src/itch/binary_file.cpp", "src/itch/decoder.cpp", "src/itch/context.cpp",
+                     "src/itch/reconstruction.cpp", "src/itch/restart.cpp", "src/itch/sha256.cpp",
+                     "src/itch/gzip.cpp", "src/itch/streaming.cpp",
+                     "scripts/check_itch_reference.py", "scripts/check_itch_context_reference.py",
+                     "scripts/check_itch_l3_reference.py", "scripts/check_itch_streaming_reference.py",
+                     "tests/itch_reference_driver.cpp", "tests/itch_context_reference_driver.cpp",
+                     "tests/itch_l3_reference_driver.cpp", "tests/itch_streaming_reference_driver.cpp",
+                     "tests/test_itch_streaming.cpp", "tests/test_itch_gzip.cpp"]
+        for name in protected:
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(self.source)
+            self.value["frozen_source_sha256"][name] = sha(self.source)
+        subprocess.run(["git", "-C", str(self.root), "add", "."], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(self.root), "-c", "user.name=Evidence Test", "-c",
+                        "user.email=evidence@example.invalid", "commit", "-qm", "candidate fixture"],
+                       check=True, capture_output=True)
+        self.value["implementation_commit"] = subprocess.check_output(
+            ["git", "-C", str(self.root), "rev-parse", "HEAD"], text=True).strip()
+        self.value["source_manifest_sha256"] = sha(json.dumps(
+            self.value["frozen_source_sha256"], sort_keys=True).encode())
         self.value["total_ctest_outcomes"] = 36
         self.value["enabled_configurations"] = dict.fromkeys(names, True)
+
+    def test_candidate_missing_protected_source_rehashed(self) -> None:
+        self.make_candidate()
+        self.value["frozen_source_sha256"] = {"source.cpp": sha(self.source)}
+        self.value["source_manifest_sha256"] = sha(json.dumps(
+            self.value["frozen_source_sha256"], sort_keys=True).encode())
+        with self.assertRaises(evidence.EvidenceError):
+            self.check(candidate_profile=True)
+
+    def test_measurements_raw_contradiction(self) -> None:
+        raw = [{"raw": {"peak_pmr_bytes": 100}}]
+        data = json.dumps(raw).encode()
+        (self.raw / "measurements.json").write_bytes(data)
+        self.value["raw_evidence_sha256"]["measurements.json"] = sha(data)
+        self.value["measurements"] = [{"raw": {"peak_pmr_bytes": 1}}]
+        self.rejected()
+
+    def test_list_measurements_require_raw_record(self) -> None:
+        self.value["measurements"] = [{"raw": {"peak_pmr_bytes": 1}}]
+        self.rejected()
+
+    def test_measurements_numeric_type_contradictions(self) -> None:
+        for actual, declared in ((0, False), (1, 1.0)):
+            with self.subTest(actual=actual, declared=declared):
+                data = json.dumps([{"raw": {"value": actual}}]).encode()
+                (self.raw / "measurements.json").write_bytes(data)
+                self.value["raw_evidence_sha256"]["measurements.json"] = sha(data)
+                self.value["measurements"] = [{"raw": {"value": declared}}]
+                self.rejected()
+
+    def test_measurements_raw_consistent(self) -> None:
+        value = [{"raw": {"peak_pmr_bytes": 100}}]
+        data = json.dumps(value).encode()
+        (self.raw / "measurements.json").write_bytes(data)
+        self.value["raw_evidence_sha256"]["measurements.json"] = sha(data)
+        self.value["measurements"] = value
+        self.assertEqual(self.check()["status"], "PASS")
+
+    def test_toolchains_raw_contradiction(self) -> None:
+        data = b'{"compiler": "actual"}'
+        (self.raw / "toolchains.json").write_bytes(data)
+        self.value["raw_evidence_sha256"]["toolchains.json"] = sha(data)
+        self.value["toolchains"] = {"compiler": "changed"}
+        self.rejected()
+
+    def test_environment_raw_missing_report_field(self) -> None:
+        data = b'{"cpu": "actual"}'
+        (self.raw / "measurement-environment.json").write_bytes(data)
+        self.value["raw_evidence_sha256"]["measurement-environment.json"] = sha(data)
+        self.rejected()
+
+    def test_environment_raw_contradiction(self) -> None:
+        data = b'{"cpu": "actual"}'
+        (self.raw / "measurement-environment.json").write_bytes(data)
+        self.value["raw_evidence_sha256"]["measurement-environment.json"] = sha(data)
+        self.value["measurement_environment"] = {"cpu": "changed"}
+        self.rejected()
 
     def test_candidate_profile_complete(self) -> None:
         self.make_candidate()
