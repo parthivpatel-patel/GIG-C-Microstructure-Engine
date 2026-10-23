@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import platform
 import random
+import re
 import subprocess
 import sys
 import tempfile
@@ -16,7 +17,43 @@ import gig_microstructure as gig
 from python_fixtures import *
 ROOT=Path(__file__).resolve().parents[1]
 
+def source_provenance(root, declared_commit=None):
+    """Archive runners supply the independently verified source commit explicitly.
+
+    An archive has no Git index/cleanliness evidence: conservatively label it dirty.
+    Its source bytes are still hashed; no checkout identity is fabricated.
+    """
+    if declared_commit is not None and not re.fullmatch(r'[0-9a-f]{40}', declared_commit):
+        raise ValueError('GIG_TEST_SOURCE_COMMIT must be a full lowercase Git SHA')
+    if (root/'.git').exists():
+        head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
+        if declared_commit is not None and declared_commit != head:
+            raise ValueError('declared source commit disagrees with checkout HEAD')
+        paths=[n.decode() for n in subprocess.check_output(['git','ls-files','-c','-o','--exclude-standard','-z'],cwd=root).split(b'\0') if n]
+        dirty=bool(subprocess.check_output(['git','status','--porcelain'],cwd=root,text=True))
+    else:
+        if declared_commit is None:
+            raise ValueError('source archive requires independently verified GIG_TEST_SOURCE_COMMIT')
+        head=declared_commit
+        paths=[p.relative_to(root).as_posix() for name in ('src','include','python','cmake') for p in (root/name).rglob('*') if p.is_file()]
+        dirty=True
+    hashes={n:hashlib.sha256((root/n).read_bytes()).hexdigest() for n in sorted(set(paths)) if n.startswith(('src/','include/','python/','cmake/')) and '__pycache__' not in n}
+    return {'commit_sha':head,'dirty':dirty,'source_tree_sha256':hashlib.sha256(json.dumps(hashes,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
+
 class InterfaceTests(unittest.TestCase):
+    def test_source_archive_provenance_is_explicit(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);(root/'src').mkdir();(root/'src/unit.cpp').write_bytes(b'synthetic test source\n')
+            for identity in (None,'','abc','A'*40,'0'*39):
+                with self.assertRaises(ValueError):source_provenance(root,identity)
+            identity='a'*40
+            expected={'src/unit.cpp':hashlib.sha256(b'synthetic test source\n').hexdigest()}
+            code=source_provenance(root,identity)
+            self.assertEqual(code,{'commit_sha':identity,'dirty':True,'source_tree_sha256':hashlib.sha256(json.dumps(expected,sort_keys=True,separators=(',',':')).encode()).hexdigest()})
+            (root/'.git').mkdir()
+            with patch('subprocess.check_output',return_value='b'*40+'\n'):
+                with self.assertRaises(ValueError):source_provenance(root,identity)
     def test_every_event_and_provenance_roundtrip(self):
         variants=[event(),event('1',{'order_id':'1','amount':{'tag':'0','value':{}}}),event('1',{'order_id':'1','amount':{'tag':'1','value':'2'}}),
           event('2',{'old_order_id':'1','new_order_id':'2','side':'0','price_ticks':'101','quantity':'20','priority':'0'}),
@@ -142,12 +179,8 @@ class InterfaceTests(unittest.TestCase):
 
     def test_manifest_export_integrity_and_failure(self):
         r=gig.Replay(rules(),replay_config());r.apply(event());snapshot=r.snapshot();native_archive=r.canonical().encode()
-        sha=hashlib.sha256(native_archive).hexdigest();head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-        source_paths=subprocess.check_output(['git','ls-files','-c','-o','--exclude-standard','-z'],cwd=ROOT).split(b'\0')
-        hashes={n.decode():hashlib.sha256((ROOT/n.decode()).read_bytes()).hexdigest() for n in sorted(set(source_paths)) if n and n.decode().startswith(('src/','include/','python/','cmake/')) and '__pycache__' not in n.decode()}
-        tree_hash=hashlib.sha256(json.dumps(hashes,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-        dirty=bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True))
-        data={'run_id':'python-research-run','code':{'commit_sha':head,'dirty':dirty,'source_tree_sha256':tree_hash},
+        sha=hashlib.sha256(native_archive).hexdigest()
+        data={'run_id':'python-research-run','code':source_provenance(ROOT,os.environ.get('GIG_TEST_SOURCE_COMMIT')),
           'build':{'compiler':gig.native_build_info()['compiler'],'flags':gig.native_build_info()['config_flags']+' '+gig.native_build_info()['binding_flags'],'architecture':platform.machine(),'os':platform.platform(),'dependencies':{'pybind11':'2.13.6','jsonschema':'4.23.0'}},
           'inputs':[{'identity':'accepted-replay-journal','sha256':sha,'license_reference':'synthetic-fixture:no-external-data','origin':'synthetic','source':'python-explicit-fixture-v1','transformation':'reconstructed','local_file':None}],
           'parents':[],'schema_versions':{'gig.book_snapshot':'1.0'},'instrument_rules':[rules()],
