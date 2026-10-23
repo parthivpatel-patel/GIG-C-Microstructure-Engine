@@ -1,7 +1,8 @@
 # P1H bounded synthetic gzip streaming validation
 
-Status: **P1H local acceptance complete; final evidence push/remote verification
-pending**. Starting local/remote feature HEAD:
+Status: **P1H complete, committed, pushed and remotely verified** at
+`cafcdb986afac5298c95bcf3418acb7cf3e6aafe`. Implementation and measurement
+source: `e055f055a447baa6bf1f913c09f7c7dcd57a8878`. Starting feature HEAD:
 `c3c3d8caef8f5b60aa4ce29f0f0875dc3bdd91c4`; main remains
 `165c5038336887116d69160b0d8e5a1a5ef59d16`. Interrupted untracked work was inspected
 and preserved; completed P1G validation was not rerun before resuming development.

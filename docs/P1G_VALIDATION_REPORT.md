@@ -1,7 +1,8 @@
 # P1G synthetic reconstruction validation report
 
-Status: **P1G local acceptance complete; final documentation push/remote verification
-pending. P1H remains gated on that verification**.
+Status: **P1G complete, committed, pushed and remotely verified** at
+`c3c3d8caef8f5b60aa4ce29f0f0875dc3bdd91c4`. The subsequent P1H gate also
+completed at `cafcdb986afac5298c95bcf3418acb7cf3e6aafe`; see its validation report.
 Starting feature HEAD: `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`.
 Main: `165c5038336887116d69160b0d8e5a1a5ef59d16`. Initial tree was clean.
 Verified implementation checkpoint: `997007f32cf94af1968b48a31504302de40085a0`.

@@ -1819,5 +1819,12 @@
     "python-debug": true,
     "python-release": true,
     "python-asan-ubsan": true
-  }
+  },
+  "hosted_ci_access": {
+    "command": "gh api repos/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs?branch=feat%2Fbootstrap-cpp20-engine&per_page=3",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Get \"https://api.github.com/repos/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs?branch=feat%2Fbootstrap-cpp20-engine&per_page=3\": Forbidden\n"
+  },
+  "verified_p1h_remote_commit": "cafcdb986afac5298c95bcf3418acb7cf3e6aafe"
 }
