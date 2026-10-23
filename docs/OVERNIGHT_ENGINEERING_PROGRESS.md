@@ -219,3 +219,52 @@ Reports: docs/NASDAQ_HY_PREFIX_VALIDATION.md and accompanying evidence JSON.
 Exact next action: commit/push documentation only, verify clean feature remote and
 unchanged main, then stop. Another request requires a separate resource preflight
 and explicit authorization; no running/background acquisition remains.
+
+## Historical administrative compatibility — active checkpoint
+
+Starting clean feature HEAD3ee54cf552c096bc8fe8f46b9237336bcd376473.
+Owner authorizes offline comprehensive audit, prioritized expansion, streaming review,
+validation, documentation and feature pushes; no new market data or observed L3.
+Phase1 complete23-family audit:docs/ITCH50_COMPATIBILITY_MATRIX.md.
+Implemented opt-in administrative_observations_v3 for L,V,W,h,N, preserving v1/v2.
+Exact Price8 uint64 representation; global V/W locate0, mapped L/h/N; observations
+only, no native journal/sequence/FIFO mutation. Eight focused tests passed.
+Independent oracle25233 wire cases+16960 context candidates/320 sessions; canonical
+87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03.
+Context reserve3 fault sites, observation0 allocations; streaming33 failure sites.
+Two preliminary test-harness issues retained in build/historical-itch/evidence:
+explicit sign conversion under Werror; canonical query called with allocator still
+armed after proving allocation-free observation. Corrected before final matrix.
+No engine failure inferred or warning/assertion suppressed.
+
+Active local runners:/tmp/run-admin-matrix.py gcc/clang/python, evidence under
+build/historical-itch/evidence; packaging runner:/tmp/admin-packages.py.
+Expected final counts139 native each,142 Python Debug/Release,143 Python sanitizer
+(total1261). Observe all actual exits; do not assume completion from this checkpoint.
+Readiness contract and16KiB proposal prepared offline. Exact next action:finish
+matrix/package gates, independently verify all seven canonical hashes, inspect
+sdist, review streaming/source-accounting limitations, measure Release resource
+profile, finalize report/evidence, commit/push validated milestones and verify main.
+No autonomous process survives a stopped execution environment or usage interruption.
+
+## Historical administrative compatibility — completed
+
+Implementation pushed/remotely verified45e8d7e58e952d5f3a262c58c84167b31746bcb7.
+All nine final configurations passed1261 CTest outcomes, zero failures/skips/disabled:
+GCC/Clang Debug/Release/ASan+UBSan139 each; Python Debug/Release142 each,
+Python ASan+UBSan143. All six previous canonical hashes unchanged; new admin v3
+87556148... matches all9 rows. Fresh checkout/source wheel consumers28/28, package
+pattern regressions3/3, safe source archive278 members, no cache/build leakage.
+Independent25233 wire/16960 context candidates,3 context and33 streaming real
+allocation-failure sites; zero observation allocations and post-destruction leaks.
+No additional production streaming defect reproduced; review and limits explicit.
+Resource probe: journal15944 bytes, PMR query/restart peak77281358, RSS76062720;
+no journal optimization, observed L3, new market data or hosted CI claim.
+
+Reports: HISTORICAL_ITCH_ENGINEERING_REPORT.md/evidence JSON; comprehensive23-type
+matrix, observed readiness contract, streaming adversarial review and offline16KiB
+proposal. Remaining K/J/I/O unsupported. Observed initialization/adapter/reference
+and RC13/16/17 remain blocked. Exact next action: deliver final documentation commit,
+verify remote/clean feature and unchanged main, then stop for owner decisions.
+A future session must inspect this checkpoint rather than rerun completed suites.
+No further acquisition or background engineering is authorized by this completion.

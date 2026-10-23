@@ -80,3 +80,15 @@ External access/security-provider/independent-machine turnaround controls closur
 no evidence currently supports a guaranteed completion date. Prioritize one
 independent authorized Actions run plus provider applicability review. Observed
 market certification and public release are separate critical paths.
+
+## Administrative v3 follow-up checkpoint
+
+The historical compatibility extension locally passes139 native outcomes per
+configuration,142 Python Debug/Release and143 Python sanitizer, plus installed
+consumers and source inventory. Hosted expectations are now139 native/142 GCC
+Python Release, all six old canonical hashes and the added `itch.admin_reference`
+hash in HISTORICAL_ITCH_ENGINEERING_EVIDENCE.json. This supersedes only the later
+extension's count expectations, not frozen closure results or RC13/16/17 blockers.
+No hosted CI request, independent-machine reproduction, provider security clearance,
+release approval or market-data request is claimed. Next data proposal is offline
+in NASDAQ_NEXT_PREFIX_PREFLIGHT_PROPOSAL.md and needs separate explicit approval.

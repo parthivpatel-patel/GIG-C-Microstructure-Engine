@@ -304,3 +304,24 @@ Source-distribution closure also runs the standalone packaging-only regressions:
 `scripts/check_sdist_inventory.py ARCHIVE --source-root . --manifest MANIFEST`.
 Use the exact source snapshot for byte comparison. Recursive force-includes are
 intentionally absent so ignored build outputs and Python caches stay excluded.
+
+## Administrative observation v3 extension
+
+`DecodeProfile::administrative_observations_v3` extends v2 with L/V/W/h/N and
+normalization version3; the default v1 and explicit H/Y v2 remain unchanged.
+Run native tests with streaming enabled, then:
+
+```sh
+ctest --test-dir build/phase9-clean-debug -R '^itch.admin_' --output-on-failure
+python3 scripts/check_itch_admin_reference.py build/phase9-clean-debug/gig_itch_admin_tests
+python3 scripts/check_itch_admin_reference.py build/phase9-clean-debug/gig_itch_admin_tests --negative-control
+build/phase9-clean-release/benchmarks/gig_itch_profile_probe 128
+build/phase9-clean-release/benchmarks/gig_itch_streaming_benchmark 32 5 17
+```
+
+Actual full qualification has139 native outcomes per configuration,142 Python
+Debug/Release,143 GCC Python ASan+UBSan. Earlier counts refer to earlier checkpoints.
+See HISTORICAL_ITCH_ENGINEERING_REPORT.md and its evidence for exact source/artifact
+identities, all seven canonical hashes and limits. Ordinary wheels still expose
+only the existing Python research API; they do not add an ITCH administration API.
+No data request or observed reconstructor invocation belongs to these commands.

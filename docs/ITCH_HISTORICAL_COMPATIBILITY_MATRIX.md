@@ -59,3 +59,14 @@ tracking numbers into exchange sequences,or missing history into initial orders.
 The synthetic L3 factory remains synthetic-only with explicit authored-empty
 evidence. H/Y observations neither establish initialization nor bypass gzip CRC,
 terminal,source identity or publication gates. No observed-market adapter is added.
+
+## Later administrative v3 extension
+
+The explicit `administrative_observations_v3` profile adds L,V,W,h,N to v2's14
+families, for19 typed families. It retains all23 known lengths; K,J,I,O remain
+unsupported. Global V/W use locate0; L/h/N require exact mapped symbols in context.
+All are external observations, not native book mutations. The v1/v2 columns above
+remain unchanged historical contracts. Comprehensive fields, evidence and limits:
+[ITCH50_COMPATIBILITY_MATRIX.md](ITCH50_COMPATIBILITY_MATRIX.md) and
+[HISTORICAL_ITCH_ENGINEERING_REPORT.md](HISTORICAL_ITCH_ENGINEERING_REPORT.md).
+No newly acquired observed bytes validate these five families.
