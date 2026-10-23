@@ -15,4 +15,6 @@ cmake.version = ">=3.20"
 cmake.args = ["-DGIG_BUILD_PYTHON=ON", "-DBUILD_TESTING=OFF", "-DGIG_BUILD_BENCHMARKS=OFF"]
 wheel.packages = ["python/gig_microstructure"]
 build.tool-args = ["-j1"]
-sdist.include = ["CMakeLists.txt", "cmake/**", "include/**", "src/**", "python/**", "schemas/**", "README.md", "THIRD_PARTY_NOTICES.md", "docs/GIG_INTEGRATION.md"]
+# Required source trees follow normal ignore rules; recursive force-includes
+# would override cache/build exclusions. Anchor only required root documents.
+sdist.include = ["/CMakeLists.txt", "/README.md", "/THIRD_PARTY_NOTICES.md", "/docs/GIG_INTEGRATION.md"]
