@@ -4,7 +4,7 @@ Starting checkpoint: `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`, feature branch
 `feat/bootstrap-cpp20-engine`; local and remote HEAD verified equal, clean tree.
 Main remains `165c5038336887116d69160b0d8e5a1a5ef59d16`.
 
-## Current phase: P1H local correctness passed; measurement/checkpoint pending
+## Current phase: P1H local acceptance complete; remote checkpoint pending
 
 P1G completed, committed and pushed. Last verified feature remote/local checkpoint:
 `c3c3d8caef8f5b60aa4ce29f0f0875dc3bdd91c4`; main unchanged at
@@ -23,12 +23,16 @@ No streaming implementation or P1H final validation had completed at interruptio
   both wheel consumers passed7 interface+6 export cases each;49 archive files verified.
 - Independent oracle:475 fixtures, canonical
   `be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5`.
-- In progress: correctness-verified implementation commit and sequential measurements.
-- Local correctness/package qualification complete; no final performance/remote
-  checkpoint or hosted CI success claimed.
-- Exact next action: commit the verified source checkpoint, then measure sequential
-  Release throughput/RSS/category allocations and a large synthetic bounded stop;
-  finalize report, push and verify feature HEAD before P1I/P1J documentation.
+- Implementation checkpoint: `e055f055a447baa6bf1f913c09f7c7dcd57a8878`.
+- Measurements:16 independently checked Release cases, two warmups/seven repetitions;
+  maximum PMR41,685,328 bytes and measured native RSS58,093,568 bytes.
+- Large synthetic source:20,500,016 decoded-byte fixture stopped explicitly at
+  source1025/accepted1024;598,567-byte PMR peak, no publication.
+- In progress: final evidence documentation and remote checkpoint.
+- Local correctness/package/performance qualification complete; remote checkpoint
+  and hosted CI status still pending/unverified respectively.
+- Exact next action: commit/push final P1H evidence and verify exact remote HEAD,
+  clean feature tree and unchanged main; then prepare P1I/P1J planning/audit documents.
 - Remaining after P1H acceptance: final report, commit/push/remote verification,
   then P1I/P1J plans and independent audit requirements.
 - Restrictions: no real data acquisition, journal redesign, main merge, release,

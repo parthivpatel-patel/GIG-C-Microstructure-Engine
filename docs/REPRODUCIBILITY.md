@@ -151,3 +151,25 @@ synthetic source bytes and an explicit empty start. It does not download data,
 claim a valid historical start or expose a real-market trading interface. P1G has
 no gzip/archive reader; P1H requires its own evidence. The native journal remains
 15,944 bytes per entry on the measured ABI; bounded replay is not unlimited history.
+
+## P1H bounded synthetic streaming checkpoint
+
+The native debug/release/ASan+UBSan presets enable `GIG_BUILD_ITCH_STREAMING=ON` and
+require system zlib development files>=1.3.1. Generic builds and ordinary wheel
+builds default this optional feature OFF. The qualified local matrix explicitly
+turns it ON in all nine configurations: native117 per row, Python Debug/Release120,
+Python sanitizer121 (1,063 outcomes). See [P1H_VALIDATION_REPORT.md](P1H_VALIDATION_REPORT.md).
+
+```sh
+CXX=g++ cmake --preset release
+cmake --build --preset release -j2
+ctest --preset release --output-on-failure
+python3 scripts/check_itch_streaming_reference.py build/release/gig_itch_streaming_reference_driver
+python3 scripts/check_itch_streaming_benchmark.py build/release/benchmarks/gig_itch_streaming_benchmark
+build/release/benchmarks/gig_itch_streaming_benchmark 128 7 17
+```
+
+All fixtures are authored synthetic data. The pipeline does not acquire archives,
+certify observed initialization, seek into gzip or provide crash-safe hot recovery.
+Full-source SHA/CRC/framing gates remain distinct from provisional accepted prefixes.
+Stored-block benchmark throughput is not a real NASDAQ compression/workload rate.
