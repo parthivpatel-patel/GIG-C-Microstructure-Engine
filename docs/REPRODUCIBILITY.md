@@ -173,3 +173,57 @@ All fixtures are authored synthetic data. The pipeline does not acquire archives
 certify observed initialization, seek into gzip or provide crash-safe hot recovery.
 Full-source SHA/CRC/framing gates remain distinct from provisional accepted prefixes.
 Stored-block benchmark throughput is not a real NASDAQ compression/workload rate.
+
+## P1I synthetic end-to-end validation
+
+Use the same qualified C++20/zlib environment above. This native demonstration
+requires no market data and adds no Python extension API. With streaming enabled:
+
+```sh
+CXX=g++ cmake --preset release
+cmake --build --preset release -j2
+ctest --preset release --output-on-failure
+python3 scripts/check_itch_validation_demo.py build/release/gig_itch_validation_demo --negative-controls
+python3 scripts/check_itch_profile_probe.py build/release/benchmarks/gig_itch_profile_probe
+```
+
+For individual version1 JSON outputs, supply a separately measured lowercase
+64-hex implementation/source-manifest digest as `IMPLEMENTATION_SHA256`:
+
+```sh
+build/release/gig_itch_validation_demo valid "$IMPLEMENTATION_SHA256"
+build/release/gig_itch_validation_demo bounded "$IMPLEMENTATION_SHA256"
+build/release/gig_itch_validation_demo restart "$IMPLEMENTATION_SHA256"
+build/release/gig_itch_validation_demo corrupt "$IMPLEMENTATION_SHA256"
+```
+
+`corrupt` deliberately demonstrates integrity rejection inside a successfully
+executed demonstration; inspect `publication_eligible=false`, not just process status.
+Malformed CLI identities and failed output sinks return nonzero with no valid complete
+result delivery. A bounded prefix must never be promoted to a full-source success.
+Schema: [native validation output v1](schemas/itch_validation_output.schema.json).
+The structural schema does not replace the independent semantic verifier. The supplied
+implementation digest is caller-declared, not auto-authenticated Git provenance.
+
+The offline evidence verifier requires the matching private raw logs/artifacts:
+
+```sh
+python3 scripts/check_validation_evidence.py docs/P1H_EVIDENCE.json --raw-root build/p1h/evidence --candidate-profile
+python3 scripts/check_validation_evidence.py docs/P1I_EVIDENCE.json --raw-root build/p1i/evidence --candidate-profile
+python3 tests/test_validation_evidence.py
+```
+
+Historical mode checks source blobs at the recorded implementation commit. Add
+`--working-tree` only when exact recorded source bytes are expected in the checkout.
+A missing private log/artifact is unavailable evidence and causes rejection; the tool
+must not turn documentation assertions into a pass. The candidate-profile option
+requires the nine configurations and reviewed P1E–H identities; P1I additionally records
+and reviews its new E2E/query/profile test identities in its final matrix.
+
+Clean source reproduction in P1I used an offline source archive containing all136
+frozen validation files, enabled streaming/benchmarks/tests in a separate native
+Release build, and ran the complete native suite. Direct and source-built wheels
+were installed privately and checked from consumer environments. This establishes
+same-host source/package restoration, not a fresh VM, ARM64, other Python version,
+bit-identical binary build or hosted-CI qualification. See
+[P1I validation](P1I_VALIDATION_REPORT.md) for actual evidence and limitations.

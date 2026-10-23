@@ -1,0 +1,1408 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gig:synthetic-itch-validation-output:1",
+  "title": "GIG authored synthetic ITCH validation output v1",
+  "description": "Native demonstration output for the fixed authored P1I fixture. Schema validates structure/domain only; independent semantic, byte-identity, accounting and FIFO checks remain mandatory. Caller-declared implementation identity is not origin authentication or an automatic code digest.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scenario": {
+      "enum": [
+        "valid",
+        "bounded",
+        "restart",
+        "corrupt"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "origin": {
+          "const": "synthetic"
+        },
+        "source": {
+          "const": "p1i-authored-source"
+        },
+        "session": {
+          "const": "p1i-authored-session"
+        },
+        "fixture": {
+          "const": "p1i-h18"
+        },
+        "fixture_version": {
+          "const": 1
+        },
+        "generator": {
+          "const": "p1i-literal-generator"
+        },
+        "generator_seed": {
+          "const": 7707
+        },
+        "initialization": {
+          "const": "authored_complete_empty"
+        },
+        "implementation_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "implementation_identity_status": {
+          "const": "caller_declared"
+        },
+        "expected_compressed_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "actual_input_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "expected_decompressed_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "declared_records": {
+          "const": 18
+        },
+        "declared_compressed_bytes": {
+          "const": 530
+        },
+        "declared_decompressed_bytes": {
+          "const": 507
+        },
+        "trading_date": {
+          "type": "null"
+        },
+        "receive_clock": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "origin",
+        "source",
+        "session",
+        "fixture",
+        "fixture_version",
+        "generator",
+        "generator_seed",
+        "initialization",
+        "implementation_sha256",
+        "implementation_identity_status",
+        "expected_compressed_sha256",
+        "actual_input_sha256",
+        "expected_decompressed_sha256",
+        "declared_records",
+        "declared_compressed_bytes",
+        "declared_decompressed_bytes",
+        "trading_date",
+        "receive_clock"
+      ],
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "const": "p1i-h18-bounded-v1"
+        },
+        "pmr_budget_bytes": {
+          "const": 4194304
+        },
+        "book_count": {
+          "const": 2
+        },
+        "max_orders_per_book": {
+          "const": 8
+        },
+        "max_levels_per_book": {
+          "const": 8
+        },
+        "depth_per_book": {
+          "const": 8
+        },
+        "journal_cap_per_book": {
+          "const": 16
+        },
+        "source_record_cap": {
+          "const": 32
+        },
+        "receipt_budget_bytes": {
+          "const": 65536
+        },
+        "context_directories": {
+          "const": 2
+        },
+        "context_lifetime_orders": {
+          "const": 4
+        },
+        "context_matches": {
+          "const": 3
+        },
+        "context_logical_budget_bytes": {
+          "const": 4096
+        },
+        "gzip_output_buffer_bytes": {
+          "const": 128
+        },
+        "compressed_byte_cap": {
+          "const": 1024
+        },
+        "decompressed_byte_cap": {
+          "const": 1024
+        },
+        "expansion_ratio_cap": {
+          "const": 2
+        },
+        "expansion_slack_bytes": {
+          "const": 64
+        },
+        "header_byte_cap": {
+          "const": 64
+        },
+        "framer_payload_cap": {
+          "const": 64
+        },
+        "framer_buffer_bytes": {
+          "const": 64
+        },
+        "framer_record_cap": {
+          "const": 32
+        },
+        "framer_byte_cap": {
+          "const": 1024
+        },
+        "price_tick": {
+          "const": [
+            1,
+            10000
+          ]
+        },
+        "quantity_lot": {
+          "const": [
+            1,
+            1
+          ]
+        },
+        "allow_c_book_only": {
+          "const": false
+        },
+        "pause_after_accepted": {
+          "const": 8
+        }
+      },
+      "required": [
+        "name",
+        "pmr_budget_bytes",
+        "book_count",
+        "max_orders_per_book",
+        "max_levels_per_book",
+        "depth_per_book",
+        "journal_cap_per_book",
+        "source_record_cap",
+        "receipt_budget_bytes",
+        "context_directories",
+        "context_lifetime_orders",
+        "context_matches",
+        "context_logical_budget_bytes",
+        "gzip_output_buffer_bytes",
+        "compressed_byte_cap",
+        "decompressed_byte_cap",
+        "expansion_ratio_cap",
+        "expansion_slack_bytes",
+        "header_byte_cap",
+        "framer_payload_cap",
+        "framer_buffer_bytes",
+        "framer_record_cap",
+        "framer_byte_cap",
+        "price_tick",
+        "quantity_lot",
+        "allow_c_book_only",
+        "pause_after_accepted"
+      ],
+      "additionalProperties": false
+    },
+    "restart_verified": {
+      "type": "boolean"
+    },
+    "pause": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/snapshot"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "replayed": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/snapshot"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "final": {
+      "$ref": "#/$defs/snapshot"
+    },
+    "resources": {
+      "type": "object",
+      "properties": {
+        "allocation_attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "allocations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "deallocations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "peak_pmr_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "restart_coexistence_peak_pmr_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "live_pmr_bytes_after_destroy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "live_pmr_blocks_after_destroy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "scope": {
+          "const": "pipeline PMR plus native queries; fixed objects, fixture and output buffers excluded"
+        }
+      },
+      "required": [
+        "allocation_attempts",
+        "allocations",
+        "deallocations",
+        "peak_pmr_bytes",
+        "restart_coexistence_peak_pmr_bytes",
+        "live_pmr_bytes_after_destroy",
+        "live_pmr_blocks_after_destroy",
+        "scope"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "scenario",
+    "provenance",
+    "profile",
+    "restart_verified",
+    "pause",
+    "replayed",
+    "final",
+    "resources"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "stream": {
+      "type": "object",
+      "properties": {
+        "compressed_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "decompressed_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "framing_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "accepted_prefix_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "source_records": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "accepted_records": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "native_records": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "external_observations": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "residual_frame_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "buffered_output_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 18446744073709551615
+        },
+        "compressed_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "decompressed_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "accepted_prefix_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "gzip_member_verified": {
+          "type": "boolean"
+        },
+        "framer_terminated": {
+          "type": "boolean"
+        },
+        "compressed_identity_verified": {
+          "type": "boolean"
+        },
+        "decompressed_identity_verified": {
+          "type": "boolean"
+        },
+        "source_complete": {
+          "type": "boolean"
+        },
+        "publication_eligible": {
+          "type": "boolean"
+        },
+        "paused": {
+          "type": "boolean"
+        },
+        "finished": {
+          "type": "boolean"
+        },
+        "bounded_prefix": {
+          "type": "boolean"
+        },
+        "error_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "gzip_error_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        },
+        "observed_gzip_error_code": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 11
+        }
+      },
+      "required": [
+        "compressed_bytes",
+        "decompressed_bytes",
+        "framing_bytes",
+        "accepted_prefix_bytes",
+        "source_records",
+        "accepted_records",
+        "native_records",
+        "external_observations",
+        "residual_frame_bytes",
+        "buffered_output_bytes",
+        "compressed_sha256",
+        "decompressed_sha256",
+        "accepted_prefix_sha256",
+        "gzip_member_verified",
+        "framer_terminated",
+        "compressed_identity_verified",
+        "decompressed_identity_verified",
+        "source_complete",
+        "publication_eligible",
+        "paused",
+        "finished",
+        "bounded_prefix",
+        "error_code",
+        "gzip_error_code",
+        "observed_gzip_error_code"
+      ],
+      "additionalProperties": false
+    },
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "stream": {
+          "$ref": "#/$defs/stream"
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "considered": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "context_committed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "native_committed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "external_observations": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "rejected": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "pending": {
+              "type": "boolean"
+            },
+            "unconsidered_record": {
+              "type": "boolean"
+            },
+            "input_complete": {
+              "type": "boolean"
+            },
+            "initialization_verified": {
+              "type": "boolean"
+            },
+            "eligibility": {
+              "enum": [
+                0,
+                1,
+                2
+              ]
+            },
+            "physical_position": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "committed_position": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 3,
+                  "maxItems": 3
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "considered",
+            "context_committed",
+            "native_committed",
+            "external_observations",
+            "rejected",
+            "pending",
+            "unconsidered_record",
+            "input_complete",
+            "initialization_verified",
+            "eligibility",
+            "physical_position",
+            "committed_position"
+          ],
+          "additionalProperties": false
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "accepted_records": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "directories": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "lifetime_orders": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "active_orders": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "matches": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 18446744073709551615
+            },
+            "initialization_incomplete": {
+              "type": "boolean"
+            },
+            "session_incomplete": {
+              "type": "boolean"
+            },
+            "source_complete": {
+              "type": "boolean"
+            },
+            "last_timestamp_ns": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "orders": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "enum": [
+                      66,
+                      83
+                    ]
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "items": false,
+                "minItems": 7,
+                "maxItems": 7
+              },
+              "maxItems": 4
+            },
+            "match_references": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "enum": [
+                      0,
+                      1,
+                      2
+                    ]
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ],
+                "items": false,
+                "minItems": 4,
+                "maxItems": 4
+              },
+              "maxItems": 3
+            }
+          },
+          "required": [
+            "accepted_records",
+            "directories",
+            "lifetime_orders",
+            "active_orders",
+            "matches",
+            "initialization_incomplete",
+            "session_incomplete",
+            "source_complete",
+            "last_timestamp_ns",
+            "orders",
+            "match_references"
+          ],
+          "additionalProperties": false
+        },
+        "receipts": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 18446744073709551615
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              {
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 18446744073709551615
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            ],
+            "items": false,
+            "minItems": 9,
+            "maxItems": 9
+          },
+          "maxItems": 32
+        },
+        "books": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "object",
+              "properties": {
+                "instrument_id": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "stock_locate": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "derived_sequence": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "journal_records": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "order_count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "remaining_quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "needs_recovery": {
+                  "type": "boolean"
+                },
+                "orders": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "enum": [
+                          66,
+                          83
+                        ]
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 5,
+                    "maxItems": 5
+                  },
+                  "maxItems": 8
+                },
+                "bids": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "maxItems": 8
+                },
+                "asks": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "maxItems": 8
+                },
+                "ledger": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 9,
+                  "maxItems": 9
+                },
+                "metadata": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "capture_ordinal": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 18446744073709551615
+                        },
+                        "source_record": {
+                          "type": "string",
+                          "pattern": "^p1i-h18:[0-9]+$"
+                        },
+                        "sequence": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 18446744073709551615
+                        },
+                        "stream_id": {
+                          "enum": [
+                            1,
+                            2
+                          ]
+                        },
+                        "session": {
+                          "const": "p1i-authored-session"
+                        },
+                        "dataset": {
+                          "const": "p1i-h18"
+                        },
+                        "version": {
+                          "const": "1"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{64}$"
+                        },
+                        "generator_seed": {
+                          "const": 7707
+                        },
+                        "origin": {
+                          "const": 0
+                        },
+                        "event_timestamp": {
+                          "type": "null"
+                        },
+                        "receive_timestamp": {
+                          "type": "null"
+                        }
+                      },
+                      "required": [
+                        "capture_ordinal",
+                        "source_record",
+                        "sequence",
+                        "stream_id",
+                        "session",
+                        "dataset",
+                        "version",
+                        "sha256",
+                        "generator_seed",
+                        "origin",
+                        "event_timestamp",
+                        "receive_timestamp"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "instrument_id",
+                "stock_locate",
+                "derived_sequence",
+                "revision",
+                "journal_records",
+                "order_count",
+                "remaining_quantity",
+                "needs_recovery",
+                "orders",
+                "bids",
+                "asks",
+                "ledger",
+                "metadata"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "instrument_id": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "stock_locate": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "derived_sequence": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "journal_records": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "order_count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "remaining_quantity": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 18446744073709551615
+                },
+                "needs_recovery": {
+                  "type": "boolean"
+                },
+                "orders": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "enum": [
+                          66,
+                          83
+                        ]
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 5,
+                    "maxItems": 5
+                  },
+                  "maxItems": 8
+                },
+                "bids": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "maxItems": 8
+                },
+                "asks": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      },
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 18446744073709551615
+                      }
+                    ],
+                    "items": false,
+                    "minItems": 3,
+                    "maxItems": 3
+                  },
+                  "maxItems": 8
+                },
+                "ledger": {
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 18446744073709551615
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 9,
+                  "maxItems": 9
+                },
+                "metadata": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "capture_ordinal": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 18446744073709551615
+                        },
+                        "source_record": {
+                          "type": "string",
+                          "pattern": "^p1i-h18:[0-9]+$"
+                        },
+                        "sequence": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 18446744073709551615
+                        },
+                        "stream_id": {
+                          "enum": [
+                            1,
+                            2
+                          ]
+                        },
+                        "session": {
+                          "const": "p1i-authored-session"
+                        },
+                        "dataset": {
+                          "const": "p1i-h18"
+                        },
+                        "version": {
+                          "const": "1"
+                        },
+                        "sha256": {
+                          "type": "string",
+                          "pattern": "^[0-9a-f]{64}$"
+                        },
+                        "generator_seed": {
+                          "const": 7707
+                        },
+                        "origin": {
+                          "const": 0
+                        },
+                        "event_timestamp": {
+                          "type": "null"
+                        },
+                        "receive_timestamp": {
+                          "type": "null"
+                        }
+                      },
+                      "required": [
+                        "capture_ordinal",
+                        "source_record",
+                        "sequence",
+                        "stream_id",
+                        "session",
+                        "dataset",
+                        "version",
+                        "sha256",
+                        "generator_seed",
+                        "origin",
+                        "event_timestamp",
+                        "receive_timestamp"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "instrument_id",
+                "stock_locate",
+                "derived_sequence",
+                "revision",
+                "journal_records",
+                "order_count",
+                "remaining_quantity",
+                "needs_recovery",
+                "orders",
+                "bids",
+                "asks",
+                "ledger",
+                "metadata"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      },
+      "required": [
+        "stream",
+        "source",
+        "context",
+        "receipts",
+        "books"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scenario": {
+            "const": "restart"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "restart_verified": {
+            "const": true
+          },
+          "pause": {
+            "$ref": "#/$defs/snapshot"
+          },
+          "replayed": {
+            "$ref": "#/$defs/snapshot"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "restart_verified": {
+            "const": false
+          },
+          "pause": {
+            "type": "null"
+          },
+          "replayed": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}
