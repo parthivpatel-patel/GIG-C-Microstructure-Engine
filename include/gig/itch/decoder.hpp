@@ -12,6 +12,7 @@ public:
     constexpr Rep value() const noexcept { return value_; }
     auto operator<=>(const WireNumber&) const = default;
 };
+struct Price8Tag;
 struct LocateTag; struct TrackingTag; struct TimeTag; struct ReferenceTag;
 struct SharesTag; struct PriceTag; struct MatchTag; struct WideSharesTag;
 using StockLocate=WireNumber<LocateTag,std::uint16_t>;
@@ -19,6 +20,7 @@ using TrackingNumber=WireNumber<TrackingTag,std::uint16_t>;
 using TimestampNanoseconds=WireNumber<TimeTag,std::uint64_t>;
 using OrderReference=WireNumber<ReferenceTag,std::uint64_t>;
 using Shares=WireNumber<SharesTag,std::uint32_t>;
+using Price8=WireNumber<Price8Tag,std::uint64_t>;
 using Price4=WireNumber<PriceTag,std::uint32_t>;
 using MatchNumber=WireNumber<MatchTag,std::uint64_t>;
 using CrossShares=WireNumber<WideSharesTag,std::uint64_t>;
@@ -29,7 +31,7 @@ template<std::size_t N> struct Text {
 };
 enum class Side : char { buy='B', sell='S' };
 // Explicit extension: baseline results remain stable for previously unsupported H/Y.
-enum class DecodeProfile : std::uint8_t { baseline_v1, status_observations_v2 };
+enum class DecodeProfile : std::uint8_t { baseline_v1, status_observations_v2, administrative_observations_v3 };
 struct Header { StockLocate stock_locate{}; TrackingNumber tracking_number{}; TimestampNanoseconds timestamp{}; bool operator==(const Header&) const=default; };
 struct SystemEvent { char event_code{}; bool operator==(const SystemEvent&)const=default; };
 // Classification/subtype are retained as printable ASCII, not appendix-enum certified.
@@ -59,7 +61,24 @@ struct RegShoRestriction {
     Text<8> stock; char action{};
     bool operator==(const RegShoRestriction&)const=default;
 };
-using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade,StockTradingAction,RegShoRestriction>;
+struct MarketParticipantPosition {
+    Text<4> mpid; Text<8> stock; char primary_market_maker{},mode{},state{};
+    bool operator==(const MarketParticipantPosition&)const=default;
+};
+struct MwcbDeclineLevels {
+    Price8 level1{},level2{},level3{};
+    bool operator==(const MwcbDeclineLevels&)const=default;
+};
+struct MwcbStatus { char breached_level{}; bool operator==(const MwcbStatus&)const=default; };
+struct OperationalHalt {
+    Text<8> stock; char market{},action{};
+    bool operator==(const OperationalHalt&)const=default;
+};
+struct RetailPriceImprovement {
+    Text<8> stock; char interest{};
+    bool operator==(const RetailPriceImprovement&)const=default;
+};
+using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade,StockTradingAction,RegShoRestriction,MarketParticipantPosition,MwcbDeclineLevels,MwcbStatus,OperationalHalt,RetailPriceImprovement>;
 struct DecodedRecord {
     std::uint8_t type{}; Header header; Message message; Location location; Provenance provenance;
     bool operator==(const DecodedRecord&)const=default;

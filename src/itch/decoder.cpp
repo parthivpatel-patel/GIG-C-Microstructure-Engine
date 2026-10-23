@@ -59,7 +59,7 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
         return Result<DecodedRecord>::failure({Code::invalid_location,location.payload_offset,"payload_offset",location.frame_offset.value()+2,location.payload_offset.value()});
     if(static_cast<unsigned>(provenance.origin)>static_cast<unsigned>(Origin::observed))
         return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"provenance.origin",0,static_cast<unsigned>(provenance.origin)});
-    if(static_cast<unsigned>(profile)>static_cast<unsigned>(DecodeProfile::status_observations_v2))
+    if(static_cast<unsigned>(profile)>static_cast<unsigned>(DecodeProfile::administrative_observations_v3))
         return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"decode.profile",0,static_cast<unsigned>(profile)});
     if(payload.empty())return Result<DecodedRecord>::failure({Code::truncated_payload,location.payload_offset,"type",1,0});
     const auto type=std::to_integer<std::uint8_t>(payload[0]);
@@ -71,6 +71,22 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
     out.type=type;out.location=location;out.provenance=provenance;
     out.header={StockLocate{static_cast<std::uint16_t>(r.number(1,2))},TrackingNumber{static_cast<std::uint16_t>(r.number(3,2))},TimestampNanoseconds{r.number(5,6)}};
     switch(type){
+    case 'L':case 'V':case 'W':case 'h':case 'N':{
+        if(profile!=DecodeProfile::administrative_observations_v3)
+            return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
+        // Exact source observations only; no book, auction or regulatory enforcement.
+        switch(type){
+        case 'L':out.message=MarketParticipantPosition{r.text<4>(11,"mpid"),r.text<8>(15,"stock"),
+            r.enumeration(23,"YN","primary_market_maker"),r.enumeration(24,"NPSRL","market_maker_mode"),
+            r.enumeration(25,"AEWSD","participant_state")};break;
+        case 'V':out.message=MwcbDeclineLevels{Price8{r.number(11,8)},Price8{r.number(19,8)},Price8{r.number(27,8)}};break;
+        case 'W':out.message=MwcbStatus{r.enumeration(11,"123","breached_level")};break;
+        case 'h':out.message=OperationalHalt{r.text<8>(11,"stock"),r.enumeration(19,"QBX","market"),r.enumeration(20,"HT","halt_action")};break;
+        case 'N':out.message=RetailPriceImprovement{r.text<8>(11,"stock"),r.enumeration(19,"BSAN","retail_interest")};break;
+        default:break;
+        }
+        break;
+    }
     case 'H':{
         if(profile==DecodeProfile::baseline_v1)return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
         StockTradingAction h;h.stock=r.text<8>(11,"stock");h.trading_state=r.enumeration(19,"HPQT","trading_state");

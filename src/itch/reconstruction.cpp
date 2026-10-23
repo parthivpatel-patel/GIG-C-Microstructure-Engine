@@ -166,7 +166,7 @@ ReconstructionStep SyntheticReconstructor::process(std::span<const std::byte> pa
     auto& token=*prepared.prepared;const auto& n=token.record();
     const bool mutation=n.kind==SemanticKind::add||n.kind==SemanticKind::execution||n.kind==SemanticKind::cancel||n.kind==SemanticKind::erase||n.kind==SemanticKind::replace;
     std::optional<std::size_t> index;
-    if(n.source.type!='S'){
+    if(n.source.type!='S'&&n.source.type!='V'&&n.source.type!='W'){
         for(std::size_t i=0;i<config_.book_count;++i)if(config_.bindings[i]->locate==n.source.header.stock_locate){index=i;break;}
         if(!index){step.native_error={gig::ErrorCode::identity_mismatch,"unknown_binding"};return reject(step);}
         const auto& b=*config_.bindings[*index];
@@ -175,6 +175,9 @@ ReconstructionStep SyntheticReconstructor::process(std::span<const std::byte> pa
         if(n.kind==SemanticKind::directory)stock=&std::get<StockDirectory>(n.source.message).stock;
         if(n.kind==SemanticKind::trading_action)stock=&std::get<StockTradingAction>(n.source.message).stock;
         if(n.kind==SemanticKind::reg_sho_restriction)stock=&std::get<RegShoRestriction>(n.source.message).stock;
+        if(n.source.type=='L')stock=&std::get<MarketParticipantPosition>(n.source.message).stock;
+        if(n.source.type=='h')stock=&std::get<OperationalHalt>(n.source.message).stock;
+        if(n.source.type=='N')stock=&std::get<RetailPriceImprovement>(n.source.message).stock;
         if(n.source.type=='P')stock=&std::get<Trade>(n.source.message).stock;
         if(n.source.type=='Q')stock=&std::get<CrossTrade>(n.source.message).stock;
         if(stock&&*stock!=b.stock){step.native_error={gig::ErrorCode::identity_mismatch,"binding.stock"};return reject(step);}

@@ -48,7 +48,7 @@ std::optional<std::size_t> SourceContext::required_bytes(const ContextPolicy& p)
 Result<SourceContext> SourceContext::create(SourceManifest m,ContextPolicy p,std::pmr::memory_resource* resource) noexcept {
     const auto bytes=required_bytes(p);
     if(!resource||!bytes||*bytes>p.memory_budget_bytes||p.price_quantum==0||p.lot_size==0
-        ||static_cast<unsigned>(p.decode_profile)>static_cast<unsigned>(DecodeProfile::status_observations_v2)
+        ||static_cast<unsigned>(p.decode_profile)>static_cast<unsigned>(DecodeProfile::administrative_observations_v3)
         ||p.first_location.frame_offset.value()>UINT64_MAX-2
         ||p.first_location.payload_offset.value()!=p.first_location.frame_offset.value()+2
         ||static_cast<unsigned>(m.initialization)>static_cast<unsigned>(Initialization::synthetic_history_declared)
@@ -106,7 +106,7 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     const auto order_index=[&](OrderReference ref){const auto i=std::find_if(orders_.begin(),orders_.end(),[&](const auto& o){return o.reference==ref;});return i==orders_.end()?absent:static_cast<std::size_t>(i-orders_.begin());};
     const auto match_index=[&](MatchNumber number){const auto i=std::find_if(matches_.begin(),matches_.end(),[&](const auto& m){return m.number==number;});return i==matches_.end()?absent:static_cast<std::size_t>(i-matches_.begin());};
     NormalizedRecord normalized{raw,manifest_};normalized.policy=policy_;
-    normalized.normalization_version=policy_.decode_profile==DecodeProfile::status_observations_v2?2U:1U;
+    normalized.normalization_version=static_cast<std::uint32_t>(policy_.decode_profile)+1U;
     std::optional<DirectoryState> add_directory;std::optional<OrderState> add_order,update_order;
     std::optional<MatchState> add_match,update_match;
     std::size_t order_slot=absent,match_slot=absent;
@@ -135,6 +135,16 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     };
     switch(raw.type){
     case 'S':normalized.kind=SemanticKind::system;break;
+    case 'L':normalized.kind=SemanticKind::participant_position;
+        require_directory(&std::get<MarketParticipantPosition>(raw.message).stock);break;
+    case 'h':normalized.kind=SemanticKind::operational_halt;
+        require_directory(&std::get<OperationalHalt>(raw.message).stock);break;
+    case 'N':normalized.kind=SemanticKind::retail_interest;
+        require_directory(&std::get<RetailPriceImprovement>(raw.message).stock);break;
+    case 'V':case 'W':
+        normalized.kind=raw.type=='V'?SemanticKind::mwcb_levels:SemanticKind::mwcb_status;
+        if(locate.value()!=0)operation_fail(ContextCode::unknown_locate,"global_stock_locate");
+        break;
     case 'H':
         normalized.kind=SemanticKind::trading_action;
         require_directory(&std::get<StockTradingAction>(raw.message).stock);break;

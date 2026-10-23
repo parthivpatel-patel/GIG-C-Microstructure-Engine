@@ -42,7 +42,7 @@ struct OrderState {
 };
 enum class MatchKind : std::uint8_t { displayed_execution, non_displayed_trade, cross };
 struct MatchState { MatchNumber number{}; StockLocate locate{}; MatchKind kind{}; bool broken{}; bool operator==(const MatchState&)const=default; };
-enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade, trading_action, reg_sho_restriction };
+enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade, trading_action, reg_sho_restriction, participant_position, mwcb_levels, mwcb_status, operational_halt, retail_interest };
 enum class IntegrationClass : std::uint8_t { external_observation, exact_candidate, book_only_projection, unsupported };
 struct NormalizedRecord {
     DecodedRecord source; SourceManifest manifest; SemanticKind kind{};
