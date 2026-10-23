@@ -1,0 +1,209 @@
+{
+  "schema": "gig.nasdaq_metadata_preflight.v1",
+  "review_date": "2026-10-23",
+  "timezone": "America/New_York",
+  "starting_commit": "98e76bf6fbf8eb4fb0ab6586e3629625492d1e0c",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "official_artifact": "https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/12302019.NASDAQ_ITCH50.gz",
+  "requests": [
+    {
+      "observed_at_utc": "2026-10-23T21:30:55Z",
+      "command": [
+        "curl",
+        "--head",
+        "--proto",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "5",
+        "--max-time",
+        "15",
+        "--max-redirs",
+        "0",
+        "--retry",
+        "0",
+        "--silent",
+        "--show-error",
+        "--header",
+        "Accept-Encoding: identity",
+        "--header",
+        "Range: bytes=0-4095",
+        "--write-out",
+        "\nPREFLIGHT_STATUS %{http_code} %{http_connect} %{size_download} %{time_total}\n",
+        "https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/12302019.NASDAQ_ITCH50.gz"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.6,
+      "sanitized_response_lines": [
+        "HTTP/1.1 200 OK",
+        "date: Fri, 23 Oct 2026 21:30:54 GMT",
+        "server: envoy",
+        "HTTP/2 416 ",
+        "content-length: 3524013057",
+        "content-type: application/x-gzip",
+        "last-modified: Tue, 31 Dec 2019 05:13:48 GMT",
+        "accept-ranges: bytes",
+        "etag: \"64b3281599bfd51:0\"",
+        "server: envoy",
+        "date: Fri, 23 Oct 2026 21:30:55 GMT",
+        "content-range: bytes */0",
+        "PREFLIGHT_STATUS 416 200 0 0.586759"
+      ],
+      "stderr": "",
+      "raw_headers_sha256": "a04d5f601183d9c115860c98618d3f498e096db6ef89922ffecd53bd2f776945",
+      "method": "HEAD only; no GET issued",
+      "downloaded_market_data_bytes": 0,
+      "response_metadata_bytes": 394
+    },
+    {
+      "observed_at_utc": "2026-10-23T21:31:07Z",
+      "command": [
+        "curl",
+        "--head",
+        "--proto",
+        "=https",
+        "--tlsv1.2",
+        "--connect-timeout",
+        "5",
+        "--max-time",
+        "15",
+        "--max-redirs",
+        "0",
+        "--retry",
+        "0",
+        "--silent",
+        "--show-error",
+        "--header",
+        "Accept-Encoding: identity",
+        "--write-out",
+        "\nPREFLIGHT_STATUS %{http_code} %{http_connect} %{size_download} %{time_total}\n",
+        "https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/12302019.NASDAQ_ITCH50.gz"
+      ],
+      "exit_code": 0,
+      "sanitized_response_lines": [
+        "HTTP/1.1 200 OK",
+        "date: Fri, 23 Oct 2026 21:31:07 GMT",
+        "server: envoy",
+        "HTTP/2 200 ",
+        "content-length: 3524013057",
+        "content-type: application/x-gzip",
+        "last-modified: Tue, 31 Dec 2019 05:13:48 GMT",
+        "accept-ranges: bytes",
+        "etag: \"64b3281599bfd51:0\"",
+        "server: envoy",
+        "date: Fri, 23 Oct 2026 21:31:07 GMT",
+        "PREFLIGHT_STATUS 200 200 0 0.336616"
+      ],
+      "stderr": "",
+      "raw_headers_sha256": "c48229ce5d34361a7608f99ccf4890bbbee09f91312cda2a21e50c366324d3b8",
+      "reason": "One ordinary HEAD to clarify origin metadata after HEAD+Range returned416; no GET or body acquisition",
+      "downloaded_market_data_bytes": 0
+    }
+  ],
+  "resources": {
+    "observed_at_utc": "2026-10-23T21:30:43Z",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "logical_cpu_count": 5,
+    "affinity_cpu_count": 5,
+    "memory": {
+      "MemTotal_bytes": 35743760384,
+      "MemAvailable_bytes": 34595491840,
+      "SwapTotal_bytes": 0,
+      "SwapFree_bytes": 0
+    },
+    "cgroup": {
+      "memory.max": "34359738368",
+      "memory.current": "6699360256",
+      "memory.high": "max",
+      "memory.swap.max": "max",
+      "cpu.max": "400000 100000",
+      "cpu.stat": "usage_usec 9419620378\nuser_usec 8304681148\nsystem_usec 1114939229\nnice_usec 0\nnr_periods 250412\nnr_throttled 1811\nthrottled_usec 86834613\nnr_bursts 0\nburst_usec 0",
+      "cpuset.cpus.effective": "0-4",
+      "pids.max": "max"
+    },
+    "cgroup_membership": "0::/",
+    "disk": {
+      "/workspace": {
+        "available_bytes": 26165575680,
+        "total_bytes": 33770192896,
+        "free_inodes": 1794294,
+        "device": 27
+      },
+      "/workspace/GIG-C-Microstructure-Engine": {
+        "available_bytes": 26165575680,
+        "total_bytes": 33770192896,
+        "free_inodes": 1794294,
+        "device": 27
+      },
+      "/tmp": {
+        "available_bytes": 17823784960,
+        "total_bytes": 17871880192,
+        "free_inodes": 4363060,
+        "device": 34
+      },
+      "/workspace/nasdaq-pilot-preflight": {
+        "available_bytes": 26165575680,
+        "total_bytes": 33770192896,
+        "free_inodes": 1794294,
+        "device": 27
+      }
+    },
+    "process_limits": {
+      "RLIMIT_CPU": [
+        -1,
+        -1
+      ],
+      "RLIMIT_AS": [
+        -1,
+        -1
+      ],
+      "RLIMIT_FSIZE": [
+        -1,
+        -1
+      ],
+      "RLIMIT_NOFILE": [
+        16384,
+        16384
+      ]
+    },
+    "tmp_directory": "/tmp",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "platform_session_deadline": "not exposed; no duration guarantee"
+  },
+  "storage_kind": {
+    "/workspace": [
+      "/workspace",
+      "overlay"
+    ],
+    "/tmp": [
+      "/tmp",
+      "tmpfs"
+    ],
+    "timeout_executable": "/usr/bin/timeout",
+    "note": "Temporary filesystem capacity is not a disk/memory reservation; tmpfs writes consume RAM."
+  },
+  "runtime_status_summary": {
+    "observations_current": true,
+    "observed_phase": "running",
+    "connectivity": "connected",
+    "network_policy": "restricted",
+    "network_state": "unknown",
+    "emi_in_configured_allowlist": true,
+    "vpn_configured": false,
+    "configured_capabilities": [],
+    "secret_bindings": [],
+    "note": "No configuration change. Desired allowlist/stateunknown is not proof of reachability; actual HEAD observations are authoritative for these requests."
+  },
+  "network_conclusion": "Origin reachable by HEAD;Accept-Ranges advertises bytes;HEAD+Range416 with contradictory Content-Range */0 does not verify current GET partial behavior. No GET permitted or issued. Network testing stopped after plain HEAD clarified metadata.",
+  "downloaded_market_data_bytes": 0,
+  "raw_metadata_location": "/workspace/nasdaq-pilot-preflight",
+  "raw_metadata_sha256": {
+    "resources.json": "45a42a9127e616d06d992cea19b77a103c4a928a9e55e87d32560f551b08370f",
+    "storage-kind.json": "a6e09d7b1a8dd0fd3bf93555917cd57d18ee7fa52c9f070c2ecfab34c666da20",
+    "emi-head.raw": "a04d5f601183d9c115860c98618d3f498e096db6ef89922ffecd53bd2f776945",
+    "emi-plain-head.raw": "c48229ce5d34361a7608f99ccf4890bbbee09f91312cda2a21e50c366324d3b8",
+    "emi-head.json": "a1589be979282a0fdc7a21494864f3b71e459a6dcb24cf1181fb3f9f92c0f92d",
+    "emi-plain-head.json": "121c7d71205e41d65273d0e3e2376a7624389306f8f208f9b98dc71130260ea3"
+  }
+}

@@ -1,5 +1,18 @@
 # Phase P1B — official data access and sample inventory
 
+## Latest metadata-only preflight — October 23, 2026, America/New_York
+
+At verified baseline `98e76bf6fbf8eb4fb0ab6586e3629625492d1e0c`, plain HEAD
+to the exact EMI archive returned HTTP200, reported Content-Length3,524,013,057
+and `Accept-Ranges: bytes`. HEAD with Range returned416 and contradictory
+`Content-Range: bytes */0`; this does **not** verify present GET Range behavior.
+Both transferred zero body bytes. Network testing stopped after those two HEAD
+requests. No archive GET, sample/prefix download, LOBSTER retry or new licensing
+claim occurred. See [NASDAQ_PILOT_PREFLIGHT.md](NASDAQ_PILOT_PREFLIGHT.md) for
+actual resources, sanitized evidence, strict4 KiB proposal and approval checklist.
+This supersedes only older access/size observations, not historical results or
+rights/retention limits below. Acquisition remains unauthorized in this assignment.
+
 ## Current rights/access update — synthetic engineering assignment
 
 Recorded October 23, 2026 UTC (October 22, America/New_York), from the user's

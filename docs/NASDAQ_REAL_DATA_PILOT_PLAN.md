@@ -1,5 +1,12 @@
 # NASDAQ real-data pilot — resource and validation plan
 
+Latest resource/access assessment: [NASDAQ_PILOT_PREFLIGHT.md](NASDAQ_PILOT_PREFLIGHT.md),
+October 23, 2026 (America/New_York). Metadata-only HEAD confirms reported size
+and accessibility; current GET Range behavior remains unverified after a HEAD
+Range anomaly. The concrete first request is limited to4 KiB, with no automatic
+expansion. The broader staged limits below are historical/planning ceilings, not
+authorization to acquire1 MiB. No market-data body was downloaded in preflight.
+
 Prepared October 23, 2026 UTC (October 22, America/New_York), against planning
 baseline `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`. **Planning only: no market
 bytes acquired, no observed replay executed, no empirical acceptance claimed.**
