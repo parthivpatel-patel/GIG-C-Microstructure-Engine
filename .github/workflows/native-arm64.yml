@@ -1,0 +1,140 @@
+name: Native ARM64 qualification (owner-gated)
+on:
+  workflow_dispatch:
+    inputs:
+      free_usage_verified:
+        description: Owner verified runner eligibility and sufficient free minutes/storage; no charges authorized
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    if: inputs.free_usage_verified && github.ref == 'refs/heads/feat/bootstrap-cpp20-engine'
+    timeout-minutes: 60
+    runs-on: ubuntu-24.04-arm
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+        preset: [debug, release, asan-ubsan]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Authenticate fresh native runner and source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${{ runner.arch }}" = ARM64
+          test "$(uname -m)" = aarch64
+          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+          test -z "$(git status --porcelain)"
+          echo "run_id=${{ github.run_id }} attempt=${{ github.run_attempt }} sha=${{ github.sha }} image=$ImageOS version=$ImageVersion"
+          uname -a
+          cat /etc/os-release
+          lscpu
+          free -b
+          df -B1 . "$RUNNER_TEMP"
+          g++ --version
+          clang++ --version
+          cmake --version
+          ninja --version
+          python3 --version
+          python3 -c 'import platform, zlib, ssl; print(platform.machine(), zlib.ZLIB_VERSION, zlib.ZLIB_RUNTIME_VERSION, ssl.OPENSSL_VERSION)'
+      - name: Build qualified optional gzip dependency in private prefix
+        run: |
+          bash scripts/build_ci_zlib.sh "$RUNNER_TEMP/gig-zlib-1.3.1"
+          echo "GIG_CI_ZLIB_ROOT=$RUNNER_TEMP/gig-zlib-1.3.1" >> "$GITHUB_ENV"
+      - name: Select compiler
+        shell: bash
+        run: |
+          if [ "${{ matrix.compiler }}" = clang ]; then
+            echo 'CXX=clang++' >> "$GITHUB_ENV"
+          else
+            echo 'CXX=g++' >> "$GITHUB_ENV"
+          fi
+      - name: Prepare pinned Python research dependencies
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r requirements-python.lock
+      - name: Configure
+        shell: bash
+        run: |
+          if [ "${{ matrix.compiler }}" = gcc ] && [ "${{ matrix.preset }}" = release ]; then
+            cmake --preset release -DZLIB_ROOT="$GIG_CI_ZLIB_ROOT" -DGIG_BUILD_PYTHON=ON -DPython3_EXECUTABLE="${{ github.workspace }}/.venv/bin/python" -Dpybind11_DIR="$(.venv/bin/python -m pybind11 --cmakedir)"
+          else
+            cmake --preset ${{ matrix.preset }} -DZLIB_ROOT="$GIG_CI_ZLIB_ROOT"
+          fi
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }}
+      - name: Test
+        shell: bash
+        run: |
+          /usr/bin/time -v ctest --preset ${{ matrix.preset }} --output-junit "${{ github.workspace }}/build/${{ matrix.preset }}/tests.xml"
+          python3 - <<'PY'
+          import json, pathlib, xml.etree.ElementTree as ET
+          root = ET.parse(pathlib.Path('build/${{ matrix.preset }}/tests.xml')).getroot()
+          counts = {key: int(root.get(key, '0')) for key in ('tests', 'failures', 'skipped', 'disabled')}
+          python_enabled = '${{ matrix.compiler }}' == 'gcc' and '${{ matrix.preset }}' == 'release'
+          if counts['tests'] != (157 if python_enabled else 154) or any(counts[k] for k in ('failures', 'skipped', 'disabled')):
+            raise SystemExit('required CTest outcomes missing, failed, skipped or disabled')
+          expected = {
+            'itch.independent_reference': '142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e',
+            'itch.context_reference': '58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e',
+            'itch.l3_reference': 'bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991',
+            'itch.streaming_reference': 'be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5',
+            'itch.validation_demo_reference': '4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520',
+            'itch.auction_reference': '76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6',
+            'itch.admin_reference': '87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03',
+            'itch.hy_reference': 'ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af',
+          }
+          cases = {case.get('name'): case for case in root.findall('testcase')}
+          if python_enabled and not {'python.research_interface', 'python.export_contracts', 'python.schema_compatibility'} <= cases.keys():
+            raise SystemExit('required Python tests missing')
+          for name, digest in expected.items():
+            if digest not in ''.join(cases[name].itertext()):
+              raise SystemExit('canonical identity mismatch: ' + name)
+            print(name + ' canonical_sha256=' + digest)
+          print('ctest_verified_counts=' + json.dumps(counts, sort_keys=True))
+          PY
+      - name: Benchmark correctness and metadata smoke (no performance gate)
+        if: matrix.preset == 'release'
+        run: python3 scripts/run_benchmark.py --events 4096 --batches 2 --repetitions 2 --warmup 1 --output build/ci-benchmark.json
+      - name: Phase 2 correctness and evidence smoke (no performance gate)
+        if: matrix.preset == 'release'
+        run: python3 scripts/run_phase2_benchmark.py --orders 32 --repetitions 2 --warmup 1 --output-dir build/ci-phase2
+      - name: Build and validate private local wheel (no publication)
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        run: |
+          .venv/bin/python -m build --wheel --no-isolation --outdir build/wheels
+          .venv/bin/python -m venv build/wheel-consumer
+          build/wheel-consumer/bin/python -m pip install --constraint requirements-python.lock build/wheels/*.whl
+          build/wheel-consumer/bin/python tests/test_python.py
+          build/wheel-consumer/bin/python tests/test_export_contracts.py
+          build/wheel-consumer/bin/python examples/python_research.py
+      - name: Source archive reproducibility and integrity
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        shell: bash
+        run: |
+          export SOURCE_DATE_EPOCH="$(git show -s --format=%ct HEAD)"
+          .venv/bin/python -m pip freeze
+          .venv/bin/python -m build --sdist --no-isolation --outdir build/sdist-a
+          .venv/bin/python -m build --sdist --no-isolation --outdir build/sdist-b
+          cmp build/sdist-a/*.tar.gz build/sdist-b/*.tar.gz
+          sha256sum build/sdist-a/*.tar.gz
+          .venv/bin/python scripts/check_sdist_inventory.py build/sdist-a/gig_microstructure-0.1.1.tar.gz --manifest build/sdist-manifest.json
+      - name: Install wheel built from verified source archive
+        if: matrix.compiler == 'gcc' && matrix.preset == 'release'
+        run: |
+          .venv/bin/python -m pip wheel --no-deps --no-build-isolation build/sdist-a/*.tar.gz --wheel-dir build/sdist-wheels
+          .venv/bin/python -m venv build/sdist-consumer
+          build/sdist-consumer/bin/python -m pip install --constraint requirements-python.lock build/sdist-wheels/*.whl
+          build/sdist-consumer/bin/python tests/test_python.py
+          build/sdist-consumer/bin/python tests/test_export_contracts.py
+          build/sdist-consumer/bin/python examples/python_research.py
+      - name: Evidence locations (preserve logs before retention expires)
+        if: always()
+        run: |
+          echo "run_id=${{ github.run_id }} sha=${{ github.sha }} compiler=${{ matrix.compiler }} preset=${{ matrix.preset }}"
+          cat build/${{ matrix.preset }}/tests.xml || true
