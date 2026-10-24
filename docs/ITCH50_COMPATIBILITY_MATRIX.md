@@ -77,3 +77,32 @@ all other family correctness remains synthetic/source-review evidence.
 Implementation and final measured results will be recorded in
 HISTORICAL_ITCH_ENGINEERING_REPORT.md. Observed L3 readiness is a separate gate in
 OBSERVED_L3_READINESS_CONTRACT.md, not implied by this matrix.
+
+## Retained-2023 auction profile v4 follow-up
+
+The explicitly named `retained_2023_auctions_v4` adds K/J/I/O to v3's19 families,
+for23 typed families in the **retained document's layout**, not certified coverage
+of every historical/modern feed. V1/v2/v3 columns above remain unchanged.
+
+| Family /official section | New typed fields and validation | Context /historical restriction |
+|---|---|---|
+| K /§1.2.6 p11 |IpoQuotingUpdate: stock11/8, release_seconds19/4 uint32, qualifier23/1 A/C, price24/4 binary Price4 |Header locate0; find previously admitted exact stock, preserve raw locate0; cancel C requires zero release/price in context. Optional intraday policy also bounds release seconds. |
+| J /§1.2.7 p11–12 |LuldAuctionCollar: stock11/8, reference19/4, upper23/4, lower27/4 Price4, extension31/4 uint32 |Known locate+stock; exact collar observation, no inferred auction orders, price-order constraint or native mutation. |
+| I /§1.6 p18–19 |NetOrderImbalance: paired11/8, imbalance19/8 uint64, direction27/1 BSNOP, stock28/8, far36/4, near40/4, reference44/4 Price4, cross48/1 OCHA, variation49/1 L123456789ABC/space |Known locate+stock; aggregate observation. Direction P and cross A are later2023/2022 additions, not evidence of2019 occurrence. |
+| O /§1.8 p20 |DirectListingDiscovery: stock11/8, eligible19/1 NY, min20/4,max24/4,near28/4 Price4, near_time32/8 raw uint64, lower40/4,upper44/4 Price4 |Known locate+stock; introduced2023. Near-time unit beyond table description is not invented; no interpreted date or book opening. |
+
+K's table labels a4-byte Price(4), while accompanying prose describes an ASCII-like
+six-whole/four-decimal representation that cannot fit the stated field. V4 explicitly
+uses the normative Data Types (all integer/price fields unsigned big-endian fixed
+point) and table Price(4) encoding; it never tries multiple codecs or silently
+reinterprets bytes. This resolves the **implementation policy**, not empirical
+2019 agreement. Contradictory prose remains a historical/documentation risk, and
+old profiles still reject K. All new Price4 fields enforce raw maximum2000000000;
+wire zero remains exact. O's eight-byte near-time is preserved without invented units.
+
+There are no remaining known-length unsupported families in v4 for this retained
+23-family layout. Unknown type octets and unsupported newer/historical variants
+remain explicit errors. All new semantics are typed external observations; no
+actual K/J/I/O appeared in the16KiB prefix. Independent synthetic reference,
+malformed fields, allocation, source accounting and restart gates are recorded in
+PHASE4_HISTORICAL_ENGINEERING_REPORT.md. Do not equate syntax with observed L3.

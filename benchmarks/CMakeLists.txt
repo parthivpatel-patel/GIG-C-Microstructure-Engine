@@ -90,3 +90,12 @@ if(GIG_BUILD_ITCH_STREAMING)
       ${PROJECT_SOURCE_DIR}/scripts/check_itch_streaming_benchmark.py $<TARGET_FILE:gig_itch_streaming_benchmark>)
   endif()
 endif()
+
+add_executable(gig_itch_decode_latency itch_decode_latency.cpp)
+target_link_libraries(gig_itch_decode_latency PRIVATE gig::itch)
+set_target_properties(gig_itch_decode_latency PROPERTIES INTERPROCEDURAL_OPTIMIZATION FALSE)
+gig_project_target(gig_itch_decode_latency)
+if(BUILD_TESTING)
+  add_test(NAME itch.decode_timing_contract COMMAND ${Python3_EXECUTABLE}
+    ${PROJECT_SOURCE_DIR}/scripts/check_itch_decode_latency.py $<TARGET_FILE:gig_itch_decode_latency>)
+endif()

@@ -6,7 +6,7 @@
 namespace gig::itch {
 // Synthetic semantic-policy module, not a native replay adapter or L3 validator.
 enum class ContextStatus : std::uint8_t { accepted, source_invalid, context_invalid, unsupported, integration_ineligible, resource_limit };
-enum class ContextCode : std::uint8_t { none, invalid_config, allocation_failure, provenance_conflict, discontinuity, timestamp_policy, lifecycle, unknown_locate, directory_conflict, stock_conflict, invalid_reference, duplicate_reference, missing_order, inactive_order, invalid_quantity, quantity_underflow, equal_cancel, duplicate_match, missing_match, broken_match, capacity, unit_conversion, unsupported_source, already_finished, invalid_prepared, stale_prepared };
+enum class ContextCode : std::uint8_t { none, invalid_config, allocation_failure, provenance_conflict, discontinuity, timestamp_policy, lifecycle, unknown_locate, directory_conflict, stock_conflict, invalid_reference, duplicate_reference, missing_order, inactive_order, invalid_quantity, quantity_underflow, equal_cancel, duplicate_match, missing_match, broken_match, capacity, unit_conversion, unsupported_source, already_finished, invalid_prepared, stale_prepared, invalid_observation };
 struct ContextError {
     ContextCode code{ContextCode::none}; Location location{}; std::string_view field{}; std::uint64_t expected{},actual{}; Error source_error{};
     bool operator==(const ContextError&)const=default;
@@ -42,7 +42,7 @@ struct OrderState {
 };
 enum class MatchKind : std::uint8_t { displayed_execution, non_displayed_trade, cross };
 struct MatchState { MatchNumber number{}; StockLocate locate{}; MatchKind kind{}; bool broken{}; bool operator==(const MatchState&)const=default; };
-enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade, trading_action, reg_sho_restriction, participant_position, mwcb_levels, mwcb_status, operational_halt, retail_interest };
+enum class SemanticKind : std::uint8_t { system, directory, add, execution, cancel, erase, replace, trade_print, cross_print, broken_trade, trading_action, reg_sho_restriction, participant_position, mwcb_levels, mwcb_status, operational_halt, retail_interest, ipo_quoting, luld_collar, imbalance, direct_listing };
 enum class IntegrationClass : std::uint8_t { external_observation, exact_candidate, book_only_projection, unsupported };
 struct NormalizedRecord {
     DecodedRecord source; SourceManifest manifest; SemanticKind kind{};

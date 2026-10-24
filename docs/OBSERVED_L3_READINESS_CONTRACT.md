@@ -117,3 +117,36 @@ memory and throughput on identical workloads before any migration.
 None of the observed gates is supplied by implementing administrative wire types.
 Synthetic candidate readiness, historical decoding compatibility, observed L3
 validation and production readiness remain four separate assessments.
+
+## Phase4 machine-checkable refusal and observed16KiB follow-up
+
+The16KiB prefix provides1433 observed S/R/H/Y messages and1424 directory admissions
+in a bounded observed SourceContext with unknown initialization. No orders/matches,
+book or reconstructor were created. It does not close any initial-state/session/
+full-artifact gate. Retained-2023 auction v4 supports all23 documented layouts,
+including K global locate0 routed by exact stock, but none of K/J/I/O was observed.
+
+Machine-checkable audit:
+
+```sh
+python3 scripts/check_observed_l3_readiness.py \
+  --from-second-prefix docs/NASDAQ_SECOND_PREFIX_EVIDENCE.json
+# Expected exit1, assessment BLOCKED, observed_certified false.
+python3 tests/test_observed_readiness.py
+```
+
+The checker uses a strict bounded64KiB JSON envelope, rejects duplicate/unknown
+fields and coerced state values, distinguishes source claims from attestations,
+and records unavailable observed adapter/context-native seed/oracle capabilities.
+Even all-positive owner claims cannot fabricate these implementation capabilities
+or certify observed L3. This is a versioned conservative capability audit, not
+cryptographic verification or a generic future certification API. Updating it later
+requires reviewing actual source/evidence and its independent negative controls.
+Synthetic origin, unknown/incomplete initialization, prefix-only integrity and
+unverified full capture stay BLOCKED. CLI invalid inputs exit2, never a success.
+
+Replay/snapshot, journal and streaming contracts remain unchanged. New fault
+fixtures independently check accepted/native/external prefix counts for CRC,
+truncation, partial framing, oversized frame, invalid field, contradictory K cancel,
+duplicate order, journal/source-cap exhaustion and unknown type across fragmented
+input. Formal candidate, exchange session and observed L3 gates remain distinct.

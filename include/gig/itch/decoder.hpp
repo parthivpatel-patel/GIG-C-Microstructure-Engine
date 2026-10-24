@@ -31,7 +31,7 @@ template<std::size_t N> struct Text {
 };
 enum class Side : char { buy='B', sell='S' };
 // Explicit extension: baseline results remain stable for previously unsupported H/Y.
-enum class DecodeProfile : std::uint8_t { baseline_v1, status_observations_v2, administrative_observations_v3 };
+enum class DecodeProfile : std::uint8_t { baseline_v1, status_observations_v2, administrative_observations_v3, retained_2023_auctions_v4 };
 struct Header { StockLocate stock_locate{}; TrackingNumber tracking_number{}; TimestampNanoseconds timestamp{}; bool operator==(const Header&) const=default; };
 struct SystemEvent { char event_code{}; bool operator==(const SystemEvent&)const=default; };
 // Classification/subtype are retained as printable ASCII, not appendix-enum certified.
@@ -78,7 +78,29 @@ struct RetailPriceImprovement {
     Text<8> stock; char interest{};
     bool operator==(const RetailPriceImprovement&)const=default;
 };
-using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade,StockTradingAction,RegShoRestriction,MarketParticipantPosition,MwcbDeclineLevels,MwcbStatus,OperationalHalt,RetailPriceImprovement>;
+// Retained-2023 layout observations; not a certified2019 auction profile.
+struct IpoQuotingUpdate {
+    Text<8> stock; std::uint32_t release_seconds{}; char qualifier{}; Price4 price{};
+    bool operator==(const IpoQuotingUpdate&)const=default;
+};
+struct LuldAuctionCollar {
+    Text<8> stock; Price4 reference{},upper{},lower{}; std::uint32_t extension{};
+    bool operator==(const LuldAuctionCollar&)const=default;
+};
+struct NetOrderImbalance {
+    std::uint64_t paired{},imbalance{}; Text<8> stock;
+    Price4 far{},near{},reference{}; char direction{},cross_type{},variation{};
+    bool operator==(const NetOrderImbalance&)const=default;
+};
+struct DirectListingDiscovery {
+    Text<8> stock; char eligible{}; Price4 minimum{},maximum{},near{};
+    // The table states time of price setting, without a separate unit contract.
+    // Preserve the full raw64-bit field; do not fabricate ns/date semantics.
+    std::uint64_t near_time_raw{}; Price4 lower{},upper{};
+    bool operator==(const DirectListingDiscovery&)const=default;
+};
+static_assert(sizeof(NetOrderImbalance)<=sizeof(CrossTrade));
+using Message=std::variant<SystemEvent,StockDirectory,AddOrder,AddAttributedOrder,OrderExecuted,OrderExecutedWithPrice,OrderCancel,OrderDelete,OrderReplace,Trade,CrossTrade,BrokenTrade,StockTradingAction,RegShoRestriction,MarketParticipantPosition,MwcbDeclineLevels,MwcbStatus,OperationalHalt,RetailPriceImprovement,IpoQuotingUpdate,LuldAuctionCollar,NetOrderImbalance,DirectListingDiscovery>;
 struct DecodedRecord {
     std::uint8_t type{}; Header header; Message message; Location location; Provenance provenance;
     bool operator==(const DecodedRecord&)const=default;

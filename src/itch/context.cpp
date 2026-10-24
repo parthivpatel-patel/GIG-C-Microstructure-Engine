@@ -48,7 +48,7 @@ std::optional<std::size_t> SourceContext::required_bytes(const ContextPolicy& p)
 Result<SourceContext> SourceContext::create(SourceManifest m,ContextPolicy p,std::pmr::memory_resource* resource) noexcept {
     const auto bytes=required_bytes(p);
     if(!resource||!bytes||*bytes>p.memory_budget_bytes||p.price_quantum==0||p.lot_size==0
-        ||static_cast<unsigned>(p.decode_profile)>static_cast<unsigned>(DecodeProfile::administrative_observations_v3)
+        ||static_cast<unsigned>(p.decode_profile)>static_cast<unsigned>(DecodeProfile::retained_2023_auctions_v4)
         ||p.first_location.frame_offset.value()>UINT64_MAX-2
         ||p.first_location.payload_offset.value()!=p.first_location.frame_offset.value()+2
         ||static_cast<unsigned>(m.initialization)>static_cast<unsigned>(Initialization::synthetic_history_declared)
@@ -135,6 +135,17 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     };
     switch(raw.type){
     case 'S':normalized.kind=SemanticKind::system;break;
+    case 'K':{
+        normalized.kind=SemanticKind::ipo_quoting;const auto& k=std::get<IpoQuotingUpdate>(raw.message);
+        if(locate.value()!=0)operation_fail(ContextCode::unknown_locate,"global_stock_locate");
+        if(std::none_of(directories_.begin(),directories_.end(),[&](const auto& d){return d.directory.stock==k.stock;}))operation_fail(ContextCode::unknown_locate,"ipo_stock");
+        if(k.qualifier=='C'&&(k.release_seconds!=0||k.price.value()!=0))operation_fail(ContextCode::invalid_observation,"ipo_cancel_fields");
+        if(policy_.require_intraday_timestamps&&k.release_seconds>=86400U)operation_fail(ContextCode::timestamp_policy,"ipo_release_seconds");
+        break;
+    }
+    case 'J':normalized.kind=SemanticKind::luld_collar;require_directory(&std::get<LuldAuctionCollar>(raw.message).stock);break;
+    case 'I':normalized.kind=SemanticKind::imbalance;require_directory(&std::get<NetOrderImbalance>(raw.message).stock);break;
+    case 'O':normalized.kind=SemanticKind::direct_listing;require_directory(&std::get<DirectListingDiscovery>(raw.message).stock);break;
     case 'L':normalized.kind=SemanticKind::participant_position;
         require_directory(&std::get<MarketParticipantPosition>(raw.message).stock);break;
     case 'h':normalized.kind=SemanticKind::operational_halt;

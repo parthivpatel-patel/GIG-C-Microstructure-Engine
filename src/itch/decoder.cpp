@@ -59,7 +59,7 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
         return Result<DecodedRecord>::failure({Code::invalid_location,location.payload_offset,"payload_offset",location.frame_offset.value()+2,location.payload_offset.value()});
     if(static_cast<unsigned>(provenance.origin)>static_cast<unsigned>(Origin::observed))
         return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"provenance.origin",0,static_cast<unsigned>(provenance.origin)});
-    if(static_cast<unsigned>(profile)>static_cast<unsigned>(DecodeProfile::administrative_observations_v3))
+    if(static_cast<unsigned>(profile)>static_cast<unsigned>(DecodeProfile::retained_2023_auctions_v4))
         return Result<DecodedRecord>::failure({Code::invalid_enum,location.payload_offset,"decode.profile",0,static_cast<unsigned>(profile)});
     if(payload.empty())return Result<DecodedRecord>::failure({Code::truncated_payload,location.payload_offset,"type",1,0});
     const auto type=std::to_integer<std::uint8_t>(payload[0]);
@@ -71,8 +71,20 @@ Result<DecodedRecord> decode(std::span<const std::byte> payload,Location locatio
     out.type=type;out.location=location;out.provenance=provenance;
     out.header={StockLocate{static_cast<std::uint16_t>(r.number(1,2))},TrackingNumber{static_cast<std::uint16_t>(r.number(3,2))},TimestampNanoseconds{r.number(5,6)}};
     switch(type){
+    case 'K':case 'J':case 'I':case 'O':{
+        if(profile!=DecodeProfile::retained_2023_auctions_v4)
+            return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
+        switch(type){
+        case 'K':out.message=IpoQuotingUpdate{r.text<8>(11,"stock"),static_cast<std::uint32_t>(r.number(19,4)),r.enumeration(23,"AC","ipo_qualifier"),r.price(24,"ipo_price")};break;
+        case 'J':out.message=LuldAuctionCollar{r.text<8>(11,"stock"),r.price(19,"collar_reference"),r.price(23,"collar_upper"),r.price(27,"collar_lower"),static_cast<std::uint32_t>(r.number(31,4))};break;
+        case 'I':{NetOrderImbalance n;n.paired=r.number(11,8);n.imbalance=r.number(19,8);n.direction=r.enumeration(27,"BSNOP","imbalance_direction");n.stock=r.text<8>(28,"stock");n.far=r.price(36,"far_price");n.near=r.price(40,"near_price");n.reference=r.price(44,"reference_price");n.cross_type=r.enumeration(48,"OCHA","imbalance_cross");n.variation=r.enumeration(49,"L123456789ABC ","price_variation");out.message=n;break;}
+        case 'O':out.message=DirectListingDiscovery{r.text<8>(11,"stock"),r.enumeration(19,"NY","open_eligibility"),r.price(20,"minimum_price"),r.price(24,"maximum_price"),r.price(28,"near_price"),r.number(32,8),r.price(40,"lower_collar"),r.price(44,"upper_collar")};break;
+        default:break;
+        }
+        break;
+    }
     case 'L':case 'V':case 'W':case 'h':case 'N':{
-        if(profile!=DecodeProfile::administrative_observations_v3)
+        if(profile<DecodeProfile::administrative_observations_v3)
             return Result<DecodedRecord>::failure({Code::unsupported_type,location.payload_offset,"type",0,type});
         // Exact source observations only; no book, auction or regulatory enforcement.
         switch(type){
