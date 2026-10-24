@@ -331,3 +331,7 @@ Entry d4c15ab79a81437fb731396c574cd04c515100db clean and remote-verified. One Ac
 ## Phase6 phases2–3 checkpoint — October24,2026
 
 Portability/source audit found no reproduced production defect. Journal semantic/archive atomicity assertions strengthened;32 lifecycle churn cycles/4128 accepted events released all35552 allocations with4727264 peak PMR in focused Debug. Focused journal CTests3/3;54 long scaling measurements (GCC/Clang Release4097/8191/8192 ×3 reset regimes ×3 repeats) passed independent byte ledgers and cleanup. No new optimization. Review docs/PHASE6_PORTABILITY_REPLAY_REVIEW.md. Remaining: streaming checkpoint (699 prefixes/2097 fragment schedules focused passed, not yet committed), then matrix, Python/package and final readiness/report. Do not claim final matrix passed yet.
+
+## Phase6 phase4 checkpoint — October24,2026
+
+Added exhaustive interruption oracle to the existing auction streaming fault CTest:699 incomplete gzip prefixes ×3 fragment sizes=2097 schedules, using independently counted RFC stored-block bytes and complete BinaryFile lengths plus authored native-event positions. Every prefix refuses publication; native/external/receipt/journal counts agree, hashes/error families match fragmentation,8MiB PMR caps hold, teardown leaves0 live blocks/bytes. Existing10 fault variants/20 schedules retained. Focused fault CTest1/1 passed. Next: freeze tests, run supported compiler/Python matrix, package checks and final report; preserve baseline hashes and avoid unapproved production changes.

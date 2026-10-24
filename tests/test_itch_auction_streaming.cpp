@@ -27,6 +27,36 @@ StreamingFeed feed(StreamingReconstructor& s,const Fixture& f,std::size_t& at,st
 void truth(const StreamingReconstructor& s){const auto f=s.summary();check(f.accepted_records==22&&f.source_records==22&&f.native_records==7&&f.external_observations==15,"source accounting includes all auction observations");check(s.reconstruction().engine(0)->journal_size()==6&&s.reconstruction().engine(1)->journal_size()==1,"observations excluded from both journals");check(s.reconstruction().receipts().size()==22,"receipts exact");}
 void rehash(Fixture& f){f.compressed=stored_gzip(f.raw);f.configuration.compressed_sha256=sha256(f.compressed);f.configuration.reconstruction.source.provenance.sha256=sha256(f.raw);auto h=hex_digest(sha256(f.raw));f.configuration.reconstruction.initialization.fixture_sha256=*gig::Digest::make({h.data(),h.size()}).data;}
 std::size_t find_frame(const Bytes& bytes,char type){std::size_t at=0;while(at+2<bytes.size()){const auto n=(std::to_integer<std::size_t>(bytes[at])<<8)|std::to_integer<std::size_t>(bytes[at+1]);if(!n)break;if(bytes[at+2]==static_cast<std::byte>(type))return at;at+=n+2;}throw std::runtime_error("fixture frame absent");}
+void interrupted_prefixes(){
+ Fixture f;check(f.raw.size()<65536,"one authored stored block oracle");
+ std::size_t schedules=0;
+ for(std::size_t cut=0;cut<f.compressed.size();++cut){
+  // RFC1951 stored block:10-byte gzip header +5-byte block header.
+  const auto available=cut<=15?0:std::min(cut-15,f.raw.size());
+  std::size_t offset=0,expected=0;
+  while(offset+2<=available){
+   const auto length=std::to_integer<std::size_t>(f.raw[offset])*256+std::to_integer<std::size_t>(f.raw[offset+1]);
+   if(!length||length>available-offset-2)break;
+   offset+=length+2;++expected;
+  }
+  const auto native=expected<=7?0:std::min(expected-7,std::size_t{7});
+  std::optional<StreamingSummary> golden;
+  for(std::size_t chunk:{std::size_t{1},std::size_t{17},std::size_t{65536}}){
+   gig::TrackedResource memory(std::pmr::get_default_resource(),8U*1024U*1024U);
+   {auto pipeline=make(f,&memory);std::size_t at=0;
+    while(at<cut){const auto step=pipeline.feed(std::span(f.compressed).subspan(at,std::min(chunk,cut-at)));check(!step.error&&step.consumed>0,"prefix bounded progress");at+=step.consumed;}
+    const auto end=pipeline.finish();
+    check(bool(end.error)&&!end.source_complete&&!end.publication_eligible,"every incomplete gzip prefix refused");
+    check(end.accepted_records==expected&&end.native_records==native&&end.external_observations==expected-native,"independent stored-block/frame prefix oracle");
+    check(pipeline.reconstruction().receipts().size()==expected,"no missing/duplicate prefix receipts");
+    const auto journal=pipeline.reconstruction().engine(0)->journal_size()+pipeline.reconstruction().engine(1)->journal_size();
+    check(journal==native,"prefix native journal accounting");
+    if(golden)check(end.accepted_prefix_sha256==golden->accepted_prefix_sha256&&end.error.code==golden->error.code,"all-prefix fragmentation invariance");else golden=end;
+   }check(memory.stats().live_bytes==0&&memory.stats().live_blocks==0,"all-prefix cleanup");++schedules;
+  }
+ }
+ std::cout<<"exhaustive_gzip_prefixes="<<f.compressed.size()<<" fragment_schedules="<<schedules<<" independent_native_external_receipt_oracle=true\n";
+}
 void faults(){
  for(unsigned variant=0;variant<10;++variant){std::optional<StreamingSummary> expected;for(std::size_t chunk:{std::size_t{1},std::size_t{65536}}){Fixture f;std::uint64_t accepted=22,native=7;
   switch(variant){
@@ -46,7 +76,7 @@ void faults(){
  }}std::cout<<"auction_fault_variants=10 fragmentation_schedules=20 independently_checked_prefix_counts=true\n";
 }
 }
-int main(int argc,char** argv){try{if(argc==2&&std::string_view(argv[1])=="faults"){faults();return 0;}check(argc==1,"arguments");Fixture f;std::optional<StreamingSummary> golden;
+int main(int argc,char** argv){try{if(argc==2&&std::string_view(argv[1])=="faults"){faults();interrupted_prefixes();return 0;}check(argc==1,"arguments");Fixture f;std::optional<StreamingSummary> golden;
  for(std::size_t chunk:std::array<std::size_t,4>{1,3,17,65536}){auto s=make(f);std::size_t at=0;check(!feed(s,f,at,chunk).error,"auction streaming feed");auto end=s.finish();check(end.publication_eligible&&end.source_complete,"synthetic publication gates remain");truth(s);if(golden)check(end.accepted_prefix_sha256==golden->accepted_prefix_sha256,"fragment deterministic hash");else golden=end;}
  auto a=make(f);check(!a.pause_after(5),"pause at auction boundary");std::size_t ai=0;check(feed(a,f,ai,1).paused,"source pause");auto code=*gig::Digest::make(std::string(64,'8')).data;auto cp=a.checkpoint(code);check(bool(cp),"auction stream checkpoint");auto b=make(f);check(!b.pause_after(5),"replay pause");std::size_t bi=0;check(feed(b,f,bi,17).paused&&!b.verify_checkpoint(*cp.data,code),"restart fragmentation equality");auto wrong=*cp.data;wrong.config.reconstruction.context_policy.decode_profile=DecodeProfile::baseline_v1;check(bool(b.verify_checkpoint(wrong,code)),"profile checkpoint mismatch");check(!a.resume()&&!b.resume(),"resume");check(!feed(a,f,ai,1).error&&!feed(b,f,bi,65536).error,"complete restart");check(a.finish().accepted_prefix_sha256==b.finish().accepted_prefix_sha256,"restart accepted hash");truth(a);truth(b);
  auto bounded=make(f);std::size_t at=0;const auto half=std::span(f.compressed).first(f.compressed.size()/2);while(at<half.size()){auto r=bounded.feed(half.subspan(at));at+=r.consumed;check(!r.error&&r.consumed>0,"bounded progress");}check(!bounded.finish(EndKind::bounded_prefix).publication_eligible,"partial prefix not published");
