@@ -268,3 +268,16 @@ and RC13/16/17 remain blocked. Exact next action: deliver final documentation co
 verify remote/clean feature and unchanged main, then stop for owner decisions.
 A future session must inspect this checkpoint rather than rerun completed suites.
 No further acquisition or background engineering is authorized by this completion.
+
+## Phase4 master directive —16KiB acquisition completed
+
+Entry ef6970626f53354827864e937f3403ce281035df clean/remote verified.
+Exactly one GET consumed authorization:206 bytes0–16383/3524013057;16384 compressed,
+58606 decompressed;1433 frames S1/R1424/H4/Y4,12 residual; first4KiB identity matches.
+V2/v3 decode1433, independent fields/context agree, no orders/book/reconstructor.
+37 local safety controls passed; raw anonymous descriptor closed, zero raw retained.
+Reports NASDAQ_SECOND_PREFIX_INSPECTION.md/evidence JSON. No new message family.
+Exact next action after checkpoint push:offline remaining K/J/I/O authoritative
+profile work, machine-checkable observed readiness, replay/fault/performance/Python
+review, applicable matrix and final PHASE4_HISTORICAL_ENGINEERING_REPORT.md.
+No further market-data request is permitted; preserve checkpoint if interrupted.
