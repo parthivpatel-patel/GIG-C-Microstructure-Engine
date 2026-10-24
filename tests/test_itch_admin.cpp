@@ -1,6 +1,7 @@
 #include "gig/itch/restart.hpp"
 #include "gig/memory/tracked_resource.hpp"
 #include "tests/support/itch_reconstruction_fixture.hpp"
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <type_traits>
@@ -24,7 +25,14 @@ ReconstructionConfig configuration(){auto c=config();c.context_policy.decode_pro
 SourceContext context(std::pmr::memory_resource* memory=std::pmr::get_default_resource()){auto c=configuration();auto x=SourceContext::create(c.source,c.context_policy,memory);check(bool(x),"admin create");return std::move(*x.data);}
 void wire(){
  for(char t:std::string_view{"LVWhN"}){auto b=observation(t);auto d=decode(b,loc,{},profile);check(bool(d),"new family decoded");for(auto p:{DecodeProfile::baseline_v1,DecodeProfile::status_observations_v2})check(decode(b,loc,{},p).error.code==Code::unsupported_type,"old profiles unchanged");
-  for(std::size_t n=0;n<=b.size()+1;++n){if(n==b.size())continue;auto bad=b;bad.resize(n);check(!decode(bad,loc,{},profile),"all malformed lengths");}
+  for(std::size_t n=0;n<=b.size()+1;++n){
+   if(n==b.size())continue;
+   // Construct the requested extent directly: preserve the available prefix and
+   // zero-fill only the one-byte extension, without copy-then-resize growth.
+   Bytes bad(n,std::byte{});
+   std::copy_n(b.begin(),std::min(n,b.size()),bad.begin());
+   check(!decode(bad,loc,{},profile),"all malformed lengths");
+  }
  }
  auto v=decode(observation('V'),loc,{},profile);const auto& levels=std::get<MwcbDeclineLevels>(v.data->message);check(levels.level1.value()==0&&levels.level2.value()==UINT64_MAX&&levels.level3.value()==(UINT64_C(1)<<32),"exact full Price8 source values");
  auto bad=observation('L');bad[11]=std::byte{0};check(decode(bad,loc,{},profile).error.code==Code::invalid_value,"MPID encoding");
