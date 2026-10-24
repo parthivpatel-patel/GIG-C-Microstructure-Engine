@@ -92,3 +92,13 @@ extension's count expectations, not frozen closure results or RC13/16/17 blocker
 No hosted CI request, independent-machine reproduction, provider security clearance,
 release approval or market-data request is claimed. Next data proposal is offline
 in NASDAQ_NEXT_PREFIX_PREFLIGHT_PROPOSAL.md and needs separate explicit approval.
+
+## Phase4 current overlay
+
+See PHASE4_PRIVATE_CANDIDATE_READINESS.md:1360 local CTest outcomes,150 native/
+153 Python Debug/Release/154 Python sanitizer, plus all8 canonical identities.
+Hosted required rows150 native/153 GCC Python Release remain unverified remotely.
+RC13/16/17 stay BLOCKED. RC23 now has partial observed16KiB evidence, but full
+artifact/profile gate is BLOCKED, not passed. RC24/25 remain BLOCKED. This updates
+only the current overlay; earlier gate decisions/counts stay historical evidence.
+The single16KiB acquisition authorization is consumed; no further range is approved.

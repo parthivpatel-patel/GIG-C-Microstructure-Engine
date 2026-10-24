@@ -281,3 +281,33 @@ Exact next action after checkpoint push:offline remaining K/J/I/O authoritative
 profile work, machine-checkable observed readiness, replay/fault/performance/Python
 review, applicable matrix and final PHASE4_HISTORICAL_ENGINEERING_REPORT.md.
 No further market-data request is permitted; preserve checkpoint if interrupted.
+
+## Phase4 offline work — active durable checkpoint
+
+16KiB evidence committed/pushed70b61658953551bc275e46140803d1a568a98ae3;
+request budget exhausted, zero retained raw bytes. Do not repeat any acquisition.
+Implemented pending retained_2023_auctions_v4 for K/J/I/O; default v1/v2/v3 unchanged.
+K normative binary Price4 policy explicit despite inconsistent prose; O/NOII later
+2023 semantics not claimed as2019. K global locate0 routes by exact known symbol.
+New observations never mutate books. NOII field layout fits existing variant size;
+Message48/DecodedRecord304 preserved. No journal/replay/gzip refactor.
+Independent auction oracle40129 wire +16960 context candidates; canonical
+76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6.
+10 stream fault variants/20 fragment schedules; fail-closed observed readiness
+checker and pure-decode timing arithmetic controls. Qualified focused11/11 passed.
+Final matrix runners:/tmp/run-phase4-matrix.py gcc/clang/python; packaging:
+/tmp/phase4-packages.py. Evidence build/phase4-historical/evidence. Expected150
+native each,153 Python Debug/Release,154 Python sanitizer (1360 total). Observe
+actual exits/hashes before asserting completion. No full suite needs restarting
+unless source changes invalidate it. No source edits planned while matrix runs.
+
+Exact next action:finish matrix/package gates; measure controlled existing
+context/L3/streaming/profile workloads plus new decode timing; audit Python,
+replay/snapshots/security boundaries; finalize docs/PHASE4_HISTORICAL_ENGINEERING_REPORT.md
+and readiness/RC evidence. Optimize only if isolated measurements justify a safe
+change; no speculative journal change. Review/commit/push verified milestones,
+verify remote/clean tree/main; do not claim execution continues after interruption.
+
+## Phase 4 closure — 2026-10-24 UTC
+
+Implementation checkpoint b549b5aa5cc157f636430800b9a16c5ec2159a39 pushed and verified. All nine final configurations passed: 1,360 CTest outcomes, zero failed/skipped/disabled, seven prior hashes unchanged plus one new matching oracle. Installed consumers 28/28; packaging regressions 3/3; refreshed archive 291 safe members. Completed 38 measured runs; no journal optimization. Final evidence verifies all 15 changed implementation-file hashes still match the tested commit. Documentation closure records retained-2023 assumptions and RC blockers. Exact next action: owner/hosted/independent-environment evidence; separately authorize any further observed-data experiment. No further data request or real L3 reconstruction authorized. No work continues after this session stops.

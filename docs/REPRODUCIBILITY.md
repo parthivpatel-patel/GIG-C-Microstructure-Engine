@@ -325,3 +325,26 @@ See HISTORICAL_ITCH_ENGINEERING_REPORT.md and its evidence for exact source/arti
 identities, all seven canonical hashes and limits. Ordinary wheels still expose
 only the existing Python research API; they do not add an ITCH administration API.
 No data request or observed reconstructor invocation belongs to these commands.
+
+## Phase4 retained2023 auctions and conservative readiness audit
+
+Explicit `DecodeProfile::retained_2023_auctions_v4` adds K/J/I/O and normalization4,
+leaving v1/v2/v3 unchanged. See current matrix for normative binary K Price4 policy
+and later O/NOII fields; no empirical2019 certification follows.
+
+```sh
+ctest --test-dir build/phase9-clean-debug \
+  -R '^itch.auction_|^observed.readiness|^itch.decode_timing' --output-on-failure
+python3 scripts/check_itch_auction_reference.py build/phase9-clean-debug/gig_itch_auction_tests
+python3 scripts/check_observed_l3_readiness.py \
+  --from-second-prefix docs/NASDAQ_SECOND_PREFIX_EVIDENCE.json
+# Expected readiness audit exit1/BLOCKED; invalid input exits2.
+build/phase9-clean-release/benchmarks/gig_itch_decode_latency 10000
+```
+
+Full actual results150 native per configuration,153 Python Debug/Release and154
+Python sanitizer (1360 CTest outcomes) are in PHASE4_HISTORICAL_ENGINEERING_REPORT.md
+and its evidence. Bench timing includes its declared clock/stage overhead and is
+not an exchange-latency target. All seven previous hashes remain unchanged. Source
+archives/wheels are locally tested snapshots; Python research schema/API unchanged.
+No command above downloads data, invokes an observed book or publishes a release.
