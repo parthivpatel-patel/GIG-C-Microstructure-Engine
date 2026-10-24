@@ -1,0 +1,400 @@
+{
+  "schema": "gig.clean_reproduction.v1",
+  "reproducible": {
+    "source_commit": "883d91c32f428396f9ee412d07f14a13d14e36c3",
+    "source_clean": true,
+    "test_profile": "python",
+    "build_configuration": "GCC Release; Python, streaming, benchmarks enabled; strict warnings",
+    "junit": "tests.xml",
+    "ctest_counts": {
+      "tests": 157,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "canonical_sha256": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+    },
+    "benchmark_correctness_cases": [
+      {
+        "name": "benchmark.fixture_reference",
+        "outcome": "passed",
+        "output_sha256": "c759206833dc38a3313b949f5d1814989f007b403cc026ef07b1277b58ff0235"
+      },
+      {
+        "name": "benchmark.compiler_metadata",
+        "outcome": "passed",
+        "output_sha256": "1415d91dd5f23a4697603832dc81b63e58477001851a548e3e89f925300ff1bc"
+      },
+      {
+        "name": "benchmark.correctness",
+        "outcome": "passed",
+        "output_sha256": "92201b9047e2bbd02d602d8d2239d45a34db941532e23042205d65fae8e33dd8"
+      },
+      {
+        "name": "benchmark.reject_0",
+        "outcome": "passed",
+        "output_sha256": "0c734f46f2e21627a6392de4e6657626e019388d91ab11b38b27fe9c6e56f20c"
+      },
+      {
+        "name": "benchmark.reject_bad",
+        "outcome": "passed",
+        "output_sha256": "0c734f46f2e21627a6392de4e6657626e019388d91ab11b38b27fe9c6e56f20c"
+      },
+      {
+        "name": "benchmark.book_smoke",
+        "outcome": "passed",
+        "output_sha256": "c0a6a987ca1eaef3c42e4dde57e24f17951825f3fcea68f73f60383d57deb7f7"
+      },
+      {
+        "name": "itch.benchmark_correctness",
+        "outcome": "passed",
+        "output_sha256": "9e5ad02cdc6614b17b47a2a2342c572744f6a4925bed54f00bc54f1da211cbb9"
+      },
+      {
+        "name": "itch.context_benchmark_correctness",
+        "outcome": "passed",
+        "output_sha256": "7667d374c484b7a33eddc3c655dc448d90d100fc7355bf9c350d96269762b92b"
+      },
+      {
+        "name": "itch.reconstruction_benchmark_correctness",
+        "outcome": "passed",
+        "output_sha256": "3f759cbbac3a2f0f45a598f6d210dcaf39a433b6951c85381c72adb77e65374c"
+      },
+      {
+        "name": "itch.streaming_benchmark_correctness",
+        "outcome": "passed",
+        "output_sha256": "9176a8d2bc9dbc764f94ed3a38731aad2e26096e5aada293ed68265c98545402"
+      }
+    ],
+    "source_setup": "docs/INDEPENDENT_REPRODUCTION.md"
+  },
+  "environment_dependent": {
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "dependencies": {
+      "pybind11": "2.13.6",
+      "scikit_build_core": "0.11.6",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "build": "1.2.2.post1",
+      "pyproject_hooks": "1.3.3",
+      "jsonschema": "4.23.0",
+      "attrs": "26.1.0",
+      "jsonschema-specifications": "2025.9.1",
+      "referencing": "0.37.0",
+      "rpds-py": "2026.9.1",
+      "typing_extensions": "4.16.0"
+    },
+    "python_openssl": "OpenSSL 3.5.8 25 Aug 2026",
+    "python_zlib": "1.3.2",
+    "expat": "expat_2.8.3",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "cmake": "cmake version 3.31.6\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+    "ninja": "1.11.1.git.kitware.jobserver-1\n",
+    "zlib_distro": "zlib1g-dev:amd64\t1:1.3.dfsg+really1.3.1-1+b1\n"
+  },
+  "artifacts": [
+    {
+      "path": "build.log",
+      "sha256": "6ca275e094b68b4af7cdfb4eb11f2d0e10bfaf2917d0140bef80a50dac2d3d83"
+    },
+    {
+      "path": "configure.log",
+      "sha256": "f9073e15ae5b5470f4b11c053d39904c4db6c581841df8a468ab6f92cf656ce5"
+    },
+    {
+      "path": "dependency-wheels.json",
+      "sha256": "f15d791041034eac20f3ed2b8e0aa12d6784b517c7e91cf7eba01411230aa7c7"
+    },
+    {
+      "path": "environment.json",
+      "sha256": "4594176a1558e808974b1a93b7b4d7ba48f3ef679d360c02670de872302f5787"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/cost_config-v1.schema.json",
+      "sha256": "3ff350e6d4c2d869893a545eb8fcc75e226c46dafdfff5c6c5b5303be268fca8"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_config-v1.schema.json",
+      "sha256": "b9cda0d3928129fac76abe6c56e5b665176d3d769ac49094b96b377beb58bf62"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_quote-v1.schema.json",
+      "sha256": "e6533ccbad63c5bcc33627dc8dc076b6a0262e04cf9ef362c9f96d2646be186a"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_trade-v1.schema.json",
+      "sha256": "8c919a0d5815b5610f046dc5479ece8af76d6b844067afd5efde4549ffcf855c"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.book_snapshot-v1.schema.json",
+      "sha256": "8a6e081aff260978ae80100c5879f2f4ac662e0bae24a9c310ac694753425820"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.event-v1.schema.json",
+      "sha256": "47b5b7d4e04d9a9f31b97295df64b279db5fdded7e77b6817095f36d48e994ea"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.execution_schedule-v1.schema.json",
+      "sha256": "99ce8454fc54d18fb16abf13fc04de3c00650c25984e09af147c5d496f7e759c"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.metric_result-v1.schema.json",
+      "sha256": "db3c347cbd33ac4cb353d7f22efa449eecf9a5625d8cd4e8cebe4bac1ee7219f"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.run_manifest-v1.schema.json",
+      "sha256": "38180856167dc770d405d29b0580029759c2abec7658ff2b8e22097a9936030b"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.simulation_output-v1.schema.json",
+      "sha256": "e1db549e48c1898b007ebc545139c1c9d9bd02bb40d2fc676f19988ad3d5217d"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/instrument_rules-v1.schema.json",
+      "sha256": "be80218b155d2f631e06ee19ce90a54ecda83c09205b199f9c7555f176fd3743"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/plan_config-v1.schema.json",
+      "sha256": "591fe0dbffd92f6d0098d2fe591499312ea6b8c1f267fd287af407e894c47d7d"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/replay_config-v1.schema.json",
+      "sha256": "ac8d8074cafae37ad21fa05ee9edcd6e91af50d11a3adb4cb40d3eff7f7d4074"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/simulation_config-v1.schema.json",
+      "sha256": "3bcdaf7d837164d32d3a8c36ba0eec4753241a00ef4839df9fa60042cd183693"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/gig_microstructure-0.1.1.dist-info/direct_url.json",
+      "sha256": "e212aedbc4fe49d702d5d757fa761f163765538ef7ef9b60af59ffb7348f5f37"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema/benchmarks/issue232/issue.json",
+      "sha256": "79a3ce663311bb9bbc4692abb00f6e93bb9c3d94b9b64286e03fe190e4d0dc79"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft201909/metaschema.json",
+      "sha256": "7b761b3e121f0a0ca1ea2a0b8e2cc856bcf801604b8268d71bacaa202bc0c13b"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft202012/metaschema.json",
+      "sha256": "41da76f5afb7ce062d248f762463a92f7ca47e4e0f905b224ba6afeef91ded0f"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft3/metaschema.json",
+      "sha256": "2cf75f64436fb5be374a2eaa27ab8b7e1fd651c9b46daea6c67b02fd64e2458b"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft4/metaschema.json",
+      "sha256": "e1489d0b4755f02793302591d3fcb8f07b6893a82a94f24895f8e4edf11b82e2"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft6/metaschema.json",
+      "sha256": "c29dfce9f54835c3a06c03b3c5d5ec0eda77706568f9c4df7cfbc7566a51006d"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft7/metaschema.json",
+      "sha256": "3d5392088261606c559b603f385329c9f1ab45b5d667eb990687453b055d405e"
+    },
+    {
+      "path": "package/checkout-consumer/lib/python3.12/site-packages/rpds_py-2026.9.1.dist-info/sboms/rpds-py.cyclonedx.json",
+      "sha256": "0c8885a9d45f3c9280aeb1e06701077036748b22bd6e3a4201fe09e6b73f99b5"
+    },
+    {
+      "path": "package/evidence/checkout-example.log",
+      "sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+    },
+    {
+      "path": "package/evidence/checkout-exports.log",
+      "sha256": "20e66ade9d76a64a555ed3f8306894e067dce94a64bd693d0515aeedb8dca8ef"
+    },
+    {
+      "path": "package/evidence/checkout-install.log",
+      "sha256": "026aa838e18faceaab92bbf348197eda3fa318639bc081ce19b84e5608f8fe7c"
+    },
+    {
+      "path": "package/evidence/checkout-interface.log",
+      "sha256": "15d2012105ebdc57b0b1998800372fb127e4ad31cd7a8b99e9591e209e46aef6"
+    },
+    {
+      "path": "package/evidence/checkout-module-path.log",
+      "sha256": "c1e30980054fe0a8710ae50488de094d08ab604fca77e09e4708f78011ef7fdf"
+    },
+    {
+      "path": "package/evidence/checkout-venv.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "package/evidence/package-artifacts.json",
+      "sha256": "954597fdfb2d647a443d91e5562ca5e1f83c0ee74d2baa0e1b8e5756c71f9ec2"
+    },
+    {
+      "path": "package/evidence/package-build.log",
+      "sha256": "86c4b1559ffee0d44d61da041f51c1712e136d2ee497fa43e691d4ddaa6d5935"
+    },
+    {
+      "path": "package/evidence/packages.json",
+      "sha256": "488cf865c06ee0b0b01cbea967d44aa6c4bda438507b13f3c9acd2ce9f5d3eec"
+    },
+    {
+      "path": "package/evidence/sdist-example.log",
+      "sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+    },
+    {
+      "path": "package/evidence/sdist-exports.log",
+      "sha256": "735ae958afc7570bc9cd2950addf728402ba03824d7c5b2493f663a11323e0b2"
+    },
+    {
+      "path": "package/evidence/sdist-install.log",
+      "sha256": "4972f24b8ff789db5c5bc6e8ffe769653cfda4b57f1ead567f46d0e5db1f4f98"
+    },
+    {
+      "path": "package/evidence/sdist-interface.log",
+      "sha256": "7aa1f38c67b2f2d4aca10b46a0c5a0e5cc7cbbd57e4e59206caa0bbec1f7495a"
+    },
+    {
+      "path": "package/evidence/sdist-module-path.log",
+      "sha256": "e2e7362b67c7bed0c6953d46e9e4a262101702b96d9970c2103031b5af6a8888"
+    },
+    {
+      "path": "package/evidence/sdist-venv.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "package/evidence/source-wheel-build.log",
+      "sha256": "4c6edd15c1e0adbc7e77e07c8322bd0ff1c27678b7f488523103cf06adac8867"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/cost_config-v1.schema.json",
+      "sha256": "3ff350e6d4c2d869893a545eb8fcc75e226c46dafdfff5c6c5b5303be268fca8"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_config-v1.schema.json",
+      "sha256": "b9cda0d3928129fac76abe6c56e5b665176d3d769ac49094b96b377beb58bf62"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_quote-v1.schema.json",
+      "sha256": "e6533ccbad63c5bcc33627dc8dc076b6a0262e04cf9ef362c9f96d2646be186a"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/flow_trade-v1.schema.json",
+      "sha256": "8c919a0d5815b5610f046dc5479ece8af76d6b844067afd5efde4549ffcf855c"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.book_snapshot-v1.schema.json",
+      "sha256": "8a6e081aff260978ae80100c5879f2f4ac662e0bae24a9c310ac694753425820"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.event-v1.schema.json",
+      "sha256": "47b5b7d4e04d9a9f31b97295df64b279db5fdded7e77b6817095f36d48e994ea"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.execution_schedule-v1.schema.json",
+      "sha256": "99ce8454fc54d18fb16abf13fc04de3c00650c25984e09af147c5d496f7e759c"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.metric_result-v1.schema.json",
+      "sha256": "db3c347cbd33ac4cb353d7f22efa449eecf9a5625d8cd4e8cebe4bac1ee7219f"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.run_manifest-v1.schema.json",
+      "sha256": "38180856167dc770d405d29b0580029759c2abec7658ff2b8e22097a9936030b"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/gig.simulation_output-v1.schema.json",
+      "sha256": "e1db549e48c1898b007ebc545139c1c9d9bd02bb40d2fc676f19988ad3d5217d"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/instrument_rules-v1.schema.json",
+      "sha256": "be80218b155d2f631e06ee19ce90a54ecda83c09205b199f9c7555f176fd3743"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/plan_config-v1.schema.json",
+      "sha256": "591fe0dbffd92f6d0098d2fe591499312ea6b8c1f267fd287af407e894c47d7d"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/replay_config-v1.schema.json",
+      "sha256": "ac8d8074cafae37ad21fa05ee9edcd6e91af50d11a3adb4cb40d3eff7f7d4074"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure/schemas/simulation_config-v1.schema.json",
+      "sha256": "3bcdaf7d837164d32d3a8c36ba0eec4753241a00ef4839df9fa60042cd183693"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/gig_microstructure-0.1.1.dist-info/direct_url.json",
+      "sha256": "bafe26f92a829811769739fd0afc4884fa2e1b7b5afb58b0b42151e1f5bbcd4d"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema/benchmarks/issue232/issue.json",
+      "sha256": "79a3ce663311bb9bbc4692abb00f6e93bb9c3d94b9b64286e03fe190e4d0dc79"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft201909/metaschema.json",
+      "sha256": "7b761b3e121f0a0ca1ea2a0b8e2cc856bcf801604b8268d71bacaa202bc0c13b"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft202012/metaschema.json",
+      "sha256": "41da76f5afb7ce062d248f762463a92f7ca47e4e0f905b224ba6afeef91ded0f"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft3/metaschema.json",
+      "sha256": "2cf75f64436fb5be374a2eaa27ab8b7e1fd651c9b46daea6c67b02fd64e2458b"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft4/metaschema.json",
+      "sha256": "e1489d0b4755f02793302591d3fcb8f07b6893a82a94f24895f8e4edf11b82e2"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft6/metaschema.json",
+      "sha256": "c29dfce9f54835c3a06c03b3c5d5ec0eda77706568f9c4df7cfbc7566a51006d"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/jsonschema_specifications/schemas/draft7/metaschema.json",
+      "sha256": "3d5392088261606c559b603f385329c9f1ab45b5d667eb990687453b055d405e"
+    },
+    {
+      "path": "package/sdist-consumer/lib/python3.12/site-packages/rpds_py-2026.9.1.dist-info/sboms/rpds-py.cyclonedx.json",
+      "sha256": "0c8885a9d45f3c9280aeb1e06701077036748b22bd6e3a4201fe09e6b73f99b5"
+    },
+    {
+      "path": "package-driver.log",
+      "sha256": "98dcf514f8dd55ccc24ebf8a3d08403965c17e42518e762589f1fd5c74bbe58d"
+    },
+    {
+      "path": "tests.log",
+      "sha256": "adbc329e4a79d3ed65adbe9761924d6e0aad741961b8742fc58af2904c7a7cd2"
+    },
+    {
+      "path": "tests.xml",
+      "sha256": "10239bbcd46c2863f5506f8611855c19ae2d42d72fafd9e7b3ed0d9c748137ee"
+    },
+    {
+      "path": "verifier-tests.log",
+      "sha256": "a25b5619af971eae96a8c9d37ebc69133b4c28e990455e210be0507206df182c"
+    }
+  ],
+  "native_arm64_archive": {
+    "existing_record": "docs/NATIVE_ARM64_QUALIFICATION_EVIDENCE.json",
+    "run": 40126420107,
+    "tested_commit": "f02363e0e09b9767b4dc6748737206254e5e4c6a",
+    "six_jobs": "independently verified public GitHub metadata and step summaries; preserved",
+    "raw_logs_junit_versions": "not available via existing auth; API Forbidden, no outbound identity; no bypass/retry"
+  },
+  "limitations": [
+    "This new clean worktree shares the Codex host; it is not another independent physical machine or human audit",
+    "Tool executables are reused installed dependencies with recorded versions, not prebuilt engine artifacts",
+    "Dependency cache contents are explicit hash-bound inputs; external registry qualification is separate",
+    "Local receipts are not a cryptographic remote attestation"
+  ]
+}

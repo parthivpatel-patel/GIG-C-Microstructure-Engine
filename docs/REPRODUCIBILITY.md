@@ -1,8 +1,12 @@
-# Reproduce the private research build
+# Reproduce the research build
+
+For the latest executed clean-checkout procedure and hash-bound manifest see
+[INDEPENDENT_REPRODUCTION.md](INDEPENDENT_REPRODUCTION.md).
 
 Tested host: Linux Debian13 x86_64, GCC14.2, CMake3.31.6, Ninja1.11.1,
 CPython3.12.14. Optional Clang19.1.7 uses the system GCC standard library.
-No native ARM64 hardware was available: ARM64 is NOT TESTED, not cross-compiled.
+Native Linux ARM64 six-job qualification is closed at f02363e by GitHub run40126420107;
+see NATIVE_ARM64_QUALIFICATION.md for source-bound public metadata and log limits.
 Windows/macOS are not tested. No portability claim follows from C++20 alone.
 
 Use the existing development branch and verify `git status --porcelain`,
@@ -23,8 +27,8 @@ ctest --preset debug --output-junit build/debug/tests.xml
 ```
 
 Repeat with release and asan-ubsan. With optional streaming and benchmarks enabled,
-the P1I/P1J native suite has122 CTest outcomes; Python Debug/Release125 and
-GCC Python sanitizer126. Historical P1F had85 native outcomes, including
+the current native suite has154 CTest outcomes; Python Debug/Release157 and
+GCC Python sanitizer158. Historical P1I/P1J counts were122/125/126. Historical P1F had85 native outcomes, including
 independent Python arbitrary-precision reference programs; the native library does
 not depend on a Python development module or pybind11. Reference scripts require
 an interpreter. Explicit CXX avoids inherited SDK compiler settings. For Clang use
