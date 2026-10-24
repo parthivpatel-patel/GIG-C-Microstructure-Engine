@@ -222,7 +222,7 @@ if(BUILD_TESTING)
     add_test(NAME itch.reconstruction_${case} COMMAND gig_itch_reconstruction_tests ${case})
   endforeach()
   add_executable(gig_itch_l3_reference_driver tests/itch_l3_reference_driver.cpp)
-  target_link_libraries(gig_itch_l3_reference_driver PRIVATE gig::itch_reconstruction)
+  target_link_libraries(gig_itch_l3_reference_driver PRIVATE gig::itch_input_adapter)
   gig_project_target(gig_itch_l3_reference_driver)
   add_test(NAME itch.l3_reference COMMAND ${Python3_EXECUTABLE}
     ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_l3_reference.py $<TARGET_FILE:gig_itch_l3_reference_driver>)

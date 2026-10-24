@@ -492,6 +492,10 @@ def main():
     if not args.negative_control:
         from check_itch_readiness_reference import main as readiness_reference
         readiness_reference(args.driver)
+        from pathlib import Path
+        import sys
+        subprocess.run([sys.executable,str(Path(__file__).with_name('check_adapter_differential.py')),args.driver],check=True)
+        subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_adapter_differential.py')],check=True)
 
 
 if __name__=='__main__':main()

@@ -1,4 +1,5 @@
 #include "gig/itch/reconstruction.hpp"
+#include "gig/itch/input_adapter.hpp"
 #include "gig/memory/tracked_resource.hpp"
 #include <algorithm>
 #include <iostream>
@@ -69,8 +70,52 @@ void outcome(const ReconstructionStep& step,const SyntheticReconstructor& r){
     }
     std::cout<<"]}";
 }
+bool adapter_case(std::istringstream& input,ReconstructionConfig config,gig::TrackedResource& resource,std::size_t chunk,std::string_view dataset_id){
+    Bytes bytes;std::string encoded;
+    while(input>>encoded){
+        if(encoded.size()%2||encoded.size()>131070){std::cerr<<"adapter fixture hex bound\n";return false;}
+        const auto size=encoded.size()/2;bytes.push_back(static_cast<std::byte>(size>>8U));bytes.push_back(static_cast<std::byte>(size&255U));
+        for(std::size_t i=0;i<encoded.size();i+=2)bytes.push_back(static_cast<std::byte>(std::stoul(encoded.substr(i,2),nullptr,16)));
+        if(bytes.size()>2U*1024U*1024U){std::cerr<<"adapter fixture byte bound\n";return false;}
+    }
+    bytes.push_back(std::byte{});bytes.push_back(std::byte{});
+    DatasetContract dataset{source_identity("independent-authored"),source_identity(dataset_id),source_identity("literal-generator"),source_identity("synthetic-test-permitted"),source_identity("no-market-data"),source_identity("authored-empty-evidence"),{},ByteOffset{0},ByteOffset{bytes.size()},false};
+    FramerLimits limits;limits.max_records=config.max_source_records;limits.max_stream_bytes=8U*1024U*1024U;
+    InputAdapterConfig input_config{dataset,config.source,config.context_policy,limits,InitialClaim::authored_synthetic,config};
+    auto created=BinarySourceAdapter::create(input_config,&resource);if(!created){std::cerr<<"adapter create "<<created.error.field<<'\n';return false;}
+    auto& adapter=*created.data;std::size_t offset=0;bool comma=false;std::cout<<"{\"events\":[";
+    while(offset<bytes.size()){
+        const auto count=std::min(chunk,bytes.size()-offset);const auto step=adapter.feed(std::span<const std::byte>(bytes).subspan(offset,count));offset+=step.consumed;
+        if(step.frame){if(comma)std::cout<<',';comma=true;outcome(step.native,*adapter.reconstruction());}
+        if(step.error)break;
+        if(!step.consumed){std::cerr<<"adapter stalled\n";return false;}
+    }
+    const auto summary=adapter.finish();const auto digest=hex_digest(summary.input_sha256);
+    std::cout<<"],\"summary\":{\"records\":"<<summary.records<<",\"accepted\":"<<summary.accepted<<",\"native\":"<<summary.native_records
+             <<",\"dataset_hex\":\""<<hex(dataset_id)<<"\",\"rejected\":"<<summary.rejected<<",\"bytes\":"<<summary.bytes<<",\"error\":"<<static_cast<unsigned>(summary.error.code)
+             <<",\"input_complete\":"<<(summary.input_complete?"true":"false")<<",\"l3_complete\":"<<(summary.full_l3_complete?"true":"false")
+             <<",\"publication_eligible\":"<<(summary.publication_eligible?"true":"false")<<",\"input_sha256\":\""<<std::string_view(digest.data(),digest.size())<<"\"}}\n";
+    return true;
 }
-int main(){std::string line;while(std::getline(std::cin,line)){gig::TrackedResource resource(std::pmr::get_default_resource(),128*1024*1024);{std::istringstream input(line);unsigned flags{};gig::types::UnitScale tick{},lots{};input>>flags>>tick.numerator>>tick.denominator>>lots.numerator>>lots.denominator;std::string digest_text;input>>digest_text;auto config=configuration(flags,tick,lots,digest_text);auto reconstruction=SyntheticReconstructor::create(config,&resource);if(!reconstruction){std::cerr<<"create: "<<static_cast<unsigned>(reconstruction.error.code)<<' '<<reconstruction.error.field<<'\n';return 2;}
+
+}
+int main(int argc,char** argv){
+    const bool use_adapter=argc>1&&std::string_view(argv[1])=="--adapter";
+    if(argc>4||(argc>1&&!use_adapter))return 5;
+    const auto dataset=SourceIdentity::make(argc==4?argv[3]:"adapter-differential-v1");if(!dataset)return 5;
+    const auto chunk=argc>=3?static_cast<std::size_t>(std::stoul(argv[2])):std::size_t{7};
+    if(chunk==0||chunk>65536)return 5;
+    bool oversized=false;std::string line;
+    const auto next=[&](){
+        if(!use_adapter)return static_cast<bool>(std::getline(std::cin,line));
+        line.clear();char value{};
+        while(std::cin.get(value)){if(value=='\n')return true;if(line.size()==2U*1024U*1024U){oversized=true;std::cerr<<"adapter fixture line limit\n";return false;}line.push_back(value);}
+        return !line.empty();
+    };
+    while(next()){gig::TrackedResource resource(std::pmr::get_default_resource(),128*1024*1024);{std::istringstream input(line);unsigned flags{};gig::types::UnitScale tick{},lots{};input>>flags>>tick.numerator>>tick.denominator>>lots.numerator>>lots.denominator;std::string digest_text;input>>digest_text;
+    if(use_adapter&&(!input||flags>7||digest_text.size()!=64||!std::all_of(digest_text.begin(),digest_text.end(),[](char c){return (c>='0'&&c<='9')||(c>='a'&&c<='f');})
+        ||!tick.numerator||!tick.denominator||!lots.numerator||!lots.denominator||tick.numerator>1000000||tick.denominator>1000000||lots.numerator>1000000||lots.denominator>1000000)){std::cerr<<"adapter fixture metadata\n";return 5;}
+    auto config=configuration(flags,tick,lots,digest_text);if(use_adapter){if(!adapter_case(input,config,resource,chunk,dataset.data->view()))return 2;}else{auto reconstruction=SyntheticReconstructor::create(config,&resource);if(!reconstruction){std::cerr<<"create: "<<static_cast<unsigned>(reconstruction.error.code)<<' '<<reconstruction.error.field<<'\n';return 2;}
     std::cout<<'[';std::string encoded;std::uint64_t offset=0,ordinal=0;bool comma=false;while(input>>encoded){Bytes payload;for(std::size_t i=0;i<encoded.size();i+=2)payload.push_back(static_cast<std::byte>(std::stoul(encoded.substr(i,2),nullptr,16)));const auto step=reconstruction.data->process(payload,{ByteOffset{offset},ByteOffset{offset+2},RecordOrdinal{ordinal}},config.source.provenance);if(comma)std::cout<<',';comma=true;outcome(step,*reconstruction.data);if(step.committed){offset+=payload.size()+2;++ordinal;}else break;}
     std::cout<<"]\n";
-}if(resource.stats().live_bytes!=0){std::cerr<<"driver PMR leak\n";return 4;}}}
+}}if(resource.stats().live_bytes!=0){std::cerr<<"driver PMR leak\n";return 4;}}return oversized?5:0;}
