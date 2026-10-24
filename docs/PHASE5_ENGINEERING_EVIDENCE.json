@@ -1,0 +1,4389 @@
+{
+  "schema": "gig.phase5_engineering_evidence.v1",
+  "starting_commit": "f0373aa3e662d416fe6260210a7f3158d8fecea7",
+  "baseline_checkpoint": "90a6d7f9d4838089bb02bcd8fa60538f73f50222",
+  "validated_implementation_commit": "6eee608ea6436a27bb0698dd6ee3f6f074353b2c",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "preserved_main": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "source_sha256": {
+    ".github/workflows/ci.yml": "93e124b8b79cff57ee1b88885dd0b8b8a4d7076459977755ff43b739bd2e5687",
+    "CMakeLists.txt": "7a8211b6563a5724071a1848d4919673a1a57b2ecce03e2f22ac7104d64175bc",
+    "benchmarks/CMakeLists.txt": "ba468a14b1180991a8a2d0517f8f29ce8164ba14e5030b55d3b766783c45f607",
+    "benchmarks/book_benchmark.cpp": "e8cd7cb139c4b9cd66475da6c5480a0be0c3ce6f6cf5e92f315dee8d2ee161b3",
+    "benchmarks/itch_profile_probe.cpp": "b947c6627a6028ca598dc2e34e1f30ee0904ce6a22ccc484571a6daa6481478a",
+    "benchmarks/itch_reconstruction_benchmark.cpp": "2334ab67a54c2914ee92c66bc3e6ac83ac5a97463487a2d01f66bb184906859f",
+    "benchmarks/itch_streaming_benchmark.cpp": "27f8f3c4f2f9cf670117a745dc4501badf90aa0f1322baef8e7de65942d79a25",
+    "include/gig/replay/replay.hpp": "a618020d5e7fc8a69517f1bf2dab78a26b04de697a6b4801cb6179c5c9699204",
+    "src/replay/replay.cpp": "e8461558e7b5b51ffeefdc7ac45cbef451084cab05311d0e17e5e63e0d35ad09",
+    "tests/test_observed_readiness.py": "04724a7201dd375e5c60c52769b22a07eb536e37afcef6f9bcb2be84d6c94b8a",
+    "scripts/check_journal_storage.py": "7ce1929c804e37f74b4e9a9e726d6638a16faf35376164ad1fbed33150a6782b",
+    "benchmarks/journal_memory_probe.cpp": "b57aa397cb1770fcbdda8eadfaf2283655f8f95f81201acf341c02ed420da25a",
+    "tests/test_journal_storage.cpp": "d89a3d2040303379422b66fe002b362c6b2bc94bf991b01dbd745e9f9cef8ec3"
+  },
+  "environment": {
+    "date_utc": "2026-10-24T02:28:22Z",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "affinity_cpus": 5,
+    "cpu_quota": "400000 100000",
+    "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+    "clang": "Debian clang version 19.1.7 (3+b1)",
+    "python": "3.12.14",
+    "baseline_compile": [
+      "c++",
+      "-std=c++20",
+      "-O3",
+      "-DNDEBUG",
+      "-DGIG_PHASE5_BASELINE",
+      "-Iinclude",
+      "-I.",
+      "benchmarks/journal_memory_probe.cpp",
+      "build/phase9-clean-release/libgig_microstructure.a"
+    ],
+    "rss_limitation": "wait4 maxrss can include pre-exec parent floor; not allocator fragmentation or exclusive engine memory",
+    "timing_limitation": "sequential before/after on shared host, no isolation/causal throughput claim"
+  },
+  "dependencies": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "python_zlib_header": "1.3.2",
+    "python_zlib_runtime": "1.3.2",
+    "packages": {
+      "pybind11": "2.13.6",
+      "scikit_build_core": "0.11.6",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "build": "1.2.2.post1",
+      "pyproject_hooks": "1.3.3",
+      "jsonschema": "4.23.0",
+      "attrs": "26.1.0",
+      "jsonschema-specifications": "2025.9.1",
+      "referencing": "0.37.0",
+      "rpds-py": "2026.9.1",
+      "typing_extensions": "4.16.0"
+    },
+    "native_zlib": {
+      "header_version": "1.3.1",
+      "runtime_version": "1.3.1",
+      "header_path": "/usr/include/zlib.h",
+      "library_path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3.1",
+      "header_sha256": "8a5579af72ea4f427ff00a4150f0ccb3fc5c1e4379f726e101133b1ab9fc600c",
+      "library_sha256": "85590dd58edf5445e18bc7193e5ebc01ac5841f1ae187e97705a662e90c6421e"
+    }
+  },
+  "matrix": [
+    {
+      "configuration": "phase9-clean-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clean-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 49.147,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "ae1120509d33464b3121ec62ea3fa5af4b0a3f3764808328890420c7b6fae998",
+      "log_sha256": "387a22e793b58d3856146cc7251e2f60a28e4981dce308cc78c7faed8e49eebf"
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clean-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 34.314,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "1ed28fa33bc281cb1e6c4ba93a4bca6d4f9aec8089f1dd5806665aca293f8ef3",
+      "log_sha256": "9a964d07b3d2ab5bdbd5f125a807e4b1e6fdba00af984a6d22a0b81609a4d94e"
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clean-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 255.142,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "83d5465e7d8921f761181614c11fda8e25377759eb47c8c445f9e55959f95093",
+      "log_sha256": "f367201904693831c8f05d7e8abfb4d32745eafc90218a437a078e29dbe9b6cc"
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clang-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 129.914,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "97f1c48fe78e70ed2faacd5b4bd779eac5510ddfa5b7bb65edf11a0e46ac6da0",
+      "log_sha256": "c4564bf167685e1a188862990d715c7f061fc844d644fd0a2a5fd8012016a452"
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clang-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 133.175,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "7c8da39137878a819db9f7bd103d7a11808a9601373fe60716966b69e595dd65",
+      "log_sha256": "8851e13219d4550e0c9e56e83c17690399906968083c093cb72b6a0eafdbe643"
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/phase9-clang-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 197.835,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "3ade2309a0c737e78b8df078b11ee20639287bc63f4fc644f9b1165706ab474c",
+      "log_sha256": "6286a51b38c5933a0a828a1133662cefbaeda9a00e27754bb6d5141f4cd16dc7"
+    },
+    {
+      "configuration": "python-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/python-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 152.977,
+      "counts": {
+        "tests": 157,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "a6a42b29852a6f4e2c6b590884268b237f639093583e4df47f0bd566968c92bb",
+      "log_sha256": "63265655256cea1457b88a6d747c095ff47fc918ed92f8555114f112c1a1c753"
+    },
+    {
+      "configuration": "python-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/python-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 175.182,
+      "counts": {
+        "tests": 157,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "1c89a3f5e7a788fca6928052fc50fff76db2bbcf6e9705603b72a7dc0a727c31",
+      "log_sha256": "7f20f401004afa74641f267cf924162acab9f63ba9f22e072e0b4e35643d780a"
+    },
+    {
+      "configuration": "python-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/evidence/python-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 264.109,
+      "counts": {
+        "tests": 158,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "6d2e31f9146a552df4d7e4da2c454d45ec00e1beb7238673aff962f717ea54e3",
+      "log_sha256": "e4242391459dacbcb65f5e442b2c1379736854026f9cace1b499eea6907b675f"
+    }
+  ],
+  "total_ctest_outcomes": 1396,
+  "canonical_changes": false,
+  "frozen_prefix_count": 128,
+  "new_reset_allocation_failure_sites": 16,
+  "prechange_reset_allocation_failure_sites": 11,
+  "existing_replay_allocation_failure_sites": 32,
+  "readiness_unittest_methods": 12,
+  "readiness_contradictory_cases": 120,
+  "readiness_adversarial_candidates": 2048,
+  "readiness_seed": 559173,
+  "journal_before": {
+    "binary_sha256": "f94b00d8cb49e3fd7ee750479ec060e57a7092650f5783aa6345c2e38b53ad4b",
+    "fixture": "authored_session_observations_and_explicit_resets_v1",
+    "seed": null,
+    "warmup_processes_per_case": 1,
+    "measured_repetitions": 3,
+    "scope": "create_apply_validate_destroy; no canonical export in timing",
+    "rows": [
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2385942,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1955075,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1704610,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2274158,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1936775,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2091613,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 137,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2072858,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 137,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2276923,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 15944,
+        "record_capacity": 128,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2041248,
+        "peak_pmr_bytes": 3061664,
+        "allocations": 137,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1787489,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8478029,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8467005,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8449580,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 19,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7124181,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 19,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7400496,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 19,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8631666,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 523,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8961392,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 523,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7902814,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 15944,
+        "record_capacity": 512,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8163744,
+        "peak_pmr_bytes": 12245408,
+        "allocations": 523,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7597701,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15649081,
+        "repetition": 0,
+        "max_rss_bytes": 18132992,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 17878370,
+        "repetition": 1,
+        "max_rss_bytes": 18087936,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 16908889,
+        "repetition": 2,
+        "max_rss_bytes": 18132992,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 27,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 19376211,
+        "repetition": 0,
+        "max_rss_bytes": 18137088,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 27,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15014772,
+        "repetition": 1,
+        "max_rss_bytes": 18141184,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 27,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 17746340,
+        "repetition": 2,
+        "max_rss_bytes": 18137088,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 1013,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 16348694,
+        "repetition": 0,
+        "max_rss_bytes": 18157568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 1013,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 16011469,
+        "repetition": 1,
+        "max_rss_bytes": 18157568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 15944,
+        "record_capacity": 1001,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15960360,
+        "peak_pmr_bytes": 24123688,
+        "allocations": 1013,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 21225792,
+        "repetition": 2,
+        "max_rss_bytes": 18157568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 19208591,
+        "repetition": 0,
+        "max_rss_bytes": 18161664,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 19166623,
+        "repetition": 1,
+        "max_rss_bytes": 18161664,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15399699,
+        "repetition": 2,
+        "max_rss_bytes": 18153472,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 28,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15997209,
+        "repetition": 0,
+        "max_rss_bytes": 18161664,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 28,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 19131169,
+        "repetition": 1,
+        "max_rss_bytes": 18157568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 28,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 16095752,
+        "repetition": 2,
+        "max_rss_bytes": 18157568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 1036,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 16791312,
+        "repetition": 0,
+        "max_rss_bytes": 18178048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 1036,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 21063368,
+        "repetition": 1,
+        "max_rss_bytes": 18169856,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 15944,
+        "record_capacity": 1024,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16327072,
+        "peak_pmr_bytes": 24490400,
+        "allocations": 1036,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 14546250,
+        "repetition": 2,
+        "max_rss_bytes": 18173952,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 67878331,
+        "repetition": 0,
+        "max_rss_bytes": 67153920,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 65958653,
+        "repetition": 1,
+        "max_rss_bytes": 67215360,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 67857079,
+        "repetition": 2,
+        "max_rss_bytes": 67162112,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 78,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 84325084,
+        "repetition": 0,
+        "max_rss_bytes": 67162112,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 78,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 69733239,
+        "repetition": 1,
+        "max_rss_bytes": 67162112,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 78,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 71636613,
+        "repetition": 2,
+        "max_rss_bytes": 67158016,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 4110,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 76502841,
+        "repetition": 0,
+        "max_rss_bytes": 67178496,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 4110,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 77902753,
+        "repetition": 1,
+        "max_rss_bytes": 67178496,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 15944,
+        "record_capacity": 4096,
+        "restart_bytes": 0,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14776,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65307040,
+        "peak_pmr_bytes": 97960352,
+        "allocations": 4110,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 72413669,
+        "repetition": 2,
+        "max_rss_bytes": 67170304,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/journal-before",
+          "4096",
+          "1"
+        ]
+      }
+    ]
+  },
+  "journal_after": {
+    "binary_sha256": "5323f7f8f2f4a28d44dac7aefd8194779a422c4dcc09845f82e6bd366010dc36",
+    "fixture": "authored_session_observations_and_explicit_resets_v1",
+    "seed": null,
+    "warmup_processes_per_case": 1,
+    "measured_repetitions": 3,
+    "scope": "create_apply_validate_destroy; no canonical export in timing",
+    "rows": [
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1566112,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 3150294,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1566112,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2404245,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1566112,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2707865,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 2,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1573552,
+        "peak_pmr_bytes": 2352680,
+        "allocations": 13,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 3291447,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 2,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1573552,
+        "peak_pmr_bytes": 2352680,
+        "allocations": 13,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1786644,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "resets": 2,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 2,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1573552,
+        "peak_pmr_bytes": 2352680,
+        "allocations": 13,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2137376,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "64"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 128,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2042272,
+        "peak_pmr_bytes": 2587040,
+        "allocations": 145,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2786988,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 128,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2042272,
+        "peak_pmr_bytes": 2587040,
+        "allocations": 145,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 1957736,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "resets": 128,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 128,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 2042272,
+        "peak_pmr_bytes": 2587040,
+        "allocations": 145,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2884071,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6263200,
+        "peak_pmr_bytes": 9394592,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7809520,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6263200,
+        "peak_pmr_bytes": 9394592,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8812480,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6263200,
+        "peak_pmr_bytes": 9394592,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8377305,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "0"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 8,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6292960,
+        "peak_pmr_bytes": 9409472,
+        "allocations": 23,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7256948,
+        "repetition": 0,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 8,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6292960,
+        "peak_pmr_bytes": 9409472,
+        "allocations": 23,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 7647013,
+        "repetition": 1,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "resets": 8,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 8,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 6292960,
+        "peak_pmr_bytes": 9409472,
+        "allocations": 23,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 9853294,
+        "repetition": 2,
+        "max_rss_bytes": 11010048,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "64"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 512,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8167840,
+        "peak_pmr_bytes": 10346912,
+        "allocations": 533,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 8904589,
+        "repetition": 0,
+        "max_rss_bytes": 11755520,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 512,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8167840,
+        "peak_pmr_bytes": 10346912,
+        "allocations": 533,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 12320060,
+        "repetition": 1,
+        "max_rss_bytes": 11751424,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "resets": 512,
+        "record_bytes": 12232,
+        "record_capacity": 512,
+        "restart_bytes": 3720,
+        "restart_capacity": 512,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 8167840,
+        "peak_pmr_bytes": 10346912,
+        "allocations": 533,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15704180,
+        "repetition": 2,
+        "max_rss_bytes": 11759616,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "512",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12244648,
+        "peak_pmr_bytes": 18507432,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 18347812,
+        "repetition": 0,
+        "max_rss_bytes": 14299136,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12244648,
+        "peak_pmr_bytes": 18507432,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 11260711,
+        "repetition": 1,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12244648,
+        "peak_pmr_bytes": 18507432,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 21704736,
+        "repetition": 2,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "0"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12304168,
+        "peak_pmr_bytes": 18537192,
+        "allocations": 32,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 10946463,
+        "repetition": 0,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12304168,
+        "peak_pmr_bytes": 18537192,
+        "allocations": 32,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 14159545,
+        "repetition": 1,
+        "max_rss_bytes": 14303232,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "resets": 15,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12304168,
+        "peak_pmr_bytes": 18537192,
+        "allocations": 32,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 10760764,
+        "repetition": 2,
+        "max_rss_bytes": 14348288,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "64"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 1001,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15968368,
+        "peak_pmr_bytes": 20412072,
+        "allocations": 1024,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15059040,
+        "repetition": 0,
+        "max_rss_bytes": 21512192,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 1001,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15968368,
+        "peak_pmr_bytes": 20412072,
+        "allocations": 1024,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 26419349,
+        "repetition": 1,
+        "max_rss_bytes": 21508096,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "resets": 1001,
+        "record_bytes": 12232,
+        "record_capacity": 1001,
+        "restart_bytes": 3720,
+        "restart_capacity": 1001,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 15968368,
+        "peak_pmr_bytes": 20412072,
+        "allocations": 1024,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 26550187,
+        "repetition": 2,
+        "max_rss_bytes": 21508096,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1001",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12525984,
+        "peak_pmr_bytes": 18788768,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 17699463,
+        "repetition": 0,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12525984,
+        "peak_pmr_bytes": 18788768,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 18254501,
+        "repetition": 1,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12525984,
+        "peak_pmr_bytes": 18788768,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 13222322,
+        "repetition": 2,
+        "max_rss_bytes": 14299136,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12585504,
+        "peak_pmr_bytes": 18818528,
+        "allocations": 33,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 11709992,
+        "repetition": 0,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12585504,
+        "peak_pmr_bytes": 18818528,
+        "allocations": 33,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 17803277,
+        "repetition": 1,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "resets": 16,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 16,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12585504,
+        "peak_pmr_bytes": 18818528,
+        "allocations": 33,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 10992153,
+        "repetition": 2,
+        "max_rss_bytes": 14307328,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "64"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 1024,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16335264,
+        "peak_pmr_bytes": 20693408,
+        "allocations": 1047,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15336845,
+        "repetition": 0,
+        "max_rss_bytes": 21770240,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 1024,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16335264,
+        "peak_pmr_bytes": 20693408,
+        "allocations": 1047,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 23372207,
+        "repetition": 1,
+        "max_rss_bytes": 21770240,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "resets": 1024,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 1024,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 16335264,
+        "peak_pmr_bytes": 20693408,
+        "allocations": 1047,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 15782198,
+        "repetition": 2,
+        "max_rss_bytes": 21774336,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50102688,
+        "peak_pmr_bytes": 75153824,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 83124933,
+        "repetition": 0,
+        "max_rss_bytes": 51949568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50102688,
+        "peak_pmr_bytes": 75153824,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 61222392,
+        "repetition": 1,
+        "max_rss_bytes": 51949568,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50102688,
+        "peak_pmr_bytes": 75153824,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 71398125,
+        "repetition": 2,
+        "max_rss_bytes": 51957760,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 64,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50340768,
+        "peak_pmr_bytes": 75272864,
+        "allocations": 85,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 76187069,
+        "repetition": 0,
+        "max_rss_bytes": 52191232,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 64,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50340768,
+        "peak_pmr_bytes": 75272864,
+        "allocations": 85,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 51878185,
+        "repetition": 1,
+        "max_rss_bytes": 52191232,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "resets": 64,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 64,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50340768,
+        "peak_pmr_bytes": 75272864,
+        "allocations": 85,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 77512670,
+        "repetition": 2,
+        "max_rss_bytes": 52187136,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "64"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 4096,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65339808,
+        "peak_pmr_bytes": 82772384,
+        "allocations": 4123,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 101573940,
+        "repetition": 0,
+        "max_rss_bytes": 82268160,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 4096,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65339808,
+        "peak_pmr_bytes": 82772384,
+        "allocations": 4123,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 74749243,
+        "repetition": 1,
+        "max_rss_bytes": 82264064,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "1"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "resets": 4096,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 4096,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 65339808,
+        "peak_pmr_bytes": 82772384,
+        "allocations": 4123,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 109297413,
+        "repetition": 2,
+        "max_rss_bytes": 82264064,
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "1"
+        ]
+      }
+    ]
+  },
+  "journal_comparison": {
+    "cases": [
+      {
+        "records": 128,
+        "reset_every": 0,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 128,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 2041248,
+          "peak_pmr_bytes": 3061664,
+          "allocations": 9,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 1704610,
+            "median": 1955075,
+            "max": 2385942
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 128,
+          "restart_bytes": 3720,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 1566112,
+          "peak_pmr_bytes": 2348960,
+          "allocations": 9,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 2404245,
+            "median": 2707865,
+            "max": 3150294
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "live_pmr_reduction_fraction": 0.23276740503848625
+      },
+      {
+        "records": 128,
+        "reset_every": 64,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 128,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 2041248,
+          "peak_pmr_bytes": 3061664,
+          "allocations": 11,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 1936775,
+            "median": 2091613,
+            "max": 2274158
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 128,
+          "restart_bytes": 3720,
+          "restart_capacity": 2,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 1573552,
+          "peak_pmr_bytes": 2352680,
+          "allocations": 13,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 1786644,
+            "median": 2137376,
+            "max": 3291447
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "live_pmr_reduction_fraction": 0.229122575992726
+      },
+      {
+        "records": 128,
+        "reset_every": 1,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 128,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 2041248,
+          "peak_pmr_bytes": 3061664,
+          "allocations": 137,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 1787489,
+            "median": 2072858,
+            "max": 2276923
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 128,
+          "restart_bytes": 3720,
+          "restart_capacity": 128,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 2042272,
+          "peak_pmr_bytes": 2587040,
+          "allocations": 145,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 1957736,
+            "median": 2786988,
+            "max": 2884071
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "live_pmr_reduction_fraction": -0.0005016538901692069
+      },
+      {
+        "records": 512,
+        "reset_every": 0,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 512,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 8163744,
+          "peak_pmr_bytes": 12245408,
+          "allocations": 11,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 8449580,
+            "median": 8467005,
+            "max": 8478029
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 512,
+          "restart_bytes": 3720,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 6263200,
+          "peak_pmr_bytes": 9394592,
+          "allocations": 11,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 7809520,
+            "median": 8377305,
+            "max": 8812480
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "live_pmr_reduction_fraction": 0.23280298843275826
+      },
+      {
+        "records": 512,
+        "reset_every": 64,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 512,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 8163744,
+          "peak_pmr_bytes": 12245408,
+          "allocations": 19,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 7124181,
+            "median": 7400496,
+            "max": 8631666
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 512,
+          "restart_bytes": 3720,
+          "restart_capacity": 8,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 6292960,
+          "peak_pmr_bytes": 9409472,
+          "allocations": 23,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 7256948,
+            "median": 7647013,
+            "max": 9853294
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "live_pmr_reduction_fraction": 0.22915760219820713
+      },
+      {
+        "records": 512,
+        "reset_every": 1,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 512,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 8163744,
+          "peak_pmr_bytes": 12245408,
+          "allocations": 523,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 7597701,
+            "median": 7902814,
+            "max": 8961392
+          },
+          "max_rss_bytes": {
+            "min": 11010048,
+            "median": 11010048,
+            "max": 11010048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 512,
+          "restart_bytes": 3720,
+          "restart_capacity": 512,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 8167840,
+          "peak_pmr_bytes": 10346912,
+          "allocations": 533,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 8904589,
+            "median": 12320060,
+            "max": 15704180
+          },
+          "max_rss_bytes": {
+            "min": 11751424,
+            "median": 11755520,
+            "max": 11759616
+          }
+        },
+        "live_pmr_reduction_fraction": -0.0005017305785188775
+      },
+      {
+        "records": 1001,
+        "reset_every": 0,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1001,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 15960360,
+          "peak_pmr_bytes": 24123688,
+          "allocations": 12,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 15649081,
+            "median": 16908889,
+            "max": 17878370
+          },
+          "max_rss_bytes": {
+            "min": 18087936,
+            "median": 18132992,
+            "max": 18132992
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1001,
+          "restart_bytes": 3720,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 12244648,
+          "peak_pmr_bytes": 18507432,
+          "allocations": 12,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 11260711,
+            "median": 18347812,
+            "max": 21704736
+          },
+          "max_rss_bytes": {
+            "min": 14299136,
+            "median": 14307328,
+            "max": 14307328
+          }
+        },
+        "live_pmr_reduction_fraction": 0.23280878376176983
+      },
+      {
+        "records": 1001,
+        "reset_every": 64,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1001,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 15960360,
+          "peak_pmr_bytes": 24123688,
+          "allocations": 27,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 15014772,
+            "median": 17746340,
+            "max": 19376211
+          },
+          "max_rss_bytes": {
+            "min": 18137088,
+            "median": 18137088,
+            "max": 18141184
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1001,
+          "restart_bytes": 3720,
+          "restart_capacity": 16,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 12304168,
+          "peak_pmr_bytes": 18537192,
+          "allocations": 32,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 10760764,
+            "median": 10946463,
+            "max": 14159545
+          },
+          "max_rss_bytes": {
+            "min": 14303232,
+            "median": 14307328,
+            "max": 14348288
+          }
+        },
+        "live_pmr_reduction_fraction": 0.22907954457167634
+      },
+      {
+        "records": 1001,
+        "reset_every": 1,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1001,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 15960360,
+          "peak_pmr_bytes": 24123688,
+          "allocations": 1013,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 16011469,
+            "median": 16348694,
+            "max": 21225792
+          },
+          "max_rss_bytes": {
+            "min": 18157568,
+            "median": 18157568,
+            "max": 18157568
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1001,
+          "restart_bytes": 3720,
+          "restart_capacity": 1001,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 15968368,
+          "peak_pmr_bytes": 20412072,
+          "allocations": 1024,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 15059040,
+            "median": 26419349,
+            "max": 26550187
+          },
+          "max_rss_bytes": {
+            "min": 21508096,
+            "median": 21508096,
+            "max": 21512192
+          }
+        },
+        "live_pmr_reduction_fraction": -0.0005017430684521873
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1024,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 16327072,
+          "peak_pmr_bytes": 24490400,
+          "allocations": 12,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 15399699,
+            "median": 19166623,
+            "max": 19208591
+          },
+          "max_rss_bytes": {
+            "min": 18153472,
+            "median": 18161664,
+            "max": 18161664
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1024,
+          "restart_bytes": 3720,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 12525984,
+          "peak_pmr_bytes": 18788768,
+          "allocations": 12,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 13222322,
+            "median": 17699463,
+            "max": 18254501
+          },
+          "max_rss_bytes": {
+            "min": 14299136,
+            "median": 14307328,
+            "max": 14307328
+          }
+        },
+        "live_pmr_reduction_fraction": 0.2328089200562109
+      },
+      {
+        "records": 1024,
+        "reset_every": 64,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1024,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 16327072,
+          "peak_pmr_bytes": 24490400,
+          "allocations": 28,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 15997209,
+            "median": 16095752,
+            "max": 19131169
+          },
+          "max_rss_bytes": {
+            "min": 18157568,
+            "median": 18157568,
+            "max": 18161664
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1024,
+          "restart_bytes": 3720,
+          "restart_capacity": 16,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 12585504,
+          "peak_pmr_bytes": 18818528,
+          "allocations": 33,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 10992153,
+            "median": 11709992,
+            "max": 17803277
+          },
+          "max_rss_bytes": {
+            "min": 14307328,
+            "median": 14307328,
+            "max": 14307328
+          }
+        },
+        "live_pmr_reduction_fraction": 0.2291634409402984
+      },
+      {
+        "records": 1024,
+        "reset_every": 1,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 1024,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 16327072,
+          "peak_pmr_bytes": 24490400,
+          "allocations": 1036,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 14546250,
+            "median": 16791312,
+            "max": 21063368
+          },
+          "max_rss_bytes": {
+            "min": 18169856,
+            "median": 18173952,
+            "max": 18178048
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 1024,
+          "restart_bytes": 3720,
+          "restart_capacity": 1024,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 16335264,
+          "peak_pmr_bytes": 20693408,
+          "allocations": 1047,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 15336845,
+            "median": 15782198,
+            "max": 23372207
+          },
+          "max_rss_bytes": {
+            "min": 21770240,
+            "median": 21770240,
+            "max": 21774336
+          }
+        },
+        "live_pmr_reduction_fraction": -0.0005017433621901102
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 4096,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 65307040,
+          "peak_pmr_bytes": 97960352,
+          "allocations": 14,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 65958653,
+            "median": 67857079,
+            "max": 67878331
+          },
+          "max_rss_bytes": {
+            "min": 67153920,
+            "median": 67162112,
+            "max": 67215360
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 4096,
+          "restart_bytes": 3720,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 50102688,
+          "peak_pmr_bytes": 75153824,
+          "allocations": 14,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 61222392,
+            "median": 71398125,
+            "max": 83124933
+          },
+          "max_rss_bytes": {
+            "min": 51949568,
+            "median": 51949568,
+            "max": 51957760
+          }
+        },
+        "live_pmr_reduction_fraction": 0.23281336897216598
+      },
+      {
+        "records": 4096,
+        "reset_every": 64,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 4096,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 65307040,
+          "peak_pmr_bytes": 97960352,
+          "allocations": 78,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 69733239,
+            "median": 71636613,
+            "max": 84325084
+          },
+          "max_rss_bytes": {
+            "min": 67158016,
+            "median": 67162112,
+            "max": 67162112
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 4096,
+          "restart_bytes": 3720,
+          "restart_capacity": 64,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 50340768,
+          "peak_pmr_bytes": 75272864,
+          "allocations": 85,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 51878185,
+            "median": 76187069,
+            "max": 77512670
+          },
+          "max_rss_bytes": {
+            "min": 52187136,
+            "median": 52191232,
+            "max": 52191232
+          }
+        },
+        "live_pmr_reduction_fraction": 0.22916782019212634
+      },
+      {
+        "records": 4096,
+        "reset_every": 1,
+        "before": {
+          "record_bytes": 15944,
+          "record_capacity": 4096,
+          "restart_bytes": 0,
+          "restart_capacity": 0,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 65307040,
+          "peak_pmr_bytes": 97960352,
+          "allocations": 4110,
+          "engine_object_bytes": 14776,
+          "elapsed_ns": {
+            "min": 72413669,
+            "median": 76502841,
+            "max": 77902753
+          },
+          "max_rss_bytes": {
+            "min": 67170304,
+            "median": 67178496,
+            "max": 67178496
+          }
+        },
+        "after": {
+          "record_bytes": 12232,
+          "record_capacity": 4096,
+          "restart_bytes": 3720,
+          "restart_capacity": 4096,
+          "initial_pmr_bytes": 416,
+          "live_pmr_bytes": 65339808,
+          "peak_pmr_bytes": 82772384,
+          "allocations": 4123,
+          "engine_object_bytes": 14808,
+          "elapsed_ns": {
+            "min": 74749243,
+            "median": 101573940,
+            "max": 109297413
+          },
+          "max_rss_bytes": {
+            "min": 82264064,
+            "median": 82264064,
+            "max": 82268160
+          }
+        },
+        "live_pmr_reduction_fraction": -0.0005017529503710261
+      }
+    ],
+    "ordinary_record_reduction_fraction": 0.23281485198193674,
+    "reset_only_used_pair_bytes_delta": 8,
+    "minimum_ordinary_100000_element_bytes": 1223200000,
+    "old_100000_element_bytes": 1594400000,
+    "no_causal_latency_claim": true
+  },
+  "equivalent_workloads": {
+    "method": "Sequential after all final compiler/Python/package runners; old equivalent fixture baselines remain in phase4 evidence. No causal timing claim across sessions.",
+    "configured_git_head": "90a6d7f9d4838089bb02bcd8fa60538f73f50222",
+    "tested_code_manifest": "complete-code-files.json",
+    "rows": [
+      {
+        "label": "gcc-reconstruction-128",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_itch_reconstruction_benchmark",
+          "128",
+          "7"
+        ],
+        "compiler": "gcc",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.11274732599849813,
+        "peak_wait_accounted_rss_bytes": 25567232,
+        "user_seconds": 0.032722,
+        "system_seconds": 0.07689499999999999,
+        "binary_sha256": "a180274cb0ee2ba82c8942c2a9f8feff00cd70144f035b8ebc8734352de9eb07",
+        "raw_json": "build/phase5/evidence/gcc-reconstruction-128.json",
+        "raw_sha256": "7c6d826d4bc4979d66bcf0c06cd6d8afcb224e6f4b1a6ac3d65ca37b36a2122b",
+        "result": {
+          "workload": "synthetic_two_book_reconstruction_v1",
+          "scope": "create_decode_context_native_journal_receipts_validate_destroy",
+          "orders_per_symbol": 128,
+          "symbols": 2,
+          "records": 1027,
+          "input_bytes": 34144,
+          "fixture_sha256": "8498dca23a5ea54d024a7264097cb201dcf77419631448e58c5b6bc5d4cc4bc7",
+          "seed": 5255495,
+          "native_records": 1024,
+          "external_records": 3,
+          "checksum": 1638400,
+          "receipt_fnv1a64": 4002003416959083346,
+          "lifetime_orders": 512,
+          "matches": 256,
+          "context_reserved_bytes": 32848,
+          "allocations": 1580,
+          "allocation_attempts": 1580,
+          "live_bytes_before_destroy": 12914728,
+          "peak_pmr_bytes": 16070960,
+          "live_bytes_after_destroy": 0,
+          "deallocations": 1580,
+          "pmr_budget_bytes": 134217728,
+          "source_receipt_bytes": 344,
+          "prepared_context_bytes": 1496,
+          "source_context_bytes": 808,
+          "reconstructor_bytes": 98328,
+          "journal_entry_bytes": 12232,
+          "journal_records_per_symbol": 512,
+          "journal_element_bytes": 12525568,
+          "warmups": 2,
+          "repetitions": 7,
+          "median_ns_per_record": 10219.6,
+          "throughput_records_per_second": 97851.2,
+          "compiler": "GCC 14.2.0",
+          "build_configuration": "Release",
+          "container_complete": false,
+          "initialization": "authored_complete_empty_synthetic",
+          "raw_time_summary": {
+            "minimum_ns": 10119045,
+            "median_ns": 10495525,
+            "maximum_ns": 11619627,
+            "max_over_min": 1.1482928477934429
+          }
+        }
+      },
+      {
+        "label": "gcc-streaming-128-17",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_itch_streaming_benchmark",
+          "128",
+          "7",
+          "17"
+        ],
+        "compiler": "gcc",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.13269676599884406,
+        "peak_wait_accounted_rss_bytes": 26521600,
+        "user_seconds": 0.068821,
+        "system_seconds": 0.059523,
+        "binary_sha256": "cd8b762451a52ecf716901ddd181431a29679875f56f8f91e20bd6a78d161f22",
+        "raw_json": "build/phase5/evidence/gcc-streaming-128-17.json",
+        "raw_sha256": "285c35acf75875e47559057a6b1efb1e904892f2ac9e59c10fcbd7b994028fcf",
+        "result": {
+          "workload": "synthetic_two_book_gzip_streaming_v1",
+          "scope": "create_incremental_gzip_frame_decode_context_native_journal_receipts_EOF_validate_destroy",
+          "compression_fixture": "manual_RFC1951_stored_blocks",
+          "orders_per_symbol": 128,
+          "symbols": 2,
+          "records": 1032,
+          "compressed_bytes": 34239,
+          "decompressed_bytes": 34216,
+          "accepted_prefix_bytes": 34214,
+          "compressed_sha256": "ad2eef4df5df8af80bb25d147b5795241173823464736098075e9ec3149f6eea",
+          "decompressed_sha256": "1d7ccf17cbc20aba25be52cce2084738a059a4588a2f6a9e04b4ebc3fc6edb04",
+          "accepted_prefix_sha256": "5adbb102274e237fb85df1fc42e831c2c484a08b214a4d33912ba041ee5661c9",
+          "seed": 5255495,
+          "native_records": 1024,
+          "external_records": 8,
+          "receipt_fnv1a64": 13111839160835978412,
+          "lifetime_orders": 512,
+          "active_orders": 0,
+          "retired_orders": 512,
+          "matches": 256,
+          "context_reserved_bytes": 32848,
+          "allocations": 1585,
+          "allocation_attempts": 1585,
+          "live_bytes_before_destroy": 12957896,
+          "peak_pmr_bytes": 16114128,
+          "live_bytes_after_destroy": 0,
+          "deallocations": 1585,
+          "pmr_budget_bytes": 134217728,
+          "receipt_budget_bytes": 2097152,
+          "compressed_input_budget_bytes": 34239,
+          "decompressed_output_budget_bytes": 34216,
+          "max_expansion_ratio": 2,
+          "expansion_slack_bytes": 64,
+          "max_header_bytes": 64,
+          "input_chunk_bytes": 17,
+          "gzip_output_buffer_bytes": 1024,
+          "framer_buffer_bytes": 64,
+          "source_receipt_bytes": 344,
+          "prepared_context_bytes": 1496,
+          "source_context_bytes": 808,
+          "order_state_bytes": 56,
+          "match_state_bytes": 16,
+          "directory_state_bytes": 40,
+          "reconstructor_bytes": 98328,
+          "streaming_reconstructor_bytes": 101872,
+          "gzip_reader_bytes": 16,
+          "framer_object_bytes": 256,
+          "journal_entry_bytes": 12232,
+          "journal_records_per_symbol": 512,
+          "journal_element_bytes": 12525568,
+          "warmups": 2,
+          "repetitions": 7,
+          "median_ns_per_record": 13210.7,
+          "throughput_records_per_second": 75696.3,
+          "compiler": "GCC 14.2.0",
+          "build_configuration": "Release",
+          "source_complete": true,
+          "session_complete": true,
+          "publication_eligible": true,
+          "observed_market_validated": false,
+          "initialization": "authored_complete_empty_synthetic",
+          "raw_time_summary": {
+            "minimum_ns": 13337104,
+            "median_ns": 13633421,
+            "maximum_ns": 14185408,
+            "max_over_min": 1.0636048125590083
+          }
+        }
+      },
+      {
+        "label": "gcc-memory-profile128",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release/benchmarks/gig_itch_profile_probe",
+          "128"
+        ],
+        "compiler": "gcc",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.18902363299275748,
+        "peak_wait_accounted_rss_bytes": 65826816,
+        "user_seconds": 0.147619,
+        "system_seconds": 0.03591,
+        "binary_sha256": "a0d51dcc6fab393c263d10cb6beec3eca0ca94ebf89f9f69d43941bb98271804",
+        "raw_json": "build/phase5/evidence/gcc-memory-profile128.json",
+        "raw_sha256": "1e67551cee17729066af232bc22d6e373d2f2522efdd27f55af41e9264c2cc59",
+        "result": {
+          "schema": "gig.synthetic_profile_probe.v1",
+          "orders_per_symbol": 128,
+          "books": 2,
+          "records": 2056,
+          "native_records": 2048,
+          "journal_records_per_book": 1024,
+          "journal_entry_bytes": 12232,
+          "journal_element_bytes": 25051136,
+          "remaining_per_book": 127104,
+          "max_orders_per_book": 128,
+          "journal_limit_per_book": 1024,
+          "context_lifetime_limit": 4096,
+          "source_limit": 4096,
+          "receipt_budget_bytes": 2097152,
+          "pmr_budget_bytes": 134217728,
+          "first_pipeline_peak_pmr": 33219623,
+          "first_pipeline_live_pmr": 26956839,
+          "coexisting_query_live_pmr": 27939905,
+          "coexisting_query_peak_pmr": 33219623,
+          "restart_coexistence_peak_pmr": 60176462,
+          "final_peak_pmr": 60176462,
+          "export_canonical_bytes": 880640,
+          "allocations": 2757,
+          "query_allocation_failures_reached": 45,
+          "post_destroy_live_bytes": 0,
+          "compressed_bytes": 54719,
+          "decompressed_bytes": 54696,
+          "compressed_sha256": "4e84e8b67999d07bf0ea80ea0de829229fe23b34b25eec4254ec82b1a2158eef",
+          "decompressed_sha256": "9180c359dd0a21ef72f3c28638d2d9e304de106295115f0154077998d1b489eb",
+          "restart_equivalent": true,
+          "publication_eligible": true,
+          "reduced_pmr_stop": {
+            "budget": 16777216,
+            "framed": 517,
+            "accepted": 516,
+            "native": 513,
+            "peak": 14431271
+          },
+          "journal_cap_stop": {
+            "tested": true,
+            "limit": 1023,
+            "framed": 2050,
+            "accepted": 2049,
+            "native": 2046,
+            "field": "journal.records"
+          },
+          "observed_market_validated": false
+        }
+      },
+      {
+        "label": "clang-reconstruction-128",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release/benchmarks/gig_itch_reconstruction_benchmark",
+          "128",
+          "7"
+        ],
+        "compiler": "clang",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.1032106349884998,
+        "peak_wait_accounted_rss_bytes": 25546752,
+        "user_seconds": 0.035726,
+        "system_seconds": 0.067097,
+        "binary_sha256": "38a3e9d48f1f56e62a6a58ef551e6193392707b26d0f7812be6c006ac730b49c",
+        "raw_json": "build/phase5/evidence/clang-reconstruction-128.json",
+        "raw_sha256": "083d678fe9a5ca437efb17b56c1bf5054f57c3cb97ae64361305e64e03c6fa69",
+        "result": {
+          "workload": "synthetic_two_book_reconstruction_v1",
+          "scope": "create_decode_context_native_journal_receipts_validate_destroy",
+          "orders_per_symbol": 128,
+          "symbols": 2,
+          "records": 1027,
+          "input_bytes": 34144,
+          "fixture_sha256": "8498dca23a5ea54d024a7264097cb201dcf77419631448e58c5b6bc5d4cc4bc7",
+          "seed": 5255495,
+          "native_records": 1024,
+          "external_records": 3,
+          "checksum": 1638400,
+          "receipt_fnv1a64": 4002003416959083346,
+          "lifetime_orders": 512,
+          "matches": 256,
+          "context_reserved_bytes": 32848,
+          "allocations": 1580,
+          "allocation_attempts": 1580,
+          "live_bytes_before_destroy": 12914728,
+          "peak_pmr_bytes": 16070960,
+          "live_bytes_after_destroy": 0,
+          "deallocations": 1580,
+          "pmr_budget_bytes": 134217728,
+          "source_receipt_bytes": 344,
+          "prepared_context_bytes": 1496,
+          "source_context_bytes": 808,
+          "reconstructor_bytes": 98328,
+          "journal_entry_bytes": 12232,
+          "journal_records_per_symbol": 512,
+          "journal_element_bytes": 12525568,
+          "warmups": 2,
+          "repetitions": 7,
+          "median_ns_per_record": 9470.59,
+          "throughput_records_per_second": 105590,
+          "compiler": "Clang 19.1.7 (3+b1)",
+          "build_configuration": "Release",
+          "container_complete": false,
+          "initialization": "authored_complete_empty_synthetic",
+          "raw_time_summary": {
+            "minimum_ns": 9542060,
+            "median_ns": 9726300,
+            "maximum_ns": 10368684,
+            "max_over_min": 1.0866295118664104
+          }
+        }
+      },
+      {
+        "label": "clang-streaming-128-17",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release/benchmarks/gig_itch_streaming_benchmark",
+          "128",
+          "7",
+          "17"
+        ],
+        "compiler": "clang",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.13331231899792328,
+        "peak_wait_accounted_rss_bytes": 26533888,
+        "user_seconds": 0.047868999999999995,
+        "system_seconds": 0.080051,
+        "binary_sha256": "f93c3f72b6dfbcb340cc36ec9fa5f6991bab44149f2cbf9c93c76d1ca9263f54",
+        "raw_json": "build/phase5/evidence/clang-streaming-128-17.json",
+        "raw_sha256": "6ca4f31fa995068cf826df76c45d0f1187412c007d242157ba46ec5d3723fb25",
+        "result": {
+          "workload": "synthetic_two_book_gzip_streaming_v1",
+          "scope": "create_incremental_gzip_frame_decode_context_native_journal_receipts_EOF_validate_destroy",
+          "compression_fixture": "manual_RFC1951_stored_blocks",
+          "orders_per_symbol": 128,
+          "symbols": 2,
+          "records": 1032,
+          "compressed_bytes": 34239,
+          "decompressed_bytes": 34216,
+          "accepted_prefix_bytes": 34214,
+          "compressed_sha256": "ad2eef4df5df8af80bb25d147b5795241173823464736098075e9ec3149f6eea",
+          "decompressed_sha256": "1d7ccf17cbc20aba25be52cce2084738a059a4588a2f6a9e04b4ebc3fc6edb04",
+          "accepted_prefix_sha256": "5adbb102274e237fb85df1fc42e831c2c484a08b214a4d33912ba041ee5661c9",
+          "seed": 5255495,
+          "native_records": 1024,
+          "external_records": 8,
+          "receipt_fnv1a64": 13111839160835978412,
+          "lifetime_orders": 512,
+          "active_orders": 0,
+          "retired_orders": 512,
+          "matches": 256,
+          "context_reserved_bytes": 32848,
+          "allocations": 1585,
+          "allocation_attempts": 1585,
+          "live_bytes_before_destroy": 12957896,
+          "peak_pmr_bytes": 16114128,
+          "live_bytes_after_destroy": 0,
+          "deallocations": 1585,
+          "pmr_budget_bytes": 134217728,
+          "receipt_budget_bytes": 2097152,
+          "compressed_input_budget_bytes": 34239,
+          "decompressed_output_budget_bytes": 34216,
+          "max_expansion_ratio": 2,
+          "expansion_slack_bytes": 64,
+          "max_header_bytes": 64,
+          "input_chunk_bytes": 17,
+          "gzip_output_buffer_bytes": 1024,
+          "framer_buffer_bytes": 64,
+          "source_receipt_bytes": 344,
+          "prepared_context_bytes": 1496,
+          "source_context_bytes": 808,
+          "order_state_bytes": 56,
+          "match_state_bytes": 16,
+          "directory_state_bytes": 40,
+          "reconstructor_bytes": 98328,
+          "streaming_reconstructor_bytes": 101872,
+          "gzip_reader_bytes": 16,
+          "framer_object_bytes": 256,
+          "journal_entry_bytes": 12232,
+          "journal_records_per_symbol": 512,
+          "journal_element_bytes": 12525568,
+          "warmups": 2,
+          "repetitions": 7,
+          "median_ns_per_record": 12284.6,
+          "throughput_records_per_second": 81402.5,
+          "compiler": "Clang 19.1.7 (3+b1)",
+          "build_configuration": "Release",
+          "source_complete": true,
+          "session_complete": true,
+          "publication_eligible": true,
+          "observed_market_validated": false,
+          "initialization": "authored_complete_empty_synthetic",
+          "raw_time_summary": {
+            "minimum_ns": 12531272,
+            "median_ns": 12677740,
+            "maximum_ns": 14206679,
+            "max_over_min": 1.1336980794926486
+          }
+        }
+      },
+      {
+        "label": "clang-memory-profile128",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release/benchmarks/gig_itch_profile_probe",
+          "128"
+        ],
+        "compiler": "clang",
+        "build_type": "Release",
+        "exit": 0,
+        "wall_seconds": 0.18544763201498426,
+        "peak_wait_accounted_rss_bytes": 65851392,
+        "user_seconds": 0.124664,
+        "system_seconds": 0.056305,
+        "binary_sha256": "5c05c3b677fef521d183b1044cd3b9b48b94d4fffd22f080ecd13f0cacec42fa",
+        "raw_json": "build/phase5/evidence/clang-memory-profile128.json",
+        "raw_sha256": "1e67551cee17729066af232bc22d6e373d2f2522efdd27f55af41e9264c2cc59",
+        "result": {
+          "schema": "gig.synthetic_profile_probe.v1",
+          "orders_per_symbol": 128,
+          "books": 2,
+          "records": 2056,
+          "native_records": 2048,
+          "journal_records_per_book": 1024,
+          "journal_entry_bytes": 12232,
+          "journal_element_bytes": 25051136,
+          "remaining_per_book": 127104,
+          "max_orders_per_book": 128,
+          "journal_limit_per_book": 1024,
+          "context_lifetime_limit": 4096,
+          "source_limit": 4096,
+          "receipt_budget_bytes": 2097152,
+          "pmr_budget_bytes": 134217728,
+          "first_pipeline_peak_pmr": 33219623,
+          "first_pipeline_live_pmr": 26956839,
+          "coexisting_query_live_pmr": 27939905,
+          "coexisting_query_peak_pmr": 33219623,
+          "restart_coexistence_peak_pmr": 60176462,
+          "final_peak_pmr": 60176462,
+          "export_canonical_bytes": 880640,
+          "allocations": 2757,
+          "query_allocation_failures_reached": 45,
+          "post_destroy_live_bytes": 0,
+          "compressed_bytes": 54719,
+          "decompressed_bytes": 54696,
+          "compressed_sha256": "4e84e8b67999d07bf0ea80ea0de829229fe23b34b25eec4254ec82b1a2158eef",
+          "decompressed_sha256": "9180c359dd0a21ef72f3c28638d2d9e304de106295115f0154077998d1b489eb",
+          "restart_equivalent": true,
+          "publication_eligible": true,
+          "reduced_pmr_stop": {
+            "budget": 16777216,
+            "framed": 517,
+            "accepted": 516,
+            "native": 513,
+            "peak": 14431271
+          },
+          "journal_cap_stop": {
+            "tested": true,
+            "limit": 1023,
+            "framed": 2050,
+            "accepted": 2049,
+            "native": 2046,
+            "field": "journal.records"
+          },
+          "observed_market_validated": false
+        }
+      }
+    ]
+  },
+  "packaging": {
+    "steps": [
+      {
+        "name": "package-build",
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "-m",
+          "build",
+          "--wheel",
+          "--sdist",
+          "--no-isolation",
+          "--outdir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/dist"
+        ],
+        "exit": 0,
+        "output_sha256": "99784f59f240bba98dba3527d38e45819de656cea768a1f1aa43dea8ffd346fd"
+      },
+      {
+        "name": "source-wheel-build",
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "-m",
+          "pip",
+          "wheel",
+          "--no-index",
+          "--no-deps",
+          "--no-build-isolation",
+          "--wheel-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/source-dist",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/dist/gig_microstructure-0.1.1.tar.gz"
+        ],
+        "exit": 0,
+        "output_sha256": "55504552a66a4e328a07b67f22386c535a3ec3d98a9a7bd1d4abdac55f40c332"
+      },
+      {
+        "name": "checkout-venv",
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "-m",
+          "venv",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer"
+        ],
+        "exit": 0,
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "checkout-install",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "-m",
+          "pip",
+          "install",
+          "--no-index",
+          "--find-links",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-dependency-wheels",
+          "--constraint",
+          "/workspace/GIG-C-Microstructure-Engine/requirements-python.lock",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl"
+        ],
+        "exit": 0,
+        "output_sha256": "ad0d02ae025e8e01f2da07ecc28ffa566ed28142d60353d7d2e062cef8e4821d"
+      },
+      {
+        "name": "checkout-interface",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_python.py"
+        ],
+        "exit": 0,
+        "output_sha256": "a55276e3b9039f0505f174c9fb72eae94808b6304752afb30737d184632c6545"
+      },
+      {
+        "name": "checkout-exports",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_export_contracts.py"
+        ],
+        "exit": 0,
+        "output_sha256": "7e849af214c565c3c340a56542c4c6acdc522a76dd527623bb5b28b9d5f16312"
+      },
+      {
+        "name": "checkout-example",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/examples/python_research.py"
+        ],
+        "exit": 0,
+        "output_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+      },
+      {
+        "name": "checkout-module-path",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "-c",
+          "import gig_microstructure as g,sys;print(g.__file__);assert \"/site-packages/\" in g.__file__ and g.__file__.startswith(sys.prefix);print(g.native_build_info())"
+        ],
+        "exit": 0,
+        "output_sha256": "61f1ac7e08e17388ec110995d0e9028396d642618c8a1a123b0d660daaa620c7"
+      },
+      {
+        "name": "sdist-venv",
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "-m",
+          "venv",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer"
+        ],
+        "exit": 0,
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "sdist-install",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "-m",
+          "pip",
+          "install",
+          "--no-index",
+          "--find-links",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-dependency-wheels",
+          "--constraint",
+          "/workspace/GIG-C-Microstructure-Engine/requirements-python.lock",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/source-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl"
+        ],
+        "exit": 0,
+        "output_sha256": "12ba72da4accf17efa69fba21e14808100a9c7ea7b7b10cca672f6d45e5dfbee"
+      },
+      {
+        "name": "sdist-interface",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_python.py"
+        ],
+        "exit": 0,
+        "output_sha256": "de979385379a76b656df2ac9ac3f10205c962d650e00b902f721909ce82e6b13"
+      },
+      {
+        "name": "sdist-exports",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_export_contracts.py"
+        ],
+        "exit": 0,
+        "output_sha256": "355e7e9fad3c8fb65742f5741bcbb3da816936823de320096c167caa2d0674c3"
+      },
+      {
+        "name": "sdist-example",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/examples/python_research.py"
+        ],
+        "exit": 0,
+        "output_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+      },
+      {
+        "name": "sdist-module-path",
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "-c",
+          "import gig_microstructure as g,sys;print(g.__file__);assert \"/site-packages/\" in g.__file__ and g.__file__.startswith(sys.prefix);print(g.native_build_info())"
+        ],
+        "exit": 0,
+        "output_sha256": "eb1f32fd753ac1899bd672e37df1ba1865024e69fdb0d0086aaae0ecbf95db99"
+      }
+    ],
+    "artifacts": {
+      "dist/gig_microstructure-0.1.1.tar.gz": {
+        "bytes": 1302142,
+        "sha256": "8be7384d4f9379e65d1b52a224f39366ce57ed218da53f8cd7ca185ef7648663"
+      },
+      "dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+        "bytes": 444586,
+        "sha256": "143999341ea5f687a413160c82f1f787eeca75bacfb24a0d91229f286d9e0172"
+      },
+      "source-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+        "bytes": 444586,
+        "sha256": "16f65612bd05e459add5442ffd5bc9e7198ac537db19ba4dc7860991c9990813"
+      }
+    },
+    "fresh_installed_cases": 28,
+    "pattern_regressions": 3,
+    "tested_source_inventory_members": 301,
+    "non_documentation_members_still_match_delivery": true,
+    "final_clean_sdist_pair": "To be bound to final documentation SHA in local final-delivery.json after push; no recursive self-hash claim"
+  },
+  "ci_controls": [
+    {
+      "configuration": "phase9-clean-debug",
+      "control": "positive",
+      "exit": 0,
+      "output": "itch.independent_reference canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e\nitch.context_reference canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e\nitch.l3_reference canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991\nitch.streaming_reference canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5\nitch.validation_demo_reference canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520\nitch.auction_reference canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6\nitch.admin_reference canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03\nitch.hy_reference canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af\nctest_verified_counts={\"disabled\": 0, \"failures\": 0, \"skipped\": 0, \"tests\": 154}\n"
+    },
+    {
+      "configuration": "phase9-clean-debug",
+      "control": "wrong_hash",
+      "exit": 1,
+      "output": "itch.independent_reference canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e\nitch.context_reference canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e\nitch.l3_reference canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991\nitch.streaming_reference canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5\nitch.validation_demo_reference canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520\ncanonical identity mismatch: itch.auction_reference\n"
+    },
+    {
+      "configuration": "phase9-clean-debug",
+      "control": "wrong_count",
+      "exit": 1,
+      "output": "required CTest outcomes missing, failed, skipped or disabled\n"
+    },
+    {
+      "configuration": "python-debug",
+      "control": "positive",
+      "exit": 0,
+      "output": "itch.independent_reference canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e\nitch.context_reference canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e\nitch.l3_reference canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991\nitch.streaming_reference canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5\nitch.validation_demo_reference canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520\nitch.auction_reference canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6\nitch.admin_reference canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03\nitch.hy_reference canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af\nctest_verified_counts={\"disabled\": 0, \"failures\": 0, \"skipped\": 0, \"tests\": 157}\n"
+    },
+    {
+      "configuration": "python-debug",
+      "control": "wrong_hash",
+      "exit": 1,
+      "output": "itch.independent_reference canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e\nitch.context_reference canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e\nitch.l3_reference canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991\nitch.streaming_reference canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5\nitch.validation_demo_reference canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520\ncanonical identity mismatch: itch.auction_reference\n"
+    },
+    {
+      "configuration": "python-debug",
+      "control": "wrong_count",
+      "exit": 1,
+      "output": "required CTest outcomes missing, failed, skipped or disabled\n"
+    }
+  ],
+  "platforms": {
+    "Linux_x86_64": "Executed GCC/Clang and CPython3.12",
+    "ARM64_native": "Not run: no authorized native executor available",
+    "ARM64_cross_or_emulated": "Not run: no aarch64 compiler/qemu/binfmt handler found",
+    "hosted_actions": {
+      "exit": 1,
+      "error": "Get \"https://api.github.com/repos/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs?branch=feat%2Fbootstrap-cpp20-engine&per_page=5\": Forbidden\n",
+      "runs_verified": []
+    }
+  },
+  "scope": {
+    "new_market_data_requests": 0,
+    "observed_L3_reconstruction": false,
+    "new_production_correctness_defects_reproduced": 0,
+    "production_readiness": false,
+    "private_synthetic_evaluation": "GO within qualified bounds",
+    "formal_candidate_closure": "BLOCKED"
+  },
+  "limitations": [
+    "Native ABI changed: rebuild C++ consumers and wheels",
+    "All-reset retained pairs cost8 extra bytes/event on measured ABI plus archive spare capacity",
+    "Remaining inline event metadata/snapshot storage is substantial",
+    "No stable C++ binary ABI, manylinux, other CPython, ARM64 or hosted CI claim",
+    "No crash-durable recovery, complete ITCH seed or independent observed-book oracle",
+    "Shared-host timing is not causal optimization or exchange-latency evidence"
+  ],
+  "local_raw_evidence_sha256": {
+    "sdist-install.log": "12ba72da4accf17efa69fba21e14808100a9c7ea7b7b10cca672f6d45e5dfbee",
+    "tested-sdist-inventory.log": "16b79c6b07983ab4c6e5bf1f42d4330604a10151efe53af529d116e6525c05ef",
+    "driver-gcc.log": "ef938e0fcf79bc61f9747f204116925eb47a6900489539d9d9d54a7ad686aa39",
+    "replay-prefix-before.json": "0c3386f424f8230ee14b24cf35d4b61f44550eb055fd0b80f5fbb09ebb33237d",
+    "gcc-streaming-128-17.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "hosted-ci.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdist-module-path.log": "eb1f32fd753ac1899bd672e37df1ba1865024e69fdb0d0086aaae0ecbf95db99",
+    "journal-after.json": "6b7f36d7f863f4a558447f00d50d2b283729849412648ffda9badc96267f518f",
+    "checkout-module-path.log": "61f1ac7e08e17388ec110995d0e9028396d642618c8a1a123b0d660daaa620c7",
+    "clang-memory-profile128.json": "1e67551cee17729066af232bc22d6e373d2f2522efdd27f55af41e9264c2cc59",
+    "package-driver.log": "98dcf514f8dd55ccc24ebf8a3d08403965c17e42518e762589f1fd5c74bbe58d",
+    "clang-memory-profile128.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "validated-code-files.json": "e87613ec870135f51885628947e51834cd1a51ac2762569edd96d6622f0e91d3",
+    "release-config.log": "dcac9cc90eaab01f64123cad35188eb7bf068f59f55e382d75314a2702cca90b",
+    "dependencies.json": "947201831b3776ceafe7d86f11cc2e74c9a4d0006db65902685d37639e8dcf28",
+    "equivalent-workload-measurements.json": "4161e508f352ed3dc9c9cfc0989014248b77917dd2f689e6a1585b4acfeb563b",
+    "matrix-gcc.json": "39e7bbbd5ec37419a037361892e4331a0197e2caeb91cc5aabe2a1ee11ed7ec6",
+    "phase9-clang-asan-ubsan.xml": "3ade2309a0c737e78b8df078b11ee20639287bc63f4fc644f9b1165706ab474c",
+    "clang-reconstruction-128.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "python-release.xml": "1c89a3f5e7a788fca6928052fc50fff76db2bbcf6e9705603b72a7dc0a727c31",
+    "checkout-venv.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "focused-build.log": "725ff50d527acb214e568879bfed5210feb5294e83c96c1a3ed98f8b960af90e",
+    "tested-sdist-manifest.json": "e0c21c5593ec5dcc915530e5402da502b532aa593cb988d1ad4ac08646d1a631",
+    "phase9-clang-asan-ubsan.log": "6286a51b38c5933a0a828a1133662cefbaeda9a00e27754bb6d5141f4cd16dc7",
+    "sdist-example.log": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "phase9-clang-debug.log": "c4564bf167685e1a188862990d715c7f061fc844d644fd0a2a5fd8012016a452",
+    "python-debug.xml": "a6a42b29852a6f4e2c6b590884268b237f639093583e4df47f0bd566968c92bb",
+    "first-build.log": "2655cff081c9841dc9c3db89da471e6ece3ff799307d912080a7d7a9a9101532",
+    "checkout-exports.log": "7e849af214c565c3c340a56542c4c6acdc522a76dd527623bb5b28b9d5f16312",
+    "gcc-memory-profile128.json": "1e67551cee17729066af232bc22d6e373d2f2522efdd27f55af41e9264c2cc59",
+    "phase9-clean-release.xml": "1ed28fa33bc281cb1e6c4ba93a4bca6d4f9aec8089f1dd5806665aca293f8ef3",
+    "driver-clang.log": "6f6c3b8dd12dde9dee85320be537c49561f1a08b624e1ced251c18e855fb0ce4",
+    "phase9-clean-asan-ubsan.xml": "83d5465e7d8921f761181614c11fda8e25377759eb47c8c445f9e55959f95093",
+    "package-build.log": "99784f59f240bba98dba3527d38e45819de656cea768a1f1aa43dea8ffd346fd",
+    "checkout-interface.log": "a55276e3b9039f0505f174c9fb72eae94808b6304752afb30737d184632c6545",
+    "sdist-patterns.log": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424",
+    "python-asan-ubsan.log": "e4242391459dacbcb65f5e442b2c1379736854026f9cace1b499eea6907b675f",
+    "hosted-ci.stderr": "ad1c5504583f3b21c119d0b935ed2117fa36f4c3a13b3ac3a71f49b9e922eeeb",
+    "sdist-venv.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase9-clang-release.log": "8851e13219d4550e0c9e56e83c17690399906968083c093cb72b6a0eafdbe643",
+    "phase9-clean-release.log": "9a964d07b3d2ab5bdbd5f125a807e4b1e6fdba00af984a6d22a0b81609a4d94e",
+    "packages.json": "aaea694e0d7d3b38f9b61fd9e2f71598baedfb66a4ea068e07b7d71080eeead5",
+    "gcc-streaming-128-17.json": "285c35acf75875e47559057a6b1efb1e904892f2ac9e59c10fcbd7b994028fcf",
+    "clang-streaming-128-17.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "clang-streaming-128-17.json": "6ca4f31fa995068cf826df76c45d0f1187412c007d242157ba46ec5d3723fb25",
+    "phase9-clang-release.xml": "7c8da39137878a819db9f7bd103d7a11808a9601373fe60716966b69e595dd65",
+    "checkout-install.log": "ad0d02ae025e8e01f2da07ecc28ffa566ed28142d60353d7d2e062cef8e4821d",
+    "complete-code-files.json": "2eaf05f95816e21042f1259852890ba9d330f17f9a4635a8413cfe8d0030192d",
+    "matrix-python.json": "adcf5a1af0eee50ec1bf34bf1ef9456ee74ead77dc62446e9d17a2239a4c3af2",
+    "python-debug.log": "63265655256cea1457b88a6d747c095ff47fc918ed92f8555114f112c1a1c753",
+    "phase9-clang-debug.xml": "97f1c48fe78e70ed2faacd5b4bd779eac5510ddfa5b7bb65edf11a0e46ac6da0",
+    "package-artifacts.json": "d3173fc014689e3fd46067918bc306b072bf0780700ca8686c49192853a6531f",
+    "release-build.log": "757b42179b92529963a48671a3c1bd1929b7615fb6751944599c15baf709675c",
+    "equivalent-measurements-driver.log": "bc0b2689ad3c3e3f2dca987ca2e78e3fb309d07a4e28e7c117f01da6c6236543",
+    "phase9-clean-debug.xml": "ae1120509d33464b3121ec62ea3fa5af4b0a3f3764808328890420c7b6fae998",
+    "clang-reconstruction-128.json": "083d678fe9a5ca437efb17b56c1bf5054f57c3cb97ae64361305e64e03c6fa69",
+    "size-before.json": "38ed7f85eb1ca1154f1b849c89f5524a4b7678c7bf534b90528dcd2d2414de40",
+    "python-asan-ubsan.xml": "6d2e31f9146a552df4d7e4da2c454d45ec00e1beb7238673aff962f717ea54e3",
+    "readiness-focused.log": "0676620ef3b67761a0fda00d00f14023df021b6626f2703e67320b66a19a216e",
+    "checkout-example.log": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "sdist-exports.log": "355e7e9fad3c8fb65742f5741bcbb3da816936823de320096c167caa2d0674c3",
+    "ci-summary-controls.json": "56e8d4fc327bdf1a3dd5a1d05b6e03d09336842efbcc7191cfa1d31ee9825aec",
+    "focused-config.log": "64d538b135442f0c6ce352c12c0e48f34b5a62c48c0f08489d60e1d5a765f9b6",
+    "python-release.log": "7f20f401004afa74641f267cf924162acab9f63ba9f22e072e0b4e35643d780a",
+    "journal-before.json": "510e32ce020fafddad71540f6f3dbf3ed2d68acb68738f5db2eaa684f5ca4524",
+    "matrix-clang.json": "c656db09863f9241c6e681dcdc26d9c1c3934c24672c05ba0ebbef5e85f33fc7",
+    "focused.xml": "cb74e8293ea2bdcb37bd79f0fff712398814ec433e0b1dd97b05ad8f4631a2aa",
+    "matrix.json": "24b9c5f27fbd6e2616114dad9b343310ac6c1c2c01fa4061c195a579b81b1f88",
+    "journal-comparison.json": "aad887aee210665e366ad4c605ae13199cf72550e80f8611512463f27a71a127",
+    "source-wheel-build.log": "55504552a66a4e328a07b67f22386c535a3ec3d98a9a7bd1d4abdac55f40c332",
+    "sdist-interface.log": "de979385379a76b656df2ac9ac3f10205c962d650e00b902f721909ce82e6b13",
+    "focused.log": "d0136f19ed2498ee0240b732055ab24efee241926d81d0bd6d547dd7dc8f28c4",
+    "gcc-memory-profile128.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gcc-reconstruction-128.json": "7c6d826d4bc4979d66bcf0c06cd6d8afcb224e6f4b1a6ac3d65ca37b36a2122b",
+    "environment.json": "93d240ca32c7128de8a17472b77b0b5b42f9db86ce5d4b996ea5af2a8ee6b52c",
+    "phase9-clean-debug.log": "387a22e793b58d3856146cc7251e2f60a28e4981dce308cc78c7faed8e49eebf",
+    "driver-python.log": "2279a015d3cea789080588d3ea5a1442cc6ed515ea1f15ad1a6538e2dad52a71",
+    "gcc-reconstruction-128.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase9-clean-asan-ubsan.log": "f367201904693831c8f05d7e8abfb4d32745eafc90218a437a078e29dbe9b6cc"
+  }
+}

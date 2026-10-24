@@ -348,3 +348,28 @@ and its evidence. Bench timing includes its declared clock/stage overhead and is
 not an exchange-latency target. All seven previous hashes remain unchanged. Source
 archives/wheels are locally tested snapshots; Python research schema/API unchanged.
 No command above downloads data, invokes an observed book or publishes a release.
+
+## Phase 5 physical journal memory qualification
+
+The logical JournalEntry DTO is unchanged. Physical records now own an optional
+index into a bounded reset-only archive; `journal_storage()` reports used/capacity
+and ABI element sizes for both vectors. Native C++ consumers must rebuild the class
+layout. No canonical schema or Python research API change is introduced.
+
+```sh
+cmake --preset release
+cmake --build --preset release
+ctest --preset release -R 'replay.journal_|observed.readiness' --output-on-failure
+build/release/benchmarks/gig_journal_memory_probe 1024 0
+build/release/benchmarks/gig_journal_memory_probe 1024 64
+build/release/benchmarks/gig_journal_memory_probe 1024 1
+python3 scripts/check_journal_storage.py trace build/release/gig_journal_storage_tests
+```
+
+Probe timings include create/apply/validate/destroy and declared synthetic fixture
+work; they do not measure journal insertion alone. Baseline comparison and full
+execution results belong to PHASE5_ENGINEERING_REPORT.md and its evidence. The
+frozen128-prefix comparison is differential evidence; the test executable also
+checks independent expected identity/quantity/count/sequence state. Do not treat
+`sizeof(JournalEntry)` as current physical retained-record memory or a declared
+resource budget as measured RSS.

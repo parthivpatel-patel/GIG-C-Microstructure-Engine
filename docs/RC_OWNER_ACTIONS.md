@@ -102,3 +102,18 @@ RC13/16/17 stay BLOCKED. RC23 now has partial observed16KiB evidence, but full
 artifact/profile gate is BLOCKED, not passed. RC24/25 remain BLOCKED. This updates
 only the current overlay; earlier gate decisions/counts stay historical evidence.
 The single16KiB acquisition authorization is consumed; no further range is approved.
+
+## Phase 5 qualification overlay
+
+The feature branch now configures154 native outcomes and157 hosted GCC Release
+Python outcomes. All eight Phase4 oracle identities remain required, plus the new
+128-prefix pre-optimization journal equivalence test. Actual local execution and
+remaining blockers are reported in PHASE5_ENGINEERING_REPORT.md. The Actions API
+attempt returned Forbidden (gh exit1), with no authenticated run ID/head/conclusion;
+no hosted success is inferred. No network configuration was changed.
+
+The journal's physical record is smaller, but metadata/snapshot storage and transient
+copy/restart costs still require workload qualification. This does not close RC23–25
+or create an observed context seed. RC13 independent-machine, RC16 provider security,
+RC17 hosted evidence and RC18 platform gaps remain as previously classified.
+No new data-acquisition or distribution authority is implied.
