@@ -25,8 +25,13 @@ def verify(manifest, artifacts):
     if document['schema'] != 'gig.clean_reproduction.v1':
         raise ValueError('unsupported evidence schema')
     root = Path(artifacts).resolve(strict=True)
+    entries = document['artifacts']
+    if type(entries) is not list or not 1 <= len(entries) <= 256:
+        raise ValueError('artifact count budget exceeded')
     seen = set()
-    for item in document['artifacts']:
+    schedule = []
+    total = 0
+    for item in entries:
         name = PurePosixPath(item['path'])
         if name.is_absolute() or '..' in name.parts or str(name) in seen:
             raise ValueError('unsafe or duplicate artifact path')
@@ -36,9 +41,21 @@ def verify(manifest, artifacts):
             raise ValueError('artifact escapes evidence directory')
         if not path.is_file() or path.stat().st_size > 64 * 1024 * 1024:
             raise ValueError('invalid artifact size/type')
+        total += path.stat().st_size
+        if total > 128 * 1024 * 1024:
+            raise ValueError('aggregate artifact budget exceeded')
+        schedule.append((path, item, name))
+    # Reject excessive work before hashing any file, not after earlier large reads.
+    hashed_total = 0
+    for path, item, name in schedule:
+        file_bytes = 0
         digest = hashlib.sha256()
         with path.open('rb') as stream:
             for block in iter(lambda: stream.read(1024 * 1024), b''):
+                file_bytes += len(block)
+                hashed_total += len(block)
+                if file_bytes > 64 * 1024 * 1024 or hashed_total > 128 * 1024 * 1024:
+                    raise ValueError('artifact read budget exceeded')
                 digest.update(block)
         if digest.hexdigest() != item['sha256']:
             raise ValueError('artifact digest mismatch: ' + str(name))

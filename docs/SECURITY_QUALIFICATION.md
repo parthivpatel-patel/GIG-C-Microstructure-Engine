@@ -80,3 +80,12 @@ build/four-phase/phase2/packaging-tests.log. Phase4 reran the same three tests w
 the documented locked interpreter:3/3 pass, no assertion or source change. The
 current consolidated results use this executed corrected outcome, not the earlier
 failed invocation. Dependency/runtime selection is part of reproducibility.
+
+## Subsequent security-closure program
+
+See SECURITY_RESIDUAL_RISKS.md and evidence/security_closure.json for explicit
+verified/non-applicable/mitigated/unresolved classifications. No risk accepted for
+the owner. A newly reproduced evidence-tool processing-budget gap is mitigated:
+256 files/128MiB aggregate preflight plus64MiB/file/read-boundary ceilings;10 receipt
+controls pass after2 failing-before controls. Existing authentic archive still
+verifies. Full provider/host/action-bundle security closure remains unresolved.

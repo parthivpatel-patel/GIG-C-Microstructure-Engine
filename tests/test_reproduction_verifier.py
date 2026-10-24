@@ -53,6 +53,24 @@ class Receipts(unittest.TestCase):
         self.document['reproducible']['junit'] = 'linked.xml'
         with self.assertRaises(ValueError): self.run_verify()
 
+    def test_aggregate_budget_before_hashing(self):
+        from unittest.mock import patch
+        items = []
+        for index in range(3):
+            path = self.root / f'large-{index}.bin'
+            with path.open('wb') as stream:
+                stream.truncate(64 * 1024 * 1024)  # Sparse, authored local input.
+            items.append({'path': path.name, 'sha256': '0' * 64})
+        self.document['artifacts'] = items
+        with patch.object(verifier.hashlib, 'sha256', side_effect=AssertionError('hash must not run')):
+            with self.assertRaisesRegex(ValueError, 'aggregate artifact budget'):
+                self.run_verify()
+
+    def test_artifact_count_budget(self):
+        self.document['artifacts'] *= 257
+        with self.assertRaisesRegex(ValueError, 'artifact count budget'):
+            self.run_verify()
+
     def test_count(self):
         self.document['reproducible']['ctest_counts']['tests'] -= 1
         with self.assertRaises(ValueError): self.run_verify()
