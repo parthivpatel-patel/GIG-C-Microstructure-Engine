@@ -39,6 +39,20 @@ class Receipts(unittest.TestCase):
         self.document['artifacts'][0]['path'] = '../tests.xml'
         with self.assertRaises(ValueError): self.run_verify()
 
+    def test_parent_symlink(self):
+        (self.root / 'real').mkdir()
+        (self.root / 'real' / 'tests.xml').write_bytes((self.root / 'tests.xml').read_bytes())
+        (self.root / 'alias').symlink_to(self.root / 'real', target_is_directory=True)
+        self.document['artifacts'][0]['path'] = 'alias/tests.xml'
+        self.document['reproducible']['junit'] = 'alias/tests.xml'
+        with self.assertRaises(ValueError): self.run_verify()
+
+    def test_leaf_symlink(self):
+        (self.root / 'linked.xml').symlink_to(self.root / 'tests.xml')
+        self.document['artifacts'][0]['path'] = 'linked.xml'
+        self.document['reproducible']['junit'] = 'linked.xml'
+        with self.assertRaises(ValueError): self.run_verify()
+
     def test_count(self):
         self.document['reproducible']['ctest_counts']['tests'] -= 1
         with self.assertRaises(ValueError): self.run_verify()

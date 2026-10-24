@@ -1,6 +1,6 @@
 # Third-party notices
 
-The project remains private and has no new public redistribution license or release.
+Public repository visibility does not itself grant a new redistribution license or release.
 These notices concern dependencies, not a license grant for project code.
 
 pybind11 2.13.6 (pinned native binding headers), BSD-style license below. Runtime

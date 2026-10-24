@@ -32,7 +32,7 @@ def verify(manifest, artifacts):
             raise ValueError('unsafe or duplicate artifact path')
         seen.add(str(name))
         path = root.joinpath(*name.parts)
-        if path.is_symlink() or not path.resolve(strict=True).is_relative_to(root):
+        if any(root.joinpath(*name.parts[:i]).is_symlink() for i in range(1, len(name.parts) + 1)) or not path.resolve(strict=True).is_relative_to(root):
             raise ValueError('artifact escapes evidence directory')
         if not path.is_file() or path.stat().st_size > 64 * 1024 * 1024:
             raise ValueError('invalid artifact size/type')
