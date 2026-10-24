@@ -93,8 +93,10 @@ def verify(result):
 
 
 def main():
-    assert len(sys.argv) == 2, "usage: check_itch_profile_probe.py EXECUTABLE"
-    process = subprocess.run([sys.argv[1]], capture_output=True, timeout=180, check=True)
+    assert len(sys.argv) in (2,3), "usage: check_itch_profile_probe.py EXECUTABLE [--sanitizer-allocation-profile]"
+    if len(sys.argv)==3:
+        assert sys.argv[2]=="--sanitizer-allocation-profile"
+    process = subprocess.run(sys.argv[1:], capture_output=True, timeout=180, check=True)
     assert len(process.stdout) <= 65536 and not process.stderr
     result = json.loads(process.stdout)
     verify(result)
@@ -110,7 +112,7 @@ def main():
             raise AssertionError("missed negative control: " + key)
     invalid = subprocess.run([sys.argv[1], "32"], capture_output=True, timeout=30)
     assert invalid.returncode != 0 and b"only declared128-order profile supported" in invalid.stderr
-    print(json.dumps({"profile": "128_live_1024_journal_per_book", "independent_checks": "passed", "negative_controls": len(bad_models), "fixture_sha256": result["decompressed_sha256"], "query_allocation_failures_reached": result["query_allocation_failures_reached"], "peak_pmr": result["final_peak_pmr"]}, sort_keys=True))
+    print(json.dumps({"profile": "128_live_1024_journal_per_book", "independent_checks": "passed", "allocation_profile": "bounded_8_order_sweep_plus_full_128_boundaries" if len(sys.argv)==3 else "full_128_order_sweep", "negative_controls": len(bad_models), "fixture_sha256": result["decompressed_sha256"], "query_allocation_failures_reached": result["query_allocation_failures_reached"], "peak_pmr": result["final_peak_pmr"]}, sort_keys=True))
 
 
 if __name__ == "__main__":

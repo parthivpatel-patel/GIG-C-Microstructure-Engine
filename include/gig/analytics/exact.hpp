@@ -15,7 +15,15 @@ inline Wide checked_add(Wide a,Wide b) {
     Wide r{};if (__builtin_add_overflow(a,b,&r) || r == -maximum-1) throw ArithmeticFailure{ErrorCode::overflow};return r;
 }
 inline Wide checked_mul(Wide a,Wide b) {
-    Wide r{};if (__builtin_mul_overflow(a,b,&r) || r == -maximum-1) throw ArithmeticFailure{ErrorCode::overflow};return r;
+    // Check magnitudes before multiplication. Clang's signed 128-bit overflow
+    // builtin can require __muloti4, absent from AArch64's default libgcc.
+    // Unsigned negation also handles the signed minimum without undefined behavior.
+    if (a==0 || b==0) return 0;
+    const auto ua=a<0?Unsigned{0}-static_cast<Unsigned>(a):static_cast<Unsigned>(a);
+    const auto ub=b<0?Unsigned{0}-static_cast<Unsigned>(b):static_cast<Unsigned>(b);
+    if (ua>static_cast<Unsigned>(maximum)/ub) throw ArithmeticFailure{ErrorCode::overflow};
+    const auto product=static_cast<Wide>(ua*ub); // proved within symmetric range
+    return (a<0)!=(b<0)?-product:product;
 }
 inline Wide magnitude(Wide n) {if (n == -maximum-1) throw ArithmeticFailure{ErrorCode::overflow};return n<0?-n:n;}
 inline Wide gcd(Wide a,Wide b) {a=magnitude(a);b=magnitude(b);while (b) {auto t=a%b;a=b;b=t;}return a;}

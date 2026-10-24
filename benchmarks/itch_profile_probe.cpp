@@ -36,16 +36,41 @@ std::size_t allocation_checks(StreamingReconstructor& stream,gig::TrackedResourc
     for(std::size_t fail=0;fail<256;++fail){memory.fail_after(fail);bool success=false;{auto c=stream.checkpoint(code);success=bool(c);if(!success){check(c.error.code==gig::ErrorCode::resource_exhausted,"checkpoint allocation error");++failures;}}memory.disable_failure();check(state(stream)==old&&memory.stats().live_bytes==bytes,"checkpoint failure atomicity");if(success)break;check(fail!=255,"checkpoint sweep bounded");}
     memory.fail_after(0);{auto d=stream.reconstruction().engine(0)->depth(16);check(!d&&d.error.code==gig::ErrorCode::resource_exhausted,"depth reached allocation failure");++failures;}memory.disable_failure();check(state(stream)==old&&memory.stats().live_bytes==bytes,"depth failure atomicity");return failures;
 }
+// Keep full-capacity failure boundaries, while sweeping every reached allocation
+// on a smaller authored fixture under instrumentation. Never reduce main replay.
+std::size_t boundary_checks(StreamingReconstructor& stream,gig::TrackedResource& memory){
+    const auto old=state(stream);const auto bytes=memory.stats().live_bytes;
+    const auto code=number<gig::Digest>(std::string(64,'1'));
+    const auto before=memory.stats().attempts;
+    {auto c=stream.checkpoint(code);check(bool(c),"full checkpoint allocation count");}
+    const auto count=memory.stats().attempts-before;check(count>1,"checkpoint allocation sites");
+    for(const auto fail:{std::size_t{0},count-1}){
+        memory.fail_after(fail);{auto c=stream.checkpoint(code);check(!c&&c.error.code==gig::ErrorCode::resource_exhausted,"full checkpoint boundary failure");}
+        memory.disable_failure();check(state(stream)==old&&memory.stats().live_bytes==bytes,"full checkpoint boundary atomicity");
+    }
+    memory.fail_after(0);{auto d=stream.reconstruction().engine(0)->depth(16);check(!d&&d.error.code==gig::ErrorCode::resource_exhausted,"full depth allocation failure");}
+    memory.disable_failure();check(state(stream)==old&&memory.stats().live_bytes==bytes,"full depth failure atomicity");
+    return 3;
+}
 struct Stop{std::uint64_t framed{},accepted{},native{};std::size_t peak{};std::string field;};
 Stop cap_stop(const Fixture& f,std::size_t cap,bool journal){gig::TrackedResource memory(std::pmr::get_default_resource(),cap);Stop out;{auto c=f.config;if(journal)for(auto& b:c.reconstruction.bindings)b->max_journal_records=1023;auto stream=make(c,memory);std::size_t offset=0;const auto step=feed(f,stream,offset,17);const auto summary=stream.finish();check(bool(step.error)&&bool(summary.error)&&!summary.publication_eligible&&!summary.source_complete,"cap explicit failure");const auto& r=stream.reconstruction();check(r.summary().context_committed==summary.accepted_records&&r.summary().native_committed==summary.native_records&&r.receipts().size()==summary.accepted_records,"cap accounting");for(std::size_t b=0;b<2;++b)check(!r.engine(b)->book().check_invariants()&&r.engine(b)->journal_size()==r.summary().native_counts[b],"cap native context consistency");out={summary.source_records,summary.accepted_records,summary.native_records,memory.stats().peak_bytes,std::string(summary.error.reconstruction.native_error.field)};}check(memory.stats().live_bytes==0,"cap cleanup");return out;}
 }
 int main(int argc,char** argv){try{
-    std::size_t n=128;if(argc==2){const std::string_view x(argv[1]);const auto r=std::from_chars(x.data(),x.data()+x.size(),n);check(r.ec==std::errc{}&&r.ptr==x.data()+x.size()&&n==128,"only declared128-order profile supported");}check(argc<=2,"arguments");
+    const bool sanitizer_profile=argc==2&&std::string_view(argv[1])=="--sanitizer-allocation-profile";
+    std::size_t n=128;if(argc==2&&!sanitizer_profile){const std::string_view x(argv[1]);const auto r=std::from_chars(x.data(),x.data()+x.size(),n);check(r.ec==std::errc{}&&r.ptr==x.data()+x.size()&&n==128,"only declared128-order profile supported");}check(argc<=2,"arguments");
     const auto f=fixture(n);gig::TrackedResource memory(std::pmr::get_default_resource(),budget);std::size_t first_peak=0,first_live=0,query_peak=0,query_live=0,coexist_peak=0,export_bytes=0,failures=0,allocations=0;const auto code=number<gig::Digest>(std::string(64,'1'));
     {
         auto original=make(f.config,memory);check(!original.pause_after(f.pause),"pause boundary");std::size_t a=0;check(feed(f,original,a,17).paused,"original paused");check_books(original,n);first_peak=memory.stats().peak_bytes;first_live=memory.stats().live_bytes;
         const auto baseline=state(original);{const auto x=original.reconstruction().engine(0)->canonical();const auto y=original.reconstruction().engine(1)->canonical();const auto depth=original.reconstruction().engine(0)->depth(16);check(bool(x)&&bool(y)&&bool(depth),"coexisting exports");export_bytes=x.data->size()+y.data->size();query_peak=memory.stats().peak_bytes;query_live=memory.stats().live_bytes;check(state(original)==baseline,"query nonmutation");}
-        failures=allocation_checks(original,memory);check_books(original,n);
+        if(sanitizer_profile){
+            failures=boundary_checks(original,memory);
+            const auto small=fixture(8);gig::TrackedResource fault_memory(std::pmr::get_default_resource(),budget);
+            {auto probe=make(small.config,fault_memory);check(!probe.pause_after(small.pause),"fault fixture pause");std::size_t offset=0;
+                check(feed(small,probe,offset,17).paused,"fault fixture feed");check_books(probe,8);
+                failures+=allocation_checks(probe,fault_memory);check_books(probe,8);}
+            check(fault_memory.stats().live_bytes==0&&fault_memory.stats().live_blocks==0,"fault fixture cleanup");
+        }else failures=allocation_checks(original,memory);
+        check_books(original,n);
         auto checkpoint=original.checkpoint(code);check(bool(checkpoint),"checkpoint");
         auto restarted=make(f.config,memory);check(!restarted.pause_after(f.pause),"restart pause");std::size_t b=0;check(feed(f,restarted,b,65536).paused,"restart paused");check(!restarted.verify_checkpoint(*checkpoint.data,code),"restart descriptor equivalence");check_books(restarted,n);coexist_peak=memory.stats().peak_bytes;
         check(!original.resume()&&!restarted.resume(),"resume");check(!feed(f,original,a,17).error&&!feed(f,restarted,b,65536).error,"completion feed");const auto left=original.finish(),right=restarted.finish();check(left.publication_eligible&&right.publication_eligible&&left.accepted_prefix_sha256==right.accepted_prefix_sha256,"full restart publication");check(state(original)==state(restarted),"final semantic equivalence");check_books(original,n);allocations=memory.stats().allocations;

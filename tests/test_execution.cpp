@@ -62,7 +62,18 @@ void integration(){
 int main(int argc,char** argv){try{
     if(argc==2 && std::string_view(argv[1])=="reference"){
         char mode{};while(std::cin>>mode){
-            if(mode=='W'){std::uint64_t target{};std::uint32_t count{};std::cin>>target>>count;std::vector<std::uint64_t> weights(count);for(auto& w:weights)std::cin>>w;auto c=plan_config(target,count);print(take(vwap(c,weights,text("reference-profile"),sim_time(0),VolumeProfile::ex_ante_forecast)));}
+            if(mode=='M'){
+                std::uint64_t ah{},al{},bh{},bl{};bool an{},bn{};
+                std::cin>>ah>>al>>an>>bh>>bl>>bn;
+                const auto make=[](std::uint64_t high,std::uint64_t low,bool negative){
+                    const auto bits=(exact::Unsigned{high}<<64U)|low;
+                    if(bits==(exact::Unsigned{1}<<127U))return -exact::maximum-1;
+                    const auto value=static_cast<exact::Wide>(bits);return negative?-value:value;
+                };
+                try{std::cout<<exact::decimal(exact::checked_mul(make(ah,al,an),make(bh,bl,bn)))<<'\n';}
+                catch(const exact::ArithmeticFailure& e){if(e.code!=ErrorCode::overflow)throw;std::cout<<"overflow\n";}
+            }
+            else if(mode=='W'){std::uint64_t target{};std::uint32_t count{};std::cin>>target>>count;std::vector<std::uint64_t> weights(count);for(auto& w:weights)std::cin>>w;auto c=plan_config(target,count);print(take(vwap(c,weights,text("reference-profile"),sim_time(0),VolumeProfile::ex_ante_forecast)));}
             else if(mode=='P'){std::uint64_t target{},num{},den{};std::size_t count{};std::cin>>target>>num>>den>>count;std::vector<VolumePoint> volume;for(std::size_t i=0;i<count;++i){std::uint64_t q{};std::cin>>q;volume.push_back({sim_time(static_cast<std::int64_t>(i+1)),number<QuantityLots>(q),text("reference-volume"),i});}print(take(pov(plan_config(target,1),volume,num,den)));}
             else if(mode=='C'){int side{};std::uint64_t target{},quantity{};std::int64_t price{},arrival{},decision{},terminal{},fn{},fd{};std::cin>>side>>target>>quantity>>price>>arrival>>decision>>terminal>>fn>>fd;auto direction=side?Side::sell:Side::buy;auto c=cost_config(target,direction);c.arrival=benchmark(arrival,0);c.terminal=benchmark(terminal,20);auto f=cost_fill(quantity,price,direction);f.decision_benchmark=benchmark(decision,5);f.fee_ticks_per_lot=exact::Fraction::ratio(fn,fd);std::array<CostFill,1> fills{f};auto r=take(transaction_costs(c,fills));auto& s=r.summary();std::cout<<s.execution_vwap.value->str()<<' '<<s.gross_notional.str()<<' '<<s.delay_cost.str()<<' '<<s.spread_cost.str()<<' '<<s.fees.str()<<' '<<s.slippage.str()<<' '<<s.opportunity_cost.str()<<' '<<s.implementation_shortfall.str()<<' '<<s.currency_shortfall.str()<<'\n';}
             else return 1;

@@ -20,7 +20,21 @@ for _ in range(1200):
  fee=F(fn,fd)*q;delay=sign*(d-a)*q;spread=sign*(p-d)*q;slip=delay+spread;opp=sign*(t-a)*(target-q);short=slip+fee+opp
  values=[F(p),F(p*q),F(delay),F(spread),fee,F(slip),F(opp),short,short/100]
  lines.append(f'C {side} {target} {q} {p} {a} {d} {t} {fn} {fd}');expected.append(' '.join(f'{v.numerator}/{v.denominator}' for v in values))
+# Python arbitrary-precision integers independently decide the symmetric 127-bit
+# magnitude boundary, including signed-minimum times zero and every sign pair.
+limit=(1<<127)-1
+boundary=[0,1,2,3,(1<<63)-1,1<<63,1<<64,1<<126,limit//3,limit//2,limit,1<<127]
+pairs=[(a*sa,b*sb) for a in boundary for b in boundary for sa in [-1,1] for sb in [-1,1] if a*sa<=(limit) and b*sb<=limit]
+for _ in range(2000):
+ pairs.append((rng.randrange(-limit-1,limit+1),rng.randrange(-limit-1,limit+1)))
+def limbs(value):
+ magnitude=abs(value)
+ return f'{magnitude>>64} {magnitude&((1<<64)-1)} {int(value<0)}'
+for a,b in pairs:
+ product=a*b
+ lines.append('M '+limbs(a)+' '+limbs(b))
+ expected.append(str(product) if -limit<=product<=limit else 'overflow')
 r=subprocess.run([sys.argv[1],'reference'],input='\n'.join(lines)+'\n',capture_output=True,text=True,check=True);actual=r.stdout.splitlines();assert len(actual)==len(expected)
 for line,want,got in zip(lines,expected,actual):
  if want!=got:raise SystemExit(f'{line}: expected {want}, got {got}')
-print(f'PASS: {len(lines)} independent Fraction apportionment, participation and cost cases; seed 6011')
+print(f'PASS: {len(lines)} independent Fraction/integer arithmetic, apportionment, participation and cost cases; seed 6011')
