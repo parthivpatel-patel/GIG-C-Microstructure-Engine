@@ -489,6 +489,9 @@ def main():
     else:
         assert count>=10000 and rejected>=10000,(count,rejected)
     print(f'sessions={sessions} source_candidates={count} rejected_candidates={rejected} seed={SEED} canonical_sha256={canonical.hexdigest()}')
+    if not args.negative_control:
+        from check_itch_readiness_reference import main as readiness_reference
+        readiness_reference(args.driver)
 
 
 if __name__=='__main__':main()

@@ -6,6 +6,21 @@ using namespace gig::itch;
 using namespace gig::itch::test;
 namespace {
 void initialization(){
+    // Every encoded invalid kind must fail before the first allocation, including
+    // a caller that shifts both declared boundaries to an arbitrary file prefix.
+    for(unsigned raw=0;raw<=255;++raw){
+        if(raw==static_cast<unsigned>(InitialStateKind::authored_empty))continue;
+        auto candidate=config();candidate.initialization.kind=static_cast<InitialStateKind>(raw);
+        gig::TrackedResource memory;memory.fail_after(0);
+        const auto refused=SyntheticReconstructor::create(candidate,&memory);
+        check(!refused&&refused.error.code==gig::ErrorCode::inconsistent_metadata&&memory.stats().attempts==0,"all non-authored states rejected before allocation");
+    }
+    for(const auto ordinal:{std::uint64_t{1},UINT64_MAX}){
+        auto candidate=config();candidate.context_policy.first_location={ByteOffset{14},ByteOffset{16},RecordOrdinal{ordinal}};
+        candidate.initialization.boundary=candidate.context_policy.first_location;
+        check(!SyntheticReconstructor::create(candidate),"matching arbitrary boundaries do not authenticate initial state");
+    }
+
     for(auto kind:{InitialStateKind::unknown,InitialStateKind::complete_seed,InitialStateKind::incomplete_history,InitialStateKind::invalid,static_cast<InitialStateKind>(255)}){auto c=config();c.initialization.kind=kind;check(!SyntheticReconstructor::create(c),"incomplete/seed/invalid initialization blocked");}
     auto c=config();c.initialization.complete_history=false;check(!SyntheticReconstructor::create(c),"history declaration required");
     c=config();c.initialization.boundary={ByteOffset{14},ByteOffset{16},RecordOrdinal{1}};check(!SyntheticReconstructor::create(c),"arbitrary boundary blocked");
