@@ -1,6 +1,6 @@
 # Current-HEAD native ARM64 qualification readiness
 
-Prior qualified sourcef02363e, historical run40126420107; current local phase baseline
+Phase2 checkpoint: prior qualified sourcef02363e, historical run40126420107; local baseline
 c9df510a7f4c926715a8b0a8d0c1350cca33d85a (later phases require their own final gates).
 
 **The previous native ARM64 qualification applies to the previously tested commit.
@@ -33,3 +33,21 @@ Executed local gate:1396/1396 outcomes across9 configurations, zero failures/ski
 disabled;all8 hashes match.14 existing installed-interface/export checks and2
 fault checks,10 security receipt controls and3 packaging controls pass. No native
 engine/ABI change since the installed wheel was built; reuse is explicit.
+
+## Final program source checkpoint
+
+Feature source checkpoint75246ea7c4cd86ecfc11d254e2cec285352055b8 adds the
+bounded adapter and independent byte-level differential validation. Final local
+matrix1396/1396 across nine configurations passed, zero failed/skipped/disabled;
+all eight hashes preserved and supplemental164 schedules/2228 prefixes agree in
+every configuration. Fresh checkout/source-built wheels passed28 installed checks,
+4 fault controls;358-member source archive verified. Evidence:
+`evidence/order_book_validation_results.json`. The earlier paragraph's wheel reuse
+applies only to Phase2, superseded here by fresh builds.
+
+Ready for separately owner-authorized current-HEAD native qualification; NOT native
+qualified yet. Report-only delivery commit does not change tested source. No workflow
+was launched or control changed. Provider security, authenticated raw hosted archive,
+observed initialization/L3 and production gates remain partial/blocked as described
+in `VALIDATION_AND_MARKET_READINESS_REPORT.md`. No extra test run is inferred from
+this documentation update.

@@ -28,3 +28,25 @@ then separately authorize observed initialization/adapter/reference design. Do n
 re-download large historical data, optimize journal, publish or launch workflows
 implicitly. Current formal release-candidate closure remains blocked; no unresolved
 external item is described as completed.
+
+## Validation/security/market-readiness program overlay
+
+Source checkpoint75246ea7c4cd86ecfc11d254e2cec285352055b8, complete program in
+`VALIDATION_AND_MARKET_READINESS_REPORT.md`. This preserves historical rows and
+supersedes only current local evidence, not historical ARM or observed claims.
+
+| Gate | Current evidence/status |
+|---|---|
+|Local GCC/Clang/native/Python/sanitizer regressions|PASS1396/1396; all8 identities, zero fail/skip/disabled|
+|Fresh packaging/installed consumers|PASS358-member source archive;28 installed API/export+4 fault checks|
+|Independent byte-adapter differential|PASS synthetic164 schedules/2228 event-prefix comparisons; negative-control report/replay verified|
+|Resource/provenance input adapter|Implemented/tested bounded raw ingress, context, synthetic native bridge|
+|Observed initial state/native book|BLOCKED; observed route context-only/no publication; no authenticated seed/evidence supplied|
+|Observed differential/market correctness|BLOCKED; current harness refuses observed replay; no new data acquired|
+|Provider/supply-chain closure|PARTIAL17 unresolved,2 mitigated,1 specific non-applicable path; no owner acceptance|
+|Historical native ARM qualification|PASS onlyf02363e at run40126420107; available metadata archived, raw signed-in outputs unavailable|
+|Current native ARM qualification|PENDING owner-approved hosted run; local readiness passed|
+|Production/live trading|NOT QUALIFIED; previous exclusions/operational gaps remain|
+
+No workflow, release, paid resource, main merge, network configuration or actual
+market-data ingestion occurred. Final report-only commit records this checkpoint.
