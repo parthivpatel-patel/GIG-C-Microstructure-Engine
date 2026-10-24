@@ -150,3 +150,30 @@ fixtures independently check accepted/native/external prefix counts for CRC,
 truncation, partial framing, oversized frame, invalid field, contradictory K cancel,
 duplicate order, journal/source-cap exhaustion and unknown type across fragmented
 input. Formal candidate, exchange session and observed L3 gates remain distinct.
+
+## Phase 5 prerequisite audit — 2026-10-23 America/New_York
+
+The separate reset-plan journal archive changes retained storage only. It supplies
+neither observed initialization evidence nor ITCH context seeding. A native complete
+order snapshot still cannot restore source directories, retired identities, matches,
+global observations or authenticated physical capture boundaries. Snapshot count,
+byte-zero, S:O, a directory spin and market-open time remain insufficient.
+
+The existing machine gate was retained rather than creating a competing certificate
+format. Additional independent controls exercise120 contradictory claim cases
+(4 initialization declarations ×3 origins ×10 failed gates), and2048 deterministic
+adversarial documents (seed559173). The declared oracle is always refusal with
+`observed_certified=false`; caller claims never become independently verified facts.
+All claimed positive gates still fail unavailable implementation capabilities.
+These checks test refusal, not the authenticity of third-party statements or a
+complete observed adapter. No observed order book was created.
+
+For a future pilot, require: full source identity/integrity and capture evidence;
+profile-authenticated session/start semantics; exact stock-locate directories;
+complete active and retired order-reference/match history; supported add/execute/
+cancel/delete/replace semantics; external trading/cross/broken-trade accounting;
+explicit gaps/clock/restart behavior; exact tick/lot rules; independent observed
+order/FIFO reference; and measured bounded replay resources. Each absent or
+contradictory prerequisite blocks certification. Tracking numbers and capture
+ordinals remain distinct from exchange sequence numbers. Historical compatibility
+of a typed observation does not remove any initialization requirement.

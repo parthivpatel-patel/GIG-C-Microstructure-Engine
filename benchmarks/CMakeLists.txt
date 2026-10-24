@@ -99,3 +99,12 @@ if(BUILD_TESTING)
   add_test(NAME itch.decode_timing_contract COMMAND ${Python3_EXECUTABLE}
     ${PROJECT_SOURCE_DIR}/scripts/check_itch_decode_latency.py $<TARGET_FILE:gig_itch_decode_latency>)
 endif()
+
+add_executable(gig_journal_memory_probe journal_memory_probe.cpp)
+target_link_libraries(gig_journal_memory_probe PRIVATE gig::microstructure)
+target_include_directories(gig_journal_memory_probe PRIVATE ${PROJECT_SOURCE_DIR})
+gig_project_target(gig_journal_memory_probe)
+if(BUILD_TESTING)
+  add_test(NAME replay.journal_memory_accounting COMMAND ${Python3_EXECUTABLE}
+    ${PROJECT_SOURCE_DIR}/scripts/check_journal_storage.py memory $<TARGET_FILE:gig_journal_memory_probe>)
+endif()

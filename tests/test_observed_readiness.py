@@ -59,6 +59,29 @@ class Readiness(unittest.TestCase):
         report=m.evaluate(self.fixture());report['implementation_capabilities']['observed_adapter']=True
         self.assertFalse(m.CAPABILITIES['observed_adapter'])
 
+    def test_contradictory_completion_claims_never_enable_observed_books(self):
+        # A complete-state claim conflicts with absent/failed initialization evidence.
+        # Refusal, rather than certification, is the independently declared oracle.
+        for initial in ('unknown', 'incomplete', 'empty_boundary_claim', 'complete_seed_claim'):
+            for origin in ('observed', 'synthetic', 'unknown'):
+                for gate in m.GATES:
+                    f=self.fixture();f['origin']=origin;f['initialization']=initial
+                    f['gates']=dict.fromkeys(m.GATES,'claimed');f['gates'][gate]='failed'
+                    out=m.evaluate(f)
+                    self.assertEqual(out['assessment'],'BLOCKED');self.assertIs(out['observed_certified'],False)
+                    self.assertIn('evidence.'+gate+'.failed',out['reasons'])
+
+    def test_bounded_adversarial_claim_oracle(self):
+        import random
+        rng=random.Random(559173)
+        for _ in range(2048):
+            f=self.fixture();f['origin']=rng.choice(('observed','synthetic','unknown'))
+            f['initialization']=rng.choice(('unknown','incomplete','empty_boundary_claim','complete_seed_claim'))
+            f['gates']={gate:rng.choice(('missing','partial','claimed','failed')) for gate in m.GATES}
+            before=copy.deepcopy(f);out=m.evaluate(f)
+            self.assertEqual(f,before);self.assertIs(out['observed_certified'],False)
+            self.assertEqual(out['assessment'],'BLOCKED');self.assertEqual(out,m.evaluate(f))
+
     def test_oversize_and_malformed_inputs(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'input.json'

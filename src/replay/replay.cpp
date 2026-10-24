@@ -36,7 +36,7 @@ void write_start(detail::CanonicalWriter& w,const StreamStart& s) {
 }
 }
 ReplayEngine::ReplayEngine(OrderBook book,ReplayConfig config,std::pmr::memory_resource* resource) noexcept
-    :book_(std::move(book)),config_(config),resource_(resource),journal_(resource) {
+    :book_(std::move(book)),config_(config),resource_(resource),journal_(resource),restart_plans_(resource) {
     if (config_.initial_state==InitialBookState::requires_snapshot) continuity_error_=Error{ErrorCode::recovery_required,"initial_snapshot_required"};
     for (std::size_t i=0;i<config_.streams.count;++i) {
         cursors_.items[i]=cursor_start(*config_.streams.items[i]);++cursors_.count;
@@ -107,12 +107,27 @@ void ReplayEngine::order_commit(const Metadata& m,std::uint32_t rank) noexcept {
     else last_key_=OrderKey{m.event_time.data->nanoseconds.value(),rank,m.sequence.data->value(),m.subevent_index};
 }
 Error ReplayEngine::reserve_record() noexcept {
+    static_assert(std::is_nothrow_copy_constructible_v<JournalRecord>);
+    static_assert(std::is_nothrow_move_constructible_v<JournalRecord>);
+    static_assert(std::is_nothrow_copy_constructible_v<RestartPlan>);
     if (journal_.size()>=config_.max_journal_records) return {ErrorCode::capacity,"journal.records"};
     try {
         if (journal_.size()==journal_.capacity()) journal_.reserve(std::min(config_.max_journal_records,std::max(journal_.size()+1,journal_.capacity()*2)));
         return {};
     } catch (const std::bad_alloc&) { return {ErrorCode::resource_exhausted,"journal"}; }
       catch (const std::length_error&) { return {ErrorCode::capacity,"journal"}; }
+}
+Error ReplayEngine::reserve_restart() noexcept {
+    // Only reset records own plans; both vectors are prepared before native mutation.
+    // The same record cap bounds this archive; indices survive vector reallocation.
+    if (restart_plans_.size()>=config_.max_journal_records) return {ErrorCode::capacity,"journal.restarts"};
+    try {
+        if (restart_plans_.size()==restart_plans_.capacity())
+            restart_plans_.reserve(std::min(config_.max_journal_records,
+                std::max(restart_plans_.size()+1,restart_plans_.capacity()*2)));
+        return {};
+    } catch (const std::bad_alloc&) { return {ErrorCode::resource_exhausted,"journal.restarts"}; }
+      catch (const std::length_error&) { return {ErrorCode::capacity,"journal.restarts"}; }
 }
 const InstrumentRules* ReplayEngine::instrument_rules(const Metadata& m) const noexcept {
     if (*m.instrument.data==book_.rules().instrument) return &book_.rules();
@@ -175,8 +190,12 @@ Error ReplayEngine::reset(const MarketEvent& event,const RestartPlan& starts) no
         if (!seen) return {ErrorCode::missing_metadata,"reset.all_streams"};
     }
     if (const auto e=reserve_record()) return e;
+    if (const auto e=reserve_restart()) return e;
     if (const auto e=book_.apply(event,next_session)) return e;
-    journal_.push_back({event,JournalDisposition::reset,starts});cursors_=next;
+    // Reserved storage and nothrow value copies make the joint append infallible.
+    const auto index=restart_plans_.size();
+    restart_plans_.push_back(starts);
+    journal_.push_back({event,JournalDisposition::reset,index});cursors_=next;
     order_commit(event.metadata,advanced.data->start.rank);return {};
 }
 Error ReplayEngine::recover(const MarketEvent& event) noexcept {
@@ -240,8 +259,8 @@ Result<std::pmr::string> ReplayEngine::canonical() const noexcept {
         w.list(cursors_,[&](const auto& c){write_start(w,c.start);w.number(c.expected.value());w.number(c.next_subevent);w.number(c.message_count);
             w.number(static_cast<unsigned>(c.last_sequence.has_value()));if (c.last_sequence) w.number(c.last_sequence->value());w.number(c.last_subevent);w.number(c.last_message_count);w.number(static_cast<unsigned>(c.exhausted));});
         w.number(journal_.size());
-        for (const auto& record:journal_) {w.enumeration(record.disposition);detail::canonical_event(w,record.event);w.number(static_cast<unsigned>(record.restart.has_value()));
-            if (record.restart) w.list(*record.restart,[&](const auto& s){write_start(w,s);});}
+        for (const auto& record:journal_) {w.enumeration(record.disposition);detail::canonical_event(w,record.event);w.number(static_cast<unsigned>(record.restart_index.has_value()));
+            if (record.restart_index) w.list(restart_plans_[*record.restart_index],[&](const auto& s){write_start(w,s);});}
         const auto book=book_.canonical();if (!book) return Result<std::pmr::string>::failure(book.error.code,book.error.field);
         w.token(std::string_view(*book.data));return Result<std::pmr::string>::success(std::move(out));
     } catch (const std::bad_alloc&) { return Result<std::pmr::string>::failure(ErrorCode::resource_exhausted,"replay.canonical"); }

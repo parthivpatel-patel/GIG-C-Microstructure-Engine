@@ -33,6 +33,12 @@ struct JournalEntry {
     MarketEvent event; JournalDisposition disposition; std::optional<RestartPlan> restart;
     bool operator==(const JournalEntry&) const = default;
 };
+// Physical storage diagnostics; capacities may grow on rejected allocation attempts.
+// Logical JournalEntry remains the canonical, owned event/restart contract above.
+struct JournalStorageStats {
+    std::size_t records,record_capacity,record_bytes;
+    std::size_t restarts,restart_capacity,restart_bytes;
+};
 struct ReplaySnapshot {
     Identity run_id; std::size_t journal_prefix; DepthSnapshot book;
     // Resolve lineage against this run's canonical journal archive, not latest input alone.
@@ -50,7 +56,11 @@ class ReplayEngine {
     ReplayConfig config_;
     BoundedList<StreamCursor,8> cursors_;
     std::pmr::memory_resource* resource_;
-    std::pmr::vector<JournalEntry> journal_;
+    struct JournalRecord {
+        MarketEvent event; JournalDisposition disposition; std::optional<std::size_t> restart_index;
+    };
+    std::pmr::vector<JournalRecord> journal_;
+    std::pmr::vector<RestartPlan> restart_plans_;
     std::optional<std::uint64_t> last_ordinal_;
     std::optional<OrderKey> last_key_;
     std::optional<Error> continuity_error_;
@@ -60,6 +70,7 @@ class ReplayEngine {
     Error order_check(const Metadata&,std::uint32_t) const noexcept;
     void order_commit(const Metadata&,std::uint32_t) noexcept;
     Error reserve_record() noexcept;
+    Error reserve_restart() noexcept;
     Error source_check(const StreamStart&,const Metadata&,bool allow_new_scope=false) const noexcept;
     const InstrumentRules* instrument_rules(const Metadata&) const noexcept;
     Error stop(Error) noexcept;
@@ -76,6 +87,11 @@ public:
     Error recover(const MarketEvent&) noexcept;
     const OrderBook& book() const noexcept { return book_; }
     std::size_t journal_size() const noexcept { return journal_.size(); }
+    static constexpr std::size_t journal_record_bytes() noexcept { return sizeof(JournalRecord); }
+    JournalStorageStats journal_storage() const noexcept {
+        return {journal_.size(),journal_.capacity(),sizeof(JournalRecord),
+                restart_plans_.size(),restart_plans_.capacity(),sizeof(RestartPlan)};
+    }
     bool needs_recovery() const noexcept { return continuity_error_.has_value(); }
     std::optional<StreamCursor> cursor(StreamId) const noexcept;
     Result<ReplaySnapshot> depth(std::size_t) const noexcept;

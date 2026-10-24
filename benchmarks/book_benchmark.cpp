@@ -132,7 +132,7 @@ int main(int argc,char** argv) {
         for (int i=0;i<10000;++i) {const auto a=BenchClock::now();const auto b=BenchClock::now();timer.push_back(std::chrono::duration_cast<std::chrono::nanoseconds>(b-a).count());}
         const std::array<std::string_view,8> names{"add","cancel","execution","depth_snapshot","replay","event_copy_add","event_copy_snapshot","payload_copy"};
         std::cout << "{\"phase2_correctness_validated\":true,\"workload_version\":2,\"orders\":" << count << ",\"seed\":" << seed << ",\"warmup\":" << warmup << ",\"repetitions\":" << repeats << ",\"threads\":1,"
-                  << "\"sizeof_market_event\":" << sizeof(MarketEvent) << ",\"sizeof_metadata\":" << sizeof(Metadata) << ",\"sizeof_add_order\":" << sizeof(AddOrder) << ",\"sizeof_journal_entry\":" << sizeof(JournalEntry)
+                  << "\"sizeof_market_event\":" << sizeof(MarketEvent) << ",\"sizeof_metadata\":" << sizeof(Metadata) << ",\"sizeof_add_order\":" << sizeof(AddOrder) << ",\"sizeof_journal_entry\":" << sizeof(JournalEntry) << ",\"physical_journal_record_bytes\":" << ReplayEngine::journal_record_bytes()
                   << ",\"sizeof_order_book\":" << sizeof(OrderBook) << ",\"sizeof_replay_engine\":" << sizeof(ReplayEngine)
                   << ",\"input_event_storage_bytes\":" << (w.adds.capacity()+w.cancels.capacity()+w.executions.capacity()+w.replay.capacity())*sizeof(MarketEvent)
                   << ",\"payload_storage_control_bytes\":" << count*sizeof(AddOrder) << ",\"standard_library\":\""
