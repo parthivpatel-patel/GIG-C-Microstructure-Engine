@@ -34,3 +34,15 @@ Phase9 is partial, not a passed full matrix. Logs build/extended/evidence/arm-*;
 container/work/extended retains source, build, ELFs, wrappers and JUnit. Resume
 by inspecting these exact processes/logs, not restarting all successful tests.
 Independent security inventory work can continue while those bounded jobs finish.
+
+## Phase10 bounded applicability checkpoint
+
+Inventory and21 official-source/feed requests completed:7 upstream/CNA sources
+and12 version-specific PyPI metadata200; GCC/Ubuntu notices proxy failures, no retries.
+Fresh review identifies managed Python OpenSSL3.5.8 versus published3.5.9 security
+fixes; provider/path mapping unresolved. CPython/Expat later fixes and partial Ubuntu
+backports recorded. No engine exploit reproduced, no candidate runtime upgrade.
+RC16 BLOCKED. PHASE10_SECURITY_APPLICABILITY.md and build/extended/evidence/security-*
+retain sources/hashes. ARM jobs still running; preserve their logs/processes and
+retry only the original timed-out L3 oracle, not successful cases. Next phase11
+controlled measurements/reliability evidence, then phase12 complete gate assessment.
