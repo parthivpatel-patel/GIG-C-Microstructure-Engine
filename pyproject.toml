@@ -1,0 +1,20 @@
+[build-system]
+requires = ["scikit-build-core==0.11.6", "pybind11==2.13.6"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "gig-microstructure"
+version = "0.1.1"
+description = "Standalone deterministic microstructure research and offline synthetic simulation"
+requires-python = ">=3.9,<3.13"
+dependencies = ["jsonschema==4.23.0"]
+readme = "README.md"
+
+[tool.scikit-build]
+cmake.version = ">=3.20"
+cmake.args = ["-DGIG_BUILD_PYTHON=ON", "-DBUILD_TESTING=OFF", "-DGIG_BUILD_BENCHMARKS=OFF"]
+wheel.packages = ["python/gig_microstructure"]
+build.tool-args = ["-j1"]
+# Required source trees follow normal ignore rules; recursive force-includes
+# would override cache/build exclusions. Anchor only required root documents.
+sdist.include = ["/CMakeLists.txt", "/README.md", "/THIRD_PARTY_NOTICES.md", "/docs/GIG_INTEGRATION.md"]

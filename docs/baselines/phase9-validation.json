@@ -1,0 +1,170 @@
+{
+  "reviewed_at": "2026-10-21T14:50:20.903033-04:00",
+  "phase9_start_sha": "c0a32fddbf57218be32afc918cd2696324c3bfb5",
+  "validated_tools_checkpoint": "36413f78b952a51d2489c0ad4c0da85e7094151e",
+  "architecture": "x86_64",
+  "native_arm64": "not available; NOT TESTED",
+  "cross_compilation": "not performed",
+  "compilers": {
+    "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+    "clang": "Debian clang version 19.1.7 (3+b1)"
+  },
+  "suites": {
+    "gcc-debug": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "3",
+      "junit_sha256": "df54f8f5ff37eebdfa9d64e58bcac654b136740102be42524c5534f343c05757"
+    },
+    "gcc-release": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "1",
+      "junit_sha256": "7f2a834101ea099d564a89885d7db666b4baffd01571cc1f37a0e7f9d1bd4b89"
+    },
+    "gcc-asan-ubsan": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "13",
+      "junit_sha256": "e8b04f4eb36a24594fd6f410a222b06ddeb367e694682e80b67f07cfa13ed6a3"
+    },
+    "clang-debug": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "3",
+      "junit_sha256": "7827d37ed98af7d5737153415f3c94f54bc67d1676dd52772657759bffa96c85"
+    },
+    "clang-release": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "1",
+      "junit_sha256": "7966ed94c3df50851a34e3d1579dc03d7cd355049c1e9888c6fc7da603f433cf"
+    },
+    "clang-asan-ubsan": {
+      "tests": "61",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "12",
+      "junit_sha256": "ee82198511f8ab79c26b564247bcd6b562f0870921673551223cb5f36cba345f"
+    },
+    "gcc-python-debug": {
+      "tests": "63",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "4",
+      "junit_sha256": "170f3f6ed3f46acaa606d994eb2806b0a5a6152b560b755d123168578612c4df"
+    },
+    "gcc-python-release": {
+      "tests": "63",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "1",
+      "junit_sha256": "9eaea9372cfd54328fd17613bcd71948d747756e67cb640b078b1f5ae9ad4ac0"
+    },
+    "gcc-python-asan-ubsan": {
+      "tests": "64",
+      "failures": "0",
+      "skipped": "0",
+      "disabled": "0",
+      "time": "18",
+      "junit_sha256": "478c8f5e99898c374bb94cc1cf4ec8e875e898f8635c030dae0366fa56021141"
+    }
+  },
+  "canonical_replay": {
+    "gcc-debug": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    },
+    "gcc-release": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    },
+    "gcc-asan-ubsan": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    },
+    "clang-debug": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    },
+    "clang-release": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    },
+    "clang-asan-ubsan": {
+      "sha256": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+      "bytes": 3792
+    }
+  },
+  "native_benchmark_artifacts_identical_to_phase7": true,
+  "python_benchmark_correctness_identical_to_phase8": true,
+  "packages": [
+    {
+      "path": "build/phase9-dist/gig_microstructure-0.1.0-cp312-cp312-linux_x86_64.whl",
+      "sha256": "393f57cd8cf908efad636d1f074742d2aa20c52bc1fff03a29e0b8336c3d5060",
+      "bytes": 440991,
+      "schema_assets": 14,
+      "third_party_notices": true
+    },
+    {
+      "path": "build/phase9-dist/gig_microstructure-0.1.0.tar.gz",
+      "sha256": "aa1c401fc9d94c211c27e2a150328f9c508115ff6f82acc5a4b5589dd9d0d9ae",
+      "bytes": 440805
+    },
+    {
+      "path": "build/phase9-sdist-wheel/gig_microstructure-0.1.0-cp312-cp312-linux_x86_64.whl",
+      "sha256": "c3c941e332fe06f94b4d4a4160db406c4a93fed71b5fc97b74ecede58b26b628",
+      "bytes": 440991,
+      "schema_assets": 14,
+      "third_party_notices": true
+    }
+  ],
+  "package_source_scope": "native/Python runtime source unchanged since ce44faa; docs/tools-only worktree edits were present during initial packaging; exact local artifact hashes recorded, no claim of clean wheel source revision or byte-reproducible binaries",
+  "installed_consumer_checks": {
+    "phase9-consumer-tests.log": {
+      "sha256": "8f0c4c2e4dd6fc12f81911d8f3af0aa1129b77c1e214d105c7915619d7a381ef",
+      "test_groups": 7,
+      "result": "passed"
+    },
+    "phase9-sdist-consumer-tests.log": {
+      "sha256": "dc66d5c60b0c9850e15f4b02d60f2f6d5abe20a031bdf6df4c5821084ef4ecea",
+      "test_groups": 7,
+      "result": "passed"
+    }
+  },
+  "installed_import_path": "/workspace/GIG-C-Microstructure-Engine/build/phase9-consumer/lib/python3.12/site-packages/gig_microstructure/__init__.py",
+  "example_sha256": {
+    "phase9-consumer-example.jsonl": "287f373a245dff61c40c8a08e47aace216573f4d9240533e5a7656491f97efcf",
+    "phase9-sdist-consumer-example.jsonl": "287f373a245dff61c40c8a08e47aace216573f4d9240533e5a7656491f97efcf"
+  },
+  "hosted_ci": {
+    "status": "UNVERIFIED",
+    "reason": "curl: (56) CONNECT tunnel failed, response 403",
+    "probe_commit": "36413f78b952a51d2489c0ad4c0da85e7094151e",
+    "local_equivalent": "six fresh native configurations plus three optional GCC/Python suites and private packaging; not a hosted run"
+  },
+  "secret_pattern_review": {
+    "scope": "project non-build non-baseline files, common private key/GitHub/AWS key patterns, filenames only",
+    "matches": 0,
+    "limitation": "pattern scan, not proof of absence of secrets"
+  },
+  "python_sanitizer_scope": "ASan/UBSan and active-interpreter LSan plus intentional-leak control; late interpreter-finalization leak coverage unverified; native exit leak checks unchanged",
+  "environment_draft": {
+    "status": "saved for review; not applied or published",
+    "network_and_repository_membership": "preserved",
+    "restoration_validation": "not performed"
+  }
+}

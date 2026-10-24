@@ -1,0 +1,298 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "additional_instruments": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "instrument": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "18446744073709551615",
+            "x-integer-minimum": "1"
+          },
+          "lot_size": {
+            "additionalProperties": false,
+            "properties": {
+              "denominator": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "0"
+              },
+              "numerator": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "0"
+              }
+            },
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "type": "object"
+          },
+          "maximum_price": {
+            "maxLength": 20,
+            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "9223372036854775807",
+            "x-integer-minimum": "-9223372036854775808"
+          },
+          "maximum_quantity": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "18446744073709551615",
+            "x-integer-minimum": "0"
+          },
+          "minimum_price": {
+            "maxLength": 20,
+            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "9223372036854775807",
+            "x-integer-minimum": "-9223372036854775808"
+          },
+          "tick_size": {
+            "additionalProperties": false,
+            "properties": {
+              "denominator": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "0"
+              },
+              "numerator": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "0"
+              }
+            },
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "type": "object"
+          },
+          "venue": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "18446744073709551615",
+            "x-integer-minimum": "1"
+          }
+        },
+        "required": [
+          "instrument",
+          "venue",
+          "minimum_price",
+          "maximum_price",
+          "maximum_quantity",
+          "tick_size",
+          "lot_size"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "type": "array"
+    },
+    "initial_state": {
+      "enum": [
+        "0",
+        "1"
+      ]
+    },
+    "max_journal_records": {
+      "maxLength": 20,
+      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+      "type": "string",
+      "x-integer-maximum": "18446744073709551615",
+      "x-integer-minimum": "0"
+    },
+    "ordering": {
+      "enum": [
+        "0",
+        "1"
+      ]
+    },
+    "run_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[!-~]+$(?![\\s\\S])",
+      "type": "string"
+    },
+    "session": {
+      "additionalProperties": false,
+      "properties": {
+        "epoch": {
+          "maxLength": 20,
+          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+          "type": "string",
+          "x-integer-maximum": "18446744073709551615",
+          "x-integer-minimum": "0"
+        },
+        "session": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[!-~]+$(?![\\s\\S])",
+          "type": "string"
+        }
+      },
+      "required": [
+        "session",
+        "epoch"
+      ],
+      "type": "object"
+    },
+    "streams": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "dataset": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[!-~]+$(?![\\s\\S])",
+            "type": "string"
+          },
+          "dataset_version": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[!-~]+$(?![\\s\\S])",
+            "type": "string"
+          },
+          "first_sequence": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "18446744073709551615",
+            "x-integer-minimum": "0"
+          },
+          "rank": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "4294967295",
+            "x-integer-minimum": "0"
+          },
+          "scope": {
+            "additionalProperties": false,
+            "properties": {
+              "epoch": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "0"
+              },
+              "session": {
+                "maxLength": 128,
+                "minLength": 1,
+                "pattern": "^[!-~]+$(?![\\s\\S])",
+                "type": "string"
+              },
+              "stream": {
+                "maxLength": 20,
+                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                "type": "string",
+                "x-integer-maximum": "18446744073709551615",
+                "x-integer-minimum": "1"
+              },
+              "unit": {
+                "enum": [
+                  "0",
+                  "1"
+                ]
+              }
+            },
+            "required": [
+              "stream",
+              "session",
+              "epoch",
+              "unit"
+            ],
+            "type": "object"
+          },
+          "venue": {
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+            "type": "string",
+            "x-integer-maximum": "18446744073709551615",
+            "x-integer-minimum": "1"
+          }
+        },
+        "required": [
+          "venue",
+          "scope",
+          "dataset",
+          "dataset_version",
+          "first_sequence",
+          "rank"
+        ],
+        "type": "object"
+      },
+      "maxItems": 8,
+      "type": "array"
+    },
+    "timestamp_clock": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "const": "0"
+            },
+            "value": {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[!-~]+$(?![\\s\\S])",
+              "type": "string"
+            }
+          },
+          "required": [
+            "reason",
+            "value"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "reason": {
+              "enum": [
+                "1",
+                "2",
+                "3"
+              ]
+            },
+            "value": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "reason",
+            "value"
+          ],
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "required": [
+    "run_id",
+    "session",
+    "streams",
+    "ordering",
+    "timestamp_clock",
+    "additional_instruments",
+    "max_journal_records",
+    "initial_state"
+  ],
+  "type": "object"
+}

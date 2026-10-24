@@ -1,0 +1,809 @@
+{
+  "all_five_cross_compiler_artifact_sets_equal": true,
+  "baseline_sha": "ccc86d3822e4cfddd4bcd2a086dd7e779602a91d",
+  "benchmark_runs": {
+    "clang": {
+      "artifacts": {
+        "book_analytics": {
+          "input.canonical": {
+            "bytes": 1304,
+            "sha256": "c18705c29c8f255fc0d6c5e614f5bab8a9f55e02e6168d2da0c04d36916c91e6"
+          }
+        },
+        "book_replay_eventcopy": {
+          "replay.canonical": {
+            "bytes": 337924,
+            "sha256": "d83d57a15e35fb499429bcacb3967ffb12a7b782b6f9f6d071aaa87b014f8979"
+          },
+          "workload.canonical": {
+            "bytes": 825629,
+            "sha256": "5acd23e7b7ae0f5e3baed41b77cdfeb39c75ace3f7bba8ebd43751345cb57911"
+          }
+        },
+        "execution_tca": {
+          "input.canonical": {
+            "bytes": 614,
+            "sha256": "4f7bc286df9da64295f086dcd16269e7c3ac5757d0e574c2cc4dac59019e8c95"
+          }
+        },
+        "flow_analytics": {
+          "input.canonical": {
+            "bytes": 1852,
+            "sha256": "7e6c75c195d0c01f3537c41de34705a3d7a536379fe52335f4780c2fa001f471"
+          }
+        },
+        "simulation": {
+          "input.canonical": {
+            "bytes": 31117,
+            "sha256": "7877560d4add7189bbca57b42f71207f0424ae762fe190dcbd3ab7c37123fbd0"
+          }
+        }
+      },
+      "compiler": {
+        "compiler": "Debian clang version 19.1.7 (3+b1)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /workspace/gig-clang/root/usr/lib/llvm-19/bin\n",
+        "compiler_arg1": "",
+        "compiler_executable": "/workspace/gig-clang/bin/clang++",
+        "compiler_id": "Clang",
+        "compiler_metadata_sha256": "ffd29a707d84f56c45eefa5ddd3658d94f4ff53b40f6e6145be6f29a6ff3246a",
+        "compiler_version": "19.1.7"
+      },
+      "correctness": {
+        "ctest_outcomes": 65,
+        "errors": 0,
+        "failures": 0,
+        "junit_sha256": "8f6841e193b1e723161d610406f4c8b67e08264f036af9e6ce97b4f4dbd46e70",
+        "skipped": 0
+      },
+      "manifest": {
+        "bytes": 2472437,
+        "local_path": "build/remediation/verified-clang/manifest.json",
+        "sha256": "45e37ff044921d590af24831089724291791e39cfa95ac5c91e438dea478d54d"
+      },
+      "source_hashes_sha256": "13527f22846b5fed725c66635616e36e378a1bce5d2cd7b6a96dc6a8200eb2a6",
+      "summary": {
+        "book_analytics": {
+          "median_operations_per_second": 1767506.444328496,
+          "p50_service_ns": 511,
+          "p95_service_ns": 531,
+          "p99_service_ns": 741,
+          "worst_observed_service_ns": 1918323
+        },
+        "book_replay_eventcopy": {
+          "add": {
+            "median_operations_per_second": 1894205.6544998484,
+            "p50_service_ns": 330,
+            "p95_service_ns": 461,
+            "p99_service_ns": 781,
+            "worst_observed_service_ns": 197120
+          },
+          "cancel": {
+            "median_operations_per_second": 4710644.953537584,
+            "p50_service_ns": 231,
+            "p95_service_ns": 321,
+            "p99_service_ns": 510,
+            "worst_observed_service_ns": 35342
+          },
+          "depth_snapshot": {
+            "median_operations_per_second": 7826831.3562431205,
+            "p50_service_ns": 140,
+            "p95_service_ns": 181,
+            "p99_service_ns": 220,
+            "worst_observed_service_ns": 41091
+          },
+          "event_copy_add": {
+            "median_operations_per_second": 4996048.047930836,
+            "p50_service_ns": 200,
+            "p95_service_ns": 331,
+            "p99_service_ns": 500,
+            "worst_observed_service_ns": 90914
+          },
+          "event_copy_snapshot": {
+            "median_operations_per_second": 8763221.853284497,
+            "p50_service_ns": 140,
+            "p95_service_ns": 160,
+            "p99_service_ns": 261,
+            "worst_observed_service_ns": 67729
+          },
+          "execution": {
+            "median_operations_per_second": 4180581.525422345,
+            "p50_service_ns": 230,
+            "p95_service_ns": 320,
+            "p99_service_ns": 471,
+            "worst_observed_service_ns": 31706
+          },
+          "payload_copy": {
+            "median_operations_per_second": 408945686.9009585,
+            "p50_service_ns": 20,
+            "p95_service_ns": 30,
+            "p99_service_ns": 31,
+            "worst_observed_service_ns": 11477
+          },
+          "replay": {
+            "median_operations_per_second": 64227.61463782462,
+            "p50_service_ns": 7341,
+            "p95_service_ns": 11097,
+            "p99_service_ns": 100498,
+            "worst_observed_service_ns": 3930556
+          }
+        },
+        "execution_tca": {
+          "median_operations_per_second": 622085.5292952517,
+          "p50_service_ns": 1072,
+          "p95_service_ns": 1582,
+          "p99_service_ns": 3966,
+          "worst_observed_service_ns": 751546
+        },
+        "flow_analytics": {
+          "median_operations_per_second": 443482.77668114344,
+          "p50_service_ns": 1582,
+          "p95_service_ns": 2294,
+          "p99_service_ns": 20730,
+          "worst_observed_service_ns": 302665
+        },
+        "simulation": {
+          "median_operations_per_second": 89424.3794611762,
+          "p50_service_ns": 6460,
+          "p95_service_ns": 28151,
+          "p99_service_ns": 64495,
+          "worst_observed_service_ns": 113657
+        }
+      }
+    },
+    "gcc": {
+      "artifacts": {
+        "book_analytics": {
+          "input.canonical": {
+            "bytes": 1304,
+            "sha256": "c18705c29c8f255fc0d6c5e614f5bab8a9f55e02e6168d2da0c04d36916c91e6"
+          }
+        },
+        "book_replay_eventcopy": {
+          "replay.canonical": {
+            "bytes": 337924,
+            "sha256": "d83d57a15e35fb499429bcacb3967ffb12a7b782b6f9f6d071aaa87b014f8979"
+          },
+          "workload.canonical": {
+            "bytes": 825629,
+            "sha256": "5acd23e7b7ae0f5e3baed41b77cdfeb39c75ace3f7bba8ebd43751345cb57911"
+          }
+        },
+        "execution_tca": {
+          "input.canonical": {
+            "bytes": 614,
+            "sha256": "4f7bc286df9da64295f086dcd16269e7c3ac5757d0e574c2cc4dac59019e8c95"
+          }
+        },
+        "flow_analytics": {
+          "input.canonical": {
+            "bytes": 1852,
+            "sha256": "7e6c75c195d0c01f3537c41de34705a3d7a536379fe52335f4780c2fa001f471"
+          }
+        },
+        "simulation": {
+          "input.canonical": {
+            "bytes": 31117,
+            "sha256": "7877560d4add7189bbca57b42f71207f0424ae762fe190dcbd3ab7c37123fbd0"
+          }
+        }
+      },
+      "compiler": {
+        "compiler": "g++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+        "compiler_arg1": "",
+        "compiler_executable": "/usr/bin/g++",
+        "compiler_id": "GNU",
+        "compiler_metadata_sha256": "86e56c0730a74cc12bfc2bc52c8b5d7eac75fc14c4afea17459af2ba0d50b63e",
+        "compiler_version": "14.2.0"
+      },
+      "correctness": {
+        "ctest_outcomes": 65,
+        "errors": 0,
+        "failures": 0,
+        "junit_sha256": "7a03e4a912a04f99ef637a8984faf262cc3a3cf51eda506961ceb950629f1436",
+        "skipped": 0
+      },
+      "manifest": {
+        "bytes": 2439747,
+        "local_path": "build/remediation/verified-gcc/manifest.json",
+        "sha256": "692bdf4bbcd3d933b8c4b70860fdec8b010fefcd7d34cd2a9911604f80dec51b"
+      },
+      "source_hashes_sha256": "13527f22846b5fed725c66635616e36e378a1bce5d2cd7b6a96dc6a8200eb2a6",
+      "summary": {
+        "book_analytics": {
+          "median_operations_per_second": 3498967.454704117,
+          "p50_service_ns": 281,
+          "p95_service_ns": 291,
+          "p99_service_ns": 451,
+          "worst_observed_service_ns": 116982
+        },
+        "book_replay_eventcopy": {
+          "add": {
+            "median_operations_per_second": 2663157.401965119,
+            "p50_service_ns": 330,
+            "p95_service_ns": 531,
+            "p99_service_ns": 961,
+            "worst_observed_service_ns": 121368
+          },
+          "cancel": {
+            "median_operations_per_second": 3404459.043426801,
+            "p50_service_ns": 230,
+            "p95_service_ns": 430,
+            "p99_service_ns": 762,
+            "worst_observed_service_ns": 184641
+          },
+          "depth_snapshot": {
+            "median_operations_per_second": 4351040.595548682,
+            "p50_service_ns": 140,
+            "p95_service_ns": 200,
+            "p99_service_ns": 220,
+            "worst_observed_service_ns": 74420
+          },
+          "event_copy_add": {
+            "median_operations_per_second": 5602670.022432566,
+            "p50_service_ns": 180,
+            "p95_service_ns": 250,
+            "p99_service_ns": 330,
+            "worst_observed_service_ns": 76082
+          },
+          "event_copy_snapshot": {
+            "median_operations_per_second": 8763221.853284497,
+            "p50_service_ns": 130,
+            "p95_service_ns": 200,
+            "p99_service_ns": 270,
+            "worst_observed_service_ns": 608526
+          },
+          "execution": {
+            "median_operations_per_second": 3818387.924348189,
+            "p50_service_ns": 211,
+            "p95_service_ns": 351,
+            "p99_service_ns": 581,
+            "worst_observed_service_ns": 76262
+          },
+          "payload_copy": {
+            "median_operations_per_second": 315465187.9235983,
+            "p50_service_ns": 30,
+            "p95_service_ns": 30,
+            "p99_service_ns": 40,
+            "worst_observed_service_ns": 107148
+          },
+          "replay": {
+            "median_operations_per_second": 55765.31689185907,
+            "p50_service_ns": 7181,
+            "p95_service_ns": 11156,
+            "p99_service_ns": 107157,
+            "worst_observed_service_ns": 4647411
+          }
+        },
+        "execution_tca": {
+          "median_operations_per_second": 811889.307011882,
+          "p50_service_ns": 1021,
+          "p95_service_ns": 1452,
+          "p99_service_ns": 2123,
+          "worst_observed_service_ns": 245812
+        },
+        "flow_analytics": {
+          "median_operations_per_second": 672660.4298488492,
+          "p50_service_ns": 922,
+          "p95_service_ns": 1522,
+          "p99_service_ns": 4026,
+          "worst_observed_service_ns": 356095
+        },
+        "simulation": {
+          "median_operations_per_second": 94376.00136255352,
+          "p50_service_ns": 6240,
+          "p95_service_ns": 28292,
+          "p99_service_ns": 98916,
+          "worst_observed_service_ns": 169069
+        }
+      }
+    }
+  },
+  "branch": "feat/bootstrap-cpp20-engine",
+  "environment": "Linux x86_64; GCC14.2.0, Clang19.1.7, CPython3.12.14, CMake3.31.6",
+  "fixture_dump": {
+    "clang": {
+      "bytes": 6588,
+      "local_path": "build/remediation/final-fixture-clang.txt",
+      "sha256": "1143b49559a84bcf1c5570b80ffd007582cf2f519eb33db47cae3c1904b8bcc4"
+    },
+    "container_version": 2,
+    "count": 512,
+    "dataset_version": 2,
+    "gcc": {
+      "bytes": 6588,
+      "local_path": "build/remediation/final-fixture-gcc.txt",
+      "sha256": "1143b49559a84bcf1c5570b80ffd007582cf2f519eb33db47cae3c1904b8bcc4"
+    },
+    "generator_version": 2,
+    "independent_reference_cases_per_suite": 16,
+    "same_original_gcc_payloads": true,
+    "seed": 1729
+  },
+  "hosted_ci": {
+    "error": {
+      "bytes": 47,
+      "local_path": "build/remediation/final-ci-error.txt",
+      "sha256": "115ac061d5c11b9f88bc706341277e549679986ec53ba237026722b790803312"
+    },
+    "reason": "GitHub API CONNECT proxy403; Git HTTPS push and exact remote SHA verification successful",
+    "status": "UNVERIFIED"
+  },
+  "installed_package": {
+    "example": {
+      "bytes": 3354,
+      "local_path": "build/remediation/complete-consumer-example.jsonl",
+      "sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9"
+    },
+    "export_contracts": {
+      "failed": 0,
+      "log": {
+        "bytes": 959,
+        "local_path": "build/remediation/complete-consumer-export-tests.log",
+        "sha256": "c1a16ba9b9cefb9348097f4815e6be889d243efa38b37986bbcbbf54d3b47034"
+      },
+      "passed": 6,
+      "skipped": 0
+    },
+    "import_paths": [
+      "/workspace/GIG-C-Microstructure-Engine/build/remediation/consumer/lib/python3.12/site-packages/gig_microstructure/__init__.py",
+      "/workspace/GIG-C-Microstructure-Engine/build/remediation/consumer/lib/python3.12/site-packages/gig_microstructure/_native.cpython-312-x86_64-linux-gnu.so"
+    ],
+    "interface": {
+      "failed": 0,
+      "log": {
+        "bytes": 845,
+        "local_path": "build/remediation/complete-consumer-tests.log",
+        "sha256": "a311cd257e0f060c0d9112df7798b97c1cef35ee2601ecdd0f17d94437cd4615"
+      },
+      "passed": 7,
+      "skipped": 0
+    },
+    "published": false,
+    "schema_bytes_unchanged": true,
+    "schema_count": 14,
+    "source_archive": {
+      "bytes": 744558,
+      "local_path": "build/remediation/complete-dist/gig_microstructure-0.1.1.tar.gz",
+      "sha256": "b4e99f55c99e5a2025b025945002c2b7ef8a77e0014e605a2f55738998bf36b9"
+    },
+    "source_rebuilt_wheel": {
+      "bytes": 442932,
+      "local_path": "build/remediation/complete-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "sha256": "10355bb608284145eb003b3db6c7524c2c82d49ae05ee6802830f7ee025fe6e7"
+    },
+    "third_party_notices_present": true,
+    "version": "0.1.1"
+  },
+  "jitter_preservation": {
+    "comparison": "exchange states, times, fills, ledger and original reports identical after removing added maker reports",
+    "current": {
+      "bytes": 42145,
+      "local_path": "build/remediation/complete-latency.json",
+      "sha256": "318fbfb3dba45089ea263871cb48eac89d93186ac0e01a74599e157a49efc592"
+    },
+    "original": {
+      "bytes": 42145,
+      "local_path": "build/remediation/original-latency.json",
+      "sha256": "318fbfb3dba45089ea263871cb48eac89d93186ac0e01a74599e157a49efc592"
+    },
+    "seeds": [
+      5,
+      42,
+      1729,
+      2027
+    ]
+  },
+  "journal": {
+    "entry_size_bytes": 15944,
+    "measurement": {
+      "bytes": 72,
+      "local_path": "build/remediation/final-sizes.txt",
+      "sha256": "6174197e3359f3d553c2eff581a3c3db0030af052b4bcdd8aa820c569500f9ec"
+    },
+    "optimized": false
+  },
+  "legacy_benchmark": {
+    "input_sha256": "c18705c29c8f255fc0d6c5e614f5bab8a9f55e02e6168d2da0c04d36916c91e6",
+    "manifest": {
+      "bytes": 405300,
+      "local_path": "build/remediation/verified-legacy-book.json",
+      "sha256": "34516f9757f65073e2881a344cd27c2b457dfcdefd3b2d682f784352ced858be"
+    },
+    "selected_compiler_id": "GNU"
+  },
+  "limitations": [
+    "Native ARM64 and cross compilation not performed",
+    "No observed-market validation or empirical calibration",
+    "Python active-interpreter LSan and positive leak control pass; late-finalization leak coverage unverified",
+    "Shared-host sequential timings are finite descriptive evidence; no speedup or production latency claim",
+    "Wheel source archive predates final documentation-only edits; final runtime, fixture and test code are unchanged",
+    "Raw logs/manifests and binaries remain ignored local evidence; hashes and commands are committed, artifacts are not published"
+  ],
+  "native_application_canonical_sha256": {
+    "phase9-clang-asan-ubsan": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+    "phase9-clang-debug": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+    "phase9-clang-release": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+    "phase9-clean-asan-ubsan": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+    "phase9-clean-debug": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979",
+    "phase9-clean-release": "bee1448c29fc918911c48e62a6f6060d09d3e53f0938a02f4e4063b49d362979"
+  },
+  "original_audit": {
+    "bytes": 72954,
+    "preservation": "verbatim prefix of committed audit; appended remediation addenda",
+    "sha256": "4c3837cd33a1be9621716d7073eb8d2e32a6624c39b624cf7824a7545e819889"
+  },
+  "original_failures": [
+    {
+      "bytes": 477,
+      "local_path": "build/remediation/fix1-before.log",
+      "sha256": "e3ed5a792e39bf7334acfeb28affa186d863a048f71d547513b1850834f797e3"
+    },
+    {
+      "bytes": 482,
+      "local_path": "build/remediation/fix2-before.log",
+      "sha256": "212e7c920a92601c51707f8d42510a1235c058d527d2db0017f19f2cd5750c23"
+    },
+    {
+      "bytes": 2539,
+      "local_path": "build/remediation/fix3-before.log",
+      "sha256": "f9b6be4249c284e9e198e8683cccbf9dd22fd3eaab375f22661b901efbc7f081"
+    },
+    {
+      "bytes": 4163,
+      "local_path": "build/remediation/fix4-before.log",
+      "sha256": "8224e981a12b0b9e19bbfe3c92a90ac10b29e4812d7b81b5a2ca7b1af9ded132"
+    },
+    {
+      "bytes": 71,
+      "local_path": "build/remediation/fix5-before.log",
+      "sha256": "5521ece603da7d6316a728dadd6a8f1ffb2f9eb2c873971bcb46dd3ea6b8cbee"
+    },
+    {
+      "bytes": 551,
+      "local_path": "build/remediation/rng-before.log",
+      "sha256": "231f364e543a5f03121679c40372e9abb35d571edca70bb74e67182740673058"
+    }
+  ],
+  "phase2_runner": {
+    "artifacts": {
+      "replay.canonical": {
+        "bytes": 21192,
+        "sha256": "b6adf3fef571cc8f641cba5be06778e1c50fed55399b76c9046cf6cdfd0ab4ff"
+      },
+      "workload.canonical": {
+        "bytes": 50867,
+        "sha256": "fbe5e33414fc8c950d0683fc130046b65295a40b16c1345123c8c01766e14523"
+      }
+    },
+    "correctness": {
+      "benchmark_independent_reference_preflight": true,
+      "ctest_outcomes": 65,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests_xml_sha256": "00aae3389e9d7b0180717a09c5ae28b4d5df52f09846a9ca6e4a0b9de69dd274"
+    },
+    "manifest": {
+      "bytes": 147479,
+      "local_path": "build/remediation/verified-phase2/manifest.json",
+      "sha256": "85b18f4fb700f5535fb8a360e5d2db5dc2368368032499548b808c5d9cc56262"
+    },
+    "provenance": {
+      "dataset_versions": {
+        "phase2-benchmark-add": "2",
+        "phase2-benchmark-cancel": "2",
+        "phase2-benchmark-copy-snapshot": "2",
+        "phase2-benchmark-execution": "2",
+        "phase2-benchmark-replay": "2"
+      },
+      "input_container": "workload.canonical",
+      "license_reference": "synthetic-fixture:no-external-data",
+      "origin": "synthetic",
+      "seed": 1729,
+      "source": "phase2-benchmark-generator-v2",
+      "transformation": "offline_reconstructed_book_and_replay_measurement"
+    }
+  },
+  "python_benchmark": {
+    "correctness": {
+      "canonical_output_sha256": "6503413a860da1800ab06e846f504a338d73ebd8078c33dac7346448a0df0fda",
+      "ctest_outcomes": 68,
+      "errors": 0,
+      "expected_remaining_lots": 512,
+      "failures": 0,
+      "input_sha256": "f1288cc88c4da2539f7f1c7e28b310f71c4ad07cb81cdb32338eb42849cba1c1",
+      "skipped": 0
+    },
+    "manifest": {
+      "bytes": 49245,
+      "local_path": "build/remediation/verified-python/manifest.json",
+      "sha256": "81dac201eb4161c33addab8da2118e5de4cbfad60b73bd543e5ced878a7aa017"
+    },
+    "summary": {
+      "median_events_per_second": 842.2596404841045,
+      "p50_service_ns": 1078798,
+      "p95_service_ns": 2062576,
+      "p99_service_ns": 3728058,
+      "worst_observed_service_ns": 64908024
+    }
+  },
+  "recorded_at_utc": "2026-10-21T22:17:58.086065+00:00",
+  "suites": [
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-debug-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 11.12,
+      "junit": {
+        "bytes": 14033,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-debug.xml",
+        "sha256": "f5af3f0743900a8009e6c15acdb2426168fd77cd08ee53b08ed5d49f5f150a1d"
+      },
+      "name": "phase9-clean-debug",
+      "passed": true,
+      "test_log": {
+        "bytes": 7299,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-debug-tests.log",
+        "sha256": "21d38e46c964c03566e3c6c54a8349d220bba1f3d90ad9f4d327df87c574b565"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-release-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 8.5,
+      "junit": {
+        "bytes": 14028,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-release.xml",
+        "sha256": "58a9c9421da6e3d0cd446e67a86cf64aa2e22d92c03f63f5faebcdd6e797313b"
+      },
+      "name": "phase9-clean-release",
+      "passed": true,
+      "test_log": {
+        "bytes": 7303,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-release-tests.log",
+        "sha256": "af8b3d053cd6612491368e69f5edc489fdea5b22c46daaa8807ea9c6f5f77a04"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-asan-ubsan-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 28.4,
+      "junit": {
+        "bytes": 13980,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-asan-ubsan.xml",
+        "sha256": "1e1f6390bb78937f89fda7adcd7f6c6ab3555299d8b2de43b846446136b1745d"
+      },
+      "name": "phase9-clean-asan-ubsan",
+      "passed": true,
+      "test_log": {
+        "bytes": 7309,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clean-asan-ubsan-tests.log",
+        "sha256": "f29931a52bc65f3bb089461e21ed9d6a82d0525f63d22e2829ca5ea51a091b4c"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-debug-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 10.31,
+      "junit": {
+        "bytes": 14037,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-debug.xml",
+        "sha256": "dc304e7f554baa770a7e61bf7a048b559e19d8f1c07fa469cabe9b46c451a664"
+      },
+      "name": "phase9-clang-debug",
+      "passed": true,
+      "test_log": {
+        "bytes": 7299,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-debug-tests.log",
+        "sha256": "58567e8803db4f65901f66abca5a91eb2a41a78a5612d35eb3742d48649ac9bd"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-release-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 8.83,
+      "junit": {
+        "bytes": 14036,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-release.xml",
+        "sha256": "cb6e86da3345080c0dba2dbc663e1d328b539147742349220380e1aefb1b0522"
+      },
+      "name": "phase9-clang-release",
+      "passed": true,
+      "test_log": {
+        "bytes": 7303,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-release-tests.log",
+        "sha256": "1a23307dbb01e56742c30a8f0cf489d8d8b3615e425315f4315c0ab2ce8632af"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 285,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-asan-ubsan-build.log",
+        "sha256": "02d46521ed459910b46bbf7b5060449c977a6865698ad04628d20b1ca48b13f2"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 65
+      },
+      "elapsed_seconds": 25.07,
+      "junit": {
+        "bytes": 13980,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-asan-ubsan.xml",
+        "sha256": "baae2ceec2fe323574aa50a43c187ebb8785718ce0c1fb30c90ca90c781371e3"
+      },
+      "name": "phase9-clang-asan-ubsan",
+      "passed": true,
+      "test_log": {
+        "bytes": 7309,
+        "local_path": "build/remediation/final-v2-matrix/phase9-clang-asan-ubsan-tests.log",
+        "sha256": "d04f3a98e93d08b71ca6119775d9b59bea5b5b3793df72a9a6257dcc688699b9"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 326,
+        "local_path": "build/remediation/final-v2-matrix/python-debug-build.log",
+        "sha256": "6f647120432fdef73452212cd4574afd3a29652a5474eebc51c638dca37c66b8"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 68
+      },
+      "elapsed_seconds": 14.38,
+      "junit": {
+        "bytes": 16387,
+        "local_path": "build/remediation/final-v2-matrix/python-debug.xml",
+        "sha256": "fdaea03c775b59a09da553366c66d9342083704db9c4da79e1c99645e779d8f9"
+      },
+      "name": "python-debug",
+      "passed": true,
+      "test_log": {
+        "bytes": 7635,
+        "local_path": "build/remediation/final-v2-matrix/python-debug-tests.log",
+        "sha256": "a57e20382eba7d6ce78c28d6554cad3d41e7f3a04b73f4bf6b3d52e27b5dc416"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 326,
+        "local_path": "build/remediation/final-v2-matrix/python-release-build.log",
+        "sha256": "6f647120432fdef73452212cd4574afd3a29652a5474eebc51c638dca37c66b8"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 68
+      },
+      "elapsed_seconds": 11.94,
+      "junit": {
+        "bytes": 16392,
+        "local_path": "build/remediation/final-v2-matrix/python-release.xml",
+        "sha256": "1dd97973756ae261930296ae3b81f804a5e570f834c619819681cc5be9d19b4d"
+      },
+      "name": "python-release",
+      "passed": true,
+      "test_log": {
+        "bytes": 7639,
+        "local_path": "build/remediation/final-v2-matrix/python-release-tests.log",
+        "sha256": "22b907d6c67f9ab38402f849cdf4564c0ac7bda9876891cd48d5eca9827f3439"
+      }
+    },
+    {
+      "build_log": {
+        "bytes": 326,
+        "local_path": "build/remediation/final-v2-matrix/python-asan-ubsan-build.log",
+        "sha256": "6f647120432fdef73452212cd4574afd3a29652a5474eebc51c638dca37c66b8"
+      },
+      "counts": {
+        "disabled": 0,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 69
+      },
+      "elapsed_seconds": 34.41,
+      "junit": {
+        "bytes": 16666,
+        "local_path": "build/remediation/final-v2-matrix/python-asan-ubsan.xml",
+        "sha256": "a29b37b5432ddac359d105b29768ac0d036dff1d42224df785f74a729c325236"
+      },
+      "name": "python-asan-ubsan",
+      "passed": true,
+      "test_log": {
+        "bytes": 7760,
+        "local_path": "build/remediation/final-v2-matrix/python-asan-ubsan-tests.log",
+        "sha256": "b0f70ef354aab4953eaf19907589f38d7cf1f01a6407a9f4b45d05cf31f159d0"
+      }
+    }
+  ],
+  "targeted_green_evidence": [
+    {
+      "bytes": 899,
+      "local_path": "build/remediation/fix1-after.log",
+      "sha256": "ed3556e1b85050ab3261870735ef5654a0f594268efb759fb1da3bbc1ba24f75"
+    },
+    {
+      "bytes": 789,
+      "local_path": "build/remediation/fix2-after.log",
+      "sha256": "59422d67ae20abd89ed6a46b0a6873df390716af527798d01bb02b2efd964f17"
+    },
+    {
+      "bytes": 505,
+      "local_path": "build/remediation/fix3-after.log",
+      "sha256": "c4835e1474b9b7e7b4ad478ed6d7a268b1d86fc87a34bce8a1a4229b0e164828"
+    },
+    {
+      "bytes": 959,
+      "local_path": "build/remediation/fix4-after.log",
+      "sha256": "e6c0d12f82077b30a804124d294e563debd02bb6f7d107b0cea7eee02fd772b8"
+    },
+    {
+      "bytes": 380,
+      "local_path": "build/remediation/fix5-unit-after.log",
+      "sha256": "2780ed4a3984aa5967a1cbd82eca4fc1938a6445d32b0e9f1ee65ff1f650b3a3"
+    },
+    {
+      "bytes": 378,
+      "local_path": "build/remediation/rng-after.log",
+      "sha256": "36aca1adc610d8aa50cb951ed87d281e35f0a73c97c70c72a4b8c2e1d1a61255"
+    }
+  ],
+  "unchanged_main_sha": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "verified_source_commit": "26514722c878d9011d36258fd80a95ab794d8246"
+}

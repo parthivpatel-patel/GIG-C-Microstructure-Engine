@@ -1,0 +1,400 @@
+{
+  "schema": "gig.nasdaq.hy-prefix-inspection.v1",
+  "starting_commit": "20e07ec89987368c121eae657e21060aea7dc0b9",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "main_baseline": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "scope": "One authorized repeat 4KiB format/decoder-only GET. No observed SourceContext admission, L3 initialization, book reconstruction or publication.",
+  "assessment": "PASS for the 350 complete observed messages under status_observations_v2; INCONCLUSIVE for full historical feed/archive/session compatibility.",
+  "single_request_run": {
+    "started_at_utc": "2026-10-23T23:07:38Z",
+    "outcome": "PASS",
+    "official_get_budget": 1,
+    "network_body_bytes": 4096,
+    "peak_polled_process_tree_rss_bytes": 29298688,
+    "memory_caps": {
+      "supervisor_soft_address_space": 67108864,
+      "worker_hard_address_space": 201326592,
+      "sum_managed_address_space_caps": 268435456
+    },
+    "raw_retained_files": 0,
+    "worker": {
+      "compressed_body_bytes": 4096,
+      "compressed_consumed": 4096,
+      "decompressed_absolute_cap": 589824,
+      "decompressed_bytes": 14267,
+      "decompressed_effective_cap": 589824,
+      "decompressed_sha256": "97e045b089ab2037d05c1746aa82766c2826b205cf5141487605995b29a077d4",
+      "elapsed_seconds": 0.4394591090094764,
+      "framing": {
+        "complete_frames": 350,
+        "frame_limit_reached": false,
+        "framing_consumed": 14257,
+        "length_mismatches": 0,
+        "residual_decompressed_bytes": 10,
+        "terminal": false,
+        "timestamp_max_ns_since_midnight": 11354339842618,
+        "timestamp_min_ns_since_midnight": 11072057543747,
+        "timestamp_outside_day": 0,
+        "type_counts": {
+          "H": 2,
+          "R": 345,
+          "S": 1,
+          "Y": 2
+        },
+        "unknown_type_frames": 0
+      },
+      "gzip_crc_trailer_verified": false,
+      "gzip_header": {
+        "flags": 0,
+        "header_bytes": 10,
+        "header_complete": true,
+        "header_crc_present": false,
+        "method": 8,
+        "mtime": 0,
+        "os_code": 0,
+        "xfl": 0
+      },
+      "gzip_member_complete": false,
+      "header_bytes_read": 401,
+      "http_requests_attempted": 1,
+      "http_status": 206,
+      "method": "GET",
+      "outcome": "PASS",
+      "peak_rss_bytes": 18087936,
+      "prefix_sha256": "133d94175e46e156baf6c7284f1fdad7e00f0fd4700bd09ed87a5afc98a700c2",
+      "ratio": 128,
+      "reference": {
+        "canonical_contract": "ordered successful records: BE uint64 ordinal, BE uint64 frame offset, BE uint16 payload length, all re-encoded typed payload fields; SHA256. No date/sequence inference.",
+        "directory_locates": 345,
+        "duplicate_directory_locates": 0,
+        "h_distinct_reasons": 1,
+        "h_nonblank_reasons": 0,
+        "h_reserved_octet_counts": {
+          "32": 2
+        },
+        "h_state_counts": {
+          "T": 2
+        },
+        "hy_ordered_fields_sha256": "275ccae33e6e684d3deb1761dd6be06245deb71a0bc7eac9dbb052e9ab72fdfe",
+        "hy_symbol_association_failures": 0,
+        "hy_symbol_associations_checked": 4,
+        "profiles": {
+          "baseline_v1": {
+            "decoded": 346,
+            "ordered_fields_sha256": "55b38913085e76591784a5d1ef1896f4f7ecb05249c8ae6b02b594908761e7c0",
+            "provenance_mismatches": 0,
+            "rejected": 0,
+            "unsupported": 4
+          },
+          "status_observations_v2": {
+            "decoded": 350,
+            "ordered_fields_sha256": "5bd16117bcfcacc6aef11384a9fa8e151a17f421863075f5f6fb43867b3a22ac",
+            "provenance_mismatches": 0,
+            "rejected": 0,
+            "unsupported": 0
+          }
+        },
+        "timestamp_regressions": 0,
+        "y_action_counts": {
+          "0": 2
+        }
+      },
+      "requested_range": "bytes=0-4095",
+      "response_headers": {
+        "Accept-Ranges": [
+          "bytes"
+        ],
+        "Content-Length": [
+          "4096"
+        ],
+        "Content-Range": [
+          "bytes 0-4095/3524013057"
+        ],
+        "Content-Type": [
+          "application/x-gzip"
+        ],
+        "ETag": [
+          "\"64b3281599bfd51:0\""
+        ],
+        "Last-Modified": [
+          "Tue, 31 Dec 2019 05:13:48 GMT"
+        ]
+      },
+      "slack_bytes": 65536,
+      "url": "https://emi.nasdaq.com/ITCH/Nasdaq%20ITCH/12302019.NASDAQ_ITCH50.gz"
+    },
+    "prefix_sha256": "133d94175e46e156baf6c7284f1fdad7e00f0fd4700bd09ed87a5afc98a700c2",
+    "native": {
+      "compressed_bytes": 4096,
+      "compressed_consumed": 4096,
+      "decompressed_bytes": 14267,
+      "decompressed_sha256": "97e045b089ab2037d05c1746aa82766c2826b205cf5141487605995b29a077d4",
+      "gzip_error_code": 0,
+      "gzip_complete": false,
+      "member_verified": false,
+      "frames": 350,
+      "framing_consumed": 14267,
+      "residual_bytes": 10,
+      "finish_error_code": 0,
+      "terminal": false,
+      "decoded": 346,
+      "unsupported": 4,
+      "rejected": 0,
+      "type_octet_counts": {
+        "72": 2,
+        "82": 345,
+        "83": 1,
+        "89": 2
+      },
+      "profiles": {
+        "baseline_v1": {
+          "decoded": 346,
+          "unsupported": 4,
+          "rejected": 0,
+          "provenance_mismatches": 0,
+          "ordered_fields_sha256": "55b38913085e76591784a5d1ef1896f4f7ecb05249c8ae6b02b594908761e7c0"
+        },
+        "status_observations_v2": {
+          "decoded": 350,
+          "unsupported": 0,
+          "rejected": 0,
+          "provenance_mismatches": 0,
+          "ordered_fields_sha256": "5bd16117bcfcacc6aef11384a9fa8e151a17f421863075f5f6fb43867b3a22ac"
+        }
+      },
+      "hy_ordered_fields_sha256": "275ccae33e6e684d3deb1761dd6be06245deb71a0bc7eac9dbb052e9ab72fdfe",
+      "typed_roundtrip_mismatches": 0,
+      "hy_symbol_associations_checked": 4,
+      "hy_symbol_association_failures": 0,
+      "directory_locates": 345,
+      "duplicate_directory_locates": 0,
+      "book_or_context_instantiated": false
+    },
+    "independent_comparison": "PASS",
+    "private_memory_extent_bytes": 4096,
+    "anonymous_prefix_closed": true,
+    "raw_market_bytes_retained_after_run": 0,
+    "elapsed_seconds": 0.5366489489970263,
+    "supervisor_peak_rss_bytes": 11010048,
+    "children_peak_wait_accounted_rss_bytes": 18219008,
+    "retained_directory_bytes": 143106,
+    "inspector_sha256": "546f6899e82518ac2b4817d029536d914f9b6c5dcbe11ff5787d39e8fff70a92",
+    "native_checker_sha256": "1eb11a24196eedd209eb63a14784cc523cd18fc317f16910122235b4e96051be"
+  },
+  "previous_inspection_comparison": {
+    "prefix_sha256_identical": true,
+    "decompressed_sha256_and_size_identical": true,
+    "complete_frame_count_and_histogram_identical": true,
+    "residual_bytes_identical": true,
+    "previous_evidence_file_sha256": "c4cb260c55af81234ea086218834aefdb33b5fdd7bd9f5796b558f6ca84ab3e1"
+  },
+  "local_safety": {
+    "cases_passed": 35,
+    "failures": 0,
+    "names": [
+      "reject-status-200-before-body",
+      "reject-status-301-before-body",
+      "reject-status-302-before-body",
+      "reject-status-307-before-body",
+      "reject-status-403-before-body",
+      "reject-status-416-before-body",
+      "reject-metadata-Content-Length",
+      "reject-metadata-Content-Length",
+      "reject-metadata-Content-Range",
+      "reject-metadata-ETag",
+      "reject-metadata-Content-Encoding",
+      "reject-metadata-Transfer-Encoding",
+      "read-boundary-no-4097th-byte",
+      "short-response-explicit",
+      "duplicate-header-rejected",
+      "header-budget",
+      "complete-synthetic-gzip",
+      "independent-frame-type-length",
+      "bounded-trailer-not-corruption",
+      "bad-magic",
+      "crc-corruption",
+      "concatenated-members",
+      "expansion-stop-before-576KiB",
+      "native-valid",
+      "native-prefix",
+      "allocation-limit",
+      "slow-work-watchdog",
+      "independent-authored-SRHY-lengths",
+      "independent-all-typed-fields-agree",
+      "correct-partial-frame-accounting",
+      "independent-field-hash-negative-control",
+      "native-stateless-no-book-or-context",
+      "TLS-and-no-redirect-handler",
+      "supervisor-child-limit-transition",
+      "unknown-symbol-association-negative-control"
+    ],
+    "official_requests": 0,
+    "inspector_sha256": "546f6899e82518ac2b4817d029536d914f9b6c5dcbe11ff5787d39e8fff70a92",
+    "native_checker_sha256": "1eb11a24196eedd209eb63a14784cc523cd18fc317f16910122235b4e96051be",
+    "reference_sha256": "d3592c052e8daedc3528c11eeaa0484bb529c87faf8030ae106df882dedbc122"
+  },
+  "focused_cpp_regressions": {
+    "command": [
+      "/workspace/gig-tools/bin/ctest",
+      "--test-dir",
+      "build/phase9-clean-debug",
+      "-R",
+      "^itch.hy_",
+      "--output-on-failure"
+    ],
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "log_sha256": "6efcc4fcf4e693a51c82f9e0141dd3324b5fe5a533b093852a25868eaae1e0f6",
+    "scope": "synthetic initialization/isolation/restart/publication/atomicity/allocation/wire/reference controls; not observed L3 evidence"
+  },
+  "prior_full_matrix": {
+    "outcomes": 1189,
+    "rerun": false,
+    "reason": "No engine implementation or test changes; protected code file hashes unchanged. Nine applicable focused regressions executed before GET.",
+    "canonical_sha256": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "evidence_sha256": "4180f7335984ccf955860cb2c4b4be576b4f5d92b65f2dee0c9c2fd045f5c7b4"
+  },
+  "validated_source_hashes": {
+    ".github/workflows/ci.yml": "d7b024327a699fde781fd04e32120c617305b06f9e7c8fb2b125b0e17e0b71f8",
+    "CMakeLists.txt": "61e6aa58d779c36a8e79eddd226e6dac3fc6a954ba5e14fe56e139eb76c427b2",
+    "include/gig/itch/context.hpp": "d248317143e87795a3a1df6660b35d3d1d68db19df26c50007ccaac90054b619",
+    "include/gig/itch/decoder.hpp": "f1dbdab35c3391fafdd17ae36af86404584db6afbebef20d591c15193b9f2cee",
+    "scripts/check_itch_hy_reference.py": "73e4b3b0f98e084e32131e5fefdf45402f02241213655e856e5b62b54092f1fe",
+    "src/itch/context.cpp": "6962d9e3dc2bddfcf9fb8aa5344bba94afd2f9935d34c93ca2b194bbb0dc1ff3",
+    "src/itch/decoder.cpp": "b7aa88e4269bb44b3ec9cc60325cdd247f75f9517ffab55a51a4f9ffa55deb8c",
+    "src/itch/reconstruction.cpp": "2e9e82ee99330b258a76cd18ff0159387fd0da813a6737a5cbe46a068a6edaa6",
+    "tests/test_itch_hy.cpp": "d5dbdb211a0825c77ace2f01067fac84e73ef4a4c3fe8eb5a177a8874f22e07b",
+    "tests/test_itch_hy_streaming.cpp": "c8c0aef8d2549c133a076cc96ec5401b76b6abaa1ed028cd30eb9baf19537d6a",
+    "pyproject.toml": "cb1108d6b43025f904e41f20eab46c728554014ce3e0c38a91502d9431478031",
+    "scripts/check_sdist_inventory.py": "fb5f7aa13fcdcb110f45695956f1453b21e8820f6b539b2653fa5f4fbb32a9c3",
+    "tests/test_sdist_patterns.py": "033b95d14ce125fd02f961007c9285a35b2176f8264402e6ee94d1b9c08d1c62"
+  },
+  "transport_contract": {
+    "requests": 1,
+    "requested_range": "bytes=0-4095",
+    "expected_total_bytes": 3524013057,
+    "expected_prefix_sha256": "133d94175e46e156baf6c7284f1fdad7e00f0fd4700bd09ed87a5afc98a700c2",
+    "max_compressed_body_bytes": 4096,
+    "max_decompressed_bytes": 589824,
+    "max_header_bytes": 65536,
+    "ratio": 128,
+    "slack_bytes": 65536,
+    "max_managed_memory_bytes": 268435456,
+    "max_private_output_bytes": 8388608,
+    "max_wall_seconds": 30,
+    "retries": 0,
+    "redirects": 0,
+    "range_expansions": 0,
+    "metadata_gate_before_body": true,
+    "read_calls": "read1(min(1024, remaining4096)); no cap-plus-one probe or body drain",
+    "tls": "inherited configured proxy/CA; hostname and certificate verification required",
+    "representation_condition": "If-Match: \"64b3281599bfd51:0\"; identity Content-Encoding; reject chunked/unknown-length transport",
+    "scope_note": "HTTP entity-body accounting does not bound TLS/kernel/header wire overhead; unsolicited buffered traffic cannot be equated with an authorized full download."
+  },
+  "independent_comparison": {
+    "method": "Separate Python struct/byte parser and native typed-decoder field re-encoding; ordered hashes include ordinal, physical frame offset, length and every decoded field. Independent Python/native inflater and framer accounting also compared.",
+    "all_complete_frames_checked": 350,
+    "h_y_fields_checked": 4,
+    "symbol_associations_checked": 4,
+    "mismatches": 0,
+    "provenance": "Native decoded records preserve observed origin, official source identity and compressed-prefix SHA256; no generator seed, invented exchange sequence, date or initial state.",
+    "source_accounting": "For each profile decoded+unsupported+rejected=350. Native14267 consumed=14257 complete-frame boundary+10 buffered residual. No source context/journal accounting asserted."
+  },
+  "resource_interpretation": {
+    "timing": "30-second acquisition/inspection envelope excludes prior compilation/local safety and subsequent metadata-only reporting.",
+    "memory": "64MiB supervisor soft virtual-address limit plus one192MiB hard-limited child at a time; watchdog checks summed RSS and30s deadline. Sampled RSS is not an exact simultaneous peak or host/kernel-memory guarantee.",
+    "private_directory_final_bytes": 148717,
+    "raw_retention": "Compressed prefix in parent-owned anonymous memfd only; decompressed bytes in worker/native address spaces. All processes exited and fd closed. Zero retained raw market bytes; seven-day bound satisfied immediately. No raw symbols/rows/payloads in committed evidence."
+  },
+  "preparation_notes": [
+    "First local ctest invocation lacked PATH entry; resolved using /workspace/gig-tools/bin/ctest before any GET. All9 focused outcomes then passed.",
+    "Corrected prior supervisor complete-frame-versus-total-consumed comparison; synthetic partial-frame safety control passed before GET.",
+    "One-shot request.started marker remains private to prevent a second run."
+  ],
+  "toolchain": {
+    "python": "3.12.14",
+    "python_zlib_runtime": "1.3.2",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "native_compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "native_compile_command": [
+      "g++",
+      "-std=c++20",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-Werror",
+      "-I",
+      "include",
+      "/workspace/nasdaq-hy-inspection-20261023/native_check.cpp",
+      "src/itch/binary_file.cpp",
+      "src/itch/decoder.cpp",
+      "src/itch/gzip.cpp",
+      "src/itch/sha256.cpp",
+      "-lz",
+      "-o",
+      "/workspace/nasdaq-hy-inspection-20261023/native_check"
+    ],
+    "native_dynamic_libraries": [
+      "\tlinux-vdso.so.1 (0x00007fe0cc794000)",
+      "\tlibz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007fe0cc73c000)",
+      "\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fe0cc4d6000)",
+      "\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fe0cc4a9000)",
+      "\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe0cc2b5000)",
+      "\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fe0cc1c3000)",
+      "\t/lib64/ld-linux-x86-64.so.2 (0x00007fe0cc796000)"
+    ]
+  },
+  "private_evidence_root": "/workspace/nasdaq-hy-inspection-20261023",
+  "private_file_sha256": {
+    "__pycache__/inspector.cpython-312.pyc": "6a9c131f338e47645ad3693854068777d79c58d4bf2bfc3cdc8c159b9d574a63",
+    "__pycache__/reference.cpython-312.pyc": "01313d8f5857acf1ed3c1998883c39295ccdc076deea49ffaae6144892a0590b",
+    "__pycache__/run_once.cpython-312.pyc": "37f8cc84055d5755b8974995dbba07af4e7cac6444f7244a3e947c9e0b05dff0",
+    "focused-tests.log": "6efcc4fcf4e693a51c82f9e0141dd3324b5fe5a533b093852a25868eaae1e0f6",
+    "inspector.py": "546f6899e82518ac2b4817d029536d914f9b6c5dcbe11ff5787d39e8fff70a92",
+    "native.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native.stdout": "50c25b2735f115013e9f86dd03e85a681074cb38b14e68949d21ad43dea025e6",
+    "native_check": "1eb11a24196eedd209eb63a14784cc523cd18fc317f16910122235b4e96051be",
+    "native_check.cpp": "c3a20a4777384dd54e7dd8e57b3f5d14422633698437e951e36ef3892bda689a",
+    "reference.py": "d3592c052e8daedc3528c11eeaa0484bb529c87faf8030ae106df882dedbc122",
+    "request.started": "9cd2e905563baedae5ed2c524da6cda64c430005c945264c5ada61c731bff653",
+    "result.json": "5ed12aff54b2722e46cff0a564b749a8acd9e95dd6b2c7c00478b340d8ed1988",
+    "run_once.py": "6c6d8e9435681794bcb923b0950907749b38ad769ab7d900cfb0a3d7d7cf0422",
+    "safety-results.json": "d119fe98e692f4fe8cbeef6d43eda9b2aad0df25a1809f48674cc9f3e68208b3",
+    "safety-run.log": "32d90b357ea34e1cc4495c9cc876e4b40f2ea6dce73d26b711b9b63722523440",
+    "safety_checks.py": "0da25c59ee2d481cd34ab6512a27c04ad3a7f54e2f9cd217b549a6a58a87ad59",
+    "worker-result.json": "3f01d92e832e427973a68ba0fe7fc10dbf6141992cec6cdb08a924dbac119880",
+    "worker.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "worker.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "remaining_gaps": [
+    "Only H:T, reserved ASCII space, blank reasons and Y:ASCII0 observed (two of each family).",
+    "No observed H:H/P/Q, Y:1/2 or nonblank-reason coverage; synthetic coverage is distinct.",
+    "Incomplete gzip member: whole-member CRC/ISIZE/archive SHA256 and remaining stream unknown.",
+    "Unfinished BinaryFile frame, no terminal marker, no authenticated date/session/empty-book boundary.",
+    "Nine known families unsupported; absent order messages in this extent do not establish absence from archive.",
+    "No observed SourceContext lifecycle admission, native order mutation, L3 recovery, FIFO or empirical reference-book validation.",
+    "No hosted CI, ARM64 or independent-machine qualification performed."
+  ],
+  "next_step": "Stop. A separate resource preflight and explicit approval could authorize one modest larger byte-zero prefix (for example16KiB), format-only, with independently agreed limits; no guarantee it contains new message families. Do not reuse this authorization or expand automatically.",
+  "native_checker_inputs_sha256": {
+    "include/gig/itch/binary_file.hpp": "1d8564f1d7eaaf7c8e4d702068bd02a2c4755b3a945d7abe262965d92cb96e15",
+    "include/gig/itch/decoder.hpp": "f1dbdab35c3391fafdd17ae36af86404584db6afbebef20d591c15193b9f2cee",
+    "include/gig/itch/gzip.hpp": "8e49a15d7169b3bfd4a8801b2335d8c2fc453d6c9eb24267dbfbcf3081f34e63",
+    "include/gig/itch/sha256.hpp": "eeb411b30706e1297a5a0b82d9d9297a4f1c78b6d31197f03587f18d411768b1",
+    "include/gig/itch/wire.hpp": "4f7baba66b91ed293ea773fb49bf0341c5ff229d0e3542f3edd6499b072f9921",
+    "src/itch/binary_file.cpp": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6",
+    "src/itch/decoder.cpp": "b7aa88e4269bb44b3ec9cc60325cdd247f75f9517ffab55a51a4f9ffa55deb8c",
+    "src/itch/gzip.cpp": "af95436d5f665c12ee6c83fed194b33f4c4747877fb6a9ac084bef10a6c516f8",
+    "src/itch/sha256.cpp": "376756916be1add85aa261c23d8c1bf5e983d863697d1a30734469143b85aed3"
+  },
+  "documentation_only_delivery": true
+}

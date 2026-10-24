@@ -1,0 +1,20 @@
+build/
+build-*/
+.cache/
+.vscode/
+.idea/
+*.o
+*.obj
+*.exe
+*.a
+*.so
+*.dll
+*.dylib
+
+# Python research packaging and local validation
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+dist/

@@ -1,0 +1,1402 @@
+{
+  "schema": "gig.rc_evidence_closure.v1",
+  "review_date": "2026-10-23",
+  "review_timezone": "America/New_York",
+  "scope": "private Linux x86_64 CPython3.12 synthetic research, not release authorization",
+  "starting_commit": "9171f4ecdaf638e2a1ff3b5bf1645be33f277b67",
+  "main_commit": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "qualification_source": {
+    "source_commit": "5349789edfc198f5bf74438cf412e403cef14fa9",
+    "source_archive_sha256": "5045243c2cb32b4b490f23f5d207a1d9a0da6e71907637805befab4a6974ed35",
+    "source_archive_bytes": 9799680,
+    "dependency_wheel_sha256": {
+      "rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "addeda51556dac7c1a2f14cda62db8b621cd12afba3091d03a96c72932387eab",
+      "pathspec-1.1.1-py3-none-any.whl": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+      "pyproject_hooks-1.3.3-py3-none-any.whl": "5fc53fdac9f7bd63fbcdc868fb5f90b4784d78a53a3d3388cd738b807441a20b",
+      "typing_extensions-4.16.0-py3-none-any.whl": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "pybind11-2.13.6-py3-none-any.whl": "237c41e29157b962835d356b370ededd57594a26d5894a795960f0047cb5caf5",
+      "packaging-26.3-py3-none-any.whl": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+      "build-1.2.2.post1-py3-none-any.whl": "1d61c0887fa860c01971625baae8bdd338e517b836a2f70dd1f7aa3a6b2fc5b5",
+      "referencing-0.37.0-py3-none-any.whl": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231",
+      "attrs-26.1.0-py3-none-any.whl": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309",
+      "scikit_build_core-0.11.6-py3-none-any.whl": "ce6d8fe64e6b4c759ea0fb95d2f8a68f60d2df31c2989838633b8ec930736360",
+      "jsonschema_specifications-2025.9.1-py3-none-any.whl": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe",
+      "jsonschema-4.23.0-py3-none-any.whl": "fbadb6f8b144a8f8cf9f0b89ba94501d143e50411a1278633f56a7acf7fd5566"
+    },
+    "original_private_wheel": {
+      "filename": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "sha256": "94213383b0463212f0adc8c26f0e6966351a1150fc1d802413fb9d88123cc8cb"
+    }
+  },
+  "ci_dependency_repair_commit": "108b423d1576ebae28d7a81598ee2ef1dbfe3a4a",
+  "test_harness_repair_commit": "5349789edfc198f5bf74438cf412e403cef14fa9",
+  "ci_count_repair_commit": "9f9f488048df3a5f81aac0671e171cc4f3a5c4b3",
+  "gate_decisions": {
+    "RC13": "BLOCKED: new rootfs/toolchain qualified, shared kernel/daemon; independent machine unavailable",
+    "RC16": "BLOCKED: authoritative applicability expanded, unresolved platform/backport/Expat/provider mapping",
+    "RC17": "BLOCKED: proxy CONNECT403 before GitHub API origin; no run ID/conclusion"
+  },
+  "matrix_status_totals": {
+    "PASS": 18,
+    "BLOCKED": 6,
+    "NOT RUN": 2,
+    "OUT OF SCOPE": 1,
+    "FAIL": 0
+  },
+  "docker_image_digest": "ubuntu@sha256:68ee22004a9109b44973313b02ff7b1de250f1de0f5ecb628d73f579aaff33ac",
+  "environment": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nUbuntu clang version 18.1.3 (1ubuntu1)\ncmake version 3.28.3\n1.11.1\nclang-18\t1:18.1.3-1ubuntu1\ncmake\t3.28.3-1build7\ng++-13\t13.3.0-6ubuntu2~24.04.1\nlibc6:amd64\t2.39-0ubuntu8.9\nlibexpat1:amd64\t2.6.1-2ubuntu0.6\nlibssl3t64:amd64\t3.0.13-0ubuntu3.16\nlibstdc++6:amd64\t14.2.0-4ubuntu2~24.04.1\nninja-build\t1.11.1-2\npython3.12\t3.12.3-1ubuntu0.17\nzlib1g:amd64\t1:1.3.dfsg-3.1ubuntu2.3\nzlib1g-dev:amd64\t1:1.3.dfsg-3.1ubuntu2.3\nFilesystem       1B-blocks       Used   Available Use% Mounted on\noverlay        33770192896 4670291968 27365138432  15% /\n0::/\n3221225472\n200000 100000\n",
+  "container_limits": "\"b112437ae1dbf1a9409cadc1fd9f3f5479ac92604f8f6783a892a687de9d91da\" \"sha256:6277ab668b2ad3c3ab851d370faa1690d324b30db29d342527f61fed28f20f36\" 3221225472 2000000000 512 false \"bridge\"",
+  "container_final_identities": "libclang-rt-18-dev:amd64\t1:18.1.3-1ubuntu1\npid:[4026532279]\nmnt:[4026532276]\nmodel name\t: INTEL(R) XEON(R) PLATINUM 8573C\n2699120640\nFilesystem       1B-blocks       Used   Available Use% Mounted on\noverlay        33770192896 5612179456 26423250944  18% /\n",
+  "outer_runtime": {
+    "python_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "openssl": "OpenSSL 3.5.8 25 Aug 2026",
+    "zlib_header": "1.3.2",
+    "zlib_runtime": "1.3.2",
+    "expat_runtime": "expat_2.8.3",
+    "libc": [
+      "glibc",
+      "2.41"
+    ],
+    "kernel": "6.18.55",
+    "compiler_config": "clang -pthread"
+  },
+  "fresh_runtime": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "ssl": "OpenSSL 3.0.13 30 Jan 2024",
+    "zlib": "1.3",
+    "expat": "expat_2.6.1",
+    "expat_features": [
+      [
+        "sizeof(XML_Char)",
+        1
+      ],
+      [
+        "sizeof(XML_LChar)",
+        1
+      ],
+      [
+        "XML_DTD",
+        0
+      ],
+      [
+        "XML_CONTEXT_BYTES",
+        1024
+      ],
+      [
+        "XML_NS",
+        0
+      ],
+      [
+        "XML_BLAP_MAX_AMP",
+        100
+      ],
+      [
+        "XML_BLAP_ACT_THRES",
+        8388608
+      ],
+      [
+        "XML_GE",
+        0
+      ],
+      [
+        "XML_AT_MAX_AMP",
+        100
+      ],
+      [
+        "XML_AT_ACT_THRES",
+        67108864
+      ]
+    ],
+    "kernel": "6.18.55"
+  },
+  "fresh_matrix": [
+    {
+      "configuration": "gcc-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/gcc-debug",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+          "-DCMAKE_BUILD_TYPE=Debug",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/gcc-debug",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/gcc-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/gcc-debug.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 79.566,
+      "counts": {
+        "tests": 122,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "0d0c8cdb6a5de200bda1377c51b2db169641911113e2580c09b07364faa93b51",
+      "log_sha256": "1c7c1018f1f7003681af6841e69344e8f509f6e69561dcf58163108cde413671"
+    },
+    {
+      "configuration": "gcc-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/gcc-release",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+          "-DCMAKE_BUILD_TYPE=Release",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python",
+          "-DGIG_BUILD_PYTHON=ON",
+          "-Dpybind11_DIR=/work/tooling/lib/python3.12/site-packages/pybind11/share/cmake/pybind11"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/gcc-release",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/gcc-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/gcc-release.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 92.364,
+      "counts": {
+        "tests": 125,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "e85d0b601f023460d1fcf46b7bb5ad864ccf39cbb099f39a529d5c8d44ee3b0a",
+      "log_sha256": "78999e1d9177a412c3dea1128739bab68953563df86c1568c9efc697803155f7"
+    },
+    {
+      "configuration": "gcc-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/gcc-asan-ubsan",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/g++",
+          "-DCMAKE_BUILD_TYPE=Debug",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python",
+          "-DGIG_ENABLE_ASAN=ON",
+          "-DGIG_ENABLE_UBSAN=ON"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/gcc-asan-ubsan",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/gcc-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/gcc-asan-ubsan.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 148.842,
+      "counts": {
+        "tests": 122,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "950ec2c87649e531384bcb7c2e568293b589465aa13206596119c0657789e43c",
+      "log_sha256": "44a07e9a63fbbdcb649b09d357e1e7e2c023a957594e0596c1c05a71c64a03f5"
+    },
+    {
+      "configuration": "clang-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/clang-debug",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/clang++",
+          "-DCMAKE_BUILD_TYPE=Debug",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/clang-debug",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/clang-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/clang-debug.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 81.099,
+      "counts": {
+        "tests": 122,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "90628ae06775174a6773d999d2d02ca8e12cdb96f01cfa8fbc2c685f966c52cd",
+      "log_sha256": "418e560a5ab04aa5a50b6cbdc7d8c57dfd424807d14b23f1fc0fca6e37a822db"
+    },
+    {
+      "configuration": "clang-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/clang-release",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/clang++",
+          "-DCMAKE_BUILD_TYPE=Release",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/clang-release",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/clang-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/clang-release.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 77.329,
+      "counts": {
+        "tests": 122,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "e77cbe27804a098756572f748c77de6226eb595b69aa961f0951c2a84497877c",
+      "log_sha256": "222fb2d344b4b73cd0531084cccf33f7bf6318e01fc2ef6a1f95120e919ec53b"
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-repaired-build/clang-asan-ubsan",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/clang++",
+          "-DCMAKE_BUILD_TYPE=Debug",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python",
+          "-DGIG_ENABLE_ASAN=ON",
+          "-DGIG_ENABLE_UBSAN=ON"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-repaired-build/clang-asan-ubsan",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-repaired-build/clang-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-clang-sanitizer/clang-asan-ubsan.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 155.678,
+      "counts": {
+        "tests": 122,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "junit_sha256": "c08bdede275d5c9d009f31309915f6475898738a360e9f3e55fb4547526a3d88",
+      "log_sha256": "cd0a9e382e3b524b327b6da12ec4590c45ca860b0d7e4bc99babcc5735926cd6"
+    }
+  ],
+  "fresh_ctest_outcomes": 735,
+  "new_checkout_interface_checks": {
+    "debug": {
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0
+    },
+    "release": {
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0
+    },
+    "asan-ubsan": {
+      "tests": 1,
+      "failures": 0,
+      "disabled": 0,
+      "skipped": 0
+    }
+  },
+  "installed_package_steps": [
+    {
+      "name": "sdist",
+      "command": [
+        "/work/tooling/bin/python",
+        "-m",
+        "build",
+        "--sdist",
+        "--no-isolation",
+        "--outdir",
+        "/work/final-packages"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-wheel-build",
+      "command": [
+        "/work/tooling/bin/python",
+        "-m",
+        "pip",
+        "wheel",
+        "--no-index",
+        "--no-deps",
+        "--no-build-isolation",
+        "--wheel-dir",
+        "/work/final-source-wheel",
+        "/work/final-packages/gig_microstructure-0.1.1.tar.gz"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "a6602c7c49a3354b9e04f29d7129c1ac6fb95ab7fc63afe6f3515d917f1285f8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original-venv",
+      "command": [
+        "python3",
+        "-m",
+        "venv",
+        "/work/final-original-consumer"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original-install",
+      "command": [
+        "/work/final-original-consumer/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--find-links=/input/wheels",
+        "--constraint",
+        "/work/final-candidate/requirements-python.lock",
+        "/input/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "f550a548306adad3a0143a0329ff8ac66bf6c830a234569db5d36a2c65fffc1f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original-interface",
+      "command": [
+        "/work/final-original-consumer/bin/python",
+        "/work/final-candidate/tests/test_python.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ec3cceca66a0ccaaf6ffe181f1dbcd0df2fcf9b2e10f9d78a8502e4a9be1a439"
+    },
+    {
+      "name": "original-exports",
+      "command": [
+        "/work/final-original-consumer/bin/python",
+        "/work/final-candidate/tests/test_export_contracts.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "7cb95a274045f5ada78b98b4daabe2ba813276ec13fe05fdec1bc0454192cb49"
+    },
+    {
+      "name": "original-example",
+      "command": [
+        "/work/final-original-consumer/bin/python",
+        "/work/final-candidate/examples/python_research.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "original-path",
+      "command": [
+        "/work/final-original-consumer/bin/python",
+        "-c",
+        "import gig_microstructure as g,sys;print(g.__file__);print(g.native_build_info());assert '/site-packages/' in g.__file__ and g.__file__.startswith(sys.prefix)"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "a9007d0dcaf01310973511b023075774bbb0d1a28c4fd4cb4592b3b80bdeb2df",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-venv",
+      "command": [
+        "python3",
+        "-m",
+        "venv",
+        "/work/final-source-consumer"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-install",
+      "command": [
+        "/work/final-source-consumer/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--no-index",
+        "--find-links=/input/wheels",
+        "--constraint",
+        "/work/final-candidate/requirements-python.lock",
+        "/work/final-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "801e1d55660a0465c2ec9248b01a7988e4648799462e0fd366908f15d9bfc0c4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-interface",
+      "command": [
+        "/work/final-source-consumer/bin/python",
+        "/work/final-candidate/tests/test_python.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d9363c50973266922c1ecf3b0f8ea28a0e2e1d0e0b4a6d03220261d41eb7a7fa"
+    },
+    {
+      "name": "source-exports",
+      "command": [
+        "/work/final-source-consumer/bin/python",
+        "/work/final-candidate/tests/test_export_contracts.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "8b47b2d63228b25443fb6da1f9b78a9750505fcdf6dfed9ae5ec2c5fee02a5b9"
+    },
+    {
+      "name": "source-example",
+      "command": [
+        "/work/final-source-consumer/bin/python",
+        "/work/final-candidate/examples/python_research.py"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "source-path",
+      "command": [
+        "/work/final-source-consumer/bin/python",
+        "-c",
+        "import gig_microstructure as g,sys;print(g.__file__);print(g.native_build_info());assert '/site-packages/' in g.__file__ and g.__file__.startswith(sys.prefix)"
+      ],
+      "cwd": "/work/final-candidate",
+      "exit_code": 0,
+      "stdout_sha256": "b6397f1cbe88cb0f64a2703ac81fa60d6f76a97f2caf86eb86ac9672842ede7a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "installed_unit_counts_per_consumer": {
+    "interface": 8,
+    "export": 6
+  },
+  "installed_artifacts": {
+    "/work/final-packages/gig_microstructure-0.1.1.tar.gz": {
+      "bytes": 1088014,
+      "sha256": "e55ff46eb6da988b36650944fed4026809b29bf572558e85ab2405145d9a0e0c"
+    },
+    "/work/final-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+      "bytes": 452211,
+      "sha256": "29600a4a7bb32b20a71d956ff35d2cc414aad1f8e724b2f4c38f594111be2a60"
+    }
+  },
+  "python_example_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+  "synthetic_demonstrations": {
+    "valid": {
+      "file_sha256": "89b50ed797efaec32193da53eac43787007744a579a056cf7f22c26864f37303",
+      "stream": {
+        "compressed_bytes": 530,
+        "decompressed_bytes": 507,
+        "framing_bytes": 507,
+        "accepted_prefix_bytes": 505,
+        "source_records": 18,
+        "accepted_records": 18,
+        "native_records": 7,
+        "external_observations": 11,
+        "compressed_sha256": "73d9117e5adc97c2b506e2c129c02a7953bf2f7c3431f59371010248c07d8e20",
+        "decompressed_sha256": "b0a3dfbda8636f10743ba71b082267aeaf52709a221e653e5d33d8d23feed2e5",
+        "accepted_prefix_sha256": "8f6c0f588e049f6fe1ff443e44935621c93adedafd0904390dcd979ff3435991",
+        "gzip_member_verified": true,
+        "framer_terminated": true,
+        "compressed_identity_verified": true,
+        "decompressed_identity_verified": true,
+        "source_complete": true,
+        "publication_eligible": true,
+        "paused": false,
+        "finished": true,
+        "bounded_prefix": false,
+        "residual_frame_bytes": 0,
+        "buffered_output_bytes": 0,
+        "error_code": 0,
+        "gzip_error_code": 0,
+        "observed_gzip_error_code": 0
+      },
+      "restart_verified": false
+    },
+    "bounded": {
+      "file_sha256": "da21753691cdc7e3af005f228b343983be01a4047186868ee3ce2d459bbf4e75",
+      "stream": {
+        "compressed_bytes": 289,
+        "decompressed_bytes": 274,
+        "framing_bytes": 268,
+        "accepted_prefix_bytes": 268,
+        "source_records": 8,
+        "accepted_records": 8,
+        "native_records": 5,
+        "external_observations": 3,
+        "compressed_sha256": "80e455833fd98e788fb7df224327acc17c7cc5cd09ab8a22fc5815a0ff1e8161",
+        "decompressed_sha256": "8dc49429ce1277bd3fcdb7ca3a5f2915f78151562a258b25e5fcf2fba19e0fd9",
+        "accepted_prefix_sha256": "e8b2c6dee38a0c55ca65478da30bab8127edb6aacffa529040828cd3b5c318ad",
+        "gzip_member_verified": false,
+        "framer_terminated": false,
+        "compressed_identity_verified": false,
+        "decompressed_identity_verified": false,
+        "source_complete": false,
+        "publication_eligible": false,
+        "paused": true,
+        "finished": true,
+        "bounded_prefix": true,
+        "residual_frame_bytes": 0,
+        "buffered_output_bytes": 6,
+        "error_code": 0,
+        "gzip_error_code": 0,
+        "observed_gzip_error_code": 0
+      },
+      "restart_verified": false
+    },
+    "restart": {
+      "file_sha256": "5a8b00639290bb981c6fdda92b4ca45883580518f20609c68e71a774d98d8fee",
+      "stream": {
+        "compressed_bytes": 530,
+        "decompressed_bytes": 507,
+        "framing_bytes": 507,
+        "accepted_prefix_bytes": 505,
+        "source_records": 18,
+        "accepted_records": 18,
+        "native_records": 7,
+        "external_observations": 11,
+        "compressed_sha256": "73d9117e5adc97c2b506e2c129c02a7953bf2f7c3431f59371010248c07d8e20",
+        "decompressed_sha256": "b0a3dfbda8636f10743ba71b082267aeaf52709a221e653e5d33d8d23feed2e5",
+        "accepted_prefix_sha256": "8f6c0f588e049f6fe1ff443e44935621c93adedafd0904390dcd979ff3435991",
+        "gzip_member_verified": true,
+        "framer_terminated": true,
+        "compressed_identity_verified": true,
+        "decompressed_identity_verified": true,
+        "source_complete": true,
+        "publication_eligible": true,
+        "paused": false,
+        "finished": true,
+        "bounded_prefix": false,
+        "residual_frame_bytes": 0,
+        "buffered_output_bytes": 0,
+        "error_code": 0,
+        "gzip_error_code": 0,
+        "observed_gzip_error_code": 0
+      },
+      "restart_verified": true
+    },
+    "corrupt": {
+      "file_sha256": "80268a22b2e619b3a567f6f3714d69fe2e96a03a40422fd1e7ffe4d4fe4a9d4c",
+      "stream": {
+        "compressed_bytes": 526,
+        "decompressed_bytes": 507,
+        "framing_bytes": 507,
+        "accepted_prefix_bytes": 505,
+        "source_records": 18,
+        "accepted_records": 18,
+        "native_records": 7,
+        "external_observations": 11,
+        "compressed_sha256": "fec4363a526083e6c4b8ed0d8890139906739c5bd2a16ee39abe631410ea17a7",
+        "decompressed_sha256": "b0a3dfbda8636f10743ba71b082267aeaf52709a221e653e5d33d8d23feed2e5",
+        "accepted_prefix_sha256": "8f6c0f588e049f6fe1ff443e44935621c93adedafd0904390dcd979ff3435991",
+        "gzip_member_verified": false,
+        "framer_terminated": true,
+        "compressed_identity_verified": false,
+        "decompressed_identity_verified": false,
+        "source_complete": false,
+        "publication_eligible": false,
+        "paused": false,
+        "finished": true,
+        "bounded_prefix": false,
+        "residual_frame_bytes": 0,
+        "buffered_output_bytes": 0,
+        "error_code": 1,
+        "gzip_error_code": 7,
+        "observed_gzip_error_code": 7
+      },
+      "restart_verified": false
+    }
+  },
+  "memory_profiles": {
+    "gcc": {
+      "raw": {
+        "schema": "gig.synthetic_profile_probe.v1",
+        "orders_per_symbol": 128,
+        "books": 2,
+        "records": 2056,
+        "native_records": 2048,
+        "journal_records_per_book": 1024,
+        "journal_entry_bytes": 15944,
+        "journal_element_bytes": 32653312,
+        "remaining_per_book": 127104,
+        "max_orders_per_book": 128,
+        "journal_limit_per_book": 1024,
+        "context_lifetime_limit": 4096,
+        "source_limit": 4096,
+        "receipt_budget_bytes": 2097152,
+        "pmr_budget_bytes": 134217728,
+        "first_pipeline_peak_pmr": 42722343,
+        "first_pipeline_live_pmr": 34559015,
+        "coexisting_query_live_pmr": 35542081,
+        "coexisting_query_peak_pmr": 42722343,
+        "restart_coexistence_peak_pmr": 77281358,
+        "final_peak_pmr": 77281358,
+        "export_canonical_bytes": 880640,
+        "allocations": 2757,
+        "query_allocation_failures_reached": 45,
+        "post_destroy_live_bytes": 0,
+        "compressed_bytes": 54719,
+        "decompressed_bytes": 54696,
+        "compressed_sha256": "4e84e8b67999d07bf0ea80ea0de829229fe23b34b25eec4254ec82b1a2158eef",
+        "decompressed_sha256": "9180c359dd0a21ef72f3c28638d2d9e304de106295115f0154077998d1b489eb",
+        "restart_equivalent": true,
+        "publication_eligible": true,
+        "reduced_pmr_stop": {
+          "budget": 16777216,
+          "framed": 516,
+          "accepted": 515,
+          "native": 512,
+          "peak": 12109863
+        },
+        "journal_cap_stop": {
+          "tested": true,
+          "limit": 1023,
+          "framed": 2050,
+          "accepted": 2049,
+          "native": 2046,
+          "field": "journal.records"
+        },
+        "observed_market_validated": false
+      },
+      "peak_process_rss_bytes": 78487552,
+      "process_user_seconds": 0.11143099999999999,
+      "process_system_seconds": 0.100269,
+      "executable_sha256": "f2c25e45417a7af80b4096729c148d11568a1f5bff0c7f5cd7960fdcfb9016c3"
+    },
+    "clang": {
+      "raw": {
+        "schema": "gig.synthetic_profile_probe.v1",
+        "orders_per_symbol": 128,
+        "books": 2,
+        "records": 2056,
+        "native_records": 2048,
+        "journal_records_per_book": 1024,
+        "journal_entry_bytes": 15944,
+        "journal_element_bytes": 32653312,
+        "remaining_per_book": 127104,
+        "max_orders_per_book": 128,
+        "journal_limit_per_book": 1024,
+        "context_lifetime_limit": 4096,
+        "source_limit": 4096,
+        "receipt_budget_bytes": 2097152,
+        "pmr_budget_bytes": 134217728,
+        "first_pipeline_peak_pmr": 42722343,
+        "first_pipeline_live_pmr": 34559015,
+        "coexisting_query_live_pmr": 35542081,
+        "coexisting_query_peak_pmr": 42722343,
+        "restart_coexistence_peak_pmr": 77281358,
+        "final_peak_pmr": 77281358,
+        "export_canonical_bytes": 880640,
+        "allocations": 2757,
+        "query_allocation_failures_reached": 45,
+        "post_destroy_live_bytes": 0,
+        "compressed_bytes": 54719,
+        "decompressed_bytes": 54696,
+        "compressed_sha256": "4e84e8b67999d07bf0ea80ea0de829229fe23b34b25eec4254ec82b1a2158eef",
+        "decompressed_sha256": "9180c359dd0a21ef72f3c28638d2d9e304de106295115f0154077998d1b489eb",
+        "restart_equivalent": true,
+        "publication_eligible": true,
+        "reduced_pmr_stop": {
+          "budget": 16777216,
+          "framed": 516,
+          "accepted": 515,
+          "native": 512,
+          "peak": 12109863
+        },
+        "journal_cap_stop": {
+          "tested": true,
+          "limit": 1023,
+          "framed": 2050,
+          "accepted": 2049,
+          "native": 2046,
+          "field": "journal.records"
+        },
+        "observed_market_validated": false
+      },
+      "peak_process_rss_bytes": 78630912,
+      "process_user_seconds": 0.136118,
+      "process_system_seconds": 0.068271,
+      "executable_sha256": "2bdc1920beeb1f4428ce02a2c5eeba5ca1eae71dec17231d3193c5d93ddc3597"
+    }
+  },
+  "qualification_cgroup_memory_peak_bytes": 3221225472,
+  "qualification_cgroup_memory_events": "low 0\nhigh 0\nmax 2401\noom 0\noom_kill 0\noom_group_kill 0\n",
+  "memory_scope": "Cgroup peak includes compiler/dependency/package/cache activity, not just the engine. Process RSS is external child wait-accounted and may include inherited pre-exec floor. PMR excludes fixed/input/output allocations. No full-day or all-maxima guarantee.",
+  "github_api": {
+    "command": [
+      "curl",
+      "--proto",
+      "=https",
+      "--tlsv1.2",
+      "--connect-timeout",
+      "8",
+      "--max-time",
+      "25",
+      "--max-filesize",
+      "524288",
+      "--silent",
+      "--show-error",
+      "--output",
+      "build/rc-closure/evidence/github-api-body",
+      "--write-out",
+      "%{response_code} %{http_connect} %{size_download}",
+      "https://api.github.com/repos/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs?head_sha=9171f4ecdaf638e2a1ff3b5bf1645be33f277b67&per_page=5"
+    ],
+    "exit_code": 56,
+    "http_code": 0,
+    "proxy_connect_http": 403,
+    "download_bytes": 0,
+    "stderr": "curl: (56) CONNECT tunnel failed, response 403\n",
+    "note": "One corrected diagnostic capture after leading-zero HTTP000 broke initial JSON formatting; no retry loop."
+  },
+  "official_security_sources": {
+    "zlib-changelog.txt.json": {
+      "url": "https://raw.githubusercontent.com/madler/zlib/develop/ChangeLog",
+      "limit_bytes": 2097152,
+      "status": 200,
+      "bytes": 86367,
+      "truncated": false,
+      "sha256": "483b3b6ca4c8d8b5f3bd4a8f49b94354e0957123d82b33a4ea4903de4915d56c"
+    },
+    "zlib-cve-2026-22184.json.fetch.json": {
+      "url": "https://raw.githubusercontent.com/CVEProject/cvelistV5/main/cves/2026/22xxx/CVE-2026-22184.json",
+      "limit_bytes": 2097152,
+      "http_status": 200,
+      "bytes": 98105,
+      "truncated": false,
+      "sha256": "bb2494de3a5bc6ef534aa69abf8b1c2efd4919abe177df6452c76251992e3bfb"
+    },
+    "cpython-3.12.15-news.txt.fetch.json": {
+      "url": "https://raw.githubusercontent.com/python/cpython/3.12/Misc/NEWS.d/3.12.15.rst",
+      "limit_bytes": 2097152,
+      "http_status": 200,
+      "bytes": 5187,
+      "truncated": false,
+      "sha256": "1e4bc900b9a566a231ac43da64bb839f269456f7c70aa5f18ea05c8ca7a5e230"
+    },
+    "expat-2.8.5-fetch.json": {
+      "url": "https://raw.githubusercontent.com/libexpat/libexpat/R_2_8_5/expat/Changes",
+      "status": 200,
+      "bytes": 116977,
+      "truncated": false,
+      "sha256": "d524be92cf55121cb6cb7bc13625f0498f1d31b4990fb52c93a574edbb372939"
+    },
+    "expat-unfixed-issues.fetch.json": {
+      "url": "https://github.com/libexpat/libexpat/issues/1160",
+      "status": 200,
+      "bytes": 329700,
+      "truncated": false,
+      "sha256": "7e470d2d8ae8eff4c08d8940cf24fd85f4a9da20f31b10f182846d3f3e82284c"
+    },
+    "cmake-3.31-release.txt.fetch.json": {
+      "url": "https://raw.githubusercontent.com/Kitware/CMake/release/Help/release/3.31.rst",
+      "limit_bytes": 2097152,
+      "http_status": 200,
+      "bytes": 10864,
+      "truncated": false,
+      "sha256": "88893becb09f29e0fa62052f1f8579ef03326ab7b6aad4f5a4aa2dbf95ae89b6"
+    },
+    "debian-advisory-index.html.json": {
+      "url": "https://security.debian.org/debian-security/dists/trixie-security/updates/main/binary-amd64/Packages.xz",
+      "limit_bytes": 2097152,
+      "status": 200,
+      "bytes": 269404,
+      "truncated": false,
+      "sha256": "320ce5ef5baed8f5681bb6c153316450dd6fb11a1cf20625a4d528225b3200f0"
+    },
+    "zlib-source-acquisition.json": {
+      "url": "https://codeload.github.com/madler/zlib/tar.gz/refs/tags/v1.3.1",
+      "status": 200,
+      "bytes": 1572744,
+      "sha256": "17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c",
+      "scope": "official open-source build dependency, not market data"
+    }
+  },
+  "python_dependency_review": {
+    "reviewed_at": "2026-10-23T13:45:23.832229-04:00",
+    "packages": 12,
+    "active_advisory_packages": [],
+    "integrity_errors": [],
+    "unavailable_metadata": [],
+    "lock_sha256": "f56593f882cfc25e9373c8a3f46ed645dd6b2a14f9563679e191874c091d43c7",
+    "scope": "PyPI version-specific advisory metadata snapshot and TLS-delivered registry SHA256 matching, installed license metadata; not a guarantee of all vulnerabilities, signatures or source authenticity; no audit of platform compiler/CPython/kernel advisories"
+  },
+  "preserved_P1J_verification": {
+    "bytes_checked": 27499115,
+    "canonical_sha256": {
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "configurations": 9,
+    "coverage_profile": "candidate-P1E-P1H-nine-configurations",
+    "ctest_outcomes": 1108,
+    "evidence_sha256": "0136115b7d804df0f89684feb3a1269570c62432009ae05e08af9dabd7a04d88",
+    "frozen_files": 136,
+    "implementation_commit": "92567f15183074647e14af3dde4604ed5ba095c7",
+    "limitation": "Local byte/count consistency; not execution attestation, license, origin authentication or hosted CI proof.",
+    "package_artifacts": 3,
+    "raw_files": 50,
+    "source_mode": "historical-git-blobs",
+    "status": "PASS"
+  },
+  "preserved_P1I_verification": {
+    "bytes_checked": 19727010,
+    "canonical_sha256": {
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "configurations": 9,
+    "coverage_profile": "candidate-P1E-P1H-nine-configurations",
+    "ctest_outcomes": 1108,
+    "evidence_sha256": "ad19734ddf5b4dfc17aa065b0bba214086f3357cac04ca0fcc748cb51523f501",
+    "frozen_files": 136,
+    "implementation_commit": "5ff7c8596f8705d92b7d97f55f860d0cb8d409fb",
+    "limitation": "Local byte/count consistency; not execution attestation, license, origin authentication or hosted CI proof.",
+    "package_artifacts": 3,
+    "raw_files": 92,
+    "source_mode": "historical-git-blobs",
+    "status": "PASS"
+  },
+  "preserved_reports": {
+    "docs/INSTITUTIONAL_ENGINEERING_AUDIT.md": "25045c0c3820ca1ad17852be62ffece5b84a1261900301fb9f4dce681d0d7ef3",
+    "docs/P1E_EVIDENCE.json": "d3da59fc66fc489e86793468d72fe970e7a533baa9af0007e5ae5150fcd834ba",
+    "docs/P1F_EVIDENCE.json": "3919e650fad5b2370f3919bd0a92bfab2dc1826b8b0f12be25e4e89d66c6f661",
+    "docs/P1G_EVIDENCE.json": "3dea5534646fc0e4071da5cd4b1f6034e7fa933a15239159b03c5e920b53dd6e",
+    "docs/P1H_EVIDENCE.json": "51319dcf5f0e20851943186b841e5f07d19cbd611c6629c238b3db26746048ab",
+    "docs/P1I_EVIDENCE.json": "ad19734ddf5b4dfc17aa065b0bba214086f3357cac04ca0fcc748cb51523f501",
+    "docs/P1J_EVIDENCE.json": "0136115b7d804df0f89684feb3a1269570c62432009ae05e08af9dabd7a04d88"
+  },
+  "protected_source": {
+    "baseline": "9171f4ecdaf638e2a1ff3b5bf1645be33f277b67",
+    "files": 63,
+    "unchanged": true,
+    "files_sha256": {
+      "CMakeLists.txt": "c5fb537fb04f32e75b888233145589b1aafbb8626d74943ab23d0ded5a34fc71",
+      "cmake/ExpectFailure.cmake": "a849658c7cd07bff8bf1fb199bfe3f4ac58c5c9f21fdff5f36aec4b32aaa3bdb",
+      "include/gig/analytics/book_metrics.hpp": "56aa765bfc04389f7bdc351cf3f28cb927aa0f5264a53936d1bbdc895c085c59",
+      "include/gig/analytics/exact.hpp": "39923e8558f2b9d560efc28235be75c0a73835ff44b3c6f8720fb0f867a6963a",
+      "include/gig/analytics/flow_metrics.hpp": "7359e661e487c9fbe2d7bd1ef0c5cf0dbcbd9aed583186443a050f7597b789a8",
+      "include/gig/book/order_book.hpp": "0fff19acec016b62d49941a917cb11f2f11070e85d10a590c23cd876308c95b8",
+      "include/gig/core/numeric.hpp": "4b96432c3bcdb2e54cd993f14f4223629ca47c2d051df0b51e8f26bedeca0768",
+      "include/gig/core/result.hpp": "b0c8854164f9bfaf92753d71a21607a12f39c4ea174bc88bdf79ef7c34d96df5",
+      "include/gig/detail/canonical.hpp": "4c95efce76d02fee8e8b18c9be23ae3ce3877af6e73a8f60eb73ddcf4c28a35c",
+      "include/gig/events/contracts.hpp": "c26c29603fec6d017692971cf3115206ea92a6a9ad3cce539ff36a36bfd9f241",
+      "include/gig/execution/execution.hpp": "d699a2d642f36692052a778a47b8b75bc85800b45e1454462426c35f57ab1e68",
+      "include/gig/itch/binary_file.hpp": "1d8564f1d7eaaf7c8e4d702068bd02a2c4755b3a945d7abe262965d92cb96e15",
+      "include/gig/itch/context.hpp": "c3d2a0aec48af9b883da385a824915f81d31e30b0be2bd1d371499e115e6ee42",
+      "include/gig/itch/decoder.hpp": "9ec7cb0f210f8d7de1538cf5f375fd8ac6546bec38640457e4b255899e091768",
+      "include/gig/itch/gzip.hpp": "8e49a15d7169b3bfd4a8801b2335d8c2fc453d6c9eb24267dbfbcf3081f34e63",
+      "include/gig/itch/reconstruction.hpp": "fa3eaf811e374e8af7d4eca5d15d4948641bc6003e28acb0f5f6af4b489b10c3",
+      "include/gig/itch/restart.hpp": "d8c57e611c17c1eab8ef8251397b61ea1c7e1a20b323b9374660f400fa6684d5",
+      "include/gig/itch/sha256.hpp": "eeb411b30706e1297a5a0b82d9d9297a4f1c78b6d31197f03587f18d411768b1",
+      "include/gig/itch/streaming.hpp": "55de329c69a7980f6c53fe440b1f559935dc715f47d25578c42406f278015ed2",
+      "include/gig/itch/wire.hpp": "4f7baba66b91ed293ea773fb49bf0341c5ff229d0e3542f3edd6499b072f9921",
+      "include/gig/market_event.hpp": "081988fd7ab0ccca74ce56ea7068ef04692b3fdea5828092ccf65ef9cd54c619",
+      "include/gig/memory/tracked_resource.hpp": "7d76ad70c0ea9b5f9f7d6aaefec66c0f2677dfee8ef79498a942fb87e0effb5c",
+      "include/gig/replay/replay.hpp": "333d69b69c8b5a94da2dd1501a9e6dbec300b88ccc8734f39321db1b2da62ec7",
+      "include/gig/simulation/simulator.hpp": "554445aca9cf95f319b63c54c276ea52d9e5fd1dd6d3d2a3504fc576f5ebb9a7",
+      "python/bindings/build_info.hpp.in": "58c15d1ccb2c827fceecdb5fa4905a9e5ffa3d769fdb4f77e8fbfc357df63ddd",
+      "python/bindings/module.cpp": "88cbecd5d2cb20edd48dcb1c5bacb3826c815050b5f310bbf91beeed143a208d",
+      "python/bindings/results.hpp": "6dcd0c5549588e95c6c9f88504c4c1f057b71f82ec089783b6e35834a057a4bd",
+      "python/bindings/schemas.cpp": "a3530bb67d8189b7e45d4dcafe6c67ed44fcc3d35768c9350f64f3a612f278be",
+      "python/bindings/wire.cpp": "af59a70002d2fe736a2f6fea1af2ae49050ad00c14bf59796719c1a68576c5dc",
+      "python/bindings/wire.hpp": "9c4439a34cf3a38566cae1db01c4a9a0799ab92af25c7150d64292b8561e360b",
+      "python/gig_microstructure/__init__.py": "9f97f0560d6cf24f3ba61e817259d80d0e8c94e5f1f4289a365535464bf91d6a",
+      "python/gig_microstructure/manifest_schema.py": "a50a24f494eb4710504a9a5d8dd23af54159897250b312990000c919eb4c38ca",
+      "schemas/cost_config-v1.schema.json": "3ff350e6d4c2d869893a545eb8fcc75e226c46dafdfff5c6c5b5303be268fca8",
+      "schemas/flow_config-v1.schema.json": "b9cda0d3928129fac76abe6c56e5b665176d3d769ac49094b96b377beb58bf62",
+      "schemas/flow_quote-v1.schema.json": "e6533ccbad63c5bcc33627dc8dc076b6a0262e04cf9ef362c9f96d2646be186a",
+      "schemas/flow_trade-v1.schema.json": "8c919a0d5815b5610f046dc5479ece8af76d6b844067afd5efde4549ffcf855c",
+      "schemas/gig.book_snapshot-v1.schema.json": "8a6e081aff260978ae80100c5879f2f4ac662e0bae24a9c310ac694753425820",
+      "schemas/gig.event-v1.schema.json": "47b5b7d4e04d9a9f31b97295df64b279db5fdded7e77b6817095f36d48e994ea",
+      "schemas/gig.execution_schedule-v1.schema.json": "99ce8454fc54d18fb16abf13fc04de3c00650c25984e09af147c5d496f7e759c",
+      "schemas/gig.metric_result-v1.schema.json": "db3c347cbd33ac4cb353d7f22efa449eecf9a5625d8cd4e8cebe4bac1ee7219f",
+      "schemas/gig.run_manifest-v1.schema.json": "38180856167dc770d405d29b0580029759c2abec7658ff2b8e22097a9936030b",
+      "schemas/gig.simulation_output-v1.schema.json": "e1db549e48c1898b007ebc545139c1c9d9bd02bb40d2fc676f19988ad3d5217d",
+      "schemas/instrument_rules-v1.schema.json": "be80218b155d2f631e06ee19ce90a54ecda83c09205b199f9c7555f176fd3743",
+      "schemas/plan_config-v1.schema.json": "591fe0dbffd92f6d0098d2fe591499312ea6b8c1f267fd287af407e894c47d7d",
+      "schemas/replay_config-v1.schema.json": "ac8d8074cafae37ad21fa05ee9edcd6e91af50d11a3adb4cb40d3eff7f7d4074",
+      "schemas/simulation_config-v1.schema.json": "3bcdaf7d837164d32d3a8c36ba0eec4753241a00ef4839df9fa60042cd183693",
+      "src/analytics/book_metrics.cpp": "7736fb73f2bb1767991f5399e54f54cc56910700d9e283b9f52aa666305704f3",
+      "src/analytics/flow_metrics.cpp": "93b3edd54ed7257fbfacceb8158ea8eb831765911e5a15f487c99d2104825af6",
+      "src/book/order_book.cpp": "b751d6144e271e8bdaa45e65078f3f083c1786d86c3ca8303da79e2f6c70b4df",
+      "src/events/validation.cpp": "77cbe02581658692bd4fb54c680c4bfd613caf320b6d3fc5c2d796cc6c994b2e",
+      "src/execution/execution.cpp": "0622cc8572f58f311c2c522cc009d928c215430a931e2118e7fb4954b0ee4a33",
+      "src/itch/binary_file.cpp": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6",
+      "src/itch/context.cpp": "24ef57a9b9cc4e652791658a4d9f939c8e95d93c1246ad6e1b4b3809c98fd116",
+      "src/itch/decoder.cpp": "a6782e2796892c07e6aef45a11b56cb7ca27fa4672c78f8e1f0aa0b2563a0921",
+      "src/itch/gzip.cpp": "af95436d5f665c12ee6c83fed194b33f4c4747877fb6a9ac084bef10a6c516f8",
+      "src/itch/reconstruction.cpp": "15f9194f7b6143f4e9ab352311c10a3a57744093f0445bff7e23be36dfce2f05",
+      "src/itch/restart.cpp": "84bc6c8645ac023c863a7ab9a60ebc4118fe572542877f9743db8ecd3477e620",
+      "src/itch/sha256.cpp": "376756916be1add85aa261c23d8c1bf5e983d863697d1a30734469143b85aed3",
+      "src/itch/streaming.cpp": "05c234ffb3f6c8c5a2460d2d168015b35e967d1ad835b9136b99ba1c7d14b86d",
+      "src/main.cpp": "eda7db97d2dcb6bd46e143c75a15c69fc1203284a8b585ceb63813c9bd894cf4",
+      "src/replay/canonical.cpp": "169acdec6f7e3a6082f93c63f2d6902d7ea677a02b749dcc11aea9a3e47d991c",
+      "src/replay/replay.cpp": "d36b237a5383472614e71418c4a18014086b643b45fa5c6ac33edc9221c28798",
+      "src/simulation/simulator.cpp": "c8581e377fde029c151b020170465a96fd25d986c3e07f8936e787bed52b701f"
+    },
+    "manifest_sha256": "7a99d9372e9155ebd96cc9a656eae59d33e5cd16729eed01e9c78c6f39d71f8b"
+  },
+  "preliminary_failures": {
+    "Ubuntu_zlib_configure": {
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "exec",
+        "-w",
+        "/work/source",
+        "gig-rc-closure-fresh",
+        "cmake",
+        "--preset",
+        "release"
+      ],
+      "exit_code": 1,
+      "output_sha256": "eff9082a9693b36fc6e6aa1dc76b00411fab3d2492f2119ac195b1b75f084567"
+    },
+    "source_archive_python": "preliminary fresh/gcc-release.xml:124 pass,1 fail; missing .git, repaired in test harness",
+    "Clang_sanitizer_link": {
+      "configuration": "clang-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/work/final-candidate",
+          "-B",
+          "/work/final-build/clang-asan-ubsan",
+          "-G",
+          "Ninja",
+          "-DCMAKE_CXX_COMPILER=/usr/bin/clang++",
+          "-DCMAKE_BUILD_TYPE=Debug",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python",
+          "-DGIG_ENABLE_ASAN=ON",
+          "-DGIG_ENABLE_UBSAN=ON"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/work/final-build/clang-asan-ubsan",
+          "--parallel",
+          "2"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/work/final-build/clang-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/evidence/final-fresh/clang-asan-ubsan.xml"
+        ]
+      ],
+      "command_exits": [
+        0,
+        1
+      ],
+      "elapsed_seconds": 15.648
+    },
+    "initial_zlib_helper_draft": "Make generator assumption in minimal Ninja-only image; fixed to explicit Ninja before CI recipe commit"
+  },
+  "limitations": [
+    "no hosted run or external machine attestation",
+    "no comprehensive CVE clearance",
+    "no ARM64/other OS/other Python ABI qualification",
+    "no real market bytes, initial-state or observed-reference validation",
+    "no signature, stable native ABI, bit-identical wheel or distribution permission",
+    "original1108 qualification not rerun; preserved bytes and historical Git identities reverified"
+  ],
+  "private_raw_root": "build/rc-closure/evidence",
+  "private_artifact_root": "build/rc-closure/artifacts",
+  "raw_file_sha256": {
+    "archive-harness-after.log": "3178330f995f336ea9bfe8e318099dfe917fe7344b482c2fe963bca403ba7414",
+    "checkout-harness-after.log": "180ddcc2d59a6c187a298bb9e96af4e40747f297efe8070919d671b80c0a1d46",
+    "checkout-python-asan-ubsan.log": "140403bb140a2818ddad8d7ffd39e7e7812608582ff041006084dbbc2c83fbc7",
+    "checkout-python-asan-ubsan.xml": "d1ea8ccc5f3d531c96bf761d58617212b72df28d73448c83b52cc0e1a5217603",
+    "checkout-python-debug.log": "31bfc8528bd7b5243e44202b388a41bcb0ece6da9453a1489f36cdd317b7cf61",
+    "checkout-python-debug.xml": "5fb0767631cb2ffa6b397ebfd164cec26577ef45f6acc0b87eeb9b1232673dda",
+    "checkout-python-release.log": "3d01d52aa14caafb05bb96f9c23ccbd696214ac2eea970aa579c8635c4691bbb",
+    "checkout-python-release.xml": "3f318429b8745f0b8aa15d9b69329f4ba156a33fc7dd9310512d81559156a75b",
+    "ci-targeted-checks.json": "930bde684b938b1fe2dfb4ac1b929ed5d229782213ce657c00b9e1497928ce0f",
+    "ci-zlib-network-mode.log": "3385652b6d294909011c1e59bc0f353e0501bd9ad94bfcedfd2d473eabfacfad",
+    "ci-zlib-reject-checksum.json": "133d1c70b91e23b2d1aef48dd7ed29f764613ac510fb70ec02caea557911a78b",
+    "ci-zlib-reject-existing.json": "3a46f8e0b20b3ad68c00c4b6c746eac493a3aa92316a4b32592ae9951b735fcc",
+    "cmake-3.31-release.txt": "88893becb09f29e0fa62052f1f8579ef03326ab7b6aad4f5a4aa2dbf95ae89b6",
+    "cmake-3.31-release.txt.fetch.json": "4b2ef47a426b7314a39a5a2e788ff1e368b2ad4a54e4018b9a180690345f5798",
+    "container-final-identities.txt": "c8def1d26105e237ca31b3014b594e4f83bf81bbe6fb4ff80c4d780437a62f30",
+    "container-id.txt": "ec4d0139bdef9e6564b3b3899074fdf0e562fdffe239818cf7a7bf9a48846847",
+    "container-limits.txt": "59a956c7246fc465f1d06a791385eff6039882e26fdb11bc67f76e3020b4fdb1",
+    "cpython-3.12.15-news.txt": "1e4bc900b9a566a231ac43da64bb839f269456f7c70aa5f18ea05c8ca7a5e230",
+    "cpython-3.12.15-news.txt.fetch.json": "8afa357d5ed453db1e1780a9744063d25b4f559c97e80e11038a9090884001d5",
+    "cpython-security-news.json": "828b6302ffcb85344f956de63383300d1f2289ec58dd95d46885111a801d8bf6",
+    "cpython-security-news.json.json": "1426f2d85ced0777b1e74e87323c4f6f9b093979c075ed782be545bc629d0b8a",
+    "debian-advisory-index.html": "320ce5ef5baed8f5681bb6c153316450dd6fb11a1cf20625a4d528225b3200f0",
+    "debian-advisory-index.html.json": "9aaa5dab6e8c04c161641e57239240c887f37306e60507991a92f60a8f6672d5",
+    "debian-security-package-versions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "docker-image.json": "5b9a2864e52e5200b168aee9987028cedd41061be20d473f66ee8a24bdfbf760",
+    "docker-info.json": "a61192e91c2d59cd0ac794852bc35426f0f571f2001a5a2605d30b617c84fca9",
+    "docker-info.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docker-pull.log": "ca49f36ba661a806d69bf8bbfc48921fc69b8e97a34c5a74c5f6bb8c721730ab",
+    "expat-2.8.5-changes.txt": "d524be92cf55121cb6cb7bc13625f0498f1d31b4990fb52c93a574edbb372939",
+    "expat-2.8.5-fetch.json": "bd28683c11901ea6bcfa91f63cc7f4488135bf8695c44ee7cc3f6c381eca6394",
+    "expat-unfixed-issues.fetch.json": "70f211cea36ef3c4ef5a6b412ac570ecbeee2b2431865f825244dad56cdd6719",
+    "expat-unfixed-issues.html": "7e470d2d8ae8eff4c08d8940cf24fd85f4a9da20f31b10f182846d3f3e82284c",
+    "expat-unfixed-issues.txt": "8e510c2e7181db3e1b6ee2e7ab1eb1186bfc6b757ddb0f923afa469cae6c4f1b",
+    "final-after-qualification.txt": "cfaf7c2df670f086d9f40db0fd29782f61f391613de3f6c6a3254f55ceb486a6",
+    "final-clang-sanitizer/clang-asan-ubsan.log": "cd0a9e382e3b524b327b6da12ec4590c45ca860b0d7e4bc99babcc5735926cd6",
+    "final-clang-sanitizer/clang-asan-ubsan.xml": "c08bdede275d5c9d009f31309915f6475898738a360e9f3e55fb4547526a3d88",
+    "final-clang-sanitizer/matrix.json": "8dd972daca36458596519895b30f42418cace8528ae154b8d0c9fc181d028028",
+    "final-clang-sanitizer-driver.log": "b6c4216afbee09fd25281b4551e26ab765e06b369dbcce37b56b1a39a3d57f18",
+    "final-environment.txt": "f3f8f0f11bcae2a0a8c2ecfe1babb543729bf5b7d543142f3d73b669537086ea",
+    "final-fresh/clang-asan-ubsan.log": "13fb3182e508bbc22c20b90b23d7e0b6dae343beb6a1bb1f94fb43922836904e",
+    "final-fresh/clang-debug.log": "418e560a5ab04aa5a50b6cbdc7d8c57dfd424807d14b23f1fc0fca6e37a822db",
+    "final-fresh/clang-debug.xml": "90628ae06775174a6773d999d2d02ca8e12cdb96f01cfa8fbc2c685f966c52cd",
+    "final-fresh/clang-release.log": "222fb2d344b4b73cd0531084cccf33f7bf6318e01fc2ef6a1f95120e919ec53b",
+    "final-fresh/clang-release.xml": "e77cbe27804a098756572f748c77de6226eb595b69aa961f0951c2a84497877c",
+    "final-fresh/gcc-asan-ubsan.log": "44a07e9a63fbbdcb649b09d357e1e7e2c023a957594e0596c1c05a71c64a03f5",
+    "final-fresh/gcc-asan-ubsan.xml": "950ec2c87649e531384bcb7c2e568293b589465aa13206596119c0657789e43c",
+    "final-fresh/gcc-debug.log": "1c7c1018f1f7003681af6841e69344e8f509f6e69561dcf58163108cde413671",
+    "final-fresh/gcc-debug.xml": "0d0c8cdb6a5de200bda1377c51b2db169641911113e2580c09b07364faa93b51",
+    "final-fresh/gcc-release.log": "78999e1d9177a412c3dea1128739bab68953563df86c1568c9efc697803155f7",
+    "final-fresh/gcc-release.xml": "e85d0b601f023460d1fcf46b7bb5ad864ccf39cbb099f39a529d5c8d44ee3b0a",
+    "final-fresh/matrix.json": "4112a7faae8ede198e698cd50f4948ce52f52378fa5c59097ef51735794703ea",
+    "final-fresh-driver.log": "761038c1d54a8bed6b25379cb62e9c9fdfbf8b88e209de21bcc9ff4163ee3143",
+    "final-input-manifest.json": "8a361a39f2c994b22629eea1a02179088f82a40aa8183706332648de95c5d002",
+    "final-packages/artifacts.json": "c117b20d5bd1b1181e5472292f74d111880c97ab78cf308aa677e818aa0baf05",
+    "final-packages/original-example.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-example.stdout": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "final-packages/original-exports.stderr": "7cb95a274045f5ada78b98b4daabe2ba813276ec13fe05fdec1bc0454192cb49",
+    "final-packages/original-exports.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-install.stdout": "f550a548306adad3a0143a0329ff8ac66bf6c830a234569db5d36a2c65fffc1f",
+    "final-packages/original-interface.stderr": "ec3cceca66a0ccaaf6ffe181f1dbcd0df2fcf9b2e10f9d78a8502e4a9be1a439",
+    "final-packages/original-interface.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-path.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-path.stdout": "a9007d0dcaf01310973511b023075774bbb0d1a28c4fd4cb4592b3b80bdeb2df",
+    "final-packages/original-venv.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/original-venv.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/sdist.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/sdist.stdout": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+    "final-packages/source-example.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-example.stdout": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "final-packages/source-exports.stderr": "8b47b2d63228b25443fb6da1f9b78a9750505fcdf6dfed9ae5ec2c5fee02a5b9",
+    "final-packages/source-exports.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-install.stdout": "801e1d55660a0465c2ec9248b01a7988e4648799462e0fd366908f15d9bfc0c4",
+    "final-packages/source-interface.stderr": "d9363c50973266922c1ecf3b0f8ea28a0e2e1d0e0b4a6d03220261d41eb7a7fa",
+    "final-packages/source-interface.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-path.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-path.stdout": "b6397f1cbe88cb0f64a2703ac81fa60d6f76a97f2caf86eb86ac9672842ede7a",
+    "final-packages/source-venv.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-venv.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-wheel-build.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "final-packages/source-wheel-build.stdout": "a6602c7c49a3354b9e04f29d7129c1ac6fb95ab7fc63afe6f3515d917f1285f8",
+    "final-packages/steps.json": "c6843bc7105524430dad064df15721dd261c3af8f74a4c8d6c28a41b34f284f6",
+    "final-packages-driver.log": "ec223f75ccf4ed7047e9f92631af487463a99f0ee3abda0ffbf4c1c0545a6bbc",
+    "final-qualified-matrix.json": "8d716f2a9f679c76823b81da31e70d94c8ac7ab4b642f37606d5d6c16d505e7b",
+    "fresh/gcc-debug.log": "1ffb25c75c7b8be73305cb8199545a0c8b475bb1081d639c6f6c125a963f74fa",
+    "fresh/gcc-debug.xml": "f25acc83d6cabddcef564c4f0b684ed93df441875f5add1beb7f3b908851cff8",
+    "fresh/gcc-release.log": "f6353101850af78305c5a1fe45701e449fa5189fbec7eb5ecb0403d762653d57",
+    "fresh/gcc-release.xml": "daa3b69134efdadc2e46f9df13c4712d196ceaebcec8abafe1c0e922f81e7297",
+    "fresh/matrix.json": "3db5cf21e86ca885c030d0bb86516743ea673526304a4bbed23ae34c29ec9820",
+    "fresh-bootstrap.log": "b2deb8ab5235dcfca3acc0ce8a988fd04bb65fd832d21545f366b7d75c77f4fb",
+    "fresh-clang-runtime-install.log": "8b40917e5bc39ce3f883a610acbe2da3d712e7da98dd1a4151d32b8546aa1b50",
+    "fresh-demo-bounded.json": "da21753691cdc7e3af005f228b343983be01a4047186868ee3ce2d459bbf4e75",
+    "fresh-demo-corrupt.json": "80268a22b2e619b3a567f6f3714d69fe2e96a03a40422fd1e7ffe4d4fe4a9d4c",
+    "fresh-demo-restart.json": "5a8b00639290bb981c6fdda92b4ca45883580518f20609c68e71a774d98d8fee",
+    "fresh-demo-valid.json": "89b50ed797efaec32193da53eac43787007744a579a056cf7f22c26864f37303",
+    "fresh-input-manifest.json": "8dfc77a5100a7709a9af371dfced53207d0ec4dde1a468ffb47cae6de0c4b487",
+    "fresh-inputs-and-versions-verified.json": "399392fe99633b2897fd02b1951db528c0711aa007a66a9357af49e8f2804647",
+    "fresh-installed-versions.txt": "312d882c7bc7de7d121daaed17d912723016bc2a278aa3d733bc6183e6e768eb",
+    "fresh-matrix-driver.log": "46d5cd02215510a2d15cc3e10015440051975990ce37d27605d54644551a9e43",
+    "fresh-memory-events.txt": "f1d8a67aaf9890895ae01b4ec7e508cf14e07ac661a15d803269fc1d710017c6",
+    "fresh-profile-clang.json": "aae33b1568b88a4f3118075a7fab076bf0f671e5028cbbf5332fd77060224d52",
+    "fresh-profile-gcc.json": "66f26fb21701472e409014492646abee4d3aca950dca1016ca2463525801f0e0",
+    "fresh-runtime-versions.json": "6256bb3805775150b8554cf560f0e01667b51a9b1ae8d59e0ed224ac8a323ac8",
+    "fresh-tooling-restore.log": "aeaf1d63118d44360da8eca823c5157aab71cd7bd9e0b14ab75cc958f4b9e785",
+    "fresh-total-memory-peak.txt": "e299e7e064963e64b8955bf05efe3e8151603ac8410068ae44c09285dd88707b",
+    "github-actions-web.html": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+    "github-actions-web.json": "323b4428ec71bc69d3b73d64c534d81b52cc3611224618c0177f9f0a7ed4c385",
+    "github-api-diagnostic.json": "917cfa75dab9d183dcdfcd3ef9d2f4a2e7fe70de14a57a6e970571e7f64ceb41",
+    "github-api-status.raw": "ac5ce11fa35ac8ba123e5d8cc445073c7990b8b3c3693d7ee9f128326465c324",
+    "official-debian-tracker-test.fetch.json": "f9bfb9ec86a60023e6d468e2092a228da65428dc2fb5ad1faccd6219f90fb781",
+    "outer-mount-namespace.txt": "0adeca90cb89e8ed85ab6ef247a0fc2032f48007526a6a0b255c786ec5ac2ff2",
+    "outer-pid-namespace.txt": "ec3c54013e5340ced4f461e2b2a152f79868eb3ba1c5895113c7da8b844a573b",
+    "outer-runtime-versions.json": "6304e0de4a1bce8e35590b108b1abcda1584d4e87ed18f0b463aff45f2ea7763",
+    "outer-system-packages.txt": "2cc40c9a438d956d8cb5c28a2d10f2a8d72dc8ae382b532e3b9b99abe6751bc1",
+    "preserved-p1i-verification.json": "eb8c19619c97aba1b40372de7ae44a8ae3292f1b7d8d0bfd9516d6c770cb3dc7",
+    "preserved-p1j-verification.json": "9f8a46d93917a12a4b94ab2cc59e4054b0623be199d26b3b5f4f62056ac1ad61",
+    "preserved-reports.json": "449220e59a4e9454836a4229d880e152db7ffd84cbf8e1a55d42c25222dd3c72",
+    "protected-source.json": "4035be7906300641be93d44c6efe6c88050f1466d697508e33f1ff5e03a93791",
+    "ubuntu-after-cmake-final.log": "9e3c6baf02c4876b5095e0d672be54b70751498ad8112307a1e8d6510812bd2f",
+    "ubuntu-after-cmake.log": "bc84875a6199e4dc5eec346b096c6b917bca7cd650a804be8d8eee0c6f031b0d",
+    "ubuntu-before-cmake.json": "aebe13e1734f8ed963e98b8009c630cccbc12d9e2d5a47d6df89351cfebb0209",
+    "ubuntu-before-cmake.log": "eff9082a9693b36fc6e6aa1dc76b00411fab3d2492f2119ac195b1b75f084567",
+    "ubuntu-security-changelogs.txt": "f47cb22344edfa3cebebf70f83d496b3d573a72f3b46d8f48c9820aaa05974b7",
+    "ubuntu-zlib-index.html": "3ae1ebaf53ad567dc8c9d3a2e93ef154a54afe7cde9f17e530a799aa515aeb06",
+    "ubuntu-zlib-index.html.json": "87641625103d8f3c24f3cb9426a27484097f8a7757de0ff43d3c163fcf0d9915",
+    "workflow-summary-extracted.py": "665ffe43d6d8c6e86659e2241260a75de4dac3614034e10347c3f9ad50d0127c",
+    "workflow-summary-final.json": "55141a256d9290de92a5dbbaba580c1d258eb1f3eabfacd550a5a593d62719ea",
+    "workflow-summary-gcc-debug.log": "11817e5969325b37be98abb07c2a4ffc25857d19081d914cda1acc8172a1fceb",
+    "workflow-summary-gcc-release.log": "51fda3f1491b257ce3dc9fb10300a095c59cc6d2c87351f16dbb12ed9f02900d",
+    "workflow-summary-negative.json": "63b1ad47f3c0acdf62336649e8e50ad77f6f4b6b34b81c0d8359491cb555b0c2",
+    "workflow-summary-positive.log": "11817e5969325b37be98abb07c2a4ffc25857d19081d914cda1acc8172a1fceb",
+    "zlib-changelog.txt": "483b3b6ca4c8d8b5f3bd4a8f49b94354e0957123d82b33a4ea4903de4915d56c",
+    "zlib-changelog.txt.json": "358f7317464087d64506a7659435455f31ebd60f927859234930d52c72520c8c",
+    "zlib-cve-2026-22184.json": "bb2494de3a5bc6ef534aa69abf8b1c2efd4919abe177df6452c76251992e3bfb",
+    "zlib-cve-2026-22184.json.fetch.json": "0f9af29362baf4ca1ec3982c1928c8a8e0cc0a38e6d9ae804ba5dcedb52790d2",
+    "zlib-official-tag.txt": "ab3e90057ecb9b848faf8612fdd99df56f29184addc31f5b2f74f2cb86c3fbe7",
+    "zlib-private-build-final.log": "0b4bf2de90136171201df306af863c4e5d095ba5d531e94c66d39e8e19504572",
+    "zlib-private-build.log": "64b3e9b52b8a21746a0795ef85d3501e3e797b668dc054450e836ea2ad4cbf52",
+    "zlib-source-acquisition.json": "9a20d7a1b995a5fa99c9e8296f1868bd938a90756dd8cef4be3874c713757c44"
+  },
+  "final_after_qualification": "Filesystem       1B-blocks       Used   Available Use% Mounted on\noverlay        33770192896 5869699072 26165731328  19% /\nlow 0\nhigh 0\nmax 2401\noom 0\noom_kill 0\noom_group_kill 0\n3221225472\nsys.flags(debug=0, inspect=0, interactive=0, optimize=0, dont_write_bytecode=0, no_user_site=0, no_site=0, ignore_environment=0, verbose=0, bytes_warning=0, quiet=0, hash_randomization=1, isolated=0, dev_mode=False, utf8_mode=1, warn_default_encoding=0, safe_path=False, int_max_str_digits=4300)\n",
+  "fresh_input_checks": {
+    "archive_verified": true,
+    "dependency_wheels_verified": 12,
+    "protected_source_files_verified": 63,
+    "installed_tooling_versions": {
+      "attrs": "26.1.0",
+      "build": "1.2.2.post1",
+      "jsonschema": "4.23.0",
+      "jsonschema-specifications": "2025.9.1",
+      "packaging": "26.3",
+      "pathspec": "1.1.1",
+      "pybind11": "2.13.6",
+      "pyproject_hooks": "1.3.3",
+      "referencing": "0.37.0",
+      "rpds-py": "2026.9.1",
+      "scikit-build-core": "0.11.6",
+      "typing_extensions": "4.16.0"
+    }
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "architecture": "x86_64",
+  "baseline_sha": "183ac12d0a4cc5e3587820ecbba19e5cbaf2d03d",
+  "benchmarks": {
+    "phase9-clang-release": {
+      "code_sha": "6ff92dbed431c0c047a3c887ad48be6e48e53126",
+      "executable_sha256": "9b9961628daaa407a5e846de8aeedaa12177b48474c92e3620d9eab96d4def44",
+      "fixture_check": {
+        "canonical": {
+          "buffer_bytes": 65535,
+          "bytes": 38002,
+          "checksum": 1001101000,
+          "fixture_fnv1a64": 11420996094707702053,
+          "records": 1000,
+          "repetitions": 3
+        },
+        "independent_fixture_sha256": "e95dc26b867ad2a0f912e8953347b5f70735f612c62ac51ce020f7fb22448dd9"
+      },
+      "peak_process_rss_bytes": 10223616,
+      "process_system_seconds": 0.0,
+      "process_user_seconds": 0.014711,
+      "raw": {
+        "buffer_bytes": 65535,
+        "bytes": 760002,
+        "checksum": 20402020000,
+        "compiler": "Clang 19.1.7 (3+b1)",
+        "decoded_record_bytes": 304,
+        "fixture_fnv1a64": 14735029317026867373,
+        "median_ns_per_record": 66.4378,
+        "minimum_ns_per_record": 64.8556,
+        "records": 20000,
+        "repetitions": 7,
+        "workload": "synthetic_itch_A_framing_decode_v1"
+      }
+    },
+    "phase9-clean-release": {
+      "code_sha": "6ff92dbed431c0c047a3c887ad48be6e48e53126",
+      "executable_sha256": "75384d2bc7d80c8a495e21cb64e1718d89b5daef86fcc11ed5ec1d13e0590336",
+      "fixture_check": {
+        "canonical": {
+          "buffer_bytes": 65535,
+          "bytes": 38002,
+          "checksum": 1001101000,
+          "fixture_fnv1a64": 11420996094707702053,
+          "records": 1000,
+          "repetitions": 3
+        },
+        "independent_fixture_sha256": "e95dc26b867ad2a0f912e8953347b5f70735f612c62ac51ce020f7fb22448dd9"
+      },
+      "peak_process_rss_bytes": 10223616,
+      "process_system_seconds": 0.003666,
+      "process_user_seconds": 0.015366,
+      "raw": {
+        "buffer_bytes": 65535,
+        "bytes": 760002,
+        "checksum": 20402020000,
+        "compiler": "GCC 14.2.0",
+        "decoded_record_bytes": 304,
+        "fixture_fnv1a64": 14735029317026867373,
+        "median_ns_per_record": 89.5984,
+        "minimum_ns_per_record": 84.4497,
+        "records": 20000,
+        "repetitions": 7,
+        "workload": "synthetic_itch_A_framing_decode_v1"
+      }
+    }
+  },
+  "branch": "feat/bootstrap-cpp20-engine",
+  "coverage_rows": {
+    "covered": 9,
+    "deferred": 16,
+    "existing_core_only_integration_deferred": 12,
+    "observed_gates_deferred": 8,
+    "partial_remainder_deferred": 25
+  },
+  "evidence_kind": "local synthetic only",
+  "framer_property_cases_per_configuration": 10000,
+  "host": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "implementation_sha": "6ff92dbed431c0c047a3c887ad48be6e48e53126",
+  "independent_synthetic_fixtures": {
+    "1000": {
+      "bytes": 38002,
+      "fnv1a64": 11420996094707702053,
+      "independent_bytes_sha256": "e95dc26b867ad2a0f912e8953347b5f70735f612c62ac51ce020f7fb22448dd9"
+    },
+    "20000": {
+      "bytes": 760002,
+      "fnv1a64": 14735029317026867373,
+      "independent_bytes_sha256": "31c4c85b45ef83e1435b28dd5f481dd8e4c17d608fb4201d8bf4dee5d227f7c2"
+    }
+  },
+  "local_raw_evidence_directory": "build/p1e/evidence",
+  "matrix": [
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clean-debug",
+      "disabled": 0,
+      "elapsed_seconds": 9.35,
+      "failed": 0,
+      "junit_sha256": "6eabecfd4dc91f21749e285306f54b309a25f04548f6b5bed93857e9fa5186f5",
+      "log_sha256": "00762b06f3b5b1d38d473d0bd620dabd2fb3834d2b43b4d8fc410b630dbd7d9b",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clean-release",
+      "disabled": 0,
+      "elapsed_seconds": 6.64,
+      "failed": 0,
+      "junit_sha256": "7cf93d7a76320ecfa528b51195da1911e17723e734da89aba15ed1dde944bd0d",
+      "log_sha256": "cbf27caae02ef6ffd31b14a56ca613717b467d388648cf53eff36acbe3fd5e16",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clean-asan-ubsan",
+      "disabled": 0,
+      "elapsed_seconds": 26.64,
+      "failed": 0,
+      "junit_sha256": "d9e5883809d8e1fa612fc5e824d7e3cedd25a97bf328a020ffb424ef766273e1",
+      "log_sha256": "35987376e185804167ae4773da59102e6485652c167b987cf4f36e94a03f599c",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clang-debug",
+      "disabled": 0,
+      "elapsed_seconds": 7.17,
+      "failed": 0,
+      "junit_sha256": "fc8be510c13e05908e938f85c43a7abc61fbc7b36ffbed7313fcfdc45e0fd0a8",
+      "log_sha256": "8fa81acdbfe19ac0d5c268728c06df115b56bf5f03b03d6fc6f95cbabb604f2a",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clang-release",
+      "disabled": 0,
+      "elapsed_seconds": 5.48,
+      "failed": 0,
+      "junit_sha256": "8eb27b6d3e162526c05cd7a32490f4c2d8ba3d5431e7e908d28ebb9d386c3db3",
+      "log_sha256": "0b6c2e497f6174249b07aa9fad1553adcda81a5b48f251bd7a43a697321d1b67",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "phase9-clang-asan-ubsan",
+      "disabled": 0,
+      "elapsed_seconds": 16.08,
+      "failed": 0,
+      "junit_sha256": "059a7aac05df815cd11efd2820b9226595f98221cfecfd490b5de4223eb94bd5",
+      "log_sha256": "acfb91813d5be6cfc7c0143d04b7d43952a7fa174de9b25f9a66bd9f6107a3aa",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 74,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "python-debug",
+      "disabled": 0,
+      "elapsed_seconds": 9.45,
+      "failed": 0,
+      "junit_sha256": "29c1217bc950b3e55e1cb74fd2997a7f39e569e586db01a300d078ae61d3257c",
+      "log_sha256": "13f4f85366d9287a5a4fbc804ab238cb0108fafab9ccde88fdb6906fdc8982b0",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 77,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "python-release",
+      "disabled": 0,
+      "elapsed_seconds": 6.34,
+      "failed": 0,
+      "junit_sha256": "0072ba52a94ce0a0944fc28505f74cf1514b4de587fd890f5eb32d725c9e3b54",
+      "log_sha256": "7037275826fc1dea58eed1ed98e5d31ceed75370384b63d1eb7a15d35321efc2",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 77,
+      "skipped": 0,
+      "test_exit": 0
+    },
+    {
+      "build_exit": 0,
+      "configuration": "python-asan-ubsan",
+      "disabled": 0,
+      "elapsed_seconds": 22.85,
+      "failed": 0,
+      "junit_sha256": "3bf35d341e6fd7a97c31cf09605aaa7c6664aceb5c2ae29e2ff583bb6f4d7d29",
+      "log_sha256": "1eeedfb51dc7d737eddc4a073039fb2c2343c0a0a254754aeafbbb6e7edc96e1",
+      "oracle_canonical_sha256": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": 78,
+      "skipped": 0,
+      "test_exit": 0
+    }
+  ],
+  "measurement_limitations": "shared host; median/minimum whole-run per-record averages; RSS is wait-accounted child high-water and can include inherited pre-exec worker floor; no tail-latency/SLA/engine-only RAM claim",
+  "oracle_cases_per_configuration": 10000,
+  "oracle_negative_controls": 4,
+  "p1d_sha": "d41a8e82835cf071ee5175fcdfd56ff888fa67e8",
+  "package": {
+    "artifacts": {
+      "build/p1e/final-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": "9cf73eb83e3513d33ed0c6b21745630797b2a2b044cad296a1f584688fa6d91a",
+      "build/p1e/final-dist/gig_microstructure-0.1.1.tar.gz": "fe99b7f9a0ea1bbca7d80e46324f92bc1f944127e39522242b2a47ee010d3448",
+      "build/p1e/sdist-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": "0bcda16cc063df1a170a372f1fd092f9fa51461c60412ab93e1b975b36d790f3"
+    },
+    "direct_wheel_export_tests": 6,
+    "direct_wheel_interface_tests": 7,
+    "example_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "log_sha256": {
+      "consumer-export.log": "c6cf3e0e09dbbdc61f7b5c16b42011d08316ba4cd9f63c1b16b79e93975a0eea",
+      "consumer-interface.log": "5706e853ce93f00c0adeebc37e9ebd63088feb8b3821eea5c725e8bbf3130184",
+      "consumer-paths.txt": "8f32215876d8a21aac1f35813a6cf996f878096a89a61b106776af9ebc461c98",
+      "final-package-build.log": "4124e913e9023c0bc4e962945e1230dcc3ed6a51c3f34c4fb15bfce451fc33cb",
+      "sdist-consumer-export.log": "0bafefdca9a6de57ba3dcc35f51f51c736410556b4ab71bbe25cbdd71ccc4316",
+      "sdist-consumer-interface.log": "5706e853ce93f00c0adeebc37e9ebd63088feb8b3821eea5c725e8bbf3130184",
+      "sdist-wheel-build.log": "b263e7aed9b155031743aa90c11be6ecceb9afaeccfab833edbb88c9784fed11"
+    },
+    "research_examples_identical": true,
+    "sdist_rebuilt_wheel_export_tests": 6,
+    "sdist_rebuilt_wheel_interface_tests": 7,
+    "version": "0.1.1"
+  },
+  "phase": "P1E",
+  "protected_document_sha256": {
+    "docs/CORRECTNESS_REMEDIATION.md": "becc51cdd5f420814bbf32ca1b9dd0cfc10f9fc2add32c462860fc44bc5c85a6",
+    "docs/INSTITUTIONAL_ENGINEERING_AUDIT.md": "25045c0c3820ca1ad17852be62ffece5b84a1261900301fb9f4dce681d0d7ef3"
+  },
+  "python": "3.12.14",
+  "sizes": {
+    "decoded_result_bytes": 360,
+    "frame_result_bytes": 112,
+    "framer_object_bytes": 256
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "9ee1e46c7e778b0239bd39570c04a700498dad840be043c3ff05fede9c5b0c8d",
+    "benchmarks/CMakeLists.txt": "562c5f46073805fd24e5189c747e48977d65d7a53d5405c6a19e7ee963e43147",
+    "benchmarks/itch_benchmark.cpp": "a6a16b5ee440b9628bdf2be784f28d14a709ff916a71bbea88b4da461a84d9b6",
+    "docs/P1E_MATRIX_COVERAGE.md": "8d715f0de1b5ba1ec1cce76aeafb67ca5330f5c0a6f290c7a29ddfe952869cc0",
+    "include/gig/itch/binary_file.hpp": "54b2bd4cbb372e57d9c292b3a266ad40aafb6277720e04225d161e23a4d42163",
+    "include/gig/itch/decoder.hpp": "9ec7cb0f210f8d7de1538cf5f375fd8ac6546bec38640457e4b255899e091768",
+    "include/gig/itch/wire.hpp": "4f7baba66b91ed293ea773fb49bf0341c5ff229d0e3542f3edd6499b072f9921",
+    "scripts/check_itch_benchmark.py": "44b509eeecac02ef8439d7fd1721de56feded60171aea45a98e9804e5da3b8d4",
+    "scripts/check_itch_reference.py": "ee59d9e8dbc9c12af2b5702995d082e2baa4dec51adc364dd0c5b396c025d567",
+    "src/itch/binary_file.cpp": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6",
+    "src/itch/decoder.cpp": "a6782e2796892c07e6aef45a11b56cb7ca27fa4672c78f8e1f0aa0b2563a0921",
+    "tests/itch_reference_driver.cpp": "f3ad2770eea404e317df64d855165c74e5fccd77ea8f7c52f25ab968cf4d4009",
+    "tests/test_binary_file.cpp": "09bcf7c2a3b84486d66fc113a47bf15a2a845a0a8d093590cc6e8c090b4c72e4",
+    "tests/test_itch_decoder.cpp": "f3a550d27e48002d4ff82774a2ad729747571550d2d88720e9e159ed399b5912"
+  },
+  "unverified": [
+    "hosted CI (GitHub API Forbidden)",
+    "ARM64",
+    "Windows/macOS",
+    "Clang Python",
+    "real-market validation",
+    "historical2019profile",
+    "gzip/container",
+    "semantic normalization and L3 integration"
+  ],
+  "utc_captured": "2026-10-22T23:17:27.755896+00:00"
+}

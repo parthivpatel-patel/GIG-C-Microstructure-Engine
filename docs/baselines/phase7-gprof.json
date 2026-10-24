@@ -1,0 +1,151 @@
+{
+  "code_sha": "5707417ba2ae705fff45f0cc53a280dd33de9473",
+  "dirty": false,
+  "profiles": {
+    "flow": {
+      "code_sha": "5707417ba2ae705fff45f0cc53a280dd33de9473",
+      "flags": "Release -O3 -DNDEBUG plus -pg compile/link; separate instrumentation build",
+      "executable_sha256": "feddff4bdd726f52cfe60d5af14fd4b876e1baee914b3ab331fb7269147cd1ee",
+      "gprof_version": "GNU gprof (GNU Binutils for Debian) 2.44",
+      "flat_profile": "Flat profile:\n\nEach sample counts as 0.01 seconds.\n  %   cumulative   self              self     total           \n time   seconds   seconds    calls  ns/call  ns/call  name    \n 66.67      0.02     0.02    80001   250.01   375.01  gig::analytics::calculate_flow(std::span<gig::analytics::FlowQuote const, 18446744073709551615ul>, std::span<gig::analytics::FlowTrade const, 18446744073709551615ul>, gig::analytics::FlowConfig, gig::types::Scalar<gig::types::EventTimeTag, long, -9223372036854775808l, false>, std::pmr::memory_resource*)\n 33.33      0.03     0.01  1120018     8.93     8.93  gig::analytics::calculate(gig::ReplaySnapshot const&, unsigned long)\n  0.00      0.03     0.00   320009     0.00     0.00  gig::validate(gig::InstrumentRules const&)\n  0.00      0.03     0.00   160000     0.00     0.00  gig::TrackedResource::do_allocate(unsigned long, unsigned long)\n  0.00      0.03     0.00   160000     0.00     0.00  gig::TrackedResource::do_deallocate(void*, unsigned long, unsigned long)\n  0.00      0.03     0.00    35008     0.00     0.00  frame_dummy\n  0.00      0.03     0.00    35001     0.00     0.00  gig::analytics::FlowMetrics gig::fixtures::take<gig::analytics::FlowMetrics>(gig::Result<gig::analytics::FlowMetrics>)\n  0.00      0.03     0.00       18     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > std::operator+<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&)\n  0.00      0.03     0.00       15     0.00     0.00  gig::(anonymous namespace)::snapshot(gig::Snapshot const&, gig::InstrumentRules const&, gig::Metadata const&)::{lambda(gig::Side, gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true>)#1}::operator()(gig::Side, gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true>) const\n  0.00      0.03     0.00       10     0.00     0.00  gig::validate(gig::MarketEvent const&, gig::InstrumentRules const&, gig::ValidationMode)\n  0.00      0.03     0.00       10     0.00     0.00  decltype(auto) std::__do_visit<std::__detail::__variant::__deduce_visit_result<gig::Error>, gig::validate(gig::MarketEvent const&, gig::InstrumentRules const&, gig::ValidationMode)::{lambda(auto:1 const&)#1}, std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent> const&>(gig::validate(gig::MarketEvent const&, gig::InstrumentRules const&, gig::ValidationMode)::{lambda(auto:1 const&)#1}&&, std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent> const&)\n  0.00      0.03     0.00        9     0.00     0.00  std::_Hashtable<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false>, std::pair<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> const, gig::(anonymous namespace)::Location>, std::pmr::polymorphic_allocator<std::pair<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> const, gig::(anonymous namespace)::Location> >, std::__detail::_Select1st, std::equal_to<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> >, gig::(anonymous namespace)::IdHash, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::~_Hashtable()\n  0.00      0.03     0.00        8     0.00     0.00  gig::DepthSnapshot::~DepthSnapshot()\n  0.00      0.03     0.00        6     0.00     0.00  std::_Rb_tree<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true>, std::pair<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true> const, gig::(anonymous namespace)::Level>, std::_Select1st<std::pair<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true> const, gig::(anonymous namespace)::Level> >, std::less<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true> >, std::pmr::polymorphic_allocator<std::pair<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true> const, gig::(anonymous namespace)::Level> > >::_M_erase(std::_Rb_tree_node<std::pair<gig::types::Scalar<gig::types::PriceTag, long, -9223372036854775808l, true> const, gig::(anonymous namespace)::Level> >*)\n  0.00      0.03     0.00        5     0.00     0.00  gig::ReplayEngine::reserve_record()\n  0.00      0.03     0.00        5     0.00     0.00  gig::ReplayEngine::apply(gig::MarketEvent const&)\n  0.00      0.03     0.00        5     0.00     0.00  gig::fixtures::book_event(std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent>, unsigned long, unsigned long, gig::BookSession)\n  0.00      0.03     0.00        5     0.00     0.00  gig::fixtures::replay_event(std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent>, unsigned long, unsigned long, unsigned long, gig::BookSession)\n  0.00      0.03     0.00        5     0.00     0.00  gig::fixtures::metadata()\n  0.00      0.03     0.00        5     0.00     0.00  gig::validate(gig::Metadata const&, gig::ValidationMode)\n  0.00      0.03     0.00        5     0.00     0.00  gig::OrderBook::apply(gig::MarketEvent const&, std::optional<gig::BookSession>)\n  0.00      0.03     0.00        5     0.00     0.00  gig::OrderBook::~OrderBook()\n  0.00      0.03     0.00        5     0.00     0.00  gig::ReplayEngine::order_check(gig::Metadata const&, unsigned int) const\n  0.00      0.03     0.00        5     0.00     0.00  gig::ReplayEngine::advance(gig::StreamCursor const&, gig::Metadata const&) const\n  0.00      0.03     0.00        5     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)\n  0.00      0.03     0.00        5     0.00     0.00  main::{lambda(std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent>, unsigned long, long)#1}::operator()(std::variant<gig::AddOrder, gig::CancelOrder, gig::ReplaceOrder, gig::Trade, gig::Quote, gig::BookReset, gig::Snapshot, gig::SessionEvent, gig::UnsupportedEvent>, unsigned long, long) const\n  0.00      0.03     0.00        4     0.00     0.00  gig::ReplaySnapshot gig::fixtures::take<gig::ReplaySnapshot>(gig::Result<gig::ReplaySnapshot>)\n  0.00      0.03     0.00        4     0.00     0.00  gig::validate(gig::AddOrder const&, gig::InstrumentRules const&)\n  0.00      0.03     0.00        4     0.00     0.00  gig::OrderBook::State::insert_staged(gig::AddOrder, unsigned long, gig::BookLimits const&, std::pmr::memory_resource*, std::optional<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> >)\n  0.00      0.03     0.00        4     0.00     0.00  gig::OrderBook::OrderBook(gig::OrderBook&&)\n  0.00      0.03     0.00        4     0.00     0.00  gig::ReplayEngine::depth(unsigned long) const\n  0.00      0.03     0.00        4     0.00     0.00  gig::OrderBook::depth(unsigned long) const\n  0.00      0.03     0.00        4     0.00     0.00  std::bad_variant_access::~bad_variant_access()\n  0.00      0.03     0.00        3     0.00     8.93  gig::analytics::quote_observation(gig::ReplaySnapshot const&, gig::types::Scalar<gig::types::EventTimeTag, long, -9223372036854775808l, false>, gig::Token<128ul>)\n  0.00      0.03     0.00        3     0.00     0.00  gig::exact::Fraction::str[abi:cxx11]() const\n  0.00      0.03     0.00        3     0.00     0.00  void std::vector<gig::analytics::FlowQuote, std::allocator<gig::analytics::FlowQuote> >::_M_realloc_append<gig::analytics::FlowQuote>(gig::analytics::FlowQuote&&)\n  0.00      0.03     0.00        3     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()\n  0.00      0.03     0.00        3     0.00     0.00  bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)\n  0.00      0.03     0.00        2     0.00     0.00  gig::ReplayEngine::~ReplayEngine()\n  0.00      0.03     0.00        2     0.00     0.00  gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> gig::fixtures::number<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false>, unsigned long>(unsigned long)\n  0.00      0.03     0.00        2     0.00     0.00  gig::analytics::FlowMetrics::~FlowMetrics()\n  0.00      0.03     0.00        1     0.00     0.00  gig::ReplayEngine::create(gig::InstrumentRules, gig::ReplayConfig, gig::BookLimits, std::pmr::memory_resource*)\n  0.00      0.03     0.00        1     0.00     0.00  gig::ReplayEngine::ReplayEngine(gig::OrderBook, gig::ReplayConfig, std::pmr::memory_resource*)\n  0.00      0.03     0.00        1     0.00     0.00  gig::benchmark_memory::emit_native_peak_rss()\n  0.00      0.03     0.00        1     0.00     0.00  gig::OrderBook::create(gig::InstrumentRules, gig::BookSession, gig::BookLimits, std::pmr::memory_resource*)\n\f\n\t\t\t",
+      "timing_is_baseline": false,
+      "checksum": 2400000
+    },
+    "simulation": {
+      "code_sha": "5707417ba2ae705fff45f0cc53a280dd33de9473",
+      "flags": "Release -O3 -DNDEBUG plus -pg compile/link; separate instrumentation build",
+      "executable_sha256": "34414f2e7e0c238cc4d837b8ce640a01586b9c64b05ce09bb971edbfa2d11d8e",
+      "gprof_version": "GNU gprof (GNU Binutils for Debian) 2.44",
+      "flat_profile": "Flat profile:\n\nEach sample counts as 0.01 seconds.\n  %   cumulative   self              self     total           \n time   seconds   seconds    calls  us/call  us/call  name    \n100.01      0.01     0.01     5120     1.95     1.95  gig::simulation::Simulator::State::State(gig::simulation::Simulator::State const&, std::pmr::memory_resource*)\n  0.00      0.01     0.00    49728     0.00     0.00  gig::TrackedResource::do_allocate(unsigned long, unsigned long)\n  0.00      0.01     0.00    49728     0.00     0.00  gig::TrackedResource::do_deallocate(void*, unsigned long, unsigned long)\n  0.00      0.01     0.00    39360     0.00     0.00  void gig::detail::CanonicalWriter::number<unsigned long>(unsigned long)\n  0.00      0.01     0.00    21504     0.00     0.00  void gig::detail::CanonicalWriter::number<unsigned int>(unsigned int)\n  0.00      0.01     0.00    18864     0.00     0.00  void gig::detail::CanonicalWriter::number<long>(long)\n  0.00      0.01     0.00     5120     0.00     1.95  gig::simulation::Simulator::command(gig::types::Scalar<gig::types::SimulationTimeTag, long, 0l, false>, std::optional<gig::simulation::SimOrder>, std::optional<gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false> >)\n  0.00      0.01     0.00     4608     0.00     0.00  gig::simulation::(anonymous namespace)::write_report(gig::detail::CanonicalWriter&, gig::simulation::ClientReport const&)\n  0.00      0.01     0.00     4608     0.00     0.00  gig::simulation::Simulator::State::report(gig::simulation::ReportKind, gig::simulation::RejectReason, gig::types::Scalar<gig::types::OrderTag, unsigned long, 1ul, false>, unsigned long, gig::simulation::SimConfig const&, std::optional<unsigned long>)\n  0.00      0.01     0.00     2560     0.00     1.95  gig::simulation::Simulator::advance_to(gig::types::Scalar<gig::types::SimulationTimeTag, long, 0l, false>)\n  0.00      0.01     0.00     2560     0.00     1.95  gig::simulation::Simulator::submit_at(gig::types::Scalar<gig::types::SimulationTimeTag, long, 0l, false>, gig::simulation::SimOrder const&)\n  0.00      0.01     0.00     2064     0.00     0.00  gig::simulation::Simulator::exchange_fills() const\n  0.00      0.01     0.00       48     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::pmr::polymorphic_allocator<char> >::_M_mutate(unsigned long, unsigned long, char const*, unsigned long)\n  0.00      0.01     0.00       32     0.00     0.00  gig::simulation::Simulator::~Simulator()\n  0.00      0.01     0.00       16     0.00     0.00  gig::simulation::Simulator::create(gig::simulation::SimConfig, std::pmr::memory_resource*)\n  0.00      0.01     0.00       16     0.00     0.00  gig::simulation::Simulator::Simulator(gig::simulation::Simulator&&)\n  0.00      0.01     0.00       16     0.00     0.00  gig::detail::canonical_rules(gig::detail::CanonicalWriter&, gig::InstrumentRules const&)\n  0.00      0.01     0.00       16     0.00     0.00  gig::validate(gig::InstrumentRules const&)\n  0.00      0.01     0.00       16     0.00     0.00  gig::simulation::Simulator::conservation() const\n  0.00      0.01     0.00       16     0.00     0.00  gig::simulation::Simulator::check_invariants() const\n  0.00      0.01     0.00       16     0.00     0.00  gig::simulation::Simulator::canonical[abi:cxx11]() const\n  0.00      0.01     0.00        1     0.00     0.00  gig::benchmark_memory::emit_native_peak_rss()\n  0.00      0.01     0.00        1     0.00     0.00  std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()\n\f\n\t\t\t",
+      "timing_is_baseline": false,
+      "checksum": 132096
+    }
+  },
+  "compile_commands": [
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/events/validation.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/events/validation.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/events/validation.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/events/validation.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/book/order_book.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/book/order_book.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/book/order_book.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/book/order_book.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/replay/replay.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/replay/replay.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/replay/replay.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/replay/replay.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/replay/canonical.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/replay/canonical.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/replay/canonical.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/replay/canonical.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/analytics/book_metrics.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/analytics/book_metrics.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/analytics/book_metrics.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/analytics/book_metrics.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/analytics/flow_metrics.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/analytics/flow_metrics.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/analytics/flow_metrics.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/analytics/flow_metrics.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/simulation/simulator.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/simulation/simulator.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/simulation/simulator.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/simulation/simulator.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_microstructure.dir/src/execution/execution.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/execution/execution.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/execution/execution.cpp",
+      "output": "CMakeFiles/gig_microstructure.dir/src/execution/execution.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_engine_demo.dir/src/main.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/main.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/src/main.cpp",
+      "output": "CMakeFiles/gig_engine_demo.dir/src/main.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/validator_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/validator_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_benchmark.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_batch.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/validator_batch.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/validator_batch.cpp",
+      "output": "benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_batch.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_book_benchmark.dir/book_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/book_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/book_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_book_benchmark.dir/book_benchmark.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_book_benchmark.dir/copy_probe.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/copy_probe.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/copy_probe.cpp",
+      "output": "benchmarks/CMakeFiles/gig_book_benchmark.dir/copy_probe.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_research_benchmark.dir/research_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/research_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/research_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_research_benchmark.dir/research_benchmark.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_flow_benchmark.dir/flow_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/flow_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/flow_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_flow_benchmark.dir/flow_benchmark.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_simulation_benchmark.dir/simulation_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/simulation_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/simulation_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_simulation_benchmark.dir/simulation_benchmark.cpp.o"
+    },
+    {
+      "directory": "/workspace/GIG-C-Microstructure-Engine/build/phase7-profile",
+      "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine -I/workspace/GIG-C-Microstructure-Engine/include -pg -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_execution_benchmark.dir/execution_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/execution_benchmark.cpp",
+      "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/execution_benchmark.cpp",
+      "output": "benchmarks/CMakeFiles/gig_execution_benchmark.dir/execution_benchmark.cpp.o"
+    }
+  ],
+  "environment": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "architecture": "x86_64",
+    "cmake": "cmake version 3.31.6\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+    "compiler": "c++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "execution": "sequential benchmarks; shared host scheduling/frequency uncontrolled",
+    "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "threads_per_engine": 1
+  },
+  "sample_interval_seconds": 0.01,
+  "limitations": [
+    "flow accumulated only 0.03s samples; simulator only 0.01s",
+    "optimized inlining/symbol attribution limits helper accounting",
+    "instrumented timings excluded from ordinary baseline",
+    "candidate costs observed, no optimization gain claimed"
+  ]
+}

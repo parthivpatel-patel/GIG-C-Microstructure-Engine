@@ -1,0 +1,159 @@
+{
+  "complete": true,
+  "environment": {
+    "affinity": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "architecture": "x86_64",
+    "build_ninja_sha256": "cdab414b661feb20dcaa5b58c16c9cc1417b44c9ffa6a3305fc4d4d7a282c340",
+    "build_type": "Release",
+    "cmake": "cmake version 3.31.6\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+    "compile_commands": [
+      {
+        "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_engine_demo.dir/src/main.cpp.o -c /workspace/GIG-C-Microstructure-Engine/src/main.cpp",
+        "directory": "/workspace/GIG-C-Microstructure-Engine/build/release",
+        "file": "/workspace/GIG-C-Microstructure-Engine/src/main.cpp",
+        "output": "CMakeFiles/gig_engine_demo.dir/src/main.cpp.o"
+      },
+      {
+        "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o CMakeFiles/gig_engine_tests.dir/tests/test_types.cpp.o -c /workspace/GIG-C-Microstructure-Engine/tests/test_types.cpp",
+        "directory": "/workspace/GIG-C-Microstructure-Engine/build/release",
+        "file": "/workspace/GIG-C-Microstructure-Engine/tests/test_types.cpp",
+        "output": "CMakeFiles/gig_engine_tests.dir/tests/test_types.cpp.o"
+      },
+      {
+        "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_benchmark.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/validator_benchmark.cpp",
+        "directory": "/workspace/GIG-C-Microstructure-Engine/build/release",
+        "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/validator_benchmark.cpp",
+        "output": "benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_benchmark.cpp.o"
+      },
+      {
+        "command": "/usr/bin/c++ -I/workspace/GIG-C-Microstructure-Engine/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -o benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_batch.cpp.o -c /workspace/GIG-C-Microstructure-Engine/benchmarks/validator_batch.cpp",
+        "directory": "/workspace/GIG-C-Microstructure-Engine/build/release",
+        "file": "/workspace/GIG-C-Microstructure-Engine/benchmarks/validator_batch.cpp",
+        "output": "benchmarks/CMakeFiles/gig_validator_benchmark.dir/validator_batch.cpp.o"
+      }
+    ],
+    "compiler": "c++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+    "compiler_path": "/usr/bin/c++",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "flags": {
+      "CMAKE_CXX_FLAGS": "",
+      "CMAKE_CXX_FLAGS-ADVANCED": "1",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g",
+      "CMAKE_CXX_FLAGS_DEBUG-ADVANCED": "1",
+      "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+      "CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED": "1",
+      "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELEASE-ADVANCED": "1",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED": "1",
+      "CMAKE_EXE_LINKER_FLAGS": "",
+      "CMAKE_EXE_LINKER_FLAGS-ADVANCED": "1",
+      "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_EXE_LINKER_FLAGS_DEBUG-ADVANCED": "1",
+      "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL-ADVANCED": "1",
+      "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELEASE-ADVANCED": "1",
+      "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED": "1",
+      "GIG_BUILD_BENCHMARKS": "ON",
+      "GIG_ENABLE_ASAN": "OFF",
+      "GIG_ENABLE_TSAN": "OFF",
+      "GIG_ENABLE_UBSAN": "OFF",
+      "GIG_WARNINGS_AS_ERRORS": "ON"
+    },
+    "frequency_control": "not controlled",
+    "generator": "Ninja",
+    "isolation": "shared cloud; not controlled",
+    "kernel": "6.18.55",
+    "logical_cpus": 5,
+    "os_release": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+    "timing_clock": "std::chrono::steady_clock"
+  },
+  "executable_sha256": "d81826d0c09a2ffb685c45dfe93100a998413918527491c23fbe2f55fbbfc6c1",
+  "git": {
+    "commit": "6bdf4758e44ff4aa88dd806cfab10682474b7b57",
+    "dirty": false
+  },
+  "limitations": [
+    "validator only; no LOB/replay/analytics",
+    "batch throughput; no per-event latency percentiles",
+    "no allocation or peak-memory measurements",
+    "workload fingerprint is noncryptographic; source/result hashes provide integrity"
+  ],
+  "provenance": {
+    "license": "repository synthetic fixture; no external market data",
+    "origin": "synthetic",
+    "parent_artifacts": [],
+    "source": "deterministic_fixture_generator",
+    "transformation": "measured_scaffold_validation"
+  },
+  "recorded_at_utc": "2026-10-21T13:27:19.714958+00:00",
+  "result": {
+    "batches": 64,
+    "events": 262144,
+    "oracle_valid_per_batch": 98304,
+    "repetitions": 7,
+    "samples": [
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 40863121
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 48696657
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 32338653
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 41698456
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 37248380
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 59957308
+      },
+      {
+        "checked_count": 6291456,
+        "elapsed_ns": 53546351
+      }
+    ],
+    "scope": "validated_scaffold_only",
+    "seed": 42,
+    "standard_library": "libstdc++-20250315",
+    "threads": 1,
+    "warmup": 2,
+    "workload_fnv1a64": "12481360265937072734",
+    "workload_version": 1
+  },
+  "result_sha256": "1035d3da34801ea4be18ddd5a364ba3c3fe1e38b5b97c148b856fc35b5944e44",
+  "schema_version": 1,
+  "source_sha256": {
+    "CMakeLists.txt": "d19a02285466c1009ddcb20a671a86ff8b5f5d7233a5dd1a876140bf0fb198ea",
+    "CMakePresets.json": "b01447b1b78a008ec11a56bec77af6f4cc26978c88fb274c93f66eb2b28d921c",
+    "benchmarks/CMakeLists.txt": "e88ef0d18b3d7c26a8f69886c989d0b9e1f8930db448ba1141cd35c263e8fe55",
+    "benchmarks/validator_batch.cpp": "d12a59136e2f902b0e948913cccccd28238fcc15ab6f4600a2f951fab782430d",
+    "benchmarks/validator_batch.hpp": "ebff09f2dca1fd12c2ebe8d113eea19ee7cee5a27664e6d56475eafe84e80049",
+    "benchmarks/validator_benchmark.cpp": "45ebbed232394702d244d0e3e66ceb6dfa7e336478071858707ea34b67d67060",
+    "include/gig/market_event.hpp": "e1ac40021af626984b4798366500d79b4cf14b23cdc5996d6062953c4387e724",
+    "scripts/run_benchmark.py": "b67a7c6c0983fb1ce185419fe9f856fde51ad033f799ef6435aaabb226db4119"
+  },
+  "summary": {
+    "max_batch_elapsed_ns": 59957308,
+    "median_batch_elapsed_ns": 41698456,
+    "median_events_per_second": 402346216.3682991,
+    "min_batch_elapsed_ns": 32338653
+  }
+}

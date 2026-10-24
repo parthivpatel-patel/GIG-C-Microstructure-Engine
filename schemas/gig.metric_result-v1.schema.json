@@ -1,0 +1,2628 @@
+{
+  "$id": "urn:gig.metric_result:1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "book"
+            },
+            "result": {
+              "additionalProperties": false,
+              "properties": {
+                "depth": {
+                  "maxLength": 20,
+                  "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "18446744073709551615",
+                  "x-integer-minimum": "0"
+                },
+                "metrics": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "ask_depth": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "best_ask": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "best_bid": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "bid_depth": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "depth_imbalance": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "microprice": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "midpoint": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "spread": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "top_imbalance": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "best_bid",
+                    "best_ask",
+                    "spread",
+                    "midpoint",
+                    "microprice",
+                    "top_imbalance",
+                    "bid_depth",
+                    "ask_depth",
+                    "depth_imbalance"
+                  ],
+                  "type": "object"
+                },
+                "source": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "journal_prefix": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    },
+                    "revision": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    },
+                    "rules": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "instrument": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "1"
+                        },
+                        "lot_size": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            },
+                            "numerator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object"
+                        },
+                        "maximum_price": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "-9223372036854775808"
+                        },
+                        "maximum_quantity": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        },
+                        "minimum_price": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "-9223372036854775808"
+                        },
+                        "tick_size": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            },
+                            "numerator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object"
+                        },
+                        "venue": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "1"
+                        }
+                      },
+                      "required": [
+                        "instrument",
+                        "venue",
+                        "minimum_price",
+                        "maximum_price",
+                        "maximum_quantity",
+                        "tick_size",
+                        "lot_size"
+                      ],
+                      "type": "object"
+                    },
+                    "run_id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[!-~]+$(?![\\s\\S])",
+                      "type": "string"
+                    },
+                    "session": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "epoch": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        },
+                        "session": {
+                          "maxLength": 128,
+                          "minLength": 1,
+                          "pattern": "^[!-~]+$(?![\\s\\S])",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "session",
+                        "epoch"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "run_id",
+                    "journal_prefix",
+                    "revision",
+                    "rules",
+                    "session"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "source",
+                "depth",
+                "metrics"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "kind",
+            "result"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "flow"
+            },
+            "result": {
+              "additionalProperties": false,
+              "properties": {
+                "as_of": {
+                  "maxLength": 20,
+                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                  "type": "string",
+                  "x-integer-maximum": "9223372036854775807",
+                  "x-integer-minimum": "-9223372036854775808"
+                },
+                "config": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "complete_top_updates": {
+                      "type": "boolean"
+                    },
+                    "continuity_complete": {
+                      "type": "boolean"
+                    },
+                    "horizon": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "max_quote_age": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "quote_lag": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "sampling_interval": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "utc_clock": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[!-~]+$(?![\\s\\S])",
+                      "type": "string"
+                    },
+                    "window": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "utc_clock",
+                    "window",
+                    "quote_lag",
+                    "horizon",
+                    "max_quote_age",
+                    "sampling_interval",
+                    "continuity_complete",
+                    "complete_top_updates"
+                  ],
+                  "type": "object"
+                },
+                "parents": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "journal_prefix": {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "0"
+                      },
+                      "revision": {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "0"
+                      },
+                      "rules": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "instrument": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "1"
+                          },
+                          "lot_size": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "denominator": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              },
+                              "numerator": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              }
+                            },
+                            "required": [
+                              "numerator",
+                              "denominator"
+                            ],
+                            "type": "object"
+                          },
+                          "maximum_price": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "-9223372036854775808"
+                          },
+                          "maximum_quantity": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "minimum_price": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "-9223372036854775808"
+                          },
+                          "tick_size": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "denominator": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              },
+                              "numerator": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              }
+                            },
+                            "required": [
+                              "numerator",
+                              "denominator"
+                            ],
+                            "type": "object"
+                          },
+                          "venue": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "1"
+                          }
+                        },
+                        "required": [
+                          "instrument",
+                          "venue",
+                          "minimum_price",
+                          "maximum_price",
+                          "maximum_quantity",
+                          "tick_size",
+                          "lot_size"
+                        ],
+                        "type": "object"
+                      },
+                      "run_id": {
+                        "maxLength": 128,
+                        "minLength": 1,
+                        "pattern": "^[!-~]+$(?![\\s\\S])",
+                        "type": "string"
+                      },
+                      "session": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "epoch": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "session": {
+                            "maxLength": 128,
+                            "minLength": 1,
+                            "pattern": "^[!-~]+$(?![\\s\\S])",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "session",
+                          "epoch"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "run_id",
+                      "journal_prefix",
+                      "revision",
+                      "rules",
+                      "session"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 100000,
+                  "type": "array",
+                  "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+                },
+                "summary": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "ofi": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "quote_intensity": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "realized_variance": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "realized_volatility": {
+                      "anyOf": [
+                        {
+                          "pattern": "^-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?$(?![\\s\\S])",
+                          "type": "string",
+                          "x-approximate": "finite long-double sqrt, not an exact rational/cross-platform last-bit claim"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "trade_intensity": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "window_return": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ofi",
+                    "trade_intensity",
+                    "quote_intensity",
+                    "window_return",
+                    "realized_variance",
+                    "realized_volatility"
+                  ],
+                  "type": "object"
+                },
+                "trades": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "effective_spread": {
+                        "oneOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "const": "0"
+                              },
+                              "value": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "denominator": {
+                                    "maxLength": 39,
+                                    "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "1"
+                                  },
+                                  "numerator": {
+                                    "maxLength": 40,
+                                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                  }
+                                },
+                                "required": [
+                                  "numerator",
+                                  "denominator"
+                                ],
+                                "type": "object",
+                                "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "enum": [
+                                  "1",
+                                  "2",
+                                  "3",
+                                  "4",
+                                  "5",
+                                  "6",
+                                  "7",
+                                  "8",
+                                  "9",
+                                  "10"
+                                ]
+                              },
+                              "value": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "price_impact": {
+                        "oneOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "const": "0"
+                              },
+                              "value": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "denominator": {
+                                    "maxLength": 39,
+                                    "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "1"
+                                  },
+                                  "numerator": {
+                                    "maxLength": 40,
+                                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                  }
+                                },
+                                "required": [
+                                  "numerator",
+                                  "denominator"
+                                ],
+                                "type": "object",
+                                "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "enum": [
+                                  "1",
+                                  "2",
+                                  "3",
+                                  "4",
+                                  "5",
+                                  "6",
+                                  "7",
+                                  "8",
+                                  "9",
+                                  "10"
+                                ]
+                              },
+                              "value": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "realized_spread": {
+                        "oneOf": [
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "const": "0"
+                              },
+                              "value": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "denominator": {
+                                    "maxLength": 39,
+                                    "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "1"
+                                  },
+                                  "numerator": {
+                                    "maxLength": 40,
+                                    "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "170141183460469231731687303715884105727",
+                                    "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                  }
+                                },
+                                "required": [
+                                  "numerator",
+                                  "denominator"
+                                ],
+                                "type": "object",
+                                "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "additionalProperties": false,
+                            "properties": {
+                              "unavailable": {
+                                "enum": [
+                                  "1",
+                                  "2",
+                                  "3",
+                                  "4",
+                                  "5",
+                                  "6",
+                                  "7",
+                                  "8",
+                                  "9",
+                                  "10"
+                                ]
+                              },
+                              "value": {
+                                "type": "null"
+                              }
+                            },
+                            "required": [
+                              "value",
+                              "unavailable"
+                            ],
+                            "type": "object"
+                          }
+                        ]
+                      },
+                      "sign": {
+                        "enum": [
+                          "0",
+                          "1",
+                          "2"
+                        ]
+                      },
+                      "source": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "journal_prefix": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "revision": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "rules": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "instrument": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "1"
+                              },
+                              "lot_size": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "denominator": {
+                                    "maxLength": 20,
+                                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "18446744073709551615",
+                                    "x-integer-minimum": "0"
+                                  },
+                                  "numerator": {
+                                    "maxLength": 20,
+                                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "18446744073709551615",
+                                    "x-integer-minimum": "0"
+                                  }
+                                },
+                                "required": [
+                                  "numerator",
+                                  "denominator"
+                                ],
+                                "type": "object"
+                              },
+                              "maximum_price": {
+                                "maxLength": 20,
+                                "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "9223372036854775807",
+                                "x-integer-minimum": "-9223372036854775808"
+                              },
+                              "maximum_quantity": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              },
+                              "minimum_price": {
+                                "maxLength": 20,
+                                "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "9223372036854775807",
+                                "x-integer-minimum": "-9223372036854775808"
+                              },
+                              "tick_size": {
+                                "additionalProperties": false,
+                                "properties": {
+                                  "denominator": {
+                                    "maxLength": 20,
+                                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "18446744073709551615",
+                                    "x-integer-minimum": "0"
+                                  },
+                                  "numerator": {
+                                    "maxLength": 20,
+                                    "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                    "type": "string",
+                                    "x-integer-maximum": "18446744073709551615",
+                                    "x-integer-minimum": "0"
+                                  }
+                                },
+                                "required": [
+                                  "numerator",
+                                  "denominator"
+                                ],
+                                "type": "object"
+                              },
+                              "venue": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "1"
+                              }
+                            },
+                            "required": [
+                              "instrument",
+                              "venue",
+                              "minimum_price",
+                              "maximum_price",
+                              "maximum_quantity",
+                              "tick_size",
+                              "lot_size"
+                            ],
+                            "type": "object"
+                          },
+                          "run_id": {
+                            "maxLength": 128,
+                            "minLength": 1,
+                            "pattern": "^[!-~]+$(?![\\s\\S])",
+                            "type": "string"
+                          },
+                          "session": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "epoch": {
+                                "maxLength": 20,
+                                "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "18446744073709551615",
+                                "x-integer-minimum": "0"
+                              },
+                              "session": {
+                                "maxLength": 128,
+                                "minLength": 1,
+                                "pattern": "^[!-~]+$(?![\\s\\S])",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "session",
+                              "epoch"
+                            ],
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "run_id",
+                          "journal_prefix",
+                          "revision",
+                          "rules",
+                          "session"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "source",
+                      "sign",
+                      "effective_spread",
+                      "realized_spread",
+                      "price_impact"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 100000,
+                  "type": "array",
+                  "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+                }
+              },
+              "required": [
+                "config",
+                "as_of",
+                "summary",
+                "trades",
+                "parents"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "kind",
+            "result"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "cost"
+            },
+            "result": {
+              "additionalProperties": false,
+              "properties": {
+                "config": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "arrival": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "available_at": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "0"
+                        },
+                        "midpoint": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 39,
+                              "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "170141183460469231731687303715884105727",
+                              "x-integer-minimum": "1"
+                            },
+                            "numerator": {
+                              "maxLength": 40,
+                              "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "170141183460469231731687303715884105727",
+                              "x-integer-minimum": "-170141183460469231731687303715884105727"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object",
+                          "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                        },
+                        "source_artifact": {
+                          "maxLength": 128,
+                          "minLength": 1,
+                          "pattern": "^[!-~]+$(?![\\s\\S])",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "midpoint",
+                        "available_at",
+                        "source_artifact"
+                      ],
+                      "type": "object"
+                    },
+                    "as_of": {
+                      "maxLength": 20,
+                      "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "9223372036854775807",
+                      "x-integer-minimum": "0"
+                    },
+                    "rules": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "instrument": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "1"
+                        },
+                        "lot_size": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            },
+                            "numerator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object"
+                        },
+                        "maximum_price": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "-9223372036854775808"
+                        },
+                        "maximum_quantity": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "0"
+                        },
+                        "minimum_price": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "-9223372036854775808"
+                        },
+                        "tick_size": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            },
+                            "numerator": {
+                              "maxLength": 20,
+                              "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "18446744073709551615",
+                              "x-integer-minimum": "0"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object"
+                        },
+                        "venue": {
+                          "maxLength": 20,
+                          "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "18446744073709551615",
+                          "x-integer-minimum": "1"
+                        }
+                      },
+                      "required": [
+                        "instrument",
+                        "venue",
+                        "minimum_price",
+                        "maximum_price",
+                        "maximum_quantity",
+                        "tick_size",
+                        "lot_size"
+                      ],
+                      "type": "object"
+                    },
+                    "run_id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[!-~]+$(?![\\s\\S])",
+                      "type": "string"
+                    },
+                    "side": {
+                      "enum": [
+                        "0",
+                        "1"
+                      ]
+                    },
+                    "simulation_run_id": {
+                      "maxLength": 128,
+                      "minLength": 1,
+                      "pattern": "^[!-~]+$(?![\\s\\S])",
+                      "type": "string"
+                    },
+                    "target": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    },
+                    "terminal": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "available_at": {
+                          "maxLength": 20,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "9223372036854775807",
+                          "x-integer-minimum": "0"
+                        },
+                        "midpoint": {
+                          "additionalProperties": false,
+                          "properties": {
+                            "denominator": {
+                              "maxLength": 39,
+                              "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "170141183460469231731687303715884105727",
+                              "x-integer-minimum": "1"
+                            },
+                            "numerator": {
+                              "maxLength": 40,
+                              "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                              "type": "string",
+                              "x-integer-maximum": "170141183460469231731687303715884105727",
+                              "x-integer-minimum": "-170141183460469231731687303715884105727"
+                            }
+                          },
+                          "required": [
+                            "numerator",
+                            "denominator"
+                          ],
+                          "type": "object",
+                          "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                        },
+                        "source_artifact": {
+                          "maxLength": 128,
+                          "minLength": 1,
+                          "pattern": "^[!-~]+$(?![\\s\\S])",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "midpoint",
+                        "available_at",
+                        "source_artifact"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "run_id",
+                    "simulation_run_id",
+                    "rules",
+                    "side",
+                    "target",
+                    "arrival",
+                    "terminal",
+                    "as_of"
+                  ],
+                  "type": "object"
+                },
+                "parents": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "child": {
+                        "maxLength": 20,
+                        "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "18446744073709551615",
+                        "x-integer-minimum": "1"
+                      },
+                      "decision_benchmark": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "available_at": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "0"
+                          },
+                          "midpoint": {
+                            "additionalProperties": false,
+                            "properties": {
+                              "denominator": {
+                                "maxLength": 39,
+                                "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "170141183460469231731687303715884105727",
+                                "x-integer-minimum": "1"
+                              },
+                              "numerator": {
+                                "maxLength": 40,
+                                "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                "type": "string",
+                                "x-integer-maximum": "170141183460469231731687303715884105727",
+                                "x-integer-minimum": "-170141183460469231731687303715884105727"
+                              }
+                            },
+                            "required": [
+                              "numerator",
+                              "denominator"
+                            ],
+                            "type": "object",
+                            "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                          },
+                          "source_artifact": {
+                            "maxLength": 128,
+                            "minLength": 1,
+                            "pattern": "^[!-~]+$(?![\\s\\S])",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "midpoint",
+                          "available_at",
+                          "source_artifact"
+                        ],
+                        "type": "object"
+                      },
+                      "decision_time": {
+                        "maxLength": 20,
+                        "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                        "type": "string",
+                        "x-integer-maximum": "9223372036854775807",
+                        "x-integer-minimum": "0"
+                      },
+                      "fee_ticks_per_lot": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "denominator": {
+                            "maxLength": 39,
+                            "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "170141183460469231731687303715884105727",
+                            "x-integer-minimum": "1"
+                          },
+                          "numerator": {
+                            "maxLength": 40,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "170141183460469231731687303715884105727",
+                            "x-integer-minimum": "-170141183460469231731687303715884105727"
+                          }
+                        },
+                        "required": [
+                          "numerator",
+                          "denominator"
+                        ],
+                        "type": "object",
+                        "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                      },
+                      "fill": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "maker": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "1"
+                          },
+                          "maker_command": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "matched_at": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "0"
+                          },
+                          "price": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "-9223372036854775808"
+                          },
+                          "quantity": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "reported_at": {
+                            "maxLength": 20,
+                            "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "9223372036854775807",
+                            "x-integer-minimum": "0"
+                          },
+                          "run_id": {
+                            "maxLength": 128,
+                            "minLength": 1,
+                            "pattern": "^[!-~]+$(?![\\s\\S])",
+                            "type": "string"
+                          },
+                          "seed": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "taker": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "1"
+                          },
+                          "taker_command": {
+                            "maxLength": 20,
+                            "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                            "type": "string",
+                            "x-integer-maximum": "18446744073709551615",
+                            "x-integer-minimum": "0"
+                          },
+                          "taker_side": {
+                            "enum": [
+                              "0",
+                              "1"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "run_id",
+                          "seed",
+                          "maker",
+                          "taker",
+                          "taker_side",
+                          "price",
+                          "quantity",
+                          "matched_at",
+                          "reported_at",
+                          "maker_command",
+                          "taker_command"
+                        ],
+                        "type": "object"
+                      }
+                    },
+                    "required": [
+                      "fill",
+                      "child",
+                      "decision_time",
+                      "decision_benchmark",
+                      "fee_ticks_per_lot"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 100000,
+                  "type": "array",
+                  "x-operational-input-limit": "4096 where used as bounded operational input; output limits follow native configuration"
+                },
+                "summary": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "currency_shortfall": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "delay_cost": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "execution_vwap": {
+                      "oneOf": [
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "const": "0"
+                            },
+                            "value": {
+                              "additionalProperties": false,
+                              "properties": {
+                                "denominator": {
+                                  "maxLength": 39,
+                                  "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "1"
+                                },
+                                "numerator": {
+                                  "maxLength": 40,
+                                  "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                                  "type": "string",
+                                  "x-integer-maximum": "170141183460469231731687303715884105727",
+                                  "x-integer-minimum": "-170141183460469231731687303715884105727"
+                                }
+                              },
+                              "required": [
+                                "numerator",
+                                "denominator"
+                              ],
+                              "type": "object",
+                              "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "additionalProperties": false,
+                          "properties": {
+                            "unavailable": {
+                              "enum": [
+                                "1",
+                                "2",
+                                "3",
+                                "4",
+                                "5",
+                                "6",
+                                "7",
+                                "8",
+                                "9",
+                                "10"
+                              ]
+                            },
+                            "value": {
+                              "type": "null"
+                            }
+                          },
+                          "required": [
+                            "value",
+                            "unavailable"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "fees": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "filled_lots": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    },
+                    "gross_notional": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "implementation_shortfall": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "opportunity_cost": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "slippage": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "spread_cost": {
+                      "additionalProperties": false,
+                      "properties": {
+                        "denominator": {
+                          "maxLength": 39,
+                          "pattern": "^[1-9][0-9]*$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "1"
+                        },
+                        "numerator": {
+                          "maxLength": 40,
+                          "pattern": "^(0|-?[1-9][0-9]*)$(?![\\s\\S])",
+                          "type": "string",
+                          "x-integer-maximum": "170141183460469231731687303715884105727",
+                          "x-integer-minimum": "-170141183460469231731687303715884105727"
+                        }
+                      },
+                      "required": [
+                        "numerator",
+                        "denominator"
+                      ],
+                      "type": "object",
+                      "x-exact-capacity": "symmetric signed 127-bit magnitude, reduced by native adapter"
+                    },
+                    "unfilled_lots": {
+                      "maxLength": 20,
+                      "pattern": "^(0|[1-9][0-9]*)$(?![\\s\\S])",
+                      "type": "string",
+                      "x-integer-maximum": "18446744073709551615",
+                      "x-integer-minimum": "0"
+                    }
+                  },
+                  "required": [
+                    "filled_lots",
+                    "unfilled_lots",
+                    "execution_vwap",
+                    "gross_notional",
+                    "delay_cost",
+                    "spread_cost",
+                    "fees",
+                    "slippage",
+                    "opportunity_cost",
+                    "implementation_shortfall",
+                    "currency_shortfall"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "config",
+                "summary",
+                "parents"
+              ],
+              "type": "object"
+            }
+          },
+          "required": [
+            "kind",
+            "result"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "schema": {
+      "const": "gig.metric_result"
+    },
+    "version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "schema",
+    "version",
+    "data"
+  ],
+  "type": "object"
+}

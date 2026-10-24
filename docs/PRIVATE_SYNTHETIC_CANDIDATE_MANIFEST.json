@@ -1,0 +1,127 @@
+{
+  "schema": "gig.private_synthetic_candidate.v1",
+  "version": "0.1.1",
+  "assessment_date": "2026-10-23",
+  "scope": "bounded private synthetic research evaluation only",
+  "formal_candidate_closure": "BLOCKED",
+  "delivery_branch": "feat/bootstrap-cpp20-engine",
+  "delivery_identity_note": "Final documentation delivery SHA must be obtained from verified feature remote; a manifest cannot embed its own Git commit SHA. Qualification source and later CI-only commit are explicit below.",
+  "qualified_source": {
+    "source_commit": "5349789edfc198f5bf74438cf412e403cef14fa9",
+    "source_archive_sha256": "5045243c2cb32b4b490f23f5d207a1d9a0da6e71907637805befab4a6974ed35",
+    "source_archive_bytes": 9799680
+  },
+  "protected_implementation": {
+    "baseline_commit": "9171f4ecdaf638e2a1ff3b5bf1645be33f277b67",
+    "file_count": 63,
+    "manifest_sha256": "7a99d9372e9155ebd96cc9a656eae59d33e5cd16729eed01e9c78c6f39d71f8b",
+    "status": "byte-identical include/src/python/schemas/CMakeLists/cmake"
+  },
+  "ci_dependency_commit": "108b423d1576ebae28d7a81598ee2ef1dbfe3a4a",
+  "ci_test_count_commit": "9f9f488048df3a5f81aac0671e171cc4f3a5c4b3",
+  "original_private_wheel": {
+    "filename": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+    "sha256": "94213383b0463212f0adc8c26f0e6966351a1150fc1d802413fb9d88123cc8cb"
+  },
+  "new_source_artifacts": {
+    "/work/final-packages/gig_microstructure-0.1.1.tar.gz": {
+      "bytes": 1088014,
+      "sha256": "e55ff46eb6da988b36650944fed4026809b29bf572558e85ab2405145d9a0e0c"
+    },
+    "/work/final-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+      "bytes": 452211,
+      "sha256": "29600a4a7bb32b20a71d956ff35d2cc414aad1f8e724b2f4c38f594111be2a60"
+    }
+  },
+  "locked_dependency_wheel_sha256": {
+    "rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "addeda51556dac7c1a2f14cda62db8b621cd12afba3091d03a96c72932387eab",
+    "pathspec-1.1.1-py3-none-any.whl": "a00ce642f577bf7f473932318056212bc4f8bfdf53128c78bbd5af0b9b20b189",
+    "pyproject_hooks-1.3.3-py3-none-any.whl": "5fc53fdac9f7bd63fbcdc868fb5f90b4784d78a53a3d3388cd738b807441a20b",
+    "typing_extensions-4.16.0-py3-none-any.whl": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "pybind11-2.13.6-py3-none-any.whl": "237c41e29157b962835d356b370ededd57594a26d5894a795960f0047cb5caf5",
+    "packaging-26.3-py3-none-any.whl": "d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c",
+    "build-1.2.2.post1-py3-none-any.whl": "1d61c0887fa860c01971625baae8bdd338e517b836a2f70dd1f7aa3a6b2fc5b5",
+    "referencing-0.37.0-py3-none-any.whl": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231",
+    "attrs-26.1.0-py3-none-any.whl": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309",
+    "scikit_build_core-0.11.6-py3-none-any.whl": "ce6d8fe64e6b4c759ea0fb95d2f8a68f60d2df31c2989838633b8ec930736360",
+    "jsonschema_specifications-2025.9.1-py3-none-any.whl": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe",
+    "jsonschema-4.23.0-py3-none-any.whl": "fbadb6f8b144a8f8cf9f0b89ba94501d143e50411a1278633f56a7acf7fd5566"
+  },
+  "qualified_environments": [
+    {
+      "scope": "original P1J qualification preserved, not rerun",
+      "os": "Debian13 Linux x86_64",
+      "python": "CPython3.12.14",
+      "compilers": [
+        "GCC14.2",
+        "Clang19.1.7 with GCC standard library"
+      ],
+      "native_zlib": "1.3.1",
+      "matrix_outcomes": 1108
+    },
+    {
+      "scope": "new independently provisioned rootfs/toolchain; shared host kernel/daemon",
+      "os": "Ubuntu24.04.5 Linux x86_64",
+      "python": "CPython3.12.3-1ubuntu0.17",
+      "compilers": [
+        "GCC13.3.0-6ubuntu2~24.04.1",
+        "Clang18.1.3-1ubuntu1"
+      ],
+      "libstdcxx": "14.2.0-4ubuntu2~24.04.1",
+      "native_zlib": "private source-built1.3.1",
+      "matrix_outcomes": 735,
+      "installed_unit_outcomes": 28,
+      "gcc_python_release": "125/125",
+      "other_fresh_rows": "122/122"
+    }
+  ],
+  "canonical_sha256": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "python_example_sha256": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+  "memory_profile": {
+    "shape": "two128-live-order,one-level/book,1024-journal/book,original+restart coexistence",
+    "pmr_budget_bytes": 134217728,
+    "peak_pmr_bytes": 77281358,
+    "gcc_peak_process_rss_bytes": 78487552,
+    "clang_peak_process_rss_bytes": 78630912,
+    "journal_entry_bytes": 15944,
+    "qualified_container_limit_bytes": 3221225472,
+    "container_peak_includes_build_cache_pressure": true,
+    "scope": "not all maxima, whole-process PMR or full-day guarantee"
+  },
+  "blocked_gates": {
+    "RC13": "BLOCKED: new rootfs/toolchain qualified, shared kernel/daemon; independent machine unavailable",
+    "RC16": "BLOCKED: authoritative applicability expanded, unresolved platform/backport/Expat/provider mapping",
+    "RC17": "BLOCKED: proxy CONNECT403 before GitHub API origin; no run ID/conclusion"
+  },
+  "other_open_gates": {
+    "RC18": "NOT RUN other platforms/ABIs",
+    "RC21": "BLOCKED distribution authorization",
+    "RC23": "NOT RUN observed sample",
+    "RC24": "BLOCKED observed initial L3",
+    "RC25": "BLOCKED independent observed reference",
+    "RC27": "OUT OF SCOPE production operations"
+  },
+  "evaluation_instructions": "docs/RC_CANDIDATE_EVALUATION.md",
+  "security_review": "docs/RC_SECURITY_APPLICABILITY.md",
+  "owner_actions": "docs/RC_OWNER_ACTIONS.md",
+  "evidence_file": "docs/RC_CLOSURE_EVIDENCE.json",
+  "evidence_sha256": "af3ef338d681174d9104bdfbac20e1aa44b6f1f642ad35faf32312e852fd8861",
+  "private_artifacts": "build/rc-closure/artifacts, build/rc-closure/input/final-source.tar; not committed or distributed",
+  "exclusions": [
+    "real-market validation",
+    "production trading",
+    "stable native ABI",
+    "bit-identical wheel builds",
+    "other OS/ARM64/other Python ABI",
+    "independent hardware attestation",
+    "all-CVE clearance",
+    "signed publisher attestation",
+    "main merge/tag/release/distribution permission"
+  ]
+}
