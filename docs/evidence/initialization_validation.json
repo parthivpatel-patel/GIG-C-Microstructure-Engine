@@ -1,0 +1,22 @@
+{
+  "schema": "gig.initialization_validation.v1",
+  "baseline": "c04ea88840c4ee9b34e4c0c6d08a51402d789f39",
+  "collected_utc": "2026-10-24T22:07:45.629110+00:00",
+  "scope": "bounded manifest/policy validation; no observed evidence verifier",
+  "unit_methods_passed": 11,
+  "mutation_subcases": 13,
+  "failures": 0,
+  "skipped": 0,
+  "disabled": 0,
+  "existing_release_l3_oracle": "1/1 CTest pass, original canonical preserved;11 new controls included",
+  "observed_eligible": false,
+  "source_sha256": {
+    "scripts/check_initialization_manifest.py": "9f9b332c9dc781dc122f113615cc5d1e11fa459df77f5ebae4552e3f63540245",
+    "tests/test_market_initialization.py": "d619ef76785610da38995ee14aa4f928450782df64ad64d0664c84faade8e21e",
+    "tests/fixtures/market_seed_manifest.json": "b536f1213629a76304b81272bec33e22f0c8b88b6ffbc56b8758d07f41428cdb"
+  },
+  "raw_receipts": {
+    "build/observed-program/phase1/initialization-tests.log": "53ec6bfd32b426a23950e2fbbff5aba6e95df6d3ed7324d3edb40dd8151e63f8",
+    "build/observed-program/phase1/phase2-targeted.xml": "9117cf1e2276747714021fa818c35aba7610ff518c59ce653b8f2694b153213a"
+  }
+}

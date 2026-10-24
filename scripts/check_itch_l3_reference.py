@@ -496,6 +496,7 @@ def main():
         import sys
         subprocess.run([sys.executable,str(Path(__file__).with_name('check_adapter_differential.py')),args.driver],check=True)
         subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_adapter_differential.py')],check=True)
+        subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_market_initialization.py')],check=True)
 
 
 if __name__=='__main__':main()

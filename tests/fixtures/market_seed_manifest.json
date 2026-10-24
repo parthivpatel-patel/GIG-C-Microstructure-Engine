@@ -1,0 +1,81 @@
+{
+  "schema": "gig.market_initialization.v1",
+  "mode": "seeded",
+  "origin": "synthetic",
+  "provider": "authored-only",
+  "dataset": "seed-contract-v1",
+  "instruments": [
+    {
+      "locate": 1,
+      "symbol": "TEST    ",
+      "instrument": 1
+    },
+    {
+      "locate": 2,
+      "symbol": "TWO     ",
+      "instrument": 2
+    }
+  ],
+  "session_date": "2000-01-01",
+  "source_sha256": "916ed89c7c4c67675123e98b93eeb16a0e97f197b68c2bd13592c92f6c004078",
+  "capture_start": 4096,
+  "capture_end": 8192,
+  "initial_state_source": "authored-flat-oracle-v1",
+  "snapshot_sha256": "977b85b1a1ca59d5abb9e3ae35024d3f59c1c0a2cce3f56d1b70464fbf548fdd",
+  "complete": true,
+  "verification_method": "authored_fixture",
+  "event_boundary": {
+    "frame_offset": 4096,
+    "payload_offset": 4098,
+    "ordinal": 100
+  },
+  "sequence_info": null,
+  "missing_data": false,
+  "license": "locally-authored-test",
+  "redistribution": "no-observed-data",
+  "validation_status": "declared",
+  "snapshot": {
+    "orders": [
+      {
+        "reference": 11,
+        "locate": 1,
+        "side": "B",
+        "price4": 100,
+        "remaining": 10,
+        "priority": 4,
+        "arrival": 10
+      },
+      {
+        "reference": 12,
+        "locate": 1,
+        "side": "B",
+        "price4": 100,
+        "remaining": 7,
+        "priority": 8,
+        "arrival": 12
+      },
+      {
+        "reference": 21,
+        "locate": 2,
+        "side": "S",
+        "price4": 201,
+        "remaining": 6,
+        "priority": 2,
+        "arrival": 11
+      }
+    ],
+    "retired_references": [
+      9
+    ],
+    "matches": [
+      {
+        "number": 70,
+        "locate": 1,
+        "kind": "execution",
+        "broken": false
+      }
+    ]
+  },
+  "session_stage": 4,
+  "last_timestamp": 1
+}
