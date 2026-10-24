@@ -1,6 +1,6 @@
 # Phase 9 ARM64 portability — October 24, 2026
 
-**Cross-compilation succeeded; QEMU user-mode qualification in progress. Native
+**Cross-compilation and all154 distinct Release C++ tests under QEMU passed. Native
 ARM64 and ARM Python extension qualification remain NOT RUN.** This is not an
 independent machine: x86_64 Ubuntu24.04 container shares the original host kernel.
 
@@ -35,14 +35,16 @@ C++ compiler guarantee. No engine atomic/concurrent algorithm is introduced.
 Display-level long-double differences must not be confused with exact rational
 contracts; cross-architecture binary files are not required to be identical.
 
-The full154-case CTest run uses the same assertions and fixtures. Its initial
-qualification-only180s timeout was too short for itch.l3_reference under emulation;
-that timeout is preserved, not counted passed. Other reference tests demonstrate
-substantial emulation cost (auction reference ~145s). Only the timed-out oracle
-is rerun with900s allowance; original project assertions/data are unchanged and
-project CMake sets no such timeout. Final actual counts/hashes will be bound in
-PHASE12_RELEASE_CANDIDATE_REPORT.md and the structured evidence. No completed
-ARM matrix or native performance is claimed while execution is pending.
+The initial full154-case CTest run passed153 and timed out only itch.l3_reference
+at the qualification-only180s allowance. That failure is retained. A targeted retry
+with900s allowance passed in578.83s, executing all10032 sessions/65186 candidates
+with unchanged assertions. Across these two invocations,154 distinct tests passed,
+zero remaining failures/skips, and all8 canonical hashes equal the x86 baseline.
+This is not an initial single-run154/154 result or native performance evidence.
+Other reference tests also have substantial QEMU cost. No engine/test assertion,
+data or canonical contract was changed to pass. ARM Debug, sanitizers and Python
+bindings remain NOT RUN. Final counts and ELF/wrapper/JUnit hashes are recorded in
+build/extended/evidence/arm-results.json and the final structured candidate evidence.
 
 Reproduce using recorded cross compiler, CMAKE_SYSTEM_NAME=Linux,
 CMAKE_SYSTEM_PROCESSOR=aarch64, CMAKE_CXX_COMPILER=aarch64-linux-gnu-g++, explicit

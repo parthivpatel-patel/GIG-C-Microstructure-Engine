@@ -46,3 +46,16 @@ RC16 BLOCKED. PHASE10_SECURITY_APPLICABILITY.md and build/extended/evidence/secu
 retain sources/hashes. ARM jobs still running; preserve their logs/processes and
 retry only the original timed-out L3 oracle, not successful cases. Next phase11
 controlled measurements/reliability evidence, then phase12 complete gate assessment.
+
+## Phase9 qualification closure and phase11 audit checkpoint
+
+Initial AArch64 QEMU Release full suite153 pass/1 L3 timeout180s; unchanged targeted
+900s retry passed578.83s.154 distinct outcomes now pass; all8 canonical identities
+match x86. Native ARM, target Python and target sanitizers NOT RUN. Initial failure
+retained. arm-results.json, both JUnit files and ELF/wrapper hashes captured.
+Phase11 source review found no new production defect;12 native controlled workload
+runs plus6 journal6144/reset17 runs passed independent formulas and equivalentPhase5
+anchor checks. No optimization or redundant x86 full-matrix rerun. Remaining:
+final evidence/RC matrix/owner actions, clean sdist closure and final commit/remote
+verification. Security/provider, independent machine and exact-SHA CI gates remain
+blocked; do not infer them from owner green screenshots or emulation.
