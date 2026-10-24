@@ -327,3 +327,7 @@ Exact final action: documentation closure push, clean-tree/remote/main verificat
 ## Phase 6 phase1 checkpoint — October24,2026 America/New_York
 
 Entry d4c15ab79a81437fb731396c574cd04c515100db clean and remote-verified. One Actions query for that exact SHA returned Forbidden; all hosted outcomes unknown. Evidence docs/PHASE6_HOSTED_CI_STATUS.md and build/phase6/evidence/hosted.stderr. No further blocked API retries authorized by need. Next: compiler-sensitive source review and adversarial tests, controlled journal scaling, streaming fault expansion, Python/package qualification, appropriate matrix and final report. Preserve prior validated matrices and main.
+
+## Phase6 phases2–3 checkpoint — October24,2026
+
+Portability/source audit found no reproduced production defect. Journal semantic/archive atomicity assertions strengthened;32 lifecycle churn cycles/4128 accepted events released all35552 allocations with4727264 peak PMR in focused Debug. Focused journal CTests3/3;54 long scaling measurements (GCC/Clang Release4097/8191/8192 ×3 reset regimes ×3 repeats) passed independent byte ledgers and cleanup. No new optimization. Review docs/PHASE6_PORTABILITY_REPLAY_REVIEW.md. Remaining: streaming checkpoint (699 prefixes/2097 fragment schedules focused passed, not yet committed), then matrix, Python/package and final readiness/report. Do not claim final matrix passed yet.
