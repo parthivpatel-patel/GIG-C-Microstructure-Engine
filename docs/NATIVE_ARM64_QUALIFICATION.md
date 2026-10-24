@@ -133,3 +133,13 @@ documentation closure. No tests were rerun unnecessarily, main remains
 The docs-only commit uses `[skip ci]` to honor the no-additional-workflow instruction;
 it does not skip or weaken any qualification test. Final documentation commit and
 remote verification are reported after push, avoiding a self-referential hash.
+
+## Run4 closure overlay
+
+Run40135471630 qualifies7fca902bac36e30befd657d2bb4e35fa92ec5a5f. Official summary
+independently confirms Success/six completed jobs/7m52s; owner confirms all six
+configurations. Detailed archival remains partial, not fabricated:
+[run4 evidence](ARM64_RUN4_EVIDENCE.md),
+[manifest](evidence/arm64_run4_manifest.json). Historical run3 scope retained.
+New implementation requires a separately authorized hosted qualification. No
+observed-market/security/production gate is advanced by this native milestone.

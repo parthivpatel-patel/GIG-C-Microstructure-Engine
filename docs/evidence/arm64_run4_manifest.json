@@ -1,0 +1,93 @@
+{
+  "schema": "gig.arm64_run4_manifest.v1",
+  "repository": "parthivpatel-patel/GIG-C-Microstructure-Engine",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "qualified_sha": "7fca902bac36e30befd657d2bb4e35fa92ec5a5f",
+  "run_id": 40135471630,
+  "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40135471630",
+  "collected_utc": "2026-10-24T22:04:58.137343+00:00",
+  "observed": {
+    "http_status": 200,
+    "conclusion": "success",
+    "duration_display": "7m 52s",
+    "six_completed_jobs": true,
+    "matrix_success_badge": true,
+    "trigger": "workflow_dispatch",
+    "displayed_start": "October 24, 2026 21:43",
+    "artifacts": "none listed"
+  },
+  "jobs": [
+    {
+      "compiler": "gcc",
+      "configuration": "debug",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    },
+    {
+      "compiler": "gcc",
+      "configuration": "release",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    },
+    {
+      "compiler": "gcc",
+      "configuration": "asan-ubsan",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    },
+    {
+      "compiler": "clang",
+      "configuration": "debug",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    },
+    {
+      "compiler": "clang",
+      "configuration": "release",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    },
+    {
+      "compiler": "clang",
+      "configuration": "asan-ubsan",
+      "job_id": null,
+      "owner_reported_conclusion": "success",
+      "individually_retrieved": false
+    }
+  ],
+  "runner_architecture": {
+    "configured": "native ARM64 ubuntu-24.04-arm; tested workflow asserts ARM64/aarch64",
+    "raw_hardware_output_available": false
+  },
+  "workflow_sha256": "13fcf0717cf9e048f885d18d8b630235c1837b3c20a9f6ae53bb4766dfd06a4e",
+  "availability": {
+    "public_summary": "retrieved",
+    "individual_job_metadata": "unavailable in returned summary",
+    "job_groups_fragment": "HTTP400 empty response",
+    "matrix_expansion_fragment": "HTTP404",
+    "raw_logs": "summary explicitly requires sign-in; no configured identity; not retrieved",
+    "junit": "not retrieved",
+    "compiler_cmake_versions": "not retrieved",
+    "packaging": "successful configured workflow requires checks; raw outputs unavailable"
+  },
+  "artifacts_sha256": {
+    "jobs.headers": "4a267c68e87c27a774840d2444dae99185c1cdd4ed0779b43379dab6ec897e80",
+    "matrix.headers": "0091f7e56d0e04997c0761f2233a06fc8a75c7ce6383f324cfd61d0024fcba61",
+    "matrix.html": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+    "run.txt": "588b0f90fe7f050fe3d8c2059f3f70182c527faebbad5f431b8c49438c46ad85",
+    "run.html": "dcf7044258a39fb48c34d635b550be4e851a6d60b7f115c0c8ec7118a3677244",
+    "run.headers": "f006a57c86c978188fc4d1f4e7b0a155fd869545e5da1635791c29d6e8a98b1f",
+    "jobs.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Independent confirmation of official summary/exact SHA/matrix success, not archival of individual raw jobs",
+    "Owner confirms all6 jobs; individual IDs and per-job raw counts remain unavailable",
+    "No API policy bypass, repeated denied call or new workflow",
+    "New source commits require new owner-authorized qualification"
+  ]
+}
