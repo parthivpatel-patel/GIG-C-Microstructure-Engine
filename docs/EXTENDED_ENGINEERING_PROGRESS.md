@@ -59,3 +59,16 @@ anchor checks. No optimization or redundant x86 full-matrix rerun. Remaining:
 final evidence/RC matrix/owner actions, clean sdist closure and final commit/remote
 verification. Security/provider, independent machine and exact-SHA CI gates remain
 blocked; do not infer them from owner green screenshots or emulation.
+
+## Phase12 closure preparation
+
+All available authorized phases assessed. New ARM evidence154 distinct Release
+configuration passes under QEMU, initial153 pass/1 timeout retained and unchanged
+L3 retry578.83s passes;8 hashes equal x86. Native ARM/Python/sanitizers unexecuted.
+Frozen candidateea2df475 production/test/build tree equals tested195cb114; no source
+or dependency-lock changes. Current security sources19 HTTP200/2 unavailable,
+provider risks explicit.12 native profiles+6 journal runs pass independent checks.
+Final reports/matrix/owner actions and structured evidence prepared. RC18 PARTIAL,
+not native PASS; formal closure BLOCKED. Next:complete diff/evidence review, docs
+push, final clean duplicate sdist inventory/reproducibility and remote/main checks.
+Exact final SHA/artifacts will be in build/extended/evidence/final-delivery.json.
