@@ -16,6 +16,11 @@ void schedules(){
     volume[1].ordinal=1;check(!pov(c,volume,1,10));volume[1].ordinal=2;volume[2].available_at=sim_time(1001);check(!pov(c,volume,1,10));check(!pov(c,{},1,0));
     c=plan_config();c.target=number<QuantityLots>(101);check(!twap(c));c=plan_config();c.first_child_id=number<OrderId>(UINT64_MAX);check(!twap(c));c=plan_config(5000,1);c.max_child=number<QuantityLots>(1);check(!twap(c));
     c=plan_config(UINT64_MAX,2);weights={UINT64_MAX,UINT64_MAX,0};auto extreme=take(vwap(c,std::span(weights).first(2),text("wide-profile"),sim_time(0),VolumeProfile::ex_ante_forecast));check(extreme.children()[0].order.quantity.value()==(UINT64_MAX/2+1) && extreme.children()[1].order.quantity.value()==UINT64_MAX/2);
+    auto long_config=plan_config(3,3);long_config.end=sim_time(INT64_MAX);
+    const auto long_schedule=take(twap(long_config));
+    check(long_schedule.children().size()==3);
+    check(long_schedule.children()[1].decision_time.value()==3074457345618258602LL);
+    check(long_schedule.children()[2].decision_time.value()==6148914691236517204LL);
 }
 void costs(){
     std::array<CostFill,1> fills{cost_fill()};auto c=cost_config();auto r=take(transaction_costs(c,fills));const auto& s=r.summary();

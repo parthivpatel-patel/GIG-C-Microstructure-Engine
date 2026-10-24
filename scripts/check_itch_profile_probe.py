@@ -8,6 +8,8 @@ RSS must be measured by an external wait-accounted child wrapper, not inferred h
 import copy
 import hashlib
 import json
+import os
+import re
 import struct
 import subprocess
 import sys
@@ -96,8 +98,22 @@ def main():
     assert len(sys.argv) in (2,3), "usage: check_itch_profile_probe.py EXECUTABLE [--sanitizer-allocation-profile]"
     if len(sys.argv)==3:
         assert sys.argv[2]=="--sanitizer-allocation-profile"
-    process = subprocess.run(sys.argv[1:], capture_output=True, timeout=180, check=True)
-    assert len(process.stdout) <= 65536 and not process.stderr
+    try:
+        process = subprocess.run(sys.argv[1:], capture_output=True, timeout=180, check=True)
+    except (subprocess.TimeoutExpired, subprocess.CalledProcessError) as error:
+        # Preserve phase and sanitizer diagnostics on timeout or child failure.
+        sys.stderr.buffer.write(error.stderr or b"")
+        raise
+    assert len(process.stdout) <= 65536
+    if os.environ.get("GIG_PROFILE_TRACE")=="1":
+        phases=process.stderr.decode().splitlines()
+        assert phases and all(re.fullmatch(r"gig\.profile\.phase name=[a-z_]+ elapsed_us=\d+ work=\d+ attempts=\d+ live_bytes=\d+ peak_bytes=\d+", p) for p in phases)
+        names=[p.split()[1].split('=')[1] for p in phases]
+        middle=["full_fault_boundaries","small_feed","small_fault_sweep"] if len(sys.argv)==3 else ["full_fault_sweep"]
+        assert names==["fixture","full_feed","full_exports",*middle,"checkpoint","restart_and_verify","completion","pmr_cap","journal_cap_and_zero_budget"]
+        sys.stderr.buffer.write(process.stderr)
+    else:
+        assert not process.stderr
     result = json.loads(process.stdout)
     verify(result)
     bad_models = [("native_records", 2047), ("decompressed_sha256", "0" * 64), ("publication_eligible", False), ("journal_element_bytes", 1), ("post_destroy_live_bytes", 1)]

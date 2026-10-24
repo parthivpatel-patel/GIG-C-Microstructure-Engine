@@ -63,15 +63,22 @@ jobs:
         run: |
           if [ "${{ matrix.compiler }}" = gcc ] && [ "${{ matrix.preset }}" = release ]; then
             cmake --preset release -DZLIB_ROOT="$GIG_CI_ZLIB_ROOT" -DGIG_BUILD_PYTHON=ON -DPython3_EXECUTABLE="${{ github.workspace }}/.venv/bin/python" -Dpybind11_DIR="$(.venv/bin/python -m pybind11 --cmakedir)"
+          elif [ "${{ matrix.preset }}" = asan-ubsan ]; then
+            # Keep instrumentation, debug symbols and assertions; avoid -O0's
+            # repeated serialization/hash overhead on native ARM64 sanitizers.
+            cmake --preset asan-ubsan -DZLIB_ROOT="$GIG_CI_ZLIB_ROOT" -DCMAKE_CXX_FLAGS_DEBUG="-g -O1"
           else
             cmake --preset ${{ matrix.preset }} -DZLIB_ROOT="$GIG_CI_ZLIB_ROOT"
           fi
       - name: Build
         run: cmake --build --preset ${{ matrix.preset }}
       - name: Test
+        env:
+          GIG_PROFILE_TRACE: '1'
         shell: bash
         run: |
-          /usr/bin/time -v ctest --preset ${{ matrix.preset }} --output-junit "${{ github.workspace }}/build/${{ matrix.preset }}/tests.xml"
+          python3 tests/test_profile_probe_diagnostics.py
+          /usr/bin/time -v ctest --preset ${{ matrix.preset }} --test-output-size-passed 16384 --test-output-size-failed 65536 --output-junit "${{ github.workspace }}/build/${{ matrix.preset }}/tests.xml"
           python3 - <<'PY'
           import json, pathlib, xml.etree.ElementTree as ET
           root = ET.parse(pathlib.Path('build/${{ matrix.preset }}/tests.xml')).getroot()

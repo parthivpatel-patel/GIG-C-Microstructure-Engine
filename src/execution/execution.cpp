@@ -32,7 +32,7 @@ Result<Schedule> weighted(PlanConfig c,std::span<const std::uint64_t> weights,Av
         const auto extra=c.target.value()-distributed;if(extra>remainder.size())fail(ErrorCode::inconsistent_state,"execution.apportionment");
         for(std::uint64_t i=0;i<extra;++i)++allocations[remainder[static_cast<std::size_t>(i)].second];
         std::pmr::vector<ChildSlice> slices(resource);
-        for(std::size_t i=0;i<weights.size();++i){const auto offset=static_cast<Wide>(c.end.value()-c.start.value())*static_cast<Wide>(i)/c.bins;const auto time=*SimulationTime::make(c.start.value()+static_cast<std::int64_t>(offset)).data;append(slices,c,time,allocations[i]);}
+        for(std::size_t i=0;i<weights.size();++i){const auto offset=exact::checked_mul(static_cast<Wide>(c.end.value()-c.start.value()),static_cast<Wide>(i))/c.bins;const auto time=*SimulationTime::make(c.start.value()+static_cast<std::int64_t>(offset)).data;append(slices,c,time,allocations[i]);}
         return Result<Schedule>::success(Schedule(c,algorithm,oracle,artifact,std::move(slices),std::pmr::vector<std::uint64_t>(weights.begin(),weights.end(),resource),std::pmr::vector<VolumePoint>(resource),0,1,profile_time));
     }catch(const Failure& e){return Result<Schedule>::failure(e.error.code,e.error.field);}catch(const std::bad_alloc&){return Result<Schedule>::failure(ErrorCode::resource_exhausted,"execution.plan");}
 }

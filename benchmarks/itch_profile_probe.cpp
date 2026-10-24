@@ -3,6 +3,8 @@
 #include "gig/memory/tracked_resource.hpp"
 #include "itch_gzip_fixture.hpp"
 #include <charconv>
+#include <chrono>
+#include <cstdlib>
 #include <iostream>
 #include <string>
 
@@ -12,6 +14,18 @@ namespace {
 using namespace gig::itch;
 using namespace gig::itch::test;
 constexpr std::size_t budget=128U*1024U*1024U;
+class PhaseTrace {
+    std::chrono::steady_clock::time_point last_=std::chrono::steady_clock::now();
+    bool enabled_=std::getenv("GIG_PROFILE_TRACE")&&std::string_view(std::getenv("GIG_PROFILE_TRACE"))=="1";
+public:
+    void mark(std::string_view name,const gig::TrackedResource& memory,std::size_t work){
+        if(!enabled_)return;
+        const auto now=std::chrono::steady_clock::now();
+        std::cerr<<"gig.profile.phase name="<<name<<" elapsed_us="<<std::chrono::duration_cast<std::chrono::microseconds>(now-last_).count()
+                 <<" work="<<work<<" attempts="<<memory.stats().attempts<<" live_bytes="<<memory.stats().live_bytes<<" peak_bytes="<<memory.stats().peak_bytes<<'\n';
+        last_=now;
+    }
+};
 std::string hex(std::span<const std::byte> bytes){constexpr char digits[]="0123456789abcdef";std::string s;for(auto b:bytes){const auto x=std::to_integer<unsigned>(b);s+=digits[x>>4U];s+=digits[x&15U];}return s;}
 struct Fixture{std::vector<std::vector<std::byte>> records;std::vector<std::byte> raw,gzip;StreamingConfig config;std::size_t pause;};
 Fixture fixture(std::size_t n){
@@ -58,27 +72,36 @@ Stop cap_stop(const Fixture& f,std::size_t cap,bool journal){gig::TrackedResourc
 int main(int argc,char** argv){try{
     const bool sanitizer_profile=argc==2&&std::string_view(argv[1])=="--sanitizer-allocation-profile";
     std::size_t n=128;if(argc==2&&!sanitizer_profile){const std::string_view x(argv[1]);const auto r=std::from_chars(x.data(),x.data()+x.size(),n);check(r.ec==std::errc{}&&r.ptr==x.data()+x.size()&&n==128,"only declared128-order profile supported");}check(argc<=2,"arguments");
-    const auto f=fixture(n);gig::TrackedResource memory(std::pmr::get_default_resource(),budget);std::size_t first_peak=0,first_live=0,query_peak=0,query_live=0,coexist_peak=0,export_bytes=0,failures=0,allocations=0;const auto code=number<gig::Digest>(std::string(64,'1'));
+    PhaseTrace trace;const auto f=fixture(n);gig::TrackedResource memory(std::pmr::get_default_resource(),budget);std::size_t first_peak=0,first_live=0,query_peak=0,query_live=0,coexist_peak=0,export_bytes=0,failures=0,allocations=0;const auto code=number<gig::Digest>(std::string(64,'1'));
+    trace.mark("fixture",memory,f.records.size());
     {
         auto original=make(f.config,memory);check(!original.pause_after(f.pause),"pause boundary");std::size_t a=0;check(feed(f,original,a,17).paused,"original paused");check_books(original,n);first_peak=memory.stats().peak_bytes;first_live=memory.stats().live_bytes;
+        trace.mark("full_feed",memory,f.pause);
         const auto baseline=state(original);{const auto x=original.reconstruction().engine(0)->canonical();const auto y=original.reconstruction().engine(1)->canonical();const auto depth=original.reconstruction().engine(0)->depth(16);check(bool(x)&&bool(y)&&bool(depth),"coexisting exports");export_bytes=x.data->size()+y.data->size();query_peak=memory.stats().peak_bytes;query_live=memory.stats().live_bytes;check(state(original)==baseline,"query nonmutation");}
+        trace.mark("full_exports",memory,export_bytes);
         if(sanitizer_profile){
-            failures=boundary_checks(original,memory);
+            failures=boundary_checks(original,memory);trace.mark("full_fault_boundaries",memory,failures);
             const auto small=fixture(8);gig::TrackedResource fault_memory(std::pmr::get_default_resource(),budget);
             {auto probe=make(small.config,fault_memory);check(!probe.pause_after(small.pause),"fault fixture pause");std::size_t offset=0;
                 check(feed(small,probe,offset,17).paused,"fault fixture feed");check_books(probe,8);
-                failures+=allocation_checks(probe,fault_memory);check_books(probe,8);}
+                trace.mark("small_feed",fault_memory,small.pause);
+                const auto small_failures=allocation_checks(probe,fault_memory);failures+=small_failures;check_books(probe,8);trace.mark("small_fault_sweep",fault_memory,small_failures);}
             check(fault_memory.stats().live_bytes==0&&fault_memory.stats().live_blocks==0,"fault fixture cleanup");
-        }else failures=allocation_checks(original,memory);
+        }else {failures=allocation_checks(original,memory);trace.mark("full_fault_sweep",memory,failures);}
         check_books(original,n);
         auto checkpoint=original.checkpoint(code);check(bool(checkpoint),"checkpoint");
+        trace.mark("checkpoint",memory,1);
         auto restarted=make(f.config,memory);check(!restarted.pause_after(f.pause),"restart pause");std::size_t b=0;check(feed(f,restarted,b,65536).paused,"restart paused");check(!restarted.verify_checkpoint(*checkpoint.data,code),"restart descriptor equivalence");check_books(restarted,n);coexist_peak=memory.stats().peak_bytes;
+        trace.mark("restart_and_verify",memory,f.pause);
         check(!original.resume()&&!restarted.resume(),"resume");check(!feed(f,original,a,17).error&&!feed(f,restarted,b,65536).error,"completion feed");const auto left=original.finish(),right=restarted.finish();check(left.publication_eligible&&right.publication_eligible&&left.accepted_prefix_sha256==right.accepted_prefix_sha256,"full restart publication");check(state(original)==state(restarted),"final semantic equivalence");check_books(original,n);allocations=memory.stats().allocations;
     }
     check(memory.stats().live_bytes==0&&memory.stats().live_blocks==0,"all profile storage released");
+    trace.mark("completion",memory,f.records.size());
     const auto reduced=cap_stop(f,16U*1024U*1024U,false);check(reduced.peak<=16U*1024U*1024U,"PMR cap");
+    trace.mark("pmr_cap",memory,static_cast<std::size_t>(reduced.framed));
     Stop journal;if(n==128){journal=cap_stop(f,budget,true);check(journal.accepted==2049&&journal.native==2046&&journal.field=="journal.records","journal limit exact prefix");}
     gig::TrackedResource empty(std::pmr::get_default_resource(),0);check(!StreamingReconstructor::create(f.config,&empty)&&empty.stats().live_bytes==0,"zero-budget creation failure");
+    trace.mark("journal_cap_and_zero_budget",memory,static_cast<std::size_t>(journal.framed));
     std::cout<<"{\"schema\":\"gig.synthetic_profile_probe.v1\",\"orders_per_symbol\":"<<n<<",\"books\":2,\"records\":"<<f.records.size()<<",\"native_records\":"<<n*16<<",\"journal_records_per_book\":"<<n*8<<",\"journal_entry_bytes\":"<<gig::ReplayEngine::journal_record_bytes()<<",\"journal_element_bytes\":"<<n*16*gig::ReplayEngine::journal_record_bytes()<<",\"remaining_per_book\":"<<n*993<<",\"max_orders_per_book\":128,\"journal_limit_per_book\":1024,\"context_lifetime_limit\":"<<f.config.reconstruction.context_policy.max_lifetime_orders<<",\"source_limit\":4096,\"receipt_budget_bytes\":2097152,\"pmr_budget_bytes\":"<<budget<<",\"first_pipeline_peak_pmr\":"<<first_peak<<",\"first_pipeline_live_pmr\":"<<first_live<<",\"coexisting_query_live_pmr\":"<<query_live<<",\"coexisting_query_peak_pmr\":"<<query_peak<<",\"restart_coexistence_peak_pmr\":"<<coexist_peak<<",\"final_peak_pmr\":"<<memory.stats().peak_bytes<<",\"export_canonical_bytes\":"<<export_bytes<<",\"allocations\":"<<allocations<<",\"query_allocation_failures_reached\":"<<failures<<",\"post_destroy_live_bytes\":0,\"compressed_bytes\":"<<f.gzip.size()<<",\"decompressed_bytes\":"<<f.raw.size()<<",\"compressed_sha256\":\""<<hex(f.config.compressed_sha256)<<"\",\"decompressed_sha256\":\""<<hex(sha256(f.raw))<<"\",\"restart_equivalent\":true,\"publication_eligible\":true,\"reduced_pmr_stop\":{\"budget\":16777216,\"framed\":"<<reduced.framed<<",\"accepted\":"<<reduced.accepted<<",\"native\":"<<reduced.native<<",\"peak\":"<<reduced.peak<<"},\"journal_cap_stop\":{\"tested\":"<<(n==128?"true":"false")<<",\"limit\":1023,\"framed\":"<<journal.framed<<",\"accepted\":"<<journal.accepted<<",\"native\":"<<journal.native<<",\"field\":\""<<journal.field<<"\"},\"observed_market_validated\":false}\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

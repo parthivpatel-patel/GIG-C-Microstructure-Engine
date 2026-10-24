@@ -75,8 +75,8 @@ Result<FlowMetrics> calculate_flow(std::span<const FlowQuote> quotes,std::span<c
         for(const auto& q:quotes)if(q.timestamp.value()>start)++quote_count;
         for(const auto& t:trades)if(t.timestamp.value()>start)++trade_count;
         if(config.continuity_complete) {
-            summary.trade_intensity=Metric::known(Fraction::ratio(static_cast<Wide>(trade_count)*1000000000,config.window.value()));
-            summary.quote_intensity=Metric::known(Fraction::ratio(static_cast<Wide>(quote_count)*1000000000,config.window.value()));
+            summary.trade_intensity=Metric::known(Fraction::ratio(exact::checked_mul(static_cast<Wide>(trade_count),1000000000),config.window.value()));
+            summary.quote_intensity=Metric::known(Fraction::ratio(exact::checked_mul(static_cast<Wide>(quote_count),1000000000),config.window.value()));
             Wide ofi=0;bool valid=config.complete_top_updates;const FlowQuote* previous=nullptr;
             for(const auto& q:quotes) {
                 if(q.timestamp.value()>start) {
@@ -123,7 +123,7 @@ Result<FlowMetrics> calculate_flow(std::span<const FlowQuote> quotes,std::span<c
                 const auto lagged=midpoint(quote_at(quotes,static_cast<Wide>(t.timestamp.value())-config.quote_lag.value(),age,t.source.journal_prefix));
                 int sign=0;
                 if(lagged) {
-                    const auto price_twice=static_cast<Wide>(t.price.value())*lagged->denominator();
+                    const auto price_twice=exact::checked_mul(static_cast<Wide>(t.price.value()),lagged->denominator());
                     sign=price_twice>lagged->numerator()?1:(price_twice<lagged->numerator()?-1:tick_sign);
                 }
                 if(sign) {

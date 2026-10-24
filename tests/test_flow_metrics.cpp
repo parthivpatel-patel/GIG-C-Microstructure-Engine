@@ -43,6 +43,16 @@ int main(int argc,char** argv){try{
     zero_trade[0].source.rules.minimum_price=number<PriceTicks>(0);zero_trade[0].price=number<PriceTicks>(0);
     auto zero_result=take(calculate_flow(zero_quote,zero_trade,config(),number<EventTimestamp>(10)));
     check(zero_result.summary().window_return.unavailable==Unavailable::zero_denominator && zero_result.summary().realized_variance.unavailable==Unavailable::zero_denominator);
+    // A half-tick midpoint near INT64_MAX needs a product wider than 64 bits.
+    auto extreme_quotes=q;auto extreme_trades=t;
+    for(auto& x:extreme_quotes){x.source.rules.maximum_price=number<PriceTicks>(INT64_MAX);x.bid->price_ticks=number<PriceTicks>(INT64_MAX-3);x.ask->price_ticks=number<PriceTicks>(INT64_MAX);}
+    extreme_trades[0].source.rules.maximum_price=number<PriceTicks>(INT64_MAX);
+    for(const auto price:{INT64_MAX-2,INT64_MAX-1,INT64_MAX}){
+        extreme_trades[0].price=number<PriceTicks>(price);
+        const auto result=take(calculate_flow(extreme_quotes,extreme_trades,config(),number<EventTimestamp>(10)));
+        check(result.trades()[0].sign==(price==INT64_MAX-2?TradeSign::sell:TradeSign::buy));
+        check(value(result.trades()[0].effective_spread)==(price==INT64_MAX?"3/1":"1/1"));
+    }
     auto empty=take(calculate_flow({}, {},config(),number<EventTimestamp>(10)));check(value(empty.summary().trade_intensity)=="0/1" && !empty.summary().realized_variance.value);
     std::cout<<"PASS: OFI, quote lag/tick signing, horizons, clock/order/gap/reset/age/sampling boundaries and exact hand references\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
