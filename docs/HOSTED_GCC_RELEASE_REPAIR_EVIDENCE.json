@@ -1,0 +1,566 @@
+{
+  "schema": "gig.hosted_gcc_release_repair.v1",
+  "baseline_commit": "6d9f7f21ea8ce02a57acf43e263a0898981baf34",
+  "repair_commit": "3e8761a73fc7d4553700f7281461a0975c9e09c1",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "main_preserved": "165c5038336887116d69160b0d8e5a1a5ef59d16",
+  "hosted": {
+    "reported_run_number": 117,
+    "report_source": "user; not independently retrieved",
+    "reported_outcomes": {
+      "passed": 5,
+      "failed_gcc_release": 1
+    },
+    "actual_run_id": null,
+    "actual_hosted_head": null,
+    "actual_new_job_conclusions": null,
+    "actual_hosted_compiler_version": null,
+    "access_exit": 1,
+    "access_error": "Get \"https://api.github.com/repos/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs?branch=feat%2Fbootstrap-cpp20-engine&per_page=10\": Forbidden\n",
+    "api_github_in_reported_allowlist": false,
+    "diagnostic_identity_limitation": "User described memmove; local failing CMake/strict compile reports memset. Exact hosted equivalence unverified."
+  },
+  "local_reproduction": {
+    "ubuntu_versions": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\ncmake version 3.28.3\ng++-13\t13.3.0-6ubuntu2~24.04.1\ngcc-13\t13.3.0-6ubuntu2~24.04.1\nlibstdc++-13-dev:amd64\t13.3.0-6ubuntu2~24.04.1\nlibstdc++6:amd64\t14.2.0-4ubuntu2~24.04.1\nPython 3.12.3\n#define ZLIB_VERSION \"1.3.1\"\n",
+    "cmake_before": [
+      {
+        "command": [
+          "docker",
+          "--host=unix:///var/run/docker.sock",
+          "exec",
+          "gig-rc-closure-fresh",
+          "bash",
+          "-c",
+          "tar -xOf /work/hosted-gcc-repair-baseline.tar tests/test_itch_admin.cpp > /work/hosted-gcc-repair/source/tests/test_itch_admin.cpp"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "docker",
+          "--host=unix:///var/run/docker.sock",
+          "exec",
+          "gig-rc-closure-fresh",
+          "cmake",
+          "-S",
+          "/work/hosted-gcc-repair/source",
+          "-B",
+          "/work/hosted-gcc-repair/gcc13-release",
+          "-G",
+          "Ninja",
+          "-DCMAKE_BUILD_TYPE=Release",
+          "-DBUILD_TESTING=ON",
+          "-DGIG_WARNINGS_AS_ERRORS=ON",
+          "-DGIG_BUILD_BENCHMARKS=ON",
+          "-DGIG_BUILD_ITCH_STREAMING=ON",
+          "-DZLIB_ROOT=/work/ci-network-zlib",
+          "-DGIG_BUILD_PYTHON=ON",
+          "-DPython3_EXECUTABLE=/work/tooling/bin/python",
+          "-Dpybind11_DIR=/work/tooling/lib/python3.12/site-packages/pybind11/share/cmake/pybind11"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "docker",
+          "--host=unix:///var/run/docker.sock",
+          "exec",
+          "gig-rc-closure-fresh",
+          "cmake",
+          "--build",
+          "/work/hosted-gcc-repair/gcc13-release",
+          "--target",
+          "CMakeFiles/gig_itch_admin_tests.dir/tests/test_itch_admin.cpp.o",
+          "--verbose"
+        ],
+        "exit": 1
+      }
+    ],
+    "direct_gcc13_optimized_before_exit": 1,
+    "direct_gcc13_optimized_after_exit": 0,
+    "original_gcc13_debug_object_exit": 0,
+    "original_gcc14_release_object_exit": 0,
+    "before_diagnostic": "In file included from /usr/include/c++/13/array:43,\n                 from include/gig/itch/wire.hpp:2,\n                 from include/gig/itch/decoder.hpp:2,\n                 from include/gig/itch/context.hpp:2,\n                 from include/gig/itch/reconstruction.hpp:2,\n                 from include/gig/itch/restart.hpp:2,\n                 from tests/test_itch_admin.cpp:1:\nIn function 'constexpr typename __gnu_cxx::__enable_if<std::__is_byte<_Tp>::__value, void>::__type std::__fill_a1(_Tp*, _Tp*, const _Tp&) [with _Tp = byte]',\n    inlined from 'constexpr void std::__fill_a(_FIte, _FIte, const _Tp&) [with _FIte = byte*; _Tp = byte]' at /usr/include/c++/13/bits/stl_algobase.h:977:21,\n    inlined from 'constexpr _OutputIterator std::__fill_n_a(_OutputIterator, _Size, const _Tp&, random_access_iterator_tag) [with _OutputIterator = byte*; _Size = long unsigned int; _Tp = byte]' at /usr/include/c++/13/bits/stl_algobase.h:1128:20,\n    inlined from 'constexpr _OI std::fill_n(_OI, _Size, const _Tp&) [with _OI = byte*; _Size = long unsigned int; _Tp = byte]' at /usr/include/c++/13/bits/stl_algobase.h:1157:29,\n    inlined from 'static constexpr _ForwardIterator std::__uninitialized_default_n_1<true>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = std::byte*; _Size = long unsigned int]' at /usr/include/c++/13/bits/stl_uninitialized.h:668:29,\n    inlined from 'static constexpr _ForwardIterator std::__uninitialized_default_n_1<true>::__uninit_default_n(_ForwardIterator, _Size) [with _ForwardIterator = std::byte*; _Size = long unsigned int]' at /usr/include/c++/13/bits/stl_uninitialized.h:660:9,\n    inlined from 'constexpr _ForwardIterator std::__uninitialized_default_n(_ForwardIterator, _Size) [with _ForwardIterator = byte*; _Size = long unsigned int]' at /usr/include/c++/13/bits/stl_uninitialized.h:712:20,\n    inlined from 'constexpr _ForwardIterator std::__uninitialized_default_n_a(_ForwardIterator, _Size, allocator<_Tp>&) [with _ForwardIterator = byte*; _Size = long unsigned int; _Tp = byte]' at /usr/include/c++/13/bits/stl_uninitialized.h:779:44,\n    inlined from 'constexpr void std::vector<_Tp, _Alloc>::_M_default_append(size_type) [with _Tp = std::byte; _Alloc = std::allocator<std::byte>]' at /usr/include/c++/13/bits/vector.tcc:668:41,\n    inlined from 'constexpr void std::vector<_Tp, _Alloc>::resize(size_type) [with _Tp = std::byte; _Alloc = std::allocator<std::byte>]' at /usr/include/c++/13/bits/stl_vector.h:1016:21,\n    inlined from 'void {anonymous}::wire()' at tests/test_itch_admin.cpp:27:87:\n/usr/include/c++/13/bits/stl_algobase.h:951:25: error: 'void* __builtin_memset(void*, int, long unsigned int)' offset 1 is out of the bounds [0, 1] [-Werror=array-bounds=]\n  951 |         __builtin_memset(__first, static_cast<unsigned char>(__tmp), __len);\n      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\ncc1plus: all warnings being treated as errors\n",
+    "classification": "Toolchain/optimization diagnostic compatibility failure; defined bounded vector idiom, no UB found; precise upstream bug not isolated"
+  },
+  "source_hashes": {
+    "baseline_commit": "6d9f7f21ea8ce02a57acf43e263a0898981baf34",
+    "old_test_sha256": "6d61418bc4f2e755905bb4edd885efe2acd1a11c48118836c5dc63431342ddcc",
+    "new_test_sha256": "ff9f005c6b235d04fd1884eff9f5313652c534cb54e6fe26abd5b3e687700021"
+  },
+  "fixture_equivalence": {
+    "cases": 119,
+    "independent_spec_bytes_agree": true,
+    "old_new_bytes_identical": true,
+    "asan_ubsan_exit": 0,
+    "corrupted_expectation_detected": true,
+    "sha256": "7e50d55c99aba72fda0b4d751231825c078bcf5878ea29d5e078a215851fc9c6"
+  },
+  "matrix": [
+    {
+      "configuration": "phase9-clean-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clean-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 58.804,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "51ed4ef5915fee760cc0bcc8b8755604a50d7f7002fc7c9e254406a8b88475d0",
+      "log_sha256": "ed4494dda04819aa3d7a657adb0b396b17e034b258272c05d4b32c058ce1559b"
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clean-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 36.581,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "eb642dc279bea36c33654c72cf04ac635ba766205549c406764eb97ed61fef28",
+      "log_sha256": "2a231bb8e3195e16e6179194c428609f7b030d5d2c7b8de4808a35bac53b75e8"
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clean-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 115.848,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "e1ae2d920e9228723f0068ff9a41c8e278dcfad33727eafe670daabee8d0dd4b",
+      "log_sha256": "60bb170a044c7d02258846fa00d341da56632a7948c2438a7ce19fc7e6128373"
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clang-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 55.173,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "00faf9673f2b33141eec3b3e4ec4e746fb453e63ae6a4a246105a83ed8f59f57",
+      "log_sha256": "03f57842fcab982548a45ef80183ae3bc921496493eadb7ef5b99515ba2e637f"
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clang-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 38.368,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "10cd2f6816c23ccd1e8caf85f9cb893d82cd785b193fc811708c2545fc306f21",
+      "log_sha256": "940ecaef1603b9d6bf063f7a318605bc5b3a9f64312d15b7c2aadef3a1a34b08"
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/phase9-clang-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 104.608,
+      "counts": {
+        "tests": 154,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "1beced52f2dc1f167ed88c8c6e58a0dbcae9d5f98eab59724987af7aee11db61",
+      "log_sha256": "b653da4599a81dafc67a6b1f29dad70e2b5b3a46098518d2a8598f53e52b7624"
+    },
+    {
+      "configuration": "Ubuntu24.04 GCC13.3 Release PythonON",
+      "counts": {
+        "tests": 157,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "0d672b120ab83a6b1e62389e32811cc1a886ab1735a231110457bbda12d63b1c",
+      "log_sha256": "3d0de69274350d1187c2144b8f4b03105a4b9e03fae472fe3454b1e056bb29e9",
+      "build_exit": 0,
+      "ctest_exit": 0,
+      "source_identity": "Verified bundle checkout at6d9f7f2 with only the test repair dirty; no fabricated clean commit",
+      "initial_archive_only_run": {
+        "passed": 156,
+        "failed": 1,
+        "cause": "missing independently verified Git identity in archive runner; repaired harness, assertion retained"
+      }
+    }
+  ],
+  "total_final_ctest_outcomes": 1081,
+  "packaging": {
+    "steps": [
+      {
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_python.py"
+        ],
+        "exit": 0,
+        "consumer": "reused installed Phase5 wheel; production sources unchanged"
+      },
+      {
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/checkout-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_export_contracts.py"
+        ],
+        "exit": 0,
+        "consumer": "reused installed Phase5 wheel; production sources unchanged"
+      },
+      {
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_python.py"
+        ],
+        "exit": 0,
+        "consumer": "reused installed Phase5 wheel; production sources unchanged"
+      },
+      {
+        "command": [
+          "/workspace/GIG-C-Microstructure-Engine/build/phase5/sdist-consumer/bin/python",
+          "/workspace/GIG-C-Microstructure-Engine/tests/test_export_contracts.py"
+        ],
+        "exit": 0,
+        "consumer": "reused installed Phase5 wheel; production sources unchanged"
+      },
+      {
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "-m",
+          "build",
+          "--sdist",
+          "--no-isolation",
+          "--outdir",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/dist"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "scripts/check_sdist_inventory.py",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/dist/gig_microstructure-0.1.1.tar.gz",
+          "--manifest",
+          "/workspace/GIG-C-Microstructure-Engine/build/hosted-gcc-repair/evidence/sdist-manifest.json"
+        ],
+        "exit": 0
+      },
+      {
+        "command": [
+          "/workspace/gig-tools/bin/python",
+          "tests/test_sdist_patterns.py"
+        ],
+        "exit": 0
+      }
+    ],
+    "installed_checks": 28,
+    "pattern_regressions": 3,
+    "archive_sha256": "6e2611ef208dfa6863e8d39a58063105b399ea588f61184d997d56a3e56a4927",
+    "archive_bytes": 1326530,
+    "manifest_members": 303,
+    "limitation": "No rebuilt wheel: only test source changed; existing checkout/source-built installed wheels rechecked. Source archive contains corrected test."
+  },
+  "production_or_build_policy_changes": false,
+  "market_data_requests": 0,
+  "raw_evidence_sha256": {
+    "fixture-build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gcc14-original.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdist-inventory.log": "64e6ce7bddc1b062defd06676bcecf4a1481244ce3921c4cf6d7fb6ea3a8a620",
+    "gcc13-original-debug-compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "driver-gcc.log": "0a2361084cf4924af5ee2060b885228b0e5b0d7cf3688390ce3c65ec753ee6d0",
+    "gcc13-reduced-sized-before.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sdist-manifest.json": "33bea4bce2b2daf3b48391f876b8c742f7913517964b85464cb60d6ab73748e8",
+    "ubuntu-versions.log": "57a222b4957b94b6ef77a231d7cf2c7d56683154f9a1f5278fe38942147d7cb2",
+    "fixture-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixture-equivalence.json": "65d521e44f575b77f4566cfe708731872f80dbee9aec77eaf9aacdc832fdaadb",
+    "matrix-gcc.json": "d4bef86a0d24bb73a08869c724966cf17e0d7c1641f2c31fc7585c34ebda97eb",
+    "phase9-clang-asan-ubsan.xml": "1beced52f2dc1f167ed88c8c6e58a0dbcae9d5f98eab59724987af7aee11db61",
+    "gcc13-before-driver.log": "95dc4b7894d5158c87c325a2c652d2bcd6a3e5be358c643f014cddde266f019d",
+    "gcc13-release-first-ctest.log": "abd620c0343a21fe33af8c77db3d6f22537cf630e0b8d7d2d7d0f329fb0f0918",
+    "checkout-test_python.py.log": "2819a24ed066d25dfa9f3949135d0421828103a6f58a55890868587fcbce1fc3",
+    "checkout-test_export_contracts.py.log": "6c2309fcf34f69e1ee5ffbf1e9a512d187c87e877f1c5f47596106621fba0a1c",
+    "gcc13-admin-before.log": "c89677f02f1d44e19dd4c5c19ed42696d8ebcfde37aa0b6530ec59c779d5fd14",
+    "phase9-clang-asan-ubsan.log": "b653da4599a81dafc67a6b1f29dad70e2b5b3a46098518d2a8598f53e52b7624",
+    "hosted-runs.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase9-clang-debug.log": "03f57842fcab982548a45ef80183ae3bc921496493eadb7ef5b99515ba2e637f",
+    "sdist-test_python.py.log": "a5913dcefe5ef4ce7f34bd8a344a8b5c6f374306aaffa3748b8ba663b52c303e",
+    "gcc13-cmake-before-1.log": "694237424701f46f0cdd91f0e219a2aba23bda77c290051b8661aa3cb75593e2",
+    "phase9-clean-release.xml": "eb642dc279bea36c33654c72cf04ac635ba766205549c406764eb97ed61fef28",
+    "driver-clang.log": "040894c072f05a6a6517f8f2812856c5a8157b5eafac11848e534ad719de5556",
+    "phase9-clean-asan-ubsan.xml": "e1ae2d920e9228723f0068ff9a41c8e278dcfad33727eafe670daabee8d0dd4b",
+    "gcc13-release-final-ctest.log": "3d0de69274350d1187c2144b8f4b03105a4b9e03fae472fe3454b1e056bb29e9",
+    "sdist-patterns.log": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0",
+    "phase9-clang-release.log": "940ecaef1603b9d6bf063f7a318605bc5b3a9f64312d15b7c2aadef3a1a34b08",
+    "phase9-clean-release.log": "2a231bb8e3195e16e6179194c428609f7b030d5d2c7b8de4808a35bac53b75e8",
+    "gcc13-admin-after.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase9-clang-release.xml": "10cd2f6816c23ccd1e8caf85f9cb893d82cd785b193fc811708c2545fc306f21",
+    "hosted-runs.stderr": "dc0f954283e3eed4c2b5310410f19071c328820fe03d17f7f597b2491aa09f0d",
+    "gcc13-cmake-before-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ubuntu-git-identity.log": "61aa445e438a5bd59799de41d5074aceabbf0a7f7794dac653204b6193dcd4cc",
+    "fixture-bytes.txt": "7e50d55c99aba72fda0b4d751231825c078bcf5878ea29d5e078a215851fc9c6",
+    "phase9-clang-debug.xml": "00faf9673f2b33141eec3b3e4ec4e746fb453e63ae6a4a246105a83ed8f59f57",
+    "gcc13-release-ctest.log": "abd620c0343a21fe33af8c77db3d6f22537cf630e0b8d7d2d7d0f329fb0f0918",
+    "phase9-clean-debug.xml": "51ed4ef5915fee760cc0bcc8b8755604a50d7f7002fc7c9e254406a8b88475d0",
+    "gcc13-cmake-before.json": "2a91641f2d016c55ce7f6648379da5f6da41322fd4d6f1c4db158ed746ec07bd",
+    "matrix-native.json": "a37f3b890f216e00ffa0db6ab75b8e482c621ab0b02467433cc8214c0a57a21e",
+    "sdist-build.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+    "packaging-driver.log": "2264020aaed995b47846d51f3aebdc438b6fe78627fded3bd2102d0a827aad92",
+    "source-hashes.json": "ca6cf5bbf85ca55b15cc9bf381aead687d824cb82c5664a3d76b3397785a4e11",
+    "matrix-clang.json": "8fcb915c8db4d15c458623532ed61ab41ed4f27f62479d3de410e5f0ecd00d11",
+    "matrix.json": "35f138bcdc6a714eeb7ebf385edf9f4f3141dd1746bb2217553083dd81324677",
+    "packaging.json": "eb0da1637340f26c831c9216d36d19b584db14da7f56fd225290dec67fc9941a",
+    "sdist-test_export_contracts.py.log": "2840cb3765bc73663b9f4aba54aac2ba64c1cf39f3abcda67ba262c55c3cb53d",
+    "gcc13-cmake-before-2.log": "3c893fab380f084e6d43de77a022769819b2259e634db58b352f62c15f52c09c",
+    "gcc13-release-build.log": "6e2abacdb40595ec8c29d9635387b1c7f12e87b6f1db18d0f5850d8fe5080e12",
+    "gcc13-release-first.xml": "6099746da6bff0363c065b0f4a166128ab05153b9470c24969ec2a2703d9def9",
+    "gcc13-reduced-before.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase9-clean-debug.log": "ed4494dda04819aa3d7a657adb0b396b17e034b258272c05d4b32c058ce1559b",
+    "gcc13-release-final.xml": "0d672b120ab83a6b1e62389e32811cc1a886ab1735a231110457bbda12d63b1c",
+    "phase9-clean-asan-ubsan.log": "60bb170a044c7d02258846fa00d341da56632a7948c2438a7ce19fc7e6128373"
+  }
+}
