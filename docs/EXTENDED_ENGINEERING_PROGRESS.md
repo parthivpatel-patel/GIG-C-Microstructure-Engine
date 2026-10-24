@@ -72,3 +72,23 @@ Final reports/matrix/owner actions and structured evidence prepared. RC18 PARTIA
 not native PASS; formal closure BLOCKED. Next:complete diff/evidence review, docs
 push, final clean duplicate sdist inventory/reproducibility and remote/main checks.
 Exact final SHA/artifacts will be in build/extended/evidence/final-delivery.json.
+
+
+## Native ARM64 milestone formally closed — October24,2026 (America/New_York)
+
+Tested source f02363e0e09b9767b4dc6748737206254e5e4c6a; official native ARM64 run
+40126420107 (#3) succeeded in7m22s. Independent public summary and all six job
+pages confirm exact SHA and individual GCC/Clang Debug/Release/ASan+UBSan success;
+architecture authentication/build/Test steps and GCC Release packaging successes
+also verified. API remains Forbidden, signed-in logs/JUnit/version export pending.
+Six warnings are pinned checkout Node20 deprecation, not compiler failures.
+NATIVE_ARM64_QUALIFICATION.md and companion JSON bind source, job IDs, step results,
+page digests, unchanged hash/count requirements and explicit readiness limits.
+RC18 PASS scoped, RC13/17 PARTIAL; other security/observed/production gaps remain.
+
+Exact next action: owner exports existing run logs/JUnit/versions and closes
+security/provider applicability; separately authorize checkout maintenance.
+No workflow launch, source/test/workflow edits, market-data acquisition or main
+change. This closure is docs-only; do not repeat already passed matrices or begin
+new implementation automatically. Verify final documentation SHA/remote/clean
+state from the delivery response before resuming.

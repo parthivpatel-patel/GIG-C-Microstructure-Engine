@@ -19,7 +19,10 @@ silently change. Missing clocks cannot support timestamp-ranked ordering. Strict
 ordering rejects errors; there is no buffering, reordering or message fabrication.
 
 The accepted-event journal is owned in memory and bounded by record/resource limits.
-Full event records are large; allocation/retention/copy costs are measured, not optimized.
+Phase5 reduced ordinary physical journal records to 12,232 bytes (logical public
+entries remain 15,944 bytes); reset-plan archive and geometric-capacity overhead
+remain substantial. Native ARM qualification does not establish full-day market
+capacity, fragmentation bounds or a production latency/throughput SLA.
 Journal capacity may grow on an otherwise failed operation; committed logical state
 remains unchanged. No disk transaction, restart log or crash-durability guarantee.
 Canonical output is an internal versioned representation, not a stable wire ABI/parser.
@@ -31,9 +34,16 @@ Debug scans invariants after every mutation; Release tests and benchmark preflig
 scan explicitly. PMR counts exclude allocator overhead and driver allocations. Peak
 RSS includes fixtures, oracle, timing arrays and driver. Shared-cloud synthetic
 measurements do not establish production, real-feed or ultra-low-latency performance.
-Native ARM64, Windows and macOS remain unverified. Local x86_64 GCC14 and
-Clang19 are tested; no native ARM or cross-compilation claim. Hosted CI evidence
-must be reported separately from local tests; inaccessible checks are not successes.
+Native Linux ARM64 is qualified at f02363e0e09b9767b4dc6748737206254e5e4c6a:
+official GitHub run40126420107 and all six individual GCC/Clang Debug/Release/
+ASan+UBSan job successes independently verified through public pages. See
+NATIVE_ARM64_QUALIFICATION.md for exact job IDs, scope and evidence limits.
+GCC Release Python/package steps succeeded; ARM Python Debug/sanitizers, Windows,
+macOS and other Python ABIs remain unqualified. Raw hosted JUnit, compiler/image/
+dependency outputs still need signed-in archival. Local, cross/emulated and native
+hosted evidence remain distinct; successful job metadata is not full log export.
+The six checkout Node20-to-Node24 deprecation warnings require separate maintenance.
+Native ARM qualification does not establish production or observed-market validity.
 
 IMPLEMENTED != VERIFIED; BENCHMARKED != FAST; SYNTHETIC != OBSERVED;
 LOCAL_TESTED != PRODUCTION_VALIDATED.

@@ -1,5 +1,17 @@
 # Phase 13 — native ARM64 qualification preparation
 
+> **October 24, 2026 closure update (America/New_York):** Native Linux ARM64
+> qualification is CLOSED at f02363e0e09b9767b4dc6748737206254e5e4c6a.
+> Run40126420107 and all six job successes are independently verified from official
+> public GitHub pages. See [current qualification and readiness overlay](NATIVE_ARM64_QUALIFICATION.md)
+> and its structured evidence. Current RC18 is PASS scoped; RC13 and RC17 are
+> PARTIAL, RC16/security and observed-market gates remain blocked. Aggregate:
+> 19 scoped PASS / 5 BLOCKED / 2 PARTIAL / 1 OUT OF SCOPE.
+> The report below is preserved historical source-bound evidence; its ARM-not-run,
+> API-only access blocker, old counts/source-equivalence and owner actions do not
+> override the newer closure. No raw hosted log/JUnit export is claimed.
+
+
 October 24, 2026 (America/New_York). **Prepared, not executed. Native ARM64 and
 independent-machine gates remain unclosed.** No billable runner was launched.
 

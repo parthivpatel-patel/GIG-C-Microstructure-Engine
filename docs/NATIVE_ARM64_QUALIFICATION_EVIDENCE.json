@@ -1,0 +1,879 @@
+{
+  "schema": "gig.native_arm64_qualification.v1",
+  "milestone": "CLOSED \u2014 scoped native Linux ARM64 synthetic qualification",
+  "verified_commit": "f02363e0e09b9767b4dc6748737206254e5e4c6a",
+  "run_id": 40126420107,
+  "run_number": 3,
+  "run_attempt": 1,
+  "run_url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107",
+  "verification_method": "independent HTTPS GET of official public GitHub summary and six individual job pages; exact commit hyperlink and per-job succeeded text parsed; no API bypass or authentication workaround; public check-step attributes independently confirm architecture authentication, configuration, build and test succeeded in every job; GCC Release packaging steps succeeded",
+  "run_conclusion": "success",
+  "duration_display": "7m 22s",
+  "duration_seconds": 442,
+  "jobs": [
+    {
+      "job_id": 120968725390,
+      "name": "build-and-test (clang, asan-ubsan)",
+      "conclusion": "success",
+      "duration_display": "2m 27s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725390",
+      "http_status": 200,
+      "html_sha256": "f49bc7eb9cb67ef4a720b15409d32219fe55ee7faae24a756046d0a3822f7c1a",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:35Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:35Z",
+          "completed-at": "2026-10-24T19:43:04Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:04Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725587,
+      "name": "build-and-test (clang, debug)",
+      "conclusion": "success",
+      "duration_display": "1m 32s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725587",
+      "http_status": 200,
+      "html_sha256": "b6a471db2c1c41dda72c36ff99c05ef5101d9f886c94fd5baeea45cae4aadc01",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:42:08Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:08Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725484,
+      "name": "build-and-test (clang, release)",
+      "conclusion": "success",
+      "duration_display": "2m 32s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725484",
+      "http_status": 200,
+      "html_sha256": "16258053350de23cbb826ae70d71af90190dcd6237b8809b26e1c294682501e1",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:32Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:32Z",
+          "completed-at": "2026-10-24T19:42:35Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:35Z",
+          "completed-at": "2026-10-24T19:42:59Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:59Z",
+          "completed-at": "2026-10-24T19:43:22Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:22Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:45Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:45Z",
+          "completed-at": "2026-10-24T19:43:45Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725538,
+      "name": "build-and-test (gcc, asan-ubsan)",
+      "conclusion": "success",
+      "duration_display": "7m 16s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725538",
+      "http_status": 200,
+      "html_sha256": "451de62b1410b79d1a2d0932fc0f6697448f0e7626f11c0ab047fa5dda73e4cf",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:17Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:17Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:21Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:21Z",
+          "completed-at": "2026-10-24T19:42:57Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:57Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725499,
+      "name": "build-and-test (gcc, debug)",
+      "conclusion": "success",
+      "duration_display": "1m 31s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725499",
+      "http_status": 200,
+      "html_sha256": "b30860ce5aec5313ba81d294e78902c0c4a34406085b278eeca634cb31c9e4f0",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:42:07Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:07Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725573,
+      "name": "build-and-test (gcc, release)",
+      "conclusion": "success",
+      "duration_display": "4m 36s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725573",
+      "http_status": 200,
+      "html_sha256": "24d2d8a504b93bfc6b48de4b733f163412e5a3b88bbdf2f33b5a509a291f22fa",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:28Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:28Z",
+          "completed-at": "2026-10-24T19:41:28Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:28Z",
+          "completed-at": "2026-10-24T19:41:32Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:32Z",
+          "completed-at": "2026-10-24T19:41:34Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:34Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:43:08Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:08Z",
+          "completed-at": "2026-10-24T19:43:32Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:32Z",
+          "completed-at": "2026-10-24T19:43:56Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:56Z",
+          "completed-at": "2026-10-24T19:44:51Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:44:51Z",
+          "completed-at": "2026-10-24T19:44:54Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:44:54Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        }
+      ]
+    }
+  ],
+  "workflow_blob_sha256": "5a742a942f2e2b0d2ab5c8305fc8127026838edf729edd12ca6c34109be6c504",
+  "runner_evidence": {
+    "label": "ubuntu-24.04-arm",
+    "source": "tested workflow declares GitHub-hosted ARM64 label and asserts runner.arch ARM64, uname aarch64, exact clean checkout; six jobs independently succeeded",
+    "raw_uname_cpu_os_versions": "not retrieved; signed-in step logs unavailable",
+    "emulation": false,
+    "hardware_attestation": false
+  },
+  "configured_requirements": {
+    "native_ctest_per_job": 154,
+    "gcc_release_python_ctest": 157,
+    "total_configured_ctest": 927,
+    "zero_failures_skips_disabled": true,
+    "canonical_sha256": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+    },
+    "canonical_evidence": "workflow-enforced checks in successful jobs; raw JUnit/hash output NOT independently exported",
+    "python": "GCC Release bindings, checkout/source-archive wheels, installed interface/export/example tests, duplicate fixed-epoch sdist and member inventory required by successful workflow",
+    "python_sanitizer": "not configured for hosted ARM64",
+    "sanitizers": "GCC and Clang combined ASan+UBSan at Debug -g -O1; no NDEBUG;180s child timeout and60min ceiling unchanged"
+  },
+  "annotations": {
+    "count": 6,
+    "classification": "checkout action runtime deprecation",
+    "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683. For more information see:",
+    "severity": "maintenance warning; no compiler/sanitizer defect inferred",
+    "action": "separate authorized SHA-pinned checkout runtime update and regression qualification"
+  },
+  "api_access": {
+    "result": "Forbidden",
+    "attempts": 1,
+    "independently_exported_api_json": false
+  },
+  "artifacts": {
+    "summary_shows": "none",
+    "raw_step_logs_junit_downloaded": false,
+    "compiler_dependency_versions_exported": false
+  },
+  "gates": {
+    "RC18": "PASS scoped: native Linux ARM64 matrix at f02363e",
+    "RC13": "PARTIAL: actual independent hosted execution; full version-bound reproduction archive still missing",
+    "RC17": "PARTIAL: exact-SHA ARM hosted result verified; x86 run and detailed evidence closure pending",
+    "RC16": "BLOCKED: security/provider applicability unresolved",
+    "observed_L3": "NO-GO",
+    "production": "OUT OF SCOPE"
+  },
+  "preservation": {
+    "no_new_workflows": true,
+    "no_source_test_workflow_changes": true,
+    "main_sha": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "documentation_commit_skip_ci": true
+  },
+  "raw_evidence_sha256": {
+    "arm-run3-web.headers": "abdce434f3abd9dff673b7e9bdcc4c977ca6c07d55271c4def3a3bc47e78c7e5",
+    "arm-run3-web.html": "6dc01aa99c762c3c5725c510947caf465f2f94bdac0726b632b526fa869ce9df",
+    "arm-run3.err": "b8c000b7945d1e8102c528ff5a9870047ccc0d8bcbe1460e3374c2635bb56160",
+    "job-120968725390.headers": "28b87e3ad43c6c48f17d07e883385c15ddaf80682a73889bf004ba9d95169287",
+    "job-120968725390.html": "f49bc7eb9cb67ef4a720b15409d32219fe55ee7faae24a756046d0a3822f7c1a",
+    "job-120968725390.txt": "8bb4d3ac1cd2da9c0b51c667b705d5e0488a76c4869f00390da84c4928073cc8",
+    "job-120968725484.headers": "4295b1b04ee5006c5b95ef2c172d28b6e6322103430ff2ff213715a596b124a6",
+    "job-120968725484.html": "16258053350de23cbb826ae70d71af90190dcd6237b8809b26e1c294682501e1",
+    "job-120968725484.txt": "0ffb186d615f774619682630127cc1732a655f41618e03d84f564b762d0a5227",
+    "job-120968725499.headers": "62b46c986acaa3737289c5d9afbea5d84269ff9818734ed43bafcf4f2c7db2bf",
+    "job-120968725499.html": "b30860ce5aec5313ba81d294e78902c0c4a34406085b278eeca634cb31c9e4f0",
+    "job-120968725499.txt": "99a9145a6c67e0a3e849c818c337c907967700f0585f29a26846c06c779cb330",
+    "job-120968725538.headers": "65430efa9979774c01c0901f6afa62804c2cad6818c84f03c6e1e50bd0b9ff00",
+    "job-120968725538.html": "451de62b1410b79d1a2d0932fc0f6697448f0e7626f11c0ab047fa5dda73e4cf",
+    "job-120968725538.txt": "dc8e1556fb02e11eeb0b2cb7a1f6e6f4081c08dff89abc37805607ce16baa962",
+    "job-120968725573.headers": "8d98dec49c11a16f20a1c5289eac3ebb92a03c3c4087bf4189f984e844e1a8c3",
+    "job-120968725573.html": "24d2d8a504b93bfc6b48de4b733f163412e5a3b88bbdf2f33b5a509a291f22fa",
+    "job-120968725573.txt": "c68c91559e8a272cfab9401516b9c8954ed722fecb2804bec321fbbd289a0443",
+    "job-120968725587.headers": "110d5ca69c852dd7679049d9e3687a6fc324986552eb975f4ca2176878c4fe44",
+    "job-120968725587.html": "b6a471db2c1c41dda72c36ff99c05ef5101d9f886c94fd5baeea45cae4aadc01",
+    "job-120968725587.txt": "533a0cd4e39b1ad9277be7dd4df819a687c636403203644136aa1c8478055b6a",
+    "jobs-web.json": "a0e38ae5221a5c77924515f60f91fc32406d71601d2d495b7f527f53bd19166c"
+  },
+  "repository_public_metadata": true
+}
