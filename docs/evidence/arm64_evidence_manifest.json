@@ -1,0 +1,1375 @@
+{
+  "schema": "gig.arm64_archive.v1",
+  "qualified_commit": "f02363e0e09b9767b4dc6748737206254e5e4c6a",
+  "run_id": 40126420107,
+  "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107",
+  "workflow_conclusion": "success",
+  "collection": {
+    "original_http_date": "2026-10-24T19:50:46Z",
+    "original_method": "independent HTTPS GET of official public GitHub summary and six individual job pages; exact commit hyperlink and per-job succeeded text parsed; no API bypass or authentication workaround; public check-step attributes independently confirm architecture authentication, configuration, build and test succeeded in every job; GCC Release packaging steps succeeded",
+    "local_rearchival_utc": "2026-10-24T20:59:46.466610+00:00",
+    "fresh_hosted_log_retrieval": false
+  },
+  "workflow_blob_sha256": "5a742a942f2e2b0d2ab5c8305fc8127026838edf729edd12ca6c34109be6c504",
+  "jobs": [
+    {
+      "job_id": 120968725390,
+      "name": "build-and-test (clang, asan-ubsan)",
+      "conclusion": "success",
+      "duration_display": "2m 27s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725390",
+      "http_status": 200,
+      "html_sha256": "f49bc7eb9cb67ef4a720b15409d32219fe55ee7faae24a756046d0a3822f7c1a",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:33Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:33Z",
+          "completed-at": "2026-10-24T19:41:35Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:35Z",
+          "completed-at": "2026-10-24T19:43:04Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:04Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:38Z",
+          "completed-at": "2026-10-24T19:43:38Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725587,
+      "name": "build-and-test (clang, debug)",
+      "conclusion": "success",
+      "duration_display": "1m 32s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725587",
+      "http_status": 200,
+      "html_sha256": "b6a471db2c1c41dda72c36ff99c05ef5101d9f886c94fd5baeea45cae4aadc01",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:42:08Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:08Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:45Z",
+          "completed-at": "2026-10-24T19:42:45Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725484,
+      "name": "build-and-test (clang, release)",
+      "conclusion": "success",
+      "duration_display": "2m 32s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725484",
+      "http_status": 200,
+      "html_sha256": "16258053350de23cbb826ae70d71af90190dcd6237b8809b26e1c294682501e1",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:30Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:30Z",
+          "completed-at": "2026-10-24T19:41:32Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:32Z",
+          "completed-at": "2026-10-24T19:42:35Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:35Z",
+          "completed-at": "2026-10-24T19:42:59Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:59Z",
+          "completed-at": "2026-10-24T19:43:22Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:22Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:44Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:44Z",
+          "completed-at": "2026-10-24T19:43:45Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:45Z",
+          "completed-at": "2026-10-24T19:43:45Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725538,
+      "name": "build-and-test (gcc, asan-ubsan)",
+      "conclusion": "success",
+      "duration_display": "7m 16s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725538",
+      "http_status": 200,
+      "html_sha256": "451de62b1410b79d1a2d0932fc0f6697448f0e7626f11c0ab047fa5dda73e4cf",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:17Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:17Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:21Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:21Z",
+          "completed-at": "2026-10-24T19:42:57Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:57Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:48:27Z",
+          "completed-at": "2026-10-24T19:48:27Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725499,
+      "name": "build-and-test (gcc, debug)",
+      "conclusion": "success",
+      "duration_display": "1m 31s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725499",
+      "http_status": 200,
+      "html_sha256": "b30860ce5aec5313ba81d294e78902c0c4a34406085b278eeca634cb31c9e4f0",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:41:20Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:20Z",
+          "completed-at": "2026-10-24T19:42:07Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:07Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "skipped",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        }
+      ]
+    },
+    {
+      "job_id": 120968725573,
+      "name": "build-and-test (gcc, release)",
+      "conclusion": "success",
+      "duration_display": "4m 36s",
+      "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40126420107/job/120968725573",
+      "http_status": 200,
+      "html_sha256": "24d2d8a504b93bfc6b48de4b733f163412e5a3b88bbdf2f33b5a509a291f22fa",
+      "steps": [
+        {
+          "number": "1",
+          "name": "Set up job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:14Z",
+          "completed-at": "2026-10-24T19:41:15Z"
+        },
+        {
+          "number": "2",
+          "name": "Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:15Z",
+          "completed-at": "2026-10-24T19:41:16Z"
+        },
+        {
+          "number": "3",
+          "name": "Authenticate fresh native runner and source",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:16Z",
+          "completed-at": "2026-10-24T19:41:19Z"
+        },
+        {
+          "number": "4",
+          "name": "Build qualified optional gzip dependency in private prefix",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:19Z",
+          "completed-at": "2026-10-24T19:41:28Z"
+        },
+        {
+          "number": "5",
+          "name": "Select compiler",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:28Z",
+          "completed-at": "2026-10-24T19:41:28Z"
+        },
+        {
+          "number": "6",
+          "name": "Prepare pinned Python research dependencies",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:28Z",
+          "completed-at": "2026-10-24T19:41:32Z"
+        },
+        {
+          "number": "7",
+          "name": "Configure",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:32Z",
+          "completed-at": "2026-10-24T19:41:34Z"
+        },
+        {
+          "number": "8",
+          "name": "Build",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:41:34Z",
+          "completed-at": "2026-10-24T19:42:43Z"
+        },
+        {
+          "number": "9",
+          "name": "Test",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:42:43Z",
+          "completed-at": "2026-10-24T19:43:08Z"
+        },
+        {
+          "number": "10",
+          "name": "Benchmark correctness and metadata smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:08Z",
+          "completed-at": "2026-10-24T19:43:32Z"
+        },
+        {
+          "number": "11",
+          "name": "Phase 2 correctness and evidence smoke (no performance gate)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:32Z",
+          "completed-at": "2026-10-24T19:43:56Z"
+        },
+        {
+          "number": "12",
+          "name": "Build and validate private local wheel (no publication)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:43:56Z",
+          "completed-at": "2026-10-24T19:44:51Z"
+        },
+        {
+          "number": "13",
+          "name": "Source archive reproducibility and integrity",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:44:51Z",
+          "completed-at": "2026-10-24T19:44:54Z"
+        },
+        {
+          "number": "14",
+          "name": "Install wheel built from verified source archive",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:44:54Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "15",
+          "name": "Evidence locations (preserve logs before retention expires)",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "30",
+          "name": "Post Run actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        },
+        {
+          "number": "31",
+          "name": "Complete job",
+          "conclusion": "success",
+          "started-at": "2026-10-24T19:45:49Z",
+          "completed-at": "2026-10-24T19:45:49Z"
+        }
+      ]
+    }
+  ],
+  "runner_architecture": {
+    "label": "ubuntu-24.04-arm",
+    "source": "tested workflow declares GitHub-hosted ARM64 label and asserts runner.arch ARM64, uname aarch64, exact clean checkout; six jobs independently succeeded",
+    "raw_uname_cpu_os_versions": "not retrieved; signed-in step logs unavailable",
+    "emulation": false,
+    "hardware_attestation": false
+  },
+  "canonical_policy": {
+    "native_ctest_per_job": 154,
+    "gcc_release_python_ctest": 157,
+    "total_configured_ctest": 927,
+    "zero_failures_skips_disabled": true,
+    "canonical_sha256": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+    },
+    "canonical_evidence": "workflow-enforced checks in successful jobs; raw JUnit/hash output NOT independently exported",
+    "python": "GCC Release bindings, checkout/source-archive wheels, installed interface/export/example tests, duplicate fixed-epoch sdist and member inventory required by successful workflow",
+    "python_sanitizer": "not configured for hosted ARM64",
+    "sanitizers": "GCC and Clang combined ASan+UBSan at Debug -g -O1; no NDEBUG;180s child timeout and60min ceiling unchanged"
+  },
+  "availability": {
+    "public_job_step_metadata": "archived selected facts and original page checksums",
+    "compiler_cmake_versions": "not exported; no configured signed-in identity",
+    "junit_raw_logs": "unavailable through existing authorization; no bypass/retry of blocked API",
+    "locally_reconstructed_logs": false
+  },
+  "source_receipt": {
+    "path": "docs/NATIVE_ARM64_QUALIFICATION_EVIDENCE.json",
+    "sha256": "5eb32157cd3dc56d6eba93d72a48c5877abc12aff8c546b888691bec093b88a9"
+  },
+  "raw_page_receipts": {
+    "arm-run3-web.headers": "abdce434f3abd9dff673b7e9bdcc4c977ca6c07d55271c4def3a3bc47e78c7e5",
+    "arm-run3-web.html": "6dc01aa99c762c3c5725c510947caf465f2f94bdac0726b632b526fa869ce9df",
+    "arm-run3.err": "b8c000b7945d1e8102c528ff5a9870047ccc0d8bcbe1460e3374c2635bb56160",
+    "job-120968725390.headers": "28b87e3ad43c6c48f17d07e883385c15ddaf80682a73889bf004ba9d95169287",
+    "job-120968725390.html": "f49bc7eb9cb67ef4a720b15409d32219fe55ee7faae24a756046d0a3822f7c1a",
+    "job-120968725390.txt": "8bb4d3ac1cd2da9c0b51c667b705d5e0488a76c4869f00390da84c4928073cc8",
+    "job-120968725484.headers": "4295b1b04ee5006c5b95ef2c172d28b6e6322103430ff2ff213715a596b124a6",
+    "job-120968725484.html": "16258053350de23cbb826ae70d71af90190dcd6237b8809b26e1c294682501e1",
+    "job-120968725484.txt": "0ffb186d615f774619682630127cc1732a655f41618e03d84f564b762d0a5227",
+    "job-120968725499.headers": "62b46c986acaa3737289c5d9afbea5d84269ff9818734ed43bafcf4f2c7db2bf",
+    "job-120968725499.html": "b30860ce5aec5313ba81d294e78902c0c4a34406085b278eeca634cb31c9e4f0",
+    "job-120968725499.txt": "99a9145a6c67e0a3e849c818c337c907967700f0585f29a26846c06c779cb330",
+    "job-120968725538.headers": "65430efa9979774c01c0901f6afa62804c2cad6818c84f03c6e1e50bd0b9ff00",
+    "job-120968725538.html": "451de62b1410b79d1a2d0932fc0f6697448f0e7626f11c0ab047fa5dda73e4cf",
+    "job-120968725538.txt": "dc8e1556fb02e11eeb0b2cb7a1f6e6f4081c08dff89abc37805607ce16baa962",
+    "job-120968725573.headers": "8d98dec49c11a16f20a1c5289eac3ebb92a03c3c4087bf4189f984e844e1a8c3",
+    "job-120968725573.html": "24d2d8a504b93bfc6b48de4b733f163412e5a3b88bbdf2f33b5a509a291f22fa",
+    "job-120968725573.txt": "c68c91559e8a272cfab9401516b9c8954ed722fecb2804bec321fbbd289a0443",
+    "job-120968725587.headers": "110d5ca69c852dd7679049d9e3687a6fc324986552eb975f4ca2176878c4fe44",
+    "job-120968725587.html": "b6a471db2c1c41dda72c36ff99c05ef5101d9f886c94fd5baeea45cae4aadc01",
+    "job-120968725587.txt": "533a0cd4e39b1ad9277be7dd4df819a687c636403203644136aa1c8478055b6a",
+    "jobs-web.json": "a0e38ae5221a5c77924515f60f91fc32406d71601d2d495b7f527f53bd19166c"
+  },
+  "limitations": [
+    "This rearchives original verified public metadata, not a new workflow run or new HTTP observation",
+    "Raw page nonces are not committed",
+    "Current HEAD differs; native qualification does not transfer automatically"
+  ],
+  "current_local_regression": {
+    "tested_head": "c9df510a7f4c926715a8b0a8d0c1350cca33d85a",
+    "matrix": [
+      {
+        "configuration": "phase9-clean-debug",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clean-debug.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 49.751,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "e634ec79572f4db1222cdcb9d1b8ad0489af39b688911e440b66cb953bf0c95c",
+        "log_sha256": "56bd31d2593e7d0604b46df27ac89289f807eeb68121011f8ec4ce928f77eae8"
+      },
+      {
+        "configuration": "phase9-clean-release",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clean-release.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 28.421,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "0933f6ede4384f042368874891b36e5e0905071059a6c1e65d55da4cbbc54363",
+        "log_sha256": "9d20f25be71236c2199214ed51c67b112da9670e98620972ea25bf08661bae80"
+      },
+      {
+        "configuration": "phase9-clean-asan-ubsan",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clean-asan-ubsan.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 113.033,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "b37e2f3ee4b98e799888f41e0db4158c8b9e71a7617c374e6ef74141a2e6b343",
+        "log_sha256": "05e10ce432a102fab5da2f0c9956da535ab6507226474bcae8b100f4fd76bdff"
+      },
+      {
+        "configuration": "phase9-clang-debug",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clang-debug.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 47.049,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "4d468ac76e3d86f301ed92a930d75030830b61b466336c80f03d37d96a4b7e57",
+        "log_sha256": "84b9e8aa32bccc6cf61bfe5ab38e3baddabb2ea7d172adaf22d58806fc260c33"
+      },
+      {
+        "configuration": "phase9-clang-release",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clang-release.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 30.346,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "92b23b82a6f6fb37dcb93c9312f655adc0ef1d335414688953c1e8b12e5c7236",
+        "log_sha256": "a9d5b52b9d874583870d436c29f90dc9b652ecb02b978e7008e3de775def07a7"
+      },
+      {
+        "configuration": "phase9-clang-asan-ubsan",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/phase9-clang-asan-ubsan.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 104.258,
+        "counts": {
+          "tests": 154,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "94d59ac9366a0536a264837257a0ba48eb2db5d2696fa1d6d3aef89858aaecf3",
+        "log_sha256": "cd97bcb0badb023e4ae6fdf97cfe6e0140fb6776dcf4579a28c8af085fea6c13"
+      },
+      {
+        "configuration": "python-debug",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-debug"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/python-debug.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 50.74,
+        "counts": {
+          "tests": 157,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "187d71b4ce6cdd2245faadf1992114ea09da5ac4ca3679c4b03f2be3dce910e9",
+        "log_sha256": "a76a2515513a41c6acebcb6439a8c1aefdfd9226f543bf86d21e829bb9442cff"
+      },
+      {
+        "configuration": "python-release",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-release"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/python-release.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 33.974,
+        "counts": {
+          "tests": 157,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "91ec7e2df0eecad2a73937be5a61d9b5314b01118369d53803f37efd8bd3b13a",
+        "log_sha256": "aef46ae988c22be4c7cad57c1fe05eec83f12b4ce0759c05b452f7c38be32b0b"
+      },
+      {
+        "configuration": "python-asan-ubsan",
+        "commands": [
+          [
+            "cmake",
+            "-S",
+            "/workspace/GIG-C-Microstructure-Engine",
+            "-B",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan"
+          ],
+          [
+            "cmake",
+            "--build",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+            "--parallel",
+            "1"
+          ],
+          [
+            "ctest",
+            "--test-dir",
+            "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+            "--output-on-failure",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/readiness-program/phase2/evidence/python-asan-ubsan.xml"
+          ]
+        ],
+        "exits": [
+          0,
+          0,
+          0
+        ],
+        "elapsed_seconds": 116.323,
+        "counts": {
+          "tests": 158,
+          "failures": 0,
+          "skipped": 0,
+          "disabled": 0
+        },
+        "canonical_sha256": {
+          "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        },
+        "junit_sha256": "d8ffb69f7e74c47de38c421561ad4ce07d44ea4a3d010e361aaf6d3c6a5bca71",
+        "log_sha256": "8bc8a9d126f80045bded4055b24918b88dfaf5353bf409c1bf3e0c2696ef10dd"
+      }
+    ],
+    "total_outcomes": 1396,
+    "failures": 0,
+    "skips": 0,
+    "canonical_sha256": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+    },
+    "installed_checks": 14,
+    "installed_fault_checks": 2,
+    "security_receipt_controls": 10,
+    "packaging_controls": 3,
+    "scope": "Local x86, existing installed wheel whose native engine/Python bytes remain unchanged; not a new hosted ARM run"
+  },
+  "local_raw_sha256": {
+    "checks/installed-faults.log": "1039f4d2c3d19f1da463040f356d718cb5975e3dd6dd830622821562609b7edf",
+    "checks/installed-interface.log": "2510c4133abf1a53781d9c0c2656b4a52eceef3ceaa902c32f87abef155d272e",
+    "checks/packaging.log": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424",
+    "checks/installed-exports.log": "3f6b849d33f5dd512f226348235a5d3a05c562223f5f833813e5c21a71ef0c0f",
+    "checks/security.log": "e2693b5e288f4b0c8fdd69d1a37fda92b4378caba1338ec0085a21eb16728a54",
+    "evidence/matrix-gcc.json": "d6852537bc29779aee765d06e2d294236eff41c8cc5339e8e5df0a0a324f7e7f",
+    "evidence/phase9-clang-asan-ubsan.xml": "94d59ac9366a0536a264837257a0ba48eb2db5d2696fa1d6d3aef89858aaecf3",
+    "evidence/python-release.xml": "91ec7e2df0eecad2a73937be5a61d9b5314b01118369d53803f37efd8bd3b13a",
+    "evidence/phase9-clang-asan-ubsan.log": "cd97bcb0badb023e4ae6fdf97cfe6e0140fb6776dcf4579a28c8af085fea6c13",
+    "evidence/phase9-clang-debug.log": "84b9e8aa32bccc6cf61bfe5ab38e3baddabb2ea7d172adaf22d58806fc260c33",
+    "evidence/gcc-driver.log": "5321f80fde036ca7927f842a457486482ff704f18366492f579235cee7e5b245",
+    "evidence/python-debug.xml": "187d71b4ce6cdd2245faadf1992114ea09da5ac4ca3679c4b03f2be3dce910e9",
+    "evidence/phase9-clean-release.xml": "0933f6ede4384f042368874891b36e5e0905071059a6c1e65d55da4cbbc54363",
+    "evidence/phase9-clean-asan-ubsan.xml": "b37e2f3ee4b98e799888f41e0db4158c8b9e71a7617c374e6ef74141a2e6b343",
+    "evidence/python-asan-ubsan.log": "8bc8a9d126f80045bded4055b24918b88dfaf5353bf409c1bf3e0c2696ef10dd",
+    "evidence/phase9-clang-release.log": "a9d5b52b9d874583870d436c29f90dc9b652ecb02b978e7008e3de775def07a7",
+    "evidence/phase9-clean-release.log": "9d20f25be71236c2199214ed51c67b112da9670e98620972ea25bf08661bae80",
+    "evidence/phase9-clang-release.xml": "92b23b82a6f6fb37dcb93c9312f655adc0ef1d335414688953c1e8b12e5c7236",
+    "evidence/matrix-python.json": "faa1b48dadbbfb0bdb3dd6f44ee809dffe918caed45b5b657642a6c821a3d953",
+    "evidence/python-debug.log": "a76a2515513a41c6acebcb6439a8c1aefdfd9226f543bf86d21e829bb9442cff",
+    "evidence/phase9-clang-debug.xml": "4d468ac76e3d86f301ed92a930d75030830b61b466336c80f03d37d96a4b7e57",
+    "evidence/phase9-clean-debug.xml": "e634ec79572f4db1222cdcb9d1b8ad0489af39b688911e440b66cb953bf0c95c",
+    "evidence/python-asan-ubsan.xml": "d8ffb69f7e74c47de38c421561ad4ce07d44ea4a3d010e361aaf6d3c6a5bca71",
+    "evidence/clang-driver.log": "cc85f68ca989a2504074bef5b07569d6c9e1ae7ae3836b8fd6a2ea083a8be4fe",
+    "evidence/python-release.log": "aef46ae988c22be4c7cad57c1fe05eec83f12b4ce0759c05b452f7c38be32b0b",
+    "evidence/matrix-clang.json": "d6890ced5c6fe849ebd0e67a553490be320922bb4807e0a8c004605bbfd23af1",
+    "evidence/python-driver.log": "c5b1f1d2867f51d696c2f6e54062974a1aaf9eb59fb2ba86fa572bc9588f11dd",
+    "evidence/phase9-clean-debug.log": "56bd31d2593e7d0604b46df27ac89289f807eeb68121011f8ec4ce928f77eae8",
+    "evidence/phase9-clean-asan-ubsan.log": "05e10ce432a102fab5da2f0c9956da535ab6507226474bcae8b100f4fd76bdff"
+  }
+}
