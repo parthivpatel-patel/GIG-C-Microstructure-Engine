@@ -69,3 +69,14 @@ controls,3 packaging-pattern controls,8 receipt controls pass. Only workflow,
 notice and receipt-tool/test changes; no engine arithmetic/book/journal behavior
 change, so expensive native matrices are not repeated. Full hosted execution of
 the new action is an explicitly unresolved verification item, not a claimed pass.
+
+
+## Phase4 evidence correction
+
+The original Phase2 packaging-pattern command accidentally used the default Python
+rather than the locked /workspace/gig-tools/bin/python and failed importing
+scikit_build_core. Its earlier pass wording was premature; the failed log remains
+build/four-phase/phase2/packaging-tests.log. Phase4 reran the same three tests with
+the documented locked interpreter:3/3 pass, no assertion or source change. The
+current consolidated results use this executed corrected outcome, not the earlier
+failed invocation. Dependency/runtime selection is part of reproducibility.

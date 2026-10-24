@@ -979,3 +979,91 @@ dependence across compilers. New independent fixture reference coverage and full
 canonical benchmark comparisons are included in CORRECTNESS_REMEDIATION.md. This
 is an authorized reproducibility repair, not the start of a storage optimization
 or the next roadmap phase. The original audit prefix remains unchanged.
+
+## Four-phase source review addendum — October24,2026
+
+This addendum preserves every byte of the historical audit above. Current review
+baseline0c5bb96fddc727332bd23687a1558602d6854fa2, engine implementationf02363e;
+new source/test/infrastructure evidence is distinct from the originalccc86d audit.
+This is finite adversarial engineering review, not outside-human certification or
+knowledge of proprietary firm implementations. The original four defects and
+compiler metadata/RNG repairs remain historically reproduced and remediated; they
+are not presented as current unresolved bugs.
+
+Current implementation is a coherent bounded deterministic research engine:
+staged FIFO book, explicit event/sequence ownership, separate synthetic simulator,
+exact rational analytics/execution/TCA, bounded wire/context/reconstruction/gzip,
+provenance/export/schema boundaries and independent references. Full observed-market
+integration and production operation are deliberately absent. No newly reproduced
+critical/high production engine defect was established in this review.
+
+### Current source-level audit matrix
+
+All ranges below refer to the current review baseline. Exact source SHA256, current
+behavior, why it matters, reproduction/test evidence, proposed improvement,
+measurable acceptance, relative effort and dependencies are recorded per finding
+in evidence/institutional_audit_findings.json.
+
+| ID | Severity / status | Exact source range | Assessment |
+|---|---|---|---|
+|A01|Low / Implemented|src/book/order_book.cpp:13–115|Maps/FIFO/index and staging are defensible; standard allocation/rehash costs remain. Avoid unmeasured custom-container rewrite.|
+|A02|High / Missing observed capability|src/itch/reconstruction.cpp:64–80|Synthetic initialization gate is correct; no authenticated observed L3 seed/adapter. Missing scope, not evidence of synthetic-book defect.|
+|A03|Medium / Partial|src/replay/replay.cpp:109–132|Journal reserve/restart logic is atomic logically but large and retains geometric coexistence costs.|
+|A04|High / Missing production durability|python/gig_microstructure/__init__.py:385–430|Normal file fsync/incomplete guards are implemented; no durable multi-file transaction/directory fsync/crash journal.|
+|A05|Medium / Partial|include/gig/events/contracts.hpp:140–164|64-order complete snapshot boundary cannot represent arbitrary large recovery or observed context seed.|
+|A06|Medium / Implemented, uncalibrated|src/analytics/flow_metrics.cpp:94–143|Exact causal quote/tick estimates and bounded horizons, not observed aggression or empirical impact/alpha.|
+|A07|Medium / Partial|src/simulation/simulator.cpp:108–144|Full staged State clones and synthetic latency are correct within contract, potentially costly and uncalibrated.|
+|A08|High / Unverified provider applicability|docs/SECURITY_QUALIFICATION.md:1–28|No comprehensive security clearance; managed runtime/advisory/vendor evidence missing.|
+|A09|Low / Repaired|scripts/verify_reproduction.py:20–55|Phase1 internal-parent-symlink policy gap reproduced and repaired in Phase2;8 controls pass. No external escape reproduced.|
+|A10|Medium / Partial|.github/workflows/native-arm64.yml:1–36|New official immutable Node24 action and no persisted credential; hosted update not executed under no-dispatch rule.|
+|A11|Medium / Partial|pyproject.toml:1–20|Exact package/backend contracts exist; other declared Python/OS/ABI compatibility still needs actual qualification.|
+|A12|Medium / Partial|benchmarks/journal_memory_probe.cpp:8–42|Correct PMR/count/timing scope, not exchange latency/whole-allocator fragmentation qualification.|
+|A13|High / Missing observed reference|scripts/check_observed_l3_readiness.py:15–43|All-claimed input cannot certify missing observed adapter/history/reference.|
+|A14|Low / Implemented|include/gig/analytics/exact.hpp:8–34|Portable checked127-magnitude arithmetic preserved;128-bit compiler requirement/approximate sqrt are explicit.|
+|A15|Medium / Partial|docs/NATIVE_ARM64_QUALIFICATION.md:13–64|Actual source-bound hosted nativeARM success preserved; raw JUnit/versions/archive not independently exported.|
+
+### New controlled operational and resource evidence
+
+Two independent authored ENOSPC faults (input fsync, final manifest hard-link)
+were injected against both fresh installed wheel consumers:4/4 outcomes pass.
+Each preserves caller manifest, leaves the incomplete marker, creates no complete
+manifest and fails verify_export. These are controlled API faults, not actual
+filled-disk, power-loss or kill/restart tests. No production durability claim.
+
+Journal scaling:36 sequential native Release measured processes plus12 warmups,
+GCC14/Clang19, records128/512/2048 × reset interval0/17 ×3 repetitions. Every count,
+reset count, independent byte ledger and post-destruction-zero check passed.
+Ordinary record12,232 bytes; logical entry15,944 unchanged. Representative GCC PMR:
+
+| Records / reset every | Live bytes | Peak bytes | Allocations |
+|---|---:|---:|---:|
+|128 /0|1,566,112|2,348,960|9|
+|128 /17|1,595,872|2,363,840|20|
+|512 /0|6,263,200|9,394,592|11|
+|512 /17|6,382,240|9,454,112|47|
+|2048 /0|25,051,552|37,577,120|13|
+|2048 /17|25,527,712|37,815,200|141|
+
+These are tracked PMR, not peak RSS or allocator fragmentation. Raw per-process
+elapsed times, binary hashes and exact workload/repetition scopes are retained in
+evidence/institutional_audit_findings.json; no throughput SLA, compiler ranking or
+optimization inferred from shared-host timings. No journal redesign undertaken.
+
+### Dependency-aware recommendations and readiness
+
+First finish provider/dependency applicability and exact existing-run artifact
+archival; qualify the pinned checkout change only with separate owner-approved
+hosted execution. Then design the observed adapter/initial context seed/reference
+contract before any larger dataset acquisition. Next, if measured retention remains
+a blocker, propose a versioned compact journal with frozen-prefix/reset/allocation
+oracle equivalence. Preserve simple containers until equivalent-workload evidence
+justifies complexity. Do not build brokers, live execution, dashboards, HA or
+large persistence infrastructure merely to advertise production readiness.
+
+Private bounded synthetic research: GO within tested scopes. Real-market decoder
+preparation: strengthened, not full historical compatibility or certified L3.
+Formal security/evidence closure: blocked/partial as documented. Production trading
+and crash-durable operations: outside current verified scope. Terminal/live/broker
+integration was not modified or attempted. Strong interview evidence is exact
+source-bound reproducibility, independent oracles, explicit failure proofs and
+honest limits—not unsupported institutional/production labels.

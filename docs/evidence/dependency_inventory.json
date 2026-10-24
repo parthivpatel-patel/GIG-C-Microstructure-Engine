@@ -620,5 +620,229 @@
     "Managed host/kernel/provider patch identities unavailable",
     "PyPI feed absence not proof of absence; no paid scanner used",
     "No hosted workflow executed after action update"
-  ]
+  ],
+  "action_bundle_declared_dependencies": {
+    "source": "official immutable checkout package.json at d23441a48e516b6c34aea4fa41551a30e30af803",
+    "declared_ranges": {
+      "@actions/core": "^1.10.1",
+      "@actions/exec": "^1.1.1",
+      "@actions/github": "^6.0.0",
+      "@actions/io": "^1.1.3",
+      "@actions/tool-cache": "^2.0.1",
+      "uuid": "^9.0.1"
+    },
+    "limitation": "Declared ranges are not a resolved bundled SBOM or independently scanned lock tree; full transitive action applicability remains open",
+    "components": [
+      {
+        "name": "@actions/core",
+        "declared_range": "^1.10.1",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      },
+      {
+        "name": "@actions/exec",
+        "declared_range": "^1.1.1",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      },
+      {
+        "name": "@actions/github",
+        "declared_range": "^6.0.0",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      },
+      {
+        "name": "@actions/io",
+        "declared_range": "^1.1.3",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      },
+      {
+        "name": "@actions/tool-cache",
+        "declared_range": "^2.0.1",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      },
+      {
+        "name": "uuid",
+        "declared_range": "^9.0.1",
+        "license": "not independently inventoried for resolved bundled version",
+        "source": "official immutable checkout package.json",
+        "update": "reviewed immutable action pin",
+        "support_security_status": "unverified transitive bundle; not a clean vulnerability result"
+      }
+    ]
+  },
+  "prioritized_advisory_register": [
+    {
+      "id": "CVE-2026-84782",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed DTLS retransmissions of handshake messages from a stale buffer offset. ([CVE-2026-84782])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-35189",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed excessive memory allocation in relative CRLDP processing. ([CVE-2026-35189])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-35191",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed QUIC unvalidated amplification credit may be over-accounted. ([CVE-2026-35191])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-42772",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed potential CPU DoS via O(n^2) fragment reassembly in QUIC. ([CVE-2026-42772])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-54872",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed a timing side-channel in scalar multiplication for mon-NIST EC curves. ([CVE-2026-54872])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-54873",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed QUIC `STREAM` fragment metadata DoS. ([CVE-2026-54873])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-54875",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed non-constant-time SM2 scalar multiplication on ARM64 and RISC-V. ([CVE-2026-54875])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-72897",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed out-of-bounds access after `SSL_set_SSL_CTX()` during a handshake. ([CVE-2026-72897])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-75804",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed QUIC connection-level flow control was not enforced for streams. ([CVE-2026-75804])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-75805",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed a NULL pointer dereference in CMP client revocation response handling. ([CVE-2026-75805])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-75806",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed an unauthenticated and undersized DTLS 1.2 AEAD record causing DoS. ([CVE-2026-75806])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-77696",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed a timing side-channel in SM2 signature generation. ([CVE-2026-77696])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-84784",
+      "component": "managed Python OpenSSL3.5.8",
+      "public_fix": "OpenSSL3.5.9 Sep29,2026 security release",
+      "affected_range": "full range not independently established by brief NEWS; installed predecessor requires provider/backport applicability",
+      "project_exploitability": "no exploit reproduced; engine does not expose DTLS/QUIC/CMP/SM2/context-switch APIs; ordinary HTTPS/crypto/provider applicability remains unresolved",
+      "summary": "Fixed an unbounded `RETIRE_CONNECTION_ID` backlog in QUIC stack implementation. ([CVE-2026-84784])",
+      "mitigation": "provider dated patch/feature map or supported qualified patched runtime",
+      "status": "unresolved applicability",
+      "source_sha256": "27ecfd0c5fbb75afa355e442fdbcea1eb7d5d83aea4a98afb10d424a33149d1f"
+    },
+    {
+      "id": "CVE-2026-22184",
+      "component": "zlib1.3.1",
+      "affected_range": "CNA custom version range0 through1.3.1.2 inclusive; default unaffected outside range",
+      "project_exploitability": "CNA explicitly contributes untgz, not deployed in engine inflater",
+      "status": "specific deployed core path not applicable; not blanket package clearance",
+      "mitigation": "do not deploy untgz; preserve bounded inflater and vendor mapping"
+    },
+    {
+      "id": "CVE-2026-93990",
+      "component": "Expat2.8.3",
+      "affected_range": "fixed2.8.5; complete upstream affected range/provider backports not independently established",
+      "project_exploitability": "described UTF16 path excluded by strict UTF8/NUL/DTD handling for trusted local evidence; other issues unqualified",
+      "status": "specific path excluded; wider provider review open",
+      "mitigation": "provider patch identity or qualified parser/runtime before hostile intake"
+    }
+  ],
+  "source_scope": "Inventory first captured during Phase2 dirty worktree at b69558a; reviewed action/receipt changes committed7c5f022. Phase4 adds declared transitive ranges and advisory applicability register; source_commit is the original observation HEAD, not an executed action revision."
 }
