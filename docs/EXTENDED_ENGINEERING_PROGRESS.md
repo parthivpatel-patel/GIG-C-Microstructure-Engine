@@ -14,3 +14,12 @@ feasibility; phase10 dated dependency applicability; phase11 controlled reliabil
 performance audit; phase12 candidate report/matrix/actions. Continue offline despite
 API blocker; do not retry without access change. Push/remote verification records
 are updated at each milestone and in final local delivery evidence.
+
+## Phase8 checkpoint
+
+No genuinely independent executor/identity available; RC13 BLOCKED. Exact fresh
+Linux/source/dependency/test/package/resource recipe in PHASE8_INDEPENDENT_REPRODUCTION.md;
+existing CI reused, no paid provisioning. Next phase9: investigate actual ARM cross/
+emulation tooling separately from native claims, then security/applicability and
+reliability measurements. Initial package metadata offers official Ubuntu cross
+GCC13 and qemu-user; no installation/test claimed yet.
