@@ -23,3 +23,14 @@ existing CI reused, no paid provisioning. Next phase9: investigate actual ARM cr
 emulation tooling separately from native claims, then security/applicability and
 reliability measurements. Initial package metadata offers official Ubuntu cross
 GCC13 and qemu-user; no installation/test claimed yet.
+
+## Phase9 validated partial checkpoint
+
+AArch64 GCC13.3 Release115-step build succeeded (sourceea2df475). Actual ARM ELFs
+running via explicit QEMU wrappers; no native ARM claim or binfmt. ABI char sign/
+long-double precision differences recorded. Full154-case emulated suite running;
+L3 oracle exceeded initial harness180s, preserved; targeted900s retry running.
+Phase9 is partial, not a passed full matrix. Logs build/extended/evidence/arm-*;
+container/work/extended retains source, build, ELFs, wrappers and JUnit. Resume
+by inspecting these exact processes/logs, not restarting all successful tests.
+Independent security inventory work can continue while those bounded jobs finish.
