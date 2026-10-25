@@ -1,0 +1,12 @@
+{
+  "name": "GIG native research terminal (private port)",
+  "build": {"dockerfile": "Dockerfile"},
+  "features": {"ghcr.io/devcontainers/features/node:1": {"version": "24.19.0"}},
+  "remoteUser": "vscode",
+  "forwardPorts": [8787],
+  "portsAttributes": {
+    "8787": {"label": "GIG native terminal — keep Private", "onAutoForward": "notify", "protocol": "http"}
+  },
+  "postCreateCommand": "bash scripts/setup_terminal.sh",
+  "customizations": {"vscode": {"settings": {"remote.autoForwardPorts": false}}}
+}

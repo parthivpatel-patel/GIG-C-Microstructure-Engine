@@ -3,6 +3,8 @@ import asyncio
 from contextlib import asynccontextmanager, suppress
 import json
 import os
+import re
+import ipaddress
 from pathlib import Path
 import time
 from urllib.parse import urlsplit
@@ -34,9 +36,32 @@ def origins_from_environment():
         raise RuntimeError('configure one to eight explicit GIG_TERMINAL_ALLOWED_ORIGINS')
     for origin in origins:
         u = urlsplit(origin)
+        if any(ord(c) < 33 or ord(c) > 126 for c in origin):
+            raise RuntimeError('origin must contain printable ASCII without whitespace')
+        try:
+            port = u.port
+        except ValueError:
+            raise RuntimeError('invalid origin port') from None
+        if port is not None and not 1 <= port <= 65535:
+            raise RuntimeError('invalid origin port')
         if u.scheme not in ('http', 'https') or not u.hostname or u.username or u.password or u.path or u.query or u.fragment or '*' in origin:
             raise RuntimeError('origins must be exact http(s) origins, without wildcard/credentials/path')
+        host = u.hostname
+        if not re.fullmatch(r'[A-Za-z0-9.-]+', host):
+            try: ipaddress.ip_address(host)
+            except ValueError: raise RuntimeError('invalid origin hostname') from None
     return origins
+
+
+def content_security_policy(origins):
+    # Explicit WS equivalents avoid browser differences in connect-src 'self'.
+    connections = ["'self'"]
+    for origin in origins:
+        u = urlsplit(origin)
+        connections.extend((origin, ('wss' if u.scheme == 'https' else 'ws') + '://' + u.netloc))
+    return ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; connect-src " + ' '.join(dict.fromkeys(connections)) +
+            "; frame-ancestors 'none'; base-uri 'none'; object-src 'none'")
 
 
 def error(code, message, status=400):
@@ -138,7 +163,7 @@ def create_app():
         response.headers['X-Content-Type-Options'] = 'nosniff'
         response.headers['Referrer-Policy'] = 'no-referrer'
         response.headers['Cache-Control'] = 'no-store'
-        response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws://localhost:8787 ws://127.0.0.1:8787; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+        response.headers['Content-Security-Policy'] = content_security_policy(origins)
         return response
 
     async def control_error(request, exc):

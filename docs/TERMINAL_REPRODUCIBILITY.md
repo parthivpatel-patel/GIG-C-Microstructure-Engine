@@ -69,3 +69,14 @@ Shared snapshot grammar is available at/api/v1/schema. Both dataset options in
 Historical Replay are authored. The provider-shaped option exercises native L2,
 not a live provider connection. Clock/fixture v2 changes are documented in
 HISTORICAL_DATA_PIPELINE.md. No old engine canonical identities changed.
+
+## Remote browser access correction
+
+The127.0.0.1 address above is for a browser on the same host only,not your phone /
+computer when the backend runs in Codex. See [BROWSER_ACCESS.md](BROWSER_ACCESS.md)
+for exact private Codespaces instructions. The repository now includes an optional
+Codespaces devcontainer plus setup/start scripts;no Codespace or paid resource was
+created. Launcher derives the exact Codespaces origin and preserves WS/CSP/Host guards.
+No externally verified Codex preview URL is available in this task. Server survival
+across one chat turn does not guarantee persistent hosting. Use Ports →8787 →Private
+→Open in Browser,not a guessed localhost URL. Keep internal port protocolHTTP.

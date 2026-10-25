@@ -1,0 +1,72 @@
+{
+  "schema": "gig.terminal.browser_access.v1",
+  "starting_commit": "e7810a4438cf3150185c012d38fc82201ed6e8ad",
+  "diagnosis": "Loopback URL was not remotely routable;existing server persisted across prior turn and local native endpoints returned200.",
+  "environment_capabilities": [],
+  "vpn_configured": false,
+  "verified_external_url": null,
+  "codespace_created": false,
+  "paid_resources_created": false,
+  "codespaces_container_built": false,
+  "source_image_metadata": {
+    "url": "https://mcr.microsoft.com/v2/devcontainers/cpp/manifests/1-ubuntu-24.04",
+    "method": "HEAD",
+    "image_downloaded": false,
+    "http_status": 200,
+    "content_type": "application/vnd.oci.image.index.v1+json",
+    "digest": "sha256:d51703c4fcbe93cd889d38005847521d87cca4d304f33423430daf10a384a332"
+  },
+  "official_docs_access": [
+    {
+      "url": "https://docs.github.com/en/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace",
+      "outcome": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces",
+      "outcome": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/github/docs/main/content/codespaces/developing-in-a-codespace/forwarding-ports-in-your-codespace.md",
+      "status": 200,
+      "bytes": 7267,
+      "sha256": "46527ab2edfbaa4c0d63c70ae09cd890a0258b849ac32cc12e8d04fe99aa7587"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/github/docs/main/content/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces.md",
+      "outcome": "HTTP Error 404: Not Found"
+    }
+  ],
+  "tests": {
+    "forwarding_host_origin_ws_policy": 12,
+    "terminal_regressions": 56,
+    "real_local_browser": 21,
+    "forwarding_sanitized": 12,
+    "live_lsan": 0,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser_version": "154.0.8037.57",
+  "browser_evidence_sha256": "3b1c2351dba9bb76c8d7afb3017943d3e4fb3c7d9d25b44f12daa9265f030c76",
+  "shell_script_syntax": "pass",
+  "devcontainer_json_syntax": "pass",
+  "native_cpp_sources_changed": false,
+  "canonical_status": "Prior1405 matrix/eight identities retained;no native rebuild or canonical regeneration needed for this startup/policy change.",
+  "limitations": [
+    "No actual Codespaces build or owner account/free-quota check",
+    "No external DNS/authentication/TLS/port-forward/browser test possible without an actual supported endpoint",
+    "Port must stay Private;Origin policy is not public authentication",
+    "Environment lifecycle is not guaranteed hosting"
+  ],
+  "raw_receipts": {
+    "codespaces-image.json": "0116c6e105bc08b3a12e58e5ea7c3e34595b43afb6dd1b1b3354aa51c562f18c",
+    "forwarding-sanitized.log": "bd80c59383c836451931b730a037adc6ea963f010d7bb86627ec4566ddc8f01d",
+    "official-docs.json": "4051ab4519820e23f1edf69fd77356086596eb5bbdb5eee7a6eeef971702e6fc",
+    "forwarding-tests.log": "edca76346841d697153e23bb15f76475ec2ac981dbc651f2f5c436876fc1b3e1",
+    "ports-source.md": "46527ab2edfbaa4c0d63c70ae09cd890a0258b849ac32cc12e8d04fe99aa7587",
+    "official-source-docs.json": "615d9397ff6f4e7071c8c86a66d81c35822305da46194aa9d5e7f19f46d128e9",
+    "terminal-regression.log": "a9491d0d45356879ee42da6a80491fc1e1ee9365f2ab9939de01df733bd65b9f",
+    "browser.log": "69c563fe31063e85c29cf08d3d802807b0da3404aa242694c8860174882d771b",
+    "server.log": "a10363ac299c2e9aa21a0a222dd5dea2cae13e354efae3bb326629108071f494",
+    "private-ports.md": "46b094a055104cf6f52215a51251dca06b34ac4cb873c46af6fc9b3b30256e69"
+  }
+}
