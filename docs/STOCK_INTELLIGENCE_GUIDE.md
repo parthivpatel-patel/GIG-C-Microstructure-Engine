@@ -80,7 +80,7 @@ cap per request,identity encoding only,8s HTTP timeout,25s whole refresh,one req
 shards or pagination are automatically fetched. A compressed response is refused rather
 than unboundedly decompressed. Normalized cache is at most8 issuers/three providers,
 2MiB per provider result (48MiB serialized payload ceiling,not a Python RSS guarantee).
-All required responses validate before replacing accepted cache;failure preserves it.
+Each published component validates before replacing accepted cache. Partial SEC/equities results explicitly retain successful sections;all-component failure preserves the prior cache.
 Raw JSON bytes are hashed then discarded;no new disk cache or observed recording.
 
 Filings preserve form,accession,filing date,optional acceptance timestamp,report date,
@@ -166,7 +166,7 @@ terminal live qualification. Recording has its separate existing rights gate.
 ## Native ARM64 and regression handoff
 
 Manual-only,owner-gated,no-cost eligibility confirmation and exact feature-branch guard
-are unchanged. Workflow now requires251 terminal tests in its GCC Release wheel step,
+are unchanged. Workflow now requires253 terminal tests in its GCC Release wheel step,
 with all crypto/SEC/Alpaca live flags disabled. No workflow was dispatched;previous native
 ARM64 results remain SHA-specific. Latest-source qualification is an owner action.
 
@@ -174,7 +174,7 @@ Local full binding cohort requires built authored diagnostic binaries via
 GIG_TERMINAL_NATIVE_BUILD and the installed native wheel:
 
 ```bash
-.venv/bin/python terminal/tests/run_native_suite.py --expected-tests 251
+.venv/bin/python terminal/tests/run_native_suite.py --expected-tests 253
 npm --prefix terminal/web run build
 node terminal/tests/stock-intelligence-validation.mjs
 ```

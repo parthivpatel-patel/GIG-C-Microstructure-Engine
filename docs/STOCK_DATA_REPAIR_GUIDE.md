@@ -102,7 +102,9 @@ another symbol cancels the prior job before changing its shared status. Accepted
 stay keyed by issuer/provider. Browser responses are version-guarded so a late AAPL
 response cannot populate NVDA. Refresh/browser restart can reload approved sources.
 
-SEC,Alpaca equities and indicative options have separate outcomes. SEC failures/cooldown
+SEC,Alpaca equities and indicative options have separate outcomes. Submissions and
+companyfacts also validate independently:available filings survive unavailable facts,
+and valid financials survive unavailable filings,with explicit PARTIAL status. SEC failures/cooldown
 do not block Alpaca's host. For equities,bars,quote and trade validate independently:
 a403 quote cannot discard accepted bars/trade. PARTIAL and per-component reasons are
 explicit. No prior response is presented as newly observed when a refresh fails.
@@ -144,4 +146,4 @@ from an origin HTTP code;connect/TLS and timeout failures are sanitized. No auto
 SIP/OPRA fallback or limit expansion. Check age before treating any snapshot as current.
 
 Latest-source native ARM64 still requires an owner-controlled,no-cost-eligible manual
-workflow. Its terminal cohort is now251;no dispatch or qualification was performed here.
+workflow. Its terminal cohort is now253;no dispatch or qualification was performed here.

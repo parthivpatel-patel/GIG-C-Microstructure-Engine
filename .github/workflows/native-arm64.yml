@@ -136,7 +136,7 @@ jobs:
         run: |
           build/wheel-consumer/bin/python -m pip install -r terminal/server/requirements.txt
           build/wheel-consumer/bin/python -c 'import platform; assert platform.machine() == "aarch64"'
-          /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 251
+          /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 253
       - name: Source archive reproducibility and integrity
         if: matrix.compiler == 'gcc' && matrix.preset == 'release'
         shell: bash

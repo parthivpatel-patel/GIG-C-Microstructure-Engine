@@ -228,3 +228,22 @@ files),not direct blocked hosts or market data. Keys absent;no mounted Quant Ter
 repo found;no credential files inspected. Usage/entitlement and actual responses remain
 owner qualification gates. Exact next action:finish local regression gates,review and
 commit/push source with [skip ci],then inventory/package and consolidated repair evidence.
+
+Source repair caa9639117e93592d6df6fac6b313dadd173aa6e pushed/remotely verified.
+Full251 matrix and9 loaded-fixture/10 unavailable-provider/21 crypto/9 recorded/9 gated
+provider browser checks passed;TLS8/security46/packages3/installed8+6. Final scope review
+reproduced SEC all-or-nothing loss in2 negative cases:good filings discarded on facts
+failure and vice versa. Both now publish independent validated PARTIAL sections. Expanded
+full253 gate exposed a rate-error classification regression in the new partial-result
+aggregation. Preserve per-component safe failure codes rather than masking rate limits;
+focused77 and full253 gates must pass before the next commit. Exact next
+action:finish253 gate,commit/push the SEC partial-response repair,then clean-source
+benchmark/archive/evidence and consolidated handoff. No actual market observations.
+
+SEC partial-response final gate closed:full253/253 Release,Debug and ASan+UBSan;
+focused77/77,LSan0. Rate-limit cause classification repaired without weakening the
+existing assertion. Two failing-before SEC coupling cases and the earlier diagnostic
+regression logs are preserved. Full fixture-browser9 and local HTTPS/WSS8 passed
+against the final runtime;prior same-session unchanged UI/security/native gates retained.
+Next exact action:commit/push this validated SEC fix,run clean-source benchmark/archive,
+then commit consolidated STOCK_DATA_REPAIR_REPORT.md and safe evidence manifest.

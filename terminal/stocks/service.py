@@ -145,12 +145,18 @@ class StockWorkspace:
             try:
                 async with asyncio.timeout(25):
                     if provider=='sec':
-                        cik=company['cik'];url=f'https://data.sec.gov/submissions/CIK{cik}.json';urls.append(url)
-                        data,digest=await self.fetch(provider,url,headers);hashes.append(digest);result=sec.filings(data,cik)
-                        await asyncio.sleep(1.01)
-                        url=f'https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json';urls.append(url)
-                        data,digest=await self.fetch(provider,url,headers);hashes.append(digest)
-                        result['financials']=sec.facts(data,cik,stamp[:10])
+                        cik=company['cik'];result={'components':{}}
+                        requests=[('filings',f'https://data.sec.gov/submissions/CIK{cik}.json',lambda data:sec.filings(data,cik)),('financials',f'https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json',lambda data:sec.facts(data,cik,stamp[:10]))]
+                        for index,(kind,url,parse) in enumerate(requests):
+                            if index:await asyncio.sleep(1.01)
+                            try:
+                                data,digest=await self.fetch(provider,url,headers);parsed=parse(data)
+                                if kind=='filings':result.update(parsed)
+                                else:result['financials']=parsed
+                                urls.append(url);hashes.append(digest);result['components'][kind]={'status':'AVAILABLE'}
+                            except Exception as exc:result['components'][kind]={'status':'UNAVAILABLE','reason':failure_reason(exc,'upstream_parse_transport_or_validation_failure'),'action':'Review source policy,identity,schema and response budget;other accepted SEC section remains visible.'}
+                        if not hashes:raise AccessError('all_SEC_components_unavailable;'+','.join(k+'='+v['reason'] for k,v in result['components'].items()))
+                        if any(c['status']!='AVAILABLE' for c in result['components'].values()):result['reason']='Partial SEC response;missing section: '+','.join(k+':'+v['reason'] for k,v in result['components'].items() if v['status']!='AVAILABLE')
                     elif provider=='options':
                         from .option_feed import snapshots
                         url=f'https://data.alpaca.markets/v1beta1/options/snapshots/{ticker}?feed=indicative&limit=100';urls.append(url)
@@ -179,7 +185,7 @@ class StockWorkspace:
                             except Exception as exc:
                                 reason=failure_reason(exc,'invalid_or_unavailable_'+kind)
                                 result['components'][kind]={'status':'UNAVAILABLE','reason':reason,'action':'Check entitlement/feed availability or retry after cooldown;other accepted sections remain visible.'}
-                        if not hashes:raise AccessError('all_iex_components_unavailable;check_configuration_entitlement_network')
+                        if not hashes:raise AccessError('all_iex_components_unavailable;'+','.join(k+'='+v['reason'] for k,v in result['components'].items()))
                         if result['bars']:
                             from fractions import Fraction
                             first=Fraction(result['bars'][0]['close']);last=Fraction(result['bars'][-1]['close']);change=last-first;relative=change/first

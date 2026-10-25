@@ -160,4 +160,21 @@ class ConfigurationDiagnostic(unittest.TestCase):
         from .service import failure_reason
         for exc,expected in [(httpx.ProxyError('secret'),'upstream_proxy_connection_failure'),(httpx.ReadTimeout('secret'),'upstream_timeout'),(httpx.ConnectError('secret'),'upstream_connect_or_TLS_failure')]:self.assertEqual(failure_reason(exc,'fallback'),expected)
 
+
+
+class SECPartialValidation(unittest.IsolatedAsyncioTestCase):
+    async def exercise(self,failed):
+        async def fetch(url,*args):
+            if failed in url:raise AccessError('upstream_http_403')
+            return await authored_fetcher(url,*args)
+        s=StockWorkspace(environment=ENV,fetcher=fetch,clock=lambda:100)
+        original=asyncio.sleep
+        async def sleep(_):s.last_request=-100;await original(0)
+        with patch('terminal.stocks.service.asyncio.sleep',sleep):await s.refresh('AAPL','sec')
+        return s.view('AAPL')['fundamentals']
+    async def test_good_filings_survive_unavailable_companyfacts(self):
+        r=await self.exercise('companyfacts');self.assertEqual(r['status'],'PARTIAL');self.assertTrue(r['filings']);self.assertNotIn('financials',r)
+    async def test_good_companyfacts_survive_unavailable_submissions(self):
+        r=await self.exercise('submissions');self.assertEqual(r['status'],'PARTIAL');self.assertTrue(r['financials']['history']['revenue']);self.assertNotIn('filings',r)
+
 if __name__=='__main__':unittest.main(verbosity=2)
