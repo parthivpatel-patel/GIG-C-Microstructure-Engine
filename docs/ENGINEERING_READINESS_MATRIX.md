@@ -50,3 +50,22 @@ supersedes only current local evidence, not historical ARM or observed claims.
 
 No workflow, release, paid resource, main merge, network configuration or actual
 market-data ingestion occurred. Final report-only commit records this checkpoint.
+
+## Observed-market program closure overlay
+
+See OBSERVED_MARKET_ENGINEERING_REPORT.md. Implementationb06a417, evidence8a80ffc;
+report-only delivery commit follows. Previous source-bound rows remain historical.
+
+| Gate | Current status |
+|---|---|
+|Native ARM64|7fca902 run40135471630 owner6/6 plus independently verified official Success/six-job summary/7m52s; raw per-job archive PARTIAL|
+|Current source native ARM64|PENDING separate owner-approved run; none launched|
+|Local compiler/Python/sanitizer|PASS1396/1396 final outcomes;0 failed/skipped/disabled;8 hashes preserved|
+|Seeded context/native reconstruction|PASS authored synthetic only; atomic factory, exact units/FIFO, retired/match state and seeded-prefix replay|
+|Independent seeded reference|PASS152 schedules/330 event prefixes in all9 candidates with full supplemental receipts;3 negative controls|
+|Bounded comparison/refusal/reproduction|PASS12 methods across9 current candidates (108 outcomes),11 expected offline demo outcomes|
+|Packaging|PASS28 installed checks+4 fault controls;379-member source package bound to immutableb06a417|
+|Observed source initialization/reference|BLOCKED; actual complete evidence, verifier/projection and aligned observed reference missing|
+|Security/provider and production|Unchanged PARTIAL/BLOCKED; no owner risk acceptance, operational/live/empirical certification|
+
+No raw market acquisition, paid resources, workflow launches, main changes or release.

@@ -51,3 +51,14 @@ was launched or control changed. Provider security, authenticated raw hosted arc
 observed initialization/L3 and production gates remain partial/blocked as described
 in `VALIDATION_AND_MARKET_READINESS_REPORT.md`. No extra test run is inferred from
 this documentation update.
+
+## Observed-market program source qualification boundary
+
+Run4 qualifies7fca902bac36e30befd657d2bb4e35fa92ec5a5f; owner6/6 and official
+summary success independently verified, full archival remains partial. New typed
+seed/adapter/comparison code atb06a417 and evidence closure8a80ffc pass final local
+1396 CTest +108 focused diagnostic outcomes, all8 identities; new supplemental seed
+receipts match across9 candidates. New source is ready for separately owner-approved
+six-job ARM qualification, **not already native-qualified**. Workflow/manual/free
+usage/feature guard unchanged. See OBSERVED_MARKET_ENGINEERING_REPORT.md for exact
+hashes, package binding, observed gates and owner procedure. No run launched here.

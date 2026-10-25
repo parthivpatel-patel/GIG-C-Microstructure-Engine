@@ -1,0 +1,18 @@
+{
+  "source_checkpoint": "b06a41775600fab25531ce12768143b64d1a31e9",
+  "source_members_compared": 378,
+  "generated_pkg_info": 1,
+  "archive_sha256": "b17450e942fc7a4d4f4561363d6f9c252ff40c95201e11ab4f42c1c24f6c34ef",
+  "scope": "Pre-evidence/report code source package; all378 source members match immutable implementation checkpoint",
+  "phase_closure_commits": {
+    "1 ARM64 evidence": "c04ea88840c4ee9b34e4c0c6d08a51402d789f39",
+    "2 Initialization contracts": "097dc19aadb131c020bb45136c6a141840ef94c4",
+    "3 Seeded reconstruction": "3a5714511cfb87c97606bb2bce7b11d24070b4e3",
+    "4 Comparison/evidence closure": "8a80ffcf6f8fc962265bdba6937d2500b7591f9b"
+  },
+  "code_checkpoint": "b06a41775600fab25531ce12768143b64d1a31e9",
+  "report_commit_resolution": "git log -1 --format=%H -- docs/OBSERVED_MARKET_ENGINEERING_REPORT.md",
+  "main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "current_native_arm_qualified": false,
+  "last_qualified": "7fca902bac36e30befd657d2bb4e35fa92ec5a5f"
+}

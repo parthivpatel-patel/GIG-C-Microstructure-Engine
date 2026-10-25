@@ -347,3 +347,21 @@ RC01–RC27 reviewed:18 scoped PASS,7 BLOCKED,1 NOT RUN,1 OUT OF SCOPE. Private 
 All authorized offline phases complete. Final report PHASE6_OVERNIGHT_ENGINEERING_REPORT.md records1396 full-matrix passes,4 additional GCC13 focused passes,8 unchanged canonical hashes,2097 new prefix schedules,32-cycle journal churn,54 scaling runs,28 installed-wheel checks,3 packaging controls and307-member tested source snapshot. No production defect or speculative optimization. Hosted/independent-machine/security/ARM64/observed L3 boundaries remain. No new data request or release.
 
 Final documentation delivery SHA and clean-tree/main checks are recorded after push in ignored build/phase6/evidence/final-delivery.json and final response. Exact resume:verify that record and Git state, then obtain owner-authorized exact-SHA hosted logs/access and independent runner/provider evidence. Do not rerun successful local gates or begin another implementation phase without a source/failure justification and authorized scope. No process continues after this session stops.
+
+## Observed-market four-phase program — final checkpoint
+
+Entry7fca902. Phase1c04ea88 public ARM run4 evidence (raw archival partial);
+Phase2097dc19 bounded initialization contracts; Phase33a57145 synthetic seeded
+context/native factory and independent oracle; Phase4b06a417 implementation plus
+8a80ffc full evidence closure. Final report-only commit follows, source unchanged.
+Final1396 CTest outcomes/0 fail/skip/disabled,8 frozen hashes preserved;108 focused
+final diagnostic outcomes,11 expected offline demo commands; seeded152/330 full
+receipts in9 candidates; fresh28 installed+4 fault checks,379-member source archive
+bound to immutableb06a417. See OBSERVED_MARKET_ENGINEERING_REPORT.md.
+
+No remaining local implementation/test failure in this scope. Exact next action:
+owner may separately approve current-source native ARM qualification and export
+signed-in run4 logs; obtain authenticated complete observed initialization and an
+aligned independent observed reference before empirical projection/pilot work.
+No data/workflow/paid/live/release action is implied. Do not restart completed
+synthetic work. Actual execution stops at delivery; no unattended continuation claim.
