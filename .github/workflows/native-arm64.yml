@@ -129,12 +129,14 @@ jobs:
         env:
           GIG_LIVE_ENABLED: '0'
           GIG_COINBASE_ENABLED: '0'
+          GIG_SEC_ENABLED: '0'
+          GIG_ALPACA_ENABLED: '0'
           GIG_TERMINAL_NATIVE_BUILD: ${{ github.workspace }}/build/release
           GIG_TERMINAL_L2_RECORDINGS: ${{ runner.temp }}/gig-terminal-recordings
         run: |
           build/wheel-consumer/bin/python -m pip install -r terminal/server/requirements.txt
           build/wheel-consumer/bin/python -c 'import platform; assert platform.machine() == "aarch64"'
-          /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 176
+          /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 224
       - name: Source archive reproducibility and integrity
         if: matrix.compiler == 'gcc' && matrix.preset == 'release'
         shell: bash

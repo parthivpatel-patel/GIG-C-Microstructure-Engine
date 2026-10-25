@@ -11,13 +11,13 @@ def build_suite():
         'terminal.server.test_server','terminal.providers.test_kraken',
         'terminal.providers.test_kraken_admin','terminal.providers.test_integrity','terminal.providers.test_supervisor','terminal.providers.test_coinbase_candidate','terminal.providers.test_coinbase_supervisor','terminal.providers.test_transport','terminal.providers.test_differential',
         'terminal.test_live_api','terminal.test_l2_recording','terminal.test_l2_playback','terminal.test_l2_capture','terminal.test_provider_diagnostic','terminal.test_websocket_diagnostic','terminal.test_arm64_terminal_policy','terminal.test_l2_research',
-        'terminal.test_historical','terminal.test_recording','terminal.test_recording_api'])
+        'terminal.test_historical','terminal.test_recording','terminal.test_recording_api','terminal.stocks.test_workspace'])
     suite.addTests(unittest.defaultTestLoader.discover('terminal/tests',pattern='test_native_depth.py'))
     return suite
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--expected-tests',type=int);args=p.parse_args()
-    os.environ['GIG_LIVE_ENABLED']='0';os.environ['GIG_COINBASE_ENABLED']='0'
+    os.environ['GIG_LIVE_ENABLED']='0';os.environ['GIG_COINBASE_ENABLED']='0';os.environ['GIG_SEC_ENABLED']='0';os.environ['GIG_ALPACA_ENABLED']='0'
     # This CLI launches authored localhost fixtures, never the operator's server.
     # Individual forwarding-policy tests supply their own explicit environment.
     for name in ('CODESPACES','CODESPACE_NAME','GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN','GIG_TERMINAL_ALLOWED_ORIGINS'):

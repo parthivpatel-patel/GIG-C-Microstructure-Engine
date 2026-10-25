@@ -6,7 +6,7 @@ headers never establish authority. Read proofs are one-use and endpoint-scoped.
 """
 from .stream_tickets import StreamTickets
 
-TARGETS=frozenset(('/api/v1/control','/api/v1/simulate','/api/v1/validate','/api/v1/recording','/api/v1/stream-ticket'))
+TARGETS=frozenset(('/api/v1/control','/api/v1/simulate','/api/v1/validate','/api/v1/recording','/api/v1/stream-ticket','/api/v1/stocks/refresh','/api/v1/stocks/options','/api/v1/stocks/research'))
 
 class RequestProofs:
     def __init__(self,**kwargs):self.store=StreamTickets(**kwargs)

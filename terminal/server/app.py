@@ -147,6 +147,9 @@ def create_app():
     async def retention_loop():
         from terminal.l2_playback import prune_expired
         while True:
+            # Expiry is enforced on every read;the bounded cleanup sweep need not
+            # race the first operator mutation during application startup.
+            await asyncio.sleep(60)
             if not work_lock.locked():
                 async with work_lock:
                     try:
@@ -154,7 +157,6 @@ def create_app():
                         await asyncio.to_thread(prune_expired,l2_directory,active_stage=active)
                     except (ValueError,OSError):
                         native.notifications.append({'code':'RETENTION_CLEANUP_FAILED','message':'Bounded recording retention cleanup refused; inspect private storage locally.'})
-            await asyncio.sleep(60)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -172,6 +174,9 @@ def create_app():
 
     app = Starlette(lifespan=lifespan)
     app.state.native = native
+    from terminal.stocks.service import StockWorkspace
+    stocks=StockWorkspace()
+    app.state.stocks=stocks
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
     app.add_middleware(CORSMiddleware, allow_origins=list(origins), allow_methods=['GET', 'POST'],
@@ -239,7 +244,7 @@ def create_app():
         recording=bool(feed.capture and feed.capture.state in ('RECORDING','FINALIZING'))
         task_active=feed.task is not None and not feed.task.done()
         observed_replay=bool(native.recorded_session and native.recorded_session.manifest['origin']=='LIVE_OBSERVED')
-        safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and not task_active and not recording and not observed_replay)
+        safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and os.environ.get('GIG_SEC_ENABLED')!='1' and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.cache and stocks.origin=='OBSERVED_OFFICIAL_RESPONSE') and not task_active and not recording and not observed_replay)
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
                 'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe}
 
@@ -331,6 +336,48 @@ def create_app():
             provider['reason']='Server-side protocol/usage attestation; runtime state reports actual connectivity separately.'
         result['recording']={'enabled':bool(feed.capture and feed.capture.state=='RECORDING'),'observed_permission':bool(feed.provider=='kraken' and feed.permission and feed.permission.recording_approved)}
         return result
+
+    @route('/api/v1/stocks/search', methods=['GET'])
+    @json_endpoint
+    async def stock_search(request):
+        from terminal.stocks.identity import search
+        try:return {'results':search(request.query_params.get('q','')),'scope':'curated routing seeds;not a complete or freshly verified listing directory'}
+        except ValueError:return error('STOCK_QUERY','invalid bounded search query')
+
+    @route('/api/v1/stocks/company', methods=['GET'])
+    @json_endpoint
+    async def stock_company(request):
+        try:return stocks.view(request.query_params.get('symbol','AAPL'))
+        except ValueError:return error('STOCK_SYMBOL','unsupported or invalid symbol')
+
+    @route('/api/v1/stocks/refresh', methods=['POST'])
+    @json_endpoint
+    async def stock_refresh(request):
+        data=await bounded_json(request)
+        if set(data)-{'symbol','provider','start','end','timeframe'} or type(data.get('symbol')) is not str or data.get('provider') not in ('sec','alpaca'):
+            return error('STOCK_REFRESH','expected supported symbol/provider and optional bounded price dates')
+        if data['provider']=='sec' and set(data)-{'symbol','provider'}:return error('STOCK_REFRESH','SEC refresh accepts only symbol and provider')
+        try:return await stocks.refresh(data['symbol'],data['provider'],start=data.get('start'),end=data.get('end'),timeframe=data.get('timeframe','1Day'))
+        except ValueError as exc:
+            from terminal.stocks.service import AccessError
+            return error('STOCK_REFRESH_BLOCKED',str(exc) if isinstance(exc,AccessError) else 'invalid stock refresh parameters',422)
+
+    @route('/api/v1/stocks/options', methods=['POST'])
+    @json_endpoint
+    async def stock_options(request):
+        from terminal.stocks.options import scenario
+        data=await bounded_json(request)
+        try:return scenario(data)
+        except (ValueError,OverflowError,TypeError):return error('OPTION_MODEL','invalid bounded theoretical scenario',422)
+
+    @route('/api/v1/stocks/research', methods=['POST'])
+    @json_endpoint
+    async def stock_research(request):
+        from terminal.stocks.research import analyze
+        data=await bounded_json(request)
+        if set(data)!={'returns'}:return error('RESEARCH_INPUT','expected authored returns only')
+        try:return analyze(data['returns'])
+        except (ValueError,OverflowError,TypeError,ZeroDivisionError):return error('RESEARCH_INPUT','invalid bounded return series',422)
 
     @route('/api/v1/control', methods=['POST'])
     @json_endpoint

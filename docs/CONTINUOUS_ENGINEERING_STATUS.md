@@ -127,3 +127,38 @@ protocol/usage wording. No subscription until that review and explicit owner tes
 Owner separately verifies no-cost runner eligibility and manually qualifies latest HEAD.
 Next session should inspect these reports and Git first,reuse unchanged native evidence,
 and reconcile only demonstrated provider differences. No work continues after task end.
+
+## Stock Intelligence execution in progress
+
+Resumed clean d79c891bf2eb645dd8853c19329a5a58c1c78e9d;feature branch preserved.
+Implemented bounded curated ticker/name/CIK directory,private browser watch/recent lists,
+Stock Intelligence workspace,strict SEC-shaped filings/facts/period-aware ratios,
+explicit-gated fixed-URL IEX bars/latest quote/trade reads,source hashes/timestamps,
+Black–Scholes/Greeks/IV/theoretical3D grid,fixed-parameter HMM/GARCH/Kalman,exact empirical
+risk and causal authored strategy,offline bounded13F XML schema parser and owner-gated
+bounded provider subscription test preparation. No external request/subscription made.
+SEC/Alpaca/vendor-doc hosts absent from current cloud allowlist;no bypass/retry.
+Owner reports verified Codespaces Kraken DNS/TLS/101/passive control only;permissions
+pending,zero observations. Official live protocol/usage remains externally blocked.
+No new implementation is ARM64-qualified;manual workflow now expects221 terminal tests.
+Current tests:221 Release/Debug passed;sanitizer final pending. New Stock Chromium10
+checks passed,including model reference,interactive3D camera,mobile bounds,private proof
+and unchanged native crypto book. Exact next action:finish sanitizer/security/browser/
+packaging matrix,source review and method documents,commit/push validated checkpoint,
+then clean-source performance/evidence and consolidated readiness report. Preserve work.
+
+## Stock runtime validation checkpoint
+
+Final runtime224/224 each Release/Debug/ASan+UBSan native binding;LSan0,security46,
+Chromium stock10+crypto21+recorded9+live9,verified local HTTPS/WSS8,frontend4,
+browser guards5,packaging3,installed-wheel8+6,fresh aggregate1 each six compilers/configs.
+No final fail/error/skip. Added48 authored stock/protocol/retention tests;stronger closed-form
+HMM/Kalman/GARCH/strategy references passed48-case focused Release/Debug/ASan checks
+without runtime changes;LSan0.
+Reproduced startup retention-lock race (first save409 BUSY);controlled failing-before
+regression captured. First sweep now waits60s;expiry/read and periodic cleanup bounds
+unchanged. New stock POST endpoints added individually to existing endpoint proof
+allowlist,with wrong-target/reuse/forged-header negative controls. No wildcard policy.
+Exact next action:review/stage safe source+guide,commit/push with [skip ci],measure
+clean-source stock workloads and build/inventory sdist,then commit consolidated stock
+readiness/evidence. External official protocol/rights/credentials/new ARM64 remain blocked.
