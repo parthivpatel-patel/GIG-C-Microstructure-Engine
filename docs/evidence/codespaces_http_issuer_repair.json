@@ -1,0 +1,65 @@
+{
+  "schema": "gig.codespaces.http_issuer_repair.v1",
+  "baseline": "02fa56225eaf900dd27f768d3e271cd19ad9a74f",
+  "policy": "codespaces-request-proof-v4",
+  "confirmed_original_condition": "raw POST Origin localhost not in configured HTTPS origins; issuer never reached",
+  "tests": {
+    "security": {
+      "passed": 46,
+      "failed": 0
+    },
+    "native_backed_terminal": {
+      "passed": 56,
+      "failed": 0
+    },
+    "sanitized_new_security": {
+      "passed": 11,
+      "failed": 0,
+      "live_lsan": 0
+    },
+    "frontend": {
+      "passed": 3,
+      "failed": 0
+    },
+    "browser": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    },
+    "verified_tls_http_and_wss": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "browser_sop_negative": {
+    "schema": "gig.bootstrap.sop_negative.v1",
+    "different_browser_origin": "http://127.0.0.1:39925",
+    "protected_target": "http://127.0.0.1:8787",
+    "legitimate_read_status": 200,
+    "cross_origin_custom_header_read_blocked": true,
+    "issuer_not_reached_after_preflight": true,
+    "no_cors_response_opaque": true,
+    "no_cors_issuer_denied": true,
+    "credentials_recorded": false
+  },
+  "logs": {
+    "unit.log": "e3adb48aa61dc06c1b89e8d862a007e70f903bdecaca97a438f102372c7913c4",
+    "terminal.log": "f4de8e5873af3a232b380a83f9fd7c55ccd9dd3a29a19abecd510da78b2b5923",
+    "sanitizer.log": "4fe3fe12cf46fd1df3e60429b63cf80b8b02b338d3726f855a256083babce2c7",
+    "frontend.log": "9202bd6426c99d4c45bce27b6f3a28017c2bb27d9534a48cfe64bf40336bd687",
+    "build.log": "1c2341fb806b1e20bfb02e0729018cc4576dba62265b392038e7223cbdbc26dc",
+    "tls.json": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "browser-sop.json": "8124a3f74978ddc82bf057ba01ff5d83e55281da33877fd8882c68d9cf970a40",
+    "browser-origin.json": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac",
+    "browser/results.json": "68d6e3b6b66074f4d1a3d587644e66ab4857442beb908c2fed6cba220225e938"
+  },
+  "native_source_changed": false,
+  "canonical_fixtures_changed": false,
+  "full_native_matrix_rerun": false,
+  "owner_codespace_post_deployment": "pending",
+  "limitations": [
+    "Proxy component responsible for rewrite not established",
+    "Local TLS and Chromium evidence; private external Codespace not independently reachable",
+    "No hosted workflows dispatched"
+  ]
+}

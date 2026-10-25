@@ -22,6 +22,7 @@ from .engine import ControlError, NativeSession
 from .config import launch_settings
 from .connection import observation, origin_value
 from .stream_tickets import StreamTickets, authorize_socket, PROTOCOL
+from .request_proofs import RequestProofs, bootstrap_context, authorize_mutation
 import gig_microstructure as gig
 
 MAX_BODY = 4096
@@ -112,8 +113,9 @@ def json_endpoint(function):
 def create_app():
     origins = origins_from_environment()
     _, _, expected_codespaces_origin = launch_settings(os.environ)
-    connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None}
+    connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None, 'last_request_proof_bootstrap': None}
     stream_tickets = StreamTickets()
+    request_proofs = RequestProofs()
     native = NativeSession()
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
@@ -152,10 +154,14 @@ def create_app():
 
     async def boundary(request, call_next):
         if request.method == 'POST':
-            connections['last_mutation'] = {**observation(request), 'decision': 'allowed' if request.headers.get('origin') in origins else 'rejected_origin'}
-        if request.method == 'POST' and request.headers.get('origin') not in origins:
-            native.rejected += 1
-            return error('ORIGIN_DENIED', 'exact configured Origin required for mutations', 403)
+            authorized_origin, decision = authorize_mutation(request.headers,request.url.path,origins,expected_codespaces_origin,request_proofs)
+            connections['last_mutation'] = {**observation(request), 'decision':'allowed' if authorized_origin else 'rejected_origin',
+                'authorization':decision,'authorized_browser_origin':authorized_origin,
+                'failure_condition':None if authorized_origin else decision}
+            if authorized_origin is None:
+                native.rejected += 1
+                return error('ORIGIN_DENIED', 'exact configured Origin or valid endpoint-bound same-origin proof required', 403)
+            request.state.authorized_browser_origin = authorized_origin
         if request.method == 'POST':
             try:
                 declared = int(request.headers.get('content-length', '0'))
@@ -222,30 +228,47 @@ def create_app():
     async def connection_status(request):
         return {
             'schema_version': '1',
-            'policy_version': 'codespaces-stream-proof-v3',
+            'policy_version': 'codespaces-request-proof-v4',
             'expected_codespaces_origin': expected_codespaces_origin,
             'configured_origins': list(origins),
             'request': observation(request),
             'last_mutation': connections['last_mutation'],
             'last_websocket': connections['last_websocket'],
             'last_browser_bootstrap': connections['last_browser_bootstrap'],
+            'last_request_proof_bootstrap': connections['last_request_proof_bootstrap'],
             'last_authenticated_websocket': connections['last_authenticated_websocket'],
             'connected_clients': native.clients,
             'maximum_clients': MAX_CLIENTS,
-            'authority': 'Exact HTTP Origin and bounded one-use stream proof;forwarded headers never expand allowed origins',
+            'authority': 'Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority',
             'privacy': 'Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers',
         }
+
+    @route('/api/v1/request-proof', methods=['GET'])
+    @json_endpoint
+    async def request_proof(request):
+        context, decision = bootstrap_context(request.headers,origins,expected_codespaces_origin)
+        connections['last_request_proof_bootstrap'] = {**observation(request),
+            'reported_browser_origin':origin_value(request.headers.get('x-gig-browser-origin')),
+            'browser_origin':context['origin'] if context else None,
+            'target':context['target'] if context else None,'decision':decision,
+            'fetch_site':request.headers.get('sec-fetch-site') if request.headers.get('sec-fetch-site') in ('same-origin','same-site','cross-site','none') else None}
+        if context is None:return error('BOOTSTRAP_DENIED','same-origin non-simple read context required',403)
+        try: proof = request_proofs.issue(context['origin'],context['target'])
+        except ValueError:return error('BOOTSTRAP_BUSY','bounded request proof capacity reached',429)
+        return JSONResponse({'schema_version':'1','proof':proof,'expires_in_seconds':30},
+            headers={'Cache-Control':'no-store','Cross-Origin-Resource-Policy':'same-origin','X-Content-Type-Options':'nosniff'})
 
     @route('/api/v1/stream-ticket', methods=['POST'])
     @json_endpoint
     async def stream_ticket(request):
-        # The POST boundary has already required an exact configured HTTP Origin.
+        # Boundary proves exact Origin or a one-use endpoint-scoped read capability.
         data = await bounded_json(request)
-        origin = request.headers.get('origin')
+        origin = request.state.authorized_browser_origin
         expected_url = ('wss' if origin.startswith('https:') else 'ws') + origin[origin.index(':'):] + '/api/v1/stream'
         connections['last_browser_bootstrap'] = {**observation(request),
             'browser_origin': origin_value(data.get('browser_origin')) if type(data.get('browser_origin')) is str else '<invalid>',
             'websocket_url': expected_url if data.get('websocket_url') == expected_url else '<mismatch>',
+            'authorized_browser_origin':origin,
             'attempt_id': data.get('attempt_id') if type(data.get('attempt_id')) is str and re.fullmatch(r'[a-f0-9-]{36}',data['attempt_id']) else '<invalid>',
             'decision':'rejected_context'}
         if (set(data) != {'browser_origin','websocket_url','attempt_id'}
@@ -256,7 +279,7 @@ def create_app():
         try: ticket = stream_tickets.issue(origin,data['attempt_id'])
         except ValueError: return error('STREAM_BUSY','bounded stream proof capacity reached;retry after expiry',429)
         connections['last_browser_bootstrap'] = {**observation(request),
-            'browser_origin':data['browser_origin'],'websocket_url':data['websocket_url'],
+            'authorized_browser_origin':origin,'browser_origin':data['browser_origin'],'websocket_url':data['websocket_url'],
             'attempt_id':data['attempt_id'],'decision':'issued'}
         # Ticket is never logged/retained in diagnostics,URL,DOM or local storage.
         return {'schema_version':'1','ticket':ticket,'protocol':PROTOCOL,'expires_in_seconds':30}

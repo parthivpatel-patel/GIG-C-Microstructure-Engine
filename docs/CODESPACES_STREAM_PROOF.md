@@ -1,5 +1,8 @@
 # Codespaces rewritten WebSocket Origin — secure handshake proof
 
+Current HTTP issuer repair: [CODESPACES_HTTP_ISSUER_REPAIR.md](CODESPACES_HTTP_ISSUER_REPAIR.md).
+The v4 same-origin read bootstrap also handles the observed rewritten POST Origin.
+
 ## Facts and attribution limits
 
 Owner supplied backend handshake:Origin http://localhost:8787,Host localhost:8787,

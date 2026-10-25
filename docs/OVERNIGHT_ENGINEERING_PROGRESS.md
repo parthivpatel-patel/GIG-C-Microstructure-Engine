@@ -473,3 +473,16 @@ checks pass;frontend build/3unit pass. No native/canonical/dependency changes.
 Exact next owner action:stop server,pull feature,build only browser assets,set exact
 HTTPSOrigin,start,refresh private Ports URL,inspect v3correlated diagnostics.
 No new development phase or external deployment success is implied.
+
+## Codespaces HTTP issuer P0 closure — October 25, 2026 (America/New_York)
+
+Owner diagnostics confirm rewritten POST Origin fails the gate before ticket issuer.
+Implemented same-origin non-simple read bootstrap and bounded endpoint-bound one-use
+POST proofs; strict Origin/Host/CORS and private-port boundary preserved. See
+CODESPACES_HTTP_ISSUER_REPAIR.md and evidence/codespaces_http_issuer_repair.json.
+Executed: security46, native-backed56, sanitized11/LSan0, frontend3, browser21,
+verified HTTPS/WSS8, real-browser hostile-origin controls and handshake capture.
+No failures. No native changes or canonical fixture changes. No external workflow.
+Exact next action: owner fast-forward feature branch, build frontend, restart server,
+refresh private forwarded URL and verify v4 diagnostics and WSS101. Actual owner
+Codespace success remains unverified. No unrelated development began.

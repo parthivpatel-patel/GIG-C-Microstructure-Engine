@@ -1,5 +1,8 @@
 # Open the actual GIG terminal from Chrome
 
+Current HTTP issuer repair: [CODESPACES_HTTP_ISSUER_REPAIR.md](CODESPACES_HTTP_ISSUER_REPAIR.md).
+The v4 same-origin read bootstrap also handles the observed rewritten POST Origin.
+
 ## Why the previous address failed
 
 127.0.0.1 means **the machine running your browser**. On your phone/computer it does

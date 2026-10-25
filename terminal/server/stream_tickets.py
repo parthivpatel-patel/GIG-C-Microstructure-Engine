@@ -44,7 +44,7 @@ def authorize_socket(headers,protocols,origins,expected,tickets):
         if proof is None:return False,'rejected_ticket',None,None
         if origin in origins and origin==proof['origin']:
             return True,'accepted_origin_ticket',proof['attempt_id'],PROTOCOL
-        # Proof was minted only after strict HTTP Origin validation. This is NOT
+        # Proof follows exact Origin or endpoint-scoped same-origin HTTP proof. NOT
         # an allowlist addition for localhost and cannot be enabled by spoofed
         # Host/X-Forwarded headers alone.
         if (expected and expected.startswith('https://') and expected in origins
