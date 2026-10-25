@@ -18,3 +18,13 @@ __pycache__/
 .pytest_cache/
 .venv/
 dist/
+
+# Private historical market data: keep outside the repository whenever possible.
+private-market-data/
+private_market_data/
+market-data-private/
+LOBSTER_SampleFile*.zip
+*_message_[0-9]*.csv
+*_orderbook_[0-9]*.csv
+*_message_[0-9]*.csv.gz
+*_orderbook_[0-9]*.csv.gz

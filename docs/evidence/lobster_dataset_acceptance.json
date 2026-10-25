@@ -1,0 +1,83 @@
+{
+  "schema": "gig.lobster_attachment_inventory.v1",
+  "archive_filename": "LOBSTER_SampleFile_AAPL_2012-06-21_5.zip",
+  "archive_bytes": 4791006,
+  "archive_sha256": "46419dd0d6106be5fcf43600ccd08b2baa5d4cfb76284f1c58773537a3adac50",
+  "structural_and_crc_checks_pass": true,
+  "archive_limits": {
+    "compressed_bytes": 33554432,
+    "member_count": 32,
+    "member_bytes": 67108864,
+    "aggregate_bytes": 134217728,
+    "ratio": 200,
+    "seconds": 30,
+    "buffer_bytes": 65536
+  },
+  "extracted_private_outside_git": true,
+  "elapsed_seconds": 0.2337971479864791,
+  "members": [
+    {
+      "filename": "AAPL_2012-06-21_34200000_57600000_orderbook_5.csv",
+      "compressed_bytes": 1672186,
+      "uncompressed_bytes": 35129588,
+      "sha256": "9a93bc2d754b5f7e02dd44cb112a19f86534212875e3b85b38ff99f6620b1f66",
+      "crc32": "3f8b3ebf",
+      "crc_verified": true,
+      "ratio": 21.008182104143916
+    },
+    {
+      "filename": "AAPL_2012-06-21_34200000_57600000_message_5.csv",
+      "compressed_bytes": 3116477,
+      "uncompressed_bytes": 12495010,
+      "sha256": "8ca6fcbbf439c973d8ef74cb096a3aa340f66db816feea3ef09dcb7522bb625d",
+      "crc32": "cdac3a9b",
+      "crc_verified": true,
+      "ratio": 4.009338108383281
+    },
+    {
+      "filename": "LOBSTER_SampleFiles_ReadMe.txt",
+      "compressed_bytes": 1793,
+      "uncompressed_bytes": 4790,
+      "sha256": "fd97b5f49391e11ef52c023ef8f3ca156baac7441b4d52240339f60844244d5b",
+      "crc32": "ec98729d",
+      "crc_verified": true,
+      "ratio": 2.671500278862242
+    }
+  ],
+  "usage": "README contains no use license; inspection only pending terms; CSV row statistics not calculated",
+  "acceptance_status": "CONDITIONAL: integrity/schema inspection passed; empirical processing BLOCKED pending usage terms",
+  "provenance": "User-uploaded attachment; publisher signature/official checksum match not established",
+  "readme": {
+    "version": "01 Sept 2013",
+    "message_columns": 6,
+    "reference_columns": 20,
+    "depth": 5,
+    "time": "seconds after midnight, decimal up to nanoseconds; timezone not specified",
+    "price": "USD x10000 integer",
+    "events_documented": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "event6": "not defined in included README; unsupported unless separately documented",
+    "reference_alignment": "README describes matching Nx6/Nx20 files; actual row alignment not analyzed pending rights"
+  },
+  "empirical_statistics": null,
+  "initial_state": "Unknown: five occupied price levels are aggregate observations, not complete L3/FIFO/order identity evidence",
+  "arm64_run5": {
+    "run_id": 40151444307,
+    "url": "https://github.com/parthivpatel-patel/GIG-C-Microstructure-Engine/actions/runs/40151444307",
+    "tested_sha": "3461a5ee571aa7639ac7939f5c91d6d8708ded02",
+    "owner_six_jobs_pass": true,
+    "public_summary_independently_verified": true,
+    "summary_conclusion": "Success",
+    "duration": "8m 22s",
+    "six_completed_jobs": true,
+    "raw_logs": "sign-in required; no raw per-job/JUnit/compiler evidence retrieved",
+    "new_code_qualified": false
+  },
+  "collected_utc": "2026-10-25T01:56:29.124188+00:00"
+}
