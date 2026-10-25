@@ -14,7 +14,7 @@ class Policy(unittest.TestCase):
         self.assertIn("matrix.compiler == 'gcc' && matrix.preset == 'release'",step)
         self.assertIn("GIG_LIVE_ENABLED: '0'",step);self.assertIn("GIG_COINBASE_ENABLED: '0'",step)
         self.assertIn('GIG_TERMINAL_NATIVE_BUILD: ${{ github.workspace }}/build/release',step)
-        self.assertIn('--expected-tests 224',step);self.assertIn('terminal/server/requirements.txt',step)
+        self.assertIn('--expected-tests 251',step);self.assertIn('terminal/server/requirements.txt',step)
         self.assertNotIn('workflow_dispatch',step);self.assertNotIn('gh workflow',step)
     def test_existing_six_matrix_and_canonical_guards_unchanged(self):
         self.assertIn('compiler: [gcc, clang]',self.text);self.assertIn('preset: [debug, release, asan-ubsan]',self.text)

@@ -207,3 +207,24 @@ Independent backlog remains:full directory/statements/13F ingestion,portfolio/fa
 fitted models/walk-forward,observed options calibration and licensed news/sentiment.
 November10 is partial readiness,not a guarantee of full institutional/production scope.
 No background engineering continues after task end;resume by verifying Git/readiness docs.
+
+## Stock data repair: implementation preserved and local qualification in progress
+
+Resumed43ba291 clean branch with recoverable uncommitted loading/auth/L1 work;continued
+rather than restart. Three owner-confirmed defects reproduced against baseline source:
+ALPACA-only pair rejected,selection cache-only,no visible quote/candles panel. Added
+canonical+legacy credential handling,exact configuration diagnostics,protected cancellable
+source-loading job,independent component failures/host cooldowns,native single-quote
+analytics,32-snapshot history,candles,indicative-only option subset/provider IV/Greeks/
+discrete3D,and scoped returned-price research. No provider observations fabricated.
+
+Current full251 Release/Debug/ASan passed,LSan0;75 focused stock tests and separate
+security46. Fixture-provider browser and unavailable-provider browser final qualification
+passing;full crypto21/recorded9/provider9/TLS8/package3/installed8+6 gates passed.
+Build caught and corrected an accidental stylesheet overwrite;existing stylesheet
+restored plus only intended stock additions. No C++/native fixture or trading changes.
+Official Alpaca public SDK corroboration obtained through allowed GitHub (5 small source
+files),not direct blocked hosts or market data. Keys absent;no mounted Quant Terminal
+repo found;no credential files inspected. Usage/entitlement and actual responses remain
+owner qualification gates. Exact next action:finish local regression gates,review and
+commit/push source with [skip ci],then inventory/package and consolidated repair evidence.

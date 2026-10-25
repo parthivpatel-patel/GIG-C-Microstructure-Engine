@@ -110,7 +110,7 @@ def json_endpoint(function):
     return endpoint
 
 
-def create_app():
+def create_app(stock_workspace=None):
     origins = origins_from_environment()
     _, _, expected_codespaces_origin = launch_settings(os.environ)
     connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None, 'last_request_proof_bootstrap': None}
@@ -165,6 +165,7 @@ def create_app():
         try:
             yield
         finally:
+            await stocks.close()
             await feed.close()
             retention.cancel()
             with suppress(asyncio.CancelledError):await retention
@@ -175,7 +176,7 @@ def create_app():
     app = Starlette(lifespan=lifespan)
     app.state.native = native
     from terminal.stocks.service import StockWorkspace
-    stocks=StockWorkspace()
+    stocks=StockWorkspace() if stock_workspace is None else stock_workspace
     app.state.stocks=stocks
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
@@ -244,7 +245,7 @@ def create_app():
         recording=bool(feed.capture and feed.capture.state in ('RECORDING','FINALIZING'))
         task_active=feed.task is not None and not feed.task.done()
         observed_replay=bool(native.recorded_session and native.recorded_session.manifest['origin']=='LIVE_OBSERVED')
-        safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and os.environ.get('GIG_SEC_ENABLED')!='1' and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.cache and stocks.origin=='OBSERVED_OFFICIAL_RESPONSE') and not task_active and not recording and not observed_replay)
+        safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and os.environ.get('GIG_SEC_ENABLED')!='1' and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.origin=='OBSERVED_OFFICIAL_RESPONSE' and (stocks.cache or stocks.environment.get('GIG_SEC_ENABLED')=='1' or stocks.environment.get('GIG_ALPACA_ENABLED')=='1')) and not task_active and not recording and not observed_replay)
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
                 'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe}
 
@@ -350,11 +351,19 @@ def create_app():
         try:return stocks.view(request.query_params.get('symbol','AAPL'))
         except ValueError:return error('STOCK_SYMBOL','unsupported or invalid symbol')
 
+    @route('/api/v1/stocks/load', methods=['POST'])
+    @json_endpoint
+    async def stock_load(request):
+        data=await bounded_json(request)
+        if set(data)-{'symbol','timeframe'} or type(data.get('symbol')) is not str:return error('STOCK_LOAD','supported symbol and timeframe required')
+        try:return await stocks.start_load(data['symbol'],timeframe=data.get('timeframe','1Day'))
+        except ValueError:return error('STOCK_LOAD','invalid bounded stock selection',422)
+
     @route('/api/v1/stocks/refresh', methods=['POST'])
     @json_endpoint
     async def stock_refresh(request):
         data=await bounded_json(request)
-        if set(data)-{'symbol','provider','start','end','timeframe'} or type(data.get('symbol')) is not str or data.get('provider') not in ('sec','alpaca'):
+        if set(data)-{'symbol','provider','start','end','timeframe'} or type(data.get('symbol')) is not str or data.get('provider') not in ('sec','alpaca','options'):
             return error('STOCK_REFRESH','expected supported symbol/provider and optional bounded price dates')
         if data['provider']=='sec' and set(data)-{'symbol','provider'}:return error('STOCK_REFRESH','SEC refresh accepts only symbol and provider')
         try:return await stocks.refresh(data['symbol'],data['provider'],start=data.get('start'),end=data.get('end'),timeframe=data.get('timeframe','1Day'))

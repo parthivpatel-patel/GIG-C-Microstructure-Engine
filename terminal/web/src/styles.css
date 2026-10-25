@@ -9,3 +9,6 @@
 @media(max-width:760px){.replay-bar{flex-wrap:wrap}.replay-actions{margin-left:auto;max-width:100%}.replay-actions input[type=range]{width:64px}.inline-controls{flex-wrap:wrap}}
 .source-picker{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin:0 0 10px}.source-picker label{display:flex;gap:10px;align-items:center;font-size:10px;color:#8c9db4}.source-picker select{font-size:11px;max-width:100%}
 @media(max-width:760px){.source-picker label{flex-wrap:wrap}.source-picker .muted{font-size:8px}}
+
+.stock-provider-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.stock-provider-grid p{overflow-wrap:anywhere}.stock-provider-grid h3{font-size:13px}.stock-provider-grid>div{padding:12px;background:#101923;border:1px solid #243344;border-radius:6px}#root table td,#root table th{padding:8px;text-align:left;border-bottom:1px solid #253246}@media(max-width:850px){.stock-provider-grid{grid-template-columns:1fr}}
+.equity-quote-panel .metric-grid{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:850px){.equity-quote-panel .metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:500px){.equity-quote-panel .metric-grid{grid-template-columns:1fr}}

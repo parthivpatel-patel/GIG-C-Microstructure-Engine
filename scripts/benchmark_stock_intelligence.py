@@ -8,6 +8,7 @@ import gig_microstructure as gig
 from terminal.stocks.sec import facts
 from terminal.stocks.options import scenario
 from terminal.stocks.research import analyze
+from terminal.stocks.quote_analytics import analyze as quote_analytics
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--repetitions',type=int,default=3);p.add_argument('--iterations',type=int,default=30);a=p.parse_args()
@@ -21,7 +22,8 @@ def main():
         return result
     payload={'cik':123,'facts':{'us-gaap':{tag:{'units':{'USD':records(base,instant)}} for tag,base,instant in [('Revenues',100,False),('NetIncomeLoss',20,False),('Assets',1000,True),('Liabilities',250,True)]}}}
     returns=['-0.01' if i%3==0 else '0.005' for i in range(128)];config={'spot':100,'strike':100,'years':1,'volatility':.2}
-    operations={'sec_512_authored_facts':lambda:facts(payload,'0000000123','2024-12-31'),'options_153_grid':lambda:scenario(config),'research_128_returns':lambda:analyze(returns)}
+    operations={'sec_512_authored_facts':lambda:facts(payload,'0000000123','2024-12-31'),'options_153_grid':lambda:scenario(config),'research_128_returns':lambda:analyze(returns),'native_L1_quote':lambda:quote_analytics({'bid':'100','ask':'101','bid_size':'3','ask_size':'1'})}
+    assert operations['native_L1_quote']()['metrics']['spread']=={'numerator':'1','denominator':'1'}
     expected=operations['sec_512_authored_facts']()['ratios']['net_margin']['value'];assert Fraction(int(expected['numerator']),int(expected['denominator']))==Fraction(147,227)
     assert abs(operations['options_153_grid']()['metrics']['price']-7.965567455405804)<1e-10
     measurements={};digests={}

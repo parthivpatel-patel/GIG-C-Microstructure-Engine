@@ -1,5 +1,9 @@
 # Stock Intelligence: implementation and safe qualification
 
+Current loading,credential setup,L1 and indicative-options instructions:
+**STOCK_DATA_REPAIR_GUIDE.md**. The repaired UI automatically loads approved sources
+on selection and exposes exact missing-configuration actions.
+
 ## Working slice and classification
 
 Stock Intelligence is a dedicated navigation workspace alongside the existing native
@@ -74,8 +78,8 @@ selected curated CIK. Strict TLS/inherited proxy,no redirects/retries,8MiB raw r
 cap per request,identity encoding only,8s HTTP timeout,25s whole refresh,one request/s.
 429/503 impose60s cooldown;other failed refreshes impose at least10s. No older filing
 shards or pagination are automatically fetched. A compressed response is refused rather
-than unboundedly decompressed. Normalized cache is at most8 issuers/two providers,
-2MiB per provider result (32MiB serialized payload ceiling,not a Python RSS guarantee).
+than unboundedly decompressed. Normalized cache is at most8 issuers/three providers,
+2MiB per provider result (48MiB serialized payload ceiling,not a Python RSS guarantee).
 All required responses validate before replacing accepted cache;failure preserves it.
 Raw JSON bytes are hashed then discarded;no new disk cache or observed recording.
 
@@ -104,7 +108,7 @@ secrets/environment;never commit,paste into browser forms,URLs,logs or reports.
 
 Required server variables:
 
-- APCA_API_KEY_ID,APCA_API_SECRET_KEY
+- ALPACA_API_KEY_ID,ALPACA_API_SECRET_KEY (legacy APCA_* pair also accepted;conflicting pairs reject)
 - GIG_ALPACA_ENABLED=1,GIG_ALPACA_PROTOCOL_REVIEWED=1
 - GIG_ALPACA_PRIVATE_DISPLAY_APPROVED=1,GIG_ALPACA_CLOUD_PROCESSING_APPROVED=1
 - GIG_ALPACA_NO_COST_CONFIRMED=1,GIG_ALPACA_PERMISSION_REFERENCE documenting actual review
@@ -114,7 +118,7 @@ feed=iex and adjustment=raw. There are no account/order/trading endpoints. Max25
 no automatic next-page acquisition. Daily window at most366 days,hourly31,minute7;
 UI requests90/14/3 days respectively. Results explicitly report incomplete history and
 next-page availability. One provider request/s,512KiB each,25s whole refresh and the same
-cooldown/cache rules apply. All three responses must validate before cache publication.
+cooldown/cache rules apply. Bars,quote and trade validate independently;PARTIAL status explicitly preserves accepted sections when another request fails. No invalid component is published.
 
 Only IEX single-venue prices/prints are represented,never SIP/NBBO/market-wide volume
 or Level2/3 equity depth. Quote/trade size units remain provider-reported and unverified;
@@ -162,7 +166,7 @@ terminal live qualification. Recording has its separate existing rights gate.
 ## Native ARM64 and regression handoff
 
 Manual-only,owner-gated,no-cost eligibility confirmation and exact feature-branch guard
-are unchanged. Workflow now requires224 terminal tests in its GCC Release wheel step,
+are unchanged. Workflow now requires251 terminal tests in its GCC Release wheel step,
 with all crypto/SEC/Alpaca live flags disabled. No workflow was dispatched;previous native
 ARM64 results remain SHA-specific. Latest-source qualification is an owner action.
 
@@ -170,7 +174,7 @@ Local full binding cohort requires built authored diagnostic binaries via
 GIG_TERMINAL_NATIVE_BUILD and the installed native wheel:
 
 ```bash
-.venv/bin/python terminal/tests/run_native_suite.py --expected-tests 224
+.venv/bin/python terminal/tests/run_native_suite.py --expected-tests 251
 npm --prefix terminal/web run build
 node terminal/tests/stock-intelligence-validation.mjs
 ```
