@@ -95,7 +95,7 @@ target_link_libraries(gig_itch_context PUBLIC gig::itch)
 gig_project_target(gig_itch_context)
 
 # Additive synthetic L3 projection; existing engine and Python linkage stays unchanged.
-add_library(gig_itch_reconstruction STATIC src/itch/reconstruction.cpp src/itch/sha256.cpp src/itch/restart.cpp)
+add_library(gig_itch_reconstruction STATIC src/itch/reconstruction.cpp src/itch/seed.cpp src/itch/sha256.cpp src/itch/restart.cpp)
 add_library(gig::itch_reconstruction ALIAS gig_itch_reconstruction)
 target_link_libraries(gig_itch_reconstruction PUBLIC gig::itch_context gig::microstructure)
 gig_project_target(gig_itch_reconstruction)

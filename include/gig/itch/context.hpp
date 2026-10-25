@@ -118,6 +118,7 @@ class SourceContext {
     std::pmr::vector<DirectoryState> directories_;
     std::pmr::vector<OrderState> orders_;
     std::pmr::vector<MatchState> matches_;
+    std::pmr::vector<OrderReference> seed_retired_;
     ContextSummary summary_{}; std::uint8_t lifecycle_stage_{}; Location next_location_{};
     bool cursor_exhausted_{},moved_from_{};
     std::uint64_t instance_{};
@@ -146,6 +147,7 @@ public:
     std::span<const DirectoryState> directories()const noexcept{return directories_;}
     std::span<const OrderState> orders()const noexcept{return orders_;}
     std::span<const MatchState> matches()const noexcept{return matches_;}
+    std::span<const OrderReference> seed_retired_references()const noexcept{return seed_retired_;}
     static std::optional<std::size_t> required_bytes(const ContextPolicy&) noexcept;
 };
 } // namespace gig::itch

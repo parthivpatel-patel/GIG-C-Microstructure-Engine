@@ -1,5 +1,6 @@
 #include "support/itch_reconstruction_fixture.hpp"
 #include "support/itch_input_adapter_checks.hpp"
+#include "support/itch_seed_checks.hpp"
 #include "gig/memory/tracked_resource.hpp"
 #include <iostream>
 #include <string_view>
@@ -8,6 +9,7 @@ using namespace gig::itch::test;
 namespace {
 void initialization(){
     input_adapter_checks();
+    seed_checks();
     // Every encoded invalid kind must fail before the first allocation, including
     // a caller that shifts both declared boundaries to an arbitrary file prefix.
     for(unsigned raw=0;raw<=255;++raw){

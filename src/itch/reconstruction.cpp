@@ -1,4 +1,5 @@
 #include "gig/itch/reconstruction.hpp"
+#include "gig/itch/seed.hpp"
 #include <algorithm>
 #include <charconv>
 #include <numeric>
@@ -43,6 +44,10 @@ gig::Metadata metadata(const ReconstructionConfig& c,const BookBinding& b,std::u
     (void)m.provenance.lineage.append({gig::TransformationKind::generated,generator,e.version});
     (void)m.provenance.lineage.append({gig::TransformationKind::reconstructed,*gig::Identity::make("itch-synthetic-l3").data,v});
     (void)m.provenance.parents.append({e.fixture,gig::Available<gig::Digest>::known(e.fixture_sha256)});
+    if(c.seed_sha256){
+        (void)m.provenance.lineage.append({gig::TransformationKind::reconstructed,*gig::Identity::make("itch-seed-import").data,v});
+        (void)m.provenance.parents.append({*gig::Identity::make("itch-seed-snapshot-v1").data,gig::Available<gig::Digest>::known(*c.seed_sha256)});
+    }
     return m;
 }
 }
@@ -61,13 +66,13 @@ gig::Result<gig::QuantityLots> shares_to_lots(std::uint64_t shares,gig::types::U
 SyntheticReconstructor::SyntheticReconstructor(ReconstructionConfig c,SourceContext context,std::pmr::memory_resource* resource) noexcept
 :config_(std::move(c)),context_(std::move(context)),receipts_(resource) {}
 SyntheticReconstructor::SyntheticReconstructor(SyntheticReconstructor&& other) noexcept
-:config_(std::move(other.config_)),context_(std::move(other.context_)),engines_(std::move(other.engines_)),receipts_(std::move(other.receipts_)),summary_(other.summary_),pending_(other.pending_),pending_size_(other.pending_size_),pending_location_(other.pending_location_),pending_provenance_(other.pending_provenance_),moved_from_(other.moved_from_),held_(other.held_) {other.moved_from_=true;}
+:config_(std::move(other.config_)),context_(std::move(other.context_)),engines_(std::move(other.engines_)),receipts_(std::move(other.receipts_)),summary_(other.summary_),sequence_base_(other.sequence_base_),pending_(other.pending_),pending_size_(other.pending_size_),pending_location_(other.pending_location_),pending_provenance_(other.pending_provenance_),moved_from_(other.moved_from_),held_(other.held_) {other.moved_from_=true;}
 gig::Result<SyntheticReconstructor> SyntheticReconstructor::create(ReconstructionConfig c,std::pmr::memory_resource* resource) noexcept {
     const auto bad=[](std::string_view field){return gig::Result<SyntheticReconstructor>::failure(gig::ErrorCode::inconsistent_metadata,field);};
     const auto& e=c.initialization;
     if(!resource||c.book_count==0||c.book_count>2||c.max_source_records==0||c.max_source_records>100000)return bad("reconstruction.limits");
     if(c.max_source_records>c.receipt_budget_bytes/sizeof(SourceReceipt))return bad("receipt_budget");
-    if(e.kind!=InitialStateKind::authored_empty||!e.complete_history||e.boundary!=c.context_policy.first_location
+    if(c.seed_sha256||e.kind!=InitialStateKind::authored_empty||!e.complete_history||e.boundary!=c.context_policy.first_location
         ||e.boundary!=Location{ByteOffset{0},ByteOffset{2},RecordOrdinal{0}}
         ||e.source!=c.source.source||e.session!=c.source.session
         ||c.source.initialization!=Initialization::synthetic_history_declared)return bad("initialization.evidence");
@@ -108,7 +113,7 @@ gig::Result<SyntheticReconstructor> SyntheticReconstructor::create(Reconstructio
 }
 gig::Result<gig::MarketEvent> SyntheticReconstructor::project(const NormalizedRecord& n,std::size_t index) const noexcept {
     const auto& b=*config_.bindings[index];const auto& raw=n.source;
-    auto m=metadata(config_,b,summary_.native_counts[index],raw.location.ordinal.value());
+    auto m=metadata(config_,b,sequence_base_[index]+summary_.native_counts[index],raw.location.ordinal.value());
     std::array<char,160> token{};const auto id=config_.initialization.fixture.view();std::copy(id.begin(),id.end(),token.begin());token[id.size()]=':';
     const auto converted=std::to_chars(token.data()+id.size()+1,token.data()+token.size(),raw.location.ordinal.value());
     if(converted.ec!=std::errc{})return gig::Result<gig::MarketEvent>::failure(gig::ErrorCode::capacity,"source_record");
@@ -191,11 +196,11 @@ ReconstructionStep SyntheticReconstructor::process(std::span<const std::byte> pa
     if(receipts_.size()==receipts_.capacity()){step.disposition=SourceDisposition::resource_rejected;step.native_error={gig::ErrorCode::capacity,"receipts"};return reject(step);}
     SourceReceipt receipt{n.source,SourceDisposition::external_observation,index,std::nullopt};
     if(mutation){
-        if(summary_.native_counts[*index]==UINT64_MAX){step.native_error={gig::ErrorCode::overflow,"derived_sequence"};return reject(step);}
+        if(summary_.native_counts[*index]==UINT64_MAX-sequence_base_[*index]){step.native_error={gig::ErrorCode::overflow,"derived_sequence"};return reject(step);}
         const auto event=project(n,*index);if(!event){step.native_error=event.error;return reject(step);}
         step.native_error=engines_[*index]->apply(*event.data);
         if(step.native_error){step.disposition=step.native_error.code==gig::ErrorCode::resource_exhausted||step.native_error.code==gig::ErrorCode::capacity?SourceDisposition::resource_rejected:SourceDisposition::integration_rejected;return reject(step);}
-        receipt.disposition=SourceDisposition::native_committed;receipt.native_sequence=summary_.native_counts[*index];
+        receipt.disposition=SourceDisposition::native_committed;receipt.native_sequence=sequence_base_[*index]+summary_.native_counts[*index];
     }
     // Private context ownership and the guard above make this commit nonfallible.
     // All vector slots were reserved at creation; no callouts or allocation follow native success.
@@ -204,7 +209,7 @@ ReconstructionStep SyntheticReconstructor::process(std::span<const std::byte> pa
     receipts_.push_back(receipt);
     ++summary_.context_committed;
     if(mutation){++summary_.native_committed;++summary_.native_counts[*index];}else ++summary_.external_observations;
-    summary_.committed_position=location;summary_.pending=false;held_=false;summary_.rejected=0;summary_.eligibility=ReconstructionEligibility::eligible_synthetic_empty;
+    summary_.committed_position=location;summary_.pending=false;held_=false;summary_.rejected=0;summary_.eligibility=config_.initialization.kind==InitialStateKind::complete_seed?ReconstructionEligibility::eligible_synthetic_seed:ReconstructionEligibility::eligible_synthetic_empty;
     step.disposition=receipt.disposition;step.book_index=receipt.book_index;step.native_sequence=receipt.native_sequence;step.committed=true;return step;
 }
 ReconstructionSummary SyntheticReconstructor::finish(ContextEnd end) noexcept {
@@ -214,5 +219,87 @@ ReconstructionSummary SyntheticReconstructor::finish(ContextEnd end) noexcept {
     summary_.finished=true;summary_.input_complete=!held_&&!summary_.unconsidered_record&&context.source_complete;
     if(!summary_.input_complete)summary_.eligibility=ReconstructionEligibility::stopped_at_valid_prefix;
     return summary_;
+}
+gig::Result<SyntheticReconstructor> SyntheticReconstructor::create_seeded(ReconstructionConfig c,const SeedState& seed,Sha256Digest trusted,std::pmr::memory_resource* memory) noexcept {
+    const auto bad=[](std::string_view field){return gig::Result<SyntheticReconstructor>::failure(gig::ErrorCode::inconsistent_metadata,field);};
+    const auto digest=seed_sha256(seed,c.source.source,c.source.session);
+    if(!digest||*digest.data!=trusted||c.initialization.kind!=InitialStateKind::complete_seed
+        ||!c.initialization.complete_history||c.initialization.boundary!=seed.boundary||c.context_policy.first_location!=seed.boundary
+        ||seed.boundary.frame_offset.value()>UINT64_MAX-2||seed.boundary.payload_offset.value()!=seed.boundary.frame_offset.value()+2
+        ||seed.boundary.ordinal.value()==0||seed.lifecycle_stage==0||seed.lifecycle_stage>5
+        ||(c.context_policy.require_monotonic_timestamps&&!seed.last_timestamp)
+        ||(seed.last_timestamp&&(seed.last_timestamp->value()>=(std::uint64_t{1}<<48U)
+            ||(c.context_policy.require_intraday_timestamps&&seed.last_timestamp->value()>=86400000000000ULL))))return bad("seed.evidence");
+    // Keep the established factory's complete config/provenance/budget validation.
+    // Its temporary empty books/context never escape this function.
+    const auto hex=hex_digest(trusted);const auto identity=gig::Digest::make(std::string_view(hex.data(),hex.size()));
+    if(!identity||(c.seed_sha256&&c.seed_sha256!=identity.data))return bad("seed.digest_identity");
+    c.seed_sha256=*identity.data;
+    auto base=c;base.seed_sha256.reset();base.initialization.kind=InitialStateKind::authored_empty;
+    base.initialization.boundary={};base.initialization.boundary.payload_offset=ByteOffset{2};base.context_policy.first_location=base.initialization.boundary;
+    auto created=create(base,memory);if(!created)return created;
+    auto& out=*created.data;
+    if(seed.directories.size()!=c.book_count||seed.directories.size()>c.context_policy.max_directories||seed.orders.size()+seed.retired.size()>c.context_policy.max_lifetime_orders
+        ||seed.matches.size()>c.context_policy.max_matches)return bad("seed.capacities");
+    try {
+        auto& context=out.context_;
+        context.seed_retired_.reserve(seed.retired.size());
+        if(context.seed_retired_.capacity()>(c.context_policy.memory_budget_bytes-context.summary_.reserved_bytes)/sizeof(OrderReference))return bad("seed.memory_budget");
+        context.summary_.reserved_bytes+=context.seed_retired_.capacity()*sizeof(OrderReference);
+        for(const auto& raw:seed.directories){
+            const auto decoded=decode(raw.payload,{ByteOffset{0},ByteOffset{2},RecordOrdinal{0}},c.source.provenance,c.context_policy.decode_profile);
+            if(!decoded||decoded.data->type!='R')return bad("seed.directory_wire");
+            const auto locate=decoded.data->header.stock_locate;const auto& directory=std::get<StockDirectory>(decoded.data->message);
+            bool bound=false;for(std::size_t i=0;i<c.book_count;++i)bound=bound||(c.bindings[i]->locate==locate&&c.bindings[i]->stock==directory.stock);
+            if(!bound||std::any_of(context.directories_.begin(),context.directories_.end(),[&](const auto& d){return d.locate==locate||d.directory.stock==directory.stock;}))return bad("seed.directory_binding");
+            context.directories_.push_back({locate,directory});
+        }
+        std::array<gig::Snapshot,2> snapshots{{{gig::SnapshotKind::order_level,gig::SnapshotCoverage::complete,0,{},{},{}},{gig::SnapshotKind::order_level,gig::SnapshotCoverage::complete,0,{},{},{}}}};
+        for(const auto& entry:seed.orders){
+            const auto& o=entry.state;
+            if(!o.active||o.reference.value()==0||o.remaining.value()==0||o.resting_price.value()==0||entry.priority==0||entry.priority==UINT64_MAX
+                ||o.arrival.value()>=seed.boundary.ordinal.value()||(o.side!=Side::buy&&o.side!=Side::sell)
+                ||(o.attribution&&std::any_of(o.attribution->bytes.begin(),o.attribution->bytes.end(),[](char ch){return ch<32||ch>126;})))return bad("seed.order_fields");
+            std::optional<std::size_t> index;for(std::size_t i=0;i<c.book_count;++i)if(c.bindings[i]->locate==o.locate&&c.bindings[i]->stock==o.stock)index=i;
+            if(!index)return bad("seed.order_binding");
+            for(const auto& prior:context.orders_){
+                if(prior.reference==o.reference||prior.arrival==o.arrival)return bad("seed.order_duplicate");
+            }
+            for(const auto& prior:seed.orders){
+                if(&prior==&entry||prior.state.locate!=o.locate)continue;
+                if(prior.priority==entry.priority||(prior.state.arrival<o.arrival&&prior.priority>=entry.priority))return bad("seed.priority");
+            }
+            const auto& binding=*c.bindings[*index];const auto price=price4_to_ticks(o.resting_price,binding.rules.tick_size);
+            const auto quantity=shares_to_lots(o.remaining.value(),binding.rules.lot_size);const auto id=gig::OrderId::make(o.reference.value());
+            if(!price||!quantity||!id)return bad("seed.exact_units");
+            if(snapshots[*index].orders.append({{*id.data,o.side==Side::buy?gig::Side::buy:gig::Side::sell,*price.data,*quantity.data},entry.priority}))return bad("seed.snapshot_capacity");
+            context.orders_.push_back(o);
+        }
+        for(const auto ref:seed.retired){
+            if(ref.value()==0||std::any_of(context.orders_.begin(),context.orders_.end(),[&](const auto& o){return o.reference==ref;})
+                ||std::find(context.seed_retired_.begin(),context.seed_retired_.end(),ref)!=context.seed_retired_.end())return bad("seed.retired_duplicate");
+            context.seed_retired_.push_back(ref);
+        }
+        for(const auto& match:seed.matches){
+            if(match.number.value()==0||static_cast<unsigned>(match.kind)>static_cast<unsigned>(MatchKind::cross)
+                ||std::none_of(context.directories_.begin(),context.directories_.end(),[&](const auto& d){return d.locate==match.locate;})
+                ||std::any_of(context.matches_.begin(),context.matches_.end(),[&](const auto& m){return m.number==match.number;}))return bad("seed.match");
+            context.matches_.push_back(match);
+        }
+        std::sort(context.orders_.begin(),context.orders_.end(),[](const auto& a,const auto& b){return a.reference<b.reference;});
+        std::sort(context.directories_.begin(),context.directories_.end(),[](const auto& a,const auto& b){return a.locate<b.locate;});
+        std::sort(context.matches_.begin(),context.matches_.end(),[](const auto& a,const auto& b){return a.number<b.number;});
+        std::sort(context.seed_retired_.begin(),context.seed_retired_.end());
+        for(std::size_t i=0;i<c.book_count;++i){
+            const auto& binding=*c.bindings[i];auto m=metadata(c,binding,0,seed.boundary.ordinal.value()-1);m.source_record=gig::Available<gig::Identity>::known(c.initialization.fixture);
+            (void)snapshots[i].boundaries.append({scope(c,binding),*gig::SequenceNumber::make(0).data,0,1});
+            const auto error=out.engines_[i]->recover({m,snapshots[i]});if(error)return gig::Result<SyntheticReconstructor>::failure(error.code,error.field);
+            out.sequence_base_[i]=1;
+        }
+        context.policy_=c.context_policy;context.lifecycle_stage_=seed.lifecycle_stage;context.next_location_=seed.boundary;
+        context.summary_.initialization_incomplete=false;context.summary_.directories=context.directories_.size();context.summary_.lifetime_orders=context.orders_.size()+context.seed_retired_.size();context.summary_.active_orders=context.orders_.size();context.summary_.matches=context.matches_.size();context.summary_.last_timestamp=seed.last_timestamp;
+        out.config_=c;out.summary_.eligibility=ReconstructionEligibility::eligible_synthetic_seed;
+        return created;
+    }catch(...){return gig::Result<SyntheticReconstructor>::failure(gig::ErrorCode::resource_exhausted,"seed.storage");}
 }
 } // namespace gig::itch

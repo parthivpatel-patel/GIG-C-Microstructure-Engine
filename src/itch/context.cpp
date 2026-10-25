@@ -33,10 +33,10 @@ bool provenance_conflicts(const Provenance& a,const Provenance& b) noexcept {
 }
 }
 SourceContext::SourceContext(SourceManifest m,ContextPolicy p,std::pmr::memory_resource* resource) noexcept
-:manifest_(std::move(m)),policy_(p),directories_(resource),orders_(resource),matches_(resource) {}
+:manifest_(std::move(m)),policy_(p),directories_(resource),orders_(resource),matches_(resource),seed_retired_(resource) {}
 SourceContext::SourceContext(SourceContext&& other) noexcept
 :manifest_(std::move(other.manifest_)),policy_(other.policy_),directories_(std::move(other.directories_)),
- orders_(std::move(other.orders_)),matches_(std::move(other.matches_)),summary_(other.summary_),
+ orders_(std::move(other.orders_)),matches_(std::move(other.matches_)),seed_retired_(std::move(other.seed_retired_)),summary_(other.summary_),
  lifecycle_stage_(other.lifecycle_stage_),next_location_(other.next_location_),
  cursor_exhausted_(other.cursor_exhausted_),moved_from_(other.moved_from_),instance_(other.instance_) {other.moved_from_=true;}
 std::optional<std::size_t> SourceContext::required_bytes(const ContextPolicy& p) noexcept {
@@ -103,9 +103,10 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     }
     const auto locate=raw.header.stock_locate;
     const auto directory_it=std::find_if(directories_.begin(),directories_.end(),[&](const auto& d){return d.locate==locate;});
+    const auto retired_seed=[&](OrderReference ref){return std::find(seed_retired_.begin(),seed_retired_.end(),ref)!=seed_retired_.end();};
     const auto order_index=[&](OrderReference ref){const auto i=std::find_if(orders_.begin(),orders_.end(),[&](const auto& o){return o.reference==ref;});return i==orders_.end()?absent:static_cast<std::size_t>(i-orders_.begin());};
     const auto match_index=[&](MatchNumber number){const auto i=std::find_if(matches_.begin(),matches_.end(),[&](const auto& m){return m.number==number;});return i==matches_.end()?absent:static_cast<std::size_t>(i-matches_.begin());};
-    NormalizedRecord normalized{raw,manifest_};normalized.policy=policy_;
+    NormalizedRecord normalized{raw,manifest_};normalized.policy=policy_;normalized.initialization_incomplete=summary_.initialization_incomplete;
     normalized.normalization_version=static_cast<std::uint32_t>(policy_.decode_profile)+1U;
     std::optional<DirectoryState> add_directory;std::optional<OrderState> add_order,update_order;
     std::optional<MatchState> add_match,update_match;
@@ -118,7 +119,7 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     };
     const auto existing_order=[&](OrderReference reference)->std::optional<OrderState>{
         order_slot=order_index(reference);
-        if(order_slot==absent){operation_fail(ContextCode::missing_order,"order_reference");return std::nullopt;}
+        if(order_slot==absent){operation_fail(retired_seed(reference)?ContextCode::inactive_order:ContextCode::missing_order,"order_reference");return std::nullopt;}
         const auto order=orders_[order_slot];
         if(order.locate!=locate){operation_fail(ContextCode::stock_conflict,"stock_locate");return std::nullopt;}
         if(!order.active){operation_fail(ContextCode::inactive_order,"order_reference");return std::nullopt;}
@@ -180,7 +181,7 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
         const auto& add=raw.type=='A'?std::get<AddOrder>(raw.message):std::get<AddAttributedOrder>(raw.message).order;
         require_directory(&add.stock);
         if(add.order_reference.value()==0)operation_fail(ContextCode::invalid_reference,"order_reference");
-        else if(order_index(add.order_reference)!=absent)operation_fail(ContextCode::duplicate_reference,"order_reference");
+        else if((order_index(add.order_reference)!=absent||retired_seed(add.order_reference)))operation_fail(ContextCode::duplicate_reference,"order_reference");
         if(add.shares.value()==0)operation_fail(ContextCode::invalid_quantity,"shares");
         OrderState order{add.order_reference,locate,add.stock,add.side,add.shares,add.price,std::nullopt,location.ordinal,true};
         if(raw.type=='F')order.attribution=std::get<AddAttributedOrder>(raw.message).attribution;
@@ -220,7 +221,7 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     case 'U':{
         normalized.kind=SemanticKind::replace;require_directory();const auto& u=std::get<OrderReplace>(raw.message);const auto before=existing_order(u.original_reference);
         if(u.new_reference.value()==0)operation_fail(ContextCode::invalid_reference,"new_reference");
-        else if(order_index(u.new_reference)!=absent)operation_fail(ContextCode::duplicate_reference,"new_reference");
+        else if((order_index(u.new_reference)!=absent||retired_seed(u.new_reference)))operation_fail(ContextCode::duplicate_reference,"new_reference");
         if(u.shares.value()==0)operation_fail(ContextCode::invalid_quantity,"shares");
         if(before){normalized.before=before;auto old=*before;old.active=false;old.remaining=Shares{0};update_order=old;
             auto next=*before;next.reference=u.new_reference;next.remaining=u.shares;next.resting_price=u.price;next.arrival=location.ordinal;next.active=true;
@@ -247,7 +248,7 @@ ContextPreparation SourceContext::prepare(std::span<const std::byte> payload,Loc
     default:return rejected(ContextStatus::unsupported,ContextCode::unsupported_source,location,"type");
     }
     if(operation_error!=ContextCode::none)return fail(operation_error,operation_field);
-    if((add_directory&&directories_.size()==policy_.max_directories)||(add_order&&orders_.size()==policy_.max_lifetime_orders)||(add_match&&matches_.size()==policy_.max_matches))return rejected(ContextStatus::resource_limit,ContextCode::capacity,location,"storage");
+    if((add_directory&&directories_.size()==policy_.max_directories)||(add_order&&orders_.size()+seed_retired_.size()==policy_.max_lifetime_orders)||(add_match&&matches_.size()==policy_.max_matches))return rejected(ContextStatus::resource_limit,ContextCode::capacity,location,"storage");
     ContextStatus status=ContextStatus::accepted;ContextError error{};
     if(normalized.integration==IntegrationClass::exact_candidate&&(!normalized.price_ticks||!normalized.quantity_lots)){
         status=ContextStatus::integration_ineligible;error={ContextCode::unit_conversion,location,"native_units",0,0,{}};
@@ -293,7 +294,7 @@ ContextResult SourceContext::commit_validated(PreparedContext&& token) noexcept 
     if(token.add_match_)matches_.push_back(*token.add_match_);
     if(token.update_match_)matches_[token.match_slot_]=*token.update_match_;
     lifecycle_stage_=token.next_stage_;
-    ++summary_.accepted_records;summary_.directories=directories_.size();summary_.lifetime_orders=orders_.size();summary_.matches=matches_.size();
+    ++summary_.accepted_records;summary_.directories=directories_.size();summary_.lifetime_orders=orders_.size()+seed_retired_.size();summary_.matches=matches_.size();
     summary_.active_orders=static_cast<std::size_t>(std::count_if(orders_.begin(),orders_.end(),[](const auto& o){return o.active;}));
     summary_.last_location=token.record().source.location;summary_.last_timestamp=token.record().source.header.timestamp;
     cursor_exhausted_=token.cursor_exhausted_;next_location_=token.next_location_;

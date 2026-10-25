@@ -497,6 +497,8 @@ def main():
         subprocess.run([sys.executable,str(Path(__file__).with_name('check_adapter_differential.py')),args.driver],check=True)
         subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_adapter_differential.py')],check=True)
         subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_market_initialization.py')],check=True)
+        from check_seeded_reference import main as seeded_reference
+        seeded_reference(args.driver)
 
 
 if __name__=='__main__':main()

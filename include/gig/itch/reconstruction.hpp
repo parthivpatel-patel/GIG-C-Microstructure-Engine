@@ -4,7 +4,7 @@
 
 namespace gig::itch {
 enum class InitialStateKind : std::uint8_t { unknown, authored_empty, complete_seed, incomplete_history, invalid };
-enum class ReconstructionEligibility : std::uint8_t { blocked, eligible_synthetic_empty, stopped_at_valid_prefix };
+enum class ReconstructionEligibility : std::uint8_t { blocked, eligible_synthetic_empty, stopped_at_valid_prefix, eligible_synthetic_seed };
 // This evidence is an explicit caller assertion, authenticated by the fixture runner.
 // It is not a market-data empty-state inference or a cryptographic verifier.
 struct InitializationEvidence {
@@ -37,6 +37,7 @@ struct ReconstructionConfig {
     std::size_t max_source_records{4096};
     std::size_t receipt_budget_bytes{2*1024*1024};
     bool allow_c_book_only{false};
+    std::optional<gig::Digest> seed_sha256{};
     bool operator==(const ReconstructionConfig&) const = default;
 };
 enum class SourceDisposition : std::uint8_t { native_committed, external_observation, source_rejected, context_rejected, integration_rejected, resource_rejected, pending_identity_mismatch, finished };
@@ -63,12 +64,14 @@ struct ReconstructionSummary {
     bool initialization_verified{true};
     bool operator==(const ReconstructionSummary&) const = default;
 };
+struct SeedState;
 class SyntheticReconstructor {
     ReconstructionConfig config_;
     SourceContext context_;
     std::array<std::optional<gig::ReplayEngine>,2> engines_;
     std::pmr::vector<SourceReceipt> receipts_;
     ReconstructionSummary summary_;
+    std::array<std::uint64_t,2> sequence_base_{};
     std::array<std::byte,65535> pending_{};
     std::size_t pending_size_{};
     Location pending_location_{};
@@ -85,6 +88,11 @@ public:
     SyntheticReconstructor& operator=(SyntheticReconstructor&&)=delete;
     static gig::Result<SyntheticReconstructor> create(ReconstructionConfig,
         std::pmr::memory_resource* = std::pmr::get_default_resource()) noexcept;
+    // Atomic factory: typed complete synthetic snapshot only, not observed evidence.
+    static gig::Result<SyntheticReconstructor> create_seeded(ReconstructionConfig,const SeedState&,
+        std::array<std::byte,32> trusted_snapshot_sha256,
+        std::pmr::memory_resource* = std::pmr::get_default_resource()) noexcept;
+    std::uint64_t seed_journal_records(std::size_t i)const noexcept{return i<config_.book_count?sequence_base_[i]:0;}
     ReconstructionStep process(std::span<const std::byte>,Location,Provenance={}) noexcept;
     ReconstructionSummary finish(ContextEnd) noexcept;
     const SourceContext& context() const noexcept {return context_;}
