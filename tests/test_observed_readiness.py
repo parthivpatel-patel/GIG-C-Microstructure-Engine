@@ -90,4 +90,9 @@ class Readiness(unittest.TestCase):
                 with self.assertRaises(ValueError):m.bounded_json(p)
 
 
-if __name__=='__main__':unittest.main()
+if __name__=='__main__':
+    if len(sys.argv)>1:
+        driver=sys.argv.pop(1)
+        subprocess.run([driver],check=True)
+        subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reference.py'),driver],check=True)
+    unittest.main()

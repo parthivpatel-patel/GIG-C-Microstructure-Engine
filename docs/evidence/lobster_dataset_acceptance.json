@@ -45,7 +45,7 @@
     }
   ],
   "usage": "README contains no use license; inspection only pending terms; CSV row statistics not calculated",
-  "acceptance_status": "CONDITIONAL: integrity/schema inspection passed; empirical processing BLOCKED pending usage terms",
+  "acceptance_status": "Integrity inspection historical PASS; actual dataset processing explicitly BLOCKED",
   "provenance": "User-uploaded attachment; publisher signature/official checksum match not established",
   "readme": {
     "version": "01 Sept 2013",
@@ -79,5 +79,6 @@
     "raw_logs": "sign-in required; no raw per-job/JUnit/compiler evidence retrieved",
     "new_code_qualified": false
   },
-  "collected_utc": "2026-10-25T01:56:29.124188+00:00"
+  "collected_utc": "2026-10-25T01:56:29.124188+00:00",
+  "owner_clarification": "No cloud-processing permission established; no further ZIP/private-file access; all development synthetic-only"
 }

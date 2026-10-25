@@ -25,3 +25,16 @@ permissible derivative reporting. This request is separate from routine engineer
 approval. Once established, use only that scope and keep raw rows/results private;
 public summaries must remain privacy-safe and no Level5 claim may follow from five
 levels. No rights are accepted/invented on provider's behalf.
+
+## Owner clarification after initial integrity inspection
+
+Owner identifies official sample page https://php.lobsterdata.com/info/DataSamples.php,
+website terms https://data.lobsterdata.com/imprint.php and formal terms
+https://php.lobsterdata.com/termsAndConditions.php, but explicitly states no written
+third-party cloud processing permission. Owner directs no further ZIP inspection,
+extraction or processing. That instruction is now enforced: no private files have
+been accessed since clarification. Earlier ZIP/CRC/README inspection and bounded
+extraction are retained as historical actions, not represented as never having
+occurred. No empirical CSV row analysis occurred. Private copies remain protected
+and untouched; they are not included in any build/source archive. Further work uses
+independently authored fixtures only. Actual empirical results remain null/blocked.

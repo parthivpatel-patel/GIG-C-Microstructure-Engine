@@ -106,6 +106,12 @@ add_library(gig::itch_input_adapter ALIAS gig_itch_input_adapter)
 target_link_libraries(gig_itch_input_adapter PUBLIC gig::itch_reconstruction)
 gig_project_target(gig_itch_input_adapter)
 
+# LOBSTER text contracts; no data acquisition or inferred initialization.
+add_library(gig_lobster STATIC src/lobster/adapter.cpp)
+add_library(gig::lobster ALIAS gig_lobster)
+target_link_libraries(gig_lobster PUBLIC gig::microstructure)
+gig_project_target(gig_lobster)
+
 option(GIG_BUILD_ITCH_STREAMING "Build bounded synthetic gzip replay (requires zlib >=1.3.1)" OFF)
 if(GIG_BUILD_ITCH_STREAMING)
   find_package(ZLIB 1.3.1 REQUIRED)
@@ -230,8 +236,11 @@ if(BUILD_TESTING)
     ${CMAKE_CURRENT_SOURCE_DIR}/scripts/run_synthetic_l3_demo.py $<TARGET_FILE:gig_itch_l3_reference_driver>)
   add_test(NAME itch.l3_oracle_negative_control COMMAND ${Python3_EXECUTABLE}
     ${CMAKE_CURRENT_SOURCE_DIR}/scripts/check_itch_l3_reference.py $<TARGET_FILE:gig_itch_l3_reference_driver> --negative-control)
+  add_executable(gig_lobster_tests tests/test_lobster.cpp)
+  target_link_libraries(gig_lobster_tests PRIVATE gig::lobster)
+  gig_project_target(gig_lobster_tests)
   add_test(NAME observed.readiness_contracts COMMAND ${Python3_EXECUTABLE}
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_observed_readiness.py)
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_observed_readiness.py $<TARGET_FILE:gig_lobster_tests>)
   add_executable(gig_itch_auction_tests tests/test_itch_auction.cpp)
   target_link_libraries(gig_itch_auction_tests PRIVATE gig::itch_reconstruction)
   target_include_directories(gig_itch_auction_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

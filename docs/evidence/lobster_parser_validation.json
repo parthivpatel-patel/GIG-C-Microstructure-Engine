@@ -1,0 +1,17 @@
+{
+  "schema": "gig.lobster_parser_validation.v1",
+  "scope": "independently authored fixtures only; attached data not processed",
+  "independent_cases": 79,
+  "reference_sha256": "43ab012bcfd2edfd08b86335551bb879014401f3f99cc203d78f24a435b91abf",
+  "targeted_debug_ctest": "1/1 pass observed.readiness_contracts including native/independent LOBSTER controls",
+  "failures": 0,
+  "source_sha256": {
+    "include/gig/lobster/adapter.hpp": "ec97f8bfec7f670fb9f167bdc442c6e72649674b43d2576d44c0a17961ab9484",
+    "src/lobster/adapter.cpp": "f52fb3bf35aa121e534445592803d15a2f479478596843f21fbe7a3b25efaf51",
+    "tests/test_lobster.cpp": "d8bc85af5af1e75332d904484baf340d6c6aa09375b6713d47c4be9acbd04b58",
+    "scripts/check_lobster_reference.py": "cfe5cfbf974086bd75b56766d9b23da22a792e7c75df02b785535676351981a8"
+  },
+  "empirical_reference_statistics": null,
+  "actual_processing_blocked": true,
+  "initialization_unknown": true
+}
