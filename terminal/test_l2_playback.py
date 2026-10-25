@@ -51,11 +51,33 @@ class Playback(unittest.TestCase):
         (self.root/'authored-l2-v2/events.jsonl').unlink()
         self.assertEqual(discover(self.root)['sessions'][0]['status'],'BLOCKED_PERMISSION')
         with self.assertRaisesRegex(ValueError,'observed_processing_permission'):RecordedSession(self.root,'authored-l2-v2')
+    def test_expired_cached_session_is_not_servable_and_storage_prunes(self):
+        from .l2_playback import prune_expired
+        m=save_fixture(self.root);session=RecordedSession(self.root,'authored-l2-v2')
+        future=m['created_unix_seconds']+m['retention_seconds']+1
+        with patch('terminal.l2_playback.time.time',return_value=future):
+            view=session.view(1,True,1);self.assertEqual(view['origin'],'UNAVAILABLE')
+            self.assertEqual(session.frames,[]);self.assertEqual(session.event_count,0)
+            self.assertEqual(prune_expired(self.root)['deleted_count'],1)
+        self.assertEqual(list(self.root.iterdir()),[])
+    def test_pending_deadline_survives_interrupted_short_retention(self):
+        from .l2_recording import L2Writer
+        from .l2_playback import prune_expired
+        from .providers.fixtures import EVENTS
+        writer=L2Writer(self.root,'short',enabled=True,clock=lambda:100,retention_seconds=1)
+        writer.append(EVENTS[0],0);writer.stream.close()  # Simulate an unfinalized writer.
+        self.assertEqual(prune_expired(self.root,now=102)['deleted_count'],1)
+        self.assertEqual(list(self.root.iterdir()),[])
+    def test_active_pending_capture_excluded_from_expired_cleanup(self):
+        from .l2_playback import prune_expired
+        stage=self.root/'.pending-l2-authored';stage.mkdir();os.utime(stage,(0,0))
+        self.assertEqual(prune_expired(self.root,now=100000,active_stage=stage)['deleted_count'],0)
+        self.assertEqual(prune_expired(self.root,now=100000)['deleted_count'],1)
     def test_fsync_stage_and_parent_after_rename(self):
         calls=[]
         with patch('terminal.l2_recording.sync_directory',side_effect=lambda p:calls.append(Path(p).name)):
             save_fixture(self.root)
-        self.assertTrue(calls[0].startswith('.pending-l2-'));self.assertEqual(calls[1],self.root.name)
+        self.assertEqual(len(calls),3);self.assertTrue(all(x.startswith('.pending-l2-') for x in calls[:2]));self.assertEqual(calls[-1],self.root.name)
     def test_false_l3_or_session_completeness_rejected(self):
         save_fixture(self.root);path=self.root/'authored-l2-v2/manifest.json';original=json.loads(path.read_bytes())
         for key in ('complete_initialization','market_session_complete'):

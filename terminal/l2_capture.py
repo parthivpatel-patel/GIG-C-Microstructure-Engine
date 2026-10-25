@@ -14,6 +14,9 @@ class Capture:
         writer=await asyncio.to_thread(L2Writer,*args,**kwargs)
         return cls(writer)
     def offer(self,raw,now,unix,receipt):
+        if self.writer.clock()>self.writer.created+self.writer.retention:
+            self.state,self.reason='ERROR','recording_retention_expired';self.abort_requested=True
+            raise ValueError('recording_retention_expired')
         if self.state=='ERROR':raise ValueError('recording_failed')
         if self.state!='RECORDING':return
         try:value=(raw,now,unix,deepcopy(receipt))

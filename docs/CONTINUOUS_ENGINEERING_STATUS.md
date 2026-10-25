@@ -35,3 +35,37 @@ C research files are partial/uncommitted at this checkpoint and must be preserve
 Exact next action: integrate and validate bounded causal research calculations; final
 consolidated matrix and benchmark/evidence follow. Native matrix need not be repeated
 unless native implementation changes. Source commit SHA recorded in next checkpoint.
+
+## Research/provider/hardening work in final validation
+
+B source checkpoint083c52bd3ef81c6d6d0e095238a7c702360cbf18 pushed/verified.
+C/D: bounded causal receive-time research windows integrated into production supervisor
+and native-validated recorded prefixes; UI exposes exact values and unavailable reasons.
+E: isolated offline Coinbase candidate and11 authored tests, never live-qualified.
+Kraken candidate adds explicit online-status/trade-field observations; official schema
+review still mandatory. F: observed replay cannot enable synthetic export; cached expiry
+and60s bounded disk retention cleanup implemented, including durable pending deadlines.
+Startup remains storage-side-effect-free before explicit use. Browser async Promise wait
+bug repaired with three negative controls and bounded actual-state polling. No C++ change.
+Current validation: focused native aggregate-depth1/1 in each GCC/Clang Debug/Release/
+sanitizer; full baseline155/155/eight hashes reused because native trees are unchanged.
+Latest151-case whole cohorts passed; final152-case run includes pending-retention test.
+Final browser/security/TLS/package/bench evidence pending. No actual provider frames.
+Exact next action: finish final expanded matrix, commit/push C/E/G checkpoint, build
+source archive, write consolidated evidence/report and verify feature remote/main/tree.
+
+## Final source validation checkpoint
+
+Final expanded terminal suite152/152 each installed Release, Debug binding and native
+ASan/UBSan consumer; LIVE_LSAN_CHECK=0. Security46, Chromium application21, recorded
+native replay+research9, gated live controls7, verified local HTTPS/WSS8, frontend4,
+async-wait negative controls3, packaging3. Native AggregateDepth1/1 each six supported
+GCC/Clang configurations. Full native155/155/eight-hash matrix reused unchanged from
+baseline54fa230; no C++/binding/fixture changes and no expensive native rebuild.
+No unresolved local test failure. Recording/retention and research are implemented;
+Kraken live and current official protocol/rights qualification remain blocked. Coinbase
+is an isolated offline candidate, not an integrated/live-qualified second provider.
+Current exact next action: commit/push validated C/E/G code and docs, run final benchmark
+and source archive inventory at that clean source commit, then commit consolidated report
+and safe evidence. Owner must independently verify official docs/terms/connectivity
+before any live flags; no observed data or owner-gated workflow was collected/launched.

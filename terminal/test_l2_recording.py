@@ -59,6 +59,11 @@ class L2Recording(unittest.TestCase):
         writer=L2Writer(self.root,'authored',enabled=True);writer.append(EVENTS[0],2)
         with self.assertRaisesRegex(ValueError,'clock'):writer.append(EVENTS[1],1)
         self.assertEqual(list(self.root.iterdir()),[])
+    def test_retention_starts_before_capture_not_at_finalization(self):
+        now=[100];writer=L2Writer(self.root,'authored',enabled=True,retention_seconds=1,clock=lambda:now[0])
+        writer.append(EVENTS[0],0);now[0]=102
+        with self.assertRaisesRegex(ValueError,'expired'):writer.finish()
+        self.assertEqual(list(self.root.iterdir()),[])
     def test_expiry_and_future_clock_rejected(self):
         self.write()
         for now in (99,100+86401):

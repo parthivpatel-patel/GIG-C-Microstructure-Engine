@@ -144,13 +144,28 @@ def create_app():
                         native.playing = False
                         native.notifications.append({'code': 'NATIVE_REPLAY_REJECTED', 'message': f'{exc.code_name}: {exc.field}'})
 
+    async def retention_loop():
+        from terminal.l2_playback import prune_expired
+        while True:
+            if not work_lock.locked():
+                async with work_lock:
+                    try:
+                        active=feed.capture.writer.stage if feed.capture and not feed.capture.task.done() else None
+                        await asyncio.to_thread(prune_expired,l2_directory,active_stage=active)
+                    except (ValueError,OSError):
+                        native.notifications.append({'code':'RETENTION_CLEANUP_FAILED','message':'Bounded recording retention cleanup refused; inspect private storage locally.'})
+            await asyncio.sleep(60)
+
     @asynccontextmanager
     async def lifespan(app):
         worker = asyncio.create_task(replay_loop())
+        retention = asyncio.create_task(retention_loop())
         try:
             yield
         finally:
             await feed.close()
+            retention.cancel()
+            with suppress(asyncio.CancelledError):await retention
             worker.cancel()
             with suppress(asyncio.CancelledError):
                 await worker

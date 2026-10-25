@@ -160,6 +160,7 @@ class KrakenBookAdapter:
         self.trades = deque(maxlen=256)
         self.trade_ids = set()
         self.backoff_attempt = 0
+        self.last_trade_snapshot = False
 
     def connect(self):
         self.state, self.reason = 'CONNECTING', 'awaiting_subscription'
@@ -219,7 +220,10 @@ class KrakenBookAdapter:
             if result['channel']=='book' and self.state not in ('LIVE','STALE'):
                 self.state, self.reason = 'SYNCHRONIZING', 'awaiting_valid_snapshot'
             return {'kind': 'acknowledgment', 'source_sequence': None}
+        if payload.get('channel') == 'status':
+            result=self._status(payload);self.last_receive_ns=now_ns;return result
         if payload.get('channel') == 'heartbeat':
+            if set(payload)!={'channel'}:raise ProviderError('heartbeat_fields')
             self.last_receive_ns = now_ns
             return {'kind': 'heartbeat', 'source_sequence': None}
         if payload.get('channel') == 'trade':
@@ -303,12 +307,28 @@ class KrakenBookAdapter:
         self.snapshots, self.updates = next_snapshots, next_updates
         return receipt
 
+    def _status(self,payload):
+        # Explicit provisional admin profile; current official schema still requires review.
+        if set(payload)!={'channel','type','data'} or payload.get('type')!='update' or type(payload.get('data')) is not list or len(payload['data'])!=1:
+            raise ProviderError('status_fields')
+        status=payload['data'][0]
+        if type(status) is not dict or set(status)!={'api_version','connection_id','system','version'}:
+            raise ProviderError('status_fields')
+        if status['api_version']!='v2' or type(status['version']) is not str or not re.fullmatch(r'[A-Za-z0-9._-]{1,32}',status['version']):
+            raise ProviderError('status_version')
+        identity=str(bounded_integer(status['connection_id'],UINT64_MAX,'status_connection_id'))
+        if status['system']!='online':raise ProviderError('provider_not_online')
+        return {'kind':'status','api_version':'v2','connection_id':identity,'system':'online','version':status['version'],'source_sequence':None}
+
     def _trade(self, payload, now_ns):
+        if set(payload)!={'channel','type','data'}:raise ProviderError('trade_fields')
         if payload.get('type') not in ('snapshot', 'update') or type(payload.get('data')) is not list or len(payload['data']) > 100:
             raise ProviderError('trade_batch')
         pending = []
         ids = set()
         for item in payload['data']:
+            if type(item) is not dict or set(item)-{'symbol','side','price','qty','trade_id','timestamp','ord_type'}:raise ProviderError('trade_fields')
+            if 'ord_type' in item and item['ord_type'] not in ('limit','market'):raise ProviderError('trade_order_type')
             if type(item) is not dict or item.get('symbol') != self.symbol or item.get('side') not in ('buy', 'sell'):
                 raise ProviderError('trade_identity')
             tid = item.get('trade_id')
@@ -325,6 +345,7 @@ class KrakenBookAdapter:
                 pending.append({'trade_id': key, 'price_ticks': price, 'quantity': qty,
                                 'side': item['side'], 'source_timestamp': item['timestamp'],
                                 'source_timestamp_ns': ns, 'origin': self.origin})
+                if 'ord_type' in item:pending[-1]['source_order_type']=item['ord_type']
         next_trades, next_ids = self.trades.copy(), self.trade_ids.copy()
         for trade in pending:
             if len(next_trades) == next_trades.maxlen:
@@ -332,6 +353,7 @@ class KrakenBookAdapter:
             next_trades.append(trade); next_ids.add(trade['trade_id'])
         receipt = {'kind': 'trades', 'trades': pending, 'deduplication_window': '256', 'source_sequence': None}
         self.trades, self.trade_ids = next_trades, next_ids
+        self.last_trade_snapshot = payload['type']=='snapshot'
         self.last_receive_ns = now_ns
         return receipt
 

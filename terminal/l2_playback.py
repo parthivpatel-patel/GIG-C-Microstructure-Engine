@@ -1,9 +1,11 @@
 """Bounded native-validated prefix cache; no synthetic order identities or observed uploads."""
 from copy import deepcopy
+from itertools import islice
 import json
+import time
 from pathlib import Path
 import gig_microstructure as gig
-from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2
+from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2,bounded_entries
 from .recording import canonical,root_path,safe_id
 from .providers.kraken import KrakenBookAdapter,_pairs
 
@@ -23,7 +25,7 @@ def metadata(directory,identity):
 
 
 def discover(directory,*,allow_observed=False):
-    root=root_path(directory);entries=list(root.iterdir())
+    root=root_path(directory);entries=bounded_entries(root,9)
     if len(entries)>8:raise ValueError('recording_dataset_budget')
     result=[];rejected=[]
     for path in sorted(entries):
@@ -53,6 +55,9 @@ class RecordedSession:
         adapter=KrakenBookAdapter(apply,symbol=manifest['symbol'],price_scale=manifest['price_scale'],
             quantity_scale=manifest['quantity_scale'],origin=manifest['origin'])
         self.frames=[];self.cache_bytes=0;self.identity=identity;self.manifest=manifest
+        self.total_records=len(rows);self.expired=False
+        from .l2_research import ResearchWindow
+        research=ResearchWindow()
         last_exchange=None
         for position in range(len(rows)+1):
             row=rows[position-1] if position else None;receipt=None
@@ -60,17 +65,30 @@ class RecordedSession:
                 receipt=adapter.feed(row['raw'],int(row['receive_monotonic_ns']))
                 if 'normalized' in row and receipt!=row['normalized']:raise ValueError('recording_normalization_mismatch')
                 if receipt['kind'] in ('snapshot','update'):last_exchange=receipt.get('source_timestamp_ns')
+                if receipt['kind'] in ('snapshot','update','trades'):
+                    observed={**receipt,'historical_snapshot':adapter.last_trade_snapshot} if receipt['kind']=='trades' else receipt
+                    research.observe(observed,gig._checked(book.state()) if receipt['kind']!='trades' else None,int(row['receive_monotonic_ns']),position)
             native=gig._checked(book.state())
-            frame={'native':native,'last_event':receipt,'source_timestamp_ns':last_exchange,
+            frame={'research':research.view(int(row['receive_monotonic_ns']) if row else 0),'native':native,'last_event':receipt,'source_timestamp_ns':last_exchange,
                    'received_at_ns':row.get('receive_unix_ns') if row else None,
                    'replay_time_ns':str(int(row['receive_monotonic_ns'])-int(rows[0]['receive_monotonic_ns'])) if row else '0'}
             self.cache_bytes+=len(canonical(frame))
             if self.cache_bytes>MAX_CACHE_BYTES:raise ValueError('recording_prefix_cache_budget')
             self.frames.append(frame)
         if not adapter.snapshots:raise ValueError('recording_snapshot_required')
+    def check_expiry(self):
+        if time.time()>self.manifest['created_unix_seconds']+self.manifest['retention_seconds']:
+            self.expired=True;self.frames.clear();self.cache_bytes=0
+        return self.expired
     @property
-    def event_count(self):return len(self.frames)-1
+    def event_count(self):return 0 if self.check_expiry() else self.total_records
     def view(self,position,playing,speed):
+        if self.check_expiry():
+            return {'mode':'HISTORICAL_REPLAY','origin':'UNAVAILABLE','instrument':self.manifest['symbol'],'provider':'kraken-recorded','venue':'Kraken',
+                'book':{'bids':[],'asks':[]},'position':0,'event_count':0,'playing':False,'speed':speed,'revision':'0',
+                'metrics':{k:None for k in ('spread','midprice','microprice','imbalance')},
+                'feed':{'state':'ERROR','reason':'recording_retention_expired','real_time':False},
+                'provenance':{'category':'UNAVAILABLE','dataset':self.identity,'session_segment':self.identity+':expired','complete_initialization':False}}
         if type(position) is not int or not 0<=position<=self.event_count:raise ValueError('replay_position')
         frame=deepcopy(self.frames[position]);native=frame.pop('native');m=self.manifest
         metrics={target:native['metrics'][source] for target,source in [('spread','spread'),('midprice','midpoint'),('microprice','microprice'),('imbalance','depth_imbalance'),('bid_depth','bid_depth'),('ask_depth','ask_depth')]}
@@ -111,3 +129,38 @@ def delete_session(directory,identity):
     from .l2_recording import sync_directory
     sync_directory(target.parent)
     return True
+
+
+def prune_expired(directory,*,now=None,active_stage=None):
+    """Delete only expired owned finalized logs; active pending writer is excluded."""
+    import shutil
+    from .l2_recording import sync_directory,MAX_AGE
+    candidate=Path(directory)
+    if candidate.is_symlink():raise ValueError('recording_root_symlink')
+    if not candidate.exists():return {'deleted_count':0,'grace_seconds':60}
+    root=root_path(directory);instant=time.time() if now is None else now
+    entries=bounded_entries(root,9)
+    if len(entries)>8:raise ValueError('recording_dataset_budget')
+    deleted=[]
+    for path in entries:
+        if path.is_symlink() or not path.is_dir():continue
+        if path.name.startswith('.pending-l2-'):
+            deadline=None
+            for name in ('pending.json','manifest.json'):
+                candidate=path/name
+                if candidate.is_symlink() or not candidate.is_file():continue
+                try:
+                    with candidate.open('rb') as stream:raw=stream.read(8193)
+                    if len(raw)>8192:continue
+                    m=json.loads(raw,object_pairs_hook=_pairs);created=m.get('created_unix_seconds');retention=m.get('retention_seconds')
+                    if type(created) is int and type(retention) is int and 0<=created and 1<=retention<=MAX_AGE:deadline=created+retention;break
+                except (OSError,ValueError,AttributeError):continue
+            expired=path!=active_stage and (instant>deadline if deadline is not None else instant-path.stat().st_mtime>MAX_AGE)
+        else:
+            try:
+                m=metadata(root,path.name);created=m.get('created_unix_seconds');retention=m.get('retention_seconds')
+                expired=(type(created) is int and type(retention) is int and 0<=created and 1<=retention<=MAX_AGE and instant>created+retention)
+            except (OSError,ValueError):continue
+        if expired:shutil.rmtree(path);deleted.append(path.name)
+    if deleted:sync_directory(root)
+    return {'deleted_count':len(deleted),'grace_seconds':60}

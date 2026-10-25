@@ -23,3 +23,6 @@ export function validateState(value:unknown):TerminalState {
  if(!Number.isSafeInteger(value.position)||!Number.isSafeInteger(value.event_count)||Number(value.position)<0||Number(value.event_count)<0||Number(value.position)>Number(value.event_count)||typeof value.playing!=='boolean'||typeof value.speed!=='number'||!Number.isFinite(value.speed))throw new Error('Invalid replay clock');
  return value as unknown as TerminalState;
 }
+
+// Observed export needs a separate rights decision; replay mode alone cannot grant it.
+export function syntheticExportAllowed(origin:unknown):boolean{return origin==='HISTORICAL_SYNTHETIC'||origin==='SIMULATED'}

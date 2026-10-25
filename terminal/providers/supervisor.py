@@ -50,6 +50,9 @@ class FeedSupervisor:
         self.aggregate,self.adapter=aggregate,adapter
         self.exchange_ns=self.received_at_ns=None
         adapter.connect()
+        from terminal.l2_research import ResearchWindow
+        self.research=ResearchWindow(aggressor_side_confirmed=self.environment.get('GIG_LIVE_AGGRESSOR_SIDE_REVIEWED')=='1')
+        self.research_cache=None;self.research_cache_until=0
 
     def cancel(self):
         """Invalidate publication synchronously before the next event-loop await."""
@@ -107,6 +110,9 @@ class FeedSupervisor:
                         self.pending=False
                         now=self.clock();unix=str(self.wall_clock())
                         receipt=self.adapter.feed(raw,now)
+                        if receipt['kind'] in ('snapshot','update','trades'):
+                            research_receipt={**receipt,'historical_snapshot':self.adapter.last_trade_snapshot} if receipt['kind']=='trades' else receipt
+                            self.research.observe(research_receipt,gig._checked(self.aggregate.state()) if receipt['kind']!='trades' else None,now,self.messages+1)
                         if self.capture is not None and self.capture.state in ('RECORDING','FINALIZING'):
                             self.capture.offer(raw,now,unix,receipt)
                         self.messages+=1;self.kind=receipt['kind']
@@ -161,6 +167,12 @@ class FeedSupervisor:
         if native:
             for target,source in [('spread','spread'),('midprice','midpoint'),('microprice','microprice'),('imbalance','depth_imbalance'),('bid_depth','bid_depth'),('ask_depth','ask_depth')]:
                 metrics[target]=native['metrics'][source]
+        research={'status':'UNAVAILABLE','reason':'untrusted_or_stale_source'}
+        if native:
+            if self.research_cache is None or now>=self.research_cache_until:
+                self.research_cache=self.research.view(now);self.research_cache_until=now+250_000_000
+            from copy import deepcopy
+            research=deepcopy(self.research_cache)
         age=None if not self.adapter or self.adapter.last_book_receive_ns is None else str(max(0,now-self.adapter.last_book_receive_ns))
         return {'origin':origin,'instrument':self.symbol,'provider':'kraken','venue':'Kraken',
             'feed_type':'L2_AGGREGATE','price_scale':str(self.price_scale),'quantity_scale':str(self.quantity_scale),
@@ -175,6 +187,7 @@ class FeedSupervisor:
                 'updates':self.adapter.updates if self.adapter else 0,
                 'trade_window_count':len(self.adapter.trades) if trusted else 0,
                 'integrity':'candidate_CRC32_scoped_no_exchange_sequence','protocol_review':'operator_attested' if self.permission else 'unverified'},
+            'research':research,
             'recording':self.capture.status() if self.capture else {'state':'DISABLED'},
             'flow':{'trades':list(self.adapter.trades) if trusted else [],'classification':'provider_reported_side_not_inferred_cancellations'},
             'provenance':{'category':origin,'dataset':None,'complete_initialization':False,

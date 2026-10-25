@@ -69,7 +69,10 @@ A fixture-tested supervised Kraken candidate now connects the bounded native L2
 book to the existing terminal after explicit server-side protocol/usage review.
 [Provider operation and activation gates](docs/LIVE_PROVIDER_OPERATIONS.md) explain
 why this is not yet live-qualified. [Bounded L2 source-log replay](docs/L2_RECORDING_REPLAY.md)
-is available offline; observed capture is not enabled in the terminal.
+now supports private session discovery and interactive recorded replay. Observed
+capture controls require separate server-side retention approval; no observed data
+was collected or qualified. [Continuous status](docs/CONTINUOUS_ENGINEERING_STATUS.md)
+records the latest engineering checkpoint.
 See [startup instructions](docs/TERMINAL_REPRODUCIBILITY.md),
 [architecture](docs/INSTITUTIONAL_TERMINAL_ARCHITECTURE.md) and
 [provider boundaries](docs/MARKET_DATA_PROVIDER_MATRIX.md). Existing Phase9/core

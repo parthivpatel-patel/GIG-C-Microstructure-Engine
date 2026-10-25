@@ -1,5 +1,10 @@
 # Bounded L2 source log and native replay tooling
 
+Current implementation: [RECORDED_L2_IMPLEMENTATION.md](RECORDED_L2_IMPLEMENTATION.md),
+[CONTINUOUS_RESEARCH_METHODOLOGY.md](CONTINUOUS_RESEARCH_METHODOLOGY.md) and
+[CONTINUOUS_ENGINEERING_STATUS.md](CONTINUOUS_ENGINEERING_STATUS.md). Earlier
+offline-only statements below retain their baseline scope; current capture is separately gated.
+
 The existing terminal recording API remains authored-L3 only. New terminal/l2_recording.py
 is offline infrastructure, not an enabled observed capture service or browser recording
 catalog. The live supervisor does not currently attach a recorder. Observed retention,

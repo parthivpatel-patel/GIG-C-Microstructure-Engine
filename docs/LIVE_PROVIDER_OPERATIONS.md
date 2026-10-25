@@ -1,5 +1,10 @@
 # Provider operations: supervised candidate, not live-qualified
 
+Current implementation: [RECORDED_L2_IMPLEMENTATION.md](RECORDED_L2_IMPLEMENTATION.md),
+[CONTINUOUS_RESEARCH_METHODOLOGY.md](CONTINUOUS_RESEARCH_METHODOLOGY.md) and
+[CONTINUOUS_ENGINEERING_STATUS.md](CONTINUOUS_ENGINEERING_STATUS.md). Earlier
+offline-only statements below retain their baseline scope; current capture is separately gated.
+
 October25,2026. The owner confirms the baseline private Codespaces connection and
 replay controls work. New feed code retains that v4 Origin/Host/proof boundary.
 No provider socket opens on startup, import, mode selection, or without explicit
