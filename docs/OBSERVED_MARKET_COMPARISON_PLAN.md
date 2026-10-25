@@ -92,3 +92,25 @@ synthetic driver is not a general observed-data CLI; its fixture provider/datase
 namespace and authored seed boundaries must never be relabelled observed. Future
 integration must explicitly implement and independently test observed evidence
 verification/projection. Format-only historical prefix results do not clear it.
+
+## Final executed closure
+
+Implementation checkpointb06a417; evidence/evidence closure follows without history
+rewrite. Final1396 CTest outcomes pass across9 configurations;0 fail/skip/disabled.
+Final12 diagnostic methods execute across all9 current candidates (108 additional
+configuration outcomes), including unsupported missing-clock refusal. Local JUnit
+passed-output cap1024 truncated the new supplemental digest; all9 full seeded
+reference checks were re-executed separately, each152 schedules/330 prefixes and
+identical4618d9b3c94d34535001c8f9e6a2a54cfd5708ac72b58116425b0cf0c996d4b1.
+No old golden replaced; no test skipped. Exact receipts:
+`evidence/bounded_comparison_results.json`.
+
+Recorded reproduction argv originally assumed repository cwd; three Debug CTest
+cases exposed that integration defect. Absolute recorded script argv repaired it,
+and tests execute that exact stored command from arbitrary CTest working directory.
+Final complete matrices pass. Missing seed time unsupported by the test-driver
+protocol is explicitly refused, not synthesized; final focused checks cover it.
+Fresh checkout/source-built wheels pass28 installed interface/export checks +4
+fault controls;379 intended byte-identical source archive members.11 authored demo
+commands produce expected exits (0 agreement,2 refusal,3 intentional divergence /
+reproduction). None establishes observed-market correctness or new nativeARM status.
