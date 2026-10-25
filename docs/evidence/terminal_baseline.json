@@ -1,0 +1,22 @@
+{
+  "schema": "gig.terminal.baseline.v1",
+  "source_commit": "3dacd44f6d7bd0ca8325c662fb249cf40d9a2127",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "remote_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "current_debug_ctest": {
+    "tests": 154,
+    "failures": 0,
+    "skipped": 0,
+    "disabled": 0
+  },
+  "junit_sha256": "92e51b654a1449022c574fadc18c5e44bb312c805ead31eb700676c954705cab",
+  "prior_full_matrix": "docs/evidence/lobster_independent_validation.json",
+  "prior_arm64": {
+    "qualification": 6,
+    "source": "3dacd44",
+    "status": "owner-reported success",
+    "duration": "8m03s",
+    "independent_run_metadata": "not yet archived"
+  },
+  "private_lobster_access": false
+}

@@ -28,3 +28,10 @@ LOBSTER_SampleFile*.zip
 *_orderbook_[0-9]*.csv
 *_message_[0-9]*.csv.gz
 *_orderbook_[0-9]*.csv.gz
+
+# Terminal dependency/build caches and private recordings
+node_modules/
+terminal/.runtime/
+terminal/recordings/
+playwright-report/
+test-results/

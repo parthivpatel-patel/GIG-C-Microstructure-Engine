@@ -383,3 +383,15 @@ authorized native run. No workflow dispatched. Exact next action:permission/rete
 review,then private bounded pilot per LOBSTER_REPRODUCIBILITY_GUIDE.md;do not repeat
 completed matrix absent source changes/failure. See REAL_MARKET_VALIDATION_REPORT.md.
 Final report commit resolved through git log;remote/clean/main confirmed at delivery.
+
+## Unified terminal program — October25,2026 (America/New_York)
+
+Entry3dacd44 clean local/remote feature verified;main12f3a539 unchanged. Owner
+reports ARM64 qualification6 at entry only. Existing engine/bindings/interfaces
+inspected, architecture under INSTITUTIONAL_TERMINAL_ARCHITECTURE.md. Workstreams:
+frontend, gateway/native integration, official providers and independent fixtures,
+separate native aggregate L2, independent browser validation. No private LOBSTER
+access. Provider-host requests blocked by proxy CONNECT403; no retries/bypass.
+Exact next action:integrate shared contracts and native synthetic browser slice,
+then independent validation before implementation commit. Partial files may exist;
+preserve and inspect rather than restart. No claim execution continues after stop.
