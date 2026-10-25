@@ -52,7 +52,7 @@ jobs:
           root = ET.parse(pathlib.Path('build/${{ matrix.preset }}/tests.xml')).getroot()
           counts = {key: int(root.get(key, '0')) for key in ('tests', 'failures', 'skipped', 'disabled')}
           python_enabled = '${{ matrix.compiler }}' == 'gcc' and '${{ matrix.preset }}' == 'release'
-          if counts['tests'] != (157 if python_enabled else 154) or any(counts[k] for k in ('failures', 'skipped', 'disabled')):
+          if counts['tests'] != (158 if python_enabled else 155) or any(counts[k] for k in ('failures', 'skipped', 'disabled')):
             raise SystemExit('required CTest outcomes missing, failed, skipped or disabled')
           expected = {
             'itch.independent_reference': '142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e',
@@ -65,6 +65,8 @@ jobs:
             'itch.hy_reference': 'ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af',
           }
           cases = {case.get('name'): case for case in root.findall('testcase')}
+          if 'market_data.aggregate_depth' not in cases:
+              raise SystemExit('required native aggregate-depth test missing')
           if python_enabled and not {'python.research_interface', 'python.export_contracts', 'python.schema_compatibility'} <= cases.keys():
             raise SystemExit('required Python tests missing')
           for name, digest in expected.items():

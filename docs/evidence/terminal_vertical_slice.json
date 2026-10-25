@@ -1,0 +1,748 @@
+{
+  "schema": "gig.terminal.vertical_slice.v1",
+  "entry_sha": "3dacd44f6d7bd0ca8325c662fb249cf40d9a2127",
+  "source_sha256": {
+    "CMakeLists.txt": "a08abf50c2f06bda23eca3c125dd291e5c620c236b26404f89f71263c360a0a1",
+    "python/bindings/module.cpp": "84719c42df7bff8a067c99c2c8afe6900d771b3bafcb686df9841cefaafdaef5",
+    "python/bindings/depth.cpp": "58e6163d5878c45f84b415f3b46b0270383315a9ca2f482246841f2d323a9ca7",
+    "include/gig/market_data/aggregate_depth.hpp": "59d0abc97805462510524dbc3665b30fd35f3b1bca937cc8d5b829531d30f887",
+    "src/market_data/aggregate_depth.cpp": "0cec65d8df6edd191369a4ec040f9cb1d9f2b5601c978d9dfa3a1051419d6901",
+    "tests/test_aggregate_depth.cpp": "b79deaf052014d2371987d210348dbb53cb97aa94533baa9a50f5e001d7a2a13"
+  },
+  "matrix": [
+    {
+      "configuration": "phase9-clean-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clean-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 63.233,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "a779049ce6bf2a14c640641af34bd58b7f784aa5fac033a08e6b26048373cc0b",
+      "log_sha256": "18a83dfaa66ce2f88b109b3414279787f21244aacb821fde6756cead58724a78"
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clean-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 37.373,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "9ccd74fdf25233d2252447f70d576baa2dda0d886e4a10643788c190738625eb",
+      "log_sha256": "cfa62ab5f32eb0966f195ad1e8634ba51b7dca6bf3537888b8575448d74f39d7"
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clean-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clean-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 140.58,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "edf2f736d50a295978b4cfafc8f59bb3a354bf76917f882e4879df7f75d1317b",
+      "log_sha256": "67c7a6942dce9e9540162bc4ce178f0207d6f99bcb7fd6e91b5f3b31169b152c"
+    },
+    {
+      "configuration": "python-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/python-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 69.188,
+      "counts": {
+        "tests": 158,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "30283a3d44f7cc262e21589422380c002e7eab6912f11af1cd4f5e4f1060757a",
+      "log_sha256": "34524c17bebbc867216bc40f92c5442c9103ca0cd4fa31f49852ed1ba1ef8752"
+    },
+    {
+      "configuration": "python-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/python-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 69.369,
+      "counts": {
+        "tests": 158,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "44566d36453dba065701b2bf97e810445c7957019ed66990b95cfd5eb195b3ca",
+      "log_sha256": "110db3cc9f954aa73b502ca7bdd967a1851cc6a0c0fa78a7bed2337c8bec6ea2"
+    },
+    {
+      "configuration": "python-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/python-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 171.66,
+      "counts": {
+        "tests": 159,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "de428fff5325851ae0a5af750cf2a8f9889cf95bf77c268a1ec104088eebd368",
+      "log_sha256": "728754070237e12831ed58b7a8990c2bb540509c7dbcef7a7f0d824982584b2b"
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clang-debug.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 58.466,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "ebc746a7f8d65717ab3c8401221aa34e28f44776de9830f8088e53007ef5673a",
+      "log_sha256": "ce3a14d9e7b75ffa352d0e89ef3acf86af48eb2996be93fa258e1b61c535a481"
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clang-release.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 39.605,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "99fbac3f4555af48695a2419870636d0fdfbaa01303d3e748e49c44bf3956ddc",
+      "log_sha256": "a0365fe5f2183e4602634fe84b810ff7989f887148d9ddbbf2833567e0b96f8a"
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/workspace/GIG-C-Microstructure-Engine",
+          "-B",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--parallel",
+          "1"
+        ],
+        [
+          "ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--output-on-failure",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/terminal/evidence/matrix/phase9-clang-asan-ubsan.xml"
+        ]
+      ],
+      "exits": [
+        0,
+        0,
+        0
+      ],
+      "elapsed_seconds": 133.154,
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "canonical_sha256": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+      },
+      "junit_sha256": "063800bdc7a55a29928a9980060747b47cec3eea55da8dd1165d83b773c870e1",
+      "log_sha256": "ec88aa9337f037712a966da42f72a3f0b0260c96fb5818b4c6ae758a9f3694ac"
+    }
+  ],
+  "ctest_total": 1405,
+  "canonical_hashes": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+  },
+  "browser": {
+    "schema": "gig.terminal.browser_validation.v1",
+    "url": "http://127.0.0.1:8787",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "started_utc": "2026-10-25T12:21:55.959Z",
+    "architecture": "x64",
+    "node": "v24.19.0",
+    "browser": "154.0.8037.57",
+    "renderer": "headless Chromium with SwiftShader; not physical Android/GPU evidence",
+    "checks": [
+      {
+        "name": "native state/provenance is reachable",
+        "status": "PASS",
+        "elapsed_ms": 4.055,
+        "detail": {
+          "instrument": "SYNTH-USD",
+          "event_count": 260,
+          "engine": {
+            "native": true,
+            "compiler": "14.2.0",
+            "python": "3.12.14",
+            "pybind11": "2.13.6",
+            "package_version": "0.1.1",
+            "schema_version": "1.0",
+            "build_type": "Release",
+            "config_flags": " -O3 -DNDEBUG",
+            "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+            "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+          }
+        }
+      },
+      {
+        "name": "independent initial ladder and native metrics",
+        "status": "PASS",
+        "elapsed_ms": 7.265,
+        "detail": null
+      },
+      {
+        "name": "WebSocket connected",
+        "status": "PASS",
+        "elapsed_ms": 17.635,
+        "detail": null
+      },
+      {
+        "name": "single event stepping reaches native quantity",
+        "status": "PASS",
+        "elapsed_ms": 104.898,
+        "detail": null
+      },
+      {
+        "name": "deterministic browser restart",
+        "status": "PASS",
+        "elapsed_ms": 102.532,
+        "detail": null
+      },
+      {
+        "name": "speed/play/pause preserves deterministic accepted prefix",
+        "status": "PASS",
+        "elapsed_ms": 527.772,
+        "detail": null
+      },
+      {
+        "name": "eight functional sections navigate",
+        "status": "PASS",
+        "elapsed_ms": 565.343,
+        "detail": null
+      },
+      {
+        "name": "interactive 3D renders native depth and camera changes pixels",
+        "status": "PASS",
+        "elapsed_ms": 774.071,
+        "detail": {
+          "before": "91a3a7f3e68210d78cc319a669fbd834c6a0d0afd4b6f6a54b761d935c3936a3",
+          "after": "a0a23ad54614df3f6223442656bebd98b4e6da156eb789b91106ca316c6e7caf",
+          "viewport": {
+            "x": 253,
+            "y": 530.6875,
+            "width": 850,
+            "height": 330
+          }
+        }
+      },
+      {
+        "name": "bounded landscape window and price-range controls",
+        "status": "PASS",
+        "elapsed_ms": 79.11,
+        "detail": null
+      },
+      {
+        "name": "explicit synchronized 2D fallback",
+        "status": "PASS",
+        "elapsed_ms": 37.512,
+        "detail": null
+      },
+      {
+        "name": "permission/capability boundary in live mode",
+        "status": "PASS",
+        "elapsed_ms": 58.491,
+        "detail": null
+      },
+      {
+        "name": "three native execution algorithms match independent fixture costs",
+        "status": "PASS",
+        "elapsed_ms": 330.398,
+        "detail": [
+          {
+            "algorithm": "TWAP",
+            "sha256": "969c976abb1149e6c3c066e7c5b3a4886bd5139d1b8c1510ad1ff39f45132f18"
+          },
+          {
+            "algorithm": "VWAP",
+            "sha256": "0f8cd954657b73b965cca5abe59658488f7ea97ad194d470857c6758c2b96841"
+          },
+          {
+            "algorithm": "POV",
+            "sha256": "f0e7de0380bf8b7e3edf33f1380aa12747966cc48e79577e601e1127a8dcf687"
+          }
+        ]
+      },
+      {
+        "name": "simulation export is explicitly simulated",
+        "status": "PASS",
+        "elapsed_ms": 39.678,
+        "detail": null
+      },
+      {
+        "name": "API failure is visible without fabricated data",
+        "status": "PASS",
+        "elapsed_ms": 72.727,
+        "detail": null
+      },
+      {
+        "name": "mobile viewport remains usable without page overflow",
+        "status": "PASS",
+        "elapsed_ms": 104.482,
+        "detail": {
+          "width": 412,
+          "scroll": 412
+        }
+      },
+      {
+        "name": "authored timeline seek reconstructs native prefix",
+        "status": "PASS",
+        "elapsed_ms": 79.45,
+        "detail": null
+      },
+      {
+        "name": "authored ITCH and LOBSTER diagnostics execute native code",
+        "status": "PASS",
+        "elapsed_ms": 128.298,
+        "detail": null
+      },
+      {
+        "name": "explicit authored recording verifies native replay and deletes safely",
+        "status": "PASS",
+        "elapsed_ms": 482.011,
+        "detail": null
+      },
+      {
+        "name": "WebSocket interruption reconnects without inventing data",
+        "status": "PASS",
+        "elapsed_ms": 2038.329,
+        "detail": {
+          "connections": 2
+        }
+      },
+      {
+        "name": "no uncaught browser application errors",
+        "status": "PASS",
+        "elapsed_ms": 0.055,
+        "detail": null
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "desktop-native-3d",
+        "path": "build/terminal/browser/desktop-native-3d.png",
+        "sha256": "7d6e66d929fe199b7413a5dc1cf78760e9248d60d4327417d3a159af221214fe"
+      },
+      {
+        "name": "desktop-native-fallback",
+        "path": "build/terminal/browser/desktop-native-fallback.png",
+        "sha256": "dd3e6fa52d52d03857f072c1dbfef8244ccb44fff2e499e0c9a96dc1d52c0456"
+      },
+      {
+        "name": "desktop-native-simulation",
+        "path": "build/terminal/browser/desktop-native-simulation.png",
+        "sha256": "8bc302bbafc6c40bb2fd65951a0d09618d8c0df796510c111c47255f0f5f843e"
+      },
+      {
+        "name": "mobile-native-orderbook",
+        "path": "build/terminal/browser/mobile-native-orderbook.png",
+        "sha256": "b30e7f233a9fc81ac38f010d3f4f726712e61a5edbac3f51d7d30549189905f5"
+      }
+    ],
+    "performance": {
+      "initial_navigation_ms": 1113.748,
+      "state_round_trip_ms": [
+        29.87,
+        2.863,
+        5.351,
+        15.091,
+        2.694,
+        2.809,
+        2.48,
+        2.523,
+        2.493,
+        2.533
+      ]
+    },
+    "limitations": [
+      "No external browser URL tested",
+      "No real provider data or restricted dataset accessed",
+      "Mobile is Chromium viewport emulation, not a physical Android device"
+    ],
+    "completed_utc": "2026-10-25T12:22:04.593Z",
+    "summary": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "server_provider_historical_recording_tests": 50,
+  "installed_native_depth_python_tests": 3,
+  "frontend_tests": 3,
+  "installed_wheel_tests": {
+    "interface": 8,
+    "export": 6,
+    "export_failure": 2
+  },
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "live_connectivity": "BLOCKED_UNVERIFIED",
+  "observed_lobster_processing": false,
+  "raw_receipt_sha256": {
+    "frontend-test.log": "edb11a0370b7f3f1c4fdb32949522b755383df61672318eb5b318f08dc0fdc29",
+    "server-final.log": "423c9789481f1ff9d12b0d5f0cefe270940e1f4041079360a8f9e267b5e52883",
+    "installed-interface.log": "a4489da186ef8d2c1ae77e7c7fe57d9bb68c84723b25c3f3d51d3fadd47e0a30",
+    "wheel-install.log": "b85ef8c705ad4d00ac6bc4c197b9f6f9eb22ba326b435e4a45b0caf5f82ce516",
+    "provider-final.log": "672b086b32dac3db5952776fdedd1b4b40e42133270f918fe886665f1f5499db",
+    "frontend-build.log": "9bcc0a6ec935042f448ea02f101deb193a9babb733598a95540e156d2be8cad9",
+    "wheel-build.log": "17f5a9916e7b0844662503e2e9d007b66686711bbc73be1122587a60ad753057",
+    "vite.log": "297adc0532baeab6e83a55fb8914d7868855244b25eca1798ab6909eb3715d14",
+    "installed-export-failure.log": "bf4fef9abdca735edc6ac9561cc37dda8248da12fd88939ad0e724b51232c4fd",
+    "frontend-install.log": "33f7271aed17e6d71e99379f1a950860f6a382adfd8a93cfd47e6ab8d9df6074",
+    "historical-tests.log": "e1a1c29eae20b01a00c66ce6a7cc1ceaca3bf87f99ab23c0f2434c292f52afb9",
+    "native-oracle-final.log": "f1b5f2bdd71e122a38f5a2bad3d609cf335243dbcda986bbc5c07ab1431c2ec9",
+    "browser.log": "f57e792eccfbbd9c343c7d5140b001a79c63d9548a80738ce55c2bb3d85509e0",
+    "baseline-debug.log": "225541a4d64f368a296327d25374bcf2ce9d46c5425ebb00b7ccc5e1aab4ccfc",
+    "server.log": "8059f0a27da47eaf091b7d0e9b7e7dcc3078723c3f74fe55ddb017ce6f8de14c",
+    "native-depth-python.log": "7fdc1b50c46a73cc1463596602fec987abb2c2501455a34731b5378f388cffae",
+    "installed-example.log": "c76ca0074818e18392753353bfe2cc5438e83c105325458e63a9db0360c3e1e9",
+    "frontend-security-update.log": "cd006272eda0c5669aa418d4261192efebb57f039b7b9a0516192ab72d6d9e7c",
+    "api-boundaries-final.log": "9d4f289210fb390460281402ea782cddfca005e6fba119b7f73d5939821e1e76",
+    "historical-recording-tests.log": "4bf93e3b6b1579f1b800461661fd4ff35eb76127875080dcd8765510f05e1a3a",
+    "installed-export.log": "2b378933e13ac810922beefebafe1099f56e3c1470d70d3e988b00ed48494a66"
+  },
+  "arm64": "entry3dacd44 owner-reported qualification6 only;new code unqualified"
+}

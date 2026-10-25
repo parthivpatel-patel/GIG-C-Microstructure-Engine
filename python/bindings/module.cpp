@@ -28,6 +28,7 @@ public:
     py::dict queue(py::handle id){return api([&](){return write(model_.exchange_queue_position(read<OrderId>(id)));});}
 };
 void bind_schemas(py::module_&);
+void bind_depth(py::module_&);
 PYBIND11_MODULE(_native,m){
     m.attr("__version__")="0.1.1";m.attr("schema_version")="1.0";m.attr("__compiler__")=__VERSION__;m.attr("__build_type__")=GIG_PYTHON_BUILD_TYPE;m.attr("__config_flags__")=GIG_PYTHON_CONFIG_FLAGS;m.attr("__target_flags__")=GIG_PYTHON_TARGET_FLAGS;m.attr("__core_flags__")=GIG_PYTHON_CORE_FLAGS;m.attr("__python__")=PY_VERSION;m.attr("__pybind11__")=std::to_string(PYBIND11_VERSION_MAJOR)+"."+std::to_string(PYBIND11_VERSION_MINOR)+"."+std::to_string(PYBIND11_VERSION_PATCH);
     py::class_<NativeReplay>(m,"_Replay").def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
@@ -46,5 +47,6 @@ PYBIND11_MODULE(_native,m){
     m.def("transaction_costs",[](py::handle c,py::handle f){return api([&](){auto fills=read<std::vector<execution::CostFill>>(f);return costs_wire(take(execution::transaction_costs(read<execution::CostConfig>(c),fills)));});});
     m.def("fraction_roundtrip",[](py::handle value){return api([&](){return write(read<exact::Fraction>(value));});});
     bind_schemas(m);
+    bind_depth(m);
 }
 } // namespace gig::python

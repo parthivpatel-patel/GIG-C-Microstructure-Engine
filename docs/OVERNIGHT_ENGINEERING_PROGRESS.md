@@ -395,3 +395,17 @@ access. Provider-host requests blocked by proxy CONNECT403; no retries/bypass.
 Exact next action:integrate shared contracts and native synthetic browser slice,
 then independent validation before implementation commit. Partial files may exist;
 preserve and inspect rather than restart. No claim execution continues after stop.
+
+### Recovered terminal implementation checkpoint
+
+All workstreams produced code before interruption. Native155*6+Python158+158+159
+=1405 CTest outcomes passed;all8 old hashes unchanged. Frontend build repaired
+invalid CSS import;server/client missing-metric and speed contracts repaired. Actual
+production-served Chromium browser16 checks pass (3D camera,2D fallback,mobile,
+replay,3 native execution plans/TCA,provenance,error handling). Independent native
+oracle241states/17143assertions preserved in ignored build/terminal/native-oracle.json.
+Gateway/provider/historical/recording current50 tests pass. Installed current native
+wheel8interface+6export+2failure checks pass. Vite audit initially2 advisories;upgrade
+to8.3.5/plugin6.1.2 yields0 npm advisories. External provider docs/legal still blocked.
+Next:final additional workflow browser checks,provider/native L2 integration,
+evidence manifests,source-archive/private-data review and validated commits.
