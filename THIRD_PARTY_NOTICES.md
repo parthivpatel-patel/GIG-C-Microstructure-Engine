@@ -79,3 +79,14 @@ freely, subject to the following restrictions:
 Jean-loup Gailly        Mark Adler
 jloup@gzip.org          madler@alumni.caltech.edu
 ```
+
+## Optional institutional research terminal
+
+Pinned package locks and `docs/evidence/terminal_dependency_inventory.json` identify
+this optional consumer's tested dependency versions, registry integrity and license
+metadata. React/React DOM, Vite/plugin-react and Three.js use MIT licenses;
+TypeScript and Playwright use Apache-2.0. The Python gateway uses Starlette,
+uvicorn, httpx and websockets plus their pinned transitive closure; consult the
+installed distributions' license files and the inventory for exact notices.
+Dependency metadata is not a grant of project redistribution or provider data rights.
+No vendor source/data is embedded, and no public release is made by this work.

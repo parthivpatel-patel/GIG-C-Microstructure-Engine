@@ -20,13 +20,13 @@ def rules():
 
 
 def scope():
-    return {'stream': '1', 'session': 'terminal-authored-v1', 'epoch': '0', 'unit': '0'}
+    return {'stream': '1', 'session': 'terminal-authored-v2', 'epoch': '0', 'unit': '0'}
 
 
 def replay_config():
-    return {'run_id': 'terminal-authored-replay-v1', 'session': {'session': 'terminal-authored-v1', 'epoch': '0'},
-            'streams': [{'venue': '1', 'scope': scope(), 'dataset': 'terminal-authored-v1',
-                         'dataset_version': '1', 'first_sequence': '0', 'rank': '0'}],
+    return {'run_id': 'terminal-authored-replay-v2', 'session': {'session': 'terminal-authored-v2', 'epoch': '0'},
+            'streams': [{'venue': '1', 'scope': scope(), 'dataset': 'terminal-authored-v2',
+                         'dataset_version': '2', 'first_sequence': '0', 'rank': '0'}],
             'ordering': '0', 'timestamp_clock': missing(), 'additional_instruments': [],
             'max_journal_records': '512', 'initial_state': '1'}
 
@@ -35,14 +35,13 @@ def event(sequence, tag, payload):
     return {'schema': 'gig.event', 'version': '1.0', 'data': {
         'metadata': {'schema_version': '1', 'instrument': known('1'), 'venue': known('1'),
                      'scope': known(scope()), 'sequence': known(str(sequence)), 'subevent_index': '0',
-                     'subevent_count': '1', 'event_time': known({'nanoseconds': str(sequence * 50_000_000),
-                         'clock': known({'domain': '0', 'identity': 'authored-logical-clock'}), 'precision': known('0')}),
+                     'subevent_count': '1', 'event_time': missing(),  # Replay clock is separate from exchange EventTimestamp.
                      'receive_time': missing(), 'source_record': known(f'authored:{sequence}'),
                      'capture_ordinal': known(str(sequence)), 'provenance': {
-                         'dataset': known({'identity': 'terminal-authored-v1', 'version': known('1'),
+                         'dataset': known({'identity': 'terminal-authored-v2', 'version': known('2'),
                             'license_reference': known('independently-authored:no-external-data'), 'sha256': missing()}),
                          'origin': known('0'), 'source': known('0'), 'generator_seed': known('0'),
-                         'lineage': [{'kind': '0', 'operation': 'terminal-fixed-scenario-v1', 'version': '1'}], 'parents': []}},
+                         'lineage': [{'kind': '0', 'operation': 'terminal-fixed-scenario-v2', 'version': '2'}], 'parents': []}},
         'payload': {'tag': str(tag), 'value': payload}}}
 
 

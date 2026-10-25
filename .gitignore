@@ -35,3 +35,4 @@ terminal/.runtime/
 terminal/recordings/
 playwright-report/
 test-results/
+*.tsbuildinfo

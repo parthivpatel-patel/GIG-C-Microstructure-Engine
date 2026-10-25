@@ -118,3 +118,15 @@ snapshot/update/checksum semantics; bounded non-recording live smoke test; nativ
 integrated failure/recovery qualification; exact-SHA owner-authorized ARM64 run.
 Recording and public exposure remain separately blocked. Current state is synthetic
 adapter readiness only, not live qualification.
+
+## Integrated authored provider path
+
+The terminal's Historical Replay source selector includes a five-record independently
+authored provider-shaped fixture. It exercises the provisional parser -> separately
+bound C++ aggregate L2 -> native exact analytics -> gateway/WebSocket -> ladder/depth /
+3D path. Two-sided snapshot, absolute replacement, a print without book mutation,
+zero deletion/one-sided metrics and a new snapshot are represented. Classification
+is always HISTORICAL_SYNTHETIC; provider is authored-kraken-profile; there are no
+exchange observations or source sequence numbers. Quantity scale100000000 is explicit.
+This verifies software integration, not the current Kraken wire profile or live access.
+The L2 initialization scope is subscribed authored depth, never full L3 identity/FIFO.

@@ -409,3 +409,34 @@ wheel8interface+6export+2failure checks pass. Vite audit initially2 advisories;u
 to8.3.5/plugin6.1.2 yields0 npm advisories. External provider docs/legal still blocked.
 Next:final additional workflow browser checks,provider/native L2 integration,
 evidence manifests,source-archive/private-data review and validated commits.
+
+### Follow-up source integration and hardening
+
+Interactive provider-shaped L2 source now reaches native AggregateDepth and browser,
+with no L3 IDs/exchange sequence or observed label. Authored L3 fixture v2 leaves
+exchange EventTimestamp unavailable;separate replay clock remains explicit. Native
+simulation-clock EventTimestamp was rejected rather than weakening engine contracts.
+Shared state schema/all-mode tests added. Current terminal cohort56tests per Debug /
+Release/ASan+UBSan;live-interpreter LSan0 after removing unused FastAPI/Pydantic
+runtime in favor of direct Starlette (import-only240-byte leak reproduced first;
+older candidate also leaked and was not adopted). No sanitizer suppression.
+New native sequence-regression classification test reproduced failure;minimal error-
+code repair underway/full9 matrix rerunning. Preserve all receipts under build/terminal.
+Exact next:await final matrix,run current-source browser/package/source-archive
+checks,commit/push follow-up and final evidence docs. Provider live/LOBSTER remainblocked.
+
+### Validated follow-up closure
+
+Final native matrix1405/1405 passed after regression-code repair,8 frozen hashes
+unchanged. Terminal current56tests each Debug/Release/ASan+UBSan and56 fresh-runtime
+consumer checks passed;live LSan0. Actual current browser21 checks,REST/WS17 checks,
+independent241states/17143assertions pass. Fresh checkout/source wheels28 interface /
+export+4 failure checks,6 additional native-depth checks,2 identical examples pass.
+Source archive468 intended members contains no node_modules/cache/private-data /
+ZIP/CSV/screenshots/binaries/tsbuildinfo;467 source members compare to working files.
+Final evidence and follow-up implementation commit next,then report-only delivery.
+Externally blocked:official provider access/rights,observed historical/LOBSTER,
+new exact-SHA ARM64,external private phone preview. Unimplemented:general interactive
+ITCH/LOBSTER import,full flow analytics UI,continuous observed recording and equities.
+No hidden completeness or production claim. Do not rerun validated native gates
+unless source/failure justifies;resume from these receipts and current Git state.

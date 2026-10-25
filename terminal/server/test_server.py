@@ -4,7 +4,7 @@ from fractions import Fraction
 import json
 import unittest
 
-from fastapi.testclient import TestClient
+from starlette.testclient import TestClient
 from starlette.websockets import WebSocketDisconnect
 
 from terminal.server.app import create_app
@@ -84,6 +84,39 @@ class NativeContracts(unittest.TestCase):
         for value in (-1,261,True,1.5):
             with self.assertRaises(ControlError): session.control('seek',value)
             self.assertEqual(session.state()['book'], expected)
+
+    def test_provider_shaped_fixture_uses_native_l2_without_l3_ids(self):
+        s=NativeSession();s.control('dataset','kraken-authored-profile-v1')
+        first=s.state();self.assertEqual(first['origin'],'HISTORICAL_SYNTHETIC')
+        self.assertEqual(first['provider'],'authored-kraken-profile');self.assertEqual(first['feed_type'],'L2_AGGREGATE')
+        self.assertEqual(first['quantity_scale'],'100000000');self.assertEqual(first['book']['bids'][0]['quantity'],'200000000')
+        s.step();self.assertEqual(s.state()['book']['bids'][0]['quantity'],'400000000')
+        prior=s.state()['book'];s.step();self.assertEqual(s.state()['book'],prior)
+        s.step();self.assertEqual(s.state()['book']['bids'],[])
+        self.assertIsNone(s.state()['metrics']['midprice']);s.step()
+        self.assertEqual(s.state()['book']['bids'][0]['price_ticks'],'9900')
+        s.restart();self.assertEqual(s.state()['book'],first['book'])
+        s.control('seek',0);self.assertEqual(s.state()['book'],{'bids':[],'asks':[]})
+        s.control('seek',2);self.assertEqual(s.state()['book']['bids'][0]['quantity'],'400000000')
+        s.control('mode','LIVE');self.assertEqual(s.state()['book'],{'bids':[],'asks':[]})
+        s.control('dataset','terminal-authored-v2');self.assertEqual(s.state()['position'],20)
+        self.assertEqual(s.state()['instrument'],'SYNTH-USD')
+
+    def test_restricted_dataset_selection_refused_before_state_change(self):
+        s=NativeSession();before=s.state()['book']
+        for source in ('lobster-aapl-private','nasdaq-itch-private','/private/input'):
+            with self.assertRaises(ControlError):s.control('dataset',source)
+            self.assertEqual(s.state()['book'],before)
+
+    def test_shared_state_schema_matches_all_modes_and_sources(self):
+        from pathlib import Path
+        from jsonschema import Draft202012Validator
+        schema=json.loads((Path(__file__).resolve().parents[1]/'contracts/state.schema.json').read_text())
+        validator=Draft202012Validator(schema);session=NativeSession()
+        for source in ('terminal-authored-v2','kraken-authored-profile-v1'):
+            session.control('dataset',source)
+            for mode in ('HISTORICAL_REPLAY','SIMULATION','LIVE'):
+                session.control('mode',mode);validator.validate(session.state())
 
     def test_exact_plan_fills_and_tca(self):
         session = NativeSession()

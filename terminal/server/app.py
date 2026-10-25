@@ -7,8 +7,12 @@ from pathlib import Path
 import time
 from urllib.parse import urlsplit
 
-from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import FileResponse, JSONResponse, Response
+from starlette.applications import Starlette
+from starlette.requests import Request
+from starlette.websockets import WebSocket, WebSocketDisconnect
+from starlette.responses import FileResponse, JSONResponse, Response
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.routing import WebSocketRoute
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
@@ -67,6 +71,14 @@ async def bounded_json(request):
     return value
 
 
+def json_endpoint(function):
+    # Uniform exact JSON transport; bodies remain hand-validated and bounded.
+    async def endpoint(request):
+        result = await function(request)
+        return result if isinstance(result, Response) else JSONResponse(result)
+    return endpoint
+
+
 def create_app():
     origins = origins_from_environment()
     native = NativeSession()
@@ -98,15 +110,13 @@ def create_app():
             with suppress(asyncio.CancelledError):
                 await worker
 
-    app = FastAPI(title='GIG native research gateway', version='1', docs_url=None, redoc_url=None,
-                  openapi_url='/api/v1/openapi.json', lifespan=lifespan)
+    app = Starlette(lifespan=lifespan)
     app.state.native = native
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
     app.add_middleware(CORSMiddleware, allow_origins=list(origins), allow_methods=['GET', 'POST'],
                        allow_headers=['Content-Type'], allow_credentials=False)
 
-    @app.middleware('http')
     async def boundary(request, call_next):
         if request.method == 'POST' and request.headers.get('origin') not in origins:
             native.rejected += 1
@@ -131,31 +141,54 @@ def create_app():
         response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws://localhost:8787 ws://127.0.0.1:8787; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
         return response
 
-    @app.exception_handler(ControlError)
     async def control_error(request, exc):
         native.rejected += 1
         return error(exc.code, str(exc), 413 if exc.code == 'BODY_LIMIT' else 400)
 
-    @app.exception_handler(gig.EngineError)
     async def native_error(request, exc):
         native.rejected += 1
         return error('NATIVE_REJECTION', f'{exc.code_name}: {exc.field}', 422)
 
-    @app.get('/api/v1/health')
-    async def health():
+    app.add_middleware(BaseHTTPMiddleware, dispatch=boundary)
+    app.add_exception_handler(ControlError, control_error)
+    app.add_exception_handler(gig.EngineError, native_error)
+
+    def route(path, methods):
+        def register(function):
+            app.add_route(path, function, methods=methods)
+            return function
+        return register
+
+    def websocket_route(path):
+        def register(function):
+            app.router.routes.append(WebSocketRoute(path, endpoint=function))
+            return function
+        return register
+
+    @route('/api/v1/health', methods=['GET'])
+    @json_endpoint
+    async def health(request):
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
                 'live_connected': False, 'recording_enabled': False, 'maximum_clients': MAX_CLIENTS}
 
-    @app.get('/api/v1/state')
-    async def state():
+    @route('/api/v1/state', methods=['GET'])
+    @json_endpoint
+    async def state(request):
         async with lock:
             return native.state()
 
-    @app.get('/api/v1/catalog')
-    async def catalog():
+    @route('/api/v1/schema', methods=['GET'])
+    @json_endpoint
+    async def schema(request):
+        return json.loads((Path(__file__).resolve().parents[1] / 'contracts/state.schema.json').read_text())
+
+    @route('/api/v1/catalog', methods=['GET'])
+    @json_endpoint
+    async def catalog(request):
         return native.catalog()
 
-    @app.post('/api/v1/control')
+    @route('/api/v1/control', methods=['POST'])
+    @json_endpoint
     async def control(request: Request):
         data = await bounded_json(request)
         if set(data) - {'action', 'value'} or type(data.get('action')) is not str:
@@ -164,7 +197,8 @@ def create_app():
             native.control(data['action'], data.get('value'))
             return native.state()
 
-    @app.post('/api/v1/simulate')
+    @route('/api/v1/simulate', methods=['POST'])
+    @json_endpoint
     async def simulate(request: Request):
         data = await bounded_json(request)
         if set(data) - {'algorithm', 'quantity', 'slices'}:
@@ -173,7 +207,8 @@ def create_app():
             # Bounded native run; no await while native session is being accessed.
             return native.simulation(data.get('algorithm', 'TWAP'), data.get('quantity', '100'), data.get('slices', 5))
 
-    @app.post('/api/v1/validate')
+    @route('/api/v1/validate', methods=['POST'])
+    @json_endpoint
     async def validate(request: Request):
         data = await bounded_json(request)
         if set(data) != {'profile'} or data['profile'] not in ('itch', 'lobster'):
@@ -187,7 +222,8 @@ def create_app():
             except (ValueError, OSError, asyncio.TimeoutError):
                 return error('VALIDATION_UNAVAILABLE', 'Authored native diagnostic unavailable or failed its bounded contract', 422)
 
-    @app.post('/api/v1/recording')
+    @route('/api/v1/recording', methods=['POST'])
+    @json_endpoint
     async def recording(request: Request):
         data = await bounded_json(request)
         if set(data) - {'action', 'enabled'} or data.get('action') not in ('save', 'verify', 'load', 'delete'):
@@ -214,15 +250,14 @@ def create_app():
                         'native_canonical_sha256': hashlib.sha256(replay.canonical().encode()).hexdigest()}
                     if data['action'] == 'load':
                         async with lock:
-                            native.control('mode', 'HISTORICAL_REPLAY')
-                            native.restart()
+                            native.control('dataset', 'terminal-authored-v2')
                 else:
                     result = {'deleted': await asyncio.to_thread(delete_authored, directory, 'authored-v1')}
             except (ValueError, OSError):
                 return error('RECORDING_REFUSED', 'Authored recording missing, expired, already present or refused by integrity/enablement policy', 409)
             return {'schema_version':'1', 'origin':'HISTORICAL_SYNTHETIC', 'observed_recording':False, 'result':result}
 
-    @app.websocket('/api/v1/stream')
+    @websocket_route('/api/v1/stream')
     async def stream(socket: WebSocket):
         if socket.headers.get('origin') not in origins or native.clients >= MAX_CLIENTS:
             await socket.close(code=1008)
@@ -245,8 +280,10 @@ def create_app():
         finally:
             native.clients -= 1
 
-    @app.get('/{path:path}')
-    async def static(path: str):
+    @route('/{path:path}', methods=['GET'])
+    @json_endpoint
+    async def static(request):
+        path = request.path_params['path']
         if path.startswith('api/'):
             return error('NOT_FOUND', 'unknown API endpoint', 404)
         candidate = (DIST / path).resolve()

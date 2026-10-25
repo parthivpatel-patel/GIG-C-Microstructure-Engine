@@ -2,7 +2,7 @@ import tempfile
 from pathlib import Path
 import unittest
 from unittest.mock import patch
-from fastapi.testclient import TestClient
+from starlette.testclient import TestClient
 from terminal.server.app import create_app
 
 class RecordingAPI(unittest.TestCase):
@@ -16,6 +16,7 @@ class RecordingAPI(unittest.TestCase):
                 verified=post({'action':'verify'});self.assertEqual(verified.status_code,200)
                 self.assertEqual(verified.json()['result']['native_accepted'],'260')
                 self.assertFalse(verified.json()['observed_recording'])
+                self.assertEqual(post({'action':'load'}).status_code,200)
                 self.assertEqual(post({'action':'save','enabled':True}).status_code,409)
                 self.assertEqual(post({'action':'verify','path':'/private'}).status_code,400)
                 self.assertEqual(post({'action':'delete'}).status_code,200)

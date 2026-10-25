@@ -4,7 +4,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import type {TerminalState} from './contracts';
 import {chartRatio,price} from './format';
 
-type Inspection={side:string;price_ticks:string;quantity:string;position:number;time:string;scale:string};
+type Inspection={side:string;price_ticks:string;quantity:string;position:number;time:string;scale:string;quantity_scale:string};
 export function Landscape({history,fallback=false}:{history:TerminalState[];fallback?:boolean}) {
  const host=useRef<HTMLDivElement>(null),runtime=useRef<{renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls;data:THREE.Group;render:()=>void;lookup:Map<THREE.Object3D,Inspection[]>}|null>(null);
  const [unavailable,setUnavailable]=useState(false),[twoD,setTwoD]=useState(fallback),[windowSize,setWindowSize]=useState(24),[depth,setDepth]=useState(10),[hover,setHover]=useState<Inspection|null>(null);
@@ -38,7 +38,7 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
   let maxQty=1n;for(const l of levels)if(BigInt(l.quantity)>maxQty)maxQty=BigInt(l.quantity);
   const span=maximum-minimum||1n,firstTime=frames.length?timeOf(frames[0]):0n,lastTime=last?timeOf(last):1n,timeSpan=lastTime-firstTime||1n;
   const dummy=new THREE.Object3D();
-  for(const side of ['bids','asks'] as const){const entries=frames.flatMap(f=>f.book[side].slice(0,depth).map(l=>({side:side==='bids'?'BID':'ASK',price_ticks:l.price_ticks,quantity:l.quantity,position:f.position,time:timeOf(f).toString(),scale:f.price_scale})));if(!entries.length)continue;
+  for(const side of ['bids','asks'] as const){const entries=frames.flatMap(f=>f.book[side].slice(0,depth).map(l=>({side:side==='bids'?'BID':'ASK',price_ticks:l.price_ticks,quantity:l.quantity,position:f.position,time:timeOf(f).toString(),scale:f.price_scale,quantity_scale:String(f.quantity_scale||'1')})));if(!entries.length)continue;
    const mesh=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:side==='bids'?'#35cdb0':'#f27b89',transparent:true,opacity:.75}),entries.length);
    entries.forEach((entry,i)=>{const height=chartRatio(BigInt(entry.quantity),maxQty)*4;dummy.position.set(chartRatio(BigInt(entry.price_ticks)-minimum,span)*12-6,height/2,chartRatio(BigInt(entry.time)-firstTime,timeSpan)*10-5);dummy.scale.set(Math.min(.32,10/Math.max(10,allPrices.length)),Math.max(.015,height),Math.min(.36,8/Math.max(8,frames.length)));dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix)});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();rt.data.add(mesh);rt.lookup.set(mesh,entries);
   }rt.render();
@@ -48,7 +48,7 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
  {(twoD||unavailable)?<div className="fallback-view" data-testid="landscape-fallback"><DepthChart state={last}/><p>{unavailable?'WebGL unavailable. ':''}Synchronized 2D depth • current observation only</p></div>:<div className="landscape-canvas" ref={host}>{!levels.length&&<div className="canvas-empty">Awaiting native book observations</div>}</div>}
  <div className="landscape-axes"><span>PRICE {price(minimum.toString(),last?.price_scale||'1')} → {price(maximum.toString(),last?.price_scale||'1')}</span><span>{timeAvailable?'SOURCE / REPLAY TIME (ns)':'CAPTURE ORDINAL — CLOCK UNAVAILABLE'}</span><span>HEIGHT = DISPLAYED QUANTITY</span></div>
  <div className="landscape-footer"><div><i className="dot bid"/> Bid liquidity <i className="dot ask"/> Ask liquidity <span className="muted">{frames.length} discrete observations · no interpolation</span></div><span className="muted">Drag rotate · pinch zoom · right-drag pan</span></div>
- {hover&&<div className="inspection" role="status">{hover.side} <b>{price(hover.price_ticks,hover.scale)}</b> · quantity <b>{hover.quantity}</b> · {timeAvailable?'time':'ordinal'} {hover.time}</div>}
+ {hover&&<div className="inspection" role="status">{hover.side} <b>{price(hover.price_ticks,hover.scale)}</b> · quantity <b>{price(hover.quantity,hover.quantity_scale)}</b> · {timeAvailable?'time':'ordinal'} {hover.time}</div>}
  </section>
 }
 export function DepthChart({state}:{state?:TerminalState}){

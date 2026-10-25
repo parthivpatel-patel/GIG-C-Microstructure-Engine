@@ -56,3 +56,16 @@ merge main without approval. GitHub is the durable source of truth: verified
 checkpoints must be pushed and their remote SHAs checked before substantial new
 work. Phases 3–9 are authorized by [the autonomous mandate](docs/AUTONOMOUS_MANDATE.md).
 Proceed sequentially through validated checkpoints; no merge to main or release publication.
+
+## Optional institutional research terminal
+
+The `terminal/` consumer now provides a local React/TypeScript/Three.js interface
+backed by the native Python/C++ engine: authored deterministic replay, exact depth,
+interactive3D, execution plans/simulation/TCA and permission-aware research controls.
+It is separate from GIG Quant Terminal. Live mode remains unavailable pending
+provider protocol/access/rights verification; no observed liquidity is fabricated.
+The private LOBSTER sample remains blocked. No broker/order submission exists.
+See [startup instructions](docs/TERMINAL_REPRODUCIBILITY.md),
+[architecture](docs/INSTITUTIONAL_TERMINAL_ARCHITECTURE.md) and
+[provider boundaries](docs/MARKET_DATA_PROVIDER_MATRIX.md). Existing Phase9/core
+reports above retain their historical scope;new code needs fresh owner-gated ARM64.

@@ -61,3 +61,11 @@ terminal/recordings,maximum8datasets,512records/2MiB each,24h replay validity.
 Verify replays the exact source into fresh native state;delete removes the fixed
 authored identity. Expiry refuses replay;deletion is operator-triggered,not a daemon.
 Future observed recording requires separate rights review and implementation gates.
+
+Current gateway uses direct Starlette ASGI after import-only Pydantic LSan findings;
+FastAPI/Pydantic are not required or imported. Additional native integration cohort:
+PYTHONPATH="$PWD" .venv/bin/python terminal/tests/run_native_suite.py (56tests).
+Shared snapshot grammar is available at/api/v1/schema. Both dataset options in
+Historical Replay are authored. The provider-shaped option exercises native L2,
+not a live provider connection. Clock/fixture v2 changes are documented in
+HISTORICAL_DATA_PIPELINE.md. No old engine canonical identities changed.

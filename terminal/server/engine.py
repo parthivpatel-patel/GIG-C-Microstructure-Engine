@@ -28,6 +28,9 @@ class NativeSession:
     """Mutated only on the ASGI event loop, never shared with a background thread."""
     def __init__(self):
         self.mode = 'HISTORICAL_REPLAY'
+        self.dataset = 'terminal-authored-v2'
+        self.aggregate = None
+        self.adapter = None
         self.playing = False
         self.speed = 1
         self.position = 0
@@ -40,8 +43,28 @@ class NativeSession:
         self.replay = None
         self.restart()
 
+    def reset_aggregate(self):
+        from terminal.providers.kraken import KrakenBookAdapter
+        aggregate = gig._native.AggregateDepth(32, 1048576)
+        def apply(snapshot, bids, asks, sequence):
+            return gig._checked((aggregate.snapshot if snapshot else aggregate.update)(bids, asks, sequence))
+        self.aggregate = aggregate
+        self.adapter = KrakenBookAdapter(apply)
+        self.position = 0
+
+    @property
+    def source_events(self):
+        if self.dataset == 'kraken-authored-profile-v1':
+            from terminal.providers.fixtures import EVENTS as profile_events
+            return profile_events
+        return EVENTS
+
     def restart(self):
         self.playing = False
+        if self.dataset == 'kraken-authored-profile-v1':
+            self.reset_aggregate()
+            self.step()
+            return
         self.replay = gig.Replay(rules(), replay_config(), limits={
             'max_orders': '128', 'max_levels': '32', 'max_snapshot_depth': '20'},
             resource_budget_bytes='33554432')
@@ -50,10 +73,13 @@ class NativeSession:
             self.step()
 
     def step(self):
-        if self.position >= len(EVENTS):
+        if self.position >= len(self.source_events):
             self.playing = False
             return False
-        self.replay.apply(EVENTS[self.position])
+        if self.dataset == 'kraken-authored-profile-v1':
+            self.adapter.feed(self.source_events[self.position], self.position * 50_000_000)
+        else:
+            self.replay.apply(EVENTS[self.position])
         self.position += 1
         return True
 
@@ -63,13 +89,30 @@ class NativeSession:
                 raise ControlError('INVALID_MODE', 'unknown operating mode')
             self.playing = False
             self.mode = value
+        elif action == 'dataset':
+            if value not in ('terminal-authored-v2', 'kraken-authored-profile-v1'):
+                raise ControlError('DATASET_UNAVAILABLE', 'only authored native or provider-shaped fixtures may be selected')
+            if value == 'kraken-authored-profile-v1' and not hasattr(gig._native, 'AggregateDepth'):
+                raise ControlError('NATIVE_CAPABILITY_UNAVAILABLE', 'rebuild the native package with aggregate depth support')
+            # Stage the new source before replacing the accepted session.
+            candidate = NativeSession()
+            candidate.dataset = value
+            if value != 'terminal-authored-v2': candidate.restart()
+            self.dataset, self.mode, self.playing = value, 'HISTORICAL_REPLAY', False
+            self.replay, self.aggregate, self.adapter = candidate.replay, candidate.aggregate, candidate.adapter
+            self.position = candidate.position
         elif action == 'speed':
             if type(value) is not int or value not in (1, 2, 4, 8):
                 raise ControlError('INVALID_SPEED', 'speed must be one of 1, 2, 4, 8')
             self.speed = value
         elif action == 'seek':
-            if self.mode != 'HISTORICAL_REPLAY' or type(value) is not int or not 0 <= value <= len(EVENTS):
+            if self.mode != 'HISTORICAL_REPLAY' or type(value) is not int or not 0 <= value <= len(self.source_events):
                 raise ControlError('INVALID_SEEK', 'seek requires authored replay position within the source boundary')
+            if self.dataset == 'kraken-authored-profile-v1':
+                self.reset_aggregate()
+                for _ in range(value): self.step()
+                self.playing = False
+                return
             candidate = gig.Replay(rules(), replay_config(), limits={
                 'max_orders':'128', 'max_levels':'32', 'max_snapshot_depth':'20'}, resource_budget_bytes='33554432')
             candidate.run(EVENTS[:value])
@@ -78,7 +121,7 @@ class NativeSession:
             if self.mode != 'HISTORICAL_REPLAY':
                 raise ControlError('MODE_RESTRICTION', 'replay controls require Historical Replay mode')
             if action == 'play':
-                self.playing = self.position < len(EVENTS)
+                self.playing = self.position < len(self.source_events)
             elif action == 'pause':
                 self.playing = False
             elif action == 'step':
@@ -100,31 +143,38 @@ class NativeSession:
         simulation = self.mode == 'SIMULATION'
         origin = 'UNAVAILABLE' if live else 'SIMULATED' if simulation else 'HISTORICAL_SYNTHETIC'
         book = self.replay.snapshot('10')['data']['book'] if not live and not simulation else {'bids': [], 'asks': [], 'revision': '0'}
+        profile = self.dataset == 'kraken-authored-profile-v1'
         metrics = {name: None for name in ('spread', 'midprice', 'microprice', 'imbalance', 'top_imbalance', 'bid_depth', 'ask_depth')}
-        if not live and not simulation:
+        aggregate = gig._checked(self.aggregate.state()) if profile else None
+        if profile and not live and not simulation:
+            book = {'bids':aggregate['bids'], 'asks':aggregate['asks'], 'revision':aggregate['revision']}
+            for target, source in [('spread','spread'),('midprice','midpoint'),('microprice','microprice'),('imbalance','depth_imbalance'),('bid_depth','bid_depth'),('ask_depth','ask_depth')]:
+                metrics[target] = aggregate['metrics'][source]
+        elif not live and not simulation:
             native = self.replay.metrics('10')['data']['result']['metrics']
             for target, source in [('spread', 'spread'), ('midprice', 'midpoint'), ('microprice', 'microprice'),
                                    ('imbalance', 'depth_imbalance'), ('top_imbalance', 'top_imbalance'),
                                    ('bid_depth', 'bid_depth'), ('ask_depth', 'ask_depth')]:
                 metrics[target] = native[source]['value']
+        from terminal.providers.fixtures import SHA256 as profile_sha
         return {
             'schema_version': '1', 'mode': self.mode, 'origin': origin,
-            'instrument': 'BTC/USD' if live else 'SYNTH-USD', 'provider': 'kraken' if live else 'authored',
-            'venue': 'Kraken' if live else 'AUTHORED', 'feed_type': 'L2_AGGREGATE' if live else 'L3_AUTHORED',
-            'price_scale': '100', 'quantity_scale': '1',
+            'instrument': 'BTC/USD' if live or profile else 'SYNTH-USD', 'provider': 'kraken' if live else 'authored-kraken-profile' if profile else 'authored',
+            'venue': 'Kraken' if live else 'AUTHORED', 'feed_type': 'L2_AGGREGATE' if live or profile else 'L3_AUTHORED',
+            'price_scale': '100', 'quantity_scale': '100000000' if profile else '1',
             'book': {'bids': book['bids'], 'asks': book['asks']}, 'revision': book['revision'],
-            'metrics': metrics, 'position': self.position if not live else 0, 'event_count': len(EVENTS) if not live else 0,
+            'metrics': metrics, 'position': self.position if not live else 0, 'event_count': len(self.source_events) if not live else 0,
             'playing': self.playing, 'speed': self.speed,
             'source_timestamp_ns': None,
             'replay_time_ns': str((self.position - 1) * 50_000_000) if not live and not simulation else None,
             'received_at_ns': None,
             'feed': {'state': 'ERROR' if live else 'PAUSED' if not self.playing else 'REPLAYING',
                      'reason': 'Blocked: provider documentation, terms and connectivity unverified; no live data received.' if live else
-                               'Independently authored complete empty starting state; not historical observations.',
-                     'real_time': False, 'sequence_complete': not live, 'stale': live, 'gaps': 0},
-            'provenance': {'category': origin, 'dataset': None if live else 'terminal-authored-v1',
-                           'fixture_sha256': None if live else FIXTURE_SHA256, 'generator_seed': None if live else '0',
-                           'clock': None if live else 'authored-logical-clock', 'complete_initialization': not live,
+                               'Independently authored provider-shaped L2 snapshot; current provider protocol is unverified.' if profile else 'Independently authored complete empty starting state; not historical observations.',
+                     'real_time': False, 'sequence_complete': not live and not profile, 'capture_complete': not live, 'stale': live, 'gaps': 0},
+            'provenance': {'category': origin, 'dataset': None if live else self.dataset,
+                           'fixture_sha256': None if live else profile_sha if profile else FIXTURE_SHA256, 'generator_seed': None if live else '0',
+                           'clock': None if live else 'simulation:authored-logical-clock', 'complete_initialization': not live and not profile, 'initialization_scope': 'authored subscribed L2 only' if profile else 'authored order-level empty boundary',
                            'recording_enabled': False, 'permission': 'unverified' if live else 'independently-authored'},
             'capabilities': {'live': False, 'native_replay': True, 'aggregate_l2': hasattr(gig._native, 'AggregateDepth'),
                              'simulation': True, 'twap': True, 'vwap': True, 'pov': True, 'tca': True,
@@ -132,7 +182,7 @@ class NativeSession:
             'engine': {'native': True, **gig.native_build_info()},
             'diagnostics': {'connected_clients': self.clients, 'queue_capacity': 1, 'queue_occupancy': 0,
                             'stream_timeouts': self.stream_timeouts, 'rejected_requests': self.rejected,
-                            'native_status': self.replay.status(), 'uptime_seconds': round(time.monotonic() - self.started, 3)},
+                            'native_status': aggregate if profile else self.replay.status(), 'uptime_seconds': round(time.monotonic() - self.started, 3)},
             'notifications': list(self.notifications), 'simulation': deepcopy(self.last_simulation) if simulation else None,
         }
 
@@ -183,9 +233,10 @@ class NativeSession:
     @staticmethod
     def catalog():
         return {'schema_version': '1', 'datasets': [
-            {'id': 'terminal-authored-v1', 'origin': 'HISTORICAL_SYNTHETIC', 'instrument': 'SYNTH-USD',
+            {'id': 'terminal-authored-v2', 'origin': 'HISTORICAL_SYNTHETIC', 'instrument': 'SYNTH-USD',
              'status': 'AVAILABLE', 'records': len(EVENTS), 'sha256': FIXTURE_SHA256,
              'initialization': 'authored complete empty state', 'format': 'gig.event/1.0'},
+            {'id':'kraken-authored-profile-v1','origin':'HISTORICAL_SYNTHETIC','status':'AVAILABLE','format':'provisional provider-shaped L2;not observed','records':5},
             {'id': 'lobster-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',
              'format': 'LOBSTER 6/20-column authored CSV', 'reason': 'Validated offline adapter; not loaded into browser replay.'},
             {'id': 'itch-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',

@@ -34,7 +34,8 @@ Error AggregateDepth::apply(std::span<const Level> bids,std::span<const Level>as
         if(sequence.has_value()!=sequence_.has_value())return {ErrorCode::inconsistent_metadata,"aggregate.sequence_presence"};
         if(sequence_) {
             if(*sequence_==std::numeric_limits<std::uint64_t>::max())return {ErrorCode::sequence_exhausted,"aggregate.sequence"};
-            if(*sequence<=*sequence_)return {ErrorCode::sequence_duplicate,"aggregate.sequence"};
+            if(*sequence<*sequence_)return {ErrorCode::sequence_regression,"aggregate.sequence"};
+            if(*sequence==*sequence_)return {ErrorCode::sequence_duplicate,"aggregate.sequence"};
             if(*sequence!=*sequence_+1)return {ErrorCode::sequence_gap,"aggregate.sequence"};
         }
     }

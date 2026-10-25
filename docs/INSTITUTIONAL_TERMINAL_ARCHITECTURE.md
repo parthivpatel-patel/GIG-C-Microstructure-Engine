@@ -60,3 +60,17 @@ Nov4 synchronized3D;Nov7 authorized live where feasible;Nov10 historical/simulat
 Nov12 engineering;Nov13–14 verification;Nov14 delivery. These are planning dates,
 not claims of unattended future execution. Network/rights/browser support can be
 external blockers; independent offline engineering continues.
+
+## Implemented follow-up decisions
+
+Gateway narrowed to direct Starlette ASGI after reproducible Pydantic import-only
+LSan findings;explicit bounded validation made Pydantic unnecessary. Exact REST/WS
+contracts are preserved. Machine-readable snapshot schema and independently checked
+TypeScript grammar coexist;no duplicate native financial math in gateway/client.
+The interactive provider-shaped fixture uses separate AggregateDepth,quantity scaling
+and subscribed-L2 initialization scope;never feeds aggregate updates into L3.
+Authored native fixture v2 separates its replay clock from exchange EventTimestamp.
+Current local source is not ARM64-qualified. Source/archive/evidence closure follows
+in INSTITUTIONAL_TERMINAL_FINAL_REPORT.md;blocked and incomplete capabilities remain
+explicit. The historical Phase0 paragraph above records the initial plan,not a
+claim that all external/live gates have subsequently passed.

@@ -9,8 +9,8 @@ export interface TerminalState {
  provenance:Record<string,unknown>;source_timestamp_ns?:string|null;replay_time_ns?:string|null;received_at_ns?:string|null;
  capabilities?:Record<string,unknown>;engine?:Record<string,unknown>;diagnostics?:Record<string,unknown>;[key:string]:unknown;
 }
-const unsigned=/^(0|[1-9][0-9]{0,38})$/;
-const signed=/^(0|-?[1-9][0-9]{0,38})$/;
+const unsigned=/^(0|[1-9][0-9]{0,38})$(?![\s\S])/;
+const signed=/^(0|-?[1-9][0-9]{0,38})$(?![\s\S])/;
 function isRecord(x:unknown):x is Record<string,unknown>{return typeof x==='object'&&x!==null&&!Array.isArray(x)}
 export function validateState(value:unknown):TerminalState {
  if(!isRecord(value)||value.schema_version!=='1'||!['HISTORICAL_REPLAY','SIMULATION','LIVE'].includes(String(value.mode))||!['LIVE_OBSERVED','LIVE_DELAYED','HISTORICAL_OBSERVED','HISTORICAL_SYNTHETIC','SIMULATED','ESTIMATED','UNAVAILABLE'].includes(String(value.origin)))throw new Error('Unsupported state schema or provenance');

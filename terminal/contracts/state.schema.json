@@ -1,0 +1,337 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gig:terminal:state:1",
+  "title": "GIG terminal owned snapshot v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "mode",
+    "origin",
+    "instrument",
+    "provider",
+    "price_scale",
+    "quantity_scale",
+    "book",
+    "metrics",
+    "position",
+    "event_count",
+    "playing",
+    "speed",
+    "feed",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1"
+    },
+    "mode": {
+      "enum": [
+        "HISTORICAL_REPLAY",
+        "SIMULATION",
+        "LIVE"
+      ]
+    },
+    "origin": {
+      "enum": [
+        "LIVE_OBSERVED",
+        "LIVE_DELAYED",
+        "HISTORICAL_OBSERVED",
+        "HISTORICAL_SYNTHETIC",
+        "SIMULATED",
+        "ESTIMATED",
+        "UNAVAILABLE"
+      ]
+    },
+    "instrument": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "provider": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "price_scale": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+    },
+    "quantity_scale": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+    },
+    "book": {
+      "type": "object",
+      "required": [
+        "bids",
+        "asks"
+      ],
+      "properties": {
+        "bids": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "required": [
+              "price_ticks",
+              "quantity"
+            ],
+            "properties": {
+              "price_ticks": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+              },
+              "quantity": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "asks": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "required": [
+              "price_ticks",
+              "quantity"
+            ],
+            "properties": {
+              "price_ticks": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+              },
+              "quantity": {
+                "type": "string",
+                "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "spread",
+        "midprice",
+        "microprice",
+        "imbalance"
+      ],
+      "properties": {
+        "spread": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "midprice": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "microprice": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "imbalance": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "top_imbalance": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bid_depth": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ask_depth": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^(0|-?[1-9][0-9]{0,38})$(?![\\s\\S])"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]{0,38}$(?![\\s\\S])"
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "position": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "event_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "playing": {
+      "type": "boolean"
+    },
+    "speed": {
+      "enum": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "feed": {
+      "type": "object",
+      "required": [
+        "state",
+        "reason"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "category",
+        "dataset",
+        "fixture_sha256"
+      ]
+    }
+  }
+}

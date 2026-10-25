@@ -39,3 +39,11 @@ requires configured exact Origin,Host is allowlisted; local single-worker deploy
 No concurrent native access, upload or arbitrary filesystem API. A browser frame is
 not an authenticated research export; exported view snapshots preserve classification
 and provenance but do not claim the complete engine run-manifest export contract.
+
+Machine-readable snapshot grammar:terminal/contracts/state.schema.json,served at
+GET/api/v1/schema. Independent tests validate both sources/all modes;TypeScript
+validator separately enforces mode/origin compatibility and exact BigInt values.
+JSON Schema specifies bounded lexical representations;native checks supply numeric
+range/cross-field semantics. No remote schema resolution is used. Fixture v2 has
+no exchange EventTimestamp;replay logical time is separate. Dataset selection accepts
+terminal-authored-v2 or kraken-authored-profile-v1 only. No private source path.

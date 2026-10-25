@@ -22,6 +22,9 @@ class NativeDepth(unittest.TestCase):
         n='18446744073709551615'
         checked(b.snapshot([{'price_ticks':'9223372036854775806','quantity':n}],[{'price_ticks':'9223372036854775807','quantity':n}],None))
         self.assertEqual(pair(checked(b.state())['metrics']['microprice']),Fraction(18446744073709551613,2))
+        checked(b.snapshot([],[], '7'));before=checked(b.state())
+        with self.assertRaises(gig.EngineError) as failure:checked(b.update([],[], '6'))
+        self.assertEqual(failure.exception.code_name,'sequence_regression');self.assertEqual(checked(b.state()),before)
 
     def test_seeded_independent_level_map(self):
         rng=random.Random(911);b=gig._native.AggregateDepth(32,1048576);checked(b.snapshot([],[], '0'));reference=[{},{}]
