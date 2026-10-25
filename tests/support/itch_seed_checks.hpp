@@ -1,5 +1,6 @@
 #pragma once
 #include "gig/itch/seed.hpp"
+#include "itch_input_adapter_checks.hpp"
 #include <iostream>
 #include "itch_reconstruction_fixture.hpp"
 #include "gig/memory/tracked_resource.hpp"
@@ -72,6 +73,18 @@ inline void seed_checks(){
     auto full=SyntheticReconstructor::create_seeded(cfg,f.view(),f.digest());check(bool(full),"seed consumes journal limit explicitly");
     const auto full_before=state(*full.data);auto blocked=full.data->process(reduce('E',11,1,71),f.boundary,cfg.source.provenance);
     check(!blocked.committed&&full.data->context().summary().accepted_records==0&&state(*full.data)==full_before,"seed journal exhaustion preserves context/book");
+    const auto tail=adapter_frames({reduce('E',11,2,71),system('E'),system('C')});
+    auto adapter_cfg=adapter_config(tail);auto seed_cfg=f.configuration();seed_cfg.source.provenance.sha256=sha256(tail);
+    const auto tail_hex=hex_digest(sha256(tail));seed_cfg.initialization.fixture_sha256=number<gig::Digest>(std::string_view(tail_hex.data(),tail_hex.size()));
+    adapter_cfg.source=seed_cfg.source;adapter_cfg.context_policy=seed_cfg.context_policy;adapter_cfg.synthetic=seed_cfg;
+    adapter_cfg.initial=InitialClaim::authored_synthetic_seed;adapter_cfg.dataset.capture_start=f.boundary.frame_offset;adapter_cfg.dataset.capture_end=ByteOffset{4096+tail.size()};
+    check(!BinarySourceAdapter::create(adapter_cfg),"seed claim needs seed API");
+    for(auto chunk:{std::size_t{1},std::size_t{7},std::size_t{4096}}){auto adapter=BinarySourceAdapter::create_seeded(adapter_cfg,f.view(),f.digest());check(bool(adapter),"seed adapter creates");
+        const auto summary=adapter_run(*adapter.data,tail,chunk);check(summary.input_complete&&summary.full_l3_complete&&summary.publication_eligible&&summary.accepted==3&&summary.native_records==1,"bounded seeded adapter complete authored tail");
+        check(adapter.data->reconstruction()->engine(0)->book().remaining()==15,"adapter seeded execution exact");}
+    bool adapter_success=false;std::size_t adapter_failures=0;
+    for(std::size_t i=0;i<128;++i){gig::TrackedResource memory;memory.fail_after(i);{auto attempt=BinarySourceAdapter::create_seeded(adapter_cfg,f.view(),f.digest(),&memory);adapter_success=bool(attempt);if(!attempt)++adapter_failures;}check(memory.stats().live_bytes==0,"seed adapter allocation cleanup");if(adapter_success)break;}
+    check(adapter_success&&adapter_failures>0,"seed adapter allocation sweep");
     bool success=false;std::size_t failures=0;
     for(std::size_t fail=0;fail<256;++fail){gig::TrackedResource memory(std::pmr::get_default_resource(),16U*1024U*1024U);memory.fail_after(fail);{auto attempt=f.create(&memory);if(attempt){success=true;check(attempt.data->engine(0)->book().remaining()==17,"allocation success coherent");}else ++failures;}check(memory.stats().live_bytes==0&&memory.stats().live_blocks==0,"seed factory failure atomic cleanup");if(success)break;}
     check(success&&failures>0,"real seed allocation failures through full success");

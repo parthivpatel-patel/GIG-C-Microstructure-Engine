@@ -17,7 +17,7 @@ MAX_INPUT = 2 * 1024 * 1024
 MAX_OUTPUT = 32 * 1024 * 1024
 
 
-def run(arguments, data):
+def run(arguments, data, timeout=120):
     if len(data) > MAX_INPUT:
         raise ValueError('fixture input budget')
     with tempfile.TemporaryFile() as source:
@@ -25,16 +25,16 @@ def run(arguments, data):
         process = subprocess.Popen(arguments, stdin=source, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         selector = selectors.DefaultSelector()
         output = {'stdout': bytearray(), 'stderr': bytearray()}
-        deadline = time.monotonic() + 120
+        deadline = time.monotonic() + timeout
         try:
             selector.register(process.stdout, selectors.EVENT_READ, 'stdout')
             selector.register(process.stderr, selectors.EVENT_READ, 'stderr')
             total = 0
             while selector.get_map():
                 remaining = deadline-time.monotonic()
-                if remaining <= 0: raise TimeoutError('candidate exceeded120 seconds')
+                if remaining <= 0: raise TimeoutError('candidate deadline exceeded')
                 ready = selector.select(remaining)
-                if not ready: raise TimeoutError('candidate exceeded120 seconds')
+                if not ready: raise TimeoutError('candidate deadline exceeded')
                 for key, _ in ready:
                     block = os.read(key.fd, min(65536, MAX_OUTPUT-total+1))
                     if not block:

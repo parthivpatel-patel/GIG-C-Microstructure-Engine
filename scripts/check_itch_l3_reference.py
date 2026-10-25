@@ -499,6 +499,7 @@ def main():
         subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_market_initialization.py')],check=True)
         from check_seeded_reference import main as seeded_reference
         seeded_reference(args.driver)
+        subprocess.run([sys.executable,str(Path(__file__).resolve().parents[1]/'tests/test_bounded_comparison.py'),args.driver],check=True)
 
 
 if __name__=='__main__':main()

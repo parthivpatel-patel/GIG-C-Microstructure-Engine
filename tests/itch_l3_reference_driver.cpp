@@ -90,19 +90,25 @@ bool seed_case(std::istringstream& input,ReconstructionConfig config,gig::Tracke
     for(std::size_t i=0;i<32;++i)trusted[i]=static_cast<std::byte>(std::stoul(expected.substr(i*2,2),nullptr,16));
     SeedState seed{{ByteOffset{offset},ByteOffset{offset+2},RecordOrdinal{ordinal}},static_cast<std::uint8_t>(stage),TimestampNanoseconds{timestamp},directories,orders,retired,matches};
     config.initialization.kind=InitialStateKind::complete_seed;config.initialization.boundary=seed.boundary;config.context_policy.first_location=seed.boundary;
-    const auto start=std::chrono::steady_clock::now();auto created=SyntheticReconstructor::create_seeded(config,seed,trusted,&resource);
-    const auto initialized=std::chrono::steady_clock::now();if(!created){std::cerr<<"seed create "<<created.error.field<<'\n';return false;}
-    auto& r=*created.data;std::cout<<"{\"seed_sha256\":\""<<expected<<"\",\"initial\":";ReconstructionStep initial;initial.committed=true;initial.disposition=SourceDisposition::external_observation;outcome(initial,r);
     Bytes bytes;while(input>>encoded){if(encoded.empty()||encoded.size()%2||encoded.size()>131070)return false;raw(bytes,encoded.size()/2,2);for(std::size_t i=0;i<encoded.size();i+=2)bytes.push_back(static_cast<std::byte>(std::stoul(encoded.substr(i,2),nullptr,16)));if(bytes.size()>2U*1024U*1024U)return false;}
-    bytes.push_back(std::byte{});bytes.push_back(std::byte{});FramerLimits limits;limits.max_stream_bytes=2U*1024U*1024U;limits.max_records=config.max_source_records;
-    auto reader=BinaryFileFramer::create(limits,seed.boundary.frame_offset,seed.boundary.ordinal,&resource);if(!reader)return false;
+    bytes.push_back(std::byte{});bytes.push_back(std::byte{});if(bytes.size()>UINT64_MAX-offset)return false;
+    DatasetContract dataset{source_identity("independent-authored"),source_identity("seeded-comparison-v1"),source_identity("literal-generator"),source_identity("synthetic-test-permitted"),source_identity("no-market-data"),source_identity("authored-seed-evidence"),{},seed.boundary.frame_offset,ByteOffset{offset+bytes.size()},false};
+    FramerLimits limits;limits.max_stream_bytes=2U*1024U*1024U;limits.max_records=config.max_source_records;
+    InputAdapterConfig input_config{dataset,config.source,config.context_policy,limits,InitialClaim::authored_synthetic_seed,config};
+    const auto start=std::chrono::steady_clock::now();auto created=BinarySourceAdapter::create_seeded(input_config,seed,trusted,&resource);
+    const auto initialized=std::chrono::steady_clock::now();if(!created){std::cerr<<"seed create "<<created.error.field<<'\n';return false;}
+    auto& adapter=*created.data;const auto& r=*adapter.reconstruction();std::cout<<"{\"seed_sha256\":\""<<expected<<"\",\"initial\":";ReconstructionStep initial;initial.committed=true;initial.disposition=SourceDisposition::external_observation;outcome(initial,r);
     std::cout<<",\"events\":[";bool comma=false;std::size_t consumed=0;
     const auto replay_start=std::chrono::steady_clock::now();
-    while(consumed<bytes.size()){const auto frame=reader.data->feed(std::span<const std::byte>(bytes).subspan(consumed,std::min(chunk,bytes.size()-consumed)));if(frame.error||!frame.consumed)return false;consumed+=frame.consumed;
-        if(frame.frame){const auto step=r.process(frame.frame->payload,frame.frame->location,config.source.provenance);if(comma)std::cout<<',';comma=true;outcome(step,r);if(!step.committed)break;}}
+    while(consumed<bytes.size()){const auto step=adapter.feed(std::span<const std::byte>(bytes).subspan(consumed,std::min(chunk,bytes.size()-consumed)));consumed+=step.consumed;
+        if(step.frame){if(comma)std::cout<<',';comma=true;outcome(step.native,r);}
+        if(step.error)break;
+        if(!step.consumed)return false;}
     const auto replay_end=std::chrono::steady_clock::now();
     std::cout<<"],\"journal_sha256\":[";for(std::size_t i=0;i<2;++i){const auto canonical=r.engine(i)->canonical();if(!canonical)return false;const auto digest=hex_digest(sha256(std::as_bytes(std::span(canonical.data->data(),canonical.data->size()))));if(i)std::cout<<',';std::cout<<'\"'<<std::string_view(digest.data(),digest.size())<<'\"';}
-    const auto memory=resource.stats();std::cout<<"],\"measurements\":{\"initialization_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(initialized-start).count()<<",\"replay_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(replay_end-replay_start).count()<<",\"pmr_peak_bytes\":"<<memory.peak_bytes<<",\"pmr_allocations\":"<<memory.allocations<<",\"journal_record_bytes\":"<<gig::ReplayEngine::journal_record_bytes()<<",\"seed_records\":2,\"observed_qualified\":false}}\n";return true;
+    const auto summary=adapter.finish();
+    std::cout<<"],\"summary\":{\"records\":"<<summary.records<<",\"accepted\":"<<summary.accepted<<",\"native\":"<<summary.native_records<<",\"rejected\":"<<summary.rejected<<",\"input_complete\":"<<(summary.input_complete?"true":"false")<<",\"l3_complete\":"<<(summary.full_l3_complete?"true":"false")<<",\"publication_eligible\":"<<(summary.publication_eligible?"true":"false")<<"}";
+    const auto memory=resource.stats();std::cout<<",\"measurements\":{\"initialization_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(initialized-start).count()<<",\"replay_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(replay_end-replay_start).count()<<",\"pmr_peak_bytes\":"<<memory.peak_bytes<<",\"pmr_allocations\":"<<memory.allocations<<",\"journal_record_bytes\":"<<gig::ReplayEngine::journal_record_bytes()<<",\"seed_records\":2,\"observed_qualified\":false}}\n";return true;
 }
 bool adapter_case(std::istringstream& input,ReconstructionConfig config,gig::TrackedResource& resource,std::size_t chunk,std::string_view dataset_id){
     Bytes bytes;std::string encoded;
@@ -140,6 +146,8 @@ int main(int argc,char** argv){
     const auto dataset=SourceIdentity::make(argc==4?argv[3]:"adapter-differential-v1");if(!dataset)return 5;
     const auto chunk=argc>=3?static_cast<std::size_t>(std::stoul(argv[2])):std::size_t{7};
     if(chunk==0||chunk>65536)return 5;
+    const auto memory_budget=use_seed&&argc==4?std::stoull(argv[3]):128ULL*1024ULL*1024ULL;
+    if(memory_budget<4096||memory_budget>128ULL*1024ULL*1024ULL)return 5;
     bool oversized=false;std::string line;
     const auto next=[&](){
         if(!use_adapter&&!use_seed)return static_cast<bool>(std::getline(std::cin,line));
@@ -147,7 +155,7 @@ int main(int argc,char** argv){
         while(std::cin.get(value)){if(value=='\n')return true;if(line.size()==2U*1024U*1024U){oversized=true;std::cerr<<"adapter fixture line limit\n";return false;}line.push_back(value);}
         return !line.empty();
     };
-    while(next()){gig::TrackedResource resource(std::pmr::get_default_resource(),128*1024*1024);{std::istringstream input(line);unsigned flags{};gig::types::UnitScale tick{},lots{};input>>flags>>tick.numerator>>tick.denominator>>lots.numerator>>lots.denominator;std::string digest_text;input>>digest_text;
+    while(next()){gig::TrackedResource resource(std::pmr::get_default_resource(),static_cast<std::size_t>(memory_budget));{std::istringstream input(line);unsigned flags{};gig::types::UnitScale tick{},lots{};input>>flags>>tick.numerator>>tick.denominator>>lots.numerator>>lots.denominator;std::string digest_text;input>>digest_text;
     if((use_adapter||use_seed)&&(!input||flags>7||digest_text.size()!=64||!std::all_of(digest_text.begin(),digest_text.end(),[](char c){return (c>='0'&&c<='9')||(c>='a'&&c<='f');})
         ||!tick.numerator||!tick.denominator||!lots.numerator||!lots.denominator||tick.numerator>1000000||tick.denominator>1000000||lots.numerator>1000000||lots.denominator>1000000)){std::cerr<<"adapter fixture metadata\n";return 5;}
     auto config=configuration(flags,tick,lots,digest_text);if(use_seed){if(!seed_case(input,config,resource,chunk))return 2;}else if(use_adapter){if(!adapter_case(input,config,resource,chunk,dataset.data->view()))return 2;}else{auto reconstruction=SyntheticReconstructor::create(config,&resource);if(!reconstruction){std::cerr<<"create: "<<static_cast<unsigned>(reconstruction.error.code)<<' '<<reconstruction.error.field<<'\n';return 2;}

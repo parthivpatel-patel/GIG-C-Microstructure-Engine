@@ -1,4 +1,5 @@
 #include "gig/itch/input_adapter.hpp"
+#include "gig/itch/seed.hpp"
 #include <chrono>
 #include <type_traits>
 
@@ -21,25 +22,27 @@ BinarySourceAdapter::BinarySourceAdapter(InputAdapterConfig c,BinaryFileFramer f
 }
 BinarySourceAdapter::BinarySourceAdapter(BinarySourceAdapter&& other) noexcept
 :config_(std::move(other.config_)),framer_(std::move(other.framer_)),context_(std::move(other.context_)),native_(std::move(other.native_)),hash_(other.hash_),summary_(other.summary_),finished_(other.finished_),moved_from_(other.moved_from_){other.moved_from_=true;}
-gig::Result<BinarySourceAdapter> BinarySourceAdapter::create(InputAdapterConfig c,std::pmr::memory_resource* memory) noexcept {
+gig::Result<BinarySourceAdapter> BinarySourceAdapter::create(InputAdapterConfig c,std::pmr::memory_resource* memory) noexcept {return create_impl(std::move(c),nullptr,{},memory);}
+gig::Result<BinarySourceAdapter> BinarySourceAdapter::create_seeded(InputAdapterConfig c,const SeedState& seed,Sha256Digest trusted,std::pmr::memory_resource* memory) noexcept {return create_impl(std::move(c),&seed,trusted,memory);}
+gig::Result<BinarySourceAdapter> BinarySourceAdapter::create_impl(InputAdapterConfig c,const SeedState* seed,Sha256Digest trusted,std::pmr::memory_resource* memory) noexcept {
     const auto bad=[](std::string_view field){return gig::Result<BinarySourceAdapter>::failure(gig::ErrorCode::inconsistent_metadata,field);};
     if(!memory||!c.source.provenance.sha256||!c.source.provenance.source||*c.source.provenance.source!=c.source.source
         ||(c.source.provenance.origin!=Origin::synthetic&&c.source.provenance.origin!=Origin::observed)
-        ||static_cast<unsigned>(c.initial)>static_cast<unsigned>(InitialClaim::authored_synthetic)
+        ||static_cast<unsigned>(c.initial)>static_cast<unsigned>(InitialClaim::authored_synthetic_seed)
         ||!date_valid(c.dataset.session_date)||c.dataset.capture_start.value()>UINT64_MAX-2
         ||c.context_policy.first_location.payload_offset.value()!=c.dataset.capture_start.value()+2
         ||c.dataset.capture_start!=c.context_policy.first_location.frame_offset
         ||(c.dataset.capture_end&&c.dataset.capture_end->value()<c.dataset.capture_start.value())
         ||c.framing.buffer_bytes>65535||c.framing.max_stream_bytes==0||c.framing.max_stream_bytes>128U*1024U*1024U
         ||c.framing.max_records==0||c.framing.max_records>100000)return bad("adapter.manifest_or_limits");
-    if(c.synthetic&&(c.initial!=InitialClaim::authored_synthetic||c.source.provenance.origin!=Origin::synthetic
+    if(c.synthetic&&(c.initial!=(seed?InitialClaim::authored_synthetic_seed:InitialClaim::authored_synthetic)||c.source.provenance.origin!=Origin::synthetic
         ||c.dataset.known_gaps||c.synthetic->source!=c.source||c.synthetic->context_policy!=c.context_policy
         ||c.framing.max_records>c.synthetic->max_source_records))return bad("adapter.synthetic_evidence");
-    if(!c.synthetic&&c.initial==InitialClaim::authored_synthetic)return bad("adapter.synthetic_config_missing");
+    if(!c.synthetic&&(seed||c.initial==InitialClaim::authored_synthetic||c.initial==InitialClaim::authored_synthetic_seed))return bad("adapter.synthetic_config_missing");
     auto framing=BinaryFileFramer::create(c.framing,c.dataset.capture_start,c.context_policy.first_location.ordinal,memory);
     if(!framing)return gig::Result<BinarySourceAdapter>::failure(framing.error.code==Code::resource_exhausted?gig::ErrorCode::resource_exhausted:gig::ErrorCode::inconsistent_metadata,"adapter.framer");
     std::optional<SourceContext> context;std::optional<SyntheticReconstructor> native;
-    if(c.synthetic){auto created=SyntheticReconstructor::create(*c.synthetic,memory);if(!created)return gig::Result<BinarySourceAdapter>::failure(created.error.code,created.error.field);native.emplace(std::move(*created.data));}
+    if(c.synthetic){auto created=seed?SyntheticReconstructor::create_seeded(*c.synthetic,*seed,trusted,memory):SyntheticReconstructor::create(*c.synthetic,memory);if(!created)return gig::Result<BinarySourceAdapter>::failure(created.error.code,created.error.field);native.emplace(std::move(*created.data));if(seed)c.synthetic=native->config();}
     else {auto created=SourceContext::create(c.source,c.context_policy,memory);if(!created)return gig::Result<BinarySourceAdapter>::failure(created.error.code==Code::resource_exhausted?gig::ErrorCode::resource_exhausted:gig::ErrorCode::inconsistent_metadata,"adapter.context");context.emplace(std::move(*created.data));}
     return gig::Result<BinarySourceAdapter>::success(BinarySourceAdapter(std::move(c),std::move(*framing.data),std::move(context),std::move(native)));
 }

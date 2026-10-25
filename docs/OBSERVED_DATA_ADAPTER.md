@@ -68,3 +68,12 @@ context/native/FIFO seed and authenticated upstream history remain missing. Curr
 API intentionally refuses to pretend those capabilities exist. A later adapter
 phase needs explicit source/evidence and independently validated seed/projection;
 no real-market correctness or production readiness follows from synthetic tests.
+
+## Seeded authored extension
+
+BinarySourceAdapter::create_seeded adds typed synthetic SeedState import with trusted
+seed digest and authored_synthetic_seed claim. Matching policies/source/boundaries,
+known-gaps=false, integer units, native/context limits and failure atomicity remain
+mandatory. Seed digest enters stored native config/provenance. Observed origin still
+cannot obtain a native book or publication. See SEEDED_STATE_RECONSTRUCTION.md and
+OBSERVED_MARKET_COMPARISON_PLAN.md; no actual observed seed verifier implemented.

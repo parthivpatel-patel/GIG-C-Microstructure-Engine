@@ -5,7 +5,7 @@
 
 namespace gig::itch {
 // Evidence categories are caller declarations, never an exchange authentication.
-enum class InitialClaim : std::uint8_t { unknown, session_start_evidence, snapshot_evidence, incomplete, authored_synthetic };
+enum class InitialClaim : std::uint8_t { unknown, session_start_evidence, snapshot_evidence, incomplete, authored_synthetic, authored_synthetic_seed };
 struct DatasetContract {
     SourceIdentity provider,dataset,acquisition,permission_reference,redistribution_reference,initial_state_reference;
     std::optional<Text<10>> session_date;
@@ -58,6 +58,7 @@ class BinarySourceAdapter {
     Sha256 hash_;
     AdapterSummary summary_;
     bool finished_{},moved_from_{},busy_{};
+    static gig::Result<BinarySourceAdapter> create_impl(InputAdapterConfig,const SeedState*,Sha256Digest,std::pmr::memory_resource*) noexcept;
     BinarySourceAdapter(InputAdapterConfig,BinaryFileFramer,std::optional<SourceContext>,std::optional<SyntheticReconstructor>) noexcept;
 public:
     BinarySourceAdapter(BinarySourceAdapter&&) noexcept;
@@ -65,6 +66,8 @@ public:
     BinarySourceAdapter& operator=(const BinarySourceAdapter&)=delete;
     BinarySourceAdapter& operator=(BinarySourceAdapter&&)=delete;
     static gig::Result<BinarySourceAdapter> create(InputAdapterConfig,std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+    static gig::Result<BinarySourceAdapter> create_seeded(InputAdapterConfig,const SeedState&,Sha256Digest trusted_snapshot,
+        std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
     AdapterFeed feed(std::span<const std::byte>) noexcept;
     AdapterSummary finish(EndKind=EndKind::source_eof) noexcept;
     const InputAdapterConfig& config()const noexcept{return config_;}
