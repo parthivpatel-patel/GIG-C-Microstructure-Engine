@@ -172,3 +172,38 @@ Debug/ASan pass,LSan0;earlier full224 Debug/ASan already passed unchanged runtim
 Next:push this focused hardening checkpoint,measure and inventory its clean source,
 then finalize evidence/readiness docs. All actual vendor feeds and latest ARM64 remain
 unqualified;Kraken written clarification still pending. No subscription was run.
+
+## Stock Intelligence: remotely verified checkpoint and readiness handoff
+
+Implemented716939db2a2bbac2e76dc241d34af06e641bfcca and hardened
+783eb8188bb7d8f4fc34d45a8ae3c4c86c0e43a6 are pushed and remote-verified.
+Stock workspace/search/watch/recent,theoretical options/3D and causal authored research
+work locally. SEC/IEX fixed-endpoint candidates and offline13F parser are fixture-tested;
+actual source access,protocol/entitlement/use rights remain unverified. Owner Kraken
+DNS/TLS/101/passive control remains owner-supplied connectivity evidence,not permission.
+
+Full terminal224 Release/Debug/ASan;final48 stock cases each three configurations after
+padding-only repair;LSan0. Dedicated security46;Chromium stock10/crypto21/recorded9/
+provider9;TLS8;frontend4;browser guards5;packaging3;installed-wheel8+6;fresh native
+aggregate1 each six compilers/configs. Full native155 per six/eight identities reused
+only with identical native trees. No final fail/error/skip or assertion weakening.
+Before failures retained for startup retention409 BUSY and option newline acceptance.
+
+Clean783eb81 benchmark:512 authored facts6.862ms,153-point options0.518ms,
+128-return research1.728ms per median call;not provider latency or empirical alpha.
+Source archive560 safe byte-identical members;private raw data/secrets/binaries absent.
+Detailed matrix,source inventory,hashes,scopes and unexecuted checks:
+STOCK_INTELLIGENCE_READINESS.md and evidence/stock_intelligence.json.
+Owner setup/official review links/gates:STOCK_INTELLIGENCE_GUIDE.md.
+Final documentation SHA belongs to Git/delivery;main12f3a539 unchanged.
+
+Exact next action:owner updates private Codespace,rebuilds frontend and accepts Stock
+Intelligence. Obtain current official SEC fair-access/user-agent and Alpaca no-cost/schema/
+usage evidence,Kraken written clarification and Coinbase protocol/rights before enabling
+any source. Subscription tool requires explicit additional owner approval and was never
+run. Owner separately qualifies latest source through manual free-eligible ARM64 workflow;
+no current-HEAD ARM64 or observed-market claim. No LOBSTER access or paid resource.
+Independent backlog remains:full directory/statements/13F ingestion,portfolio/factors,
+fitted models/walk-forward,observed options calibration and licensed news/sentiment.
+November10 is partial readiness,not a guarantee of full institutional/production scope.
+No background engineering continues after task end;resume by verifying Git/readiness docs.
