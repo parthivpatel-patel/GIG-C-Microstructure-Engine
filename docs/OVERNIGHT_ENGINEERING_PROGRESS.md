@@ -457,3 +457,19 @@ canonical changes,market data,paid resources,main change or Actions dispatch.
 Owner next:stop old server,fast-forward feature branch,set exact private HTTPS Origin,
 restart script,refresh top-level Ports URL. Actual owner-session headers remain
 unverified until refreshed diagnostics are read. Do not claim external owner pass.
+
+## Reported Codespaces localhost WS Origin — proof-bound repair
+
+Entryd830551. Owner supplied raw Origin/Host localhost8787 with correct HTTPS
+forwarding metadata. Bare rejection stays correct. Frontend source/local ChromeCDP
+uses document Origin;exact remote rewriting hop not identified without owner-edge
+capture. New browser requests one-use proof through strict configured HTTP Origin,
+then transmits it via WS subprotocol (not URL/logs). Specific Codespaces localhost
+shape requires independent proof,not X-Forwarded headers.256bits/30s/32pending,
+hash-only memory,one-use;8client cap preserved. Public attempt IDs correlate
+bootstrap and authenticated WS separately from unrelated local probes.
+35policy/unit,56existing terminal,13sanitized(LSan0),6TLS rewrite and21browser
+checks pass;frontend build/3unit pass. No native/canonical/dependency changes.
+Exact next owner action:stop server,pull feature,build only browser assets,set exact
+HTTPSOrigin,start,refresh private Ports URL,inspect v3correlated diagnostics.
+No new development phase or external deployment success is implied.

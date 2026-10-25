@@ -116,3 +116,14 @@ These are local verified proxy/browser checks,not a real owner Codespace/private
 GitHub authentication round trip. Existing native sources/canonical identities
 are unchanged;no native rebuild/full1405 matrix rerun was necessary. No market data,
 paid services,main change or GitHub workflow was involved.
+
+## Follow-up: reported localhost WS rewrite
+
+The next owner diagnostic showed correct configured HTTPS policy but raw WS
+Origin/Host localhost8787. Current handling is described in
+[CODESPACES_STREAM_PROOF.md](CODESPACES_STREAM_PROOF.md). It keeps a bare localhost
+handshake denied and adds a one-use proof issued only by strictly Origin-validated
+HTTP. Forwarded headers never authorize the request. This follow-up requires only
+a browser-asset build plus backend restart;no native rebuild. Current diagnostic
+version is codespaces-stream-proof-v3,with correlated browser/bootstrap/WS records.
+The older v2 checks above are historical,not the current compatibility protocol.

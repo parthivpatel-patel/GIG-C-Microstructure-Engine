@@ -1,0 +1,387 @@
+{
+  "schema": "gig.codespaces.stream_proof.v1",
+  "starting_commit": "d830551fe9cc08e9d02b44e08c805bc623d58dc6",
+  "owner_reported_handshake": {
+    "configured_https_origin_matches_expected": true,
+    "origin": "http://localhost:8787",
+    "host": "localhost:8787",
+    "forwarded_host": "owner private hostname withheld",
+    "forwarded_proto": "https",
+    "asgi_scheme": "wss",
+    "decision": "rejected_origin",
+    "status": 403
+  },
+  "attribution": {
+    "frontend_source": "WS URL derives exclusively from browser location;no Origin header setter",
+    "local_browser_capture": {
+      "schema": "gig.browser.handshake_evidence.v1",
+      "browser": "154.0.8037.57",
+      "document": {
+        "origin": "http://127.0.0.1:8787",
+        "host": "127.0.0.1:8787",
+        "protocol": "http:"
+      },
+      "outgoing_browser_handshake": {
+        "url": "ws://127.0.0.1:8787/api/v1/stream",
+        "origin": "http://127.0.0.1:8787"
+      },
+      "bootstrap_and_socket_correlated": true,
+      "credential_headers_recorded": false,
+      "scope": "Local browser CDP capture;not owner private Codespaces edge capture"
+    },
+    "actual_owner_proxy_hop": "not independently identified",
+    "correlation": "Approved HTTP bootstrap public attempt ID is bound to one-use socket proof;distinguishes authenticated browser from bare local probes"
+  },
+  "security": {
+    "raw_localhost_without_proof": "rejected",
+    "forwarded_headers_authorize": false,
+    "proof_entropy_bits": 256,
+    "proof_ttl_seconds": 30,
+    "max_pending": 32,
+    "single_use": true,
+    "storage": "in-memory SHA256 only",
+    "transport": "subprotocol not URL;server selects only public application protocol",
+    "native_clients_max": 8,
+    "private_github_auth_changed": false,
+    "wildcard_cors": false
+  },
+  "tests": {
+    "unit_policy": 35,
+    "existing_terminal": 56,
+    "new_sanitized": 13,
+    "live_lsan": 0,
+    "tls_rewrite": 6,
+    "browser": 21,
+    "frontend_unit": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tls_proxy": {
+    "schema": "gig.codespaces.rewritten_origin_tls.v1",
+    "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled",
+    "checks": [
+      "TLS verified actual frontend HTML",
+      "TLS proxy actual C++ state",
+      "forwarded HTTPS Origin mutates native prefix",
+      "foreign Origin denied behind TLS proxy",
+      "two verified WSS upgrades101 preserve native prefix",
+      "actual proxy Origin/Host/HTTPS header capture"
+    ],
+    "passed": 6,
+    "failed": 0,
+    "captured_proxy_headers": {
+      "schema_version": "1",
+      "policy_version": "codespaces-stream-proof-v3",
+      "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+      "configured_origins": [
+        "https://authored-tls-check-8787.app.github.dev"
+      ],
+      "request": {
+        "origin": "https://authored-tls-check-8787.app.github.dev",
+        "host": "127.0.0.1:48031",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https"
+      },
+      "last_mutation": {
+        "origin": "https://authored-tls-check-8787.app.github.dev",
+        "host": "127.0.0.1:48031",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https",
+        "decision": "allowed"
+      },
+      "last_websocket": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "wss",
+        "has_application_protocol": true,
+        "has_stream_proof": true,
+        "decision": "accepted",
+        "authorization": "accepted_codespaces_rewrite_ticket",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "upgrade_status": 101
+      },
+      "last_browser_bootstrap": {
+        "origin": "https://authored-tls-check-8787.app.github.dev",
+        "host": "127.0.0.1:48031",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https",
+        "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "decision": "issued"
+      },
+      "last_authenticated_websocket": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "wss",
+        "has_application_protocol": true,
+        "has_stream_proof": true,
+        "decision": "accepted",
+        "authorization": "accepted_codespaces_rewrite_ticket",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "upgrade_status": 101
+      },
+      "connected_clients": 2,
+      "maximum_clients": 8,
+      "authority": "Exact HTTP Origin and bounded one-use stream proof;forwarded headers never expand allowed origins",
+      "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers"
+    },
+    "scope": "Test proxy deliberately rewrites Origin+Host exactly as reported;HTTPS proof minted with unchanged approved Origin. Not identification of the owner rewriting component."
+  },
+  "browser": {
+    "schema": "gig.terminal.browser_validation.v1",
+    "url": "http://127.0.0.1:8787",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "started_utc": "2026-10-25T14:54:06.921Z",
+    "architecture": "x64",
+    "node": "v24.19.0",
+    "browser": "154.0.8037.57",
+    "renderer": "headless Chromium with SwiftShader; not physical Android/GPU evidence",
+    "checks": [
+      {
+        "name": "native state/provenance is reachable",
+        "status": "PASS",
+        "elapsed_ms": 6.362,
+        "detail": {
+          "instrument": "SYNTH-USD",
+          "event_count": 260,
+          "engine": {
+            "native": true,
+            "compiler": "14.2.0",
+            "python": "3.12.14",
+            "pybind11": "2.13.6",
+            "package_version": "0.1.1",
+            "schema_version": "1.0",
+            "build_type": "Release",
+            "config_flags": " -O3 -DNDEBUG",
+            "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+            "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+          }
+        }
+      },
+      {
+        "name": "independent initial ladder and native metrics",
+        "status": "PASS",
+        "elapsed_ms": 12.191,
+        "detail": null
+      },
+      {
+        "name": "WebSocket connected",
+        "status": "PASS",
+        "elapsed_ms": 25.162,
+        "detail": null
+      },
+      {
+        "name": "single event stepping reaches native quantity",
+        "status": "PASS",
+        "elapsed_ms": 109.66,
+        "detail": null
+      },
+      {
+        "name": "deterministic browser restart",
+        "status": "PASS",
+        "elapsed_ms": 136.71,
+        "detail": null
+      },
+      {
+        "name": "speed/play/pause preserves deterministic accepted prefix",
+        "status": "PASS",
+        "elapsed_ms": 519.356,
+        "detail": null
+      },
+      {
+        "name": "eight functional sections navigate",
+        "status": "PASS",
+        "elapsed_ms": 632.482,
+        "detail": null
+      },
+      {
+        "name": "interactive 3D renders native depth and camera changes pixels",
+        "status": "PASS",
+        "elapsed_ms": 814.366,
+        "detail": {
+          "before": "91a3a7f3e68210d78cc319a669fbd834c6a0d0afd4b6f6a54b761d935c3936a3",
+          "after": "a0a23ad54614df3f6223442656bebd98b4e6da156eb789b91106ca316c6e7caf",
+          "viewport": {
+            "x": 253,
+            "y": 572.6875,
+            "width": 850,
+            "height": 330
+          }
+        }
+      },
+      {
+        "name": "bounded landscape window and price-range controls",
+        "status": "PASS",
+        "elapsed_ms": 88.402,
+        "detail": null
+      },
+      {
+        "name": "explicit synchronized 2D fallback",
+        "status": "PASS",
+        "elapsed_ms": 46.294,
+        "detail": null
+      },
+      {
+        "name": "permission/capability boundary in live mode",
+        "status": "PASS",
+        "elapsed_ms": 44.235,
+        "detail": null
+      },
+      {
+        "name": "three native execution algorithms match independent fixture costs",
+        "status": "PASS",
+        "elapsed_ms": 390.943,
+        "detail": [
+          {
+            "algorithm": "TWAP",
+            "sha256": "969c976abb1149e6c3c066e7c5b3a4886bd5139d1b8c1510ad1ff39f45132f18"
+          },
+          {
+            "algorithm": "VWAP",
+            "sha256": "0f8cd954657b73b965cca5abe59658488f7ea97ad194d470857c6758c2b96841"
+          },
+          {
+            "algorithm": "POV",
+            "sha256": "f0e7de0380bf8b7e3edf33f1380aa12747966cc48e79577e601e1127a8dcf687"
+          }
+        ]
+      },
+      {
+        "name": "simulation export is explicitly simulated",
+        "status": "PASS",
+        "elapsed_ms": 54.15,
+        "detail": null
+      },
+      {
+        "name": "API failure is visible without fabricated data",
+        "status": "PASS",
+        "elapsed_ms": 73.14,
+        "detail": null
+      },
+      {
+        "name": "mobile viewport remains usable without page overflow",
+        "status": "PASS",
+        "elapsed_ms": 117.364,
+        "detail": {
+          "width": 412,
+          "scroll": 412
+        }
+      },
+      {
+        "name": "provider-shaped fixture reaches native L2 and remains explicitly synthetic",
+        "status": "PASS",
+        "elapsed_ms": 180.079,
+        "detail": null
+      },
+      {
+        "name": "authored timeline seek reconstructs native prefix",
+        "status": "PASS",
+        "elapsed_ms": 75.693,
+        "detail": null
+      },
+      {
+        "name": "authored ITCH and LOBSTER diagnostics execute native code",
+        "status": "PASS",
+        "elapsed_ms": 126.565,
+        "detail": null
+      },
+      {
+        "name": "explicit authored recording verifies native replay and deletes safely",
+        "status": "PASS",
+        "elapsed_ms": 468.928,
+        "detail": null
+      },
+      {
+        "name": "WebSocket interruption reconnects without inventing data",
+        "status": "PASS",
+        "elapsed_ms": 2031.88,
+        "detail": {
+          "connections": 2
+        }
+      },
+      {
+        "name": "no uncaught browser application errors",
+        "status": "PASS",
+        "elapsed_ms": 0.031,
+        "detail": null
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "desktop-native-3d",
+        "path": "build/codespaces-rewrite/browser/desktop-native-3d.png",
+        "sha256": "43608637271fba4cb1052b15dd64e42179116a067589e936fcd3b7bfee627495"
+      },
+      {
+        "name": "desktop-native-fallback",
+        "path": "build/codespaces-rewrite/browser/desktop-native-fallback.png",
+        "sha256": "f0134157ad6d447bff47ab2648db449b5f1e2deeb69ecfe86398a17a6f91ba91"
+      },
+      {
+        "name": "desktop-native-simulation",
+        "path": "build/codespaces-rewrite/browser/desktop-native-simulation.png",
+        "sha256": "a63bf3c451e1a1a1d9e4cd2005b4abbf3faf9d5363d6977e23f310b5c83b7dcf"
+      },
+      {
+        "name": "mobile-native-orderbook",
+        "path": "build/codespaces-rewrite/browser/mobile-native-orderbook.png",
+        "sha256": "52d39e70f7216ad142aeec71706d8454a4b039da1dc2fc703ec8e6469ba0ebee"
+      }
+    ],
+    "performance": {
+      "initial_navigation_ms": 1238.907,
+      "state_round_trip_ms": [
+        34.876,
+        3.066,
+        3.958,
+        2.778,
+        2.645,
+        2.526,
+        2.974,
+        2.839,
+        2.786,
+        2.953
+      ]
+    },
+    "limitations": [
+      "No external browser URL tested",
+      "No real provider data or restricted dataset accessed",
+      "Mobile is Chromium viewport emulation, not a physical Android device"
+    ],
+    "completed_utc": "2026-10-25T14:54:16.377Z",
+    "summary": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "native_cpp_changed": false,
+  "canonical_status": "Frozen core sources/identities unchanged;no native rebuild or full matrix rerun required",
+  "owner_authenticated_deployment_verified": false,
+  "raw_receipt_sha256": {
+    "frontend.log": "68eeb7b1a563e9284ead575f7d990826349af85ea151ceb935f7550bb0c6747d",
+    "tls-rewrite.json": "a4f3bdba9ae3ebfd9639602d06a5226feaace34ab081b2269ccae4ac8b15d91e",
+    "tls-rewrite-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "browser-origin.json": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac",
+    "browser-origin-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "terminal.log": "94a81b93c426fc21bcb899501226f89f101a386286490d32b3ebee66ef557e06",
+    "unit.log": "6642b829e941fb44a12cee96287623b04314fa5dd02a520e017e39f5523c33b2",
+    "browser.log": "dde34fba12d5b5dd792f80024cd9676eee0583b4dbaf8181f82600df59e80bbf",
+    "server.log": "ce966e61b7a496266ad72d922ffdad7e332319502aba94d8fd23c8d98b961ce3",
+    "build.log": "023c9fd34013a7cae2bc2e480fa10a6e29e40feb4f73c1007449269aa4d49e61",
+    "sanitized.log": "c9c92ee28ea2c66bf77f3cc0114eba1fecf5982f3413bfcd6ebf8e1d50c33709"
+  }
+}

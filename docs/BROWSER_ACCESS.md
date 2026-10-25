@@ -109,3 +109,9 @@ slash. Current launcher and direct ASGI app share one Codespaces policy. The saf
 without cookies/tokens. A rendering page alone does not prove a WS upgrade or
 that the running process loaded newly pulled settings. No frontend/native rebuild
 is required for this backend configuration repair.
+
+If the actual WS Origin is rewritten to localhost despite a correct HTTPS policy,
+use [CODESPACES_STREAM_PROOF.md](CODESPACES_STREAM_PROOF.md):pull,build only browser
+assets,restart,refresh. Do not add localhost to the remote origin allowlist or trust
+X-Forwarded headers. A strictly issued one-use stream proof binds the new browser's
+connection to the configured HTTPS origin and distinguishes unrelated local probes.

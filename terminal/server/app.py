@@ -20,7 +20,8 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from .engine import ControlError, NativeSession
 from .config import launch_settings
-from .connection import observation
+from .connection import observation, origin_value
+from .stream_tickets import StreamTickets, authorize_socket, PROTOCOL
 import gig_microstructure as gig
 
 MAX_BODY = 4096
@@ -111,7 +112,8 @@ def json_endpoint(function):
 def create_app():
     origins = origins_from_environment()
     _, _, expected_codespaces_origin = launch_settings(os.environ)
-    connections = {'last_mutation': None, 'last_websocket': None}
+    connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None}
+    stream_tickets = StreamTickets()
     native = NativeSession()
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
@@ -220,17 +222,44 @@ def create_app():
     async def connection_status(request):
         return {
             'schema_version': '1',
-            'policy_version': 'codespaces-origin-v2',
+            'policy_version': 'codespaces-stream-proof-v3',
             'expected_codespaces_origin': expected_codespaces_origin,
             'configured_origins': list(origins),
             'request': observation(request),
             'last_mutation': connections['last_mutation'],
             'last_websocket': connections['last_websocket'],
+            'last_browser_bootstrap': connections['last_browser_bootstrap'],
+            'last_authenticated_websocket': connections['last_authenticated_websocket'],
             'connected_clients': native.clients,
             'maximum_clients': MAX_CLIENTS,
-            'authority': 'Server-owned configuration only;forwarded headers never expand allowed origins',
-            'privacy': 'Only bounded Origin/Host/proxy scheme/port;no cookies,tokens,client IP or arbitrary headers',
+            'authority': 'Exact HTTP Origin and bounded one-use stream proof;forwarded headers never expand allowed origins',
+            'privacy': 'Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers',
         }
+
+    @route('/api/v1/stream-ticket', methods=['POST'])
+    @json_endpoint
+    async def stream_ticket(request):
+        # The POST boundary has already required an exact configured HTTP Origin.
+        data = await bounded_json(request)
+        origin = request.headers.get('origin')
+        expected_url = ('wss' if origin.startswith('https:') else 'ws') + origin[origin.index(':'):] + '/api/v1/stream'
+        connections['last_browser_bootstrap'] = {**observation(request),
+            'browser_origin': origin_value(data.get('browser_origin')) if type(data.get('browser_origin')) is str else '<invalid>',
+            'websocket_url': expected_url if data.get('websocket_url') == expected_url else '<mismatch>',
+            'attempt_id': data.get('attempt_id') if type(data.get('attempt_id')) is str and re.fullmatch(r'[a-f0-9-]{36}',data['attempt_id']) else '<invalid>',
+            'decision':'rejected_context'}
+        if (set(data) != {'browser_origin','websocket_url','attempt_id'}
+                or data['browser_origin'] != origin or data['websocket_url'] != expected_url
+                or type(data['attempt_id']) is not str
+                or not re.fullmatch(r'[a-f0-9-]{36}',data['attempt_id'])):
+            raise ControlError('INVALID_STREAM_BOOTSTRAP','browser context must match the exact configured HTTP Origin')
+        try: ticket = stream_tickets.issue(origin,data['attempt_id'])
+        except ValueError: return error('STREAM_BUSY','bounded stream proof capacity reached;retry after expiry',429)
+        connections['last_browser_bootstrap'] = {**observation(request),
+            'browser_origin':data['browser_origin'],'websocket_url':data['websocket_url'],
+            'attempt_id':data['attempt_id'],'decision':'issued'}
+        # Ticket is never logged/retained in diagnostics,URL,DOM or local storage.
+        return {'schema_version':'1','ticket':ticket,'protocol':PROTOCOL,'expires_in_seconds':30}
 
     @route('/api/v1/catalog', methods=['GET'])
     @json_endpoint
@@ -309,17 +338,23 @@ def create_app():
 
     @websocket_route('/api/v1/stream')
     async def stream(socket: WebSocket):
-        reason = 'rejected_origin' if socket.headers.get('origin') not in origins else 'rejected_capacity' if native.clients >= MAX_CLIENTS else 'accepted'
-        record = {**observation(socket), 'decision': 'accepting' if reason == 'accepted' else reason,
-                  'upgrade_status': None if reason == 'accepted' else 403}
+        accepted, decision, attempt, protocol = authorize_socket(
+            socket.headers, socket.scope.get('subprotocols',[]),origins,expected_codespaces_origin,stream_tickets)
+        if accepted and native.clients >= MAX_CLIENTS:
+            accepted, decision = False, 'rejected_capacity'
+        record = {**observation(socket),'has_application_protocol':PROTOCOL in socket.scope.get('subprotocols',[]),
+                  'has_stream_proof':any(p.startswith('gig-ticket.') for p in socket.scope.get('subprotocols',[])),
+                  'decision':'accepting' if accepted else decision,
+                  'authorization':decision,'attempt_id':attempt,'upgrade_status':None if accepted else 403}
         connections['last_websocket'] = record
-        if reason != 'accepted':
+        if not accepted:
             await socket.close(code=1008)
             return
-        await socket.accept()
-        record['decision'], record['upgrade_status'] = 'accepted', 101
-        native.clients += 1
+        native.clients += 1  # Reserve before first await;concurrent upgrades cannot exceed the cap.
         try:
+            await socket.accept(subprotocol=protocol)
+            record['decision'], record['upgrade_status'] = 'accepted', 101
+            if attempt is not None:connections['last_authenticated_websocket'] = record
             while True:
                 async with lock:
                     current = native.state()
