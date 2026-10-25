@@ -86,3 +86,18 @@ review current official protocol/usage/retention,then explicitly gated actual fe
 verification. Do not blindly set permission flags. Coinbase production transport/UI,
 actual observed calibration and exact-HEAD ARM64 remain unqualified/external gates.
 No background execution after this task ends. Use the report's continuation prompt.
+
+## Provider qualification execution checkpoint
+
+Resumed clean a06950dc48376f4ea22e7e9dae8fb65519fd2749 on feature branch;main remains
+12f3a53943dc245e36f2cbbc35b9910fb21c0718. Added handshake-only diagnostic, separate
+Coinbase native supervisor/transport/UI gates, full256-level native/top10 display scope,
+fixture-server safety guard, accurate live native diagnostics and pre-mutation session
+budget rejection. No provider request, restricted dataset or workflow dispatch.
+Owner Codespaces metadata/browser acceptance is OWNER_SUPPLIED, not independent feed
+qualification. Latest176-case Release/Debug/sanitizer cohort, security46, application21,
+recorded9, live controls9, TLS8, frontend4, browser guards5, packaging3, installed8+6
+and fresh native aggregate1 per six configurations passed in ignored
+build/qualification;zero failures/errors/skips in final cohorts and LSan0. Mandatory six155-case native/eight-hash evidence reused only for
+unchanged native trees. No current-head ARM64 claim. Exact next action: commit/push tested source with [skip ci], measure
+clean-commit authored workloads, then commit consolidated evidence/report.

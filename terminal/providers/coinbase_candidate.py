@@ -10,8 +10,10 @@ import re
 from .kraken import decode,decimal_wire,timestamp_ns,bounded_integer,ProviderError,PRICE_MAX,UINT64_MAX
 
 class CoinbaseCandidate:
-    def __init__(self,apply_native,*,symbol='BTC-USD',max_levels=256):
+    def __init__(self,apply_native,*,symbol='BTC-USD',max_levels=256,origin='HISTORICAL_SYNTHETIC'):
         if symbol not in ('BTC-USD','ETH-USD') or type(max_levels) is not int or not 1<=max_levels<=256:raise ProviderError('coinbase_configuration')
+        if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('coinbase_origin')
+        self.origin=origin;self.snapshots=self.updates=0
         self.apply=apply_native;self.symbol=symbol;self.limit=max_levels
         self.bids={};self.asks={};self.state='DISCONNECTED';self.last_book_ns=None;self.last_receive=None
         self.trades=deque(maxlen=128);self.trade_ids=set();self.rejected=0
@@ -19,13 +21,17 @@ class CoinbaseCandidate:
         result=decimal_wire(value,maximum=PRICE_MAX if price else UINT64_MAX,scale=100000000)[0]
         if price and result=='0':raise ProviderError('coinbase_zero_price')
         return result
+    @property
+    def last_book_receive_ns(self):return self.last_book_ns
+    def connect(self):
+        self.disconnected();self.state='SYNCHRONIZING'
     def disconnected(self):
         self.state='DISCONNECTED';self.bids={};self.asks={};self.last_book_ns=self.last_receive=None
         self.trades.clear();self.trade_ids.clear()
     def status(self,now):
         if self.last_book_ns is not None and now-self.last_book_ns>10_000_000_000 and self.state=='CANDIDATE_READY':self.state='STALE'
-        return {'state':self.state,'provider':'coinbase-exchange-candidate','symbol':self.symbol,
-            'profile_verified':False,'live_verified':False,'origin':'HISTORICAL_SYNTHETIC',
+        return {'state':self.state,'reason':'depth_freshness_deadline' if self.state=='STALE' else 'candidate_profile_no_sequence_or_checksum_proof','provider':'coinbase-exchange-candidate','symbol':self.symbol,
+            'profile_verified':False,'live_verified':False,'origin':self.origin,
             'sequence_continuity':'unverified_global_scope_not_a_contiguous_L2_sequence','checksum':'not_defined_in_candidate'}
     def feed(self,raw,now):
         try:
@@ -48,11 +54,13 @@ class CoinbaseCandidate:
             if type(channels) is not list or len(channels)>3:raise ProviderError('coinbase_subscription')
             for c in channels:
                 if type(c) is not dict or c.get('name') not in ('level2','matches','heartbeat') or c.get('product_ids')!=[self.symbol]:raise ProviderError('coinbase_subscription')
-            return {'kind':'acknowledgment','origin':'HISTORICAL_SYNTHETIC'}
+            return {'kind':'acknowledgment','origin':self.origin}
         if p.get('product_id')!=self.symbol:raise ProviderError('coinbase_product')
         sequence=None if p.get('sequence') is None else str(bounded_integer(p['sequence'],UINT64_MAX,'coinbase_source_sequence'))
         source_ns=None if p.get('time') is None else timestamp_ns(p['time'])
-        if kind=='heartbeat':return {'kind':'heartbeat','source_sequence':sequence,'source_timestamp_ns':source_ns}
+        if kind=='heartbeat':
+            last=None if p.get('last_trade_id') is None else str(bounded_integer(p['last_trade_id'],UINT64_MAX,'coinbase_last_trade_id'))
+            return {'kind':'heartbeat','source_sequence':sequence,'source_timestamp_ns':source_ns,'last_trade_id':last}
         if kind in ('match','last_match'):
             if p.get('side') not in ('buy','sell') or source_ns is None:raise ProviderError('coinbase_match')
             tid=str(bounded_integer(p.get('trade_id'),UINT64_MAX,'coinbase_trade_id'))
@@ -60,7 +68,7 @@ class CoinbaseCandidate:
             if qty=='0':raise ProviderError('coinbase_zero_trade')
             trade={'trade_id':tid,'price_ticks':price,'quantity':qty,'reported_side':p['side'],
                 'reported_side_role':'maker_candidate_unverified','aggressor_side':None,'source_timestamp_ns':source_ns,
-                'source_sequence':sequence,'origin':'HISTORICAL_SYNTHETIC'}
+                'source_sequence':sequence,'origin':self.origin}
             next_trades=self.trades.copy();ids=self.trade_ids.copy()
             duplicate=tid in ids
             if not duplicate:
@@ -107,8 +115,9 @@ class CoinbaseCandidate:
         if any(len(s)>self.limit for s in candidate):raise ProviderError('coinbase_depth_budget')
         if candidate[0] and candidate[1] and max(map(int,candidate[0]))>min(map(int,candidate[1])):raise ProviderError('coinbase_crossed')
         receipt={'kind':'snapshot' if snapshot else 'update','source_sequence':sequence,'source_timestamp_ns':source_ns,
-            'origin':'HISTORICAL_SYNTHETIC','native_event':{'snapshot':snapshot,'bids':changes[0],'asks':changes[1],'sequence':None}}
+            'origin':self.origin,'native_event':{'snapshot':snapshot,'bids':changes[0],'asks':changes[1],'sequence':None}}
+        counts=(self.snapshots+int(snapshot),self.updates+int(not snapshot))
         try:self.apply(**receipt['native_event'])
         except Exception as error:raise ProviderError('coinbase_native_rejected') from error
-        self.bids,self.asks=candidate;self.last_book_ns=now;self.state='CANDIDATE_READY'
+        self.bids,self.asks=candidate;self.last_book_ns=now;self.state='CANDIDATE_READY';self.snapshots,self.updates=counts
         return receipt

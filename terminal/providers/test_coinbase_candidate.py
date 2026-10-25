@@ -55,6 +55,10 @@ class Candidate(unittest.TestCase):
         self.assertEqual(gig._checked(self.book.state()),before)
         with self.assertRaises(ProviderError):self.adapter.feed('x'*65537,3)
         with self.assertRaisesRegex(ProviderError,'unsupported'):self.feed({'type':[]},4)
+    def test_heartbeat_reference_preserved_and_invalid_reference_rejected(self):
+        r=self.feed({'type':'heartbeat','product_id':'BTC-USD','last_trade_id':123,'sequence':9})
+        self.assertEqual(r['last_trade_id'],'123');self.assertEqual(r['source_sequence'],'9')
+        with self.assertRaises(ProviderError):self.feed({'type':'heartbeat','product_id':'BTC-USD','last_trade_id':True},2)
     def test_eth_is_separate_configured_native_book(self):
         a=CoinbaseCandidate(lambda **_:None,symbol='ETH-USD');a.feed(json.dumps({**SNAP,'product_id':'ETH-USD'}),1)
         self.assertEqual(self.adapter.bids,{})

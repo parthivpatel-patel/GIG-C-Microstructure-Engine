@@ -1,10 +1,10 @@
-# Coinbase Exchange: isolated offline candidate
+# Coinbase Exchange: supervised provisional candidate
 
 terminal/providers/coinbase_candidate.py implements an independently authored,
 legacy Exchange-shaped profile, not a currently verified Coinbase protocol adapter.
 The current official documentation/terms remain blocked; no fresh denial retry,
 provider socket, subscription, account, market-data collection or recording occurred.
-No Coinbase choice is enabled in the production UI or Kraken supervisor.
+A separate Coinbase UI choice and permission-gated supervisor are implemented. Neither provider is enabled by default; no Coinbase live qualification is claimed.
 
 Assumptions tested with toy data only:
 - snapshot(product_id,bids,asks), absolute l2update(changes,time), match/last_match,
@@ -23,14 +23,14 @@ Assumptions tested with toy data only:
   used as aggressor direction. Source order references, if supplied, stay external
   observations and do not create resting L3 identities. Current semantics need review.
 - last_match is classified historical, not a new live arrival. Heartbeats cannot make
-  unchanged depth fresh. Fixture status is always HISTORICAL_SYNTHETIC/not LIVE_VERIFIED.
+  unchanged depth fresh. Injected fixture status is always HISTORICAL_SYNTHETIC/not LIVE_VERIFIED. The fixed real transport may use LIVE_OBSERVED only after separate permission gates.
 
-Eleven native-backed authored tests cover exact levels, absolute deletion, sequence
+Twelve candidate and nine supervisor native-backed authored tests cover exact levels, absolute deletion, sequence
 scope, missing snapshot, product isolation, candidate/native rejection atomicity,
 maker-side distinction, dedup, freshness, resource limits, unsupported data and resync.
 They establish this declared profile's behavior, not current compatibility or rights.
 
 Next: obtain current official channels/message/sequence and applicable usage evidence
 from docs.cdp.coinbase.com and Coinbase legal sources; reconcile/version differences;
-then implement and validate the independent bounded transport/supervisor namespace.
+then reconcile the provisional bounded transport/supervisor against that evidence. See PROVIDER_QUALIFICATION_GUIDE.md for separate gates, depth scopes and the owner handshake check.
 No source mixing, guessed free entitlement, unrestricted retention or new live claim.

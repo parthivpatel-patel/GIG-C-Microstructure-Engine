@@ -209,7 +209,11 @@ class NativeSession:
                 view['origin']='UNAVAILABLE';view['book']={'bids':[],'asks':[]}
                 view['metrics']={k:None for k in metrics};view['provenance']['category']='UNAVAILABLE'
                 view['flow']={'trades':[],'classification':'UNAVAILABLE'}
+                view['research']={'status':'UNAVAILABLE','reason':'fixture_transport_not_live'}
+                view['native_core_status']={'scope':'fixture_transport_not_live','published':False}
+            core=view.pop('native_core_status',{'scope':'unavailable','published':False})
             result.update(view)
+            result['diagnostics']['native_status']=core
         return result
 
     def simulation(self, algorithm, quantity='100', slices=5):

@@ -1,3 +1,4 @@
+import {assertFixtureServer} from './fixture-safety.mjs';
 /** Independent real-browser qualification. Only authored terminal data is exercised.
  * Start the real native-backed backend and Vite, then run npm test in this directory.
  * Evidence/screenshots stay in ignored build/terminal/browser by default.
@@ -24,7 +25,7 @@ async function control(action,value){const r=await page.request.post(url+'/api/v
 try{
  page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
  page.on('pageerror',e=>errors.push(String(e)));
- const started=performance.now();await page.goto(url,{waitUntil:'networkidle'});
+ await assertFixtureServer(page,url);const started=performance.now();await page.goto(url,{waitUntil:'networkidle'});
  evidence.performance.initial_navigation_ms=+(performance.now()-started).toFixed(3);
  await control('mode','HISTORICAL_REPLAY');await control('restart');
  await page.getByTestId('native-position').waitFor();

@@ -6,7 +6,7 @@ from terminal.server.app import create_app
 
 class LiveAPI(unittest.TestCase):
     def setUp(self):
-        self.env=patch.dict(os.environ,{'GIG_LIVE_ENABLED':'0','GIG_TERMINAL_ALLOWED_ORIGINS':'http://localhost:8787'})
+        self.env=patch.dict(os.environ,{'GIG_LIVE_ENABLED':'0','GIG_COINBASE_ENABLED':'0','GIG_TERMINAL_ALLOWED_ORIGINS':'http://localhost:8787'})
         self.env.start();self.addCleanup(self.env.stop)
         self.client=TestClient(create_app(),base_url='http://localhost:8787')
         self.client.__enter__();self.addCleanup(self.client.__exit__,None,None,None)
@@ -34,6 +34,26 @@ class LiveAPI(unittest.TestCase):
         after=self.client.get('/api/v1/state').json()
         self.assertEqual(after['feed']['state'],state['feed']['state'])
         self.assertEqual(after['mode'],state['mode'])
+    def test_coinbase_separate_gate_and_wire_identity(self):
+        with patch.dict(os.environ,{'GIG_COINBASE_ENABLED':'0'}):
+            state=self.post('connect',{'provider':'coinbase','instrument':'ETH/USD','depth':10}).json()
+        self.assertEqual(state['provider'],'coinbase');self.assertEqual(state['source_instrument'],'ETH-USD')
+        self.assertEqual(state['origin'],'UNAVAILABLE');self.assertEqual(state['book'],{'bids':[],'asks':[]})
+        self.assertEqual(state['feed']['state'],'ERROR')
+        providers=self.client.get('/api/v1/catalog').json()['providers']
+        self.assertEqual({p['id'] for p in providers},{'kraken','coinbase'})
+    def test_unavailable_live_diagnostics_are_not_authored_l3_replay(self):
+        state=self.post('connect',{'provider':'coinbase','instrument':'BTC/USD','depth':10}).json()
+        self.assertEqual(state['diagnostics']['native_status'],{'scope':'coinbase_L2','published':False,'state':'ERROR'})
+    def test_coinbase_recording_cannot_use_kraken_log_profile(self):
+        self.post('connect',{'provider':'coinbase','instrument':'BTC/USD','depth':10})
+        r=self.client.post('/api/v1/recording',headers={'Origin':'http://localhost:8787'},json={'action':'start_l2'})
+        self.assertEqual(r.status_code,409)
+    def test_fixture_safety_health_refuses_live_enabled_environment(self):
+        self.assertTrue(self.client.get('/api/v1/health').json()['fixture_tests_safe'])
+        with patch.dict(os.environ,{'GIG_COINBASE_ENABLED':'1'}):
+            health=self.client.get('/api/v1/health').json()
+            self.assertFalse(health['fixture_tests_safe']);self.assertFalse(health['live_connected'])
     def test_switch_back_retains_native_replay(self):
         self.post('connect','kraken');self.post('disconnect')
         state=self.post('mode','HISTORICAL_REPLAY').json()

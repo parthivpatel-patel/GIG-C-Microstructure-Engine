@@ -234,8 +234,14 @@ def create_app():
     @route('/api/v1/health', methods=['GET'])
     @json_endpoint
     async def health(request):
+        healthy=bool(feed.adapter and feed.adapter.status(feed.clock())['state'] in ('LIVE','CANDIDATE_READY'))
+        connected=feed.state=='LIVE_VERIFIED' and healthy
+        recording=bool(feed.capture and feed.capture.state in ('RECORDING','FINALIZING'))
+        task_active=feed.task is not None and not feed.task.done()
+        observed_replay=bool(native.recorded_session and native.recorded_session.manifest['origin']=='LIVE_OBSERVED')
+        safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and not task_active and not recording and not observed_replay)
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
-                'live_connected': False, 'recording_enabled': False, 'maximum_clients': MAX_CLIENTS}
+                'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe}
 
     @route('/api/v1/state', methods=['GET'])
     @json_endpoint
@@ -313,13 +319,17 @@ def create_app():
     @json_endpoint
     async def catalog(request):
         result=native.catalog()
-        provider=result['providers'][0]
+        result['providers'].append({'id':'coinbase','instrument':'BTC/USD','capabilities':['L2_AGGREGATE','TRADES'],
+            'status':'BLOCKED_UNVERIFIED','live_connected':False,'reason':'Current protocol and usage review required;separate provider gates;recording unsupported.'})
+        provider=next(p for p in result['providers'] if p['id']==feed.provider)
         provider['instruments']=['BTC/USD','ETH/USD'];provider['depth']=10
         provider['runtime_state']=feed.state
         provider['live_connected']=feed.state=='LIVE_VERIFIED'
+        for p in result['providers']:p['instruments']=['BTC/USD','ETH/USD'];p['display_depth']=10
         if feed.permission is not None:
             provider['status']='OPERATOR_CONFIGURED'
             provider['reason']='Server-side protocol/usage attestation; runtime state reports actual connectivity separately.'
+        result['recording']={'enabled':bool(feed.capture and feed.capture.state=='RECORDING'),'observed_permission':bool(feed.provider=='kraken' and feed.permission and feed.permission.recording_approved)}
         return result
 
     @route('/api/v1/control', methods=['POST'])
@@ -334,11 +344,11 @@ def create_app():
                 from terminal.providers.kraken import ProviderError
                 if value in (None,'kraken'):value={'provider':'kraken','instrument':'BTC/USD','depth':10}
                 if (type(value) is not dict or set(value)!={'provider','instrument','depth'}
-                        or value['provider']!='kraken' or value['instrument'] not in ('BTC/USD','ETH/USD')
+                        or value['provider'] not in ('kraken','coinbase') or value['instrument'] not in ('BTC/USD','ETH/USD')
                         or type(value['depth']) is not int or value['depth']!=10):
-                    raise ControlError('INVALID_PROVIDER','expected Kraken BTC/USD or ETH/USD depth10; no URLs')
+                    raise ControlError('INVALID_PROVIDER','expected configured Kraken/Coinbase BTC/USD or ETH/USD display depth10; no URLs')
                 native.mode='LIVE';native.playing=False
-                try:await feed.start(value['instrument'])
+                try:await feed.start(value['instrument'],provider=value['provider'])
                 except ProviderError:
                     native.notifications.append({'code':'LIVE_BLOCKED','message':'Explicit server permission and current protocol review required; no connection started.'})
                 return native.state()
@@ -400,6 +410,7 @@ def create_app():
                 from terminal.providers.kraken import ProviderError
                 import uuid
                 try:
+                    if feed.provider!='kraken':raise ValueError('provider_recording_profile_unavailable')
                     permission=configured_permission(os.environ);permission.require_live()
                     if os.environ.get('GIG_LIVE_RECORDING_ENABLED')!='1' or not permission.recording_approved:
                         raise ValueError('retention_permission_required')

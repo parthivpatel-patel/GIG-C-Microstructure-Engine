@@ -1,10 +1,11 @@
+import {assertFixtureServer} from './fixture-safety.mjs';
 /** Actual secured browser/native recorded session, authored data only. */
 import {waitState} from './wait-state.mjs';
 import {chromium} from 'playwright';import assert from 'node:assert/strict';
 const base=process.env.TERMINAL_URL||'http://127.0.0.1:8787';assert.match(base,/^http:\/\/(127\.0\.0\.1|localhost):8787$/);
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
 try{
- const page=await browser.newPage();await page.request.post(base+'/api/v1/recording',{headers:{Origin:new URL(base).origin},data:{action:'delete_l2',identity:'authored-l2-v2'}});await page.goto(base);
+ const page=await browser.newPage();await assertFixtureServer(page,base);await page.request.post(base+'/api/v1/recording',{headers:{Origin:new URL(base).origin},data:{action:'delete_l2',identity:'authored-l2-v2'}});await page.goto(base);
  async function mutation(action,operation){const committed=page.waitForResponse(r=>r.request().method()==='POST'&&JSON.parse(r.request().postData()||'{}').action===action);await operation();const response=await committed;assert.equal(response.status(),200);return response.json()}
  await mutation('mode',()=>page.getByLabel('Operating mode').selectOption('HISTORICAL_REPLAY'));
  await mutation('save_l2_fixture',()=>page.getByRole('button',{name:'Save authored L2 recording',exact:true}).click());
