@@ -29,3 +29,11 @@ Next: extend bounded fixture-tested supervisor and native terminal integration,
 repair reproduced freshness defects, run regression/security/browser/sanitizer checks.
 Default live and recording remain disabled. User must establish current protocol and
 permitted cloud/private-display usage before an actual provider session can start.
+
+## Closing checkpoint
+
+Validated implementation80a6f30b2ea03d523931f84957c54e8c5a2f2639 is remotely verified.
+Final delivered/partial/blocked matrix, exact test outcomes and residual priorities:
+[TERMINAL_MASTER_DELIVERY_REPORT.md](TERMINAL_MASTER_DELIVERY_REPORT.md).
+Safe machine-readable evidence: evidence/terminal_master_execution.json.
+Real exchange and observed recording gates remain blocked; no new ARM64 run launched.

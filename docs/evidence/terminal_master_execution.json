@@ -1,0 +1,345 @@
+{
+  "schema": "gig.terminal.master_execution.v1",
+  "baseline": "34e3145467c0e47dcc76c9c9fcd3079990f7c3cc",
+  "baseline_checkpoint": "c846dacdd93124f17edf0bfb46cf745544446db4",
+  "implementation_commit": "80a6f30b2ea03d523931f84957c54e8c5a2f2639",
+  "owner_baseline_confirmation": "CONNECTED and Step; user supplied",
+  "platform": "Linux x86_64",
+  "native_matrix": {
+    "gcc-current-debug": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "gcc-current-release": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "gcc-current-asan": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clang-debug": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clang-release": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clang-asan-ubsan": {
+      "tests": 155,
+      "failures": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    }
+  },
+  "native_builds_reused": true,
+  "native_source_changed": false,
+  "terminal_native_binding_cohort": {
+    "release": {
+      "passed": 96,
+      "failed": 0
+    },
+    "debug": {
+      "passed": 96,
+      "failed": 0
+    },
+    "asan_ubsan": {
+      "passed": 96,
+      "failed": 0,
+      "live_lsan": 0
+    }
+  },
+  "python_ctest": {
+    "python-debug": {
+      "tests": 3,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "python-release": {
+      "tests": 3,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "python-sanitizer": {
+      "tests": 4,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    }
+  },
+  "security_tests": {
+    "passed": 46,
+    "failed": 0
+  },
+  "frontend_tests": {
+    "passed": 3,
+    "failed": 0
+  },
+  "packaging_tests": {
+    "passed": 3,
+    "failed": 0
+  },
+  "installed_wheel_tests": {
+    "interface": 8,
+    "export": 6,
+    "failed": 0,
+    "native_wheel_rebuilt": false
+  },
+  "browser": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  },
+  "live_controls_browser": {
+    "passed": 7,
+    "failed": 0
+  },
+  "verified_https_wss": {
+    "passed": 8,
+    "failed": 0
+  },
+  "independent_oracle": {
+    "authored_candidates": 10000,
+    "corrupt_crc_candidates": 103,
+    "reinitializing_snapshots_after_corruption": 103,
+    "symbols": 2,
+    "negative_reference_control": true
+  },
+  "benchmark": {
+    "schema": "gig.terminal.feed_benchmark.v1",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "native_build": {
+      "compiler": "14.2.0",
+      "python": "3.12.14",
+      "pybind11": "2.13.6",
+      "package_version": "0.1.1",
+      "schema_version": "1.0",
+      "build_type": "Release",
+      "config_flags": " -O3 -DNDEBUG",
+      "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+      "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+    },
+    "fixture_sha256": "c6b7ff2bc79a522a2a964605c6c51d53ea837badcac54ae121820942d05c9d4c",
+    "workload": "alternating authored one-level replacement snapshots;includes JSON,CRC,native exact metrics",
+    "generator_seed": null,
+    "warmup_events": 100,
+    "events_per_repetition": 10000,
+    "repetitions": 3,
+    "seconds": [
+      0.3606688469881192,
+      0.35242370795458555,
+      0.3528027799911797
+    ],
+    "median_events_per_second": 28344.44785341546,
+    "output_sha256": "d80fd33d1c5c8746ea830c32f2afe9c21ece87e6f73949a2d194aedfb68ba86f",
+    "native_pmr_live_bytes": "1024",
+    "native_pmr_peak_bytes": "2048",
+    "python_traced_current_bytes": 2898,
+    "python_traced_peak_bytes": 9569,
+    "process_peak_rss_kib": 19456,
+    "journal_entries": 0,
+    "limitations": [
+      "Python+native microbenchmark;not exchange latency or network throughput",
+      "RSS is whole-process Linux high-water mark",
+      "Tracing uses separate untimed pass",
+      "Snapshot workload;not representative of all update/trade mixtures"
+    ],
+    "source_commit": "80a6f30b2ea03d523931f84957c54e8c5a2f2639",
+    "native_and_terminal_source_clean": true,
+    "metadata_capture": "git identity and CPU appended by validation driver immediately after measurement",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C"
+  },
+  "source_archive": {
+    "source_commit": "80a6f30b2ea03d523931f84957c54e8c5a2f2639",
+    "filename": "gig_microstructure-0.1.1.tar.gz",
+    "members": 513,
+    "sha256": "6929477cb41491590f179c86c68ad5f2b807611817825967a6fc567299068d13",
+    "forbidden_members": [],
+    "required_new_files_verified": [
+      "terminal/providers/supervisor.py",
+      "terminal/providers/test_differential.py",
+      "terminal/l2_recording.py",
+      "terminal/test_l2_recording.py",
+      "scripts/replay_terminal_l2.py"
+    ]
+  },
+  "live_qualification": {
+    "status": "BLOCKED",
+    "official_docs": "Kraken and Coinbase proxy CONNECT403;curl56",
+    "provider_socket_started": false,
+    "observed_records": 0,
+    "permissions_verified": false,
+    "owner_codespace_provider_connection": "not tested"
+  },
+  "new_head_arm64_qualified": false,
+  "workflows_dispatched": false,
+  "restricted_data_accessed": false,
+  "earlier_test_attempts": {
+    "stale_build_debug": {
+      "tests": 61,
+      "failed": 3
+    },
+    "stale_build_release": {
+      "tests": 65,
+      "failed": 1
+    },
+    "stale_build_sanitizer": {
+      "tests": 61,
+      "failed": 3
+    },
+    "explanation": "Old pre-remediation build trees selected initially; stale binary/reference protocol mismatches. Current phase9-clean GCC and phase9-clang trees all passed155. Logs retained; no source fix to obsolete artifacts or assertions weakened.",
+    "browser_pause_race": {
+      "passed": 5,
+      "failed": 1,
+      "repair": "Await exact pause POST response, preserve all existing assertions"
+    }
+  },
+  "implementation_files": [
+    "README.md",
+    "docs/L2_RECORDING_REPLAY.md",
+    "docs/LIVE_FEED_INTEGRATION.md",
+    "docs/LIVE_PROVIDER_OPERATIONS.md",
+    "docs/MARKET_DATA_PROVIDER_MATRIX.md",
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+    "docs/TERMINAL_MASTER_SECURITY_AUDIT.md",
+    "docs/TERMINAL_REPRODUCIBILITY.md",
+    "docs/TERMINAL_SECURITY_REVIEW.md",
+    "scripts/benchmark_terminal_feed.py",
+    "scripts/replay_terminal_l2.py",
+    "scripts/verify_terminal_feed.py",
+    "terminal/l2_recording.py",
+    "terminal/providers/kraken.py",
+    "terminal/providers/supervisor.py",
+    "terminal/providers/test_differential.py",
+    "terminal/providers/test_integrity.py",
+    "terminal/providers/test_supervisor.py",
+    "terminal/providers/test_transport.py",
+    "terminal/server/app.py",
+    "terminal/server/engine.py",
+    "terminal/test_l2_recording.py",
+    "terminal/test_live_api.py",
+    "terminal/tests/browser-validation.mjs",
+    "terminal/tests/live-controls-validation.mjs",
+    "terminal/tests/run_native_suite.py",
+    "terminal/web/src/App.tsx"
+  ],
+  "log_sha256": {
+    "final-terminal-release.log": "51c9b7727e6862247e02e5b8ada81209575351dab6537464560006594f6e7309",
+    "final-terminal-debug.log": "cc9e7292343bde94e1126ddfe693edf683261061dc32c6eaefd93dfa9a4ebf5c",
+    "final-terminal-sanitizer.log": "1e6a63fbe3e5ad8b2d313432ba2e0dc71c2181698fe2f375fc262bfce9cb68f3",
+    "security.log": "62c2ab23455d796b96d0fface532f819c61407d13a2fc109d42c4df912587e4b",
+    "frontend-build.log": "2a4aebf33863b838a2c7de8c8d7d0f1b5ea84c509dac98cac9d2a76d378bfe13",
+    "frontend-tests.log": "83af7acda6b2756525d4b795d01846298cf28a5f51d758549d30cbbcabac29c5",
+    "packaging-tests.log": "27c4a39d34ece4cbc66cc59cb0870c7abe4cc0a5f009205bdd0ea06a93f8b3ac",
+    "installed-interface.log": "d916eaae88582004b00d277028e91fff1a5bce9c1b636d4e8411730fb282756f",
+    "installed-export.log": "55207187cc9e1bcfbeab5844da2ddca299d0523f4436b1f8d66685ad289fb1ed",
+    "python-debug.log": "100a214d956c32bb3623d22d0def580baf95c88a65738e61c48fb1642c7e1328",
+    "python-release.log": "34cc419326e029d5d076ccfaad258d4515be197dc40a27e134eb114318d1762a",
+    "python-sanitizer.log": "f9fe2ae12028942bd4d862344dde49c5c75b602601df1e350fd97fc20d7a4c2d",
+    "https-wss.json": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "browser/results.json": "cf434c8deef91959d28cf66d04c3d64ec4bf07119c036c3df81af9fca525f212",
+    "browser-live-controls.json": "e8a2cc76c97e897ef420bcfe2e678866c974b5271d98fbf322182f0c4c81d740",
+    "browser-sop.json": "09d1f0ede6038abc97eba102eef73fd5a4360b148627c2239c09df4d273dd95c",
+    "canonical-matrix.json": "1530e2a333d5501fa2d9c5da75a631dc5b77e156ebd1b4d67e38f782d678c032",
+    "benchmark.json": "679821048ecc13d9513b433da877875490ce99196852363136755895389a8365",
+    "l2-demo.json": "09b5073de18c943034613c11b15cc9333e1c7fef2546742bce2ae3f3b5b396dc",
+    "integrity-before.log": "70a8566d9a26cad40657ef49889f467719834b4d398f43e73f6950cb64229abe",
+    "close-window-before.log": "301d377c96f8a46b75054e520ce0593da9e6211dc621018b50251a6779aaa1dd",
+    "exponent-before.log": "d3c17d529676487dd65eb59e952d33e2cd253dc98b3ca9a9a78dd882d46a65d1",
+    "invalid-mode-before.log": "618fa810b7f27b0ec09dc03e8257d419e6d9b7618edf08d4de21cfd9f83aa134",
+    "browser-pause-race-before.json": "4ad9da1a6f3f1188fa1183fd7f8fa6dc3d64a64a5f413f8efba1327b14ddd30b",
+    "sdist-inventory.json": "d015957d3930cc997f0ca2639eebc42fe6583fb5af9c865be46b05a5a67da109",
+    "gcc-current-debug.log": "ca75a18536d9385787f5580b7ed79d3ebcfa08236951a32b3abf7d2f035bd544",
+    "gcc-current-debug.xml": "f878c633225a251c5607429348c38609b7b78437e939133f70f6f23a0d98f1d5",
+    "gcc-current-release.log": "808e245b3ec0d7270d44b5efe20574f5531c27369f8ab0b4f50d9232d059376e",
+    "gcc-current-release.xml": "b8c30c387fdc6c1cf44df9b7e43a22b070670c1026b343ae14256634af624333",
+    "gcc-current-asan.log": "18cc30722e30190c424a9d64cf72b0e38f255b6daf9ee26ef9d081cf35b68a0a",
+    "gcc-current-asan.xml": "df9ecc48a6b0394e1ce3672c59ad1dceafdaaeafee1fbb9eab0ee9b1f9f83a29",
+    "phase9-clang-debug.log": "0fd5c39657db1fa665c5d90e427a2df4a8e9e430df79d0deb1c9427a0bf4aa3e",
+    "phase9-clang-debug.xml": "1e4840b8ef017a8f61a6f95b79004aa400d1a6467e3d003718f1cb7c5dc609a6",
+    "phase9-clang-release.log": "7b8dcf1b7c5109044dd9899a1d4afe33ea75bbe28681cdf92945c02566585a8a",
+    "phase9-clang-release.xml": "0d09c720ddb03604a05da13bd4d580388788cc1f77fe81cbc5cd8d8f60422d80",
+    "phase9-clang-asan-ubsan.log": "e9acee6a88bd52818f49b3e1cbf0eba263e631a1d9b77e9b20a7616c7926ac78",
+    "phase9-clang-asan-ubsan.xml": "ee114c3a08d289ce34cdc0264d3eb5b7ca8d2a648adf70bea51110dc5ab21a24",
+    "python-debug.xml": "edb346197c55683fac0f8891306df8bbbda0d01e83cf43bc15d21e8ee65c41c5",
+    "python-release.xml": "3e09f45503d2e75dec25dee501f137266edb0fed34f2e1c373d163443e5e98d1",
+    "python-sanitizer.xml": "ac080810e0e32c26e27e18d16a93015a133d1fe41bf7355ca264232da5470482"
+  },
+  "limitations": [
+    "Current provider protocol and applicable legal terms unverified",
+    "Fixture transport is never LIVE_OBSERVED",
+    "No observed source recording or real-data L3 reconstruction",
+    "Offline L2 log not yet attached to live supervisor or browser recording selector",
+    "No source-built wheel rebuild; unchanged installed wheel tested",
+    "No actual owner private preview access or new ARM64 run"
+  ]
+}

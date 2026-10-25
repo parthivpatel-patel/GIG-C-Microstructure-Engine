@@ -502,3 +502,24 @@ provider docs/terms/live qualification blocked. No market data or hosted runs.
 Resume: inspect feature HEAD/status and docs/MASTER_TERMINAL_EXECUTION_STATUS.md;
 finish final browser/security/package evidence, commit/push validated source checkpoint,
 then evidence/consolidated report. Do not repeat native matrix without source changes.
+
+## Master terminal directive: validated checkpoint closure
+
+Implementation80a6f30b2ea03d523931f84957c54e8c5a2f2639 committed/pushed/remote verified;
+source tree clean at source-archive build. Final report/evidence committed separately.
+Final results: six native configurations155/155 each, eight frozen identities each;
+terminal96/96 each Release/Debug/ASan+UBSan and live LSan0; security46; browser21;
+new browser controls7; verified TLS/WSS8; frontend3; packaging3; Python CTest3/3/4;
+installed wheel8 interface+6 export. Archive513 members, private outputs excluded.
+Original stale-build and browser synchronization failures are transparently recorded.
+Clean implementation benchmark28,344events/s,19,456KiB peakRSS; synthetic only.
+No outstanding local test failure. No actual provider data, restricted archive access,
+new native ARM64 qualification or production-readiness claim.
+Exact next action: owner apply feature update and accept private replay/3D/security;
+review current official Kraken docs/terms and permissible cloud/private-display use,
+verify endpoint reachability under supported policy, then run bounded permission-gated
+smoke and collect real ack/snapshot/update/trade/CRC/browser/reconnect evidence. Unknown
+status/admin messages must be documented/implemented, not skipped. Do not blindly set
+permission flags. Observed recording attachment and full interactive recorded-L2 replay
+remain partial; native trade/quote research analytics require causal methodology.
+Do not repeat completed native matrix absent source changes. No main/workflow/release.
