@@ -1,5 +1,7 @@
 #include "gig/lobster/adapter.hpp"
 #include <charconv>
+#include <bit>
+#include <algorithm>
 #include <limits>
 namespace gig::lobster {
 namespace {
@@ -41,7 +43,7 @@ gig::Result<Reference> parse_reference(std::string_view line) noexcept {
         if((level.missing&&level.quantity.value!=0)||(!level.missing&&(level.price.value<=0||level.price.value==9999999999LL)))return gig::Result<Reference>::failure(gig::ErrorCode::invalid_range,"lobster.reference.sentinel_price");
         auto& levels=side==0?out.asks:out.bids;
         if(i&&((levels[i-1].missing&&!level.missing)||(!level.missing&&(side==0?level.price.value<=levels[i-1].price.value:level.price.value>=levels[i-1].price.value))))return gig::Result<Reference>::failure(gig::ErrorCode::ordering_error,"lobster.reference.level_order");
-        out.missing_levels+=level.missing?1U:0U;out.zero_volume=out.zero_volume||(!level.missing&&level.quantity.value==0);levels[i]=level;
+        out.missing_levels+=level.missing?1U:0U;out.zero_volume=out.zero_volume||(!level.missing&&level.quantity.value==0);out.zero_volume_levels+=!level.missing&&level.quantity.value==0?1U:0U;levels[i]=level;
     }}
     if(!out.asks[0].missing&&!out.bids[0].missing){out.locked=out.bids[0].price==out.asks[0].price;out.crossed=out.bids[0].price.value>out.asks[0].price.value;}
     return gig::Result<Reference>::success(out);
@@ -59,6 +61,11 @@ gig::Result<Pair> PairedValidator::accept(std::string_view message,std::string_v
     if(std::chrono::steady_clock::now()-start_>std::chrono::milliseconds(limits_.max_milliseconds))return fail(gig::ErrorCode::capacity,"lobster.deadline");
     const auto m=parse_message(message);if(!m)return fail(m.error.code,m.error.field);const auto r=parse_reference(reference);if(!r)return fail(r.error.code,r.error.field);
     if(summary_.last&&m.data->time.value<summary_.last->value)return fail(gig::ErrorCode::ordering_error,"lobster.time_regression");
+    if(summary_.last&&m.data->time==*summary_.last)++summary_.tied_timestamps;
+    const auto shares=m.data->quantity.value;++summary_.share_histogram[static_cast<std::size_t>(std::bit_width(shares))];
+    summary_.shares_min=summary_.shares_min?std::min(*summary_.shares_min,shares):shares;summary_.shares_max=summary_.shares_max?std::max(*summary_.shares_max,shares):shares;
+    if(m.data->kind!=Kind::halt&&m.data->kind!=Kind::unsupported){const auto price=m.data->price.value;summary_.price4_min=summary_.price4_min?std::min(*summary_.price4_min,price):price;summary_.price4_max=summary_.price4_max?std::max(*summary_.price4_max,price):price;}
+    summary_.zero_volume_levels+=r.data->zero_volume_levels;
     if(!summary_.first){summary_.first=m.data->time;}summary_.last=m.data->time;++summary_.accepted;summary_.bytes+=bytes;
     ++summary_.codes[m.data->code<8?m.data->code:0];summary_.unsupported+=m.data->kind==Kind::unsupported?1U:0U;
     summary_.locked+=r.data->locked?1U:0U;summary_.crossed+=r.data->crossed?1U:0U;summary_.zero_volume+=r.data->zero_volume?1U:0U;summary_.missing_levels+=r.data->missing_levels;

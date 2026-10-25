@@ -93,6 +93,8 @@ class Readiness(unittest.TestCase):
 if __name__=='__main__':
     if len(sys.argv)>1:
         driver=sys.argv.pop(1)
+        analysis=sys.argv.pop(1) if len(sys.argv)>1 else None
         subprocess.run([driver],check=True)
         subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reference.py'),driver],check=True)
+        if analysis:subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reconstruction.py'),analysis],check=True)
     unittest.main()

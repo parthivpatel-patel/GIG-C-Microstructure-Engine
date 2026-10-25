@@ -1,0 +1,43 @@
+{
+  "scope": "independent authored known-subset and observable reference effects",
+  "scenarios": 11,
+  "source_rows": 30,
+  "canonical_sha256": "4759decfbef5001c1e9f2d5a0828d0fc972d108bbc4c19ab38c75b52033ff470",
+  "observed_processed": false,
+  "full_l3_complete": false,
+  "schema": "gig.lobster.empirical_results.v1",
+  "actual_lobster_processed": false,
+  "empirical_counts": null,
+  "empirical_agreement": null,
+  "empirical_first_divergence": null,
+  "blocker": "Owner explicitly forbids further attached ZIP/data access pending cloud processing authorization",
+  "synthetic_baseline": {
+    "rows": 10,
+    "native": 5,
+    "external": 2,
+    "unknown_order": 1,
+    "inconsistent": 0,
+    "unsupported": 1,
+    "blocked": 1,
+    "native_rejected": 0,
+    "resource_rejected": 0,
+    "quantity_eligible": 6,
+    "quantity_matches": 6,
+    "best_eligible": 8,
+    "best_matches": 8,
+    "depth_eligible": 8,
+    "depth_matches": 8,
+    "lower_bound_checks": 6,
+    "lower_bound_violations": 0,
+    "equal_level_quantities": 0,
+    "first_mismatch": null,
+    "prefix_blocked": true
+  },
+  "mode_scope": {
+    "A": "reference observation parser, no reconstruction claim",
+    "B": "known post-boundary submissions only; unknown initial state always",
+    "C": "known-subset lower bound/equality only while visible coverage retained",
+    "D": "conditional aggregate reference effects with per-metric eligibility"
+  },
+  "privacy": "Only independently authored fixtures; no raw attached rows in source/evidence"
+}

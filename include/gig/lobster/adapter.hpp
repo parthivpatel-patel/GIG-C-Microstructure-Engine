@@ -12,11 +12,11 @@ struct Shares { std::uint64_t value; bool operator==(const Shares&)const=default
 enum class Kind : std::uint8_t { add, cancel, erase, visible_execution, hidden_execution, halt, unsupported };
 struct Message { TimeNs time; std::uint32_t code; std::uint64_t order; Shares quantity; Price4 price; std::int64_t direction; Kind kind; bool operator==(const Message&)const=default; };
 struct Level { Price4 price; Shares quantity; bool missing; bool operator==(const Level&)const=default; };
-struct Reference { std::array<Level,5> asks,bids; bool locked{},crossed{},zero_volume{}; std::size_t missing_levels{}; bool operator==(const Reference&)const=default; };
+struct Reference { std::array<Level,5> asks,bids; bool locked{},crossed{},zero_volume{}; std::size_t missing_levels{},zero_volume_levels{}; bool operator==(const Reference&)const=default; };
 gig::Result<Message> parse_message(std::string_view) noexcept;
 gig::Result<Reference> parse_reference(std::string_view) noexcept;
 struct Limits { std::uint64_t max_bytes{128U*1024U*1024U},max_records{1000000}; std::size_t max_line_bytes{4096}; std::uint64_t max_milliseconds{120000}; std::size_t max_errors{1}; };
-struct Summary {std::uint64_t accepted{},bytes{},rejected{},locked{},crossed{},zero_volume{},missing_levels{},unsupported{};std::array<std::uint64_t,8> codes{};std::optional<TimeNs> first,last;bool stopped{},input_complete{},full_l3_complete{};};
+struct Summary {std::uint64_t accepted{},bytes{},rejected{},locked{},crossed{},zero_volume{},missing_levels{},unsupported{};std::array<std::uint64_t,8> codes{};std::array<std::uint64_t,65> share_histogram{};std::optional<std::int64_t> price4_min,price4_max;std::optional<std::uint64_t> shares_min,shares_max;std::uint64_t tied_timestamps{},zero_volume_levels{};std::optional<TimeNs> first,last;bool stopped{},input_complete{},full_l3_complete{};};
 struct Pair {Message message;Reference reference;};
 // Single explicit externally supplied instrument. No inferred exchange IDs/timezone.
 // No allocation or book mutation. Both rows validate before accepted state changes.

@@ -3,11 +3,13 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
+#include "support/lobster_checks.hpp"
 using namespace gig::lobster;
 namespace {
 void check(bool v,const char* message){if(!v)throw std::runtime_error(message);}
 std::string reference(){return "110,10,100,20,120,11,90,21,130,12,80,22,140,13,70,23,150,14,60,24";}
 void tests(){
+    gig::lobster::test::reconstruction_checks();
     auto m=parse_message("34200.123456789,1,19,10,100,1");check(m&&m.data->time.value==34200123456789ULL&&m.data->kind==Kind::add,"message exact nanoseconds");
     for(auto code:{1,2,3,4,5})check(bool(parse_message("1,"+std::to_string(code)+",12,3,100,-1")),"all ordinary types");
     for(auto price:{-1,0,1}){auto h=parse_message("1,7,0,0,"+std::to_string(price)+",-1");check(h&&h.data->kind==Kind::halt,"halt flags");}

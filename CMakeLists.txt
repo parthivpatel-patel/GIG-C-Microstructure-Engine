@@ -107,10 +107,14 @@ target_link_libraries(gig_itch_input_adapter PUBLIC gig::itch_reconstruction)
 gig_project_target(gig_itch_input_adapter)
 
 # LOBSTER text contracts; no data acquisition or inferred initialization.
-add_library(gig_lobster STATIC src/lobster/adapter.cpp)
+add_library(gig_lobster STATIC src/lobster/adapter.cpp src/lobster/reconstruction.cpp)
 add_library(gig::lobster ALIAS gig_lobster)
 target_link_libraries(gig_lobster PUBLIC gig::microstructure)
 gig_project_target(gig_lobster)
+
+add_executable(gig_lobster_validate examples/lobster_validate.cpp)
+target_link_libraries(gig_lobster_validate PRIVATE gig::lobster gig::itch_reconstruction)
+gig_project_target(gig_lobster_validate)
 
 option(GIG_BUILD_ITCH_STREAMING "Build bounded synthetic gzip replay (requires zlib >=1.3.1)" OFF)
 if(GIG_BUILD_ITCH_STREAMING)
@@ -240,7 +244,7 @@ if(BUILD_TESTING)
   target_link_libraries(gig_lobster_tests PRIVATE gig::lobster)
   gig_project_target(gig_lobster_tests)
   add_test(NAME observed.readiness_contracts COMMAND ${Python3_EXECUTABLE}
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_observed_readiness.py $<TARGET_FILE:gig_lobster_tests>)
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_observed_readiness.py $<TARGET_FILE:gig_lobster_tests> $<TARGET_FILE:gig_lobster_validate>)
   add_executable(gig_itch_auction_tests tests/test_itch_auction.cpp)
   target_link_libraries(gig_itch_auction_tests PRIVATE gig::itch_reconstruction)
   target_include_directories(gig_itch_auction_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
