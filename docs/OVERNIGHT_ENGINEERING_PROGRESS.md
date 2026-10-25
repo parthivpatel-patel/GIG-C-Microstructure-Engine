@@ -365,3 +365,21 @@ signed-in run4 logs; obtain authenticated complete observed initialization and a
 aligned independent observed reference before empirical projection/pilot work.
 No data/workflow/paid/live/release action is implied. Do not restart completed
 synthetic work. Actual execution stops at delivery; no unattended continuation claim.
+
+## LOBSTER four-phase program — October25 final checkpoint
+
+All feasible authored engineering complete. Phase1c90f753,Phase23522808,Phase3
+2a6d460,Phase43b3c993 committed/pushed; separate consolidated report follows.
+1396/1396 CTest outcomes across9 candidates,0 failed/skipped/disabled;8 frozen
+hashes unchanged. Final independent cohorts82 parser cases,12 scenarios/32 rows,
+13 workflow methods per candidate. Fresh installed wheels28 interface/export+4
+fault checks;407 source members,406 Git sources bound to immutable3b3c993.
+
+Actual empirical CSV testing BLOCKED by owner cloud-use restriction. Earlier ZIP /
+README/CRC/private extraction occurred before clarification; no actual CSV row
+analysis and no private-data access after restriction. No historical accuracy claim.
+ARM5 run40151444307 qualifies3461a5e only;new implementation awaits separately
+authorized native run. No workflow dispatched. Exact next action:permission/retention
+review,then private bounded pilot per LOBSTER_REPRODUCIBILITY_GUIDE.md;do not repeat
+completed matrix absent source changes/failure. See REAL_MARKET_VALIDATION_REPORT.md.
+Final report commit resolved through git log;remote/clean/main confirmed at delivery.

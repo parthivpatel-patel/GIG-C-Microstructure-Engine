@@ -1,0 +1,12 @@
+{
+  "schema": "gig.lobster.source_binding.v1",
+  "source_commit": "3b3c9936255cecba1616101c6626b454255919be",
+  "source_archive_inventory_members": 407,
+  "git_source_members_verified": 406,
+  "excluded_generated_metadata": [
+    "PKG-INFO"
+  ],
+  "method": "Source-distribution inventory bytes and SHA256 compared with git show at immutable Phase4 commit.",
+  "private_dataset_access": false,
+  "validated_source_hashes": 16
+}
