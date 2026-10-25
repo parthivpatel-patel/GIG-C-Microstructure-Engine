@@ -1,55 +1,63 @@
-# Bounded L2 source log and native replay tooling
+# Private L2 recording and interactive replay
 
-Current implementation: [RECORDED_L2_IMPLEMENTATION.md](RECORDED_L2_IMPLEMENTATION.md),
-[CONTINUOUS_RESEARCH_METHODOLOGY.md](CONTINUOUS_RESEARCH_METHODOLOGY.md) and
-[CONTINUOUS_ENGINEERING_STATUS.md](CONTINUOUS_ENGINEERING_STATUS.md). Earlier
-offline-only statements below retain their baseline scope; current capture is separately gated.
+Current source checkpoint5b8b7e5. See RECORDED_L2_IMPLEMENTATION.md for the earlier
+checkpoint and CONTINUOUS_ENGINEERING_REPORT.md for final evidence and remaining gates.
 
-The existing terminal recording API remains authored-L3 only. New terminal/l2_recording.py
-is offline infrastructure, not an enabled observed capture service or browser recording
-catalog. The live supervisor does not currently attach a recorder. Observed retention,
-recording integration and interactive recorded-L2 selection remain explicit gaps.
+## Working authored path
 
-L2Writer requires enabled=True. LIVE_OBSERVED additionally requires reviewed Permission,
-private-display/cloud-processing attestations and recording_approved=True. This is an
-operator assertion, not an inferred license. No observed file was opened or created by
-this assignment. All recording tests use independently authored provider-shaped strings.
+In the private browser choose Historical Replay, Save authored L2 recording, select
+that session, then Load L2 session. Step, Seek, Play/Pause, speed and Restart operate
+native-validated recorded prefixes. Selecting another Replay source returns to the
+existing authored L3 scenario. Authored recordings always remain HISTORICAL_SYNTHETIC.
+No private dataset, actual exchange response or L3 identities are fabricated.
 
-Bounds:512 records,2MiB/log,8 directories,64KiB source JSON per frame, retention1..86400s.
-Source strings and receive-monotonic timestamp order are preserved exactly. Log ordinal
-is physical capture order, never fabricated exchange sequence. Profile/symbol/scales,
-source SHA256, byte/record counts and completeness are in a versioned manifest. Unix
-creation time supports retention. Expired files are rejected on load; expiry is not
-automatic disk deletion. Explicit operator cleanup is required. No unlimited retention.
+CLI demonstration: `.venv/bin/python scripts/replay_terminal_l2.py --position 2`.
+This creates/removes a temporary authored log, invokes native replay and prints hashes.
+No network or restricted archive is accessed. The older CLI's v1 logs remain supported.
 
-Private staging uses mode0700 directories,0600 files, fsync and one final directory
-rename. Append, disk-full, allocation or finalization failure aborts the unpublished
-log. An interrupted .pending-l2 directory is incomplete and not replayable. There is
-no crash-safe hot recovery promise or durable cross-filesystem transaction. One trusted
-local writer is required; checks are not a defense against a hostile same-user process
-racing symlinks. No browser filesystem path input exists. Hashes detect accidental
-corruption; they are not source authentication or a signature against deliberate edits.
+## Observed capture: separately gated, not live-qualified here
 
-Loader rejects duplicate JSON keys, invalid manifest identity, symlinks, count/digest/
-clock contradictions, truncated rows, invalid record order and expired/future dates.
-Replay reconstructs a fresh native AggregateDepth and revalidates source CRC/semantics
-at each requested prefix. Seeking is bounded O(records), not indexed recovery. The
-first valid subscribed L2 snapshot remains necessary; no L3 initialization is claimed.
-Observed log replay is HISTORICAL_OBSERVED, never LIVE_VERIFIED; authored log replay
-remains HISTORICAL_SYNTHETIC. Log loading is an explicit trusted offline operation,
-not arbitrary user-upload ingestion or permission verification.
+Start permitted recording requires LIVE_VERIFIED production transport, reviewed
+protocol/private-display/cloud-processing settings, GIG_LIVE_RECORDING_ENABLED=1 and
+GIG_LIVE_RECORDING_RETENTION_APPROVED=1. These must reflect an actual applicable rights
+review. No flags were enabled in this task. No genuine market frames were received.
+Starting capture reconnects for a real fresh source snapshot; existing aggregate depth
+is never fabricated into observed source messages. Stop drains the accepted queue.
 
-Run the self-contained authored demonstration (no network or private dataset):
+Version2 logs include raw source frames, accepted native-event receipts, exact source
+metadata, optional actual Unix receive time, monotonic receive order, venue, instrument,
+profile, integrity hash and interval-end reason. File completion is not market-session
+completeness. Unknown initialization/session declarations are rejected. Hashes detect
+corruption, not malicious coordinated edits or authenticated exchange authorship.
 
-```bash
-.venv/bin/python scripts/replay_terminal_l2.py --position 5
-.venv/bin/python scripts/replay_terminal_l2.py --position 2
-```
+Bounds:512 records,2MiB/log,eight sessions,four queued records,8MiB encoded prefix cache,
+64KiB source JSON and64KiB normalized receipt. Python heap is not equal to encoded size;
+actual measurements are in the evidence. One writer and one trusted local operator.
+No arbitrary URL, input path, upload, credentials or permission attestation from browser.
 
-The first prints a final one-bid/one-ask native view; the second prints the earlier
-updated bid quantity. Source hash and canonical result hash are deterministic. The
-TemporaryDirectory is removed on exit. It never accesses LOBSTER or Nasdaq attachments.
+## Durability, retention and failure behavior
 
-Next integration gate: explicit verified retention basis, bounded capture writer
-attached without blocking/loss ambiguity, failure/stop receipts, selected recording
-catalog and browser play/pause/seek/speed tests. Do not claim those are complete.
+A durable pending deadline precedes raw writes. Retention begins when the writer is
+created, not after collection finishes. Accepted finalization fsyncs files/staged directory,
+atomically renames on the same filesystem and fsyncs the parent. Pending state is not
+selectable. A failed parent fsync can leave a complete but unacknowledged directory;
+caller reports error instead of claiming durability. Physical power-loss testing and
+hostile concurrent filesystem mutation are not qualified.
+
+Queue overflow, source interruption, disk/allocation failure or invalid source aborts
+unpublished capture. Record-budget completion explicitly ends a bounded interval without
+claiming a full source/session. No crash-safe hot continuation or silent omitted events.
+
+Configured retention is1..86400s through trusted writer configuration (the browser
+capture uses the conservative default24h). Expired loads are refused; expired cached
+frames are cleared. The running service sweeps expired owned logs every60s, excluding
+an active writer. Interrupted pending logs retain their deadline; legacy pending state
+without one has a24h fallback. Cleanup failures are diagnosed. No cleanup process can
+run while the environment is stopped; filesystem backups, remanence and client copies
+are outside application enforcement. Deletion is not a secure physical wipe promise.
+
+A selected session is fully revalidated with real native C++ before publication and
+compiled into an owned bounded prefix cache. Interactive playback is cache selection
+of native results, not mock financial state. Observed sessions are HISTORICAL_OBSERVED,
+never LIVE_VERIFIED, and remain blocked unless processing permission is configured.
+Observed exports stay disabled pending a separate rights decision.

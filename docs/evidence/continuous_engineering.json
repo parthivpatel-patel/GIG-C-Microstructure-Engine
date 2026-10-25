@@ -1,0 +1,395 @@
+{
+  "schema": "gig.continuous_engineering.v1",
+  "baseline": "54fa2303c3beac03181d2ff73724ad51aba2dd52",
+  "recording_checkpoint": "083c52bd3ef81c6d6d0e095238a7c702360cbf18",
+  "validated_source_commit": "5b8b7e519d6089b4ba254f2382a5bda726f636bf",
+  "branch": "feat/bootstrap-cpp20-engine",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "terminal_tests": {
+    "final-release.log": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0
+    },
+    "final-debug.log": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0
+    },
+    "final-sanitizer.log": {
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "live_lsan": 0,
+  "fresh_native_aggregate_checks": {
+    "native-phase9-clean-release.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "native-phase9-clang-debug.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "native-phase9-clang-asan-ubsan.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "native-phase9-clang-release.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "native-phase9-clean-asan-ubsan.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    },
+    "native-phase9-clean-debug.xml": {
+      "tests": 1,
+      "failures": 0,
+      "skipped": 0,
+      "disabled": 0
+    }
+  },
+  "reused_full_native_matrix": {
+    "baseline_commit": "54fa2303c3beac03181d2ff73724ad51aba2dd52",
+    "tests_per_configuration": 155,
+    "configurations": 6,
+    "status": "REUSED_UNCHANGED_NATIVE_SOURCE_NOT_RERUN",
+    "matching_git_tree_objects": {
+      "include": "255d54cf582dceb071cee323e8c466785e1aa26d",
+      "src": "b7649bf2dd2622a5d7fada1585d10f9e944d0ccf",
+      "python": "8c48f0f31b6856cfe155b25d9aa61f4084120ff2",
+      "tests": "9d53c8354f0f83405533926d1d562c8b26363425",
+      "CMakeLists.txt": "d7d174306701246ca5117c3e9599d8c5efe607c3",
+      "CMakePresets.json": "46aae0e0f78132c9ee42281895562a34a18c9ad5",
+      ".github": "880de0029524671e34fb54a6fb7bb36585d5a38f"
+    },
+    "canonical_hashes": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    }
+  },
+  "security_tests": {
+    "passed": 46,
+    "failed": 0
+  },
+  "browser_tests": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  },
+  "recorded_browser": {
+    "passed": 9,
+    "failed": 0
+  },
+  "live_controls_browser": {
+    "passed": 7,
+    "failed": 0
+  },
+  "verified_https_wss": {
+    "passed": 8,
+    "failed": 0
+  },
+  "frontend_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "async_polling_controls": {
+    "passed": 3,
+    "failed": 0
+  },
+  "packaging_regressions": {
+    "passed": 3,
+    "failed": 0
+  },
+  "installed_wheel": {
+    "interface_tests": 8,
+    "export_tests": 6,
+    "failed": 0,
+    "wheel_rebuilt": false
+  },
+  "independent_oracles": {
+    "prior_provider_candidates": 10000,
+    "injected_crc_failures": 103,
+    "new_integer_ofi_candidates": 2000,
+    "new_coinbase_native_tests": 11,
+    "new_research_tests": 12
+  },
+  "performance": {
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "architecture": "x86_64",
+    "benchmark_128": {
+      "schema": "gig.recorded_l2.benchmark.v1",
+      "source_commit": "5b8b7e519d6089b4ba254f2382a5bda726f636bf",
+      "worktree_dirty": false,
+      "architecture": "x86_64",
+      "python": "3.12.14",
+      "native_build": {
+        "compiler": "14.2.0",
+        "python": "3.12.14",
+        "pybind11": "2.13.6",
+        "package_version": "0.1.1",
+        "schema_version": "1.0",
+        "build_type": "Release",
+        "config_flags": " -O3 -DNDEBUG",
+        "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+        "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+      },
+      "source_files_sha256": {
+        "terminal/l2_recording.py": "59ac16d56eb086e9308cb66d22a4fa0bd53ab9688d19a55ae22fd5396d039b5b",
+        "terminal/l2_playback.py": "ce4d2e54f179c17b775a01071dd530fc2112c114a78499c25a0a59468855cb1c",
+        "terminal/l2_research.py": "e1ad3d572a7d4f4decb94475cef4eb8655da87ac24d72d40cc18375939af5a18",
+        "/workspace/GIG-C-Microstructure-Engine/scripts/benchmark_recorded_l2.py": "049df14bc61e072678d95285a652d004fa803c695c7149fb6689596ce7e963bb"
+      },
+      "classification": "HISTORICAL_SYNTHETIC",
+      "workload": "one snapshot,alternating absolute bid sizes;CRC/native metrics;recorded native research prefixes",
+      "seed": null,
+      "fixture_sha256": "f3e4fcd82c4d1ee13e8c29ce283da822306de4ba5f580b1a72af3fcc2f4cf13e",
+      "native_binding_update_latency_nanoseconds": {
+        "count": 1000,
+        "warmup": 100,
+        "p50": 1330,
+        "p95": 1538,
+        "p99": 2591,
+        "scope": "Python binding+native atomic depth update;no socket or pure C++ cycle isolation"
+      },
+      "events": 128,
+      "repetitions": 3,
+      "warmup_events": 8,
+      "unrecorded_seconds": [
+        0.004521497001405805,
+        0.004184591991361231,
+        0.00425312202423811
+      ],
+      "recorded_seconds": [
+        0.008046265982557088,
+        0.008032250043470412,
+        0.010206824983470142
+      ],
+      "compile_seconds": [
+        0.10459259996423498,
+        0.10143933794461191,
+        0.10516914899926633
+      ],
+      "median_unrecorded_events_per_second": 30095.53905825909,
+      "median_recorded_events_per_second": 15908.00009314654,
+      "view_latency_nanoseconds": {
+        "count": 387,
+        "p50": 74989,
+        "p95": 146162,
+        "p99": 221763,
+        "method": "sorted nearest rank;owned Python cache view,not exchange latency"
+      },
+      "peak_rss_kib": 25708,
+      "python_traced_peak_bytes": 2148516,
+      "encoded_cache_bytes": 443128,
+      "log_bytes": 79969,
+      "final_sha256": "4bcae2d6b5baa22c193e2e0c35f2c7acfb2394a2ddc83f353729b691966c65c9",
+      "native_pmr_peak_bytes": "2048",
+      "limits": [
+        "Linux whole-process RSS high-water mark",
+        "No network or disk-hardware durability claim",
+        "Processing timers exclude writer construction/setup;final fsync is included",
+        "Synchronous writer microbenchmark;async production path separately fault tested",
+        "No total allocator-call count or production tail-latency claim"
+      ]
+    },
+    "benchmark_512": {
+      "schema": "gig.recorded_l2.benchmark.v1",
+      "source_commit": "5b8b7e519d6089b4ba254f2382a5bda726f636bf",
+      "worktree_dirty": false,
+      "architecture": "x86_64",
+      "python": "3.12.14",
+      "native_build": {
+        "compiler": "14.2.0",
+        "python": "3.12.14",
+        "pybind11": "2.13.6",
+        "package_version": "0.1.1",
+        "schema_version": "1.0",
+        "build_type": "Release",
+        "config_flags": " -O3 -DNDEBUG",
+        "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+        "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+      },
+      "source_files_sha256": {
+        "terminal/l2_recording.py": "59ac16d56eb086e9308cb66d22a4fa0bd53ab9688d19a55ae22fd5396d039b5b",
+        "terminal/l2_playback.py": "ce4d2e54f179c17b775a01071dd530fc2112c114a78499c25a0a59468855cb1c",
+        "terminal/l2_research.py": "e1ad3d572a7d4f4decb94475cef4eb8655da87ac24d72d40cc18375939af5a18",
+        "/workspace/GIG-C-Microstructure-Engine/scripts/benchmark_recorded_l2.py": "049df14bc61e072678d95285a652d004fa803c695c7149fb6689596ce7e963bb"
+      },
+      "classification": "HISTORICAL_SYNTHETIC",
+      "workload": "one snapshot,alternating absolute bid sizes;CRC/native metrics;recorded native research prefixes",
+      "seed": null,
+      "fixture_sha256": "72a8c38db08cb744da81bbd750364892f8cfd4d75f39ac489e9db36dbd523822",
+      "native_binding_update_latency_nanoseconds": {
+        "count": 1000,
+        "warmup": 100,
+        "p50": 1257,
+        "p95": 1327,
+        "p99": 1411,
+        "scope": "Python binding+native atomic depth update;no socket or pure C++ cycle isolation"
+      },
+      "events": 512,
+      "repetitions": 1,
+      "warmup_events": 8,
+      "unrecorded_seconds": [
+        0.01928573101758957
+      ],
+      "recorded_seconds": [
+        0.04200828401371837
+      ],
+      "compile_seconds": [
+        0.2611017909948714
+      ],
+      "median_unrecorded_events_per_second": 26548.125115559786,
+      "median_recorded_events_per_second": 12188.0722343431,
+      "view_latency_nanoseconds": {
+        "count": 513,
+        "p50": 73490,
+        "p95": 118026,
+        "p99": 216526,
+        "method": "sorted nearest rank;owned Python cache view,not exchange latency"
+      },
+      "peak_rss_kib": 40028,
+      "python_traced_peak_bytes": 7729088,
+      "encoded_cache_bytes": 1753336,
+      "log_bytes": 320737,
+      "final_sha256": "9b536c13860539a91c743f0f1fc99131584a677f27dbeaf106a11f410ccd1c99",
+      "native_pmr_peak_bytes": "2048",
+      "limits": [
+        "Linux whole-process RSS high-water mark",
+        "No network or disk-hardware durability claim",
+        "Processing timers exclude writer construction/setup;final fsync is included",
+        "Synchronous writer microbenchmark;async production path separately fault tested",
+        "No total allocator-call count or production tail-latency claim"
+      ]
+    }
+  },
+  "archive": {
+    "source_commit": "5b8b7e519d6089b4ba254f2382a5bda726f636bf",
+    "members": 534,
+    "sha256": "aea1cd65a8f330a7149abb93ea7bcb2fc6ee1b247d836fd376f0b5cd06d220cd",
+    "forbidden_members": [],
+    "required_files": [
+      "terminal/l2_capture.py",
+      "terminal/l2_playback.py",
+      "terminal/l2_research.py",
+      "terminal/providers/coinbase_candidate.py",
+      "terminal/providers/test_kraken_admin.py",
+      "scripts/diagnose_provider_access.py",
+      "scripts/benchmark_recorded_l2.py"
+    ],
+    "uncompressed_bytes": 12552941
+  },
+  "provider_evidence": {
+    "current_official_protocol_and_rights": "UNVERIFIED",
+    "connectivity_basis": "Prior CONNECT403 and unchanged managed host configuration;blocked probes not repeated",
+    "owner_diagnostic_executed_in_codespace": false,
+    "provider_sockets_started": 0,
+    "observed_market_records": 0,
+    "coinbase": "OFFLINE_CANDIDATE_ONLY",
+    "live_qualification": "BLOCKED"
+  },
+  "arm64": {
+    "new_source_qualified": false,
+    "workflow_dispatched": false,
+    "scope": "Prior exact-commit qualification is not transferred"
+  },
+  "privacy": {
+    "restricted_lobster_accessed": false,
+    "additional_market_data_downloaded": false,
+    "raw_data_committed": false,
+    "paid_resources": false
+  },
+  "source_files_changed": [
+    "README.md",
+    "docs/COINBASE_CANDIDATE_PROFILE.md",
+    "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+    "docs/CONTINUOUS_RESEARCH_METHODOLOGY.md",
+    "docs/L2_RECORDING_REPLAY.md",
+    "docs/LIVE_PROVIDER_OPERATIONS.md",
+    "docs/RECORDED_L2_IMPLEMENTATION.md",
+    "scripts/benchmark_recorded_l2.py",
+    "scripts/diagnose_provider_access.py",
+    "terminal/l2_capture.py",
+    "terminal/l2_playback.py",
+    "terminal/l2_recording.py",
+    "terminal/l2_research.py",
+    "terminal/providers/coinbase_candidate.py",
+    "terminal/providers/kraken.py",
+    "terminal/providers/supervisor.py",
+    "terminal/providers/test_coinbase_candidate.py",
+    "terminal/providers/test_kraken_admin.py",
+    "terminal/server/app.py",
+    "terminal/server/engine.py",
+    "terminal/test_l2_capture.py",
+    "terminal/test_l2_playback.py",
+    "terminal/test_l2_recording.py",
+    "terminal/test_l2_research.py",
+    "terminal/test_provider_diagnostic.py",
+    "terminal/tests/browser-validation.mjs",
+    "terminal/tests/live-controls-validation.mjs",
+    "terminal/tests/recorded-playback-validation.mjs",
+    "terminal/tests/run_native_suite.py",
+    "terminal/tests/wait-state.mjs",
+    "terminal/tests/wait-state.test.mjs",
+    "terminal/web/src/App.tsx",
+    "terminal/web/src/contracts.ts",
+    "terminal/web/src/format.test.ts"
+  ],
+  "log_sha256": {
+    "final-release.log": "b438ca6f2dd356ccc561832744d90ed4c5ec236b231d5e7623a79a287415c74a",
+    "final-debug.log": "983120b3a4f0c19fc3ab77967977ad378764612096d1232dd7ea6b3187e3d30d",
+    "final-sanitizer.log": "95366f64060b91d50d1159bcff1c68739b9e68838347173bc3596e9ce862f5ce",
+    "security-final.log": "805557aa8640b3ee533e09557d85e217d517368025ffb92179b18841964abbef",
+    "frontend-c-build.log": "a9608c1e393babbdb7e9ee39c9cde07c2e2206b12f98614adb7e539271b1fa3c",
+    "frontend-final-tests.log": "df3c6e0c3f31df56637fd384ebca6da5a3f2018f561e48fbeec0a3f22af94023",
+    "wait-tests.log": "78a8e259cb979fdcd9ee02a30b82bd4703f0e81c15930bd2718cc4145f693fca",
+    "packaging.log": "27c4a39d34ece4cbc66cc59cb0870c7abe4cc0a5f009205bdd0ea06a93f8b3ac",
+    "installed-interface.log": "7500c6294b543f156c33e3c7f52349e641dc6755a573f3c748f97aed85b8655f",
+    "installed-export.log": "106f60cc2b4de28bb278e0580e8ecf78d79e6d828f0b0e2de89c2ce86d3e34a1",
+    "browser/results.json": "af4546e75b7cab0034b282b1af4c5ea3f7db7133aeebe29220df47dafe5538eb",
+    "browser-recorded.json": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+    "browser-live.json": "e8a2cc76c97e897ef420bcfe2e678866c974b5271d98fbf322182f0c4c81d740",
+    "browser-sop.json": "a3ff8d58221493c9943e2a801b2d8ca5b4883082a14303497be1e29b6f527259",
+    "https-wss.json": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "replay-benchmark.json": "1ef1bd3d7ee82b8d3c7b237a809df42c169d184d6adfa5893089c734d088bbb2",
+    "replay-scale-benchmark.json": "5cd601cbae7731ee57abfe3c0528ba08e7e856e79e44f0791121f1cbe7b18276",
+    "archive-build.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+    "archive-inventory.json": "537c031dd610a16d168b42eac7d5776525f306f2541effd1f5741b827beb5ae8",
+    "retention-final.log": "465136e4241c95fe2195d81be010d489a6596581d8b69f68958d1db8ad7f974e",
+    "analytic-provider-final.log": "bffeee89016f9ebef666701a9ab79ad66feffb1f1ed4bb9b283c211842fd3ca6",
+    "native-phase9-clean-release.xml": "c30e6053c85e3d054501d0243a4d64207e95a2a83a0bdfdb479982fcdddc2365",
+    "native-phase9-clang-debug.xml": "f585ca4909a6d339b1bca473a7a54f033560346c8270ab187848a78c302df32d",
+    "native-phase9-clang-asan-ubsan.xml": "52b82f151a09bf3ca480a91c38ea34cff8f1f73f9634888f927914a325e1ffd3",
+    "native-phase9-clang-release.xml": "a2c1a5a3d68acc47c2f4a5931a012776bdfed5282d740441407e3376f3f67170",
+    "native-phase9-clean-asan-ubsan.xml": "47b1032ef44be1bb9775ea2df04d61adbce1bd2383bb608f13a3626e24ce8924",
+    "native-phase9-clean-debug.xml": "48252b25ca5a65b3c15a3a92632cf672899bf6434839d37cd0e69d8d3aa750bc"
+  },
+  "limits": [
+    "No actual external private browser or exchange data verification",
+    "Cached native prefixes support playback;no fabricated L3 initialization",
+    "Observed recording remains disabled absent separate server retention review",
+    "Research is display-cadence Python exact arithmetic;native financial book unchanged",
+    "No new full native matrix,source-built wheel,ARM64 or hosted run claimed",
+    "Successful POSIX fsync/rename finalization;not a physical power-loss or hostile filesystem proof",
+    "Retention cleanup requires running service;client copies and storage backups are outside application enforcement"
+  ]
+}

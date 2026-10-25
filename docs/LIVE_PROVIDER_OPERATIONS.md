@@ -23,8 +23,8 @@ Fresh metadata-only requests to both official documentation hosts returned curl5
 proxy CONNECT403, before origin response. No additional blocked-host retry or live
 handshake was attempted. Applicable terms, cloud/private display, geography and
 retention remain unverified. The existing provisional protocol still requires review
-against the current official schema; notably status/admin messages and unknown fields
-fail closed. Passing authored fixtures does not establish Kraken compatibility.
+against the current official schema; notably status/trade/heartbeat candidate profiles are explicit and unknown fields
+fail closed; current official conformance still requires independent review. Passing authored fixtures does not establish Kraken compatibility.
 
 ## Exact activation prerequisites
 
@@ -42,7 +42,7 @@ fail closed. Passing authored fixtures does not establish Kraken compatibility.
    GIG_LIVE_CLOUD_PROCESSING_APPROVED=1 and a non-secret
    GIG_LIVE_PERMISSION_REFERENCE identifying the reviewed basis. These are explicit
    operator attestations, not automated legal verification. Do not set them simply
-   to remove the blocked message. No field enables recording in the live supervisor.
+   to remove the blocked message. Observed capture additionally requires the separate recording/retention settings in L2_RECORDING_REPLAY.md; default remains off.
 5. Restart the private terminal, select Live Market Data, provider, instrument and
    Connect public feed. Or run the bounded, non-recording CLI:
 
