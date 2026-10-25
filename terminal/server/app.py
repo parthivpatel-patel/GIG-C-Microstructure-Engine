@@ -117,6 +117,9 @@ def create_app():
     stream_tickets = StreamTickets()
     request_proofs = RequestProofs()
     native = NativeSession()
+    from terminal.providers.supervisor import FeedSupervisor
+    feed = FeedSupervisor()
+    native.live_feed = feed
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
     # Aggregate operation rate bound, including all connected browser clients.
@@ -141,6 +144,7 @@ def create_app():
         try:
             yield
         finally:
+            await feed.close()
             worker.cancel()
             with suppress(asyncio.CancelledError):
                 await worker
@@ -287,7 +291,15 @@ def create_app():
     @route('/api/v1/catalog', methods=['GET'])
     @json_endpoint
     async def catalog(request):
-        return native.catalog()
+        result=native.catalog()
+        provider=result['providers'][0]
+        provider['instruments']=['BTC/USD','ETH/USD'];provider['depth']=10
+        provider['runtime_state']=feed.state
+        provider['live_connected']=feed.state=='LIVE_VERIFIED'
+        if feed.permission is not None:
+            provider['status']='OPERATOR_CONFIGURED'
+            provider['reason']='Server-side protocol/usage attestation; runtime state reports actual connectivity separately.'
+        return result
 
     @route('/api/v1/control', methods=['POST'])
     @json_endpoint
@@ -296,7 +308,27 @@ def create_app():
         if set(data) - {'action', 'value'} or type(data.get('action')) is not str:
             raise ControlError('INVALID_CONTROL', 'expected action and optional value only')
         async with lock:
-            native.control(data['action'], data.get('value'))
+            action,value=data['action'],data.get('value')
+            if action=='connect':
+                from terminal.providers.kraken import ProviderError
+                if value in (None,'kraken'):value={'provider':'kraken','instrument':'BTC/USD','depth':10}
+                if (type(value) is not dict or set(value)!={'provider','instrument','depth'}
+                        or value['provider']!='kraken' or value['instrument'] not in ('BTC/USD','ETH/USD')
+                        or type(value['depth']) is not int or value['depth']!=10):
+                    raise ControlError('INVALID_PROVIDER','expected Kraken BTC/USD or ETH/USD depth10; no URLs')
+                native.mode='LIVE';native.playing=False
+                try:await feed.start(value['instrument'])
+                except ProviderError:
+                    native.notifications.append({'code':'LIVE_BLOCKED','message':'Explicit server permission and current protocol review required; no connection started.'})
+                return native.state()
+            if action=='disconnect':
+                await feed.close()
+                return native.state()
+            # Validate and commit synchronous control first; invalid input must not
+            # disconnect an otherwise accepted feed. No task runs between these steps.
+            native.control(action,value)
+            if action in ('mode','dataset'):
+                await feed.close()
             return native.state()
 
     @route('/api/v1/simulate', methods=['POST'])

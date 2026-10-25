@@ -486,3 +486,19 @@ No failures. No native changes or canonical fixture changes. No external workflo
 Exact next action: owner fast-forward feature branch, build frontend, restart server,
 refresh private forwarded URL and verify v4 diagnostics and WSS101. Actual owner
 Codespace success remains unverified. No unrelated development began.
+
+## Master terminal directive: supervised candidate implementation
+
+Starting34e3145; owner confirms private browser CONNECTED and Step. Baseline checkpoint
+c846dac records independent provider metadata CONNECT403 blockers. New bounded native
+L2 supervisor, strict protected connect/disconnect controls, BTC/ETH symbol choice,
+freshness/resync/jitter/restart handling, visualization pause and source-segment reset.
+Offline permission-aware bounded L2 log/replay tooling uses authored fixtures only.
+Current native CTest155/155 in each GCC/Clang Debug/Release/ASan+UBSan;8 frozen hashes
+match each configuration. Final terminal cohort96 passes in Release/Debug/sanitizer,
+live LSan0. Browser pause test synchronization repair preserves all assertions.
+Full final evidence/report and source-archive inventory are being finalized; actual
+provider docs/terms/live qualification blocked. No market data or hosted runs.
+Resume: inspect feature HEAD/status and docs/MASTER_TERMINAL_EXECUTION_STATUS.md;
+finish final browser/security/package evidence, commit/push validated source checkpoint,
+then evidence/consolidated report. Do not repeat native matrix without source changes.

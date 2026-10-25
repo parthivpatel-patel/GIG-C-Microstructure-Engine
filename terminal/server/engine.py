@@ -27,6 +27,7 @@ def exact_quantity(value):
 class NativeSession:
     """Mutated only on the ASGI event loop, never shared with a background thread."""
     def __init__(self):
+        self.live_feed = None
         self.mode = 'HISTORICAL_REPLAY'
         self.dataset = 'terminal-authored-v2'
         self.aggregate = None
@@ -157,7 +158,7 @@ class NativeSession:
                                    ('bid_depth', 'bid_depth'), ('ask_depth', 'ask_depth')]:
                 metrics[target] = native[source]['value']
         from terminal.providers.fixtures import SHA256 as profile_sha
-        return {
+        result = {
             'schema_version': '1', 'mode': self.mode, 'origin': origin,
             'instrument': 'BTC/USD' if live or profile else 'SYNTH-USD', 'provider': 'kraken' if live else 'authored-kraken-profile' if profile else 'authored',
             'venue': 'Kraken' if live else 'AUTHORED', 'feed_type': 'L2_AGGREGATE' if live or profile else 'L3_AUTHORED',
@@ -185,6 +186,16 @@ class NativeSession:
                             'native_status': aggregate if profile else self.replay.status(), 'uptime_seconds': round(time.monotonic() - self.started, 3)},
             'notifications': list(self.notifications), 'simulation': deepcopy(self.last_simulation) if simulation else None,
         }
+
+        if live and self.live_feed is not None:
+            view=self.live_feed.view()
+            # Fixture-injected transports cannot be displayed as live observations.
+            if view['origin']=='HISTORICAL_SYNTHETIC':
+                view['origin']='UNAVAILABLE';view['book']={'bids':[],'asks':[]}
+                view['metrics']={k:None for k in metrics};view['provenance']['category']='UNAVAILABLE'
+                view['flow']={'trades':[],'classification':'UNAVAILABLE'}
+            result.update(view)
+        return result
 
     def simulation(self, algorithm, quantity='100', slices=5):
         if self.mode != 'SIMULATION':

@@ -1,5 +1,8 @@
 # Market-data provider assessment
 
+Current supervised candidate implementation: [LIVE_PROVIDER_OPERATIONS.md](LIVE_PROVIDER_OPERATIONS.md).
+This section retains its earlier evidence scope; actual external provider qualification remains blocked.
+
 Assessment scope: October 25, 2026, private development environment. No observed
 provider payloads were obtained, no subscription opened and no market observations
 were recorded or redistributed. Source access below is actual; protocol proposals

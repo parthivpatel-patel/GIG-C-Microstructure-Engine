@@ -1,5 +1,8 @@
 # Terminal security review
 
+Current supervised candidate implementation: [LIVE_PROVIDER_OPERATIONS.md](LIVE_PROVIDER_OPERATIONS.md).
+This section retains its earlier evidence scope; actual external provider qualification remains blocked.
+
 Scope:local single-owner research application,not a public multi-tenant production
 service. Default127.0.0.1:8787,one worker;explicit exact Origin for mutations/WS,
 Host allowlist,restricted CORS,security headers/CSP,no-store responses.4KiB bodies /

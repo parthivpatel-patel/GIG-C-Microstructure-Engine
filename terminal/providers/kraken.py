@@ -58,7 +58,7 @@ def decode(raw: str) -> dict:
         value = json.loads(raw, parse_float=Decimal, parse_int=Decimal,
                            parse_constant=lambda _: (_ for _ in ()).throw(ProviderError('nonfinite_number')),
                            object_pairs_hook=_pairs)
-    except (ValueError, RecursionError) as error:
+    except (ValueError, RecursionError, InvalidOperation) as error:
         if isinstance(error, ProviderError):
             raise
         raise ProviderError('malformed_json') from error
@@ -139,12 +139,14 @@ class KrakenBookAdapter:
     }
 
     def __init__(self, apply_native: Callable, *, symbol='BTC/USD', price_scale=100,
-                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000):
+                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC'):
         if (type(depth) is not int or depth != 10 or type(price_scale) is not int or
                 type(quantity_scale) is not int or not 1 <= price_scale <= 10**9 or
                 not 1 <= quantity_scale <= 10**9 or type(stale_ns) is not int or
-                not 1 <= stale_ns <= 60_000_000_000 or symbol != 'BTC/USD'):
+                not 1 <= stale_ns <= 60_000_000_000 or symbol not in ('BTC/USD', 'ETH/USD')):
             raise ProviderError('configuration')
+        if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('origin')
+        self.origin=origin
         self.apply_native = apply_native
         self.symbol = symbol
         self.price_scale, self.quantity_scale = price_scale, quantity_scale
@@ -152,6 +154,7 @@ class KrakenBookAdapter:
         self.bids, self.asks = {}, {}
         self.state, self.reason = 'DISCONNECTED', 'not_connected'
         self.last_receive_ns = None
+        self.last_book_receive_ns = None
         self.last_digest = None
         self.rejected = self.duplicates = self.snapshots = self.updates = 0
         self.trades = deque(maxlen=256)
@@ -161,12 +164,14 @@ class KrakenBookAdapter:
     def connect(self):
         self.state, self.reason = 'CONNECTING', 'awaiting_subscription'
         self.bids, self.asks = {}, {}
-        self.last_digest, self.last_receive_ns = None, None
+        self.last_digest, self.last_receive_ns, self.last_book_receive_ns = None, None, None
+        self.trades.clear(); self.trade_ids.clear()
 
     def disconnected(self):
         self.state, self.reason = 'DISCONNECTED', 'transport_closed'
         self.bids, self.asks = {}, {}
-        self.last_digest, self.last_receive_ns = None, None
+        self.last_digest, self.last_receive_ns, self.last_book_receive_ns = None, None, None
+        self.trades.clear(); self.trade_ids.clear()
 
     def recovery_delay(self) -> int:
         delay = min(30, 2 ** min(self.backoff_attempt, 5))
@@ -174,12 +179,12 @@ class KrakenBookAdapter:
         return delay
 
     def status(self, now_ns: int) -> dict:
-        if self.last_receive_ns is not None and now_ns - self.last_receive_ns > self.stale_ns and self.state == 'LIVE':
-            self.state, self.reason = 'STALE', 'heartbeat_deadline'
+        if self.last_book_receive_ns is not None and now_ns - self.last_book_receive_ns > self.stale_ns and self.state == 'LIVE':
+            self.state, self.reason = 'STALE', 'depth_freshness_deadline'
         return {'state': self.state, 'reason': self.reason, 'provider': self.provider,
                 'rejected': self.rejected, 'duplicates': self.duplicates,
                 'snapshots': self.snapshots, 'updates': self.updates,
-                'origin': 'HISTORICAL_SYNTHETIC', 'source_sequence': None, 'continuity': 'checksum_scoped_not_exchange_sequence',
+                'origin': self.origin, 'source_sequence': None, 'continuity': 'checksum_scoped_not_exchange_sequence',
                 'capabilities': dict(self.capabilities)}
 
     def _level(self, item):
@@ -193,6 +198,8 @@ class KrakenBookAdapter:
 
     def feed(self, raw: str, now_ns: int) -> dict:
         if type(now_ns) is not int or now_ns < 0 or (self.last_receive_ns is not None and now_ns < self.last_receive_ns):
+            self.rejected+=1
+            self.state, self.reason = 'GAP_DETECTED', 'receive_clock_regression'
             raise ProviderError('receive_clock_regression')
         try:
             return self._feed(raw, now_ns)
@@ -209,7 +216,8 @@ class KrakenBookAdapter:
             result = payload.get('result')
             if type(result) is not dict or result.get('channel') not in ('book', 'trade') or result.get('symbol') != self.symbol:
                 raise ProviderError('subscription_identity')
-            self.state, self.reason = 'SYNCHRONIZING', 'awaiting_valid_snapshot'
+            if result['channel']=='book' and self.state not in ('LIVE','STALE'):
+                self.state, self.reason = 'SYNCHRONIZING', 'awaiting_valid_snapshot'
             return {'kind': 'acknowledgment', 'source_sequence': None}
         if payload.get('channel') == 'heartbeat':
             self.last_receive_ns = now_ns
@@ -262,6 +270,8 @@ class KrakenBookAdapter:
             cache_copy = {k: cache[k] for k in retained}
             cache.clear(); cache.update(cache_copy)
             normalized.append(converted)
+        if candidate[0] and candidate[1] and max(map(int,candidate[0])) > min(map(int,candidate[1])):
+            raise ProviderError('crossed_book')
         if checksum(*candidate) != wire_checksum:
             raise ProviderError('checksum_mismatch')
         # Project only the accepted bounded cache diff. Explicitly delete trimmed
@@ -278,7 +288,7 @@ class KrakenBookAdapter:
         # allocation failure cannot strand native state ahead of accepted cache.
         receipt = {'kind': 'snapshot' if snapshot else 'update', 'source_timestamp': source_time,
                    'source_timestamp_ns': source_ns, 'source_sequence': None,
-                   'receive_monotonic_ns': str(now_ns), 'origin': 'HISTORICAL_SYNTHETIC',
+                   'receive_monotonic_ns': str(now_ns), 'origin': self.origin,
                    'integration_profile': 'unverified_kraken_v2_authored_v1'}
         next_snapshots, next_updates = self.snapshots + int(snapshot), self.updates + int(not snapshot)
         try:
@@ -286,7 +296,7 @@ class KrakenBookAdapter:
         except Exception as error:
             raise ProviderError('native_rejected') from error
         self.bids, self.asks = candidate
-        self.last_digest, self.last_receive_ns = digest, now_ns
+        self.last_digest, self.last_receive_ns, self.last_book_receive_ns = digest, now_ns, now_ns
         self.state, self.reason = 'LIVE', 'authored_profile_validated_not_live_connectivity'
         self.backoff_attempt = 0
         self.snapshots, self.updates = next_snapshots, next_updates
@@ -313,7 +323,7 @@ class KrakenBookAdapter:
             if key not in self.trade_ids:
                 pending.append({'trade_id': key, 'price_ticks': price, 'quantity': qty,
                                 'side': item['side'], 'source_timestamp': item['timestamp'],
-                                'source_timestamp_ns': ns, 'origin': 'HISTORICAL_SYNTHETIC'})
+                                'source_timestamp_ns': ns, 'origin': self.origin})
         next_trades, next_ids = self.trades.copy(), self.trade_ids.copy()
         for trade in pending:
             if len(next_trades) == next_trades.maxlen:
@@ -325,19 +335,24 @@ class KrakenBookAdapter:
         return receipt
 
 
-async def live_messages(permission: Permission, *, stop: asyncio.Event) -> AsyncIterator[str]:
+async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='BTC/USD') -> AsyncIterator[str]:
     """Explicit future opt-in transport; NEVER invoked by synthetic/default startup.
 
     Requires reviewed current protocol and legal evidence. Retains no market payload.
     No retries beyond caller-controlled lifecycle. ws client honors inherited proxy.
     """
     permission.require_live()
+    if symbol not in ('BTC/USD', 'ETH/USD'):raise ProviderError('configuration')
     import websockets.asyncio.client
-    async with websockets.asyncio.client.connect(
+    class FixedEndpoint(websockets.asyncio.client.connect):
+        def process_redirect(self,error):
+            # A provider redirect must not expand this explicit outbound allowlist.
+            return error
+    async with FixedEndpoint(
             'wss://ws.kraken.com/v2', max_size=MAX_PAYLOAD, max_queue=4,
             open_timeout=10, close_timeout=3, ping_interval=20, ping_timeout=10) as ws:
-        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'book', 'symbol': ['BTC/USD'], 'depth': 10, 'snapshot': True}}))
-        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'trade', 'symbol': ['BTC/USD'], 'snapshot': False}}))
+        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'book', 'symbol': [symbol], 'depth': 10, 'snapshot': True}}))
+        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'trade', 'symbol': [symbol], 'snapshot': False}}))
         while not stop.is_set():
             try:
                 raw = await asyncio.wait_for(ws.recv(), timeout=1)

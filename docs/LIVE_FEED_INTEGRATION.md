@@ -1,5 +1,8 @@
 # Live-feed integration — authored provider readiness, live access blocked
 
+Current supervised candidate implementation: [LIVE_PROVIDER_OPERATIONS.md](LIVE_PROVIDER_OPERATIONS.md).
+This section retains its earlier evidence scope; actual external provider qualification remains blocked.
+
 ## Actual delivery and boundary
 
 `terminal/providers/kraken.py` supplies a provisional Kraken-v2-shaped L2/trade

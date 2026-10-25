@@ -1,5 +1,8 @@
 # Local native terminal reproduction
 
+Current supervised candidate implementation: [LIVE_PROVIDER_OPERATIONS.md](LIVE_PROVIDER_OPERATIONS.md).
+This section retains its earlier evidence scope; actual external provider qualification remains blocked.
+
 Use CPython3.12,C++20 GCC/Clang,CMake>=3.20,Ninja,Node24/npm. Existing pinned native
 build tools:requirements-python.lock. Gateway lock:terminal/server/requirements.txt;
 frontend/test npm locks are committed. No restricted data or credentials required.
