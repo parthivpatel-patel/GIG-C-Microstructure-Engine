@@ -247,3 +247,30 @@ regression logs are preserved. Full fixture-browser9 and local HTTPS/WSS8 passed
 against the final runtime;prior same-session unchanged UI/security/native gates retained.
 Next exact action:commit/push this validated SEC fix,run clean-source benchmark/archive,
 then commit consolidated STOCK_DATA_REPAIR_REPORT.md and safe evidence manifest.
+
+## Stock data repair closed local checkpoint
+
+Validated source18d67fba941a96aff68ac459179cf365379868f7 and initial
+caa9639117e93592d6df6fac6b313dadd173aa6e are pushed and remote-verified.
+Full253 Release/Debug/ASan all passed,LSan0;focused77;security46;loaded authored browser9,
+unavailable stock10,crypto21,recorded9,provider9,TLS8,frontend4,guards5,packaging3,
+installed8+6,fresh native aggregate1 each six configs. No final fail/error/skip.
+Full unchanged native155×6/eight canonical identities reused with Git-tree proof.
+Source archive574 intended safe byte-identical members;no market observations/secrets.
+Clean-source native L1 quote+Python path measured25.48µs/call (not exchange latency),
+with bounded authored model/disclosure measurements and source/fixture identities.
+
+Consolidated report:STOCK_DATA_REPAIR_REPORT.md;safe evidence:evidence/stock_data_repair.json;
+owner setup:STOCK_DATA_REPAIR_GUIDE.md. New current source remains unqualified on ARM64;
+manual owner-gated workflow now requires253 terminal tests. No workflows dispatched.
+No actual Alpaca/SEC market request,account/order call,paid service or restricted data.
+Five official public Alpaca SDK source documents corroborated via allowed GitHub;actual
+entitlements/terms/direct API responses remain unverified. Main12f3a539 unchanged.
+
+Exact next owner action:stop server,fast-forward feature branch,rebuild frontend,run
+scripts/check_stock_configuration.py,grant this repository private Codespaces access to
+existing ALPACA_API_KEY_ID/ALPACA_API_SECRET_KEY secrets,restart Codespace/server,and
+complete real policy/entitlement/SEC-identifying review before enabling source gates.
+Do not paste secrets into chat. Search AAPL then NVDA and collect only sanitized source
+status/hash/error evidence. Do not treat fixture acceptance as real-market qualification.
+Resume from the final documentation SHA in Git/delivery;no background engineering runs.
