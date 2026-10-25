@@ -30,7 +30,14 @@ Effect reference_effect(const Reference& before,const Message& m,const Reference
     std::array<Level,6> expected{};std::size_t count=0;
     for(const auto& l:old)if(!l.missing&&l.price.value!=m.price.value)expected[count++]=l;
     if(next)expected[count++]={m.price,Shares{next},false};
-    std::sort(expected.begin(),expected.begin()+static_cast<std::ptrdiff_t>(count),[&](const auto& a,const auto& b){return bid?a.price.value>b.price.value:a.price.value<b.price.value;});
+    // At most5 old occupied levels +1 submission. Explicit bounded insertion
+    // keeps every index below6 and avoids generic sort's16-element optimization
+    // path in GCC Release diagnostics; no warning suppression or padded dummy data.
+    for(std::size_t i=1;i<expected.size();++i){
+        if(i>=count){break;}const auto pending=expected[i];auto at=i;
+        while(at>0&&(bid?pending.price.value>expected[at-1].price.value:pending.price.value<expected[at-1].price.value)){expected[at]=expected[at-1];--at;}
+        expected[at]=pending;
+    }
     result.best_eligible=count>0;const auto& other=bid?before.asks:before.bids;const auto& other_current=bid?after.asks:after.bids;
     result.best_match=result.best_eligible&&expected[0]==current[0]&&other[0]==other_current[0];
     result.depth_eligible=next>0||occupied<5;
@@ -47,7 +54,7 @@ gig::Result<KnownSubset> KnownSubset::create(SourceBinding s,Limits limits,std::
     catch(...){return gig::Result<KnownSubset>::failure(gig::ErrorCode::resource_exhausted,"lobster.subset.storage");}
 }
 gig::Result<Step> KnownSubset::process(std::string_view message,std::string_view reference) noexcept {
-    const auto pair=validator_.accept(message,reference);if(!pair)return gig::Result<Step>::failure(pair.error.code,pair.error.field);
+    const auto pair=validator_.accept(message,reference);if(!pair)return gig::Result<Step>::failure(pair.error.code,pair.error.field,pair.error.index);
     const auto& m=pair.data->message;const auto& ref=pair.data->reference;Step step{m,Disposition::external,{}};
     if(previous_)step.effect=reference_effect(*previous_,m,ref);else step.effect.exclusion="first_row_no_pre_state";
     const auto row=summary_.rows++;
@@ -55,7 +62,7 @@ gig::Result<Step> KnownSubset::process(std::string_view message,std::string_view
     if(step.effect.best_eligible){++summary_.best_eligible;summary_.best_matches+=step.effect.best_match?1U:0U;}
     if(step.effect.depth_eligible){++summary_.depth_eligible;summary_.depth_matches+=step.effect.depth_match?1U:0U;}
     const bool effect_mismatch=(step.effect.quantity_eligible&&!step.effect.quantity_match)||(step.effect.best_eligible&&!step.effect.best_match)||(step.effect.depth_eligible&&!step.effect.depth_match);
-    if(effect_mismatch&&!summary_.first_mismatch)summary_.first_mismatch=row;
+    if(effect_mismatch&&!summary_.first_mismatch){summary_.first_mismatch=row;summary_.first_mismatch_code=m.code;summary_.first_mismatch_category=step.effect.quantity_eligible&&!step.effect.quantity_match?"quantity":step.effect.best_eligible&&!step.effect.best_match?"best":"depth";}
     previous_=ref;
     if(m.kind==Kind::unsupported){step.disposition=Disposition::unsupported;++summary_.unsupported;summary_.prefix_blocked=true;}
     else if(m.kind==Kind::hidden_execution||m.kind==Kind::halt){++summary_.external;}
@@ -65,7 +72,7 @@ gig::Result<Step> KnownSubset::process(std::string_view message,std::string_view
         if(m.kind!=Kind::add&&!existing){
             if(marker!=seen_.end()&&marker->known_submission){step.disposition=Disposition::inconsistent_history;++summary_.inconsistent;summary_.prefix_blocked=true;}
             else if(marker==seen_.end()&&seen_.size()==lifetime_limit_){step.disposition=Disposition::resource_rejected;step.native_error={gig::ErrorCode::capacity,"lobster.lifetime"};++summary_.resource_rejected;summary_.prefix_blocked=true;}
-            else {step.disposition=Disposition::unknown_order;++summary_.unknown;if(marker==seen_.end())seen_.push_back({id,false});}
+            else {step.disposition=Disposition::unknown_order;++summary_.unknown;if(!summary_.first_unknown_order)summary_.first_unknown_order=row;if(marker==seen_.end())seen_.push_back({id,false});}
         }
         else if((m.kind==Kind::add&&marker!=seen_.end())||(existing&&(existing->order.side!=side||existing->order.price_ticks.value()!=m.price.value||(m.kind==Kind::erase?existing->order.quantity.value()!=m.quantity.value:m.quantity.value>existing->order.quantity.value())||(m.kind==Kind::cancel&&m.quantity.value==existing->order.quantity.value())))){
             step.disposition=Disposition::inconsistent_history;++summary_.inconsistent;summary_.prefix_blocked=true;
@@ -98,7 +105,7 @@ gig::Result<Step> KnownSubset::process(std::string_view message,std::string_view
     }
     if(!summary_.prefix_blocked){for(std::size_t i=0;i<10;++i)if(sums[i]){const auto qty=i<5?ref.asks[i].quantity.value:ref.bids[i-5].quantity.value;++step.lower_bound_checks;step.lower_bound_violations+=sums[i]>qty?1U:0U;step.equal_level_quantities+=sums[i]==qty?1U:0U;}}
     summary_.lower_bound_checks+=step.lower_bound_checks;summary_.lower_bound_violations+=step.lower_bound_violations;summary_.equal_level_quantities+=step.equal_level_quantities;
-    if(step.lower_bound_violations){summary_.prefix_blocked=true;if(!summary_.first_mismatch)summary_.first_mismatch=row;}
+    if(step.lower_bound_violations){summary_.prefix_blocked=true;if(!summary_.first_mismatch){summary_.first_mismatch=row;summary_.first_mismatch_code=m.code;summary_.first_mismatch_category="known_lower_bound";}}
     return gig::Result<Step>::success(step);
 }
 } // namespace gig::lobster

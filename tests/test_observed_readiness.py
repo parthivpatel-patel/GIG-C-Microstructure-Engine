@@ -96,5 +96,7 @@ if __name__=='__main__':
         analysis=sys.argv.pop(1) if len(sys.argv)>1 else None
         subprocess.run([driver],check=True)
         subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reference.py'),driver],check=True)
-        if analysis:subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reconstruction.py'),analysis],check=True)
+        if analysis:
+            subprocess.run([sys.executable,str(ROOT/'scripts/check_lobster_reconstruction.py'),analysis],check=True)
+            subprocess.run([sys.executable,str(ROOT/'tests/test_lobster_workflow.py'),analysis],check=True)
     unittest.main()

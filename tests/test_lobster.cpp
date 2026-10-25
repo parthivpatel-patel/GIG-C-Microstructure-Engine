@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
+#include <chrono>
 #include "support/lobster_checks.hpp"
 using namespace gig::lobster;
 namespace {
@@ -32,6 +33,15 @@ void tests(){
 }
 int main(int argc,char** argv){try{
     if(argc==1){tests();return 0;}
+    if(argc==3&&std::string_view(argv[1])=="--parser-benchmark"){
+        const auto n=std::stoull(argv[2]);if(n==0||n>1000000)return 2;
+        const auto row=reference();const auto start=std::chrono::steady_clock::now();std::uint64_t checksum=0;
+        for(std::uint64_t i=0;i<n;++i){const auto m=parse_message("34200.123456789,1,19,10,100,1");const auto r=parse_reference(row);if(!m||!r)return 2;checksum+=m.data->quantity.value+r.data->bids[0].quantity.value;}
+        const auto valid=std::chrono::steady_clock::now();std::uint64_t errors=0;
+        for(std::uint64_t i=0;i<n;++i){errors+=!parse_message("invalid")?1U:0U;errors+=!parse_reference("invalid")?1U:0U;}
+        const auto finish=std::chrono::steady_clock::now();
+        std::cout<<"{\"pairs\":"<<n<<",\"checksum\":"<<checksum<<",\"errors\":"<<errors<<",\"valid_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(valid-start).count()<<",\"invalid_ns\":"<<std::chrono::duration_cast<std::chrono::nanoseconds>(finish-valid).count()<<"}\n";return 0;
+    }
     if(argc!=2||std::string_view(argv[1])!="--parser-fixtures")return 2;
     std::string line;line.reserve(4100);char c{};
     while(std::cin.get(c)){if(c!='\n'){if(line.size()>=4098)return 2;line.push_back(c);continue;}

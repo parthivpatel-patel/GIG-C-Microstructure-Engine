@@ -14,7 +14,7 @@ def message(line):
         if len(f)!=6 or not re.fullmatch(r'[0-9]{1,5}(?:\.[0-9]{1,9})?',f[0]):return None
         ns=Decimal(f[0])*10**9
         if not 0<=ns<86400*10**9:return None
-        if not all(re.fullmatch(r'-?[0-9]+',x) for x in f[1:]):return None
+        if not all(re.fullmatch(r'[0-9]+',x) for x in f[1:4]) or not all(re.fullmatch(r'-?[0-9]+',x) for x in f[4:]):return None
         code,order,quantity,price,side=map(int,f[1:])
         if not(0<=code<2**32 and 0<=order<2**64 and 0<=quantity<2**64 and -2**63<=price<2**63 and -2**63<=side<2**63):return None
         kind={1:0,2:1,3:2,4:3,5:4,7:5}.get(code,6)
@@ -28,7 +28,7 @@ def message(line):
 
 def reference(line):
     fields=line.rstrip('\r\n').split(',')
-    if len(fields)!=20 or not all(re.fullmatch(r'-?[0-9]+',v) for v in fields):return None
+    if len(fields)!=20 or not all(re.fullmatch(r'[0-9]+' if i%2 else r'-?[0-9]+',v) for i,v in enumerate(fields)):return None
     values=list(map(int,fields));levels=[];missing=0;zero=False
     for i in range(5):
         row=values[i*4:i*4+4]
@@ -67,6 +67,7 @@ def main(driver):
     for i,value in [(0,'9999999999'),(2,'9999999999'),(4,'109'),(6,'101'),(1,str(2**64)),(1,'0'),(2,'110'),(2,'115')]:
         f=plain.split(',');f[i]=value;cases.append(('R',','.join(f)))
     cases.extend([('R',plain+',0'),('R',plain.rsplit(',',1)[0])])
+    cases.extend([('M','1,-0,0,0,0,0'),('M','1,5,-0,1,100,1'),('R',','.join(['9999999999,-0,-9999999999,0']*5))])
     expected=[message(row) if kind=='M' else reference(row) for kind,row in cases]
     data=''.join(k+':'+s+'\n' for k,s in cases)
     p=subprocess.run([driver,'--parser-fixtures'],input=data,text=True,capture_output=True,timeout=30)

@@ -18,7 +18,9 @@ def effect(before,message,after):
     def maps(row):return [{row[i]:row[i+1] for i in range(side,20,4) if row[i]!=(9999999999 if side==0 else -9999999999)} for side in (0,2)]
     prior,current=maps(before),maps(after)
     def best(x):return (min(x[0].items()) if x[0] else None,max(x[1].items()) if x[1] else None)
-    if before[2]>=before[0] or after[2]>=after[0] or any(x==0 for x in before[1::2]+after[1::2]):return answer
+    zero=lambda row:any(row[i+1]==0 and row[i] not in (9999999999,-9999999999) for i in range(0,20,2))
+    crossed=lambda row:row[0]!=9999999999 and row[2]!=-9999999999 and row[2]>=row[0]
+    if crossed(before) or crossed(after) or zero(before) or zero(after):return answer
     if code not in (1,2,3,4,5,7):return answer
     if code in (5,7):answer.update(best_eligible=1,best_matches=int(best(prior)==best(current)),depth_eligible=1,depth_matches=int(prior==current));return answer
     side=1 if direction==1 else 0;other=1-side;old=prior[side]
@@ -84,6 +86,8 @@ def main(driver,report=None):
     for quantity in (1,2,7,19,21,2**32-1):
         a=book(20+quantity);c=book(20)
         fixtures.append(([f'1,1,11,{quantity},100,1',f'2,4,11,{quantity},100,1'],[a,c]))
+    empty=[9999999999,0,-9999999999,0]*5;one=empty.copy();one[2:4]=[100,1]
+    fixtures.append((['1,5,0,1,100,1','2,1,33,1,100,1'],[empty,one]))
     canonical=hashlib.sha256();results=[]
     with tempfile.TemporaryDirectory() as temp:
         for i,(messages,books) in enumerate(fixtures):

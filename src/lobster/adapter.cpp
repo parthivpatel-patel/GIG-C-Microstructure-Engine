@@ -54,7 +54,7 @@ gig::Result<PairedValidator> PairedValidator::create(Limits l) noexcept {
     return gig::Result<PairedValidator>::success(PairedValidator(l));
 }
 gig::Result<Pair> PairedValidator::accept(std::string_view message,std::string_view reference) noexcept {
-    const auto fail=[&](gig::ErrorCode code,std::string_view field){++summary_.rejected;summary_.stopped=true;return gig::Result<Pair>::failure(code,field);};
+    const auto fail=[&](gig::ErrorCode code,std::string_view field){++summary_.rejected;summary_.stopped=true;return gig::Result<Pair>::failure(code,field,static_cast<std::size_t>(summary_.accepted));};
     if(summary_.stopped||summary_.input_complete)return gig::Result<Pair>::failure(gig::ErrorCode::inconsistent_state,"lobster.stopped");
     if(message.size()>limits_.max_line_bytes||reference.size()>limits_.max_line_bytes||summary_.accepted==limits_.max_records)return fail(gig::ErrorCode::capacity,"lobster.row_budget");
     const auto bytes=message.size()+reference.size();if(bytes>limits_.max_bytes-summary_.bytes)return fail(gig::ErrorCode::capacity,"lobster.byte_budget");

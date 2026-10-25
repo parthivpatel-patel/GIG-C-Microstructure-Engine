@@ -22,6 +22,10 @@ def load_manifest(path):
             d[k]=v
         return d
     m=json.loads(data,object_pairs_hook=unique)
+    return validate_manifest(m)
+
+
+def validate_manifest(m):
     required={'schema','origin','dataset','session','instrument','initialization','message_sha256','reference_sha256','permission'}
     if type(m) is not dict or set(m)!=required or m['schema']!='gig.lobster.run.v1' or m['origin'] not in ('synthetic','observed'):raise ValueError('manifest schema/origin')
     for key in ('dataset','session'):
@@ -37,6 +41,8 @@ def load_manifest(path):
 
 
 def run(m,messages,reference,driver,*,max_rows=1000000,max_bytes=128*1024*1024,max_memory=64*1024*1024,timeout=120,max_line=4096):
+    validate_manifest(m)
+    if any(type(v) is not int for v in (max_rows,max_bytes,max_memory,max_line)):raise ValueError('integer resource budget required')
     if not(1<=max_rows<=10000000 and 1<=max_bytes<=1024**3 and 4096<=max_memory<=128*1024*1024 and 0<timeout<=3600 and 1<=max_line<=4096):raise ValueError('resource budget')
     if m['origin']=='observed' and not m['permission']['cloud_processing_approved']:
         return dict(schema='gig.lobster.run_result.v1',status='BLOCKED_PERMISSION',origin='observed',input_opened=False,empirical_statistics=None,full_l3_complete=False)
