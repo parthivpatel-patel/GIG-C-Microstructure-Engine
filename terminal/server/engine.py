@@ -28,6 +28,7 @@ class NativeSession:
     """Mutated only on the ASGI event loop, never shared with a background thread."""
     def __init__(self):
         self.live_feed = None
+        self.recorded_session = None
         self.mode = 'HISTORICAL_REPLAY'
         self.dataset = 'terminal-authored-v2'
         self.aggregate = None
@@ -55,6 +56,7 @@ class NativeSession:
 
     @property
     def source_events(self):
+        if self.recorded_session is not None:return range(self.recorded_session.event_count)
         if self.dataset == 'kraken-authored-profile-v1':
             from terminal.providers.fixtures import EVENTS as profile_events
             return profile_events
@@ -62,6 +64,8 @@ class NativeSession:
 
     def restart(self):
         self.playing = False
+        if self.recorded_session is not None:
+            self.position=0;return
         if self.dataset == 'kraken-authored-profile-v1':
             self.reset_aggregate()
             self.step()
@@ -74,6 +78,11 @@ class NativeSession:
             self.step()
 
     def step(self):
+        if self.recorded_session is not None:
+            if self.position>=self.recorded_session.event_count:self.playing=False;return False
+            self.position+=1
+            if self.position==self.recorded_session.event_count:self.playing=False
+            return True
         if self.position >= len(self.source_events):
             self.playing = False
             return False
@@ -99,6 +108,7 @@ class NativeSession:
             candidate = NativeSession()
             candidate.dataset = value
             if value != 'terminal-authored-v2': candidate.restart()
+            self.recorded_session=None
             self.dataset, self.mode, self.playing = value, 'HISTORICAL_REPLAY', False
             self.replay, self.aggregate, self.adapter = candidate.replay, candidate.aggregate, candidate.adapter
             self.position = candidate.position
@@ -109,6 +119,8 @@ class NativeSession:
         elif action == 'seek':
             if self.mode != 'HISTORICAL_REPLAY' or type(value) is not int or not 0 <= value <= len(self.source_events):
                 raise ControlError('INVALID_SEEK', 'seek requires authored replay position within the source boundary')
+            if self.recorded_session is not None:
+                self.position=value;self.playing=False;return
             if self.dataset == 'kraken-authored-profile-v1':
                 self.reset_aggregate()
                 for _ in range(value): self.step()
@@ -187,6 +199,9 @@ class NativeSession:
             'notifications': list(self.notifications), 'simulation': deepcopy(self.last_simulation) if simulation else None,
         }
 
+        if not live and not simulation and self.recorded_session is not None:
+            result.update(self.recorded_session.view(self.position,self.playing,self.speed))
+            result['diagnostics']['native_status']={'recorded_native_prefix_cache':True,'prefixes':len(self.recorded_session.frames),'encoded_bytes':self.recorded_session.cache_bytes}
         if live and self.live_feed is not None:
             view=self.live_feed.view()
             # Fixture-injected transports cannot be displayed as live observations.

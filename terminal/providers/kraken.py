@@ -286,7 +286,8 @@ class KrakenBookAdapter:
             changes.append(levels)
         # Prepare the owned receipt/counters before native commit: publication
         # allocation failure cannot strand native state ahead of accepted cache.
-        receipt = {'kind': 'snapshot' if snapshot else 'update', 'source_timestamp': source_time,
+        receipt = {'native_event':{'snapshot':snapshot,'bids':changes[0],'asks':changes[1],'sequence':None},
+                   'kind': 'snapshot' if snapshot else 'update', 'source_timestamp': source_time,
                    'source_timestamp_ns': source_ns, 'source_sequence': None,
                    'receive_monotonic_ns': str(now_ns), 'origin': self.origin,
                    'integration_profile': 'unverified_kraken_v2_authored_v1'}

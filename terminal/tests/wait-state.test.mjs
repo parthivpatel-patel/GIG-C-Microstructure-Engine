@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {waitState} from './wait-state.mjs';
+test('awaits false promises and polls until actual state matches',async()=>{let calls=0;const page={request:{get:async()=>({status:()=>200,json:async()=>({position:++calls})})}};await waitState(page,'http://authored.invalid',async s=>s.position===3,100);assert.equal(calls,3)});
+test('permanently false async predicate rejects rather than passing Promise truthiness',async()=>{const page={request:{get:async()=>({status:()=>200,json:async()=>({})})}};await assert.rejects(waitState(page,'http://authored.invalid',async()=>false,30),/predicate/)});
+test('HTTP failure cannot become a successful wait',async()=>{const page={request:{get:async()=>({status:()=>403})}};await assert.rejects(waitState(page,'http://authored.invalid',()=>true),/403/)});

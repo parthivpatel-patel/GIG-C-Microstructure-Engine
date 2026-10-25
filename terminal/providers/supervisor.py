@@ -20,7 +20,8 @@ def configured_permission(environment):
         raise ProviderError('permission_reference')
     return Permission(environment.get('GIG_LIVE_PROTOCOL_REVIEWED')=='1',
         environment.get('GIG_LIVE_PRIVATE_DISPLAY_APPROVED')=='1',
-        environment.get('GIG_LIVE_CLOUD_PROCESSING_APPROVED')=='1',False,reference)
+        environment.get('GIG_LIVE_CLOUD_PROCESSING_APPROVED')=='1',
+        environment.get('GIG_LIVE_RECORDING_RETENTION_APPROVED')=='1',reference)
 
 
 class FeedSupervisor:
@@ -37,7 +38,7 @@ class FeedSupervisor:
         self.reconnects=0;self.messages=0;self.failures=0;self.received_at_ns=None
         self.exchange_ns=None;self.kind=None;self.epoch=0;self.depth=10
         self.price_scale=100000000;self.quantity_scale=100000000
-        self.permission=None;self.pending=False
+        self.permission=None;self.pending=False;self.capture=None
 
     def _new_book(self):
         aggregate=gig._native.AggregateDepth(32,1048576)
@@ -65,6 +66,7 @@ class FeedSupervisor:
         old=self.cancel()
         if old:
             with suppress(asyncio.CancelledError):await old
+        if self.capture is not None:await self.capture.stop()
 
     async def start(self,symbol='BTC/USD'):
         if symbol not in SYMBOLS:raise ProviderError('configuration')
@@ -103,12 +105,15 @@ class FeedSupervisor:
                     raw=first
                     while epoch==self.epoch and not self.stop_event.is_set():
                         self.pending=False
-                        receipt=self.adapter.feed(raw,self.clock())
+                        now=self.clock();unix=str(self.wall_clock())
+                        receipt=self.adapter.feed(raw,now)
+                        if self.capture is not None and self.capture.state in ('RECORDING','FINALIZING'):
+                            self.capture.offer(raw,now,unix,receipt)
                         self.messages+=1;self.kind=receipt['kind']
                         if self.messages%64==0:await asyncio.sleep(0)
                         if self.messages>1_000_000_000:raise ProviderError('session_record_budget')
                         if receipt['kind'] in ('snapshot','update'):
-                            self.received_at_ns=str(self.wall_clock())
+                            self.received_at_ns=unix
                             self.exchange_ns=receipt.get('source_timestamp_ns')
                             self.state='LIVE_VERIFIED' if self.observed_transport else 'TESTED_WITH_FIXTURES'
                             self.reason='validated_subscribed_L2_not_full_market_or_L3'
@@ -123,6 +128,7 @@ class FeedSupervisor:
                     # Invalidate before fallible/awaiting close; no trusted publication window.
                     if epoch==self.epoch:
                         self.state,self.reason='RESYNCING','stream_ended_snapshot_required'
+                        if self.capture is not None:await self.capture.abort('source_interrupted')
                     # Explicit generator closure closes socket even on parsing/native rejection.
                     if hasattr(stream,'aclose'):await stream.aclose()
                 return
@@ -169,9 +175,10 @@ class FeedSupervisor:
                 'updates':self.adapter.updates if self.adapter else 0,
                 'trade_window_count':len(self.adapter.trades) if trusted else 0,
                 'integrity':'candidate_CRC32_scoped_no_exchange_sequence','protocol_review':'operator_attested' if self.permission else 'unverified'},
+            'recording':self.capture.status() if self.capture else {'state':'DISABLED'},
             'flow':{'trades':list(self.adapter.trades) if trusted else [],'classification':'provider_reported_side_not_inferred_cancellations'},
             'provenance':{'category':origin,'dataset':None,'complete_initialization':False,
-                'initialization_scope':'subscribed aggregate L2 only','recording_enabled':False,
+                'initialization_scope':'subscribed aggregate L2 only','recording_enabled':self.capture is not None and self.capture.state=='RECORDING',
                 'clock':'receive:monotonic_ns;wall:unix_ns;exchange:optional_RFC3339',
                 'profile':'provisional_kraken_v2','permission':'operator_attested' if self.permission else 'unverified',
                 'source_sequence':None,'session_segment':f'{self.epoch}:{self.reconnects}',

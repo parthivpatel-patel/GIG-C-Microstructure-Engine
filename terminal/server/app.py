@@ -122,6 +122,12 @@ def create_app():
     native.live_feed = feed
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
+    l2_directory=Path(os.environ.get('GIG_TERMINAL_L2_RECORDINGS',str(ROOT/'terminal'/'recordings'/'l2')))
+    def observed_processing_allowed():
+        from terminal.providers.supervisor import configured_permission
+        from terminal.providers.kraken import ProviderError
+        try:configured_permission(os.environ).require_live();return True
+        except ProviderError:return False
     # Aggregate operation rate bound, including all connected browser clients.
     last_actions = []
 
@@ -356,10 +362,64 @@ def create_app():
             except (ValueError, OSError, asyncio.TimeoutError):
                 return error('VALIDATION_UNAVAILABLE', 'Authored native diagnostic unavailable or failed its bounded contract', 422)
 
+    @route('/api/v1/recordings', methods=['GET'])
+    @json_endpoint
+    async def sessions(request):
+        from terminal.l2_playback import discover
+        try:return {'schema_version':'1',**await asyncio.to_thread(discover,l2_directory,allow_observed=observed_processing_allowed())}
+        except (ValueError,OSError):return error('RECORDING_REFUSED','Recording catalog unavailable or over budget',409)
+
     @route('/api/v1/recording', methods=['POST'])
     @json_endpoint
     async def recording(request: Request):
         data = await bounded_json(request)
+        if data.get('action') in ('start_l2','stop_l2'):
+            if set(data)!={'action'}:raise ControlError('INVALID_RECORDING','Capture takes no paths, permissions or URLs')
+            if work_lock.locked():return error('BUSY','One recording operation may run at a time',409)
+            async with work_lock:
+                if data['action']=='stop_l2':
+                    result=await feed.capture.stop() if feed.capture else {'state':'DISABLED'}
+                    return {'schema_version':'1','recording':result}
+                from terminal.providers.supervisor import configured_permission
+                from terminal.l2_capture import Capture
+                from terminal.providers.kraken import ProviderError
+                import uuid
+                try:
+                    permission=configured_permission(os.environ);permission.require_live()
+                    if os.environ.get('GIG_LIVE_RECORDING_ENABLED')!='1' or not permission.recording_approved:
+                        raise ValueError('retention_permission_required')
+                    if feed.state!='LIVE_VERIFIED' or native.mode!='LIVE':raise ValueError('verified_production_feed_required')
+                    if feed.capture and not feed.capture.task.done():raise ValueError('capture_busy')
+                    capture=await Capture.create(l2_directory,'capture-'+uuid.uuid4().hex,enabled=True,
+                        origin='LIVE_OBSERVED',permission=permission,symbol=feed.symbol,version=2)
+                    try:
+                        async with lock:
+                            await feed.start(feed.symbol)  # Fresh observed source snapshot, never an invented seed.
+                            feed.capture=capture
+                    except BaseException:await capture.abort('startup_failed');raise
+                    return {'schema_version':'1','recording':capture.status()}
+                except (ValueError,OSError,ProviderError):return error('RECORDING_REFUSED','Verified production source and separate retention approval required',409)
+        if data.get('action') in ('save_l2_fixture','load_l2','delete_l2'):
+            if set(data)-{'action','identity'}:raise ControlError('INVALID_RECORDING','Only recording identity is accepted; no paths')
+            identity=data.get('identity','authored-l2-v2')
+            if work_lock.locked():return error('BUSY','One recording operation may run at a time',409)
+            async with work_lock:
+                from terminal.l2_playback import save_fixture,RecordedSession,delete_session
+                try:
+                    if data['action']=='save_l2_fixture':
+                        result=await asyncio.to_thread(save_fixture,l2_directory,identity)
+                    elif data['action']=='delete_l2':
+                        result={'deleted':await asyncio.to_thread(delete_session,l2_directory,identity)}
+                    else:
+                        candidate=await asyncio.to_thread(RecordedSession,l2_directory,identity,allow_observed=observed_processing_allowed())
+                        async with lock:
+                            await feed.close()
+                            native.recorded_session=candidate;native.dataset='recorded-l2'
+                            native.mode='HISTORICAL_REPLAY';native.position=0;native.playing=False
+                        result={'identity':identity,'records':candidate.event_count,'cache_encoded_bytes':candidate.cache_bytes}
+                except (ValueError,OSError,gig.EngineError):
+                    return error('RECORDING_REFUSED','Recording failed integrity, permission, expiry or resource policy',409)
+                return {'schema_version':'1','result':result}
         if set(data) - {'action', 'enabled'} or data.get('action') not in ('save', 'verify', 'load', 'delete'):
             raise ControlError('INVALID_RECORDING', 'expected save, verify or delete; no paths or observed data accepted')
         if work_lock.locked():
