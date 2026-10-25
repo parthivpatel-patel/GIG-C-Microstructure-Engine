@@ -7,7 +7,7 @@ def finite(x,lo,hi):
 
 def contract(code):
     if type(code) is not str:raise ValueError('option_identity')
-    m=re.fullmatch(r'([A-Z]{1,6})\s{0,5}(\d{6})([CP])(\d{8})',code)
+    m=re.fullmatch(r'([A-Z]{1,6}) {0,5}(\d{6})([CP])(\d{8})',code)
     if not m:raise ValueError('option_identity')
     expiry=datetime.date(2000+int(m[2][:2]),int(m[2][2:4]),int(m[2][4:6]))
     strike=int(m[4])

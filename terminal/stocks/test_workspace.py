@@ -96,6 +96,9 @@ class ModelTests(unittest.TestCase):
         h=.001;f=lambda s:options.price(s,110,.7,.3,.02)['price'];g=options.price(100,110,.7,.3,.02)
         self.assertAlmostEqual(g['delta'],(f(100+h)-f(100-h))/(2*h),places=7);self.assertAlmostEqual(g['gamma'],(f(100+h)-2*f(100)+f(100-h))/h**2,places=6)
         v=lambda x:options.price(100,110,.7,x,.02)['price'];self.assertAlmostEqual(g['vega'],(v(.300001)-v(.299999))/.000002,places=6)
+        r=lambda x:options.price(100,110,.7,.3,x)['price'];t=lambda x:options.price(100,110,x,.3,.02)['price']
+        self.assertAlmostEqual(g['rho'],(r(.020001)-r(.019999))/.000002,places=6)
+        self.assertAlmostEqual(g['theta_per_year'],-(t(.700001)-t(.699999))/.000002,places=6)
     def test_iv_roundtrip_and_unidentifiable_price(self):
         for v in (.05,.2,.8):self.assertAlmostEqual(options.implied(options.price(100,100,1,v)['price'],100,100,1),v,places=8)
         with self.assertRaises(ValueError):options.implied(1000,100,100,1)
@@ -103,6 +106,7 @@ class ModelTests(unittest.TestCase):
         for v in (True,float('nan'),-1,6):
             with self.assertRaises(ValueError):options.price(100,100,1,v)
         c=options.contract('AAPL  261120C00100000');self.assertEqual(c['strike_millis'],'100000');self.assertEqual(c['expiration'],'2026-11-20')
+        with self.assertRaises(ValueError):options.contract('AAPL\n261120C00100000')
     def test_surface_is_explicitly_theoretical_and_bounded(self):
         out=options.scenario({'spot':100,'strike':100,'years':1,'volatility':.2});self.assertEqual(out['classification'],'THEORETICAL_SCENARIO');self.assertEqual(sum(map(len,out['surface'])),153);self.assertTrue(all(p['volatility']==.2 for row in out['surface'] for p in row))
     def test_empirical_risk_independent_sorted_reference(self):

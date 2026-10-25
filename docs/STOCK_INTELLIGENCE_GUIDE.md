@@ -18,7 +18,8 @@ Theoretical European option prices,Greeks,IV and interactive 3D constant-volatil
 work without external data. Spot,strike,volatility and maturity are explicit scenario
 assumptions,not quotes for the selected ticker. A flat model grid is not an observed
 smile or calibrated market term structure. OCC-shaped identifier parsing does not verify
-listing,deliverable or exercise adjustments. American exercise/discrete dividends are
+listing,deliverable or exercise adjustments. Expiry YY is explicitly interpreted as
+2000+YY;only ASCII spaces are accepted in the padded root field. American exercise/discrete dividends are
 excluded. Greeks use per1.0 volatility/rate and annual theta;floating approximations
 are separate from the native engine's exact monetary contracts.
 

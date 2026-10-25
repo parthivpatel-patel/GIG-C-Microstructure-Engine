@@ -162,3 +162,13 @@ allowlist,with wrong-target/reuse/forged-header negative controls. No wildcard p
 Exact next action:review/stage safe source+guide,commit/push with [skip ci],measure
 clean-source stock workloads and build/inventory sdist,then commit consolidated stock
 readiness/evidence. External official protocol/rights/credentials/new ARM64 remain blocked.
+
+Stock source716939db2a2bbac2e76dc241d34af06e641bfcca pushed/remotely verified.
+Final review reproduced a padded-option identifier accepting newline as whitespace;
+restricted padding to ASCII spaces,added failing-before regression and explicit20YY
+assumption. Independent finite differences now cover all five Greeks,with closed-form
+HMM/Kalman/GARCH/cost/wealth references. Full224 Release and48-case changed-component
+Debug/ASan pass,LSan0;earlier full224 Debug/ASan already passed unchanged runtime paths.
+Next:push this focused hardening checkpoint,measure and inventory its clean source,
+then finalize evidence/readiness docs. All actual vendor feeds and latest ARM64 remain
+unqualified;Kraken written clarification still pending. No subscription was run.
