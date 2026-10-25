@@ -101,3 +101,29 @@ and fresh native aggregate1 per six configurations passed in ignored
 build/qualification;zero failures/errors/skips in final cohorts and LSan0. Mandatory six155-case native/eight-hash evidence reused only for
 unchanged native trees. No current-head ARM64 claim. Exact next action: commit/push tested source with [skip ci], measure
 clean-commit authored workloads, then commit consolidated evidence/report.
+
+## Provider qualification: verified source checkpoint and handoff
+
+Source160c139954c371515fcfb1a10da52e90d00b22bd pushed and remote SHA verified.
+Final Release/Debug/ASan176 each,LSan0,security46,browser21+9+9,TLS8,frontend4,
+browser guards5,packaging3,installed-wheel8+6,fresh native aggregate1 each six configs.
+No final failures/errors/skips. Full native155 per six/eight hashes reused only with
+identical source/binding/build/fixture tree evidence;workflow changed intentionally.
+Recorded128/512 final hashes unchanged. Clean source archive544 safe byte-identical
+members. Clean Coinbase256-level authored/native integer-oracle benchmark and bounded
+recorded replay measurements captured in evidence/provider_qualification.json.
+
+Consolidated report:PROVIDER_QUALIFICATION_REPORT.md;owner commands and permission
+boundaries:PROVIDER_QUALIFICATION_GUIDE.md. No live vendor request/frame,restricted
+LOBSTER processing,workflow dispatch or exact-HEAD ARM64 result. Current official
+protocol/usage evidence remains blocked here;owner supplied metadata/browser results
+are explicitly labelled. Coinbase recorder is explicitly unsupported,not Kraken-labelled.
+Local fixture implementation is complete;actual live conformance and formal release
+remain blocked. Final documentation SHA is recorded in Git/delivery to avoid recursion.
+
+Exact next action:owner updates feature branch,rebuilds frontend,restarts private server;
+runs the bounded handshake-only tool and shares sanitized JSON plus applicable current
+protocol/usage wording. No subscription until that review and explicit owner test approval.
+Owner separately verifies no-cost runner eligibility and manually qualifies latest HEAD.
+Next session should inspect these reports and Git first,reuse unchanged native evidence,
+and reconcile only demonstrated provider differences. No work continues after task end.

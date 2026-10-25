@@ -18,11 +18,12 @@ or usage permission follow from either statement.
 
 ## Update the private Codespace
 
-Stop the existing server with Ctrl+C. Keep port8787 Private and retain exact Codespaces
+Stop the existing server with Ctrl+C. Keep port 8787 Private and retain exact Codespaces
 Origin configuration. On the existing feature branch:
 
 ```bash
 git pull --ff-only origin feat/bootstrap-cpp20-engine
+npm --prefix terminal/web run build
 bash scripts/start_terminal.sh
 ```
 
@@ -40,8 +41,8 @@ timeout 20s .venv/bin/python scripts/diagnose_websocket_access.py --provider kra
 
 `--provider coinbase` uses its separately fixed endpoint. One connection, zero retries,
 zero redirects, zero application sends/subscriptions. Strict certificate/hostname
-verification and inherited proxy trust remain enabled. Async overall12s, open5s,
-passive receive at most two4096-byte frames, close2s; outer20s bounds process startup.
+verification and inherited proxy trust remain enabled. Async overall 12s, open 5s,
+passive receive at most two 4096-byte frames, close 2s; outer 20s bounds process startup.
 There is no payload retention or raw message output. Unsolicited application frames
 are discarded and stop inspection. TLS/WebSocket and passive-control observations
 are separate from full protocol conformance or usage authorization. Under a configured
@@ -74,10 +75,10 @@ cannot enable Coinbase. Do not set these until justified and an owner-authorized
 subscription test is approved. RECORDING_RETENTION_APPROVED is a separate permission;
 Coinbase recording remains unsupported regardless. No live test was run here.
 
-Coinbase maintains at most256 native levels per side, exposes top10, and rejects an
+Coinbase maintains at most 256 native levels per side, exposes top 10, and rejects an
 oversized snapshot rather than dropping deeper liquidity. This may block real full-depth
 snapshots. Native depth metrics cover all admitted levels; rolling Python research uses
-the declared top10 projection. Match side is an unverified maker-role candidate, never
+the declared top 10 projection. Match side is an unverified maker-role candidate, never
 fabricated aggressor direction. Hidden order identities, FIFO, exchange gap proof and
 checksum are not inferred. Disconnect/update-before-snapshot requires fresh state.
 
@@ -89,7 +90,11 @@ npm --prefix terminal/web run build
 npm --prefix terminal/web test
 ```
 
-The CLI isolates authored localhost policy and disables both live flags. Browser harnesses
+The suite also requires built `gig_itch_validation_demo` and `gig_lobster_validate`
+executables. Set `GIG_TERMINAL_NATIVE_BUILD` to their existing CMake build directory
+(the hosted workflow uses `build/release`). These are authored-only tests, never private
+LOBSTER data. The CLI isolates authored localhost policy and disables both live flags.
+Browser harnesses
 first require health.fixture_tests_safe=true, refusing an enabled/active feed, observed
 replay or recording. Never run fixture browser tests against a working live terminal.
 Use a separate private fixture instance. All fixture source values remain synthetic.
@@ -98,7 +103,7 @@ Use a separate private fixture instance. All fixture source values remain synthe
 
 The separate Native ARM64 workflow is still workflow_dispatch only, guarded to
 feat/bootstrap-cpp20-engine and free_usage_verified=false by default, with the original
-six configurations. New GCC Release wheel-consumer step runs all176 terminal fixtures
+six configurations. New GCC Release wheel-consumer step runs all 176 terminal fixtures
 with both provider flags0, a temporary recording directory, and the freshly built native
 replay binary path. Existing155/158 CTest counts and all eight frozen hashes remain
 mandatory. Policy tests pass locally; no full YAML/actionlint or hosted execution claim.
