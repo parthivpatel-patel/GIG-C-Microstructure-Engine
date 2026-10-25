@@ -19,6 +19,8 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from .engine import ControlError, NativeSession
+from .config import launch_settings
+from .connection import observation
 import gig_microstructure as gig
 
 MAX_BODY = 4096
@@ -31,7 +33,9 @@ DEFAULT_ORIGINS = ('http://127.0.0.1:5173', 'http://localhost:5173',
 
 
 def origins_from_environment():
-    origins = tuple(x.strip() for x in os.environ.get('GIG_TERMINAL_ALLOWED_ORIGINS', ','.join(DEFAULT_ORIGINS)).split(',') if x.strip())
+    # Resolve here too: uvicorn terminal.server.app:app does not run __main__.
+    _, configured, _ = launch_settings(os.environ)
+    origins = tuple(x.strip() for x in (configured if configured is not None else ','.join(DEFAULT_ORIGINS)).split(',') if x.strip())
     if not origins or len(origins) > 8:
         raise RuntimeError('configure one to eight explicit GIG_TERMINAL_ALLOWED_ORIGINS')
     for origin in origins:
@@ -106,6 +110,8 @@ def json_endpoint(function):
 
 def create_app():
     origins = origins_from_environment()
+    _, _, expected_codespaces_origin = launch_settings(os.environ)
+    connections = {'last_mutation': None, 'last_websocket': None}
     native = NativeSession()
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
@@ -143,6 +149,8 @@ def create_app():
                        allow_headers=['Content-Type'], allow_credentials=False)
 
     async def boundary(request, call_next):
+        if request.method == 'POST':
+            connections['last_mutation'] = {**observation(request), 'decision': 'allowed' if request.headers.get('origin') in origins else 'rejected_origin'}
         if request.method == 'POST' and request.headers.get('origin') not in origins:
             native.rejected += 1
             return error('ORIGIN_DENIED', 'exact configured Origin required for mutations', 403)
@@ -206,6 +214,23 @@ def create_app():
     @json_endpoint
     async def schema(request):
         return json.loads((Path(__file__).resolve().parents[1] / 'contracts/state.schema.json').read_text())
+
+    @route('/api/v1/connection', methods=['GET'])
+    @json_endpoint
+    async def connection_status(request):
+        return {
+            'schema_version': '1',
+            'policy_version': 'codespaces-origin-v2',
+            'expected_codespaces_origin': expected_codespaces_origin,
+            'configured_origins': list(origins),
+            'request': observation(request),
+            'last_mutation': connections['last_mutation'],
+            'last_websocket': connections['last_websocket'],
+            'connected_clients': native.clients,
+            'maximum_clients': MAX_CLIENTS,
+            'authority': 'Server-owned configuration only;forwarded headers never expand allowed origins',
+            'privacy': 'Only bounded Origin/Host/proxy scheme/port;no cookies,tokens,client IP or arbitrary headers',
+        }
 
     @route('/api/v1/catalog', methods=['GET'])
     @json_endpoint
@@ -284,10 +309,15 @@ def create_app():
 
     @websocket_route('/api/v1/stream')
     async def stream(socket: WebSocket):
-        if socket.headers.get('origin') not in origins or native.clients >= MAX_CLIENTS:
+        reason = 'rejected_origin' if socket.headers.get('origin') not in origins else 'rejected_capacity' if native.clients >= MAX_CLIENTS else 'accepted'
+        record = {**observation(socket), 'decision': 'accepting' if reason == 'accepted' else reason,
+                  'upgrade_status': None if reason == 'accepted' else 403}
+        connections['last_websocket'] = record
+        if reason != 'accepted':
             await socket.close(code=1008)
             return
         await socket.accept()
+        record['decision'], record['upgrade_status'] = 'accepted', 101
         native.clients += 1
         try:
             while True:

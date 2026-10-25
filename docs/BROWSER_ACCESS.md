@@ -99,3 +99,13 @@ the native library/bindings for interactive book/replay/3D/simulation;missing op
 CLI diagnostics return an explicit unavailable result,not a fake success. Base
 container image manifest availability was checked against Microsoft's registry and
 its digest pinned;actual container build and owner Codespace launch remain untested.
+
+## Page loads but mutations/WS are denied
+
+See [CODESPACES_ORIGIN_REPAIR.md](CODESPACES_ORIGIN_REPAIR.md). Stop the old server
+before pulling/restarting;configure the exact HTTPS Origin,not wss or a trailing
+slash. Current launcher and direct ASGI app share one Codespaces policy. The safe
+/api/v1/connection endpoint exposes actual bounded Origin/Host/proxy diagnostics
+without cookies/tokens. A rendering page alone does not prove a WS upgrade or
+that the running process loaded newly pulled settings. No frontend/native rebuild
+is required for this backend configuration repair.

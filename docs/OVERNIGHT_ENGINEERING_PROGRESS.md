@@ -440,3 +440,20 @@ new exact-SHA ARM64,external private phone preview. Unimplemented:general intera
 ITCH/LOBSTER import,full flow analytics UI,continuous observed recording and equities.
 No hidden completeness or production claim. Do not rerun validated native gates
 unless source/failure justifies;resume from these receipts and current Git state.
+
+## Private Codespaces Origin repair checkpoint
+
+Entry bcec6f9. Owner reports private HTTPS app renders but POST/WS rejected.
+Direct authenticated owner access unavailable (one proxy CONNECT403,no bypass).
+Confirmed failing-before:ASGI import bypassed launcher-only Codespaces origins.
+Shared server/config.py now resolves exact policy for both entry points;server-owned
+name metadata also works without optional flag. Strict checks unchanged;forwarded
+headers observed only,never trusted to expand policy. New safe/api/v1/connection
+reports actual last Origin/Host/proxy/WS decisions,excluding credentials/client IP.
+Startup refuses occupied8787 so an old server is not mistaken for a new launch.
+22policy/unit,56existing terminal,10ASan/UBSan repair checks(LiveLSan0),6verified
+localTLS-proxy checks and21actual browser checks pass. No C++/frontend rebuild,
+canonical changes,market data,paid resources,main change or Actions dispatch.
+Owner next:stop old server,fast-forward feature branch,set exact private HTTPS Origin,
+restart script,refresh top-level Ports URL. Actual owner-session headers remain
+unverified until refreshed diagnostics are read. Do not claim external owner pass.
