@@ -6,6 +6,12 @@ from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 REFERENCE_TAGS={'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'),'net_income':('NetIncomeLoss',),'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),'assets':('Assets',),'liabilities':('Liabilities',),'equity':('StockholdersEquity',),'cash':('CashAndCashEquivalentsAtCarryingValue',),'eps':('EarningsPerShareDiluted',),'gross_profit':('GrossProfit',),'operating_income':('OperatingIncomeLoss',),'assets_current':('AssetsCurrent',),'liabilities_current':('LiabilitiesCurrent',),'short_term_borrowings':('ShortTermBorrowings',),'long_term_debt_current':('LongTermDebtCurrent',),'long_term_debt_noncurrent':('LongTermDebtNoncurrent',),'capex':('PaymentsToAcquirePropertyPlantAndEquipment',)}
 
+REFERENCE_TAGS.update({'cost_of_revenue':('CostOfRevenue','CostOfGoodsAndServicesSold'),
+ 'cash_investing':('NetCashProvidedByUsedInInvestingActivities',),'cash_financing':('NetCashProvidedByUsedInFinancingActivities',),
+ 'cash_fx':('EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents',),
+ 'cash_change':('CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect',),
+ 'eps_basic':('EarningsPerShareBasic',),'diluted_shares':('WeightedAverageNumberOfDilutedSharesOutstanding',)})
+
 def decode(raw):
     if len(raw)>8388608:raise ValueError('source_body_budget')
     def pairs(items):
@@ -22,7 +28,7 @@ def reconcile(raw,normalized,as_of):
     if str(source.get('cik','')).zfill(10)!=normalized.get('issuer_cik'):mismatches.append({'metric':'issuer','reason':'issuer_identity'})
     gaap=source.get('facts',{}).get('us-gaap',{})
     for name,tags in REFERENCE_TAGS.items():
-        unit='USD/shares' if name=='eps' else 'USD';groups={}
+        unit='USD/shares' if name in ('eps','eps_basic') else 'shares' if name=='diluted_shares' else 'USD';groups={}
         for tag in tags:
             for r in gaap.get(tag,{}).get('units',{}).get(unit,[]):
                 if r.get('form') not in ('10-K','10-K/A','10-Q','10-Q/A') or r['filed']>as_of:continue

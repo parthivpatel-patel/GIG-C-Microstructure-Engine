@@ -346,6 +346,18 @@ def create_app(stock_workspace=None):
         try:return company_contract(stocks,request.path_params['symbol'])
         except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
 
+    @route('/api/v1/stocks/history-ingest', methods=['POST'])
+    @json_endpoint
+    async def history_ingest(request):
+        from terminal.stocks.acquisition import ingest
+        data=await bounded_json(request)
+        if set(data)-{'symbol','start','end','timeframe','max_pages'} or not {'symbol','start','end'}<=set(data):return error('HISTORY_INGEST_QUERY','bounded symbol,date interval,timeframe and pages required',422)
+        try:
+            async with asyncio.timeout(25):return await ingest(stocks,data['symbol'],data['start'],data['end'],data.get('timeframe','1Day'),data.get('max_pages',4))
+        except TimeoutError:return error('HISTORY_INGEST_TIME_LIMIT','acquisition time budget reached;inspect revision list before retry because a final storage worker may have committed',503)
+        except (ValueError,KeyError,TypeError):return error('HISTORY_INGEST_BLOCKED','configuration,entitlement,source integrity or interval budget rejected;no partial revision published',422)
+        except Exception:return error('HISTORY_INGEST_UNAVAILABLE','bounded upstream acquisition failed;prior revisions preserved',503)
+
     @route('/api/v1/stocks/history-store', methods=['GET','POST'])
     @json_endpoint
     async def history_store(request):
@@ -355,8 +367,19 @@ def create_app(stock_workspace=None):
             if request.method=='GET':
                 if set(request.query_params)-{'revision'}:raise ValueError('history_query')
                 revision=request.query_params.get('revision')
-                return {'schema':'gig.history.store.v1','revision':revision,'storage_completeness':'bounded_snapshot_not_complete_market_history','snapshot':await asyncio.to_thread(store.read,revision)} if revision else {'schema':'gig.history.store.v1','revisions':await asyncio.to_thread(store.list),'retention_seconds':604800,'maximum_snapshots':32}
+                if revision:
+                    snapshot=await asyncio.to_thread(store.read,revision)
+                    from terminal.stocks.risk import analyze
+                    from terminal.stocks.price_research import describe
+                    return {'schema':'gig.history.store.v1','revision':revision,'storage_completeness':'bounded_snapshot_not_complete_market_history','snapshot':snapshot,'analysis':{'source_revision':revision,'descriptive':describe(snapshot['bars']),'risk':analyze(snapshot['bars'])}}
+                return {'schema':'gig.history.store.v1','revisions':await asyncio.to_thread(store.list),'retention_seconds':604800,'maximum_snapshots':32}
             data=await bounded_json(request)
+            if set(data)=={'action'} and data['action'] in ('backup','delete_backup'):
+                from terminal.stocks.history_backup import backup,delete_backup
+                return await asyncio.to_thread(backup if data['action']=='backup' else delete_backup,store)
+            if set(data)=={'action','confirm'} and data['action']=='restore' and data['confirm']=='REPLACE_PRIVATE_REVISIONS':
+                from terminal.stocks.history_backup import restore
+                return await asyncio.to_thread(restore,store)
             if set(data)=={'action','symbol'} and data['action']=='save':
                 from terminal.stocks.history import from_workspace
                 return {'schema':'gig.history.store.v1',**await asyncio.to_thread(store.save,from_workspace(stocks,data['symbol']))}
@@ -366,15 +389,26 @@ def create_app(stock_workspace=None):
         except (ValueError,KeyError,TypeError):return error('HISTORY_STORAGE_INVALID','invalid,expired,unapproved or inconsistent bounded history request',422)
         except Exception:return error('HISTORY_STORAGE_FAILURE','private storage unavailable;accepted native state unchanged',503)
 
+    @route('/api/v2/companies/{symbol}/accounting-checks', methods=['GET'])
+    @json_endpoint
+    async def accounting_checks(request):
+        from terminal.stocks.accounting import checks
+        if request.query_params:return error('ACCOUNTING_QUERY','cache-only endpoint accepts no query parameters')
+        try:
+            view=stocks.view(request.path_params['symbol']);financials=view['fundamentals'].get('financials',{})
+            return {**checks(financials),'instrument':view['instrument'],'data_origin':view['classification'],'issuer_check':'ACCEPTED_SEC_CIK_MATCHES_CURATED_ROUTE' if financials else 'UNAVAILABLE','identity_limit':'Not an independent official directory reconciliation'}
+        except (ValueError,KeyError,TypeError):return error('ACCOUNTING_INVALID','invalid identity or cached financial contract',422)
+
     @route('/api/v2/companies/{symbol}/statements', methods=['GET'])
     @json_endpoint
     async def statements_v2(request):
         from terminal.stocks.statements import aligned
+        from terminal.stocks.accounting import checks
         q=request.query_params
         if set(q)-{'statement','period'}:return error('STATEMENT_QUERY','unsupported statement query')
         try:
             view=stocks.view(request.path_params['symbol']);source=view['fundamentals']
-            return {**aligned(source.get('financials',{}),q.get('statement','income'),q.get('period','annual')),'instrument':view['instrument'],'data_origin':view['classification'],'source_records':source.get('source_records',[])}
+            return {**aligned(source.get('financials',{}),q.get('statement','income'),q.get('period','annual')),'selected_component_checks':checks(source.get('financials',{})),'instrument':view['instrument'],'data_origin':view['classification'],'source_records':source.get('source_records',[])}
         except (ValueError,KeyError,TypeError):return error('STATEMENT_INVALID','unsupported identity or reported period')
 
     @route('/api/v2/companies/{symbol}/historical', methods=['GET'])
@@ -438,6 +472,26 @@ def create_app(stock_workspace=None):
         data=await bounded_json(request)
         try:return scenario(data)
         except (ValueError,OverflowError,TypeError):return error('OPTION_MODEL','invalid bounded theoretical scenario',422)
+
+    @route('/api/v1/stocks/portfolio', methods=['POST'])
+    @json_endpoint
+    async def stock_portfolio(request):
+        from terminal.stocks.portfolio import analyze
+        data=await bounded_json(request)
+        try:return analyze(data)
+        except (ValueError,TypeError,KeyError,OverflowError):return error('PORTFOLIO_INVALID','aligned explicit returns,weights and bounded scenarios required',422)
+
+    @route('/api/v1/stocks/evaluation', methods=['POST'])
+    @json_endpoint
+    async def stock_evaluation(request):
+        from terminal.stocks.evaluation import evaluate,walk_forward
+        data=await bounded_json(request)
+        rolling=set(data)=={'returns','walk_forward'} and data['walk_forward'] is True
+        if not rolling and set(data)!={'returns','train_end','validation_end'}:return error('EVALUATION_QUERY','ordered returns and explicit chronological split boundaries or bounded walk-forward required',422)
+        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        try:
+            async with analysis_lock:return await asyncio.to_thread(walk_forward,data['returns']) if rolling else await asyncio.to_thread(evaluate,data['returns'],data['train_end'],data['validation_end'])
+        except (ValueError,TypeError,KeyError,OverflowError):return error('EVALUATION_INVALID','invalid ordered data or holdout boundaries',422)
 
     @route('/api/v1/stocks/models', methods=['POST'])
     @json_endpoint

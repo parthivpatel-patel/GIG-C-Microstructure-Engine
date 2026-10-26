@@ -4,6 +4,12 @@ from fractions import Fraction
 from decimal import Decimal
 
 TAGS={'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'),'net_income':('NetIncomeLoss',),'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),'assets':('Assets',),'liabilities':('Liabilities',),'equity':('StockholdersEquity',),'cash':('CashAndCashEquivalentsAtCarryingValue',),'eps':('EarningsPerShareDiluted',),'gross_profit':('GrossProfit',),'operating_income':('OperatingIncomeLoss',),'assets_current':('AssetsCurrent',),'liabilities_current':('LiabilitiesCurrent',),'short_term_borrowings':('ShortTermBorrowings',),'long_term_debt_current':('LongTermDebtCurrent',),'long_term_debt_noncurrent':('LongTermDebtNoncurrent',),'capex':('PaymentsToAcquirePropertyPlantAndEquipment',)}
+TAGS.update({'cost_of_revenue':('CostOfRevenue','CostOfGoodsAndServicesSold'),
+ 'cash_investing':('NetCashProvidedByUsedInInvestingActivities',),'cash_financing':('NetCashProvidedByUsedInFinancingActivities',),
+ 'cash_fx':('EffectOfExchangeRateOnCashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents',),
+ 'cash_change':('CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalentsPeriodIncreaseDecreaseIncludingExchangeRateEffect',),
+ 'eps_basic':('EarningsPerShareBasic',),'diluted_shares':('WeightedAverageNumberOfDilutedSharesOutstanding',)})
+UNITS={'eps':'USD/shares','eps_basic':'USD/shares','diluted_shares':'shares'}
 FORMS={'10-K','10-K/A','10-Q','10-Q/A','8-K','8-K/A','13F-HR','13F-HR/A'}
 
 def date(value):
@@ -69,7 +75,7 @@ def facts(payload,cik,as_of):
         records=[]
         for tag in tags:
             data=object_value(namespace.get(tag,{}))
-            unit='USD/shares' if metric=='eps' else 'USD'
+            unit=UNITS.get(metric,'USD')
             values=object_value(data.get('units',{})).get(unit,[])
             if type(values) is not list or len(values)>10000:raise ValueError('sec_fact_budget')
             for r in values:

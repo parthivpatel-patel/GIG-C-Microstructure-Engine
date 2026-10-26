@@ -523,3 +523,24 @@ status/admin messages must be documented/implemented, not skipped. Do not blindl
 permission flags. Observed recording attachment and full interactive recorded-L2 replay
 remain partial; native trade/quote research analytics require causal methodology.
 Do not repeat completed native matrix absent source changes. No main/workflow/release.
+
+## ATLAS Phase5 integrated checkpoint — October26,2026 America/New_York
+
+Baseline2d4db35ef91f23eb79875282ba067cd1bd004fb8;new isolated branch
+feat/atlas-phase5-integration. Bounded historical acquisition/pinned revisions,private
+backup/restore,financial component checks,explicit portfolio risk and training-only
+heldout/walk-forward evaluation implemented. No native source/contract change.
+Executed final checks:2095 passes,0 final failures/skips;native6×155;terminal3×274;
+Phase3/4/5 consumers3×51;frontend13;security46;TLS8;wheel14;packaging3;browser106.
+Eight native canonical identities unchanged across6 configurations. Native binaries and
+installed wheel reused;no fresh compiler build or new ARM64 qualification claimed.
+Backup SQLITE_DONE deadline defect reproduced/repaired. Final browser fixture state
+reuse exposed expected no-overwrite behavior;empty-store precondition added and fresh
+fixture rerun6/6. Benchmarks and27 screenshot hashes in phase5 evidence manifest.
+Live Alpaca wire driver remains NOT IMPLEMENTED/BLOCKED:official doc proxy CONNECT403,
+permissions381230 unresolved. SEC identifying User-Agent absent;no market/SEC requests.
+No restricted LOBSTER access. No workflow dispatch/main changes/paid dependencies.
+Exact next action:inspect feature remote/status and docs/phase5/PHASE5_FINAL_REPORT.md;
+owner review private Codespaces,resolve provider rights/current specs,run authorized SEC
+reconciliation. Do not claim synthetic agreement establishes observed/live acceptance.
+Reserve November7–10 for integration/acceptance;unclosed20 priorities explicitly retained.

@@ -1,5 +1,5 @@
 """Opt-in private SQLite snapshots:bounded immutable revisions,not an exchange archive."""
-import hashlib,json,os,re,sqlite3,stat,time
+import hashlib,json,os,re,sqlite3,stat,time,threading
 from pathlib import Path
 from contextlib import contextmanager
 from .history import HistorySource,normalize
@@ -20,8 +20,10 @@ def verify(value):
     source=HistorySource(**value['source']);rows=[]
     for row in value['bars']:
         rows.append({k:row[k] for k in ('timestamp','open','high','low','close','volume')})
-    if value['page_count']!=1 or len(value['source_sha256'])!=1:raise ValueError('history_storage_single_page_only')
+    if type(value.get('page_count')) is not int or not 1<=value['page_count']<=4 or type(value.get('source_sha256')) is not list or len(value['source_sha256'])!=value['page_count'] or any(type(v) is not str or not re.fullmatch('[0-9a-f]{64}',v) for v in value['source_sha256']):raise ValueError('history_storage_page_metadata')
     core=normalize(value['symbol'],value['timeframe'],[{'bars':rows,'sha256':value['source_sha256'][0]}],source,has_more=value['has_more'])
+    core['page_count']=value['page_count'];core['source_sha256']=list(value['source_sha256'])
+    del core['canonical_sha256'];core['canonical_sha256']=hashlib.sha256(canonical(core)).hexdigest()
     for key in core:
         if value.get(key)!=core[key]:raise ValueError('history_storage_integrity')
     return core
@@ -30,6 +32,7 @@ def verify(value):
 class HistoryStore:
     def __init__(self,directory,*,allow_observed=False,clock=time.time):
         if type(allow_observed) is not bool:raise ValueError('history_observed_retention_boolean_required')
+        self.lock=threading.RLock()
         self.clock=clock;self.allow_observed=allow_observed
         root=Path(directory).absolute()
         if any(p.is_symlink() for p in (root,*root.parents)):raise ValueError('history_storage_symlink')
@@ -52,6 +55,10 @@ class HistoryStore:
             db.execute('DELETE FROM snapshots WHERE created<?',(self.clock()-RETENTION_SECONDS,))
     @contextmanager
     def connect(self):
+        with self.lock:
+            with self._connect() as db:yield db
+    @contextmanager
+    def _connect(self):
         if self.path.stat().st_size>32*1024*1024:raise ValueError('history_storage_disk_budget')
         db=sqlite3.connect(self.path,timeout=2)
         try:

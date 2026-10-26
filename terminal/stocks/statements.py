@@ -1,8 +1,8 @@
 """Aligned selected reported facts,not fabricated full financial statements."""
 
-GROUPS={'income':('revenue','gross_profit','operating_income','net_income','eps'),
+GROUPS={'income':('revenue','gross_profit','operating_income','net_income','eps','eps_basic','diluted_shares','cost_of_revenue'),
         'balance':('assets','liabilities','equity','cash','assets_current','liabilities_current','short_term_borrowings','long_term_debt_current','long_term_debt_noncurrent'),
-        'cash':('operating_cash_flow','capex')}
+        'cash':('operating_cash_flow','cash_investing','cash_financing','cash_fx','cash_change','capex')}
 
 
 def aligned(normalized,statement='income',period='annual'):

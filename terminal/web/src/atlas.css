@@ -52,3 +52,4 @@ html,body,#root{min-width:0;background:var(--atlas-bg);color:var(--atlas-text)}b
 
 @media(max-width:600px){.atlas-shell .landscape-canvas{height:340px}.atlas-shell .fallback-view{min-height:300px}}
 .atlas-shell .panel-content dd,.atlas-shell .panel-content code{overflow-wrap:anywhere}.atlas-shell .atlas-history-archive code{word-break:break-all}.atlas-shell .atlas-aligned{padding:16px;border:1px solid var(--atlas-line);border-radius:8px;margin:16px 0}.atlas-shell .atlas-history-archive{padding:12px 0}
+.atlas-shell fieldset{min-width:0;border:1px solid var(--atlas-line);border-radius:8px;margin:14px 0;padding:16px}.atlas-shell legend{font-size:14px;padding:0 8px}.atlas-shell textarea{max-width:100%;box-sizing:border-box}
