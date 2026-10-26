@@ -125,7 +125,7 @@ class LiveIEX:
         def present(event):
             row={k:v for k,v in event.items() if k!='received_monotonic'};age=max(0,now-event['received_monotonic']);source_age=int(event['source_age_at_receipt_ns'])+int(age*10**9)
             row['receive_age_seconds']=age
-            row['state']='UNAVAILABLE' if self.phase!='SUBSCRIBED' or event['generation']!=self.generation else 'STALE' if max(int(age*10**9),source_age)>(120_000_000_000 if event['kind']=='bar' else 30_000_000_000) else 'SIMULATED' if self.connector else 'LIVE'
+            row['state']='UNAVAILABLE' if self.phase!='SUBSCRIBED' or event['symbol'] not in self.symbols or event['generation']!=self.generation else 'STALE' if max(int(age*10**9),source_age)>(120_000_000_000 if event['kind']=='bar' else 30_000_000_000) else 'SIMULATED' if self.connector else 'LIVE'
             return row
         try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
         except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}

@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {validateMarketState} from './marketContract.ts';
+const quote={symbol:'AAPL',kind:'quote',generation:0,receipt_index:1,timestamp:'2024-01-02T14:30:00Z',source_timestamp_ns:'1704205800000000000',out_of_order:false,receive_age_seconds:0,state:'SIMULATED',data:{bid:'100',ask:'101',bid_size:'1',ask_size:'2'}};
+const empty=()=>({schema:'gig.alpaca.live.v1',state:'DISABLED',phase:'DISCONNECTED',generation:0,accepted_observations:0,connection_count:0,metrics:{},readiness:{ready:false},symbols:[],history:[],observations:[]});
+test('disabled and missing observations remain valid without inventing quote fields',()=>{const v=empty();assert.equal(validateMarketState(v),v)});
+test('malformed API replies and nonfinite chart inputs are rejected before rendering',()=>{const valid={...empty(),accepted_observations:1,symbols:['AAPL'],history:[quote]};assert.equal(validateMarketState(valid),valid);for(const bad of [null,{}, {...empty(),symbols:['AAPL','AAPL']},{...empty(),history:Array(257).fill({})},{...empty(),metrics:null},{...valid,history:[{...quote,data:{...quote.data,bid:'NaN'}}]},{...valid,history:[{...quote,receipt_index:2}]},{...valid,symbols:[]}])assert.throws(()=>validateMarketState(bad))});

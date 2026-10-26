@@ -12,7 +12,7 @@ class Completion(unittest.TestCase):
    c.socket.send=send;c.task=asyncio.create_task(asyncio.sleep(100));c.process(packet(quote()))
    await c.start(['NVDA'],['quotes']);self.assertEqual(sent,[{'action':'unsubscribe','quotes':['AAPL'],'trades':['AAPL']}]);self.assertEqual(c.symbols,('AAPL',));self.assertIsNotNone(c.pending)
    with self.assertRaises(ValueError):await c.start(['MSFT'])
-   c.process(packet({'T':'subscription','quotes':[],'trades':[]}));self.assertEqual(c.pending['step'],'SUBSCRIBE_READY');self.assertEqual(c.symbols,())
+   c.process(packet({'T':'subscription','quotes':[],'trades':[]}));self.assertEqual(c.pending['step'],'SUBSCRIBE_READY');self.assertEqual(c.symbols,());self.assertTrue(all(r['state']=='UNAVAILABLE' for r in c.view()['observations']))
    c.pending['step']='SUBSCRIBE_SENT';before=c.generation;c.process(packet({'T':'subscription','quotes':['NVDA']}));self.assertEqual(c.symbols,('NVDA',));self.assertEqual(c.generation,before+1);self.assertIsNone(c.pending);self.assertFalse(c.latest)
    q=quote();q['S']='NVDA';c.process(packet(q));self.assertEqual(c.view()['metrics']['NVDA']['valid_ordered_quotes'],1);await c.close()
   asyncio.run(run())
