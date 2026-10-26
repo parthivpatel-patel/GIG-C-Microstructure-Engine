@@ -94,3 +94,20 @@ Follow PHASE3_REMAINING_GAPS.md in order. Immediate next step is owner-run offic
 reconciliation and private Codespaces acceptance of this separate branch. Broader directory,
 statement/calendar/adjustment coverage,upstream paging,actual Alpaca WS protocol,statistical
 estimation and observed L3 evidence remain explicit follow-up engineering/external gates.
+
+
+## Source/package closure
+
+Core implementation f57e44fb926bd91e79b65db2ea2c8b84e024b4dd was pushed and remotely
+verified. Its rebuilt0.1.1 source archive passed628 safe,intended,byte-identical member
+checks with all required source trees present. The follow-up evidence checkpoint also
+adds the standalone offline measurement tool:
+
+```bash
+python scripts/benchmark_atlas_history.py > build/atlas3-owner/history-measurement.json
+```
+
+Create the output directory first. It uses only authored256-bar input,5 warmups and20
+tracemalloc-instrumented repetitions;no network or provider settings. Its actual run
+is recorded separately from the earlier measurement. No sustained-memory/leak-free
+performance or production latency claim follows from either short observation.

@@ -16,8 +16,8 @@
     },
     {
       "path": "docs/backend/PHASE3_FINAL_REPORT.md",
-      "sha256": "65bd656fe519d079797165795d98d45150585a26313238e7ab10c11395248f6c",
-      "bytes": 5772
+      "sha256": "f94a0f31a44ae90ac57256b8ef09c9668424f644cadf3e6d8187e55c22f6f82e",
+      "bytes": 6541
     },
     {
       "path": "docs/backend/PHASE3_INTEGRATION_REPORT.md",
@@ -98,6 +98,11 @@
       "path": "terminal/web/src/StockIntelligence.tsx",
       "sha256": "bd27f18d81d21e9c5b84dba7cfd23e867435874e2cf823b9bacad99f00d149ea",
       "bytes": 16320
+    },
+    {
+      "path": "scripts/benchmark_atlas_history.py",
+      "sha256": "759a3413c7cb56f9b19f4c2eae7601997e143dd1cd691964c4c1224853dddc93",
+      "bytes": 1897
     }
   ],
   "native_tests": [
@@ -532,6 +537,11 @@
       "path": "build/atlas3/tls.log",
       "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6",
       "bytes": 4364
+    },
+    {
+      "path": "build/atlas3/sdist.log",
+      "sha256": "d67c412bcd4a4777c186c59e932cd5400fcba632850144f96777dbea8d5f1e3e",
+      "bytes": 231
     }
   ],
   "stable_assets": {
@@ -671,5 +681,55 @@
     "workflow_dispatch": false,
     "paid_resources": false,
     "private_data_committed": false
+  },
+  "verified_core_implementation_commit": "f57e44fb926bd91e79b65db2ea2c8b84e024b4dd",
+  "source_archive": {
+    "source_commit": "f57e44fb926bd91e79b65db2ea2c8b84e024b4dd",
+    "sha256": "f26485cb0f9220d6701355c21a5ef87ce08d6606edb50b4016ec41a292fd76f8",
+    "bytes": 2163186,
+    "members": 628,
+    "status": "PASS_safe_intended_byte_identical",
+    "scope": "core implementation archive before subsequent portable benchmark/evidence checkpoint"
+  },
+  "portable_benchmark": {
+    "schema": "gig.atlas.phase3.history_measurement.v1",
+    "classification": "AUTHORED_NOT_OBSERVED",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "bars_per_run": 256,
+    "warmups": 5,
+    "repetitions": 20,
+    "seconds": [
+      0.06374637398403138,
+      0.04995658400002867,
+      0.05044532101601362,
+      0.04878326802281663,
+      0.04922921699471772,
+      0.04950621095485985,
+      0.049453006009571254,
+      0.05059517297195271,
+      0.04953148798085749,
+      0.04941827798029408,
+      0.05037335999077186,
+      0.05030525597976521,
+      0.05204676801804453,
+      0.04909536801278591,
+      0.04969237296609208,
+      0.04993368999566883,
+      0.04980756901204586,
+      0.050321365997660905,
+      0.04973137198248878,
+      0.04978128499351442
+    ],
+    "throughput_bars_per_second": 5060.522030473465,
+    "traced_peak_bytes": 431118,
+    "peak_process_rss_kib": 18356,
+    "canonical_sha256": "4fca4daa3ce45652aecdec334b7ac3f7006dd98319499900921879843d15d0fa",
+    "measured_source_sha256": "297740584e8d68488b09392b6fb333c75c8e6e8c53319d61ddb814c422786dc6",
+    "limitations": [
+      "Tracemalloc instrumented,not production performance",
+      "Process RSS includes interpreter/imports;not incremental native journal memory",
+      "No network,exchange latency or independent machine measurement"
+    ]
   }
 }
