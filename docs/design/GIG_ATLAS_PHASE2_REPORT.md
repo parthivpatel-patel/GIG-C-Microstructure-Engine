@@ -232,3 +232,13 @@ committed. No restricted files or credentials enter source archives.
 One warmup plus three samples per variant,isolated after other validation completed.
 These are local observations with different initial2D/3D workload,not statistical
 claims or a reduction in total all-route bytes.
+
+
+### Committed source and packaging closure
+
+Implementation source `b6f6df1ec379ad497e979fd35ba300ec3afbfa20` pushed and remotely verified.
+Its locally rebuilt0.1.1 source archive passed the strict inventory verifier:
+615 safe,intended,byte-identical members;required source trees complete.
+Installed-wheel8 interface and6 export checks use the previously validated native
+wheel because no native/Python implementation changed. No new wheel/native build
+is claimed. Final evidence-only commit and exact remote HEAD are in Git/final response.

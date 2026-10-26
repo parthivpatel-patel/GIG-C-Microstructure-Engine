@@ -5,8 +5,8 @@
   "source_inventory": [
     {
       "path": "docs/design/GIG_ATLAS_PHASE2_REPORT.md",
-      "sha256": "63d054ceb844c4b81074e2fe472bbe08ec7fb591db405d9d63bcaa0e06a86cf0",
-      "bytes": 15086
+      "sha256": "a1442d29e6451932b66de6ac98d9ce8390a081829ccfc8724187e8f8a719a4ec",
+      "bytes": 15629
     },
     {
       "path": "terminal/tests/atlas2-performance.mjs",
@@ -569,6 +569,10 @@
       "path": "build/atlas2/stock-loading.log",
       "sha256": "24c28152aa63421dd21364c23d1e5f53e5f7a4d0ef457ef9190cf3859bd48f45",
       "bytes": 349
+    },
+    {
+      "path": "build/atlas2/resume-sdist.log",
+      "sha256": "c682084c386fdc41dbada342dc764b415afb30c46c09a0c17701f861f60df860"
     }
   ],
   "historical_failures": [
@@ -601,5 +605,14 @@
     "python tests/test_python.py",
     "python tests/test_export_contracts.py",
     "node terminal/tests/atlas2-performance.mjs"
-  ]
+  ],
+  "verified_implementation_commit": "b6f6df1ec379ad497e979fd35ba300ec3afbfa20",
+  "source_archive": {
+    "source_commit": "b6f6df1ec379ad497e979fd35ba300ec3afbfa20",
+    "sha256": "d562b594d8cd4c8c029dcc1daf6f8f63fc35f7318eca7da92d25036e69171443",
+    "bytes": 2139673,
+    "members": 615,
+    "inventory_result": "PASS: safe,intended,byte-identical;required source trees complete",
+    "note": "Archive built at source commit before this documentation-only closure"
+  }
 }
