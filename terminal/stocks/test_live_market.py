@@ -44,6 +44,7 @@ class Semantics(unittest.TestCase):
    c=client();c.workspace.environment['GIG_ALPACA_LIVE_MAX_SYMBOLS']='1'
    with self.assertRaises(ValueError):await c.start(['AAPL','NVDA'])
    with self.assertRaises(ValueError):await c.start(['AAPL'],['paid_sip'])
+   with self.assertRaises(ValueError):await c.start(['AAPL'],['bars'])
    self.assertIsNone(c.task)
   asyncio.run(run())
  def test_source_timestamp_receive_time_and_clock_warning(self):

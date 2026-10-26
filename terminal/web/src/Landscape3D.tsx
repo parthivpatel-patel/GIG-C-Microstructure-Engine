@@ -35,13 +35,13 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
  },[twoD]);
  useEffect(()=>{
   const rt=runtime.current;if(!rt)return;
-  for(const obj of [...rt.data.children]){rt.data.remove(obj);const m=obj as THREE.InstancedMesh;m.geometry.dispose();(m.material as THREE.Material).dispose()}rt.lookup.clear();
+  for(const obj of rt.data.children)(obj as THREE.InstancedMesh).count=0;rt.lookup.clear();
   let maxQty=1n;for(const l of levels)if(BigInt(l.quantity)>maxQty)maxQty=BigInt(l.quantity);
   const span=maximum-minimum||1n,firstTime=frames.length?timeOf(frames[0]):0n,lastTime=last?timeOf(last):1n,timeSpan=lastTime-firstTime||1n;
   const dummy=new THREE.Object3D();
   for(const side of ['bids','asks'] as const){const entries=frames.flatMap(f=>f.book[side].slice(0,depth).map(l=>({side:side==='bids'?'BID':'ASK',price_ticks:l.price_ticks,quantity:l.quantity,position:f.position,time:timeOf(f).toString(),scale:f.price_scale,quantity_scale:String(f.quantity_scale||'1')})));if(!entries.length)continue;
-   const mesh=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:side==='bids'?'#35cdb0':'#f27b89',transparent:true,opacity:.75}),entries.length);
-   entries.forEach((entry,i)=>{const height=chartRatio(BigInt(entry.quantity),maxQty)*4;dummy.position.set(chartRatio(BigInt(entry.price_ticks)-minimum,span)*12-6,height/2,chartRatio(BigInt(entry.time)-firstTime,timeSpan)*10-5);dummy.scale.set(Math.min(.32,10/Math.max(10,allPrices.length)),Math.max(.015,height),Math.min(.36,8/Math.max(8,frames.length)));dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix)});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();rt.data.add(mesh);rt.lookup.set(mesh,entries);
+   let mesh=rt.data.children.find(o=>o.name===side) as THREE.InstancedMesh|undefined;if(!mesh){mesh=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:side==='bids'?'#35cdb0':'#f27b89',transparent:true,opacity:.75}),960);mesh.name=side;mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);rt.data.add(mesh)}mesh.count=entries.length;const target=mesh;
+   entries.forEach((entry,i)=>{const height=chartRatio(BigInt(entry.quantity),maxQty)*4;dummy.position.set(chartRatio(BigInt(entry.price_ticks)-minimum,span)*12-6,height/2,chartRatio(BigInt(entry.time)-firstTime,timeSpan)*10-5);dummy.scale.set(Math.min(.32,10/Math.max(10,allPrices.length)),Math.max(.015,height),Math.min(.36,8/Math.max(8,frames.length)));dummy.updateMatrix();target.setMatrixAt(i,dummy.matrix)});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();rt.lookup.set(mesh,entries);
   }rt.render();
  },[history,windowSize,depth,twoD]);
  const reset=()=>{const rt=runtime.current;if(rt){rt.camera.position.set(10,8,13);rt.controls.target.set(0,1.5,0);rt.controls.update();rt.render()}};

@@ -122,7 +122,7 @@ class LiveIEX:
         if type(symbols) is not list or not 1<=len(symbols)<=self.symbol_limit() or len(set(symbols))!=len(symbols):raise ValueError('live_symbol_budget')
         for s in symbols:instrument(s)
         channels=('quotes','trades') if channels is None else channels
-        if type(channels) not in (list,tuple) or not channels or len(channels)>3 or any(c not in ('quotes','trades','bars') for c in channels) or len(set(channels))!=len(channels):raise ValueError('live_channel_budget')
+        if type(channels) not in (list,tuple) or not channels or len(channels)>3 or any(c not in ('quotes','trades','bars') for c in channels) or len(set(channels))!=len(channels) or not any(c in channels for c in ('quotes','trades')):raise ValueError('live_channel_budget')
         selected=tuple(sorted(symbols));chosen=tuple(sorted(channels))
         if self.task and not self.task.done() and self.symbols==selected and tuple(sorted(self.channels))==chosen:return
         await self.close();self.latest={};self.symbols=selected;self.channels=chosen;self.stop_event=asyncio.Event();self.state='CONNECTING';self.reason=None;self.task=asyncio.create_task(self.run())
