@@ -10,18 +10,24 @@ import msgpack,uvicorn
 for k in ('GIG_SEC_ENABLED','GIG_ALPACA_ENABLED','GIG_LIVE_ENABLED','GIG_COINBASE_ENABLED'):os.environ[k]='0'
 os.environ['GIG_TERMINAL_ALLOWED_ORIGINS']='http://127.0.0.1:18797'
 class Socket:
- def __init__(self):self.stage=0;self.symbols=[];self.channels=[];self.tick=0
+ def __init__(self):
+  self.symbols=[];self.channels=[];self.tick=0;self.queue=asyncio.Queue();self.queue.put_nowait({'T':'success','msg':'connected'})
  async def __aenter__(self):return self
  async def __aexit__(self,*args):pass
  async def send(self,b):
   m=msgpack.unpackb(b)
-  if m['action']=='subscribe':self.channels=[k for k in m if k!='action'];self.symbols=m[self.channels[0]]
+  if m['action']=='auth':self.queue.put_nowait({'T':'success','msg':'authenticated'})
+  elif m['action']=='subscribe':
+   self.channels=[k for k in m if k!='action'];self.symbols=m[self.channels[0]]
+   self.queue.put_nowait({'T':'subscription',**{k:self.symbols for k in self.channels}})
+  elif m['action']=='unsubscribe':
+   self.queue.put_nowait({'T':'subscription',**{k:[] for k in self.channels}});self.channels=[];self.symbols=[]
  async def recv(self):
-  self.stage+=1
-  if self.stage==1:return packet({'T':'success','msg':'connected'})
-  if self.stage==2:return packet({'T':'success','msg':'authenticated'})
-  if self.stage==3:return packet({'T':'subscription',**{k:self.symbols for k in self.channels}})
-  await asyncio.sleep(.2);self.tick+=1;t=datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z');out=[]
+  if not self.queue.empty():return packet(await self.queue.get())
+  await asyncio.sleep(.2)
+  if not self.queue.empty():return packet(await self.queue.get())
+  if not self.symbols:return packet(await self.queue.get())
+  self.tick+=1;t=datetime.datetime.now(datetime.timezone.utc).isoformat().replace('+00:00','Z');out=[]
   for i,s in enumerate(self.symbols):
    p=100+i*40+(self.tick%10)*.01
    if 'quotes' in self.channels:out.append({'T':'q','S':s,'t':t,'bp':p,'ap':round(p+.02,2),'bs':4,'as':5})

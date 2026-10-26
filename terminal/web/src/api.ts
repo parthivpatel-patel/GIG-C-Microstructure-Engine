@@ -18,3 +18,14 @@ export async function readCompanyV2(symbol:string,filings=false,offset=0,form?:s
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
  try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+(filings?'/filings?limit=50&offset='+offset+(form?'&form='+encodeURIComponent(form):''):''),{signal:controller.signal}));}finally{clearTimeout(timer);}
 }
+
+/** Endpoint-bound proof retains Codespaces rewrite protection for stock push. */
+export async function openMarketStream(signal:AbortSignal):Promise<Response>{
+ const target='/api/v1/stocks/events';
+ const proof=await decoded(await fetch('/api/v1/request-proof',{headers:{'X-GIG-Bootstrap':'same-origin-v1','X-GIG-Browser-Origin':location.origin,'X-GIG-Target':target},signal}));
+ if(!/^[A-Za-z0-9_-]{43}$/.test(proof.proof))throw Error('Invalid stock push proof');
+ const response=await fetch(target,{method:'POST',headers:{'Content-Type':'application/json','X-GIG-Request-Proof':proof.proof},body:'{}',signal});
+ if(!response.ok){await decoded(response);throw Error('Stock push unavailable')}
+ if(!response.headers.get('content-type')?.startsWith('text/event-stream'))throw Error('Invalid stock push content type');
+ return response;
+}

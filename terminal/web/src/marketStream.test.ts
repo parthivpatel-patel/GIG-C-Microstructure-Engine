@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+// The actual browser regression exercises proof bootstrap,fragmented HTTP push and cancellation.
+// Pure protocol helpers are tested separately from fetch to avoid an injected provider.
+import {parseMarketEvent,MarketEventDecoder} from './marketStreamProtocol.ts';
+test('SSE typed state decoding distinguishes malformed/oversize/error frames',()=>{assert.deepEqual(parseMarketEvent('event: state\ndata: {"schema":"test"}'),{schema:'test'});assert.equal(parseMarketEvent(': heartbeat'),null);assert.throws(()=>parseMarketEvent('event: error\ndata: {}'));assert.throws(()=>parseMarketEvent('event: state\ndata: nope'));assert.throws(()=>parseMarketEvent('x'.repeat(1024*1024+1)))});
+
+test('incremental SSE preserves fragmented UTF8,coalesced frames,and rejects truncation/corruption',()=>{const d=new MarketEventDecoder(),bytes=new TextEncoder().encode('event: state\ndata: {"text":"λ"}\n\nevent: state\ndata: {"n":2}\n\n'),out:unknown[]=[];for(const byte of bytes)out.push(...d.push(new Uint8Array([byte])));assert.deepEqual(out,[{text:'λ'},{n:2}]);d.finish();const bad=new MarketEventDecoder();bad.push(new TextEncoder().encode('event: state\ndata: {}'));assert.throws(()=>bad.finish());assert.throws(()=>new MarketEventDecoder().push(new Uint8Array([255])));assert.throws(()=>parseMarketEvent('event: wrong\ndata: {}'));assert.throws(()=>parseMarketEvent('event: state\ndata: {}\ndata: {}'))})
