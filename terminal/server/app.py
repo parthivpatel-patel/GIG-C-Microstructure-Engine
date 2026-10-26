@@ -345,6 +345,14 @@ def create_app(stock_workspace=None):
         try:return company_contract(stocks,request.path_params['symbol'])
         except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
 
+    @route('/api/v2/companies/{symbol}/historical', methods=['GET'])
+    @json_endpoint
+    async def historical_v2(request):
+        if request.query_params:return error('HISTORY_V2_QUERY','cache-only endpoint accepts no query parameters')
+        from terminal.stocks.history import from_workspace
+        try:return from_workspace(stocks,request.path_params['symbol'])
+        except (ValueError,KeyError,TypeError):return error('HISTORY_V2_INVALID','invalid identity or accepted history contract')
+
     @route('/api/v2/companies/{symbol}/filings', methods=['GET'])
     @json_endpoint
     async def filings_v2(request):

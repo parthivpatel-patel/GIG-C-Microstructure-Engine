@@ -201,6 +201,14 @@ class StockWorkspace:
                             if not history or quote!=history[-1]:history.append(quote)
                             result['quote_history']=history[-32:]
                     result.update(status='PARTIAL' if any(v['status']!='AVAILABLE' for v in result.get('components',{}).values()) else 'AVAILABLE',requested_at=stamp,received_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),origin=self.origin,source_urls=urls,response_sha256=hashes,source_records=source_records)
+                    if provider=='alpaca' and result.get('bars'):
+                        from .history import HistorySource,normalize
+                        receipts=[r for r in source_records if r['component']=='bars']
+                        if len(receipts)!=1:raise AccessError('history_unique_bar_receipt_required')
+                        receipt=receipts[0]
+                        history=normalize(ticker,timeframe,[{'bars':result['bars'],'sha256':receipt['sha256']}],HistorySource('alpaca','iex',result['scope'],'raw',self.origin,'fixture_only' if self.fetcher is not None else 'operator_review_not_independent_verification',receipt['received_at']),has_more=result.get('next_page_available',False))
+                        result['history_integrity']={k:history[k] for k in ('schema','state','record_count','page_count','has_more','complete_history','source_sha256','session','canonical_sha256')}
+                        result['history_integrity']['gap_candidate_count']=len(history['gap_candidates'])
                     encoded=json.dumps(result,separators=(',',':'))
                     if len(encoded)>2*1024*1024:raise AccessError('normalized_response_budget')
             except Exception as exc:

@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bounded cache-only historical observations v2",
+  "type": "object",
+  "required": [
+    "schema",
+    "symbol",
+    "state",
+    "bars",
+    "record_count",
+    "complete_history"
+  ],
+  "properties": {
+    "schema": {
+      "const": "gig.backend.history.v2"
+    },
+    "symbol": {
+      "type": "string",
+      "pattern": "^[A-Z]{1,5}(?:[.-][A-Z])?$"
+    },
+    "state": {
+      "enum": [
+        "HISTORICAL",
+        "SIMULATED",
+        "UNAVAILABLE",
+        "BLOCKED"
+      ]
+    },
+    "timeframe": {
+      "enum": [
+        "1Day",
+        "1Hour",
+        "1Min"
+      ]
+    },
+    "bars": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "required": [
+          "timestamp",
+          "timestamp_ns",
+          "utc",
+          "open",
+          "high",
+          "low",
+          "close",
+          "volume"
+        ],
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "timestamp_ns": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "utc": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "open": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "high": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "low": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "close": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "volume": {
+            "type": "string",
+            "maxLength": 64
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 256
+    },
+    "complete_history": {
+      "const": false
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "has_more": {
+      "type": "boolean"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "provider",
+        "feed",
+        "coverage",
+        "adjustment",
+        "origin",
+        "entitlement",
+        "received_at",
+        "price_unit",
+        "volume_unit"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "feed": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "coverage": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "adjustment": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "origin": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "entitlement": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "received_at": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "price_unit": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "volume_unit": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
+    "source_sha256": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "canonical_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "canonical_scope": {
+      "const": "normalized_observation_core_excluding_derived_research_and_cache_metadata"
+    },
+    "gap_candidates": {
+      "type": "array",
+      "maxItems": 255
+    },
+    "session": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "research": {
+      "type": "object"
+    },
+    "cache": {
+      "type": "object"
+    },
+    "reason": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "HISTORICAL",
+              "SIMULATED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "source",
+          "source_sha256",
+          "canonical_sha256",
+          "canonical_scope",
+          "timeframe",
+          "page_count",
+          "has_more",
+          "gap_candidates",
+          "session",
+          "limitations"
+        ]
+      },
+      "else": {
+        "required": [
+          "reason"
+        ]
+      }
+    }
+  ]
+}

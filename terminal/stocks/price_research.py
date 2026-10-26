@@ -1,5 +1,6 @@
 """Exact descriptive returned-bar analytics,not fitted forecasts or strategy alpha."""
 from fractions import Fraction
+import math
 
 def describe(bars):
     if not bars:return {'status':'UNAVAILABLE','reason':'accepted_closing_prices_required'}
@@ -10,7 +11,16 @@ def describe(bars):
         if x is None:return {'value':None,'reason':'insufficient_return_observations'}
         if max(x.numerator.bit_length(),x.denominator.bit_length())>4096:return {'value':None,'reason':'exact_rational_capacity'}
         return {'value':{'numerator':str(x.numerator),'denominator':str(x.denominator)},'reason':None}
+    squared=sum((r*r for r in returns),Fraction())
+    mean=sum(returns)/len(returns) if returns else None
+    sample_variance=sum(((r-mean)**2 for r in returns),Fraction())/(len(returns)-1) if len(returns)>1 else None
+    realized={'value':None,'reason':'insufficient_return_observations'}
+    if returns:
+        try:
+            value=math.sqrt(float(squared))
+            realized={'value':value,'reason':None,'precision':'binary64 approximation;exact squared value supplied separately'} if math.isfinite(value) else {'value':None,'reason':'binary64_capacity'}
+        except OverflowError:realized={'value':None,'reason':'binary64_capacity'}
     peak=closes[0];dd=Fraction()
     for close in closes:peak=max(peak,close);dd=max(dd,1-close/peak)
     tail=(len(returns)+19)//20;losses=sorted((-r for r in returns),reverse=True)
-    return {'status':'DESCRIPTIVE_ACCEPTED_SOURCE_BARS','return_count':len(returns),'first_timestamp':bars[0]['timestamp'],'last_timestamp':bars[-1]['timestamp'],'total_return':wire(closes[-1]/closes[0]-1),'maximum_close_drawdown':wire(dd),'mean_simple_return':wire(sum(returns)/len(returns) if returns else None),'sum_squared_simple_returns':wire(sum((r*r for r in returns),Fraction()) if returns else None),'historical_var_95':wire(losses[tail-1] if len(returns)>=20 else None),'historical_es_95':wire(sum(losses[:tail])/tail if len(returns)>=20 else None),'methodology':'raw unadjusted returned close-to-close simple returns;95% tail uses worst ceil(5%N);at least20 returns;not annualized,complete history,causal alpha,forecast or portfolio risk'}
+    return {'status':'DESCRIPTIVE_ACCEPTED_SOURCE_BARS','return_count':len(returns),'first_timestamp':bars[0]['timestamp'],'last_timestamp':bars[-1]['timestamp'],'total_return':wire(closes[-1]/closes[0]-1),'maximum_close_drawdown':wire(dd),'mean_simple_return':wire(sum(returns)/len(returns) if returns else None),'sum_squared_simple_returns':wire(squared if returns else None),'sample_return_variance':wire(sample_variance),'realized_simple_return_volatility':realized,'historical_var_95':wire(losses[tail-1] if len(returns)>=20 else None),'historical_es_95':wire(sum(losses[:tail])/tail if len(returns)>=20 else None),'methodology':'raw unadjusted returned close-to-close simple returns;95% tail uses worst ceil(5%N);at least20 returns;not annualized,complete history,causal alpha,forecast or portfolio risk'}
