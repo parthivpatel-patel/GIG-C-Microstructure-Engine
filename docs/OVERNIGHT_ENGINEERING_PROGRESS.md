@@ -592,3 +592,29 @@ SEC implementationc5af8a1c32672ad0f6ff15015e9b72b4283a4d87 pushed/verified;709-m
 archive passed,private configuration excluded. Final closure documentation-only. Next:
 owner update private Codespace,run hidden-contact configure/check helper,restart and
 perform bounded AAPL SEC acceptance. No live success claimed in this runtime.
+
+## Live market /3D resumed checkpoint — October26,2026 America/New_York
+
+Recovered baseline `6af0bdef51007d6058f4f3119ecf5bac21c61ceb`;preserved pending source
+changes. Backend/history/L1 analytics checkpoint `56de91c9b95e6a08e1cd4a7dd3fa43ed8ef8b04b`
+was committed,pushed and remotely verified. Current branch `feat/atlas-final-release`.
+
+Implemented:256-event/dedup budgets,per-kind ordering diagnostics,exact best-quote metrics,
+source/receive provenance,correction observations,optional OHLCV bars,multi-stock controls,
+bounded1Hz browser sampling,paused view,shared Level1 point cloud,shared capture axis,
+generation isolation,native mesh reuse. No native engine/SEC/security/provider-gate rewrite.
+
+Final validation PASSED:104 stock/SEC/live tests in each Release/Debug/ASan+UBSan cohort,
+91 stable-browser checks,new14-check journey (five widths),frontend17. Earlier274×3 terminal tests,eight canonical hashes,
+46 security tests,verifiedTLS8,wheel14,packaging3,frontend17 all passed. These are authored
+or synthetic results,not observed feed acceptance. Evidence under `build/live-market`;
+design/gaps/setup/report under `docs/live-market`. Native and third-party build scopes are
+explicitly distinguished in the report. Provider qualification remains BLOCKED:credentials
+and entitlement evidence absent,support381230 unresolved. No market data fetched.
+
+Implementation UI/liveness checkpoint is committed after final tests;see the delivery
+evidence for its exact SHA. Final selected outcomes:1335 passed,zero failures/skips.
+Exact resume action:inspect status/logs without resetting;complete documentation/evidence
+closure if still pending. Actual provider qualification requires owner entitlement and
+server configuration;do not activate gates or treat fixtures as observed data. Do not repeat unchanged native builds or
+claim new ARM64 qualification. Never enable provider gates merely for a green screen.

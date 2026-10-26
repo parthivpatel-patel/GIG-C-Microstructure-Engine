@@ -1,0 +1,561 @@
+{
+  "schema": "gig.live_market.offline.delivery.v1",
+  "date": "2026-10-26 America/New_York",
+  "baseline": "6af0bdef51007d6058f4f3119ecf5bac21c61ceb",
+  "branch": "feat/atlas-final-release",
+  "implementation_commits": [
+    "56de91c9b95e6a08e1cd4a7dd3fa43ed8ef8b04b",
+    "25c48b013500c4376c6c5a433e093bc0d3bd07b9"
+  ],
+  "remote_source_checkpoint_verified": "25c48b013500c4376c6c5a433e093bc0d3bd07b9",
+  "unchanged_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "classification": "AUTHORED_SYNTHETIC_OFFLINE_NOT_LIVE_MARKET_QUALIFICATION",
+  "provider_requests": 0,
+  "provider_entitlement_status": "BLOCKED_PENDING_VERIFIED_OWNER_PERMISSION_AND_CONFIGURATION",
+  "new_head_arm64_qualified": false,
+  "new_native_compile_matrix_executed": false,
+  "selected_outcomes": {
+    "passed": 1335,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "selected non-overlapping final cohorts;not all native compiler configurations"
+  },
+  "python_cohorts": [
+    {
+      "name": "terminal-release",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/terminal-release.log",
+        "bytes": 40306,
+        "sha256": "8b5e90c4d07b2ef52ac215da058012f4f1fb4372a126d2be603664f05bc2ff2c"
+      }
+    },
+    {
+      "name": "terminal-debug",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/terminal-debug.log",
+        "bytes": 40306,
+        "sha256": "08956fbabfdc2f0c9a6d382424c3500dafe19745672c9cd7b8ad4f9f5813b986"
+      }
+    },
+    {
+      "name": "terminal-sanitizer",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/terminal-sanitizer.log",
+        "bytes": 41063,
+        "sha256": "270e6d2a67c6ce4f328a3c4e2b649e49c3d30a6e459ff358bd32b5d53089a8df"
+      }
+    },
+    {
+      "name": "stocks-release",
+      "passed": 104,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/stocks-release-final.log",
+        "bytes": 16992,
+        "sha256": "e601e5a0bb42243ef1c6c39f297009d06635e9659fd896b297e8d53374b55efe"
+      }
+    },
+    {
+      "name": "stocks-debug",
+      "passed": 104,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/stocks-debug-final.log",
+        "bytes": 16992,
+        "sha256": "f08e77049e774f41506fb220d5dcb5e70f667848c519155c08dcd6db6a310e4b"
+      }
+    },
+    {
+      "name": "stocks-sanitizer",
+      "passed": 104,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/live-market/stocks-sanitizer-final.log",
+        "bytes": 17010,
+        "sha256": "beadd195afa079ec1ff28353b2f33f7dcaa28322fe775004ff61518b3fb364da"
+      }
+    }
+  ],
+  "other_cohorts": {
+    "security": 46,
+    "frontend": 17,
+    "verified_local_tls": 8,
+    "canonical_oracles": 8,
+    "installed_wheel_interface": 8,
+    "installed_wheel_exports": 6,
+    "packaging_regressions": 3,
+    "browser_existing": 91,
+    "browser_new": 14
+  },
+  "browser_existing": {
+    "browser": {
+      "passed": 21,
+      "evidence": {
+        "path": "build/atlas2/resume/browser-validation.log",
+        "bytes": 6206,
+        "sha256": "8afd4c7e68bdee2e3b848505121baf1c3122bd17797f7abdedfbd68919dec0a7"
+      }
+    },
+    "stock-intelligence": {
+      "passed": 10,
+      "evidence": {
+        "path": "build/atlas2/resume/stock-intelligence-validation.log",
+        "bytes": 908,
+        "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+      }
+    },
+    "stock-loading": {
+      "passed": 10,
+      "evidence": {
+        "path": "build/atlas2/resume/stock-loading-validation.log",
+        "bytes": 983,
+        "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+      }
+    },
+    "atlas": {
+      "passed": 21,
+      "evidence": {
+        "path": "build/atlas2/resume/atlas-validation.log",
+        "bytes": 3291,
+        "sha256": "3ad39c3e895267137260a8d82c1e75dae3b83702a14ac6c7acbd8e2db5063769"
+      }
+    },
+    "atlas2": {
+      "passed": 11,
+      "evidence": {
+        "path": "build/atlas2/resume/atlas2-validation.log",
+        "bytes": 2542,
+        "sha256": "ec3109518f3e2b63e6b821f0ed4eaea12f0f9bba10f00e8d601c9adcc9d60f8a"
+      }
+    },
+    "recorded-playback": {
+      "passed": 9,
+      "evidence": {
+        "path": "build/atlas2/resume/recorded-playback-validation.log",
+        "bytes": 396,
+        "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+      }
+    },
+    "live-controls": {
+      "passed": 9,
+      "evidence": {
+        "path": "build/atlas2/resume/live-controls-validation.log",
+        "bytes": 496,
+        "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+      }
+    }
+  },
+  "browser_new": {
+    "schema": "gig.live_market.browser.v1",
+    "passed": 14,
+    "failed": 0,
+    "origin": "HISTORICAL_SYNTHETIC",
+    "observed_provider_verified": false,
+    "screenshots": [
+      "live-market-desktop-synthetic.png",
+      "live-market-mobile-synthetic.png"
+    ]
+  },
+  "stable_asset_hashes": {
+    ".vite/manifest.json": "de41131238f4c9c98fe96d80a91ff70f2d306247ab15dc7cef9ae8b9305f6724",
+    "assets/Landscape3D-CCMH3x2d.js": "b78d07668f9c6bc951bce397d287e0d706eb3c2a8e02d93657248186f5f9b01c",
+    "assets/OrbitControls-BUg9iy_5.js": "d5b98d9084277985cd8c3719c7356650518afe885618e5ed75f297122d913dcc",
+    "assets/QuoteCloud-DOVd-n7f.js": "baad71d25911f80488a015f0ef3313d78a476bc9da464d72f4b7cff39766dd34",
+    "assets/StockIntelligence-aGMn-XBF.js": "76b2d35ef7b19958eee47e83484fa14026e40f035afc2c458fdbc6cbe4428415",
+    "assets/VolatilitySurface-jhWPWQLE.js": "09b31daf02ba3fd2a1b06bdaa88bd7ada2fdab08ad3968ea391105c3ee0bdda3",
+    "assets/index-C8MOz8_4.css": "7f102b970eb5016c668f5f86da1ea84734c0e40f20279f25b3de795a023f56a8",
+    "assets/index-MR3kFYBW.js": "82d5e2a56e0c283c3c076d45ce52f3cfb7f53f2ae3bcb7e67c3f32f330154e58",
+    "index.html": "b2104c43e9fa5191199e530a6996983bdb34ff0d0086b6a8a2e1fcdb778097dc"
+  },
+  "canonical": {
+    "matched": 8,
+    "mismatches": 0,
+    "expected_and_observed": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "source_test_log_sha256": "783b03899daf2d3c2193f6ac4066db9aa5a4e111507feda4592e784219418131"
+  },
+  "performance_before": {
+    "schema": "gig.live_market.measure.v1",
+    "classification": "AUTHORED_SYNTHETIC_NOT_PROVIDER_PERFORMANCE",
+    "python": "3.12.14",
+    "architecture": "x86_64",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "warmup_events": 256,
+    "measured_events": 1000,
+    "repetitions": 1,
+    "elapsed_seconds": 42.65825777401915,
+    "events_per_second": 23.442120053225572,
+    "tracemalloc_current_bytes": 625221,
+    "tracemalloc_peak_bytes": 1218812,
+    "process_peak_rss_kib_linux": 36024,
+    "retained_events": 256,
+    "dedup_identities": 256,
+    "receipt_count": 1256,
+    "limitations": [
+      "Includes tracemalloc instrumentation and full view calculation per event",
+      "Python allocation peak is not native/GPU allocation accounting",
+      "No socket/network/exchange latency or production throughput claim",
+      "Single run on shared cloud CPU,no stable performance baseline"
+    ]
+  },
+  "performance_after": {
+    "schema": "gig.live_market.measure.v1",
+    "classification": "AUTHORED_SYNTHETIC_NOT_PROVIDER_PERFORMANCE",
+    "python": "3.12.14",
+    "architecture": "x86_64",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "warmup_events": 256,
+    "measured_events": 1000,
+    "repetitions": 1,
+    "elapsed_seconds": 17.177189484005794,
+    "events_per_second": 58.216741506585265,
+    "tracemalloc_current_bytes": 581121,
+    "tracemalloc_peak_bytes": 848944,
+    "process_peak_rss_kib_linux": 35952,
+    "retained_events": 256,
+    "dedup_identities": 256,
+    "receipt_count": 1256,
+    "limitations": [
+      "Includes tracemalloc instrumentation and full view calculation per event",
+      "Python allocation peak is not native/GPU allocation accounting",
+      "No socket/network/exchange latency or production throughput claim",
+      "Single run on shared cloud CPU,no stable performance baseline"
+    ]
+  },
+  "host": {
+    "architecture": "x86_64",
+    "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "visible_logical_cpus": 5,
+    "execution": "shared cloud x86_64;not dedicated benchmarking hardware",
+    "generator": "authored fixed quote plus integer size counter;no RNG",
+    "warmup_count": 256,
+    "measured_event_count": 1000,
+    "measured_repetitions": 1,
+    "native_journal_modified": false
+  },
+  "browser_performance_snapshot": {
+    "classification": "SINGLE_AUTHORED_CHROMIUM_SWIFTSHADER_RUN_NOT_GPU_BENCHMARK",
+    "metrics": [
+      {
+        "name": "Nodes",
+        "value": 2257
+      },
+      {
+        "name": "LayoutCount",
+        "value": 0
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 9246948
+      },
+      {
+        "name": "JSHeapTotalSize",
+        "value": 18685952
+      }
+    ]
+  },
+  "browser_performance_warning": "Heap/node snapshot only;zero layout/script counters were enabled at end and are not execution-time measurements",
+  "screenshots": [
+    {
+      "path": "build/live-market/live-market-desktop-synthetic.png",
+      "bytes": 420729,
+      "sha256": "dced9e9d12f1faa73d8d404caeb6c840770aff84f1ec329e37d20e743a3c6143"
+    },
+    {
+      "path": "build/live-market/live-market-mobile-synthetic.png",
+      "bytes": 445322,
+      "sha256": "adfbf99be2d2f1637e3748d790e291498b82b33549267fdab81b4b49fec651af"
+    }
+  ],
+  "official_sdk_reference": {
+    "official_repository": "alpacahq/alpaca-py",
+    "revision": "3da132c6407792310bfbaca1b3114863c44d5bda",
+    "references": [
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/live/websocket.py",
+        "sha256": "ce4a21600663be6f2c5b714dd99695a43546b3b45b1d79c76caf6a8d00642ee2",
+        "bytes": 21432
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/live/stock.py",
+        "sha256": "81bc98c9e9886dec392b6e95908d0851371b360e79045e7d0dfc04fcf6b850b9",
+        "bytes": 8613
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/mappings.py",
+        "sha256": "7979ae408edbf287ccaa29c104b13b12dc7fd7d43f6773a647e328182791d82a",
+        "bytes": 1721
+      }
+    ],
+    "purpose": "Protocol source only;no market data or provider API requests"
+  },
+  "source_inventory": [
+    {
+      "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+      "bytes": 48371,
+      "sha256": "9235474d29f8f6d66d2ca82a4fbcd1def51a72a620836444d8a14fc696747f7d"
+    },
+    {
+      "path": "docs/live-market/ENGINEERING_AUDIT.md",
+      "bytes": 2143,
+      "sha256": "29fbe0728860122218561af527a1a9389da6fecf9f0b300f2bd5c3aef4ee4557"
+    },
+    {
+      "path": "docs/live-market/IMPLEMENTATION_REPORT.md",
+      "bytes": 10532,
+      "sha256": "c44d420cbc23a2953cad50357b2c6088734e08ff5c60ffda4cd85140f9a2ae82"
+    },
+    {
+      "path": "docs/live-market/SETUP_AND_QUALIFICATION.md",
+      "bytes": 3516,
+      "sha256": "8379ffd9e96025fd85a162c4b045b048fa075814ac1d20fc97af02c4ab51e799"
+    },
+    {
+      "path": "docs/live-market/VALIDATION_REPORT.md",
+      "bytes": 6213,
+      "sha256": "9e40cfb4598b6433dd89eee94fa6d83ec1cca26cdc53f89a4486decef5b222d9"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 48695,
+      "sha256": "dd3778f80909987e239ded582fa7d0b0efa88875da9dc1d9b5834fcaa9c8384c"
+    },
+    {
+      "path": "terminal/stocks/identity.py",
+      "bytes": 1341,
+      "sha256": "3e8902168bfd16d8b2a8874b7d48b23eb91ef4907f00f36cf6c91082cc039a10"
+    },
+    {
+      "path": "terminal/stocks/live.py",
+      "bytes": 15495,
+      "sha256": "34faa35e5812d76283ea83c712b695b197db526db46f49ef074db8e38e6aaaf3"
+    },
+    {
+      "path": "terminal/stocks/live_metrics.py",
+      "bytes": 3369,
+      "sha256": "ce7cdd19dba8bd857883ca7f6d586f922800b1a2baaea69db2f5aa9510b47612"
+    },
+    {
+      "path": "terminal/stocks/test_live_market.py",
+      "bytes": 7314,
+      "sha256": "5d6f82b41323a1bd941006760278d9aaffe9e9ea4453eb9847b56575685d35cb"
+    },
+    {
+      "path": "terminal/tests/live-market-validation.mjs",
+      "bytes": 4899,
+      "sha256": "6e1af33fbb946e437087aab7af3ba29b0d45ae2c0142e33f910476f236435bf1"
+    },
+    {
+      "path": "terminal/tests/live_market_fixture_server.py",
+      "bytes": 1866,
+      "sha256": "c9bc345e0d3cf21180bac9ae51bd2210d490a547d6f81df76cb999a49740111a"
+    },
+    {
+      "path": "terminal/tests/measure_live_market.py",
+      "bytes": 1477,
+      "sha256": "28bb01e4417eabaca3330212a62956e3e8a15b2a7c7d48a4bed76f29d920b38d"
+    },
+    {
+      "path": "terminal/tests/run_live_market_suite.py",
+      "bytes": 1001,
+      "sha256": "9383fc088f90f38944f2a91068cef2d7a16c302def62414ffa010ab62f89d579"
+    },
+    {
+      "path": "terminal/web/package.json",
+      "bytes": 574,
+      "sha256": "d54f52357271aee49b417d6f33d7787fdaf0017d355356db6736943dd6815dfd"
+    },
+    {
+      "path": "terminal/web/src/Landscape3D.tsx",
+      "bytes": 8405,
+      "sha256": "2e602fa7f98a3f247cc23f734deade501ef6316540ec78296789131adc65b68a"
+    },
+    {
+      "path": "terminal/web/src/LiveMarket.tsx",
+      "bytes": 8970,
+      "sha256": "1371e814e12161dd3ce89970ded59f35477570cc8159625964c7dbcaf96cbf19"
+    },
+    {
+      "path": "terminal/web/src/QuoteCloud.tsx",
+      "bytes": 5947,
+      "sha256": "4ce504a9e01445b7240b4d90ecff881120fe7fa8851d42212e189c53f0eba77b"
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "bytes": 17555,
+      "sha256": "3ba165c1d239831488353e4902aeb3eeaecbfd0fc53e25fc5232ed915e757c5e"
+    },
+    {
+      "path": "terminal/web/src/marketPlot.test.ts",
+      "bytes": 1045,
+      "sha256": "4fe070faac3dc2561deed071d957dfdc4bcbdd33c87456fe3c11a7e5e2ad7b5c"
+    },
+    {
+      "path": "terminal/web/src/marketPlot.ts",
+      "bytes": 609,
+      "sha256": "f533d9062f893ba8fa04f59ca9bc434dfef5ae46ec44e459b544e61edba07b62"
+    }
+  ],
+  "source_inventory_scope": "Changed implementation and closure docs;this self-manifest excluded",
+  "evidence_artifacts": [
+    {
+      "path": "build/live-market/focused.log",
+      "bytes": 361,
+      "sha256": "0cd4e7a28abaad707056b019922c3348587e2f48ff72614d2c3e8f01ceee4ad0"
+    },
+    {
+      "path": "build/live-market/adapter-initial.log",
+      "bytes": 15356,
+      "sha256": "48c927496b3595cedb2c2fcf1c76cc39ebe992601a6048170855619577a7394d"
+    },
+    {
+      "path": "build/live-market/adapter-compatible.log",
+      "bytes": 5863,
+      "sha256": "a99ee762a52b76e7219552ee9644acb95e305331e203855ba6877d68ab762cd0"
+    },
+    {
+      "path": "build/live-market/regressions.log",
+      "bytes": 1037,
+      "sha256": "d2b6214e1b79737d2bd28bac61f2bfbaa5a4f38a1991be01aaa29dc4324e5064"
+    },
+    {
+      "path": "build/live-market/regressions-final.log",
+      "bytes": 482,
+      "sha256": "f11bc41f414cfb000a4255e8243b8b96adce8f4b52dd1db187b312b344cd51cd"
+    },
+    {
+      "path": "build/live-market/focused-final.log",
+      "bytes": 366,
+      "sha256": "4e5fa40ca7bf3ff6294144e8902495a857ac6a7735d2676f5ec4d160a6a37e5f"
+    },
+    {
+      "path": "build/live-market/frontend-tests-final.log",
+      "bytes": 2127,
+      "sha256": "350b40878a74e14072363078304e00b23f92bd32d46ff74f053e2f04145b9f02"
+    },
+    {
+      "path": "build/live-market/frontend-build-final.log",
+      "bytes": 1456,
+      "sha256": "eb368e57a593ceb8d08a68c4631a691b4a38d3bcc958e38047e73b1193bff0ed"
+    },
+    {
+      "path": "build/live-market/canonical.log",
+      "bytes": 1124,
+      "sha256": "af2ad3b92ec7c9c920aed3d05ea75f5428a20263c442344e7ff25bf2951053d8"
+    },
+    {
+      "path": "build/live-market/canonical-comparison.json",
+      "bytes": 953,
+      "sha256": "839ad6cc3e0d29f1b96a3ad4e79743756991d687bf37e182043a7e17f73cd494"
+    },
+    {
+      "path": "build/live-market/tls.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/live-market/wheel-interface.log",
+      "bytes": 964,
+      "sha256": "48de4902fab1e216b07c54013fa13f56ae7d8a570c59e8cd9b90725b7122ffc6"
+    },
+    {
+      "path": "build/live-market/wheel-exports.log",
+      "bytes": 959,
+      "sha256": "0c59a7a06145fa62459c9e3128d415184d311bb13b6e44cd433e89166014f293"
+    },
+    {
+      "path": "build/live-market/packaging.log",
+      "bytes": 101,
+      "sha256": "869ea8047d0ae89dddb808470175fa3bdce5d6007a92e195f2d7e7e762e1f49f"
+    },
+    {
+      "path": "build/live-market/browser-initial-failure.log",
+      "bytes": 414,
+      "sha256": "076488a0f3b5dfeed28fce38d2a6216ff253612729305e5e5d4f40c1ba3c8a91"
+    },
+    {
+      "path": "build/live-market/browser-palette-old-assets.log",
+      "bytes": 385,
+      "sha256": "eeb8a916f70d7e3e359a99c25e34bb77b7e01e608996d45ec2be0d865d770fee"
+    },
+    {
+      "path": "build/live-market/browser-async-observation-race.log",
+      "bytes": 747,
+      "sha256": "b8f5d2b6b000934b2afd4389a3134976411213253359c8389b24a6f5609f3927"
+    },
+    {
+      "path": "build/live-market/browser-regression-final.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/live-market/browser-final.log",
+      "bytes": 255,
+      "sha256": "5800da3687bc20e9c5705b7e48c7f7159db41e0e59b99c88bba18d4b21271ebd"
+    },
+    {
+      "path": "build/live-market/browser-performance.json",
+      "bytes": 418,
+      "sha256": "c080177b37f333bb7de6193bb69a8ba3ce6154c3cda956b2869b62b01b4e397a"
+    },
+    {
+      "path": "build/live-market/sdist-check-final.log",
+      "bytes": 81,
+      "sha256": "d41530b522497703c034c9dd832b155caaf11c382d6142ff4da1647ddaee2524"
+    },
+    {
+      "path": "build/live-market/sdist-build-final.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/live-market/sdist-inventory-final.json",
+      "bytes": 114508,
+      "sha256": "3c4d44bc3944cfcdea15b0c4b4385a7bd8ea536748ec54eec8bd81393f52f2f2"
+    }
+  ],
+  "source_archive": {
+    "path": "build/live-market/dist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2339693,
+    "sha256": "7d254eb2c01f7fd3058a41045689982b1a66dd8b1fee04f153feec1d3170fbd2",
+    "verified_members": 723,
+    "self_manifest_not_in_archive": true,
+    "scope": "Safe byte-identical source archive built after implementation/docs,before creating this self-manifest;no wheel/release publication"
+  },
+  "known_gaps": [
+    "No observed provider qualification or market-wide completeness",
+    "No licensed equity depth or inferred L2/L3",
+    "1Hz HTTP sampling,not browser stock-push",
+    "Controlled reconnect subscription replacement,not in-place deltas",
+    "Shared 3D camera;independent scissored panels absent",
+    "No physical Android,GPU stress/full WCAG,external Codespaces auth or fresh ARM64 evidence",
+    "OHLCV bar profile only;updated/daily bars,status/LULD unsupported",
+    "Correction observations do not reconstruct corrected tape",
+    "No authoritative current exchange calendar/halts or process-wide RSS hard cap",
+    "Memory-only history;no durable tape/crash recovery"
+  ]
+}
