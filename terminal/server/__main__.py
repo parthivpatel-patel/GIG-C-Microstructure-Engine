@@ -15,7 +15,7 @@ def main():
     else:
         print('Local browser: http://127.0.0.1:8787 on THIS machine; remote devices need private forwarding.', flush=True)
     uvicorn.run('terminal.server.app:app', host=host, port=8787, workers=1,
-                ws_max_size=4096, ws_max_queue=4, timeout_keep_alive=5,
+                ws_max_size=4096, ws_max_queue=4, timeout_keep_alive=5, timeout_graceful_shutdown=5,
                 limit_concurrency=32, h11_max_incomplete_event_size=8192)
 
 

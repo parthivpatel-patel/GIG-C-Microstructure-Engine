@@ -46,3 +46,6 @@ test-results/
 
 # Owner contact and SEC startup policy configuration (never source artifacts).
 .gig-sec/
+
+# Owner-private calendar evidence (never credentials or repository data).
+.gig-session/

@@ -22,6 +22,7 @@ from .engine import ControlError, NativeSession
 from .config import launch_settings
 from .connection import observation, origin_value
 from .stream_tickets import StreamTickets, authorize_socket, PROTOCOL
+from .market_events import MarketEvents
 from .request_proofs import RequestProofs, bootstrap_context, authorize_mutation
 import gig_microstructure as gig
 
@@ -168,6 +169,7 @@ def create_app(stock_workspace=None):
         try:
             yield
         finally:
+            market_events.closed=True
             await stock_live.close()
             await stocks.close()
             await feed.close()
@@ -184,6 +186,8 @@ def create_app(stock_workspace=None):
     stock_live=LiveIEX(stocks)
     app.state.stocks=stocks
     app.state.stock_live=stock_live
+    market_events=MarketEvents(stock_live)
+    app.state.market_events=market_events
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
     app.add_middleware(CORSMiddleware, allow_origins=list(origins), allow_methods=['GET', 'POST'],
@@ -373,12 +377,19 @@ def create_app(stock_workspace=None):
             async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
         except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
 
+    @route('/api/v1/stocks/events', methods=['POST'])
+    async def stock_events(request):
+        data=await bounded_json(request)
+        if data!={}:return error('MARKET_STREAM_QUERY','empty object required',422)
+        if not market_events.reserve():return error('MARKET_STREAM_CAPACITY','bounded stock-stream capacity reached',429)
+        return market_events.response()
+
     @route('/api/v1/stocks/live', methods=['GET','POST'])
     @json_endpoint
     async def stock_live_control(request):
         if request.method=='GET':
             if request.query_params:return error('LIVE_QUERY','no query parameters accepted',422)
-            return stock_live.view()
+            result=stock_live.view();result['browser_push']=market_events.status();return result
         data=await bounded_json(request)
         try:
             async with stock_live_lock:
