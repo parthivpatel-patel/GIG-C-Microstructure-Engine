@@ -338,6 +338,26 @@ def create_app(stock_workspace=None):
         result['recording']={'enabled':bool(feed.capture and feed.capture.state=='RECORDING'),'observed_permission':bool(feed.provider=='kraken' and feed.permission and feed.permission.recording_approved)}
         return result
 
+    @route('/api/v2/companies/{symbol}', methods=['GET'])
+    @json_endpoint
+    async def company_v2(request):
+        from .backend_contract import company_contract
+        try:return company_contract(stocks,request.path_params['symbol'])
+        except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
+
+    @route('/api/v2/companies/{symbol}/filings', methods=['GET'])
+    @json_endpoint
+    async def filings_v2(request):
+        from terminal.stocks.sec import FORMS
+        q=request.query_params
+        if set(q)-{'form','offset','limit'}:return error('FILINGS_V2_QUERY','unknown filing query parameter')
+        offset=q.get('offset','0');limit=q.get('limit','25');form=q.get('form')
+        if not re.fullmatch(r'[0-9]{1,3}',offset) or not re.fullmatch(r'[0-9]{1,2}',limit) or not 1<=int(limit)<=50 or int(offset)>128 or (form is not None and form not in FORMS):return error('FILINGS_V2_QUERY','bounded offset0..128,limit1..50 and supported form required')
+        try:view=stocks.view(request.path_params['symbol'])
+        except ValueError:return error('FILINGS_V2_SYMBOL','unsupported or invalid company identity')
+        source=view['fundamentals'];rows=[r for r in source.get('filings',[]) if form is None or r['form']==form];start=int(offset);end=start+int(limit)
+        return {'schema':'gig.backend.filings.v2','instrument':view['instrument'],'data_origin':view['classification'],'observed_at':source.get('received_at'),'status':source['status'],'records':rows[start:end],'total_cached_matching':len(rows),'next_offset':end if end<len(rows) else None,'source_coverage':source.get('integrity',{}),'pagination_scope':'cached recent filings only;no upstream pagination or request on GET','limitations':['Filing acceptance time may be missing;no invented intraday availability','Amendments are distinct filings,not additive restatements']}
+
     @route('/api/v1/stocks/search', methods=['GET'])
     @json_endpoint
     async def stock_search(request):

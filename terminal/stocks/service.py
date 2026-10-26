@@ -141,7 +141,7 @@ class StockWorkspace:
         if self.lock.locked():raise AccessError('upstream_refresh_busy')
         async with self.lock:
             previous=self.cache.get(ticker,{})
-            stamp=datetime.datetime.now(datetime.timezone.utc).isoformat();hashes=[];urls=[]
+            stamp=datetime.datetime.now(datetime.timezone.utc).isoformat();hashes=[];urls=[];source_records=[]
             try:
                 async with asyncio.timeout(25):
                     if provider=='sec':
@@ -152,15 +152,17 @@ class StockWorkspace:
                             try:
                                 data,digest=await self.fetch(provider,url,headers);parsed=parse(data)
                                 if kind=='filings':result.update(parsed)
-                                else:result['financials']=parsed
-                                urls.append(url);hashes.append(digest);result['components'][kind]={'status':'AVAILABLE'}
+                                else:
+                                    from .financials import calculate
+                                    parsed['analytics']=calculate(parsed);result['financials']=parsed
+                                urls.append(url);hashes.append(digest);source_records.append({'component':kind,'url':url,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat()});result['components'][kind]={'status':'AVAILABLE'}
                             except Exception as exc:result['components'][kind]={'status':'UNAVAILABLE','reason':failure_reason(exc,'upstream_parse_transport_or_validation_failure'),'action':'Review source policy,identity,schema and response budget;other accepted SEC section remains visible.'}
                         if not hashes:raise AccessError('all_SEC_components_unavailable;'+','.join(k+'='+v['reason'] for k,v in result['components'].items()))
                         if any(c['status']!='AVAILABLE' for c in result['components'].values()):result['reason']='Partial SEC response;missing section: '+','.join(k+':'+v['reason'] for k,v in result['components'].items() if v['status']!='AVAILABLE')
                     elif provider=='options':
                         from .option_feed import snapshots
                         url=f'https://data.alpaca.markets/v1beta1/options/snapshots/{ticker}?feed=indicative&limit=100';urls.append(url)
-                        data,digest=await self.fetch(provider,url,headers);hashes.append(digest);result=snapshots(data,ticker)
+                        data,digest=await self.fetch(provider,url,headers);hashes.append(digest);result=snapshots(data,ticker);source_records.append({'component':'option_snapshots','url':url,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat()})
                     else:
                         if not start or not end:raise AccessError('bounded_price_dates_required')
                         sec.date(start);sec.date(end)
@@ -181,7 +183,7 @@ class StockWorkspace:
                                     if any(not lower<=int(timestamp_ns(row['timestamp']))<upper for row in parsed['bars']):raise AccessError('bar_outside_requested_UTC_calendar_interval')
                                     result.update(parsed);result['timeframe']=timeframe;result['requested_interval']={'start':start+'T00:00:00Z','exclusive_end':exclusive_end+'T00:00:00Z','meaning':'user end date inclusive;latest bar completeness unknown'}
                                 else:result[kind]=parsed
-                                urls.append(url);hashes.append(digest);result['components'][kind]={'status':'AVAILABLE'}
+                                urls.append(url);hashes.append(digest);source_records.append({'component':kind,'url':url,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat()});result['components'][kind]={'status':'AVAILABLE'}
                             except Exception as exc:
                                 reason=failure_reason(exc,'invalid_or_unavailable_'+kind)
                                 result['components'][kind]={'status':'UNAVAILABLE','reason':reason,'action':'Check entitlement/feed availability or retry after cooldown;other accepted sections remain visible.'}
@@ -198,7 +200,7 @@ class StockWorkspace:
                             quote=result['quotes']
                             if not history or quote!=history[-1]:history.append(quote)
                             result['quote_history']=history[-32:]
-                    result.update(status='PARTIAL' if any(v['status']!='AVAILABLE' for v in result.get('components',{}).values()) else 'AVAILABLE',received_at=stamp,origin=self.origin,source_urls=urls,response_sha256=hashes)
+                    result.update(status='PARTIAL' if any(v['status']!='AVAILABLE' for v in result.get('components',{}).values()) else 'AVAILABLE',requested_at=stamp,received_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),origin=self.origin,source_urls=urls,response_sha256=hashes,source_records=source_records)
                     encoded=json.dumps(result,separators=(',',':'))
                     if len(encoded)>2*1024*1024:raise AccessError('normalized_response_budget')
             except Exception as exc:

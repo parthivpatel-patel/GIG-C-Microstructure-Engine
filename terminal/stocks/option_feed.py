@@ -7,7 +7,7 @@ def signed(value):
     if type(value) not in (int,Decimal,str) or isinstance(value,bool) or len(str(value))>48:raise ValueError('option_model_value')
     try:n=Decimal(value)
     except InvalidOperation:raise ValueError('option_model_value') from None
-    if not n.is_finite() or abs(n)>1000000 or not -12<=n.as_tuple().exponent<=12:raise ValueError('option_model_value')
+    if not n.is_finite() or n.copy_abs()>1000000 or not -12<=n.as_tuple().exponent<=12:raise ValueError('option_model_value')
     return str(n)
 
 def snapshots(payload,ticker):

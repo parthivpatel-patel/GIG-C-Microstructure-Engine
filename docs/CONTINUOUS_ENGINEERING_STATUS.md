@@ -274,3 +274,25 @@ complete real policy/entitlement/SEC-identifying review before enabling source g
 Do not paste secrets into chat. Search AAPL then NVDA and collect only sanitized source
 status/hash/error evidence. Do not treat fixture acceptance as real-market qualification.
 Resume from the final documentation SHA in Git/delivery;no background engineering runs.
+
+## Backend engineering audit checkpoint — October25,2026 America/New_York
+
+Starting feature/remote f991c813749ad4c54e99943c51d7b1294f0cda20;main
+12f3a53943dc245e36f2cbbc35b9910fb21c0718 preserved. Two reproduced SEC
+integrity failures repaired (Decimal-context magnitude rounding;contradictory
+filing accession). New period-aware12-metric financial descriptors,source receipts,
+read-only versioned company/filings contracts,and independent raw SEC reconciliation
+tooling implemented. SEC network/contact configuration unavailable;no actual SEC or
+Alpaca request. Alpaca support381230 remains pending. Restricted LOBSTER untouched.
+Fresh six native155/155 suites and all48/eight-identity comparisons passed. Expanded
+274-case terminal cohorts passed installed Release,Debug binding,ASan/UBSan binding;
+LSan live checkpoint0 and deliberate12345-byte leak control detected. Security46;
+TLS/WSS8;browser21+10+9+9+9;frontend4;packaging3(correct build-tool interpreter);
+installed-wheel8+6. Final strengthened21-case financial tests rerun successfully.
+Journal scaling measured1/1024/8192 records,three repeats each,including32 restarts;
+physical record12232B,logical15944B;no storage implementation changed.
+Current changes uncommitted until final documentation/review. Exact next action:
+finish nine backend reports/safe evidence,final cohort checks,review and commit
+[skip ci] to feature only;build/inventory source archive at clean source,then final
+evidence commit/push/remote verification. No claim of real SEC source validation,
+production readiness,new ARM64 qualification or hosted CI success.

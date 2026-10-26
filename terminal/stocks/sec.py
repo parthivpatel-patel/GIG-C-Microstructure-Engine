@@ -1,9 +1,9 @@
 """Period-aware, bounded SEC-shaped disclosure parsing. No invented missing facts."""
-import datetime,re
+import datetime,re,hashlib,json
 from fractions import Fraction
 from decimal import Decimal
 
-TAGS={'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'),'net_income':('NetIncomeLoss',),'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),'assets':('Assets',),'liabilities':('Liabilities',),'equity':('StockholdersEquity',),'cash':('CashAndCashEquivalentsAtCarryingValue',),'eps':('EarningsPerShareDiluted',)}
+TAGS={'revenue':('RevenueFromContractWithCustomerExcludingAssessedTax','Revenues','SalesRevenueNet'),'net_income':('NetIncomeLoss',),'operating_cash_flow':('NetCashProvidedByUsedInOperatingActivities',),'assets':('Assets',),'liabilities':('Liabilities',),'equity':('StockholdersEquity',),'cash':('CashAndCashEquivalentsAtCarryingValue',),'eps':('EarningsPerShareDiluted',),'gross_profit':('GrossProfit',),'operating_income':('OperatingIncomeLoss',),'assets_current':('AssetsCurrent',),'liabilities_current':('LiabilitiesCurrent',),'short_term_borrowings':('ShortTermBorrowings',),'long_term_debt_current':('LongTermDebtCurrent',),'long_term_debt_noncurrent':('LongTermDebtNoncurrent',),'capex':('PaymentsToAcquirePropertyPlantAndEquipment',)}
 FORMS={'10-K','10-K/A','10-Q','10-Q/A','8-K','8-K/A','13F-HR','13F-HR/A'}
 
 def date(value):
@@ -17,21 +17,25 @@ def text(value,limit=256):
 
 def exact(value):
     # SEC monetary values are JSON numbers; preserve every supplied decimal digit.
-    from decimal import Decimal
     if type(value) not in (int,Decimal) or isinstance(value,bool):raise ValueError('sec_numeric')
-    if not Decimal(value).is_finite() or len(str(value))>64 or abs(value)>10**30 or not -12<=Decimal(value).as_tuple().exponent<=30:raise ValueError('sec_numeric')
+    if not Decimal(value).is_finite() or len(str(value))>64 or Decimal(value).copy_abs()>10**30 or not -128<=Decimal(value).as_tuple().exponent<=30:raise ValueError('sec_numeric')
     return str(value)
 
+def object_value(value):
+    if type(value) is not dict:raise ValueError('sec_structure')
+    return value
+
 def filings(payload,cik):
+    object_value(payload)
     if str(payload.get('cik','')).lstrip('0')!=cik.lstrip('0'):raise ValueError('sec_identity')
-    recent=payload.get('filings',{}).get('recent',{})
+    recent=object_value(object_value(payload.get('filings',{})).get('recent',{}))
     required=('accessionNumber','form','filingDate','primaryDocument')
     if any(type(recent.get(k)) is not list for k in required):raise ValueError('sec_filing_columns')
     count=len(recent['form'])
     if count>10000 or any(len(recent[k])!=count for k in required):raise ValueError('sec_filing_alignment')
     for k in ('acceptanceDateTime','reportDate'):
         if k in recent and (type(recent[k]) is not list or len(recent[k])!=count):raise ValueError('sec_filing_alignment')
-    rows=[]
+    rows=[];seen={};duplicates=0
     for i in range(count):
         form=text(recent['form'][i],32)
         if form not in FORMS:continue
@@ -46,22 +50,27 @@ def filings(payload,cik):
             if stamp.tzinfo is None:raise ValueError('sec_acceptance_timestamp')
         report=recent.get('reportDate',[None]*count)[i]
         if report:date(report)
-        rows.append({'form':form,'amendment':form.endswith('/A'),'accession':accession,'filed':filed,'accepted_at':accepted,'report_date':report or None,'url':f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace("-","")}/{doc}'})
+        row={'form':form,'amendment':form.endswith('/A'),'accession':accession,'filed':filed,'accepted_at':accepted,'report_date':report or None,'url':f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace("-","")}/{doc}'}
+        if accession in seen:
+            if seen[accession]!=row:raise ValueError('sec_contradictory_filing')
+            duplicates+=1;continue
+        seen[accession]=row;rows.append(row)
     rows.sort(key=lambda r:(r['filed'],r['accession']),reverse=True)
-    return {'filings':rows[:128],'coverage':'recent submissions only;older filing shards not fetched','institutional_holdings':{'status':'UNAVAILABLE','reason':'Issuer filings are not a holder registry. 13F manager reports disclose delayed quarter-end positions, not real-time ownership;information-table ingestion not implemented.'},'timeline':[{'event':r['form'],'published_at':r['accepted_at'],'filing_date':r['filed'],'url':r['url'],'source':'SEC EDGAR'} for r in rows[:64]]}
+    return {'filings':rows[:128],'coverage':'recent submissions only;older filing shards not fetched','integrity':{'input_rows':count,'eligible_unique_rows':len(rows),'duplicate_rows':duplicates,'selected_rows':min(len(rows),128),'truncated':len(rows)>128},'institutional_holdings':{'status':'UNAVAILABLE','reason':'Issuer filings are not a holder registry. 13F manager reports disclose delayed quarter-end positions, not real-time ownership;information-table ingestion not implemented.'},'timeline':[{'event':r['form'],'published_at':r['accepted_at'],'filing_date':r['filed'],'url':r['url'],'source':'SEC EDGAR'} for r in rows[:64]]}
 
 def facts(payload,cik,as_of):
+    object_value(payload)
     date(as_of)
     if str(payload.get('cik','')).lstrip('0')!=cik.lstrip('0'):raise ValueError('sec_identity')
-    namespace=payload.get('facts',{}).get('us-gaap',{})
+    namespace=object_value(payload.get('facts',{})).get('us-gaap',{})
     if type(namespace) is not dict:raise ValueError('sec_facts')
-    history={};coverage={}
+    history={};coverage={};revisions={}
     for metric,tags in TAGS.items():
         records=[]
         for tag in tags:
-            data=namespace.get(tag,{})
+            data=object_value(namespace.get(tag,{}))
             unit='USD/shares' if metric=='eps' else 'USD'
-            values=data.get('units',{}).get(unit,[])
+            values=object_value(data.get('units',{})).get(unit,[])
             if type(values) is not list or len(values)>10000:raise ValueError('sec_fact_budget')
             for r in values:
                 if type(r) is not dict:raise ValueError('sec_fact_record')
@@ -71,7 +80,12 @@ def facts(payload,cik,as_of):
                 if filed>as_of:continue
                 accession=text(r['accn'],24)
                 if not re.fullmatch(r'\d{10}-\d{2}-\d{6}',accession):raise ValueError('sec_accession')
-                records.append({'concept':tag,'unit':unit,'value':exact(r['val']),'start':start,'end':end,'filed':filed,'accession':accession,'form':r['form'],'frame':text(r['frame'],40) if 'frame' in r else None})
+                fiscal_year=r.get('fy');fiscal_period=r.get('fp')
+                if fiscal_year is not None and (type(fiscal_year) is not int or not 1800<=fiscal_year<=2200):raise ValueError('sec_filing_fiscal_year')
+                if fiscal_period is not None:text(fiscal_period,16)
+                row={'issuer_cik':cik,'concept':tag,'unit':unit,'value':exact(r['val']),'start':start,'end':end,'filed':filed,'accession':accession,'form':r['form'],'frame':text(r['frame'],40) if 'frame' in r else None,'filing_fiscal_year':fiscal_year,'filing_fiscal_period':fiscal_period,'period_kind':'duration' if start else 'instant','duration_days':(datetime.date.fromisoformat(end)-datetime.date.fromisoformat(start)).days+1 if start else None}
+                row['source_fact_id']=hashlib.sha256(json.dumps(row,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+                records.append(row)
         # Keep competing concepts separate. Latest filing for the same tagged period
         # is a deliberate as-of restatement policy, not original point-in-time history.
         duplicates={}
@@ -80,9 +94,10 @@ def facts(payload,cik,as_of):
             if key in duplicates and Decimal(duplicates[key])!=Decimal(r['value']):raise ValueError('sec_contradictory_fact')
             duplicates[key]=r['value']
         selected={}
-        for r in sorted(records,key=lambda r:(r['filed'],r['accession'])):selected[(r['concept'],r['start'],r['end'],r['unit'])]=r
+        for r in sorted(records,key=lambda r:(r['filed'],r['accession'],r['source_fact_id'])):selected[(r['concept'],r['start'],r['end'],r['unit'])]=r
         ordered=sorted(selected.values(),key=lambda r:(r['end'],r['start'] or '',r['filed'],r['concept']),reverse=True)
-        history[metric]=ordered[:256];coverage[metric]={'available':bool(ordered),'truncated':len(ordered)>256,'eligible_periods':len(ordered)}
+        revisions[metric]=sorted(records,key=lambda r:(r['filed'],r['accession'],r['source_fact_id']),reverse=True)[:16]
+        history[metric]=ordered[:256];coverage[metric]={'available':bool(ordered),'truncated':len(ordered)>256,'eligible_periods':len(ordered),'revision_rows':len(records),'revision_rows_retained':min(16,len(records)),'revision_history_truncated':len(records)>16,'expected_unit':unit}
     # No mixing quarterly/annual durations or incompatible end dates.
     ratios={}
     for name,numerator,denominator,duration in [('net_margin','net_income','revenue',True),('liabilities_to_assets','liabilities','assets',False)]:
@@ -93,4 +108,4 @@ def facts(payload,cik,as_of):
                     f=Fraction(a['value'])/Fraction(b['value']);matches.append({'numerator':str(f.numerator),'denominator':str(f.denominator),'start':a['start'],'end':a['end'],'source_accessions':[a['accession'],b['accession']],'concepts':[a['concept'],b['concept']]})
         ambiguous=bool(matches and len({(r['numerator'],r['denominator']) for r in matches if (r['start'],r['end'])==(matches[0]['start'],matches[0]['end'])})>1)
         ratios[name]={'value':matches[0] if matches and not ambiguous else None,'reason':'ambiguous_compatible_concepts' if ambiguous else None if matches else 'missing_compatible_periods'}
-    return {'as_of_filing_date':as_of,'history':history,'coverage':coverage,'ratios':ratios,'methodology':'us-gaap selected tags/units only;all alternatives labelled;latest filing per tagged period as-of date;no fiscal-quarter subtraction,imputation or cross-period ratios;not a point-in-time trading dataset'}
+    return {'financial_schema_version':'2','issuer_cik':cik,'as_of_filing_date':as_of,'revision_history':revisions,'history':history,'coverage':coverage,'ratios':ratios,'methodology':'us-gaap selected tags/units only;all alternatives labelled;latest filing per tagged period as-of date;no fiscal-quarter subtraction,imputation or cross-period ratios;not a point-in-time trading dataset'}

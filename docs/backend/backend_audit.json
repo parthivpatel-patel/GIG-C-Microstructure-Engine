@@ -1,0 +1,832 @@
+{
+  "schema": "gig.backend.audit.v1",
+  "environment": {
+    "utc": "2026-10-26T01:20:02.759943+00:00",
+    "architecture": "x86_64",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "compiler_versions": {
+      "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+      "clang": "Debian clang version 19.1.7 (3+b1)"
+    },
+    "baseline": "f991c813749ad4c54e99943c51d7b1294f0cda20",
+    "source_tree_ids": {
+      "include": "255d54cf582dceb071cee323e8c466785e1aa26d",
+      "src": "b7649bf2dd2622a5d7fada1585d10f9e944d0ccf",
+      "python": "8c48f0f31b6856cfe155b25d9aa61f4084120ff2",
+      "tests": "9d53c8354f0f83405533926d1d562c8b26363425",
+      "fixtures": "d1e453d191f560c8def6fb7e48022972453820d5",
+      "schemas": "a63aa1e96e96281fd90ad35552d0c5d69577a6b4",
+      "CMakeLists.txt": "d7d174306701246ca5117c3e9599d8c5efe607c3",
+      "CMakePresets.json": "46aae0e0f78132c9ee42281895562a34a18c9ad5"
+    }
+  },
+  "source_changes": [
+    {
+      "path": ".github/workflows/native-arm64.yml",
+      "sha256": "8a96f6da6e91fda426bddbddc289add347cf6eca089e3d9f26a38ded964f4482",
+      "bytes": 9334
+    },
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "sha256": "e7090eea86c1a315f143478849bfca49e855b32d1648e575421083fd64d5ea3f",
+      "bytes": 21573
+    },
+    {
+      "path": "docs/backend/BACKEND_ARCHITECTURE.md",
+      "sha256": "86bee7b3d72fdd367dedf2319bb4696a031d3e8da88ea573c7880e56872c7371",
+      "bytes": 4699
+    },
+    {
+      "path": "docs/backend/BACKEND_COMPLIANCE_MATRIX.md",
+      "sha256": "41e92706c202a4fc987ddcd6a837dd89ee32f18a817b3d814e1456fb5387f945",
+      "bytes": 7750
+    },
+    {
+      "path": "docs/backend/DATA_PROVENANCE_AND_VALIDATION.md",
+      "sha256": "ac29010c0aa2726fe02c09a1bb47ca4d1692192e64a5419829b81767013e0934",
+      "bytes": 3593
+    },
+    {
+      "path": "docs/backend/FINAL_BACKEND_ENGINEERING_REPORT.md",
+      "sha256": "eb6c96664afeb6f5ca95ca0ec5b25b771b6829a235e57698e29f36f4be268790",
+      "bytes": 7423
+    },
+    {
+      "path": "docs/backend/PERFORMANCE_REPORT.md",
+      "sha256": "c6cb18fb24d9d9c5d3dc956ca30f9c5224ed01a769316b50067bc4340619190b",
+      "bytes": 3171
+    },
+    {
+      "path": "docs/backend/QUANT_MODEL_VALIDATION.md",
+      "sha256": "37847d8445948a2374f473d52205d676bb5a6c2919997d080c7860277d8479b6",
+      "bytes": 3673
+    },
+    {
+      "path": "docs/backend/REMAINING_GAPS.md",
+      "sha256": "ab6a321a3d6bf9a7683903f53971947e6fb97ab0d32d1129edb846cfc1c5c8cf",
+      "bytes": 3905
+    },
+    {
+      "path": "docs/backend/SECURITY_AUDIT.md",
+      "sha256": "e48fdda500ec172536460baa1c672119d3992af4aa098da8f81565af07eca603",
+      "bytes": 3567
+    },
+    {
+      "path": "docs/backend/SEC_EDGAR_VALIDATION.md",
+      "sha256": "769c89157c6fb6e9bb0ffa870ab9a8d373c7df7416749dc73fea08248e671601",
+      "bytes": 4236
+    },
+    {
+      "path": "scripts/qualify_sec_sources.py",
+      "sha256": "b429f8ad52862959924e9fe65f0aa9c51e3e2be356558b23e3ac45dfe7d2f13b",
+      "bytes": 7750
+    },
+    {
+      "path": "terminal/server/app.py",
+      "sha256": "15a2ad4781638ae7f65e4209c584b00b4dea675caabefcc3188334b1506b8227",
+      "bytes": 35655
+    },
+    {
+      "path": "terminal/server/backend_contract.py",
+      "sha256": "0b2eaa7beb3c350735207304f1e2c2966ece860f905c0e759b73ca9262fbb7ac",
+      "bytes": 1568
+    },
+    {
+      "path": "terminal/server/schemas/backend_company_v2.schema.json",
+      "sha256": "cd78a0497cb855e242c04d633960fc373a8637293812d4e3c920df04f84140d2",
+      "bytes": 5006
+    },
+    {
+      "path": "terminal/stocks/financials.py",
+      "sha256": "ca9235571a6c47cdc451d954b2a4e6f34ceed02b98a6470a5c1165cd6be54848",
+      "bytes": 7799
+    },
+    {
+      "path": "terminal/stocks/option_feed.py",
+      "sha256": "525af9519759f275f134b791b9f195c6b605b8616d95bfc05975ee8771fba056",
+      "bytes": 2582
+    },
+    {
+      "path": "terminal/stocks/sec.py",
+      "sha256": "8e9822d67b5e9b252c5cff5b42de8cbf9defcd42954f21ceb2c501def7e83796",
+      "bytes": 9475
+    },
+    {
+      "path": "terminal/stocks/service.py",
+      "sha256": "09baf1a0361446e5126b2428e7eaf4a843abba44ba90c8d58b8b5f4657a1b966",
+      "bytes": 18704
+    },
+    {
+      "path": "terminal/stocks/test_backend.py",
+      "sha256": "bc918d91a27c7ad07b6780010512ea4a2f6e95e91092ba45f3daac6fd34de52b",
+      "bytes": 12551
+    },
+    {
+      "path": "terminal/test_arm64_terminal_policy.py",
+      "sha256": "117a123ab89b65e2f623299e5933a87f8d8c7a7d912e76e4a6ef0b725a754ed7",
+      "bytes": 2179
+    },
+    {
+      "path": "terminal/tests/run_native_suite.py",
+      "sha256": "ac296aa053f366c84a85dc4572ba8a76183865b3aa5a7d2c95af00f412752ca6",
+      "bytes": 2490
+    }
+  ],
+  "native": {
+    "phase9-clang-asan-ubsan": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clean-release": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clean-asan-ubsan": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clang-release": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clang-debug": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    },
+    "phase9-clean-debug": {
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      }
+    }
+  },
+  "native_commands": [
+    {
+      "configuration": "phase9-clean-debug",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clean-debug",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.144
+    },
+    {
+      "configuration": "phase9-clean-debug",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clean-debug",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clean-debug.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 32.083
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clean-release",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.118
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clean-release",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clean-release.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 29.876
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clean-asan-ubsan",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.122
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clean-asan-ubsan",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clean-asan-ubsan.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 74.36
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clang-debug",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.136
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clang-debug",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clang-debug.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 34.385
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clang-release",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.142
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clang-release",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clang-release.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 29.989
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/cmake",
+        "--build",
+        "build/phase9-clang-asan-ubsan",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.126
+    },
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "build/phase9-clang-asan-ubsan",
+        "--parallel",
+        "2",
+        "--output-on-failure",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/backend-audit/phase9-clang-asan-ubsan.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 66.605
+    }
+  ],
+  "terminal": {
+    "configurations": [
+      "release",
+      "debug",
+      "asan_ubsan"
+    ],
+    "tests_per_configuration": 274,
+    "failures": 0,
+    "skips": 0,
+    "lsan_live_checkpoint": 0,
+    "lsan_negative_control": "deliberate12345-byte leak detected;requiredexit1"
+  },
+  "focused_backend": {
+    "test_methods": 21,
+    "random_margin_candidates": 2000,
+    "source": "independently_authored_only"
+  },
+  "security": {
+    "strict_origin_host_proof": 46,
+    "tls_wss": 8
+  },
+  "browser": {
+    "application": 21,
+    "stock_unavailable": 10,
+    "stock_authored_load": 9,
+    "recorded": 9,
+    "live_controls_authored": 9,
+    "wait_guards": 5,
+    "external_private_Codespaces_verified": false
+  },
+  "frontend": 4,
+  "packaging_patterns": {
+    "passed": 3,
+    "interpreter": "gig-tools pinned build backend",
+    "initial_runtime_only_import_failure": "scikit_build_core absent;reruncorrectenvironmentpassed"
+  },
+  "installed_wheel": {
+    "version": "0.1.1",
+    "interface": 8,
+    "exports": 6
+  },
+  "journal_scaling": [
+    {
+      "records": 1,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12648,
+      "peak_pmr_bytes": 12648,
+      "allocations": 2,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 69960,
+      "repetition": 0,
+      "wall_seconds": 0.0024932099622674286
+    },
+    {
+      "records": 1,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12648,
+      "peak_pmr_bytes": 12648,
+      "allocations": 2,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 52028,
+      "repetition": 1,
+      "wall_seconds": 0.0033549420186318457
+    },
+    {
+      "records": 1,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12648,
+      "peak_pmr_bytes": 12648,
+      "allocations": 2,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 54799,
+      "repetition": 2,
+      "wall_seconds": 0.0024479880230501294
+    },
+    {
+      "records": 1024,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1024,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12525984,
+      "peak_pmr_bytes": 18788768,
+      "allocations": 12,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 15368802,
+      "repetition": 0,
+      "wall_seconds": 0.01751085201976821
+    },
+    {
+      "records": 1024,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1024,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12525984,
+      "peak_pmr_bytes": 18788768,
+      "allocations": 12,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 16918743,
+      "repetition": 1,
+      "wall_seconds": 0.020066010009031743
+    },
+    {
+      "records": 1024,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1024,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12525984,
+      "peak_pmr_bytes": 18788768,
+      "allocations": 12,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 12847703,
+      "repetition": 2,
+      "wall_seconds": 0.015012210002169013
+    },
+    {
+      "records": 8192,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100204960,
+      "peak_pmr_bytes": 150307232,
+      "allocations": 15,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 135697127,
+      "repetition": 0,
+      "wall_seconds": 0.13894740998512134
+    },
+    {
+      "records": 8192,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100204960,
+      "peak_pmr_bytes": 150307232,
+      "allocations": 15,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 147036236,
+      "repetition": 1,
+      "wall_seconds": 0.1496386299841106
+    },
+    {
+      "records": 8192,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100204960,
+      "peak_pmr_bytes": 150307232,
+      "allocations": 15,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 132034929,
+      "repetition": 2,
+      "wall_seconds": 0.13538430101471022
+    },
+    {
+      "records": 8192,
+      "reset_every": 256,
+      "resets": 32,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 32,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100324000,
+      "peak_pmr_bytes": 150366752,
+      "allocations": 53,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 106885396,
+      "repetition": 0,
+      "wall_seconds": 0.10956117504974827
+    },
+    {
+      "records": 8192,
+      "reset_every": 256,
+      "resets": 32,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 32,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100324000,
+      "peak_pmr_bytes": 150366752,
+      "allocations": 53,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 136164828,
+      "repetition": 1,
+      "wall_seconds": 0.13974568503908813
+    },
+    {
+      "records": 8192,
+      "reset_every": 256,
+      "resets": 32,
+      "record_bytes": 12232,
+      "record_capacity": 8192,
+      "restart_bytes": 3720,
+      "restart_capacity": 32,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 100324000,
+      "peak_pmr_bytes": 150366752,
+      "allocations": 53,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 130673905,
+      "repetition": 2,
+      "wall_seconds": 0.1333898799493909
+    }
+  ],
+  "stock_benchmark_dirty_precommit": {
+    "schema": "gig.stock.benchmark.v1",
+    "classification": "HISTORICAL_SYNTHETIC",
+    "source_commit": "f991c813749ad4c54e99943c51d7b1294f0cda20",
+    "worktree_dirty": true,
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "native_build": {
+      "compiler": "14.2.0",
+      "python": "3.12.14",
+      "pybind11": "2.13.6",
+      "package_version": "0.1.1",
+      "schema_version": "1.0",
+      "build_type": "Release",
+      "config_flags": " -O3 -DNDEBUG",
+      "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+      "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+    },
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "repetitions": 3,
+    "iterations_per_repeat": 30,
+    "warmup_calls_per_operation": 5,
+    "seed": null,
+    "fixture_sha256": "9558eee5e1eb2ceafc23df2b205733c885f06fc3a9ee094c671fb47447318ada",
+    "measurements": {
+      "sec_512_authored_facts": {
+        "ns_per_call": [
+          14342176.633333333,
+          11329384.066666666,
+          17054585.466666665
+        ],
+        "median_ns_per_call": 14342176.633333333
+      },
+      "options_153_grid": {
+        "ns_per_call": [
+          732617.4333333333,
+          848975.4666666667,
+          802107.6333333333
+        ],
+        "median_ns_per_call": 802107.6333333333
+      },
+      "research_128_returns": {
+        "ns_per_call": [
+          2503823.2,
+          1902965.8666666667,
+          2268091.3333333335
+        ],
+        "median_ns_per_call": 2268091.3333333335
+      },
+      "native_L1_quote": {
+        "ns_per_call": [
+          33046.4,
+          26471.433333333334,
+          47558.23333333333
+        ],
+        "median_ns_per_call": 33046.4
+      }
+    },
+    "canonical_result_sha256": {
+      "sec_512_authored_facts": "60289d344138cb45a92642003997f5a96481b61f8e38bf467f1d1ad30564d21e",
+      "options_153_grid": "d97e484a30eb7ffae3b69bce24e55d0c5e289bfbed2e27464ae8aa99503bb589",
+      "research_128_returns": "fc49050db329f1c6b72f262243b46eeb2bc9ed0756343489cbb48834632df8fb",
+      "native_L1_quote": "880b500b0e5c9fcf4ba42ed04fb85d8b48ca552f07df011da5822e011fdf9802"
+    },
+    "python_traced_peak_bytes_separate_untimed_pass": 386975,
+    "peak_rss_kib": 20860,
+    "limitations": [
+      "Shared-cloud Python call timings,not network/exchange or production latency",
+      "Input construction outside timing/tracing;whole-process RSS includes imports/native module",
+      "Small repetition counts,no tail percentile or total allocation-call claim",
+      "No observed-data calibration or forecasts fitted"
+    ]
+  },
+  "independent_qualifier": {
+    "schema": "gig.sec.reconciliation.v1",
+    "status": "AGREEMENT_WITHIN_SELECTED_RECORD_SCOPE",
+    "matched_records": 4,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "raw_source_sha256": "0ecd6b7bb1a51662e3d09b2ae1ed34109ade71f23228155b0a985ddb3bcd562b",
+    "as_of_filing_date": "2024-12-31",
+    "scope": "selected raw SEC records/values/units/periods/context/identities only;not full statements,ratios or intraday PIT validation",
+    "source_url": null,
+    "source_authority": "owner_supplied_file_origin_not_independently_authenticated",
+    "backend_cache_compared": false,
+    "raw_retained": false,
+    "test_scope": "independently_authored_fixture_only",
+    "cli_controls": 3
+  },
+  "source_receipts": {
+    "scope": "authored_fixture_only",
+    "receipt_and_request_time_order": true,
+    "raw_component_hashes_independently_verified": 2,
+    "financial_calculator_integrated": true
+  },
+  "log_sha256": {
+    "clang-matrix.log": "9a7baa6ed0ad84d24279c728e5cc3144d6e7b91a1fe1422837d5502d69de4b8e",
+    "phase9-clang-release-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "lsan-negative-control.log": "7350eb32a8172cc322a70483b7cdea333846099490db43c7338b6c3e9476a06e",
+    "installed-interface.log": "722914f6f195c313f4cfdb9c6ef642b1e2e68cc29b3f9f9071995a3510a22061",
+    "phase9-clang-asan-ubsan-ctest.log": "ad7c8d0787552870e0124879a9fb5add2ff148ed325710f3220f95d3e8d7c69c",
+    "browser-guards.log": "c41485f39698b97ae9259766ce0b9e1cfb9c3ff340d3e755b60e88c78dee7ff8",
+    "gcc-matrix.log": "9f5427f566a74475db615db1f77f26a980293f72ac0e8786b4e9b2e01698fa7e",
+    "stock-unavailable-browser.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "frontend.log": "4e45f7afbd16f208e56eaeeac9919c1ddf73159a318e98e151c0da6c4fa8c215",
+    "phase9-clang-asan-ubsan-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "phase9-clean-release-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "terminal-release.log": "7d1f05b48be6672a2fba04dedbd5ee8eaf0cd5d0b47737546e71a4805e514ec6",
+    "phase9-clean-debug-ctest.log": "42cb6e7fe27e6e66675ed92d6d1d7849db5825ff913194e7cea7fb42da576c3f",
+    "phase9-clang-debug-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "packaging.log": "a4c79988123d5f17541bffb7d6545b249a7cd454fd280c9dc3cefcad6ccfe1bb",
+    "installed-exports.log": "361bf6a273e495e7c990c0e6bc675c0d3824180b5dcf523da057d59a65fe30bc",
+    "phase9-clang-debug-ctest.log": "5a1dd489cc00f2b149cd14837e136109d6aa8e35b75d8fad9eeca6b14ae4e9e9",
+    "terminal-sanitized.log": "98bc45f24bf2ba3e7712eefe8f79d758e61bfc702eb71477caa552552d24aa81",
+    "tls.log": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "sec-integrity-before.log": "b73be76e8e0bce9ddfe920d21a7271283a5bf7129f2a7d6d4ae05b5ffe4e801c",
+    "browser-server.log": "07e2a24278fbe136328525eca2d55aa60d5d7a376a8d353f9d7f25c20c0b2645",
+    "stock-loading-browser.log": "04848d6f110ead19295b6f7f3bbcd25e22284c6311b7d6ed0f46bbdbd4f644d1",
+    "recorded-browser.log": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+    "phase9-clean-asan-ubsan-ctest.log": "7de3f4a6003035185632440d59b3d761381acaf060ff957f31d65e77f89680aa",
+    "live-controls-browser.log": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
+    "sec-integrity-after.log": "e23dba85a86130ddf63de7b06883edf91e3b27f4d1d6c62e745ed4f8de2840a2",
+    "browser.log": "08856220af3921745a9e9867b331a375f7c39f2dc982e991de477764e6ae3ed5",
+    "security.log": "7348e1d1007c042f050f9fff30aadb8a28f0fe6aedb1ec4a63ac2365f5ce2ea6",
+    "phase9-clean-debug-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "terminal-debug.log": "0f3b5986b3bb00b1deffc5d6f2b0d1c1993cd548a6a6020b308ca693d83fa5cf",
+    "stock-fixture-server.log": "26e43da8bcba190fde36e999623f632b860c6c0090069580a8d8718a6de6ab41",
+    "phase9-clean-release-ctest.log": "2e289c636bccd7e59da6c73cd69a6657bab77880355fd4fa76f6f8b511b1a27b",
+    "option-context-before.log": "6b3e78a5fb01db6d0c366bd3089df962a99fe1d35d891c88bac4b3c27e9480ae",
+    "phase9-clean-asan-ubsan-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "backend-focused.log": "5f4abc70ef671192ac457b53bf1d144a0156f7233aa905ffedf3b0114ba3676f",
+    "phase9-clang-release-ctest.log": "3950d0dbd3379fb197759c11324f7b50004a52a1f1f069f837e30bf48f873932",
+    "packaging-tools.log": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+  },
+  "external": {
+    "SEC_actual_source_reconciliation": "BLOCKED:noSECnetworkallowanceortruthfulcontactconfiguration",
+    "SEC_owner_dashboard_report": "OWNER_REPORTED_ONLY",
+    "Alpaca": "PENDINGsupport381230;gatesunchanged",
+    "LOBSTER": "NOT_ACCESSED",
+    "hosted_CI_this_HEAD": "NOT_VERIFIED",
+    "ARM64_this_HEAD": "NOT_QUALIFIED",
+    "workflow_dispatch": false,
+    "main_modified": false
+  },
+  "limitations": [
+    "bounded source review,not formal verification",
+    "model math is not statistical/empirical validation",
+    "source cache process lifetime only",
+    "CPython finalization outside live LSan checkpoint",
+    "journal100000-record cost extrapolated,notmeasured"
+  ]
+}

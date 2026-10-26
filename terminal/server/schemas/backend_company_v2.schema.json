@@ -1,0 +1,247 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gig.backend.company.v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "instrument",
+    "data_origin",
+    "observed_at",
+    "as_of_filing_date",
+    "quality",
+    "financials",
+    "provenance",
+    "limits",
+    "limitations"
+  ],
+  "properties": {
+    "schema": {
+      "const": "gig.backend.company.v2"
+    },
+    "instrument": {
+      "type": "object",
+      "required": [
+        "symbol",
+        "cik"
+      ]
+    },
+    "data_origin": {
+      "enum": [
+        "UNAVAILABLE",
+        "HISTORICAL_SYNTHETIC",
+        "OBSERVED_OFFICIAL_RESPONSE"
+      ]
+    },
+    "observed_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "as_of_filing_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality": {
+      "type": "object",
+      "required": [
+        "sec_response_status",
+        "source_reconciliation"
+      ]
+    },
+    "financials": {
+      "type": "object",
+      "required": [
+        "schema",
+        "metrics",
+        "selection_policy",
+        "coverage"
+      ],
+      "properties": {
+        "schema": {
+          "const": "gig.financial_analytics.v2"
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/metric"
+          },
+          "required": [
+            "gross_margin",
+            "operating_margin",
+            "net_profit_margin",
+            "current_ratio",
+            "debt_to_equity",
+            "free_cash_flow",
+            "cash_conversion",
+            "return_on_assets",
+            "return_on_equity",
+            "annual_revenue_growth",
+            "annual_net_income_growth",
+            "annual_eps_growth"
+          ],
+          "minProperties": 12
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "source_records",
+        "history_policy"
+      ]
+    },
+    "limits": {
+      "type": "object"
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "required": [
+        "value",
+        "status",
+        "quality",
+        "reason",
+        "unit",
+        "formula",
+        "period",
+        "as_of_filing_date",
+        "timestamp",
+        "source",
+        "input_facts",
+        "limitations"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "AVAILABLE",
+            "UNAVAILABLE"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "numerator",
+                "denominator"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "numerator": {
+                  "type": "string",
+                  "pattern": "^-?[0-9]+$"
+                },
+                "denominator": {
+                  "type": "string",
+                  "pattern": "^[1-9][0-9]*$"
+                }
+              }
+            }
+          ]
+        },
+        "timestamp": {
+          "type": "null"
+        },
+        "unit": {
+          "enum": [
+            "ratio",
+            "USD"
+          ]
+        },
+        "input_facts": {
+          "type": "array"
+        },
+        "quality": {
+          "enum": [
+            "REPORTED_INPUTS_ALIGNED",
+            "INELIGIBLE_OR_MISSING"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "formula": {
+          "type": "string"
+        },
+        "period": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "as_of_filing_date": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNAVAILABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "null"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "AVAILABLE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "type": "object"
+              },
+              "reason": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
