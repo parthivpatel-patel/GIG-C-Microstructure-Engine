@@ -406,3 +406,12 @@ Validated bounded IEX transport/exact datasets/conditional models and integrated
 journeys;2154 local final checks. All real-source permissions/observed qualification gates
 remain separate. Existing native source/eight identities preserved;no current-HEAD ARM64
 claim or main merge. Exact evidence and remaining requirement statuses in docs/final/.
+
+## SEC integration repair
+
+See docs/sec/SEC_INTEGRATION_REPAIR.md and SEC_SETUP.md on feat/atlas-final-release.
+SEC true/yes/on/1 parsing,startup/private contact persistence,readiness/cache/error handling
+and browser states repaired;1270 local counted outcomes. Current runtime has no approved
+identifying SEC configuration;no live SEC request was made. Existing Alpaca,Origin/proof,
+native/risk boundaries preserved. Owner configure privately,restart,and run bounded SEC
+acceptance in Codespaces. Exact changed candidate still needs separate owner qualification.

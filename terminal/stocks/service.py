@@ -19,7 +19,9 @@ def failure_reason(exc,fallback):
 
 class StockWorkspace:
     def __init__(self,environment=None,fetcher=None,clock=time.monotonic,history_store=None):
-        self.environment=os.environ if environment is None else environment
+        from .sec_config import resolve
+        self.environment,self.sec_config = resolve(os.environ) if environment is None else (environment,{'source':'explicit_environment','error':None})
+        self.sec_accepted={};self.sec_refresh_state={}
         from .history_store import configured
         self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
@@ -27,10 +29,11 @@ class StockWorkspace:
     def permission(self,provider):
         e=self.environment
         if provider=='sec':
-            if e.get('GIG_SEC_ENABLED')!='1' or e.get('GIG_SEC_POLICY_REVIEWED')!='1':raise AccessError('sec_disabled_pending_fair_access_review')
-            agent=e.get('GIG_SEC_USER_AGENT','')
-            if not re.fullmatch(r'[ -~]{8,160}',agent) or '@' not in agent:raise AccessError('sec_identifying_user_agent_required')
-            return {'User-Agent':agent}
+            from .sec_config import readiness
+            status=readiness(e)
+            if self.sec_config['error']:raise AccessError(self.sec_config['error'])
+            if not status['ready']:raise AccessError(status['reason'])
+            return {'User-Agent':e['GIG_SEC_USER_AGENT']}
         required=('ENABLED','PROTOCOL_REVIEWED','PRIVATE_DISPLAY_APPROVED','CLOUD_PROCESSING_APPROVED','NO_COST_CONFIRMED')
         if any(e.get('GIG_ALPACA_'+k)!='1' for k in required):raise AccessError('alpaca_disabled_pending_entitlement_protocol_and_usage_review')
         ref=e.get('GIG_ALPACA_PERMISSION_REFERENCE','')
@@ -47,14 +50,17 @@ class StockWorkspace:
             except AccessError as exc:reason=str(exc)
             missing=[]
             if provider=='sec':
-                missing=[k for k in ('GIG_SEC_ENABLED','GIG_SEC_POLICY_REVIEWED') if self.environment.get(k)!='1']
-                if not self.environment.get('GIG_SEC_USER_AGENT'):missing.append('GIG_SEC_USER_AGENT')
+                from .sec_config import readiness
+                missing=readiness(self.environment)['missing_configuration']
             else:
                 missing=['GIG_ALPACA_'+k for k in ('ENABLED','PROTOCOL_REVIEWED','PRIVATE_DISPLAY_APPROVED','CLOUD_PROCESSING_APPROVED','NO_COST_CONFIRMED') if self.environment.get('GIG_ALPACA_'+k)!='1']
                 if not self.environment.get('GIG_ALPACA_PERMISSION_REFERENCE'):missing.append('GIG_ALPACA_PERMISSION_REFERENCE')
                 if not any(presence(self.environment)[p+'_pair_present'] for p in ('ALPACA','APCA')):missing+=['ALPACA_API_KEY_ID','ALPACA_API_SECRET_KEY']
                 if provider=='options':missing+=['GIG_ALPACA_OPTIONS_'+k for k in ('ENABLED','PROTOCOL_REVIEWED','INDICATIVE_APPROVED') if self.environment.get('GIG_ALPACA_OPTIONS_'+k)!='1']
             result[provider]={'ready':reason is None,'reason':reason,'missing_configuration':missing,'action':'Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.','last_error':None}
+        result['sec'].update({k:v for k,v in readiness(self.environment).items() if k not in ('ready','reason')})
+        result['sec']['configuration_source']=self.sec_config['source']
+        result['sec']['action']='Run .venv/bin/python scripts/configure_sec.py --check;configure Codespaces secrets or the private helper,then restart. Never paste the contact value in chat.'
         result['alpaca_credential_presence']=presence(self.environment)
         return result
     async def close(self):
@@ -78,7 +84,7 @@ class StockWorkspace:
                         self.permission(provider)
                         await asyncio.sleep(max(0,1.01-(self.clock()-self.last_request)))
                         end=datetime.date.today();days={'1Day':90,'1Hour':14,'1Min':3}[timeframe]
-                        await self.refresh(ticker,provider,start=str(end-datetime.timedelta(days=days)),end=str(end),timeframe=timeframe)
+                        await self.refresh(ticker,provider,start=str(end-datetime.timedelta(days=days)),end=str(end),timeframe=timeframe,allow_cached=provider=='sec')
                         self.load_state['sections'][provider]=self.cache.get(ticker,{}).get(provider,{}).get('status','UNAVAILABLE')
                     except (ValueError,TimeoutError):self.load_state['sections'][provider]='UNAVAILABLE;see_configuration_or_section_error'
             self.load_state['status']='FINISHED'
@@ -128,20 +134,27 @@ class StockWorkspace:
             item=out[key]
             if 'received_at' in item:
                 age=max(0,(datetime.datetime.now(datetime.timezone.utc)-datetime.datetime.fromisoformat(item['received_at'])).total_seconds())
-                out[key]={**item,'response_age_seconds':round(age,3),'freshness':'CACHED_RESPONSE_NOT_LIVE_STREAM','last_refresh_error':self.errors.get((ticker,{'fundamentals':'sec','prices':'alpaca','options_market':'options'}[key]))}
+                out[key]={**item,'response_age_seconds':round(age,3),'freshness':'STALE_CACHE' if key=='fundamentals' and age>86400 else 'CACHED_RESPONSE_NOT_LIVE_STREAM','last_refresh_error':self.errors.get((ticker,{'fundamentals':'sec','prices':'alpaca','options_market':'options'}[key]))}
         if 'quotes' in out['prices']:
             for key in ('quotes','trades'):
                 observed=out['prices'].get(key)
                 if observed:
                     age=(datetime.datetime.now(datetime.timezone.utc)-prices.timestamp(observed['timestamp'])).total_seconds()
                     out['prices'][key]={**observed,'source_age_approximate_seconds':age,'clock_status':'FUTURE_SOURCE_CLOCK' if age<0 else 'SOURCE_TIMESTAMP_OBSERVED_NOT_STREAM_FRESHNESS'}
+        out['sec_refresh']=dict(self.sec_refresh_state.get(ticker,{'status':'IDLE'}))
         return out
-    async def refresh(self,ticker,provider,*,start=None,end=None,timeframe='1Day'):
+    async def refresh(self,ticker,provider,*,start=None,end=None,timeframe='1Day',allow_cached=False):
         company=instrument(ticker)
         if provider not in ('sec','alpaca','options'):raise AccessError('unsupported_provider')
         headers=self.permission(provider)
+        if provider=='sec' and allow_cached and ticker in self.sec_accepted and 'sec' in self.cache.get(ticker,{}):
+            age=self.clock()-self.sec_accepted[ticker]
+            if 0<=age<60:
+                self.sec_refresh_state[ticker]={'status':'CACHED_RECENT','cached_age_seconds':round(age,3),'next_refresh_seconds':round(60-age,3),'reason':'Recent accepted SEC response reused;no upstream request'}
+                return self.view(ticker)
         if self.lock.locked():raise AccessError('upstream_refresh_busy')
         async with self.lock:
+            if provider=='sec':self.sec_refresh_state[ticker]={'status':'RUNNING'}
             previous=self.cache.get(ticker,{})
             stamp=datetime.datetime.now(datetime.timezone.utc).isoformat();hashes=[];urls=[];source_records=[]
             try:
@@ -159,6 +172,7 @@ class StockWorkspace:
                                     parsed['analytics']=calculate(parsed);result['financials']=parsed
                                 urls.append(url);hashes.append(digest);source_records.append({'component':kind,'url':url,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat()});result['components'][kind]={'status':'AVAILABLE'}
                             except Exception as exc:result['components'][kind]={'status':'UNAVAILABLE','reason':failure_reason(exc,'upstream_parse_transport_or_validation_failure'),'action':'Review source policy,identity,schema and response budget;other accepted SEC section remains visible.'}
+                        if hashes and result['components']['financials']['status']!='AVAILABLE' and previous.get('sec',{}).get('financials'):raise AccessError('SEC_companyfacts_failed_cached_financials_preserved')
                         if not hashes:raise AccessError('all_SEC_components_unavailable;'+','.join(k+'='+v['reason'] for k,v in result['components'].items()))
                         if any(c['status']!='AVAILABLE' for c in result['components'].values()):result['reason']='Partial SEC response;missing section: '+','.join(k+':'+v['reason'] for k,v in result['components'].items() if v['status']!='AVAILABLE')
                     elif provider=='options':
@@ -213,14 +227,20 @@ class StockWorkspace:
                         result['history_integrity']['gap_candidate_count']=len(history['gap_candidates'])
                     encoded=json.dumps(result,separators=(',',':'))
                     if len(encoded)>2*1024*1024:raise AccessError('normalized_response_budget')
+            except asyncio.CancelledError:
+                if provider=='sec':self.sec_refresh_state[ticker]={'status':'CANCELLED','reason':'Refresh cancelled before publication;accepted cache unchanged','accepted_cache_preserved':bool(previous.get('sec'))}
+                raise
             except Exception as exc:
                 # Keep accepted cached result unchanged;never publish URL/key/error payload.
                 domain='sec' if provider=='sec' else 'alpaca'
                 self.cooldowns[domain]=max(self.cooldowns.get(domain,0),self.clock()+10)
                 self.last_error=failure_reason(exc,'upstream_parse_transport_or_validation_failure')
+                if provider=='sec':self.sec_refresh_state[ticker]={'status':'ERROR','reason':self.last_error,'accepted_cache_preserved':bool(previous.get('sec'))}
                 self.errors[(ticker,provider)]=self.last_error
                 raise AccessError(self.last_error) from None
             self.last_error=None;self.errors.pop((ticker,provider),None)
             self.cache[ticker]={**previous,provider:result};self.cache.move_to_end(ticker)
+            if provider=='sec':
+                self.sec_accepted[ticker]=self.clock();self.sec_refresh_state[ticker]={'status':'SUCCEEDED','next_refresh_seconds':60}
             while len(self.cache)>8:self.cache.popitem(last=False)
             return self.view(ticker)

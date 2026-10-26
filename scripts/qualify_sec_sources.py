@@ -54,7 +54,9 @@ def reconcile(raw,normalized,as_of):
 def official_fetch(cik,environment):
     from terminal.stocks.service import StockWorkspace
     import httpx
-    headers=StockWorkspace(environment=environment).permission('sec')
+    from terminal.stocks.sec_config import resolve
+    effective,_=resolve(environment)
+    headers=StockWorkspace(environment=effective).permission('sec')
     url='https://data.sec.gov/api/xbrl/companyfacts/CIK'+cik+'.json'
     with httpx.Client(timeout=8,follow_redirects=False,headers={'Accept-Encoding':'identity'}) as client:
         with client.stream('GET',url,headers=headers) as response:

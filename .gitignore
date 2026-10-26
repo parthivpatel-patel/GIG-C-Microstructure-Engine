@@ -43,3 +43,6 @@ test-results/
 *.sqlite3-journal
 *.sqlite3-wal
 *.sqlite3-shm
+
+# Owner contact and SEC startup policy configuration (never source artifacts).
+.gig-sec/

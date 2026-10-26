@@ -16,4 +16,6 @@ else:
     connection.close()
     raise SystemExit('Port 8787 is already in use. Stop the existing GIG server with Ctrl+C in its terminal, then restart. No process was killed or replaced.')
 PYTHON
+# Safe readiness only;private JSON is independently loaded by the backend as well.
+.venv/bin/python scripts/configure_sec.py --check
 exec .venv/bin/python -m terminal.server

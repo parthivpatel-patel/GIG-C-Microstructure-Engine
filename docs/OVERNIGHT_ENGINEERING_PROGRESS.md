@@ -573,3 +573,17 @@ Combined6/7/8 sourcedc3da0a37901d2a0604df241a2985cf0541a18c8 pushed/verified;cle
 698 members passed. Final closure documentation-only. All7 test servers stopped.
 Preserved ARM64 workflow permits only bootstrap branch;owner must review a final-branch
 guard before separately authorizing exact-SHA qualification. No current ARM64 claim.
+
+## SEC repair checkpoint — October26,2026 America/New_York
+
+Baselineee945723a01c589bbe975f23dba06d05e9f686ca;existing feat/atlas-final-release.
+Implemented shared SEC switch/identity parsing,ignored private startup JSON,hidden-contact
+setup/check helper,consistent health fixture safety,60s HTTP cache reuse,failed/cancelled
+refresh preservation and explicit SEC UI states. No C++/Alpaca/risk/provider gate bypass.
+Final1270 counted outcomes pass,0finalfail/skip:274×3 legacy,86×3 combined(including17new),
+frontend14,security46,TLS8,wheel14,packaging3,canonical8,browser97. Both leak checkpoints0.
+Exact source references/old-vs-new configuration and regression failures preserved.
+No approved runtime SEC User-Agent/enable-policy variables;no real SEC/market request.
+Five owned fixture servers stopped. NEXT:review/stage/commit,push feature branch,validate
+clean source archive,close documentation evidence and verify remote/main/tree. Owner then
+runs private helper/check,startup and bounded AAPL SEC acceptance;no personal contact in chat.

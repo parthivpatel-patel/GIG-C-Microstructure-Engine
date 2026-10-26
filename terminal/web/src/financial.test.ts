@@ -13,3 +13,15 @@ test('ratio presentation uses backend rational and explicit percentage/multiple 
 
 test('shared balance pairs require identical reported instants and units,not inferred zeros',()=>{const a={...fact,start:null,concept:'Assets',value:'200'},b={...fact,start:null,concept:'Liabilities',value:'100'};assert.equal(balancePairs([a],[b]).length,1);assert.equal(balancePairs([a],[{...b,end:'2022-12-31'}]).length,0);assert.equal(balancePairs([a],[{...b,unit:'shares'}]).length,0);assert.equal(balancePairs([a,{...a,concept:'OtherAssets'}],[b]).length,0);assert.equal(balancePairs([a],[{...b,value:'-10'}])[0].liabilities.value,'-10');});
 test('filing page contracts reject contradictory counts,backward cursor and unsafe source links',()=>{const p={schema:'gig.backend.filings.v2',instrument:{symbol:'AAPL'},status:'AVAILABLE',records:Array.from({length:50},(_,i)=>({form:'10-K',filed:'2024-01-01',amendment:false,url:'https://www.sec.gov/Archives/authored-'+i+'.htm'})),total_cached_matching:66,next_offset:50,observed_at:null};assert.equal(validateFilings(p,'AAPL',0).next_offset,50);for(const patch of [{total_cached_matching:0},{next_offset:0},{next_offset:129},{records:[{...p.records[0],url:'javascript:alert(1)'}]}])assert.throws(()=>validateFilings({...p,...patch},'AAPL',0));});
+
+import {secState} from './secStatus.ts';
+test('SEC readiness,missing,error and stale states never fabricate reported values',()=>{
+ assert.equal(secState({ready:false},{status:'UNAVAILABLE'}).state,'BLOCKED');
+ assert.equal(secState({ready:true},{status:'AVAILABLE',financials:{history:{revenue:[]}}}).state,'UNAVAILABLE');
+ const facts={status:'AVAILABLE',financials:{history:{revenue:[{}]}}};
+ assert.equal(secState({ready:true},facts).state,'REPORTED');
+ assert.equal(secState({ready:true},{...facts,freshness:'STALE_CACHE'}).state,'STALE');
+ assert.deepEqual(secState({ready:true},{...facts,last_refresh_error:'upstream_http_403'}),{state:'ERROR',reported:true});
+ assert.equal(secState({ready:true},{...facts,status:'PARTIAL'}).state,'PARTIAL');
+ assert.equal(secState({ready:true},facts,{status:'RUNNING'}).state,'LOADING');
+});
