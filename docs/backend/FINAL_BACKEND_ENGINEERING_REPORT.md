@@ -10,6 +10,9 @@ reconciler is ready. Existing native book/replay/simulation/TCA behavior is unch
 Actual official SEC source reconciliation remains **BLOCKED**, so acceptance requirement5
 is not claimed. Owner-reported dashboard observations remain separate evidence.
 
+Verified source checkpoint: `ae570a2778befff59ac0fe38c143ab083ea2046f`, pushed
+and verified on the feature branch. Final documentation/evidence commit follows.
+
 Baseline: feature `f991c813749ad4c54e99943c51d7b1294f0cda20`, clean tree verified.
 Main `12f3a53943dc245e36f2cbbc35b9910fb21c0718` is preserved. Exact delivered source
 and evidence commit identities are recorded by Git and the final response; see the
@@ -57,6 +60,10 @@ normalization expectations. Current tests use independently authored source shap
 |Frontend unit tests|4/4|0/0|
 |Packaging patterns(build-tool interpreter)|3/3|0/0|
 |Installed wheel interface/export contracts|8+6|0/0|
+|Wheel rebuilt from checked source archive,isolated consumer|8+6|0/0|
+|Source archive intended/byte-identical safe members|591/591|0/0|
+|Offline source-qualification CLI controls|3/3|0/0|
+|Browser wait/fixture guards|5/5|0/0|
 
 The new financial tests include2000 independent seeded margin candidates and reference
 formulas for all12 metrics. Six fresh native suites total930 outcomes and preserve all
@@ -71,7 +78,10 @@ interpreter-shutdown leak cleanliness. No suppressions/assertion weakening were 
 
 A first packaging invocation used the runtime-only wheel environment and failed to
 import scikit_build_core. Re-execution in the installed build-tool environment passed
-all3 checks; this was an environment-selection error, not a repaired package defect.
+all3 checks; this was an environment-selection error, not a repaired package defect. The first
+source-wheel attempt inherited an unavailable `CXX=clang++ -pthread`; explicitly
+selecting installed `/usr/bin/g++`14.2 produced a successful source-archive wheel and
+all14 isolated consumer tests passed. No project warning/overflow check was removed.
 Two server launch attempts found already-running owned local test servers; those were
 stopped and the changed source was restarted before browser qualification.
 
@@ -108,7 +118,8 @@ bash scripts/start_terminal.sh
 
 Stop the prior terminal process before restarting. Keep8787 PRIVATE and use its
 forwarded HTTPS address, not a remote device's localhost. Existing UI stays on v1;
-new v2 company/filing views are available for the redesigned frontend. No native engine
+new v2 company/filing views are available for the redesigned frontend. The source archive was inspected without publishing it;591 intended byte-identical
+members include the new backend schema and exclude private data/build output. No native engine
 rebuild is necessary for these Python/backend changes when the validated wheel exists.
 
 ## Remaining acceptance and next actions

@@ -39,7 +39,7 @@ production SLA is proposed. The existing fixed-parameter model demonstrations ar
 fitted models. Observed L3, institutional production operations and a complete financial
 warehouse remain materially different requirements from private research evaluation.
 
-November5 target/November12 contingency cannot be certified from this local checkpoint.
+The owner’s November10 terminal target cannot be certified from this local checkpoint.
 The immediate critical path is owner-accessible SEC reconciliation and ATLAS/private
 Codespaces acceptance; exact-HEAD ARM64/hosted evidence follows without this agent
 dispatching workflows. Provider authorization dates are external and not invented.

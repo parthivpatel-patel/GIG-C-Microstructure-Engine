@@ -34,7 +34,11 @@ is excluded. A separate untimed tracemalloc pass and whole-process peak RSS are 
 This run is tied to baseline HEAD plus the exact changed-file manifest; the benchmark
 correctly reports a dirty worktree. SEC normalized output identities intentionally
 change for additive v2 metadata, unrelated to the eight frozen native oracle hashes.
-Actual timings live in the evidence JSON; they are not stable performance thresholds.
+A second run at clean source ae570a2778befff59ac0fe38c143ab083ea2046f records
+medians18.927ms SEC512 facts,1.008ms option grid,3.590ms128-return research and
+54.76µs native L1 Python call;whole-process peak RSS21112KiB. These shared-host
+measurements overlap unrelated packaging work and are not stable thresholds. Exact
+repetitions,fixture hashes,compiler/Python identities and traced memory are in the JSON.
 
 ## Benchmark-gated journal improvement plan
 

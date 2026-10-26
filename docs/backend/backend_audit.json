@@ -393,7 +393,30 @@
     "failures": 0,
     "skips": 0,
     "lsan_live_checkpoint": 0,
-    "lsan_negative_control": "deliberate12345-byte leak detected;requiredexit1"
+    "lsan_negative_control": "deliberate12345-byte leak detected;requiredexit1",
+    "final_log_counts": {
+      "release": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "debug": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "sanitized": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      }
+    }
   },
   "focused_backend": {
     "test_methods": 21,
@@ -776,12 +799,15 @@
   "log_sha256": {
     "clang-matrix.log": "9a7baa6ed0ad84d24279c728e5cc3144d6e7b91a1fe1422837d5502d69de4b8e",
     "phase9-clang-release-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "source-wheel-install.log": "a34763c893ba32f35b854aef21c99c5958b23ef78d7992dc0bc7469f738ab11d",
     "lsan-negative-control.log": "7350eb32a8172cc322a70483b7cdea333846099490db43c7338b6c3e9476a06e",
+    "source-wheel-build-gcc.log": "3ea81796e959d0df16d7f73a0a333a5cc50befdfada9a9ab15c033a17a8a1fbe",
     "installed-interface.log": "722914f6f195c313f4cfdb9c6ef642b1e2e68cc29b3f9f9071995a3510a22061",
     "phase9-clang-asan-ubsan-ctest.log": "ad7c8d0787552870e0124879a9fb5add2ff148ed325710f3220f95d3e8d7c69c",
     "browser-guards.log": "c41485f39698b97ae9259766ce0b9e1cfb9c3ff340d3e755b60e88c78dee7ff8",
     "gcc-matrix.log": "9f5427f566a74475db615db1f77f26a980293f72ac0e8786b4e9b2e01698fa7e",
     "stock-unavailable-browser.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "source-wheel-exports.log": "355e7e9fad3c8fb65742f5741bcbb3da816936823de320096c167caa2d0674c3",
     "frontend.log": "4e45f7afbd16f208e56eaeeac9919c1ddf73159a318e98e151c0da6c4fa8c215",
     "phase9-clang-asan-ubsan-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
     "phase9-clean-release-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
@@ -790,10 +816,13 @@
     "phase9-clang-debug-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
     "packaging.log": "a4c79988123d5f17541bffb7d6545b249a7cd454fd280c9dc3cefcad6ccfe1bb",
     "installed-exports.log": "361bf6a273e495e7c990c0e6bc675c0d3824180b5dcf523da057d59a65fe30bc",
+    "source-wheel-identity.log": "2b291208645138dc6f14206c4cd736a30762d3e2badaf9a55b450c521a4d1e4e",
     "phase9-clang-debug-ctest.log": "5a1dd489cc00f2b149cd14837e136109d6aa8e35b75d8fad9eeca6b14ae4e9e9",
     "terminal-sanitized.log": "98bc45f24bf2ba3e7712eefe8f79d758e61bfc702eb71477caa552552d24aa81",
+    "source-wheel-interface.log": "61a096bbe2e77ae4c677a499bb26febbb6e6a06522148e5acac7db7d906ea15c",
     "tls.log": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
     "sec-integrity-before.log": "b73be76e8e0bce9ddfe920d21a7271283a5bf7129f2a7d6d4ae05b5ffe4e801c",
+    "sdist-build.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
     "browser-server.log": "07e2a24278fbe136328525eca2d55aa60d5d7a376a8d353f9d7f25c20c0b2645",
     "stock-loading-browser.log": "04848d6f110ead19295b6f7f3bbcd25e22284c6311b7d6ed0f46bbdbd4f644d1",
     "recorded-browser.log": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
@@ -803,6 +832,7 @@
     "browser.log": "08856220af3921745a9e9867b331a375f7c39f2dc982e991de477764e6ae3ed5",
     "security.log": "7348e1d1007c042f050f9fff30aadb8a28f0fe6aedb1ec4a63ac2365f5ce2ea6",
     "phase9-clean-debug-build.log": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794",
+    "source-wheel-build.log": "7b24be0d9a286427197fc8958d7dc8e6a331e6b130a0ca0d025bd421a8f345e6",
     "terminal-debug.log": "0f3b5986b3bb00b1deffc5d6f2b0d1c1993cd548a6a6020b308ca693d83fa5cf",
     "stock-fixture-server.log": "26e43da8bcba190fde36e999623f632b860c6c0090069580a8d8718a6de6ab41",
     "phase9-clean-release-ctest.log": "2e289c636bccd7e59da6c73cd69a6657bab77880355fd4fa76f6f8b511b1a27b",
@@ -828,5 +858,96 @@
     "source cache process lifetime only",
     "CPython finalization outside live LSan checkpoint",
     "journal100000-record cost extrapolated,notmeasured"
-  ]
+  ],
+  "source_snapshot_commit": "ae570a2778befff59ac0fe38c143ab083ea2046f",
+  "inventory_excludes_this_manifest": true,
+  "stock_benchmark_clean_source": {
+    "schema": "gig.stock.benchmark.v1",
+    "classification": "HISTORICAL_SYNTHETIC",
+    "source_commit": "ae570a2778befff59ac0fe38c143ab083ea2046f",
+    "worktree_dirty": false,
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "native_build": {
+      "compiler": "14.2.0",
+      "python": "3.12.14",
+      "pybind11": "2.13.6",
+      "package_version": "0.1.1",
+      "schema_version": "1.0",
+      "build_type": "Release",
+      "config_flags": " -O3 -DNDEBUG",
+      "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+      "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+    },
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "repetitions": 3,
+    "iterations_per_repeat": 30,
+    "warmup_calls_per_operation": 5,
+    "seed": null,
+    "fixture_sha256": "9558eee5e1eb2ceafc23df2b205733c885f06fc3a9ee094c671fb47447318ada",
+    "measurements": {
+      "sec_512_authored_facts": {
+        "ns_per_call": [
+          18890746.7,
+          18926630.733333334,
+          19168692.7
+        ],
+        "median_ns_per_call": 18926630.733333334
+      },
+      "options_153_grid": {
+        "ns_per_call": [
+          1042940.0333333333,
+          992234.0,
+          1008132.8
+        ],
+        "median_ns_per_call": 1008132.8
+      },
+      "research_128_returns": {
+        "ns_per_call": [
+          3590200.966666667,
+          3465570.8,
+          3921064.1666666665
+        ],
+        "median_ns_per_call": 3590200.966666667
+      },
+      "native_L1_quote": {
+        "ns_per_call": [
+          62395.166666666664,
+          48447.166666666664,
+          54755.566666666666
+        ],
+        "median_ns_per_call": 54755.566666666666
+      }
+    },
+    "canonical_result_sha256": {
+      "sec_512_authored_facts": "60289d344138cb45a92642003997f5a96481b61f8e38bf467f1d1ad30564d21e",
+      "options_153_grid": "d97e484a30eb7ffae3b69bce24e55d0c5e289bfbed2e27464ae8aa99503bb589",
+      "research_128_returns": "fc49050db329f1c6b72f262243b46eeb2bc9ed0756343489cbb48834632df8fb",
+      "native_L1_quote": "880b500b0e5c9fcf4ba42ed04fb85d8b48ca552f07df011da5822e011fdf9802"
+    },
+    "python_traced_peak_bytes_separate_untimed_pass": 386975,
+    "peak_rss_kib": 21112,
+    "limitations": [
+      "Shared-cloud Python call timings,not network/exchange or production latency",
+      "Input construction outside timing/tracing;whole-process RSS includes imports/native module",
+      "Small repetition counts,no tail percentile or total allocation-call claim",
+      "No observed-data calibration or forecasts fitted"
+    ]
+  },
+  "source_archive": {
+    "source_commit": "ae570a2778befff59ac0fe38c143ab083ea2046f",
+    "members": 591,
+    "result": "PASS_SAFE_INTENDED_BYTE_IDENTICAL",
+    "sha256": "043490e9d16814c732342ca0f2f74c3e98532cad3f6453ab2f3cfbcf68eb72ee",
+    "bytes": 2080515,
+    "inventory_sha256": "e7d8d075ce866178a9e24c03771dd3a9da2a9b376b0559cc550804d75bb505b9",
+    "wheel_rebuilt_from_archive": true,
+    "wheel_sha256": "5576fe353217a20d83d87f69fd248d2ee24c62b763b2a6b9248c978046a863d5",
+    "isolated_installed_interface_tests": 8,
+    "isolated_installed_export_tests": 6,
+    "initial_build_failure": "inherited CXX=clang++ -pthread unavailable;explicit /usr/bin/g++14.2 build passed",
+    "private_data_committed": false
+  },
+  "remote_verified_source_commit": "ae570a2778befff59ac0fe38c143ab083ea2046f",
+  "remote_verified_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718"
 }

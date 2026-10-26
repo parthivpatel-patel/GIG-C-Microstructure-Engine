@@ -296,3 +296,20 @@ finish nine backend reports/safe evidence,final cohort checks,review and commit
 [skip ci] to feature only;build/inventory source archive at clean source,then final
 evidence commit/push/remote verification. No claim of real SEC source validation,
 production readiness,new ARM64 qualification or hosted CI success.
+
+## Backend checkpoint delivered
+
+Source ae570a2778befff59ac0fe38c143ab083ea2046f pushed and remotely verified;main
+12f3a53943dc245e36f2cbbc35b9910fb21c0718 unchanged. Additional related option
+Decimal-context boundary repaired;final274-case Release/Debug/sanitizer cohorts
+passed after that source change. All eight hashes unchanged across six fresh155-case
+native suites. Nine backend reports and safe backend/backend_audit.json delivered.
+Clean-source benchmark and591-member safe byte-identical source archive verified;
+archive-built wheel passes14 isolated consumer checks. Inherited unavailable CXX
+was explicitly corrected to installed GCC14.2 for that build;no checks suppressed.
+Actual SEC reconciliation BLOCKED;Alpaca support381230 pending;LOBSTER untouched.
+Exact next action: owner private Codespaces update and v2 acceptance,then independent
+SEC source/cached-value reconciliation with truthful contact/access. Owner may then
+authorize current-HEAD manual ARM64 qualification;do not dispatch automatically.
+Follow docs/backend/REMAINING_GAPS.md for remaining audit/storage/research work.
+No work runs after this task stops. Final evidence-only commit is recorded by Git.
