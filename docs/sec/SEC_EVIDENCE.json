@@ -16,13 +16,13 @@
     },
     {
       "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
-      "bytes": 46107,
-      "sha256": "0a769349764464d230afbdffde688ba22bcd0ad583f49848273ac5eef66b4b99"
+      "bytes": 46451,
+      "sha256": "69ef5fcb379f946c0c0c1bb06f896df1d6d05ca834a15ee73c6683a27cc2504e"
     },
     {
       "path": "docs/sec/SEC_INTEGRATION_REPAIR.md",
-      "bytes": 6775,
-      "sha256": "c81b962f98c15bed363199795c30ad971ad8b5738bf2eb9e24e12356e3638134"
+      "bytes": 7341,
+      "sha256": "908cb645f6d692f7f841b5da5a8fc652f4ea3917c92c0d4376332cda995306f0"
     },
     {
       "path": "docs/sec/SEC_SETUP.md",
@@ -547,6 +547,16 @@
       "path": "build/sec-repair/wheel-interface.log",
       "bytes": 964,
       "sha256": "c832da56774d69678a9a5d5b679efd331e424a5e7e5e728b960d63bf778bbe04"
+    },
+    {
+      "path": "build/sec-repair/sdist-build.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/sec-repair/sdist-check.log",
+      "bytes": 81,
+      "sha256": "d279a63229c73e4350dd78c0c1a2f237849c7063e2052f42aac49ada67266f76"
     }
   ],
   "original_browser_logs": [
@@ -652,5 +662,19 @@
     "python tests/test_python.py",
     "python tests/test_export_contracts.py",
     "python tests/test_sdist_patterns.py"
-  ]
+  ],
+  "verified_implementation_commit": "c5af8a1c32672ad0f6ff15015e9b72b4283a4d87",
+  "source_archive": {
+    "path": "build/sec-repair/dist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2316595,
+    "sha256": "d604490ce6e23bdc34297083b6104c3a2ccf698dec9a0b732103cad89c809134",
+    "source_commit": "c5af8a1c32672ad0f6ff15015e9b72b4283a4d87",
+    "member_count": 709,
+    "inventory": {
+      "path": "build/sec-repair/sdist-inventory.json",
+      "bytes": 112246,
+      "sha256": "d7fb56887d65673e396c10d112da7baf9ff2b9c23ddfc28ba8490dd64147d0ee"
+    },
+    "result": "PASS safe,intended,byte-identical files;required trees complete;private SEC settings excluded"
+  }
 }
