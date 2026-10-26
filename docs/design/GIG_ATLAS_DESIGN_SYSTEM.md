@@ -58,3 +58,8 @@ navigation. Tables scroll inside bounded focusable containers. Summary cards sta
 small phones;Trends/Statements/Ratios render on demand to reduce scrolling and DOM size.
 All five specified widths are browser tested. Token text/link contrasts are checked
 against4.5:1;this does not certify legacy canvas colors or the entire application.
+
+
+Phase 2 recovery: see [Phase 2 report](GIG_ATLAS_PHASE2_REPORT.md) and
+`gig_atlas_phase2_evidence.json` for current refinements,stable-build browser checks,
+viewport screenshots,performance observations and remaining accessibility limits.

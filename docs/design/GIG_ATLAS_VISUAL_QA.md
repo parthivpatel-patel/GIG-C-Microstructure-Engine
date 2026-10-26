@@ -64,3 +64,8 @@ A global/local company-selection bridge regression was reproduced during impleme
 local NVDA followed by global AAPL could retain NVDA when the parent symbol was already
 AAPL. An explicit selection revision now delivers each user intent;the browser regression
 verifies the selected company changes. This was caught before the delivery commit.
+
+
+Phase 2 recovery: see [Phase 2 report](GIG_ATLAS_PHASE2_REPORT.md) and
+`gig_atlas_phase2_evidence.json` for current refinements,stable-build browser checks,
+viewport screenshots,performance observations and remaining accessibility limits.

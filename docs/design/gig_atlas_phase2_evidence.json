@@ -1,0 +1,605 @@
+{
+  "schema": "gig.atlas.phase2.delivery.v1",
+  "baseline": "17a5601e4889a7b4a9b852d8dc392a1d518565b2",
+  "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_ONLY",
+  "source_inventory": [
+    {
+      "path": "docs/design/GIG_ATLAS_PHASE2_REPORT.md",
+      "sha256": "63d054ceb844c4b81074e2fe472bbe08ec7fb591db405d9d63bcaa0e06a86cf0",
+      "bytes": 15086
+    },
+    {
+      "path": "terminal/tests/atlas2-performance.mjs",
+      "sha256": "c91b06559551456828fecf51fd39284bcb53dbe70263ec5f2a896f4f4cc1d528",
+      "bytes": 5166
+    },
+    {
+      "path": "terminal/tests/atlas2-validation.mjs",
+      "sha256": "6679c1be4b7f8f5ff1f2ba82f48432b3fa6d10f4f2e18c5adbb29c0a791193c2",
+      "bytes": 8672
+    },
+    {
+      "path": "terminal/tests/atlas2_fixture_server.py",
+      "sha256": "95c1daacebdb36afe63615aac651fcca1090bd4fd36f7c576d4f8d2e442737fe",
+      "bytes": 1134
+    },
+    {
+      "path": "terminal/tests/run_atlas_browser_suite.py",
+      "sha256": "5bcc1d8d487ad444885483b69fd47104fe71660284b4b2c0bca6a2375f16a5cc",
+      "bytes": 2368
+    },
+    {
+      "path": "terminal/web/src/BalanceComparison.tsx",
+      "sha256": "ebec966fb78098d13b2a76e542cde6ca4a12d29d97f219f722f29d1cd1cebb52",
+      "bytes": 2471
+    },
+    {
+      "path": "terminal/web/src/DepthChart.tsx",
+      "sha256": "aec8ce77853364a7befc3f71fd192b490061d799ffe929fca5f91d0ecc772b1e",
+      "bytes": 1355
+    },
+    {
+      "path": "terminal/web/src/FilingExplorer.tsx",
+      "sha256": "d6b2109d2fabcf1bcbbb827bc7515a66cdd452fb4049917bb070522e2af51471",
+      "bytes": 3242
+    },
+    {
+      "path": "terminal/web/src/Landscape3D.tsx",
+      "sha256": "2c98ea2b984172d95c242c14bd80ceeed2475ab7b30f97f00394ef980d4ae9f8",
+      "bytes": 8302
+    },
+    {
+      "path": "terminal/web/src/OptionalBoundary.tsx",
+      "sha256": "7e66324a9afb6d29cd1035d6b2e9ce0f58d4017c482079255a5b8424baff161a",
+      "bytes": 770
+    },
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "sha256": "4514240512ecf53b33cc5c2f5f18a1745d58213340243ed68ac7492cb871fe4c",
+      "bytes": 26032
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_COMPONENT_INVENTORY.md",
+      "sha256": "4c580164c7523cd1e56165c6f6ed8573327c8d808d305ee51d9145632d0f0518",
+      "bytes": 2751
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_DESIGN_SYSTEM.md",
+      "sha256": "73e8a6ba41c4e353c3775ceac22598917dc689b50aef99fefc2855bc682fb8f1",
+      "bytes": 3369
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_UX_ARCHITECTURE.md",
+      "sha256": "0480903b6465aab09d0d1894fa6080bad638b6714fa00611003b8e3602deac76",
+      "bytes": 4991
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_VISUAL_QA.md",
+      "sha256": "f5b4411b30d80465faa018ca7cef858b0992e76b935781f1ae35351e540efb5e",
+      "bytes": 4047
+    },
+    {
+      "path": "terminal/tests/atlas-validation.mjs",
+      "sha256": "d9ee3c28f2937e4a013e45549f7f85c00cad063b5a6952888fd60d936dec928f",
+      "bytes": 13344
+    },
+    {
+      "path": "terminal/tests/browser-validation.mjs",
+      "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+      "bytes": 15704
+    },
+    {
+      "path": "terminal/tests/stock-intelligence-validation.mjs",
+      "sha256": "e6f8e69b7dfc658ffac1999edfcd7201b1526cb2a74895665ddbe21b78130492",
+      "bytes": 6006
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "sha256": "3e927a75dbe389b8cd6aaa3e23c48f3bff29c7af4bcc2f95470a580fe4dd6a81",
+      "bytes": 34814
+    },
+    {
+      "path": "terminal/web/src/FinancialWorkspace.tsx",
+      "sha256": "71b4c936e18c1d355fe13c9f3128d41b4fcb5d00862995c5cfd77336cf7081e0",
+      "bytes": 9109
+    },
+    {
+      "path": "terminal/web/src/Landscape.tsx",
+      "sha256": "b262d80c2bc981efcb3d5b7ac9a641f1f4a2e5eec7f4ae0fc982f2a6990865ca",
+      "bytes": 1504
+    },
+    {
+      "path": "terminal/web/src/OptionChain.tsx",
+      "sha256": "5cb2c91c3e7a59ad6ce635a1ac9d1a2ada5a022685ed2eb294a6b450898cda00",
+      "bytes": 3592
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "sha256": "a63a5f84f609c5819b81aba7056bbb1b56eea9dbc866c3e53b5a2748f39ea77a",
+      "bytes": 15703
+    },
+    {
+      "path": "terminal/web/src/api.ts",
+      "sha256": "57a34b40063cb8247a66137b28f70cb87ea03f2624fe8a9e5b4bee7ab3d4a5fa",
+      "bytes": 2508
+    },
+    {
+      "path": "terminal/web/src/atlas.css",
+      "sha256": "3aa7fa14542ea7b4d64b433213a556eaf0a74c3e189cc05331514ad768a13979",
+      "bytes": 18857
+    },
+    {
+      "path": "terminal/web/src/financial.test.ts",
+      "sha256": "983edebcc0b8c95a3c95a404570eabd8ca440b47fcb52627ffe2a5c3a598fa21",
+      "bytes": 5398
+    },
+    {
+      "path": "terminal/web/src/financial.ts",
+      "sha256": "6340645c5572837b8ffad04eb31f98240375939ef36042f251eb11e8968d0990",
+      "bytes": 8257
+    },
+    {
+      "path": "terminal/web/vite.config.ts",
+      "sha256": "c24f9a049dd633defd08cd6069ab354fc3aedd955a4c777e7cbc947f7f2e54bf",
+      "bytes": 273
+    }
+  ],
+  "tests": {
+    "frontend": 13,
+    "terminal_release": 274,
+    "terminal_debug": 274,
+    "terminal_asan_ubsan": 274,
+    "security": 46,
+    "https_wss": 8,
+    "canonical_references": 8,
+    "installed_wheel_interface": 8,
+    "installed_wheel_exports": 6,
+    "packaging_patterns": 3,
+    "native_browser": 21,
+    "stock_unavailable_browser": 10,
+    "stock_configured_browser": 9,
+    "atlas_original_browser": 21,
+    "atlas_phase2_browser": 11,
+    "recorded_browser": 9,
+    "live_controls_browser": 9,
+    "total": 1004,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "canonical_hashes": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+  },
+  "performance": {
+    "schema": "gig.atlas.phase2.performance.v1",
+    "baseline": "17a5601e4889a7b4a9b852d8dc392a1d518565b2",
+    "classification": "AUTHORED_NATIVE_FIXTURES",
+    "warmups_per_variant": 1,
+    "repetitions_per_variant": 3,
+    "samples": [
+      {
+        "variant": "baseline",
+        "repetition": 0,
+        "navigation_and_settle_ms": 1212,
+        "script_execution_seconds": 0.270938,
+        "task_seconds": 0.460678,
+        "used_js_heap_bytes": 6101420,
+        "dom_nodes": 853,
+        "script_resources": [
+          {
+            "name": "/assets/index-BGJVuXAZ.js",
+            "bytes": 778098,
+            "duration_ms": 17
+          }
+        ],
+        "script_bytes": 778098,
+        "native_step_ui_ms": 77
+      },
+      {
+        "variant": "phase2",
+        "repetition": 0,
+        "navigation_and_settle_ms": 1025,
+        "script_execution_seconds": 0.112563,
+        "task_seconds": 0.285506,
+        "used_js_heap_bytes": 3675944,
+        "dom_nodes": 786,
+        "script_resources": [
+          {
+            "name": "/assets/index-Cv9I-xYM.js",
+            "bytes": 230438,
+            "duration_ms": 14.100000023841858
+          }
+        ],
+        "script_bytes": 230438,
+        "native_step_ui_ms": 91
+      },
+      {
+        "variant": "baseline",
+        "repetition": 1,
+        "navigation_and_settle_ms": 1189,
+        "script_execution_seconds": 0.231942,
+        "task_seconds": 0.393631,
+        "used_js_heap_bytes": 6037124,
+        "dom_nodes": 853,
+        "script_resources": [
+          {
+            "name": "/assets/index-BGJVuXAZ.js",
+            "bytes": 778098,
+            "duration_ms": 31
+          }
+        ],
+        "script_bytes": 778098,
+        "native_step_ui_ms": 93
+      },
+      {
+        "variant": "phase2",
+        "repetition": 1,
+        "navigation_and_settle_ms": 1036,
+        "script_execution_seconds": 0.123127,
+        "task_seconds": 0.324042,
+        "used_js_heap_bytes": 3709112,
+        "dom_nodes": 786,
+        "script_resources": [
+          {
+            "name": "/assets/index-Cv9I-xYM.js",
+            "bytes": 230438,
+            "duration_ms": 19.69999998807907
+          }
+        ],
+        "script_bytes": 230438,
+        "native_step_ui_ms": 82
+      },
+      {
+        "variant": "baseline",
+        "repetition": 2,
+        "navigation_and_settle_ms": 1194,
+        "script_execution_seconds": 0.278647,
+        "task_seconds": 0.421433,
+        "used_js_heap_bytes": 5982392,
+        "dom_nodes": 853,
+        "script_resources": [
+          {
+            "name": "/assets/index-BGJVuXAZ.js",
+            "bytes": 778098,
+            "duration_ms": 27
+          }
+        ],
+        "script_bytes": 778098,
+        "native_step_ui_ms": 101
+      },
+      {
+        "variant": "phase2",
+        "repetition": 2,
+        "navigation_and_settle_ms": 968,
+        "script_execution_seconds": 0.09125,
+        "task_seconds": 0.291481,
+        "used_js_heap_bytes": 3786504,
+        "dom_nodes": 786,
+        "script_resources": [
+          {
+            "name": "/assets/index-Cv9I-xYM.js",
+            "bytes": 230438,
+            "duration_ms": 15.100000023841858
+          }
+        ],
+        "script_bytes": 230438,
+        "native_step_ui_ms": 87
+      }
+    ],
+    "optional_3d_load_ms": 305,
+    "optional_stock_then_3d_js_heap_bytes": 6182188,
+    "optional_route_script_seconds": 0.255988,
+    "route_and_failure_checks": 4,
+    "passed": true,
+    "browser": "154.0.8037.57",
+    "limitations": [
+      "Shared cloud/software renderer;small sample,no statistical speedup or production latency claim",
+      "CDP heap is target JS heap at sample time,not peak RSS/GPU/native memory",
+      "Baseline defaults3D,current defaults2D;optional3D cost separately measured",
+      "Cold isolated contexts/cache disabled;browser process reused,not independent devices"
+    ]
+  },
+  "performance_medians": {
+    "baseline": {
+      "script_bytes": 778098,
+      "script_execution_seconds": 0.270938,
+      "used_js_heap_bytes": 6037124,
+      "navigation_and_settle_ms": 1194,
+      "native_step_ui_ms": 93
+    },
+    "phase2": {
+      "script_bytes": 230438,
+      "script_execution_seconds": 0.112563,
+      "used_js_heap_bytes": 3709112,
+      "navigation_and_settle_ms": 1025,
+      "native_step_ui_ms": 87
+    }
+  },
+  "visual": {
+    "schema": "gig.atlas.phase2.visual.v1",
+    "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED_STATEMENTS",
+    "passed": 11,
+    "failed": 0,
+    "checks": [
+      "Command Center2D starts without optional3D modules",
+      "shared-scale balance chart uses matched dates,common zero and independent2:1 height reference",
+      "selected statement tables preserve exact reported values and keyboard scroll region",
+      "filing Next/Previous/First and server-side filter preserve cached66-record scope",
+      "filing invalid cursors are rejected without rendering unvalidated records",
+      "native replay stepping and provenance remain deterministic",
+      "optional3D and exact2D remain available after deferred loading",
+      "native simulation summaries remain simulated and bounded to16 slices",
+      "all nine workspaces fit90 dark/light viewport combinations",
+      "keyboard help and named navigation remain available",
+      "no uncaught browser errors"
+    ],
+    "responsive_combinations": 90,
+    "screenshots": [
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/command-center-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/financial-trends-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/financial-statements-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/filings-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/historical-replay-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/microstructure-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/execution-simulation-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/research-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/operations-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/stock-mobile-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/stock-mobile-light.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/command-center-light.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/operations-light.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas2/visual/stock-intelligence-light.png"
+    ],
+    "browser": "154.0.8037.57",
+    "timezone": "America/New_York",
+    "limitations": [
+      "Chromium/SwiftShader viewport emulation,not physical Android",
+      "No external Codespaces authentication,full screen-reader/WCAG audit or observed financial validation"
+    ]
+  },
+  "screenshots": [
+    {
+      "path": "build/atlas2/visual/command-center-dark.png",
+      "sha256": "a52da5d389fab2eb5953c7b48796ee8e153b0ff1382f7ac1595085dc405282eb",
+      "bytes": 334394
+    },
+    {
+      "path": "build/atlas2/visual/financial-trends-dark.png",
+      "sha256": "4d2c40361bb08298a292f6308f2d8b1df735f23c25a5bf7acf31baffedf6bf28",
+      "bytes": 253904
+    },
+    {
+      "path": "build/atlas2/visual/financial-statements-dark.png",
+      "sha256": "987cc0cf5c1b32546e1a60aa05d3ed2ae8c6e15a500cccd64ccf26fc7cda76f6",
+      "bytes": 210714
+    },
+    {
+      "path": "build/atlas2/visual/filings-dark.png",
+      "sha256": "93ae80511f0b29f462fecf5e47aa1981832708ded69b971d256f6bbef21b6ca2",
+      "bytes": 209696
+    },
+    {
+      "path": "build/atlas2/visual/historical-replay-dark.png",
+      "sha256": "23d2625d785638f5ecdff4cad8b981f271ff543a81a5e7b37b5b47f39c7d66eb",
+      "bytes": 262801
+    },
+    {
+      "path": "build/atlas2/visual/microstructure-dark.png",
+      "sha256": "461649275a1a1004671cc02c59b5fd702b4774d88086c154587151918e0e5e70",
+      "bytes": 281831
+    },
+    {
+      "path": "build/atlas2/visual/execution-simulation-dark.png",
+      "sha256": "f822cdcf0a8e3a2ddf6905883d1bfe0b1d7319e95ac21438936a2d47664f2867",
+      "bytes": 211869
+    },
+    {
+      "path": "build/atlas2/visual/research-dark.png",
+      "sha256": "4d99e219ff27839c54976e453d14dea084dc17f813930ce36332585bb00bd98f",
+      "bytes": 206833
+    },
+    {
+      "path": "build/atlas2/visual/operations-dark.png",
+      "sha256": "930cb03e2d081b7868eb5af7befdb25d3a96ba8a9fd799a8bfa165a0f5eebb46",
+      "bytes": 179664
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-dark.png",
+      "sha256": "6cdb04b0ea8d2ed95ef6ac72ca36caccd3a64a8e488d261f8b966bbe7a511f84",
+      "bytes": 280564
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-light.png",
+      "sha256": "2345dd589f5ac2386b7979186f858aa6935bb83e6c28273974141f9da7f8f746",
+      "bytes": 292424
+    },
+    {
+      "path": "build/atlas2/visual/command-center-light.png",
+      "sha256": "43589f39a8e2f0eb391da9a0daa7a645316361cb9617fe08c6bd46780e7158cb",
+      "bytes": 345181
+    },
+    {
+      "path": "build/atlas2/visual/operations-light.png",
+      "sha256": "0fda0d9ddd63eb3759446efc61056b71b141f2f8f5221347a5ac51c820913b17",
+      "bytes": 186529
+    },
+    {
+      "path": "build/atlas2/visual/stock-intelligence-light.png",
+      "sha256": "f19dd1e306190629bcc6d0216e9b09be74ad37f2ae5fd6dad35abb0a2ebf59dd",
+      "bytes": 300884
+    }
+  ],
+  "stable_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "472e8f1ea7c8e6fe65c5abb0b06ec50acc6166996d7c32348001dcbcd926caa1",
+      "assets/Landscape3D-I0tjFDDc.js": "8627ff8ccced0f395f551c744c82852dd28a8ba572e41915c81d2e9600fe9a7b",
+      "assets/OrbitControls-lzfHL0i5.js": "e90e071cdf3ca1a69bf0776676799bf1ab88b6b67e8749adb35668f62ddabb51",
+      "assets/StockIntelligence-BizTe9bb.js": "c3684a5a49d0085c1df681b77390b6c30dac2d11ca2b48db4a5cfd9c5c3bb2ba",
+      "assets/VolatilitySurface-Bi93yM2z.js": "0a60d991124dd8b2ba48e63ffe9263b1763714c3302d302d22ff23b858734910",
+      "assets/index-Cv9I-xYM.js": "ad6f805a56b96e2ef6fdfd7d30110efcd793cf44269d33f25ef1eb99da627f72",
+      "assets/index-D8zMqL8-.css": "cc1e4f07a17f69eeec9a2ba2f2f1fa194dc6e0414cfb59ee1da851ebae226b22",
+      "index.html": "6e8e407a32a9c2767860ef4a56bb1e1a92fdbc2c3bd0259261789e6702ee8a59"
+    },
+    "asset_mutation_detected": false
+  },
+  "log_inventory": [
+    {
+      "path": "build/atlas2/resume-browser-driver.log",
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a",
+      "bytes": 78
+    },
+    {
+      "path": "build/atlas2/resume-build.log",
+      "sha256": "97c19df0a847a1dfb568a2571266797fdbaa2c4762b2a103dd6b3360ba94441b",
+      "bytes": 1383
+    },
+    {
+      "path": "build/atlas2/resume-canonical.log",
+      "sha256": "0b081b2a77baf89d03f37727b1ffa07c606ee8dad3d4c80e516c54ebcd580612",
+      "bytes": 1124
+    },
+    {
+      "path": "build/atlas2/resume-debug.log",
+      "sha256": "4f2b904ef8d19bac1be05568c650edde30e6a826dacb9705d8bf62b020e49b8a",
+      "bytes": 40306
+    },
+    {
+      "path": "build/atlas2/resume-installed-exports.log",
+      "sha256": "dde9f0791ece93fa3d7f9a957de6529076a081391c5b760533bc9016bee68b4d",
+      "bytes": 959
+    },
+    {
+      "path": "build/atlas2/resume-installed-interface.log",
+      "sha256": "d9d956acd819b6529cdd4253ea6bad4d7ebfe9b9c40052abbd807870421959a9",
+      "bytes": 964
+    },
+    {
+      "path": "build/atlas2/resume-packaging.log",
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0",
+      "bytes": 101
+    },
+    {
+      "path": "build/atlas2/resume-performance.log",
+      "sha256": "08ad0a9e0b71239d0b127f4c53eb1ac27d6fdfe760160645b7d923b90b86de26",
+      "bytes": 3627
+    },
+    {
+      "path": "build/atlas2/resume-release.log",
+      "sha256": "7f7e3e9c45e88a321222b644c5469cd277008b38f8ae35ec8aecc9333bb2445d",
+      "bytes": 40306
+    },
+    {
+      "path": "build/atlas2/resume-sanitized.log",
+      "sha256": "6bbe9c26fb004c1204299284dc291fc62191492cec829f6f6dd85787612e74e7",
+      "bytes": 40687
+    },
+    {
+      "path": "build/atlas2/resume-security.log",
+      "sha256": "1af0b280044508fbea96357b31c5f67313de4b97f26746a5ea8e486f1bec41a8",
+      "bytes": 376
+    },
+    {
+      "path": "build/atlas2/resume-tls.log",
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+      "bytes": 4364
+    },
+    {
+      "path": "build/atlas2/resume-unit.log",
+      "sha256": "337ffc7c67739aa99f045dddbaef2005e0ebd9d4a944a374744927fb6cdbbe4b",
+      "bytes": 1706
+    },
+    {
+      "path": "build/atlas2/resume/atlas-validation.log",
+      "sha256": "e51f79e0887db1fe18ab86bb3ac1f5396fe690e5c2657c637bc74e7e9e91b880",
+      "bytes": 3291
+    },
+    {
+      "path": "build/atlas2/resume/atlas2-validation.log",
+      "sha256": "ec3109518f3e2b63e6b821f0ed4eaea12f0f9bba10f00e8d601c9adcc9d60f8a",
+      "bytes": 2542
+    },
+    {
+      "path": "build/atlas2/resume/browser-validation.log",
+      "sha256": "fd6634349c634a691b2526f6d47679c3f0d737e85c9f6581deb8cc7f5f0f8c83",
+      "bytes": 6197
+    },
+    {
+      "path": "build/atlas2/resume/build.log",
+      "sha256": "1e4f6ebabc8a7bc423e3c7be2a0c03e0a3929d57431a41d187ff410a1723535e",
+      "bytes": 1383
+    },
+    {
+      "path": "build/atlas2/resume/live-controls-validation.log",
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
+      "bytes": 496
+    },
+    {
+      "path": "build/atlas2/resume/recorded-playback-validation.log",
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+      "bytes": 396
+    },
+    {
+      "path": "build/atlas2/resume/stock-intelligence-validation.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+      "bytes": 908
+    },
+    {
+      "path": "build/atlas2/resume/stock-loading-validation.log",
+      "sha256": "04848d6f110ead19295b6f7f3bbcd25e22284c6311b7d6ed0f46bbdbd4f644d1",
+      "bytes": 863
+    },
+    {
+      "path": "build/atlas2/stock-loading.log",
+      "sha256": "24c28152aa63421dd21364c23d1e5f53e5f7a4d0ef457ef9190cf3859bd48f45",
+      "bytes": 349
+    }
+  ],
+  "historical_failures": [
+    "Original optional stock canvas timeout preserved;overlapping rebuild plausible but exact cause not proven",
+    "Legacy filing test now waits actual asynchronous matching-count UI;assertions retained",
+    "New wrapper initial setup failed before browser start due legacy URL/output defaults;explicit settings repaired",
+    "Initial resumed canonical command used absent build directory;corrected to existing phase9-clean-release;fresh exact8 references passed"
+  ],
+  "native_source_trees_unchanged": true,
+  "security_boundaries": "No backend/source gates,origin/proof,provider entitlement or native contracts changed",
+  "limitations": [
+    "Viewport emulation not physical Android",
+    "No complete WCAG/screen-reader audit",
+    "No external authenticated Codespaces test",
+    "No new native ARM64 or hosted workflow evidence",
+    "No provider or observed financial validation",
+    "Optional shared Three chunk remains >500KB;warning retained",
+    "Small shared-cloud performance samples not production or statistical claims"
+  ],
+  "commands": [
+    "npm --prefix terminal/web test",
+    "python terminal/tests/run_atlas_browser_suite.py",
+    "PYTHONPATH=build/python-debug/python:. python terminal/tests/run_native_suite.py --expected-tests 274",
+    "PYTHONPATH=. python terminal/tests/run_native_suite.py --expected-tests 274",
+    "LD_PRELOAD=libasan.so:libstdc++.so PYTHONMALLOC=malloc ASAN_OPTIONS=detect_leaks=1:leak_check_at_exit=0:halt_on_error=1 PYTHONPATH=build/python-asan-ubsan/python:. python scripts/run_python_sanitized.py terminal/tests/run_native_suite.py --expected-tests 274",
+    "python -m unittest terminal.test_request_proof terminal.test_stream_proof terminal.test_browser_access terminal.test_codespaces_origin",
+    "python terminal/tests/check_rewritten_http_tls.py",
+    "ctest --test-dir build/phase9-clean-release -R ^itch\\.(validation_demo_reference|independent_reference|context_reference|l3_reference|streaming_reference|auction_reference|admin_reference|hy_reference)$ --output-on-failure",
+    "python tests/test_sdist_patterns.py",
+    "python tests/test_python.py",
+    "python tests/test_export_contracts.py",
+    "node terminal/tests/atlas2-performance.mjs"
+  ]
+}

@@ -39,3 +39,20 @@ export function comparableHistory(rows:Fact[],period:Period):Fact[]{
  if(new Set(selected.map(r=>r.unit+'|'+r.concept)).size>1)return [];
  return [...selected].sort((a,b)=>a.end.localeCompare(b.end)).slice(-12);
 }
+
+export function balancePairs(assets:Fact[],liabilities:Fact[]){
+ const a=comparableHistory(assets.filter(r=>r.start===null),'all'),b=comparableHistory(liabilities.filter(r=>r.start===null),'all');
+ return a.flatMap(x=>{const y=b.find(r=>r.end===x.end&&r.unit===x.unit);return y?[{assets:x,liabilities:y}]:[];}).slice(-12);
+}
+
+export type FilingRecord={form:string;filed:string;accepted_at:string|null;url:string;amendment:boolean;report_date?:string|null;accession?:string};
+export type FilingPage={schema:string;instrument:{symbol:string};status:string;records:FilingRecord[];total_cached_matching:number;next_offset:number|null;observed_at:string|null};
+export function validateFilings(value:unknown,symbol:string,offset:number):FilingPage{
+ const p=value as FilingPage;
+ if(!p||p.schema!=='gig.backend.filings.v2'||p.instrument?.symbol!==symbol||typeof p.status!=='string'||!Array.isArray(p.records)||p.records.length>50||!Number.isInteger(p.total_cached_matching)||p.total_cached_matching<0||p.total_cached_matching>128||p.records.some(r=>!r||typeof r.form!=='string'||typeof r.filed!=='string'||typeof r.amendment!=='boolean'||typeof r.url!=='string'||!/^https:\/\/www\.sec\.gov\/Archives\//.test(r.url)))throw Error('Invalid v2 filing contract');
+ if(p.observed_at!==null&&(typeof p.observed_at!=='string'||!Number.isFinite(Date.parse(p.observed_at))))throw Error('Invalid filing receipt timestamp');
+ if(p.records.some(r=>(r.accepted_at!==null&&r.accepted_at!==undefined&&typeof r.accepted_at!=='string')||(r.accession!==undefined&&typeof r.accession!=='string')||(r.report_date!==null&&r.report_date!==undefined&&typeof r.report_date!=='string')))throw Error('Invalid filing record metadata');
+ if(p.next_offset!==null&&(p.next_offset!==offset+p.records.length||p.records.length!==50||!Number.isInteger(p.next_offset)||p.next_offset<=offset||p.next_offset>128||p.next_offset>=p.total_cached_matching))throw Error('Invalid filing pagination');
+ if(p.records.length>Math.max(0,p.total_cached_matching-offset))throw Error('Contradictory filing count');
+ return p;
+}

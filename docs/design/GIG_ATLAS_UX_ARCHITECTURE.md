@@ -70,3 +70,11 @@ Authored model diagnostics gain labelled summary cards without forecasts or fitt
 claims. Operations retains source/queue/build diagnostics behind disclosures. These
 screens receive shared presentation improvements,not a claim that every interaction
 has been independently redesigned from scratch.
+
+## Phase2 superseding behavior
+
+Native liquidity starts2D;3D is explicitly loaded on request. Option graphics and the
+company route are separately lazy. Filing exploration now navigates bounded server-side
+v2 pages/filters rather than only filtering the first page locally. Shared-scale balance
+comparison and optional-chunk failure isolation are implemented. No backend contract,
+provider gate or financial formula changes. See GIG_ATLAS_PHASE2_REPORT.md.

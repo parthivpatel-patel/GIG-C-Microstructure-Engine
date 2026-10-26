@@ -19,3 +19,11 @@
 Existing Panel/Box wrappers remain compatible. This checkpoint shares visual primitives
 through tokens/classes rather than introducing a new component framework. Further
 consolidation should preserve existing semantic labels and regression coverage.
+
+## Phase2 additions
+
+DepthChart(lightweight),Landscape(optional boundary/loader),Landscape3D(preserved renderer),
+OptionalBoundary(deployment-chunk isolation),BalanceComparison(shared-scale matched
+instants),FilingExplorer(server-filtered bounded cache pages),and two Phase2 browser/
+performance harnesses. See GIG_ATLAS_PHASE2_REPORT.md for current loading policy;
+prior Phase1 capture/evidence remains historical.
