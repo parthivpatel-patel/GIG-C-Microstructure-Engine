@@ -122,6 +122,7 @@ def create_app(stock_workspace=None):
     native.live_feed = feed
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
+    analysis_lock = asyncio.Lock()
     l2_directory=Path(os.environ.get('GIG_TERMINAL_L2_RECORDINGS',str(ROOT/'terminal'/'recordings'/'l2')))
     def observed_processing_allowed():
         from terminal.providers.supervisor import configured_permission
@@ -345,6 +346,37 @@ def create_app(stock_workspace=None):
         try:return company_contract(stocks,request.path_params['symbol'])
         except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
 
+    @route('/api/v1/stocks/history-store', methods=['GET','POST'])
+    @json_endpoint
+    async def history_store(request):
+        store=stocks.history_store
+        if store is None:return error('HISTORY_STORAGE_DISABLED','owner-private storage is not configured',422)
+        try:
+            if request.method=='GET':
+                if set(request.query_params)-{'revision'}:raise ValueError('history_query')
+                revision=request.query_params.get('revision')
+                return {'schema':'gig.history.store.v1','revision':revision,'storage_completeness':'bounded_snapshot_not_complete_market_history','snapshot':await asyncio.to_thread(store.read,revision)} if revision else {'schema':'gig.history.store.v1','revisions':await asyncio.to_thread(store.list),'retention_seconds':604800,'maximum_snapshots':32}
+            data=await bounded_json(request)
+            if set(data)=={'action','symbol'} and data['action']=='save':
+                from terminal.stocks.history import from_workspace
+                return {'schema':'gig.history.store.v1',**await asyncio.to_thread(store.save,from_workspace(stocks,data['symbol']))}
+            if set(data)=={'action','revision'} and data['action']=='delete':
+                await asyncio.to_thread(store.delete,data['revision']);return {'schema':'gig.history.store.v1','deleted':True}
+            raise ValueError('history_action')
+        except (ValueError,KeyError,TypeError):return error('HISTORY_STORAGE_INVALID','invalid,expired,unapproved or inconsistent bounded history request',422)
+        except Exception:return error('HISTORY_STORAGE_FAILURE','private storage unavailable;accepted native state unchanged',503)
+
+    @route('/api/v2/companies/{symbol}/statements', methods=['GET'])
+    @json_endpoint
+    async def statements_v2(request):
+        from terminal.stocks.statements import aligned
+        q=request.query_params
+        if set(q)-{'statement','period'}:return error('STATEMENT_QUERY','unsupported statement query')
+        try:
+            view=stocks.view(request.path_params['symbol']);source=view['fundamentals']
+            return {**aligned(source.get('financials',{}),q.get('statement','income'),q.get('period','annual')),'instrument':view['instrument'],'data_origin':view['classification'],'source_records':source.get('source_records',[])}
+        except (ValueError,KeyError,TypeError):return error('STATEMENT_INVALID','unsupported identity or reported period')
+
     @route('/api/v2/companies/{symbol}/historical', methods=['GET'])
     @json_endpoint
     async def historical_v2(request):
@@ -406,6 +438,37 @@ def create_app(stock_workspace=None):
         data=await bounded_json(request)
         try:return scenario(data)
         except (ValueError,OverflowError,TypeError):return error('OPTION_MODEL','invalid bounded theoretical scenario',422)
+
+    @route('/api/v1/stocks/models', methods=['POST'])
+    @json_endpoint
+    async def stock_models(request):
+        from terminal.stocks.models import fit
+        data=await bounded_json(request)
+        if set(data)!={'returns'}:return error('MODELS_INPUT','bounded authored decimal returns required',422)
+        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        try:
+            async with analysis_lock:return await asyncio.to_thread(fit,data['returns'])
+        except (ValueError,OverflowError,TypeError):return error('MODELS_INVALID','invalid bounded diagnostic model input',422)
+
+    @route('/api/v1/stocks/scenarios', methods=['POST'])
+    @json_endpoint
+    async def stock_scenarios(request):
+        from terminal.stocks.risk import scenarios
+        data=await bounded_json(request)
+        if set(data)!={'quantity','price','shocks'}:return error('SCENARIO_INPUT','explicit authored quantity,price and shocks required',422)
+        try:return scenarios(data['quantity'],data['price'],data['shocks'])
+        except (ValueError,OverflowError,TypeError):return error('SCENARIO_INVALID','invalid bounded linear scenario',422)
+
+    @route('/api/v2/companies/{symbol}/risk', methods=['GET'])
+    @json_endpoint
+    async def stock_risk(request):
+        from terminal.stocks.history import from_workspace
+        from terminal.stocks.risk import analyze
+        if request.query_params:return error('RISK_QUERY','cache-only endpoint accepts no query parameters')
+        try:
+            history=from_workspace(stocks,request.path_params['symbol'])
+            return {'schema':'gig.backend.risk.v2','symbol':history['symbol'],'data_state':history['state'],'source_sha256':history.get('source_sha256',[]),'normalized_history_sha256':history.get('canonical_sha256'),'risk':analyze(history['bars'])}
+        except (ValueError,KeyError,TypeError):return error('RISK_INVALID','invalid symbol or accepted source history',422)
 
     @route('/api/v1/stocks/research', methods=['POST'])
     @json_endpoint

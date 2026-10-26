@@ -36,3 +36,10 @@ terminal/recordings/
 playwright-report/
 test-results/
 *.tsbuildinfo
+
+# Owner-private opt-in historical snapshot storage (never source artifacts).
+.gig-history/
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm

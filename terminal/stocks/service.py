@@ -18,8 +18,10 @@ def failure_reason(exc,fallback):
 
 
 class StockWorkspace:
-    def __init__(self,environment=None,fetcher=None,clock=time.monotonic):
+    def __init__(self,environment=None,fetcher=None,clock=time.monotonic,history_store=None):
         self.environment=os.environ if environment is None else environment
+        from .history_store import configured
+        self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
         self.clock=clock;self.last_request=-100.;self.cooldown_until=0.;self.cooldowns={};self.cache=OrderedDict();self.lock=asyncio.Lock();self.last_error=None;self.load_lock=asyncio.Lock();self.load_task=None;self.load_state={};self.errors={}
     def permission(self,provider):

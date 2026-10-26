@@ -1,0 +1,1067 @@
+{
+  "schema": "gig.atlas.phase4.delivery.v1",
+  "baseline": "696c4c940a311d39a50114606724dfdb5326096d",
+  "branch": "feat/atlas-phase4-platform",
+  "classification": "AUTHORED_FIXTURE_VALIDATION_NOT_EMPIRICAL_OR_PRODUCTION_QUALIFICATION",
+  "source_inventory": [
+    {
+      "path": "docs/phase4/PHASE4_ARCHITECTURE.md",
+      "bytes": 2564,
+      "sha256": "823db832f24200df7beac5ba80d1a6285f50f6c2db2e6dbdbe0d602adeb73733"
+    },
+    {
+      "path": "docs/phase4/PHASE4_FINAL_REPORT.md",
+      "bytes": 5344,
+      "sha256": "81eb902e49c8e753011efc342f4c1c5ccef52f124e14b04be29d7e98a35727d7"
+    },
+    {
+      "path": "docs/phase4/PHASE4_FINANCIAL_ENGINE.md",
+      "bytes": 2159,
+      "sha256": "70b47c340e36eba6b712eec37ed73632827f663b99aba35cba49574ae7057587"
+    },
+    {
+      "path": "docs/phase4/PHASE4_HISTORICAL_DATA.md",
+      "bytes": 3285,
+      "sha256": "5b64bcb8fd09f42dc3fed02b1e76e58a726750ac8470e28853ca505be38f8b2e"
+    },
+    {
+      "path": "docs/phase4/PHASE4_QUANT_MODELS.md",
+      "bytes": 2463,
+      "sha256": "4f8f62e3a9222cc990c8d577395e269b461a6500ae8abfccc6a42558dceacb68"
+    },
+    {
+      "path": "docs/phase4/PHASE4_REMAINING_GAPS.md",
+      "bytes": 2630,
+      "sha256": "7b95cd4397e6a12b6c1c81c6bd46dbc27e7cb2b71be20eda80620343e1765d52"
+    },
+    {
+      "path": "docs/phase4/PHASE4_RISK_ANALYTICS.md",
+      "bytes": 1918,
+      "sha256": "9dec976d79bb3a65f5248cec96b58eebaca8e4bf37d67ffae3d5d2b50294f71f"
+    },
+    {
+      "path": "docs/phase4/PHASE4_UI_REFINEMENT.md",
+      "bytes": 2283,
+      "sha256": "a2556e52799b59c361d0a67acf659f66b3b70f46a99de6d5ae3d1f0729c32e19"
+    },
+    {
+      "path": "docs/phase4/PHASE4_VALIDATION_REPORT.md",
+      "bytes": 4544,
+      "sha256": "59da4588ebcd3d680a3a5a501c64ba43f958f4ef3436b308296cc4757a271368"
+    },
+    {
+      "path": "scripts/benchmark_atlas_models.py",
+      "bytes": 1608,
+      "sha256": "650c37984f475ab5d901e6a959ba6d97cdc2f5184ce0fd9358502e3a5b86a961"
+    },
+    {
+      "path": "terminal/stocks/history_store.py",
+      "bytes": 6688,
+      "sha256": "78b340c10cfbb81e3524e0455f76129c2d5c64733d96fb610a3d97cb0fc6fcdd"
+    },
+    {
+      "path": "terminal/stocks/models.py",
+      "bytes": 6722,
+      "sha256": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2"
+    },
+    {
+      "path": "terminal/stocks/risk.py",
+      "bytes": 3269,
+      "sha256": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c"
+    },
+    {
+      "path": "terminal/stocks/statements.py",
+      "bytes": 2497,
+      "sha256": "9a03b471f998a427995e1a1d2a531e1039aff886d8f32d09ed7598a4d46da919"
+    },
+    {
+      "path": "terminal/stocks/test_phase4.py",
+      "bytes": 13012,
+      "sha256": "c9e36adcab74ff5d7b2906d9bc80c740945cd4e1f9eea8e0763ddf01c0d1c3ab"
+    },
+    {
+      "path": "terminal/tests/atlas4-validation.mjs",
+      "bytes": 6336,
+      "sha256": "6b21b496c30f1f1168216ac07b709982540f1c83d7364339ee6b3d27a7e345af"
+    },
+    {
+      "path": "terminal/tests/atlas4_fixture_server.py",
+      "bytes": 1614,
+      "sha256": "0f964e70a15a199755b79ea855ed4ede53bdefeda2a17bff38715c66e71f8555"
+    },
+    {
+      "path": "terminal/web/src/AlignedStatements.tsx",
+      "bytes": 2234,
+      "sha256": "589adecc6e012db4c6ab1bf1304c5eb452f4723c59bf7f69946677c595a8a450"
+    },
+    {
+      "path": "terminal/web/src/HistoryArchive.tsx",
+      "bytes": 2149,
+      "sha256": "c02786d3769700efb703075202f155902dab9cced527e8bdf4c3a3b163bdde63"
+    },
+    {
+      "path": "terminal/web/src/ResearchDiagnostics.tsx",
+      "bytes": 5025,
+      "sha256": "cb169a2e00168937a2cd6fd2c27b58570e18d051bb8f6da05cd4288b9811aea1"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 763,
+      "sha256": "0d67c7e7973e08451b52ba4c52bf2bd6b39a774cf8afb990eeacbec9c9f26e98"
+    },
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "bytes": 27240,
+      "sha256": "318b8e67766da4298406c97eeec1ca978ed2fbe1c009dad4a81d8bf68cb02087"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 40636,
+      "sha256": "78c8a25838df961c488ea6698a1efce382ec1e4565c50164bf5220e178f732b6"
+    },
+    {
+      "path": "terminal/server/request_proofs.py",
+      "bytes": 3055,
+      "sha256": "0015fc2284fddef4fd6fc652685b5871905c2e71f73fe0e0c6975f4fb7997b68"
+    },
+    {
+      "path": "terminal/stocks/service.py",
+      "bytes": 19888,
+      "sha256": "c02aa0eb236c0d04fdff20f255043bc367fd758bd301b1c3d6863b29b4f5d58f"
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "bytes": 35177,
+      "sha256": "e99fb5b948330de43e717ff878b6e477c4a12429a525bf56be54ea2aa12e52d8"
+    },
+    {
+      "path": "terminal/web/src/FinancialWorkspace.tsx",
+      "bytes": 9361,
+      "sha256": "f87291ffa8b9a10a74f4709b23c59b089908cf4378819be90775d060c3021a4e"
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "bytes": 16555,
+      "sha256": "dfbd319c0c8c62d0c907160a8c9ca75e00912fb534d7cab9c91c16d6d37fbf11"
+    },
+    {
+      "path": "terminal/web/src/atlas.css",
+      "bytes": 21947,
+      "sha256": "aca40c4920b6b3c3a0a07fafb75b47561498c334da74c2d5173cc03383650a2b"
+    }
+  ],
+  "native": [
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clang-asan-ubsan.xml",
+        "bytes": 43015,
+        "sha256": "6892988f1344d82ed47f58908c218419032ea3a6eb61298dfe00d46baf9dc96e"
+      }
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clang-debug.xml",
+        "bytes": 43041,
+        "sha256": "49b72c4c8c30e555ae9b943bfd43356943e1ad27e65825eab8d24c837869774e"
+      }
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clang-release.xml",
+        "bytes": 43057,
+        "sha256": "8d93027a1bd1525e1495b727422f921451f6de53362d27a9d376701289ffb9ce"
+      }
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clean-asan-ubsan.xml",
+        "bytes": 43024,
+        "sha256": "0f147144a4d9e1e6f28d12573dd18fc2f1095b11ef6b10b45b642c8b2816eb64"
+      }
+    },
+    {
+      "configuration": "phase9-clean-debug",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clean-debug.xml",
+        "bytes": 43043,
+        "sha256": "5207cf5078f9b4701ddd2b3d0401d6386dab817f61bef581e21b9118aaea39de"
+      }
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "canonical_hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/atlas4/native-phase9-clean-release.xml",
+        "bytes": 43035,
+        "sha256": "97e13c7324523f7e8b163a5359c4ec73b71a0a4b0412925627f25951f9a12b23"
+      }
+    }
+  ],
+  "consumer_counts": {
+    "Release": 274,
+    "Debug": 274,
+    "ASan_UBSan": 274,
+    "Phase3_each": 13,
+    "Phase4_each": 18,
+    "combined_Phase3_Phase4_each": 31,
+    "combined_configurations": 3,
+    "failures": 0,
+    "skips": 0,
+    "live_lsan": 0
+  },
+  "other_counts": {
+    "frontend": 13,
+    "security": 46,
+    "HTTPS_WSS": 8,
+    "wheel_interface": 8,
+    "wheel_exports": 6,
+    "packaging_patterns": 3
+  },
+  "browser": [
+    {
+      "suite": "browser",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/browser-validation.log",
+        "bytes": 6204,
+        "sha256": "2ff27c7812e77c754cd98935f301f1d558c3a4500c80394082dcb8d2fc7e4eff"
+      }
+    },
+    {
+      "suite": "stock-intelligence",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/stock-intelligence-validation.log",
+        "bytes": 908,
+        "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+      }
+    },
+    {
+      "suite": "stock-loading",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/stock-loading-validation.log",
+        "bytes": 983,
+        "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+      }
+    },
+    {
+      "suite": "atlas",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/atlas-validation.log",
+        "bytes": 3291,
+        "sha256": "e14d09c53bf0dadf649612e1a4dbe084dedb26a446ddd16d809791e6b0bf3bf4"
+      }
+    },
+    {
+      "suite": "atlas2",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/atlas2-validation.log",
+        "bytes": 2542,
+        "sha256": "ec3109518f3e2b63e6b821f0ed4eaea12f0f9bba10f00e8d601c9adcc9d60f8a"
+      }
+    },
+    {
+      "suite": "recorded-playback",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/recorded-playback-validation.log",
+        "bytes": 396,
+        "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+      }
+    },
+    {
+      "suite": "live-controls",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "evidence": {
+        "path": "build/atlas2/resume/live-controls-validation.log",
+        "bytes": 496,
+        "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+      }
+    }
+  ],
+  "phase4_visual": {
+    "schema": "gig.atlas.phase4.browser.v1",
+    "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED",
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "checks": [
+      "full-width desktop and comfortable Command Center typography",
+      "compact navigation preserves all9 accessible destinations",
+      "private immutable history snapshot save and explicit deletion",
+      "aligned reporting periods show actual source values without missing-zero invention",
+      "cached-source risk and in-sample models stay separately labelled",
+      "linear scenarios are explicit authored assumptions",
+      "mobile navigation and analytical panels fit360/390px in both themes",
+      "no uncaught browser errors and native stream remains connected"
+    ],
+    "screenshots": [
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/command-center-wide-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/command-center-compact-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/private-history-fixture.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/aligned-statements-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/risk-models-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/risk-mobile-light.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/risk-mobile-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas4/visual/command-center-wide-light.png"
+    ],
+    "browser": "154.0.8037.57",
+    "limitations": [
+      "Chromium/SwiftShader viewport emulation,not physical Android",
+      "No official SEC,Alpaca or external Codespaces acceptance"
+    ]
+  },
+  "total_counted_checks": 2028,
+  "canonical_hashes": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+  },
+  "screenshots": [
+    {
+      "path": "build/atlas4/visual/command-center-wide-dark.png",
+      "bytes": 390943,
+      "sha256": "1fe9dbeba63155df9bcc62cd20a9393a401bb85350b8a187a92b6f465d431c55"
+    },
+    {
+      "path": "build/atlas4/visual/command-center-compact-dark.png",
+      "bytes": 364490,
+      "sha256": "5506281bc9667992ffeea077ae229bd0b725fc4fa832883b57923ade4406f504"
+    },
+    {
+      "path": "build/atlas4/visual/private-history-fixture.png",
+      "bytes": 378099,
+      "sha256": "43ae8e25fdb897af5f60260262790a0874ab5fb5743c455c9365168afbf0fc6d"
+    },
+    {
+      "path": "build/atlas4/visual/aligned-statements-dark.png",
+      "bytes": 312737,
+      "sha256": "b3573cdcca14a6023d3c905c1cdf78c91c361e9c7f025c12068851d82a6017cf"
+    },
+    {
+      "path": "build/atlas4/visual/risk-models-dark.png",
+      "bytes": 314929,
+      "sha256": "3f58179d8aebfbc92245df507802fddfd33d129dc1b16a2de5af24605364773a"
+    },
+    {
+      "path": "build/atlas4/visual/risk-mobile-light.png",
+      "bytes": 314060,
+      "sha256": "b3e5738c002f5eaf0f250b903fd5d57b4eef96633e4ea0505936bfedaa0e7027"
+    },
+    {
+      "path": "build/atlas4/visual/risk-mobile-dark.png",
+      "bytes": 313461,
+      "sha256": "589d0bd23acfa0db37d240758eee0544a6be19fc1c87563a0a60c63adfbc5e06"
+    },
+    {
+      "path": "build/atlas4/visual/command-center-wide-light.png",
+      "bytes": 402580,
+      "sha256": "a3ec8503ff880b080109d9795bc4ed6cbd4ffc4483f6b623d850b615e63b8918"
+    },
+    {
+      "path": "build/atlas2/visual/command-center-dark.png",
+      "bytes": 362571,
+      "sha256": "431dad9c786eadef0f11b0a5a8a1a4a93e27606b4e8840a30e235bf9d73e00ef"
+    },
+    {
+      "path": "build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 277512,
+      "sha256": "b56e71a9a139fafce37f26f24ab25b4a15239aec7c8c2c0cbf14cea4673a79d4"
+    },
+    {
+      "path": "build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 241421,
+      "sha256": "196c269c6969377a37ad2995cefb2409f8837c1c31b2980f2b9f57b99cdfa948"
+    },
+    {
+      "path": "build/atlas2/visual/filings-dark.png",
+      "bytes": 217496,
+      "sha256": "2276c1e6cd7f818b03ccfd9562525632cb514b09383f5c6038e73b2ae7cbb830"
+    },
+    {
+      "path": "build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 287260,
+      "sha256": "b183703778abb820abaf571230e69c4542a18e8fdaa53d9e328acce785ede669"
+    },
+    {
+      "path": "build/atlas2/visual/microstructure-dark.png",
+      "bytes": 340053,
+      "sha256": "b6c2850e088a127710a287e3ca04080a8fe7fb8e7f195c727e02cfcb3c984293"
+    },
+    {
+      "path": "build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 231358,
+      "sha256": "e1ad18e145f34f592bdae3e72c430e1afa5650fc91eb9833e29f420939942528"
+    },
+    {
+      "path": "build/atlas2/visual/research-dark.png",
+      "bytes": 231963,
+      "sha256": "e0c301a03a9ad97d65a52e096b5de1878bf544adabc78be8de3fa1b44145458f"
+    },
+    {
+      "path": "build/atlas2/visual/operations-dark.png",
+      "bytes": 200112,
+      "sha256": "5fcc1f1b510c0be502da9abbc52e4c8d592163ef6d9f64e64b23d0ccb3c4f780"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 312551,
+      "sha256": "46991e77b78c92062fd9e61fa2e18eefc1ea23ace7391f03e79e69437b71f577"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 324496,
+      "sha256": "bc2be017834251d7a998a1731f33627c7e119a808286464904d0f02c37aa5dd6"
+    },
+    {
+      "path": "build/atlas2/visual/command-center-light.png",
+      "bytes": 379334,
+      "sha256": "412b5d93016bf65be88b0b523249bf854da2773c302624a75e905286682e9e63"
+    },
+    {
+      "path": "build/atlas2/visual/operations-light.png",
+      "bytes": 207532,
+      "sha256": "f132816184a6a6d49b62d42a85b66556368775316ad2f91184ce3caef31c80b0"
+    },
+    {
+      "path": "build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 340469,
+      "sha256": "81e41fb389b78173bb796f262e29743a5e6503a4c376278b5db043521cbf01e4"
+    }
+  ],
+  "model_measurement": {
+    "schema": "gig.atlas.phase4.model_measurement.v1",
+    "classification": "AUTHORED_DIAGNOSTIC_FITS_NOT_EMPIRICAL_FORECASTING",
+    "fixture": "mod13_returns_256",
+    "python": "3.12.14",
+    "architecture": "x86_64",
+    "warmups": 1,
+    "repetitions": 3,
+    "seconds": [
+      0.45910639298381284,
+      0.4561576489941217,
+      0.4585819889907725
+    ],
+    "traced_peak_bytes": 439873,
+    "process_peak_rss_kib": 12316,
+    "deterministic_output_sha256": "92669eb1575a8693bccadea5d015656569239173a4e71c915c6ee4c4213bcf85",
+    "models_source_sha256": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2",
+    "hmm_converged": true,
+    "hmm_iterations": 16,
+    "garch_candidates": 19,
+    "limitations": [
+      "Tracemalloc overhead;small local sample,not a latency SLO",
+      "RSS includes interpreter/imports,not incremental model memory",
+      "No out-of-sample,ARM64 or observed-data performance evidence"
+    ]
+  },
+  "journal_measurements": {
+    "classification": "AUTHORED_SESSION_EVENTS_NOT_OBSERVED_MARKET",
+    "cases": [
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1566112,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 5823417
+      },
+      {
+        "records": 128,
+        "reset_every": 128,
+        "resets": 1,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 1,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1569832,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 11,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2067545
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12525984,
+        "peak_pmr_bytes": 18788768,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 86394355
+      },
+      {
+        "records": 1024,
+        "reset_every": 128,
+        "resets": 8,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 8,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12555744,
+        "peak_pmr_bytes": 18803648,
+        "allocations": 24,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 98520450
+      },
+      {
+        "records": 8192,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 8192,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 100204960,
+        "peak_pmr_bytes": 150307232,
+        "allocations": 15,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 356542775
+      },
+      {
+        "records": 8192,
+        "reset_every": 128,
+        "resets": 64,
+        "record_bytes": 12232,
+        "record_capacity": 8192,
+        "restart_bytes": 3720,
+        "restart_capacity": 64,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 100443040,
+        "peak_pmr_bytes": 150426272,
+        "allocations": 86,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 555163080
+      }
+    ],
+    "limits": "Existing probe max8192 records;PMR not process RSS;no new optimization"
+  },
+  "initial_JS": [
+    {
+      "file": "assets/index-CxXOfSll.js",
+      "bytes": 230732
+    }
+  ],
+  "stable_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "8ddb35636b1dde81ce2c90faefac761364a3b5e2e0f77c6c81d99c7a0382dec1",
+      "assets/Landscape3D-B1bAvkDU.js": "63be580d6a886087ef698e4b2ea1af4691b417d05100a1de8584ab4b859e04e9",
+      "assets/OrbitControls-lzfHL0i5.js": "e90e071cdf3ca1a69bf0776676799bf1ab88b6b67e8749adb35668f62ddabb51",
+      "assets/StockIntelligence-DDyBi8wx.js": "39b3dc740832463bf642d2a972e252eb9af092d9328f85a89c713760b63fc86f",
+      "assets/VolatilitySurface-CDbasNSg.js": "39aaf8b9ec211e8bcc395cd78fea4083452f53faa57855267514878bcfee7350",
+      "assets/index-CxXOfSll.js": "66df1a0a6414ed55ad1805f22b515d4b4776cd308ded8874db5ceb5f7fd2bd8f",
+      "assets/index-DYYn_HIn.css": "d6bc1950b781d0f9f522ae14caf8bc6e19c2bd56bb47977ae92fc41ff236c096",
+      "index.html": "796f57d7aa2a49dc41a47ba0c86783423b6e09ccae52915c906a90057df4e2d3"
+    },
+    "asset_mutation_detected": false
+  },
+  "SEC_state": {
+    "identifying_user_agent_present": false,
+    "SEC_requests_made": 0,
+    "status": "OWNER_RUN_GATE"
+  },
+  "log_inventory": [
+    {
+      "path": "build/atlas4/atlas-server-complete.log",
+      "bytes": 10927,
+      "sha256": "3ba24c3bc571193bfa73a2bdec7306d26a5af1ce446bdd6f9a7f9e47ce5acb00"
+    },
+    {
+      "path": "build/atlas4/atlas-server.log",
+      "bytes": 11164,
+      "sha256": "0a73cd5d97ea4406f4e31c14fd1714037a49260df74d816ae41a1053720ec421"
+    },
+    {
+      "path": "build/atlas4/browser-complete.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/atlas4/browser.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/atlas4/build-final.log",
+      "bytes": 1383,
+      "sha256": "775c3ddb0e45ec4c5b47b2881e57b654e82cb92b26e59ab202661525c4752404"
+    },
+    {
+      "path": "build/atlas4/build.log",
+      "bytes": 1383,
+      "sha256": "118c960e1f226ef860ab2457c99048c8d8ef8fc723b1001c4f997cdbcdfd373d"
+    },
+    {
+      "path": "build/atlas4/frontend.log",
+      "bytes": 1500,
+      "sha256": "c77d9c77eddfbb06a75ba47a30efa5085c5098498594639262654fd8f894dfbb"
+    },
+    {
+      "path": "build/atlas4/hmm-tie-before.log",
+      "bytes": 183,
+      "sha256": "5025ad4965ecdca48773e85e37dfbebdb012a7038b4f55e0f3f964536b57efc4"
+    },
+    {
+      "path": "build/atlas4/installed-exports.log",
+      "bytes": 959,
+      "sha256": "9310b843df6696b962a747112cf08a06baa1713dba46bc7d4bd6d7cdbd8f3585"
+    },
+    {
+      "path": "build/atlas4/installed-interface.log",
+      "bytes": 964,
+      "sha256": "4a48caf4855601059c65954ff18bf249f3d5c315bb924997aafccd4ef87678a6"
+    },
+    {
+      "path": "build/atlas4/log-return-before.log",
+      "bytes": 183,
+      "sha256": "7b30c34f669dc2c14d147d729b33b26365801ad56734f8a4bd494162d84e433b"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clang-asan-ubsan.log",
+      "bytes": 20189,
+      "sha256": "4103c421fd7cf60b67d382e32a3dc2d082d77f9c5f1944c471912f6aa0e0579a"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clang-debug.log",
+      "bytes": 20179,
+      "sha256": "217389e1c180ff652210159fdae829e332cd7dc4cfceae69043918eee5ac98a1"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clang-release.log",
+      "bytes": 20183,
+      "sha256": "80b3598ccdf2107b2d476261e58cd094cb38f45b43c39dda2530e9802348d126"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clean-asan-ubsan.log",
+      "bytes": 20189,
+      "sha256": "8a4fe222e464526a45256e2a6dbd74a3d644d75dd50e99a93605248117080f6b"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clean-debug.log",
+      "bytes": 20179,
+      "sha256": "2c01fb5b063ddc70ad96ec37eb2b30c7d96a67193073ffdb2cb0f1e2482305ab"
+    },
+    {
+      "path": "build/atlas4/native-phase9-clean-release.log",
+      "bytes": 20183,
+      "sha256": "fd01f8731d9c2edce27bd3ad2322fb9d7f7fdd2e05507c099b177815081cd68e"
+    },
+    {
+      "path": "build/atlas4/new-debug-complete.log",
+      "bytes": 5214,
+      "sha256": "65a161ed3c95af1c7a9e9d5a5973a48024736886d27da0282470c4d09e166553"
+    },
+    {
+      "path": "build/atlas4/new-debug-final.log",
+      "bytes": 5063,
+      "sha256": "b6543e44f856b47ed292f3684c9ba3e504e126dd36f494e4ec0fb4b28fa3fa00"
+    },
+    {
+      "path": "build/atlas4/new-debug.log",
+      "bytes": 4904,
+      "sha256": "59687402593d85b2909037765b8529bb9a29b49757096b76ad9962b8369a3854"
+    },
+    {
+      "path": "build/atlas4/new-release-complete.log",
+      "bytes": 5214,
+      "sha256": "65a161ed3c95af1c7a9e9d5a5973a48024736886d27da0282470c4d09e166553"
+    },
+    {
+      "path": "build/atlas4/new-release-final.log",
+      "bytes": 5063,
+      "sha256": "31d1f581eedc396731e4f1676c6a2ee9e579822e29c658cc298b31065cd150aa"
+    },
+    {
+      "path": "build/atlas4/new-release.log",
+      "bytes": 4904,
+      "sha256": "c1e3eee8f2b2ca6a880dfe640e5ab5cbaceda25f599d06560fe2e489a83b33d3"
+    },
+    {
+      "path": "build/atlas4/new-sanitized-complete.log",
+      "bytes": 5233,
+      "sha256": "ebbd144c48e6b53cafbb38ad5da54d88edb5abab98d75825e2f223c3f9405f9a"
+    },
+    {
+      "path": "build/atlas4/new-sanitized-final.log",
+      "bytes": 5082,
+      "sha256": "af3a012e84a427999bb4568129f55734d63e760227b591d984d0868a30965066"
+    },
+    {
+      "path": "build/atlas4/new-sanitized.log",
+      "bytes": 4923,
+      "sha256": "ec1eeb1dd486f243302fa094f16ef3a6cf2188d329e3f0ea6e22773f1a393662"
+    },
+    {
+      "path": "build/atlas4/packaging.log",
+      "bytes": 101,
+      "sha256": "7ba600c131d14938fa296eb6eb208c575bf239a15b65439f37d0578df0fff9bf"
+    },
+    {
+      "path": "build/atlas4/phase2-server-complete.log",
+      "bytes": 10546,
+      "sha256": "d1e54b4bc7b41521396f58625fa099f7cb1d74906bc28322ae3498e338d86783"
+    },
+    {
+      "path": "build/atlas4/phase2-server.log",
+      "bytes": 11439,
+      "sha256": "f3d279a6ae210d0f21cf0a9b3d10fa1f982d38734ba02787402064ae1a681841"
+    },
+    {
+      "path": "build/atlas4/phase4-browser-complete.log",
+      "bytes": 1692,
+      "sha256": "8abed53dd5513dd4bd4f2db40a4f5a7f8b74168da3c41b75f9895436e1223bad"
+    },
+    {
+      "path": "build/atlas4/phase4-browser-final.log",
+      "bytes": 803,
+      "sha256": "b16f345de25784269858e4f8d048a4196d9fd77602e17407bd2942ee6061bc6f"
+    },
+    {
+      "path": "build/atlas4/phase4-browser-verified.log",
+      "bytes": 1692,
+      "sha256": "8abed53dd5513dd4bd4f2db40a4f5a7f8b74168da3c41b75f9895436e1223bad"
+    },
+    {
+      "path": "build/atlas4/phase4-browser.log",
+      "bytes": 560,
+      "sha256": "e3ee20af1e9b03eca4c249dc7667b3884fb7e14d4d9e055481ae09b910327b51"
+    },
+    {
+      "path": "build/atlas4/phase4-release.log",
+      "bytes": 2724,
+      "sha256": "78c8604218d1c8201167e141eb2b4efb2819e39ae8f7172691e4b294eea07184"
+    },
+    {
+      "path": "build/atlas4/phase4-server-before-fixture.log",
+      "bytes": 5712,
+      "sha256": "2d57b3d2453d86c92f1a5b356be2a8a727aaa26b387d25bb28fded7784689e74"
+    },
+    {
+      "path": "build/atlas4/phase4-server-before-proof.log",
+      "bytes": 4952,
+      "sha256": "8a01ceb31446417596d82efd85206aa4bc8848deb43c47868b5e1e49df22f588"
+    },
+    {
+      "path": "build/atlas4/phase4-server-complete.log",
+      "bytes": 6138,
+      "sha256": "321e0783915c65469e4f86a0ad11c78238cdcc82e4695b755b864558b186fbcd"
+    },
+    {
+      "path": "build/atlas4/phase4-server-final.log",
+      "bytes": 5864,
+      "sha256": "0d3561a22dc545eabeabc5ea3723a998b3e2bf7923ddbf590241ee76f8db819e"
+    },
+    {
+      "path": "build/atlas4/phase4-server-prior-final.log",
+      "bytes": 6138,
+      "sha256": "5c4f067ec3451f14cb4f744279a2cbf333ce5bf8c4e966f911a5cd5d60c70ccb"
+    },
+    {
+      "path": "build/atlas4/phase4-server-verified.log",
+      "bytes": 6205,
+      "sha256": "609dc7eca892a9d1214f5fe169298738a6b5b59f9a3c1770aad5be3e6103317e"
+    },
+    {
+      "path": "build/atlas4/phase4-server.log",
+      "bytes": 5104,
+      "sha256": "1508c56ce84b446fa85baee1aab282f8f616bb7e462950b74512928b9eca9217"
+    },
+    {
+      "path": "build/atlas4/proof-target-before.log",
+      "bytes": 197,
+      "sha256": "70d02edc5b45c54e87e286d73bd80917a9dbd714dad4b25b3b8507b097151d91"
+    },
+    {
+      "path": "build/atlas4/retention-gate-before.log",
+      "bytes": 222,
+      "sha256": "a6e8eca78531bbab21d18187d2372c234788cfb7a0859d50580cf558c58d54da"
+    },
+    {
+      "path": "build/atlas4/security-final.log",
+      "bytes": 376,
+      "sha256": "489675038058013db3e5eec6d99fca02b0695daf4d4fb446976ec2cb74485fd8"
+    },
+    {
+      "path": "build/atlas4/security.log",
+      "bytes": 376,
+      "sha256": "9ad9e84a2857da52c46712ee2bb900190feb0e622563ace2d999d280fcd04eb6"
+    },
+    {
+      "path": "build/atlas4/server-complete.log",
+      "bytes": 19734,
+      "sha256": "3741a437741c437f190caaa10e2ba62e9245c4ece65349473fe44d298857a3ed"
+    },
+    {
+      "path": "build/atlas4/server.log",
+      "bytes": 18926,
+      "sha256": "5b8852f76ed94e6a4f2d4f7afdd552db693432d1fa8f97da49d77d47eba00013"
+    },
+    {
+      "path": "build/atlas4/stock-server-complete.log",
+      "bytes": 13740,
+      "sha256": "81130756c5b34b1645b08749866d4d43e4c728fb4ad8f47b7d9069ce37d21a2c"
+    },
+    {
+      "path": "build/atlas4/stock-server.log",
+      "bytes": 13467,
+      "sha256": "29c265faa9a3b4213b2896d625aceeb4ad65d0167e3ec2cfedc17e87ed0c6e0e"
+    },
+    {
+      "path": "build/atlas4/stored-schema-before.log",
+      "bytes": 9647,
+      "sha256": "14fbcbee32723d010ede1d7809d34d6b94346c03c8ca51784cb9eb2b461b57eb"
+    },
+    {
+      "path": "build/atlas4/targeted-async.log",
+      "bytes": 2135,
+      "sha256": "55d167fee5cfa082bed2444d35bca5c27308e74a5048ec38cb935df0259d5b20"
+    },
+    {
+      "path": "build/atlas4/targeted-final.log",
+      "bytes": 2570,
+      "sha256": "ab561729dfcc2c611e14c567583b4bbe488538e8358cc8dadff9859cce240426"
+    },
+    {
+      "path": "build/atlas4/targeted-fixed.log",
+      "bytes": 2135,
+      "sha256": "ff822ebc2f251a33c56934f61990fef3dc16695951b8d6a372770aa0aae7d59a"
+    },
+    {
+      "path": "build/atlas4/targeted-stable.log",
+      "bytes": 2724,
+      "sha256": "3f901052da7ac3aed1190347bf699abd21cb446754303b313f9e2e4d73d70b13"
+    },
+    {
+      "path": "build/atlas4/targeted.log",
+      "bytes": 2741,
+      "sha256": "58dee9a6e1d1d4cbbc8060536df76c33eb4e80342f2ea926fcda599ad3ac120d"
+    },
+    {
+      "path": "build/atlas4/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "e79e1f894cd395ea2f1e4abdcab81ba7d3f68f919a2f7f74bc0f8f0b90c2769f"
+    },
+    {
+      "path": "build/atlas4/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "3e442b899ff4d0b63ae34843734b4453030dc78fe437a531ee78694ba490879d"
+    },
+    {
+      "path": "build/atlas4/terminal-sanitized.log",
+      "bytes": 43779,
+      "sha256": "602fadadb9157e3ab40f3d3038b627361e4da3be1c9be73f48919d41bbd4773a"
+    },
+    {
+      "path": "build/atlas4/tls-final.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/atlas4/tls.log",
+      "bytes": 4364,
+      "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6"
+    }
+  ],
+  "environment": {
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.41",
+    "node": "24.19.0",
+    "chromium": "154.0.8037.57",
+    "gcc": "14.2.0",
+    "clang": "19.1.7",
+    "native_provenance": "unchanged source;existing validated binaries;fresh tests,no new compiler build"
+  },
+  "commands": [
+    "ctest --test-dir build/phase9-CONFIG --parallel 2 --output-on-failure --output-junit build/atlas4/native-CONFIG.xml (six configurations)",
+    "python terminal/tests/run_native_suite.py --expected-tests 274 (Release/Debug/sanitized native bindings)",
+    "python -m unittest terminal.stocks.test_phase3 terminal.stocks.test_phase4 -v",
+    "LD_PRELOAD=libasan.so:libstdc++.so PYTHONMALLOC=malloc ASAN_OPTIONS=detect_leaks=1:leak_check_at_exit=0:halt_on_error=1 python scripts/run_python_sanitized.py build/atlas4/run_new.py",
+    "npm --prefix terminal/web test",
+    "python terminal/tests/run_atlas_browser_suite.py",
+    "node terminal/tests/atlas4-validation.mjs",
+    "python -m unittest terminal.test_request_proof terminal.test_stream_proof terminal.test_browser_access terminal.test_codespaces_origin",
+    "python terminal/tests/check_rewritten_http_tls.py",
+    "python tests/test_python.py",
+    "python tests/test_export_contracts.py",
+    "python tests/test_sdist_patterns.py",
+    "python scripts/benchmark_atlas_models.py",
+    "build/phase9-clean-release/benchmarks/gig_journal_memory_probe N RESET_EVERY (N128,1024,8192;RESET0,128)"
+  ],
+  "limitations": [
+    "No official SEC reconciliation:identifying User-Agent absent",
+    "No Alpaca activation,wire client or permission confirmation",
+    "No restricted LOBSTER/data download",
+    "Diagnostic fits not statistical/OOS/empirical validation",
+    "Snapshot access TTL is not continuous physical erasure",
+    "No full statements/taxonomy/calendar/corporate-action coverage",
+    "No new ARM64/hosted/external Codespaces/physical-device qualification",
+    "No native journal redesign"
+  ],
+  "security_review": {
+    "exact_origin_host_and_proofs_preserved": true,
+    "explicit_new_proof_targets": [
+      "/api/v1/stocks/models",
+      "/api/v1/stocks/scenarios",
+      "/api/v1/stocks/history-store"
+    ],
+    "provider_gates_changed": false,
+    "credentials_committed": false,
+    "private_market_data_committed": false,
+    "workflow_dispatch": false,
+    "paid_resources": false,
+    "main_modified": false
+  }
+}

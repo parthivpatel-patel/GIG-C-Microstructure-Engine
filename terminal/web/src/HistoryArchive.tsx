@@ -1,0 +1,10 @@
+import {useEffect,useState} from 'react';
+import {request} from './api';
+type Revision={revision:string;symbol:string;timeframe:string;retained_at_unix:number};
+export function HistoryArchive({symbol}:{symbol:string}){
+ const [rows,setRows]=useState<Revision[]>([]),[available,setAvailable]=useState(false),[message,setMessage]=useState('Checking owner-private storage…'),[busy,setBusy]=useState(false);
+ async function refresh(){try{const x=await request<{schema:string;revisions:Revision[]}>('/stocks/history-store');if(x.schema!=='gig.history.store.v1'||!Array.isArray(x.revisions)||x.revisions.length>32)throw Error('Invalid storage contract');setRows(x.revisions);setAvailable(true);setMessage('Private immutable snapshots ·7-day access expiry ·maximum32 revisions. Purged on startup/write;no continuous deletion service.')}catch{setAvailable(false);setRows([]);setMessage('Private snapshot storage is disabled or unavailable. No history is written automatically. Owner configuration and observed-data retention permission are separate requirements.')}}
+ useEffect(()=>{void refresh()},[]);
+ async function action(body:unknown){setBusy(true);try{await request('/stocks/history-store',body);await refresh()}catch(e){setMessage((e as Error).message)}finally{setBusy(false)}}
+ return <details className="atlas-history-archive"><summary>Private historical snapshot archive</summary><p role="status">{message}</p>{available&&<><button disabled={busy} onClick={()=>void action({action:'save',symbol})}>Save accepted {symbol} history snapshot</button><div className="atlas-table-scroll" tabIndex={0} aria-label="Private historical revisions"><table><caption>Explicitly retained snapshots,not complete market history</caption><thead><tr><th>Instrument</th><th>Timeframe</th><th>Content revision</th><th>Action</th></tr></thead><tbody>{rows.map(r=><tr key={r.revision}><th scope="row">{r.symbol}</th><td>{r.timeframe}</td><td><code>{r.revision}</code></td><td><button disabled={busy} onClick={()=>void action({action:'delete',revision:r.revision})}>Delete snapshot {r.revision.slice(0,8)}</button></td></tr>)}</tbody></table></div></>}</details>;
+}
