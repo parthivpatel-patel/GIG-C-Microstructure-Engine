@@ -15,6 +15,10 @@ focused financial views,readable exact-value cards,lightweight SVG trends,v2 rat
 filings,source/freshness indicators,simulation tables and model diagnostic cards.
 No external chart framework,font service or paid infrastructure was added.
 
+Verified implementation checkpoint: `895e34f9cad6d0da4adf68e1a5f7a0b7a4f9d174`,
+pushed and remotely verified. A subsequent documentation/evidence commit records
+package closure;its exact SHA is in Git and the final delivery response.
+
 ## Delivery by phase
 
 | Phase | Implemented | Remaining |
@@ -61,6 +65,7 @@ and stock/replay/live-control browser regressions,and the new ATLAS browser suit
 |Fresh frozen canonical reference checks|8 /0 /0|
 |Installed wheel interface/export checks|8+6 /0 /0|
 |Packaging patterns|3 /0 /0|
+|Safe intended byte-identical source-archive members|604 /0 /0|
 |Browser wait/safety guard controls|5 /0 /0|
 
 Representative commands from the repository root:

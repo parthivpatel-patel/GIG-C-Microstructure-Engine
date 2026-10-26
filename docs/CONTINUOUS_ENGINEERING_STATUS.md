@@ -334,3 +334,19 @@ finish safe evidence review,commit/push feature[skip ci],validate source archive
 final evidence-only commit/remote verification. Owner next:explicit frontend rebuild
 in private Codespaces,then launch existing native-backed server. Real source approval,
 external/physical-device acceptance and new-HEAD ARM64 remain open.
+
+## GIG ATLAS delivered checkpoint
+
+Implementation895e34f9cad6d0da4adf68e1a5f7a0b7a4f9d174 pushed/verified on feature.
+Fresh21 ATLAS browser cases include45 responsive combinations and the reproduced
+global/local same-symbol regression;58 existing browser checks pass. Native/source
+backend and all eight canonical identities preserved. Terminal274x3,security46,
+TLS8,frontend11,installed14,packaging3 and source inventory604 members pass.
+Reports and actual screenshots/evidence:docs/design and ignored build/atlas.
+Exact next owner action:stop old Codespaces server,git pull --ff-only on feature,
+npm --prefix terminal/web run build,then bash scripts/start_terminal.sh. Keep8787
+PRIVATE and open its authenticated forwarded URL. No paid hosting/provider activation.
+Follow the20 priorities in GIG_ATLAS_IMPLEMENTATION_REPORT.md;physical Android,full
+accessibility,external Codespaces acceptance,official SEC reconciliation,Alpaca381230
+and new-HEAD hosted/ARM64 remain separate gates. No background engineering continues
+after task completion. Final evidence commit SHA is recorded in Git/delivery.

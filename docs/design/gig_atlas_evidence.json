@@ -717,7 +717,9 @@
     "index-dUzu4D8T.css": 36202
   },
   "log_sha256": {
+    "sdist-inventory.log": "a6db5711f3ab750d3af2704bafb9bb0440fe658f97fca6162e87553e3bf3c901",
     "wheel-interface.log": "8f4cb8c11e093d54a7b6ecd8c6e9487c1096e118a89d99458bba2e7c9084e309",
+    "sdist.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
     "fixture-server.log": "06b06d754f257ecf1c2e7a837505ac95c6969c7c71752face413a1592563c07f",
     "recorded.log": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
     "live-controls.log": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
@@ -750,7 +752,7 @@
     "No new hosted/ARM64 qualification or workflow dispatch",
     "Native six155-suite baseline reused unchanged;fresh8 references separated"
   ],
-  "source_commit": "VALIDATED_WORKTREE_PENDING_CHECKPOINT",
+  "source_commit": "895e34f9cad6d0da4adf68e1a5f7a0b7a4f9d174",
   "native_screenshots": [
     {
       "path": "build/atlas/native-browser/desktop-native-simulation.png",
@@ -779,5 +781,16 @@
     "repair": "explicit global selection revision;stale-response generation safeguards retained",
     "regression": "global same-symbol selection overrides a different local selection",
     "failing_before_log_sha256": "6d9a7ec4d1eea38fdfb350aa7b19bdf1bf6c0725ece00e2c66c430c169c10039"
-  }
+  },
+  "source_archive": {
+    "source_commit": "895e34f9cad6d0da4adf68e1a5f7a0b7a4f9d174",
+    "members": 604,
+    "safe_intended_byte_identical": true,
+    "private_data_included": false,
+    "sha256": "d9ca5acb254cc6587d640b642debb0044932083affd4d16f3fab1642a4c44986",
+    "bytes": 2118690,
+    "inventory_sha256": "b8885ceb02fbb9a304a428aebe137b5c1783e44123badd2b29a20e5f05798b58"
+  },
+  "verified_remote_source_commit": "895e34f9cad6d0da4adf68e1a5f7a0b7a4f9d174",
+  "verified_remote_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718"
 }
