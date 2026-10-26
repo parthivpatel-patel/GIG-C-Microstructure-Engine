@@ -120,6 +120,8 @@ def create_app(stock_workspace=None):
     from terminal.providers.supervisor import FeedSupervisor
     feed = FeedSupervisor()
     native.live_feed = feed
+    from terminal.stocks.live import LiveIEX
+    stock_live_lock=asyncio.Lock()
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
     analysis_lock = asyncio.Lock()
@@ -166,6 +168,7 @@ def create_app(stock_workspace=None):
         try:
             yield
         finally:
+            await stock_live.close()
             await stocks.close()
             await feed.close()
             retention.cancel()
@@ -178,6 +181,7 @@ def create_app(stock_workspace=None):
     app.state.native = native
     from terminal.stocks.service import StockWorkspace
     stocks=StockWorkspace() if stock_workspace is None else stock_workspace
+    stock_live=LiveIEX(stocks)
     app.state.stocks=stocks
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
@@ -346,6 +350,42 @@ def create_app(stock_workspace=None):
         try:return company_contract(stocks,request.path_params['symbol'])
         except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
 
+    @route('/api/v1/stocks/dataset-analysis',methods=['POST'])
+    @json_endpoint
+    async def dataset_analysis(request):
+        from terminal.stocks.datasets import analyze_revisions
+        data=await bounded_json(request)
+        if stocks.history_store is None:return error('DATASET_DISABLED','private history storage required',409)
+        if set(data)!={'revisions','weights'}:return error('DATASET_QUERY','explicit revision aliases and weights required',422)
+        try:return await asyncio.to_thread(analyze_revisions,stocks.history_store,data['revisions'],data['weights'])
+        except (ValueError,KeyError,TypeError):return error('DATASET_INELIGIBLE','verified raw compatible revisions and20–64 exact matched intervals required',422)
+
+    @route('/api/v1/stocks/garch-optimization',methods=['POST'])
+    @json_endpoint
+    async def garch_optimization(request):
+        from terminal.stocks.advanced_models import optimize_garch
+        data=await bounded_json(request)
+        if set(data)!={'returns'}:return error('GARCH_QUERY','bounded ordered returns required',422)
+        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        try:
+            async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
+        except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
+
+    @route('/api/v1/stocks/live', methods=['GET','POST'])
+    @json_endpoint
+    async def stock_live_control(request):
+        if request.method=='GET':
+            if request.query_params:return error('LIVE_QUERY','no query parameters accepted',422)
+            return stock_live.view()
+        data=await bounded_json(request)
+        try:
+            async with stock_live_lock:
+                if data=={'action':'stop'}:await stock_live.close()
+                elif set(data)=={'action','symbols'} and data['action']=='start':await stock_live.start(data['symbols'])
+                else:raise ValueError('live_action')
+            return stock_live.view()
+        except (ValueError,TypeError):return error('ALPACA_LIVE_BLOCKED','explicit permissions,live enable and1–4 curated symbols required',422)
+
     @route('/api/v1/stocks/history-ingest', methods=['POST'])
     @json_endpoint
     async def history_ingest(request):
@@ -388,6 +428,16 @@ def create_app(stock_workspace=None):
             raise ValueError('history_action')
         except (ValueError,KeyError,TypeError):return error('HISTORY_STORAGE_INVALID','invalid,expired,unapproved or inconsistent bounded history request',422)
         except Exception:return error('HISTORY_STORAGE_FAILURE','private storage unavailable;accepted native state unchanged',503)
+
+    @route('/api/v2/companies/{symbol}/vintage',methods=['GET'])
+    @json_endpoint
+    async def company_vintage(request):
+        from terminal.stocks.vintages import at_filing_date
+        if set(request.query_params)!={'filing_date'}:return error('VINTAGE_QUERY','one filing_date required',422)
+        try:
+            view=stocks.view(request.path_params['symbol'])
+            return {**at_filing_date(view['fundamentals'].get('financials',{}),request.query_params['filing_date']),'instrument':view['instrument'],'data_origin':view['classification']}
+        except (ValueError,KeyError,TypeError):return error('VINTAGE_UNAVAILABLE','requested filing-date view unavailable from retained cache',422)
 
     @route('/api/v2/companies/{symbol}/accounting-checks', methods=['GET'])
     @json_endpoint

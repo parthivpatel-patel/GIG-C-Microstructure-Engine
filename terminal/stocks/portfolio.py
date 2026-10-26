@@ -9,7 +9,12 @@ def number(v):
     return Fraction(v)
 
 
-def analyze(data):
+def analyze(data,*,_rational=False):
+    def parse(v):
+        if not _rational:return number(v)
+        if type(v) is not str or not re.fullmatch(r'-?\d{1,80}/[1-9]\d{0,79}',v):raise ValueError('portfolio_exact_rational')
+        return Fraction(v)
+
     if type(data) is not dict or set(data)-{'assets','weights','horizon','shocks'} or not {'assets','weights'}<=set(data):raise ValueError('portfolio_fields')
     assets=data['assets'];weights=data['weights']
     if type(assets) is not dict or not 1<=len(assets)<=4 or type(weights) is not dict or set(weights)!=set(assets) or any(not re.fullmatch('[A-Z][A-Z0-9_]{0,7}',k) for k in assets):raise ValueError('portfolio_identity')
@@ -17,7 +22,7 @@ def analyze(data):
     for name in names:
         values=assets[name]
         if type(values) is not list or not 20<=len(values)<=64 or (n is not None and n!=len(values)):raise ValueError('portfolio_alignment')
-        n=len(values);row=[number(v) for v in values]
+        n=len(values);row=[parse(v) for v in values]
         if any(abs(v)>1 for v in row):raise ValueError('portfolio_return_range')
         series.append(row)
     w=[number(weights[k]) for k in names];gross=sum(map(abs,w))

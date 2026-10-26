@@ -90,3 +90,10 @@ uvicorn, httpx and websockets plus their pinned transitive closure; consult the
 installed distributions' license files and the inventory for exact notices.
 Dependency metadata is not a grant of project redistribution or provider data rights.
 No vendor source/data is embedded, and no public release is made by this work.
+
+## Optional stock-stream codec
+
+The terminal stock-stream adapter uses MessagePack for Python (`msgpack==1.1.2`,
+Apache-2.0, https://github.com/msgpack/msgpack-python). It is a server dependency;
+no provider credentials or market data are bundled. Protocol references are the
+public official alpacahq/alpaca-py source;the adapter is independently authored.
