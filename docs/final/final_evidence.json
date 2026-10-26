@@ -5,7 +5,8 @@
   "classification": "PRIVATE_RESEARCH_CANDIDATE_NOT_LIVE_OBSERVED_OR_PRODUCTION_QUALIFICATION",
   "implementation_commits": [
     "6f5f04bf4886167fd63a65452509d9f8d5770a89",
-    "078884afe64543e9854db82b69cfae2eeab554a8"
+    "078884afe64543e9854db82b69cfae2eeab554a8",
+    "dc3da0a37901d2a0604df241a2985cf0541a18c8"
   ],
   "source_inventory": [
     {
@@ -20,13 +21,13 @@
     },
     {
       "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
-      "bytes": 44704,
-      "sha256": "e19f0433298719ff4ea21c06193ba2c62574353cc45e0caadaa6e9c675d1727d"
+      "bytes": 45057,
+      "sha256": "8f412232db4082c5717383f4583e5f59261429dc26c03c239513669af8550748"
     },
     {
       "path": "docs/final/EXECUTION_CHECKPOINT.md",
-      "bytes": 2319,
-      "sha256": "b00998d8d282961d521b36f852eb3d74cafef4808252d6c2a8ddc3caeafb0a0e"
+      "bytes": 2767,
+      "sha256": "c586f280918bd4da74eed048ba2c209774888b6f7cefb4aed227c29a4f9abbac"
     },
     {
       "path": "docs/final/GIG_ATLAS_FINAL_ARCHITECTURE.md",
@@ -35,13 +36,13 @@
     },
     {
       "path": "docs/final/GIG_ATLAS_FINAL_REPORT.md",
-      "bytes": 5479,
-      "sha256": "27e34dfbcf31a256d7edeace6e1be799b7e2e33b5f3e43fb8eec5a6a3dcbe61b"
+      "bytes": 6550,
+      "sha256": "8df6c58b9c93477dd2b5f0f4cea1350aed7657823907adaf95584d59bb2b43f0"
     },
     {
       "path": "docs/final/GIG_ATLAS_KNOWN_LIMITATIONS.md",
-      "bytes": 3142,
-      "sha256": "8a71ccc5bc3d88aa1e942d11fb562078d2dad1694b7da7f6040c564e60350a85"
+      "bytes": 3392,
+      "sha256": "7daff885e352002c5cf857f5fafb87f31f6c3e6e0739a6937a193ac410ffc6aa"
     },
     {
       "path": "docs/final/GIG_ATLAS_PERFORMANCE_REPORT.md",
@@ -50,8 +51,8 @@
     },
     {
       "path": "docs/final/GIG_ATLAS_REAL_DATA_ACCEPTANCE.md",
-      "bytes": 2677,
-      "sha256": "f3b28e3b9d20a014abbfc8c91493faa4742c52daafe688e6e231ed442ebc43a7"
+      "bytes": 3027,
+      "sha256": "e6c3e511afb9ae2a7ed0bafe0a2fc5244a95448fd8e93bdc9c1a47d7471c7f8a"
     },
     {
       "path": "docs/final/GIG_ATLAS_RELEASE_NOTES.md",
@@ -80,8 +81,8 @@
     },
     {
       "path": "docs/final/PHASE8_QUALIFICATION_REPORT.md",
-      "bytes": 4082,
-      "sha256": "fdd7e6de8a957f9480f401f6c6cd38bb9d8969fd57c6c4e966ec75bd6e3e0d9d"
+      "bytes": 4454,
+      "sha256": "a2e63ec934586fdfd28f1674e31790c606880d1ae067470f8a94f843e6223ebb"
     },
     {
       "path": "scripts/benchmark_atlas_final.py",
@@ -1048,6 +1049,16 @@
       "path": "build/final/unit-mismatch-before.log",
       "bytes": 1209,
       "sha256": "025483d29f85412d0771021a825793cca0a979091c52c8b92516af7ada2c3d30"
+    },
+    {
+      "path": "build/final/sdist-build.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/final/sdist-check.log",
+      "bytes": 81,
+      "sha256": "69e7ebb335558fb4ed051091ae845d1d65f2bbffb9ca39ec83ff81bae2e66f04"
     }
   ],
   "original_browser_logs": [
@@ -1169,5 +1180,28 @@
       "pid": 756443,
       "action": "SIGTERM to verified owned test process"
     }
-  ]
+  ],
+  "verified_source_commit": "dc3da0a37901d2a0604df241a2985cf0541a18c8",
+  "source_archive": {
+    "path": "build/final/dist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2292980,
+    "sha256": "43093129985a74306379f3f7cbc53ac308efb5f7162a2f2726907bb5439eba2e",
+    "source_commit": "dc3da0a37901d2a0604df241a2985cf0541a18c8",
+    "member_count": 698,
+    "inventory": {
+      "path": "build/final/sdist-inventory.json",
+      "bytes": 110526,
+      "sha256": "ab47502d3f6e23404a6d6685e2267d92dd60c41b7f073583c03a2ae71a9cd16f"
+    },
+    "result": "PASS safe,intended,byte-identical members;required trees complete;no private outputs"
+  },
+  "hosted_workflow_gate": {
+    "workflow": ".github/workflows/native-arm64.yml",
+    "guard_line": 14,
+    "allowed_ref": "refs/heads/feat/bootstrap-cpp20-engine",
+    "candidate_branch_supported": false,
+    "action": "Owner review/authorization of narrow manual-only final-branch guard before separately authorized free-runner dispatch",
+    "workflow_modified": false,
+    "workflow_dispatched": false
+  }
 }

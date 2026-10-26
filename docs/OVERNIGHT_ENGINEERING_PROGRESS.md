@@ -568,3 +568,8 @@ Next owner actions:private Codespaces acceptance;resolve381230/credentials/proto
 authorized bounded SEC/history/live pilots;owner-authorized exact-SHA ARM64 qualification.
 Conditional GO private disabled-provider research;NO-GO complete live v1/production.
 No workflow/main/release/paid resource action. No execution continues after task stops.
+
+Combined6/7/8 sourcedc3da0a37901d2a0604df241a2985cf0541a18c8 pushed/verified;clean source archive
+698 members passed. Final closure documentation-only. All7 test servers stopped.
+Preserved ARM64 workflow permits only bootstrap branch;owner must review a final-branch
+guard before separately authorizing exact-SHA qualification. No current ARM64 claim.

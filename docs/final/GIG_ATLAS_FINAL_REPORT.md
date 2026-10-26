@@ -83,3 +83,19 @@ Phase6 commit6f5f04bf4886167fd63a65452509d9f8d5770a89;
 Phase7 commit078884afe64543e9854db82b69cfae2eeab554a8.
 Qualification/source-archive and final closure commits are recorded in the machine manifest
 and final delivery response after commit. No work continues after the session stops.
+
+## Artifact and remote closure
+
+Qualification/source commit `dc3da0a37901d2a0604df241a2985cf0541a18c8` pushed/remote verified.
+Clean sdist:698 intended byte-identical members;required source trees complete.
+Archive SHA256 `43093129985a74306379f3f7cbc53ac308efb5f7162a2f2726907bb5439eba2e`,2292980 bytes.
+Archive captures that source commit;this subsequent closure changes documentation only.
+All7 owned loopback test servers stopped;source worktree was clean at artifact build.
+Final closure commit/remote HEAD appears in the delivery response;manifest records exact
+source commits and artifact hash without a circular self-referential commit identity.
+
+Manual ARM64 workflow remains unchanged and currently guards only
+refs/heads/feat/bootstrap-cpp20-engine(.github/workflows/native-arm64.yml:14).
+Owner must first review/authorize a narrow manual-only guard for this final branch before
+any exact-candidate qualification;selecting the new branch under the old guard skips it.
+Do not dispatch under a misleading old-SHA qualification claim or bypass the free-use gate.

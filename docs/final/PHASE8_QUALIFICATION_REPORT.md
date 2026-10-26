@@ -67,3 +67,8 @@ canonical references and archive manifest are captured in final_evidence.json.
 Artifact acceptance(source inventory) is separate from the2154 total. No publication,
 tag,main merge,workflow dispatch or real-data acquisition. Requirement matrix retains
 substantive incomplete/blocked capabilities;local green tests do not close observed gates.
+
+Clean source artifact:698 intended byte-identical members fromdc3da0a37901d2a0604df241a2985cf0541a18c8;
+required source trees complete;no databases/ZIPs/private outputs. Artifact acceptance is
+separate from2154 test outcomes. Actual final branch ARM64 workflow requires owner review
+of the preserved bootstrap-only branch guard before any separately authorized dispatch.

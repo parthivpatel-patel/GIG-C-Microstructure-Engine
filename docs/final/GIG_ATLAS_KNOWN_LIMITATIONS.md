@@ -37,3 +37,7 @@ This list is substantive remaining engineering,not merely external permission pa
 Reserve November7–10 for integration/critical fixes/security/browser acceptance;defer
 speculative features. If external gates remain unresolved,deliver a disabled-provider
 research candidate. November10 is a target,not an evidence-free readiness assertion.
+
+ARM64 owner action is not dispatch alone:the unchanged manual workflow guard currently
+permits only feat/bootstrap-cpp20-engine. Review a narrow final-branch guard first,retain
+manual-only/free-use controls,and qualify the exact changed source SHA.

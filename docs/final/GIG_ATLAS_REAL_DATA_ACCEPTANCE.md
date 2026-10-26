@@ -38,3 +38,8 @@ PASS means bounded accepted quote+trade observations only,not independent exchan
 reconnect/quiet-session qualification,global completeness or production readiness. Run
 browser quote/print/freshness/stop/reconnect acceptance separately through private port8787.
 Unknown provider messages must be preserved as explicit failures and researched,not skipped.
+
+Hosted qualification prerequisite:the preserved manual native-arm64 workflow's job guard
+currently accepts only feat/bootstrap-cpp20-engine. Review and authorize a narrowly scoped
+final-branch guard before a new free-usage-verified owner dispatch. No workflow changed or
+launched here;an old-branch run cannot qualify this candidate by implication.
