@@ -19,7 +19,7 @@ def analyze_revisions(store,selections,weights):
             core=verify(json.loads(raw))
             if core['source']['origin']!='HISTORICAL_SYNTHETIC' and not store.allow_observed:raise ValueError('dataset_retention_permission')
             cores[alias]=core
-    if len({(c['timeframe'],c['source']['adjustment'],c['source']['origin']) for c in cores.values()})!=1:raise ValueError('dataset_incompatible_sources')
+    if len({(c['timeframe'],c['source']['adjustment'],c['source']['origin'],c['source']['price_unit']) for c in cores.values()})!=1:raise ValueError('dataset_incompatible_sources')
     if any(c['source']['adjustment']!='raw' for c in cores.values()):raise ValueError('dataset_adjustments_unverified')
     paths={}
     for alias,core in cores.items():

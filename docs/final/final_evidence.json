@@ -1,0 +1,1173 @@
+{
+  "schema": "gig.atlas.final.delivery.v1",
+  "baseline": "1f07a6fabc1a0cfd99e37d769d744a258126c14b",
+  "branch": "feat/atlas-final-release",
+  "classification": "PRIVATE_RESEARCH_CANDIDATE_NOT_LIVE_OBSERVED_OR_PRODUCTION_QUALIFICATION",
+  "implementation_commits": [
+    "6f5f04bf4886167fd63a65452509d9f8d5770a89",
+    "078884afe64543e9854db82b69cfae2eeab554a8"
+  ],
+  "source_inventory": [
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 5129,
+      "sha256": "b190402c30413ca4882657db9eb7b3d00ad1a9fe16f7468091c2532830cea54d"
+    },
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "bytes": 28674,
+      "sha256": "3e351c493f23e03bef9d2fc667b7f21bf5de25c72859662a5914dff8ded3bdb9"
+    },
+    {
+      "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+      "bytes": 44704,
+      "sha256": "e19f0433298719ff4ea21c06193ba2c62574353cc45e0caadaa6e9c675d1727d"
+    },
+    {
+      "path": "docs/final/EXECUTION_CHECKPOINT.md",
+      "bytes": 2319,
+      "sha256": "b00998d8d282961d521b36f852eb3d74cafef4808252d6c2a8ddc3caeafb0a0e"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_FINAL_ARCHITECTURE.md",
+      "bytes": 1952,
+      "sha256": "b81f4a15e9ed937b6b6ae5c255794d2c9b8a2ca460f4b57c722248b4ceadfa80"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_FINAL_REPORT.md",
+      "bytes": 5479,
+      "sha256": "27e34dfbcf31a256d7edeace6e1be799b7e2e33b5f3e43fb8eec5a6a3dcbe61b"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_KNOWN_LIMITATIONS.md",
+      "bytes": 3142,
+      "sha256": "8a71ccc5bc3d88aa1e942d11fb562078d2dad1694b7da7f6040c564e60350a85"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_PERFORMANCE_REPORT.md",
+      "bytes": 1937,
+      "sha256": "f2d0d4e9d1e1be76d1fe5ddce9e29d49dc9ee74b7ea28f442abdfd3c1c1ba691"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_REAL_DATA_ACCEPTANCE.md",
+      "bytes": 2677,
+      "sha256": "f3b28e3b9d20a014abbfc8c91493faa4742c52daafe688e6e231ed442ebc43a7"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_RELEASE_NOTES.md",
+      "bytes": 2118,
+      "sha256": "a8a59c66e78adba5ae2be4843cea85c6f66a00d8812ec18b2e9c93ef3f180b87"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_REQUIREMENTS_MATRIX.md",
+      "bytes": 7616,
+      "sha256": "1c58c8904154be407de982abb0aaca0244138946e7ffd920e42f2fa8f2a3aa62"
+    },
+    {
+      "path": "docs/final/GIG_ATLAS_SECURITY_REVIEW.md",
+      "bytes": 1852,
+      "sha256": "def31615a275d13dfc7b62bb589fe6755bc134347587068c411834fdacdafffc"
+    },
+    {
+      "path": "docs/final/PHASE6_ENGINEERING_REPORT.md",
+      "bytes": 4443,
+      "sha256": "37bfa5396546ae965937627cb4b91791a1f218594ca9528be445047a3744ecb8"
+    },
+    {
+      "path": "docs/final/PHASE7_PRODUCT_REPORT.md",
+      "bytes": 2685,
+      "sha256": "d70ec28e8682a9ae503466f735accd96d6ebf391b35a3418f3925350ad3cdb58"
+    },
+    {
+      "path": "docs/final/PHASE8_QUALIFICATION_REPORT.md",
+      "bytes": 4082,
+      "sha256": "fdd7e6de8a957f9480f401f6c6cd38bb9d8969fd57c6c4e966ec75bd6e3e0d9d"
+    },
+    {
+      "path": "scripts/benchmark_atlas_final.py",
+      "bytes": 1809,
+      "sha256": "b02107b10173732ad32c19654ca80c5bdfe6b164ef0096d7247226b371ac5cbb"
+    },
+    {
+      "path": "scripts/qualify_alpaca_live.py",
+      "bytes": 2167,
+      "sha256": "a489dd146fc4aa129d34d60666c0e815ba54a78836d999661af65f6ff728d7d4"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 48477,
+      "sha256": "39739ef1e059295ab06b0a92049d7fbbbaffe6d550597d23506326c575481d92"
+    },
+    {
+      "path": "terminal/server/request_proofs.py",
+      "bytes": 3234,
+      "sha256": "7ed38d337dcb7445d346cb77e2c0c67f13737f2ffcd62407e3d1cea241b4422c"
+    },
+    {
+      "path": "terminal/server/requirements.txt",
+      "bytes": 300,
+      "sha256": "1d23c7294f2028a5d00585d539321121a445413010110cff3a7bc210c0bcdbc3"
+    },
+    {
+      "path": "terminal/stocks/advanced_models.py",
+      "bytes": 4001,
+      "sha256": "85d209cedfa838ce7d2e31a1d0921db60fcc874f13b4bf40c53d3009ebc31266"
+    },
+    {
+      "path": "terminal/stocks/datasets.py",
+      "bytes": 3238,
+      "sha256": "2081ce8cb6ce4b6ca2a34e61b3fba3cb1c319d87a81f1a8935415b1b443fc786"
+    },
+    {
+      "path": "terminal/stocks/live.py",
+      "bytes": 10278,
+      "sha256": "c0ec2359a50a3c6be6de6988e8809f412923b35c1fc5f738cf4f04fb235e0bc3"
+    },
+    {
+      "path": "terminal/stocks/portfolio.py",
+      "bytes": 5439,
+      "sha256": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92"
+    },
+    {
+      "path": "terminal/stocks/test_final.py",
+      "bytes": 11665,
+      "sha256": "fd53a6a2a9114fd488c980ab002a3f8d03640e124d1a7792f2f1189c5f160376"
+    },
+    {
+      "path": "terminal/stocks/vintages.py",
+      "bytes": 1700,
+      "sha256": "26a0e08775b48306fb979556b496e2061dcd984e9424dd2acfa3a74f858c608f"
+    },
+    {
+      "path": "terminal/tests/atlas-final-performance.mjs",
+      "bytes": 2585,
+      "sha256": "de283ffb297ea41a9b3ec8b43b3520eda0de764ac7994ce2e21c28e73c38f52c"
+    },
+    {
+      "path": "terminal/tests/atlas-final-validation.mjs",
+      "bytes": 5981,
+      "sha256": "43681a9dc0a673e876196f4e3ab37011c6348bc2e6ac9228260bdd6d43639b82"
+    },
+    {
+      "path": "terminal/tests/atlas_final_fixture_server.py",
+      "bytes": 709,
+      "sha256": "0b7a26ce155d68cb91af6e6f9a1549fefd291fe6765deccc7695fd983e0f2cee"
+    },
+    {
+      "path": "terminal/web/src/DatasetLab.tsx",
+      "bytes": 3597,
+      "sha256": "6dccc5d0a6facd6ea5693638c23f19b0344b0b6bedc10d8c79fc0e2225cfae67"
+    },
+    {
+      "path": "terminal/web/src/HistoryArchive.tsx",
+      "bytes": 5367,
+      "sha256": "09309155e65339110dda23699ff8acb4f0b63d25ee5ad5d651dc49aff7fba3e8"
+    },
+    {
+      "path": "terminal/web/src/LiveIEX.tsx",
+      "bytes": 2273,
+      "sha256": "6964bf4501c1c4b80b1222f119656b13483c97195f995d455c7174e0f774701c"
+    },
+    {
+      "path": "terminal/web/src/ResearchDiagnostics.tsx",
+      "bytes": 10617,
+      "sha256": "7c5a994757f36749b9cd97a9828595e867ca0ca888b74747bc49c3c9e8420214"
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "bytes": 16716,
+      "sha256": "12082815ba30a4eb57e5cbe99c943ea16203257c745f1dea0f7164f43e2822ea"
+    }
+  ],
+  "source_inventory_scope": "Changed files relative to exact Phase5 baseline;self manifest excluded;closure doc hashes refreshed",
+  "native": [
+    {
+      "configuration": "phase9-clang-asan-ubsan",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clang-asan-ubsan.xml",
+        "bytes": 43012,
+        "sha256": "b7788991fb971cedd7f3ff5399893b92e7efcffecf2765d9eb6965faf7d8a617"
+      }
+    },
+    {
+      "configuration": "phase9-clang-debug",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clang-debug.xml",
+        "bytes": 43083,
+        "sha256": "2303de54b936fe7bc6da59a15761995d9fc6217272572402abd9e27238ddac60"
+      }
+    },
+    {
+      "configuration": "phase9-clang-release",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clang-release.xml",
+        "bytes": 43114,
+        "sha256": "14f04bfb55edced472ecc0a272339adfc0b7c052a674c525b43d1a6e6da5a063"
+      }
+    },
+    {
+      "configuration": "phase9-clean-asan-ubsan",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clean-asan-ubsan.xml",
+        "bytes": 42976,
+        "sha256": "fd3382561ffe8d157fd3335794ca229340971a337fa34e56d09cdb536c21338c"
+      }
+    },
+    {
+      "configuration": "phase9-clean-debug",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clean-debug.xml",
+        "bytes": 43095,
+        "sha256": "c931dc7cb17d551db9b9ce937c63488943d68473adc35dd959b4682a3c9a5487"
+      }
+    },
+    {
+      "configuration": "phase9-clean-release",
+      "passed": 155,
+      "failed": 0,
+      "skipped": 0,
+      "hashes": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "evidence": {
+        "path": "build/final/native-phase9-clean-release.xml",
+        "bytes": 43113,
+        "sha256": "fdd534dca58571789bec7e1630782a01bb537437426515bf823ca9350ad248ed"
+      }
+    }
+  ],
+  "canonical_hashes": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+  },
+  "counts": {
+    "native": 930,
+    "terminal": 822,
+    "phase3_4_5_final_consumers": 207,
+    "frontend": 13,
+    "security": 46,
+    "verified_tls_wss": 8,
+    "installed_wheel": 14,
+    "packaging_patterns": 3,
+    "browser": 111
+  },
+  "total_counted_checks": 2154,
+  "final_failed": 0,
+  "final_skipped": 0,
+  "screenshots": [
+    {
+      "path": "build/atlas2/visual/command-center-dark.png",
+      "bytes": 362571,
+      "sha256": "431dad9c786eadef0f11b0a5a8a1a4a93e27606b4e8840a30e235bf9d73e00ef"
+    },
+    {
+      "path": "build/atlas2/visual/command-center-light.png",
+      "bytes": 379334,
+      "sha256": "412b5d93016bf65be88b0b523249bf854da2773c302624a75e905286682e9e63"
+    },
+    {
+      "path": "build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 231354,
+      "sha256": "ec6e2bb375cb48cea609d4bf0fb1a5ff74ab9e7f33c218f5c4a83fe614d94a74"
+    },
+    {
+      "path": "build/atlas2/visual/filings-dark.png",
+      "bytes": 216930,
+      "sha256": "a3884426942a7e93f9c9bc0fe8fb7c47a3c0d5166014feed5865bfe2b07220eb"
+    },
+    {
+      "path": "build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 241131,
+      "sha256": "cc5fb1977e6fed7bb5935b8bfea1a06b4f516e724344ff8834cd451ea4d348e4"
+    },
+    {
+      "path": "build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 271930,
+      "sha256": "7cb20dccbd69da890010fa10f917ef8ed49784aed04a8e9f3ffbdc9b45b2dad1"
+    },
+    {
+      "path": "build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 287260,
+      "sha256": "b183703778abb820abaf571230e69c4542a18e8fdaa53d9e328acce785ede669"
+    },
+    {
+      "path": "build/atlas2/visual/microstructure-dark.png",
+      "bytes": 340053,
+      "sha256": "b6c2850e088a127710a287e3ca04080a8fe7fb8e7f195c727e02cfcb3c984293"
+    },
+    {
+      "path": "build/atlas2/visual/operations-dark.png",
+      "bytes": 200112,
+      "sha256": "c126701b8398bef292e5780858a07b1a7ecf5bcdc07193ad368bdb716025f71f"
+    },
+    {
+      "path": "build/atlas2/visual/operations-light.png",
+      "bytes": 207532,
+      "sha256": "f132816184a6a6d49b62d42a85b66556368775316ad2f91184ce3caef31c80b0"
+    },
+    {
+      "path": "build/atlas2/visual/research-dark.png",
+      "bytes": 231959,
+      "sha256": "6430c2c7ca3ef415836e3d390f3c34c87a6111edc617505bdd7ff94bb8689ab3"
+    },
+    {
+      "path": "build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 345304,
+      "sha256": "8d6a393debb81cb84860fd6effac37b87db5c4474864fa27f9d5552585cd4a32"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 316587,
+      "sha256": "de5466b12ee6f7e8bc96dd6e6697fd4a5b91f51143ed9c229d5ad7f08dbb536e"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 329269,
+      "sha256": "dea3e7c5aeb3b841acdc79ae6960fd2269fcf8691f5a5b169824016e93824e1d"
+    },
+    {
+      "path": "build/atlas4/visual/aligned-statements-dark.png",
+      "bytes": 316536,
+      "sha256": "0558de371034d09e388581c5e93b6403e76ef55fdc8d4abb262bb0a722501089"
+    },
+    {
+      "path": "build/atlas4/visual/command-center-compact-dark.png",
+      "bytes": 364500,
+      "sha256": "1c91d49b8d937f0aa6b1517ec735055f7ef05bbe7c5c3e146c9b50a363eb89ce"
+    },
+    {
+      "path": "build/atlas4/visual/command-center-wide-dark.png",
+      "bytes": 390943,
+      "sha256": "1fe9dbeba63155df9bcc62cd20a9393a401bb85350b8a187a92b6f465d431c55"
+    },
+    {
+      "path": "build/atlas4/visual/command-center-wide-light.png",
+      "bytes": 402580,
+      "sha256": "a3ec8503ff880b080109d9795bc4ed6cbd4ffc4483f6b623d850b615e63b8918"
+    },
+    {
+      "path": "build/atlas4/visual/private-history-fixture.png",
+      "bytes": 391235,
+      "sha256": "d3c0c36dd3d214f804997c42bf42c399a25d7b14bb65a430786613cde3b56449"
+    },
+    {
+      "path": "build/atlas4/visual/risk-mobile-dark.png",
+      "bytes": 327926,
+      "sha256": "2ca6b83c58b303ea9e06895e25d8fd503dacbcedf248f1e3602fe280a55caf64"
+    },
+    {
+      "path": "build/atlas4/visual/risk-mobile-light.png",
+      "bytes": 329265,
+      "sha256": "a2e2037b6ff05ac4bd8e49e917f5b5b11834032ff141b6497cd67ea2f7dc7baf"
+    },
+    {
+      "path": "build/atlas4/visual/risk-models-dark.png",
+      "bytes": 333365,
+      "sha256": "40818c1f15af11078b8270982642b7c673eec7baa5107468a7fb82e83afc6bf1"
+    },
+    {
+      "path": "build/atlas5/visual/evaluation-dark.png",
+      "bytes": 484581,
+      "sha256": "b237ebe0e21d39097dbe90b78c99402d2f5961b512fdf7a7ecc498e19865676c"
+    },
+    {
+      "path": "build/atlas5/visual/pinned-ingestion-dark.png",
+      "bytes": 447288,
+      "sha256": "c38cdea5520e09cc8d41ecd6ce03e6abafeec9c5162204ac81e228f5e7e92ce8"
+    },
+    {
+      "path": "build/atlas5/visual/portfolio-dark.png",
+      "bytes": 406450,
+      "sha256": "eacc7c7c75307d6df982e27619fa0b9c6b6faf05ca466995f1eee12809257cf2"
+    },
+    {
+      "path": "build/atlas5/visual/research-mobile-dark.png",
+      "bytes": 281276,
+      "sha256": "e48d9f0e2358905f14b2e7e77c9adfffdb95c3540467a1b4b127ae31dffb0f36"
+    },
+    {
+      "path": "build/atlas5/visual/research-mobile-light.png",
+      "bytes": 443971,
+      "sha256": "01f1d239f6b0c68f3d69eb9082815aa6c93baa4fb6847d106fce02e9bb832344"
+    },
+    {
+      "path": "build/final/visual/dataset-research-dark.png",
+      "bytes": 496625,
+      "sha256": "f7710f2706a496650ea2885c6c6852c1db66ff5b3e00e704905d69704d58725a"
+    },
+    {
+      "path": "build/final/visual/final-mobile-dark.png",
+      "bytes": 260648,
+      "sha256": "a3507d3f03d35b643d722800c05692d866bfce1898b7f60c88b6b174134b044a"
+    },
+    {
+      "path": "build/final/visual/final-mobile-light.png",
+      "bytes": 262406,
+      "sha256": "50f19bfe23e4f8459d78189514dccdc00bc10949e3fb2f0b7850c131204e00c2"
+    },
+    {
+      "path": "build/final/visual/garch-search-dark.png",
+      "bytes": 309350,
+      "sha256": "105f02d75cc4811f48424d2a51d49eb9013a63b6320f0b8276ede109abbb3833"
+    },
+    {
+      "path": "build/final/visual/return-command-center.png",
+      "bytes": 368901,
+      "sha256": "d4d38c4e02e6254559a6b8f21ecec41c4f3a462706f24dd5f9723fb2cf6677df"
+    }
+  ],
+  "final_browser": {
+    "schema": "gig.atlas.final.browser.v1",
+    "classification": "AUTHORED_NOT_OBSERVED_OR_LIVE_ACCEPTANCE",
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "checks": [
+      "live IEX remains disabled and start is rejected without explicit live permission",
+      "company to pinned dataset to exact risk to private authored export",
+      "conditional GARCH search visible with source and convergence limitations",
+      "360/390 responsive layouts both themes",
+      "keyboard focus and native browser connection survive integrated journey"
+    ],
+    "screenshots": [
+      "/workspace/GIG-C-Microstructure-Engine/build/final/visual/dataset-research-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/final/visual/garch-search-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/final/visual/final-mobile-light.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/final/visual/final-mobile-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/final/visual/return-command-center.png"
+    ],
+    "browser": "154.0.8037.57"
+  },
+  "stable_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "426471322786e8f3d14a06f0f95dd1711f312cc163a298d3ef4c944edeef9c07",
+      "assets/Landscape3D-CKDLIkBq.js": "c619d6608507b9af8b2c0689b0cc6c23798600738a84e449a8c6f4c7e7fce5a4",
+      "assets/OrbitControls-lzfHL0i5.js": "e90e071cdf3ca1a69bf0776676799bf1ab88b6b67e8749adb35668f62ddabb51",
+      "assets/StockIntelligence-DwuRFrQk.js": "9ca17192027f5835cb5e50abdd244ca33777f246813690a8b28b73463d71a158",
+      "assets/VolatilitySurface-BiHD33Hn.js": "d68b37c5c77c5f616c9336aa04c3eec1cec7e2eb78cf45a4ea93c44d7ee12031",
+      "assets/index-C8MOz8_4.css": "7f102b970eb5016c668f5f86da1ea84734c0e40f20279f25b3de795a023f56a8",
+      "assets/index-Cg9xQZFb.js": "2f78dd3f5af1a01ab659fdacc5894d3a4dc8ed7ec965242982c0c48e8c976896",
+      "index.html": "2c2d7eb3175b4c21a4d7b91bc700bb9ffa943b4f02ee7477a35a3822f793dbbe"
+    },
+    "asset_mutation_detected": false
+  },
+  "bundle_sizes": [
+    {
+      "entry": "_OrbitControls-lzfHL0i5.js",
+      "file": "assets/OrbitControls-lzfHL0i5.js",
+      "bytes": 507532,
+      "gzip_bytes": 124024,
+      "sha256": "e90e071cdf3ca1a69bf0776676799bf1ab88b6b67e8749adb35668f62ddabb51"
+    },
+    {
+      "entry": "index.html",
+      "file": "assets/index-Cg9xQZFb.js",
+      "bytes": 230732,
+      "gzip_bytes": 71427,
+      "sha256": "2f78dd3f5af1a01ab659fdacc5894d3a4dc8ed7ec965242982c0c48e8c976896"
+    },
+    {
+      "entry": "src/Landscape3D.tsx",
+      "file": "assets/Landscape3D-CKDLIkBq.js",
+      "bytes": 6563,
+      "gzip_bytes": 2748,
+      "sha256": "c619d6608507b9af8b2c0689b0cc6c23798600738a84e449a8c6f4c7e7fce5a4"
+    },
+    {
+      "entry": "src/StockIntelligence.tsx",
+      "file": "assets/StockIntelligence-DwuRFrQk.js",
+      "bytes": 70384,
+      "gzip_bytes": 19628,
+      "sha256": "9ca17192027f5835cb5e50abdd244ca33777f246813690a8b28b73463d71a158"
+    },
+    {
+      "entry": "src/VolatilitySurface.tsx",
+      "file": "assets/VolatilitySurface-BiHD33Hn.js",
+      "bytes": 2507,
+      "gzip_bytes": 1369,
+      "sha256": "d68b37c5c77c5f616c9336aa04c3eec1cec7e2eb78cf45a4ea93c44d7ee12031"
+    }
+  ],
+  "performance": {
+    "schema": "gig.atlas.final.performance.v1",
+    "classification": "AUTHORED_NOT_MARKET_LATENCY",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "warmups": 1,
+    "model_repetitions": 3,
+    "garch64_seconds": [
+      0.10076920199207962,
+      0.10599013598402962,
+      0.09858382301172242
+    ],
+    "garch64_median_seconds": 0.10076920199207962,
+    "codec_frames": 1000,
+    "codec_rows_per_frame": 32,
+    "codec_seconds": 0.20983734098263085,
+    "codec_rows_per_second": 152499.07309228045,
+    "traced_peak_bytes": 21489,
+    "process_peak_rss_kib": 17516,
+    "dataset_sha256": "a6127aa4fc3c870ba09e578d3ca54384437aa82dfcd65b79780430c4585db05d",
+    "source_sha256": {
+      "terminal/stocks/advanced_models.py": "85d209cedfa838ce7d2e31a1d0921db60fcc874f13b4bf40c53d3009ebc31266",
+      "terminal/stocks/live.py": "c0ec2359a50a3c6be6de6988e8809f412923b35c1fc5f738cf4f04fb235e0bc3"
+    },
+    "limitations": [
+      "Tracemalloc instrumentation affects timings",
+      "Codec measurement excludes transport/normalization/auth/storage",
+      "One local x86_64 process;not ARM64/exchange latency"
+    ]
+  },
+  "browser_performance": {
+    "schema": "gig.atlas.final.browser.performance.v1",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+    "warmups": 1,
+    "repetitions": 3,
+    "samples": [
+      {
+        "initial_navigation_and_settle_ms": 774.68658,
+        "stock_route_ms": 145.51873499999965,
+        "health_roundtrip_ms": 2.801296999999977,
+        "script_seconds": 0.129342,
+        "task_seconds": 0.376214,
+        "used_js_heap_bytes": 5094672,
+        "dom_nodes": 1479,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Cg9xQZFb.js",
+            "bytes": 230732
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 842.9533710000005,
+        "stock_route_ms": 263.16848800000025,
+        "health_roundtrip_ms": 15.780212000000574,
+        "script_seconds": 0.194767,
+        "task_seconds": 0.483568,
+        "used_js_heap_bytes": 5707780,
+        "dom_nodes": 1479,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Cg9xQZFb.js",
+            "bytes": 230732
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 889.5695749999995,
+        "stock_route_ms": 139.81429900000057,
+        "health_roundtrip_ms": 11.571920999999747,
+        "script_seconds": 0.192374,
+        "task_seconds": 0.544831,
+        "used_js_heap_bytes": 5171568,
+        "dom_nodes": 1479,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Cg9xQZFb.js",
+            "bytes": 230732
+          }
+        ]
+      }
+    ],
+    "browser": "154.0.8037.57",
+    "limitations": [
+      "Isolated Chromium contexts with disabled cache;browser process reused",
+      "Navigation includes networkidle wait;not pure rendering latency",
+      "CDP sampled JS heap,not native/GPU memory or long-run growth",
+      "Loopback fake providers;no Android/external Codespaces acceptance"
+    ]
+  },
+  "official_protocol_sources": {
+    "official_repository": "alpacahq/alpaca-py",
+    "revision": "3da132c6407792310bfbaca1b3114863c44d5bda",
+    "references": [
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/live/websocket.py",
+        "sha256": "ce4a21600663be6f2c5b714dd99695a43546b3b45b1d79c76caf6a8d00642ee2",
+        "bytes": 21432
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/live/stock.py",
+        "sha256": "81bc98c9e9886dec392b6e95908d0851371b360e79045e7d0dfc04fcf6b850b9",
+        "bytes": 8613
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/3da132c6407792310bfbaca1b3114863c44d5bda/alpaca/data/mappings.py",
+        "sha256": "7979ae408edbf287ccaa29c104b13b12dc7fd7d43f6773a647e328182791d82a",
+        "bytes": 1721
+      }
+    ],
+    "purpose": "Protocol source only;no market data or provider API requests"
+  },
+  "configuration_presence": {
+    "SEC_user_agent_present": false,
+    "alpaca_credentials_present": false,
+    "provider_activated": false
+  },
+  "log_inventory": [
+    {
+      "path": "build/final/atlas-server.log",
+      "bytes": 17405,
+      "sha256": "d66b2fc2b446955ee828b5168445ae05ba99a38be26286bcb0a84d20006eb066"
+    },
+    {
+      "path": "build/final/atlas2-server.log",
+      "bytes": 11456,
+      "sha256": "9f3aac98095383cfa22a15541955305935bb793cdb96a63afa328e30c76a888d"
+    },
+    {
+      "path": "build/final/atlas4-server.log",
+      "bytes": 8658,
+      "sha256": "28eacb540655884660f1a487108420d6fe6937134b4d19c0b04caa857416950a"
+    },
+    {
+      "path": "build/final/atlas5-server.log",
+      "bytes": 7327,
+      "sha256": "9692238616bffe01b945f78b9c9209bf5f3a092abe7b7ee5dfa5f5b7df115ec8"
+    },
+    {
+      "path": "build/final/browser-final-accepted.log",
+      "bytes": 1037,
+      "sha256": "bcedec0fbaa74b83658f58ebf88448a97f1b2d616aad4c04f4408a3e07e7f821"
+    },
+    {
+      "path": "build/final/browser-final-final.log",
+      "bytes": 576,
+      "sha256": "f886bbadff45e1f306c6d7b396c2a1b2185abf98cc2d7f6da9c949852be8eec0"
+    },
+    {
+      "path": "build/final/browser-final-finished.log",
+      "bytes": 1037,
+      "sha256": "bcedec0fbaa74b83658f58ebf88448a97f1b2d616aad4c04f4408a3e07e7f821"
+    },
+    {
+      "path": "build/final/browser-final-qualified.log",
+      "bytes": 576,
+      "sha256": "8b7098c48acdce124910a4a8ebafec9893543a30fb7d49e7449a10d78d03d6ca"
+    },
+    {
+      "path": "build/final/browser-final.log",
+      "bytes": 946,
+      "sha256": "3e557f25637b449488805f940bf1d7f87fe10b761312413dcd8b2098e392387c"
+    },
+    {
+      "path": "build/final/browser-performance.log",
+      "bytes": 1775,
+      "sha256": "8a261f56c37239d929f6b5b98397e38a2ef79794a7e3eb97038cc61ffd78bec2"
+    },
+    {
+      "path": "build/final/browser-phase4.log",
+      "bytes": 1765,
+      "sha256": "cba3f95000768b4510d4b98fd0e4ac953cac698868b3ee5e8e3d178499e8aa79"
+    },
+    {
+      "path": "build/final/browser-phase5.log",
+      "bytes": 1326,
+      "sha256": "bd7ba0c0f92f2c6f28bb7148363c4c0b903e846d3c7aaaf9d0d5f8b9b86a1d93"
+    },
+    {
+      "path": "build/final/browser.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/final/consumers-debug-accepted.log",
+      "bytes": 10959,
+      "sha256": "4c9101e5b748719a8e6ec682c1a347dcc636534910f57e75935f74c23a9efa4d"
+    },
+    {
+      "path": "build/final/consumers-debug-final.log",
+      "bytes": 10959,
+      "sha256": "f9357f4c7983fd5c76e9ea645d3453f3759a757848a2e1d96ec3fc9fef556bdc"
+    },
+    {
+      "path": "build/final/consumers-debug-qualified.log",
+      "bytes": 10959,
+      "sha256": "fec060def99d9d96036afeb71e2a9238a7fc42988efcfc5011b1af45b5f3cc5b"
+    },
+    {
+      "path": "build/final/consumers-debug.log",
+      "bytes": 10959,
+      "sha256": "db47b6065cfd51797cb80d8f21734dd49e61f0c3443168595c0932465787d885"
+    },
+    {
+      "path": "build/final/consumers-release-accepted.log",
+      "bytes": 10959,
+      "sha256": "7d4aab9b25185c568569fa83ebe9f177d58693c4af7066038ba92acbdb767a08"
+    },
+    {
+      "path": "build/final/consumers-release-final.log",
+      "bytes": 10959,
+      "sha256": "6d1580eff592aa5ead2be751c0564ebf8c0ce00eaa89f373fd6916c0cf804640"
+    },
+    {
+      "path": "build/final/consumers-release-qualified.log",
+      "bytes": 10959,
+      "sha256": "ef54b0a1058b0fb7d728a5dc6a32f96f79dd5758553f60bbf59d5be672f6d06f"
+    },
+    {
+      "path": "build/final/consumers-release.log",
+      "bytes": 10959,
+      "sha256": "df1d6ea733266d9703b36b28b7f07130719f4a58d59e744b26268dabcea380e4"
+    },
+    {
+      "path": "build/final/consumers-sanitized-accepted.log",
+      "bytes": 10977,
+      "sha256": "cb236c3f0b0640708db3cb5c36279fb257a64a8126b078b6681bb452b7476b63"
+    },
+    {
+      "path": "build/final/consumers-sanitized-final.log",
+      "bytes": 10977,
+      "sha256": "357ba3ba0ecffad44eefea210dd634ca4fa61fc1c42e9bdd1433779c434024f4"
+    },
+    {
+      "path": "build/final/consumers-sanitized-qualified.log",
+      "bytes": 10977,
+      "sha256": "a82937158041f65421b847c4e200bd5311b44ceb1575d2596b7eced988dce06f"
+    },
+    {
+      "path": "build/final/consumers-sanitized.log",
+      "bytes": 10977,
+      "sha256": "f6cac0c4094d357d3c47624fc40ade128cf0b9e09c2ea86b922676e1b4556c99"
+    },
+    {
+      "path": "build/final/final-server-accepted.log",
+      "bytes": 3626,
+      "sha256": "093cdca9eb158a55ef42dab326f9a95a9367c2b8a2169ee55e8f7aa37c4c5ef4"
+    },
+    {
+      "path": "build/final/final-server-final.log",
+      "bytes": 3944,
+      "sha256": "38eaa3ec335aabdc37cfa9b50233c11cdf3bb4d9e4433def0b099c8fb94ee3d3"
+    },
+    {
+      "path": "build/final/final-server-finished.log",
+      "bytes": 6094,
+      "sha256": "13e94d7fd045f0c8245b6250c76ca3db2a6106894d29d26d88f1d24236a95a10"
+    },
+    {
+      "path": "build/final/final-server-qualified.log",
+      "bytes": 3786,
+      "sha256": "024f8be6f9eb938c0881964bad4018ec26fc24602f239ef5bfe77ca01209e3c4"
+    },
+    {
+      "path": "build/final/final-server.log",
+      "bytes": 3626,
+      "sha256": "85eae3d18127f71775cf17dd33174cd12efc10da8ced585ff0325265f6d833b3"
+    },
+    {
+      "path": "build/final/focused-expanded.log",
+      "bytes": 2896,
+      "sha256": "f6e83a7c982177b7c1f8f44a2a77608e6f47c01a31545e3a423fc414133086da"
+    },
+    {
+      "path": "build/final/focused-final.log",
+      "bytes": 2304,
+      "sha256": "1c13b42b369860eb6fe9ff717e6dade73dbbe5674a5e70b7891a3a4a0f534fef"
+    },
+    {
+      "path": "build/final/focused-live-fixed.log",
+      "bytes": 6989,
+      "sha256": "a21582322b022e2c1e1cd03b83d6eed0b5a939da8b4be8cf6b8a1b1355dbbf3c"
+    },
+    {
+      "path": "build/final/focused-live-fixed2.log",
+      "bytes": 3162,
+      "sha256": "0923eb6df145813fb7106c9791d27c3a61732508b475bf7cba8848c472743044"
+    },
+    {
+      "path": "build/final/focused-live.log",
+      "bytes": 2408,
+      "sha256": "183a157a9b25788f0358161d66ebc2408a566cf0cef385b1214dba4c7a8dcbfc"
+    },
+    {
+      "path": "build/final/focused-models.log",
+      "bytes": 3817,
+      "sha256": "ce0c6d11545d7e14aded36209ffafb424e491705d528eadc14f9837cd31491c0"
+    },
+    {
+      "path": "build/final/frontend-build-final.log",
+      "bytes": 1383,
+      "sha256": "7de800f4d26f7d3167a415253943ce83b4dc11dd761e946a0825b5e3c66708fa"
+    },
+    {
+      "path": "build/final/frontend-build.log",
+      "bytes": 1383,
+      "sha256": "0b530452b0195d4c4b0716fc557765af2a4d632478e189b007a18546df955c14"
+    },
+    {
+      "path": "build/final/frontend-final.log",
+      "bytes": 1706,
+      "sha256": "47dbf32ab8d52121085669df83c84062f2ad0d5f75db6c97e6b64072083b29c5"
+    },
+    {
+      "path": "build/final/frontend.log",
+      "bytes": 1708,
+      "sha256": "8c2ebc9ccd2b2b4ece6de5c8de81818aacc658b19182791a84763486266141ef"
+    },
+    {
+      "path": "build/final/installed-exports.log",
+      "bytes": 959,
+      "sha256": "d8be14570fa760e68048a17112e12082541a157bc1ad3b35a2cd2e525f80a5e4"
+    },
+    {
+      "path": "build/final/installed-interface.log",
+      "bytes": 964,
+      "sha256": "a921c623bde9a430bcdb4de167659fd565d9945cb32054cc59045f72450e67a5"
+    },
+    {
+      "path": "build/final/live-cli-help.log",
+      "bytes": 545,
+      "sha256": "d955b3df1b0d420a9f7864055df01a9725967a5e6974e5e86fa8539165503d3f"
+    },
+    {
+      "path": "build/final/loader-busy-before.log",
+      "bytes": 1065,
+      "sha256": "e854d745c0f2b0792f97bd9033fbee531b317591a3a83dc79de85dc4d95d2138"
+    },
+    {
+      "path": "build/final/msgpack-install.log",
+      "bytes": 732,
+      "sha256": "f53a076ed830f8a6b0281e449530a09110e7bfbcf65ac2a9f43aade3097f1ffc"
+    },
+    {
+      "path": "build/final/native-phase9-clang-asan-ubsan.log",
+      "bytes": 20189,
+      "sha256": "309b4b867a2cb7d29197e666ed30840f3a4e6de4b9c5b60e1ad99ce795ad1117"
+    },
+    {
+      "path": "build/final/native-phase9-clang-debug.log",
+      "bytes": 20179,
+      "sha256": "c8a3b10a71ee0306d5e42c1775c807b4ccd0746578d072191ce5bb17d67e588a"
+    },
+    {
+      "path": "build/final/native-phase9-clang-release.log",
+      "bytes": 20183,
+      "sha256": "1f819a8b3605cc7c946eaa0b107778af1e0b16832f81ce8c3efafca458e0afe1"
+    },
+    {
+      "path": "build/final/native-phase9-clean-asan-ubsan.log",
+      "bytes": 20189,
+      "sha256": "174b5af39400e27f51efecbab9638019e4862addbb91308641b0dc5867c6216c"
+    },
+    {
+      "path": "build/final/native-phase9-clean-debug.log",
+      "bytes": 20179,
+      "sha256": "4a19a5c659e6fa11aed7604e64a19df1f4ebcd5c3b3b8e3db1a87b5586a23d77"
+    },
+    {
+      "path": "build/final/native-phase9-clean-release.log",
+      "bytes": 20183,
+      "sha256": "3b35149b9b935e31d397b967b86ff6a47b82bef2810869570f0665ffa5cdfae5"
+    },
+    {
+      "path": "build/final/packaging-corrected.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/final/packaging.log",
+      "bytes": 266,
+      "sha256": "d1baf5716bf69b829725b5a9a510003ab8509a61bb4b6b6df2caefb48f6cba09"
+    },
+    {
+      "path": "build/final/security-accepted.log",
+      "bytes": 376,
+      "sha256": "5640ba09082b3eda762fb8ccc0a545edf2b2600db517a255861054dc5d0a5f37"
+    },
+    {
+      "path": "build/final/security-corrected.log",
+      "bytes": 364,
+      "sha256": "ced1bdf6d4388da9c776a4adf1ff8dab9e74b7aa577cf15a2c575f0410d6876d"
+    },
+    {
+      "path": "build/final/security-final.log",
+      "bytes": 376,
+      "sha256": "c9eadde61e1f1cb3031ee293e6bd8506c4449e0d170d093e4ebaf8860b2746aa"
+    },
+    {
+      "path": "build/final/security.log",
+      "bytes": 1558,
+      "sha256": "032054eb09410d6a8174020f82eae9dbbac71b49861686d94c9c3b11675b164e"
+    },
+    {
+      "path": "build/final/server.log",
+      "bytes": 20008,
+      "sha256": "b5de65e8513e684506e88b4a16ccaa406340bf59ed0ad1550da89d30ec901cbd"
+    },
+    {
+      "path": "build/final/stock-server.log",
+      "bytes": 13680,
+      "sha256": "5ef75067a32bd5ed94ce871e367f5ba454c8deb631c66838106ff9b144483305"
+    },
+    {
+      "path": "build/final/terminal-debug-accepted.log",
+      "bytes": 40306,
+      "sha256": "a43a531367a6454af2d9453d94d399c2c9fc8028cb0ef56db2a53b9898cc012d"
+    },
+    {
+      "path": "build/final/terminal-debug-final.log",
+      "bytes": 40306,
+      "sha256": "2425aae318010c0022f03ca46a6865f971c4e3ffa6aa2e18902f9a82c007e500"
+    },
+    {
+      "path": "build/final/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "3dd452c2e7f6c755b1d2876e756da42ee9ec1ffb705d9aa117017959476e076f"
+    },
+    {
+      "path": "build/final/terminal-release-accepted.log",
+      "bytes": 40306,
+      "sha256": "4aa7f34660ef3e7ac47062ecec2cfd1bee8370a74f3296a181c44c20dbb06b08"
+    },
+    {
+      "path": "build/final/terminal-release-final.log",
+      "bytes": 40306,
+      "sha256": "fbe26cdca3011004c365487db2f08f7804fb307068665b13d24de758de596999"
+    },
+    {
+      "path": "build/final/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "b4cfd7dd83779a3d847eaa9723076feb73fefb22de07823a610f6455c4f48bc6"
+    },
+    {
+      "path": "build/final/terminal-sanitized-accepted.log",
+      "bytes": 41063,
+      "sha256": "75bb3d20082cc03d26742b6f0e63f475628f02f3249ecec37ad8e06d90687385"
+    },
+    {
+      "path": "build/final/terminal-sanitized-final.log",
+      "bytes": 41063,
+      "sha256": "9df9da6eb34d201f9802dd0b96ffa60df39bdc21f91902600844db59c5440958"
+    },
+    {
+      "path": "build/final/terminal-sanitized.log",
+      "bytes": 41064,
+      "sha256": "f03d365202838dd85f1b47ce742ee7424545577b919e80bf48763213bc3bce3b"
+    },
+    {
+      "path": "build/final/tls-final.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/final/tls.log",
+      "bytes": 4364,
+      "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6"
+    },
+    {
+      "path": "build/final/unit-mismatch-before.log",
+      "bytes": 1209,
+      "sha256": "025483d29f85412d0771021a825793cca0a979091c52c8b92516af7ada2c3d30"
+    }
+  ],
+  "original_browser_logs": [
+    {
+      "path": "build/atlas2/resume/atlas-validation.log",
+      "bytes": 3291,
+      "sha256": "dcecf3c04c6da4399965313cf0914f4c1f0c806d433209abcfe15eccf3d8d52f"
+    },
+    {
+      "path": "build/atlas2/resume/atlas2-validation.log",
+      "bytes": 2542,
+      "sha256": "ec3109518f3e2b63e6b821f0ed4eaea12f0f9bba10f00e8d601c9adcc9d60f8a"
+    },
+    {
+      "path": "build/atlas2/resume/browser-validation.log",
+      "bytes": 6214,
+      "sha256": "26e3bb0cd33875e1e9ee3b7ef9e5eee70a2ae44f290670912f453818d2047c4c"
+    },
+    {
+      "path": "build/atlas2/resume/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/atlas2/resume/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/atlas2/resume/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/atlas2/resume/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    }
+  ],
+  "environment": {
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "chromium": "154.0.8037.57",
+    "node": "24.19.0",
+    "native_artifacts": "existing GCC14.2/Clang19.1.7 native configurations;source unchanged;no new compiler build",
+    "third_party_codec": "msgpack1.1.2 existing wheel,not rebuilt with sanitizers"
+  },
+  "reproduced_repairs": [
+    {
+      "defect": "Explicit price-unit conflict accepted across revisions",
+      "before": "build/final/unit-mismatch-before.log",
+      "repair": "include source.price_unit in compatibility key",
+      "regression": "Numeric.test_dataset_exact_repeating_return_alignment_and_retention"
+    },
+    {
+      "defect": "Concurrent source load reported generic422 and browser raced it",
+      "before": "build/final/loader-busy-before.log",
+      "repair": "HISTORY_INGEST_BUSY409 and browser waits actual load response AND completion",
+      "regression": "Stream.test_api_gates_and_foreign_origin;final browser workflow"
+    }
+  ],
+  "limitations": [
+    "No market-data/SEC request or provider activation",
+    "No exact-candidate ARM64/hosted/independent-machine claim",
+    "Native artifacts/existing wheel exercised;no new compiler build",
+    "No physical Android/screen-reader/full WCAG or external Codespaces auth evidence",
+    "Synthetic protocol/algorithmic agreement is not observed qualification",
+    "Full XBRL/PIT/calendar/actions/model uncertainty/operational HA remain partial"
+  ],
+  "commands": [
+    "python terminal/tests/run_native_suite.py --expected-tests 274",
+    "python build/final/run_consumers.py with release/debug/sanitized binding paths",
+    "ctest --test-dir build/phase9-{clean,clang}-{debug,release,asan-ubsan} -j2 --output-junit <artifact>",
+    "npm --prefix terminal/web test",
+    "python terminal/tests/run_atlas_browser_suite.py",
+    "node terminal/tests/atlas4-validation.mjs",
+    "node terminal/tests/atlas5-validation.mjs",
+    "node terminal/tests/atlas-final-validation.mjs",
+    "node terminal/tests/atlas-final-performance.mjs",
+    "python scripts/benchmark_atlas_final.py",
+    "python tests/test_python.py",
+    "python tests/test_export_contracts.py",
+    "python tests/test_sdist_patterns.py"
+  ],
+  "recommendation": "CONDITIONAL_GO_PRIVATE_DISABLED_PROVIDER_RESEARCH;NO_GO_COMPLETE_LIVE_V1_OR_PRODUCTION",
+  "owned_test_servers_stopped": [
+    {
+      "launcher": "terminal.server",
+      "pid": 745384,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "stock_fixture_server.py",
+      "pid": 745398,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "atlas_fixture_server.py",
+      "pid": 745378,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "atlas2_fixture_server.py",
+      "pid": 745400,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "atlas4_fixture_server.py",
+      "pid": 745407,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "atlas5_fixture_server.py",
+      "pid": 745411,
+      "action": "SIGTERM to verified owned test process"
+    },
+    {
+      "launcher": "atlas_final_fixture_server.py",
+      "pid": 756443,
+      "action": "SIGTERM to verified owned test process"
+    }
+  ]
+}

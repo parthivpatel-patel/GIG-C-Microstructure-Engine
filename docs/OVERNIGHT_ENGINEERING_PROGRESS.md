@@ -548,3 +548,23 @@ Reserve November7–10 for integration/acceptance;unclosed20 priorities explicit
 Phase5 source commit `b8ca0057daa696c61159353ad7a503c1ada5fbff` pushed/remote verified. Clean sdist673 members passed
 byte-for-byte inventory validation;no private data. Final closure is documentation only.
 All six owned fixture servers terminated. No work continues after session completion.
+
+## ATLAS combined6/7/8 research-candidate checkpoint — October26,2026
+
+Exact baseline1f07a6fabc1a0cfd99e37d769d744a258126c14b;authorized isolated
+feat/atlas-final-release. Phase6 source6f5f04bf4886167fd63a65452509d9f8d5770a89;
+Phase7 product078884afe64543e9854db82b69cfae2eeab554a8,pushed/verified.
+Final qualification2154 counted passes,0 final fail/skip,eight identities unchanged.
+Six native155-case configurations;terminal3×274;combined3×69;frontend13;security46;
+TLS8;wheel14;packaging3;browser111. Two live LSan checkpoints0. Existing native artifacts,
+no fresh compiler or exact-candidate ARM64/hosted qualification. Native source unchanged.
+Official public SDK sources pinned;bounded opt-in IEX transport implemented and fixture
+validated,no provider activation/market request/SEC request or restricted LOBSTER access.
+Explicit source-unit conflict and busy-ingestion diagnostics repaired with failing-before
+regressions. Final browser waits load request/completion;all7 owned fixture servers stopped.
+Source archive and final documentation closure follow in separate validated commit.
+Resume:inspect branch/remote/status and docs/final/GIG_ATLAS_FINAL_REPORT.md plus manifest.
+Next owner actions:private Codespaces acceptance;resolve381230/credentials/protocol review;
+authorized bounded SEC/history/live pilots;owner-authorized exact-SHA ARM64 qualification.
+Conditional GO private disabled-provider research;NO-GO complete live v1/production.
+No workflow/main/release/paid resource action. No execution continues after task stops.

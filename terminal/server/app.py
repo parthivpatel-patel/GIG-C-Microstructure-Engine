@@ -390,11 +390,15 @@ def create_app(stock_workspace=None):
     @json_endpoint
     async def history_ingest(request):
         from terminal.stocks.acquisition import ingest
+        from terminal.stocks.service import AccessError
         data=await bounded_json(request)
         if set(data)-{'symbol','start','end','timeframe','max_pages'} or not {'symbol','start','end'}<=set(data):return error('HISTORY_INGEST_QUERY','bounded symbol,date interval,timeframe and pages required',422)
         try:
             async with asyncio.timeout(25):return await ingest(stocks,data['symbol'],data['start'],data['end'],data.get('timeframe','1Day'),data.get('max_pages',4))
         except TimeoutError:return error('HISTORY_INGEST_TIME_LIMIT','acquisition time budget reached;inspect revision list before retry because a final storage worker may have committed',503)
+        except AccessError as exc:
+            if str(exc)=='upstream_refresh_busy':return error('HISTORY_INGEST_BUSY','Company source loading is in progress;wait for completion before explicitly retrying',409)
+            return error('HISTORY_INGEST_BLOCKED','configuration,entitlement,source integrity or interval budget rejected;no partial revision published',422)
         except (ValueError,KeyError,TypeError):return error('HISTORY_INGEST_BLOCKED','configuration,entitlement,source integrity or interval budget rejected;no partial revision published',422)
         except Exception:return error('HISTORY_INGEST_UNAVAILABLE','bounded upstream acquisition failed;prior revisions preserved',503)
 

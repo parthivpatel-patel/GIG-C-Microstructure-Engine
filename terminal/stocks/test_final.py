@@ -69,6 +69,16 @@ class Stream(unittest.TestCase):
   with TestClient(create_app(stock_workspace=StockWorkspace(environment={})),base_url='http://127.0.0.1:8787') as c:
    self.assertEqual(c.get('/api/v1/stocks/live').json()['state'],'DISABLED')
    self.assertEqual(c.post('/api/v1/stocks/live',json={'action':'start','symbols':['AAPL']},headers={'Origin':'https://evil.invalid'}).status_code,403)
+  from .history_store import HistoryStore
+  with tempfile.TemporaryDirectory() as root:
+   w=StockWorkspace(environment=ENV,fetcher=lambda *a:None,history_store=HistoryStore(root))
+   with TestClient(create_app(stock_workspace=w),base_url='http://127.0.0.1:8787') as c:
+    c.portal.call(w.lock.acquire)
+    try:
+     response=c.post('/api/v1/stocks/history-ingest',json={'symbol':'AAPL','start':'2024-01-01','end':'2024-01-10'},headers={'Origin':'http://127.0.0.1:8787'})
+     self.assertEqual(response.status_code,409);self.assertEqual(response.json()['error']['code'],'HISTORY_INGEST_BUSY')
+    finally:c.portal.call(w.lock.release)
+
 
 class Numeric(unittest.TestCase):
  def test_constrained_search_monotone_independent_recursion(self):
@@ -103,6 +113,10 @@ class Numeric(unittest.TestCase):
    # normalize recomputes the symbol-bound digest.
    second=normalize('NVDA','1Day',pages(rows),source());a=store.save(first)['revision'];b=store.save(second)['revision'];r=analyze_revisions(store,{'ASSET_A':a,'ASSET_B':b},{'ASSET_A':'0.6','ASSET_B':'0.4'})
    self.assertEqual(r['aligned_intervals'],20);self.assertEqual(r['analysis']['portfolio_returns'][0],{'numerator':'1','denominator':'99'});self.assertEqual(r['excluded_intervals'],{'ASSET_A':0,'ASSET_B':0})
+   from dataclasses import replace
+   mismatch=normalize('NVDA','1Day',pages(rows),replace(source(),price_unit='EUR'))
+   third=store.save(mismatch)['revision']
+   with self.assertRaises(ValueError):analyze_revisions(store,{'ASSET_A':a,'ASSET_B':third},{'ASSET_A':'0.6','ASSET_B':'0.4'})
    store.delete(a)
    with self.assertRaises(ValueError):analyze_revisions(store,{'A':a},{'A':'1'})
 
