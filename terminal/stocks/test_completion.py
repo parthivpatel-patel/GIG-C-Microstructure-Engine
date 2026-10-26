@@ -33,6 +33,7 @@ class Completion(unittest.TestCase):
    with self.assertRaises(asyncio.CancelledError):await response({'type':'http','asgi':{'spec_version':'2.4'}},receive,send)
    self.assertEqual(h.clients,0)
    c.view=lambda:{'oversize':'x'*(1024*1024)};it=h.frames();self.assertIn('MARKET_SNAPSHOT_BUDGET',await anext(it));await it.aclose()
+   h.status=lambda:{};base=len(json.dumps({'pad':'','browser_push':{}},separators=(',',':')));c.view=lambda:{'pad':'x'*(1024*1024-base)};it=h.frames();self.assertIn('MARKET_SNAPSHOT_BUDGET',await anext(it));await it.aclose()
   asyncio.run(run())
  def test_foreign_origin_and_forwarded_headers_cannot_open_stock_push(self):
   from starlette.testclient import TestClient

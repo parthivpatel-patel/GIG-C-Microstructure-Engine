@@ -21,10 +21,11 @@ class MarketEvents:
             if key!=previous or now-emitted>=self.heartbeat:
                 snapshot=s.view();snapshot['browser_push']=self.status()
                 data=json.dumps(snapshot,separators=(',',':'),allow_nan=False)
-                if len(data.encode())>1024*1024:
+                frame='event: state\ndata: '+data+'\n\n'
+                if len(frame.encode())>1024*1024:
                     yield 'event: error\ndata: {"code":"MARKET_SNAPSHOT_BUDGET"}\n\n';return
                 self.sent+=1;previous=key;emitted=now
-                yield 'event: state\ndata: '+data+'\n\n'
+                yield frame
             else:self.coalesced+=1
             await asyncio.sleep(self.interval)
     def response(self):return BoundedEvents(self)

@@ -1,6 +1,6 @@
 const LIMIT=1024*1024;
 export function parseMarketEvent(event:string):unknown|null{
- if(event.length>LIMIT)throw Error('Stock push frame budget exceeded');
+ if(event.length>LIMIT||new TextEncoder().encode(event).byteLength>LIMIT)throw Error('Stock push frame budget exceeded');
  const lines=event.split('\n'),types=lines.filter(x=>x.startsWith('event: ')),data=lines.filter(x=>x.startsWith('data: '));
  if(types.some(x=>x==='event: error'))throw Error('Stock push snapshot rejected');
  if(!data.length)return null;
@@ -10,11 +10,11 @@ export function parseMarketEvent(event:string):unknown|null{
 export class MarketEventDecoder {
  private buffer='';private decoder=new TextDecoder('utf-8',{fatal:true});
  push(bytes:Uint8Array):unknown[]{
-  if(bytes.byteLength>LIMIT)throw Error('Stock push chunk budget exceeded');
+  if(bytes.byteLength>4*LIMIT)throw Error('Stock push chunk budget exceeded');
   this.buffer+=this.decoder.decode(bytes,{stream:true});
+  const out:unknown[]=[];let end,frames=0;
+  while((end=this.buffer.indexOf('\n\n'))>=0){if(++frames>64)throw Error('Stock push batch budget exceeded');const frame=this.buffer.slice(0,end);this.buffer=this.buffer.slice(end+2);const data=parseMarketEvent(frame);if(data!==null)out.push(data)}
   if(this.buffer.length>LIMIT||new TextEncoder().encode(this.buffer).byteLength>LIMIT)throw Error('Stock push frame budget exceeded');
-  const out:unknown[]=[];let end;
-  while((end=this.buffer.indexOf('\n\n'))>=0){const frame=this.buffer.slice(0,end);this.buffer=this.buffer.slice(end+2);const data=parseMarketEvent(frame);if(data!==null)out.push(data)}
   return out;
  }
  finish(){this.buffer+=this.decoder.decode();if(this.buffer.trim())throw Error('Truncated stock push frame')}
