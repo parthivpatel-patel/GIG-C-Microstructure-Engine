@@ -16,9 +16,9 @@ archive controls,and separate accepted-source risk/authored-model/scenario views
 unavailable source remains unavailable;no decorative fabricated market values added.
 
 Existing seven browser suites cover all nine workspaces and90 combinations of360,390,
-768,1280,1920 widths and dark/light themes. New8-assertion journey covers full-width1920,
+768,1280,1920 widths and dark/light themes. New9-assertion journey covers full-width1920,
 compact navigation,storage save/delete,aligned missing facts,risk/model labels,scenarios,
-360/390 mobile in both themes,and native connection/error preservation. Existing global
+360/390 mobile in both themes,risk receipt refresh,input-identity guards,and native connection/error preservation. Existing global
 NVDA→AAPL regression remains. Actual Chromium/SwiftShader screenshots are in the evidence
 manifest;8 new phase4 captures supplement14 refreshed existing-workspace captures.
 

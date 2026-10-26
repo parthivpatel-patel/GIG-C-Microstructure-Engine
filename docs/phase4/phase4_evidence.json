@@ -5,14 +5,24 @@
   "classification": "AUTHORED_FIXTURE_VALIDATION_NOT_EMPIRICAL_OR_PRODUCTION_QUALIFICATION",
   "source_inventory": [
     {
+      "path": ".gitignore",
+      "bytes": 763,
+      "sha256": "0d67c7e7973e08451b52ba4c52bf2bd6b39a774cf8afb990eeacbec9c9f26e98"
+    },
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "bytes": 27240,
+      "sha256": "318b8e67766da4298406c97eeec1ca978ed2fbe1c009dad4a81d8bf68cb02087"
+    },
+    {
       "path": "docs/phase4/PHASE4_ARCHITECTURE.md",
       "bytes": 2564,
       "sha256": "823db832f24200df7beac5ba80d1a6285f50f6c2db2e6dbdbe0d602adeb73733"
     },
     {
       "path": "docs/phase4/PHASE4_FINAL_REPORT.md",
-      "bytes": 5344,
-      "sha256": "81eb902e49c8e753011efc342f4c1c5ccef52f124e14b04be29d7e98a35727d7"
+      "bytes": 5345,
+      "sha256": "5394054bf60e0f13fa519102b5179e8b37dc9dcb6d8c35b3eed6b99312ef4af7"
     },
     {
       "path": "docs/phase4/PHASE4_FINANCIAL_ENGINE.md",
@@ -31,8 +41,8 @@
     },
     {
       "path": "docs/phase4/PHASE4_REMAINING_GAPS.md",
-      "bytes": 2630,
-      "sha256": "7b95cd4397e6a12b6c1c81c6bd46dbc27e7cb2b71be20eda80620343e1765d52"
+      "bytes": 2805,
+      "sha256": "bf4e3a3529f6e1d1361c02e577ff85bed2ddf6de0691bf875689e1c938c0e30a"
     },
     {
       "path": "docs/phase4/PHASE4_RISK_ANALYTICS.md",
@@ -41,18 +51,28 @@
     },
     {
       "path": "docs/phase4/PHASE4_UI_REFINEMENT.md",
-      "bytes": 2283,
-      "sha256": "a2556e52799b59c361d0a67acf659f66b3b70f46a99de6d5ae3d1f0729c32e19"
+      "bytes": 2326,
+      "sha256": "3a11d2e2d587bfd2ea8e4ba14b9df12bb97369b981f6d52a07163275ed9d5ab0"
     },
     {
       "path": "docs/phase4/PHASE4_VALIDATION_REPORT.md",
-      "bytes": 4544,
-      "sha256": "59da4588ebcd3d680a3a5a501c64ba43f958f4ef3436b308296cc4757a271368"
+      "bytes": 4982,
+      "sha256": "1447851e151c6053fa6a7a7a3d33b784810809b45dba8db561c21b4efa9738f7"
     },
     {
       "path": "scripts/benchmark_atlas_models.py",
       "bytes": 1608,
       "sha256": "650c37984f475ab5d901e6a959ba6d97cdc2f5184ce0fd9358502e3a5b86a961"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 40636,
+      "sha256": "78c8a25838df961c488ea6698a1efce382ec1e4565c50164bf5220e178f732b6"
+    },
+    {
+      "path": "terminal/server/request_proofs.py",
+      "bytes": 3055,
+      "sha256": "0015fc2284fddef4fd6fc652685b5871905c2e71f73fe0e0c6975f4fb7997b68"
     },
     {
       "path": "terminal/stocks/history_store.py",
@@ -70,6 +90,11 @@
       "sha256": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c"
     },
     {
+      "path": "terminal/stocks/service.py",
+      "bytes": 19888,
+      "sha256": "c02aa0eb236c0d04fdff20f255043bc367fd758bd301b1c3d6863b29b4f5d58f"
+    },
+    {
       "path": "terminal/stocks/statements.py",
       "bytes": 2497,
       "sha256": "9a03b471f998a427995e1a1d2a531e1039aff886d8f32d09ed7598a4d46da919"
@@ -81,8 +106,8 @@
     },
     {
       "path": "terminal/tests/atlas4-validation.mjs",
-      "bytes": 6336,
-      "sha256": "6b21b496c30f1f1168216ac07b709982540f1c83d7364339ee6b3d27a7e345af"
+      "bytes": 7787,
+      "sha256": "41bdcc0f4a3a37c2122461d60aa5d710905d8946f9d2a1dbe9e2d28bd4b3a096"
     },
     {
       "path": "terminal/tests/atlas4_fixture_server.py",
@@ -95,41 +120,6 @@
       "sha256": "589adecc6e012db4c6ab1bf1304c5eb452f4723c59bf7f69946677c595a8a450"
     },
     {
-      "path": "terminal/web/src/HistoryArchive.tsx",
-      "bytes": 2149,
-      "sha256": "c02786d3769700efb703075202f155902dab9cced527e8bdf4c3a3b163bdde63"
-    },
-    {
-      "path": "terminal/web/src/ResearchDiagnostics.tsx",
-      "bytes": 5025,
-      "sha256": "cb169a2e00168937a2cd6fd2c27b58570e18d051bb8f6da05cd4288b9811aea1"
-    },
-    {
-      "path": ".gitignore",
-      "bytes": 763,
-      "sha256": "0d67c7e7973e08451b52ba4c52bf2bd6b39a774cf8afb990eeacbec9c9f26e98"
-    },
-    {
-      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
-      "bytes": 27240,
-      "sha256": "318b8e67766da4298406c97eeec1ca978ed2fbe1c009dad4a81d8bf68cb02087"
-    },
-    {
-      "path": "terminal/server/app.py",
-      "bytes": 40636,
-      "sha256": "78c8a25838df961c488ea6698a1efce382ec1e4565c50164bf5220e178f732b6"
-    },
-    {
-      "path": "terminal/server/request_proofs.py",
-      "bytes": 3055,
-      "sha256": "0015fc2284fddef4fd6fc652685b5871905c2e71f73fe0e0c6975f4fb7997b68"
-    },
-    {
-      "path": "terminal/stocks/service.py",
-      "bytes": 19888,
-      "sha256": "c02aa0eb236c0d04fdff20f255043bc367fd758bd301b1c3d6863b29b4f5d58f"
-    },
-    {
       "path": "terminal/web/src/App.tsx",
       "bytes": 35177,
       "sha256": "e99fb5b948330de43e717ff878b6e477c4a12429a525bf56be54ea2aa12e52d8"
@@ -140,9 +130,19 @@
       "sha256": "f87291ffa8b9a10a74f4709b23c59b089908cf4378819be90775d060c3021a4e"
     },
     {
+      "path": "terminal/web/src/HistoryArchive.tsx",
+      "bytes": 2149,
+      "sha256": "c02786d3769700efb703075202f155902dab9cced527e8bdf4c3a3b163bdde63"
+    },
+    {
+      "path": "terminal/web/src/ResearchDiagnostics.tsx",
+      "bytes": 5694,
+      "sha256": "b2309934e0d84b8cf6d1a7d6a2783854cb67e97f60ed6abcdce535dd814bb786"
+    },
+    {
       "path": "terminal/web/src/StockIntelligence.tsx",
-      "bytes": 16555,
-      "sha256": "dfbd319c0c8c62d0c907160a8c9ca75e00912fb534d7cab9c91c16d6d37fbf11"
+      "bytes": 16592,
+      "sha256": "0937e76baec1601577db4424a4b2f3180cde704ba44945b15c53ebe769820153"
     },
     {
       "path": "terminal/web/src/atlas.css",
@@ -306,8 +306,8 @@
       "skipped": 0,
       "evidence": {
         "path": "build/atlas2/resume/browser-validation.log",
-        "bytes": 6204,
-        "sha256": "2ff27c7812e77c754cd98935f301f1d558c3a4500c80394082dcb8d2fc7e4eff"
+        "bytes": 6209,
+        "sha256": "845335f457dcc303c1ee64e0660fee2a652dc5d322636960663b54505fee18cf"
       }
     },
     {
@@ -380,7 +380,7 @@
   "phase4_visual": {
     "schema": "gig.atlas.phase4.browser.v1",
     "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED",
-    "passed": 8,
+    "passed": 9,
     "failed": 0,
     "skipped": 0,
     "checks": [
@@ -389,6 +389,7 @@
       "private immutable history snapshot save and explicit deletion",
       "aligned reporting periods show actual source values without missing-zero invention",
       "cached-source risk and in-sample models stay separately labelled",
+      "risk provenance refreshes when the accepted price receipt changes",
       "linear scenarios are explicit authored assumptions",
       "mobile navigation and analytical panels fit360/390px in both themes",
       "no uncaught browser errors and native stream remains connected"
@@ -409,7 +410,7 @@
       "No official SEC,Alpaca or external Codespaces acceptance"
     ]
   },
-  "total_counted_checks": 2028,
+  "total_counted_checks": 2029,
   "canonical_hashes": {
     "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
     "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
@@ -428,33 +429,33 @@
     },
     {
       "path": "build/atlas4/visual/command-center-compact-dark.png",
-      "bytes": 364490,
-      "sha256": "5506281bc9667992ffeea077ae229bd0b725fc4fa832883b57923ade4406f504"
+      "bytes": 364500,
+      "sha256": "1c91d49b8d937f0aa6b1517ec735055f7ef05bbe7c5c3e146c9b50a363eb89ce"
     },
     {
       "path": "build/atlas4/visual/private-history-fixture.png",
-      "bytes": 378099,
-      "sha256": "43ae8e25fdb897af5f60260262790a0874ab5fb5743c455c9365168afbf0fc6d"
+      "bytes": 370905,
+      "sha256": "7aa77538d5632f42adedef937bf7fe9b83f30fd8bbab629ad9b4ca3262e85dd0"
     },
     {
       "path": "build/atlas4/visual/aligned-statements-dark.png",
-      "bytes": 312737,
-      "sha256": "b3573cdcca14a6023d3c905c1cdf78c91c361e9c7f025c12068851d82a6017cf"
+      "bytes": 312579,
+      "sha256": "630f4f29ba9f494109c119be85c06b36652055616511a9c2418b68c2a096225d"
     },
     {
       "path": "build/atlas4/visual/risk-models-dark.png",
-      "bytes": 314929,
-      "sha256": "3f58179d8aebfbc92245df507802fddfd33d129dc1b16a2de5af24605364773a"
+      "bytes": 321450,
+      "sha256": "844acb3e9fbc02fdf7d232bcf97fd9b793c9566a5e48e105d0d9c28f8763ac53"
     },
     {
       "path": "build/atlas4/visual/risk-mobile-light.png",
-      "bytes": 314060,
-      "sha256": "b3e5738c002f5eaf0f250b903fd5d57b4eef96633e4ea0505936bfedaa0e7027"
+      "bytes": 320068,
+      "sha256": "a78e2092150cde3c8536f8d0923197d5e5dfdb82a5ff3b1a90c51033ff56c3d5"
     },
     {
       "path": "build/atlas4/visual/risk-mobile-dark.png",
-      "bytes": 313461,
-      "sha256": "589d0bd23acfa0db37d240758eee0544a6be19fc1c87563a0a60c63adfbc5e06"
+      "bytes": 319470,
+      "sha256": "35775db9d34814fe2b319a139354a32a8ecaccf2b997ca78b2913a15224def19"
     },
     {
       "path": "build/atlas4/visual/command-center-wide-light.png",
@@ -463,73 +464,73 @@
     },
     {
       "path": "build/atlas2/visual/command-center-dark.png",
-      "bytes": 362571,
-      "sha256": "431dad9c786eadef0f11b0a5a8a1a4a93e27606b4e8840a30e235bf9d73e00ef"
+      "bytes": 366593,
+      "sha256": "945b27b79f77ca666f734e322ec281823fa9b996c117b9a1fed43f10bbe6d4a3"
     },
     {
       "path": "build/atlas2/visual/financial-trends-dark.png",
-      "bytes": 277512,
-      "sha256": "b56e71a9a139fafce37f26f24ab25b4a15239aec7c8c2c0cbf14cea4673a79d4"
+      "bytes": 272081,
+      "sha256": "177e74e332807bf06e5fd1dbd20890ee51a52c121be078fe54b22a3fdeeef98d"
     },
     {
       "path": "build/atlas2/visual/financial-statements-dark.png",
-      "bytes": 241421,
-      "sha256": "196c269c6969377a37ad2995cefb2409f8837c1c31b2980f2b9f57b99cdfa948"
+      "bytes": 241280,
+      "sha256": "99badc1dc5ae6609fe58f23c3af2f7e39afe930b80fc65dda256e81d2fcf4e16"
     },
     {
       "path": "build/atlas2/visual/filings-dark.png",
-      "bytes": 217496,
-      "sha256": "2276c1e6cd7f818b03ccfd9562525632cb514b09383f5c6038e73b2ae7cbb830"
+      "bytes": 217291,
+      "sha256": "7d0fdbf545613bbedaaf094a9196134fdcdf26bb6d3157c2c4706109e7fe9657"
     },
     {
       "path": "build/atlas2/visual/historical-replay-dark.png",
-      "bytes": 287260,
-      "sha256": "b183703778abb820abaf571230e69c4542a18e8fdaa53d9e328acce785ede669"
+      "bytes": 287405,
+      "sha256": "1480ace069a61bb62ad68ae167cb47eeacbae4b2a611da6a88cf91a5d5e49d95"
     },
     {
       "path": "build/atlas2/visual/microstructure-dark.png",
-      "bytes": 340053,
-      "sha256": "b6c2850e088a127710a287e3ca04080a8fe7fb8e7f195c727e02cfcb3c984293"
+      "bytes": 339911,
+      "sha256": "d5067c02fa781ca53d75af78e3b5b0bc02d53595308efa7a648298aa6a670b26"
     },
     {
       "path": "build/atlas2/visual/execution-simulation-dark.png",
-      "bytes": 231358,
-      "sha256": "e1ad18e145f34f592bdae3e72c430e1afa5650fc91eb9833e29f420939942528"
+      "bytes": 231478,
+      "sha256": "c08a4a3df2952b0606ef33ec2ff87012f8b8829c50209b1271d18e12e55f41f6"
     },
     {
       "path": "build/atlas2/visual/research-dark.png",
-      "bytes": 231963,
-      "sha256": "e0c301a03a9ad97d65a52e096b5de1878bf544adabc78be8de3fa1b44145458f"
+      "bytes": 231803,
+      "sha256": "2347420e1602c40416ba02c2f46bc21e5a8b35af200f11187bad2372dc03ed5b"
     },
     {
       "path": "build/atlas2/visual/operations-dark.png",
-      "bytes": 200112,
-      "sha256": "5fcc1f1b510c0be502da9abbc52e4c8d592163ef6d9f64e64b23d0ccb3c4f780"
+      "bytes": 200064,
+      "sha256": "28a79c84025fb4ec95e4457dca116b2f6325b458dfe4d177630c0ee03120387d"
     },
     {
       "path": "build/atlas2/visual/stock-mobile-dark.png",
-      "bytes": 312551,
-      "sha256": "46991e77b78c92062fd9e61fa2e18eefc1ea23ace7391f03e79e69437b71f577"
+      "bytes": 312739,
+      "sha256": "c911b8da1ea60625aab7bbc02941a209642978a358fd23bcf4361f17ae06888f"
     },
     {
       "path": "build/atlas2/visual/stock-mobile-light.png",
-      "bytes": 324496,
-      "sha256": "bc2be017834251d7a998a1731f33627c7e119a808286464904d0f02c37aa5dd6"
+      "bytes": 324428,
+      "sha256": "7314a0e78040dc79ee10912dbcccbb83915c111a924c6933515d70feb96ae256"
     },
     {
       "path": "build/atlas2/visual/command-center-light.png",
-      "bytes": 379334,
-      "sha256": "412b5d93016bf65be88b0b523249bf854da2773c302624a75e905286682e9e63"
+      "bytes": 379326,
+      "sha256": "de0fac49782ba674f81fd7031c009547d926374bae264d32a4042f30b43532fa"
     },
     {
       "path": "build/atlas2/visual/operations-light.png",
-      "bytes": 207532,
-      "sha256": "f132816184a6a6d49b62d42a85b66556368775316ad2f91184ce3caef31c80b0"
+      "bytes": 207425,
+      "sha256": "2cf409de128662b1cb6b24801be0b23739ffa6dccb7f58d4c9ac95759b0214df"
     },
     {
       "path": "build/atlas2/visual/stock-intelligence-light.png",
-      "bytes": 340469,
-      "sha256": "81e41fb389b78173bb796f262e29743a5e6503a4c376278b5db043521cbf01e4"
+      "bytes": 340498,
+      "sha256": "775d9c5eb900fde98eeba97d6207323fdc234767a7a8d3fec9da36a8c79beeb1"
     }
   ],
   "model_measurement": {
@@ -680,7 +681,7 @@
   },
   "initial_JS": [
     {
-      "file": "assets/index-CxXOfSll.js",
+      "file": "assets/index-CUbcBmhU.js",
       "bytes": 230732
     }
   ],
@@ -696,14 +697,14 @@
       "live-controls-validation"
     ],
     "asset_sha256": {
-      ".vite/manifest.json": "8ddb35636b1dde81ce2c90faefac761364a3b5e2e0f77c6c81d99c7a0382dec1",
-      "assets/Landscape3D-B1bAvkDU.js": "63be580d6a886087ef698e4b2ea1af4691b417d05100a1de8584ab4b859e04e9",
+      ".vite/manifest.json": "0e0144f65818b476895f11355c97f32afb53b559df4e33095e48712bd34342b2",
+      "assets/Landscape3D-BNhb4Xh5.js": "f9b74a760a8a81398bb58661e8513a2de371d55a3febd1c1f5b45147d857f0dc",
       "assets/OrbitControls-lzfHL0i5.js": "e90e071cdf3ca1a69bf0776676799bf1ab88b6b67e8749adb35668f62ddabb51",
-      "assets/StockIntelligence-DDyBi8wx.js": "39b3dc740832463bf642d2a972e252eb9af092d9328f85a89c713760b63fc86f",
-      "assets/VolatilitySurface-CDbasNSg.js": "39aaf8b9ec211e8bcc395cd78fea4083452f53faa57855267514878bcfee7350",
-      "assets/index-CxXOfSll.js": "66df1a0a6414ed55ad1805f22b515d4b4776cd308ded8874db5ceb5f7fd2bd8f",
+      "assets/StockIntelligence-C3PN_x2X.js": "45ea0565e1908b3e2d353d824ba0012b8e8249c394870725f4b189f0171727ac",
+      "assets/VolatilitySurface-Dlboj3fh.js": "a68e06dc823153b053a84bb0142225a01337294cd4264ca598858b8ac6d8d603",
+      "assets/index-CUbcBmhU.js": "c2244888cb2696fd06bd07fedecac3ae4836e0b0e5c4875cd11c723cc50cc5f1",
       "assets/index-DYYn_HIn.css": "d6bc1950b781d0f9f522ae14caf8bc6e19c2bd56bb47977ae92fc41ff236c096",
-      "index.html": "796f57d7aa2a49dc41a47ba0c86783423b6e09ccae52915c906a90057df4e2d3"
+      "index.html": "9bec8bbaf7de68ec62846963aef749514a299e47aa672ccd933287f6caac4622"
     },
     "asset_mutation_detected": false
   },
@@ -715,8 +716,8 @@
   "log_inventory": [
     {
       "path": "build/atlas4/atlas-server-complete.log",
-      "bytes": 10927,
-      "sha256": "3ba24c3bc571193bfa73a2bdec7306d26a5af1ce446bdd6f9a7f9e47ce5acb00"
+      "bytes": 31069,
+      "sha256": "596adc6cd2d95fba4c8739d88f90efce6287e1be8ec6ddffe9087e2e9bb0c80b"
     },
     {
       "path": "build/atlas4/atlas-server.log",
@@ -725,6 +726,16 @@
     },
     {
       "path": "build/atlas4/browser-complete.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/atlas4/browser-final.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/atlas4/browser-risk-refresh.log",
       "bytes": 78,
       "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
     },
@@ -745,8 +756,8 @@
     },
     {
       "path": "build/atlas4/frontend.log",
-      "bytes": 1500,
-      "sha256": "c77d9c77eddfbb06a75ba47a30efa5085c5098498594639262654fd8f894dfbb"
+      "bytes": 1703,
+      "sha256": "9ee4f65607b22f834176a023fdba4141d0452739a400bf1b7188e6410e21b67e"
     },
     {
       "path": "build/atlas4/hmm-tie-before.log",
@@ -850,8 +861,8 @@
     },
     {
       "path": "build/atlas4/phase2-server-complete.log",
-      "bytes": 10546,
-      "sha256": "d1e54b4bc7b41521396f58625fa099f7cb1d74906bc28322ae3498e338d86783"
+      "bytes": 30691,
+      "sha256": "e8ebb2f23d43fea4f7b1ec008e1712170a847fccf9f7c139767de32181222212"
     },
     {
       "path": "build/atlas4/phase2-server.log",
@@ -864,9 +875,19 @@
       "sha256": "8abed53dd5513dd4bd4f2db40a4f5a7f8b74168da3c41b75f9895436e1223bad"
     },
     {
+      "path": "build/atlas4/phase4-browser-final-accepted.log",
+      "bytes": 1765,
+      "sha256": "cba3f95000768b4510d4b98fd0e4ac953cac698868b3ee5e8e3d178499e8aa79"
+    },
+    {
       "path": "build/atlas4/phase4-browser-final.log",
       "bytes": 803,
       "sha256": "b16f345de25784269858e4f8d048a4196d9fd77602e17407bd2942ee6061bc6f"
+    },
+    {
+      "path": "build/atlas4/phase4-browser-risk-refresh.log",
+      "bytes": 1765,
+      "sha256": "cba3f95000768b4510d4b98fd0e4ac953cac698868b3ee5e8e3d178499e8aa79"
     },
     {
       "path": "build/atlas4/phase4-browser-verified.log",
@@ -895,8 +916,8 @@
     },
     {
       "path": "build/atlas4/phase4-server-complete.log",
-      "bytes": 6138,
-      "sha256": "321e0783915c65469e4f86a0ad11c78238cdcc82e4695b755b864558b186fbcd"
+      "bytes": 29587,
+      "sha256": "7ba748c339de20dffc66e49790c74f05e53ff43a387f1378f3e0564fb9799389"
     },
     {
       "path": "build/atlas4/phase4-server-final.log",
@@ -929,6 +950,16 @@
       "sha256": "a6e8eca78531bbab21d18187d2372c234788cfb7a0859d50580cf558c58d54da"
     },
     {
+      "path": "build/atlas4/risk-refresh-before.log",
+      "bytes": 458,
+      "sha256": "bf8df535e74feff5225abc527a1a4cc5cf2244c0094b328441c9ecc9d178402d"
+    },
+    {
+      "path": "build/atlas4/sdist.log",
+      "bytes": 231,
+      "sha256": "6b2ad7cba678e717b25432dbdaab3ed095dadb86f34e91608ee0c2bef9260a55"
+    },
+    {
       "path": "build/atlas4/security-final.log",
       "bytes": 376,
       "sha256": "489675038058013db3e5eec6d99fca02b0695daf4d4fb446976ec2cb74485fd8"
@@ -940,8 +971,8 @@
     },
     {
       "path": "build/atlas4/server-complete.log",
-      "bytes": 19734,
-      "sha256": "3741a437741c437f190caaa10e2ba62e9245c4ece65349473fe44d298857a3ed"
+      "bytes": 58168,
+      "sha256": "836fce91b020bfce7d8b3f4bdc3c40f2a3602ececc5ed2c9e3a308c577e27948"
     },
     {
       "path": "build/atlas4/server.log",
@@ -950,8 +981,8 @@
     },
     {
       "path": "build/atlas4/stock-server-complete.log",
-      "bytes": 13740,
-      "sha256": "81130756c5b34b1645b08749866d4d43e4c728fb4ad8f47b7d9069ce37d21a2c"
+      "bytes": 39763,
+      "sha256": "6a9321a239dbdcdd29ca8670cbe273d31adbb6cfdc7ae6df25c4476c37fbe696"
     },
     {
       "path": "build/atlas4/stock-server.log",

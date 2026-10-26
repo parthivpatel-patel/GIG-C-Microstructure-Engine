@@ -14,8 +14,8 @@
 |Installed-wheel interface / export|8 /6|0|0|
 |Packaging pattern regressions|3|0|0|
 |Existing seven browser cohorts|91|0|0|
-|New Phase4 browser journey|8|0|0|
-|Total counted final checks|2028|0|0|
+|New Phase4 browser journey|9|0|0|
+|Total counted final checks|2029|0|0|
 
 Eight native canonical identities matched all six native XML outputs;these are included
 within930 native outcomes,not48 extra cases. Native C++ sources/toolchain definitions are
@@ -48,6 +48,13 @@ These are defects/test-construction issues found in new Phase4 work,not claims o
 reproduced old native-engine defects. Final tests preserve every original assertion and
 canonical output. No timeout,warning or sanitizer check was suppressed. Corrupt existing
 revision resave also fails explicitly rather than claiming idempotent success.
+
+Late browser reproduction `risk-refresh-before.log` confirmed stale risk provenance
+after an accepted price refresh. The response is now bound to symbol/receipt and
+superseded reads are aborted;the new browser assertion checks the new canonical provenance.
+
+Authored diagnostic/scenario results also remain bound to the exact inputs that produced
+them;editing inputs hides superseded output until calculation matches the current inputs.
 
 ## Reproduction
 

@@ -34,3 +34,6 @@ is retained;no new live connection or invented exchange sequence has been added.
 No complete institutional/production platform,empirically fitted forecasting system,
 full-statement reconstruction or observed-market L3 qualification is claimed. These
 are explicit next milestones rather than silently accepted substitutes.
+
+Cross-endpoint reads are not a transactionally frozen snapshot;source hashes identify
+each response vintage. Authenticated multi-resource revision tokens remain future work.
