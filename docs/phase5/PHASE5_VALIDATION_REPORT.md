@@ -67,3 +67,8 @@ list assumption. No production security/storage rule was relaxed. The browser te
 asserts empty private fixture storage before running;restart its dedicated fixture server
 for each execution. A fresh server passed all6 scenarios with final built assets. Original
 failure:phase5-browser-accepted-final.log;accepted rerun:phase5-browser-accepted-rerun.log.
+
+Clean source archive built from the pushed implementation commit:673 intended members,
+byte-identical inventory and required trees complete. Additional artifact acceptance,
+not added as another CTest outcome to the2095 total. Screenshots inspected locally:
+portfolio-dark.png and research-mobile-light.png;27 screenshot hashes retained.

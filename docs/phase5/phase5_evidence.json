@@ -11,8 +11,8 @@
     },
     {
       "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
-      "bytes": 42863,
-      "sha256": "7af4c078cb8a7896088813fefc81beb349f413c34899acc4329e36c8e295d57e"
+      "bytes": 43157,
+      "sha256": "b37d1f8ebd61c6e5d275161c5647458b7d24a254a8002af9c65128b1d13bde9f"
     },
     {
       "path": "docs/phase5/PHASE5_ALPACA_INTEGRATION.md",
@@ -26,8 +26,8 @@
     },
     {
       "path": "docs/phase5/PHASE5_FINAL_REPORT.md",
-      "bytes": 5499,
-      "sha256": "8854c8d94bf89df9b4aee072bd00ab9d6d592593063df460067f6ef73b0b0581"
+      "bytes": 6087,
+      "sha256": "a7f9f078802a1918cd2055bcaa94fe9b0072f2e4091909622344b96824fe1759"
     },
     {
       "path": "docs/phase5/PHASE5_FINANCIAL_INTELLIGENCE.md",
@@ -66,8 +66,8 @@
     },
     {
       "path": "docs/phase5/PHASE5_VALIDATION_REPORT.md",
-      "bytes": 4244,
-      "sha256": "460b77f248ee662e90b6e991d73f90bccdb68f48535cdfd104fcfd336f79bb2b"
+      "bytes": 4582,
+      "sha256": "96760cdc8ead7a431739d5eeff2b63b2fdf9fd4f8237042cf2c4cc9fa9cdc80e"
     },
     {
       "path": "scripts/benchmark_atlas_integration.py",
@@ -954,6 +954,16 @@
       "path": "build/atlas5/tls.log",
       "bytes": 4364,
       "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6"
+    },
+    {
+      "path": "build/atlas5/sdist-build.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/atlas5/sdist-check.log",
+      "bytes": 81,
+      "sha256": "095413e58856af4876d24d0c2ca8718af1344ad6da8a656cbe3ade3c78c7ecbd"
     }
   ],
   "browser_driver_logs": [
@@ -1019,5 +1029,54 @@
     "No raw market data,secrets,SQLite,ZIP or binary screenshots committed",
     "Exact request-proof targets and existing Origin/Host rules preserved",
     "Only isolated Phase5 feature branch pushed;skip-ci commit markers;no workflow dispatch"
+  ],
+  "verified_source_commit": "b8ca0057daa696c61159353ad7a503c1ada5fbff",
+  "implementation_commits": [
+    "b8ca0057daa696c61159353ad7a503c1ada5fbff"
+  ],
+  "source_archive": {
+    "path": "build/atlas5/dist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2247358,
+    "sha256": "66380bbd6ac9c47600d03eb8ef5833fcfb012be8262213a315ba6416b2f328e3",
+    "source_commit": "b8ca0057daa696c61159353ad7a503c1ada5fbff",
+    "member_count": 673,
+    "inventory": {
+      "path": "build/atlas5/sdist-inventory.json",
+      "bytes": 106507,
+      "sha256": "dbcbdbf63cfd227fe1781cd3e025e0c144fe1fdf45d277e4d93c2a73e71f0408"
+    },
+    "result": "PASS byte-identical intended members;required trees complete;private outputs excluded"
+  },
+  "owned_test_server_shutdown": [
+    {
+      "fixture": "server.log",
+      "pid": 722706,
+      "action": "SIGTERM to verified owned launcher"
+    },
+    {
+      "fixture": "stock-server.log",
+      "pid": 722724,
+      "action": "SIGTERM to verified owned launcher"
+    },
+    {
+      "fixture": "atlas-server.log",
+      "pid": 722733,
+      "action": "SIGTERM to verified owned launcher"
+    },
+    {
+      "fixture": "atlas2-server.log",
+      "pid": 722741,
+      "action": "SIGTERM to verified owned launcher"
+    },
+    {
+      "fixture": "atlas4-server.log",
+      "pid": 722746,
+      "action": "SIGTERM to verified owned launcher"
+    },
+    {
+      "fixture": "atlas5-server-accepted.log",
+      "pid": 738774,
+      "action": "SIGTERM to verified owned launcher"
+    }
   ]
 }
