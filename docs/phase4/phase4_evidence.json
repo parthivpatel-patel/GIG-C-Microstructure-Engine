@@ -11,8 +11,8 @@
     },
     {
       "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
-      "bytes": 27240,
-      "sha256": "318b8e67766da4298406c97eeec1ca978ed2fbe1c009dad4a81d8bf68cb02087"
+      "bytes": 27584,
+      "sha256": "24f959ec03f35d4be275412b25c21fa51c67031aba3c2ce4e7b4d71f1cb4a280"
     },
     {
       "path": "docs/phase4/PHASE4_ARCHITECTURE.md",
@@ -21,8 +21,8 @@
     },
     {
       "path": "docs/phase4/PHASE4_FINAL_REPORT.md",
-      "bytes": 5345,
-      "sha256": "5394054bf60e0f13fa519102b5179e8b37dc9dcb6d8c35b3eed6b99312ef4af7"
+      "bytes": 5948,
+      "sha256": "0d795d050c89db167453f0783a66d06757e3fda0bb5c28b060c7d75ecd9882fb"
     },
     {
       "path": "docs/phase4/PHASE4_FINANCIAL_ENGINE.md",
@@ -1043,6 +1043,11 @@
       "path": "build/atlas4/tls.log",
       "bytes": 4364,
       "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6"
+    },
+    {
+      "path": "build/atlas4/sdist-final.log",
+      "sha256": "6b2ad7cba678e717b25432dbdaab3ed095dadb86f34e91608ee0c2bef9260a55",
+      "bytes": 231
     }
   ],
   "environment": {
@@ -1094,5 +1099,19 @@
     "workflow_dispatch": false,
     "paid_resources": false,
     "main_modified": false
-  }
+  },
+  "verified_source_commit": "7270bff1f7c410820ecd8c3c9bbdd804b6e5827b",
+  "implementation_commits": [
+    "0e47cb7b4ae929516aba583eec4ad6fa6057c36d",
+    "7270bff1f7c410820ecd8c3c9bbdd804b6e5827b"
+  ],
+  "source_archive": {
+    "source_commit": "7270bff1f7c410820ecd8c3c9bbdd804b6e5827b",
+    "sha256": "d1c51db0de32610b0bd7d8663cb69a0899d0ec147ee19feea16bc70020e15866",
+    "bytes": 2204950,
+    "members": 650,
+    "result": "PASS_safe_intended_byte_identical_required_trees_complete",
+    "scope": "clean source checkpoint before documentation-only closure"
+  },
+  "source_inventory_scope": "Final worktree including documentation-only closure;all executable code hashes verified against verified_source_commit"
 }
