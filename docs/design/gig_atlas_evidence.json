@@ -1,0 +1,783 @@
+{
+  "schema": "gig.atlas.delivery.v1",
+  "baseline": "805294762f55efbbeb6fd988f7b8d842eb474654",
+  "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_ONLY",
+  "native_trees_unchanged": {
+    "include": "255d54cf582dceb071cee323e8c466785e1aa26d",
+    "src": "b7649bf2dd2622a5d7fada1585d10f9e944d0ccf",
+    "python": "8c48f0f31b6856cfe155b25d9aa61f4084120ff2",
+    "tests": "9d53c8354f0f83405533926d1d562c8b26363425",
+    "fixtures": "d1e453d191f560c8def6fb7e48022972453820d5",
+    "schemas": "a63aa1e96e96281fd90ad35552d0c5d69577a6b4",
+    "cmake": "ca6a55da753d77f353e94b3b64a222884e19d9fa",
+    "CMakeLists.txt": "d7d174306701246ca5117c3e9599d8c5efe607c3",
+    "CMakePresets.json": "46aae0e0f78132c9ee42281895562a34a18c9ad5"
+  },
+  "source_inventory": [
+    {
+      "path": "docs/CONTINUOUS_ENGINEERING_STATUS.md",
+      "sha256": "db93523c0de75dc8405017bea93b9e1dc7d31f41a5e4ea3aad82e25cd7f9f7ea",
+      "bytes": 24314
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_COMPONENT_INVENTORY.md",
+      "sha256": "55fad21b03185cbd1c49fc63c5772e5b7d4e793c989f04823151650933beb3cf",
+      "bytes": 2334
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_DESIGN_SYSTEM.md",
+      "sha256": "ac3001ebe9db909de4dd0d1d6fc3d2a5bc04aa513224f1843a4a5658e2d19b7b",
+      "bytes": 3128
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_IMPLEMENTATION_REPORT.md",
+      "sha256": "b91a1068013c16886939c434222db3bed2343067a209f653f7bdc4c40611d380",
+      "bytes": 8660
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_UX_ARCHITECTURE.md",
+      "sha256": "f16c69e05d957d1bcb20b0036ffaf4d259815a529577c3d0e269e911856706d4",
+      "bytes": 4533
+    },
+    {
+      "path": "docs/design/GIG_ATLAS_VISUAL_QA.md",
+      "sha256": "2e819c292779e7e40adf0dcffb04e55837bca134baff8ca5f7c101f00336d242",
+      "bytes": 3806
+    },
+    {
+      "path": "terminal/tests/atlas-validation.mjs",
+      "sha256": "96ea70e06d9e93326be8da6b4114bfac983b1dc5f76f959940e7017e41b6a13f",
+      "bytes": 13216
+    },
+    {
+      "path": "terminal/tests/atlas_fixture_server.py",
+      "sha256": "efdaf302a2e430b5ec19806d1240a24039d820aac8f067066ee903a78cdb8592",
+      "bytes": 2247
+    },
+    {
+      "path": "terminal/tests/stock-intelligence-validation.mjs",
+      "sha256": "71f63a2b230bdf7c427171715173e3f665072582d2957bf620c75790b447537f",
+      "bytes": 5927
+    },
+    {
+      "path": "terminal/tests/stock-loading-validation.mjs",
+      "sha256": "36257a2331b0fea037aec551cdb4594d5982affa0c8670d25978afa254d3f50a",
+      "bytes": 5227
+    },
+    {
+      "path": "terminal/web/index.html",
+      "sha256": "636215813adc0508ee3785480fbd552ef9312ddae9aeb4a3b2b0635fb8b9f89f",
+      "bytes": 367
+    },
+    {
+      "path": "terminal/web/package.json",
+      "sha256": "8fdac05604cd3d1df701411f3c7d0481366087ea1d8162afb9472c58b2187e2d",
+      "bytes": 551
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "sha256": "a780f506637fcdfe35ae5852c84418e02d187d1239cafcd773cf2ce18de62777",
+      "bytes": 33186
+    },
+    {
+      "path": "terminal/web/src/FinancialWorkspace.tsx",
+      "sha256": "b84b95ff6a480dc5bacb8c4b8932c0ddacbb50628086dac3aabb644739627842",
+      "bytes": 10538
+    },
+    {
+      "path": "terminal/web/src/ResearchSummary.tsx",
+      "sha256": "4f8babedc298c11f16d2b7d684ed03d2e129b958da7b9a962e3540cc8643bd54",
+      "bytes": 3432
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "sha256": "9d2ca55713223f2c2dfe1486ee1163b5bcb057348e76ee261c9f01490eafbbbb",
+      "bytes": 16272
+    },
+    {
+      "path": "terminal/web/src/api.ts",
+      "sha256": "d0b74bd84f45856d7921d7452d36eaff5497b93d550c63b76ea13951f6b2815d",
+      "bytes": 2225
+    },
+    {
+      "path": "terminal/web/src/atlas.css",
+      "sha256": "714903801476206ee3fe37810eddf00800818501b87ae2425715ad15d977766d",
+      "bytes": 15112
+    },
+    {
+      "path": "terminal/web/src/financial.test.ts",
+      "sha256": "5af17dba2df5402ce1868981dcce91ab1bdc50b6ab4beee8c18584317450857f",
+      "bytes": 4171
+    },
+    {
+      "path": "terminal/web/src/financial.ts",
+      "sha256": "e927258e62f536cb2402feed026a9e948fd9022b996d2dbdf567d0c31e924035",
+      "bytes": 6185
+    },
+    {
+      "path": "terminal/web/src/main.tsx",
+      "sha256": "86ff9bf181d74e52275e0d62567bc2050736ed58fcb527f30e8bcbc82e2e7245",
+      "bytes": 231
+    }
+  ],
+  "frontend": {
+    "unit_passed": 11,
+    "unit_failed": 0,
+    "unit_skipped": 0,
+    "typecheck_and_vite_build": "PASS",
+    "production_dependency_additions": 0
+  },
+  "terminal": {
+    "release": {
+      "errors": 0,
+      "expected": 274,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 274
+    },
+    "debug": {
+      "errors": 0,
+      "expected": 274,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 274
+    },
+    "sanitized": {
+      "errors": 0,
+      "expected": 274,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 274
+    }
+  },
+  "canonical_hashes_fresh_release_reference_checks": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+  },
+  "browser_atlas": {
+    "schema": "gig.atlas.visual.v1",
+    "classification": "HISTORICAL_SYNTHETIC",
+    "passed": 21,
+    "failed": 0,
+    "checks": [
+      "global search routes to curated company/native-backed workspace",
+      "v2 exact ratios,source fields and twelve descriptors are loaded",
+      "reported annual history charts carry descriptions and exact tables",
+      "quarter filter does not turn annual or YTD values into quarters",
+      "source receipt,reconciliation warning and exact ratio remain accessible",
+      "responsive financial layout at360px",
+      "responsive financial layout at390px",
+      "responsive financial layout at768px",
+      "responsive financial layout at1280px",
+      "responsive financial layout at1920px",
+      "light theme persists and remains readable",
+      "core theme text and links meet4.5:1 contrast token checks",
+      "all focusable controls retain names and skip link works",
+      "native help dialog traps focus and Escape dismisses",
+      "all persistent workspace names remain keyboard accessible",
+      "filing explorer exposes original references and amendment filter",
+      "invalid v2 descriptor yields explicit error without fabricated ratio",
+      "stale response remains explicitly cached and not live",
+      "all nine workspaces remain bounded across45 viewport/section combinations",
+      "global same-symbol selection overrides a different local selection",
+      "browser has no uncaught application errors"
+    ],
+    "screenshots": [
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-dark-360.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-dark-390.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-viewport-390.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-dark-768.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-dark-1280.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-viewport-1280.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-dark-1920.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-ratios-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-trends-dark.png",
+      "/workspace/GIG-C-Microstructure-Engine/build/atlas/visual/financial-light-1280.png"
+    ],
+    "performance": [
+      {
+        "width": 360,
+        "scroll": 360,
+        "viewport": 360,
+        "dom": 262,
+        "resources": 27
+      },
+      {
+        "width": 390,
+        "scroll": 390,
+        "viewport": 390,
+        "dom": 262,
+        "resources": 27
+      },
+      {
+        "width": 768,
+        "scroll": 768,
+        "viewport": 768,
+        "dom": 262,
+        "resources": 27
+      },
+      {
+        "width": 1280,
+        "scroll": 1280,
+        "viewport": 1280,
+        "dom": 262,
+        "resources": 27
+      },
+      {
+        "width": 1920,
+        "scroll": 1920,
+        "viewport": 1920,
+        "dom": 262,
+        "resources": 27
+      }
+    ],
+    "browser": "154.0.8037.57",
+    "renderer": "Headless Chromium SwiftShader;not physical Android/external Codespaces",
+    "limitations": [
+      "No actual SEC/Alpaca observations or restricted data",
+      "No full WCAG audit or screen-reader/physical-device qualification",
+      "Native source/canonical identities unchanged"
+    ]
+  },
+  "browser_native": {
+    "schema": "gig.terminal.browser_validation.v1",
+    "url": "http://127.0.0.1:8787",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "started_utc": "2026-10-26T03:00:05.971Z",
+    "architecture": "x64",
+    "node": "v24.19.0",
+    "browser": "154.0.8037.57",
+    "renderer": "headless Chromium with SwiftShader; not physical Android/GPU evidence",
+    "checks": [
+      {
+        "name": "native state/provenance is reachable",
+        "status": "PASS",
+        "elapsed_ms": 16.063,
+        "detail": {
+          "instrument": "SYNTH-USD",
+          "event_count": 260,
+          "engine": {
+            "native": true,
+            "compiler": "14.2.0",
+            "python": "3.12.14",
+            "pybind11": "2.13.6",
+            "package_version": "0.1.1",
+            "schema_version": "1.0",
+            "build_type": "Release",
+            "config_flags": " -O3 -DNDEBUG",
+            "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+            "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -std=c++20 -fPIC"
+          }
+        }
+      },
+      {
+        "name": "independent initial ladder and native metrics",
+        "status": "PASS",
+        "elapsed_ms": 19.774,
+        "detail": null
+      },
+      {
+        "name": "WebSocket connected",
+        "status": "PASS",
+        "elapsed_ms": 43.538,
+        "detail": null
+      },
+      {
+        "name": "single event stepping reaches native quantity",
+        "status": "PASS",
+        "elapsed_ms": 155.136,
+        "detail": null
+      },
+      {
+        "name": "deterministic browser restart",
+        "status": "PASS",
+        "elapsed_ms": 183.191,
+        "detail": null
+      },
+      {
+        "name": "speed/play/pause preserves deterministic accepted prefix",
+        "status": "PASS",
+        "elapsed_ms": 1236.194,
+        "detail": null
+      },
+      {
+        "name": "eight functional sections navigate",
+        "status": "PASS",
+        "elapsed_ms": 865.879,
+        "detail": null
+      },
+      {
+        "name": "interactive 3D renders native depth and camera changes pixels",
+        "status": "PASS",
+        "elapsed_ms": 1057.766,
+        "detail": {
+          "before": "aa03dff8026003c689481c9e4821c437f981b8e64e3d1c9fd101071b7b55200b",
+          "after": "bddd5169071499fce8d4ba9514dd28c6143793b542f711c6fdffcc84a59d6b7a",
+          "viewport": {
+            "x": 261,
+            "y": 334.875,
+            "width": 844,
+            "height": 330
+          }
+        }
+      },
+      {
+        "name": "bounded landscape window and price-range controls",
+        "status": "PASS",
+        "elapsed_ms": 143.788,
+        "detail": null
+      },
+      {
+        "name": "explicit synchronized 2D fallback",
+        "status": "PASS",
+        "elapsed_ms": 115.331,
+        "detail": null
+      },
+      {
+        "name": "permission/capability boundary in live mode",
+        "status": "PASS",
+        "elapsed_ms": 154.793,
+        "detail": null
+      },
+      {
+        "name": "three native execution algorithms match independent fixture costs",
+        "status": "PASS",
+        "elapsed_ms": 772.245,
+        "detail": [
+          {
+            "algorithm": "TWAP",
+            "sha256": "969c976abb1149e6c3c066e7c5b3a4886bd5139d1b8c1510ad1ff39f45132f18"
+          },
+          {
+            "algorithm": "VWAP",
+            "sha256": "0f8cd954657b73b965cca5abe59658488f7ea97ad194d470857c6758c2b96841"
+          },
+          {
+            "algorithm": "POV",
+            "sha256": "f0e7de0380bf8b7e3edf33f1380aa12747966cc48e79577e601e1127a8dcf687"
+          }
+        ]
+      },
+      {
+        "name": "simulation export is explicitly simulated",
+        "status": "PASS",
+        "elapsed_ms": 162.966,
+        "detail": null
+      },
+      {
+        "name": "API failure is visible without fabricated data",
+        "status": "PASS",
+        "elapsed_ms": 348.888,
+        "detail": null
+      },
+      {
+        "name": "mobile viewport remains usable without page overflow",
+        "status": "PASS",
+        "elapsed_ms": 375.648,
+        "detail": {
+          "width": 412,
+          "scroll": 412
+        }
+      },
+      {
+        "name": "provider-shaped fixture reaches native L2 and remains explicitly synthetic",
+        "status": "PASS",
+        "elapsed_ms": 431.576,
+        "detail": null
+      },
+      {
+        "name": "authored timeline seek reconstructs native prefix",
+        "status": "PASS",
+        "elapsed_ms": 165.629,
+        "detail": null
+      },
+      {
+        "name": "authored ITCH and LOBSTER diagnostics execute native code",
+        "status": "PASS",
+        "elapsed_ms": 407.731,
+        "detail": null
+      },
+      {
+        "name": "explicit authored recording verifies native replay and deletes safely",
+        "status": "PASS",
+        "elapsed_ms": 1007.618,
+        "detail": null
+      },
+      {
+        "name": "WebSocket interruption reconnects without inventing data",
+        "status": "PASS",
+        "elapsed_ms": 2646.657,
+        "detail": {
+          "connections": 2
+        }
+      },
+      {
+        "name": "no uncaught browser application errors",
+        "status": "PASS",
+        "elapsed_ms": 0.041,
+        "detail": null
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "desktop-native-3d",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas/native-browser/desktop-native-3d.png"
+      },
+      {
+        "name": "desktop-native-fallback",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas/native-browser/desktop-native-fallback.png"
+      },
+      {
+        "name": "desktop-native-simulation",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas/native-browser/desktop-native-simulation.png"
+      },
+      {
+        "name": "mobile-native-orderbook",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas/native-browser/mobile-native-orderbook.png"
+      }
+    ],
+    "performance": {
+      "initial_navigation_ms": 1257.2,
+      "state_round_trip_ms": [
+        44.733,
+        4.465,
+        3.373,
+        3.425,
+        4.388,
+        3.786,
+        5.985,
+        4.959,
+        2.702,
+        2.466
+      ]
+    },
+    "limitations": [
+      "No external browser URL tested",
+      "No real provider data or restricted dataset accessed",
+      "Mobile is Chromium viewport emulation, not a physical Android device"
+    ],
+    "completed_utc": "2026-10-26T03:00:21.873Z",
+    "summary": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "browser_legacy": {
+    "stock-loading": {
+      "schema": "gig.stock.loading_browser.v1",
+      "passed": 9,
+      "failed": 0,
+      "checks": [
+        "selection initiates authorized fixture requests and displays candles,L1 bid/ask and native spread",
+        "accepted latest quote/trade and source provenance",
+        "SEC authored facts appear after automatic loading",
+        "filings show validated official links and amendment records",
+        "indicative candidate chain,expiry/right/strike selectors,provider IV/Greeks and discrete3D points",
+        "theoretical Black-Scholes plane stays separate from indicative points",
+        "NVDA switching replaces all selected-symbol price and option observations",
+        "browser refresh preserves watchlist and safely reloads selected default",
+        "no browser runtime errors or credential values in API"
+      ],
+      "classification": "HISTORICAL_SYNTHETIC",
+      "live_provider_verified": false
+    },
+    "stock-unavailable": {
+      "schema": "gig.stock.browser.v1",
+      "passed": 10,
+      "failed": 0,
+      "checks": [
+        "dedicated stock workspace while real native transport remains connected",
+        "company-name search and CIK identity",
+        "bounded watchlist persists browser refresh",
+        "no fake equity observations or crypto source-strip mixing;separate provider gates",
+        "Black-Scholes independently known zero-rate reference through secure HTTP proof",
+        "interactive theoretical 3D volatility plane changes pixels on camera rotation",
+        "causal fixed-parameter research and exact empirical risk on explicit authored input",
+        "missing facts,holdings and news remain explicitly unavailable",
+        "mobile viewport stays bounded",
+        "crypto native book and renderer preserved;no browser runtime errors"
+      ],
+      "observed_data": false,
+      "renderer": "local Chromium SwiftShader;not physical Android or external Codespaces"
+    },
+    "recorded": {
+      "schema": "gig.browser.recorded_l2.v1",
+      "passed": 9,
+      "failed": 0,
+      "checks": [
+        "save authored native log",
+        "discover/select",
+        "native exact step",
+        "seek exact quantity",
+        "causal OFI corresponds to native prefix",
+        "restart prefix0",
+        "speed and playback to EOF",
+        "delete with owned cache",
+        "return to L3 authored source"
+      ],
+      "observed_data": false
+    },
+    "live-controls": {
+      "schema": "gig.browser.live_controls.v1",
+      "passed": 9,
+      "failed": 0,
+      "checks": [
+        "private-boundary proof controls",
+        "explicit ETH/USD selection",
+        "disabled live empty not authored",
+        "replay disabled in live mode",
+        "Coinbase selection and source isolation",
+        "Coinbase cannot use Kraken recorder",
+        "disconnect and native replay resume",
+        "visualization pause",
+        "native ingestion remains active while visualization paused"
+      ],
+      "live_verified": false
+    }
+  },
+  "security_passed": 46,
+  "tls_wss": {
+    "schema": "gig.codespaces.rewritten_http_issuer.v1",
+    "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled",
+    "checks": [
+      "TLS verified actual frontend HTML",
+      "TLS proxy actual C++ state",
+      "exact HTTP issuer failure reproduced without proof",
+      "forwarded HTTPS Origin mutates native prefix",
+      "foreign Origin denied behind TLS proxy",
+      "two verified WSS upgrades101 preserve native prefix",
+      "cross-origin non-simple preflight denied despite rewritten Origin",
+      "actual proxy Origin/Host/HTTPS header capture"
+    ],
+    "passed": 8,
+    "failed": 0,
+    "captured_proxy_headers": {
+      "schema_version": "1",
+      "policy_version": "codespaces-request-proof-v4",
+      "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+      "configured_origins": [
+        "https://authored-tls-check-8787.app.github.dev"
+      ],
+      "request": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https"
+      },
+      "last_mutation": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https",
+        "decision": "allowed",
+        "authorization": "codespaces_rewrite_request_proof",
+        "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "failure_condition": null
+      },
+      "last_websocket": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "wss",
+        "has_application_protocol": true,
+        "has_stream_proof": true,
+        "decision": "accepted",
+        "authorization": "accepted_codespaces_rewrite_ticket",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "upgrade_status": 101
+      },
+      "last_browser_bootstrap": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https",
+        "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "decision": "issued"
+      },
+      "last_request_proof_bootstrap": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "https",
+        "reported_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+        "target": "/api/v1/stream-ticket",
+        "decision": "same_origin_read",
+        "fetch_site": "same-origin"
+      },
+      "last_authenticated_websocket": {
+        "origin": "http://localhost:8787",
+        "host": "localhost:8787",
+        "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+        "x_forwarded_proto": "https",
+        "x_forwarded_port": "443",
+        "asgi_scheme": "wss",
+        "has_application_protocol": true,
+        "has_stream_proof": true,
+        "decision": "accepted",
+        "authorization": "accepted_codespaces_rewrite_ticket",
+        "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+        "upgrade_status": 101
+      },
+      "connected_clients": 2,
+      "maximum_clients": 8,
+      "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+      "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers"
+    },
+    "scope": "Test proxy rewrites HTTP POST and WS Origin/Host exactly as reported. Same-origin read proofs validate ticket issuer and native mutations. Not owner external authentication evidence."
+  },
+  "installed_wheel_interface_passed": 8,
+  "installed_wheel_exports_passed": 6,
+  "packaging_patterns_passed": 3,
+  "browser_guard_passed": 5,
+  "screenshots": [
+    {
+      "path": "build/atlas/visual/financial-dark-360.png",
+      "bytes": 182938,
+      "sha256": "31a97a8122c19d7c5f837a8d2d33ce3b33c603aa7c2e4259c1efb53edc893970",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-dark-390.png",
+      "bytes": 182688,
+      "sha256": "6dbe2c7ff5f2cee4aea8eae20e412d32677e97132c1c1c2a8e1260ecbf533ecf",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-viewport-390.png",
+      "bytes": 67769,
+      "sha256": "7362065046d0b7dd3c752b9141f928c9d28fe1b8c6d2c040287133a03c21895a",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-dark-768.png",
+      "bytes": 186615,
+      "sha256": "be29e5c2b40c96067b0c2b7f56f67d54b925ce1f73c76ad912d9e246ff64b2b4",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-dark-1280.png",
+      "bytes": 193480,
+      "sha256": "b173c7fe7b51e7c5967878f088a2edc3da656e5944bd1f51b1bab2f539d81910",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-viewport-1280.png",
+      "bytes": 138596,
+      "sha256": "1bafe4aadb1943f46cc436729dcffbe7b4f9ef03e6c8d88ddce4301c864e2b75",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-dark-1920.png",
+      "bytes": 199991,
+      "sha256": "b2dba2bf14dfb5f78a4b5fafc846c30ac74fae5e97bd17996c4172ef5d500bd3",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-ratios-dark.png",
+      "bytes": 278059,
+      "sha256": "5ad8bf7c832491bcf36c24d152429c11cd5073ded12157b29b093a7139033cb6",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-trends-dark.png",
+      "bytes": 204077,
+      "sha256": "6e7cc6633dc0e6dd281577465d44c3ce4eb597c61d93d6dcf90f2aa71e411e19",
+      "classification": "AUTHORED_SYNTHETIC"
+    },
+    {
+      "path": "build/atlas/visual/financial-light-1280.png",
+      "bytes": 198240,
+      "sha256": "1faf51b9730ac6162c77baccc2275cd061d74ee64ff90e8058eb361b3bf54faf",
+      "classification": "AUTHORED_SYNTHETIC"
+    }
+  ],
+  "asset_bytes": {
+    "index-BGJVuXAZ.js": 778098,
+    "index-dUzu4D8T.css": 36202
+  },
+  "log_sha256": {
+    "wheel-interface.log": "8f4cb8c11e093d54a7b6ecd8c6e9487c1096e118a89d99458bba2e7c9084e309",
+    "fixture-server.log": "06b06d754f257ecf1c2e7a837505ac95c6969c7c71752face413a1592563c07f",
+    "recorded.log": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+    "live-controls.log": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
+    "wait-guards.log": "e25a4f27d74a19f38dc11958be65304f832ed039b3ed97c3775a0e5e83d78bea",
+    "wheel-exports.log": "3a01f8c29e4043179636486192f132e78cff9b3627c324d558d78a884d1ad1da",
+    "terminal-release.log": "32a03665851b84b6cca481f5c0d65ee9b25a7e8e3493472acf472d4471b7b779",
+    "atlas-browser.log": "0635d4a1822b90a01144332cde3acbb5e57f33aa4c5542e2688e0d7d2c1c8a82",
+    "packaging.log": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d",
+    "reselect-before.log": "6d9a7ec4d1eea38fdfb350aa7b19bdf1bf6c0725ece00e2c66c430c169c10039",
+    "terminal-sanitized.log": "5f2108bb7f0bbe91564a615123ea95223c48bbbebef7c0dbe0a6439359a172a0",
+    "tls.log": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "stock-loading.log": "04848d6f110ead19295b6f7f3bbcd25e22284c6311b7d6ed0f46bbdbd4f644d1",
+    "stock-unavailable.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "unit.log": "90ea15e2be1518ca0516924a78ebacebcc5166d2776daccd308bcae47ac5ced0",
+    "native-browser.log": "8904ddacd365a91f52d241ce6d0f7c1189fe6a9f3f4b77757d34510b81693e8b",
+    "security.log": "b775e8b417fac0e545f46e15870145f11a9b0cfa19f65a2672b3f5e42cb1103f",
+    "server.log": "e4a55058d23fa2620f70641f18a183e4b98062049bc70bff2d2a67bca9b57059",
+    "rich-fixture-server.log": "f2cdad8166c4194a8a9a34e4c7c93f2b70247bc9c4a03e5b1e03559a792ddb4b",
+    "terminal-debug.log": "cfecf6f5f2d3b824027154d4820b991d1db918e1c0c353a846fd87a2c67d8407",
+    "build.log": "310d11e0046abab26d873288b2bf869fb259d94074b3cbe10be580c4058a4386",
+    "canonical.log": "1f66690dcce808da2c244bc7a89e4236d733fb5a9614a193c81a76b8e070153d"
+  },
+  "limitations": [
+    "No observed financial/market accuracy claim",
+    "Alpaca support381230 pending;no provider gate activated",
+    "No LOBSTER access",
+    "No external authenticated Codespaces or physical Android test",
+    "No full WCAG audit;new token contrast and bounded keyboard checks only",
+    "Three.js bundle >500kB warning remains",
+    "No new hosted/ARM64 qualification or workflow dispatch",
+    "Native six155-suite baseline reused unchanged;fresh8 references separated"
+  ],
+  "source_commit": "VALIDATED_WORKTREE_PENDING_CHECKPOINT",
+  "native_screenshots": [
+    {
+      "path": "build/atlas/native-browser/desktop-native-simulation.png",
+      "sha256": "5027d5b0d6f30f0dbeeb741188d8bc62beece62d607ef7755a89e629e164ee41",
+      "classification": "AUTHORED_SYNTHETIC_OR_SIMULATED"
+    },
+    {
+      "path": "build/atlas/native-browser/desktop-native-3d.png",
+      "sha256": "4e6d6e5e19d15a142301cf0be9c63e1d9bc8385fe35998949d5a7b5616f48f02",
+      "classification": "AUTHORED_SYNTHETIC_OR_SIMULATED"
+    },
+    {
+      "path": "build/atlas/native-browser/desktop-native-fallback.png",
+      "sha256": "c3a4372d4a9d6be72d3baabde0ac44a2228a494acea3e533a7d69e2afcb3ac23",
+      "classification": "AUTHORED_SYNTHETIC_OR_SIMULATED"
+    },
+    {
+      "path": "build/atlas/native-browser/mobile-native-orderbook.png",
+      "sha256": "b9f42b257c4aa3acaf9b114d140cf93d53fb44820cab595ee34ca650019c0f58",
+      "classification": "AUTHORED_SYNTHETIC_OR_SIMULATED"
+    }
+  ],
+  "inventory_excludes_this_manifest": true,
+  "new_routing_regression": {
+    "failing_before": "Local NVDA followed by global AAPL retained NVDA when parent symbol prop unchanged",
+    "repair": "explicit global selection revision;stale-response generation safeguards retained",
+    "regression": "global same-symbol selection overrides a different local selection",
+    "failing_before_log_sha256": "6d9a7ec4d1eea38fdfb350aa7b19bdf1bf6c0725ece00e2c66c430c169c10039"
+  }
+}

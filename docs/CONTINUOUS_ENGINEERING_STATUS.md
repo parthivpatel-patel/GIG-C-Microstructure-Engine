@@ -313,3 +313,24 @@ SEC source/cached-value reconciliation with truthful contact/access. Owner may t
 authorize current-HEAD manual ARM64 qualification;do not dispatch automatically.
 Follow docs/backend/REMAINING_GAPS.md for remaining audit/storage/research work.
 No work runs after this task stops. Final evidence-only commit is recorded by Git.
+
+## GIG ATLAS frontend transformation checkpoint
+
+Baseline805294762f55efbbeb6fd988f7b8d842eb474654 verified local/remote,clean tree.
+Shared institutional shell,dark/light tokens,global company routing,keyboard/help,
+Stock Intelligence v2 exact descriptors and readable financial views implemented.
+FinancialSummary/Trends/Statements/Ratios preserve actual periods,missingness/source
+metadata. Filing explorer,native simulated orders/fills/costs and authored model cards
+implemented. Existing nine workspaces and native3D/replay/stock controls preserved.
+New global/local same-symbol routing regression reproduced and repaired using an
+explicit selection revision. Actual-date chart spacing retains leap-year/missing gaps.
+No C++/backend/provider-gate changes,restricted data,workflow dispatch or paid services.
+Fresh terminal274/274 Release,Debug,ASan/UBSan;LSan0;security46;TLS8;native frozen
+reference8 with all eight hashes;frontend11;installed8+6;packaging3;browser guards5.
+ATLAS21 browser checks include45 section/viewport cases;existing browser58 checks.
+Final captures/evidence under ignored build/atlas and docs/design. Source package
+inventory/final commit verification follows the source checkpoint. Exact next action:
+finish safe evidence review,commit/push feature[skip ci],validate source archive,then
+final evidence-only commit/remote verification. Owner next:explicit frontend rebuild
+in private Codespaces,then launch existing native-backed server. Real source approval,
+external/physical-device acceptance and new-HEAD ARM64 remain open.

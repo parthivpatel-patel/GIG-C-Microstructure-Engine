@@ -11,3 +11,9 @@ export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=100
  return await decoded(await fetch('/api/v1'+path,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:controller.signal})) as T;
  }finally{clearTimeout(timer)}}
 export async function getState():Promise<TerminalState>{return validateState(await request('/state'))}
+/** Cache-only v2 reads; caller cannot provide an arbitrary host or mutation. */
+export async function readCompanyV2(symbol:string,filings=false):Promise<unknown>{
+ if(!/^[A-Z]{1,5}(?:[.-][A-Z])?$/.test(symbol))throw Error('Invalid company identity');
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
+ try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+(filings?'/filings?limit=50':''),{signal:controller.signal}));}finally{clearTimeout(timer);}
+}
