@@ -1,6 +1,6 @@
 import re
 # Curated routing seeds, not a downloaded exchange directory or price observations.
-SEEDS=[('AAPL','Apple Inc.','NASDAQ',320193),('NVDA','NVIDIA Corporation','NASDAQ',1045810),('TSLA','Tesla Inc.','NASDAQ',1318605),('MSFT','Microsoft Corporation','NASDAQ',789019),('AMZN','Amazon.com Inc.','NASDAQ',1018724),('GOOG','Alphabet Inc.','NASDAQ',1652044),('META','Meta Platforms Inc.','NASDAQ',1326801),('JPM','JPMorgan Chase & Co.','NYSE',19617)]
+SEEDS=[('AAPL','Apple Inc.','NASDAQ',320193),('NVDA','NVIDIA Corporation','NASDAQ',1045810),('TSLA','Tesla Inc.','NASDAQ',1318605),('MSFT','Microsoft Corporation','NASDAQ',789019),('AMZN','Amazon.com Inc.','NASDAQ',1018724),('GOOG','Alphabet Inc.','NASDAQ',1652044),('META','Meta Platforms Inc.','NASDAQ',1326801),('JPM','JPMorgan Chase & Co.','NYSE',19617),('GOOGL','Alphabet Inc. Class A','NASDAQ',1652044),('AMD','Advanced Micro Devices Inc.','NASDAQ',2488),('SPY','SPDR S&P 500 ETF Trust','NYSE Arca',884394)]
 
 def symbol(value):
     if type(value) is not str or not re.fullmatch(r'[A-Z]{1,5}(?:[.-][A-Z])?',value):raise ValueError('invalid_symbol')

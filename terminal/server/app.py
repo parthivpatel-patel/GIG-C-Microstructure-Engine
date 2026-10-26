@@ -183,6 +183,7 @@ def create_app(stock_workspace=None):
     stocks=StockWorkspace() if stock_workspace is None else stock_workspace
     stock_live=LiveIEX(stocks)
     app.state.stocks=stocks
+    app.state.stock_live=stock_live
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=allowed_hosts)
     app.add_middleware(CORSMiddleware, allow_origins=list(origins), allow_methods=['GET', 'POST'],
@@ -382,7 +383,7 @@ def create_app(stock_workspace=None):
         try:
             async with stock_live_lock:
                 if data=={'action':'stop'}:await stock_live.close()
-                elif set(data)=={'action','symbols'} and data['action']=='start':await stock_live.start(data['symbols'])
+                elif {'action','symbols'}<=set(data)<= {'action','symbols','channels'} and data['action']=='start':await stock_live.start(data['symbols'],data.get('channels'))
                 else:raise ValueError('live_action')
             return stock_live.view()
         except (ValueError,TypeError):return error('ALPACA_LIVE_BLOCKED','explicit permissions,live enable and1–4 curated symbols required',422)
