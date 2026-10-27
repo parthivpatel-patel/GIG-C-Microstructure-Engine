@@ -16,7 +16,7 @@
     },
     "symbol": {
       "type": "string",
-      "pattern": "^[A-Z]{1,5}(?:[.-][A-Z])?$"
+      "pattern": "^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$"
     },
     "state": {
       "enum": [

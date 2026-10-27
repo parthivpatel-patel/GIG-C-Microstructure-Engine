@@ -19,7 +19,7 @@ DEFINITIONS={
 
 class Ineligible(ValueError):pass
 
-def calculate(normalized):
+def calculate(normalized,*,target_period=None):
     history=normalized['history'];as_of=normalized['as_of_filing_date']
     # Index actual reported periods;filing FY/FP are context,not fact-period labels.
     index={name:{} for name in history}
@@ -40,6 +40,7 @@ def calculate(normalized):
         if instant:keys=[k for k in keys if k[0] is None]
         else:keys=[k for k in keys if k[0] is not None]
         if annual:keys=[k for k in keys if annual_period(name,k)]
+        if target_period is not None:keys=[k for k in keys if k==target_period]
         if not keys:raise Ineligible('missing_eligible_reported_period_'+name)
         # Most recent end,then longest actual duration at that end;no inferred quarter.
         return max(keys,key=lambda k:(k[1],-datetime.date.fromisoformat(k[0]).toordinal() if k[0] else 0))

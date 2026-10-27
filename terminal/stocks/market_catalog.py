@@ -1,7 +1,7 @@
 """Private,owner-permitted directory import;listing identity never grants feed entitlement."""
 import json,hashlib,re,os,stat,datetime
-from .identity import SEEDS
-PATTERN=r'[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?'
+from .identity import SEEDS,SYMBOL_PATTERN
+PATTERN=SYMBOL_PATTERN
 class MarketCatalog:
  def __init__(self,raw=None):
   self.reason=None;self.source={'reference':'curated_routing_seeds','as_of':None,'sha256':None,'authority':'CURATED_NOT_CURRENT_EXCHANGE_DIRECTORY'}

@@ -1,14 +1,13 @@
 """Gated bounded IEX historical REST acquisition;no live/SIP or automatic retries."""
 import asyncio,datetime,hashlib
 from urllib.parse import urlencode
-from .identity import instrument
 from .service import AccessError
 from .sec import date
 from .prices import bars
 from .history import HistorySource,normalize
 
 async def ingest(workspace,ticker,start,end,timeframe='1Day',max_pages=4):
-    instrument(ticker);date(start);date(end)
+    workspace.market_identity(ticker);date(start);date(end)
     if timeframe not in ('1Day','1Hour','1Min') or type(max_pages) is not int or not 1<=max_pages<=4:raise AccessError('history_acquisition_budget')
     if not 0<(datetime.date.fromisoformat(end)-datetime.date.fromisoformat(start)).days<={'1Day':366,'1Hour':31,'1Min':7}[timeframe]:raise AccessError('history_acquisition_interval')
     store=workspace.history_store

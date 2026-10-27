@@ -59,6 +59,18 @@ class StockWorkspace:
         extra=sorted(s for s,r in self.issuers.items() if q in s.casefold() or q in r['company_name'].casefold())
         symbols=list(dict.fromkeys(symbols+extra))[:20]
         return {'results':[self.resolve(s) for s in symbols],'scope':found['scope'],'directory':{k:found[k] for k in ('catalog_count','source','reason')},'sec_directory':{'count':len(self.issuers),'source':self.issuer_source}}
+    def market_identity(self,ticker):
+        try:return self.catalog.instrument(ticker)
+        except ValueError:
+            if type(ticker) is not str or ticker not in self.issuers:raise ValueError('unsupported_market_symbol') from None
+            row=self.issuers[ticker]
+            return {'symbol':ticker,'name':row['company_name'],'exchange':'UNVERIFIED','asset_id':None,'identity_source':{**self.issuer_source,'authority':'SEC_TICKER_IDENTITY_NOT_PROVIDER_ASSET_QUALIFICATION','as_of':None}}
+    def market_search(self,query):
+        found=self.catalog.search(query);q=query.strip().casefold();symbols=[r['symbol'] for r in found['results']]
+        matches=[s for s,r in self.issuers.items() if q in s.casefold() or q in r['company_name'].casefold()]
+        chosen=list(dict.fromkeys(symbols+sorted(matches)))[:20]
+        total=len({s for s in self.catalog.rows if q in s.casefold() or q in self.catalog.rows[s]['name'].casefold()}|set(matches))
+        return {**found,'results':[self.market_identity(s) for s in chosen],'matches':total,'returned':len(chosen),'catalog_count':len(set(self.catalog.rows)|set(self.issuers)),'source':{**found['source'],'authority':'CONFIGURED_AND_ACCEPTED_SEC_IDENTITIES_NOT_ENTITLEMENT','as_of':None} if self.issuers else found['source'],'sec_identity_source':self.issuer_source,'scope':'Identity discovery only;not current provider asset support,SEC fact availability or streaming entitlement'}
     def permission(self,provider):
         e=self.environment
         if provider=='sec':

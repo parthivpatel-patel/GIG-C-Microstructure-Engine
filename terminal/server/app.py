@@ -357,6 +357,18 @@ def create_app(stock_workspace=None):
         try:return company_contract(stocks,request.path_params['symbol'])
         except ValueError:return error('COMPANY_V2_SYMBOL','unsupported or invalid company identity')
 
+    @route('/api/v2/companies/{symbol}/ratio-history',methods=['GET'])
+    @json_endpoint
+    async def ratio_history(request):
+        from terminal.stocks.ratio_history import reported_history
+        if set(request.query_params)-{'period'}:return error('RATIO_HISTORY_QUERY','only bounded period accepted',422)
+        try:
+            view=stocks.view(request.path_params['symbol']);source=view['fundamentals'];normalized=source.get('financials',{'history':{},'as_of_filing_date':None})
+            if analysis_lock.locked():return error('RATIO_HISTORY_BUSY','one bounded analytical request at a time',429)
+            async with analysis_lock:history=await asyncio.to_thread(reported_history,normalized,request.query_params.get('period','annual'))
+            return {**history,'instrument':view['instrument'],'data_origin':view['classification'],'observed_at':source.get('received_at'),'source_records':source.get('source_records',[])}
+        except (ValueError,KeyError,TypeError,OverflowError):return error('RATIO_HISTORY_UNAVAILABLE','invalid query or accepted reported financial history unavailable',422)
+
     @route('/api/v1/stocks/dataset-analysis',methods=['POST'])
     @json_endpoint
     async def dataset_analysis(request):
@@ -382,7 +394,7 @@ def create_app(stock_workspace=None):
     @json_endpoint
     async def market_search(request):
         if set(request.query_params)-{'q'}:return error('CATALOG_QUERY','only bounded q accepted',422)
-        try:return stock_live.catalog.search(request.query_params.get('q',''))
+        try:return stocks.market_search(request.query_params.get('q',''))
         except ValueError:return error('CATALOG_QUERY','invalid bounded query',422)
 
     @route('/api/v1/stocks/events', methods=['POST'])
@@ -405,7 +417,7 @@ def create_app(stock_workspace=None):
                 elif {'action','symbols'}<=set(data)<= {'action','symbols','channels'} and data['action']=='start':await stock_live.start(data['symbols'],data.get('channels'))
                 else:raise ValueError('live_action')
             return stock_live.view()
-        except (ValueError,TypeError):return error('ALPACA_LIVE_BLOCKED','explicit permissions,live enable and1–4 curated symbols required',422)
+        except (ValueError,TypeError):return error('ALPACA_LIVE_BLOCKED','explicit permissions,live enable and bounded known market identities required',422)
 
     @route('/api/v1/stocks/history-ingest', methods=['POST'])
     @json_endpoint

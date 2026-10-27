@@ -2,7 +2,7 @@
 import hashlib,json,stat,os
 from .prices import timestamp
 from terminal.providers.kraken import timestamp_ns
-from .identity import instrument
+from .identity import symbol
 
 class SessionSchedule:
  def __init__(self,raw=None):
@@ -20,7 +20,7 @@ class SessionSchedule:
   if type(p) is not dict or set(p)!={'schema','source','symbols','intervals'} or p['schema']!='gig.session.schedule.v1':raise ValueError('session_schema')
   if type(p['source']) is not str or not 1<=len(p['source'])<=256 or any(ord(c)<32 for c in p['source']):raise ValueError('session_source')
   if type(p['symbols']) is not list or not 1<=len(p['symbols'])<=20 or any(type(s) is not str for s in p['symbols']) or len(set(p['symbols']))!=len(p['symbols']):raise ValueError('session_symbols')
-  for s in p['symbols']:instrument(s)
+  for s in p['symbols']:symbol(s)
   if type(p['intervals']) is not list or not 1<=len(p['intervals'])<=1000:raise ValueError('session_intervals')
   prior=None
   for r in p['intervals']:
