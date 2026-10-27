@@ -87,6 +87,6 @@ class Expansion(unittest.TestCase):
  def test_older_cached_page_is_readable_without_new_upstream_request(self):
   from starlette.testclient import TestClient
   from terminal.server.app import create_app
-  w=StockWorkspace(environment={});row=filings(submissions(),CIK)['filings'][0];w.cache['AAPL']={'sec':{'status':'AVAILABLE','filings':[dict(row) for _ in range(1024)]}}
+  w=StockWorkspace(environment={});row=filings(submissions(),CIK)['filings'][0];w.cache['AAPL']={'sec':{'status':'AVAILABLE','received_at':'2020-01-01T00:00:00Z','filings_received_at':'2024-01-01T00:00:00Z','filings':[dict(row) for _ in range(1024)]}}
   with TestClient(create_app(stock_workspace=w),base_url='http://127.0.0.1:8787') as c:
-   r=c.get('/api/v2/companies/AAPL/filings?offset=1000&limit=50');self.assertEqual(r.status_code,200);self.assertEqual(len(r.json()['records']),24);self.assertIsNone(r.json()['next_offset']);self.assertEqual(c.get('/api/v2/companies/AAPL/filings?offset=1025').status_code,400)
+   r=c.get('/api/v2/companies/AAPL/filings?offset=1000&limit=50');self.assertEqual(r.status_code,200);self.assertEqual(len(r.json()['records']),24);self.assertEqual(r.json()['observed_at'],'2024-01-01T00:00:00Z');self.assertIsNone(r.json()['next_offset']);self.assertEqual(c.get('/api/v2/companies/AAPL/filings?offset=1025').status_code,400)

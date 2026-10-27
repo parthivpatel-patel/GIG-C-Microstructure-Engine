@@ -515,7 +515,7 @@ def create_app(stock_workspace=None):
         try:view=stocks.view(request.path_params['symbol'])
         except ValueError:return error('FILINGS_V2_SYMBOL','unsupported or invalid company identity')
         source=view['fundamentals'];rows=[r for r in source.get('filings',[]) if form is None or r['form']==form];start=int(offset);end=start+int(limit)
-        return {'schema':'gig.backend.filings.v2','instrument':view['instrument'],'data_origin':view['classification'],'observed_at':source.get('received_at'),'status':source['status'],'records':rows[start:end],'total_cached_matching':len(rows),'next_offset':end if end<len(rows) else None,'source_coverage':source.get('integrity',{}),'pagination_scope':'bounded cached filings only;older shards require explicit authorized loading;no request on GET','limitations':['Filing acceptance time may be missing;no invented intraday availability','Amendments are distinct filings,not additive restatements']}
+        return {'schema':'gig.backend.filings.v2','instrument':view['instrument'],'data_origin':view['classification'],'observed_at':source.get('filings_received_at',source.get('received_at')),'status':source['status'],'records':rows[start:end],'total_cached_matching':len(rows),'next_offset':end if end<len(rows) else None,'source_coverage':source.get('integrity',{}),'pagination_scope':'bounded cached filings only;older shards require explicit authorized loading;no request on GET','limitations':['Filing acceptance time may be missing;no invented intraday availability','Amendments are distinct filings,not additive restatements']}
 
     @route('/api/v1/stocks/search', methods=['GET'])
     @json_endpoint
