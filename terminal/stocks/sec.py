@@ -31,7 +31,19 @@ def object_value(value):
     if type(value) is not dict:raise ValueError('sec_structure')
     return value
 
-def filings(payload,cik):
+def acceptance_ns(value):
+    """One exact acceptance grammar for normalization and retained-cache filtering."""
+    from terminal.providers.kraken import timestamp_ns
+    if type(value) is not str or len(value)>40:raise ValueError('sec_acceptance_timestamp')
+    match=re.fullmatch(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})',value)
+    if not match:raise ValueError('sec_acceptance_timestamp')
+    try:
+        whole=datetime.datetime.fromisoformat(match[1]+match[3].replace('Z','+00:00')).astimezone(datetime.timezone.utc)
+        return int(timestamp_ns(whole.strftime('%Y-%m-%dT%H:%M:%S')+(match[2] or '')+'Z'))
+    except (ValueError,OverflowError):raise ValueError('sec_acceptance_timestamp') from None
+
+def filings(payload,cik,*,limit=128):
+    if type(limit) is not int or not 1<=limit<=1024:raise ValueError('sec_filing_output_budget')
     object_value(payload)
     if str(payload.get('cik','')).lstrip('0')!=cik.lstrip('0'):raise ValueError('sec_identity')
     recent=object_value(object_value(payload.get('filings',{})).get('recent',{}))
@@ -50,10 +62,7 @@ def filings(payload,cik):
         if type(doc) is not str or not re.fullmatch(r'[A-Za-z0-9_.-]{1,160}',doc) or '..' in doc:raise ValueError('sec_document')
         filed=date(recent['filingDate'][i]);accepted=recent.get('acceptanceDateTime',[None]*count)[i]
         if accepted is not None:
-            text(accepted,40)
-            try:stamp=datetime.datetime.fromisoformat(accepted.replace('Z','+00:00'))
-            except ValueError:raise ValueError('sec_acceptance_timestamp') from None
-            if stamp.tzinfo is None:raise ValueError('sec_acceptance_timestamp')
+            acceptance_ns(accepted)
         report=recent.get('reportDate',[None]*count)[i]
         if report:date(report)
         row={'form':form,'amendment':form.endswith('/A'),'accession':accession,'filed':filed,'accepted_at':accepted,'report_date':report or None,'url':f'https://www.sec.gov/Archives/edgar/data/{int(cik)}/{accession.replace("-","")}/{doc}'}
@@ -62,7 +71,7 @@ def filings(payload,cik):
             duplicates+=1;continue
         seen[accession]=row;rows.append(row)
     rows.sort(key=lambda r:(r['filed'],r['accession']),reverse=True)
-    return {'filings':rows[:128],'coverage':'recent submissions only;older filing shards not fetched','integrity':{'input_rows':count,'eligible_unique_rows':len(rows),'duplicate_rows':duplicates,'selected_rows':min(len(rows),128),'truncated':len(rows)>128},'institutional_holdings':{'status':'UNAVAILABLE','reason':'Issuer filings are not a holder registry. 13F manager reports disclose delayed quarter-end positions, not real-time ownership;information-table ingestion not implemented.'},'timeline':[{'event':r['form'],'published_at':r['accepted_at'],'filing_date':r['filed'],'url':r['url'],'source':'SEC EDGAR'} for r in rows[:64]]}
+    return {'filings':rows[:limit],'coverage':'recent submissions only;older filing shards not fetched','integrity':{'input_rows':count,'eligible_unique_rows':len(rows),'duplicate_rows':duplicates,'selected_rows':min(len(rows),limit),'truncated':len(rows)>limit},'institutional_holdings':{'status':'UNAVAILABLE','reason':'Issuer filings are not a holder registry. 13F manager reports disclose delayed quarter-end positions, not real-time ownership;information-table ingestion not implemented.'},'timeline':[{'event':r['form'],'published_at':r['accepted_at'],'filing_date':r['filed'],'url':r['url'],'source':'SEC EDGAR'} for r in rows[:64]]}
 
 def facts(payload,cik,as_of):
     object_value(payload)

@@ -23,16 +23,42 @@ class StockWorkspace:
         self.environment,self.sec_config = resolve(os.environ) if environment is None else (environment,{'source':'explicit_environment','error':None})
         from .market_catalog import MarketCatalog
         self.catalog=MarketCatalog.configured(self.environment)
-        self.sec_accepted={};self.sec_refresh_state={}
+        self.issuers={};self.issuer_source=None;self.sec_accepted={};self.sec_refresh_state={}
         from .history_store import configured
         self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
         self.clock=clock;self.last_request=-100.;self.cooldown_until=0.;self.cooldowns={};self.cache=OrderedDict();self.lock=asyncio.Lock();self.last_error=None;self.load_lock=asyncio.Lock();self.load_task=None;self.load_state={};self.errors={}
     def resolve(self,ticker):
+        if type(ticker) is not str:raise ValueError('invalid_symbol')
+        if ticker in self.issuers:
+            row=self.issuers[ticker]
+            exchange=self.catalog.rows.get(ticker,{}).get('exchange','UNVERIFIED')
+            return {**row,'exchange':exchange,'currency':'USD','identity_source':'accepted_SEC_company_tickers_response','identity_as_of':self.issuer_source['received_at'],'identity_source_record':self.issuer_source}
         try:return instrument(ticker)
         except ValueError:
             row=self.catalog.instrument(ticker)
             return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
+    async def refresh_identities(self):
+        from .sec_identity import parse,URL
+        from .identity import SEEDS
+        headers=self.permission('sec')
+        if self.lock.locked():raise AccessError('upstream_refresh_busy')
+        async with self.lock:
+            async with asyncio.timeout(10):
+                payload,digest=await self.fetch('sec',URL,headers);rows=parse(payload)
+                for ticker,_,_,cik in SEEDS:
+                    if ticker in rows and rows[ticker]['cik']!=str(cik).zfill(10):raise AccessError('sec_directory_curated_identity_conflict')
+                for ticker,row in self.issuers.items():
+                    if ticker in self.cache and (ticker not in rows or rows[ticker]['cik']!=row['cik']):raise AccessError('sec_directory_cached_issuer_change')
+                source={'url':URL,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':self.origin,'scope':'Current SEC ticker mapping;not historical listing identity or feed entitlement'}
+                self.issuers,self.issuer_source=rows,source
+        return {'schema':'gig.sec.identity.v1','count':len(rows),'source':source}
+    def search(self,query):
+        found=self.catalog.search(query);q=query.strip().casefold()
+        symbols=[r['symbol'] for r in found['results']]
+        extra=sorted(s for s,r in self.issuers.items() if q in s.casefold() or q in r['company_name'].casefold())
+        symbols=list(dict.fromkeys(symbols+extra))[:20]
+        return {'results':[self.resolve(s) for s in symbols],'scope':found['scope'],'directory':{k:found[k] for k in ('catalog_count','source','reason')},'sec_directory':{'count':len(self.issuers),'source':self.issuer_source}}
     def permission(self,provider):
         e=self.environment
         if provider=='sec':

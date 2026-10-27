@@ -20,17 +20,11 @@ def at_filing_date(financials,as_of):
 
 def at_acceptance_time(financials,filings,as_of):
     """Conservative retained-cache filter,not an authenticated historical XBRL vintage."""
-    import datetime,re
-    from terminal.providers.kraken import timestamp_ns
-    def instant(s):
-        if type(s) is not str or len(s)>40:raise ValueError('acceptance_timestamp')
-        match=re.fullmatch(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})',s)
-        if not match:raise ValueError('acceptance_timestamp')
-        whole=datetime.datetime.fromisoformat(match[1]+match[3].replace('Z','+00:00')).astimezone(datetime.timezone.utc)
-        return int(timestamp_ns(whole.strftime('%Y-%m-%dT%H:%M:%S')+(match[2] or '')+'Z'))
+    import datetime
+    from .sec import acceptance_ns as instant
     cutoff=instant(as_of)
     cutoff_day=datetime.datetime.fromtimestamp(cutoff//10**9,datetime.timezone.utc).date().isoformat()
-    if not financials or type(filings) is not list or len(filings)>128:raise ValueError('acceptance_cache_boundary')
+    if not financials or type(filings) is not list or len(filings)>1024:raise ValueError('acceptance_cache_boundary')
     if cutoff_day>financials['as_of_filing_date']:raise ValueError('acceptance_cache_boundary')
     available={};ambiguous=set()
     for filing in filings:
@@ -56,4 +50,4 @@ def at_acceptance_time(financials,filings,as_of):
         selected[metric]=sorted(accepted,key=lambda r:(r['end'],r['start'] or '',r['filed'],r['concept']),reverse=True)
         truncated|=financials.get('coverage',{}).get(metric,{}).get('revision_history_truncated',False)
     out=copy.deepcopy(financials);out['history']=selected;out['as_of_filing_date']=cutoff_day
-    return {'schema':'gig.financial.acceptance.v1','as_of':as_of,'cutoff_ns':str(cutoff),'history':selected,'descriptors':calculate(out),'exclusions':excluded,'retained_history_truncated':truncated,'completeness':'PARTIAL_RETAINED_CACHE_NOT_AUTHENTICATED_SOURCE_VINTAGE','limitations':['Unknown acceptance times are excluded,never replaced by midnight or current filings','Recent128 submissions/retained revisions may omit older eligible facts','Current companyfacts retrieval cannot prove what an older response contained','No complete XBRL dimensions,presentation or tradable PIT authority']}
+    return {'schema':'gig.financial.acceptance.v1','as_of':as_of,'cutoff_ns':str(cutoff),'history':selected,'descriptors':calculate(out),'exclusions':excluded,'retained_history_truncated':truncated,'completeness':'PARTIAL_RETAINED_CACHE_NOT_AUTHENTICATED_SOURCE_VINTAGE','limitations':['Unknown acceptance times are excluded,never replaced by midnight or current filings','Bounded1024 submissions/retained revisions may omit older eligible facts','Current companyfacts retrieval cannot prove what an older response contained','No complete XBRL dimensions,presentation or tradable PIT authority']}
