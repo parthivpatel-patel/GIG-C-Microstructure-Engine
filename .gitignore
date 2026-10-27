@@ -49,3 +49,9 @@ test-results/
 
 # Owner-private calendar evidence (never credentials or repository data).
 .gig-session/
+
+# Owner-permitted private market identity catalogs.
+.gig-symbols/
+
+# Explicitly authorized private observation ledger.
+.gig-observations/

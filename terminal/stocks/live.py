@@ -40,11 +40,22 @@ def amount(v,positive=False):
     return decimal(v,positive)
 
 class LiveIEX:
-    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time):
+    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None):
         from .session_schedule import SessionSchedule
+        from .market_catalog import MarketCatalog
+        self.catalog=workspace.catalog
         self.schedule=SessionSchedule.configured(workspace.environment)
         self.workspace=workspace;self.connector=connector;self.clock=clock;self.wall=wall
         self.task=None;self.stop_event=asyncio.Event();self.state='DISABLED';self.phase='DISCONNECTED';self.symbols=();self.latest={};self.seen=[];self.receipts=0;self.duplicates=0;self.generation=0;self.failures=0;self.reason=None;self.last_data=None;self.channels=('quotes','trades');self.history=[];self.out_of_order=0;self.evicted=0;self.pending=None;self.socket=None;self.connection_count=0
+        self.store=store;self.store_reason='disabled_by_default'
+        if self.store is None and workspace.environment.get('GIG_ALPACA_STORE_ENABLED')=='1':
+            try:
+                from .observation_store import ObservationStore
+                workspace.permission('alpaca');e=workspace.environment
+                if e.get('GIG_ALPACA_STORAGE_APPROVED')!='1':raise ValueError('retention_not_approved')
+                self.store=ObservationStore(e.get('GIG_ALPACA_STORE_DIRECTORY','.gig-observations'),allow_observed=True,permission_reference=e.get('GIG_ALPACA_STORAGE_REFERENCE'),retention_seconds=int(e['GIG_ALPACA_STORAGE_SECONDS']))
+            except (ValueError,KeyError,OSError):self.store_reason='unapproved_or_invalid_storage_configuration'
+        self.capture_id=__import__('uuid').uuid4().hex if self.store else None
     def symbol_limit(self):
         value=self.workspace.environment.get('GIG_ALPACA_LIVE_MAX_SYMBOLS','4')
         if value not in ('1','2','3','4'):raise ValueError('live_invalid_symbol_limit')
@@ -110,13 +121,17 @@ class LiveIEX:
                 if identity in seen:dups+=1;continue
                 seen=(seen+[identity])[-256:];count+=1;last=received
                 previous=latest.get(ticker+':'+kind);late=bool(previous and ns<int(previous['source_timestamp_ns']));late_count+=int(late)
-                event={'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':hashlib.sha256(raw).hexdigest(),'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
+                event={'instrument_metadata':self.catalog.instrument(ticker),'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':hashlib.sha256(raw).hexdigest(),'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
                 if not late:latest[ticker+':'+kind]=event
                 history.append(event)
                 if len(history)>256:history.pop(0);evicted+=1
                 out.append(event)
             else:raise ProtocolError('unsupported_message_type')
-        self.phase,self.latest,self.seen,self.receipts,self.duplicates,self.last_data,self.history,self.out_of_order,self.evicted,self.symbols,self.channels,self.generation,self.pending=phase,latest,seen,count,dups,last,history,late_count,evicted,symbols,channels,generation,pending
+        prepared=(phase,latest,seen,count,dups,last,history,late_count,evicted,symbols,channels,generation,pending)
+        if out and self.store:
+            try:self.store.append(self.capture_id,out)
+            except (ValueError,OSError):raise ProtocolError('observation_storage_rejected_frame') from None
+        self.phase,self.latest,self.seen,self.receipts,self.duplicates,self.last_data,self.history,self.out_of_order,self.evicted,self.symbols,self.channels,self.generation,self.pending=prepared
         return out
     def view(self):
         from .live_metrics import metrics
@@ -130,11 +145,11 @@ class LiveIEX:
         try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
         except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
         rows=[present(e) for e in self.latest.values()];history=[present(e) for e in self.history if e['symbol'] in self.symbols]
-        return {'schema':'gig.alpaca.live.v1','state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
+        return {'schema':'gig.alpaca.live.v1','durable_observations':self.store.cached if self.store else {'enabled':False,'reason':self.store_reason},'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
     async def start(self,symbols,channels=None):
         self.require()
         if type(symbols) is not list or not 1<=len(symbols)<=self.symbol_limit() or len(set(symbols))!=len(symbols):raise ValueError('live_symbol_budget')
-        for s in symbols:instrument(s)
+        for s in symbols:self.catalog.instrument(s)
         channels=('quotes','trades') if channels is None else channels
         if type(channels) not in (list,tuple) or not channels or len(channels)>3 or any(c not in ('quotes','trades','bars') for c in channels) or len(set(channels))!=len(channels) or not any(c in channels for c in ('quotes','trades')):raise ValueError('live_channel_budget')
         selected=tuple(sorted(symbols));chosen=tuple(sorted(channels))

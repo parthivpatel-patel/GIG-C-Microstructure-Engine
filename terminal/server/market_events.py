@@ -13,13 +13,16 @@ class MarketEvents:
     def reserve(self):
         if self.closed or self.clients>=self.limit:return False
         self.clients+=1;return True
-    async def frames(self):
+    async def frames(self,profile=None):
+        from .market_delta import MarketProjection
+        projection=MarketProjection() if profile=='delta-v1' else None
         previous=None;emitted=0.
         while not self.closed:
             s=self.source;key=(s.receipts,s.generation,s.state,s.phase,s.duplicates,s.out_of_order,str(s.pending))
             now=time.monotonic()
             if key!=previous or now-emitted>=self.heartbeat:
                 snapshot=s.view();snapshot['browser_push']=self.status()
+                if projection:snapshot=projection.project(snapshot)
                 data=json.dumps(snapshot,separators=(',',':'),allow_nan=False)
                 frame='event: state\ndata: '+data+'\n\n'
                 if len(frame.encode())>1024*1024:
@@ -28,12 +31,12 @@ class MarketEvents:
                 yield frame
             else:self.coalesced+=1
             await asyncio.sleep(self.interval)
-    def response(self):return BoundedEvents(self)
+    def response(self,profile=None):return BoundedEvents(self,profile)
 
 class BoundedEvents(StreamingResponse):
-    def __init__(self,hub):
+    def __init__(self,hub,profile=None):
         self.hub=hub
-        super().__init__(hub.frames(),media_type='text/event-stream',headers={'Cache-Control':'no-store','X-Accel-Buffering':'no','Cross-Origin-Resource-Policy':'same-origin'})
+        super().__init__(hub.frames(profile),media_type='text/event-stream',headers={'Cache-Control':'no-store','X-Accel-Buffering':'no','Cross-Origin-Resource-Policy':'same-origin'})
     async def stream_response(self,send):
         async def bounded(message):
             try:await asyncio.wait_for(send(message),2.)

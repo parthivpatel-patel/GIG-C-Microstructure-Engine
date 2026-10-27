@@ -157,6 +157,7 @@ def create_app(stock_workspace=None):
             if not work_lock.locked():
                 async with work_lock:
                     try:
+                        if stock_live.store:await asyncio.to_thread(stock_live.store.prune)
                         active=feed.capture.writer.stage if feed.capture and not feed.capture.task.done() else None
                         await asyncio.to_thread(prune_expired,l2_directory,active_stage=active)
                     except (ValueError,OSError):
@@ -377,12 +378,19 @@ def create_app(stock_workspace=None):
             async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
         except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
 
+    @route('/api/v1/stocks/market-search', methods=['GET'])
+    @json_endpoint
+    async def market_search(request):
+        if set(request.query_params)-{'q'}:return error('CATALOG_QUERY','only bounded q accepted',422)
+        try:return stock_live.catalog.search(request.query_params.get('q',''))
+        except ValueError:return error('CATALOG_QUERY','invalid bounded query',422)
+
     @route('/api/v1/stocks/events', methods=['POST'])
     async def stock_events(request):
         data=await bounded_json(request)
-        if data!={}:return error('MARKET_STREAM_QUERY','empty object required',422)
+        if data not in ({},{'profile':'delta-v1'}):return error('MARKET_STREAM_QUERY','empty object or supported profile required',422)
         if not market_events.reserve():return error('MARKET_STREAM_CAPACITY','bounded stock-stream capacity reached',429)
-        return market_events.response()
+        return market_events.response(data.get('profile'))
 
     @route('/api/v1/stocks/live', methods=['GET','POST'])
     @json_endpoint
@@ -446,6 +454,16 @@ def create_app(stock_workspace=None):
         except (ValueError,KeyError,TypeError):return error('HISTORY_STORAGE_INVALID','invalid,expired,unapproved or inconsistent bounded history request',422)
         except Exception:return error('HISTORY_STORAGE_FAILURE','private storage unavailable;accepted native state unchanged',503)
 
+    @route('/api/v2/companies/{symbol}/acceptance-view',methods=['GET'])
+    @json_endpoint
+    async def acceptance_view(request):
+        from terminal.stocks.vintages import at_acceptance_time
+        if set(request.query_params)!={'at'}:return error('ACCEPTANCE_QUERY','one explicit timezone-aware at required',422)
+        try:
+            view=stocks.view(request.path_params['symbol']);f=view['fundamentals']
+            return {**at_acceptance_time(f.get('financials',{}),f.get('filings',[]),request.query_params['at']),'instrument':view['instrument'],'data_origin':view['classification']}
+        except (ValueError,KeyError,TypeError,OverflowError):return error('ACCEPTANCE_UNAVAILABLE','retained acceptance-qualified cache unavailable',422)
+
     @route('/api/v2/companies/{symbol}/vintage',methods=['GET'])
     @json_endpoint
     async def company_vintage(request):
@@ -502,8 +520,9 @@ def create_app(stock_workspace=None):
     @route('/api/v1/stocks/search', methods=['GET'])
     @json_endpoint
     async def stock_search(request):
-        from terminal.stocks.identity import search
-        try:return {'results':search(request.query_params.get('q','')),'scope':'curated routing seeds;not a complete or freshly verified listing directory'}
+        try:
+            found=stocks.catalog.search(request.query_params.get('q',''))
+            return {'results':[stocks.resolve(r['symbol']) for r in found['results']],'scope':found['scope'],'directory':{k:found[k] for k in ('catalog_count','source','reason')}}
         except ValueError:return error('STOCK_QUERY','invalid bounded search query')
 
     @route('/api/v1/stocks/company', methods=['GET'])

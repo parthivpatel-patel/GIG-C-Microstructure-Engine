@@ -21,11 +21,18 @@ class StockWorkspace:
     def __init__(self,environment=None,fetcher=None,clock=time.monotonic,history_store=None):
         from .sec_config import resolve
         self.environment,self.sec_config = resolve(os.environ) if environment is None else (environment,{'source':'explicit_environment','error':None})
+        from .market_catalog import MarketCatalog
+        self.catalog=MarketCatalog.configured(self.environment)
         self.sec_accepted={};self.sec_refresh_state={}
         from .history_store import configured
         self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
         self.clock=clock;self.last_request=-100.;self.cooldown_until=0.;self.cooldowns={};self.cache=OrderedDict();self.lock=asyncio.Lock();self.last_error=None;self.load_lock=asyncio.Lock();self.load_task=None;self.load_state={};self.errors={}
+    def resolve(self,ticker):
+        try:return instrument(ticker)
+        except ValueError:
+            row=self.catalog.instrument(ticker)
+            return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
     def permission(self,provider):
         e=self.environment
         if provider=='sec':
@@ -69,7 +76,7 @@ class StockWorkspace:
             try:await self.load_task
             except asyncio.CancelledError:pass
     async def start_load(self,ticker,*,timeframe='1Day'):
-        instrument(ticker)
+        self.resolve(ticker)
         if timeframe not in ('1Day','1Hour','1Min'):raise AccessError('price_timeframe')
         async with self.load_lock:
             await self.close()
@@ -124,10 +131,12 @@ class StockWorkspace:
         if type(payload) is not dict:raise AccessError('upstream_object_required')
         return payload,hashlib.sha256(data).hexdigest()
     def view(self,ticker):
-        company=instrument(ticker);cached=self.cache.get(ticker,{})
+        company=self.resolve(ticker);cached=self.cache.get(ticker,{})
         out={'schema':'gig.stock.workspace.v1','instrument':company,'classification':self.origin if cached else 'UNAVAILABLE','fundamentals':cached.get('sec',{'status':'UNAVAILABLE','reason':'no_authorized_SEC_response_loaded'}),'prices':cached.get('alpaca',{'status':'UNAVAILABLE','reason':'no_authorized_IEX_response_loaded'}),'options_market':cached.get('options',{'status':'UNAVAILABLE','reason':'no_authorized_indicative_option_snapshots_loaded'}),'configuration':self.configuration(),'load':dict(self.load_state) if self.load_state.get('symbol')==ticker else {'status':'NOT_LOADING'},'capabilities':{'sec_refresh':False,'iex_refresh':False,'equities_depth':False,'options_quotes':False,'third_party_news':False}}
         for p,k in [('sec','sec_refresh'),('alpaca','iex_refresh'),('options','options_quotes')]:
-            try:self.permission(p);out['capabilities'][k]=True
+            try:
+                self.permission(p)
+                out['capabilities'][k]=p!='sec' or company['cik'] is not None
             except AccessError:pass
         for provider in ('sec','alpaca','options'):out['configuration'][provider]['last_error']=self.errors.get((ticker,provider))
         for key in ('fundamentals','prices','options_market'):
@@ -144,9 +153,10 @@ class StockWorkspace:
         out['sec_refresh']=dict(self.sec_refresh_state.get(ticker,{'status':'IDLE'}))
         return out
     async def refresh(self,ticker,provider,*,start=None,end=None,timeframe='1Day',allow_cached=False):
-        company=instrument(ticker)
+        company=self.resolve(ticker)
         if provider not in ('sec','alpaca','options'):raise AccessError('unsupported_provider')
         headers=self.permission(provider)
+        if provider=='sec' and company['cik'] is None:raise AccessError('sec_issuer_identity_unavailable;market_discovery_is_not_SEC_mapping')
         if provider=='sec' and allow_cached and ticker in self.sec_accepted and 'sec' in self.cache.get(ticker,{}):
             age=self.clock()-self.sec_accepted[ticker]
             if 0<=age<60:
