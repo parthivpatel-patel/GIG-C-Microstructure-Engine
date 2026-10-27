@@ -764,5 +764,580 @@
       "Snapshot tier includes retained analytics and JSON encoding,but no transport",
       "Shared-host short runs,no tail-latency,FPS or production throughput qualification"
     ]
+  },
+  "continuation": {
+    "date": "2026-10-26 America/New_York",
+    "baseline": "6f7e33cbe272417d95c0c2838c7eefe863ba422b",
+    "implementation_commit": "a8f9d7e791cd9c5aed952ac1dc8e5c608134f975",
+    "verified_remote_source_checkpoint": "a8f9d7e791cd9c5aed952ac1dc8e5c608134f975",
+    "unchanged_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "classification": "OFFLINE_AUTHORED_AND_GATED_BROWSER_NOT_OBSERVED_MARKET_QUALIFICATION",
+    "final_cohorts": [
+      {
+        "name": "terminal-debug",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/terminal-debug-final.log"
+      },
+      {
+        "name": "terminal-release",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/terminal-release-final.log"
+      },
+      {
+        "name": "terminal-sanitizer",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/terminal-sanitizer-final.log"
+      },
+      {
+        "name": "stocks-debug",
+        "passed": 134,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/stocks-debug-134.log"
+      },
+      {
+        "name": "stocks-release",
+        "passed": 134,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/stocks-release-134.log"
+      },
+      {
+        "name": "stocks-sanitizer",
+        "passed": 134,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/continuation/stocks-sanitizer-134.log"
+      },
+      {
+        "name": "security-final",
+        "passed": 46,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "tls-final",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "frontend-final",
+        "passed": 24,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "stable-browser",
+        "passed": 91,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "live-browser-stable",
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "discovery-browser-final",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "canonical-final",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "wheel-interface-final",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "wheel-export-final",
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "packaging-final",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "final_passed": 1442,
+    "final_failed": 0,
+    "final_skipped": 0,
+    "canonical_expected_and_observed": {
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "native_sources_changed": false,
+    "native_binaries_recompiled": false,
+    "six_native_matrix": "Inherited prior evidence;this continuation reran eight frozen reference cases and three binding-consumer cohorts",
+    "source_built_wheel": "Not rebuilt;unchanged installed0.1.1 native wheel rechecked14 tests;sdist rebuilt and inspected separately",
+    "new_head_arm64_qualified": false,
+    "hosted_ci_claimed": false,
+    "symbol_resolution": {
+      "results": [
+        {
+          "symbol": "AAPL",
+          "passed": true,
+          "sec_available": false,
+          "live_entitlement_granted": false
+        },
+        {
+          "symbol": "APLD",
+          "passed": true,
+          "sec_available": false,
+          "live_entitlement_granted": false
+        },
+        {
+          "symbol": "CRWV",
+          "passed": true,
+          "sec_available": false,
+          "live_entitlement_granted": false
+        }
+      ],
+      "origin": "GATED_NO_PROVIDER_REQUESTS",
+      "passed": 3,
+      "failed": 0
+    },
+    "projection": {
+      "classification": "AUTHORED_FOUR_SYMBOL_NOT_PROVIDER_BENCHMARK",
+      "cross_language_comparisons": 40,
+      "steady_and_resync_full_bytes": 13400005,
+      "projection_bytes": 1167822,
+      "reduction_fraction": 0.9128491369965906,
+      "fixture_and_comparison_seconds": 0.7544195749796927,
+      "retained_rows": 256,
+      "source_observed": false
+    },
+    "ledger": {
+      "classification": "SINGLE_AUTHORED_X86_64_LOCAL_SQLITE_NOT_PROVIDER_BENCHMARK",
+      "events": 1000,
+      "append_seconds": 0.03467467305017635,
+      "events_per_second": 28839.49326798091,
+      "verified_recovery_seconds": 0.058467229013331234,
+      "recovered": 1000,
+      "database_bytes": 2121728,
+      "peak_process_rss_kib": 49152,
+      "rss_scope": "includes interpreter,native module,fixture construction and retained reference;not isolated ledger allocation",
+      "summary": {
+        "enabled": true,
+        "records": 1000,
+        "logical_payload_bytes": 1491280,
+        "last_digest": "2f06a9363f01c73bda11323a8aeadb842a6bfddb81ed5da035dc7b23a72e0bbd",
+        "retention_seconds": 3600,
+        "classification": "RETAINED_HISTORICAL_NOT_CURRENT",
+        "limits": "10000 records,16MiB payload,32MiB database;rollback journal may add32MiB",
+        "hot_live_recovery": false,
+        "integrity": "Hash-chain consistency,not authenticated exchange completeness"
+      }
+    },
+    "browser": {
+      "classification": "SINGLE_AUTHORED_CHROMIUM_SWIFTSHADER_RUN_NOT_GPU_BENCHMARK",
+      "metrics": [
+        {
+          "name": "Nodes",
+          "value": 1732
+        },
+        {
+          "name": "LayoutCount",
+          "value": 123
+        },
+        {
+          "name": "ScriptDuration",
+          "value": 1.127684
+        },
+        {
+          "name": "JSHeapUsedSize",
+          "value": 8916444
+        },
+        {
+          "name": "JSHeapTotalSize",
+          "value": 28385280
+        }
+      ]
+    },
+    "renderers": {
+      "classification": "CHROMIUM_SWIFTSHADER_FIXTURE_SNAPSHOT_NOT_PHYSICAL_GPU",
+      "renderer": [
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.30000001192092896",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.19999998807907104",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.09999996423721313",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.19999998807907104",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        }
+      ]
+    },
+    "public_document_metadata": [
+      {
+        "kind": "calendar",
+        "url": "https://www.nasdaqtrader.com/Trader.aspx?id=Calendar",
+        "status": 200,
+        "bytes_inspected": 54629,
+        "sha256": "e207428df6b3be89c3fe8581b881c854a7c0502056281815e34d26d529910760",
+        "redirects_followed": false,
+        "tls_verification": true,
+        "rights": "Public document inspection only;no redistribution or storage license inferred"
+      },
+      {
+        "kind": "directory_definitions",
+        "url": "https://www.nasdaqtrader.com/Trader.aspx?id=SymbolDirDefs",
+        "status": 200,
+        "bytes_inspected": 114996,
+        "sha256": "a7c1b8611e4597bdbecf081b4a3324a2d2f42ed4b4ccd3bd3a1478d55a2ea7e1",
+        "redirects_followed": false,
+        "tls_verification": true,
+        "rights": "Public document inspection only;no redistribution or storage license inferred"
+      }
+    ],
+    "provider_market_or_SEC_data_requests": 0,
+    "live_observed_storage_enabled": false,
+    "blocked": [
+      "Observed provider credentials/permissions/acceptance",
+      "Fresh official symbol and SEC CIK reconciliation",
+      "Complete PIT/XBRL history",
+      "Current calendar/halts authority",
+      "Observed retention rights and host backup/physical deletion policy",
+      "Physical GPU/Android/full accessibility qualification",
+      "Exact-candidate owner-authorized ARM64/hosted run"
+    ],
+    "failure_history": [
+      {
+        "test": "clock rollback expired suffix pruning",
+        "before": "1 failed assertion:2 retained instead of0",
+        "after": "Passed in final134-test cohorts;contiguous pruning repair",
+        "log": "build/continuation/prune-failing-before.log"
+      },
+      {
+        "test": "early archive inspection",
+        "before": "empty archive because writer still running",
+        "after": "Sequential completed archive inspection passed;no source defect",
+        "log": "build/continuation/sdist-inventory.log"
+      }
+    ],
+    "artifact_inventory": {
+      "build/atlas2/resume/atlas-validation.log": {
+        "bytes": 3291,
+        "sha256": "3b20c0261b7784e0ebf14cdcfa5e7e4ea2003dddc2f4c4093e54d59ae60cf0a2"
+      },
+      "build/atlas2/resume/atlas2-validation.log": {
+        "bytes": 2542,
+        "sha256": "ec3109518f3e2b63e6b821f0ed4eaea12f0f9bba10f00e8d601c9adcc9d60f8a"
+      },
+      "build/atlas2/resume/browser-validation.log": {
+        "bytes": 6213,
+        "sha256": "37e08d0953996be10743450cd8a77d74f84a6171b8405b61c879a68644ae8947"
+      },
+      "build/atlas2/resume/build.log": {
+        "bytes": 1529,
+        "sha256": "6fb96b61db216ffaf9a4964aa549ad8149edc404ad1dbbdfa142302268c96760"
+      },
+      "build/atlas2/resume/live-controls-validation.log": {
+        "bytes": 496,
+        "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+      },
+      "build/atlas2/resume/recorded-playback-validation.log": {
+        "bytes": 396,
+        "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+      },
+      "build/atlas2/resume/stable-assets.json": {
+        "bytes": 1370,
+        "sha256": "6c7fd701ccc1282bca9bec6c27a3e54f0f4b72b6c38934ab60db4856da84758b"
+      },
+      "build/atlas2/resume/stock-intelligence-validation.log": {
+        "bytes": 908,
+        "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+      },
+      "build/atlas2/resume/stock-loading-validation.log": {
+        "bytes": 983,
+        "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+      },
+      "build/continuation/atlas2_fixture_server.log": {
+        "bytes": 12379,
+        "sha256": "0504136d0ce86db552abaad885c53d524c3e82a54ffc201873241c19125c2ba2"
+      },
+      "build/continuation/atlas_fixture_server.log": {
+        "bytes": 12130,
+        "sha256": "d62434a9c46b6e6a2465b610e384ef42ca14b46e7887b075a7abb0531b95dabf"
+      },
+      "build/continuation/browser-suite-final.log": {
+        "bytes": 78,
+        "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+      },
+      "build/continuation/build-final.log": {
+        "bytes": 1529,
+        "sha256": "d88d73ab1c768675809e6cc9c2b35928014862f2b1a26c36bbd252b20c676ee1"
+      },
+      "build/continuation/build.log": {
+        "bytes": 1529,
+        "sha256": "0b315d158445aba3d54023d6982c00bd14ddb5864b0f1f7bf73952014781c18c"
+      },
+      "build/continuation/canonical-final.log": {
+        "bytes": 1124,
+        "sha256": "67603c120fb9d513cb5146cd2c07bcf9c16f273357cef31b75c9430368dd8cb2"
+      },
+      "build/continuation/catalog-projection.log": {
+        "bytes": 641,
+        "sha256": "6f199fdbcced209aff03f073984fb64d90a4ca57e893cee8aa06640e64db532b"
+      },
+      "build/continuation/discovery-browser-final.log": {
+        "bytes": 42,
+        "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+      },
+      "build/continuation/discovery-browser.log": {
+        "bytes": 42,
+        "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+      },
+      "build/continuation/discovery-crwv-gated.png": {
+        "bytes": 329653,
+        "sha256": "3ad7b4126302aa46f8543f1b6e03aee3ac80989e4ac0f8c96ee964156e6828ae"
+      },
+      "build/continuation/focused.log": {
+        "bytes": 341,
+        "sha256": "61a5fa85fad16113433e29dc909320cea9e70fdeb13b94acfdc032909511d2e1"
+      },
+      "build/continuation/frontend-final.log": {
+        "bytes": 2919,
+        "sha256": "4e18903921b905fe29670d4e1373ea11cdb746f8f14a2070a3d6aad4d96fa762"
+      },
+      "build/continuation/frontend.log": {
+        "bytes": 2918,
+        "sha256": "f579e1347bf8de2f4ae956f4015abf3a0f8305fc01f58d1e3ace2e0e063908e7"
+      },
+      "build/continuation/live-browser-final.log": {
+        "bytes": 255,
+        "sha256": "ae6ed61d6156b01d8c615c7f048113c20af3201e4e3a713304b61940632c1738"
+      },
+      "build/continuation/live-browser-stable.log": {
+        "bytes": 255,
+        "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+      },
+      "build/continuation/live-market-desktop-synthetic.png": {
+        "bytes": 543981,
+        "sha256": "106fbd69af2f914cedcd54c71517163fdd982dffaa82aa23dc73f68a66f3bbb5"
+      },
+      "build/continuation/live-market-mobile-synthetic.png": {
+        "bytes": 626314,
+        "sha256": "48dc698027ca78e2f8ddb45bbdefa6771e6bf6c3582e3ebb18e83b589ca4abbe"
+      },
+      "build/continuation/live-server.log": {
+        "bytes": 10206,
+        "sha256": "bda7a68184d856961a426f581a3f442e13f23e91e51b605051bedce4b1416e48"
+      },
+      "build/continuation/native-server.log": {
+        "bytes": 24243,
+        "sha256": "e7ddbece73cfb8d83e275398f7d41de66a7348a0967fac05db927b03c8399e62"
+      },
+      "build/continuation/new-components.log": {
+        "bytes": 346,
+        "sha256": "81e7f4c222c65cc9ffa4de23a968f0f852a52ca3ce4ee319ecd617b53560fca3"
+      },
+      "build/continuation/packaging-final.log": {
+        "bytes": 101,
+        "sha256": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424"
+      },
+      "build/continuation/projection-cross-language-final.log": {
+        "bytes": 593,
+        "sha256": "8703eb19231f3039e63c9b03a7543f135c931f7e6a3e447e2708b0f775e1bf38"
+      },
+      "build/continuation/projection-cross-language.log": {
+        "bytes": 593,
+        "sha256": "f6dec9e5ecdd10e99c25ae7d3ee57ac5f44b08c7169f7748994361257836e6c3"
+      },
+      "build/continuation/projection.log": {
+        "bytes": 101,
+        "sha256": "e1b88634c719b535b485a913ff048c0d6fc77002529e77d1693f317c44915d51"
+      },
+      "build/continuation/prune-failing-before.log": {
+        "bytes": 1422,
+        "sha256": "b557be34c00887abaedb99c40c20d8f41bc60acb153ff84b39244055dc8358f3"
+      },
+      "build/continuation/resolution.log": {
+        "bytes": 1405,
+        "sha256": "116dab215bf430aba28d7284a13485079ba728b4637ff30dad1a3ec5502ea4c6"
+      },
+      "build/continuation/resume-stocks.log": {
+        "bytes": 21404,
+        "sha256": "40356ec4a50897e8976aa736d6f417c692f78dca2ccf9c2d669920524232ff6f"
+      },
+      "build/continuation/sdist-final.log": {
+        "bytes": 150,
+        "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+      },
+      "build/continuation/sdist-inventory-final.log": {
+        "bytes": 81,
+        "sha256": "18bd8a624ecb9c086c64f8ba99fa6657fc29cf83471abd2ee45209d3eb33040b"
+      },
+      "build/continuation/sdist-inventory.log": {
+        "bytes": 835,
+        "sha256": "a9ff4601eaee0ed9e26c1d46002b4bb2305d00a0eaaef23d7da55fbaaaa9553a"
+      },
+      "build/continuation/security-final.log": {
+        "bytes": 376,
+        "sha256": "3cd535da73f8e4e4a1a723f1026c7737b5293dfb5355661956bd368368e61b0f"
+      },
+      "build/continuation/stock_fixture_server.log": {
+        "bytes": 12347,
+        "sha256": "aa03d139f9706f2c06cdbf18c782e0de80451b19e7b3b45a851a27cbc87eb0bd"
+      },
+      "build/continuation/stocks-debug-134.log": {
+        "bytes": 22172,
+        "sha256": "e44e96569d76ce7c0aee105b2862f38ed8d5864f9777e4d0cf56af31712bbd1c"
+      },
+      "build/continuation/stocks-debug-final.log": {
+        "bytes": 21966,
+        "sha256": "e060e31ae734b6c4e03290cbbad950a06118af8288261ab7b5f36af099a04a66"
+      },
+      "build/continuation/stocks-release-134.log": {
+        "bytes": 22172,
+        "sha256": "6c5df1cc2c6bdd2b502f3df2d4c704dba49b7a98cf041ee82a3e761fdc2a84e5"
+      },
+      "build/continuation/stocks-release-final.log": {
+        "bytes": 21966,
+        "sha256": "90f1cd500511e12a8f8730c550b75b0b96db6af0c58ea2eb9e801ad389af7732"
+      },
+      "build/continuation/stocks-release.log": {
+        "bytes": 21404,
+        "sha256": "f6a7c658847a06ce21f7afb41abd09152d6cb111531983abe5aca8f0fd7cb973"
+      },
+      "build/continuation/stocks-sanitizer-134.log": {
+        "bytes": 22190,
+        "sha256": "67dca6bf6018053324c1df71b48bb9222ee19a30a217fe9439d0c11dbc2f2541"
+      },
+      "build/continuation/stocks-sanitizer-final.log": {
+        "bytes": 21984,
+        "sha256": "344aad9050d678d9fe410445bd1ae47a33ce12e51d5119186ec8e97e91391dd2"
+      },
+      "build/continuation/store-acceptance.log": {
+        "bytes": 337,
+        "sha256": "4ffbd649eb9c1785c5d36cf89ebf47ce446b6eccd31facbc91b4a3c92104b8a2"
+      },
+      "build/continuation/store-final.log": {
+        "bytes": 337,
+        "sha256": "49231fb830145e8f966eb9f6ef84b13391badd894729c5401680330dcf039076"
+      },
+      "build/continuation/store-measurements.log": {
+        "bytes": 1098,
+        "sha256": "d3af91a4d983d8a18a63b26f35efcce2628f7a271228e42bfb60bf1ce9e721ae"
+      },
+      "build/continuation/store.log": {
+        "bytes": 332,
+        "sha256": "d954df89e02a37d4cd283a73996e6c3980a4e296ac5719f61104c4cd08f3b2b8"
+      },
+      "build/continuation/terminal-debug-final.log": {
+        "bytes": 40306,
+        "sha256": "3dc4fb11a9c3812208f5bb6e7c89c571d364d07d844abc676df62a8fa4d7147b"
+      },
+      "build/continuation/terminal-release-final.log": {
+        "bytes": 40306,
+        "sha256": "1336d48f0307ba5d015adaa39e290d90b114100153fcfe1cf24d7ef90cc935f1"
+      },
+      "build/continuation/terminal-sanitizer-final.log": {
+        "bytes": 41063,
+        "sha256": "7325d905ca2304a7e9d1e2e674c494062ec092d96319c7dcdf384117b74b56dc"
+      },
+      "build/continuation/tls-final.log": {
+        "bytes": 4364,
+        "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+      },
+      "build/continuation/wheel-export-final.log": {
+        "bytes": 959,
+        "sha256": "36d70557ed45d073d230921dcd7f8068dae5e0b4b7890dae24a4e261f70f2da6"
+      },
+      "build/continuation/wheel-interface-final.log": {
+        "bytes": 964,
+        "sha256": "f06acac492b8833fd2ed0d70259a1f01fd6ba864055e9614045876944196c15f"
+      }
+    },
+    "changed_implementation_files": [
+      ".gitignore",
+      "docs/completion/CONTINUATION_CONTRACTS.md",
+      "terminal/server/app.py",
+      "terminal/server/market_delta.py",
+      "terminal/server/market_events.py",
+      "terminal/stocks/live.py",
+      "terminal/stocks/market_catalog.py",
+      "terminal/stocks/observation_store.py",
+      "terminal/stocks/service.py",
+      "terminal/stocks/test_acceptance.py",
+      "terminal/stocks/test_catalog.py",
+      "terminal/stocks/test_observation_store.py",
+      "terminal/stocks/test_projection.py",
+      "terminal/stocks/vintages.py",
+      "terminal/tests/check_market_projection.py",
+      "terminal/tests/discovery-validation.mjs",
+      "terminal/tests/live-market-validation.mjs",
+      "terminal/tests/measure_observation_store.py",
+      "terminal/tests/run_live_market_suite.py",
+      "terminal/web/package.json",
+      "terminal/web/src/AcceptanceView.tsx",
+      "terminal/web/src/App.tsx",
+      "terminal/web/src/LiveMarket.tsx",
+      "terminal/web/src/QuoteCloud.tsx",
+      "terminal/web/src/StockIntelligence.tsx",
+      "terminal/web/src/api.ts",
+      "terminal/web/src/marketContract.ts",
+      "terminal/web/src/marketDelta.test.ts",
+      "terminal/web/src/marketDelta.ts",
+      "terminal/web/src/marketStream.ts"
+    ],
+    "privacy": "No raw observations,ZIPs,credentials,databases or restricted datasets in committed evidence;synthetic artifacts remain ignored",
+    "self_manifest": "Final documentation commit cannot include its own SHA or archive-manifest hash;report-only closure follows verified implementation",
+    "source_archive": {
+      "path": "build/continuation/dist/gig_microstructure-0.1.1.tar.gz",
+      "sha256": "f46012b7a405ddeeea989028f507ae9de855815d0dcc6de3a35083b9d3eba24b",
+      "bytes": 2401320,
+      "verified_members": 753,
+      "inventory_sha256": "8481a8c2f01fdd65f1deb22e6743d5517c278bd9dfea7575a0b472945e233066",
+      "verification": "753 safe,intended,byte-identical members;required source trees complete",
+      "snapshot_scope": "Implementation and documentation immediately before adding this archive receipt;final evidence metadata and report receipt necessarily postdate archive",
+      "evidence_snapshot_sha256": "09492fcae3bb4011abbcd2a6b770f824b56bb3201df1f818d87f2088199fb577"
+    }
   }
 }

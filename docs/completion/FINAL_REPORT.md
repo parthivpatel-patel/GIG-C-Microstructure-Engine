@@ -184,3 +184,102 @@ Final boundary regressions also reproduced rejection of two valid coalesced600KB
 and an envelope/payload budget mismatch. The decoder now bounds carried frames separately
 from four-MiB read chunks, and the sender includes the SSE envelope in its one-MiB limit.
 Original failing-before tests are preserved;no unsupported input is silently skipped.
+
+
+## Continued engineering closure (recovered baseline6f7e33c)
+
+The prior sections are historical evidence for the earlier checkpoint. Current
+implementation checkpoint:a8f9d7e791cd9c5aed952ac1dc8e5c608134f975,remotely verified
+on feat/atlas-final-release. The recovered uncommitted implementation was preserved
+and completed;no reset/restart,native source change,provider activation or data download.
+See CONTINUATION_CONTRACTS.md for exact interfaces,private configuration and bounds.
+
+Implemented:opt-in versioned retained-history projection with strict browser
+resynchronization;bounded private catalog import and shared discovery/company routing;
+exact acceptance-time retained-SEC filtering and optional Financials UI;permission-gated
+normalized observation ledger;quiet/paused3D upload avoidance. AAPL,APLD and CRWV pass
+search/company/v2 API checks and actual browser global selection. AAPL retains its CIK;
+APLD/CRWV have explicitly null,unverified CIKs. Discovery never grants a feed entitlement.
+No current full exchange directory or real financial observations were acquired.
+
+### Final executed validation
+
+| Cohort | Pass | Fail | Skip |
+|---|---:|---:|---:|
+| Terminal with Debug native binding |274|0|0|
+| Terminal with Release native binding |274|0|0|
+| Terminal with ASan/UBSan native binding |274|0|0|
+| Stock/SEC/live/persistence Debug |134|0|0|
+| Stock/SEC/live/persistence Release |134|0|0|
+| Stock/SEC/live/persistence ASan/UBSan |134|0|0|
+| Origin/proof/security |46|0|0|
+| Verified HTTPS/WSS proxy boundary |8|0|0|
+| Frontend unit |24|0|0|
+| Seven stable-asset browser suites |91|0|0|
+| Multi-stock authored browser |21|0|0|
+| AAPL/APLD/CRWV gated browser selection |3|0|0|
+| Native eight frozen canonical reference tests |8|0|0|
+| Installed0.1.1 wheel interfaces/export contracts |14|0|0|
+| Packaging pattern regressions |3|0|0|
+| **Selected final outcomes** |**1442**|**0**|**0**|
+
+Two live LSan checks returned0. The new20 Python component tests include1000
+independent projection windows,10000-entry catalog search,acceptance nanosecond
+boundaries,transaction rollback,an actual precommit child-process exit,corruption,
+tail deletion,expiry and10050-record retention pressure. An additional40 actual
+production-source snapshots were restored exactly by the TypeScript reader and
+compared with full Python views,including freshness/expiry and generation change.
+These are separate comparisons,not inflated CTest totals. Production TypeScript/Vite
+build passed. Stable-asset driver completed before the final21-check live browser
+run. All8 canonical hashes equal the prior frozen values. Existing binaries were
+reused;no fresh six-compiler build or ARM64/hosted qualification is claimed.
+
+### Measurements and defects
+
+Four-symbol,256-row authored projection fixture:39 post-initial snapshots including
+a forced full generation resync total13,400,005 full-view bytes versus1,167,822
+projection bytes,91.2849% reduction. This is encoded fixture size,not measured network
+traffic or provider latency;full latest observations/metrics remain. Reproduce with
+terminal/tests/check_market_projection.py. Initial app JS232.10kB/gzip72.66kB;
+Three remains deferred and its existing large-chunk warning remains visible.
+
+A single local SQLite run appended1000 authored events in0.034675s and reopened/
+verified them in0.058467s;database2,121,728bytes,peak processRSS49,152KiB including
+interpreter/native import/fixture/reference construction. This is not isolated
+allocation cost,crash-safe live recovery or production throughput. Reproduce with
+terminal/tests/measure_observation_store.py. Browser software-renderer snapshot:
+1732nodes,8,916,444bytes used JS heap;four charts each2geometries/2draw calls.
+No hardware GPU/FPS or physical Android qualification is inferred.
+
+Review reproduced an expired later ledger record surviving physical prune after a
+backward storage-clock adjustment. Original test failed2 retained versus expected0.
+Pruning now removes through the last expired record as a contiguous prefix,with a
+regression in all three stock configurations. Earlier unexpired records may be
+evicted to preserve a verified suffix. Immutable original expiry prevents policy
+extension after restart. Offline hosts cannot guarantee timed physical deletion.
+
+An initial archive inspection ran before the archive writer finished and reported
+an empty file. Sequential completed-build inspection passed;this was validation
+scheduling,not a packaging-source defect. The failed log is retained and hashed.
+No tests,warnings,assertions or security policies were disabled to obtain a pass.
+
+### Remaining boundaries and exact next work
+
+Complete observed provider qualification,official current symbol/CIK reconciliation,
+current calendar/halts authority,storage permission/host backup policy,complete XBRL
+PIT history,corrected tape reconciliation,physical device/GPU/accessibility audit
+and exact-candidate owner-authorized ARM64/hosted evidence remain open. Market-only
+APLD/CRWV resolution is complete;their SEC financial loading remains blocked by
+unverified issuer mapping. No data entitlement is implied by a selectable symbol.
+
+For existing Codespaces:stop this application's old foreground server withCtrl+C;
+run git switch feat/atlas-final-release,git pull --ff-only origin feat/atlas-final-release,
+then bash scripts/setup_terminal.sh and bash scripts/start_terminal.sh. Preserve
+private configuration and keep port8787 Private;use its authenticated forwarded URL.
+No extra gate or permission variable is required for discovery or projection.
+
+Sequential closure source-archive inspection passed753 intended,byte-identical members,
+with complete required source trees and no private output paths. Its checksum and
+pre-receipt evidence snapshot are recorded in EVIDENCE.json;the final archive receipt
+necessarily postdates the archive itself. This does not claim a newly rebuilt native
+wheel. Existing installed-wheel14 checks and packaging3 regressions passed.

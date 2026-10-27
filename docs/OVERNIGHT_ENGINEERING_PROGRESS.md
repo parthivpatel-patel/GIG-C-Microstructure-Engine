@@ -650,3 +650,24 @@ corrected tape and durable market-tape recovery remain explicit non-closed produ
 Final wire/frame budget and coalesced-frame regressions are repaired and separately
 checkpointed;see completion evidence for exact SHA. Never relabel fixtures as live or request repetitive owner feature checks to substitute
 for engineering. No further work continues after the task stops.
+
+## Continued GIG ATLAS checkpoint after6f7e33c
+
+Preserved and completed interrupted projection/catalog/acceptance/ledger work.
+Verified and pushed implementation:a8f9d7e791cd9c5aed952ac1dc8e5c608134f975.
+Final selected outcomes1442 passed/0 failed/0 skipped;terminal274x3,stock134x3,
+security46,TLS/WSS8,frontend24,stable browser91,live browser21,discovery3,
+canonical8,wheel14,packaging3. Both LSan checks0;all8 canonical hashes unchanged.
+Additional40 exact Python-to-TypeScript snapshot comparisons;91.2849% encoded
+fixture-byte reduction. AAPL/APLD/CRWV API and browser resolution pass;APLD/CRWV
+CIKs remain null and financial availability/entitlement are not inferred.
+Fixed reproduced retention expiry after clock rollback;failing-before evidence kept.
+No native source/journal changes,no actual provider requests,no restricted data,
+no workflow dispatch or new ARM64 qualification. Main remains12f3a53943dc245e36f2cbbc35b9910fb21c0718.
+Documentation/evidence closure follows separately;see completion/CONTINUATION_CONTRACTS.md.
+Exact next action after closure:inspect current Git status and continuation evidence;
+address separately scoped gaps(official permitted directory/CIK reconciliation,
+complete PIT history,corrected tape)or owner-authorized external qualification.
+Do not restart implementation or repeat this matrix without a relevant change.
+Do not activate feeds/storage without their documented authorization gates.
+No claim that execution continues after the session stops.
