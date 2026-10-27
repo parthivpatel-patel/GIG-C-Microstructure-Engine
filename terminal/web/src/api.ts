@@ -13,8 +13,8 @@ export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=100
 export async function getState():Promise<TerminalState>{return validateState(await request('/state'))}
 /** Cache-only v2 reads; caller cannot provide an arbitrary host or mutation. */
 export async function readCompanyV2(symbol:string,filings=false,offset=0,form?:string):Promise<unknown>{
- if(!/^[A-Z]{1,5}(?:[.-][A-Z])?$/.test(symbol))throw Error('Invalid company identity');
- if(!Number.isInteger(offset)||offset<0||offset>128||(form!==undefined&&!['10-K','10-K/A','10-Q','10-Q/A','8-K','8-K/A','13F-HR','13F-HR/A'].includes(form)))throw Error('Invalid bounded filing query');
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol))throw Error('Invalid company identity');
+ if(!Number.isInteger(offset)||offset<0||offset>1024||(form!==undefined&&!['10-K','10-K/A','10-Q','10-Q/A','8-K','8-K/A','13F-HR','13F-HR/A'].includes(form)))throw Error('Invalid bounded filing query');
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
  try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+(filings?'/filings?limit=50&offset='+offset+(form?'&form='+encodeURIComponent(form):''):''),{signal:controller.signal}));}finally{clearTimeout(timer);}
 }
@@ -31,7 +31,7 @@ export async function openMarketStream(signal:AbortSignal):Promise<Response>{
 }
 
 export async function readAcceptance<T>(symbol:string,at:string):Promise<T>{
- if(!/^[A-Z]{1,5}(?:[.-][A-Z])?$/.test(symbol)||!at||at.length>40)throw Error('Invalid acceptance query');
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!at||at.length>40)throw Error('Invalid acceptance query');
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
  try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+'/acceptance-view?at='+encodeURIComponent(at),{signal:controller.signal})) as T}finally{clearTimeout(timer)}
 }

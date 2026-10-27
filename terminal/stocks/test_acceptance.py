@@ -12,3 +12,7 @@ class Acceptance(unittest.TestCase):
   a=at_acceptance_time(f,filings,'2024-12-30T12:00:00Z');self.assertTrue(all(not v for v in a['history'].values()));b=at_acceptance_time(f,filings,'2024-12-30T12:00:00.000000001Z');self.assertTrue(any(b['history'].values()));self.assertEqual(f,before)
  def test_timezone_equivalence_conflicts_and_truncated_coverage(self):
   f=self.input();a=next(r for rows in f['history'].values() for r in rows)['accession'];filings=[{'accession':a,'accepted_at':'2024-12-30T12:00:00Z'}];x=at_acceptance_time(f,filings,'2024-12-30T07:00:00-05:00');y=at_acceptance_time(f,filings,'2024-12-30T12:00:00Z');self.assertEqual(x['history'],y['history']);filings.append({'accession':a,'accepted_at':'2024-12-30T13:00:00Z'});z=at_acceptance_time(f,filings,'2024-12-31T00:00:00Z');self.assertGreater(z['exclusions']['unknown_or_ambiguous_acceptance'],0)
+ def test_date_only_vintage_does_not_invent_same_day_accession_chronology(self):
+  from .vintages import at_filing_date
+  f=self.input();row=copy.deepcopy(f['history']['revenue'][0]);row.update(value='200',accession='0000000123-24-999999',source_fact_id='a'*64);f['history']['revenue'].append(row)
+  v=at_filing_date(f,'2024-12-31');self.assertEqual(v['history']['revenue'],[]);self.assertEqual(v['exclusions']['ambiguous_same_filing_date'],2)

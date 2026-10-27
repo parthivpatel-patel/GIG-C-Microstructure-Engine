@@ -25,3 +25,4 @@ test('SEC readiness,missing,error and stale states never fabricate reported valu
  assert.equal(secState({ready:true},{...facts,status:'PARTIAL'}).state,'PARTIAL');
  assert.equal(secState({ready:true},facts,{status:'RUNNING'}).state,'LOADING');
 });
+test('explicit expanded cached filings remain bounded and pageable beyond old recent window',()=>{const row={form:'10-K',filed:'2024-01-01',amendment:false,url:'https://www.sec.gov/Archives/authored.htm'};const page={schema:'gig.backend.filings.v2',instrument:{symbol:'AAPL'},status:'AVAILABLE',records:Array.from({length:24},()=>row),total_cached_matching:1024,next_offset:null,observed_at:null};assert.equal(validateFilings(page,'AAPL',1000).records.length,24);assert.throws(()=>validateFilings({...page,total_cached_matching:1025},'AAPL',1000));});
