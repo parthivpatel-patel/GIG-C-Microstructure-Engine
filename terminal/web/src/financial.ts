@@ -10,11 +10,14 @@ export function validateCompany(x:unknown,symbol:string):CompanyV2{
  if(v.observed_at!==null&&(typeof v.observed_at!=='string'||!Number.isFinite(Date.parse(v.observed_at))))throw Error('Invalid source receipt timestamp');
  if(v.provenance.source_records.length>8||v.provenance.source_records.some(r=>typeof r.component!=='string'||typeof r.url!=='string'||!/^https:\/\/data\.sec\.gov\//.test(r.url)||! /^[a-f0-9]{64}$/.test(r.sha256)))throw Error('Invalid financial source receipt');
  if(Object.keys(v.financials?.metrics||{}).length!==metricNames.length)throw Error('Invalid financial metric coverage');
- for(const name of metricNames){const m=v.financials?.metrics?.[name];if(!m||!['AVAILABLE','UNAVAILABLE'].includes(m.status)||typeof m.formula!=='string'||typeof m.unit!=='string'||!Array.isArray(m.input_facts)||!Array.isArray(m.limitations)||typeof m.quality!=='string'||typeof m.source!=='string')throw Error('Invalid v2 financial descriptor');
+ for(const name of metricNames)validateDescriptor(v.financials?.metrics?.[name]);return v;
+}
+export function validateDescriptor(m:Descriptor):void{
+ if(!m||!['AVAILABLE','UNAVAILABLE'].includes(m.status)||typeof m.formula!=='string'||typeof m.unit!=='string'||!Array.isArray(m.input_facts)||!Array.isArray(m.limitations)||typeof m.quality!=='string'||typeof m.source!=='string')throw Error('Invalid v2 financial descriptor');
   if(m.period!==null&&(!m.period||typeof m.period.end!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(m.period.end)||(m.period.start!==null&&(typeof m.period.start!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(m.period.start)))))throw Error('Invalid financial period');
   if(m.status==='AVAILABLE'){if(!m.value||typeof m.value.numerator!=='string'||typeof m.value.denominator!=='string'||!/^(-?[1-9]\d*|0)$/.test(m.value.numerator)||! /^[1-9]\d*$/.test(m.value.denominator)||m.value.numerator.length>1300||m.value.denominator.length>1300||m.reason!==null)throw Error('Invalid exact financial value');}
   else if(m.value!==null||typeof m.reason!=='string')throw Error('Missing financial value must remain unavailable');
- }return v;
+
 }
 export function inPeriod(row:Fact,period:Period):boolean{
  if(period==='all'||row.start===null)return true;

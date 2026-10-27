@@ -35,3 +35,16 @@ export async function readAcceptance<T>(symbol:string,at:string):Promise<T>{
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
  try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+'/acceptance-view?at='+encodeURIComponent(at),{signal:controller.signal})) as T}finally{clearTimeout(timer)}
 }
+
+export async function readRatioHistory(symbol:string,period:string,signal:AbortSignal):Promise<unknown>{
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!['annual','quarter','ytd','all'].includes(period))throw Error('Invalid reported ratio history query');
+ return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/ratio-history?period='+period,signal);
+}
+export async function readStatements(symbol:string,statement:string,period:string,signal:AbortSignal):Promise<unknown>{
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!['income','balance','cash'].includes(statement)||!['annual','quarter','ytd','all'].includes(period))throw Error('Invalid statements query');
+ return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/statements?statement='+statement+'&period='+period,signal);
+}
+async function readBoundedFinancial(path:string,signal:AbortSignal):Promise<unknown>{
+ const c=new AbortController(),cancel=()=>c.abort();signal.addEventListener('abort',cancel,{once:true});if(signal.aborted)c.abort();const timer=setTimeout(cancel,10000);
+ try{return await decoded(await fetch(path,{signal:c.signal}))}finally{clearTimeout(timer);signal.removeEventListener('abort',cancel)}
+}
