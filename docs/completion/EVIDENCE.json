@@ -1960,5 +1960,574 @@
       "scope": "Source and reports immediately before archive receipt;receipt/evidence-final-metadata necessarily postdate archive",
       "evidence_snapshot_sha256": "48d71c28b0321684640401918adb3a813b1966bc8b95b460b8fad7047a8f0032"
     }
+  },
+  "bounded_engineering_closure": {
+    "date": "2026-10-27 America/New_York",
+    "baseline": "ff41c97abbd79012ea9232eb56dfb5481e5f94c2",
+    "verified_source_checkpoint": "1336c2e1bbc5837130b845825b06b38f0038caf8",
+    "commits": [
+      "8c16f2034699c50b8ba2745fce1c0f784f3002bc",
+      "3fac8761a3d3f65a79cc10c357eda2aa6c6b5490",
+      "1336c2e1bbc5837130b845825b06b38f0038caf8"
+    ],
+    "branch": "feat/atlas-final-release",
+    "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "classification": "OFFLINE_AUTHORED_GATED_BROWSER_AND_SOFTWARE_WEBGL_NOT_LIVE_OR_PHYSICAL_DEVICE_ACCEPTANCE",
+    "cohorts": [
+      {
+        "name": "stock-debug",
+        "passed": 151,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/readiness/stocks-debug.log"
+      },
+      {
+        "name": "stock-release",
+        "passed": 151,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/readiness/stocks-release.log"
+      },
+      {
+        "name": "stock-sanitizer",
+        "passed": 151,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/readiness/stocks-sanitizer.log"
+      },
+      {
+        "name": "security-policy",
+        "passed": 48,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "tls-wss",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "frontend",
+        "passed": 27,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "stable-browser",
+        "passed": 91,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "sec-browser",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "discovery-browser",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "live-browser",
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "gpu-context-loss-keyboard",
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "canonical",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "installed-wheel",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "packaging",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "selected_passed_outcomes": 688,
+    "failed": 0,
+    "skipped": 0,
+    "canonical_expected_and_observed": {
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "native_sources_changed": false,
+    "native_binaries_recompiled": false,
+    "prior_full_native_consumer_matrix": "Historical evidence retained;not repeated wholesale for unrelated unchanged contracts",
+    "new_arm64_qualified": false,
+    "hosted_run_claimed": false,
+    "external_provider_attempts": 0,
+    "observed_storage_enabled": false,
+    "default_ciks": {
+      "APLD": null,
+      "CRWV": null
+    },
+    "projection_comparisons": {
+      "classification": "AUTHORED_FOUR_SYMBOL_NOT_PROVIDER_BENCHMARK",
+      "cross_language_comparisons": 40,
+      "steady_and_resync_full_bytes": 13400005,
+      "projection_bytes": 1167822,
+      "reduction_fraction": 0.9128491369965906,
+      "fixture_and_comparison_seconds": 0.9714487320161425,
+      "retained_rows": 256,
+      "source_observed": false
+    },
+    "store_measurements": {
+      "classification": "SINGLE_AUTHORED_X86_64_LOCAL_SQLITE_NOT_PROVIDER_BENCHMARK",
+      "events": 1000,
+      "append_seconds": 0.06188081199070439,
+      "events_per_second": 16160.09822479734,
+      "verified_recovery_seconds": 0.05129695398500189,
+      "recovered": 1000,
+      "database_bytes": 2121728,
+      "peak_process_rss_kib": 49264,
+      "rss_scope": "includes interpreter,native module,fixture construction and retained reference;not isolated ledger allocation",
+      "summary": {
+        "enabled": true,
+        "records": 1000,
+        "logical_payload_bytes": 1491298,
+        "last_digest": "727e32dea1d830171e1a186ecfe55926df5643bcf7c99511175a39818c5d27f8",
+        "retention_seconds": 3600,
+        "classification": "RETAINED_HISTORICAL_NOT_CURRENT",
+        "limits": "10000 records,16MiB payload,32MiB database;rollback journal may add32MiB",
+        "hot_live_recovery": false,
+        "integrity": "Hash-chain consistency,not authenticated exchange completeness"
+      }
+    },
+    "store_comparison_initial": {
+      "classification": "INTERLEAVED_LOCAL_AUTHORED_SQLITE_NOT_PROVIDER_OR_STATISTICAL_PERFORMANCE_GATE",
+      "baseline_sha": "ff41c97abbd79012ea9232eb56dfb5481e5f94c2",
+      "architecture": "x86_64",
+      "python": "3.12.14",
+      "events": 1000,
+      "batch_limit": 128,
+      "warmups_per_variant": 1,
+      "measured_repetitions_per_variant": 5,
+      "samples_seconds": {
+        "baseline": [
+          0.03266304300632328,
+          0.02959263598313555,
+          0.03001859301002696,
+          0.030516754020936787,
+          0.030679761024657637
+        ],
+        "repaired": [
+          0.029388875991571695,
+          0.031924523995257914,
+          0.030366152001079172,
+          0.03071951400488615,
+          0.03056361200287938
+        ]
+      },
+      "median_seconds": {
+        "baseline": 0.030516754020936787,
+        "repaired": 0.03056361200287938
+      },
+      "canonical_ledger_digests_equal": true,
+      "conclusion": "Short shared-host filesystem trials;no production throughput or statistically significant regression/improvement claim"
+    },
+    "store_comparison_reproduction": {
+      "classification": "INTERLEAVED_LOCAL_AUTHORED_SQLITE_NOT_PROVIDER_OR_STATISTICAL_PERFORMANCE_GATE",
+      "baseline_sha": "ff41c97abbd79012ea9232eb56dfb5481e5f94c2",
+      "architecture": "x86_64",
+      "python": "3.12.14",
+      "events": 1000,
+      "batch_limit": 128,
+      "warmups_per_variant": 1,
+      "measured_repetitions_per_variant": 5,
+      "samples_seconds": {
+        "baseline": [
+          0.030706757970619947,
+          0.029930962016806006,
+          0.02971751696895808,
+          0.03127907100133598,
+          0.03152458497788757
+        ],
+        "repaired": [
+          0.02932322397828102,
+          0.03195831895573065,
+          0.028320362034719437,
+          0.029037953994702548,
+          0.03056504303822294
+        ]
+      },
+      "median_seconds": {
+        "baseline": 0.030706757970619947,
+        "repaired": 0.02932322397828102
+      },
+      "canonical_ledger_digests_equal": true,
+      "conclusion": "Short shared-host filesystem trials;no production throughput or statistically significant regression/improvement claim"
+    },
+    "gpu_native": {
+      "passed": 5,
+      "failed": 0,
+      "classification": "ACTUAL_WEBGL_EXTENSION_IN_HEADLESS_SWIFTSHADER_NOT_PHYSICAL_GPU"
+    },
+    "gpu_quote": {
+      "passed": 4,
+      "failed": 0,
+      "classification": "ACTUAL_WEBGL_EXTENSION_IN_HEADLESS_SWIFTSHADER_NOT_PHYSICAL_GPU"
+    },
+    "browser_metrics": {
+      "classification": "SINGLE_AUTHORED_CHROMIUM_SWIFTSHADER_RUN_NOT_GPU_BENCHMARK",
+      "metrics": [
+        {
+          "name": "Nodes",
+          "value": 4766
+        },
+        {
+          "name": "LayoutCount",
+          "value": 126
+        },
+        {
+          "name": "ScriptDuration",
+          "value": 0.984286
+        },
+        {
+          "name": "JSHeapUsedSize",
+          "value": 17280816
+        },
+        {
+          "name": "JSHeapTotalSize",
+          "value": 34152448
+        }
+      ]
+    },
+    "renderer_metrics": {
+      "classification": "CHROMIUM_SWIFTSHADER_FIXTURE_SNAPSHOT_NOT_PHYSICAL_GPU",
+      "renderer": [
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.30000001192092896",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.3999999761581421",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.19999998807907104",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.10000002384185791",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "8"
+        }
+      ]
+    },
+    "confirmed_repairs": [
+      {
+        "severity": "Medium",
+        "issue": "projection accepted inconsistent full receipt/profile/channel/status metadata",
+        "failure": "build/readiness/projection-failing-before.log"
+      },
+      {
+        "severity": "Medium",
+        "issue": "cached ledger summary published after releasing writer lock",
+        "failure": "build/readiness/storage-failing-before.log",
+        "validation": "portable lock-publication invariant plus actual200-append100-prune concurrent test"
+      },
+      {
+        "severity": "Medium",
+        "issue": "lost WebGL context did not activate explicit2D fallback",
+        "failures": [
+          "build/readiness/gpu-landscape-failing-before.log",
+          "build/readiness/gpu-quote-failing-before.log"
+        ]
+      }
+    ],
+    "fixture_timing_failure": "Native GPU fixture initially looked for enable before initial render;now waits/clicks actual enable action;original log retained",
+    "remaining_matrix_items_dispositioned": [
+      "Actual authoritative APLD/CRWV reconciliation",
+      "Actual live provider/recovery/retention qualification",
+      "Actual provider directory acquisition/qualification",
+      "Authoritative current calendar/halts",
+      "Authorized directory search",
+      "Backend transport queue depth/exchange drops",
+      "Complete authenticated SEC PIT/XBRL database",
+      "Complete exchange sequence/exactly-once tape",
+      "Crash-safe hot live/L3 recovery",
+      "Empirical forecasting/OOS validity",
+      "Exact-candidate ARM64/hosted CI",
+      "Exchange/network latency estimate",
+      "Full accounting/XBRL presentation/vintage completeness",
+      "Full authenticated XBRL/PIT source history",
+      "In-place subscription handover",
+      "Licensed live equity L2/L3",
+      "Minimal per-symbol delta optimization",
+      "Mobile/accessibility",
+      "New-candidate actual ARM64 qualification",
+      "Observed complete equity L3 validation",
+      "Observed provider/storage acceptance",
+      "Owner's external Codespaces authentication",
+      "Quotes/trades/basic OHLCV bars",
+      "Reconciled corrected trade tape",
+      "SEC/live provider reconciliation here",
+      "Source reconnect/recovery",
+      "Sustained GPU/context-loss qualification",
+      "Updated/daily bars/status/LULD source profiles"
+    ],
+    "engineering_assessment": "Implemented bounded scope ready for controlled final acceptance when external prerequisites are met;broader roadmap remains partial",
+    "production_assessment": "NOT_READY",
+    "next_phase_requirements": "docs/completion/FINAL_ACCEPTANCE_AND_READINESS.md",
+    "artifact_inventory": [
+      {
+        "path": "build/atlas2/resume/stable-assets.json",
+        "bytes": 1370,
+        "sha256": "03c578e04fd2d6fd34a59c4afa9fa8034eae09ecabded6a8feedc4e23a5bf160"
+      },
+      {
+        "path": "build/readiness/atlas2_fixture_server.log",
+        "bytes": 12379,
+        "sha256": "3d1b94d50e0f091eb3fc8c6c3c5a04878f72d8f457676adb2fa1dc0d91a2677a"
+      },
+      {
+        "path": "build/readiness/atlas_fixture_server.log",
+        "bytes": 15049,
+        "sha256": "14d557b4d62b5d19c9f5eb5e684a1b866844cd2949eb61316265e37b9b0d030c"
+      },
+      {
+        "path": "build/readiness/browser-suite.log",
+        "bytes": 78,
+        "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+      },
+      {
+        "path": "build/readiness/build-final.log",
+        "bytes": 1529,
+        "sha256": "989b1aaefd8475d1c445836880aa64d62b7619b80c6cedf481a4bb0967c6bd63"
+      },
+      {
+        "path": "build/readiness/build.log",
+        "bytes": 1529,
+        "sha256": "fc41d86a482b6aeebdd493059497bf5cf172252e59a1c64545bb229c6f783173"
+      },
+      {
+        "path": "build/readiness/canonical.log",
+        "bytes": 1124,
+        "sha256": "a58141cdcddd4d3f52c6d987de46bf13f3bdc2faf4fd3e0dd0d0f4e848908a1c"
+      },
+      {
+        "path": "build/readiness/discovery-browser.log",
+        "bytes": 42,
+        "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+      },
+      {
+        "path": "build/readiness/frontend-final.log",
+        "bytes": 3211,
+        "sha256": "dd40d14862ce1d097fdbb44e3a485702b8e1b53b61940e1b49793f9d10b8ffdb"
+      },
+      {
+        "path": "build/readiness/frontend.log",
+        "bytes": 3214,
+        "sha256": "6ebef98a75e3365f8c1875c099d187fae2d7993f0fb04d8437a9a6c28a28a923"
+      },
+      {
+        "path": "build/readiness/gpu-landscape-failing-before.log",
+        "bytes": 390,
+        "sha256": "dd134f5d0dce3ebe934591ff461fc9a8bcdb05aa2608c9a3002296acd674464e"
+      },
+      {
+        "path": "build/readiness/gpu-landscape-final.log",
+        "bytes": 24,
+        "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+      },
+      {
+        "path": "build/readiness/gpu-landscape-initial-timing-failure.log",
+        "bytes": 375,
+        "sha256": "391e73f96fca1f0975aa00b07052d65f09b6319c30d226e6d8248f1a290346df"
+      },
+      {
+        "path": "build/readiness/gpu-quote-failing-before.log",
+        "bytes": 474,
+        "sha256": "ba06c8e1856b7be51f5262471dcf39f1e561133aafe88e30879df8081f4dc00f"
+      },
+      {
+        "path": "build/readiness/gpu-quote-final.log",
+        "bytes": 20,
+        "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+      },
+      {
+        "path": "build/readiness/live-browser.log",
+        "bytes": 255,
+        "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+      },
+      {
+        "path": "build/readiness/live-market-desktop-synthetic.png",
+        "bytes": 549903,
+        "sha256": "d7cb7722d006b8ee22f67239e2cf6eadd495c00bf981e381f6bac85b11ee182b"
+      },
+      {
+        "path": "build/readiness/live-market-mobile-synthetic.png",
+        "bytes": 614453,
+        "sha256": "37c7a2b55b1a0a6f9945ccde3a7d67062a0a3ea2881f8eb94e3e07df615a9340"
+      },
+      {
+        "path": "build/readiness/live-server.log",
+        "bytes": 12779,
+        "sha256": "01ed8290aa17e20ca6080f85977c849b276790fbc26c00c19cfaf9bf8b643cfc"
+      },
+      {
+        "path": "build/readiness/native-server.log",
+        "bytes": 26541,
+        "sha256": "db0c0ebd470e72d9e64e04b63f5fa8b852daddf134ab6f402984ecdce23f04e2"
+      },
+      {
+        "path": "build/readiness/packaging.log",
+        "bytes": 101,
+        "sha256": "27c4a39d34ece4cbc66cc59cb0870c7abe4cc0a5f009205bdd0ea06a93f8b3ac"
+      },
+      {
+        "path": "build/readiness/projection-failing-before.log",
+        "bytes": 4971,
+        "sha256": "f602d622277b751d1400815bdf676bd9cdafe5d096b879084ba9d380670ba37a"
+      },
+      {
+        "path": "build/readiness/projection-oracle-final.log",
+        "bytes": 593,
+        "sha256": "cbff62f21c9de54bfdd6d720329b5e77fe6c6e02a582416569282ebbc21df7c9"
+      },
+      {
+        "path": "build/readiness/projection-oracle.log",
+        "bytes": 593,
+        "sha256": "ee1bc533fa603d66d6fa83797b8f658d80c5f823f1dccdf26001b6e7daf63883"
+      },
+      {
+        "path": "build/readiness/sec-browser.log",
+        "bytes": 24,
+        "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+      },
+      {
+        "path": "build/readiness/security.log",
+        "bytes": 378,
+        "sha256": "0ee1eedcb79d8944f7a93a0327c4c0e1aee605305133d6eb3c8e147f17228150"
+      },
+      {
+        "path": "build/readiness/stock_fixture_server.log",
+        "bytes": 12687,
+        "sha256": "3a098b9451347a7e1cbbc74a566b1366c191aca089e4b991767a6c0b46074d01"
+      },
+      {
+        "path": "build/readiness/stocks-debug.log",
+        "bytes": 25250,
+        "sha256": "839a0be46db97be4d169df7df03175b46d144f2e30cba3748f94ef8fbfa4aced"
+      },
+      {
+        "path": "build/readiness/stocks-release.log",
+        "bytes": 25250,
+        "sha256": "79e871c68edc232576bf45dd0a8a9693e93abf826558058c9196d406841058ca"
+      },
+      {
+        "path": "build/readiness/stocks-sanitizer.log",
+        "bytes": 25268,
+        "sha256": "1bb474189237e903c7cfdca2a9383df9bf472ca0d2aa80b04e5db12bf66a41c9"
+      },
+      {
+        "path": "build/readiness/storage-failing-before.log",
+        "bytes": 2889,
+        "sha256": "851a84f91c72dd9e130f38a4c55e92188ff1879aa246152bb3aa93921332c30e"
+      },
+      {
+        "path": "build/readiness/storage-focused.log",
+        "bytes": 340,
+        "sha256": "e91424c827ab8622d63584774daaa68b811e92c7780ec33ac75e7f6a693ffeaf"
+      },
+      {
+        "path": "build/readiness/store-comparison-reproduction.log",
+        "bytes": 1066,
+        "sha256": "6648d15357a73bc67a52d2a8289db6fbfc171dd66f403adec9fecc8ddbf4546b"
+      },
+      {
+        "path": "build/readiness/store-comparison.log",
+        "bytes": 1067,
+        "sha256": "a1b478d6067927c9f5f00d064af3ccdcb5877ec8b1505102019d62990e09ef42"
+      },
+      {
+        "path": "build/readiness/store-measurement-final.log",
+        "bytes": 1097,
+        "sha256": "e9f135ed7272474f8a63921281c003572f755d952f64dc4fdbe23e4c85fc26c9"
+      },
+      {
+        "path": "build/readiness/store-measurement.log",
+        "bytes": 1099,
+        "sha256": "35a65d4aef93e88e589bf4423f9b734fb0bc7e7c1492665a271dbcfd51f75831"
+      },
+      {
+        "path": "build/readiness/tls.log",
+        "bytes": 4364,
+        "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+      },
+      {
+        "path": "build/readiness/wheel-exports.log",
+        "bytes": 959,
+        "sha256": "6f69c9269b05bee1497aa380768712d38fd9b58be23a6014f0d6b65fb4ad055c"
+      },
+      {
+        "path": "build/readiness/wheel-interface.log",
+        "bytes": 964,
+        "sha256": "5f39e589ff3ade3352c25b164875d814f4e4ac8a2454251839ed65d7b806ed42"
+      }
+    ],
+    "changed_files": [
+      "terminal/stocks/observation_store.py",
+      "terminal/stocks/test_observation_store.py",
+      "terminal/tests/check_market_projection.py",
+      "terminal/tests/compare_observation_store.py",
+      "terminal/tests/gpu-recovery-validation.mjs",
+      "terminal/tests/measure_observation_store.py",
+      "terminal/tests/run_live_market_suite.py",
+      "terminal/web/src/Landscape3D.tsx",
+      "terminal/web/src/LiveMarket.tsx",
+      "terminal/web/src/QuoteCloud.tsx",
+      "terminal/web/src/marketDelta.test.ts",
+      "terminal/web/src/marketDelta.ts"
+    ],
+    "privacy": "No restricted data,credentials,private configuration or database/binary committed;fixtures explicitly authored",
+    "source_archive": {
+      "safe_intended_byte_identical_members": 764,
+      "sha256": "ef8baac3489eb6313282cc5a786450cac3b53c62ebda3f5dc762e17e7e43f89f",
+      "bytes": 2432647,
+      "inventory_sha256": "e18a9f0be7741e70c08bc124ce190dbafdb96ab5049014d2aa24cf612b5fa732",
+      "evidence_snapshot_sha256": "b450b4aacfd34c81f4fd2875370ae6eb442eb2e29c0c1eef7cad679cce93fdf5",
+      "scope": "Archive verified before adding its receipt;receipt/final report metadata necessarily postdate archive"
+    }
   }
 }

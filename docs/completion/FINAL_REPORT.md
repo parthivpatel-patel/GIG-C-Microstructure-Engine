@@ -365,3 +365,84 @@ Final sequential source archive inspection passed761 safe,intended,byte-identica
 members with complete required source trees. Archive checksum and pre-receipt evidence
 snapshot are recorded in EVIDENCE.json;the final receipt necessarily postdates archive
 creation. No restricted data,private database,credential or build binary was committed.
+
+## Final bounded engineering-readiness closure — 2026-10-27
+
+Recovered exact baselineff41c97abbd79012ea9232eb56dfb5481e5f94c2 without reset.
+New implementation checkpoints:8c16f2034699c50b8ba2745fce1c0f784f3002bc
+(stream/persistence),3fac8761a3d3f65a79cc10c357eda2aa6c6b5490(graphics),and the
+reproducible comparison tool(source SHA in EVIDENCE.json). Main remains unchanged.
+
+The final review repaired three reproduced reliability gaps:projection profile/
+full-baseline/channel ambiguity;cached persistence-summary publication outside the
+writer lock;and lost WebGL contexts not entering their promised2D fallback. Full
+negative-control failures are retained. Both renderers now dispose/retry independently;
+the native camera also supports keyboard interaction. No native book,source acquisition,
+provider permission,SEC identity,financial value or canonical native output was changed.
+
+Fresh selected outcomes688 passed/0 failed/0 skipped:
+
+| Cohort | Pass |
+|---|---:|
+| Stock/SEC/live/storage with Debug binding |151|
+| Same with Release binding |151|
+| Same with ASan/UBSan binding |151|
+| Security/origin/proof/manual-ARM-policy |48|
+| Verified TLS/WSS |8|
+| Frontend unit |27|
+| Seven stable-asset browser suites |91|
+| Multi-stock authored browser |21|
+| AAPL/APLD/CRWV gated browser discovery |3|
+| SEC/late-response/retention browser |3|
+| Actual software-WebGL context loss/retry/isolation/keyboard |9|
+| Native frozen canonical references |8|
+| Installed native-wheel interface/export |14|
+| Packaging regressions |3|
+
+LSan returned0. All8 actual canonical hashes equal their frozen values. The existing
+full six-native and274-consumer matrices remain historical evidence;they were not
+unnecessarily rerun because native sources and those unrelated contracts are unchanged.
+No fresh native build,ARM64,physical-device or hosted qualification is claimed. Additional
+40 independent Python-to-TypeScript full-window comparisons passed after projection
+hardening. A151-test cohort includes the portable lock-publication invariant and actual
+200-append/100-prune concurrent chain/summary verification,plus prior crash/expiry tests.
+
+The original two WebGL regressions injected actual WEBGL_lose_context events. One first
+post-repair native browser attempt checked for an enable button before initial render
+and waited for a nonexistent canvas. The fixture now unconditionally waits/clicks the
+actual enable action;both final GPU cases pass. This timing failure is retained,not
+reclassified as a graphics fix or hidden. Existing deferred-Three bundle and Starlette
+TestClient deprecation warnings remain unsuppressed.
+
+Initial JS232.14kB/gzip72.67kB;Three stays deferred. The same authored projection fixture
+still uses1,167,822bytes versus13,400,005 full-view bytes across39 post-initial snapshots,
+including resynchronization:91.2849% encoded-size reduction,not network traffic/latency.
+Interleaved1000-event SQLite trials used one warmup and five measured repetitions per
+variant with FULL sync. First-series median baseline30.517ms/repaired30.564ms;
+independent script reproduction30.707ms/29.323ms. All recovered ledger digests agree.
+Short shared-host filesystem trials establish no statistically significant speed change
+or production throughput;the publication repair is justified by correctness. The
+comparison script executes only the fixed trusted repository baseline and authored
+fixtures;requires full Git history and can write to a separate evidence directory.
+
+FINAL_ACCEPTANCE_AND_READINESS.md classifies every28 distinct remaining non-complete
+matrix items,plus the now-closed history projection scope. It identifies current
+engineering closure,external qualifications and optional broader product work,with
+exact eventual acceptance gates. No current reproduced defect from this pass remains
+open. This is not an assertion of global defect freedom or full-roadmap completion.
+
+Engineering assessment:the implemented bounded research-terminal scope is ready for
+controlled final acceptance once external prerequisites are established. Broader
+XBRL/PIT,corrected tape,hot-native-recovery and additional source profiles remain explicit
+optional/deferred scope,not silently complete. Production assessment:NOT READY. Actual
+SEC/company reconciliation,entitled provider/storage acceptance,private-device browser
+acceptance,exact-candidate native ARM64 and full hardware/accessibility evidence remain
+required for their claims. Default APLD/CRWV CIKs remain null. No blocked network operation
+was retried,no observed retention/feed/trading gate enabled,and no intermediate owner
+testing was requested. Stop speculative development and use the documented acceptance
+requirements when the owner elects to begin that final phase.
+
+Sequential final source archive inspection passed764 safe,intended,byte-identical
+members with complete required source trees. Its hash/inventory/pre-receipt evidence
+snapshot are recorded in EVIDENCE.json;the final archive receipt necessarily postdates
+the archive. No credential,restricted observation,private database or binary was added.

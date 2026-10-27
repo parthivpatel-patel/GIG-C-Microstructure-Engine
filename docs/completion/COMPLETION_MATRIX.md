@@ -29,7 +29,7 @@ records; current code and executed evidence below qualify only their stated scop
 | Exchange/network latency estimate | BLOCKED | Unsynchronized clocks; age is reported without inventing one-way latency |
 | Per-symbol health/freshness | COMPLETE | LIVE/SIMULATED/STALE/waiting state, bounded-generation counts, source age and receipt age |
 | Browser backpressure/resources | COMPLETE | Eight slots, no per-client FIFO, 1 MiB frames, two-second ASGI send deadline, cancel/timeout cleanup |
-| Browser snapshot bandwidth optimization | PARTIAL | Opt-in delta-v1 history projection;40 exact Python/TypeScript comparisons;91.3% reduction on declared fixture;full top-level metrics/latest remain |
+| Browser snapshot bandwidth optimization | COMPLETE | Opt-in delta-v1 history projection;40 exact Python/TypeScript comparisons;91.3% reduction on declared fixture;full top-level metrics/latest remain |
 | Backend transport queue depth/exchange drops | PARTIAL | Fixed queue/frame bounds; actual queue depth and missing exchange observations remain unknown |
 | Authorized directory search | PARTIAL | AAPL/APLD/CRWV pass API and actual browser selection;13 default display seeds;up to50000 private identities;not current official listings |
 | General provider asset-directory importer | COMPLETE | Strict bounded owner-permitted JSON import,private regular file,source/hash;10000 authored identities tested;no actual provider directory qualification |
@@ -41,7 +41,7 @@ records; current code and executed evidence below qualify only their stated scop
 | Smooth camera interaction | COMPLETE | Bounded event-driven damping; reduced-motion disables inertia; no interpolated source ticks |
 | Accurate axes/tooltips/legends | COMPLETE | Shared capture ordinal, disclosed per-symbol price normalization, actual source values/times |
 | Lighting/fullscreen/2D fallback | COMPLETE | Standard lighting, fullscreen control, existing cards/traces retained on constructor failure |
-| Sustained GPU/context-loss qualification | PARTIAL | Disposal/remount and software-renderer geometry/timing evidence; no physical GPU stress or context-loss recovery qualification |
+| Sustained GPU/context-loss qualification | PARTIAL | Software WebGL context loss/fallback/retry9 checks pass;context disposal and keyboard camera tested;physical GPU/Android sustained stress remains unqualified |
 | Mobile/accessibility | PARTIAL | Five emulated widths, nine-workspace dark/light checks, labelled controls, keyboard/presets/2D; no physical Android/full WCAG certification |
 | Source-aware L1 analytics | COMPLETE | Independent exact spread/mid/imbalance/rate/return references and stable retained log variation |
 | Current session evidence abstraction | COMPLETE | Optional bounded private schedule, provenance, half-open intervals, UNKNOWN for missing coverage |
@@ -113,3 +113,12 @@ checkpoint;older test evidence remains historical. No provider gate was activate
 The remaining full-PIT,corrected-tape,current calendar/halts,physical GPU/device/full
 accessibility and empirical forecasting gaps above are not relabelled complete by
 these services or synthetic tests. No production-readiness claim is made.
+
+## Final bounded engineering closure
+
+Baselineff41c97abbd79012ea9232eb56dfb5481e5f94c2. Reproduced projection baseline/profile
+and persistence diagnostic-publication defects are repaired. Actual WebGL loss now
+falls back and retries independently for L1 and native replay. See
+FINAL_ACCEPTANCE_AND_READINESS.md for a disposition of **every remaining matrix item**,
+engineering/optional/external boundaries and the exact eventual acceptance gates.
+No additional speculative product extension is treated as a defect repair.
