@@ -283,3 +283,85 @@ with complete required source trees and no private output paths. Its checksum an
 pre-receipt evidence snapshot are recorded in EVIDENCE.json;the final archive receipt
 necessarily postdates the archive itself. This does not claim a newly rebuilt native
 wheel. Existing installed-wheel14 checks and packaging3 regressions passed.
+
+## SEC identity/history and qualification continuation — 2026-10-27
+
+Recovered exact clean baseline8cd87af51585023af875679affe136a91d816a81.
+Pushed services4ec38a210b77a7ba347ba0530bd7b5034f937bb8;
+manual ARM64 preparationd4d5f150ee50933529e5414c56fb8947de554701;
+filing-page receipt correctiona640826a72bfeb3974cf8ea428a8d0149604476d;
+PIT ambiguity/UI7d2eb21 checkpoint (full SHA in EVIDENCE.json).
+Main and all native source contracts/canonical identities are preserved.
+
+The actual implementation now supports bounded official SEC ticker-directory
+resolution,explicit advertised older-submissions loading with1024 cached filings,
+shared exact acceptance parsing,amendment cutoffs,ambiguity-safe date-only vintages,
+extended cached filing navigation and history/identity actions in Stock Intelligence.
+Directory conflicts and changed/removed cached issuer identities fail atomically.
+Unknown CIKs remain null. In this environment SEC configuration is disabled and the
+identifying User-Agent is absent;no SEC requests occurred. Fixtures deliberately
+use authored CIK42/43,not asserted APLD/CRWV mappings. The resolver is engineered;
+actual authoritative reconciliation remains BLOCKED. See SEC_HISTORY_AND_IDENTITY.md.
+
+Confirmed failing-before defects:normalization accepted a timestamp grammar the PIT
+filter rejected;date-only vintage chose among same-day facts using accession order.
+The shared exact parser and explicit ambiguous-day exclusion repair these. The latter
+intentionally makes ambiguous results unavailable rather than changing expected values
+to fit an invented chronology. Native canonical outputs remain unchanged.
+Integration guards preserve financial receipt/hash when only filing metadata refreshes,
+reject contradictory shard overlap and prevent late responses from replacing another
+selected company. New endpoint proof targets are explicitly allowlisted;all existing
+Origin/Host/private-Codespaces controls remain. No forwarded-header trust was added.
+
+Final selected outcomes:1535 passed,0 failed,0 skipped (1493 broad selected outcomes plus42 focused post-receipt-correction outcomes):
+
+- Terminal consumer274 in each Debug/Release/ASan+UBSan configuration:822.
+- Stock/SEC/live/persistence149 in each of those configurations:447.
+- Security/proof/ARM64 static policy48;verified TLS/WSS8.
+- Frontend25;seven stable-asset browser suites91.
+- Authored multi-stock browser21;gated AAPL/APLD/CRWV discovery3;new SEC/late-response/retention browser3.
+- Frozen native reference tests8;installed-wheel interfaces/export contracts14;packaging3.
+- Final filing-page receipt correction14 focused tests per Debug/Release/sanitizer:42. The full cohorts precede this final metadata-only change;the affected SEC/API cohort was then repeated in all three configurations.
+
+Three LSan checks returned0. All8 actual canonical hashes equal the frozen values.
+An additional40 cross-language projected/full snapshot comparisons passed,not counted
+as extra CTest outcomes. C++ code/binaries were not rebuilt;prior full six-native
+configuration evidence is retained,not represented as a new build. No new ARM64 or
+hosted success is claimed. The new branch-specific workflow is only prepared,manual,
+free-usage-owner-gated and independently policy checked. Existing workflow is unchanged.
+No workflow,paid resource,feed,observed retention or trading connection was activated.
+
+One initial browser assertion checked enablement before the existing source-load lock
+finished. The test now waits for actual readiness before checking the new action;
+original failure is preserved. Earlier authored tests also needed an advancing fixture
+clock to exercise multiple rate-limited requests and to preserve the fixture's existing
+options entitlements. These fixture errors were repaired without weakening production
+rate limits,permission controls,assertions or test coverage. Final cohorts have no skips.
+
+Measured localx86_64 fixture:50000 issuer rows parsed in0.161870s;100 bounded searches
+took0.573283s (5.73283ms mean);peak processRSS57644KiB includes interpreter,fixture,
+normalized rows and search. This is not SEC/provider throughput. Initial JS232.14kB,
+gzip72.67kB versus previous232.10/72.66;Three remains deferred,its warning unsuppressed.
+The unchanged projection fixture again reconstructs40 exact views and reduces encoded
+bytes91.2849%;not a wire-traffic measurement. Software-renderer screenshots/counters are
+recorded separately;no physical GPU/FPS/Android/accessibility certification is implied.
+
+Remaining implementation:complete XBRL context/presentation and authenticated historical
+fact vintages,corrected trade-tape reconciliation,authoritative current session/halts,
+and hardware/context-loss/accessibility qualification. Remaining external acceptance:
+SEC identifying configuration and official identity reconciliation;actual entitled
+market observations/retention rights;owner-authorized exact-SHA ARM64 and hosted evidence.
+No intermediate owner testing was requested. The next engineering milestone is a
+bounded authenticated fact-vintage archive with independent source reconciliation;
+current selected-fact/metadata services must not be called a complete PIT database.
+
+The final readonly filing page now reports its separate filing receipt rather than
+the preserved older financial receipt. Debug/Release/sanitized focused SEC tests14
+each passed afterward. One initial targeted sanitizer invocation used an unsupported
+-m option;the corrected script-runner invocation passed with LSan0. The invocation
+error is retained as procedural evidence,not a sanitizer finding.
+
+Final sequential source archive inspection passed761 safe,intended,byte-identical
+members with complete required source trees. Archive checksum and pre-receipt evidence
+snapshot are recorded in EVIDENCE.json;the final receipt necessarily postdates archive
+creation. No restricted data,private database,credential or build binary was committed.

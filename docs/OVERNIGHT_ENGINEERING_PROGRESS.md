@@ -671,3 +671,22 @@ complete PIT history,corrected tape)or owner-authorized external qualification.
 Do not restart implementation or repeat this matrix without a relevant change.
 Do not activate feeds/storage without their documented authorization gates.
 No claim that execution continues after the session stops.
+
+## 2026-10-27 SEC/history continuation
+
+Recovered8cd87af without reset. Pushed services4ec38a2,ARM64 preparationd4d5f15,
+PIT/UI7d2eb21;exact SHAs and artifacts in completion evidence. Current selected
+final broad cohorts1493pass/0fail/0skip plus42 focused receipt tests;stock149x3,terminal274x3,security/policy48,TLS8,
+frontend25,browser91+21+3+3,canonical8,wheel14,packaging3. Both LSan checks0.
+Final filing-page receipt checkpointa640826 preserves separate source freshness;
+14 focused tests per configuration passed afterward with third LSan check0.
+New tests preserve original parser-mismatch and same-day accession-order failures.
+Directory/history APIs and UI actions are fixture-qualified,not official SEC acceptance.
+Default APLD/CRWV CIKs remain null because SEC configuration/User-Agent is unavailable.
+Native ARM64 workflow for this branch is manual/owner-gated and was NOT executed.
+No source data download,observed storage,provider activation,main change or workflow dispatch.
+Exact resume:inspect current HEAD/status and development_next evidence;do not repeat
+completed implementation. Remaining engineering:authenticated fact-vintage/XBRL archive,
+corrected tape,current source calendar/halts and hardware/accessibility qualification.
+External prerequisites:SEC identifying config/observed source qualification,feed/storage
+rights and owner-authorized exact-candidate ARM64. No execution continues after stop.

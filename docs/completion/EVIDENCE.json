@@ -1339,5 +1339,626 @@
       "snapshot_scope": "Implementation and documentation immediately before adding this archive receipt;final evidence metadata and report receipt necessarily postdate archive",
       "evidence_snapshot_sha256": "09492fcae3bb4011abbcd2a6b770f824b56bb3201df1f818d87f2088199fb577"
     }
+  },
+  "sec_history_development": {
+    "date": "2026-10-27 America/New_York",
+    "baseline": "8cd87af51585023af875679affe136a91d816a81",
+    "verified_source_commit": "a640826a72bfeb3974cf8ea428a8d0149604476d",
+    "commits": [
+      "4ec38a210b77a7ba347ba0530bd7b5034f937bb8",
+      "d4d5f150ee50933529e5414c56fb8947de554701",
+      "7d2eb217914267b2cf2c39635e18603cbd4b2b67",
+      "a640826a72bfeb3974cf8ea428a8d0149604476d"
+    ],
+    "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "classification": "OFFLINE_AUTHORSHIP_AND_GATED_BROWSER_NOT_OFFICIAL_SEC_OR_LIVE_PROVIDER_ACCEPTANCE",
+    "cohorts": [
+      {
+        "name": "terminal-debug",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/terminal-debug.log"
+      },
+      {
+        "name": "terminal-release",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/terminal-release.log"
+      },
+      {
+        "name": "terminal-sanitizer",
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/terminal-sanitizer.log"
+      },
+      {
+        "name": "stocks-debug",
+        "passed": 149,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/stocks-debug-149.log"
+      },
+      {
+        "name": "stocks-release",
+        "passed": 149,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/stocks-release-149.log"
+      },
+      {
+        "name": "stocks-sanitizer",
+        "passed": 149,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/stocks-sanitizer-149.log"
+      },
+      {
+        "name": "security-and-arm-policy",
+        "passed": 48,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "https-wss",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "frontend",
+        "passed": 25,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "stable-browser",
+        "passed": 91,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "live-browser",
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "discovery-browser",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "sec-browser",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "native-canonical",
+        "passed": 8,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "installed-wheel",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "packaging",
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "name": "final-filing-receipt-debug",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/filing-receipt-debug.log"
+      },
+      {
+        "name": "final-filing-receipt-release",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/filing-receipt-release.log"
+      },
+      {
+        "name": "final-filing-receipt-sanitizer",
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "log": "build/development-next/filing-receipt-sanitizer.log"
+      }
+    ],
+    "passed": 1535,
+    "failed": 0,
+    "skipped": 0,
+    "canonical_hashes": {
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "additional_projection_comparisons": 40,
+    "native_code_changed": false,
+    "native_binaries_recompiled": false,
+    "six_native_matrix": "Prior evidence retained;not rerun wholesale because native sources are unchanged",
+    "installed_wheel": "Existing0.1.1 wheel,14 checks;no new native wheel build claimed",
+    "sec_readiness": {
+      "enabled": false,
+      "policy_reviewed": false,
+      "user_agent_present": false,
+      "user_agent_valid": false,
+      "request_attempts": 0
+    },
+    "actual_issuer_resolution": {
+      "AAPL": "curated routing remains",
+      "APLD": null,
+      "CRWV": null,
+      "official_source_reconciled": false,
+      "fixture_ids": "42/43 are authored test IDs only,not asserted real company mappings"
+    },
+    "arm64": {
+      "local_machine": "x86_64",
+      "cross_compiler_available": false,
+      "qemu_available": false,
+      "candidate_workflow": ".github/workflows/atlas-native-arm64.yml",
+      "manual_only": true,
+      "free_usage_owner_gate": true,
+      "feature_branch_only": true,
+      "policy_tests_passed": 2,
+      "workflow_dispatched": false,
+      "default_branch_registered_by_task": false,
+      "actual_new_candidate_pass": false
+    },
+    "directory_measurements": {
+      "classification": "AUTHORED_50000_ROWS_NOT_OFFICIAL_QUALIFICATION",
+      "parse_seconds": 0.16186998697230592,
+      "queries": 100,
+      "search_total_seconds": 0.5732829950284213,
+      "mean_search_milliseconds": 5.732829950284213,
+      "peak_process_rss_kib": 57644
+    },
+    "browser_measurements": {
+      "classification": "SINGLE_AUTHORED_CHROMIUM_SWIFTSHADER_RUN_NOT_GPU_BENCHMARK",
+      "metrics": [
+        {
+          "name": "Nodes",
+          "value": 1736
+        },
+        {
+          "name": "LayoutCount",
+          "value": 127
+        },
+        {
+          "name": "ScriptDuration",
+          "value": 0.968664
+        },
+        {
+          "name": "JSHeapUsedSize",
+          "value": 8032640
+        },
+        {
+          "name": "JSHeapTotalSize",
+          "value": 28909568
+        }
+      ]
+    },
+    "renderers": {
+      "classification": "CHROMIUM_SWIFTSHADER_FIXTURE_SNAPSHOT_NOT_PHYSICAL_GPU",
+      "renderer": [
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.30000001192092896",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "9"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.20000004768371582",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "9"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "1.300000011920929",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "9"
+        },
+        {
+          "engine": "three.js r180",
+          "camera": "12.999999999999993,10.999999999999998,17.999999999999993",
+          "renderMilliseconds": "0.19999998807907104",
+          "geometries": "2",
+          "drawCalls": "2",
+          "geometryUpdates": "9"
+        }
+      ]
+    },
+    "sec_browser": {
+      "passed": 3,
+      "failed": 0,
+      "classification": "AUTHORED_PRIVATE_LOOPBACK_NOT_SEC_OBSERVATIONS"
+    },
+    "provider_or_observed_storage_activated": false,
+    "default_market_discovery_tests": {
+      "AAPL": "PASS",
+      "APLD": "PASS",
+      "CRWV": "PASS"
+    },
+    "confirmed_defects": [
+      {
+        "issue": "normalizer accepted timestamp grammar rejected by PIT filter",
+        "failing_before": "build/development-next/acceptance-failing-before.log",
+        "repair": "shared exact timezone/nanosecond parser"
+      },
+      {
+        "issue": "date-only vintage invented same-day ordering from accession strings",
+        "failing_before": "build/development-next/date-tie-failing-before.log",
+        "repair": "exclude ambiguous latest-day candidates with explicit count"
+      }
+    ],
+    "fixture_failures": [
+      "Initial rate-limit tests used a frozen clock while mocking sleep;advancing authored clock fixed the fixture",
+      "Initial permission assertion forgot pre-existing authorized fixture options;production gates not changed",
+      "Initial browser assertion checked action before source-load busy state completed;wait for readiness now explicit"
+    ],
+    "artifact_inventory": [
+      {
+        "path": "build/atlas2/resume/stable-assets.json",
+        "bytes": 1370,
+        "sha256": "d73e15b53677a097081e21df07687dd6b0898078a867aa6dcda0d0aa599ad5ac"
+      },
+      {
+        "path": "build/development-next/acceptance-failing-before.log",
+        "bytes": 1090,
+        "sha256": "ede6c6f8af5f925c5de6c06e7bcb3011f66ac752146ca7c2cb9a3abffeacd9b9"
+      },
+      {
+        "path": "build/development-next/arm-policy-final.log",
+        "bytes": 100,
+        "sha256": "fe008aab760eb03ccac7578e2b84665b1b50b0d7f855b17a0c7a8d039435b658"
+      },
+      {
+        "path": "build/development-next/arm-policy.log",
+        "bytes": 10588,
+        "sha256": "8c13d96bf68620748f386666670bfaa3f12fb73ab283deed4ac5b567bf24089a"
+      },
+      {
+        "path": "build/development-next/atlas2_fixture_server.log",
+        "bytes": 24157,
+        "sha256": "4eb95086e70a169e6fbe81b09567b15e74d0ba646652d5a06cb835d8af68e561"
+      },
+      {
+        "path": "build/development-next/atlas_fixture_server.log",
+        "bytes": 31334,
+        "sha256": "88bb68bf01d617ecab17653a627d450b25063cdcfd24c502f0fd81876aae9b02"
+      },
+      {
+        "path": "build/development-next/browser-suite-final.log",
+        "bytes": 78,
+        "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+      },
+      {
+        "path": "build/development-next/browser-suite-frozen.log",
+        "bytes": 78,
+        "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+      },
+      {
+        "path": "build/development-next/build-final.log",
+        "bytes": 1529,
+        "sha256": "96d8b60ac398fa457488c6312759b9c27017893c87c3b212c4d6f3038ddbfff1"
+      },
+      {
+        "path": "build/development-next/build.log",
+        "bytes": 1529,
+        "sha256": "b8b4ed2eec6b510aefd79cd8522f9c5bf478eb9316bb93ab686e3c691c77e0cc"
+      },
+      {
+        "path": "build/development-next/canonical.log",
+        "bytes": 1124,
+        "sha256": "b10f19f00f8711de245c2a8c6a8399b6246338c189e38744a4f2875cae355efb"
+      },
+      {
+        "path": "build/development-next/date-tie-failing-before.log",
+        "bytes": 2161,
+        "sha256": "f9a41c1e06ba04835c0c3a92ea3dd307ac84bc3f4b0630d86a554d999469a398"
+      },
+      {
+        "path": "build/development-next/directory-measurements.log",
+        "bytes": 245,
+        "sha256": "09f8598be8488e64e5db3b6feb86d76c2f3fa4bea9d85300c9cfed4df22ccd19"
+      },
+      {
+        "path": "build/development-next/discovery-browser-frozen.log",
+        "bytes": 42,
+        "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+      },
+      {
+        "path": "build/development-next/discovery-browser.log",
+        "bytes": 42,
+        "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+      },
+      {
+        "path": "build/development-next/filing-receipt-debug.log",
+        "bytes": 347,
+        "sha256": "a47af459344944248ef7275ee7a03da583ca4c312e2216a048a08d71682779c3"
+      },
+      {
+        "path": "build/development-next/filing-receipt-release.log",
+        "bytes": 347,
+        "sha256": "399ea425328b4f801ff57ffbb727547b65e939c1418c6a4fac41547b816a661b"
+      },
+      {
+        "path": "build/development-next/filing-receipt-sanitizer-invocation-error.log",
+        "bytes": 124,
+        "sha256": "f728a2d7978ad19f6d41d65375d1c493e09203dec41c424c97ac47d4ca88ad3c"
+      },
+      {
+        "path": "build/development-next/filing-receipt-sanitizer.log",
+        "bytes": 2897,
+        "sha256": "9eafd4c51804e0f2e08852dbd1b5dc5cade2e40050257322318f798cdbb85936"
+      },
+      {
+        "path": "build/development-next/frontend-final.log",
+        "bytes": 3021,
+        "sha256": "a42b4572df02f5e92a3f2573761495c06f2204ca8163940d979331e51302990c"
+      },
+      {
+        "path": "build/development-next/frontend.log",
+        "bytes": 2917,
+        "sha256": "405a792f01f3702dce803d7136127298e93248f4166d82fa7e3b3a9bef9b1d26"
+      },
+      {
+        "path": "build/development-next/live-browser-frozen.log",
+        "bytes": 255,
+        "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+      },
+      {
+        "path": "build/development-next/live-browser.log",
+        "bytes": 255,
+        "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+      },
+      {
+        "path": "build/development-next/live-market-desktop-synthetic.png",
+        "bytes": 549540,
+        "sha256": "5888ee0fce3ea4bd512c15cce8f5f7c586dc769669723667e1f9fde56780fb32"
+      },
+      {
+        "path": "build/development-next/live-market-mobile-synthetic.png",
+        "bytes": 610858,
+        "sha256": "9acc2051d77d021122847a55a79bea759fc2c56998ecb95f41a7482bb222bb22"
+      },
+      {
+        "path": "build/development-next/live_market_fixture_server.log",
+        "bytes": 10291,
+        "sha256": "bf4250c0627113d3e4ce57eaa16aa693ef03db003ac3709842026ce9e7d0fa80"
+      },
+      {
+        "path": "build/development-next/native-server.log",
+        "bytes": 44373,
+        "sha256": "e06ed28ae0435430247c594d27acc980c743082e2323c1abb7487e437eba7485"
+      },
+      {
+        "path": "build/development-next/operations-retention-synthetic.png",
+        "bytes": 267206,
+        "sha256": "9265236db97da2bda45a69675908b7f7dfbcfa2f1cb11161e43f9520f6436d09"
+      },
+      {
+        "path": "build/development-next/packaging.log",
+        "bytes": 101,
+        "sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d"
+      },
+      {
+        "path": "build/development-next/policy-sec.log",
+        "bytes": 2531,
+        "sha256": "53c4b1a6f52fa2d28361e2cbe1d56bf550ce0f186dd02083bf9dec499c224d02"
+      },
+      {
+        "path": "build/development-next/projection.log",
+        "bytes": 593,
+        "sha256": "75ae68177e2a3fd43972be167b795d27d0e92ca224089ac8e3ca674d71ada00b"
+      },
+      {
+        "path": "build/development-next/sdist-build.log",
+        "bytes": 150,
+        "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+      },
+      {
+        "path": "build/development-next/sdist-check.log",
+        "bytes": 81,
+        "sha256": "5be2db3ef1ccf29a74b8dc1378325cf1a525543d311aa2d0ae1d6ec3adb82ca1"
+      },
+      {
+        "path": "build/development-next/sec-browser-final.log",
+        "bytes": 24,
+        "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+      },
+      {
+        "path": "build/development-next/sec-browser-frozen.log",
+        "bytes": 24,
+        "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+      },
+      {
+        "path": "build/development-next/sec-browser-initial-failure.log",
+        "bytes": 415,
+        "sha256": "e55438dea1ede7b05f298c1d3bd1a0207fc9cfc1b77f302a68f334d9ce646852"
+      },
+      {
+        "path": "build/development-next/sec-browser.log",
+        "bytes": 415,
+        "sha256": "e55438dea1ede7b05f298c1d3bd1a0207fc9cfc1b77f302a68f334d9ce646852"
+      },
+      {
+        "path": "build/development-next/sec-expanded-final.log",
+        "bytes": 2493,
+        "sha256": "c269b70e47d35b64db37dbf2cb30f1cf429237935897bd69140bd450451290d2"
+      },
+      {
+        "path": "build/development-next/sec-focused-final.log",
+        "bytes": 2135,
+        "sha256": "88249d942e0b43cfd4ee710708830d1229539fc42b1a8a6ea016484e4122e1ba"
+      },
+      {
+        "path": "build/development-next/sec-focused.log",
+        "bytes": 6229,
+        "sha256": "afb094555804e25d0d8be02e3529cc3cf345a13f694701d3a2d2a045c80686f8"
+      },
+      {
+        "path": "build/development-next/sec-policy-final.log",
+        "bytes": 349,
+        "sha256": "9f1c7b87c0c52070eb79406ed4e0e3534d1c07e3e0ca4e7ac9fe229c4c1374b0"
+      },
+      {
+        "path": "build/development-next/security-policy-final.log",
+        "bytes": 378,
+        "sha256": "d6cf1bb80d9b529cce9a2510f62d2796a0e65ac51ec2e17e7c3d8bdd4ceec0db"
+      },
+      {
+        "path": "build/development-next/security-policy.log",
+        "bytes": 378,
+        "sha256": "9e8be5c6f0f6593d1c7d56a5ab8251dfdbb6f4032980b3c536d2b1d5aa04fc4d"
+      },
+      {
+        "path": "build/development-next/stock_fixture_server.log",
+        "bytes": 24603,
+        "sha256": "22c65e3429733e36068f72897ca7eae5a16cf4ecbf44f9c18129de872b4ff764"
+      },
+      {
+        "path": "build/development-next/stocks-debug-149.log",
+        "bytes": 24908,
+        "sha256": "c2be2ac33db3f8c303950dc24b1c7c58f91fb6ceec194e4563de1ef74e802add"
+      },
+      {
+        "path": "build/development-next/stocks-debug-final.log",
+        "bytes": 24718,
+        "sha256": "739ceb1fb8b5dd56f6789524cedebe894aa0256e096cd8dd37d618b3c1be3898"
+      },
+      {
+        "path": "build/development-next/stocks-debug.log",
+        "bytes": 23974,
+        "sha256": "82cf7a85466d1beecbebd9bbc44bb0cd034f03846d11a26b75e1045d18e4a7e9"
+      },
+      {
+        "path": "build/development-next/stocks-release-149.log",
+        "bytes": 24908,
+        "sha256": "54f013f1c325596fdac1dbc9d29405983b5d61c936061bff97f9f44e06db04ac"
+      },
+      {
+        "path": "build/development-next/stocks-release-final.log",
+        "bytes": 24718,
+        "sha256": "b5bf5429d94ce60edfe2339b802750fda9451fa32f26f2c5fbedef328b4ccd5d"
+      },
+      {
+        "path": "build/development-next/stocks-release.log",
+        "bytes": 23974,
+        "sha256": "5a911d5b6dc1cfa0576eba8cd839739f3bd320e869fdddf13b59bc30fea37ff1"
+      },
+      {
+        "path": "build/development-next/stocks-sanitizer-149.log",
+        "bytes": 24926,
+        "sha256": "43dce26ce8a15edc66a7610b2c3e9878619024b3cb796ef711ad50d623c60ecf"
+      },
+      {
+        "path": "build/development-next/stocks-sanitizer-final.log",
+        "bytes": 24736,
+        "sha256": "e201d0284d6671e4b939aefd6b75d1af17219b9399df835f694216a49086ed62"
+      },
+      {
+        "path": "build/development-next/stocks-sanitizer.log",
+        "bytes": 23992,
+        "sha256": "0c56442bd6e022952add6cefae954d3aafa4c54686fd0c3d979a3ba75f280fd5"
+      },
+      {
+        "path": "build/development-next/terminal-debug.log",
+        "bytes": 40306,
+        "sha256": "57a46dfbd8a9c943f7f15ad320876ac6f413de46e9322be09bebe05d0fa5fe21"
+      },
+      {
+        "path": "build/development-next/terminal-release.log",
+        "bytes": 40306,
+        "sha256": "f99cbd285da2407d4a1211e9a3f8269933a18d9842408e870d29c7756cdabe67"
+      },
+      {
+        "path": "build/development-next/terminal-sanitizer.log",
+        "bytes": 41063,
+        "sha256": "f83302838c3af1548352fe224acfd34de85405670bf1240902d8a5cc30dc84ed"
+      },
+      {
+        "path": "build/development-next/tls-final.log",
+        "bytes": 4364,
+        "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+      },
+      {
+        "path": "build/development-next/wheel-exports.log",
+        "bytes": 959,
+        "sha256": "517f9fef5b7ebdd1ebcaf5eef9517aa0718b249b62c84076a551448eb0c3c84e"
+      },
+      {
+        "path": "build/development-next/wheel-interface.log",
+        "bytes": 964,
+        "sha256": "6631db17bed12acb3a38308847806cedd7a9a05f07bdb6ef8bf0d555c075ee8d"
+      }
+    ],
+    "changed_files": [
+      ".github/workflows/atlas-native-arm64.yml",
+      "docs/completion/SEC_HISTORY_AND_IDENTITY.md",
+      "terminal/server/app.py",
+      "terminal/server/request_proofs.py",
+      "terminal/stocks/sec.py",
+      "terminal/stocks/sec_history.py",
+      "terminal/stocks/sec_identity.py",
+      "terminal/stocks/service.py",
+      "terminal/stocks/test_acceptance.py",
+      "terminal/stocks/test_sec_expansion.py",
+      "terminal/stocks/vintages.py",
+      "terminal/test_atlas_arm64_policy.py",
+      "terminal/tests/measure_sec_directory.py",
+      "terminal/tests/run_live_market_suite.py",
+      "terminal/tests/sec-completion-validation.mjs",
+      "terminal/web/src/MarketHealth.tsx",
+      "terminal/web/src/StockIntelligence.tsx",
+      "terminal/web/src/api.ts",
+      "terminal/web/src/financial.test.ts",
+      "terminal/web/src/financial.ts"
+    ],
+    "remaining_implementation": [
+      "Complete XBRL context/presentation and authenticated historical fact vintages",
+      "Corrected trade-tape reconciliation",
+      "Authoritative current calendar/halts",
+      "Hardware context-loss/accessibility qualification"
+    ],
+    "external_blockers": [
+      "Valid identifying SEC configuration and observed directory/shard reconciliation",
+      "Actual entitled provider observations and retention rights",
+      "Owner-authorized exact-candidate native ARM64/hosted evidence"
+    ],
+    "scope": "No current SEC/Alpaca requests,no private historical data,no new native ARM64 qualification,no production-readiness claim",
+    "source_archive": {
+      "members": 761,
+      "sha256": "3448ac88f175d0f0ec89272faff25b2e3af70d79ea958e17f74d978076f561b7",
+      "bytes": 2419522,
+      "inventory_sha256": "c20d9da3c44bc6fc10b0d021e429551b6a0896d967f242c140a09b7ee03619db",
+      "verified": "Safe intended byte-identical members;required source trees complete",
+      "scope": "Source and reports immediately before archive receipt;receipt/evidence-final-metadata necessarily postdate archive",
+      "evidence_snapshot_sha256": "48d71c28b0321684640401918adb3a813b1966bc8b95b460b8fad7047a8f0032"
+    }
   }
 }

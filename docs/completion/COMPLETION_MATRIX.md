@@ -87,3 +87,29 @@ evidence is retained in EVIDENCE.json;current tests are separately inventoried.
 | Observed provider/storage acceptance | BLOCKED | No credentials,source/retention grant or live experiment here |
 
 Allowed status vocabulary:COMPLETE,PARTIAL,NOT IMPLEMENTED,BROKEN,BLOCKED,NOT APPLICABLE.
+
+## SEC historical engineering continuation (2026-10-27)
+
+Baseline8cd87af51585023af875679affe136a91d816a81. This table extends the prior
+checkpoint;older test evidence remains historical. No provider gate was activated.
+
+| Requirement | Status | Executed evidence and boundary |
+|---|---|---|
+| Fixed official SEC directory resolver | COMPLETE | Source URL fixed;bounded parse,permissions,rate limit,hash/classification,atomic conflicts/cache identity protection;authored fixtures only |
+| Actual authoritative APLD/CRWV reconciliation | BLOCKED | No enabled SEC review/User-Agent configuration here;default CIKs remain null;no guessed mappings |
+| AAPL/APLD/CRWV discovery | COMPLETE | Existing API and actual browser3/3 preserved;discovery and feed entitlements remain separate |
+| Explicit advertised historical submissions loader | COMPLETE | At most2 older shards,25s operation,8MiB/source,1024 selected filings;failure preserves cache;not full-history completeness |
+| Extended cached filing pagination | COMPLETE | API/frontend0–1024 offsets and50-row page bound;old default128 normalization preserved |
+| Shared exact acceptance grammar | COMPLETE | Reproduced parser mismatch repaired;nanoseconds/timezones/amendments/regressions pass |
+| Date-only ambiguous same-day facts | COMPLETE | Failing-before accession-order choice now excluded with explicit count;no invented chronology |
+| Full authenticated XBRL/PIT source history | PARTIAL | Bounded companyfacts revisions/recent or explicitly fetched filing metadata are not a complete historic response archive |
+| Financial freshness after filing-only refresh | COMPLETE | Financial receipt/hash preserved,filing receipt separate;synthetic regression |
+| Late-response company isolation | COMPLETE | Browser held old-company history response while selectingNVDA;old response cannot overwrite it |
+| Durable storage operational clarity | COMPLETE | Operations shows historical retention count/bytes/policy or disabled reason;no acquisition/storage activation |
+| New-branch manual ARM64 qualification workflow | COMPLETE | Separate atlas-native-arm64.yml;manual-only,owner/free-usage gate,branch guard,six configurations/eight frozen hashes,static policy2/2 |
+| New-candidate actual ARM64 qualification | BLOCKED | Localx86_64,no cross compiler/QEMU;workflow not dispatched or registered onmain |
+| Actual live provider/recovery/retention qualification | BLOCKED | Permissions/credentials/observations unavailable;existing streaming/store fixture regressions preserved |
+
+The remaining full-PIT,corrected-tape,current calendar/halts,physical GPU/device/full
+accessibility and empirical forecasting gaps above are not relabelled complete by
+these services or synthetic tests. No production-readiness claim is made.
