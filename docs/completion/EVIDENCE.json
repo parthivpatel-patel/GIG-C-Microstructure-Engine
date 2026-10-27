@@ -2529,5 +2529,19 @@
       "evidence_snapshot_sha256": "b450b4aacfd34c81f4fd2875370ae6eb442eb2e29c0c1eef7cad679cce93fdf5",
       "scope": "Archive verified before adding its receipt;receipt/final report metadata necessarily postdate archive"
     }
+  },
+  "full_development_scope_audit": {
+    "baseline": "90bebeb61ba16330eb17edd9771eb600d436e363",
+    "verified_source_checkpoint": "8a598ce2eb13c53f7f0bc47c25a87b1b9561fab3",
+    "manifest": "docs/completion/DEVELOPMENT_SCOPE_EVIDENCE.json",
+    "traceability": "docs/completion/DEVELOPMENT_SCOPE_TRACEABILITY.json",
+    "report": "docs/completion/DEVELOPMENT_SCOPE_AUDIT.md",
+    "answer": "YES_DECLARED_RESEARCH_ENGINEERING_SCOPE_ONLY_NOT_EXTERNAL_ACCEPTANCE",
+    "selected_outcomes": {
+      "passed": 1567,
+      "failed": 0,
+      "skipped": 0
+    },
+    "new_candidate_arm64_qualified": false
   }
 }

@@ -1,0 +1,1050 @@
+{
+  "baseline": "90bebeb61ba16330eb17edd9771eb600d436e363",
+  "classification": "SOURCE_FUNCTIONALITY_AUDIT_NOT_EXTERNAL_QUALIFICATION",
+  "requirements": [
+    {
+      "requirement": "Native C++ engine",
+      "actual_implementation": "Strong types,L3 FIFO,replay,journal,matching,execution/TCA through real extension",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "include/gig/core/numeric.hpp",
+          "line": 15,
+          "sha256": "4b96432c3bcdb2e54cd993f14f4223629ca47c2d051df0b51e8f26bedeca0768",
+          "role": "code"
+        },
+        {
+          "path": "include/gig/book/order_book.hpp",
+          "line": 32,
+          "sha256": "0fff19acec016b62d49941a917cb11f2f11070e85d10a590c23cd876308c95b8",
+          "role": "code"
+        },
+        {
+          "path": "include/gig/replay/replay.hpp",
+          "line": 50,
+          "sha256": "a618020d5e7fc8a69517f1bf2dab78a26b04de697a6b4801cb6179c5c9699204",
+          "role": "code"
+        },
+        {
+          "path": "include/gig/simulation/simulator.hpp",
+          "line": 40,
+          "sha256": "554445aca9cf95f319b63c54c276ea52d9e5fd1dd6d3d2a3504fc576f5ebb9a7",
+          "role": "code"
+        },
+        {
+          "path": "include/gig/execution/execution.hpp",
+          "line": 14,
+          "sha256": "d699a2d642f36692052a778a47b8b75bc85800b45e1454462426c35f57ab1e68",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/engine.py",
+          "line": 13,
+          "sha256": "8f90855b2c8f1776df10a9b87dcab777a7bfa957d2dccc1ab2ff7e1c39d91a10",
+          "role": "code"
+        },
+        {
+          "path": "tests/test_replay.cpp",
+          "line": 1,
+          "sha256": "72bbecd8b3edb40a0311a26b1a287f386b3d12b585eaee447432994a5c8082dc",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_simulation.cpp",
+          "line": 1,
+          "sha256": "f7c847ef45b2938e14b797da20d0dae512e246158d4ea3d360493d7be8cc4e6c",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_execution.cpp",
+          "line": 1,
+          "sha256": "9c6a9981a826c775aeed3b0da9e16c5d5646f1fffe63ae017d57a4a0574efbe8",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/browser-validation.mjs",
+          "line": 1,
+          "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Observed L3 initialization/reference and new-candidate ARM64 remain external qualification",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Real-time L1 streaming",
+      "actual_implementation": "Fixed IEX adapter,shared source,auth/acks,ordering,dedup,reconnect,IDLE/stale,proof SSE projection",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/live.py",
+          "line": 11,
+          "sha256": "af054d222822c097ece4b5d8bffc874fee596682736f2ffdc08e4ebb457e05cb",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/live_metrics.py",
+          "line": 5,
+          "sha256": "ce7cdd19dba8bd857883ca7f6d586f922800b1a2baaea69db2f5aa9510b47612",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/market_events.py",
+          "line": 6,
+          "sha256": "be5b4f4c91af2f26c66d980a829b6ce928195e0d356b6da6f46da0d1b0cfd207",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/market_delta.py",
+          "line": 2,
+          "sha256": "43db0b2b49019d3a110affc23c5acbfd61eee444ffccd325ce80f2415e9baeca",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/marketStream.ts",
+          "line": 5,
+          "sha256": "0fe131e69dd437d3814c2244cb4c0b60c6f2a8d77090146931cd7af6a53958c7",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/marketDelta.ts",
+          "line": 4,
+          "sha256": "8195ac84eeee690df5ac65b8b72c882afc6df976b7e581da95b56c1e16775ec0",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_final.py",
+          "line": 9,
+          "sha256": "fd53a6a2a9114fd488c980ab002a3f8d03640e124d1a7792f2f1189c5f160376",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_completion.py",
+          "line": 7,
+          "sha256": "3716334f29d615ec99159009a3766bc5c9ea3c112cf8e826fad706bb1d09f620",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_projection.py",
+          "line": 4,
+          "sha256": "e66751e8b05fe7446f9cb3dadef11372fd98ee533f58b25039737ac196b10d43",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/live-market-validation.mjs",
+          "line": 1,
+          "sha256": "732a6cbfd7ea9f23a06b037cfe0534c70d7e88eb4dd872f1429f43650678bce6",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Account/protocol/observed-source acceptance is external;not SIP/NBBO or complete tape",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Multi-stock monitoring",
+      "actual_implementation": "Bounded four-or-stricter subscriptions,persistent identifiers,panels,comparison,independent pause/camera",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/LiveMarket.tsx",
+          "line": 9,
+          "sha256": "40db8afd39a04ee49e0fb0a6712907ab98e1ae060ff2c9516c4700d88f991e59",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/QuoteCloud.tsx",
+          "line": 6,
+          "sha256": "6cf278514471527310fcb01da8048e291cabd23b86e5f4f951080b3c8339d642",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/live.py",
+          "line": 11,
+          "sha256": "af054d222822c097ece4b5d8bffc874fee596682736f2ffdc08e4ebb457e05cb",
+          "role": "code"
+        },
+        {
+          "path": "terminal/tests/live-market-validation.mjs",
+          "line": 1,
+          "sha256": "732a6cbfd7ea9f23a06b037cfe0534c70d7e88eb4dd872f1429f43650678bce6",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_completion.py",
+          "line": 7,
+          "sha256": "3716334f29d615ec99159009a3766bc5c9ea3c112cf8e826fad706bb1d09f620",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Provider support and observed acceptance remain unverified;watchlists are not subscriptions",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Broad discovery",
+      "actual_implementation": "Bounded private catalog plus accepted SEC identities connected to financial and market search/admission",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/market_catalog.py",
+          "line": 5,
+          "sha256": "895c3c5c53a3bf54a4282f4acf8809f3401d20751ebd61f4d9ba2628a472ca16",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/sec_identity.py",
+          "line": 6,
+          "sha256": "0e038c274a17f0f83445377e49325ad478f645d406dadb4d7e3f65379f563234",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/service.py",
+          "line": 10,
+          "sha256": "72f2f9fbd252d6d4fa68e68df808aaafd079da34b24e244f31d64fe77af60362",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/live.py",
+          "line": 11,
+          "sha256": "af054d222822c097ece4b5d8bffc874fee596682736f2ffdc08e4ebb457e05cb",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_catalog.py",
+          "line": 3,
+          "sha256": "057717dc347f73687247784f067432288f9d8407a08f58514fab30cce61ae7fa",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_sec_expansion.py",
+          "line": 11,
+          "sha256": "6abe557f8170e299f1444f05481713be8b2ac8b721ef2b619a1554372758deeb",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_ratio_history.py",
+          "line": 6,
+          "sha256": "dde2e9320e718175d3f13ef00b78b270ce71bde963dcc76bf949b152f3a13a70",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/discovery-validation.mjs",
+          "line": 1,
+          "sha256": "29facef7c6b6a28f968bd1223b13d4b16d610e4084b42ac8117eb6343565d649",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/acquisition.py",
+          "sha256": "06c1df9a3a462a783971e29ae06c24b715a21ae13870d52fd2b2c27a295b3e4a",
+          "role": "code",
+          "line": 1
+        },
+        {
+          "path": "terminal/stocks/identity.py",
+          "sha256": "54ee20dbef6f43e86d86a1ce2464d6fcff6a8dd1618d251e207d9c8c65f00ac9",
+          "role": "code",
+          "line": 1
+        },
+        {
+          "path": "terminal/stocks/session_schedule.py",
+          "sha256": "7f7e6a50b41759929f483e2ca26ab79790fad1df97c1301bbb65a7e1496d0d43",
+          "role": "code",
+          "line": 1
+        }
+      ],
+      "remaining_boundary": "Current official universe requires permitted source/configuration;default APLD/CRWV CIKs remain null",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Stock Intelligence",
+      "actual_implementation": "Company identity,search/loading,quotes,facts,filings,options,portfolio/model/risk views,source and missingness",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/StockIntelligence.tsx",
+          "line": 29,
+          "sha256": "8df5cd63517e5bb0b85ba3be36803da8cca14c27eb824f4b461aac4dacf84fed",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/FinancialWorkspace.tsx",
+          "line": 9,
+          "sha256": "c74caf2f92dbc1b70512585df9b7fe45aa244faa01b40efadb53ce4087cc89f4",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/OptionChain.tsx",
+          "line": 4,
+          "sha256": "5cb2c91c3e7a59ad6ce635a1ac9d1a2ada5a022685ed2eb294a6b450898cda00",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/PortfolioLab.tsx",
+          "line": 4,
+          "sha256": "2f59f3dc767f5b447eabe038ae2b675b57a8e9e143a63626d4c35065a460bbb9",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/service.py",
+          "line": 10,
+          "sha256": "72f2f9fbd252d6d4fa68e68df808aaafd079da34b24e244f31d64fe77af60362",
+          "role": "code"
+        },
+        {
+          "path": "terminal/tests/stock-intelligence-validation.mjs",
+          "line": 1,
+          "sha256": "e6f8e69b7dfc658ffac1999edfcd7201b1526cb2a74895665ddbe21b78130492",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/stock-loading-validation.mjs",
+          "line": 1,
+          "sha256": "cfc84365b9767a937ea7917e4de135c8fa4fa0fc3edb30788e5b610d3e3a23be",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/sec-completion-validation.mjs",
+          "line": 1,
+          "sha256": "0d38e0e7c05387f68c8e5b33cfedbd48a851d8f281f82e6c38ef284358d3273b",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "No fabricated holdings/news/quotes;unavailable conditional sources are explicit",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "SEC statements and periods",
+      "actual_implementation": "Selected income,balance,cash facts,aligned period tables,exact twelve descriptors,no inferred quarters",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/sec.py",
+          "line": 15,
+          "sha256": "c7eabec56078f6536a1a80a559d563f3d4a0c7285f3068e03da788e489d8ccb1",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/statements.py",
+          "line": 8,
+          "sha256": "b20839f778b0f27a7213159d71734556db7fd87038be1b311b11421e0892808e",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/financials.py",
+          "line": 20,
+          "sha256": "b94b69bbbe2938e9e642148239a96c421e40a608a8d61bf67c3a249ccf513d28",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/AlignedStatements.tsx",
+          "line": 5,
+          "sha256": "9eb942028267df8f7ba50d75b5cff4eda18802c1e78ab4f269293e4339ed04ba",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/BalanceComparison.tsx",
+          "line": 5,
+          "sha256": "ebec966fb78098d13b2a76e542cde6ca4a12d29d97f219f722f29d1cd1cebb52",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_backend.py",
+          "line": 7,
+          "sha256": "bc918d91a27c7ad07b6780010512ea4a2f6e95e91092ba45f3daac6fd34de52b",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_phase4.py",
+          "line": 10,
+          "sha256": "c9e36adcab74ff5d7b2906d9bc80c740945cd4e1f9eea8e0763ddf01c0d1c3ab",
+          "role": "test"
+        },
+        {
+          "path": "terminal/web/src/financial.test.ts",
+          "line": 5,
+          "sha256": "6c78ab29bbd0154c25a8de484fd9830f55a1b5b14bb42a99a799bcc2a63a97fe",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/ratio-history-validation.mjs",
+          "line": 1,
+          "sha256": "858ea98dbfe1b0545bf1ed5e2f8e9607f46a45759598e6a00dffd106abb412d4",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Selected reported facts are the agreed UI contract;not full XBRL presentation/taxonomy reconstruction",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Financial ratio trends",
+      "actual_implementation": "NEW:cache-only versioned exact period histories,charts,tables,missing/ambiguous periods,no client formula duplication",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/ratio_history.py",
+          "line": 7,
+          "sha256": "52296eb7b511adf617509d3378d1dc2cfc8cf62b4f8ee894380c46ee91634613",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/financials.py",
+          "line": 20,
+          "sha256": "b94b69bbbe2938e9e642148239a96c421e40a608a8d61bf67c3a249ccf513d28",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/RatioHistory.tsx",
+          "line": 2,
+          "sha256": "7de37e39033cc413f8d9eb3fb4043eb3bc3863ac1bbb97b9bcb7366d4edbc760",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/ratioHistory.ts",
+          "line": 2,
+          "sha256": "1a83a7a922e6f936a0609a77eeb374d50a45685c1358e5a791e03b2c9b4aa83c",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_ratio_history.py",
+          "line": 6,
+          "sha256": "dde2e9320e718175d3f13ef00b78b270ce71bde963dcc76bf949b152f3a13a70",
+          "role": "test"
+        },
+        {
+          "path": "terminal/web/src/ratioHistory.test.ts",
+          "line": 1,
+          "sha256": "69b3c13bb011b9221d9f3ba66aa9a2f87901e723771fc5d5143047a5b4d899b1",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/ratio-history-validation.mjs",
+          "line": 1,
+          "sha256": "858ea98dbfe1b0545bf1ed5e2f8e9607f46a45759598e6a00dffd106abb412d4",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Restated retained snapshot explicitly NOT point-in-time information availability",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Historical filings and PIT safeguards",
+      "actual_implementation": "Bounded advertised shards,1024-cache pagination,acceptance timestamps,amendments,ambiguity-safe vintages",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/sec_history.py",
+          "line": 6,
+          "sha256": "3b7a337fcf17552e0f387439f5add3b00326ab8d4cd64484be2905f9a02ccd72",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/vintages.py",
+          "line": 6,
+          "sha256": "cf8da98fe5c947c9a38eaf1c4ed2a23ad5f9cc925c495c38162871f75724a04b",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/FilingExplorer.tsx",
+          "line": 5,
+          "sha256": "d6b2109d2fabcf1bcbbb827bc7515a66cdd452fb4049917bb070522e2af51471",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/AcceptanceView.tsx",
+          "line": 3,
+          "sha256": "053b532d9e44f2207e0121fcc2daab1ed4ac873d6461aa3a1e18a35fa9e12689",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_sec_expansion.py",
+          "line": 11,
+          "sha256": "6abe557f8170e299f1444f05481713be8b2ac8b721ef2b619a1554372758deeb",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_acceptance.py",
+          "line": 5,
+          "sha256": "950bd04179c8bde42c13f692701eefa620c10f630083c3d6569859b7682ce8be",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/sec-completion-validation.mjs",
+          "line": 1,
+          "sha256": "0d38e0e7c05387f68c8e5b33cfedbd48a851d8f281f82e6c38ef284358d3273b",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Official reconciliation and complete historical response authority not established",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Order Book and Market Depth",
+      "actual_implementation": "Actual native book/aggregate-depth visualization,source labels,2D and independent native3D",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/App.tsx",
+          "line": 16,
+          "sha256": "1c22e12e2b406b53b51f1d5664453d216bee5bb55ab2137b6d09b549980be655",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/DepthChart.tsx",
+          "line": 3,
+          "sha256": "aec8ce77853364a7befc3f71fd192b490061d799ffe929fca5f91d0ecc772b1e",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/Landscape3D.tsx",
+          "line": 9,
+          "sha256": "16f05e147e36eed6ba8e9bd1cb09ec7466d637280a2ba5ed0a63edd4eb10590e",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/engine.py",
+          "line": 13,
+          "sha256": "8f90855b2c8f1776df10a9b87dcab777a7bfa957d2dccc1ab2ff7e1c39d91a10",
+          "role": "code"
+        },
+        {
+          "path": "tests/test_book_metrics.cpp",
+          "line": 1,
+          "sha256": "75b13f4b3cc109f2a94ce2762e37bc830481e30e31eca09b0300c498e3474a73",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/browser-validation.mjs",
+          "line": 1,
+          "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/atlas2-validation.mjs",
+          "line": 1,
+          "sha256": "6679c1be4b7f8f5ff1f2ba82f48432b3fa6d10f4f2e18c5adbb29c0a791193c2",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "No L2/L3 equity depth inferred from L1;aggregate depth has no L3 identities",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Order Flow",
+      "actual_implementation": "Native bounded window metrics,OFI,matched-price changes,intensity,source-position tape;unavailable when unsupported",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "include/gig/analytics/flow_metrics.hpp",
+          "line": 27,
+          "sha256": "7359e661e487c9fbe2d7bd1ef0c5cf0dbcbd9aed583186443a050f7597b789a8",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/engine.py",
+          "line": 13,
+          "sha256": "8f90855b2c8f1776df10a9b87dcab777a7bfa957d2dccc1ab2ff7e1c39d91a10",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/App.tsx",
+          "line": 16,
+          "sha256": "1c22e12e2b406b53b51f1d5664453d216bee5bb55ab2137b6d09b549980be655",
+          "role": "code"
+        },
+        {
+          "path": "tests/test_flow_metrics.cpp",
+          "line": 1,
+          "sha256": "7f20c2e7dfab9e1dd986491c45ceb7d34e317912fc1215a9f7d357bfbb5b89ca",
+          "role": "test"
+        },
+        {
+          "path": "terminal/test_l2_research.py",
+          "line": 6,
+          "sha256": "976839a1838e4ae57b2b80e540c97df48ab1d6558e555379a87596b59b828ec1",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/live-controls-validation.mjs",
+          "line": 1,
+          "sha256": "4e3c75f2c549fcdec858438271f02c8ec20ca8f286cad7221dd7e7f43c54746c",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Depth changes are not executions/cancels;corrected complete tape not promised",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Historical Replay",
+      "actual_implementation": "Timeline,seek,restart,step,play,speed,dataset provenance,recorded aggregate sessions",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/server/engine.py",
+          "line": 13,
+          "sha256": "8f90855b2c8f1776df10a9b87dcab777a7bfa957d2dccc1ab2ff7e1c39d91a10",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/App.tsx",
+          "line": 16,
+          "sha256": "1c22e12e2b406b53b51f1d5664453d216bee5bb55ab2137b6d09b549980be655",
+          "role": "code"
+        },
+        {
+          "path": "terminal/l2_playback.py",
+          "line": 14,
+          "sha256": "ce4d2e54f179c17b775a01071dd530fc2112c114a78499c25a0a59468855cb1c",
+          "role": "code"
+        },
+        {
+          "path": "tests/test_replay.cpp",
+          "line": 1,
+          "sha256": "72bbecd8b3edb40a0311a26b1a287f386b3d12b585eaee447432994a5c8082dc",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/recorded-playback-validation.mjs",
+          "line": 1,
+          "sha256": "d79790d52fff15040c8f9d2bf9080cadeb7ad3303da933bfedd13e07e01e62f9",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/browser-validation.mjs",
+          "line": 1,
+          "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Only accepted authored/permitted recordings;unknown initial L3 state is never completed by assumption",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Execution Simulator",
+      "actual_implementation": "Native TWAP/VWAP/POV,schedules,matching,fills,costs,export,simulation-only labels",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "include/gig/execution/execution.hpp",
+          "line": 14,
+          "sha256": "d699a2d642f36692052a778a47b8b75bc85800b45e1454462426c35f57ab1e68",
+          "role": "code"
+        },
+        {
+          "path": "include/gig/simulation/simulator.hpp",
+          "line": 40,
+          "sha256": "554445aca9cf95f319b63c54c276ea52d9e5fd1dd6d3d2a3504fc576f5ebb9a7",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/engine.py",
+          "line": 13,
+          "sha256": "8f90855b2c8f1776df10a9b87dcab777a7bfa957d2dccc1ab2ff7e1c39d91a10",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/ResearchSummary.tsx",
+          "line": 4,
+          "sha256": "4f8babedc298c11f16d2b7d684ed03d2e129b958da7b9a962e3540cc8643bd54",
+          "role": "code"
+        },
+        {
+          "path": "tests/test_execution.cpp",
+          "line": 1,
+          "sha256": "9c6a9981a826c775aeed3b0da9e16c5d5646f1fffe63ae017d57a4a0574efbe8",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_simulation.cpp",
+          "line": 1,
+          "sha256": "f7c847ef45b2938e14b797da20d0dae512e246158d4ea3d360493d7be8cc4e6c",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/browser-validation.mjs",
+          "line": 1,
+          "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/atlas2-validation.mjs",
+          "line": 1,
+          "sha256": "6679c1be4b7f8f5ff1f2ba82f48432b3fa6d10f4f2e18c5adbb29c0a791193c2",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "No broker/live orders;authored volume profiles are not forecasts",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Research and Validation",
+      "actual_implementation": "Bounded HMM/GARCH/Kalman,risk,portfolio,chronological evaluation,dataset validation and gated exports",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/models.py",
+          "line": 5,
+          "sha256": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/advanced_models.py",
+          "line": 5,
+          "sha256": "85d209cedfa838ce7d2e31a1d0921db60fcc874f13b4bf40c53d3009ebc31266",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/risk.py",
+          "line": 7,
+          "sha256": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/portfolio.py",
+          "line": 7,
+          "sha256": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/evaluation.py",
+          "line": 6,
+          "sha256": "17a474f2711f93b144b0683e5a85e131757d5fb41de760f165ea280c583cb663",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/ResearchDiagnostics.tsx",
+          "line": 6,
+          "sha256": "7c5a994757f36749b9cd97a9828595e867ca0ca888b74747bc49c3c9e8420214",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/PortfolioLab.tsx",
+          "line": 4,
+          "sha256": "2f59f3dc767f5b447eabe038ae2b675b57a8e9e143a63626d4c35065a460bbb9",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_phase4.py",
+          "line": 10,
+          "sha256": "c9e36adcab74ff5d7b2906d9bc80c740945cd4e1f9eea8e0763ddf01c0d1c3ab",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_phase5.py",
+          "line": 11,
+          "sha256": "e4692854b5dee431c658185a3a5b962ff054fd6331111ef7a2bcf4f5bb575e40",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_final.py",
+          "line": 9,
+          "sha256": "fd53a6a2a9114fd488c980ab002a3f8d03640e124d1a7792f2f1189c5f160376",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/atlas-final-validation.mjs",
+          "line": 1,
+          "sha256": "43681a9dc0a673e876196f4e3ab37011c6348bc2e6ac9228260bdd6d43639b82",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Independent numerical checks are not empirical forecasting/OOS certification",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Operations",
+      "actual_implementation": "Native/source health,stream freshness,bounded resource metadata,provider configuration,storage policy display",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/MarketHealth.tsx",
+          "line": 4,
+          "sha256": "23c6f8624a4282dd85779806f847a779e62100366e7ea070941ea59af39c3744",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/SECStatus.tsx",
+          "line": 2,
+          "sha256": "1f19136181997c4ed1ee7e1685c0fdaa6f5514c30846200a3e2d7550acf8e4a6",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/app.py",
+          "line": 38,
+          "sha256": "e041ea60c9f0f1ab8a639725e926e798b86b8f183e0489d5ae6df2d2a4f45a44",
+          "role": "code"
+        },
+        {
+          "path": "terminal/tests/live-market-validation.mjs",
+          "line": 1,
+          "sha256": "732a6cbfd7ea9f23a06b037cfe0534c70d7e88eb4dd872f1429f43650678bce6",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/sec-completion-validation.mjs",
+          "line": 1,
+          "sha256": "0d38e0e7c05387f68c8e5b33cfedbd48a851d8f281f82e6c38ef284358d3273b",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/atlas-validation.mjs",
+          "line": 1,
+          "sha256": "d9ee3c28f2937e4a013e45549f7f85c00cad063b5a6952888fd60d936dec928f",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Configuration/status is not live qualification;no credentials exposed",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Interactive3D",
+      "actual_implementation": "Separate L1 cloud/native replay;axes,inspection,independent orbit/presets,pause,fullscreen,context loss/retry/disposal",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/QuoteCloud.tsx",
+          "line": 6,
+          "sha256": "6cf278514471527310fcb01da8048e291cabd23b86e5f4f951080b3c8339d642",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/Landscape3D.tsx",
+          "line": 9,
+          "sha256": "16f05e147e36eed6ba8e9bd1cb09ec7466d637280a2ba5ed0a63edd4eb10590e",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/OptionalBoundary.tsx",
+          "line": 4,
+          "sha256": "7e66324a9afb6d29cd1035d6b2e9ce0f58d4017c482079255a5b8424baff161a",
+          "role": "code"
+        },
+        {
+          "path": "terminal/tests/live-market-validation.mjs",
+          "line": 1,
+          "sha256": "732a6cbfd7ea9f23a06b037cfe0534c70d7e88eb4dd872f1429f43650678bce6",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/gpu-recovery-validation.mjs",
+          "line": 1,
+          "sha256": "f642a9fecdfef7ea51b8170157f8d6be985777048be18da8dddb76755987f254",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/browser-validation.mjs",
+          "line": 1,
+          "sha256": "f3732ab0a62d81bd62e7220ba908d19a55ce43b1e3c1476be0cf484648dea776",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Physical hardware/Android sustained rendering remains acceptance,not synthetic proof",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Persistence and recovery",
+      "actual_implementation": "Permission-gated bounded normalized ledger,atomic frame transactions,expiry,chain/tail checks,cold historical recovery",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/stocks/observation_store.py",
+          "line": 6,
+          "sha256": "8ce855ce4587c9f46b7196e3f01f757d21255dd06543180963c9ca945728c4b7",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/history_store.py",
+          "line": 12,
+          "sha256": "d1e774598b0d62ba8f85dec3f3eb3246cbc7a3ed998967b2a827047dc764440e",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/history_backup.py",
+          "line": 7,
+          "sha256": "24cc7358cfde5fb2bf90ace62526871583131f5b76f6d2702ee376c63b137ac3",
+          "role": "code"
+        },
+        {
+          "path": "terminal/l2_recording.py",
+          "line": 23,
+          "sha256": "59ac16d56eb086e9308cb66d22a4fa0bd53ab9688d19a55ae22fd5396d039b5b",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/test_observation_store.py",
+          "line": 4,
+          "sha256": "886dd4223d72790291d8a97b2690419b963d8a501b45097af732d8a4ecaa2bbb",
+          "role": "test"
+        },
+        {
+          "path": "terminal/stocks/test_phase5.py",
+          "line": 11,
+          "sha256": "e4692854b5dee431c658185a3a5b962ff054fd6331111ef7a2bcf4f5bb575e40",
+          "role": "test"
+        },
+        {
+          "path": "terminal/test_recording.py",
+          "line": 9,
+          "sha256": "cad9e2dad8bb3543abf26a6d8bbefebabdf360a08fd5c037e3fbe9ce09e5a6fa",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "No hot-live-state restoration or unapproved observed storage;offline physical deletion/host backup policy needs operational evidence",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Security and private operations",
+      "actual_implementation": "Strict Origin/Host,endpoint proofs,private forwarding,server-only config,provider/retention gates,bounded errors",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/server/request_proofs.py",
+          "line": 11,
+          "sha256": "ae6916552b77fac80548296019e9ea24241e09e240ef2fb90dd683708edd0f9a",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/stream_tickets.py",
+          "line": 10,
+          "sha256": "ad05918c405f0520df8027e56f7674f4deb2ecf83564d8138741a1c12a3d55ef",
+          "role": "code"
+        },
+        {
+          "path": "terminal/server/config.py",
+          "line": 5,
+          "sha256": "5c5cfd1a9bb6756a61c6b38e5db9d70e4088eaf9d769cadf9440358339e57b48",
+          "role": "code"
+        },
+        {
+          "path": "terminal/stocks/sec_config.py",
+          "line": 9,
+          "sha256": "cafa2cacc78172312ec968d11d09326a380d3000a8eb9ba1261837900f8d779c",
+          "role": "code"
+        },
+        {
+          "path": "scripts/start_terminal.sh",
+          "line": 1,
+          "sha256": "56bdb434475cd8730894c1c96fff03e607b9c86f226b96ba270d69e8ecf00d8f",
+          "role": "code"
+        },
+        {
+          "path": "terminal/test_request_proof.py",
+          "line": 13,
+          "sha256": "292d8cec7bd0984b1d4b21bce69588be65804646704b4afa67e511ba7bcce6a4",
+          "role": "test"
+        },
+        {
+          "path": "terminal/test_codespaces_origin.py",
+          "line": 12,
+          "sha256": "a04d4b305cbf3afa3feea1935968b9050a5c11447681b5e5d897d8b3a6fdce1c",
+          "role": "test"
+        },
+        {
+          "path": "terminal/test_browser_access.py",
+          "line": 12,
+          "sha256": "57871f3d70473f81bdd2898329d16b68b0280d2d6e4db8d4c1dc99a057167732",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/check_rewritten_http_tls.py",
+          "line": 21,
+          "sha256": "c5320ab4f1853bf205e09f6e377cf1588bb106b470e4cbab706194664513ed28",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Actual owner authentication/source permissions remain external;no admin/trading expansion",
+      "missing_essential_after_repairs": null
+    },
+    {
+      "requirement": "Performance,accessibility,packaging",
+      "actual_implementation": "Lazy stock/Three chunks,instancing,projection,tabular/exact alternatives,themes,responsive focus,locked dependencies,sdist/wheel checks",
+      "engineering_status": "IMPLEMENTED_DECLARED_CONTRACT",
+      "external_qualification": "NOT_PASSED_WHERE_REQUIRED",
+      "evidence_paths": [
+        {
+          "path": "terminal/web/src/atlas.css",
+          "line": 1,
+          "sha256": "f418374b13d7ee2dd3828bb612cc4d8e53777de9bcf776c5aafa39ceee894431",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/Landscape.tsx",
+          "line": 5,
+          "sha256": "b262d80c2bc981efcb3d5b7ac9a641f1f4a2e5eec7f4ae0fc982f2a6990865ca",
+          "role": "code"
+        },
+        {
+          "path": "terminal/web/src/FinancialWorkspace.tsx",
+          "line": 9,
+          "sha256": "c74caf2f92dbc1b70512585df9b7fe45aa244faa01b40efadb53ce4087cc89f4",
+          "role": "code"
+        },
+        {
+          "path": "pyproject.toml",
+          "line": 1,
+          "sha256": "cb1108d6b43025f904e41f20eab46c728554014ce3e0c38a91502d9431478031",
+          "role": "code"
+        },
+        {
+          "path": "scripts/check_sdist_inventory.py",
+          "line": 11,
+          "sha256": "fb5f7aa13fcdcb110f45695956f1453b21e8820f6b539b2653fa5f4fbb32a9c3",
+          "role": "code"
+        },
+        {
+          "path": "terminal/tests/atlas-validation.mjs",
+          "line": 1,
+          "sha256": "d9ee3c28f2937e4a013e45549f7f85c00cad063b5a6952888fd60d936dec928f",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/atlas2-validation.mjs",
+          "line": 1,
+          "sha256": "6679c1be4b7f8f5ff1f2ba82f48432b3fa6d10f4f2e18c5adbb29c0a791193c2",
+          "role": "test"
+        },
+        {
+          "path": "terminal/tests/gpu-recovery-validation.mjs",
+          "line": 1,
+          "sha256": "f642a9fecdfef7ea51b8170157f8d6be985777048be18da8dddb76755987f254",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_sdist_patterns.py",
+          "line": 12,
+          "sha256": "033b95d14ce125fd02f961007c9285a35b2176f8264402e6ee94d1b9c08d1c62",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_python.py",
+          "line": 20,
+          "sha256": "f3856fdd3a1177736a856429c0aa9c7bff5a7f91077fdba7911b7175c05c4517",
+          "role": "test"
+        },
+        {
+          "path": "tests/test_export_contracts.py",
+          "line": 11,
+          "sha256": "8a8dd17edcad47ed7ee221c2c5bf0e3950ca96335a2bee60c067d11bde4a1ffd",
+          "role": "test"
+        }
+      ],
+      "remaining_boundary": "Full WCAG/screen-reader/physical-device and new-candidate independent build/ARM64 are not established",
+      "missing_essential_after_repairs": null
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # Final bounded engineering readiness and acceptance plan
 
+Current full-scope assessment: [DEVELOPMENT_SCOPE_AUDIT.md](DEVELOPMENT_SCOPE_AUDIT.md).
+This report remains a historical checkpoint; its bounded-closure judgment is
+superseded by the full original-requirement audit and additional implementation.
+
+
 Baseline:ff41c97abbd79012ea9232eb56dfb5481e5f94c2.
 This closes the reproduced defects found in the current pass. It does not certify
 absence of all defects or complete the broader optional product roadmap.

@@ -1,0 +1,462 @@
+{
+  "schema": "gig.atlas.development_scope_audit.v1",
+  "baseline": "90bebeb61ba16330eb17edd9771eb600d436e363",
+  "implementation_commits": [
+    "ff5a421bd37e8410ac7156b71d3703ba40ba3556",
+    "8a598ce2eb13c53f7f0bc47c25a87b1b9561fab3"
+  ],
+  "date": "2026-10-27",
+  "branch": "feat/atlas-final-release",
+  "answer": "YES_DECLARED_RESEARCH_ENGINEERING_SCOPE_ONLY_NOT_EXTERNAL_ACCEPTANCE",
+  "classification": "AUTHORED_FIXTURES_AND_GATED_NATIVE_APPLICATION_NOT_EMPIRICAL_VALIDATION",
+  "provider_requests": 0,
+  "restricted_data_accessed": false,
+  "new_candidate_arm64_qualified": false,
+  "hosted_ci_claimed": false,
+  "native_sources_changed": false,
+  "native_binaries_rebuilt": false,
+  "selected_outcomes": {
+    "passed": 1567,
+    "failed": 0,
+    "skipped": 0
+  },
+  "cohorts": [
+    {
+      "name": "terminal Debug",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "terminal Release",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "terminal ASan+UBSan",
+      "passed": 274,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "stocks Debug",
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "stocks Release",
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "stocks ASan+UBSan",
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "frontend",
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "stable browser journeys",
+      "passed": 91,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "live fixtures browser",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "SEC fixtures browser",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "discovery browser",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "GPU recovery browser",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "ratio/statement browser",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "security",
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "verified TLS/WSS",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "native independent canonical tests",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "installed native wheel",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "packaging regressions",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "lsan_checks": [
+    0,
+    0
+  ],
+  "commands": {
+    "core": "PYTHONPATH=build/python-{debug,release,asan-ubsan}/python:. <validated-python> terminal/tests/run_native_suite.py (sanitizer via scripts/run_python_sanitized.py)",
+    "stocks": "PYTHONPATH=build/python-{debug,release,asan-ubsan}/python:. <validated-python> terminal/tests/run_live_market_suite.py",
+    "frontend": "npm --prefix terminal/web test; npm --prefix terminal/web run build",
+    "stable_browser": "python terminal/tests/run_atlas_browser_suite.py (four authored servers already started)",
+    "new_browser": "node terminal/tests/ratio-history-validation.mjs",
+    "canonical": "ctest --test-dir build/phase9-clean-release -R ^itch.(validation_demo_reference|independent_reference|context_reference|streaming_reference|l3_reference|auction_reference|admin_reference|hy_reference)$",
+    "sdist": "python -m build --sdist --outdir build/scope-audit/sdist; python scripts/check_sdist_inventory.py build/scope-audit/sdist/gig_microstructure-0.1.1.tar.gz --manifest build/scope-audit/sdist-inventory.json"
+  },
+  "performance": {
+    "classification": "AUTHORED_256_PERIOD_NORMALIZED_INPUT_NOT_SEC_QUALIFICATION",
+    "python": "3.12.14",
+    "architecture": "x86_64",
+    "input_selected_facts": 5888,
+    "warmups": 1,
+    "measured_repetitions": 5,
+    "seconds": [
+      0.07324570399941877,
+      0.08242915902519599,
+      0.07430869300151244,
+      0.07542931602802128,
+      0.07741984602762386
+    ],
+    "median_seconds": 0.07542931602802128,
+    "encoded_response_bytes": 228811,
+    "output_points": 144,
+    "peak_process_rss_kib": 20608
+  },
+  "browser_performance": {
+    "classification": "SINGLE_AUTHORED_CHROMIUM_SWIFTSHADER_RUN_NOT_GPU_BENCHMARK",
+    "metrics": [
+      {
+        "name": "Nodes",
+        "value": 3389
+      },
+      {
+        "name": "LayoutCount",
+        "value": 124
+      },
+      {
+        "name": "ScriptDuration",
+        "value": 0.956958
+      },
+      {
+        "name": "JSHeapUsedSize",
+        "value": 9145224
+      },
+      {
+        "name": "JSHeapTotalSize",
+        "value": 26812416
+      }
+    ]
+  },
+  "stable_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "3424164d42e307b7cd3e74ec3243b6ef85fdd33dfdc759f0eddb9384a8177025",
+      "assets/Landscape3D-DuVb_PfP.js": "1a1e3f6c1106880865a738b0cf4c15d600733a293c852a3dc6fb852af58df6a2",
+      "assets/MarketHealth-D7N58mYw.js": "939cb9481dff471b1b5bc6af65b9f04d6f2ff97e1c861e3dfe7442aeb96e4e71",
+      "assets/OrbitControls-CFB5RmRs.js": "91c499b6dbf4fe9797252a668451f32a644d43127887263d78cee639b7881497",
+      "assets/QuoteCloud-BNyrFeMs.js": "78220b74e2b38d8c5a74170f217d305619ed5026c6c597ad64805df729066c06",
+      "assets/StockIntelligence-BFqOlVkG.js": "72c13e9d22d76de796d6146afda68f5e8fdd9c8d8936ea658cfd3737c32108a5",
+      "assets/VolatilitySurface-CKlqyj0M.js": "82434b155e6c6421fac63ee388318716353735e4aaad22ef1bd0f2b101dfd87d",
+      "assets/index-Bq_7H4ft.js": "456797ac1ce52d940f71ecd01332b05e12d06174273b15cb8a76fc4fa26a8f83",
+      "assets/index-C8MOz8_4.css": "7f102b970eb5016c668f5f86da1ea84734c0e40f20279f25b3de795a023f56a8",
+      "index.html": "e1310b22aeec7bdb7de8c0424bd7b1bbe60d924a041b28bb5e182aca2443ff87"
+    },
+    "asset_mutation_detected": false
+  },
+  "artifacts": [
+    {
+      "path": "build/scope-audit/stocks-debug-final164.log",
+      "bytes": 27749,
+      "sha256": "f94572e06ead19560bcb60e5a127d2744b4640239a9d11862f0c173625bf4e96"
+    },
+    {
+      "path": "build/scope-audit/stocks-release-final164.log",
+      "bytes": 27749,
+      "sha256": "f105fc14e9fc25320d718b3bf1b8b8f82a78ff321c6603a2a77e147369151137"
+    },
+    {
+      "path": "build/scope-audit/stocks-sanitizer-final164.log",
+      "bytes": 27767,
+      "sha256": "eeae5967ff08e064a6292fb1e95b567460dba1c555752ee58edecce4b477b394"
+    },
+    {
+      "path": "build/scope-audit/terminal-debug-final.log",
+      "bytes": 40306,
+      "sha256": "a7f4fe7294a054d7b588bab5b5dc531897a24ab03683fb042a395be82905b026"
+    },
+    {
+      "path": "build/scope-audit/terminal-release-final.log",
+      "bytes": 40306,
+      "sha256": "64278c61a8807e37112015f65a45ae721545fae35a30dc7cc2e40be7e49e6022"
+    },
+    {
+      "path": "build/scope-audit/terminal-sanitizer-final.log",
+      "bytes": 41063,
+      "sha256": "e0717380ce894fca52e9d92324075dadca708cd4380c9012694568be314f35b3"
+    },
+    {
+      "path": "build/scope-audit/frontend-final.log",
+      "bytes": 3638,
+      "sha256": "0bfea9f621d07ff82c9d1f8315d14bfaa2687d70dd2026bcd15c5761c8f9ce11"
+    },
+    {
+      "path": "build/scope-audit/build-final.log",
+      "bytes": 1529,
+      "sha256": "fcab8b0e709469e4e2d584382a90fa110b9b43f794eb222a3693872c56937461"
+    },
+    {
+      "path": "build/scope-audit/browser-suite-frozen.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/scope-audit/ratio-browser-frozen.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/scope-audit/live-browser-frozen.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/scope-audit/sec-browser-frozen.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/scope-audit/discovery-browser-frozen.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/scope-audit/gpu-frozen.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/scope-audit/gpu-quote-frozen.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    },
+    {
+      "path": "build/scope-audit/security.log",
+      "bytes": 378,
+      "sha256": "b6eafe9d3ea367c61ecc4a660bad83c87775bcfea38135d09c594d3a1e6c50d6"
+    },
+    {
+      "path": "build/scope-audit/tls.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/scope-audit/canonical.log",
+      "bytes": 1124,
+      "sha256": "ed99b61979f496feb2695ead8b924d4760ea8ca0c2907dc9d583bba8057639e6"
+    },
+    {
+      "path": "build/scope-audit/canonical.xml",
+      "bytes": 4304,
+      "sha256": "d53060a6dcde0c6410cfa44d28005dd0458aad24579306f4b45a2d9db9095bdd"
+    },
+    {
+      "path": "build/scope-audit/wheel-interface.log",
+      "bytes": 964,
+      "sha256": "828e467e9eb8e78cad917c539390d576f8300a8543e3299a50585908934a3c7d"
+    },
+    {
+      "path": "build/scope-audit/wheel-exports.log",
+      "bytes": 959,
+      "sha256": "80a32b12588f1abdb0eb1d1aceae203895786a2366143c326acfea7d23903ce1"
+    },
+    {
+      "path": "build/scope-audit/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/scope-audit/ratio-browser-initial-failure.log",
+      "bytes": 417,
+      "sha256": "f2786249dd81db347122177117c41a37148c9b3ed0b976d22989ab0782b18098"
+    },
+    {
+      "path": "build/scope-audit/ratio-browser-cold.log",
+      "bytes": 29,
+      "sha256": "699a59d33330259d331d25d3c5869be17d0c093cfd2daa72a40e924499929d7d"
+    },
+    {
+      "path": "build/scope-audit/universe-failing-before.log",
+      "bytes": 3120,
+      "sha256": "4ec4f08668f22136fdde3ec37756ff91af7c42b057705becd2a176a73566c170"
+    },
+    {
+      "path": "build/scope-audit/sdist-build.log",
+      "bytes": 293,
+      "sha256": "d71a1a8cae098c22a1c1f7649c637499fdb9715db0fbe243ae5283272a44b6e8"
+    }
+  ],
+  "canonical_reference_cases": [
+    {
+      "name": "itch.validation_demo_reference",
+      "status": "run",
+      "seconds": "0.227959",
+      "output_sha256": "db57f833d047a554b9116b8ac1efb107d4cd0a2db5e08ac5d63fcff4f490c0f2"
+    },
+    {
+      "name": "itch.independent_reference",
+      "status": "run",
+      "seconds": "0.241132",
+      "output_sha256": "417fa55ef1f3d00cc8b5a0c2f677dbb48397b9e487a1be2daff4da9032d012d7"
+    },
+    {
+      "name": "itch.context_reference",
+      "status": "run",
+      "seconds": "0.765853",
+      "output_sha256": "c414f957ef92936205f6e56a18962534d06f25811a66b6f134e396af53eb7771"
+    },
+    {
+      "name": "itch.streaming_reference",
+      "status": "run",
+      "seconds": "0.818662",
+      "output_sha256": "2ca3725cd449cfcde13ee0197b1e5c78511eb925651aed7f25ac19446bb6abb6"
+    },
+    {
+      "name": "itch.l3_reference",
+      "status": "run",
+      "seconds": "21.8421",
+      "output_sha256": "dc249d298a3bca74791c7df5cd251c5c0e5285cc828c9ac8d136fe9d50343482"
+    },
+    {
+      "name": "itch.auction_reference",
+      "status": "run",
+      "seconds": "0.920178",
+      "output_sha256": "9ab145fa12a58552c951582d5606ff2af7b0fcec0284162dfb11691245c9dac4"
+    },
+    {
+      "name": "itch.admin_reference",
+      "status": "run",
+      "seconds": "0.478887",
+      "output_sha256": "fff5c91a37902f54472d9f2326c75bdc225a1410844267fdafe07222395333e2"
+    },
+    {
+      "name": "itch.hy_reference",
+      "status": "run",
+      "seconds": "0.395542",
+      "output_sha256": "11e8bffbef0ea19dfa39f1d937381b77a8d036ffab5738250e0305b3dda03433"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/scope-audit/ratio-history-synthetic-desktop.png",
+      "sha256": "38f7cfa324c3c32c26f7b731ba599e2c16fd623bcf63dd38fa268a1f91fea1f0",
+      "classification": "AUTHORED_SYNTHETIC_NOT_OBSERVED"
+    },
+    {
+      "path": "build/scope-audit/ratio-history-synthetic-mobile.png",
+      "sha256": "9f09b4a99202986b8a0aa42e07547bd2b71d841830a52df1fbd7f05d0c8ee0f7",
+      "classification": "AUTHORED_SYNTHETIC_NOT_OBSERVED"
+    }
+  ],
+  "source_archive": {
+    "path": "build/scope-audit/sdist/gig_microstructure-0.1.1.tar.gz",
+    "sha256": "770613d8ca8d6f6074c471a434fd5d90d9bdf6e77aaee07d0f56f405df825f26",
+    "inventory_sha256": "c66f6ecddd154c8884a94a43652140a5d1f1f947cfb2f8dd47028782d114aa87",
+    "members": 771,
+    "scope": "Implementation snapshot before audit documentation;not final-documentation archive",
+    "note": "Built and checked before documentation updates;documentation changes do not alter tested native or frontend sources."
+  },
+  "failure_history": {
+    "initial_ratio_browser_timeout": "Preserved,not conclusively attributed to asset compilation;explicit accepted-cache readiness added;cold and final retries pass",
+    "nonseed_rejection": "Two failing-before regressions retained;repaired paths pass"
+  },
+  "qualification_prerequisites": [
+    "permitted source configuration and official reconciliation",
+    "observed provider/retention rights and source behavior",
+    "exact-candidate native ARM64 and hosted/independent-machine evidence",
+    "target private-host/device/accessibility acceptance"
+  ],
+  "unchanged_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "changed_implementation_files": [
+    "terminal/server/app.py",
+    "terminal/server/schemas/backend_history_v2.schema.json",
+    "terminal/stocks/acquisition.py",
+    "terminal/stocks/financials.py",
+    "terminal/stocks/identity.py",
+    "terminal/stocks/live.py",
+    "terminal/stocks/market_catalog.py",
+    "terminal/stocks/ratio_history.py",
+    "terminal/stocks/service.py",
+    "terminal/stocks/session_schedule.py",
+    "terminal/stocks/test_ratio_history.py",
+    "terminal/tests/measure_ratio_history.py",
+    "terminal/tests/ratio-history-validation.mjs",
+    "terminal/tests/run_live_market_suite.py",
+    "terminal/web/package.json",
+    "terminal/web/src/AlignedStatements.tsx",
+    "terminal/web/src/FinancialWorkspace.tsx",
+    "terminal/web/src/RatioHistory.tsx",
+    "terminal/web/src/api.ts",
+    "terminal/web/src/financial.ts",
+    "terminal/web/src/ratioHistory.test.ts",
+    "terminal/web/src/ratioHistory.ts"
+  ],
+  "documentation_files": [
+    "docs/completion/DEVELOPMENT_SCOPE_AUDIT.md",
+    "docs/completion/DEVELOPMENT_SCOPE_TRACEABILITY.json",
+    "docs/completion/DEVELOPMENT_SCOPE_EVIDENCE.json",
+    "docs/completion/COMPLETION_MATRIX.md",
+    "docs/completion/FINAL_REPORT.md",
+    "docs/completion/FINAL_ACCEPTANCE_AND_READINESS.md",
+    "docs/completion/EVIDENCE.json",
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md"
+  ]
+}

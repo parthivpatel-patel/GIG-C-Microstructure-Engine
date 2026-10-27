@@ -1,5 +1,9 @@
 # Consolidated completion matrix
 
+Current scope assessment: [DEVELOPMENT_SCOPE_AUDIT.md](DEVELOPMENT_SCOPE_AUDIT.md).
+The historical tables below are preserved; the final audit and its 18-area source/test
+traceability supersede earlier engineering-completion judgments.
+
 Baseline `9a5ad1b013ab30d2697a9e55686a53f256acad2d`, branch `feat/atlas-final-release`.
 Reviewed prior live-market audit/implementation/validation reports, SEC repair, ATLAS
 phase/design evidence and combined final assessment. Those reports remain historical
@@ -122,3 +126,25 @@ falls back and retries independently for L1 and native replay. See
 FINAL_ACCEPTANCE_AND_READINESS.md for a disposition of **every remaining matrix item**,
 engineering/optional/external boundaries and the exact eventual acceptance gates.
 No additional speculative product extension is treated as a defect repair.
+
+
+## Full agreed-scope audit (October 27, 2026)
+
+Source checkpoints `ff5a421bd37e8410ac7156b71d3703ba40ba3556` and
+`8a598ce2eb13c53f7f0bc47c25a87b1b9561fab3` are pushed and remotely verified.
+The baseline was not fully implemented: ratio trends and broad-identity routing were
+essential gaps. Both are repaired, rather than deferred as optional enhancements.
+
+| Final requirement | Engineering status | Evidence / qualification |
+|---|---|---|
+| Twelve reported ratio histories | COMPLETE | Existing exact formulas on explicit anchors;bounded cache-only API,charts/exact/source tables;never PIT availability |
+| Discovered market identity routing | COMPLETE | Accepted identities feed search/source admission/acquisition/schedules;no provider qualification inferred |
+| Async financial-view safety | COMPLETE | Body/deadline/admission bounds,cancellation/version guards,malformed/held-reply browser controls |
+| All original workspace engineering | COMPLETE declared contract | 18-area source/test traceability;selected reported statements and model demonstrations,not full XBRL/forecast efficacy |
+| Exact-candidate live/provider/ARM64/device acceptance | BLOCKED | External qualification remains unperformed;no owner's manual tests requested |
+
+Selected executed outcomes:1,567 passed/0 failed/0 skipped. This is not unique-test
+coverage or evidence of full product acceptance. All eight native frozen reference
+contracts pass. See DEVELOPMENT_SCOPE_EVIDENCE.json for cohort provenance,including
+preserved original browser failure. Engineering scope is ready to enter acceptance;
+not accepted or production-ready. No new speculative roadmap was opened.
