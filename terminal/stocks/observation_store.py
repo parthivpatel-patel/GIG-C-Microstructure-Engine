@@ -52,8 +52,9 @@ class ObservationStore:
   if last:
    db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('anchor',last[3]));db.execute('DELETE FROM records WHERE ordinal<=?',(last[0],))
  def prune(self):
-  with self.connect() as db:db.execute('BEGIN IMMEDIATE');self.trim(db);new_cached=self._summary(db)
-  self.cached=new_cached
+  with self.lock:
+   with self.connect() as db:db.execute('BEGIN IMMEDIATE');self.trim(db);new_cached=self._summary(db)
+   self.cached=new_cached
  def append(self,capture,events):
   if type(capture) is not str or not re.fullmatch('[0-9a-f]{32}',capture) or not 1<=len(events)<=128:raise ValueError('observation_batch')
   rows=[];prior=None
@@ -64,17 +65,18 @@ class ObservationStore:
    prior=receipt;core={k:v for k,v in event.items() if k!='received_monotonic'};created=self.clock();raw=self.encode({'schema':'gig.iex.observation.v1','capture':capture,'created_seconds':created,'expires_seconds':created+self.ttl,'retention_policy':{'permission_reference_sha256':self.policy_hash,'observed_allowed':self.allow_observed,'seconds':self.ttl},'event':core})
    if len(raw)>65536:raise ValueError('observation_record_budget')
    rows.append((receipt,created,raw))
-  with self.connect() as db:
-   db.execute('BEGIN IMMEDIATE');meta=dict(db.execute('SELECT key,value FROM meta'))
-   if meta.get('capture')==capture:
-    if rows[0][0]!=int(meta['receipt'])+1:raise ValueError('observation_receipt_order')
-   elif db.execute('SELECT 1 FROM records WHERE capture=? LIMIT 1',(capture,)).fetchone():raise ValueError('observation_retired_capture')
-   last=db.execute('SELECT digest FROM records ORDER BY ordinal DESC LIMIT 1').fetchone();previous=last[0] if last else meta['anchor']
-   for receipt,created,raw in rows:
-    digest=self.digest(previous,raw);db.execute('INSERT INTO records(capture,receipt,created,expires,payload,previous,digest) VALUES(?,?,?,?,?,?,?)',(capture,receipt,created,created+self.ttl,raw,previous,digest));previous=digest
-   db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('capture',capture));db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('receipt',str(rows[-1][0])));self.trim(db);db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('tail',previous));new_cached=self._summary(db)
-   if self.before_commit:self.before_commit()
-  self.cached=new_cached
+  with self.lock:
+   with self.connect() as db:
+    db.execute('BEGIN IMMEDIATE');meta=dict(db.execute('SELECT key,value FROM meta'))
+    if meta.get('capture')==capture:
+     if rows[0][0]!=int(meta['receipt'])+1:raise ValueError('observation_receipt_order')
+    elif db.execute('SELECT 1 FROM records WHERE capture=? LIMIT 1',(capture,)).fetchone():raise ValueError('observation_retired_capture')
+    last=db.execute('SELECT digest FROM records ORDER BY ordinal DESC LIMIT 1').fetchone();previous=last[0] if last else meta['anchor']
+    for receipt,created,raw in rows:
+     digest=self.digest(previous,raw);db.execute('INSERT INTO records(capture,receipt,created,expires,payload,previous,digest) VALUES(?,?,?,?,?,?,?)',(capture,receipt,created,created+self.ttl,raw,previous,digest));previous=digest
+    db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('capture',capture));db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('receipt',str(rows[-1][0])));self.trim(db);db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('tail',previous));new_cached=self._summary(db)
+    if self.before_commit:self.before_commit()
+   self.cached=new_cached
  def recover(self):
   with self.connect() as db:
    previous=db.execute('SELECT value FROM meta WHERE key=?',('anchor',)).fetchone()[0];rows=db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal').fetchall();result=[]

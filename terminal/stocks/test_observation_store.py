@@ -49,3 +49,31 @@ class Store(unittest.TestCase):
  def test_clock_rollback_cannot_hide_expired_later_records_from_physical_pruning(self):
   with tempfile.TemporaryDirectory() as d:
    now=[100.];s=ObservationStore(d,clock=lambda:now[0],retention_seconds=10);events=self.events(2);s.append('a'*32,events[:1]);now[0]=90.;s.append('a'*32,events[1:]);now[0]=101.;s.prune();self.assertEqual(s.cached['records'],0);self.assertEqual(s.recover(),[])
+ def test_cached_publication_remains_inside_writer_lock(self):
+  import threading
+  class TrackingLock:
+   def __init__(self):self.raw=threading.RLock();self.depth=threading.local()
+   def __enter__(self):self.raw.acquire();self.depth.n=getattr(self.depth,'n',0)+1;return self
+   def __exit__(self,*args):self.depth.n-=1;self.raw.release()
+   def owned(self):return getattr(self.depth,'n',0)>0
+  class Guarded(ObservationStore):
+   def __setattr__(self,key,value):
+    if key=='cached' and self.__dict__.get('guard',False) and not self.lock.owned():raise AssertionError('summary publication outside writer lock permits stale overwrite')
+    super().__setattr__(key,value)
+  for operation in ('append','prune'):
+   with self.subTest(operation=operation),tempfile.TemporaryDirectory() as d:
+    s=Guarded(d);s.lock=TrackingLock();s.guard=True
+    if operation=='append':s.append('a'*32,self.events())
+    else:s.prune()
+ def test_concurrent_prune_and_append_leave_consistent_durable_summary(self):
+  from concurrent.futures import ThreadPoolExecutor
+  with tempfile.TemporaryDirectory() as d:
+   s=ObservationStore(d);events=self.events(200)
+   def writer():
+    for e in events:s.append('a'*32,[e])
+   def pruner():
+    for _ in range(100):s.prune()
+   with ThreadPoolExecutor(max_workers=2) as pool:
+    futures=[pool.submit(writer),pool.submit(pruner)]
+    for f in futures:f.result(timeout=15)
+   self.assertEqual(s.cached,s.summary());self.assertEqual(len(s.recover()),200)
