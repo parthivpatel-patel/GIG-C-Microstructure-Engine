@@ -14,16 +14,17 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
  const timeAvailable=frames.length>0&&frames.every(f=>f.source_timestamp_ns||f.replay_time_ns),timeOf=(f:TerminalState)=>timeAvailable?BigInt(f.source_timestamp_ns||f.replay_time_ns||'0'):BigInt(f.position);
  useEffect(()=>{setTwoD(fallback)},[fallback]);
  useEffect(()=>{
-  if(twoD||!host.current)return;
+  if(twoD||unavailable||!host.current)return;
   const container=host.current;let renderer:THREE.WebGLRenderer;
   try {renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));}catch{setUnavailable(true);return;}
   const scene=new THREE.Scene();scene.background=new THREE.Color('#0c1119');
   const camera=new THREE.PerspectiveCamera(40,1,.1,100);camera.position.set(10,8,13);
-  const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,1.5,0);controls.enableDamping=false;controls.minDistance=6;controls.maxDistance=35;controls.maxPolarAngle=Math.PI*.48;controls.update();
+  const controls=new OrbitControls(camera,renderer.domElement);controls.listenToKeyEvents(renderer.domElement);renderer.domElement.tabIndex=0;controls.target.set(0,1.5,0);controls.enableDamping=false;controls.minDistance=6;controls.maxDistance=35;controls.maxPolarAngle=Math.PI*.48;controls.update();
   const grid=new THREE.GridHelper(14,14,'#334455','#1a2735');grid.position.y=-.02;scene.add(grid);
   const data=new THREE.Group();scene.add(data);container.appendChild(renderer.domElement);renderer.domElement.setAttribute('aria-label','Interactive price by observation time by displayed liquidity');renderer.domElement.setAttribute('role','img');renderer.domElement.dataset.testid='liquidity-canvas';
   const lookup=new Map<THREE.Object3D,Inspection[]>();
-  const render=()=>{if(document.visibilityState==='visible')renderer.render(scene,camera)};
+  let lost=false;const contextLost=(event:Event)=>{event.preventDefault();lost=true;setHover(null);setUnavailable(true)};renderer.domElement.addEventListener('webglcontextlost',contextLost);
+  const render=()=>{if(!lost&&document.visibilityState==='visible'){renderer.render(scene,camera);renderer.domElement.dataset.camera=camera.position.toArray().join(',')}};
   controls.addEventListener('change',render);
   const resize=new ResizeObserver(()=>{const w=container.clientWidth,h=container.clientHeight;if(w&&h){renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();render()}});resize.observe(container);
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
@@ -31,8 +32,8 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
   const leave=()=>setHover(null);renderer.domElement.addEventListener('pointermove',move);renderer.domElement.addEventListener('pointerleave',leave);
   const visible=()=>render();document.addEventListener('visibilitychange',visible);
   runtime.current={renderer,scene,camera,controls,data,render,lookup};render();
-  return()=>{resize.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointermove',move);renderer.domElement.removeEventListener('pointerleave',leave);document.removeEventListener('visibilitychange',visible);for(const obj of data.children){const m=obj as THREE.InstancedMesh;m.geometry.dispose();(m.material as THREE.Material).dispose()}grid.geometry.dispose();(grid.material as THREE.Material).dispose();renderer.dispose();renderer.domElement.remove();runtime.current=null;};
- },[twoD]);
+  return()=>{resize.disconnect();controls.dispose();renderer.domElement.removeEventListener('pointermove',move);renderer.domElement.removeEventListener('pointerleave',leave);renderer.domElement.removeEventListener('webglcontextlost',contextLost);document.removeEventListener('visibilitychange',visible);for(const obj of data.children){const m=obj as THREE.InstancedMesh;m.geometry.dispose();(m.material as THREE.Material).dispose()}grid.geometry.dispose();(grid.material as THREE.Material).dispose();renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();runtime.current=null;};
+ },[twoD,unavailable]);
  useEffect(()=>{
   const rt=runtime.current;if(!rt)return;
   for(const obj of rt.data.children)(obj as THREE.InstancedMesh).count=0;rt.lookup.clear();
@@ -43,9 +44,9 @@ export function Landscape({history,fallback=false}:{history:TerminalState[];fall
    let mesh=rt.data.children.find(o=>o.name===side) as THREE.InstancedMesh|undefined;if(!mesh){mesh=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:side==='bids'?'#35cdb0':'#f27b89',transparent:true,opacity:.75}),960);mesh.name=side;mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);rt.data.add(mesh)}mesh.count=entries.length;const target=mesh;
    entries.forEach((entry,i)=>{const height=chartRatio(BigInt(entry.quantity),maxQty)*4;dummy.position.set(chartRatio(BigInt(entry.price_ticks)-minimum,span)*12-6,height/2,chartRatio(BigInt(entry.time)-firstTime,timeSpan)*10-5);dummy.scale.set(Math.min(.32,10/Math.max(10,allPrices.length)),Math.max(.015,height),Math.min(.36,8/Math.max(8,frames.length)));dummy.updateMatrix();target.setMatrixAt(i,dummy.matrix)});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();rt.lookup.set(mesh,entries);
   }rt.render();
- },[history,windowSize,depth,twoD]);
+ },[history,windowSize,depth,twoD,unavailable]);
  const reset=()=>{const rt=runtime.current;if(rt){rt.camera.position.set(10,8,13);rt.controls.target.set(0,1.5,0);rt.controls.update();rt.render()}};
- return <section className="panel landscape-panel" aria-label="Liquidity landscape"><header className="panel-header"><div><span className="eyebrow">MICROSTRUCTURE EXPLORER</span><h2>Liquidity landscape <span className="tag">{twoD||unavailable?'2D':'3D'}</span></h2></div><div className="inline-controls"><label>Window<select aria-label="Landscape observation window" value={windowSize} onChange={e=>setWindowSize(Number(e.target.value))}><option value={8}>8 observations</option><option value={24}>24 observations</option><option value={48}>48 observations</option></select></label><label>Levels<select aria-label="Landscape price range" value={depth} onChange={e=>setDepth(Number(e.target.value))}><option value={5}>5 per side</option><option value={10}>10 per side</option><option value={20}>20 per side</option></select></label><button onClick={reset} disabled={twoD||unavailable} aria-label="Reset camera">↺</button><button onClick={()=>setTwoD(!twoD)} aria-pressed={twoD}>{twoD?'3D view':'2D fallback'}</button></div></header>
+ return <section className="panel landscape-panel" aria-label="Liquidity landscape"><header className="panel-header"><div><span className="eyebrow">MICROSTRUCTURE EXPLORER</span><h2>Liquidity landscape <span className="tag">{twoD||unavailable?'2D':'3D'}</span></h2></div><div className="inline-controls"><label>Window<select aria-label="Landscape observation window" value={windowSize} onChange={e=>setWindowSize(Number(e.target.value))}><option value={8}>8 observations</option><option value={24}>24 observations</option><option value={48}>48 observations</option></select></label><label>Levels<select aria-label="Landscape price range" value={depth} onChange={e=>setDepth(Number(e.target.value))}><option value={5}>5 per side</option><option value={10}>10 per side</option><option value={20}>20 per side</option></select></label><button onClick={reset} disabled={twoD||unavailable} aria-label="Reset camera">↺</button><button onClick={()=>{if(unavailable){setUnavailable(false);setTwoD(false)}else setTwoD(!twoD)}} aria-pressed={twoD||unavailable}>{unavailable?'Retry 3D view':twoD?'3D view':'2D fallback'}</button></div></header>
  {(twoD||unavailable)?<div className="fallback-view" data-testid="landscape-fallback"><DepthChart state={last}/><p>{unavailable?'WebGL unavailable. ':''}Synchronized 2D depth • current observation only</p></div>:<div className="landscape-canvas" ref={host}>{!levels.length&&<div className="canvas-empty">Awaiting native book observations</div>}</div>}
  <div className="landscape-axes"><span>PRICE {price(minimum.toString(),last?.price_scale||'1')} → {price(maximum.toString(),last?.price_scale||'1')}</span><span>{timeAvailable?'SOURCE / REPLAY TIME (ns)':'CAPTURE ORDINAL — CLOCK UNAVAILABLE'}</span><span>HEIGHT = DISPLAYED QUANTITY</span></div>
  <div className="landscape-footer"><div><i className="dot bid"/> Bid liquidity <i className="dot ask"/> Ask liquidity <span className="muted">{frames.length} discrete observations · no interpolation</span></div><span className="muted">Drag rotate · pinch zoom · right-drag pan</span></div>
