@@ -618,3 +618,35 @@ Exact resume action:inspect status/logs without resetting;complete documentation
 closure if still pending. Actual provider qualification requires owner entitlement and
 server configuration;do not activate gates or treat fixtures as observed data. Do not repeat unchanged native builds or
 claim new ARM64 qualification. Never enable provider gates merely for a green screen.
+
+## Final completion directive — October26,2026 America/New_York (validated implementation checkpoint)
+
+Baseline9a5ad1b013ab30d2697a9e55686a53f256acad2d on feat/atlas-final-release,clean start.
+Preserved prior code/evidence. Implemented proof-authorized bounded SSE stock push,
+acknowledged unsubscribe/subscribe on one upstream socket,connection/transition diagnostics,
+independent stock3D cameras/palettes/pause/lighting/reduced-motion,search/saved watchlists,
+private bounded optional session schedule with UNKNOWN default,read-only equity Operations.
+No feeds/permissions activated,no real data fetched,no main/workflow/release action.
+
+Native six existing configurations each passed155/155 CTest;all eight canonical hashes
+matched in each configuration. Terminal bindings Release/Debug/ASan+UBSan passed274/274
+each. Expanded stock/SEC/research/completion cohort passed114/114 in each configuration,
+including idle-feed liveness,acknowledgement atomicity,push backpressure and calendar gaps.
+Security46,verifiedTLS/WSS8,frontend22,wheel14,packaging3,stable browser91,new browser20
+passed. Default-gated360px unavailable-state check also passed. Total2,299 selected outcomes,zero final failures/skips;both live LSan checks0.
+No native sources were rebuilt or changed;no exact-candidate ARM64/hosted claim.
+
+Verified/pushed backend:5919729e7ab906bd83bd0560f7fd6560b60459b5.
+Verified/pushed UI:27433e147f6e91efcff685f446a531f4843585ae.
+Verified/pushed final handover/contract repair:ca5cd02a869c21888850adc63e53d69fa30fa6e6.
+Reports/matrix/deployment and safe evidence inventory:docs/completion/.
+
+Exact continuation:inspect current status/evidence without resetting. Complete documentation
+closure if still pending;otherwise start only the explicitly identified next package.
+Current external blockers are actual provider/SEC credentials and permissions,independent
+current listings/calendar/halts authority,observed qualification,physical GPU/device and
+owner-authorized exact-SHA ARM64/hosted evidence. Generic full XBRL/PIT completeness,
+corrected tape and durable market-tape recovery remain explicit non-closed product gaps.
+Final wire/frame budget and coalesced-frame regressions are repaired and separately
+checkpointed;see completion evidence for exact SHA. Never relabel fixtures as live or request repetitive owner feature checks to substitute
+for engineering. No further work continues after the task stops.
