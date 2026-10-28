@@ -14,6 +14,7 @@ if [[ ! -e .venv ]]; then python3.12 -m venv .venv; fi
 .venv/bin/python -c 'import sys; assert sys.version_info[:2] == (3,12), "Existing .venv needs Python3.12; preserving it rather than replacing it"'
 .venv/bin/python -m pip install -r requirements-python.lock -r terminal/server/requirements.txt
 CXX=g++ .venv/bin/python -m pip install --no-build-isolation .
+bash scripts/setup_terminal_native.sh
 npm --prefix terminal/web ci --ignore-scripts
 npm --prefix terminal/web run build
 .venv/bin/python -c 'import gig_microstructure as g; assert hasattr(g._native,"AggregateDepth"); print("Actual native engine ready:",g.native_build_info())'
