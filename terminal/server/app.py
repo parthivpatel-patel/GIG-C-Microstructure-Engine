@@ -393,6 +393,16 @@ def create_app(stock_workspace=None):
             async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
         except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
 
+    @route('/api/v2/companies/{symbol}/availability',methods=['GET'])
+    @json_endpoint
+    async def company_availability(request):
+        if request.query_params:return error('COMPANY_AVAILABILITY_QUERY','no query parameters accepted',422)
+        try:
+            view=stocks.view(request.path_params['symbol']);source=view['fundamentals'];identity=view['instrument'];filings=source.get('filings',[]);facts=source.get('financials',{}).get('history',{});concepts=sorted(k for k,v in facts.items() if v)
+            state='SOURCE_TEMPORARILY_UNAVAILABLE' if view['configuration']['sec']['last_error'] else 'IDENTITY_FOUND_CIK_UNVERIFIED' if identity['cik'] is None else 'CIK_PRESENT_FILINGS_UNAVAILABLE' if not filings else 'FILINGS_AVAILABLE_FACTS_UNAVAILABLE' if not concepts else 'SELECTED_REPORTED_FACTS_AVAILABLE'
+            return {'schema':'gig.company.availability.v1','symbol':identity['symbol'],'state':state,'identity':identity,'financials':{'cached_filings':len(filings),'available_selected_concepts':concepts,'received_at':source.get('received_at'),'freshness':source.get('freshness'),'source_records':source.get('source_records',[]),'current_directory_reconciled':identity.get('identity_source')=='accepted_SEC_company_tickers_response' and identity.get('identity_source_record',{}).get('classification')=='OBSERVED_OFFICIAL_RESPONSE'},'market':{'prices_status':view['prices']['status'],'acquisition_authorized_by_configuration':view['capabilities']['iex_refresh'],'depth_authorized':False},'source_error_cache_preserved':bool(concepts),'limitations':['Listing discovery is independent of SEC coverage and feed entitlement','Selected reported concepts are not complete financial statements','CIK presence alone is not current official source reconciliation']}
+        except ValueError:return error('COMPANY_IDENTITY_UNKNOWN','company not found in accepted identity sources',404)
+
     @route('/api/v2/securities',methods=['GET'])
     @json_endpoint
     async def securities(request):

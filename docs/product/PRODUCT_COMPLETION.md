@@ -55,3 +55,15 @@ fallback identities are clearly not a full current official universe.
 
 Initial validation:13 directory/catalog tests,164 stock regressions,274 terminal
 regressions pass on Debug binding. Full product qualification remains ongoing.
+
+## Financial availability and routing checkpoint
+
+A read-only versioned company availability endpoint now distinguishes unknown identity,
+known security/unverified CIK,CIK with unavailable filings,filings without selected facts,
+selected facts available,and temporary SEC failure with cached evidence preserved.
+An injected synthetic SEC mapping is not labelled current official reconciliation.
+No unverified CIK,missing financial zero,provider entitlement or live depth is invented.
+
+The strict stock cohort includes the directory and availability regressions:175 cases
+pass under Debug,Release and ASan+UBSan (live LSan check0). This is authored qualification,
+not an actual listed-universe import. Source/core C++ expectations remain unchanged.

@@ -47,3 +47,17 @@ class Directory(unittest.TestCase):
   w=StockWorkspace(environment={});w.catalog=parse_files(files())
   with TestClient(create_app(stock_workspace=w),base_url='http://127.0.0.1:8787') as c:
    self.assertEqual(len(c.get('/api/v2/securities?limit=2&offset=2').json()['results']),2);self.assertEqual(c.get('/api/v2/securities?limit=0').status_code,422);self.assertFalse(c.get('/api/v2/securities/status').json()['approved']);self.assertEqual(c.post('/api/v1/stocks/directory-refresh',json={}).status_code,403);self.assertEqual(c.post('/api/v1/stocks/directory-refresh',json={},headers={'Origin':'http://127.0.0.1:8787'}).status_code,422)
+ def test_source_byte_and_clock_bounds_and_cross_directory_collision(self):
+  from .directory import MAX_BYTES
+  f=files()
+  for other in [b'x'*(MAX_BYTES+1),f['other'].replace(b'10282026',b'10272026'),f['other'].replace(b'EXMP.A|',b'AAPL|',1)]:
+   with self.assertRaises(ValueError):parse_files({**f,'other':other})
+ def test_cancelled_refresh_never_publishes_partial_directory(self):
+  from .service import StockWorkspace
+  async def run():
+   w=StockWorkspace(environment={'GIG_DIRECTORY_USE_APPROVED':'1','GIG_DIRECTORY_PERMISSION_REFERENCE':'AUTHORED'});before=w.catalog;entered=asyncio.Event()
+   async def fetch(url):entered.set();await asyncio.sleep(100)
+   d=DirectoryService(w,fetch);task=asyncio.create_task(d.refresh());await entered.wait();task.cancel()
+   with self.assertRaises(asyncio.CancelledError):await task
+   self.assertIs(w.catalog,before);self.assertFalse(d.lock.locked())
+  asyncio.run(run())
