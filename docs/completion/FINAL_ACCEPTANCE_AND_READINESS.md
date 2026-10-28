@@ -131,3 +131,14 @@ automatically tested. This does not mean every optional roadmap capability is co
 qualification,operational guarantees,hardware/accessibility evidence and any broader
 claimed research capability require their own supporting evidence. This is a private
 research terminal,not a production trading system or a complete PIT/L3 data authority.
+
+
+## Final acceptance campaign (October28,2026)
+
+Historical scope-completion claims are now qualified by the executed campaign in
+[INDEPENDENT_ENGINEERING_VERIFICATION.md](INDEPENDENT_ENGINEERING_VERIFICATION.md).
+The new strict FINAL_ACCEPTANCE_MATRIX.json records195PASS,0FAIL,8BLOCKED,
+3NOT TESTED,1NOT APPLICABLE. Setup repair6e76d40 fixes the reproduced clean-install
+native diagnostic gap. All6local native configurations and8canonical identities pass.
+Engineering acceptance remains CONDITIONAL;productionNO-GO. Exact container/zlib,
+Python/system advisories,contrast and external qualification are not silently passed.

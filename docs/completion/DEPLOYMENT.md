@@ -68,3 +68,16 @@ Next external gates: valid provider permission/credentials, bounded observed sou
 qualification, independently sourced listings/calendar coverage, physical-device/GPU and
 accessibility acceptance, then owner-authorized exact-commit ARM64/hosted verification.
 These are not established by synthetic data or by past ARM64 runs on older commits.
+
+
+## Acceptance repair:authored native diagnostics
+
+Standard setup now invokes `bash scripts/setup_terminal_native.sh` to build the existing
+ITCH and LOBSTER authored diagnostics at the terminal's configured native-build path.
+The helper requires GCC,CMake and zlib>=1.3.1,keeps the existing strict minimum,and
+never accesses private datasets or activates a source. The container requests
+zlib1g-dev,but its exact image/package version has NOT been qualified here. A distro
+package name is not evidence of the required version;setup must fail visibly if
+CMake rejects the dependency. Do not weaken the minimum to clear the check.
+Fresh local source/venv/npm/wheel tests are not a new ARM64 or actual Codespaces run.
+See INDEPENDENT_ENGINEERING_VERIFICATION.md and FINAL_ACCEPTANCE_MATRIX.json.

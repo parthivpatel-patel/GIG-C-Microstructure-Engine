@@ -1,0 +1,2997 @@
+{
+  "schema": "gig.atlas.acceptance.matrix.v1",
+  "frozen_candidate": "f314b36cb1d088fe6dad83c705ef371bc387834e",
+  "repair_candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+  "date": "2026-10-28 America/New_York",
+  "counts": {
+    "PASS": 195,
+    "NOT TESTED": 3,
+    "BLOCKED": 8,
+    "NOT APPLICABLE": 1,
+    "FAIL": 0
+  },
+  "requirements": [
+    {
+      "id": "A03.01",
+      "requirement": "Deterministic replay",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.02",
+      "requirement": "Order-book correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.03",
+      "requirement": "Matching and event sequencing",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.04",
+      "requirement": "Numerical invariants",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.05",
+      "requirement": "Boundary conditions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.06",
+      "requirement": "Resource limits",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.07",
+      "requirement": "Memory safety",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.08",
+      "requirement": "Exception and failure handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.09",
+      "requirement": "Reproducible outputs",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.10",
+      "requirement": "Compiler consistency",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A03.11",
+      "requirement": "Canonical reference hashes",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Native correctness;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.01",
+      "requirement": "API contracts",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.02",
+      "requirement": "Input validation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.03",
+      "requirement": "Error handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.04",
+      "requirement": "Authentication boundaries",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.05",
+      "requirement": "Session handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.06",
+      "requirement": "Cancellation behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.07",
+      "requirement": "Timeouts",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.08",
+      "requirement": "Rate limits where implemented",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only;existing global per-process mutation admission,not distributed quotas",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.09",
+      "requirement": "Resource cleanup",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.10",
+      "requirement": "Startup and shutdown",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.11",
+      "requirement": "Health and readiness reporting",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.12",
+      "requirement": "Concurrent requests",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.13",
+      "requirement": "Stale-response protection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A04.14",
+      "requirement": "Sensitive-data redaction",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "API/backend;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.01",
+      "requirement": "Shared upstream connection management",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.02",
+      "requirement": "Dynamic subscriptions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.03",
+      "requirement": "Subscription acknowledgment",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.04",
+      "requirement": "Browser-push delivery",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.05",
+      "requirement": "Event ordering",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.06",
+      "requirement": "Quote and trade timestamps",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.07",
+      "requirement": "Venue/source provenance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.08",
+      "requirement": "Reconnection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.09",
+      "requirement": "Quiet-feed handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.10",
+      "requirement": "Staleness detection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.11",
+      "requirement": "Full-snapshot recovery",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.12",
+      "requirement": "Versioned history projection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.13",
+      "requirement": "Projection-gap rejection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.14",
+      "requirement": "Backpressure",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.15",
+      "requirement": "Memory bounds",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.16",
+      "requirement": "Multi-client behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.17",
+      "requirement": "Per-symbol health",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A05.18",
+      "requirement": "Provider entitlement enforcement",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fixture L1 pipeline;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.01",
+      "requirement": "Broad symbol discovery",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.02",
+      "requirement": "Search correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.03",
+      "requirement": "Company identity",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.04",
+      "requirement": "Symbol normalization",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.05",
+      "requirement": "Watchlists",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.06",
+      "requirement": "Multi-stock comparisons",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.07",
+      "requirement": "Newly discovered symbol routing",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.08",
+      "requirement": "Invalid-symbol handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.09",
+      "requirement": "Search performance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.10",
+      "requirement": "Symbol-directory provenance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.11",
+      "requirement": "Reference-data refresh",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.12",
+      "requirement": "SEC identity mapping",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.13",
+      "requirement": "Financial-data availability states",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.14",
+      "requirement": "AAPL",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.15",
+      "requirement": "APLD",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A06.16",
+      "requirement": "CRWV",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Stock discovery;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-4.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.01",
+      "requirement": "SEC configuration safety",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.02",
+      "requirement": "Company identity resolution",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.03",
+      "requirement": "Filing accession provenance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.04",
+      "requirement": "Filing pagination",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.05",
+      "requirement": "Exact acceptance-time parsing",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.06",
+      "requirement": "Amendment handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.07",
+      "requirement": "Fiscal-period interpretation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.08",
+      "requirement": "Financial concept selection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.09",
+      "requirement": "Units and currencies",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.10",
+      "requirement": "Financial ratios",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.11",
+      "requirement": "Historical ratio charts",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.12",
+      "requirement": "Source tables",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.13",
+      "requirement": "Cache correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.14",
+      "requirement": "Financial freshness timestamps",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.15",
+      "requirement": "Filing freshness timestamps",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.16",
+      "requirement": "Point-in-time restrictions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.17",
+      "requirement": "Restatement limitations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A07.18",
+      "requirement": "Prevention of look-ahead bias",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "SEC/financial fixtures;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/browser-1.log",
+        "build/acceptance/browser-3.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.01",
+      "requirement": "Deterministic replay",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.02",
+      "requirement": "Observation ordering",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.03",
+      "requirement": "Reproducibility",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.04",
+      "requirement": "Session boundaries",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.05",
+      "requirement": "Replay controls",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.06",
+      "requirement": "Data-source labeling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.07",
+      "requirement": "Historical-versus-live separation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.08",
+      "requirement": "Research calculations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.09",
+      "requirement": "Export correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A08.10",
+      "requirement": "Error handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Historical/replay;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.01",
+      "requirement": "Simulation-only behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.02",
+      "requirement": "Deterministic results",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.03",
+      "requirement": "Fill and accounting invariants",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.04",
+      "requirement": "Boundary conditions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.05",
+      "requirement": "Transaction-cost calculations where implemented",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.06",
+      "requirement": "Export integrity",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.07",
+      "requirement": "Failure behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A09.08",
+      "requirement": "Separation from real brokerage execution",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Simulation only;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/browser-0.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.01",
+      "requirement": "Permission gating",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.02",
+      "requirement": "Bounded retention",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.03",
+      "requirement": "Atomic writes",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.04",
+      "requirement": "Crash recovery",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.05",
+      "requirement": "Corruption handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.06",
+      "requirement": "Expiry",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.07",
+      "requirement": "Rollback",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.08",
+      "requirement": "Restart behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.09",
+      "requirement": "Ledger integrity",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.10",
+      "requirement": "Concurrent publication safety",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A10.11",
+      "requirement": "Disabled-state behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Synthetic persistence;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/python-results.json",
+        "build/acceptance/perf-store.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.01",
+      "requirement": "Command Center",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.02",
+      "requirement": "Stock Intelligence",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.03",
+      "requirement": "Live Markets",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.04",
+      "requirement": "Multi-Stock Comparisons",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.05",
+      "requirement": "Order Book",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.06",
+      "requirement": "Market Depth",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.07",
+      "requirement": "Order Flow",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.08",
+      "requirement": "Historical Replay",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.09",
+      "requirement": "Execution Simulator",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.10",
+      "requirement": "Research & Validation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.11",
+      "requirement": "Operations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.12",
+      "requirement": "Navigation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.13",
+      "requirement": "Search",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.14",
+      "requirement": "Controls",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.15",
+      "requirement": "Loading states",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.16",
+      "requirement": "Error states",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.17",
+      "requirement": "Empty states",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.18",
+      "requirement": "Data provenance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.19",
+      "requirement": "Refresh behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.20",
+      "requirement": "Responsiveness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.21",
+      "requirement": "Keyboard accessibility",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.22",
+      "requirement": "State transitions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.23",
+      "requirement": "Browser-console errors",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A11.24",
+      "requirement": "Resource cleanup",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Actual browser workspaces;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.01",
+      "requirement": "Camera controls",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.02",
+      "requirement": "Independent visualization state",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.03",
+      "requirement": "Pause/resume",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.04",
+      "requirement": "Axes and labels",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.05",
+      "requirement": "Timestamp correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.06",
+      "requirement": "Source labeling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.07",
+      "requirement": "WebGL resource cleanup",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.08",
+      "requirement": "Context-loss recovery",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.09",
+      "requirement": "2D fallback",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.10",
+      "requirement": "Retry behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.11",
+      "requirement": "Keyboard controls",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.12",
+      "requirement": "Resize handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.13",
+      "requirement": "Reduced-motion behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.14",
+      "requirement": "Bounded history",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.15",
+      "requirement": "Rendering performance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only;software-renderer timings only,no measured physical FPS or GPU memory",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A12.16",
+      "requirement": "Multi-panel behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "3D/2D software browser;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json",
+        "build/acceptance/gpu-quote.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.01",
+      "requirement": "Authentication and authorization",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.02",
+      "requirement": "API validation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.03",
+      "requirement": "WebSocket access control",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.04",
+      "requirement": "Origin restrictions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.05",
+      "requirement": "Credential handling",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.06",
+      "requirement": "SEC User-Agent confidentiality",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.07",
+      "requirement": "Browser bundle contents",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.08",
+      "requirement": "Error-message leakage",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.09",
+      "requirement": "Logging",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.10",
+      "requirement": "Dependency risks",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "NOT TESTED",
+      "defect_or_blocker": "npm advisory query clean;complete Python/system advisory coverage not executed",
+      "follow_up": "Current full dependency advisory/SBOM review"
+    },
+    {
+      "id": "A13.11",
+      "requirement": "Unsafe configuration defaults",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.12",
+      "requirement": "Port exposure",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.13",
+      "requirement": "Network boundaries",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A13.14",
+      "requirement": "Denial-of-service resistance within the existing architecture",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Security local boundary;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/security.log",
+        "build/acceptance/security-stream.log",
+        "build/acceptance/tls.log",
+        "build/acceptance/npm-audit.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.01",
+      "requirement": "Symbol-directory loading",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.02",
+      "requirement": "Symbol search",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.03",
+      "requirement": "Multi-stock updates",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.04",
+      "requirement": "Streaming serialization",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.05",
+      "requirement": "History projection",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fresh unchanged256-row authored projection+JSON timing and byte measurement;5warmups,100repetitions;not a provider bandwidth estimate",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json",
+        "build/acceptance/projection-performance.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.06",
+      "requirement": "Browser rendering",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.07",
+      "requirement": "3D geometry updates",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.08",
+      "requirement": "Financial-history loading",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.09",
+      "requirement": "Memory growth",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only;50,000-event bounded soak,not indefinite stability",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.10",
+      "requirement": "Recovery operations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.11",
+      "requirement": "Test hardware",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.12",
+      "requirement": "Runtime versions",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.13",
+      "requirement": "Workload size",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.14",
+      "requirement": "Measurement methodology",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.15",
+      "requirement": "Latency",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.16",
+      "requirement": "Throughput where relevant",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.17",
+      "requirement": "Memory usage",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A14.18",
+      "requirement": "Known limitations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Authored performance;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/perf-directory.log",
+        "build/acceptance/perf-stream.log",
+        "build/acceptance/perf-ingest.log",
+        "build/acceptance/perf-ratios.log",
+        "build/acceptance/perf-store.log",
+        "build/acceptance/browser-6.log",
+        "build/acceptance/soak.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.01",
+      "requirement": "Linux x86-64",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.02",
+      "requirement": "Debug builds",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.03",
+      "requirement": "Release builds",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.04",
+      "requirement": "Sanitizer builds",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.05",
+      "requirement": "Python packaging",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.06",
+      "requirement": "Frontend production build",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.07",
+      "requirement": "Dependency installation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fresh local detached checkout;new venv,pinned backend install,rebuilt installed wheel,npm ci/build,authored native diagnostic build and backend suites;NOT an independent machine",
+      "evidence": [
+        "build/acceptance/clean-frontend-retry.log",
+        "build/acceptance/clean-native-helper.log",
+        "build/acceptance/clean-native-repaired.log",
+        "build/acceptance/clean-stocks-repaired.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Independent machine remains EXT.04"
+    },
+    {
+      "id": "A15.08",
+      "requirement": "Startup scripts",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.09",
+      "requirement": "Shutdown behavior",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Local toolchain/packaging;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/native-results.json",
+        "build/acceptance/wheel-tests.log",
+        "build/acceptance/sdist.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A15.10",
+      "requirement": "Clean-environment reproducibility",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Fresh local detached checkout;new venv,pinned backend install,rebuilt installed wheel,npm ci/build,authored native diagnostic build and backend suites;NOT an independent machine",
+      "evidence": [
+        "build/acceptance/clean-frontend-retry.log",
+        "build/acceptance/clean-native-helper.log",
+        "build/acceptance/clean-native-repaired.log",
+        "build/acceptance/clean-stocks-repaired.log"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Independent machine remains EXT.04"
+    },
+    {
+      "id": "A16.01",
+      "requirement": "Keyboard navigation",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.02",
+      "requirement": "Focus visibility",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.03",
+      "requirement": "Semantic controls",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.04",
+      "requirement": "Screen-reader labeling where applicable",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only;DOM labels only,not assistive-technology behavior",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.05",
+      "requirement": "Reduced-motion support",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.06",
+      "requirement": "Responsive layouts",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.07",
+      "requirement": "Readable text",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "NOT TESTED",
+      "defect_or_blocker": "Viewport/semantic checks pass;no independent quantitative contrast/typography readability audit",
+      "follow_up": "Contrast and readability audit before accessibility closure"
+    },
+    {
+      "id": "A16.08",
+      "requirement": "Error announcements",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "A16.09",
+      "requirement": "Color-independent status indicators",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "x86_64 Linux;authored fixtures;loopback Chromium/SwiftShader where browser applies",
+      "method": "Bounded browser accessibility;source review plus fresh executable evidence,authored/local scope only",
+      "evidence": [
+        "build/acceptance/browser-results.json"
+      ],
+      "result": "PASS",
+      "defect_or_blocker": null,
+      "follow_up": "Preserve regressions;no live/external inference"
+    },
+    {
+      "id": "EXT.01",
+      "requirement": "Live-provider account/feed/display/cloud permission and read-only observations",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No ready credential pair or enabled authorized provider configuration",
+      "follow_up": "Configure existing private server credential selectors and documented feed permissions;bounded read-only qualification"
+    },
+    {
+      "id": "EXT.02",
+      "requirement": "Official SEC source reconciliation and AAPL/APLD/CRWV CIK promotion",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "SEC disabled,no identifying User-Agent",
+      "follow_up": "Provide approved identifying server-only configuration and fair-access review;bounded official reconciliation"
+    },
+    {
+      "id": "EXT.03",
+      "requirement": "Observed-data retention qualification",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No confirmed retention permission or enabled observed collection",
+      "follow_up": "Document retention rights/duration/private location before observed storage test"
+    },
+    {
+      "id": "EXT.04",
+      "requirement": "Exact-candidate native ARM64 and hosted independent-machine verification",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "Only x86_64 local infrastructure;owner-gated workflows not dispatched",
+      "follow_up": "Owner-authorized eligible-free manual exact-SHA workflow and actual logs"
+    },
+    {
+      "id": "EXT.05",
+      "requirement": "Physical Chrome/Android and hardware GPU acceptance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No actual target device attached",
+      "follow_up": "Final target-device acceptance after software qualification"
+    },
+    {
+      "id": "EXT.06",
+      "requirement": "Manual assistive technology/accessibility acceptance",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No manual screen-reader/device evaluation",
+      "follow_up": "Final independent keyboard/screen-reader/accessibility audit"
+    },
+    {
+      "id": "EXT.07",
+      "requirement": "Private Codespaces authentication from outside environment",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No authenticated owner browser or Codespace session here",
+      "follow_up": "Verify private forwarded port with authorized owner session at final acceptance"
+    },
+    {
+      "id": "EXT.08",
+      "requirement": "Observed historical L3 empirical correctness",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not available in this executor",
+      "method": "Safe configuration/infrastructure readiness inspection,no external test performed",
+      "evidence": [
+        "build/acceptance/environment.json"
+      ],
+      "result": "BLOCKED",
+      "defect_or_blocker": "No permitted complete history and independent full L3 initialization/reference",
+      "follow_up": "Separate authorized dataset and independently justified comparison campaign"
+    },
+    {
+      "id": "OUT.01",
+      "requirement": "Live order submission and production trading release",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Not applicable",
+      "method": "Outside scope;source routes have no broker order submission",
+      "evidence": [
+        "terminal/server/app.py",
+        "terminal/stocks/live.py"
+      ],
+      "result": "NOT APPLICABLE",
+      "defect_or_blocker": null,
+      "follow_up": "Do not enable trading"
+    },
+    {
+      "id": "ENV.01",
+      "requirement": "Exact configured Codespaces devcontainer image and zlib >=1.3.1 availability",
+      "candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+      "environment": "Docker image not built in this campaign",
+      "method": "Source review;host zlib1.3.1 passes,but distro package availability/version not proven",
+      "evidence": [
+        ".devcontainer/Dockerfile",
+        "scripts/setup_terminal_native.sh"
+      ],
+      "result": "NOT TESTED",
+      "defect_or_blocker": "Adding zlib1g-dev does not prove its version meets1.3.1 on pinned Ubuntu image",
+      "follow_up": "Build exact container and verify zlib version before claiming clean Codespaces diagnostics ready"
+    }
+  ],
+  "evidence_scope": "Authored local tests;18 prior implementation areas checked against144 existing source/test hashes;not an independent organization or machine audit"
+}

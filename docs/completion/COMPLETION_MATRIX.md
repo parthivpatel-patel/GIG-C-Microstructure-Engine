@@ -148,3 +148,14 @@ coverage or evidence of full product acceptance. All eight native frozen referen
 contracts pass. See DEVELOPMENT_SCOPE_EVIDENCE.json for cohort provenance,including
 preserved original browser failure. Engineering scope is ready to enter acceptance;
 not accepted or production-ready. No new speculative roadmap was opened.
+
+
+## Final acceptance campaign (October28,2026)
+
+Historical scope-completion claims are now qualified by the executed campaign in
+[INDEPENDENT_ENGINEERING_VERIFICATION.md](INDEPENDENT_ENGINEERING_VERIFICATION.md).
+The new strict FINAL_ACCEPTANCE_MATRIX.json records195PASS,0FAIL,8BLOCKED,
+3NOT TESTED,1NOT APPLICABLE. Setup repair6e76d40 fixes the reproduced clean-install
+native diagnostic gap. All6local native configurations and8canonical identities pass.
+Engineering acceptance remains CONDITIONAL;productionNO-GO. Exact container/zlib,
+Python/system advisories,contrast and external qualification are not silently passed.

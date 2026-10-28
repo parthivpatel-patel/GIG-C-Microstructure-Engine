@@ -723,3 +723,24 @@ provider/source/device/exact-candidate qualification remains blocked/unperformed
 Next action:inspect clean remote checkpoint and evidence;do not restart implementation
 or expand optional roadmap. Final acceptance only after required external evidence;
 no intermediate owner tests requested. No work continues after session ends.
+
+
+## Final acceptance campaign — October28,2026
+
+Frozen f314b36;setup repair6e76d405f53679ef8dade4f342dc111bcbf7ff12 pushed.
+Confirmed clean-installation gap:authored diagnostic executables not built. New native
+setup helper builds existing ITCH/LOBSTER targets with strict zlib>=1.3.1. Clean suite
+fails2 before,passes274+164 after;final helper historical6passes. No native/app/frontend
+semantics changed. Fresh GCC/Clang six configurations937CTest,Python1314,frontend31,
+browser141,security53,TLS8,wheel14,package3,clean438,historical6=2945pass,0finalfail/skip.
+All8canonical outputs equal across6executed configurations. New isolated wheel/locked
+clean local dependencies/frontend/native build tested,not independent-machine evidence.
+Campaign matrix207checks:195PASS,0FAIL,8BLOCKED,3NOT TESTED,1NOT APPLICABLE.
+See completion/INDEPENDENT_ENGINEERING_VERIFICATION.md;manifest/matrix/register adjacent.
+Outstanding NOT TESTED:full Python/system advisories,contrast/readability,exact pinned
+Codespaces image/zlib version. No external-provider/SEC/ARM64/device qualification.
+Engineering acceptanceconditional;controlled authored researchconditionalgo;liveblocked;
+productionNO-GO. No data acquisition,retention activation,workflow dispatch,main change
+or manual owner tests requested. Next:inspect final remote docs receipt;close enumerated
+qualification gaps only with appropriate infrastructure/authorization. No speculative
+feature work or claim execution continues after session ends.

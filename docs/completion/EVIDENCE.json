@@ -2543,5 +2543,18 @@
       "skipped": 0
     },
     "new_candidate_arm64_qualified": false
+  },
+  "final_acceptance_campaign": {
+    "frozen_candidate": "f314b36cb1d088fe6dad83c705ef371bc387834e",
+    "repair_candidate": "6e76d405f53679ef8dade4f342dc111bcbf7ff12",
+    "matrix": "docs/completion/FINAL_ACCEPTANCE_MATRIX.json",
+    "receipt_manifest": "docs/completion/FINAL_ACCEPTANCE_EVIDENCE.json",
+    "report": "docs/completion/INDEPENDENT_ENGINEERING_VERIFICATION.md",
+    "engineering_acceptance": "CONDITIONAL",
+    "controlled_research_use": "CONDITIONAL_GO",
+    "authorized_live_qualification": "BLOCKED",
+    "production_readiness": "NO_GO",
+    "test_outcomes": 2945,
+    "new_arm64_qualified": false
   }
 }
