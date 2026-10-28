@@ -167,9 +167,12 @@ def create_app(stock_workspace=None):
     async def lifespan(app):
         worker = asyncio.create_task(replay_loop())
         retention = asyncio.create_task(retention_loop())
+        directory_worker=asyncio.create_task(stocks.directory.run())
         try:
             yield
         finally:
+            directory_worker.cancel()
+            with suppress(asyncio.CancelledError):await directory_worker
             market_events.closed=True
             await stock_live.close()
             await stocks.close()
@@ -389,6 +392,28 @@ def create_app(stock_workspace=None):
         try:
             async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
         except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
+
+    @route('/api/v2/securities',methods=['GET'])
+    @json_endpoint
+    async def securities(request):
+        q=request.query_params
+        try:
+            if set(q)-{'q','offset','limit'}:raise ValueError('directory_query')
+            offset=q.get('offset','0');limit=q.get('limit','20')
+            if not re.fullmatch(r'[0-9]{1,6}',offset) or not re.fullmatch(r'[0-9]{1,3}',limit):raise ValueError('directory_query')
+            return stocks.catalog.search(q.get('q',''),int(offset),int(limit))
+        except ValueError:return error('DIRECTORY_QUERY','bounded ticker/name prefix,offset and limit required',422)
+
+    @route('/api/v2/securities/status',methods=['GET'])
+    @json_endpoint
+    async def securities_status(request):return stocks.directory.view()
+
+    @route('/api/v1/stocks/directory-refresh',methods=['POST'])
+    @json_endpoint
+    async def directory_refresh(request):
+        if await bounded_json(request)!={}:return error('DIRECTORY_QUERY','empty object required',422)
+        try:return await stocks.directory.refresh()
+        except ValueError:return error('DIRECTORY_BLOCKED','source permission,interval and valid complete official files required',422)
 
     @route('/api/v1/stocks/market-search', methods=['GET'])
     @json_endpoint

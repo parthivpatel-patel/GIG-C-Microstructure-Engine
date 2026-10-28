@@ -50,7 +50,8 @@ class MarketCatalog:
  def instrument(self,symbol):
   if type(symbol) is not str or symbol not in self.rows:raise ValueError('unsupported_market_symbol')
   return {**self.rows[symbol],'identity_source':self.source}
- def search(self,query):
-  if type(query) is not str or len(query)>80 or any(ord(c)<32 for c in query):raise ValueError('catalog_query')
-  q=query.strip().casefold();matches=[r for s,n,r in self.index if q in s or q in n]
-  return {'schema':'gig.market.search.v1','results':matches[:20],'matches':len(matches),'returned':min(20,len(matches)),'catalog_count':len(self.rows),'source':self.source,'reason':self.reason,'scope':'Market identity only;not SEC CIK coverage,tradability or streaming entitlement'}
+ def search(self,query,offset=0,limit=20):
+  if not hasattr(self,'search_index'):
+   from .directory import SearchIndex
+   self.search_index=SearchIndex(self.rows)
+  return {**self.search_index.search(query,offset,limit),'schema':'gig.market.search.v1','catalog_count':len(self.rows),'source':self.source,'reason':self.reason,'scope':self.source.get('coverage','Market identity only;not SEC CIK coverage,tradability or streaming entitlement')}

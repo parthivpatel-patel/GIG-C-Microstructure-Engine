@@ -23,6 +23,8 @@ class StockWorkspace:
         self.environment,self.sec_config = resolve(os.environ) if environment is None else (environment,{'source':'explicit_environment','error':None})
         from .market_catalog import MarketCatalog
         self.catalog=MarketCatalog.configured(self.environment)
+        from .directory import DirectoryService
+        self.directory=DirectoryService(self)
         self.issuers={};self.issuer_source=None;self.sec_accepted={};self.sec_refresh_state={}
         from .history_store import configured
         self.history_store=history_store if history_store is not None else configured(self.environment)
@@ -34,10 +36,14 @@ class StockWorkspace:
             row=self.issuers[ticker]
             exchange=self.catalog.rows.get(ticker,{}).get('exchange','UNVERIFIED')
             return {**row,'exchange':exchange,'currency':'USD','identity_source':'accepted_SEC_company_tickers_response','identity_as_of':self.issuer_source['received_at'],'identity_source_record':self.issuer_source}
-        try:return instrument(ticker)
+        try:
+            seed=instrument(ticker)
+            if ticker in self.catalog.rows:
+                row=self.catalog.rows[ticker];seed={**seed,'company_name':row['name'],'exchange':row['exchange'],'security_type':row.get('security_type','UNCLASSIFIED_SEED'),'listing_status':row.get('listing_status','UNVERIFIED_SEED')}
+            return seed
         except ValueError:
             row=self.catalog.instrument(ticker)
-            return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
+            return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','security_type':row.get('security_type','UNCLASSIFIED'),'listing_status':row.get('listing_status','UNVERIFIED'),'identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
     async def refresh_identities(self):
         from .sec_identity import parse,URL
         from .identity import SEEDS
