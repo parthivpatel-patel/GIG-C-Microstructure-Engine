@@ -55,15 +55,18 @@ def official_fetch(cik,environment):
     from terminal.stocks.service import StockWorkspace
     import httpx
     from terminal.stocks.sec_config import resolve
-    effective,_=resolve(environment)
+    from terminal.stocks.qualification import nonretaining_environment
+    effective=nonretaining_environment(environment)
     headers=StockWorkspace(environment=effective).permission('sec')
     url='https://data.sec.gov/api/xbrl/companyfacts/CIK'+cik+'.json'
+    started=time.monotonic()
     with httpx.Client(timeout=8,follow_redirects=False,headers={'Accept-Encoding':'identity'}) as client:
         with client.stream('GET',url,headers=headers) as response:
             if response.status_code!=200:raise ValueError('SEC_HTTP_'+str(response.status_code))
             if response.headers.get('content-encoding','identity').lower() not in ('','identity'):raise ValueError('SEC_encoding')
             raw=bytearray()
             for chunk in response.iter_raw():
+                if time.monotonic()-started>25:raise ValueError('SEC_total_deadline')
                 if len(raw)+len(chunk)>8388608:raise ValueError('SEC_body_budget')
                 raw.extend(chunk)
     return bytes(raw),url
@@ -87,7 +90,8 @@ def main():
         if not a.fetch:p.error('--resolve-identity requires explicit --fetch and existing SEC authorization')
         import asyncio
         from terminal.stocks.service import StockWorkspace
-        identity=asyncio.run(resolve_reference(a.symbol,StockWorkspace()))
+        from terminal.stocks.qualification import nonretaining_environment
+        identity=asyncio.run(resolve_reference(a.symbol,StockWorkspace(environment=nonretaining_environment())))
         cik=identity['cik']
         # Registry then companyfacts share a conservative SEC request cadence.
         time.sleep(1.01)

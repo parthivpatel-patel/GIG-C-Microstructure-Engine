@@ -110,7 +110,7 @@ no owner-run command was required during intermediate development.
   --symbol AAPL --kind bars --start 2026-10-20 --end 2026-10-20 --max-pages 1
 
 # Separate live IEX qualification,not market-wide completeness or exchange accuracy.
-.venv/bin/python scripts/qualify_alpaca_live.py --execute --symbol AAPL --seconds 30
+.venv/bin/python scripts/qualify_alpaca_live.py --execute --exclusive-stream-window --symbol AAPL --seconds 30
 
 # Exact official SEC registry resolution before facts,including non-curated symbols.
 .venv/bin/python scripts/qualify_sec_sources.py --fetch --resolve-identity \

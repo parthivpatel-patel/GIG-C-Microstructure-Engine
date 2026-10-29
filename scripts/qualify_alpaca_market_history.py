@@ -6,7 +6,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from terminal.stocks.service import StockWorkspace
 from terminal.stocks.alpaca_history import acquire
 async def qualify(a):
-    w=StockWorkspace()
+    from terminal.stocks.qualification import nonretaining_environment
+    w=StockWorkspace(environment=nonretaining_environment())
     r=await acquire(w,a.symbol,a.kind,a.start,a.end,a.timeframe,a.max_pages)
     return {k:r[k] for k in ('schema','symbol','kind','provider','feed','origin','availability','freshness','record_count','pages','has_more','complete_market_history','requested_interval','source_records','scope','retention')}
 def main():
@@ -14,5 +15,7 @@ def main():
     if not a.execute:p.error('No request made;explicit --execute and existing server permissions required')
     try:r=asyncio.run(qualify(a))
     except Exception:print(json.dumps({'status':'BLOCKED_OR_REJECTED','reason':'source_permissions_credentials_network_interval_or_validation','credential_values_emitted':False}));return 2
-    print(json.dumps({**r,'raw_records_emitted':False,'qualification':'BOUNDED_HISTORICAL_READ_ONLY_NOT_LIVE_OR_INDEPENDENT_EXCHANGE_VALIDATION'},indent=2));return 0
+    from terminal.stocks.qualification import history_status
+    r['status']=history_status(r)
+    print(json.dumps({**r,'raw_records_emitted':False,'qualification':'BOUNDED_HISTORICAL_READ_ONLY_NOT_LIVE_OR_INDEPENDENT_EXCHANGE_VALIDATION'},indent=2));return 0 if r['status']=='PASS_BOUNDED_HISTORICAL_OBSERVATIONS' else 1
 if __name__=='__main__':raise SystemExit(main())

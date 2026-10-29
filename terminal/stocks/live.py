@@ -40,7 +40,9 @@ def amount(v,positive=False):
     return decimal(v,positive)
 
 class LiveIEX:
-    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None):
+    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5):
+        if type(retry_budget) is not int or not 1<=retry_budget<=5:raise ValueError('live_retry_budget')
+        self.retry_budget=retry_budget
         from .session_schedule import SessionSchedule
         from .market_catalog import MarketCatalog
         self.catalog=workspace.catalog
@@ -216,7 +218,7 @@ class LiveIEX:
                 except Exception:
                     # WebSocket closure/handshake failures never log exception text or keys.
                     self.phase='DISCONNECTED';self.state='BACKOFF';self.failures+=1;self.reason='transport_closed'
-                if self.failures>=5:self.state='FAILED';self.reason='retry_budget_exhausted';return
+                if self.failures>=self.retry_budget:self.state='FAILED';self.reason='retry_budget_exhausted';return
                 try:await asyncio.wait_for(self.stop_event.wait(),min(30,2**min(self.failures,5)))
                 except asyncio.TimeoutError:pass
         finally:self.socket=None;self.phase='DISCONNECTED'
