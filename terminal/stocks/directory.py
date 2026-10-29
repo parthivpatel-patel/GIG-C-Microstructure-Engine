@@ -21,7 +21,7 @@ class SearchIndex:
    found=set()
    for word in self.words[bisect.bisect_left(self.words,term):bisect.bisect_right(self.words,term+'\uffff')]:found.update(self.tokens[word])
    names=found if names is None else names&found
-  hits.update(names or ());ordered=sorted(hits,key=lambda s:(s!=q,not s.startswith(q),s));chosen=ordered[offset:offset+limit]
+  ordered=list(prefix)+sorted((names or set())-hits);chosen=ordered[offset:offset+limit]
   return {'results':[dict(self.rows[s]) for s in chosen],'matches':len(ordered),'returned':len(chosen),'offset':offset,'limit':limit,'next_offset':offset+limit if offset+limit<len(ordered) else None,'search_method':'exact ticker, ticker prefix, all company-name word prefixes'}
 def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
  rows={};excluded={'test_issue':0,'unsupported_symbol':0};sources=[]

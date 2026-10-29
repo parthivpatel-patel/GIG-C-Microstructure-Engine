@@ -18,6 +18,15 @@ class Directory(unittest.TestCase):
   c=parse_files(files());self.assertEqual(c.search('applied')['results'][0]['symbol'],'APLD');self.assertEqual(c.search('',2,2)['next_offset'],4);self.assertEqual(len(c.search('',4,2)['results']),2)
   for args in [('x',-1,2),('x',0,0),('x',0,101),('x\n',0,2)]:
    with self.assertRaises(ValueError):c.search(*args)
+  # Independent scan/rank oracle for indexed pages,including broad name matches.
+  rows={f'X{i:03}':{'symbol':f'X{i:03}','name':f'Authored group {i%7} corporation'} for i in range(200)};index=SearchIndex(rows)
+  for query in ['','X001','X0','auth','group 3','corpor','unmatched']:
+   words=query.lower().split();expected=[]
+   for symbol,row in rows.items():
+    name_words=row['name'].lower().split()
+    if symbol.startswith(query.upper()) or words and all(any(w.startswith(term) for w in name_words) for term in words):expected.append(symbol)
+   expected.sort(key=lambda s:(s!=query.upper(),not s.startswith(query.upper()),s))
+   self.assertEqual([r['symbol'] for r in index.search(query,3,20)['results']],expected[3:23]);self.assertEqual(index.search(query)['matches'],len(expected))
  def test_invalid_footer_columns_enums_and_collision(self):
   f=files()
   for change in [lambda v:v.replace(b'File Creation Time:',b'No creation marker'),lambda v:v.replace(b'|Q|N|N|100|',b'|Z|N|N|100|'),lambda v:v.replace(b'AAPL|',b'CRWV|'),lambda v:v.replace(b'|100|',b'|0|')]:
