@@ -19,13 +19,14 @@ def failure_reason(exc,fallback):
 
 class StockWorkspace:
     def __init__(self,environment=None,fetcher=None,clock=time.monotonic,history_store=None):
+        self.production_configuration=environment is None
         from .sec_config import resolve
         self.environment,self.sec_config = resolve(os.environ) if environment is None else (environment,{'source':'explicit_environment','error':None})
         from .market_catalog import MarketCatalog
         self.catalog=MarketCatalog.configured(self.environment)
         from .directory import DirectoryService
         self.directory=DirectoryService(self)
-        self.issuers={};self.issuer_source=None;self.sec_accepted={};self.sec_refresh_state={}
+        self.issuers={};self.issuer_source=None;self.sec_identity_accepted=None;self.sec_accepted={};self.sec_refresh_state={}
         from .history_store import configured
         self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
@@ -48,6 +49,10 @@ class StockWorkspace:
         from .sec_identity import parse,URL
         from .identity import SEEDS
         headers=self.permission('sec')
+        now=self.clock()
+        if self.sec_identity_accepted is not None and 0<=now-self.sec_identity_accepted<60:
+            self.directory.sec_status='CACHED_ACCEPTED_REFERENCE'
+            return {'schema':'gig.sec.identity.v1','count':len(self.issuers),'source':self.issuer_source,'refresh':'CACHED_ACCEPTED_REFERENCE','next_refresh_seconds':60-(now-self.sec_identity_accepted)}
         if self.lock.locked():raise AccessError('upstream_refresh_busy')
         async with self.lock:
             async with asyncio.timeout(10):
@@ -57,7 +62,10 @@ class StockWorkspace:
                 for ticker,row in self.issuers.items():
                     if ticker in self.cache and (ticker not in rows or rows[ticker]['cik']!=row['cik']):raise AccessError('sec_directory_cached_issuer_change')
                 source={'url':URL,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':self.origin,'scope':'Current SEC ticker mapping;not historical listing identity or feed entitlement'}
+                accepted=self.clock()
                 self.issuers,self.issuer_source=rows,source
+                self.sec_identity_accepted=accepted
+                self.directory.sec_status='ACCEPTED'
         return {'schema':'gig.sec.identity.v1','count':len(rows),'source':source}
     def search(self,query):
         found=self.catalog.search(query);q=query.strip().casefold()

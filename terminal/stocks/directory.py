@@ -14,7 +14,7 @@ class SearchIndex:
    for token in set(re.findall(r'[a-z0-9]+',r['name'].casefold())):self.tokens.setdefault(token,set()).add(s)
   self.words=sorted(self.tokens)
  def search(self,query,offset=0,limit=20):
-  if type(query) is not str or len(query)>80 or any(ord(c)<32 for c in query) or type(offset) is not int or type(limit) is not int or not 0<=offset<=MAX_ROWS or not 1<=limit<=100:raise ValueError('directory_search_bounds')
+  if type(query) is not str or len(query)>80 or any(ord(c)<32 for c in query) or type(offset) is not int or type(limit) is not int or not 0<=offset<=150000 or not 1<=limit<=100:raise ValueError('directory_search_bounds')
   q=query.strip().upper();prefix=self.symbols[bisect.bisect_left(self.symbols,q):bisect.bisect_right(self.symbols,q+'\uffff')] if q else self.symbols
   hits=set(prefix);terms=re.findall(r'[a-z0-9]+',query.casefold());names=None
   for term in terms:
@@ -86,15 +86,23 @@ class DirectoryService:
     self.state={**self.state,'status':'STALE_LAST_ACCEPTED' if self.state['accepted_count'] else 'UNAVAILABLE','last_error':'directory_refresh_rejected;previous_identity_snapshot_preserved'}
     raise ValueError('directory_refresh_rejected') from None
   return self.view()
- def view(self):return {**self.state,'approved':self.approved(),'source':self.workspace.catalog.source,'catalog_count':len(self.workspace.catalog.rows),'actual_official_count':self.state['accepted_count'] if self.workspace.catalog.source.get('authority')=='OFFICIAL_DIRECTORY_RESPONSE' else 0,'limits':{'bytes_per_file':MAX_BYTES,'max_rows_resource_budget':MAX_ROWS,'refresh_interval_seconds':21600},'retention':'Process-lifetime catalog only;no directory file persisted','identity_only':True}
+ def view(self):
+  try:self.workspace.permission('sec');sec_ready=True
+  except ValueError:sec_ready=False
+  return {**self.state,'approved':self.approved(),'source':self.workspace.catalog.source,'catalog_count':len(self.workspace.catalog.rows),'actual_official_count':self.state['accepted_count'] if self.workspace.catalog.source.get('authority')=='OFFICIAL_DIRECTORY_RESPONSE' else 0,'limits':{'bytes_per_file':MAX_BYTES,'max_rows_resource_budget':MAX_ROWS,'refresh_interval_seconds':21600},'retention':'Process-lifetime catalog only;no directory file persisted','identity_only':True,'sec_ready':sec_ready,'sec_identity_count':len(self.workspace.issuers),'sec_identity_source':self.workspace.issuer_source,'sec_reference_status':getattr(self,'sec_status','NOT_REQUESTED')}
  async def run(self):
   while True:
    if self.approved():
     try:await self.refresh()
     except ValueError:pass
-   if self.approved() or self.workspace.environment.get('GIG_SEC_DIRECTORY_AUTO_REFRESH')=='1':
+   mode=self.workspace.environment.get('GIG_SEC_DIRECTORY_AUTO_REFRESH')
+   auto=mode=='1' or mode is None and (self.approved() or self.workspace.production_configuration and self.workspace.fetcher is None)
+   if auto:
     try:
      self.workspace.permission('sec')
      await self.workspace.refresh_identities()
-    except (ValueError,httpx.HTTPError,TimeoutError):pass
+     self.sec_status='ACCEPTED'
+    except (ValueError,httpx.HTTPError,TimeoutError):self.sec_status='UNAVAILABLE_OR_IDENTIFYING_CONFIGURATION_REQUIRED'
+   elif mode=='0':self.sec_status='AUTOMATIC_REFRESH_DISABLED'
+   elif mode is not None:self.sec_status='INVALID_AUTOMATIC_REFRESH_CONFIGURATION'
    await asyncio.sleep(21600)

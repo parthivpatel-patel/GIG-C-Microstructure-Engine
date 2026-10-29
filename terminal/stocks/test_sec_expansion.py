@@ -70,7 +70,7 @@ class Expansion(unittest.TestCase):
   p=submissions();p['filings']['recent']['acceptanceDateTime'][0]='2024-02-01 12:00:00Z'
   with self.assertRaisesRegex(ValueError,'sec_acceptance_timestamp'):filings(p,CIK)
  def test_removed_cached_issuer_cannot_leave_financials_with_null_identity(self):
-  source=self.directory();w=self.workspace(lambda url:source);asyncio.run(w.refresh_identities());w.cache['APLD']={'sec':{'authored':True}};before=copy.deepcopy(w.issuers);del source['1']
+  source=self.directory();w=self.workspace(lambda url:source);asyncio.run(w.refresh_identities());w.cache['APLD']={'sec':{'authored':True}};before=copy.deepcopy(w.issuers);w.clock=lambda:100000;del source['1']
   with self.assertRaisesRegex(ValueError,'cached_issuer_change'):asyncio.run(w.refresh_identities())
   self.assertEqual(w.issuers,before);self.assertEqual(w.resolve('APLD')['cik'],'0000000042')
  def test_expanded_filings_budget_and_default_compatibility(self):

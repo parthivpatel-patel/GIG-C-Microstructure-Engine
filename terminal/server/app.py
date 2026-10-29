@@ -411,7 +411,8 @@ def create_app(stock_workspace=None):
             if set(q)-{'q','offset','limit'}:raise ValueError('directory_query')
             offset=q.get('offset','0');limit=q.get('limit','20')
             if not re.fullmatch(r'[0-9]{1,6}',offset) or not re.fullmatch(r'[0-9]{1,3}',limit):raise ValueError('directory_query')
-            return stocks.catalog.search(q.get('q',''),int(offset),int(limit))
+            from terminal.stocks.discovery import search
+            return search(stocks,q.get('q',''),int(offset),int(limit))
         except ValueError:return error('DIRECTORY_QUERY','bounded ticker/name prefix,offset and limit required',422)
 
     @route('/api/v2/securities/status',methods=['GET'])
@@ -590,7 +591,9 @@ def create_app(stock_workspace=None):
     async def sec_directory(request):
         if await bounded_json(request)!={}:return error('SEC_DIRECTORY_QUERY','empty object required',422)
         try:return await stocks.refresh_identities()
-        except Exception:return error('SEC_DIRECTORY_UNAVAILABLE','authorized bounded SEC directory response unavailable;accepted identities unchanged',422)
+        except Exception:
+            stocks.directory.sec_status='REFRESH_REJECTED_LAST_ACCEPTED' if stocks.issuer_source else 'UNAVAILABLE'
+            return error('SEC_DIRECTORY_UNAVAILABLE','authorized bounded SEC directory response unavailable;accepted identities unchanged',422)
 
     @route('/api/v1/stocks/sec-history',methods=['POST'])
     @json_endpoint
