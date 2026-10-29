@@ -27,3 +27,16 @@ OptionalBoundary(deployment-chunk isolation),BalanceComparison(shared-scale matc
 instants),FilingExplorer(server-filtered bounded cache pages),and two Phase2 browser/
 performance harnesses. See GIG_ATLAS_PHASE2_REPORT.md for current loading policy;
 prior Phase1 capture/evidence remains historical.
+
+
+## Product-development expansion (October28,2026)
+
+The shell now preserves the original nine workspaces and adds Securities Universe,
+Live Markets and Multi-Stock Comparison. `ResearchDesk` is the company-first overview;
+`UniverseWorkspace` consumes bounded versioned discovery/contracts;`CompanyCoverage`
+separates identity,financial and acquisition evidence. `WorkspaceIcon` supplies twelve
+original SVG marks. `QuoteCloud` delegates four source-aware modes to pure
+`marketGeometry`;`ModelSurface`/`modelSurface` independently render the declared GARCH
+response grid. Native L3 remains in its existing renderer,not inferred from live L1.
+All optional renderers remain lazy-loaded. See the current product report/evidence for
+actual browser,cleanup,responsive and qualification boundaries.

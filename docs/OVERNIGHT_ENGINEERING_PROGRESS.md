@@ -1,3 +1,40 @@
+# Current GIG ATLAS product checkpoint — October28,2026
+
+Branch `feat/atlas-final-release`;implemented and remotely verified checkpoint
+`7b28431943d2eb3d63485bf248015242321da32e`. Main remains
+`12f3a53943dc245e36f2cbbc35b9910fb21c0718`.
+
+Completed:automatic SEC discovery/cache/startup and refresh controls;exact identity
+union and provenances;company availability;indexed source search;research-first
+Command Center;Securities Universe;dedicated live and multi-stock workspaces;
+four Level1 3D modes;separate modeled GARCH response surface;all original workspaces;
+mobile/light-theme/control repairs and ordinary-click browser validation.
+
+Validated:180 stock tests/configuration and274 terminal tests/configuration under
+Debug/Release/ASan+UBSan native bindings;41 frontend tests;91 stable browser checks;
+32 new product checks;50 additional ratio/live/SEC/discovery/GPU browser checks;
+53 security checks;8 verified local HTTPS/WSS checks;8 unchanged native frozen
+reference cases;14 installed-wheel checks;3 packaging regressions;803-member source
+archive inventory. Supplemental final indexed-search sanitizer14/14,liveLSan0.
+No failed/skipped final listed cohort. Prior failures and exact receipts are preserved
+in `docs/product/product_evidence.json` and the product report.
+
+Actual source coverage0 official listing identities/0 official SEC mappings/13 fallback
+identities. No ready identifying SEC config or Alpaca credential pair here. No restricted
+LOBSTER access,no market acquisition,no workflow dispatch,no live trading or retention
+activation. New implementation is NOT ARM64-qualified by historical commit results.
+
+Next action:read `docs/product/PRODUCT_DEVELOPMENT_REPORT.md` and source ledger before
+resuming. Do not restart completed UI/native work or rerun every unchanged cohort.
+Qualify lawful official reference sources and the exact candidate when authorized
+configuration/infrastructure is available. Do not infer full US coverage from SEC
+registrants or50k authored benchmark identities. No intermediate owner manual testing
+was requested. Delivery-doc commit SHA is in Git history and final response.
+
+The earlier autonomous-engineering checkpoints below are preserved history.
+
+---
+
 # Autonomous engineering checkpoint
 
 Starting checkpoint: `1855a2f7a4d4ef472b61ffa5fd3b6b1a76acf282`, feature branch

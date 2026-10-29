@@ -69,3 +69,11 @@ verifies the selected company changes. This was caught before the delivery commi
 Phase 2 recovery: see [Phase 2 report](GIG_ATLAS_PHASE2_REPORT.md) and
 `gig_atlas_phase2_evidence.json` for current refinements,stable-build browser checks,
 viewport screenshots,performance observations and remaining accessibility limits.
+
+
+Current expanded product:see [product visual QA](../product/PRODUCT_VISUAL_QA.md).
+The executed cross-workspace matrix is now12 workspaces,60 width combinations and
+120 dark/light combinations. It preserves the original assertions while moving native
+controls to their dedicated pages. New screenshots/ordinary-click interactions and
+limitations supersede the old nine-workspace description above;historical captures
+are preserved.

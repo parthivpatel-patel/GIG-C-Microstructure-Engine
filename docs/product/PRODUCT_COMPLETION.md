@@ -1,3 +1,17 @@
+# Current product checkpoint — October28,2026
+
+See [product-development report](PRODUCT_DEVELOPMENT_REPORT.md),
+[source ledger](SOURCE_ACCESS_LEDGER.md),[visual QA](PRODUCT_VISUAL_QA.md) and
+[verified evidence](product_evidence.json). The research desk,all12 workspaces,
+SEC startup/cache discovery,company coverage and advanced source-aware 3D work are
+implemented and fixture-qualified at `7b28431943d2eb3d63485bf248015242321da32e`.
+Official current coverage here remains0 listing identities/0 SEC mappings/13 fallback
+identities. Source/provider/actual-candidate ARM64/device qualification remain open.
+This supersedes the earlier IN PROGRESS labels below;the original checkpoint record
+is preserved as historical evidence,not silently rewritten as current results.
+
+---
+
 # Product completion program — October28,2026
 
 Baseline50b83c581297a200ffc15b6f5a4801b0a60a5d49. Previous engineering acceptance

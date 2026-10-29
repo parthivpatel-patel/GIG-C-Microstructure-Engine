@@ -1,3 +1,16 @@
+# Current expanded product scope
+
+The earlier engineering contracts below do not establish final product acceptance.
+Current12-workspace implementation/source qualification is assessed in
+[the product report](../product/PRODUCT_DEVELOPMENT_REPORT.md),with
+[actual test/visual/source receipts](../product/product_evidence.json).
+Automatic SEC discovery and broader reference routing are implemented;actual official
+listing/SEC coverage here is0/0,with13 fallback identities. Live source permissions,
+exact-candidate ARM64/hosted and independent device/product acceptance remain open.
+Historical completion labels below retain their original declared scope.
+
+---
+
 # Consolidated completion matrix
 
 Current scope assessment: [DEVELOPMENT_SCOPE_AUDIT.md](DEVELOPMENT_SCOPE_AUDIT.md).

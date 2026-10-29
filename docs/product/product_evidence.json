@@ -1,0 +1,1020 @@
+{
+  "schema": "gig.atlas.product-development-evidence.v1",
+  "review_date": "2026-10-28 America/New_York;execution into2026-10-29UTC",
+  "classification": "AUTHORED_FIXTURE_QUALIFICATION_NOT_MARKET_PRODUCT_ACCEPTANCE",
+  "baseline": "50b83c581297a200ffc15b6f5a4801b0a60a5d49",
+  "implementation_commit": "7b28431943d2eb3d63485bf248015242321da32e",
+  "branch": "feat/atlas-final-release",
+  "unchanged_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "actual_runtime_coverage": {
+    "official_listing_identities": 0,
+    "official_sec_ticker_mappings": 0,
+    "curated_fallback_identities": 13,
+    "sec_ready": false,
+    "alpaca_credential_pair_available": false,
+    "actual_reference_or_market_acquisition_in_this_assignment": false
+  },
+  "configuration_privacy": "Values neither printed nor changed;readiness booleans only",
+  "environment": {
+    "machine": "x86_64",
+    "os": "Linux",
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "chromium": "154.0.8037.57",
+    "renderer": "Headless SwiftShader;no physical Android/GPU/ARM64/hosted qualification"
+  },
+  "test_results": {
+    "stock_binding_consumers": [
+      {
+        "configuration": "Debug",
+        "tests": 180,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "Release",
+        "tests": 180,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "ASan+UBSan",
+        "tests": 180,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    ],
+    "terminal_native_binding_consumers": [
+      {
+        "configuration": "Debug",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "Release",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "ASan+UBSan",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": 0
+      }
+    ],
+    "frontend": {
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    "stable_browser_suites": {
+      "passed": 91,
+      "failed": 0,
+      "skipped": 0,
+      "workspace_width_combinations": 60,
+      "workspace_theme_width_combinations": 120
+    },
+    "product_browser": {
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ratio_history_browser": {
+      "passed": 14,
+      "failed": 0
+    },
+    "live_market_browser": {
+      "passed": 21,
+      "failed": 0
+    },
+    "sec_browser": {
+      "passed": 3,
+      "failed": 0
+    },
+    "discovery_browser": {
+      "passed": 3,
+      "failed": 0,
+      "symbols": [
+        "AAPL",
+        "APLD",
+        "CRWV"
+      ]
+    },
+    "gpu_landscape_browser": {
+      "passed": 5,
+      "failed": 0
+    },
+    "gpu_quote_browser": {
+      "passed": 4,
+      "failed": 0
+    },
+    "origin_proof_security": {
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0
+    },
+    "verified_local_https_wss": {
+      "passed": 8,
+      "failed": 0
+    },
+    "installed_existing_wheel": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    "packaging_patterns": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "supplemental_index_sanitizer": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "live_lsan_check": 0
+    },
+    "counting": "Per-suite/configuration outcomes;cohorts overlap,not unique tests"
+  },
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "executed_cases": [
+      {
+        "case": "itch.validation_demo_reference",
+        "time_seconds": 0.161067,
+        "reported_hashes": [
+          "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+        ]
+      },
+      {
+        "case": "itch.independent_reference",
+        "time_seconds": 0.17827,
+        "reported_hashes": [
+          "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+        ]
+      },
+      {
+        "case": "itch.context_reference",
+        "time_seconds": 0.844678,
+        "reported_hashes": [
+          "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+        ]
+      },
+      {
+        "case": "itch.streaming_reference",
+        "time_seconds": 0.87138,
+        "reported_hashes": [
+          "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+        ]
+      },
+      {
+        "case": "itch.l3_reference",
+        "time_seconds": 20.5968,
+        "reported_hashes": [
+          "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+          "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+        ]
+      },
+      {
+        "case": "itch.auction_reference",
+        "time_seconds": 0.816007,
+        "reported_hashes": [
+          "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        ]
+      },
+      {
+        "case": "itch.admin_reference",
+        "time_seconds": 0.500162,
+        "reported_hashes": [
+          "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+        ]
+      },
+      {
+        "case": "itch.hy_reference",
+        "time_seconds": 0.350592,
+        "reported_hashes": [
+          "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+        ]
+      }
+    ],
+    "all_unchanged": true,
+    "native_source_changed": false
+  },
+  "stable_browser_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "73de018b437d819dfb63fa01b86625dc2e856e4af0fc4f174062921077cfc37e",
+      "assets/Landscape3D-CmfhCZuX.js": "83ead735d91aeec172067c7f0f41c8f2ade356b98d49e49d9588e21204ff836a",
+      "assets/LiveMarket-BXdu5bEi.js": "f09e5e38ca63dfc0c3cfa18fa14d0baf3ad50b5c08684bcee7b12471b4baa10b",
+      "assets/MarketHealth-D6qb7lD5.js": "48e8d6205c48b39476ca7e33e91aaa145794e86903f4c2daea224cc08d514a45",
+      "assets/ModelSurface-DvQzl3SI.js": "a3f9d9329f30518624691f84b481f03a1cd703dfee66210602fdcce0bbd76d19",
+      "assets/OrbitControls-CFB5RmRs.js": "91c499b6dbf4fe9797252a668451f32a644d43127887263d78cee639b7881497",
+      "assets/QuoteCloud-CK2rxwd5.js": "2f63f3d48d010244bc4b71e182fec5af70309529423b09c83e36bfb4745c1f79",
+      "assets/ResearchDesk-u1xNdad0.js": "0b6c9254cb6cd0ef916887d535c0753f3c7dbd6f85c00428a9a0a5ec5994f8bf",
+      "assets/StockIntelligence-BzakWxt_.js": "9fc1163292470f53fe8b8081915d1de74e360e6bf3a9507cff49cd25f1299715",
+      "assets/UniverseWorkspace-CCDY1R97.js": "0ea7ac3da62fa1d3167821d243b1358527d3da8fea7df9f316f0e5612d211d39",
+      "assets/VolatilitySurface-DyctBjq3.js": "bbbcf3294d651856094fb1effedb5398d3316aee97e70334c72598c5376738b0",
+      "assets/directoryContract-CI9YF21r.js": "bce911fdc9a634aede2e587aaa4d00dbd98fa5496a8f3b8fa3423435f6020673",
+      "assets/index-C-k25qwL.js": "92c535114f539f3e9c3d73b5639690c6c7f73871bb2eb67a9698b94cf7f3a087",
+      "assets/index-DNne9hyX.css": "ab94858d3c5a3916ce06a2b13b9bb698d90784beb52a3100267270446d6a5fef",
+      "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "index.html": "9d23ca6131e62d927fc7f25ac9241eb8f490adc5699e0c0724e4684f18a05863"
+    },
+    "asset_mutation_detected": false
+  },
+  "browser_driver": [
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_atlas_browser_suite.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/ratio-history-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/live-market-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/sec-completion-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/discovery-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/gpu-recovery-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/atlas-final-performance.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": "GIG_GPU_CASE=quote node terminal/tests/gpu-recovery-validation.mjs",
+      "exit": 0
+    }
+  ],
+  "assets": [
+    {
+      "path": "terminal/web/dist/assets/LiveMarket-BXdu5bEi.js",
+      "bytes": 17527,
+      "sha256": "f09e5e38ca63dfc0c3cfa18fa14d0baf3ad50b5c08684bcee7b12471b4baa10b",
+      "gzip_bytes": 6162
+    },
+    {
+      "path": "terminal/web/dist/assets/Landscape3D-CmfhCZuX.js",
+      "bytes": 6965,
+      "sha256": "83ead735d91aeec172067c7f0f41c8f2ade356b98d49e49d9588e21204ff836a",
+      "gzip_bytes": 2919
+    },
+    {
+      "path": "terminal/web/dist/assets/StockIntelligence-BzakWxt_.js",
+      "bytes": 86330,
+      "sha256": "9fc1163292470f53fe8b8081915d1de74e360e6bf3a9507cff49cd25f1299715",
+      "gzip_bytes": 23653
+    },
+    {
+      "path": "terminal/web/dist/assets/QuoteCloud-CK2rxwd5.js",
+      "bytes": 10012,
+      "sha256": "2f63f3d48d010244bc4b71e182fec5af70309529423b09c83e36bfb4745c1f79",
+      "gzip_bytes": 4240
+    },
+    {
+      "path": "terminal/web/dist/assets/directoryContract-CI9YF21r.js",
+      "bytes": 1285,
+      "sha256": "bce911fdc9a634aede2e587aaa4d00dbd98fa5496a8f3b8fa3423435f6020673",
+      "gzip_bytes": 536
+    },
+    {
+      "path": "terminal/web/dist/assets/MarketHealth-D6qb7lD5.js",
+      "bytes": 2529,
+      "sha256": "48e8d6205c48b39476ca7e33e91aaa145794e86903f4c2daea224cc08d514a45",
+      "gzip_bytes": 1081
+    },
+    {
+      "path": "terminal/web/dist/assets/index-C-k25qwL.js",
+      "bytes": 235569,
+      "sha256": "92c535114f539f3e9c3d73b5639690c6c7f73871bb2eb67a9698b94cf7f3a087",
+      "gzip_bytes": 72824
+    },
+    {
+      "path": "terminal/web/dist/assets/marketContract-DM0W2FhH.js",
+      "bytes": 1813,
+      "sha256": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "gzip_bytes": 793
+    },
+    {
+      "path": "terminal/web/dist/assets/ResearchDesk-u1xNdad0.js",
+      "bytes": 4389,
+      "sha256": "0b6c9254cb6cd0ef916887d535c0753f3c7dbd6f85c00428a9a0a5ec5994f8bf",
+      "gzip_bytes": 1797
+    },
+    {
+      "path": "terminal/web/dist/assets/VolatilitySurface-DyctBjq3.js",
+      "bytes": 2507,
+      "sha256": "bbbcf3294d651856094fb1effedb5398d3316aee97e70334c72598c5376738b0",
+      "gzip_bytes": 1370
+    },
+    {
+      "path": "terminal/web/dist/assets/OrbitControls-CFB5RmRs.js",
+      "bytes": 513793,
+      "sha256": "91c499b6dbf4fe9797252a668451f32a644d43127887263d78cee639b7881497",
+      "gzip_bytes": 125455
+    },
+    {
+      "path": "terminal/web/dist/assets/ModelSurface-DvQzl3SI.js",
+      "bytes": 6821,
+      "sha256": "a3f9d9329f30518624691f84b481f03a1cd703dfee66210602fdcce0bbd76d19",
+      "gzip_bytes": 2953
+    },
+    {
+      "path": "terminal/web/dist/assets/UniverseWorkspace-CCDY1R97.js",
+      "bytes": 6163,
+      "sha256": "0ea7ac3da62fa1d3167821d243b1358527d3da8fea7df9f316f0e5612d211d39",
+      "gzip_bytes": 2413
+    },
+    {
+      "path": "terminal/web/dist/assets/index-DNne9hyX.css",
+      "bytes": 52319,
+      "sha256": "ab94858d3c5a3916ce06a2b13b9bb698d90784beb52a3100267270446d6a5fef",
+      "gzip_bytes": 10201
+    }
+  ],
+  "performance": {
+    "directory": {
+      "classification": "AUTHORED_COMPLETE_FILES_NOT_US_LISTING_IMPORT",
+      "accepted_identities": 50002,
+      "nasdaq_input_bytes": 2689026,
+      "parse_and_index_seconds": 0.40739426300569903,
+      "results": [
+        {
+          "query": "X49999",
+          "matches": 1,
+          "returned": 1,
+          "queries_per_repetition": 1000,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 0.004391292997752316
+        },
+        {
+          "query": "X49",
+          "matches": 1000,
+          "returned": 20,
+          "queries_per_repetition": 100,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 0.026522629923420027
+        },
+        {
+          "query": "authored industry",
+          "matches": 50000,
+          "returned": 20,
+          "queries_per_repetition": 100,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 23.137556869914988
+        }
+      ],
+      "peak_process_rss_kib": 82360,
+      "limitations": [
+        "In-process fixed authored names,not HTTP/server/provider latency",
+        "Shared-host observations,not a capacity guarantee or real-universe count"
+      ]
+    },
+    "rendering": {
+      "classification": "AUTHORED_FOUR_STOCK_SWIFTSHADER_NOT_LIVE_OR_PHYSICAL_GPU",
+      "browser": "154.0.8037.57",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "display_window": 256,
+      "active": [
+        {
+          "label": "Retained Level 1 quotes:capture order x,per-symbol source price y,symbol lanes z;discrete retained observations",
+          "geometries": 2,
+          "draw_calls": 2,
+          "render_submission_ms": 12.300000011920929,
+          "geometry_updates": 2
+        },
+        {
+          "label": "Retained Level 1 quotes:capture order x,per-symbol source price y,symbol lanes z;discrete retained observations",
+          "geometries": 2,
+          "draw_calls": 2,
+          "render_submission_ms": 6.700000002980232,
+          "geometry_updates": 2
+        },
+        {
+          "label": "Retained Level 1 quotes:capture order x,per-symbol source price y,symbol lanes z;discrete retained observations",
+          "geometries": 2,
+          "draw_calls": 2,
+          "render_submission_ms": 15.900000005960464,
+          "geometry_updates": 2
+        },
+        {
+          "label": "Retained Level 1 quotes:capture order x,per-symbol source price y,symbol lanes z;discrete retained observations",
+          "geometries": 2,
+          "draw_calls": 2,
+          "render_submission_ms": 7,
+          "geometry_updates": 2
+        }
+      ],
+      "paused_geometry_unchanged": true,
+      "metrics": [
+        {
+          "name": "Nodes",
+          "value": 2734
+        },
+        {
+          "name": "ScriptDuration",
+          "value": 0.105167
+        },
+        {
+          "name": "TaskDuration",
+          "value": 0.38409
+        },
+        {
+          "name": "JSHeapUsedSize",
+          "value": 10559496
+        }
+      ],
+      "limitations": [
+        "Single local run with concurrent regression load",
+        "Renderer submission timing is not GPU completion or measured frame rate",
+        "CDP heap is not total process/GPU allocation;not long-run leak qualification"
+      ]
+    },
+    "browser_journeys": {
+      "schema": "gig.atlas.final.browser.performance.v1",
+      "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+      "warmups": 1,
+      "repetitions": 3,
+      "samples": [
+        {
+          "initial_navigation_and_settle_ms": 911.8080689999997,
+          "stock_route_ms": 269.73852399999987,
+          "health_roundtrip_ms": 8.263066999999864,
+          "script_seconds": 0.174799,
+          "task_seconds": 0.448352,
+          "used_js_heap_bytes": 4302656,
+          "dom_nodes": 1034,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-C-k25qwL.js",
+              "bytes": 235569
+            },
+            {
+              "path": "/assets/ResearchDesk-u1xNdad0.js",
+              "bytes": 4389
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-CI9YF21r.js",
+              "bytes": 1285
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 846.6597320000001,
+          "stock_route_ms": 160.5065510000004,
+          "health_roundtrip_ms": 19.078652000000147,
+          "script_seconds": 0.160169,
+          "task_seconds": 0.451177,
+          "used_js_heap_bytes": 4454896,
+          "dom_nodes": 1127,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-C-k25qwL.js",
+              "bytes": 235569
+            },
+            {
+              "path": "/assets/ResearchDesk-u1xNdad0.js",
+              "bytes": 4389
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-CI9YF21r.js",
+              "bytes": 1285
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 1208.6285120000002,
+          "stock_route_ms": 342.0722820000001,
+          "health_roundtrip_ms": 11.108518000000004,
+          "script_seconds": 0.373665,
+          "task_seconds": 0.7599,
+          "used_js_heap_bytes": 4655700,
+          "dom_nodes": 1127,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-C-k25qwL.js",
+              "bytes": 235569
+            },
+            {
+              "path": "/assets/ResearchDesk-u1xNdad0.js",
+              "bytes": 4389
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-CI9YF21r.js",
+              "bytes": 1285
+            }
+          ]
+        }
+      ],
+      "browser": "154.0.8037.57",
+      "limitations": [
+        "Isolated Chromium contexts with disabled cache;browser process reused",
+        "Navigation includes networkidle wait;not pure rendering latency",
+        "CDP sampled JS heap,not native/GPU memory or long-run growth",
+        "Loopback fake providers;no Android/external Codespaces acceptance"
+      ]
+    }
+  },
+  "source_archive": {
+    "path": "build/product/source-delivery/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2518944,
+    "sha256": "6175259a5f435636c17e05737ee9cbc7b4564b4566d0a4f4b3e5cc0f9d3909c3",
+    "safe_byte_identical_members": 803,
+    "inventory": {
+      "path": "build/product/source-delivery/inventory.json",
+      "bytes": 127493,
+      "sha256": "72c9e81360592d18b7764c5d547080a9121d582835507af382443523a3cb41d7"
+    },
+    "source_checkpoint": "7b28431943d2eb3d63485bf248015242321da32e;before delivery-doc-only changes"
+  },
+  "sources": [
+    {
+      "path": "build/product/official-doc.html",
+      "bytes": 114996,
+      "sha256": "d35c658c4ff7ac980b18ad5da75d1530d3722f8fe8444eb10e634e6424c85dda"
+    },
+    {
+      "path": "build/product/terms.html",
+      "bytes": 89749,
+      "sha256": "f593a9e395ab4700c3765168099af38c87b39e172aea71df857d50aaa23196fb"
+    },
+    {
+      "path": "build/product/official-doc.headers",
+      "bytes": 410,
+      "sha256": "19ce9e3f9743b30d2586c27b6c759aeacf81c5390ccefc0843c688507096cac6"
+    },
+    {
+      "path": "build/product/terms.headers",
+      "bytes": 411,
+      "sha256": "9deb6268072a7ea8048b59afa1779976ff8169be4d3b64c574f3b07b7f594155"
+    },
+    {
+      "path": "build/product/nasdaqlisted-head.txt",
+      "bytes": 398,
+      "sha256": "7da00c9a66aba42d4ad736b4b7f28f57224c468c269a4e8a2d4cba29e80a45e0"
+    },
+    {
+      "path": "build/product/otherlisted-head.txt",
+      "bytes": 399,
+      "sha256": "8a8ed584a795c1f150efc74631a7a3fd792f347b34f7fde6cb6850dfff117b04"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/atlas2/visual/command-center-dark.png",
+      "bytes": 185572,
+      "sha256": "79a253bafef3596c0b7aad54c3d0573efb657c2f88c3551b13b4df87e862fa2a"
+    },
+    {
+      "path": "build/atlas2/visual/command-center-light.png",
+      "bytes": 189188,
+      "sha256": "0f7961f414b702711ee3ecf5057ee35c785c365310f7e6eccd744a731bb53805"
+    },
+    {
+      "path": "build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 193422,
+      "sha256": "701e185a647aaeda72d5067410f787b2af90f8b508fa4d24bfd51e5acb7da602"
+    },
+    {
+      "path": "build/atlas2/visual/filings-dark.png",
+      "bytes": 227272,
+      "sha256": "4a99b121663996e048f50b2488702f14cb4c53b43e7beb82a14d31a425cd7a70"
+    },
+    {
+      "path": "build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 302852,
+      "sha256": "f2b5e4628ab67c1e5b6fd4e2a578306eafec68d83b59b12c6b0bb4d00bbb9bfc"
+    },
+    {
+      "path": "build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 333236,
+      "sha256": "001b81c2212f11533ca92f54c21950ec710140836d70cc8af88731dd366c675e"
+    },
+    {
+      "path": "build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 343065,
+      "sha256": "0c1f0447d5fcc90dac62c0f239a53952da68ce56cb94b550f38acd499a992f66"
+    },
+    {
+      "path": "build/atlas2/visual/microstructure-dark.png",
+      "bytes": 345259,
+      "sha256": "09ecf8a925783043185480e3250ed383a67ee3f84f6de817569e06f5f4890c38"
+    },
+    {
+      "path": "build/atlas2/visual/operations-dark.png",
+      "bytes": 209773,
+      "sha256": "11cc0ca6306ed64fb25c9bcddb772e0f87316ab7a8747a7f8ab4e84010643f01"
+    },
+    {
+      "path": "build/atlas2/visual/operations-light.png",
+      "bytes": 216836,
+      "sha256": "c9e8f70509626947b8f912e4bdd787ead10b38df0b8a0fff2a3a569f8bdfbb6d"
+    },
+    {
+      "path": "build/atlas2/visual/research-dark.png",
+      "bytes": 138455,
+      "sha256": "6917f55589a9453eba6832c12979e72b23c3779993f98b53514091df533f8a05"
+    },
+    {
+      "path": "build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 430960,
+      "sha256": "351438d65a137b4c1a1ea19f99e2383c5d1ef26f2139fcbb7e5b9c8b1178f4dc"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 398071,
+      "sha256": "bb205487770a3486c00353774cbe705266ff84a02d2f6435f0ff6dad81bd83ed"
+    },
+    {
+      "path": "build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 409398,
+      "sha256": "530fc433c93a3e7035db70304424a7959530e803e1bda7214c7f55397ccc0e93"
+    },
+    {
+      "path": "build/product/command-center-after-synthetic.png",
+      "bytes": 158063,
+      "sha256": "9d35ab53a3f56c480229acf9b71f813b82136efd0ea07d3171b275f199583343"
+    },
+    {
+      "path": "build/product/command-center-before-baseline.png",
+      "bytes": 159771,
+      "sha256": "1fbe55f8cab6c3fe563c768bb7dee578aa93e98c2f457993ab53f121ec20f919"
+    },
+    {
+      "path": "build/product/command-center-mobile-after-synthetic.png",
+      "bytes": 64593,
+      "sha256": "d7637d47702d5282e30e59b5fc318a9b4de62811c9864d798334606442df6870"
+    },
+    {
+      "path": "build/product/command-center-mobile-light-after-synthetic.png",
+      "bytes": 63605,
+      "sha256": "1be91b78e357fdd9ccb87c5f101eb354d844428dda238dbff624da74c83b29cf"
+    },
+    {
+      "path": "build/product/comparison-3d-after-synthetic.png",
+      "bytes": 68932,
+      "sha256": "6d28a5049f7c923dd70e35504e53d0acfa6ea1595329d9d915eddd6e89043069"
+    },
+    {
+      "path": "build/product/model-surface-after-synthetic.png",
+      "bytes": 65563,
+      "sha256": "f94edd8e79c4ae4b6191506971e63e894b995ceaf38c98ea4fc390f1491de93b"
+    },
+    {
+      "path": "build/product/quotes-3d-after-synthetic.png",
+      "bytes": 63091,
+      "sha256": "eb6f0a929d25e12aca2a88f16722a48b8cebeab6a4a48f448fa052d27f382725"
+    },
+    {
+      "path": "build/product/trades-3d-after-synthetic.png",
+      "bytes": 65242,
+      "sha256": "9946cea0483c5fc9807d142f3bdf8d2b0c19037719f955cb9dfeadff1f041ced"
+    },
+    {
+      "path": "build/product/universe-after-synthetic.png",
+      "bytes": 147792,
+      "sha256": "29e922b1d5b6fdd0b34a9fd89023cd8eb25736e13153958203ac12494916c326"
+    },
+    {
+      "path": "build/product/volatility-3d-after-synthetic.png",
+      "bytes": 67175,
+      "sha256": "40305f4ccb763d211f66ecd1c57170568e319d6914dadef984273eff1a2dc8e1"
+    }
+  ],
+  "logs": [
+    {
+      "path": "build/product/resume-stocks-debug.log",
+      "bytes": 30507,
+      "sha256": "e9da5a869a81103eee17a9ecf9ba3f70006b9bb75ee938ce588c0b035f96150b"
+    },
+    {
+      "path": "build/product/resume-stocks-release.log",
+      "bytes": 30507,
+      "sha256": "97d4b8287e766282aef5cdf12c3c0e77856954f16e8ebf1ca583d1ec56b324a2"
+    },
+    {
+      "path": "build/product/resume-final-sanitizer.log",
+      "bytes": 30525,
+      "sha256": "23873fb8c683027c76f80b82460618412614f201232bc01e6bc8da24d7dde9bf"
+    },
+    {
+      "path": "build/product/resume-native-debug.log",
+      "bytes": 40306,
+      "sha256": "82839cb7e14f25b803f0945ce77e84962b84d883ad8d458eb3d36ab93029aa28"
+    },
+    {
+      "path": "build/product/resume-native-release.log",
+      "bytes": 40306,
+      "sha256": "241b75d89624dad2f8961b07b393ee00b9d04a07e6f807585ea42f220483b333"
+    },
+    {
+      "path": "build/product/resume-native-sanitizer.log",
+      "bytes": 41063,
+      "sha256": "620f668e86963f0bbc5815fd4453491055377698fc8d062422110d84b5ef8c0b"
+    },
+    {
+      "path": "build/product/resume-index-oracle.log",
+      "bytes": 348,
+      "sha256": "85668a608c83ef807e188d18c18ae1cc467623bc22e4e90f7fcdcf10cbf92fd8"
+    },
+    {
+      "path": "build/product/resume-index-sanitizer-final.log",
+      "bytes": 2756,
+      "sha256": "40c0ad9243d2026be37a4635bc9446e0e25b6d8246a8e7f29beb439908bf59f1"
+    },
+    {
+      "path": "build/product/resume-geometry-unit.log",
+      "bytes": 4475,
+      "sha256": "b3904ca60b97f81ec4dcd729f0d78be5def68549934a1885daf3b1720fb3bd7a"
+    },
+    {
+      "path": "build/product/resume-product-32.log",
+      "bytes": 106,
+      "sha256": "7cae3ffbb5dd9434ef766f45ac9a08f024498cead0ce7ae9a62178d63cef3975"
+    },
+    {
+      "path": "build/product/resume-canonical.log",
+      "bytes": 1124,
+      "sha256": "ee4ef153f93b2f6e2c3db8f56f1c301d5b4160b0538cd4c9c626c672b7fca7b9"
+    },
+    {
+      "path": "build/product/resume-canonical.xml",
+      "bytes": 4302,
+      "sha256": "3b8e70b8a1e3ecc9fda3c1dcf5ea6f896df5d498934bb90d4d46081d7caf5d14"
+    },
+    {
+      "path": "build/product/security-final.log",
+      "bytes": 383,
+      "sha256": "09bbd4ec393280a9489a42cb63399660c11cc48569254cdeea33ec0be40c2ada"
+    },
+    {
+      "path": "build/product/tls-final.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/product/wheel-consumer.log",
+      "bytes": 113,
+      "sha256": "4d50a29c0fac427cd27458de2c3344d0775d2437bd98e2ac193f03f0a3228f8c"
+    },
+    {
+      "path": "build/product/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/product/resume-source-build.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/product/resume-source-inventory.log",
+      "bytes": 81,
+      "sha256": "b4c991336f24b4db2e4353d49adb8b78921fa120e1786294f74bf3a423b28f85"
+    },
+    {
+      "path": "build/product/resume-render-final.log",
+      "bytes": 1430,
+      "sha256": "c07c4c038883c06f6163f3b2865fd983b5f3a3fdcfe92f4fb6e49b16b1994698"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/browser-validation.log",
+      "bytes": 6315,
+      "sha256": "4567f1fab22929acb6b01659128e6ed673dd0569791b676883cf66a35892e376"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/build.log",
+      "bytes": 1967,
+      "sha256": "0dcd197c8bc9e4a0806db1ceeecb14cdd5c9603c616d87cb8365fcc55fe690b8"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/atlas2-validation.log",
+      "bytes": 2546,
+      "sha256": "3f81f3da9c9016e3a15db9af1c5c628e2abb115222c8e2d61cf966b0f2d2c2e2"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/atlas-validation.log",
+      "bytes": 3293,
+      "sha256": "3716f317c5570726a7f461b176f344c5943f37eccf4b0e06a331d30d750844fc"
+    },
+    {
+      "path": "build/product/resume-qualified-stable-browser/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-6.log",
+      "bytes": 2692,
+      "sha256": "cc51e25012b52b1c09b0bded736a8b11a8775cf005ee744a60bc04e0efc1d7a3"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-0.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-1.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-2.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-3.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-4.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-5.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/gpu-quote.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    },
+    {
+      "path": "build/product/resume-qualified-browser/browser-results.json",
+      "bytes": 933,
+      "sha256": "83243e8b0cc7e30ec3d0f2a1b0bc5fd2f1b9b96987f4144ca5129bb298ef5b63"
+    }
+  ],
+  "changed_file_inventory_since_product_baseline": [
+    "docs/product/PRODUCT_COMPLETION.md",
+    "docs/product/SEC_AUTOMATIC_DISCOVERY.md",
+    "terminal/server/app.py",
+    "terminal/server/request_proofs.py",
+    "terminal/stocks/directory.py",
+    "terminal/stocks/discovery.py",
+    "terminal/stocks/market_catalog.py",
+    "terminal/stocks/service.py",
+    "terminal/stocks/test_availability.py",
+    "terminal/stocks/test_directory.py",
+    "terminal/stocks/test_discovery.py",
+    "terminal/stocks/test_sec_expansion.py",
+    "terminal/tests/atlas-validation.mjs",
+    "terminal/tests/atlas2-validation.mjs",
+    "terminal/tests/browser-validation.mjs",
+    "terminal/tests/gpu-recovery-validation.mjs",
+    "terminal/tests/live-controls-validation.mjs",
+    "terminal/tests/live-market-validation.mjs",
+    "terminal/tests/measure_directory.py",
+    "terminal/tests/product-performance.mjs",
+    "terminal/tests/product-validation.mjs",
+    "terminal/tests/product_fixture_server.py",
+    "terminal/tests/recorded-playback-validation.mjs",
+    "terminal/tests/run_atlas_browser_suite.py",
+    "terminal/tests/run_live_market_suite.py",
+    "terminal/tests/stock-intelligence-validation.mjs",
+    "terminal/web/package.json",
+    "terminal/web/src/App.tsx",
+    "terminal/web/src/CompanyCoverage.tsx",
+    "terminal/web/src/LiveMarket.tsx",
+    "terminal/web/src/ModelSurface.tsx",
+    "terminal/web/src/QuoteCloud.tsx",
+    "terminal/web/src/ResearchDesk.tsx",
+    "terminal/web/src/StockIntelligence.tsx",
+    "terminal/web/src/UniverseWorkspace.tsx",
+    "terminal/web/src/WorkspaceIcon.tsx",
+    "terminal/web/src/api.ts",
+    "terminal/web/src/atlas.css",
+    "terminal/web/src/directoryContract.test.ts",
+    "terminal/web/src/directoryContract.ts",
+    "terminal/web/src/marketGeometry.test.ts",
+    "terminal/web/src/marketGeometry.ts",
+    "terminal/web/src/modelSurface.test.ts",
+    "terminal/web/src/modelSurface.ts"
+  ],
+  "preserved_failed_attempts": [
+    "build/product/resume-final-browser/",
+    "build/product/resume-product-browser.log",
+    "build/product/resume-index-sanitizer.log",
+    "build/product/browser-2.log",
+    "build/product/geometry-browser-diagnostic.log"
+  ],
+  "external_gates": [
+    "Lawful derived-cloud listing-source use and actual complete source-body validation",
+    "Existing approved SEC identifying configuration and official reference/financial reconciliation",
+    "Actual provider entitlement/credentials and separate retention permission",
+    "Exact-candidate owner-authorized ARM64/hosted qualification",
+    "Independent product/device/physical GPU/accessibility acceptance"
+  ],
+  "not_claimed": [
+    "Complete current US-listed universe",
+    "Actual authoritative APLD/CRWV CIK reconciliation here",
+    "Complete historical PIT/XBRL",
+    "Empirical market/L3 accuracy",
+    "Production trading readiness"
+  ],
+  "no_forced_clicks": true,
+  "no_workflow_dispatch": true,
+  "no_restricted_data_access": true
+}
