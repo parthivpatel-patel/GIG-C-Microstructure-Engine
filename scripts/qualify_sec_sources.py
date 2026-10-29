@@ -68,12 +68,31 @@ def official_fetch(cik,environment):
                 raw.extend(chunk)
     return bytes(raw),url
 
+async def resolve_reference(symbol,workspace):
+    """Resolve exact SEC ticker identity,including non-seed companies;never guess a CIK."""
+    from terminal.stocks.identity import symbol as validate_symbol
+    validate_symbol(symbol)
+    await workspace.refresh_identities()
+    row=workspace.issuers.get(symbol)
+    if row is None:raise ValueError('SEC_authoritative_symbol_unavailable')
+    return {**row,'source':workspace.issuer_source}
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--symbol',default='AAPL');p.add_argument('--as-of',required=True);p.add_argument('--company-facts');p.add_argument('--fetch',action='store_true');p.add_argument('--compare-cache',action='store_true');p.add_argument('--output');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--symbol',default='AAPL');p.add_argument('--as-of',required=True);p.add_argument('--company-facts');p.add_argument('--fetch',action='store_true');p.add_argument('--resolve-identity',action='store_true');p.add_argument('--compare-cache',action='store_true');p.add_argument('--output');a=p.parse_args()
     if bool(a.company_facts)==bool(a.fetch):p.error('choose exactly one authorized JSON file or explicit --fetch')
     from terminal.stocks.identity import instrument
     from terminal.stocks.sec import facts,date
-    cik=instrument(a.symbol)['cik'];date(a.as_of)
+    date(a.as_of)
+    if a.resolve_identity:
+        if not a.fetch:p.error('--resolve-identity requires explicit --fetch and existing SEC authorization')
+        import asyncio
+        from terminal.stocks.service import StockWorkspace
+        identity=asyncio.run(resolve_reference(a.symbol,StockWorkspace()))
+        cik=identity['cik']
+        # Registry then companyfacts share a conservative SEC request cadence.
+        time.sleep(1.01)
+    else:
+        identity=instrument(a.symbol);cik=identity['cik']
     if a.fetch:raw,url=official_fetch(cik,os.environ)
     else:
         with Path(a.company_facts).open('rb') as f:raw=f.read(8388609)
@@ -88,7 +107,7 @@ def main():
         if normalized is None:raise ValueError('backend_SEC_cache_not_loaded')
         if normalized.get('issuer_cik')!=cik:raise ValueError('backend_cache_issuer_mismatch')
         if normalized['as_of_filing_date']!=a.as_of:raise ValueError('backend_cache_as_of_mismatch')
-    result=reconcile(raw,normalized,a.as_of);result.update(source_url=url,source_authority='fixed_official_TLS_fetch' if a.fetch else 'owner_supplied_file_origin_not_independently_authenticated',backend_cache_compared=a.compare_cache,raw_retained=False)
+    result=reconcile(raw,normalized,a.as_of);result.update(source_url=url,source_authority='fixed_official_TLS_fetch' if a.fetch else 'owner_supplied_file_origin_not_independently_authenticated',identity_reference=identity,backend_cache_compared=a.compare_cache,raw_retained=False)
     encoded=json.dumps(result,indent=2)+'\n'
     if a.output:
         with open(a.output,'x',encoding='utf-8') as f:f.write(encoded)

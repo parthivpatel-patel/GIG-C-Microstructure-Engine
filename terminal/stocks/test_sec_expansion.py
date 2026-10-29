@@ -17,6 +17,16 @@ class Expansion(unittest.TestCase):
   w=self.workspace(self.directory());self.assertIsNone(w.resolve('APLD')['cik']);r=asyncio.run(w.refresh_identities());self.assertEqual(self.urls,[URL]);self.assertEqual(r['source']['classification'],'HISTORICAL_SYNTHETIC')
   for ticker,cik in [('APLD','0000000042'),('CRWV','0000000043'),('AAPL',CIK)]:self.assertEqual(w.resolve(ticker)['cik'],cik);self.assertEqual(w.search(ticker)['results'][0]['symbol'],ticker)
   self.assertFalse(w.view('CRWV')['capabilities']['equities_depth']);self.assertEqual(w.view('CRWV')['capabilities']['options_quotes'],w.view('AAPL')['capabilities']['options_quotes'])
+ def test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance(self):
+  import importlib.util
+  from pathlib import Path
+  spec=importlib.util.spec_from_file_location('sec_qualification_reference',Path(__file__).resolve().parents[2]/'scripts/qualify_sec_sources.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+  w=self.workspace(self.directory())
+  for symbol,cik in [('AAPL',CIK),('APLD','0000000042'),('CRWV','0000000043')]:
+   result=asyncio.run(m.resolve_reference(symbol,w));self.assertEqual(result['cik'],cik);self.assertEqual(result['source']['classification'],'HISTORICAL_SYNTHETIC');self.assertEqual(result['source']['url'],URL)
+  with self.assertRaisesRegex(ValueError,'SEC_authoritative_symbol_unavailable'):asyncio.run(m.resolve_reference('UNKNOWNQ',w))
+  w.environment={}
+  with self.assertRaises(ValueError):asyncio.run(m.resolve_reference('APLD',w))
  def test_bad_directory_and_conflicting_cached_identity_do_not_publish(self):
   for change in [lambda p:p['1'].update(cik_str=True),lambda p:p['1'].update(ticker='../evil'),lambda p:p['2'].update(ticker='APLD'),lambda p:p['0'].update(cik_str=1)]:
    p=self.directory();change(p);w=self.workspace(p)
