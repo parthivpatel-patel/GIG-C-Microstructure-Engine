@@ -1,0 +1,759 @@
+{
+  "schema": "gig.atlas.advanced3d.evidence.v1",
+  "report_date": "2026-10-29 America/New_York",
+  "baseline": "9e1443849adf8d5928895f88e5af2b5295d41aee",
+  "implementation_commit": "5e68cf4b60a41e04d93670b59f7d17e6540cbf89",
+  "branch": "feat/atlas-final-release",
+  "implementation_files": [
+    {
+      "path": "terminal/tests/advanced-research-validation.mjs",
+      "bytes": 14458,
+      "sha256": "e18913b9b1b216f62ae947635448e077229f5a06cc15328c01aeeafed9a6bbeb"
+    },
+    {
+      "path": "terminal/tests/measure_research3d.mjs",
+      "bytes": 1531,
+      "sha256": "77d52ec38f5445f12f5522feafc649842e466f4dbef574ed575e4b8629590bcf"
+    },
+    {
+      "path": "terminal/web/package.json",
+      "bytes": 809,
+      "sha256": "c42980fc5b1ca5c1f4f435e80967d4138785a2a1973f973cfbb5f44e1db21f66"
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "bytes": 37203,
+      "sha256": "7ed1d3c1c5b98b94af2cd022b37712987da0c953a039c775fd245c3e4512195a"
+    },
+    {
+      "path": "terminal/web/src/LiveMarket.tsx",
+      "bytes": 14373,
+      "sha256": "3f36377b0e5397a32d62b97f05ccc372964b061fca546661037d6d0341179ac7"
+    },
+    {
+      "path": "terminal/web/src/ResearchLab.tsx",
+      "bytes": 9306,
+      "sha256": "e47fbd22ede2307a3c4287716d8b9e7a7e159ac358557789905845b07d91c076"
+    },
+    {
+      "path": "terminal/web/src/ResearchScene.tsx",
+      "bytes": 7406,
+      "sha256": "18943395d4910677bc1d8a130579e2fb85c267f32802738dacf056ccd38783f8"
+    },
+    {
+      "path": "terminal/web/src/research3d.css",
+      "bytes": 2807,
+      "sha256": "454049bd4147f7a7f79bc5b55cc4fdfe0ca58c5f25ebdfd7e766fab4ed233d4c"
+    },
+    {
+      "path": "terminal/web/src/research3d.test.ts",
+      "bytes": 10256,
+      "sha256": "5908d71d65cfd028eb1f6390b2555e3bcce8d601d3a6dcf0a41341ae74bc349a"
+    },
+    {
+      "path": "terminal/web/src/research3d.ts",
+      "bytes": 21447,
+      "sha256": "d12b1ed382b251d1555a022d39686302bd5f651bb9f84fc539992939f3350f35"
+    }
+  ],
+  "tests": {
+    "frontend": {
+      "passed": 71,
+      "failed": 0,
+      "skipped": 0,
+      "new_tests": 26
+    },
+    "native_terminal_consumers": {
+      "debug": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "release": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "sanitizer": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": 0
+      }
+    },
+    "new_browser": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        "Three.js not requested by Command Center",
+        "native snapshot source preserves synthetic origin and real C++ prices",
+        "snapshots cannot silently fabricate order events",
+        "height authored geometry,labels,inspection,and bounded draw calls",
+        "canyon authored geometry,labels,inspection,and bounded draw calls",
+        "events authored geometry,labels,inspection,and bounded draw calls",
+        "vwap authored geometry,labels,inspection,and bounded draw calls",
+        "flow authored geometry,labels,inspection,and bounded draw calls",
+        "wheel authored geometry,labels,inspection,and bounded draw calls",
+        "dome authored geometry,labels,inspection,and bounded draw calls",
+        "ribbon authored geometry,labels,inspection,and bounded draw calls",
+        "camera presets,key pan,drag rotation,and wheel zoom are functional",
+        "local timeline,symbol filtering,voxel/point toggle,and no native mutation",
+        "real WebGL context loss yields2D and retry creates fresh usable renderer",
+        "all8 models fit both themes at360,390,768,1280,1920 without page overflow",
+        "2D toggle and reduced-motion keyboard semantics remain accessible",
+        "closing laboratory releases its canvas",
+        "WebGL construction failure has working table/2D fallback",
+        "Level1 ribbon and dome use actual fixture quote history with truthful origin",
+        "Level1 depth and unsigned-flow modes explicitly unavailable",
+        "existing four Level1 geometries remain functional",
+        "existing GARCH surface,parameters,camera,and recovery are preserved",
+        "stable production assets and no uncaught application errors"
+      ],
+      "classification": "AUTHORED_FIXTURES_WITH_NATIVE_CPP_BACKEND_AND_SWIFTSHADER_NOT_LIVE_QUALIFICATION"
+    },
+    "existing_native_browser": {
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0
+    },
+    "security": {
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0
+    },
+    "verified_local_https_wss": {
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "installed_existing_wheel": {
+      "version": "0.1.1",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    "packaging": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "counting": "Outcomes per cohort/configuration;cohorts overlap.80 model/theme/width combinations are within one browser check,not80 additional tests."
+  },
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "cases": [
+      {
+        "case": "itch.validation_demo_reference",
+        "reported_hashes": [
+          "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+        ]
+      },
+      {
+        "case": "itch.independent_reference",
+        "reported_hashes": [
+          "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+        ]
+      },
+      {
+        "case": "itch.context_reference",
+        "reported_hashes": [
+          "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+        ]
+      },
+      {
+        "case": "itch.streaming_reference",
+        "reported_hashes": [
+          "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+        ]
+      },
+      {
+        "case": "itch.l3_reference",
+        "reported_hashes": [
+          "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+          "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+        ]
+      },
+      {
+        "case": "itch.auction_reference",
+        "reported_hashes": [
+          "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        ]
+      },
+      {
+        "case": "itch.admin_reference",
+        "reported_hashes": [
+          "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+        ]
+      },
+      {
+        "case": "itch.hy_reference",
+        "reported_hashes": [
+          "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+        ]
+      }
+    ],
+    "all_eight_unchanged": true,
+    "native_source_modified": false
+  },
+  "performance": {
+    "schema": "gig.advanced3d.projection_performance.v1",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "fixture": "authored-research-v1",
+    "seed": "NONE_FIXED_AUTHORED_INTEGER_RULES",
+    "fixture_events": 240,
+    "warmup_per_model": 10,
+    "measured_per_model": 100,
+    "models": [
+      {
+        "model": "height",
+        "marks": 384,
+        "source_paths": 64,
+        "surface_vertices": 1240,
+        "surface_triangles": 620,
+        "median_projection_ms": 1.3640169999999898,
+        "p95_projection_ms": 2.1258440000000007
+      },
+      {
+        "model": "canyon",
+        "marks": 384,
+        "source_paths": 64,
+        "surface_vertices": 1240,
+        "surface_triangles": 620,
+        "median_projection_ms": 1.4651149999999689,
+        "p95_projection_ms": 4.300220000000024
+      },
+      {
+        "model": "events",
+        "marks": 120,
+        "source_paths": 0,
+        "surface_vertices": 0,
+        "surface_triangles": 0,
+        "median_projection_ms": 0.18029899999999088,
+        "p95_projection_ms": 1.4008959999999888
+      },
+      {
+        "model": "vwap",
+        "marks": 28,
+        "source_paths": 3,
+        "surface_vertices": 0,
+        "surface_triangles": 0,
+        "median_projection_ms": 0.15428799999995135,
+        "p95_projection_ms": 1.6840220000000272
+      },
+      {
+        "model": "flow",
+        "marks": 28,
+        "source_paths": 28,
+        "surface_vertices": 0,
+        "surface_triangles": 0,
+        "median_projection_ms": 0.17216900000005353,
+        "p95_projection_ms": 0.8732669999999416
+      },
+      {
+        "model": "wheel",
+        "marks": 384,
+        "source_paths": 384,
+        "surface_vertices": 0,
+        "surface_triangles": 0,
+        "median_projection_ms": 0.657244999999989,
+        "p95_projection_ms": 1.849333999999999
+      },
+      {
+        "model": "dome",
+        "marks": 24,
+        "source_paths": 0,
+        "surface_vertices": 216,
+        "surface_triangles": 368,
+        "median_projection_ms": 0.15303499999993164,
+        "p95_projection_ms": 0.3485769999999775
+      },
+      {
+        "model": "ribbon",
+        "marks": 64,
+        "source_paths": 0,
+        "surface_vertices": 64,
+        "surface_triangles": 62,
+        "median_projection_ms": 0.15614900000002763,
+        "p95_projection_ms": 0.4495150000000194
+      }
+    ],
+    "output_sha256": "222811765f4d91b5ac85af367c28cbbd2a01664d58c99dd1e77322e58365eaaa",
+    "process_max_rss_kib": 122672,
+    "architecture": "x64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "node": "v24.19.0",
+    "scope": "Node projection only;includes allocations;no live feed,no GPU,no exchange latency guarantee"
+  },
+  "deterministic_projection_repeat_hash": "222811765f4d91b5ac85af367c28cbbd2a01664d58c99dd1e77322e58365eaaa",
+  "browser_renderer_snapshots": [
+    {
+      "model": "height",
+      "engine": "three.js r180",
+      "renderMs": "49.60000002384186",
+      "drawCalls": "9",
+      "geometries": "7",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "620"
+    },
+    {
+      "model": "canyon",
+      "engine": "three.js r180",
+      "renderMs": "46.400000005960464",
+      "drawCalls": "9",
+      "geometries": "7",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "620"
+    },
+    {
+      "model": "events",
+      "engine": "three.js r180",
+      "renderMs": "5.200000017881393",
+      "drawCalls": "3",
+      "geometries": "3",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "120",
+      "triangles": "0"
+    },
+    {
+      "model": "vwap",
+      "engine": "three.js r180",
+      "renderMs": "27",
+      "drawCalls": "6",
+      "geometries": "6",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "28",
+      "triangles": "0"
+    },
+    {
+      "model": "flow",
+      "engine": "three.js r180",
+      "renderMs": "20.30000001192093",
+      "drawCalls": "5",
+      "geometries": "5",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "28",
+      "triangles": "0"
+    },
+    {
+      "model": "wheel",
+      "engine": "three.js r180",
+      "renderMs": "23.80000001192093",
+      "drawCalls": "5",
+      "geometries": "5",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "0"
+    },
+    {
+      "model": "dome",
+      "engine": "three.js r180",
+      "renderMs": "42",
+      "drawCalls": "5",
+      "geometries": "4",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "24",
+      "triangles": "368"
+    },
+    {
+      "model": "ribbon",
+      "engine": "three.js r180",
+      "renderMs": "40",
+      "drawCalls": "5",
+      "geometries": "4",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "64",
+      "triangles": "62"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/advanced-3d/height-synthetic-desktop.png",
+      "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+    },
+    {
+      "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+      "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+    },
+    {
+      "path": "build/advanced-3d/events-synthetic-desktop.png",
+      "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+    },
+    {
+      "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+      "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+    },
+    {
+      "path": "build/advanced-3d/flow-synthetic-desktop.png",
+      "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+    },
+    {
+      "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+      "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+    },
+    {
+      "path": "build/advanced-3d/dome-synthetic-desktop.png",
+      "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+      "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+    },
+    {
+      "path": "build/advanced-3d/iex-authored-ribbon.png",
+      "sha256": "35fb1fbd3817c2b695707d31f5a325cea73afaacaeb9b2ba0022659968283299"
+    },
+    {
+      "path": "build/advanced-3d/iex-authored-dome.png",
+      "sha256": "e62b1e9df989e55719e31c235a6746c16cfeac14c4e9c0b56ba30625b6e90e42"
+    }
+  ],
+  "visual_review": {
+    "inspected": [
+      "height-synthetic-desktop.png",
+      "flow-synthetic-desktop.png",
+      "ribbon-synthetic-mobile-light.png",
+      "iex-authored-dome.png"
+    ],
+    "capture_note": "All pictures are authored synthetic data. Level1 ribbon and dome have separate captures. Mobile capture focus is set by a normal heading click.",
+    "ordinary_clicks": true,
+    "forced_clicks": false,
+    "model_theme_width_combinations": 80,
+    "widths": [
+      360,
+      390,
+      768,
+      1280,
+      1920
+    ],
+    "themes": [
+      "dark",
+      "light"
+    ],
+    "physical_device_tested": false,
+    "physical_gpu_tested": false,
+    "supplementary_mobile_pointer_probe": {
+      "classification": "HEADLESS_MOBILE_VIEWPORT_NOT_PHYSICAL_DEVICE",
+      "skip_link_bounds": {
+        "top": -80,
+        "bottom": -30.3125,
+        "css_top": "-80px",
+        "active": false
+      },
+      "control_hit": {
+        "x": 33,
+        "y": 430.578125,
+        "width": 324,
+        "height": 38,
+        "center_element": "SELECT",
+        "unobstructed": true
+      },
+      "actual_pointer_and_keyboard_selection": "wheel",
+      "interpretation": "The offscreen fixed skip link appears in tall stitched element captures but does not obstruct this actual390px viewport. Initial probe omitted scrolling the select back into view;its failure is preserved."
+    }
+  },
+  "bundle": {
+    "entry": {
+      "path": "terminal/web/dist/assets/index-DZ3o-pEL.js",
+      "bytes": 236210,
+      "sha256": "550adbdb2fdd2798cba52fdab38e5c85850aee3c942f7823bb732feba418ac05"
+    },
+    "entry_gzip_bytes": 73003,
+    "previous_entry_bytes": 235735,
+    "entry_delta_bytes": 475,
+    "optional_chunks": [
+      {
+        "path": "terminal/web/dist/assets/ResearchDesk-C4DmXVV7.js",
+        "bytes": 4497,
+        "sha256": "c3462c2ee06a0c79530ed01aadbd6f4dc57c3c2e2d32be1c237f8a20b212f08d"
+      },
+      {
+        "path": "terminal/web/dist/assets/ResearchLab-4jTH0odS.js",
+        "bytes": 25142,
+        "sha256": "2ea03a878e05c94a492812e8b875526d595c69d49cf13bb66f492ad6d5df1665"
+      },
+      {
+        "path": "terminal/web/dist/assets/ResearchLab-gFa97j1M.css",
+        "bytes": 2778,
+        "sha256": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439"
+      },
+      {
+        "path": "terminal/web/dist/assets/ResearchScene-CZiFlscK.js",
+        "bytes": 5511,
+        "sha256": "3d79dc00869d3744623c2cc9498afe8f3686af897247ac9d3ac7d6a2d0cc1459"
+      }
+    ],
+    "three_chunk_warning_retained": true,
+    "three_requested_on_command_center": false
+  },
+  "source_archive": {
+    "path": "build/advanced-3d/sdist-final/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2608700,
+    "sha256": "bb140fe78786c6d3980feccb697952fa3094e469758ef5522c2086b2f930a572",
+    "implementation_commit": "5e68cf4b60a41e04d93670b59f7d17e6540cbf89",
+    "safe_byte_identical_members": 831,
+    "inventory": {
+      "path": "build/advanced-3d/sdist-final-inventory.json",
+      "bytes": 132076,
+      "sha256": "b630b2370a374da66d3653e2bbe991b38db384f6a2e2f9ac029ae23de50e70b1"
+    },
+    "qualification": "Implementation source archive;final report-only commit is later."
+  },
+  "limits": {
+    "native_input_snapshots": 48,
+    "displayed_book_snapshots": 32,
+    "levels_per_side": 12,
+    "selected_symbol_events": 256,
+    "live_input_observations": 256,
+    "selected_symbol_quotes": 128,
+    "maximum_geometry_marks": 768,
+    "vpin_completed_buckets": 512,
+    "vpin_trade_size_max": 100000,
+    "sample_table_rows_per_page": 24,
+    "device_pixel_ratio_max": 1.25,
+    "observed_disk_storage_enabled": false
+  },
+  "preserved_initial_failures": {
+    "unit-coordinate-precision": {
+      "path": "build/advanced-3d/unit-first.log",
+      "bytes": 7946,
+      "sha256": "3439b27167ff3c225ab9c6b2e212fcbc5fdcb5d86b84fda473fc58c99507b06f"
+    },
+    "accessible-select-label": {
+      "path": "build/advanced-3d/browser-initial.json",
+      "bytes": 2650,
+      "sha256": "54dda040658e15896fa21ce3e1a65ab2c6647d3491571ff9d05e1e85d0795791"
+    },
+    "browser-history-readiness": {
+      "path": "build/advanced-3d/browser-pre-live-fix.json",
+      "bytes": 7545,
+      "sha256": "f846f50a9676e22ec58cf31259a9c27f93b4197deffe05b27ff6dca28fe1799a"
+    },
+    "shared-fixture-interference": {
+      "path": "build/advanced-3d/browser-shared-server-interference.json",
+      "bytes": 7667,
+      "sha256": "bf02d354cdc50a9494c2ecc115685fa3569eff3e8aa5104dfdbf88d631643742"
+    },
+    "await-control-commit": {
+      "path": "build/advanced-3d/browser-control-race.json",
+      "bytes": 7185,
+      "sha256": "36e974eae09503076cc7fa98fe5381f515b5652a301e2add694721a094285fd7"
+    },
+    "missing-prominent-level1-label": {
+      "path": "build/advanced-3d/browser-level1-label.json",
+      "bytes": 7886,
+      "sha256": "6d317dba25bda004b8c78b8f8d1ac8e4379905ea673fef78981debd41885352a"
+    },
+    "dataset-scope-regression": {
+      "path": "build/advanced-3d/provenance-before.log",
+      "bytes": 8002,
+      "sha256": "7d394476b3d2c6da211b27c199a7b2a6f459bd509dab26480a991522b466901d"
+    },
+    "mobile-probe-missing-scroll": {
+      "path": "build/advanced-3d/mobile-focus-probe-initial.log",
+      "bytes": 412,
+      "sha256": "a13e9e2056f84acae9b7ea1caee3c6aea0e1e2fe339f549d85a60d08e8121460"
+    }
+  },
+  "logs": [
+    {
+      "path": "build/advanced-3d/build.log",
+      "bytes": 2186,
+      "sha256": "e51a528f685ecbe3d0f96f43dd0088e4c62b91137b9c1e0a90bc5cee249d60b7"
+    },
+    {
+      "path": "build/advanced-3d/unit.log",
+      "bytes": 7126,
+      "sha256": "f845b789e4631248c8ea319c65a6389a7b987a84ec81ae1e8a017f5a3f9aede2"
+    },
+    {
+      "path": "build/advanced-3d/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "328f6a4ef63aa1def1b094e63b15e048b6120f0b6f826c74c73fc1c3ed5d0cc9"
+    },
+    {
+      "path": "build/advanced-3d/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "a75f4f838c9ce1f81f2909fd175e41a8377d27245f2f4a6f50d35f80249aa3cf"
+    },
+    {
+      "path": "build/advanced-3d/terminal-sanitizer.log",
+      "bytes": 41699,
+      "sha256": "8e0e6418fa20d332304f0f55d0a3082906a7e09a613fc33b03df73b65aa10676"
+    },
+    {
+      "path": "build/advanced-3d/browser.log",
+      "bytes": 9382,
+      "sha256": "20eeafd07c0c7d9699dfe1cf9f6f3b1aa6c395cf66caaa3d19266ac840eb1bf5"
+    },
+    {
+      "path": "build/advanced-3d/browser.json",
+      "bytes": 7820,
+      "sha256": "777ce6414fea47da073ce35f9d87c98bae42b66ff58f71085b5d61417cd48830"
+    },
+    {
+      "path": "build/advanced-3d/native-browser.log",
+      "bytes": 6214,
+      "sha256": "2ac7d42aaf8a7edc98458a8762cd558f8f5dff78273de37e0862ebacc108ca31"
+    },
+    {
+      "path": "build/advanced-3d/native-browser/results.json",
+      "bytes": 6214,
+      "sha256": "2ac7d42aaf8a7edc98458a8762cd558f8f5dff78273de37e0862ebacc108ca31"
+    },
+    {
+      "path": "build/advanced-3d/security.log",
+      "bytes": 1807,
+      "sha256": "9d4f289210fb390460281402ea782cddfca005e6fba119b7f73d5939821e1e76"
+    },
+    {
+      "path": "build/advanced-3d/tls.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/advanced-3d/canonical.log",
+      "bytes": 7753,
+      "sha256": "1cb2ec439ee1d3581c3895dbb970bed82332d030ecfaa7d49ff759614ea024e7"
+    },
+    {
+      "path": "build/advanced-3d/canonical.xml",
+      "bytes": 4304,
+      "sha256": "7e11cdbed72dc0e31c917ee7da0c5b7a4ef2b9a67d9a10ac94bb80bef96a30a2"
+    },
+    {
+      "path": "build/advanced-3d/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/advanced-3d/wheel-consumer.log",
+      "bytes": 113,
+      "sha256": "77cbcb788b253ba4c6dc863541f793926d6bf66899afb83fcf398414ff1114f9"
+    },
+    {
+      "path": "build/advanced-3d/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/advanced-3d/sdist-inventory.log",
+      "bytes": 81,
+      "sha256": "0e4baf17ba1f86a7a334bd0dcfa34480cc62f21864e3c2a5da60016e81174fd5"
+    },
+    {
+      "path": "build/advanced-3d/projection-performance.json",
+      "bytes": 2507,
+      "sha256": "30949f80a7847ec43f014c61ad326d36c64169ea87abb05a8ae8f323cd06235b"
+    },
+    {
+      "path": "build/advanced-3d/projection-repeat.json",
+      "bytes": 2515,
+      "sha256": "9063e7ae50dc29d25c0643cea99145afe7aaa2ea0a37fa71043a38dd192600f2"
+    },
+    {
+      "path": "build/advanced-3d/projection-after-scope-fix.json",
+      "bytes": 2510,
+      "sha256": "a15830d6e1062f46791357662cc62bcdd31fa76b1a2889b727067170c076e1fa"
+    },
+    {
+      "path": "build/advanced-3d/sdist-final.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/advanced-3d/sdist-final-inventory.log",
+      "bytes": 81,
+      "sha256": "0e4baf17ba1f86a7a334bd0dcfa34480cc62f21864e3c2a5da60016e81174fd5"
+    },
+    {
+      "path": "build/advanced-3d/labels-probe.log",
+      "bytes": 1588,
+      "sha256": "d8a357eec63bdf200b9a831fd9723266fc3833d12707e606f7cf1d638bd48720"
+    },
+    {
+      "path": "build/advanced-3d/live-probe.log",
+      "bytes": 4716,
+      "sha256": "552c3605e86eba9012fb1e4419328023878ddc229ea0c734a613797fc3e33e98"
+    },
+    {
+      "path": "build/advanced-3d/mobile-focus-probe.json",
+      "bytes": 528,
+      "sha256": "92af40bc357de83ece641c440ddfaf7a3491efe018d548116bbf81b1edfebd52"
+    }
+  ],
+  "security": {
+    "new_provider_requests": false,
+    "real_market_data_accessed": false,
+    "gates_changed": false,
+    "trading_enabled": false,
+    "new_network_endpoints": false,
+    "origin_cors_host_policy_changed": false,
+    "private_configuration_modified": false,
+    "paid_infrastructure_used": false,
+    "main_changed": false,
+    "workflow_dispatched": false,
+    "test_servers_stopped": true
+  },
+  "environment": {
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "node": "24.19.0",
+    "chromium": "154.0.8037.57",
+    "renderer": "Headless SwiftShader;not physical GPU/Android evidence",
+    "current_commit_arm64_qualified": false,
+    "current_commit_hosted_ci_qualified": false
+  },
+  "external_qualification": {
+    "alpaca_live_qualified_here": false,
+    "real_depth_qualified_here": false,
+    "provider_permission_reference_fabricated": false,
+    "codespaces_external_browser_qualified_here": false
+  },
+  "documentation_files": [
+    "docs/product/ADVANCED_3D_RESEARCH_REPORT.md",
+    "docs/product/advanced_3d_evidence.json",
+    "docs/design/GIG_ATLAS_COMPONENT_INVENTORY.md",
+    "docs/completion/COMPLETION_MATRIX.md",
+    "docs/product/PRODUCT_COMPLETION.md",
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md"
+  ],
+  "implementation_commits": [
+    "841e6e6186866c73e599dd7e633874b40c079330",
+    "5e68cf4b60a41e04d93670b59f7d17e6540cbf89"
+  ]
+}

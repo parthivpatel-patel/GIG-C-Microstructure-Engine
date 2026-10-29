@@ -1,3 +1,20 @@
+# Eight advanced visualizations — October29,2026
+
+All8 requested models are implemented and fixture/browser verified at implementation
+`5e68cf4b60a41e04d93670b59f7d17e6540cbf89`. [Current model-by-model matrix and
+evidence](../product/ADVANCED_3D_RESEARCH_REPORT.md) supersede any earlier statement that this visualization work must
+wait for live qualification. Only the ribbon and derived-variation dome accept current
+Level1 inputs;depth/events/VWAP/signed VPIN require their declared source inputs.
+No live-provider qualification,observed depth,or empirical reconstruction claim follows.
+
+Actual new validation:71 frontend,23 new browser,21 existing native browser,274 native
+consumers per Debug/Release/ASan+UBSan,8 unchanged frozen hashes,17 API boundary,8 local
+HTTPS/WSS,14 installed-wheel and3 packaging outcomes;831-member safe source archive.
+No new dependency,gate activation,trading,observed storage,main change,or workflow dispatch.
+Older reports below preserve historical counts/source qualification scope.
+
+---
+
 # Provider reference/history expansion — October29,2026
 
 [Current integration matrix](../product/PHASE_NEXT_DATA_INTEGRATION_REPORT.md)

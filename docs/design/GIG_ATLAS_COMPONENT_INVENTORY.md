@@ -50,3 +50,15 @@ contracts/normalization have independent reference tests;no SEC ratio is recalcu
 in JavaScript. Securities Universe adds source exchange/classification/activity filters
 and a separate approved Alpaca asset refresh. Existing3D remains lazy/native-separated.
 See `docs/product/PHASE_NEXT_DATA_INTEGRATION_REPORT.md` for fixture-vs-live boundaries.
+
+## Eight advanced research views — October29,2026
+
+| Component | Responsibility | Executed evidence |
+|---|---|---|
+|research3d.ts|Bounded native/Level1/authored source adapters;eight pure projections;exact VWAP/volume buckets;no snapshot-to-order inference|26 new independent numerical/lifecycle/boundary tests within71 frontend cases|
+|ResearchLab.tsx + research3d.css|Lazy source/model/symbol/time/filter controls;prominent evidence labels;bounded table/2D alternative;theme/mobile layout|23 ordinary-click checks including80 model/theme/width combinations|
+|ResearchScene.tsx|One independently owned camera/renderer;instancing,batched lines,surface meshes;inspection,fullscreen,loss/retry,cleanup|Actual SwiftShader context loss/constructor failure,keyboard/pointer/camera/fullscreen and disposal checks|
+|advanced-research-validation.mjs|Stable-asset native/authored transport integration;existing4 Level1 modes and GARCH preservation|23/23;no real provider qualification|
+|measure_research3d.mjs|Fixed authored fixture;10 warmups/100 measured projections per model;deterministic output hash/RSS|Repeated identical output hashes;current numbers in linked report|
+
+[Implementation,source boundaries,measurements and limitations](../product/ADVANCED_3D_RESEARCH_REPORT.md).
