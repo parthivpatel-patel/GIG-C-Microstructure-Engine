@@ -44,6 +44,7 @@ def metadata(row):
 
 async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pages=4):
     key = query_key(workspace,symbol,kind,start,end,timeframe,max_pages)
+    instrument = workspace.market_identity(symbol)
     headers = workspace.permission('alpaca')
     cached = workspace.market_history_cache.get(key)
     if cached and 0 <= workspace.clock()-cached[0] < 60:
@@ -98,6 +99,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
                     raise ValueError('market_history_pagination_no_progress')
                 seen_tokens.add(token)
             result = {'schema':'gig.alpaca.historical.v1','symbol':symbol,'kind':kind,
+                'instrument_metadata':instrument,
                 'timeframe':timeframe if kind == 'bars' else None,'provider':'alpaca','feed':'iex',
                 'origin':workspace.origin,'availability':'AVAILABLE' if rows else 'EMPTY_SOURCE_RESPONSE',
                 'freshness':'HISTORICAL_NOT_LIVE','adjustment':'raw' if kind == 'bars' else None,

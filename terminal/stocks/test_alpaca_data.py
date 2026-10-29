@@ -65,7 +65,7 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
         with patch('terminal.stocks.alpaca_history.asyncio.sleep',sleep):return await op()
     def workspace(self,fetch):
         self.ticks=[100]
-        return StockWorkspace(environment=ENV,fetcher=fetch,clock=lambda:self.ticks[0])
+        return StockWorkspace(environment=dict(ENV),fetcher=fetch,clock=lambda:self.ticks[0])
     async def test_bounded_pagination_preserves_nanos_and_provenance(self):
         calls=[]
         async def fetch(url,*_):
@@ -81,7 +81,7 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
             async def fetch(*_):return json.dumps(response(kind)).encode()
             w=self.workspace(fetch);r=await self.fast(w,lambda:acquire(w,'AAPL',kind,'2026-10-20','2026-10-20'))
             self.assertEqual(r['record_count'],1);self.assertEqual(r['records'][0]['close' if kind=='bars' else 'bid' if kind=='quotes' else 'price'],'101' if kind=='bars' else '100.25' if kind=='quotes' else '100.50')
-            self.assertEqual(r['freshness'],'HISTORICAL_NOT_LIVE')
+            self.assertEqual(r['freshness'],'HISTORICAL_NOT_LIVE');self.assertEqual(r['instrument_metadata']['symbol'],'AAPL')
     async def test_page_limit_and_duplicates_are_explicit(self):
         async def fetch(*_):return json.dumps(response('trades',token='more')).encode()
         w=self.workspace(fetch);r=await self.fast(w,lambda:acquire(w,'AAPL','trades','2026-10-20','2026-10-20',max_pages=1))
@@ -167,6 +167,27 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
         with self.assertRaises(asyncio.CancelledError):await task
         w.production_configuration=True;self.assertTrue(w.asset_reference.enabled());w.environment['GIG_ALPACA_ASSET_REFERENCE_ENABLED']='0';self.assertFalse(w.asset_reference.enabled())
 
+    async def test_asset_startup_waits_for_sec_local_lock_without_six_hour_delay(self):
+        calls=[];original=asyncio.sleep;park=asyncio.Event()
+        async def fetch(url,*_):
+            status=parse_qs(urlsplit(url).query)['status'][0];calls.append(status)
+            return json.dumps([asset()] if status=='active' else []).encode()
+        w=self.workspace(fetch);w.environment['GIG_ALPACA_ASSET_REFERENCE_ENABLED']='1'
+        async def sleep(seconds):
+            if seconds>=21600:await park.wait()
+            else:w.last_request=-100;await original(0)
+        await w.lock.acquire()
+        with patch('terminal.stocks.alpaca_reference.asyncio.sleep',sleep):
+            task=asyncio.create_task(w.asset_reference.run());await original(.01)
+            self.assertEqual(calls,[]);w.lock.release()
+            async def accepted():
+                while w.asset_reference.status!='ACCEPTED':await original(.01)
+            try:await asyncio.wait_for(accepted(),2)
+            finally:
+                task.cancel()
+                with self.assertRaises(asyncio.CancelledError):await task
+        self.assertEqual(calls,['active','inactive']);self.assertEqual(list(w.catalog.rows),['APLD'])
+
     async def test_account_paths_rejected_before_credentials_reach_transport(self):
         calls=[]
         async def fetch(url,*_):calls.append(url);return b'{}'
@@ -185,6 +206,17 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
             await self.fast(w,lambda:acquire(w,'AAPL','bars',day,day))
         self.assertEqual(len(w.market_history_cache),16)
         self.assertNotIn('2026-10-01',[key[2] for key in w.market_history_cache])
+
+    async def test_cached_provider_identity_cannot_be_relabelled_after_symbol_reuse(self):
+        identity=[1]
+        async def fetch(url,*_):
+            active=parse_qs(urlsplit(url).query)['status'][0]=='active'
+            return json.dumps([asset('AAPL',identity=identity[0])] if active else []).encode()
+        w=self.workspace(fetch);await self.fast(w,w.asset_reference.refresh)
+        before=w.catalog;w.cache['AAPL']={'alpaca':{'status':'AUTHORED_ACCEPTED_CACHE'}}
+        identity[0]=2;self.ticks[0]+=301
+        with self.assertRaises(ValueError):await self.fast(w,w.asset_reference.refresh)
+        self.assertIs(w.catalog,before);self.assertEqual(w.cache['AAPL']['alpaca']['status'],'AUTHORED_ACCEPTED_CACHE')
 
     async def test_asset_parse_allocation_failure_retains_previous_snapshot(self):
         async def fetch(url,*_):

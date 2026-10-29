@@ -105,6 +105,12 @@ class AssetReference:
                         receipts.append({'url':url,'sha256':digest})
                     catalog = await asyncio.to_thread(parse,batches,w.origin)
                     catalog.source['sources'] = receipts
+                    # Do not relabel retained observations after provider symbol reuse.
+                    protected = set(w.cache) | {key[0] for key in w.market_history_cache}
+                    for symbol in protected:
+                        previous = w.catalog.rows.get(symbol,{})
+                        if previous.get('asset_id') is not None and (symbol not in catalog.rows or catalog.rows[symbol]['asset_id'] != previous['asset_id']):
+                            raise ValueError('alpaca_cached_asset_identity_changed')
                     w.catalog = catalog
                     self.status, self.last_error = 'ACCEPTED', None
             except asyncio.CancelledError:
@@ -118,7 +124,16 @@ class AssetReference:
         while True:
             if self.enabled():
                 try:
-                    await self.refresh()
+                    # SEC initialization can own the shared upstream lock at startup.
+                    # Wait for that local work instead of delaying assets for six hours.
+                    # This does not retry a rejected remote request.
+                    self.workspace.permission('alpaca')
+                    async with asyncio.timeout(55):
+                        async with self.workspace.lock:
+                            pass
+                        await self.refresh()
                 except ValueError:
                     pass
+                except TimeoutError:
+                    self.status, self.last_error = 'INITIALIZATION_BUSY', 'shared_upstream_startup_budget'
             await asyncio.sleep(21600)
