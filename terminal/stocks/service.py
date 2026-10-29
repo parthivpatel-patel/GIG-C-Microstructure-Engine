@@ -33,7 +33,7 @@ class StockWorkspace:
         self.clock=clock;self.last_request=-100.;self.cooldown_until=0.;self.cooldowns={};self.cache=OrderedDict();self.lock=asyncio.Lock();self.last_error=None;self.load_lock=asyncio.Lock();self.load_task=None;self.load_state={};self.errors={}
         from .alpaca_reference import AssetReference
         self.asset_reference=AssetReference(self)
-        self.market_history_cache=OrderedDict()
+        self.market_history_cache=OrderedDict();self.market_history_pending=0
     def resolve(self,ticker):
         if type(ticker) is not str:raise ValueError('invalid_symbol')
         if ticker in self.issuers:

@@ -67,7 +67,7 @@ class AssetReference:
 
     def enabled(self):
         mode = self.workspace.environment.get('GIG_ALPACA_ASSET_REFERENCE_ENABLED')
-        return mode == '1' or mode is None and self.workspace.production_configuration and not self.workspace.directory.approved()
+        return mode == '1' or mode is None and self.workspace.production_configuration and not self.workspace.directory.approved() and not self.workspace.environment.get('GIG_MARKET_CATALOG_FILE')
 
     def view(self):
         w = self.workspace

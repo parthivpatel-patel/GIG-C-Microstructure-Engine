@@ -165,7 +165,7 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
         w=self.workspace(fetch);self.assertFalse(w.asset_reference.enabled())
         task=asyncio.create_task(w.asset_reference.run());await asyncio.sleep(0);task.cancel()
         with self.assertRaises(asyncio.CancelledError):await task
-        w.production_configuration=True;self.assertTrue(w.asset_reference.enabled());w.environment['GIG_ALPACA_ASSET_REFERENCE_ENABLED']='0';self.assertFalse(w.asset_reference.enabled())
+        w.production_configuration=True;self.assertTrue(w.asset_reference.enabled());w.environment['GIG_MARKET_CATALOG_FILE']='AUTHORED_PRIVATE_CATALOG_SELECTOR';self.assertFalse(w.asset_reference.enabled());w.environment['GIG_ALPACA_ASSET_REFERENCE_ENABLED']='1';self.assertTrue(w.asset_reference.enabled());w.environment['GIG_ALPACA_ASSET_REFERENCE_ENABLED']='0';self.assertFalse(w.asset_reference.enabled())
 
     async def test_asset_startup_waits_for_sec_local_lock_without_six_hour_delay(self):
         calls=[];original=asyncio.sleep;park=asyncio.Event()
@@ -195,6 +195,29 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
         for path in ('orders','account','positions','assets/attacker'):
             with self.assertRaises(ValueError):await w.fetch('alpaca','https://paper-api.alpaca.markets/v2/'+path,w.permission('alpaca'))
         self.assertEqual(calls,[])
+
+    async def test_history_waits_for_local_load_and_bounds_queued_requests(self):
+        calls=[]
+        async def fetch(*_):calls.append(1);return json.dumps(response()).encode()
+        w=self.workspace(fetch);await w.lock.acquire()
+        task=asyncio.create_task(acquire(w,'AAPL','bars','2026-10-20','2026-10-20'))
+        await asyncio.sleep(0);self.assertFalse(calls);w.lock.release()
+        r=await task;self.assertEqual(r['record_count'],1);self.assertEqual(w.market_history_pending,0)
+        w.market_history_cache.clear();await w.lock.acquire()
+        tasks=[asyncio.create_task(acquire(w,'AAPL','bars','2026-10-20','2026-10-20')) for _ in range(4)]
+        await asyncio.sleep(0)
+        try:
+            self.assertEqual(w.market_history_pending,4)
+            with self.assertRaisesRegex(ValueError,'request_capacity'):await acquire(w,'AAPL','bars','2026-10-20','2026-10-20')
+        finally:
+            for task in tasks:task.cancel()
+            await asyncio.gather(*tasks,return_exceptions=True);w.lock.release()
+        self.assertEqual(w.market_history_pending,0)
+        w.last_request=-100;await w.lock.acquire()
+        tasks=[asyncio.create_task(acquire(w,'AAPL','bars','2026-10-20','2026-10-20')) for _ in range(4)]
+        await asyncio.sleep(0);w.lock.release()
+        results=await asyncio.gather(*tasks)
+        self.assertTrue(all(r['record_count']==1 for r in results));self.assertEqual(len(calls),2)
 
     async def test_history_cache_has_explicit_sixteen_query_limit(self):
         async def fetch(url,*_):
