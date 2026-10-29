@@ -49,9 +49,9 @@ async function readBoundedFinancial(path:string,signal:AbortSignal):Promise<unkn
  try{return await decoded(await fetch(path,{signal:c.signal}))}finally{clearTimeout(timer);signal.removeEventListener('abort',cancel)}
 }
 
-export async function readSecurities(query:string,offset:number,signal:AbortSignal):Promise<unknown>{
- if(query.length>80||!Number.isInteger(offset)||offset<0||offset>150000)throw Error('Invalid directory page');
- return await readBoundedFinancial('/api/v2/securities?q='+encodeURIComponent(query)+'&offset='+offset+'&limit=20',signal);
+export async function readSecurities(query:string,offset:number,signal:AbortSignal,filters:Record<string,string>={}):Promise<unknown>{
+ if(Object.entries(filters).some(([k,v])=>!['exchange','security_type','listing_status'].includes(k)||typeof v!=='string'||v.length>64)||query.length>80||!Number.isInteger(offset)||offset<0||offset>150000)throw Error('Invalid directory page');
+ return await readBoundedFinancial('/api/v2/securities?q='+encodeURIComponent(query)+'&offset='+offset+'&limit=20&'+new URLSearchParams(filters).toString(),signal);
 }
 export async function readDirectoryStatus(signal:AbortSignal):Promise<unknown>{return await readBoundedFinancial('/api/v2/securities/status',signal)}
 export async function readCompanyAvailability(symbol:string,signal:AbortSignal):Promise<unknown>{if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol))throw Error('Invalid issuer');return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/availability',signal)}
