@@ -1,3 +1,16 @@
+# Current two-milestone decision — October29,2026
+
+M1: ENGINEERING COMPLETE for the agreed declared research scope,with all final local
+automated gates passed. M2: NOT VERIFIED;actual permitted sources,private Codespace
+qualification and final owner acceptance remain external. Implementation checkpoint
+`40ca4e86ec4c7c5f339695768605e7453ae4603b`. Current reports supersede historical
+counts/labels below;they do not claim full US coverage,real-market acceptance,or production
+readiness. See [engineering closure](../milestones/ENGINEERING_COMPLETION.md),
+[operational commands](../milestones/OPERATIONAL_QUALIFICATION_RUNBOOK.md),and
+[remaining gates](../milestones/RELEASE_READINESS.md). Historical evidence is preserved.
+
+---
+
 # Eight advanced visualizations — October29,2026
 
 All8 requested models are implemented and fixture/browser verified at implementation

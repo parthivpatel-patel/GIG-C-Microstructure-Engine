@@ -1,0 +1,2525 @@
+{
+  "schema": "gig.atlas.two_milestone.evidence.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "8f152b6e9c9a9113158fa15fa6019a3dde46f958",
+  "implementation_commit": "40ca4e86ec4c7c5f339695768605e7453ae4603b",
+  "milestones": {
+    "M1": "ENGINEERING_COMPLETE_DECLARED_BOUNDED_RESEARCH_SCOPE",
+    "M2": "NOT_VERIFIED_EXTERNAL_SOURCE_TARGET_AND_OWNER_ACCEPTANCE_BLOCKED"
+  },
+  "tests": {
+    "frontend": {
+      "passed": 74,
+      "failed": 0,
+      "skipped": 0
+    },
+    "stock": {
+      "debug": {
+        "passed": 207,
+        "failed": 0,
+        "skipped": 0
+      },
+      "release": {
+        "passed": 207,
+        "failed": 0,
+        "skipped": 0
+      },
+      "sanitizer": {
+        "passed": 207,
+        "failed": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    },
+    "native_terminal_consumers": {
+      "debug": {
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0
+      },
+      "release": {
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0
+      },
+      "sanitizer": {
+        "passed": 274,
+        "failed": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    },
+    "new_qualification": {
+      "debug": {
+        "passed": 32,
+        "failed": 0,
+        "skipped": 0
+      },
+      "release": {
+        "passed": 32,
+        "failed": 0,
+        "skipped": 0
+      },
+      "sanitizer": {
+        "passed": 32,
+        "failed": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    },
+    "workflow_policy_after_last_guard_change": {
+      "debug": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      "release": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      },
+      "sanitizer": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    },
+    "browser": {
+      "checks_passed": 353,
+      "test_cohorts": 22,
+      "separate_performance_cohorts": 1,
+      "failed": 0,
+      "skipped": 0,
+      "all_workspaces": 12,
+      "visualization_modes": 13,
+      "workspace_theme_width_checks": 120
+    },
+    "security": {
+      "passed": 50,
+      "failed": 0,
+      "skipped": 0
+    },
+    "local_verified_HTTPS_WSS": {
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "wheel": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    "packaging": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "counting": "Overlapping outcomes per cohort/configuration,not unique tests or coverage percentage"
+  },
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "executed": [
+      {
+        "case": "itch.validation_demo_reference",
+        "reported_hashes": [
+          "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+        ]
+      },
+      {
+        "case": "itch.independent_reference",
+        "reported_hashes": [
+          "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+        ]
+      },
+      {
+        "case": "itch.context_reference",
+        "reported_hashes": [
+          "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+        ]
+      },
+      {
+        "case": "itch.streaming_reference",
+        "reported_hashes": [
+          "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+        ]
+      },
+      {
+        "case": "itch.l3_reference",
+        "reported_hashes": [
+          "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+          "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+        ]
+      },
+      {
+        "case": "itch.auction_reference",
+        "reported_hashes": [
+          "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        ]
+      },
+      {
+        "case": "itch.admin_reference",
+        "reported_hashes": [
+          "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+        ]
+      },
+      {
+        "case": "itch.hy_reference",
+        "reported_hashes": [
+          "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+        ]
+      }
+    ],
+    "all_eight_unchanged": true,
+    "native_source_changed": false
+  },
+  "commands": {
+    "debug": {
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "stock": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "terminal": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "qualification": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "-m",
+        "unittest",
+        "terminal.stocks.test_operational"
+      ]
+    },
+    "release": {
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "stock": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "terminal": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "qualification": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "-m",
+        "unittest",
+        "terminal.stocks.test_operational"
+      ]
+    },
+    "sanitizer": {
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "stock": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "terminal": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "qualification": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "build/milestones/run_operational.py"
+      ]
+    },
+    "frontend": [
+      "npm --prefix terminal/web test",
+      "npm --prefix terminal/web run build"
+    ],
+    "browser": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python scripts/qualify_atlas_offline.py --output build/milestones/browser-final",
+    "security": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python -m unittest terminal.test_browser_access terminal.test_codespaces_origin terminal.test_stream_proof terminal.test_request_proof terminal.stocks.test_repair.Authentication",
+    "TLS": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/check_rewritten_http_tls.py",
+    "canonical": "/workspace/gig-tools/bin/ctest --test-dir build/python-release -R '^itch\\.(independent_reference|context_reference|l3_reference|streaming_reference|validation_demo_reference|auction_reference|admin_reference|hy_reference)$' -V --output-junit build/milestones/canonical.xml",
+    "wheel": "PYTHONPATH=tests /workspace/gig-terminal-clean-venv/bin/python -m unittest test_python test_export_contracts",
+    "packaging": "/workspace/gig-tools/bin/python -m unittest discover -s tests -p test_sdist_patterns.py",
+    "source_archive": "Clean detached worktree40ca4e8; /workspace/gig-tools/bin/python -m build --sdist --no-isolation --outdir /workspace/GIG-C-Microstructure-Engine/build/milestones/sdist-final",
+    "source_inventory": "/workspace/gig-tools/bin/python scripts/check_sdist_inventory.py build/milestones/sdist-final/gig_microstructure-0.1.1.tar.gz --source-root build/milestones/package-final-source --manifest build/milestones/sdist-final-inventory.json",
+    "source_preflight": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python scripts/qualify_atlas.py",
+    "source_blocked_path": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python scripts/qualify_atlas.py --execute --exclusive-stream-window"
+  },
+  "source_scope": {
+    "current_executor_provider_requests": 0,
+    "current_executor_provider_secrets_bound": false,
+    "provider_hosts_allowlisted": false,
+    "forbidden_codespace_access_retried": false,
+    "owner_codespace_keys_and_SEC_ready": "OWNER_REPORTED_NOT_INDEPENDENTLY_EXECUTED_HERE",
+    "actual_target_stock_count": null,
+    "actual_observed_source_qualified": false,
+    "source_probe": {
+      "schema": "gig.atlas.operational.sources.v1",
+      "readiness": {
+        "sec": {
+          "ready": false,
+          "reason": "sec_disabled_pending_fair_access_review",
+          "missing_configuration": [
+            "GIG_SEC_ENABLED",
+            "GIG_SEC_POLICY_REVIEWED",
+            "GIG_SEC_USER_AGENT"
+          ],
+          "action": "Run .venv/bin/python scripts/configure_sec.py --check;configure Codespaces secrets or the private helper,then restart. Never paste the contact value in chat.",
+          "last_error": null,
+          "enabled": false,
+          "policy_reviewed": false,
+          "user_agent_present": false,
+          "user_agent_valid": false,
+          "invalid_boolean_variables": [],
+          "configuration_source": "explicit_environment"
+        },
+        "alpaca": {
+          "ready": false,
+          "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+          "missing_configuration": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY"
+          ],
+          "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+          "last_error": null
+        },
+        "options": {
+          "ready": false,
+          "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+          "missing_configuration": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY",
+            "GIG_ALPACA_OPTIONS_ENABLED",
+            "GIG_ALPACA_OPTIONS_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_OPTIONS_INDICATIVE_APPROVED"
+          ],
+          "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+          "last_error": null
+        },
+        "alpaca_credential_presence": {
+          "ALPACA_pair_present": false,
+          "APCA_pair_present": false,
+          "paper_base_url_configured": false,
+          "paper_base_url_used_for_market_data": false
+        }
+      },
+      "stages": {
+        "alpaca_reads": {
+          "status": "BLOCKED_CONFIGURATION_OR_PERMISSION",
+          "missing": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY"
+          ]
+        },
+        "sec_sources": {
+          "status": "BLOCKED_CONFIGURATION",
+          "missing": [
+            "GIG_SEC_ENABLED",
+            "GIG_SEC_POLICY_REVIEWED",
+            "GIG_SEC_USER_AGENT"
+          ]
+        },
+        "live": {
+          "status": "BLOCKED_EXISTING_LIVE_GATE",
+          "new_connections": 0
+        }
+      },
+      "milestone_2": "NOT_VERIFIED_TARGET_UI_PRIVACY_AND_FINAL_OWNER_ACCEPTANCE_REQUIRED",
+      "persistent_observed_storage": false,
+      "trading_operations": false,
+      "legal_and_plan_verification": "Existing operator permission records required;configured flags are not independent vendor/billing evidence",
+      "status": "INCOMPLETE_OR_BLOCKED_SOURCE_QUALIFICATION",
+      "observed_provider_qualification": false,
+      "identity_coverage": {
+        "runtime_searchable_identity_count": 13,
+        "accepted_provider_assets": 0,
+        "accepted_SEC_ticker_mappings": 0,
+        "count_status": "UNQUALIFIED_PROCESS_IDENTITY_COUNT",
+        "representative_symbols": {
+          "AAPL": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          },
+          "APLD": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          },
+          "CRWV": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          }
+        },
+        "scope": "Search namespace may combine provider assets,SEC registrants and curated fallbacks;not a count of all current exchange-listed stocks"
+      },
+      "preflight": {
+        "schema": "gig.atlas.operational.preflight.v1",
+        "configuration": {
+          "sec": {
+            "ready": false,
+            "reason": "sec_disabled_pending_fair_access_review",
+            "missing_configuration": [
+              "GIG_SEC_ENABLED",
+              "GIG_SEC_POLICY_REVIEWED",
+              "GIG_SEC_USER_AGENT"
+            ],
+            "action": "Run .venv/bin/python scripts/configure_sec.py --check;configure Codespaces secrets or the private helper,then restart. Never paste the contact value in chat.",
+            "last_error": null,
+            "enabled": false,
+            "policy_reviewed": false,
+            "user_agent_present": false,
+            "user_agent_valid": false,
+            "invalid_boolean_variables": [],
+            "configuration_source": "explicit_environment"
+          },
+          "alpaca": {
+            "ready": false,
+            "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+            "missing_configuration": [
+              "GIG_ALPACA_ENABLED",
+              "GIG_ALPACA_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+              "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+              "GIG_ALPACA_NO_COST_CONFIRMED",
+              "GIG_ALPACA_PERMISSION_REFERENCE",
+              "ALPACA_API_KEY_ID",
+              "ALPACA_API_SECRET_KEY"
+            ],
+            "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+            "last_error": null
+          },
+          "options": {
+            "ready": false,
+            "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+            "missing_configuration": [
+              "GIG_ALPACA_ENABLED",
+              "GIG_ALPACA_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+              "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+              "GIG_ALPACA_NO_COST_CONFIRMED",
+              "GIG_ALPACA_PERMISSION_REFERENCE",
+              "ALPACA_API_KEY_ID",
+              "ALPACA_API_SECRET_KEY",
+              "GIG_ALPACA_OPTIONS_ENABLED",
+              "GIG_ALPACA_OPTIONS_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_OPTIONS_INDICATIVE_APPROVED"
+            ],
+            "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+            "last_error": null
+          },
+          "alpaca_credential_presence": {
+            "ALPACA_pair_present": false,
+            "APCA_pair_present": false,
+            "paper_base_url_configured": false,
+            "paper_base_url_used_for_market_data": false
+          }
+        },
+        "gateway_port_8787_in_use": false,
+        "environment_is_codespaces": false,
+        "authorization_flags_changed": false,
+        "network_provider_requests": 0,
+        "observed_retention_disabled_for_this_process": true,
+        "provider_entitlements": "Unknown until narrow source probes;assets/credentials are not market-data entitlement or vendor-rights proof",
+        "milestone_2": "NOT_VERIFIED_TARGET_PRIVATE_AUTHENTICATION_AND_OWNER_ACCEPTANCE_REQUIRED"
+      }
+    }
+  },
+  "browser_campaign": {
+    "schema": "gig.atlas.offline.campaign.v1",
+    "fixture_only": true,
+    "cases": [
+      {
+        "case": "browser-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/browser-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 11.871750964986859,
+        "log_sha256": "cf941ba071305aedf5a538b10124b218231bb9b340f8e9ec6c561cece8c1353f",
+        "summary": {
+          "passed": 21,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "stock-intelligence-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/stock-intelligence-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 5.706513013021322,
+        "log_sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+        "summary": {
+          "schema": "gig.stock.browser.v1",
+          "passed": 10,
+          "failed": 0,
+          "checks": [
+            "dedicated stock workspace while real native transport remains connected",
+            "company-name search and CIK identity",
+            "bounded watchlist persists browser refresh",
+            "no fake equity observations or crypto source-strip mixing;separate provider gates",
+            "Black-Scholes independently known zero-rate reference through secure HTTP proof",
+            "interactive theoretical 3D volatility plane changes pixels on camera rotation",
+            "causal fixed-parameter research and exact empirical risk on explicit authored input",
+            "missing facts,holdings and news remain explicitly unavailable",
+            "mobile viewport stays bounded",
+            "crypto native book and renderer preserved;no browser runtime errors"
+          ],
+          "observed_data": false,
+          "renderer": "local Chromium SwiftShader;not physical Android or external Codespaces"
+        }
+      },
+      {
+        "case": "stock-loading-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/stock-loading-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 18.081060691009043,
+        "log_sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926",
+        "summary": {
+          "schema": "gig.stock.loading_browser.v1",
+          "passed": 10,
+          "failed": 0,
+          "checks": [
+            "selection initiates authorized fixture requests and displays candles,L1 bid/ask and native spread",
+            "provider-neutral history and exact descriptive research preserve synthetic source and incomplete-session limits",
+            "accepted latest quote/trade and source provenance",
+            "SEC authored facts appear after automatic loading",
+            "filings show validated official links and amendment records",
+            "indicative candidate chain,expiry/right/strike selectors,provider IV/Greeks and discrete3D points",
+            "theoretical Black-Scholes plane stays separate from indicative points",
+            "NVDA switching replaces all selected-symbol price and option observations",
+            "browser refresh preserves watchlist and safely reloads selected default",
+            "no browser runtime errors or credential values in API"
+          ],
+          "classification": "HISTORICAL_SYNTHETIC",
+          "live_provider_verified": false
+        }
+      },
+      {
+        "case": "atlas-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 18.781045998010086,
+        "log_sha256": "cac01829a7a728fea13e4428158ca8adfd6d50e23039b484d4e37e198a057e44",
+        "summary": {
+          "schema": "gig.atlas.visual.v1",
+          "classification": "HISTORICAL_SYNTHETIC",
+          "passed": 21,
+          "failed": 0,
+          "checks": [
+            "global search routes to curated company/native-backed workspace",
+            "v2 exact ratios,source fields and twelve descriptors are loaded",
+            "reported annual history charts carry descriptions and exact tables",
+            "quarter filter does not turn annual or YTD values into quarters",
+            "source receipt,reconciliation warning and exact ratio remain accessible",
+            "responsive financial layout at360px",
+            "responsive financial layout at390px",
+            "responsive financial layout at768px",
+            "responsive financial layout at1280px",
+            "responsive financial layout at1920px",
+            "light theme persists and remains readable",
+            "core theme text and links meet4.5:1 contrast token checks",
+            "all focusable controls retain names and skip link works",
+            "native help dialog traps focus and Escape dismisses",
+            "all persistent workspace names remain keyboard accessible",
+            "filing explorer exposes original references and amendment filter",
+            "invalid v2 descriptor yields explicit error without fabricated ratio",
+            "stale response remains explicitly cached and not live",
+            "all twelve workspaces remain bounded across60 viewport/section combinations",
+            "global same-symbol selection overrides a different local selection",
+            "browser has no uncaught application errors"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-360.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-390.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-viewport-390.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-768.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-1280.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-viewport-1280.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-1920.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-ratios-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-trends-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas/visual/financial-light-1280.png"
+          ],
+          "performance": [
+            {
+              "width": 360,
+              "scroll": 360,
+              "viewport": 360,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 390,
+              "scroll": 390,
+              "viewport": 390,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 768,
+              "scroll": 768,
+              "viewport": 768,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 1280,
+              "scroll": 1280,
+              "viewport": 1280,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 1920,
+              "scroll": 1920,
+              "viewport": 1920,
+              "dom": 319,
+              "resources": 37
+            }
+          ],
+          "browser": "154.0.8037.57",
+          "renderer": "Headless Chromium SwiftShader;not physical Android/external Codespaces",
+          "limitations": [
+            "No actual SEC/Alpaca observations or restricted data",
+            "No full WCAG audit or screen-reader/physical-device qualification",
+            "Native source/canonical identities unchanged"
+          ]
+        }
+      },
+      {
+        "case": "atlas2-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas2-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 24.646568873984506,
+        "log_sha256": "5ba6c9a24ff9c3bc7e8c1e05b3caea1c1c00cd6cf21992bd4ca5a41fe58614ca",
+        "summary": {
+          "schema": "gig.atlas.phase2.visual.v1",
+          "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED_STATEMENTS",
+          "passed": 11,
+          "failed": 0,
+          "checks": [
+            "Command Center2D starts without optional3D modules",
+            "shared-scale balance chart uses matched dates,common zero and independent2:1 height reference",
+            "selected statement tables preserve exact reported values and keyboard scroll region",
+            "filing Next/Previous/First and server-side filter preserve cached66-record scope",
+            "filing invalid cursors are rejected without rendering unvalidated records",
+            "native replay stepping and provenance remain deterministic",
+            "optional3D and exact2D remain available after deferred loading",
+            "native simulation summaries remain simulated and bounded to16 slices",
+            "all twelve workspaces fit120 dark/light viewport combinations",
+            "keyboard help and named navigation remain available",
+            "no uncaught browser errors"
+          ],
+          "responsive_combinations": 120,
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/command-center-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/financial-trends-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/financial-statements-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/filings-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/historical-replay-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/microstructure-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/execution-simulation-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/research-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/operations-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/stock-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/stock-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/command-center-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/operations-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas2/visual/stock-intelligence-light.png"
+          ],
+          "browser": "154.0.8037.57",
+          "timezone": "America/New_York",
+          "limitations": [
+            "Chromium/SwiftShader viewport emulation,not physical Android",
+            "No external Codespaces authentication,full screen-reader/WCAG audit or observed financial validation"
+          ]
+        }
+      },
+      {
+        "case": "recorded-playback-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/recorded-playback-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 2.025321636989247,
+        "log_sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+        "summary": {
+          "schema": "gig.browser.recorded_l2.v1",
+          "passed": 9,
+          "failed": 0,
+          "checks": [
+            "save authored native log",
+            "discover/select",
+            "native exact step",
+            "seek exact quantity",
+            "causal OFI corresponds to native prefix",
+            "restart prefix0",
+            "speed and playback to EOF",
+            "delete with owned cache",
+            "return to L3 authored source"
+          ],
+          "observed_data": false
+        }
+      },
+      {
+        "case": "live-controls-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/live-controls-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.8223708839796018,
+        "log_sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
+        "summary": {
+          "schema": "gig.browser.live_controls.v1",
+          "passed": 9,
+          "failed": 0,
+          "checks": [
+            "private-boundary proof controls",
+            "explicit ETH/USD selection",
+            "disabled live empty not authored",
+            "replay disabled in live mode",
+            "Coinbase selection and source isolation",
+            "Coinbase cannot use Kraken recorder",
+            "disconnect and native replay resume",
+            "visualization pause",
+            "native ingestion remains active while visualization paused"
+          ],
+          "live_verified": false
+        }
+      },
+      {
+        "case": "ratio-history-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/ratio-history-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 5.884629131003749,
+        "log_sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2",
+        "summary": {
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "live-market-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/live-market-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 11.512981295003556,
+        "log_sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f",
+        "summary": {
+          "schema": "gig.live_market.browser.v1",
+          "passed": 21,
+          "failed": 0,
+          "origin": "HISTORICAL_SYNTHETIC",
+          "observed_provider_verified": false,
+          "screenshots": [
+            "live-market-desktop-synthetic.png",
+            "live-market-mobile-synthetic.png"
+          ]
+        }
+      },
+      {
+        "case": "sec-completion-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/sec-completion-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 7.3339424160076305,
+        "log_sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37",
+        "summary": {
+          "passed": 3,
+          "failed": 0
+        }
+      },
+      {
+        "case": "discovery-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/discovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.9729940819961485,
+        "log_sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f",
+        "summary": {
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "gpu-recovery-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/gpu-recovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.779297328001121,
+        "log_sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed",
+        "summary": {
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "market-unavailable-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/market-unavailable-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.578609668998979,
+        "log_sha256": "5d163b4689601eefd035b811ebb264202e8a43fb8fc5dd80c9aa2d1a817503ef",
+        "summary": {
+          "schema": "gig.market.unavailable.browser.v1",
+          "passed": 1,
+          "failed": 0,
+          "scope": "Default-gated native application,360px viewport,no source acquisition"
+        }
+      },
+      {
+        "case": "atlas4-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas4-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 14.383649053022964,
+        "log_sha256": "eced7f5456573edf2ff5662c43adb01cedd8a2414e6231de7d1b9b5ae5164145",
+        "summary": {
+          "schema": "gig.atlas.phase4.browser.v1",
+          "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "full-width desktop and comfortable Command Center typography",
+            "compact navigation preserves all12 accessible destinations",
+            "private immutable history snapshot save and explicit deletion",
+            "aligned reporting periods show actual source values without missing-zero invention",
+            "cached-source risk and in-sample models stay separately labelled",
+            "risk provenance refreshes when the accepted price receipt changes",
+            "linear scenarios are explicit authored assumptions",
+            "mobile navigation and analytical panels fit360/390px in both themes",
+            "no uncaught browser errors and native stream remains connected"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/command-center-wide-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/command-center-compact-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/private-history-fixture.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/aligned-statements-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/risk-models-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/risk-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/risk-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas4/visual/command-center-wide-light.png"
+          ],
+          "browser": "154.0.8037.57",
+          "limitations": [
+            "Chromium/SwiftShader viewport emulation,not physical Android",
+            "No official SEC,Alpaca or external Codespaces acceptance"
+          ]
+        }
+      },
+      {
+        "case": "atlas5-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas5-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 12.839238713000668,
+        "log_sha256": "5547b62bcc5a5ce08515046edfcdcf89fd6f808f7067463604b1d1964295940e",
+        "summary": {
+          "schema": "gig.atlas.phase5.browser.v1",
+          "classification": "AUTHORED_FIXTURES_NOT_LIVE_PROVIDER_ACCEPTANCE",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "bounded IEX pagination stores a pinned30-record synthetic revision without replacing stock cache",
+            "private backup restore is explicit and preserves the same revision",
+            "explicit portfolio weights produce independent .006 historical VaR and invalidate on edit",
+            "training-only and walk-forward evaluations show explicit split identity and unused suffix",
+            "new research layouts fit360/390 light and dark without page overflow",
+            "native transport and browser error invariants preserved"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas5/visual/pinned-ingestion-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas5/visual/portfolio-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas5/visual/evaluation-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas5/visual/research-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/atlas5/visual/research-mobile-dark.png"
+          ],
+          "browser": "154.0.8037.57",
+          "limitations": [
+            "Viewport emulation,not physical Android/external Codespaces",
+            "No official Alpaca or SEC observations"
+          ]
+        }
+      },
+      {
+        "case": "atlas-final-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-final-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 12.574525729985908,
+        "log_sha256": "805a1e57e4fb1d471327099e614f2cba67d82370783a34222fb0791397a2b127",
+        "summary": {
+          "schema": "gig.atlas.final.browser.v1",
+          "classification": "AUTHORED_NOT_OBSERVED_OR_LIVE_ACCEPTANCE",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "live IEX remains disabled and start is rejected without explicit live permission",
+            "company to pinned dataset to exact risk to private authored export",
+            "conditional GARCH search visible with source and convergence limitations",
+            "360/390 responsive layouts both themes",
+            "keyboard focus and native browser connection survive integrated journey"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/final/visual/dataset-research-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/final/visual/garch-search-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/final/visual/final-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/final/visual/final-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/final/visual/return-command-center.png"
+          ],
+          "browser": "154.0.8037.57"
+        }
+      },
+      {
+        "case": "sec-integration-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/sec-integration-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 10.768500139005482,
+        "log_sha256": "cf757ef76b24615f423cd2f39591cf1326934acdc6fc2fb9d52e82d3fd0cd2fc",
+        "summary": {
+          "schema": "gig.sec.browser.validation.v1",
+          "classification": "AUTHORED_FIXTURES_NO_LIVE_SEC",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "true/yes SEC configuration loads authored AAPL reported facts,units and source dates",
+            "failed explicit refresh retains reported facts and shows actionable error",
+            "missing mapped facts stay unavailable and immediate refresh uses accepted cache",
+            "stale cache and partial-source states remain distinct",
+            "mobile SEC messages fit360/390 and transport remains native-connected",
+            "unconfigured server shows blocked configuration and native health remains available"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/sec-repair/visual/reported-aapl.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/sec-repair/visual/failed-refresh-cache-preserved.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace/build/sec-repair/visual/sec-mobile.png"
+          ],
+          "browser": "154.0.8037.57"
+        }
+      },
+      {
+        "case": "product-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/product-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 7.390219280991005,
+        "log_sha256": "7cae3ffbb5dd9434ef766f45ac9a08f024498cead0ce7ae9a62178d63cef3975",
+        "summary": {
+          "passed": 32,
+          "failed": 0,
+          "skipped": 0,
+          "classification": "AUTHORED_DIRECTORY_SEC_IEX_NOT_LIVE_QUALIFICATION"
+        }
+      },
+      {
+        "case": "phase-next-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/phase-next-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 10.949368947010953,
+        "log_sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+        "summary": {
+          "schema": "gig.atlas.phase-next.browser.v1",
+          "classification": "AUTHORED_REFERENCE_SEC_IEX_NOT_PROVIDER_QUALIFICATION",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "Alpaca paper asset refresh publishes complete authored active/inactive snapshot",
+            "Exchange and source-status filters intersect before page rendering",
+            "Seven representative stock identities remain searchable independently of SEC facts",
+            "Stock coverage preserves unverified CRWV CIK instead of borrowing another issuer",
+            "Historical bars compare only exact common timestamps and remain historical",
+            "Historical quotes and trades preserve source values and paginated counts",
+            "Invalid source response preserves earlier accepted observation view",
+            "Historical requests and comparison do not mutate the native L3 book",
+            "Historical controls fit five target widths using ordinary clicks",
+            "No uncaught browser application errors"
+          ]
+        }
+      },
+      {
+        "case": "advanced-research-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/advanced-research-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 27.575906095997198,
+        "log_sha256": "1c76d91b3369827ccfb2879a6819ebc1d4971500dd87b7e9682b17efef09faf1",
+        "summary": {
+          "schema": "gig.advanced3d.browser.v1",
+          "classification": "AUTHORED_FIXTURES_WITH_NATIVE_CPP_BACKEND_AND_SWIFTSHADER_NOT_LIVE_QUALIFICATION",
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "Three.js not requested by Command Center",
+            "native snapshot source preserves synthetic origin and real C++ prices",
+            "snapshots cannot silently fabricate order events",
+            "height authored geometry,labels,inspection,and bounded draw calls",
+            "canyon authored geometry,labels,inspection,and bounded draw calls",
+            "events authored geometry,labels,inspection,and bounded draw calls",
+            "vwap authored geometry,labels,inspection,and bounded draw calls",
+            "flow authored geometry,labels,inspection,and bounded draw calls",
+            "wheel authored geometry,labels,inspection,and bounded draw calls",
+            "dome authored geometry,labels,inspection,and bounded draw calls",
+            "ribbon authored geometry,labels,inspection,and bounded draw calls",
+            "camera presets,key pan,drag rotation,and wheel zoom are functional",
+            "local timeline,symbol filtering,voxel/point toggle,and no native mutation",
+            "real WebGL context loss yields2D and retry creates fresh usable renderer",
+            "all8 models fit both themes at360,390,768,1280,1920 without page overflow",
+            "2D toggle and reduced-motion keyboard semantics remain accessible",
+            "closing laboratory releases its canvas",
+            "WebGL construction failure has working table/2D fallback",
+            "Level1 ribbon and dome use actual fixture quote history with truthful origin",
+            "Level1 depth and unsigned-flow modes explicitly unavailable",
+            "existing four Level1 geometries remain functional",
+            "existing GARCH surface,parameters,camera,and recovery are preserved",
+            "stable production assets and no uncaught application errors"
+          ],
+          "errors": [],
+          "renders": [
+            {
+              "model": "height",
+              "engine": "three.js r180",
+              "renderMs": "43.5",
+              "drawCalls": "9",
+              "geometries": "7",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "620"
+            },
+            {
+              "model": "canyon",
+              "engine": "three.js r180",
+              "renderMs": "44.5",
+              "drawCalls": "9",
+              "geometries": "7",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "620"
+            },
+            {
+              "model": "events",
+              "engine": "three.js r180",
+              "renderMs": "4.300000011920929",
+              "drawCalls": "3",
+              "geometries": "3",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "120",
+              "triangles": "0"
+            },
+            {
+              "model": "vwap",
+              "engine": "three.js r180",
+              "renderMs": "18.69999998807907",
+              "drawCalls": "6",
+              "geometries": "6",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "28",
+              "triangles": "0"
+            },
+            {
+              "model": "flow",
+              "engine": "three.js r180",
+              "renderMs": "18.80000001192093",
+              "drawCalls": "5",
+              "geometries": "5",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "28",
+              "triangles": "0"
+            },
+            {
+              "model": "wheel",
+              "engine": "three.js r180",
+              "renderMs": "24.69999998807907",
+              "drawCalls": "5",
+              "geometries": "5",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "0"
+            },
+            {
+              "model": "dome",
+              "engine": "three.js r180",
+              "renderMs": "37.19999998807907",
+              "drawCalls": "5",
+              "geometries": "4",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "24",
+              "triangles": "368"
+            },
+            {
+              "model": "ribbon",
+              "engine": "three.js r180",
+              "renderMs": "39.70000001788139",
+              "drawCalls": "5",
+              "geometries": "4",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "64",
+              "triangles": "62"
+            }
+          ],
+          "screenshots": [
+            {
+              "path": "build/advanced-3d/height-synthetic-desktop.png",
+              "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+            },
+            {
+              "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+              "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+            },
+            {
+              "path": "build/advanced-3d/events-synthetic-desktop.png",
+              "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+            },
+            {
+              "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+              "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+            },
+            {
+              "path": "build/advanced-3d/flow-synthetic-desktop.png",
+              "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+            },
+            {
+              "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+              "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+            },
+            {
+              "path": "build/advanced-3d/dome-synthetic-desktop.png",
+              "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+              "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+              "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+              "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+            },
+            {
+              "path": "build/advanced-3d/iex-authored-ribbon.png",
+              "sha256": "fa69737da13516d7aa91c85e0102ff8e4df7accc6fae4ce2fcf62e79f791d28d"
+            },
+            {
+              "path": "build/advanced-3d/iex-authored-dome.png",
+              "sha256": "1c256093cff52e16805bd4331421c2896dfe9ba49516b3231d8f1e01a920980a"
+            }
+          ],
+          "asset_sha256": {
+            "Landscape3D-DRIpGTTD.js": "66629ca179d98d420cdfe0f618cea916c796bd5397d4879cd261dd28f4596aec",
+            "LiveMarket-B3dBi4ql.js": "5a537918f52b381d32a6f529e195b512c82cb9e8ed44902acf869ca743cb0dc2",
+            "MarketHealth-CzP1BMNJ.js": "454addfdf571cfe8edc59891bc3684651caa48855b65a3c691192d2b8d379658",
+            "ModelSurface-B-irsTZ1.js": "b324ba32ef2e1ba50ffeaad45d3a3d0f6739e331314a9a54e48ab28697dd4f4f",
+            "OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+            "QuoteCloud-BCwW9Ezb.js": "ce4907186636858ffb09e5fb6afd62c2f306433b419d75cc9ee71a94f8a1afdc",
+            "ResearchDesk-BoQUgFfY.js": "fed89b823793e8f6010f3e9a8d6a477236552216ac3b06433e708e17cc2656f1",
+            "ResearchLab-DX3XAcCx.js": "6cd625ccdbd0e713a1075ab390446cf0165323e309dcb1217cff5e17370c019a",
+            "ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+            "ResearchScene-scnXuRZj.js": "0a9c583247eccc596f8d4e5add82bbffea698e2bcb080208a1511c40c1136f7b",
+            "StockIntelligence-DlF_Jtz3.js": "ec045a154fdf9d7f1e4a33c4aa3f30fc2ad93b9042ef7ecaee78f6ff74e4b1c5",
+            "UniverseWorkspace-DasWJSAj.js": "43b8dc3433cb3bd46e3aff32f9bc5572ceae0a35b24b3d460043322c265160d5",
+            "VolatilitySurface-BYBDwxc5.js": "c775816538268bb53bc9f6526cac5a3e0e66f982473292bf223c3b40c2209dff",
+            "directoryContract-mTumUNcY.js": "58d911c928f2e030c24ffafb747fce44bafecaf870f4dc68785af9ea905ff094",
+            "index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+            "index-DFSB93th.js": "2b36115d60daef804d3c90dacb453ad6e82056dad7f31ee439a60dd3a07c766b",
+            "marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0"
+          }
+        }
+      },
+      {
+        "case": "workspace-qualification",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/workspace-qualification.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 10.509851060982328,
+        "log_sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd",
+        "summary": {
+          "schema": "gig.atlas.workspace_qualification.v1",
+          "classification": "AUTHORED_NOT_PROVIDER_OR_PHYSICAL_DEVICE_QUALIFICATION",
+          "passed": 120,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "dark/360/Command Center",
+            "dark/360/Securities Universe",
+            "dark/360/Stock Intelligence",
+            "dark/360/Live Markets",
+            "dark/360/Multi-Stock Comparison",
+            "dark/360/Order Book",
+            "dark/360/Market Depth",
+            "dark/360/Order Flow",
+            "dark/360/Historical Replay",
+            "dark/360/Execution Simulator",
+            "dark/360/Research & Validation",
+            "dark/360/Operations",
+            "dark/390/Command Center",
+            "dark/390/Securities Universe",
+            "dark/390/Stock Intelligence",
+            "dark/390/Live Markets",
+            "dark/390/Multi-Stock Comparison",
+            "dark/390/Order Book",
+            "dark/390/Market Depth",
+            "dark/390/Order Flow",
+            "dark/390/Historical Replay",
+            "dark/390/Execution Simulator",
+            "dark/390/Research & Validation",
+            "dark/390/Operations",
+            "dark/768/Command Center",
+            "dark/768/Securities Universe",
+            "dark/768/Stock Intelligence",
+            "dark/768/Live Markets",
+            "dark/768/Multi-Stock Comparison",
+            "dark/768/Order Book",
+            "dark/768/Market Depth",
+            "dark/768/Order Flow",
+            "dark/768/Historical Replay",
+            "dark/768/Execution Simulator",
+            "dark/768/Research & Validation",
+            "dark/768/Operations",
+            "dark/1280/Command Center",
+            "dark/1280/Securities Universe",
+            "dark/1280/Stock Intelligence",
+            "dark/1280/Live Markets",
+            "dark/1280/Multi-Stock Comparison",
+            "dark/1280/Order Book",
+            "dark/1280/Market Depth",
+            "dark/1280/Order Flow",
+            "dark/1280/Historical Replay",
+            "dark/1280/Execution Simulator",
+            "dark/1280/Research & Validation",
+            "dark/1280/Operations",
+            "dark/1920/Command Center",
+            "dark/1920/Securities Universe",
+            "dark/1920/Stock Intelligence",
+            "dark/1920/Live Markets",
+            "dark/1920/Multi-Stock Comparison",
+            "dark/1920/Order Book",
+            "dark/1920/Market Depth",
+            "dark/1920/Order Flow",
+            "dark/1920/Historical Replay",
+            "dark/1920/Execution Simulator",
+            "dark/1920/Research & Validation",
+            "dark/1920/Operations",
+            "light/360/Command Center",
+            "light/360/Securities Universe",
+            "light/360/Stock Intelligence",
+            "light/360/Live Markets",
+            "light/360/Multi-Stock Comparison",
+            "light/360/Order Book",
+            "light/360/Market Depth",
+            "light/360/Order Flow",
+            "light/360/Historical Replay",
+            "light/360/Execution Simulator",
+            "light/360/Research & Validation",
+            "light/360/Operations",
+            "light/390/Command Center",
+            "light/390/Securities Universe",
+            "light/390/Stock Intelligence",
+            "light/390/Live Markets",
+            "light/390/Multi-Stock Comparison",
+            "light/390/Order Book",
+            "light/390/Market Depth",
+            "light/390/Order Flow",
+            "light/390/Historical Replay",
+            "light/390/Execution Simulator",
+            "light/390/Research & Validation",
+            "light/390/Operations",
+            "light/768/Command Center",
+            "light/768/Securities Universe",
+            "light/768/Stock Intelligence",
+            "light/768/Live Markets",
+            "light/768/Multi-Stock Comparison",
+            "light/768/Order Book",
+            "light/768/Market Depth",
+            "light/768/Order Flow",
+            "light/768/Historical Replay",
+            "light/768/Execution Simulator",
+            "light/768/Research & Validation",
+            "light/768/Operations",
+            "light/1280/Command Center",
+            "light/1280/Securities Universe",
+            "light/1280/Stock Intelligence",
+            "light/1280/Live Markets",
+            "light/1280/Multi-Stock Comparison",
+            "light/1280/Order Book",
+            "light/1280/Market Depth",
+            "light/1280/Order Flow",
+            "light/1280/Historical Replay",
+            "light/1280/Execution Simulator",
+            "light/1280/Research & Validation",
+            "light/1280/Operations",
+            "light/1920/Command Center",
+            "light/1920/Securities Universe",
+            "light/1920/Stock Intelligence",
+            "light/1920/Live Markets",
+            "light/1920/Multi-Stock Comparison",
+            "light/1920/Order Book",
+            "light/1920/Market Depth",
+            "light/1920/Order Flow",
+            "light/1920/Historical Replay",
+            "light/1920/Execution Simulator",
+            "light/1920/Research & Validation",
+            "light/1920/Operations"
+          ],
+          "screenshots": [
+            "build/workspaces/command-center-dark-1280.png",
+            "build/workspaces/securities-universe-dark-1280.png",
+            "build/workspaces/stock-intelligence-dark-1280.png",
+            "build/workspaces/live-markets-dark-1280.png",
+            "build/workspaces/multi-stock-comparison-dark-1280.png",
+            "build/workspaces/order-book-dark-1280.png",
+            "build/workspaces/market-depth-dark-1280.png",
+            "build/workspaces/order-flow-dark-1280.png",
+            "build/workspaces/historical-replay-dark-1280.png",
+            "build/workspaces/execution-simulator-dark-1280.png",
+            "build/workspaces/research-validation-dark-1280.png",
+            "build/workspaces/operations-dark-1280.png",
+            "build/workspaces/command-center-light-390.png",
+            "build/workspaces/stock-intelligence-light-390.png",
+            "build/workspaces/live-markets-light-390.png",
+            "build/workspaces/operations-light-390.png"
+          ]
+        }
+      },
+      {
+        "case": "gpu-quote",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/gpu-recovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 2.22392614101409,
+        "log_sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca",
+        "summary": {
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "performance",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-final-performance.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/milestones/browser-final/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 5.134993537008995,
+        "log_sha256": "52d5f411834664d2eb15412d414de399bad83fa832c6e613ce868330c548ca2b"
+      }
+    ],
+    "failed_attempts": [],
+    "assets": {
+      ".vite/manifest.json": "218448625f4a5e52fa8bb46ca6d1d9775517c7d40d549e5f168bcbc4c9cc5ce0",
+      "assets/Landscape3D-DRIpGTTD.js": "66629ca179d98d420cdfe0f618cea916c796bd5397d4879cd261dd28f4596aec",
+      "assets/LiveMarket-B3dBi4ql.js": "5a537918f52b381d32a6f529e195b512c82cb9e8ed44902acf869ca743cb0dc2",
+      "assets/MarketHealth-CzP1BMNJ.js": "454addfdf571cfe8edc59891bc3684651caa48855b65a3c691192d2b8d379658",
+      "assets/ModelSurface-B-irsTZ1.js": "b324ba32ef2e1ba50ffeaad45d3a3d0f6739e331314a9a54e48ab28697dd4f4f",
+      "assets/OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+      "assets/QuoteCloud-BCwW9Ezb.js": "ce4907186636858ffb09e5fb6afd62c2f306433b419d75cc9ee71a94f8a1afdc",
+      "assets/ResearchDesk-BoQUgFfY.js": "fed89b823793e8f6010f3e9a8d6a477236552216ac3b06433e708e17cc2656f1",
+      "assets/ResearchLab-DX3XAcCx.js": "6cd625ccdbd0e713a1075ab390446cf0165323e309dcb1217cff5e17370c019a",
+      "assets/ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+      "assets/ResearchScene-scnXuRZj.js": "0a9c583247eccc596f8d4e5add82bbffea698e2bcb080208a1511c40c1136f7b",
+      "assets/StockIntelligence-DlF_Jtz3.js": "ec045a154fdf9d7f1e4a33c4aa3f30fc2ad93b9042ef7ecaee78f6ff74e4b1c5",
+      "assets/UniverseWorkspace-DasWJSAj.js": "43b8dc3433cb3bd46e3aff32f9bc5572ceae0a35b24b3d460043322c265160d5",
+      "assets/VolatilitySurface-BYBDwxc5.js": "c775816538268bb53bc9f6526cac5a3e0e66f982473292bf223c3b40c2209dff",
+      "assets/directoryContract-mTumUNcY.js": "58d911c928f2e030c24ffafb747fce44bafecaf870f4dc68785af9ea905ff094",
+      "assets/index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+      "assets/index-DFSB93th.js": "2b36115d60daef804d3c90dacb453ad6e82056dad7f31ee439a60dd3a07c766b",
+      "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "index.html": "7e914e011064249ae46108865ea9e76be297b96c522c79d443249b717c95e8f2"
+    },
+    "all_passed": true,
+    "source_commit": "8f152b6e9c9a9113158fa15fa6019a3dde46f958",
+    "working_tree_dirty": true
+  },
+  "performance": {
+    "schema": "gig.atlas.final.browser.performance.v1",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+    "warmups": 1,
+    "repetitions": 3,
+    "samples": [
+      {
+        "initial_navigation_and_settle_ms": 783.3839450000003,
+        "stock_route_ms": 142.6462889999998,
+        "health_roundtrip_ms": 12.940872000000127,
+        "script_seconds": 0.11707,
+        "task_seconds": 0.314622,
+        "used_js_heap_bytes": 4526176,
+        "dom_nodes": 1284,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-DFSB93th.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BoQUgFfY.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-mTumUNcY.js",
+            "bytes": 1924
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 730.8409350000002,
+        "stock_route_ms": 156.86026999999967,
+        "health_roundtrip_ms": 4.203940999999759,
+        "script_seconds": 0.113841,
+        "task_seconds": 0.305112,
+        "used_js_heap_bytes": 4998820,
+        "dom_nodes": 1285,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-DFSB93th.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BoQUgFfY.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-mTumUNcY.js",
+            "bytes": 1924
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 778.1445359999998,
+        "stock_route_ms": 252.5695909999995,
+        "health_roundtrip_ms": 3.074279999999817,
+        "script_seconds": 0.135993,
+        "task_seconds": 0.366232,
+        "used_js_heap_bytes": 4764628,
+        "dom_nodes": 1285,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-DFSB93th.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BoQUgFfY.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-mTumUNcY.js",
+            "bytes": 1924
+          }
+        ]
+      }
+    ],
+    "browser": "154.0.8037.57",
+    "limitations": [
+      "Isolated Chromium contexts with disabled cache;browser process reused",
+      "Navigation includes networkidle wait;not pure rendering latency",
+      "CDP sampled JS heap,not native/GPU memory or long-run growth",
+      "Loopback fake providers;no Android/external Codespaces acceptance"
+    ]
+  },
+  "entry_asset": {
+    "path": "terminal/web/dist/assets/index-DFSB93th.js",
+    "bytes": 236210,
+    "sha256": "2b36115d60daef804d3c90dacb453ad6e82056dad7f31ee439a60dd3a07c766b",
+    "gzip_bytes": 73003
+  },
+  "source_archive": {
+    "path": "build/milestones/sdist-final/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2639447,
+    "sha256": "29e0767f6c35713164e5b526ff1feb8b6c263b9afffdf0ab58725349f31b33dd",
+    "safe_members": 839,
+    "source_commit": "40ca4e86ec4c7c5f339695768605e7453ae4603b",
+    "inventory": {
+      "path": "build/milestones/sdist-final-inventory.json",
+      "bytes": 133361,
+      "sha256": "65168ff46ae262ef9fa78094a0f3d296552fbfa1f19606eec874a3f2753be10f"
+    }
+  },
+  "changed_implementation_files": [
+    {
+      "path": ".github/workflows/native-arm64.yml",
+      "bytes": 9391,
+      "sha256": "4a63c812666fb1854f5fab2cbf766f172a17dc7a33ef173a52a95b5189585d7d"
+    },
+    {
+      "path": "docs/product/ALPACA_RESEARCH_DATA_SETUP.md",
+      "bytes": 7599,
+      "sha256": "c70db2e9b8c9b3a604ead003962997defdac532c983725a6a4035ab45621cf81"
+    },
+    {
+      "path": "scripts/check_actual_comparison.mjs",
+      "bytes": 1971,
+      "sha256": "0079897aec5c1c4b658924054233a3f6fa10965d0fdcd088dd7550e180670029"
+    },
+    {
+      "path": "scripts/qualify_alpaca_live.py",
+      "bytes": 2851,
+      "sha256": "86c550f37282680f67e6c15c8325000cd5f4881f06f04c07d95c15df5b060ea2"
+    },
+    {
+      "path": "scripts/qualify_alpaca_market_history.py",
+      "bytes": 1942,
+      "sha256": "984022b8bd4162473a10f9c0b3da3a4ff13522cac9fc4252551abd7b15308495"
+    },
+    {
+      "path": "scripts/qualify_alpaca_reference.py",
+      "bytes": 1885,
+      "sha256": "b4a1784d309873c386f7c498b7b4dcd24aa1d5c83e3817cee840ec1568ec2549"
+    },
+    {
+      "path": "scripts/qualify_atlas.py",
+      "bytes": 3962,
+      "sha256": "9467be6979cdd09cdc21d2222babd08dd8127421c9fb23702ea57c079cb3ded6"
+    },
+    {
+      "path": "scripts/qualify_atlas_offline.py",
+      "bytes": 8370,
+      "sha256": "605d49dcdbc6f0f22e4d8b11f4d2cd927893725da0ac407b2f7aba637fbd476c"
+    },
+    {
+      "path": "scripts/qualify_sec_sources.py",
+      "bytes": 9762,
+      "sha256": "8f624c5887827027eabc9f7501225bafb05c31682051c97a4471dbe4b09d0242"
+    },
+    {
+      "path": "terminal/stocks/live.py",
+      "bytes": 21051,
+      "sha256": "1865d50faf46b2ca74703f71f75c27dd68be82373b5f17f6693428968ad29a78"
+    },
+    {
+      "path": "terminal/stocks/qualification.py",
+      "bytes": 12563,
+      "sha256": "4faaceca912f901d713ef25fac827a57e267a7b64562968bf9571636dc7e64c2"
+    },
+    {
+      "path": "terminal/stocks/test_operational.py",
+      "bytes": 17823,
+      "sha256": "043ac000d4b884f1f9b3c95020c082a21d687f24d9d60c3ed28ede3cf525f728"
+    },
+    {
+      "path": "terminal/test_arm64_terminal_policy.py",
+      "bytes": 2934,
+      "sha256": "ad8058f24df465f0018c65f1924a961782084f0b0088711f8753dd8273dae05a"
+    },
+    {
+      "path": "terminal/tests/atlas4-validation.mjs",
+      "bytes": 8101,
+      "sha256": "018232740ddc323fc48bdf2812158ab1fed9f24c4a3914e822359039a22a613d"
+    },
+    {
+      "path": "terminal/tests/workspace-qualification.mjs",
+      "bytes": 2633,
+      "sha256": "3e5bb3ced1c2bef0ae1069176c60ed6e2ed58ebe67c40ee6e06af741826e70fa"
+    },
+    {
+      "path": "terminal/web/src/HistoricalMarket.tsx",
+      "bytes": 8245,
+      "sha256": "9f3124b44bf61c31505769e76ca77b25f7ca33970b94c15d0cf5eed188c5c1fd"
+    },
+    {
+      "path": "terminal/web/src/historicalMarket.test.ts",
+      "bytes": 3775,
+      "sha256": "dd619066a214cf09e551ab192a35f070550c1c75d8f884a628f7f1f325980cdf"
+    },
+    {
+      "path": "terminal/web/src/historicalMarket.ts",
+      "bytes": 5886,
+      "sha256": "fd4f8a819afb30eb701175b1c1947ffd6a207bbaa4349a1a7a3b573411e2e829"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/canyon-synthetic-desktop.png",
+      "bytes": 156744,
+      "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/dome-synthetic-desktop.png",
+      "bytes": 143319,
+      "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/events-synthetic-desktop.png",
+      "bytes": 147430,
+      "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/flow-synthetic-desktop.png",
+      "bytes": 156293,
+      "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/height-synthetic-desktop.png",
+      "bytes": 152889,
+      "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/iex-authored-dome.png",
+      "bytes": 160858,
+      "sha256": "1c256093cff52e16805bd4331421c2896dfe9ba49516b3231d8f1e01a920980a"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/iex-authored-ribbon.png",
+      "bytes": 140766,
+      "sha256": "fa69737da13516d7aa91c85e0102ff8e4df7accc6fae4ce2fcf62e79f791d28d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/ribbon-synthetic-desktop.png",
+      "bytes": 144403,
+      "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "bytes": 140403,
+      "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "bytes": 136288,
+      "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/vwap-synthetic-desktop.png",
+      "bytes": 137378,
+      "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/advanced-3d/wheel-synthetic-desktop.png",
+      "bytes": 153153,
+      "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-1280.png",
+      "bytes": 280578,
+      "sha256": "3f25e44d328da13b8212ede722798fdf2a41ba696a607cb986987c61dfe4d515"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-1920.png",
+      "bytes": 288346,
+      "sha256": "6ce6449b131708d0435232774da85bac7109a584e667b741b4554f8fa310118f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-360.png",
+      "bytes": 256011,
+      "sha256": "bd1829a091e769186c9e2b2cca6f511b231b6657ac6708c1fe6a922ff7a6e1f1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-390.png",
+      "bytes": 257969,
+      "sha256": "dd5e0f779401991d0ad6654f5ce3935796628cda4edcbc82b9f9b029f07409f5"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-dark-768.png",
+      "bytes": 252433,
+      "sha256": "805b0367225486a8383f2fcea57f81b0f6e282e0e186a67bb7fa4d0e9017ebbb"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-light-1280.png",
+      "bytes": 287936,
+      "sha256": "ccdb434237ee5ff3492c340e5c4558ecf3e7c9f577cd7d164c38ea49f71a6aa4"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-ratios-dark.png",
+      "bytes": 349257,
+      "sha256": "f8d8b595057386394c23011a3657c291769d22a78d507fe5000a01ad252802d1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-trends-dark.png",
+      "bytes": 316291,
+      "sha256": "795253a919ccacec75229263c2f9be77b9eae3a518b7462bc0ebb1edd146f413"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-viewport-1280.png",
+      "bytes": 135988,
+      "sha256": "675e3252d25f5146012b16ae094f30b1f1bd7cc7e194afd94d64eb76bbb744c1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas/visual/financial-viewport-390.png",
+      "bytes": 62454,
+      "sha256": "9fb479673e612b337e80adcd7443a0fbeda44a19ccb6f06563fde08988583ec2"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/command-center-dark.png",
+      "bytes": 186483,
+      "sha256": "439532ad61ec36075c49ed17b49ca4fc2b7c97ecf8e1c1826a87fe68e0e5f7b7"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/command-center-light.png",
+      "bytes": 190185,
+      "sha256": "a03a7578d6e7c5ce095940530c0398abb1048bbb9cdfa191d0a34f55986b36c6"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 193422,
+      "sha256": "701e185a647aaeda72d5067410f787b2af90f8b508fa4d24bfd51e5acb7da602"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/filings-dark.png",
+      "bytes": 227180,
+      "sha256": "c3e9fd6a286352405b435a1896caf2b4c0bf7aa69a17457b7cd3cda13c9d71fd"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 302564,
+      "sha256": "87a32260d24d51303c10d52482d6f1158876491326564ffd705ff997001c7df0"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 332942,
+      "sha256": "2356b176e56f1b60f74aec12bbfbb754b1052d7a1cdb59ac1fa261772e15cf26"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 355664,
+      "sha256": "f0fee64fa2a485fcf85d0b686147f425d4940b15407a2181014159442f250320"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/microstructure-dark.png",
+      "bytes": 358631,
+      "sha256": "78450e1874ec4320e4518f83b655dc5c718bd9b1e06caf7440eac966f1770e69"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/operations-dark.png",
+      "bytes": 209724,
+      "sha256": "f4caf6d7b666d86e85f28560a58ad703bbfad8843451483bc4db20e2e917231d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/operations-light.png",
+      "bytes": 216626,
+      "sha256": "e8d5e81df24a956aa96157a8db4ff08bb2fbcf66e236700cb6699b69b68fcc3d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/research-dark.png",
+      "bytes": 258443,
+      "sha256": "43e54b381197c1cbdbbfb9d51fe99febd5934662d96614f8b998189eea469177"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 474195,
+      "sha256": "9df7bfed3f9f8e5e29e6a78ade737d13627870f0ea1ecbfb9de1c7570c4e3f94"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 447341,
+      "sha256": "af86371cc4b79bcadf10e112e8038388aff8591af5452eb0957baea039ddd645"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 459390,
+      "sha256": "bc366c774f8863f62bad66a9c99e72b5bdec3d34ee46eeb565f31ce3f91c48bf"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/aligned-statements-dark.png",
+      "bytes": 379230,
+      "sha256": "2b5945a52774d71dcf212259bb2270ed860093835fdcf035569a09f517e37ea5"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/command-center-compact-dark.png",
+      "bytes": 157852,
+      "sha256": "47bf617fffa96dac75627df651a30990aec5c9e43f1a12005bc5371042ce24b3"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/command-center-wide-dark.png",
+      "bytes": 191629,
+      "sha256": "f3e692fb1d7814b3879d63a214945a3be00c05c593e0cf7b4cdda4baf66524fd"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/command-center-wide-light.png",
+      "bytes": 195505,
+      "sha256": "83c1ff564f7b7c1299fb37db39b862b72c8a818838a8c5cceb3ca7af3b8954a9"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/private-history-fixture.png",
+      "bytes": 511168,
+      "sha256": "26f1d01f038a92a66efed54a7378f2c59f75ff22e538513034b193e30ab119c5"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/risk-mobile-dark.png",
+      "bytes": 330768,
+      "sha256": "f71eb247d33c2f8190a73600b40eda486cf750a49a4fed659286c277b3b66c9a"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/risk-mobile-light.png",
+      "bytes": 331758,
+      "sha256": "bfa68fb6623273406c0ab30378bcc9c8e2c3279a455a111543fc91548bebc665"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas4/visual/risk-models-dark.png",
+      "bytes": 343957,
+      "sha256": "c6d3e193f052439aade6329cd8872ef98824f87321aab6a2db05823f8962ff6f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas5/visual/evaluation-dark.png",
+      "bytes": 494107,
+      "sha256": "d6b34130a6d2baf62aa7d4917ab11ab66de3588a56682a6530af3a29bbba10fe"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas5/visual/pinned-ingestion-dark.png",
+      "bytes": 567655,
+      "sha256": "137bc240dbec07ae47a2efb9d9895802b8617666671f195023398ab0ce2e888d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas5/visual/portfolio-dark.png",
+      "bytes": 415660,
+      "sha256": "e414baef5887aae3f00248df966b866678d61ee144ba45a29063ea9e38184d60"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas5/visual/research-mobile-dark.png",
+      "bytes": 284640,
+      "sha256": "48023af192357e906397fb6d54e8ff44c774ad38cc28b6d98d3fbf05f816033b"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/atlas5/visual/research-mobile-light.png",
+      "bytes": 447664,
+      "sha256": "9acbaf5b69b5cadb8ce6cce3470e07db7e8860320d9a6ecafb89b03a69bc4393"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/completion/default-gated-mobile.png",
+      "bytes": 273770,
+      "sha256": "94620d90606269f345be9930f6b566f09a18caa9fb7b95e65dea951bc36e9786"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/continuation/discovery-crwv-gated.png",
+      "bytes": 410306,
+      "sha256": "9daed2f8b79e036da08aab5d9930ef3171f453b7a92997c6ba38f869d5cfec20"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/development-next/operations-retention-synthetic.png",
+      "bytes": 215261,
+      "sha256": "ae3ffecd4aa6d40fe581af8b5d9bee79b4bd5401a7babf082998f9d5e80431fc"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/final/visual/dataset-research-dark.png",
+      "bytes": 618325,
+      "sha256": "983f6fd5e4b11635818ac341e151152be65027d7f899aee09a4acf5735da9f53"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/final/visual/final-mobile-dark.png",
+      "bytes": 262971,
+      "sha256": "fb42d66b448d6ab10003545c806b8408ca8dbebabe7222785817a6b023954cc4"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/final/visual/final-mobile-light.png",
+      "bytes": 265148,
+      "sha256": "cf600cb9bfc8c264fcae29a9755ed8b4b7860ee3c5d71446a62974ef9519644f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/final/visual/garch-search-dark.png",
+      "bytes": 317676,
+      "sha256": "98b08c1020459166c501d574489b081b12dc0d70fe8e793089a4021dea2ef15d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/final/visual/return-command-center.png",
+      "bytes": 189593,
+      "sha256": "119322e220c4212b59ed1b70b795df41b22d7e74ecd49cd546310e12dfae6d73"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/live-market/live-market-desktop-synthetic.png",
+      "bytes": 555528,
+      "sha256": "3000a996cee0bfccf0b89bc8e0c9971958547ea4f5ff704fce6f529180c72877"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/live-market/live-market-mobile-synthetic.png",
+      "bytes": 634785,
+      "sha256": "a556748d549c872d0e439488d6b414cb5940b938c569205d9c22be87d90a9b11"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/phase-next/historical-comparison-synthetic.png",
+      "bytes": 175505,
+      "sha256": "54546be9e445d1c104981573770cad04c1a74aab7d520c2c0c7c5aadd3268c03"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/phase-next/historical-mobile-synthetic.png",
+      "bytes": 114736,
+      "sha256": "c0ce23de8506f4e37a47ccb335f606ef8c35b5d269e76d8b686df19b33186fb3"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/command-center-after-synthetic.png",
+      "bytes": 158929,
+      "sha256": "1ea94a106350bee60a38b18f4051e83259e9546fdecb6061268f1c609167141f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/command-center-mobile-after-synthetic.png",
+      "bytes": 64568,
+      "sha256": "0eb5a2ad8768ae8627a53d12f1cc75f27eedb624a6439de0241978f9e9915a91"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/command-center-mobile-light-after-synthetic.png",
+      "bytes": 63855,
+      "sha256": "e894919a6557c0c59364a599e879aec0d543d09d94fe84f2acabbe8aff8aec9c"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/comparison-3d-after-synthetic.png",
+      "bytes": 69318,
+      "sha256": "389dee82c10b2c84a315c55a8392c321e0f38c63a82d48a4b3940f95c9f4bb3f"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/model-surface-after-synthetic.png",
+      "bytes": 65385,
+      "sha256": "c76a0d68feb9b5868e100f36f17f4735ad6f8768b1ba18c0884ce4a0743083b1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/quotes-3d-after-synthetic.png",
+      "bytes": 63392,
+      "sha256": "feec1076d4ba20324a317b9566f05da37887d7f6f15efc137f4013cbe3365dc9"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/trades-3d-after-synthetic.png",
+      "bytes": 65255,
+      "sha256": "a7507578e9d920070ab7bf1b860f8f22b62b88509731fb0b1ff799c5ff70f89b"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/universe-after-synthetic.png",
+      "bytes": 150447,
+      "sha256": "cc6ef5debcdb07b334645c7b647660c05eacdfc7c302e043f99e3d03ad091ca7"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/product/volatility-3d-after-synthetic.png",
+      "bytes": 67503,
+      "sha256": "1542b02d07561f8e5a436caab8a8dd6d2dedca5cd7a904a73f79039c2dcf6f74"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/scope-audit/ratio-history-synthetic-desktop.png",
+      "bytes": 124040,
+      "sha256": "e645e63ecc870d66cc5a2997bebdb695b4ae514adea060eacba41d630bdc8ec8"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/scope-audit/ratio-history-synthetic-mobile.png",
+      "bytes": 55822,
+      "sha256": "527d69c5342bc9f070430a298b9cfd3cf8c7c13b924e24607ab126cc142dcdf0"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/sec-repair/visual/failed-refresh-cache-preserved.png",
+      "bytes": 403177,
+      "sha256": "3f6b10e72968efbd5008be1c051005dc66b4969345a2a964b96ef7bfab2f017a"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/sec-repair/visual/reported-aapl.png",
+      "bytes": 400563,
+      "sha256": "2b532ee3cac1126c2595f0de4e0f2372de6b1e7579b9d0d3844b8d933c1d3bbd"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/sec-repair/visual/sec-mobile.png",
+      "bytes": 390190,
+      "sha256": "0c7d9a2ea07c26c1cfae7910b5d601f18de42782d730ac0ef0f9abeba13733fb"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/terminal/browser/desktop-native-3d.png",
+      "bytes": 351855,
+      "sha256": "68db25ade2e7c68a2e85c29c8d3e597edb77970e6cf0b44161418ae9f975e0e4"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/terminal/browser/desktop-native-fallback.png",
+      "bytes": 317577,
+      "sha256": "9e7c1895b40e305c139b262418fa9850eeb71cef71c04620357818c16e16fd95"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/terminal/browser/desktop-native-simulation.png",
+      "bytes": 179466,
+      "sha256": "90d5a94fc447db28fff3fbdb2e3f35610ebe755a58c89fba250fc6de5ba48c7c"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/terminal/browser/mobile-native-orderbook.png",
+      "bytes": 184254,
+      "sha256": "29b071235bc892e0ad4bdd242adff517376cebc20ef32cddf24105b4f958f10d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/command-center-dark-1280.png",
+      "bytes": 133092,
+      "sha256": "6a61068b2757d42682829478f72af151bed97d0c5caf8e3459238eb2128f2e56"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/command-center-light-390.png",
+      "bytes": 65691,
+      "sha256": "b7f7a7246da58b6f9bb55dfa89390b3796c34247dc30c1bb2c50a491df6f689d"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/execution-simulator-dark-1280.png",
+      "bytes": 124054,
+      "sha256": "fdfb8746ae30563ac8afb7e43a9c3ae86cb044b68f5a70c9451dfc027108656c"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/historical-replay-dark-1280.png",
+      "bytes": 141748,
+      "sha256": "01be28c3e3c4cdbd1728124ebfeba5dd2a0c824ccdc238121bd3af8680542f86"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/live-markets-dark-1280.png",
+      "bytes": 122794,
+      "sha256": "9c9c96335d5ccccd3ffacd55c7f13ab98f1f7cbedfee56089f05b0bbe3d997c4"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/live-markets-light-390.png",
+      "bytes": 61023,
+      "sha256": "95ffba383ec1e8c9b869dd6447d282b96a26952f96c5d6544d5c51a93b5f62eb"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/market-depth-dark-1280.png",
+      "bytes": 141387,
+      "sha256": "7ed073858ab50f1365ebbead9d49c77a148ca36516ce0872bb14ae7de7b39017"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/multi-stock-comparison-dark-1280.png",
+      "bytes": 130029,
+      "sha256": "8145d03f3ac5053160edc503e4524b96059fce0dbe551837efa12890b3821649"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/operations-dark-1280.png",
+      "bytes": 160846,
+      "sha256": "2902a0b8ee001dcf71498dec304e58937c49b847b45d5e1c1216085021e02de4"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/operations-light-390.png",
+      "bytes": 61797,
+      "sha256": "3098d2d0ba523dbe76085339c0cced1f40af955edb0cddc148d9133e6f68ec51"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/order-book-dark-1280.png",
+      "bytes": 140045,
+      "sha256": "79887d1e36f25bf7acaf1e1e247e41ba77ae663b0df34abb8e6fb4f82444c433"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/order-flow-dark-1280.png",
+      "bytes": 140415,
+      "sha256": "2420beff5b2c0b8be5cb1dc4ca18976c2fe98fc29c21ffa3e7123899459e0bdb"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/research-validation-dark-1280.png",
+      "bytes": 138979,
+      "sha256": "438373608a4962bb23e04215f7c0e3453829ce8a86f07ac61bf697c0e95f5e01"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/securities-universe-dark-1280.png",
+      "bytes": 128772,
+      "sha256": "9695c9cad1ae97bcdaf0d9a13e93c499fadcfe1c1f616aea2fa7b43b7cd53e6b"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/stock-intelligence-dark-1280.png",
+      "bytes": 135708,
+      "sha256": "c29f2e1c70319c525be2e5ad26de08f997691a0bc09335024d65d82e4dfd57fe"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace/build/workspaces/stock-intelligence-light-390.png",
+      "bytes": 58199,
+      "sha256": "e24f228edfc4e8c35cdaeccb9bc33f930cd6950b9abf421b1e5d013cccb94ecf"
+    }
+  ],
+  "visual_review": {
+    "reviewed": [
+      "build/workspaces/stock-intelligence-dark-1280.png",
+      "build/workspaces/live-markets-light-390.png",
+      "build/atlas2/visual/financial-trends-dark.png"
+    ],
+    "classification": "AUTHORED_FIXTURES_NOT_ACTUAL_COMPANY_OBSERVATIONS",
+    "physical_device": false,
+    "physical_GPU": false,
+    "forced_clicks_added": false
+  },
+  "logs": [
+    {
+      "path": "build/milestones/stocks-debug.log",
+      "bytes": 35123,
+      "sha256": "b9fe381227834dc7395516aacd62242b39643179b1a49f74eb8c301b9b301c35"
+    },
+    {
+      "path": "build/milestones/stocks-release.log",
+      "bytes": 35123,
+      "sha256": "d1e1d09739a9b5a481436c351676545dd81255140324076cc89f04da39d0af2e"
+    },
+    {
+      "path": "build/milestones/stocks-sanitizer.log",
+      "bytes": 35141,
+      "sha256": "aef2dcccaac3d02f764edfe53f4d0c4a490d058f2ff94d21591b6427eef13c09"
+    },
+    {
+      "path": "build/milestones/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "6499164df57204dba9ddf6dada29693d789119d8f770fd1edcf9b89710b20bc0"
+    },
+    {
+      "path": "build/milestones/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "cc81fdb86bb27a027228b4193665ccf8322213b1adc0ba13172044b296462b88"
+    },
+    {
+      "path": "build/milestones/terminal-sanitizer.log",
+      "bytes": 41063,
+      "sha256": "8e9118096e94ee2a86083bce9c0fab705e1fabddadb40ff4724b3c7d0979ffbe"
+    },
+    {
+      "path": "build/milestones/operational-debug.log",
+      "bytes": 362,
+      "sha256": "0c4d20331e68eb89b58f45303c2bd5d087b78e9b19a7f6c905de572bc8393da0"
+    },
+    {
+      "path": "build/milestones/operational-release.log",
+      "bytes": 362,
+      "sha256": "c0dbc5db6913b50506daae32fe297841a881eced087d6a66ad3b822c1ff35b2e"
+    },
+    {
+      "path": "build/milestones/operational-sanitizer.log",
+      "bytes": 5922,
+      "sha256": "bfa2a7c2c7ed3fd54faf7665412f9772ff39d9ea4e58942b5d65f85c653d1bde"
+    },
+    {
+      "path": "build/milestones/arm-policy-debug.log",
+      "bytes": 101,
+      "sha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0"
+    },
+    {
+      "path": "build/milestones/arm-policy.log",
+      "bytes": 101,
+      "sha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0"
+    },
+    {
+      "path": "build/milestones/arm-policy-sanitizer.log",
+      "bytes": 119,
+      "sha256": "c59d7b5695732326449cc2cc12d91ebdd71a6054ca8774cef68d22120e86b17c"
+    },
+    {
+      "path": "build/milestones/security.log",
+      "bytes": 381,
+      "sha256": "800aa06bf3120e0043cf72fc434dd60bc5e4ff87d86570c08febe6feea9b394b"
+    },
+    {
+      "path": "build/milestones/wheel.log",
+      "bytes": 113,
+      "sha256": "9a2db53e575e71d9d1ff5d01329b6b574bb713e532985903c9511c0d75cc501f"
+    },
+    {
+      "path": "build/milestones/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/milestones/browser-final/browser-validation.log",
+      "bytes": 6338,
+      "sha256": "cf941ba071305aedf5a538b10124b218231bb9b340f8e9ec6c561cece8c1353f"
+    },
+    {
+      "path": "build/milestones/browser-final/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/milestones/browser-final/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "path": "build/milestones/browser-final/atlas-validation.log",
+      "bytes": 3703,
+      "sha256": "cac01829a7a728fea13e4428158ca8adfd6d50e23039b484d4e37e198a057e44"
+    },
+    {
+      "path": "build/milestones/browser-final/atlas2-validation.log",
+      "bytes": 3120,
+      "sha256": "5ba6c9a24ff9c3bc7e8c1e05b3caea1c1c00cd6cf21992bd4ca5a41fe58614ca"
+    },
+    {
+      "path": "build/milestones/browser-final/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/milestones/browser-final/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/milestones/browser-final/ratio-history-validation.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/milestones/browser-final/live-market-validation.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/milestones/browser-final/sec-completion-validation.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/milestones/browser-final/discovery-validation.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/milestones/browser-final/gpu-recovery-validation.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/milestones/browser-final/market-unavailable-validation.log",
+      "bytes": 166,
+      "sha256": "5d163b4689601eefd035b811ebb264202e8a43fb8fc5dd80c9aa2d1a817503ef"
+    },
+    {
+      "path": "build/milestones/browser-final/atlas4-validation.log",
+      "bytes": 2094,
+      "sha256": "eced7f5456573edf2ff5662c43adb01cedd8a2414e6231de7d1b9b5ae5164145"
+    },
+    {
+      "path": "build/milestones/browser-final/atlas5-validation.log",
+      "bytes": 1531,
+      "sha256": "5547b62bcc5a5ce08515046edfcdcf89fd6f808f7067463604b1d1964295940e"
+    },
+    {
+      "path": "build/milestones/browser-final/atlas-final-validation.log",
+      "bytes": 1242,
+      "sha256": "805a1e57e4fb1d471327099e614f2cba67d82370783a34222fb0791397a2b127"
+    },
+    {
+      "path": "build/milestones/browser-final/sec-integration-validation.log",
+      "bytes": 1108,
+      "sha256": "cf757ef76b24615f423cd2f39591cf1326934acdc6fc2fb9d52e82d3fd0cd2fc"
+    },
+    {
+      "path": "build/milestones/browser-final/product-validation.log",
+      "bytes": 106,
+      "sha256": "7cae3ffbb5dd9434ef766f45ac9a08f024498cead0ce7ae9a62178d63cef3975"
+    },
+    {
+      "path": "build/milestones/browser-final/phase-next-validation.log",
+      "bytes": 883,
+      "sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0"
+    },
+    {
+      "path": "build/milestones/browser-final/advanced-research-validation.log",
+      "bytes": 9400,
+      "sha256": "1c76d91b3369827ccfb2879a6819ebc1d4971500dd87b7e9682b17efef09faf1"
+    },
+    {
+      "path": "build/milestones/browser-final/workspace-qualification.log",
+      "bytes": 4355,
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "path": "build/milestones/browser-final/gpu-quote.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    },
+    {
+      "path": "build/milestones/browser-final/performance.log",
+      "bytes": 2691,
+      "sha256": "52d5f411834664d2eb15412d414de399bad83fa832c6e613ce868330c548ca2b"
+    },
+    {
+      "path": "build/milestones/frontend.log",
+      "bytes": 7428,
+      "sha256": "31ae1d703cec68b5f1617721e5ab77bd2b1bc8f3888483154f98f83a71b9218a"
+    },
+    {
+      "path": "build/milestones/tls.json",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/milestones/canonical.xml",
+      "bytes": 4302,
+      "sha256": "d5e45df0a9c7bf80ba993982d7f0914523fd0813c5d3d8fa674180f0cffd937b"
+    },
+    {
+      "path": "build/milestones/canonical.log",
+      "bytes": 7753,
+      "sha256": "450b550c47d2f34819b7e84784cd698fa33aa044491e2153128d2399242fb5ae"
+    },
+    {
+      "path": "build/milestones/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/milestones/wheel.log",
+      "bytes": 113,
+      "sha256": "9a2db53e575e71d9d1ff5d01329b6b574bb713e532985903c9511c0d75cc501f"
+    },
+    {
+      "path": "build/milestones/sdist-final.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/milestones/sdist-final-inventory.log",
+      "bytes": 81,
+      "sha256": "f90c1bd920d1d51659cc57b3fb61cb771853d403a0b7f6a5403b08cf8b4ef8b7"
+    },
+    {
+      "path": "build/milestones/browser-final.log",
+      "bytes": 560,
+      "sha256": "7659a1f6044fb0941bc24e93c9a283105460f4263bddbd6dd55e17e4b2165c4f"
+    },
+    {
+      "path": "build/milestones/browser-final/build.log",
+      "bytes": 2186,
+      "sha256": "88c3fbc469b9cb81b139332260b2ab68de0d4c874fc790a730a69da0d60c2146"
+    },
+    {
+      "path": "build/milestones/browser-final/campaign.json",
+      "bytes": 47147,
+      "sha256": "df37fd2a13fd0742f41ded1a1aa6f8c4871eb9d4d1e8466da8cbeb727332c19f"
+    },
+    {
+      "path": "build/milestones/source-preflight.json",
+      "bytes": 2881,
+      "sha256": "60ea01b3aadfcfc459a40c183b66e4d49339b03ac562c42c2f6ca4f207dab337"
+    },
+    {
+      "path": "build/milestones/source-qualification-blocked.json",
+      "bytes": 7264,
+      "sha256": "ba97ed6072d60d48373af7a512de33cf8af319bba5688e87337e8b71d1578952"
+    }
+  ],
+  "preserved_failures": [
+    {
+      "path": "build/milestones/history-before.log",
+      "bytes": 8144,
+      "sha256": "1c301c0d7dd2fab7aade7a4284b7f40980d7e0831426512b8e9ac7e8950ce896"
+    },
+    {
+      "path": "build/milestones/comparison-origin-before.log",
+      "bytes": 8350,
+      "sha256": "db5e164fae52d1eb3f89984d498cbd41fcbdf1fef91cbd3b8fa62a5b71d829cc"
+    },
+    {
+      "path": "build/milestones/qualifiers-before.log",
+      "bytes": 3308,
+      "sha256": "7973a70bbb41e9a7b166857ba76bdb92ee765eb1c9a83c70499db1507be2aa70"
+    },
+    {
+      "path": "build/milestones/sec-deadline-before.log",
+      "bytes": 1068,
+      "sha256": "6b052ce292c357e551c5ea7f40179eb40bdad29df8cc8996b3e1c0595a6abbd1"
+    },
+    {
+      "path": "build/milestones/arm-policy-before.log",
+      "bytes": 10400,
+      "sha256": "774e3dd0b53c811e300276612fbe53fb7edcdf1889eb2e26fff7ac6f5ab46032"
+    },
+    {
+      "path": "build/milestones/browser-campaign-1.log",
+      "bytes": 1036,
+      "sha256": "658474622012e5cb7c45d00e81ed72b8ecebe1559598287b5ad8a727702ee26b"
+    },
+    {
+      "path": "build/milestones/browser-resume-1.log",
+      "bytes": 618,
+      "sha256": "964aed3081398433b39713a027ab00dea00235e24e98981fe2f9f44ec1d6a975"
+    },
+    {
+      "path": "build/milestones/browser-resume-2.log",
+      "bytes": 887,
+      "sha256": "e9a84ae7f5e84a1d3ac1936cca14fa1461bc27d15c84b091154805a10946c912"
+    },
+    {
+      "path": "build/milestones/browser-resume-3.log",
+      "bytes": 635,
+      "sha256": "2831c767c1f33d31af1e71228affe6eb032d113d6e29a6404bad0789530ea8ec"
+    },
+    {
+      "path": "build/milestones/browser-1/campaign-before-resume.json",
+      "bytes": 15495,
+      "sha256": "0fcedfe13ffe7e90ce89dcc035487da008aa34a0115f36a590e1b160003a5501"
+    },
+    {
+      "path": "build/milestones/browser-1/campaign-before-resume-3.json",
+      "bytes": 18388,
+      "sha256": "a8563e2a98bf28cf4828e88af791bb279dbfda9a761b0799d85eba36e4bf52c4"
+    },
+    {
+      "path": "build/milestones/browser-1/atlas4-validation.failed-2.log",
+      "bytes": 605,
+      "sha256": "4a685ac7c4503c75490cf01070c23283e40764fb9b27ef781aec7bc54ffa60cb"
+    },
+    {
+      "path": "build/milestones/browser-1/sec-completion-validation.failed-1.log",
+      "bytes": 429,
+      "sha256": "b762a71d74d99214eefd67dfce4648ce0853932f004474ee4e60436008a250e2"
+    }
+  ],
+  "privacy_and_delivery": {
+    "market_data_downloaded": false,
+    "restricted_LOBSTER_accessed": false,
+    "provider_gates_granted": false,
+    "credential_values_emitted": false,
+    "observed_storage_enabled": false,
+    "trading_enabled": false,
+    "paid_dependency_added": false,
+    "workflows_dispatched": false,
+    "main_changed": false
+  },
+  "environment": {
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "node": "24.19.0",
+    "chromium": "154.0.8037.57",
+    "renderer": "SwiftShader emulation,not physical Android/GPU",
+    "current_candidate_ARM64": false,
+    "current_candidate_hosted_CI": false
+  },
+  "limitations": [
+    "No actual source/target/owner acceptance",
+    "No current ARM64/hosted run",
+    "No complete US listings/PIT/empirical L3 or prediction claim",
+    "Live-interpreter LSan only,not CPython shutdown cleanliness",
+    "Historical source archive is implementation checkpoint;report commit follows"
+  ],
+  "implementation_commits": [
+    "8ae381e7e11bea16c9a9d0a97c801c16dfd63904",
+    "40ca4e86ec4c7c5f339695768605e7453ae4603b"
+  ],
+  "directive": {
+    "name": "Two mandatory milestones",
+    "bytes": 5843,
+    "sha256": "ac5db219cd7c56916e77c3457aaa3cc97bf7daa3bc4c5ee22d3a5473722aa486"
+  },
+  "documentation_files": [
+    "docs/milestones/ENGINEERING_COMPLETION.md",
+    "docs/milestones/OPERATIONAL_QUALIFICATION_RUNBOOK.md",
+    "docs/milestones/RELEASE_READINESS.md",
+    "docs/milestones/FINAL_ACCEPTANCE_TEMPLATE.json",
+    "docs/milestones/engineering_evidence.json",
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+    "docs/completion/COMPLETION_MATRIX.md",
+    "docs/product/PRODUCT_COMPLETION.md"
+  ]
+}
