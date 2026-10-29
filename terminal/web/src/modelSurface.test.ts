@@ -1,0 +1,3 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {garchGrid} from './modelSurface.ts';
+test('modeled grid independently agrees with stated polynomial',()=>{const rows=garchGrid(.000001,.08,.9);assert.equal(rows.length,21);assert.equal(rows[0].length,21);assert.equal(rows[10][0].variance,.000001);assert.ok(Math.abs(rows[0][20].variance-(.000001+.08*.01+.9*.04))<1e-15);assert.equal(rows[0][20].variance,rows[20][20].variance)});
+test('invalid or nonstationary toy parameters rejected',()=>{for(const x of [[NaN,.1,.8],[-1,.1,.8],[0,.2,.8],[1,.1,.8]])assert.throws(()=>garchGrid(...x as [number,number,number]))});

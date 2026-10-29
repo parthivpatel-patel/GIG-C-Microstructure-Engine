@@ -10,7 +10,7 @@ import os
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / 'build/atlas2/resume'
+OUT = Path(os.environ.get('GIG_ATLAS_BROWSER_EVIDENCE', str(ROOT / 'build/atlas2/resume'))).resolve()
 SCRIPTS = ('browser-validation', 'stock-intelligence-validation',
            'stock-loading-validation', 'atlas-validation', 'atlas2-validation',
            'recorded-playback-validation', 'live-controls-validation')

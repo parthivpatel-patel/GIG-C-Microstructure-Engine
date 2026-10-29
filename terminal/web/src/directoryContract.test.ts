@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {validatePage,validateDirectoryStatus} from './directoryContract.ts';
+const packet=()=>({schema:'gig.security.discovery.v2',results:[{symbol:'APLD',name:'Authored Applied Digital',exchange:'NASDAQ'}],catalog_count:100,matches:1,source:{authority:'AUTHORED'},next_offset:null});
+test('valid directory identity does not invent CIK or authorization',()=>{const p=validatePage(packet());assert.equal(p.results[0].symbol,'APLD');assert.equal('cik' in p.results[0],false)});
+test('invalid identity,count and pagination rejected',()=>{for(const mutate of [(p:any)=>p.results[0].symbol='bad*',(p:any)=>p.catalog_count=-1,(p:any)=>p.next_offset='20',(p:any)=>p.results=Array(21).fill(p.results[0])]){const p=packet();mutate(p);assert.throws(()=>validatePage(p))}});
+test('source approval cannot be inferred from strings or counts',()=>{assert.throws(()=>validateDirectoryStatus({approved:'1',catalog_count:0,actual_official_count:1}));assert.equal(validateDirectoryStatus({approved:false,catalog_count:13,actual_official_count:0,status:'NOT_LOADED',last_success:null,last_error:null}).approved,false)});

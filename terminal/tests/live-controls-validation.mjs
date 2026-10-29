@@ -5,7 +5,7 @@ import {chromium} from 'playwright';import assert from 'node:assert/strict';
 const base=process.env.TERMINAL_URL||'http://127.0.0.1:8787';assert.match(base,/^http:\/\/(127\.0\.0\.1|localhost):8787$/);
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
 try{
- const page=await browser.newPage();await assertFixtureServer(page,base);await page.goto(base);
+ const page=await browser.newPage();await assertFixtureServer(page,base);await page.goto(base);await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name:'Historical Replay',exact:true}).click();
  await page.getByLabel('Operating mode').selectOption('HISTORICAL_REPLAY');
  await page.getByLabel('Restart replay',{exact:true}).click();
  await waitState(page,base,s=>s.position===20);

@@ -2,7 +2,7 @@ import {chromium} from 'playwright';import assert from 'node:assert/strict';impo
 const kind=process.env.GIG_GPU_CASE||'landscape',base=kind==='landscape'?'http://127.0.0.1:8787':'http://127.0.0.1:18797';
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});let checks=0;const errors=[];
 try{const page=await browser.newPage({viewport:{width:1280,height:900}});page.on('pageerror',e=>errors.push(e.message));await assertFixtureServer(page,base);await page.goto(base);
- if(kind==='landscape'){
+ if(kind==='landscape'){await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name:'Market Depth',exact:true}).click();
   const enable=page.getByRole('button',{name:'Enable 3D landscape'});await enable.click();
   const panel=page.getByRole('region',{name:'Liquidity landscape'});await panel.locator('canvas').waitFor();const before=await(await page.request.get(base+'/api/v1/state')).json();
   await panel.locator('canvas').evaluate(c=>{const gl=c.getContext('webgl2');assertExtension(gl);function assertExtension(gl){const ext=gl?.getExtension('WEBGL_lose_context');if(!ext)throw Error('No context-loss extension;test cannot qualify recovery');ext.loseContext()}});
