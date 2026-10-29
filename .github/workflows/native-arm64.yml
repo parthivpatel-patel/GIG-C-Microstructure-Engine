@@ -11,7 +11,7 @@ permissions:
   contents: read
 jobs:
   build-and-test:
-    if: inputs.free_usage_verified && github.ref == 'refs/heads/feat/bootstrap-cpp20-engine'
+    if: inputs.free_usage_verified && (github.ref == 'refs/heads/feat/bootstrap-cpp20-engine' || github.ref == 'refs/heads/feat/atlas-final-release')
     timeout-minutes: 60
     runs-on: ubuntu-24.04-arm
     strategy:

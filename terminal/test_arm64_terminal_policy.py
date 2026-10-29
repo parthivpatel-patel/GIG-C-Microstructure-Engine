@@ -7,7 +7,13 @@ class Policy(unittest.TestCase):
     def test_manual_free_usage_and_feature_guard_preserved(self):
         self.assertIn('\non:\n  workflow_dispatch:',self.text)
         for event in ('push','pull_request','schedule'):self.assertNotIn('\n  '+event+':',self.text)
-        self.assertIn("inputs.free_usage_verified && github.ref == 'refs/heads/feat/bootstrap-cpp20-engine'",self.text)
+        self.assertIn("inputs.free_usage_verified && (github.ref == 'refs/heads/feat/bootstrap-cpp20-engine' || github.ref == 'refs/heads/feat/atlas-final-release')",self.text)
+        self.assertIn("github.ref == 'refs/heads/feat/atlas-final-release'",self.text)
+        guard=re.search(r'^    if: (.+)$',self.text,re.M)[1]
+        refs=set(re.findall(r"github.ref == '([^']+)'",guard))
+        self.assertEqual(refs,{'refs/heads/feat/bootstrap-cpp20-engine','refs/heads/feat/atlas-final-release'})
+        self.assertEqual(guard,"inputs.free_usage_verified && (github.ref == 'refs/heads/feat/bootstrap-cpp20-engine' || github.ref == 'refs/heads/feat/atlas-final-release')")
+        for approved,ref in [(False,'refs/heads/feat/atlas-final-release'),(True,'refs/heads/main'),(True,'refs/heads/unknown'),(True,'refs/pull/1/merge')]:self.assertFalse(approved and ref in refs)
         self.assertIn('runs-on: ubuntu-24.04-arm',self.text);self.assertIn('default: false',self.text)
     def test_terminal_step_only_gcc_release_with_exact_count_and_live_disabled(self):
         step=self.text.split('      - name: Native-backed terminal fixture qualification',1)[1].split('      - name:',1)[0]
