@@ -1,3 +1,29 @@
+# October29,2026 — owner authorization/access checkpoint
+
+Owner explicitly authorizes existing Basic Free paper account/private non-commercial
+research and reports credentials+SEC ready in the existing Codespace. Do not ask for
+new keys or repeat setup. Current task executor is separate Codex Cloud;one bounded
+`gh codespace list` returned Forbidden. No authenticated Codespaces terminal is available,
+so no target settings/import/history/live qualification or conditional eight-visualization
+phase was executed. Do not mistake Codex's missing bindings for missing Codespace keys.
+
+Read `docs/product/ALPACA_AUTHORIZATION_REVIEW_2026-10-29.md` and its evidence JSON.
+The specific provider cloud/private-use record was not found in the repository;older
+381230 notes do not prove current external status. Inspect any newer private record in
+the existing Codespace before setting corresponding flags;do not fabricate references.
+
+Repaired a static v2 response that permanently claimed the historical ticket pending,
+without weakening any permissions. Extended regression failed before repair;51 targeted
+backend/provider/auth tests pass Debug/Release/ASan+UBSan,liveLSan0. Native/frozen source
+unchanged. Latest code/docs commit is in Git/final response. Main unchanged.
+Exact next action:continue in an authenticated session of the existing configured
+Codespace,using existing keys/SEC and bounded tools;measure actual source counts and
+observations before advancing3D. Do not recreate setup or claim real-data success.
+
+Earlier verified checkpoints are preserved below.
+
+---
+
 # Current GIG ATLAS checkpoint — October29,2026
 
 Branch `feat/atlas-final-release`;latest pushed implementation

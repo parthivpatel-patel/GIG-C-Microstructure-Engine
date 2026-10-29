@@ -108,7 +108,7 @@ class ContractV2(unittest.TestCase):
         from .test_repair import ENV,authored_fetcher
         from terminal.server.backend_contract import company_contract
         n=FinancialMetrics().normalized();w=StockWorkspace(environment=ENV,fetcher=authored_fetcher);w.cache['AAPL']={'sec':{'status':'AVAILABLE','financials':n,'source_records':[{'component':'financials','sha256':'a'*64,'url':'https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json'}]}}
-        x=company_contract(w,'AAPL');self.assertEqual(x['data_origin'],'HISTORICAL_SYNTHETIC');self.assertEqual(x['quality']['source_reconciliation'],'NOT_INDEPENDENTLY_RECONCILED_BY_THIS_SERVER');self.assertTrue(x['financials']['metrics']['net_profit_margin']['input_facts'])
+        x=company_contract(w,'AAPL');self.assertFalse(any('support381230' in message for message in x['limitations']), 'A historical ticket cannot permanently override current owner/configuration evidence');self.assertEqual(x['data_origin'],'HISTORICAL_SYNTHETIC');self.assertEqual(x['quality']['source_reconciliation'],'NOT_INDEPENDENTLY_RECONCILED_BY_THIS_SERVER');self.assertTrue(x['financials']['metrics']['net_profit_margin']['input_facts'])
         import json,jsonschema
         from pathlib import Path
         jsonschema.validate(x,json.loads((Path(__file__).resolve().parents[2]/'terminal/server/schemas/backend_company_v2.schema.json').read_text()))

@@ -1,0 +1,95 @@
+{
+  "schema": "gig.atlas.authorization-access-review.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "0f05098f688cd8d38efb109844aac25271391460",
+  "owner_authorization": "Existing Basic Free paper account,private non-commercial research;current owner instruction",
+  "owner_reported_codespaces_credentials_detected": true,
+  "owner_reported_codespaces_sec_ready": true,
+  "owner_setup_repetition_requested": false,
+  "new_keys_requested": false,
+  "provider_permission_reference_fabricated": false,
+  "codespace_settings_changed": false,
+  "current_executor": "Codex Cloud,separate from owner Codespace",
+  "runtime_observations": {
+    "current": true,
+    "network_policy": "enforced restricted",
+    "provider_hosts_allowed": [],
+    "ready_secret_bindings": 0
+  },
+  "codespaces_execution_probe": {
+    "command": [
+      "gh",
+      "codespace",
+      "list",
+      "--repo",
+      "parthivpatel-patel/GIG-C-Microstructure-Engine",
+      "--limit",
+      "3",
+      "--json",
+      "name,repository,state"
+    ],
+    "exit": 1,
+    "result": "Forbidden",
+    "http_status": null,
+    "blocked_request_repeated": false,
+    "credential_values_exposed": false
+  },
+  "actual_codespace_catalog_count": null,
+  "provider_acquisition_requests": 0,
+  "history_qualification": "NOT_EXECUTED",
+  "iex_qualification": "NOT_EXECUTED",
+  "conditional_eight_visualizations": "NOT_STARTED_PENDING_REAL_DATA_GATE",
+  "approval_flags_bypassed": false,
+  "source_files_changed": [
+    "terminal/server/backend_contract.py",
+    "terminal/stocks/test_backend.py"
+  ],
+  "tests": [
+    {
+      "configuration": "Debug",
+      "passed": 51,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": {
+        "path": "build/authorization-review/targeted-debug.log",
+        "bytes": 384,
+        "sha256": "eb7fef07dafa91b474b2656954d4d6ae7087c1b62c3d6a363bd4b5c8d88742de"
+      }
+    },
+    {
+      "configuration": "Release",
+      "passed": 51,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": {
+        "path": "build/authorization-review/targeted-release.log",
+        "bytes": 384,
+        "sha256": "7ba69885b7e926b66dae281fbe67f6278b014d9c0354d8289a4114115409e3d4"
+      }
+    },
+    {
+      "configuration": "ASan+UBSan",
+      "passed": 51,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": {
+        "path": "build/authorization-review/targeted-sanitizer.log",
+        "bytes": 8777,
+        "sha256": "b139d9195faff9b65bba193aa0c654824e9df70a3a4d6367afe7cd1a474cebe9"
+      }
+    }
+  ],
+  "live_lsan_check": 0,
+  "failing_before": {
+    "path": "build/authorization-review/backend-before.log",
+    "bytes": 1665,
+    "sha256": "cb1b9c0236d7a5411588a6e8ee9eb65767948df7d5ad362de1de87af13230f7f"
+  },
+  "native_source_changed": false,
+  "full_native_or_hosted_matrix_reexecuted": false,
+  "unresolved_provider_evidence": "Specific cloud/private-use terms or permission basis not present in accessible repository;newer private Codespace record inaccessible;no blanket approval requested",
+  "required_execution_context": "Authenticated terminal in existing configured Codespace,no replacement provider credentials"
+}
