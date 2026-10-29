@@ -13,16 +13,21 @@ class SearchIndex:
   for s,r in rows.items():
    for token in set(re.findall(r'[a-z0-9]+',r['name'].casefold())):self.tokens.setdefault(token,set()).add(s)
   self.words=sorted(self.tokens)
- def search(self,query,offset=0,limit=20):
+  self.filter_options={key:sorted({r.get(key,'UNVERIFIED') for r in rows.values()}) for key in ('exchange','security_type','listing_status')}
+ def search(self,query,offset=0,limit=20,filters=None):
   if type(query) is not str or len(query)>80 or any(ord(c)<32 for c in query) or type(offset) is not int or type(limit) is not int or not 0<=offset<=150000 or not 1<=limit<=100:raise ValueError('directory_search_bounds')
+  filters={} if filters is None else filters
+  if type(filters) is not dict or set(filters)-set(self.filter_options) or any(type(v) is not str or not 1<=len(v)<=64 or any(ord(c)<32 for c in v) for v in filters.values()):raise ValueError('directory_filter_bounds')
   q=query.strip().upper();prefix=self.symbols[bisect.bisect_left(self.symbols,q):bisect.bisect_right(self.symbols,q+'\uffff')] if q else self.symbols
   hits=set(prefix);terms=re.findall(r'[a-z0-9]+',query.casefold());names=None
   for term in terms:
    found=set()
    for word in self.words[bisect.bisect_left(self.words,term):bisect.bisect_right(self.words,term+'\uffff')]:found.update(self.tokens[word])
    names=found if names is None else names&found
-  ordered=list(prefix)+sorted((names or set())-hits);chosen=ordered[offset:offset+limit]
-  return {'results':[dict(self.rows[s]) for s in chosen],'matches':len(ordered),'returned':len(chosen),'offset':offset,'limit':limit,'next_offset':offset+limit if offset+limit<len(ordered) else None,'search_method':'exact ticker, ticker prefix, all company-name word prefixes'}
+  ordered=list(prefix)+sorted((names or set())-hits)
+  if filters:ordered=[s for s in ordered if all(self.rows[s].get(k,'UNVERIFIED')==v for k,v in filters.items())]
+  chosen=ordered[offset:offset+limit]
+  return {'results':[dict(self.rows[s]) for s in chosen],'matches':len(ordered),'returned':len(chosen),'offset':offset,'limit':limit,'next_offset':offset+limit if offset+limit<len(ordered) else None,'search_method':'exact ticker, ticker prefix, all company-name word prefixes','filters_applied':filters,'available_filters':{k:v[:64] for k,v in self.filter_options.items()},'filter_options_truncated':any(len(v)>64 for v in self.filter_options.values())}
 def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
  rows={};excluded={'test_issue':0,'unsupported_symbol':0};sources=[]
  for kind in ('nasdaq','other'):
@@ -89,7 +94,7 @@ class DirectoryService:
  def view(self):
   try:self.workspace.permission('sec');sec_ready=True
   except ValueError:sec_ready=False
-  return {**self.state,'approved':self.approved(),'source':self.workspace.catalog.source,'catalog_count':len(self.workspace.catalog.rows),'actual_official_count':self.state['accepted_count'] if self.workspace.catalog.source.get('authority')=='OFFICIAL_DIRECTORY_RESPONSE' else 0,'limits':{'bytes_per_file':MAX_BYTES,'max_rows_resource_budget':MAX_ROWS,'refresh_interval_seconds':21600},'retention':'Process-lifetime catalog only;no directory file persisted','identity_only':True,'sec_ready':sec_ready,'sec_identity_count':len(self.workspace.issuers),'sec_identity_source':self.workspace.issuer_source,'sec_reference_status':getattr(self,'sec_status','NOT_REQUESTED')}
+  return {**self.state,'approved':self.approved(),'source':self.workspace.catalog.source,'catalog_count':len(self.workspace.catalog.rows),'actual_official_count':self.state['accepted_count'] if self.workspace.catalog.source.get('authority')=='OFFICIAL_DIRECTORY_RESPONSE' else 0,'limits':{'bytes_per_file':MAX_BYTES,'max_rows_resource_budget':MAX_ROWS,'refresh_interval_seconds':21600},'retention':'Process-lifetime catalog only;no directory file persisted','identity_only':True,'sec_ready':sec_ready,'sec_identity_count':len(self.workspace.issuers),'sec_identity_source':self.workspace.issuer_source,'sec_reference_status':getattr(self,'sec_status','NOT_REQUESTED'),'asset_reference':self.workspace.asset_reference.view()}
  async def run(self):
   while True:
    if self.approved():

@@ -31,6 +31,9 @@ class StockWorkspace:
         self.history_store=history_store if history_store is not None else configured(self.environment)
         self.fetcher=fetcher;self.origin='HISTORICAL_SYNTHETIC' if fetcher is not None else 'OBSERVED_OFFICIAL_RESPONSE'
         self.clock=clock;self.last_request=-100.;self.cooldown_until=0.;self.cooldowns={};self.cache=OrderedDict();self.lock=asyncio.Lock();self.last_error=None;self.load_lock=asyncio.Lock();self.load_task=None;self.load_state={};self.errors={}
+        from .alpaca_reference import AssetReference
+        self.asset_reference=AssetReference(self)
+        self.market_history_cache=OrderedDict()
     def resolve(self,ticker):
         if type(ticker) is not str:raise ValueError('invalid_symbol')
         if ticker in self.issuers:
@@ -151,11 +154,15 @@ class StockWorkspace:
         except asyncio.CancelledError:raise
         except Exception:self.load_state['status']='FAILED;sanitized_provider_failure'
     async def fetch(self,provider,url,headers):
+        shape='object'
+        if provider!='sec':
+            from .alpaca_transport import validate_url
+            shape=validate_url(url,provider)
         domain='sec' if provider=='sec' else 'alpaca'
         if self.clock()<self.cooldowns.get(domain,0):raise AccessError('upstream_failure_cooldown')
         if self.clock()-self.last_request<1:raise AccessError('upstream_rate_limit_one_request_per_second')
         self.last_request=self.clock()
-        cap=8*1024*1024 if provider=='sec' else 512*1024
+        cap=8*1024*1024 if provider=='sec' or shape=='array' else 512*1024
         if self.fetcher is not None:data=await self.fetcher(url,headers,cap)
         else:
             # No browser URL,redirect,automatic retry,compressed expansion or credential echo.
@@ -179,8 +186,9 @@ class StockWorkspace:
                 if k in result:raise ValueError('duplicate_field')
                 result[k]=v
             return result
-        payload=json.loads(data,parse_float=Decimal,parse_constant=lambda _:(_ for _ in ()).throw(ValueError('invalid_constant')),object_pairs_hook=pairs)
-        if type(payload) is not dict:raise AccessError('upstream_object_required')
+        try:payload=json.loads(data,parse_float=Decimal,parse_constant=lambda _:(_ for _ in ()).throw(ValueError('invalid_constant')),object_pairs_hook=pairs)
+        except RecursionError:raise AccessError('upstream_json_nesting') from None
+        if type(payload) is not (list if shape=='array' else dict):raise AccessError('upstream_expected_json_shape')
         return payload,hashlib.sha256(data).hexdigest()
     def view(self,ticker):
         company=self.resolve(ticker);cached=self.cache.get(ticker,{})

@@ -7,6 +7,7 @@ import re
 import ipaddress
 from pathlib import Path
 import time
+from httpx import HTTPError
 from urllib.parse import urlsplit
 
 from starlette.applications import Starlette
@@ -168,9 +169,12 @@ def create_app(stock_workspace=None):
         worker = asyncio.create_task(replay_loop())
         retention = asyncio.create_task(retention_loop())
         directory_worker=asyncio.create_task(stocks.directory.run())
+        assets_worker=asyncio.create_task(stocks.asset_reference.run())
         try:
             yield
         finally:
+            assets_worker.cancel()
+            with suppress(asyncio.CancelledError):await assets_worker
             directory_worker.cancel()
             with suppress(asyncio.CancelledError):await directory_worker
             market_events.closed=True
@@ -408,16 +412,32 @@ def create_app(stock_workspace=None):
     async def securities(request):
         q=request.query_params
         try:
-            if set(q)-{'q','offset','limit'}:raise ValueError('directory_query')
+            if set(q)-{'q','offset','limit','exchange','security_type','listing_status'} or len(q.multi_items())!=len(q):raise ValueError('directory_query')
             offset=q.get('offset','0');limit=q.get('limit','20')
             if not re.fullmatch(r'[0-9]{1,6}',offset) or not re.fullmatch(r'[0-9]{1,3}',limit):raise ValueError('directory_query')
             from terminal.stocks.discovery import search
-            return search(stocks,q.get('q',''),int(offset),int(limit))
+            return search(stocks,q.get('q',''),int(offset),int(limit),{k:q[k] for k in ('exchange','security_type','listing_status') if k in q})
         except ValueError:return error('DIRECTORY_QUERY','bounded ticker/name prefix,offset and limit required',422)
 
     @route('/api/v2/securities/status',methods=['GET'])
     @json_endpoint
     async def securities_status(request):return stocks.directory.view()
+
+    @route('/api/v1/stocks/assets-refresh',methods=['POST'])
+    @json_endpoint
+    async def assets_refresh(request):
+        if await bounded_json(request)!={}:return error('ASSET_REFERENCE_QUERY','empty object required',422)
+        try:return await stocks.asset_reference.refresh()
+        except (ValueError,TimeoutError):return error('ASSET_REFERENCE_BLOCKED','approved account configuration,source access,cooldown and complete asset response required',422)
+
+    @route('/api/v1/stocks/market-history',methods=['POST'])
+    @json_endpoint
+    async def market_history(request):
+        from terminal.stocks.alpaca_history import acquire
+        data=await bounded_json(request)
+        if set(data)-{'symbol','kind','start','end','timeframe','max_pages'} or not {'symbol','kind','start','end'}<=set(data):return error('MARKET_HISTORY_QUERY','symbol,kind and bounded calendar dates required;no URLs,keys or paid feed selection',422)
+        try:return await acquire(stocks,data['symbol'],data['kind'],data['start'],data['end'],data.get('timeframe','1Day'),data.get('max_pages',4))
+        except (ValueError,KeyError,TypeError,OverflowError,TimeoutError,HTTPError):return error('MARKET_HISTORY_REJECTED','source configuration,rate limit,response or interval validation rejected;previous accepted result preserved',422)
 
     @route('/api/v1/stocks/directory-refresh',methods=['POST'])
     @json_endpoint
