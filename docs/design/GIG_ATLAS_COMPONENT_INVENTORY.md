@@ -40,3 +40,13 @@ original SVG marks. `QuoteCloud` delegates four source-aware modes to pure
 response grid. Native L3 remains in its existing renderer,not inferred from live L1.
 All optional renderers remain lazy-loaded. See the current product report/evidence for
 actual browser,cleanup,responsive and qualification boundaries.
+
+
+## Provider/history integration (October29,2026)
+
+`HistoricalMarket` supplies bounded date/kind/timeframe queries,exact source tables,
+OHLC views and matched-timestamp raw-close comparison. Pure `historicalMarket`
+contracts/normalization have independent reference tests;no SEC ratio is recalculated
+in JavaScript. Securities Universe adds source exchange/classification/activity filters
+and a separate approved Alpaca asset refresh. Existing3D remains lazy/native-separated.
+See `docs/product/PHASE_NEXT_DATA_INTEGRATION_REPORT.md` for fixture-vs-live boundaries.

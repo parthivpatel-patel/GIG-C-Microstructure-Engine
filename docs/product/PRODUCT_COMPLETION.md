@@ -1,3 +1,24 @@
+# Current provider/history checkpoint — October29,2026
+
+See [Phase Next integration report](PHASE_NEXT_DATA_INTEGRATION_REPORT.md),
+[private setup/qualification guide](ALPACA_RESEARCH_DATA_SETUP.md) and
+[executed evidence](phase_next_evidence.json). Implementation checkpoint
+`89d06adb973c4a3f5cb8f3da3e734721a63bfe02` adds paper-account asset discovery,
+source filters,bounded bars/quotes/trades,historical aligned comparisons and non-seed
+SEC qualification. Current default actual coverage remains13 fallback identities,
+0 imported Alpaca assets,0 official exchange imports and0 accepted official SEC
+mappings. The new adapter is fixture-qualified,not live-provider verified.
+
+The latest cohort passes207 stock tests/configuration,274 terminal/native consumers
+/configuration,45 frontend tests,151 browser checks,53 security/8 HTTPS-WSS checks,
+8 unchanged native references,14 installed-wheel tests,3 packaging cases and an819-member
+implementation source inventory. See the report for exact scope,failures preserved,
+measurements and remaining external permissions/infrastructure gates.
+
+The previous checkpoints below are preserved historical evidence.
+
+---
+
 # Current product checkpoint — October28,2026
 
 See [product-development report](PRODUCT_DEVELOPMENT_REPORT.md),

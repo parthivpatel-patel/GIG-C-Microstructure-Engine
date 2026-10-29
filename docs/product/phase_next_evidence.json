@@ -1,0 +1,1199 @@
+{
+  "schema": "gig.atlas.phase-next.evidence.v1",
+  "report_date": "2026-10-29 America/New_York",
+  "baseline": "c8022a3b4edbdd482d1945c972c4414a344bcd8c",
+  "implementation_commit": "89d06adb973c4a3f5cb8f3da3e734721a63bfe02",
+  "branch": "feat/atlas-final-release",
+  "unchanged_main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "classification": "AUTHORED_REFERENCE_PROVIDER_CONTRACT_QUALIFICATION_NOT_ACTUAL_COVERAGE_OR_LIVE_ACCEPTANCE",
+  "actual_default_configuration_coverage": {
+    "curated_fallback_identities": 13,
+    "imported_official_exchange_identities": 0,
+    "imported_alpaca_asset_identities": 0,
+    "accepted_official_sec_mappings": 0,
+    "live_provider_observations_qualified": 0,
+    "sec_ready": false,
+    "alpaca_pair_present": false,
+    "external_alpaca_or_sec_acquisition_requests": 0
+  },
+  "source_readiness": {
+    "current_network_policy": "enforced restricted;Alpaca/SEC hosts absent",
+    "runtime_credential_bindings": 0,
+    "observations_current": true,
+    "source_permissions_bypassed": false,
+    "provider_credentials_copied_from_other_project": false,
+    "user_private_configuration_modified": false
+  },
+  "authored_fixture_coverage": {
+    "browser_account_reference": 60,
+    "asset_performance": 11000,
+    "directory_performance": 50002,
+    "representative_symbol_resolution": [
+      "AAPL",
+      "GOOGL",
+      "MSFT",
+      "NVDA",
+      "AMZN",
+      "APLD",
+      "CRWV"
+    ],
+    "cik_42_43": "FICTIONAL_SEC_FIXTURES_NOT_REAL_COMPANY_IDENTITY"
+  },
+  "test_results": {
+    "stock_provider_sec_consumers": [
+      {
+        "configuration": "Debug",
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "Release",
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "ASan+UBSan",
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "live_lsan_check": 0
+      }
+    ],
+    "terminal_native_consumers": [
+      {
+        "configuration": "Debug",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "Release",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": null
+      },
+      {
+        "configuration": "ASan+UBSan",
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274,
+        "live_lsan_check": 0
+      }
+    ],
+    "frontend": {
+      "passed": 45,
+      "failed": 0,
+      "skipped": 0
+    },
+    "stable_browser": {
+      "passed": 91,
+      "failed": 0,
+      "width_section_combinations": 60,
+      "theme_width_combinations": 120
+    },
+    "additional_browser": {
+      "passed": 50,
+      "failed": 0,
+      "breakdown": {
+        "ratio": 14,
+        "live": 21,
+        "sec": 3,
+        "discovery": 3,
+        "gpu_landscape": 5,
+        "gpu_quote": 4
+      }
+    },
+    "phase_next_browser": {
+      "schema": "gig.atlas.phase-next.browser.v1",
+      "classification": "AUTHORED_REFERENCE_SEC_IEX_NOT_PROVIDER_QUALIFICATION",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        "Alpaca paper asset refresh publishes complete authored active/inactive snapshot",
+        "Exchange and source-status filters intersect before page rendering",
+        "Seven representative stock identities remain searchable independently of SEC facts",
+        "Stock coverage preserves unverified CRWV CIK instead of borrowing another issuer",
+        "Historical bars compare only exact common timestamps and remain historical",
+        "Historical quotes and trades preserve source values and paginated counts",
+        "Invalid source response preserves earlier accepted observation view",
+        "Historical requests and comparison do not mutate the native L3 book",
+        "Historical controls fit five target widths using ordinary clicks",
+        "No uncaught browser application errors"
+      ]
+    },
+    "security": {
+      "passed": 53,
+      "failed": 0,
+      "skipped": 0
+    },
+    "local_verified_https_wss": {
+      "passed": 8,
+      "failed": 0
+    },
+    "existing_installed_wheel": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0
+    },
+    "packaging": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "cli_safety": {
+      "passed": 4,
+      "failed": 0,
+      "results": [
+        {
+          "script": "scripts/qualify_alpaca_reference.py",
+          "without_execute": "REFUSED_NO_REQUEST",
+          "execute_with_current_disabled_configuration": "BLOCKED_BEFORE_NETWORK"
+        },
+        {
+          "script": "scripts/qualify_alpaca_market_history.py",
+          "without_execute": "REFUSED_NO_REQUEST",
+          "execute_with_current_disabled_configuration": "BLOCKED_BEFORE_NETWORK"
+        }
+      ]
+    },
+    "counting": "Per-suite/configuration outcomes;cohorts overlap,not a count of unique tests"
+  },
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "executed_cases": [
+      {
+        "case": "itch.validation_demo_reference",
+        "reported_hashes": [
+          "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+        ]
+      },
+      {
+        "case": "itch.independent_reference",
+        "reported_hashes": [
+          "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+        ]
+      },
+      {
+        "case": "itch.context_reference",
+        "reported_hashes": [
+          "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+        ]
+      },
+      {
+        "case": "itch.streaming_reference",
+        "reported_hashes": [
+          "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+        ]
+      },
+      {
+        "case": "itch.l3_reference",
+        "reported_hashes": [
+          "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+          "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+        ]
+      },
+      {
+        "case": "itch.auction_reference",
+        "reported_hashes": [
+          "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        ]
+      },
+      {
+        "case": "itch.admin_reference",
+        "reported_hashes": [
+          "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+        ]
+      },
+      {
+        "case": "itch.hy_reference",
+        "reported_hashes": [
+          "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+        ]
+      }
+    ],
+    "all_eight_unchanged": true,
+    "native_source_changes": []
+  },
+  "source_archive": {
+    "path": "build/phase-next/sdist-final/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 2560719,
+    "sha256": "7e6346005f0045ba604d00d50c22941418138956cf669dd8ea93eeec98086508",
+    "source_checkpoint": "89d06adb973c4a3f5cb8f3da3e734721a63bfe02;before delivery documentation",
+    "safe_byte_identical_members": 819,
+    "inventory": {
+      "path": "build/phase-next/sdist-final/inventory.json",
+      "bytes": 130095,
+      "sha256": "683c09e0638851da1c464f5c3b852bfeed25f9ef849b2f7b85073ce38ccb713f"
+    }
+  },
+  "environment": {
+    "architecture": "x86_64",
+    "system": "Linux",
+    "cpu_reported": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "logical_cpus_reported": 5,
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "chromium": "154.0.8037.57",
+    "renderer": "Headless SwiftShader,not physical GPU/Android",
+    "current_head_arm64_qualified": false,
+    "workflow_dispatched": false
+  },
+  "official_interface_references": {
+    "repository": "alpacahq/alpaca-py",
+    "commit": "1b7bf9b922944adc8823ccf88ada5ea4646877ca",
+    "receipts": [
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/data/historical/stock.py",
+        "bytes": 7892,
+        "sha256": "abceca87e5bc6df15885e97a28682edb2444a4f1a51aeb4706aa29ef52950c79"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/data/requests.py",
+        "bytes": 25332,
+        "sha256": "b751946aef57ee02bea8a7886a71208faba06b6402b832942211bb8b6f7f41f8"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/trading/client.py",
+        "bytes": 26264,
+        "sha256": "b576305db1b2ffd538add2d873f54547ce58aba51f52baba5f32b0a07aeacb1d"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/trading/requests.py",
+        "bytes": 34259,
+        "sha256": "02b43fd6595fa9966ad36dff8e1cff284c27d68ca98bdd898218bc0b6a66057f"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/common/constants.py",
+        "bytes": 347,
+        "sha256": "731081af8e7441569567f2d4ea0af0ac95a15614623acae8f45889ea48d3eb5d"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/LICENSE",
+        "bytes": 10873,
+        "sha256": "bc84da682744c6dd008cf9ad3306caf18444d613a80c1bcc3de0dd46094787ef"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/common/enums.py",
+        "bytes": 2207,
+        "sha256": "ede525055449cd730af1908a10ffb11166826780b46a5cb683c7862b63a4b438"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/alpacahq/alpaca-py/1b7bf9b922944adc8823ccf88ada5ea4646877ca/alpaca/common/rest.py",
+        "bytes": 16686,
+        "sha256": "112d851f58ee3feecab74253d783176f17e0d3e179fd5c8bb85727368afe18cf"
+      }
+    ],
+    "rights": "SDK code license is not account market-data use/retention/redistribution permission"
+  },
+  "performance": {
+    "asset_reference": {
+      "classification": "AUTHORED_ASSET_REFERENCE_NOT_OBSERVED_SOURCE_OR_PROVIDER_PERFORMANCE",
+      "accepted_identities": 11000,
+      "authored_batch_json_bytes": [
+        1770000,
+        179000
+      ],
+      "warmups": 1,
+      "repetitions": 3,
+      "parse_and_index_seconds": [
+        0.1247908030054532,
+        0.13755400100490078,
+        0.1265830949996598
+      ],
+      "median_parse_and_index_seconds": 0.1265830949996598,
+      "peak_process_rss_kib": 64140,
+      "limitations": [
+        "Shared local host;no HTTP/credentials/real account reference",
+        "RSS is process high-water mark,not per-catalog bytes or long-run fragmentation"
+      ]
+    },
+    "directory": {
+      "classification": "AUTHORED_COMPLETE_FILES_NOT_US_LISTING_IMPORT",
+      "accepted_identities": 50002,
+      "nasdaq_input_bytes": 2689026,
+      "parse_and_index_seconds": 0.4586841390118934,
+      "results": [
+        {
+          "query": "X49999",
+          "matches": 1,
+          "returned": 1,
+          "queries_per_repetition": 1000,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 0.006997243006480858
+        },
+        {
+          "query": "X49",
+          "matches": 1000,
+          "returned": 20,
+          "queries_per_repetition": 100,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 0.03846250008791685
+        },
+        {
+          "query": "authored industry",
+          "matches": 50000,
+          "returned": 20,
+          "queries_per_repetition": 100,
+          "warmups": 1,
+          "repetitions": 5,
+          "median_ms_per_query": 31.63329005998094
+        }
+      ],
+      "peak_process_rss_kib": 82068,
+      "limitations": [
+        "In-process fixed authored names,not HTTP/server/provider latency",
+        "Shared-host observations,not a capacity guarantee or real-universe count"
+      ]
+    },
+    "browser": {
+      "schema": "gig.atlas.final.browser.performance.v1",
+      "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+      "warmups": 1,
+      "repetitions": 3,
+      "samples": [
+        {
+          "initial_navigation_and_settle_ms": 739.1023140000002,
+          "stock_route_ms": 152.98348599999963,
+          "health_roundtrip_ms": 8.967457999999624,
+          "script_seconds": 0.123181,
+          "task_seconds": 0.317521,
+          "used_js_heap_bytes": 4553464,
+          "dom_nodes": 1285,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-CJwr09LY.js",
+              "bytes": 235735
+            },
+            {
+              "path": "/assets/ResearchDesk-DKCq-mlr.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-mTumUNcY.js",
+              "bytes": 1924
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 782.8296910000004,
+          "stock_route_ms": 161.37321399999973,
+          "health_roundtrip_ms": 4.105277000000115,
+          "script_seconds": 0.147161,
+          "task_seconds": 0.370458,
+          "used_js_heap_bytes": 4519308,
+          "dom_nodes": 1192,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-CJwr09LY.js",
+              "bytes": 235735
+            },
+            {
+              "path": "/assets/ResearchDesk-DKCq-mlr.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-mTumUNcY.js",
+              "bytes": 1924
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 783.7922049999997,
+          "stock_route_ms": 145.16219600000022,
+          "health_roundtrip_ms": 8.12249999999949,
+          "script_seconds": 0.129525,
+          "task_seconds": 0.354283,
+          "used_js_heap_bytes": 4347776,
+          "dom_nodes": 1285,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-CJwr09LY.js",
+              "bytes": 235735
+            },
+            {
+              "path": "/assets/ResearchDesk-DKCq-mlr.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-mTumUNcY.js",
+              "bytes": 1924
+            }
+          ]
+        }
+      ],
+      "browser": "154.0.8037.57",
+      "limitations": [
+        "Isolated Chromium contexts with disabled cache;browser process reused",
+        "Navigation includes networkidle wait;not pure rendering latency",
+        "CDP sampled JS heap,not native/GPU memory or long-run growth",
+        "Loopback fake providers;no Android/external Codespaces acceptance"
+      ]
+    }
+  },
+  "stable_assets": {
+    "schema": "gig.atlas.stable-assets.v1",
+    "completed": [
+      "browser-validation",
+      "stock-intelligence-validation",
+      "stock-loading-validation",
+      "atlas-validation",
+      "atlas2-validation",
+      "recorded-playback-validation",
+      "live-controls-validation"
+    ],
+    "asset_sha256": {
+      ".vite/manifest.json": "d1af1db7a34c3b9c3b8143139db445c4f7514dbb1e3ad35161ea978e7f310ec0",
+      "assets/Landscape3D-CXP3RCum.js": "67422c05da2f2687bb8156ff3fbbe46e66ddc8f4d6903765a1123fada3d954f7",
+      "assets/LiveMarket-Da1NxYU_.js": "522d0190fc98c39eb0c7daf2a97b6b8af945b8f11281c7260ac5d5994a489c4b",
+      "assets/MarketHealth-BbqaMDep.js": "a9dde1e6698dd9accaf5f626ec1e6964da4c0590fbdb613a7b2d0d1ac4531db9",
+      "assets/ModelSurface-3pKHRbTn.js": "74299df36a356f4d639ba1357287bc271f976fcdd6bf76f404d65e66bbe6be50",
+      "assets/OrbitControls-CFB5RmRs.js": "91c499b6dbf4fe9797252a668451f32a644d43127887263d78cee639b7881497",
+      "assets/QuoteCloud-rv3g4Yol.js": "29e5eb1a5970937846662c3173a750dc01e74884f86aa0328d07ddf1f7776115",
+      "assets/ResearchDesk-DKCq-mlr.js": "23cd992616ffa99981c1955520318d5537ef0706deac972666f0788b3e68a991",
+      "assets/StockIntelligence-CwBRNuSk.js": "86312ac2a4570b219198cbc569bad8cf46caf84bb33e2fc9c504226a0a6ff3dc",
+      "assets/UniverseWorkspace-UhJM0mgI.js": "d680a935be35a2c217f959750afdefb316f76324f02f4f266c232f587a0b74a6",
+      "assets/VolatilitySurface-BO_-wRw3.js": "ae0ace7b17211488b1df79c8d608e9305f690797de146ee4e485c4373ead6489",
+      "assets/directoryContract-mTumUNcY.js": "58d911c928f2e030c24ffafb747fce44bafecaf870f4dc68785af9ea905ff094",
+      "assets/index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+      "assets/index-CJwr09LY.js": "77cbb81a7e16e825b8d3434328ae9e9abb16ef0287b259eebb9d402246de1bb0",
+      "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "index.html": "9a37e0908b6066b692f8c0649d520797c323a10432c97a756eb572db764fe27c"
+    },
+    "asset_mutation_detected": false
+  },
+  "browser_runs": [
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_atlas_browser_suite.py"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/ratio-history-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/live-market-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/sec-completion-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/discovery-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/gpu-recovery-validation.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "node",
+        "terminal/tests/atlas-final-performance.mjs"
+      ],
+      "exit": 0
+    },
+    {
+      "command": "GIG_GPU_CASE=quote node terminal/tests/gpu-recovery-validation.mjs",
+      "exit": 0
+    }
+  ],
+  "asset_sizes": [
+    {
+      "path": "terminal/web/dist/assets/Landscape3D-CXP3RCum.js",
+      "bytes": 6965,
+      "sha256": "67422c05da2f2687bb8156ff3fbbe46e66ddc8f4d6903765a1123fada3d954f7",
+      "gzip_bytes": 2920
+    },
+    {
+      "path": "terminal/web/dist/assets/LiveMarket-Da1NxYU_.js",
+      "bytes": 32237,
+      "sha256": "522d0190fc98c39eb0c7daf2a97b6b8af945b8f11281c7260ac5d5994a489c4b",
+      "gzip_bytes": 10454
+    },
+    {
+      "path": "terminal/web/dist/assets/MarketHealth-BbqaMDep.js",
+      "bytes": 2529,
+      "sha256": "a9dde1e6698dd9accaf5f626ec1e6964da4c0590fbdb613a7b2d0d1ac4531db9",
+      "gzip_bytes": 1081
+    },
+    {
+      "path": "terminal/web/dist/assets/ModelSurface-3pKHRbTn.js",
+      "bytes": 6821,
+      "sha256": "74299df36a356f4d639ba1357287bc271f976fcdd6bf76f404d65e66bbe6be50",
+      "gzip_bytes": 2953
+    },
+    {
+      "path": "terminal/web/dist/assets/OrbitControls-CFB5RmRs.js",
+      "bytes": 513793,
+      "sha256": "91c499b6dbf4fe9797252a668451f32a644d43127887263d78cee639b7881497",
+      "gzip_bytes": 125455
+    },
+    {
+      "path": "terminal/web/dist/assets/QuoteCloud-rv3g4Yol.js",
+      "bytes": 10012,
+      "sha256": "29e5eb1a5970937846662c3173a750dc01e74884f86aa0328d07ddf1f7776115",
+      "gzip_bytes": 4242
+    },
+    {
+      "path": "terminal/web/dist/assets/ResearchDesk-DKCq-mlr.js",
+      "bytes": 4497,
+      "sha256": "23cd992616ffa99981c1955520318d5537ef0706deac972666f0788b3e68a991",
+      "gzip_bytes": 1835
+    },
+    {
+      "path": "terminal/web/dist/assets/StockIntelligence-CwBRNuSk.js",
+      "bytes": 82374,
+      "sha256": "86312ac2a4570b219198cbc569bad8cf46caf84bb33e2fc9c504226a0a6ff3dc",
+      "gzip_bytes": 22480
+    },
+    {
+      "path": "terminal/web/dist/assets/UniverseWorkspace-UhJM0mgI.js",
+      "bytes": 7465,
+      "sha256": "d680a935be35a2c217f959750afdefb316f76324f02f4f266c232f587a0b74a6",
+      "gzip_bytes": 2787
+    },
+    {
+      "path": "terminal/web/dist/assets/VolatilitySurface-BO_-wRw3.js",
+      "bytes": 2507,
+      "sha256": "ae0ace7b17211488b1df79c8d608e9305f690797de146ee4e485c4373ead6489",
+      "gzip_bytes": 1370
+    },
+    {
+      "path": "terminal/web/dist/assets/directoryContract-mTumUNcY.js",
+      "bytes": 1924,
+      "sha256": "58d911c928f2e030c24ffafb747fce44bafecaf870f4dc68785af9ea905ff094",
+      "gzip_bytes": 723
+    },
+    {
+      "path": "terminal/web/dist/assets/index-Bi5AfQUv.css",
+      "bytes": 53273,
+      "sha256": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+      "gzip_bytes": 10320
+    },
+    {
+      "path": "terminal/web/dist/assets/index-CJwr09LY.js",
+      "bytes": 235735,
+      "sha256": "77cbb81a7e16e825b8d3434328ae9e9abb16ef0287b259eebb9d402246de1bb0",
+      "gzip_bytes": 72887
+    },
+    {
+      "path": "terminal/web/dist/assets/marketContract-DM0W2FhH.js",
+      "bytes": 1813,
+      "sha256": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "gzip_bytes": 793
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/phase-next/historical-comparison-synthetic.png",
+      "bytes": 174759,
+      "sha256": "bd8048731376e4bfd8ad58ce55e191d5e41bfba8c0f87065bdfc823571c8430a"
+    },
+    {
+      "path": "build/phase-next/historical-mobile-synthetic.png",
+      "bytes": 114826,
+      "sha256": "1d602fb85500a6489d65fb01d646fa18f5e5812b2ea0962cd7a311056f6dc158"
+    }
+  ],
+  "logs": [
+    {
+      "path": "build/phase-next/alpaca-final-debug.log",
+      "bytes": 4159,
+      "sha256": "907a4085abf9619907833bd4219134d02d8cf06abafb6cee624516fc1c070dae"
+    },
+    {
+      "path": "build/phase-next/alpaca-initial.log",
+      "bytes": 4276,
+      "sha256": "f48d2d0f6873123db6d84aafa5afc0a4ea4820bebe290a77b0885d5b8250d50b"
+    },
+    {
+      "path": "build/phase-next/asset-performance.log",
+      "bytes": 775,
+      "sha256": "c940c04d36b79c5bd9d6507786823576d02ccbd0852f50d8a72491b4bbf83a4d"
+    },
+    {
+      "path": "build/phase-next/backend-precommit.log",
+      "bytes": 358,
+      "sha256": "b5588fede1f22e4e2ccc78c55f84efde0cae6ca55db96c2fe17c26ec47a050a1"
+    },
+    {
+      "path": "build/phase-next/browser-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/phase-next/browser-final-qualification.log",
+      "bytes": 883,
+      "sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0"
+    },
+    {
+      "path": "build/phase-next/browser-final.log",
+      "bytes": 707,
+      "sha256": "7a345ef5c74848d28d8da87669b7003bf1088514f130fa1e17b77859ba31f585"
+    },
+    {
+      "path": "build/phase-next/browser-initial.log",
+      "bytes": 640,
+      "sha256": "ad85a5c8ae5ad5e75149228c4f3ee88572acac8e087618ce8f77eea6d3a7e257"
+    },
+    {
+      "path": "build/phase-next/browser-second.log",
+      "bytes": 436,
+      "sha256": "b25c00edcfc750886721a6c6a99f1c9e11f541a2deac639b05a2329c5bf2b97b"
+    },
+    {
+      "path": "build/phase-next/browser-third.log",
+      "bytes": 707,
+      "sha256": "7a345ef5c74848d28d8da87669b7003bf1088514f130fa1e17b77859ba31f585"
+    },
+    {
+      "path": "build/phase-next/browser-verified.log",
+      "bytes": 887,
+      "sha256": "ca2ae1382aaa90271a30f61ceec1a1f31a3e9e4b9fd9b34b54745a457ff87585"
+    },
+    {
+      "path": "build/phase-next/build-final.log",
+      "bytes": 1967,
+      "sha256": "b34b276c3b03b7f72735474deee1faa1fd355218505b5b6bd6c1562b9c849afb"
+    },
+    {
+      "path": "build/phase-next/build-initial.log",
+      "bytes": 1967,
+      "sha256": "b64e3b9d346415bcb07e4bc3380e100c295cb2966e88a8c7028d7b9b77ebaaa9"
+    },
+    {
+      "path": "build/phase-next/canonical.log",
+      "bytes": 1124,
+      "sha256": "e9541fd313989447f2ba84282dc0a3a13406d1e536aa354160f8d18923d50a21"
+    },
+    {
+      "path": "build/phase-next/cli-safety.log",
+      "bytes": 443,
+      "sha256": "9b17ec040e175646c7ba641874498aa1884ff87ff70c0fe3be91e49ac5f19251"
+    },
+    {
+      "path": "build/phase-next/directory-performance.log",
+      "bytes": 869,
+      "sha256": "8eb3b3b252be2801cd23b42c87d5089b8935259cfc39d7811a8eb69c7be3054b"
+    },
+    {
+      "path": "build/phase-next/fixture-delivery.log",
+      "bytes": 5801,
+      "sha256": "abcacd4084e739c895ed1714d0e34c636bc9910d9971942fe3f01ee6865b2e40"
+    },
+    {
+      "path": "build/phase-next/fixture-final-qualification.log",
+      "bytes": 6378,
+      "sha256": "a4aa6f560030e27018804b36a9a5aa49fe1553697aef3bb32bf70de4db791c1a"
+    },
+    {
+      "path": "build/phase-next/fixture-final.log",
+      "bytes": 5181,
+      "sha256": "62c8ed31e31511e6b540cb47d09ffec3d77cbfc8a4c08d340174df7002df0e0d"
+    },
+    {
+      "path": "build/phase-next/fixture-qualified.log",
+      "bytes": 5882,
+      "sha256": "d82275aba7dcfa21b81f845b1f8d38d274b6e6bd3c06507f30b98ffbfd3bcc06"
+    },
+    {
+      "path": "build/phase-next/fixture-verified.log",
+      "bytes": 6378,
+      "sha256": "83d105c25076eb2ad1acf288ff673c90c6647d76adde9d581b0feae4c8fbc03d"
+    },
+    {
+      "path": "build/phase-next/fixture.log",
+      "bytes": 4250,
+      "sha256": "a69ceae77ffafe67aa3ee06b0e80cca4fe6142cd8eb06181f825e6bd5fc21ca2"
+    },
+    {
+      "path": "build/phase-next/frontend-final.log",
+      "bytes": 4863,
+      "sha256": "e60ea8d6cc3cde1a5bc9f4ceb22e040298c95c5cc952c8482474e4f577f098a3"
+    },
+    {
+      "path": "build/phase-next/frontend-initial.log",
+      "bytes": 4771,
+      "sha256": "cb02f9d512cc9d8bb9fa715e55916cd70a65a07c5d438b2f21c88dc92afcb246"
+    },
+    {
+      "path": "build/phase-next/history-actual-diagnostic.log",
+      "bytes": 236,
+      "sha256": "9631c915a053a174454c15b017dbe1cf1c4f875ddb567f94a30e91fa77047105"
+    },
+    {
+      "path": "build/phase-next/initial-regression.log",
+      "bytes": 373,
+      "sha256": "a1b91b2e2bf0d3fa98d078bb75825b0da1d28d9b926fe22892a7b45a7d30beb3"
+    },
+    {
+      "path": "build/phase-next/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/phase-next/queue-failing-before.log",
+      "bytes": 1763,
+      "sha256": "5c519dfca7ceb42f1ad27f95e97c16adb0f65d781bbfd00f6956ad759413e37d"
+    },
+    {
+      "path": "build/phase-next/queue-final-debug.log",
+      "bytes": 4717,
+      "sha256": "6b27f634b61471d7541f8d8fe4c18f455c10e736712333d8e6473b315983c96a"
+    },
+    {
+      "path": "build/phase-next/reference-priority-debug.log",
+      "bytes": 4541,
+      "sha256": "d1147cac7adcc9428f7edb85b2221f4de3dae80ae4f41dbbad2df25d48966692"
+    },
+    {
+      "path": "build/phase-next/reference-priority-release.log",
+      "bytes": 4541,
+      "sha256": "8c6226b8c28ea3dbc8a55dba6ce2c966403197025086178b56360127df6acd7f"
+    },
+    {
+      "path": "build/phase-next/reference-priority-sanitizer.log",
+      "bytes": 4559,
+      "sha256": "b36cf6bc68dfcafb8f8af0411670dba330606486d95123a6008c5e2a2461d3f1"
+    },
+    {
+      "path": "build/phase-next/regression-browser/atlas2_fixture_server.log",
+      "bytes": 21977,
+      "sha256": "a5eef3aed31e14d5aec3883a04344a49480cd27a27721ab9317951b84dda6964"
+    },
+    {
+      "path": "build/phase-next/regression-browser/atlas_fixture_server.log",
+      "bytes": 34336,
+      "sha256": "7fed045d2bf21f2bc54da32e71054b46ac9ccbfcdb9ad981b0b18c2889cb6fa1"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-0.log",
+      "bytes": 78,
+      "sha256": "74358e67ac4cb93012eb0ded29561041b679787b8856a2973aeae91c8282eb2a"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-1.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-2.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-3.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-4.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-5.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/phase-next/regression-browser/browser-6.log",
+      "bytes": 2692,
+      "sha256": "5a4a6e3cfbdd0e55e918bfa86a987695a1d2eca1712fa97d25705e22a47db7b2"
+    },
+    {
+      "path": "build/phase-next/regression-browser/gpu-quote.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    },
+    {
+      "path": "build/phase-next/regression-browser/live_market_fixture_server.log",
+      "bytes": 9200,
+      "sha256": "8c65e9f48977afb8e08aa99a0cc44ed73082fe73f14d2fda6f4d18efe4410301"
+    },
+    {
+      "path": "build/phase-next/regression-browser/native.log",
+      "bytes": 28361,
+      "sha256": "a3aa9416ca211934be25595b8dfaee8dc33114c7a111864db8bc46312337d0a9"
+    },
+    {
+      "path": "build/phase-next/regression-browser/stock_fixture_server.log",
+      "bytes": 13978,
+      "sha256": "a264a876ddbf0931949509c3d242d2dcb9d20191e6c3ef531497aad4de7fe73e"
+    },
+    {
+      "path": "build/phase-next/sdist-final-inventory.log",
+      "bytes": 81,
+      "sha256": "e842a78d69507e7cebc2a78450faf3a0a12d674b3056f77509ae026e824f85da"
+    },
+    {
+      "path": "build/phase-next/sdist-final.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/phase-next/sdist-inventory.log",
+      "bytes": 81,
+      "sha256": "e842a78d69507e7cebc2a78450faf3a0a12d674b3056f77509ae026e824f85da"
+    },
+    {
+      "path": "build/phase-next/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/phase-next/security-final.log",
+      "bytes": 383,
+      "sha256": "1c2ed111485fe7194e2722d33c56683d448782b0b8e93c068bdf7d4cfe7cb6aa"
+    },
+    {
+      "path": "build/phase-next/security.log",
+      "bytes": 376,
+      "sha256": "ae1cee32bd5940d1704808ac03483c16922f84d9a0a2a6ed7a18e11aa5500e9a"
+    },
+    {
+      "path": "build/phase-next/stable-browser/atlas-validation.log",
+      "bytes": 3293,
+      "sha256": "6c4c182361c8be1a7650d656752358583801992b16564a0d42df6a6bcfec2fb7"
+    },
+    {
+      "path": "build/phase-next/stable-browser/atlas2-validation.log",
+      "bytes": 2546,
+      "sha256": "3f81f3da9c9016e3a15db9af1c5c628e2abb115222c8e2d61cf966b0f2d2c2e2"
+    },
+    {
+      "path": "build/phase-next/stable-browser/browser-validation.log",
+      "bytes": 6270,
+      "sha256": "be400150e8f5b289a870977b5e20851e0a7c5adad8c1e85ace77ac9e8896bfa1"
+    },
+    {
+      "path": "build/phase-next/stable-browser/build.log",
+      "bytes": 1967,
+      "sha256": "698b4f961af8b7f393f056d9c62228f02b9a1d3e3ef0893b9e60ff5213fec7e5"
+    },
+    {
+      "path": "build/phase-next/stable-browser/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/phase-next/stable-browser/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/phase-next/stable-browser/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/phase-next/stable-browser/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "path": "build/phase-next/startup-failing-before.log",
+      "bytes": 2765,
+      "sha256": "1d185c967faf878fa632bea395cf661ee6ae37b9e1c2b9158d55012ef5afd967"
+    },
+    {
+      "path": "build/phase-next/startup-final.log",
+      "bytes": 4347,
+      "sha256": "a563fb0c80c4e096850d4e5a485888c71c03ab536874e36c0a069c2c3a3f4c2e"
+    },
+    {
+      "path": "build/phase-next/startup-initial.log",
+      "bytes": 5419,
+      "sha256": "1ed55160eec9386aac6e01e4802ccf11f61dfe7ea393151a3a8d49f46d215474"
+    },
+    {
+      "path": "build/phase-next/startup-sanitizer-final.log",
+      "bytes": 4365,
+      "sha256": "0de04127c2469cbaf7454438efc1d7bda455f33edd12100219691019b5f8191d"
+    },
+    {
+      "path": "build/phase-next/stocks-debug.log",
+      "bytes": 34331,
+      "sha256": "a3b60246ac276ddbf780c67dfbf89641ac9857a1110edef24d6ed7cea1a2495f"
+    },
+    {
+      "path": "build/phase-next/stocks-delivery-debug.log",
+      "bytes": 34889,
+      "sha256": "a849fa5fc1fdcccf2e52f3c5d6646a7962122f471b61edc502e92c7352aeb906"
+    },
+    {
+      "path": "build/phase-next/stocks-delivery-release.log",
+      "bytes": 34889,
+      "sha256": "05ff3cba4efa6d49972fb3ebd7d7a4aa695d5adbf7b8f95a66260928745d178b"
+    },
+    {
+      "path": "build/phase-next/stocks-delivery-sanitizer.log",
+      "bytes": 34907,
+      "sha256": "ec82b121129b74e6bdffc64a91547f0000c1a79a4e1cbe4edc0fa1894b3149a5"
+    },
+    {
+      "path": "build/phase-next/stocks-final-debug.log",
+      "bytes": 34713,
+      "sha256": "7a853a0930db7d76a595d74df9ce2741ab140480fdb378734033584dd716f108"
+    },
+    {
+      "path": "build/phase-next/stocks-final-qualified-debug.log",
+      "bytes": 35123,
+      "sha256": "15983dc5a01d33294433d591eda2c45f9146e9ba65c574d98bcad704c156fab5"
+    },
+    {
+      "path": "build/phase-next/stocks-final-qualified-release.log",
+      "bytes": 35123,
+      "sha256": "242dbde0fd63d4f42a8f79c75e1b6f211c1b045dce3724dd5d19472bcbeb24eb"
+    },
+    {
+      "path": "build/phase-next/stocks-final-qualified-sanitizer.log",
+      "bytes": 35141,
+      "sha256": "c1708499951cc6fef3f97b841c3f4a2386e0161944cfa48efd542457d6e7bcab"
+    },
+    {
+      "path": "build/phase-next/stocks-final-release.log",
+      "bytes": 34713,
+      "sha256": "98214f2d7f8da28e088f5141486ea9c9e709ee9a82b5474a56f7154bf4e33e5a"
+    },
+    {
+      "path": "build/phase-next/stocks-final-sanitizer.log",
+      "bytes": 34731,
+      "sha256": "f64dd54bdc10f5bb6d0a1e465a30564aa805e34698625bb3010884940c0bc606"
+    },
+    {
+      "path": "build/phase-next/stocks-release.log",
+      "bytes": 34331,
+      "sha256": "e506f5bc3ceed4b6a000a27d7ff004d7959179566fcb57b2aeb824b93e51b57e"
+    },
+    {
+      "path": "build/phase-next/stocks-sanitizer.log",
+      "bytes": 34349,
+      "sha256": "6d7649efecccaac6e9954a03d81a549503de5e0939ac49186ab489003bbd5218"
+    },
+    {
+      "path": "build/phase-next/supplemental-sanitizer.log",
+      "bytes": 4177,
+      "sha256": "31f4c9987954985756f19ce73eee9b58bab361d67972b1d84c1c62dcbcc6d3b1"
+    },
+    {
+      "path": "build/phase-next/terminal-debug.log",
+      "bytes": 40682,
+      "sha256": "b2a179552f433cd815c9afc3fe768503c9e7b33d8af2da70ed9976861527f703"
+    },
+    {
+      "path": "build/phase-next/terminal-delivery-debug.log",
+      "bytes": 40306,
+      "sha256": "9750b73f638b94fe7ebd270699d8f622b340c74da50b67f6d70f4b72a3ad51ac"
+    },
+    {
+      "path": "build/phase-next/terminal-delivery-release.log",
+      "bytes": 40306,
+      "sha256": "bdabf3c331d9fdb8fd96a91eaaee65c949062a6f90c63a2cbd43ca2209d9428f"
+    },
+    {
+      "path": "build/phase-next/terminal-delivery-sanitizer.log",
+      "bytes": 41063,
+      "sha256": "dd5df8cbf54fba073bc6131d2089d9f6c64f02bff6a5ecea9f7f066b006b1201"
+    },
+    {
+      "path": "build/phase-next/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "4062c0165e911a3efd4031c7f1fa92da8fb8d19071495778b135a42e8232b06f"
+    },
+    {
+      "path": "build/phase-next/terminal-sanitizer.log",
+      "bytes": 41063,
+      "sha256": "98ea471c90848dc094a6eb3dfda2be774be5a02ca78e638570f32afa596e828c"
+    },
+    {
+      "path": "build/phase-next/tls.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/phase-next/wheel-consumer.log",
+      "bytes": 113,
+      "sha256": "d53da78472b3878d117c853fb9423f7d879d3a3a4bf61bff0c276e6c10b982a0"
+    }
+  ],
+  "preserved_failures": {
+    "startup": {
+      "path": "build/phase-next/startup-failing-before.log",
+      "bytes": 2765,
+      "sha256": "1d185c967faf878fa632bea395cf661ee6ae37b9e1c2b9158d55012ef5afd967"
+    },
+    "local_queue": {
+      "path": "build/phase-next/queue-failing-before.log",
+      "bytes": 1763,
+      "sha256": "5c519dfca7ceb42f1ad27f95e97c16adb0f65d781bbfd00f6956ad759413e37d"
+    },
+    "other_initial_attempts": [
+      {
+        "path": "build/phase-next/alpaca-initial.log",
+        "bytes": 4276,
+        "sha256": "f48d2d0f6873123db6d84aafa5afc0a4ea4820bebe290a77b0885d5b8250d50b"
+      },
+      {
+        "path": "build/phase-next/startup-initial.log",
+        "bytes": 5419,
+        "sha256": "1ed55160eec9386aac6e01e4802ccf11f61dfe7ea393151a3a8d49f46d215474"
+      },
+      {
+        "path": "build/phase-next/browser-initial.log",
+        "bytes": 640,
+        "sha256": "ad85a5c8ae5ad5e75149228c4f3ee88572acac8e087618ce8f77eea6d3a7e257"
+      },
+      {
+        "path": "build/phase-next/browser-second.log",
+        "bytes": 436,
+        "sha256": "b25c00edcfc750886721a6c6a99f1c9e11f541a2deac639b05a2329c5bf2b97b"
+      },
+      {
+        "path": "build/phase-next/browser-third.log",
+        "bytes": 707,
+        "sha256": "7a345ef5c74848d28d8da87669b7003bf1088514f130fa1e17b77859ba31f585"
+      },
+      {
+        "path": "build/phase-next/browser-final.log",
+        "bytes": 707,
+        "sha256": "7a345ef5c74848d28d8da87669b7003bf1088514f130fa1e17b77859ba31f585"
+      }
+    ]
+  },
+  "source_file_inventory": [
+    "scripts/qualify_alpaca_market_history.py",
+    "scripts/qualify_alpaca_reference.py",
+    "scripts/qualify_sec_sources.py",
+    "terminal/server/app.py",
+    "terminal/server/request_proofs.py",
+    "terminal/stocks/alpaca_history.py",
+    "terminal/stocks/alpaca_reference.py",
+    "terminal/stocks/alpaca_transport.py",
+    "terminal/stocks/directory.py",
+    "terminal/stocks/discovery.py",
+    "terminal/stocks/service.py",
+    "terminal/stocks/test_alpaca_data.py",
+    "terminal/stocks/test_sec_expansion.py",
+    "terminal/tests/measure_alpaca_reference.py",
+    "terminal/tests/phase-next-validation.mjs",
+    "terminal/tests/phase_next_fixture_server.py",
+    "terminal/tests/run_live_market_suite.py",
+    "terminal/web/package.json",
+    "terminal/web/src/HistoricalMarket.tsx",
+    "terminal/web/src/LiveMarket.tsx",
+    "terminal/web/src/ResearchDesk.tsx",
+    "terminal/web/src/StockIntelligence.tsx",
+    "terminal/web/src/UniverseWorkspace.tsx",
+    "terminal/web/src/api.ts",
+    "terminal/web/src/atlas.css",
+    "terminal/web/src/directoryContract.test.ts",
+    "terminal/web/src/directoryContract.ts",
+    "terminal/web/src/historicalMarket.test.ts",
+    "terminal/web/src/historicalMarket.ts"
+  ],
+  "limits": {
+    "asset_bytes_per_response": 8388608,
+    "asset_responses": 2,
+    "accepted_asset_rows": 50000,
+    "reference_refresh_seconds": 21600,
+    "reference_manual_cooldown_seconds": 300,
+    "history_pending_requests": 4,
+    "history_total_seconds": 25,
+    "history_pages_per_query": 4,
+    "history_records_per_page": 64,
+    "history_process_cached_queries": 16,
+    "history_cache_reuse_seconds": 60,
+    "source_http_retries": 0,
+    "live_max_symbols": 4,
+    "live_retained_observations": 256
+  },
+  "not_claimed": [
+    "Complete current US-listed universe",
+    "Actual APLD/CRWV CIK reconciliation here",
+    "Consolidated or corrected complete market tape",
+    "Full historical financial statements or PIT archive",
+    "Production readiness",
+    "Current-candidate hosted or ARM64 qualification"
+  ],
+  "security": {
+    "forced_clicks": false,
+    "wildcard_cors_added": false,
+    "secrets_emitted": false,
+    "trading_client_or_order_endpoint_added": false,
+    "observed_disk_storage_enabled": false,
+    "paid_service_activated": false,
+    "main_changed": false,
+    "restricted_market_data_accessed": false
+  },
+  "documentation_files": [
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+    "docs/completion/COMPLETION_MATRIX.md",
+    "docs/design/GIG_ATLAS_COMPONENT_INVENTORY.md",
+    "docs/product/ALPACA_RESEARCH_DATA_SETUP.md",
+    "docs/product/PHASE_NEXT_DATA_INTEGRATION_REPORT.md",
+    "docs/product/PRODUCT_COMPLETION.md",
+    "docs/product/SOURCE_ACCESS_LEDGER.md",
+    "docs/product/phase_next_evidence.json"
+  ],
+  "external_account_limits": "GIG Quant Terminal may consume the same account-wide quota;local ATLAS bounds are not an independent provider allowance;other project not accessed"
+}

@@ -48,3 +48,21 @@ Nasdaq directory-use determination or independently review an official zero-cost
 alternative before acquisition. Verify format,exclusions,symbol collisions,coverage,
 retention and redistribution rights independently. Until then advertise accepted
 identifier counts and source classes,not full US stock coverage.
+
+
+## October29,2026 — account-reference alternative implemented
+
+The official `alpacahq/alpaca-py` SDK was read at pinned commit
+`1b7bf9b922944adc8823ccf88ada5ea4646877ca` through permitted GitHub URLs. Asset GET
+paths,active/inactive us_equity query fields,separate paper/data bases,bulk historical
+paths and grouped pagination are supported by those interface references. Eight
+public-source receipts/hashes are in `phase_next_evidence.json`. The SDK code license
+is not an account data-use/retention/redistribution license;account permissions and
+existing review gates remain required. No SDK dependency or trading client was added.
+
+The implemented paper asset catalog is a provider-account reference,not a complete
+exchange-listed master. No credentials/SEC readiness are available here;no account,
+market or SEC source request was made. Actual imported counts remain0,not the60/11000
+or50002 independently authored fixture counts. No Nasdaq listing body,NYSE/Cboe source
+or restricted LOBSTER data was acquired. See the Phase Next report for exact bounds,
+source precedence,actual counts and eventual private qualification commands.

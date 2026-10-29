@@ -1,3 +1,15 @@
+# Provider reference/history expansion — October29,2026
+
+[Current integration matrix](../product/PHASE_NEXT_DATA_INTEGRATION_REPORT.md)
+and [evidence](../product/phase_next_evidence.json) supersede earlier narrower labels.
+Paper asset-reference discovery/filtering,bounded historical observations/comparisons
+and non-seed SEC qualification are implemented/fixture-tested. Actual default source
+coverage remains13 fallback/0 imported provider/0 official listing/0 official SEC
+mappings. Full US/current coverage,live qualification,complete PIT history and current
+ARM64/production readiness remain unclaimed. Existing scope/evidence below is preserved.
+
+---
+
 # Current expanded product scope
 
 The earlier engineering contracts below do not establish final product acceptance.
