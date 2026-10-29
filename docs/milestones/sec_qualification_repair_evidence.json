@@ -1,0 +1,277 @@
+{
+  "schema": "gig.sec.qualification_repair.evidence.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "47d0f57331dee73fb44ac66c39d5dc87caa44f23",
+  "branch": "feat/atlas-final-release",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "owner_failure": {
+    "source": "OWNER_REPORTED_CODESPACES",
+    "error_type": "ValueError",
+    "reason": "sanitized_source_or_configuration_failure",
+    "actual_rejected_source_condition": "UNVERIFIED_NO_RESPONSE_OR_AUTHENTICATED_TARGET_EXECUTION"
+  },
+  "repairs": [
+    "Exact allowlisted diagnostic codes instead of exception-prefix disclosure",
+    "Fixed pipeline stages and completed-stage reporting",
+    "Private SEC configuration precedence and SEC-only permission preflight",
+    "Stable strict calendar-date error token",
+    "CIK and declared body-length checks before request/body iteration",
+    "Identity workspace and cache connection cleanup"
+  ],
+  "new_tests": 26,
+  "combined_affected_cohort": {
+    "new_SEC_qualification": 26,
+    "existing_operational": 32,
+    "existing_backend": 21,
+    "total": 79
+  },
+  "results": {
+    "debug": {
+      "passed": 79,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "release": {
+      "passed": 79,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "sanitizer": {
+      "passed": 79,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "live_lsan_check": 0
+    },
+    "stock_regressions_release": {
+      "passed": 207,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "native_frozen": {
+      "passed": 8,
+      "failed": 0,
+      "expected": {
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+      },
+      "all_eight_unchanged": true
+    },
+    "counting": "Per-cohort outcomes;not a unique test total or coverage percentage"
+  },
+  "commands": {
+    "affected": {
+      "debug": {
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "argv": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "build/sec-qualification-repair/run_targeted.py"
+        ]
+      },
+      "release": {
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "argv": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "build/sec-qualification-repair/run_targeted.py"
+        ]
+      },
+      "sanitizer": {
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "argv": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "build/sec-qualification-repair/run_targeted.py"
+        ]
+      }
+    },
+    "affected_driver_source": "import json,unittest\nsuite=unittest.defaultTestLoader.loadTestsFromNames(['terminal.stocks.test_'+n for n in ('sec_qualification','operational','backend')])\nassert suite.countTestCases()==79,suite.countTestCases()\nr=unittest.TextTestRunner(verbosity=2).run(suite)\nprint('SEC_REPAIR_COUNTS='+json.dumps({'tests':r.testsRun,'failures':len(r.failures),'errors':len(r.errors),'skipped':len(r.skipped)}))\nraise SystemExit(0 if r.wasSuccessful() and r.testsRun==79 and not r.skipped else 1)\n",
+    "equivalent_unittest_modules": [
+      "terminal.stocks.test_sec_qualification",
+      "terminal.stocks.test_operational",
+      "terminal.stocks.test_backend"
+    ],
+    "stock_regressions": {
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "argv": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ]
+    },
+    "canonical": "/workspace/gig-tools/bin/ctest --test-dir build/python-release -R '^itch\\.(independent_reference|context_reference|l3_reference|streaming_reference|validation_demo_reference|auction_reference|admin_reference|hy_reference)$' -V --output-junit /workspace/GIG-C-Microstructure-Engine/build/sec-qualification-repair/canonical.xml",
+    "cloud_blocked": {
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "argv": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/qualify_sec_sources.py",
+        "--fetch",
+        "--resolve-identity",
+        "--symbol",
+        "AAPL",
+        "--as-of",
+        "2026-10-28"
+      ],
+      "exit_code": 2
+    },
+    "owner_retest": "git pull --ff-only origin feat/atlas-final-release && .venv/bin/python scripts/qualify_sec_sources.py --fetch --resolve-identity --symbol AAPL --as-of 2026-10-28"
+  },
+  "logs": [
+    {
+      "path": "build/sec-qualification-repair/targeted-debug.log",
+      "bytes": 14310,
+      "sha256": "ff3f536b7d3750cc4b0a764cb36f5f745a557c99424b0a6fe603a7020454b6a9"
+    },
+    {
+      "path": "build/sec-qualification-repair/targeted-release.log",
+      "bytes": 14310,
+      "sha256": "0355a41bb59f9b28c43ed547528a37b2f4e7142c626a0f01980e38d30fd00b4b"
+    },
+    {
+      "path": "build/sec-qualification-repair/targeted-sanitizer.log",
+      "bytes": 14328,
+      "sha256": "88748852ae91332e48297d45333847ebf2ec23368f7c59bae774085b6f756c5f"
+    },
+    {
+      "path": "build/sec-qualification-repair/stock-regressions.log",
+      "bytes": 35123,
+      "sha256": "6d648cb091915a6599acd34580eecafe4be4f601c161aec6d88837729ef65027"
+    },
+    {
+      "path": "build/sec-qualification-repair/failing-before.log",
+      "bytes": 3305,
+      "sha256": "76c6ef247103d6ce2f81ca0f0ccf9e1bc2499b5f09c1480dc153fecf990d0ca5"
+    },
+    {
+      "path": "build/sec-qualification-repair/calendar-failing-before.log",
+      "bytes": 1340,
+      "sha256": "60820b45abf26d78816cd9262f0d876ad7e83055a3d961f3c2b5fd64808239ca"
+    },
+    {
+      "path": "build/sec-qualification-repair/canonical.log",
+      "bytes": 7753,
+      "sha256": "d0492c48a79bac8d5c08ba8079c45128f40ff12b75e0742e85292b6c335808a5"
+    },
+    {
+      "path": "build/sec-qualification-repair/canonical.xml",
+      "bytes": 4303,
+      "sha256": "22cbf7dba3ef6267615e5489024a8dae46080e3f86306b2661234ec10b68d6eb"
+    },
+    {
+      "path": "build/sec-qualification-repair/cloud-blocked.json",
+      "bytes": 594,
+      "sha256": "074f85cfd24d75cff7cfff6d61c2591d375aca7af5567d18e4254147664b8e37"
+    }
+  ],
+  "files": [
+    {
+      "path": "scripts/qualify_sec_sources.py",
+      "bytes": 16454,
+      "sha256": "04aa902c94d8962a9d6c68d2a9417503edbb3e0908be3cdabad51f0a4685ff7c"
+    },
+    {
+      "path": "terminal/stocks/sec.py",
+      "bytes": 10765,
+      "sha256": "b73037382e130156fa7b921e33e3197b3469c0c02f45515f9d883f297cf3a0bb"
+    },
+    {
+      "path": "terminal/stocks/test_sec_qualification.py",
+      "bytes": 16870,
+      "sha256": "0cb6ca1b605af591d17e5d8c67f8ad222e7ce98d773635df9580b90fd38b0649"
+    },
+    {
+      "path": "docs/milestones/SEC_QUALIFICATION_REPAIR.md",
+      "bytes": 9366,
+      "sha256": "4c07b31481c9599a634400a104844e623b48a1c10dc08ffb792fe916317abff8"
+    },
+    {
+      "path": "docs/milestones/OPERATIONAL_QUALIFICATION_RUNBOOK.md",
+      "bytes": 12800,
+      "sha256": "223a133e08021b79650ed8af8f5c03d5d9134a6c6a9ff1f4e34cb7fa6815b899"
+    }
+  ],
+  "source_scope": {
+    "actual_SEC_requests": 0,
+    "live_SEC_qualification": "NOT_EXECUTED",
+    "owner_SEC_ready": "OWNER_REPORTED_TRUE_PRIVATE_FILE_WITH_ENVIRONMENT_PRECEDENCE",
+    "current_cloud_result": {
+      "schema": "gig.sec.qualification.failure.v2",
+      "status": "BLOCKED_OR_INVALID",
+      "error_type": "AccessError",
+      "reason": "sec_disabled_pending_fair_access_review",
+      "diagnostic": {
+        "stage": "sec_configuration",
+        "category": "CONFIGURATION",
+        "code": "sec_disabled_pending_fair_access_review"
+      },
+      "diagnostics": {
+        "completed_stages": [
+          "input_validation"
+        ],
+        "configuration": {
+          "ready": false,
+          "configuration_source": "environment",
+          "missing_configuration": [
+            "GIG_SEC_ENABLED",
+            "GIG_SEC_POLICY_REVIEWED",
+            "GIG_SEC_USER_AGENT"
+          ],
+          "contact_disclosed": false
+        }
+      },
+      "raw_retained": false,
+      "contact_disclosed": false
+    },
+    "network": "Enforced restricted policy excludes www.sec.gov and data.sec.gov;no provider bindings",
+    "fixtures": "Independently authored only;not actual official-source acceptance"
+  },
+  "safeguards": {
+    "rate_limit_seconds_between_sources": 1.01,
+    "registry_operation_timeout_seconds": 10,
+    "HTTP_timeout_seconds": 8,
+    "companyfacts_body_deadline_seconds": 25,
+    "source_body_cap_bytes": 8388608,
+    "maximum_issuers": 50000,
+    "automatic_retries": 0,
+    "follow_redirects": false,
+    "TLS_verification": true,
+    "saved_configuration_changed": false,
+    "provider_gates_activated": false,
+    "observed_storage_activated": false,
+    "trading_enabled": false,
+    "native_CPP_changed": false,
+    "frozen_expectations_changed": false,
+    "frontend_changed": false,
+    "paid_dependency_added": false,
+    "workflows_dispatched": false
+  },
+  "limitations": [
+    "Actual Codespaces rejection awaits safely categorized retest",
+    "Source validators are not relaxed;unknown errors stay redacted",
+    "Live-interpreter sanitizer leak check does not certify CPython shutdown",
+    "No new hosted or ARM64 qualification",
+    "Unchanged unrelated browser/compiler/packaging matrices were not repeated",
+    "Existing Starlette/httpx deprecation retained",
+    "Evidence records this source checkpoint;final exact pushed commit is in delivery response"
+  ]
+}

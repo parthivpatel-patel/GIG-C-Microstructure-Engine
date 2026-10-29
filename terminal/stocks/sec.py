@@ -14,7 +14,8 @@ FORMS={'10-K','10-K/A','10-Q','10-Q/A','8-K','8-K/A','13F-HR','13F-HR/A'}
 
 def date(value):
     if type(value) is not str or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',value):raise ValueError('sec_date')
-    datetime.date.fromisoformat(value)
+    try:datetime.date.fromisoformat(value)
+    except ValueError:raise ValueError('sec_date') from None
     return value
 
 def text(value,limit=256):

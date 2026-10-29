@@ -1,5 +1,8 @@
 # Existing Codespace: bounded operational qualification
 
+For the reported standalone SEC `ValueError`, use the focused
+[diagnostic repair and single retest command](SEC_QUALIFICATION_REPAIR.md).
+
 Engineering checkpoint: `40ca4e86ec4c7c5f339695768605e7453ae4603b`.
 This is the final source/target acceptance workflow,not a request to repeat setup.
 Existing `ALPACA_API_KEY_ID`, `ALPACA_API_SECRET_KEY` and approved SEC configuration
