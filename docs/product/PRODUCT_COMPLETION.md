@@ -1,3 +1,17 @@
+# Current final master assessment — October29,2026
+
+Implementation f1516d03c66ee97850e1b4a7a0add9e90e9a607b is pushed/verified. M1 ENGINEERING
+COMPLETE for declared bounded research scope;M2 NOT VERIFIED,externally blocked by
+source/permission/target/device/owner evidence and current-candidate infrastructure.
+See [final report](../final_release/FINAL_ENGINEERING_REPORT.md),
+[phase/workspace/13-mode matrix](../final_release/REQUIREMENT_MATRIX.md),
+[one final acceptance session](../final_release/FINAL_OWNER_ACCEPTANCE.md),and
+[exact final evidence](../final_release/evidence.json). Existing source rights remain
+gated. MessagePack1.2.3 security patch is required;no new credential setup or native
+rebuild. Historical counts/decisions below are preserved and superseded by this report.
+
+---
+
 # Current two-milestone decision — October29,2026
 
 M1: ENGINEERING COMPLETE for the agreed declared research scope,with all final local

@@ -1,3 +1,41 @@
+# Final master directive closure — October29,2026 America/New_York
+
+Implementation f1516d03c66ee97850e1b4a7a0add9e90e9a607b is committed,pushed and remote
+verified on feat/atlas-final-release. Engineering is complete for the declared bounded
+private research contract. Milestone2 remains NOT VERIFIED:actual permitted sources,
+private target/device/owner acceptance and exact-candidate ARM64/hosted evidence are
+external. Main12f3a53943dc245e36f2cbbc35b9910fb21c0718 is unchanged.
+
+[Final report](final_release/FINAL_ENGINEERING_REPORT.md),[complete matrix](final_release/REQUIREMENT_MATRIX.md),
+[one final owner session](final_release/FINAL_OWNER_ACCEPTANCE.md),[exact evidence](final_release/evidence.json).
+Fixed SEC reference/routing separation and truthful subset coverage;bounded per-event
+provenance;finite L1 chart calculations;consolidated diagnostics. Reproduced and patched
+msgpack1.1.2 memory leak (4137216→0 retained bytes);pin1.2.3 plus startup/upstream guard.
+No permission gate,data retention,trading,paid resource or live provider was activated.
+
+Final local gates:full GCC native/Python158/158/159 and Clang155/155/155;all8 frozen hashes
+unchanged;terminal274,stock207,source94 per Debug/Release/ASan+UBSan;77 frontend;357 browser
+checks including12×2×5 layouts and3 emulated-touch renderers;52 security;8 TLS/WSS;3 actual
+startup/shutdown;14 wheel;3 packaging. All final failures/errors/skips0,liveLSan0.
+99 authored screenshots;852 safe source archive members;two byte-identical archives.
+NPM0 advisories,official PyPI0 for17 direct pins after security patch. Original failures
+and superseded screenshots/logs are retained under build/final-master/.
+
+No current provider credential binding/egress or authenticated Codespaces access here;
+owner's existing SEC/Alpaca configuration is not requested again. Applicable Alpaca
+cloud/private-display record remains unavailable;ticket381230 resolution not invented.
+No forbidden Codespaces retry,market-data acquisition,main change or workflow dispatch.
+
+Exact next action:follow the single final acceptance procedure later,after applicable
+source rights and a shared account window are established. Install the existing pinned
+security dependency update;do not recreate keys/configuration or rerun completed
+engineering. Sources blocked/quiet remain explicitly blocked/inconclusive. Do not call
+this candidate operationally verified,ARM64-qualified or production-ready without
+actual evidence. Test servers are stopped;no continued execution after task completion
+is claimed. A report/evidence-only delivery commit follows the implementation.
+
+---
+
 # Two-milestone closure — October29,2026
 
 Implementation `40ca4e86ec4c7c5f339695768605e7453ae4603b` is committed/pushed and

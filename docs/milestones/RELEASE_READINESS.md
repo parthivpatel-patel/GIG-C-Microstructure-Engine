@@ -1,3 +1,17 @@
+# Current final master candidate — October29,2026
+
+Implementation f1516d03c66ee97850e1b4a7a0add9e90e9a607b is pushed/verified. All final
+local engineering gates passed,including SEC subset admission and MessagePack1.2.3
+security repair. The actual SEC offending entry/retrieval remains unverified here;
+no real IEX data was received. M1 COMPLETE (bounded research contract),M2 NOT VERIFIED.
+Current [report](../final_release/FINAL_ENGINEERING_REPORT.md),
+[matrix](../final_release/REQUIREMENT_MATRIX.md),[evidence](../final_release/evidence.json)
+and [one final owner session](../final_release/FINAL_OWNER_ACCEPTANCE.md) supersede the
+older checkpoint below. Provider permissions,actual private target/device/owner and
+exact-candidate ARM64 gates remain open. Main and provider authorization gates remain unchanged.
+
+---
+
 # Final private-candidate gates and blocker register
 
 Implementation `40ca4e86ec4c7c5f339695768605e7453ae4603b`. Date October29,2026,

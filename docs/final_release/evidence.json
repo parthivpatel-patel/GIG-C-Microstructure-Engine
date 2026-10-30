@@ -1,0 +1,3808 @@
+{
+  "schema": "gig.atlas.final_master.evidence.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "73d6725898f54ad97ff926e674e93f137c3d1fd7",
+  "implementation_commit": "f1516d03c66ee97850e1b4a7a0add9e90e9a607b",
+  "branch": "feat/atlas-final-release",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "delivery": "Report/evidence-only commit follows;exact final SHA verified after commit and in final response",
+  "milestones": {
+    "M1": "ENGINEERING_COMPLETE_DECLARED_BOUNDED_PRIVATE_RESEARCH_SCOPE",
+    "M2": "NOT_VERIFIED_EXTERNAL_SOURCE_RIGHTS_TARGET_DEVICE_OWNER_AND_CANDIDATE_QUALIFICATION",
+    "production": "NOT_READY_OR_AUTHORIZED"
+  },
+  "tests": {
+    "native_complete_six": [
+      {
+        "configuration": "gcc-python-debug",
+        "passed": 158,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/gcc-python-debug.xml",
+          "bytes": 45571,
+          "sha256": "33002b552c32e857fe2075956f57e8fa1ef1e9bf15678cf415b32e836b88cad8"
+        }
+      },
+      {
+        "configuration": "gcc-python-release",
+        "passed": 158,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/gcc-python-release.xml",
+          "bytes": 45588,
+          "sha256": "c4dd0cecee1bc76ae5c212e69e3782ea851b810cb75c755216ff1a25f9b082c5"
+        }
+      },
+      {
+        "configuration": "gcc-python-asan-ubsan",
+        "passed": 159,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/gcc-python-asan-ubsan.xml",
+          "bytes": 45836,
+          "sha256": "be7271bfe728c50fb6504a331bf1e6b767eb018224bf4945ce9a9dfc18caed5a"
+        }
+      },
+      {
+        "configuration": "clang-debug",
+        "passed": 155,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/clang-debug.xml",
+          "bytes": 43101,
+          "sha256": "14c16cdda500bdf86e10155019282510535d48124c8bc3b8c383c4e530fd4e0b"
+        }
+      },
+      {
+        "configuration": "clang-release",
+        "passed": 155,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/clang-release.xml",
+          "bytes": 43120,
+          "sha256": "fb2238c64e2a5f7ef02be995a8c80a20009b01e0dffe848022260982abe9ff38"
+        }
+      },
+      {
+        "configuration": "clang-asan-ubsan",
+        "passed": 155,
+        "failed": 0,
+        "skipped": 0,
+        "receipt": {
+          "path": "build/final-master/clang-asan-ubsan.xml",
+          "bytes": 42995,
+          "sha256": "73f96e1c307c25df9eafe56953e28424dbf2c1e9f6785734534fb3c95225dacf"
+        }
+      }
+    ],
+    "native_initial_supplemental_core_only": [
+      {
+        "name": "gcc-debug",
+        "directory": "build/debug",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/debug",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/debug",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-debug.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 133,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 111.37848181300797
+      },
+      {
+        "name": "gcc-release",
+        "directory": "build/release",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/release",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/release",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-release.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 133,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 109.53896490100306
+      },
+      {
+        "name": "gcc-asan-ubsan",
+        "directory": "build/asan-ubsan",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/asan-ubsan",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/asan-ubsan",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-asan-ubsan.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 133,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 166.63538414199138
+      },
+      {
+        "name": "clang-debug",
+        "directory": "build/phase9-clang-debug",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-debug",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-debug",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-debug.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 28.5510053979815
+      },
+      {
+        "name": "clang-release",
+        "directory": "build/phase9-clang-release",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-release",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-release",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-release.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 34.425904329982586
+      },
+      {
+        "name": "clang-asan-ubsan",
+        "directory": "build/phase9-clang-asan-ubsan",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-asan-ubsan",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-asan-ubsan",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-asan-ubsan.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 78.57762931098114
+      }
+    ],
+    "python_final_after_security_patch": [
+      {
+        "configuration": "debug",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 22.21769258499262,
+        "log": "build/final-master/security-final/stocks-debug-final.log"
+      },
+      {
+        "configuration": "debug",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 18.064680382987717,
+        "log": "build/final-master/security-final/terminal-debug-final.log"
+      },
+      {
+        "configuration": "debug",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 6.39047723801923,
+        "log": "build/final-master/security-final/sources-debug-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 21.579904382000677,
+        "log": "build/final-master/security-final/stocks-release-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 17.47645758400904,
+        "log": "build/final-master/security-final/terminal-release-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 6.235050765011692,
+        "log": "build/final-master/security-final/sources-release-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 44.673367090988904,
+        "log": "build/final-master/security-final/stocks-sanitizer-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 84.60967406601412,
+        "log": "build/final-master/security-final/terminal-sanitizer-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 10.370958109997446,
+        "log": "build/final-master/security-final/sources-sanitizer-final.log"
+      }
+    ],
+    "frontend": {
+      "passed": 77,
+      "failed": 0,
+      "skips": 0,
+      "strict_build": "PASS"
+    },
+    "browser": {
+      "checks": 357,
+      "functional_cohorts": 23,
+      "separate_performance_cohorts": 1,
+      "failed": 0,
+      "skips": 0,
+      "workspaces": 12,
+      "workspace_themes_widths": 120,
+      "visualization_modes": 13,
+      "emulated_mobile_touch_families": 3
+    },
+    "security_policy": {
+      "passed": 52,
+      "failed": 0,
+      "skips": 0
+    },
+    "actual_local_verified_TLS_WSS": {
+      "passed": 8,
+      "failed": 0
+    },
+    "actual_launcher": {
+      "schema": "gig.atlas.actual_startup_proof.v1",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        "Actual start_terminal.sh serves real C++ engine with all external sources disabled",
+        "Second startup refuses occupied port without killing/replacing native server",
+        "Actual launcher shuts down cleanly and releases listener"
+      ],
+      "native_build": {
+        "compiler": "14.2.0",
+        "python": "3.12.14",
+        "pybind11": "2.13.6",
+        "package_version": "0.1.1",
+        "schema_version": "1.0",
+        "build_type": "Release",
+        "config_flags": " -O3 -DNDEBUG",
+        "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+        "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC"
+      },
+      "source_scope": "Authored native only;no SEC/Alpaca request or permission activation",
+      "launcher_copy_sha256_matches_source": true,
+      "returncode": -15
+    },
+    "installed_native_wheel": {
+      "version": "0.1.1",
+      "passed": 14,
+      "failed": 0,
+      "skips": 0
+    },
+    "packaging_patterns": {
+      "passed": 3,
+      "failed": 0,
+      "skips": 0
+    },
+    "counting": "Per-cohort/configuration outcomes overlap;not unique tests or coverage percentages"
+  },
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "configurations": [
+      {
+        "configuration": "gcc-python-debug",
+        "passed": 158,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      },
+      {
+        "configuration": "gcc-python-release",
+        "passed": 158,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      },
+      {
+        "configuration": "gcc-python-asan-ubsan",
+        "passed": 159,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      },
+      {
+        "configuration": "clang-debug",
+        "passed": 155,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      },
+      {
+        "configuration": "clang-release",
+        "passed": 155,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      },
+      {
+        "configuration": "clang-asan-ubsan",
+        "passed": 155,
+        "failures": 0,
+        "skips": 0,
+        "all_eight_canonical_hashes_unchanged": true
+      }
+    ]
+  },
+  "browser_campaign": {
+    "schema": "gig.atlas.offline.campaign.v1",
+    "fixture_only": true,
+    "cases": [
+      {
+        "case": "browser-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/browser-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 14.153766490984708,
+        "log_sha256": "033e710482d20ef6e15a250eabc1c84a11af963c46dde885cf4041732e051576",
+        "summary": {
+          "passed": 21,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "stock-intelligence-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/stock-intelligence-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 6.7230218820041046,
+        "log_sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+        "summary": {
+          "schema": "gig.stock.browser.v1",
+          "passed": 10,
+          "failed": 0,
+          "checks": [
+            "dedicated stock workspace while real native transport remains connected",
+            "company-name search and CIK identity",
+            "bounded watchlist persists browser refresh",
+            "no fake equity observations or crypto source-strip mixing;separate provider gates",
+            "Black-Scholes independently known zero-rate reference through secure HTTP proof",
+            "interactive theoretical 3D volatility plane changes pixels on camera rotation",
+            "causal fixed-parameter research and exact empirical risk on explicit authored input",
+            "missing facts,holdings and news remain explicitly unavailable",
+            "mobile viewport stays bounded",
+            "crypto native book and renderer preserved;no browser runtime errors"
+          ],
+          "observed_data": false,
+          "renderer": "local Chromium SwiftShader;not physical Android or external Codespaces"
+        }
+      },
+      {
+        "case": "stock-loading-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/stock-loading-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 18.355762177990982,
+        "log_sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926",
+        "summary": {
+          "schema": "gig.stock.loading_browser.v1",
+          "passed": 10,
+          "failed": 0,
+          "checks": [
+            "selection initiates authorized fixture requests and displays candles,L1 bid/ask and native spread",
+            "provider-neutral history and exact descriptive research preserve synthetic source and incomplete-session limits",
+            "accepted latest quote/trade and source provenance",
+            "SEC authored facts appear after automatic loading",
+            "filings show validated official links and amendment records",
+            "indicative candidate chain,expiry/right/strike selectors,provider IV/Greeks and discrete3D points",
+            "theoretical Black-Scholes plane stays separate from indicative points",
+            "NVDA switching replaces all selected-symbol price and option observations",
+            "browser refresh preserves watchlist and safely reloads selected default",
+            "no browser runtime errors or credential values in API"
+          ],
+          "classification": "HISTORICAL_SYNTHETIC",
+          "live_provider_verified": false
+        }
+      },
+      {
+        "case": "atlas-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 20.363874773000134,
+        "log_sha256": "ff92f093c0ff3b5f7a95c1d3c3788a699e9a7ba212b56bc395328ff8c2c5ea1a",
+        "summary": {
+          "schema": "gig.atlas.visual.v1",
+          "classification": "HISTORICAL_SYNTHETIC",
+          "passed": 21,
+          "failed": 0,
+          "checks": [
+            "global search routes to curated company/native-backed workspace",
+            "v2 exact ratios,source fields and twelve descriptors are loaded",
+            "reported annual history charts carry descriptions and exact tables",
+            "quarter filter does not turn annual or YTD values into quarters",
+            "source receipt,reconciliation warning and exact ratio remain accessible",
+            "responsive financial layout at360px",
+            "responsive financial layout at390px",
+            "responsive financial layout at768px",
+            "responsive financial layout at1280px",
+            "responsive financial layout at1920px",
+            "light theme persists and remains readable",
+            "core theme text and links meet4.5:1 contrast token checks",
+            "all focusable controls retain names and skip link works",
+            "native help dialog traps focus and Escape dismisses",
+            "all persistent workspace names remain keyboard accessible",
+            "filing explorer exposes original references and amendment filter",
+            "invalid v2 descriptor yields explicit error without fabricated ratio",
+            "stale response remains explicitly cached and not live",
+            "all twelve workspaces remain bounded across60 viewport/section combinations",
+            "global same-symbol selection overrides a different local selection",
+            "browser has no uncaught application errors"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-360.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-390.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-viewport-390.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-768.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-1280.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-viewport-1280.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-1920.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-ratios-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-trends-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas/visual/financial-light-1280.png"
+          ],
+          "performance": [
+            {
+              "width": 360,
+              "scroll": 360,
+              "viewport": 360,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 390,
+              "scroll": 390,
+              "viewport": 390,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 768,
+              "scroll": 768,
+              "viewport": 768,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 1280,
+              "scroll": 1280,
+              "viewport": 1280,
+              "dom": 319,
+              "resources": 37
+            },
+            {
+              "width": 1920,
+              "scroll": 1920,
+              "viewport": 1920,
+              "dom": 319,
+              "resources": 37
+            }
+          ],
+          "browser": "154.0.8037.57",
+          "renderer": "Headless Chromium SwiftShader;not physical Android/external Codespaces",
+          "limitations": [
+            "No actual SEC/Alpaca observations or restricted data",
+            "No full WCAG audit or screen-reader/physical-device qualification",
+            "Native source/canonical identities unchanged"
+          ]
+        }
+      },
+      {
+        "case": "atlas2-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas2-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 26.608085787011078,
+        "log_sha256": "235dcb5afb726efd9e9b9937c9b903f8107306f1b7f531a027ec5b5030628c7d",
+        "summary": {
+          "schema": "gig.atlas.phase2.visual.v1",
+          "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED_STATEMENTS",
+          "passed": 11,
+          "failed": 0,
+          "checks": [
+            "Command Center2D starts without optional3D modules",
+            "shared-scale balance chart uses matched dates,common zero and independent2:1 height reference",
+            "selected statement tables preserve exact reported values and keyboard scroll region",
+            "filing Next/Previous/First and server-side filter preserve cached66-record scope",
+            "filing invalid cursors are rejected without rendering unvalidated records",
+            "native replay stepping and provenance remain deterministic",
+            "optional3D and exact2D remain available after deferred loading",
+            "native simulation summaries remain simulated and bounded to16 slices",
+            "all twelve workspaces fit120 dark/light viewport combinations",
+            "keyboard help and named navigation remain available",
+            "no uncaught browser errors"
+          ],
+          "responsive_combinations": 120,
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/command-center-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/financial-trends-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/financial-statements-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/filings-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/historical-replay-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/microstructure-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/execution-simulation-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/research-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/operations-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/command-center-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/operations-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-intelligence-light.png"
+          ],
+          "browser": "154.0.8037.57",
+          "timezone": "America/New_York",
+          "limitations": [
+            "Chromium/SwiftShader viewport emulation,not physical Android",
+            "No external Codespaces authentication,full screen-reader/WCAG audit or observed financial validation"
+          ]
+        }
+      },
+      {
+        "case": "recorded-playback-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/recorded-playback-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 2.3246378439944237,
+        "log_sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425",
+        "summary": {
+          "schema": "gig.browser.recorded_l2.v1",
+          "passed": 9,
+          "failed": 0,
+          "checks": [
+            "save authored native log",
+            "discover/select",
+            "native exact step",
+            "seek exact quantity",
+            "causal OFI corresponds to native prefix",
+            "restart prefix0",
+            "speed and playback to EOF",
+            "delete with owned cache",
+            "return to L3 authored source"
+          ],
+          "observed_data": false
+        }
+      },
+      {
+        "case": "live-controls-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/live-controls-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.948588862986071,
+        "log_sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659",
+        "summary": {
+          "schema": "gig.browser.live_controls.v1",
+          "passed": 9,
+          "failed": 0,
+          "checks": [
+            "private-boundary proof controls",
+            "explicit ETH/USD selection",
+            "disabled live empty not authored",
+            "replay disabled in live mode",
+            "Coinbase selection and source isolation",
+            "Coinbase cannot use Kraken recorder",
+            "disconnect and native replay resume",
+            "visualization pause",
+            "native ingestion remains active while visualization paused"
+          ],
+          "live_verified": false
+        }
+      },
+      {
+        "case": "ratio-history-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/ratio-history-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 5.8842783290019725,
+        "log_sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2",
+        "summary": {
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "live-market-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/live-market-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 12.32391812701826,
+        "log_sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f",
+        "summary": {
+          "schema": "gig.live_market.browser.v1",
+          "passed": 21,
+          "failed": 0,
+          "origin": "HISTORICAL_SYNTHETIC",
+          "observed_provider_verified": false,
+          "screenshots": [
+            "live-market-desktop-synthetic.png",
+            "live-market-mobile-synthetic.png"
+          ]
+        }
+      },
+      {
+        "case": "sec-completion-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/sec-completion-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 7.866950299008749,
+        "log_sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37",
+        "summary": {
+          "passed": 3,
+          "failed": 0
+        }
+      },
+      {
+        "case": "discovery-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/discovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.9742443089780863,
+        "log_sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f",
+        "summary": {
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "gpu-recovery-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/gpu-recovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.625447908998467,
+        "log_sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed",
+        "summary": {
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "market-unavailable-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/market-unavailable-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 1.420068576990161,
+        "log_sha256": "5d163b4689601eefd035b811ebb264202e8a43fb8fc5dd80c9aa2d1a817503ef",
+        "summary": {
+          "schema": "gig.market.unavailable.browser.v1",
+          "passed": 1,
+          "failed": 0,
+          "scope": "Default-gated native application,360px viewport,no source acquisition"
+        }
+      },
+      {
+        "case": "atlas4-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas4-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 14.628711096011102,
+        "log_sha256": "d1f8591e3b7fe94e14478789b9f49046497e259f11b83658fdd15fe3a76ba435",
+        "summary": {
+          "schema": "gig.atlas.phase4.browser.v1",
+          "classification": "INDEPENDENTLY_AUTHORED_FIXTURES_NOT_OBSERVED",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "full-width desktop and comfortable Command Center typography",
+            "compact navigation preserves all12 accessible destinations",
+            "private immutable history snapshot save and explicit deletion",
+            "aligned reporting periods show actual source values without missing-zero invention",
+            "cached-source risk and in-sample models stay separately labelled",
+            "risk provenance refreshes when the accepted price receipt changes",
+            "linear scenarios are explicit authored assumptions",
+            "mobile navigation and analytical panels fit360/390px in both themes",
+            "no uncaught browser errors and native stream remains connected"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-wide-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-compact-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/private-history-fixture.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/aligned-statements-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-models-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-wide-light.png"
+          ],
+          "browser": "154.0.8037.57",
+          "limitations": [
+            "Chromium/SwiftShader viewport emulation,not physical Android",
+            "No official SEC,Alpaca or external Codespaces acceptance"
+          ]
+        }
+      },
+      {
+        "case": "atlas5-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas5-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 12.664069967984688,
+        "log_sha256": "2157bdfab404290ee05a64f6357d9398d4cedb67edc9391c1d2ba831dad76257",
+        "summary": {
+          "schema": "gig.atlas.phase5.browser.v1",
+          "classification": "AUTHORED_FIXTURES_NOT_LIVE_PROVIDER_ACCEPTANCE",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "bounded IEX pagination stores a pinned30-record synthetic revision without replacing stock cache",
+            "private backup restore is explicit and preserves the same revision",
+            "explicit portfolio weights produce independent .006 historical VaR and invalidate on edit",
+            "training-only and walk-forward evaluations show explicit split identity and unused suffix",
+            "new research layouts fit360/390 light and dark without page overflow",
+            "native transport and browser error invariants preserved"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas5/visual/pinned-ingestion-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas5/visual/portfolio-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas5/visual/evaluation-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas5/visual/research-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/atlas5/visual/research-mobile-dark.png"
+          ],
+          "browser": "154.0.8037.57",
+          "limitations": [
+            "Viewport emulation,not physical Android/external Codespaces",
+            "No official Alpaca or SEC observations"
+          ]
+        }
+      },
+      {
+        "case": "atlas-final-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-final-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 11.638806222996209,
+        "log_sha256": "5653cf5b79b4d887c7a551227b968cf1e22b00ba2ac3d289a6e78b65637bfda9",
+        "summary": {
+          "schema": "gig.atlas.final.browser.v1",
+          "classification": "AUTHORED_NOT_OBSERVED_OR_LIVE_ACCEPTANCE",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "live IEX remains disabled and start is rejected without explicit live permission",
+            "company to pinned dataset to exact risk to private authored export",
+            "conditional GARCH search visible with source and convergence limitations",
+            "360/390 responsive layouts both themes",
+            "keyboard focus and native browser connection survive integrated journey"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/final/visual/dataset-research-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/final/visual/garch-search-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/final/visual/final-mobile-light.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/final/visual/final-mobile-dark.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/final/visual/return-command-center.png"
+          ],
+          "browser": "154.0.8037.57"
+        }
+      },
+      {
+        "case": "sec-integration-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/sec-integration-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 10.975282278988743,
+        "log_sha256": "2386e56333873146b3fef6aa66dfbff23430b453a51da098550da871159cf83b",
+        "summary": {
+          "schema": "gig.sec.browser.validation.v1",
+          "classification": "AUTHORED_FIXTURES_NO_LIVE_SEC",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "true/yes SEC configuration loads authored AAPL reported facts,units and source dates",
+            "failed explicit refresh retains reported facts and shows actionable error",
+            "missing mapped facts stay unavailable and immediate refresh uses accepted cache",
+            "stale cache and partial-source states remain distinct",
+            "mobile SEC messages fit360/390 and transport remains native-connected",
+            "unconfigured server shows blocked configuration and native health remains available"
+          ],
+          "screenshots": [
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/sec-repair/visual/reported-aapl.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/sec-repair/visual/failed-refresh-cache-preserved.png",
+            "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace/build/sec-repair/visual/sec-mobile.png"
+          ],
+          "browser": "154.0.8037.57"
+        }
+      },
+      {
+        "case": "product-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/product-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 8.482189487986034,
+        "log_sha256": "f875b9028a0f349559f2ec4991a3f79677cbc26b4d6b163771c8fba51685ac4d",
+        "summary": {
+          "passed": 33,
+          "failed": 0,
+          "skipped": 0,
+          "classification": "AUTHORED_DIRECTORY_SEC_IEX_NOT_LIVE_QUALIFICATION"
+        }
+      },
+      {
+        "case": "phase-next-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/phase-next-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 13.80737153001246,
+        "log_sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+        "summary": {
+          "schema": "gig.atlas.phase-next.browser.v1",
+          "classification": "AUTHORED_REFERENCE_SEC_IEX_NOT_PROVIDER_QUALIFICATION",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "Alpaca paper asset refresh publishes complete authored active/inactive snapshot",
+            "Exchange and source-status filters intersect before page rendering",
+            "Seven representative stock identities remain searchable independently of SEC facts",
+            "Stock coverage preserves unverified CRWV CIK instead of borrowing another issuer",
+            "Historical bars compare only exact common timestamps and remain historical",
+            "Historical quotes and trades preserve source values and paginated counts",
+            "Invalid source response preserves earlier accepted observation view",
+            "Historical requests and comparison do not mutate the native L3 book",
+            "Historical controls fit five target widths using ordinary clicks",
+            "No uncaught browser application errors"
+          ]
+        }
+      },
+      {
+        "case": "advanced-research-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/advanced-research-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 27.882262284023454,
+        "log_sha256": "82d03b818f518b7e8b380ae9d5a58c5deb578107f47bab77807d7783a3ea8f1a",
+        "summary": {
+          "schema": "gig.advanced3d.browser.v1",
+          "classification": "AUTHORED_FIXTURES_WITH_NATIVE_CPP_BACKEND_AND_SWIFTSHADER_NOT_LIVE_QUALIFICATION",
+          "passed": 23,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "Three.js not requested by Command Center",
+            "native snapshot source preserves synthetic origin and real C++ prices",
+            "snapshots cannot silently fabricate order events",
+            "height authored geometry,labels,inspection,and bounded draw calls",
+            "canyon authored geometry,labels,inspection,and bounded draw calls",
+            "events authored geometry,labels,inspection,and bounded draw calls",
+            "vwap authored geometry,labels,inspection,and bounded draw calls",
+            "flow authored geometry,labels,inspection,and bounded draw calls",
+            "wheel authored geometry,labels,inspection,and bounded draw calls",
+            "dome authored geometry,labels,inspection,and bounded draw calls",
+            "ribbon authored geometry,labels,inspection,and bounded draw calls",
+            "camera presets,key pan,drag rotation,and wheel zoom are functional",
+            "local timeline,symbol filtering,voxel/point toggle,and no native mutation",
+            "real WebGL context loss yields2D and retry creates fresh usable renderer",
+            "all8 models fit both themes at360,390,768,1280,1920 without page overflow",
+            "2D toggle and reduced-motion keyboard semantics remain accessible",
+            "closing laboratory releases its canvas",
+            "WebGL construction failure has working table/2D fallback",
+            "Level1 ribbon and dome use actual fixture quote history with truthful origin",
+            "Level1 depth and unsigned-flow modes explicitly unavailable",
+            "existing four Level1 geometries remain functional",
+            "existing GARCH surface,parameters,camera,and recovery are preserved",
+            "stable production assets and no uncaught application errors"
+          ],
+          "errors": [],
+          "renders": [
+            {
+              "model": "height",
+              "engine": "three.js r180",
+              "renderMs": "42.099999994039536",
+              "drawCalls": "9",
+              "geometries": "7",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "620"
+            },
+            {
+              "model": "canyon",
+              "engine": "three.js r180",
+              "renderMs": "44",
+              "drawCalls": "9",
+              "geometries": "7",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "620"
+            },
+            {
+              "model": "events",
+              "engine": "three.js r180",
+              "renderMs": "6",
+              "drawCalls": "3",
+              "geometries": "3",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "120",
+              "triangles": "0"
+            },
+            {
+              "model": "vwap",
+              "engine": "three.js r180",
+              "renderMs": "19.599999994039536",
+              "drawCalls": "6",
+              "geometries": "6",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "28",
+              "triangles": "0"
+            },
+            {
+              "model": "flow",
+              "engine": "three.js r180",
+              "renderMs": "21.299999982118607",
+              "drawCalls": "5",
+              "geometries": "5",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "28",
+              "triangles": "0"
+            },
+            {
+              "model": "wheel",
+              "engine": "three.js r180",
+              "renderMs": "21.299999982118607",
+              "drawCalls": "5",
+              "geometries": "5",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "384",
+              "triangles": "0"
+            },
+            {
+              "model": "dome",
+              "engine": "three.js r180",
+              "renderMs": "37.599999994039536",
+              "drawCalls": "5",
+              "geometries": "4",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "24",
+              "triangles": "368"
+            },
+            {
+              "model": "ribbon",
+              "engine": "three.js r180",
+              "renderMs": "40.70000001788139",
+              "drawCalls": "5",
+              "geometries": "4",
+              "camera": "12.999999999999996,10,16",
+              "testid": "advanced-research-canvas",
+              "samples": "64",
+              "triangles": "62"
+            }
+          ],
+          "screenshots": [
+            {
+              "path": "build/advanced-3d/height-synthetic-desktop.png",
+              "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+            },
+            {
+              "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+              "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+            },
+            {
+              "path": "build/advanced-3d/events-synthetic-desktop.png",
+              "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+            },
+            {
+              "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+              "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+            },
+            {
+              "path": "build/advanced-3d/flow-synthetic-desktop.png",
+              "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+            },
+            {
+              "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+              "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+            },
+            {
+              "path": "build/advanced-3d/dome-synthetic-desktop.png",
+              "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+              "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+              "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+            },
+            {
+              "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+              "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+            },
+            {
+              "path": "build/advanced-3d/iex-authored-ribbon.png",
+              "sha256": "5b07a90633f1977d11efddd9402ef0b2a1b666cf06367c29e02e42a6ef9a5270"
+            },
+            {
+              "path": "build/advanced-3d/iex-authored-dome.png",
+              "sha256": "47464726be42dea091382ceee9d5450dbbee9ec579382f7a2c9d766570de123a"
+            }
+          ],
+          "asset_sha256": {
+            "Landscape3D-DgshB_36.js": "135d55351ce9ba045a02d910220b8d2e3a9c35ef82ee3fe19642bb15b4ecffaf",
+            "LiveMarket-vW_6WBV_.js": "e0973844111971dd3ef8e899af9f667f50149d429d6dd5cfc0beaeafffa4c691",
+            "MarketHealth-D0_Nr0eo.js": "d894fff71f4020c047ad186adc8b0312e94a3f394461ac343d092cf2d679f56d",
+            "ModelSurface-DeyfcwIP.js": "9f46cf3150fea8675bdff348793a46f075db5105d857d09db6df55e5b9c137f1",
+            "OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+            "QuoteCloud-DJfqFdQs.js": "8553517b669fa3d243d767362c81da96536f4ddf81aa1561bb25e7c38b93ccbe",
+            "ResearchDesk-BZcujSqm.js": "c3f2a28d276d6a12c45c28ce7f765e8e4e306dd22d548a40340710833a25317f",
+            "ResearchLab-C0ZIAUYX.js": "e70b9d89f0ca7a6f80ad3a5d2b8e8663701572f502391ebbf81b16f5dbedca6d",
+            "ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+            "ResearchScene-D6H1X30_.js": "c238b7da3a0a5b22fbd1d34ce9109d12aa165b79f2fa97403c83002d0542a3bf",
+            "StockIntelligence-Dw0m8Bjv.js": "9969cc19b7a6b2da5790421af72aac51f86426d5f9103560a67b908dd2b295c8",
+            "UniverseWorkspace-BQEyF2zF.js": "5de093d1aa75515536f1c2ed7eae7f8152a7af14d6f41061c441a4d6938eecea",
+            "VolatilitySurface-D6YKg2-J.js": "789d52deb53465d3ebc4bfa84a0ac0d0d0650da90515e512285ed6a6f65fcbdc",
+            "directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+            "index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+            "index-Kz7u3ikp.js": "6c9f0dfab7c649718a7e61c09f03c37ab5b40dd08eb9c4117466e7a4dfce1a37",
+            "marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0"
+          }
+        }
+      },
+      {
+        "case": "workspace-qualification",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/workspace-qualification.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 10.517230110999662,
+        "log_sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd",
+        "summary": {
+          "schema": "gig.atlas.workspace_qualification.v1",
+          "classification": "AUTHORED_NOT_PROVIDER_OR_PHYSICAL_DEVICE_QUALIFICATION",
+          "passed": 120,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "dark/360/Command Center",
+            "dark/360/Securities Universe",
+            "dark/360/Stock Intelligence",
+            "dark/360/Live Markets",
+            "dark/360/Multi-Stock Comparison",
+            "dark/360/Order Book",
+            "dark/360/Market Depth",
+            "dark/360/Order Flow",
+            "dark/360/Historical Replay",
+            "dark/360/Execution Simulator",
+            "dark/360/Research & Validation",
+            "dark/360/Operations",
+            "dark/390/Command Center",
+            "dark/390/Securities Universe",
+            "dark/390/Stock Intelligence",
+            "dark/390/Live Markets",
+            "dark/390/Multi-Stock Comparison",
+            "dark/390/Order Book",
+            "dark/390/Market Depth",
+            "dark/390/Order Flow",
+            "dark/390/Historical Replay",
+            "dark/390/Execution Simulator",
+            "dark/390/Research & Validation",
+            "dark/390/Operations",
+            "dark/768/Command Center",
+            "dark/768/Securities Universe",
+            "dark/768/Stock Intelligence",
+            "dark/768/Live Markets",
+            "dark/768/Multi-Stock Comparison",
+            "dark/768/Order Book",
+            "dark/768/Market Depth",
+            "dark/768/Order Flow",
+            "dark/768/Historical Replay",
+            "dark/768/Execution Simulator",
+            "dark/768/Research & Validation",
+            "dark/768/Operations",
+            "dark/1280/Command Center",
+            "dark/1280/Securities Universe",
+            "dark/1280/Stock Intelligence",
+            "dark/1280/Live Markets",
+            "dark/1280/Multi-Stock Comparison",
+            "dark/1280/Order Book",
+            "dark/1280/Market Depth",
+            "dark/1280/Order Flow",
+            "dark/1280/Historical Replay",
+            "dark/1280/Execution Simulator",
+            "dark/1280/Research & Validation",
+            "dark/1280/Operations",
+            "dark/1920/Command Center",
+            "dark/1920/Securities Universe",
+            "dark/1920/Stock Intelligence",
+            "dark/1920/Live Markets",
+            "dark/1920/Multi-Stock Comparison",
+            "dark/1920/Order Book",
+            "dark/1920/Market Depth",
+            "dark/1920/Order Flow",
+            "dark/1920/Historical Replay",
+            "dark/1920/Execution Simulator",
+            "dark/1920/Research & Validation",
+            "dark/1920/Operations",
+            "light/360/Command Center",
+            "light/360/Securities Universe",
+            "light/360/Stock Intelligence",
+            "light/360/Live Markets",
+            "light/360/Multi-Stock Comparison",
+            "light/360/Order Book",
+            "light/360/Market Depth",
+            "light/360/Order Flow",
+            "light/360/Historical Replay",
+            "light/360/Execution Simulator",
+            "light/360/Research & Validation",
+            "light/360/Operations",
+            "light/390/Command Center",
+            "light/390/Securities Universe",
+            "light/390/Stock Intelligence",
+            "light/390/Live Markets",
+            "light/390/Multi-Stock Comparison",
+            "light/390/Order Book",
+            "light/390/Market Depth",
+            "light/390/Order Flow",
+            "light/390/Historical Replay",
+            "light/390/Execution Simulator",
+            "light/390/Research & Validation",
+            "light/390/Operations",
+            "light/768/Command Center",
+            "light/768/Securities Universe",
+            "light/768/Stock Intelligence",
+            "light/768/Live Markets",
+            "light/768/Multi-Stock Comparison",
+            "light/768/Order Book",
+            "light/768/Market Depth",
+            "light/768/Order Flow",
+            "light/768/Historical Replay",
+            "light/768/Execution Simulator",
+            "light/768/Research & Validation",
+            "light/768/Operations",
+            "light/1280/Command Center",
+            "light/1280/Securities Universe",
+            "light/1280/Stock Intelligence",
+            "light/1280/Live Markets",
+            "light/1280/Multi-Stock Comparison",
+            "light/1280/Order Book",
+            "light/1280/Market Depth",
+            "light/1280/Order Flow",
+            "light/1280/Historical Replay",
+            "light/1280/Execution Simulator",
+            "light/1280/Research & Validation",
+            "light/1280/Operations",
+            "light/1920/Command Center",
+            "light/1920/Securities Universe",
+            "light/1920/Stock Intelligence",
+            "light/1920/Live Markets",
+            "light/1920/Multi-Stock Comparison",
+            "light/1920/Order Book",
+            "light/1920/Market Depth",
+            "light/1920/Order Flow",
+            "light/1920/Historical Replay",
+            "light/1920/Execution Simulator",
+            "light/1920/Research & Validation",
+            "light/1920/Operations"
+          ],
+          "screenshots": [
+            "build/workspaces/command-center-dark-1280.png",
+            "build/workspaces/securities-universe-dark-1280.png",
+            "build/workspaces/stock-intelligence-dark-1280.png",
+            "build/workspaces/live-markets-dark-1280.png",
+            "build/workspaces/multi-stock-comparison-dark-1280.png",
+            "build/workspaces/order-book-dark-1280.png",
+            "build/workspaces/market-depth-dark-1280.png",
+            "build/workspaces/order-flow-dark-1280.png",
+            "build/workspaces/historical-replay-dark-1280.png",
+            "build/workspaces/execution-simulator-dark-1280.png",
+            "build/workspaces/research-validation-dark-1280.png",
+            "build/workspaces/operations-dark-1280.png",
+            "build/workspaces/command-center-light-390.png",
+            "build/workspaces/stock-intelligence-light-390.png",
+            "build/workspaces/live-markets-light-390.png",
+            "build/workspaces/operations-light-390.png"
+          ]
+        }
+      },
+      {
+        "case": "mobile-camera-validation",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/mobile-camera-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 4.28427750398987,
+        "log_sha256": "4e384b44ee48a5867b6e83958dbe4e57259f92927c48dd0df6407c4a07f3115c",
+        "summary": {
+          "schema": "gig.atlas.mobile_touch.v1",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "checks": [
+            "research renderer responds to unobscured emulated touch drag",
+            "quote renderer responds to touch with paused authored source",
+            "static modeled surface camera responds to actual browser touch input"
+          ],
+          "classification": "AUTHORED_REPLAY_LEVEL1_AND_MODEL_FIXTURES_EMULATED_TOUCH_NOT_PHYSICAL_DEVICE"
+        }
+      },
+      {
+        "case": "gpu-quote",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/gpu-recovery-validation.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 2.2809207490063272,
+        "log_sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca",
+        "summary": {
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "case": "performance",
+        "command": [
+          "node",
+          "/workspace/GIG-C-Microstructure-Engine/terminal/tests/atlas-final-performance.mjs"
+        ],
+        "cwd": "/workspace/GIG-C-Microstructure-Engine/build/final-master/browser-qualified/workspace",
+        "returncode": 0,
+        "elapsed_seconds": 4.99954351602355,
+        "log_sha256": "1023d16acc9da8c4d4640f09f3f7b6ab646a31109f80b7d02664453f19bf9c91"
+      }
+    ],
+    "failed_attempts": [],
+    "assets": {
+      ".vite/manifest.json": "601c1d6f708853b496442f7e59314fbdd8b6c8833a44d92d8b50f8164ed6b72b",
+      "assets/Landscape3D-DgshB_36.js": "135d55351ce9ba045a02d910220b8d2e3a9c35ef82ee3fe19642bb15b4ecffaf",
+      "assets/LiveMarket-vW_6WBV_.js": "e0973844111971dd3ef8e899af9f667f50149d429d6dd5cfc0beaeafffa4c691",
+      "assets/MarketHealth-D0_Nr0eo.js": "d894fff71f4020c047ad186adc8b0312e94a3f394461ac343d092cf2d679f56d",
+      "assets/ModelSurface-DeyfcwIP.js": "9f46cf3150fea8675bdff348793a46f075db5105d857d09db6df55e5b9c137f1",
+      "assets/OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+      "assets/QuoteCloud-DJfqFdQs.js": "8553517b669fa3d243d767362c81da96536f4ddf81aa1561bb25e7c38b93ccbe",
+      "assets/ResearchDesk-BZcujSqm.js": "c3f2a28d276d6a12c45c28ce7f765e8e4e306dd22d548a40340710833a25317f",
+      "assets/ResearchLab-C0ZIAUYX.js": "e70b9d89f0ca7a6f80ad3a5d2b8e8663701572f502391ebbf81b16f5dbedca6d",
+      "assets/ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+      "assets/ResearchScene-D6H1X30_.js": "c238b7da3a0a5b22fbd1d34ce9109d12aa165b79f2fa97403c83002d0542a3bf",
+      "assets/StockIntelligence-Dw0m8Bjv.js": "9969cc19b7a6b2da5790421af72aac51f86426d5f9103560a67b908dd2b295c8",
+      "assets/UniverseWorkspace-BQEyF2zF.js": "5de093d1aa75515536f1c2ed7eae7f8152a7af14d6f41061c441a4d6938eecea",
+      "assets/VolatilitySurface-D6YKg2-J.js": "789d52deb53465d3ebc4bfa84a0ac0d0d0650da90515e512285ed6a6f65fcbdc",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+      "assets/index-Kz7u3ikp.js": "6c9f0dfab7c649718a7e61c09f03c37ab5b40dd08eb9c4117466e7a4dfce1a37",
+      "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "index.html": "194b5de896ad70cbf9f4533c8a7b4f097d6338c67ef9394cf1c78c5469787f66"
+    },
+    "all_passed": true,
+    "source_commit": "73d6725898f54ad97ff926e674e93f137c3d1fd7",
+    "working_tree_dirty": true
+  },
+  "commands": {
+    "python_final": [
+      {
+        "configuration": "debug",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 22.21769258499262,
+        "log": "build/final-master/security-final/stocks-debug-final.log"
+      },
+      {
+        "configuration": "debug",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 18.064680382987717,
+        "log": "build/final-master/security-final/terminal-debug-final.log"
+      },
+      {
+        "configuration": "debug",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-debug/python:."
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 6.39047723801923,
+        "log": "build/final-master/security-final/sources-debug-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 21.579904382000677,
+        "log": "build/final-master/security-final/stocks-release-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 17.47645758400904,
+        "log": "build/final-master/security-final/terminal-release-final.log"
+      },
+      {
+        "configuration": "release",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-release/python:."
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 6.235050765011692,
+        "log": "build/final-master/security-final/sources-release-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "stocks",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_live_market_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 207,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 44.673367090988904,
+        "log": "build/final-master/security-final/stocks-sanitizer-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "terminal",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_native_suite.py",
+          "--expected-tests",
+          "274"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 274,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 84.60967406601412,
+        "log": "build/final-master/security-final/terminal-sanitizer-final.log"
+      },
+      {
+        "configuration": "sanitizer",
+        "cohort": "sources",
+        "command": [
+          "/workspace/gig-terminal-clean-venv/bin/python",
+          "scripts/run_python_sanitized.py",
+          "terminal/tests/run_source_qualification_suite.py"
+        ],
+        "environment": {
+          "PYTHONPATH": "build/python-asan-ubsan/python:.",
+          "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+          "PYTHONMALLOC": "malloc",
+          "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+        },
+        "passed": 94,
+        "returncode": 0,
+        "valid": true,
+        "elapsed_seconds": 10.370958109997446,
+        "log": "build/final-master/security-final/sources-sanitizer-final.log"
+      }
+    ],
+    "native_builds": [
+      {
+        "name": "gcc-python-debug",
+        "directory": "build/python-debug",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/python-debug",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/python-debug",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-python-debug.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 158,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 38.232733728014864
+      },
+      {
+        "name": "gcc-python-release",
+        "directory": "build/python-release",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/python-release",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/python-release",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-python-release.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 158,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 35.2115184829745
+      },
+      {
+        "name": "gcc-python-asan-ubsan",
+        "directory": "build/python-asan-ubsan",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/python-asan-ubsan",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/python-asan-ubsan",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/gcc-python-asan-ubsan.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 159,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 67.42714924900793
+      },
+      {
+        "name": "clang-debug",
+        "directory": "build/phase9-clang-debug",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-debug",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-debug",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-debug.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 28.5510053979815
+      },
+      {
+        "name": "clang-release",
+        "directory": "build/phase9-clang-release",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-release",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-release",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-release.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 34.425904329982586
+      },
+      {
+        "name": "clang-asan-ubsan",
+        "directory": "build/phase9-clang-asan-ubsan",
+        "commands": [
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/cmake",
+              "--build",
+              "build/phase9-clang-asan-ubsan",
+              "-j",
+              "2"
+            ],
+            "returncode": 0
+          },
+          {
+            "argv": [
+              "/workspace/gig-tools/bin/ctest",
+              "--test-dir",
+              "build/phase9-clang-asan-ubsan",
+              "--output-on-failure",
+              "-j",
+              "2",
+              "--output-junit",
+              "/workspace/GIG-C-Microstructure-Engine/build/final-master/clang-asan-ubsan.xml"
+            ],
+            "returncode": 0
+          }
+        ],
+        "tests": 155,
+        "failed": 0,
+        "skipped": 0,
+        "elapsed_seconds": 78.57762931098114
+      }
+    ],
+    "frontend": "npm --prefix terminal/web test",
+    "browser_final": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python scripts/qualify_atlas_offline.py --output build/final-master/browser-qualified",
+    "TLS": "PYTHONPATH=build/python-release/python:. GIG_SEC_ENABLED=0 GIG_ALPACA_ENABLED=0 GIG_LIVE_ENABLED=0 GIG_COINBASE_ENABLED=0 GIG_ALPACA_STORE_ENABLED=0 GIG_HISTORY_STORE_ENABLED=0 /workspace/gig-terminal-clean-venv/bin/python terminal/tests/check_rewritten_http_tls.py",
+    "security": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python -m unittest terminal.test_browser_access terminal.test_codespaces_origin terminal.test_stream_proof terminal.test_request_proof terminal.stocks.test_repair.Authentication terminal.test_atlas_arm64_policy",
+    "wheel": "PYTHONPATH=tests /workspace/gig-terminal-clean-venv/bin/python -m unittest test_python test_export_contracts",
+    "packaging": "/workspace/gig-tools/bin/python -m unittest discover -s tests -p test_sdist_patterns.py",
+    "npm_audit": "npm --prefix terminal/web audit --json --ignore-scripts",
+    "source_measurement": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python build/final-master/measure_sources.py",
+    "startup": "/workspace/gig-terminal-clean-venv/bin/python build/final-master/verify_startup.py",
+    "archive": "/workspace/gig-tools/bin/python build/final-master/check_package.py"
+  },
+  "driver_sources": {
+    "measure_sources.py": "import asyncio,gc,hashlib,json,platform,resource,time,tracemalloc\nfrom pathlib import Path\nfrom terminal.stocks.sec_identity import parse_reference\nfrom terminal.stocks.service import StockWorkspace\nfrom terminal.stocks.test_workspace import SEC_ENV\nfrom terminal.stocks.test_final import client,quote,packet\npayload={str(i):{'ticker':f'GEN/{i}'if i%10==0 else f'GEN{i:05}','cik_str':i+1,'title':'Authored registry performance fixture'}for i in range(50000)}\nraw=json.dumps(payload,separators=(',',':')).encode();assert len(raw)<=8388608\nsamples=[]\nfor rep in range(4):\n gc.collect();t=time.perf_counter();rows,integrity=parse_reference(payload);elapsed=time.perf_counter()-t\n assert len(rows)==45000 and integrity['excluded_rows']==5000\n if rep:samples.append({'seconds':elapsed,'source_entries_per_second':50000/elapsed})\n del rows\ntracemalloc.start();decoded=json.loads(raw);rows,integrity=parse_reference(decoded);current,peak=tracemalloc.get_traced_memory();tracemalloc.stop()\nasync def snapshot():\n p={str(i):{'ticker':f'NEW{i}','title':'Authored registry issuer','cik_str':42+i}for i in range(4)}\n for i in range(40):p[str(i+4)]={'ticker':f'AUTH/{i}','title':'Authored unsupported reference','cik_str':100+i}\n async def fetch(*_):return json.dumps(p).encode()\n w=StockWorkspace(environment=SEC_ENV,fetcher=fetch);await w.refresh_identities();c=client();c.workspace.issuers=w.issuers;c.workspace.issuer_source=w.issuer_source;c.symbols=tuple(w.issuers);c.phase='SUBSCRIBED'\n t=time.perf_counter()\n for i in range(256):\n  q=quote();q['S']=f'NEW{i%4}';q['bs']=i;c.process(packet(q))\n seconds=time.perf_counter()-t;s=c.view();size=len(json.dumps(s,separators=(',',':')).encode());assert size<1048576\n return {'symbols':4,'events':256,'source_exclusions':40,'source_diagnostic_examples':16,'snapshot_bytes':size,'frame_budget_bytes':1048576,'processing_seconds':seconds,'events_per_second':256/seconds,'classification':'AUTHORED_IN_PROCESS_NOT_EXCHANGE_THROUGHPUT'}\ns=asyncio.run(snapshot())\ncpu=next((line.split(':',1)[1].strip()for line in Path('/proc/cpuinfo').read_text().splitlines()if line.startswith('model name')),platform.processor())\nr={'schema':'gig.atlas.final.source_measurements.v1','fixture':'INDEXED_AUTHORED_REGISTRY_50000_V1','fixture_sha256':hashlib.sha256(raw).hexdigest(),'generator_seed':None,'generator':'deterministic indexed rows;no RNG','input_bytes':len(raw),'source_entries':50000,'accepted':45000,'excluded':5000,'warmups':1,'repetitions':3,'samples':samples,'decode_and_parse_peak_tracked_bytes':peak,'whole_process_peak_rss_KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'msgpack_version':'.'.join(map(str,__import__('msgpack').version)),'python':platform.python_version(),'architecture':platform.machine(),'CPU':cpu,'snapshot':s,'limitations':['Synthetic single-process measurements,not market latency or SLA','Throughput repetitions exclude JSON decoding;memory pass includes decoding','RSS includes input,warmup and tracing instrumentation;not isolated production peak','No raw market data,observed source or persistence']}\nPath('build/final-master/source-measurements.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r,indent=2))\n",
+    "verify_startup.py": "from pathlib import Path\nimport json,os,shutil,socket,subprocess,time,urllib.request\nroot=Path.cwd();work=root/'build/final-master/startup-proof';(work/'scripts').mkdir(parents=True)\n(work/'terminal').symlink_to(root/'terminal',target_is_directory=True);(work/'.venv').symlink_to('/workspace/gig-terminal-clean-venv',target_is_directory=True)\nfor name in ('start_terminal.sh','configure_sec.py'):shutil.copy2(root/'scripts'/name,work/'scripts'/name)\nenv={k:v for k,v in os.environ.items()if not k.startswith(('GIG_','ALPACA_','APCA_','CODESPACE','GITHUB_CODESPACES_'))}\nenv.update(PYTHONPATH=str(root/'build/python-release/python')+':'+str(work),GIG_SEC_ENABLED='0',GIG_SEC_POLICY_REVIEWED='0',GIG_SEC_USER_AGENT='',GIG_ALPACA_ENABLED='0',GIG_LIVE_ENABLED='0',GIG_COINBASE_ENABLED='0',GIG_SEC_DIRECTORY_AUTO_REFRESH='0',GIG_ALPACA_ASSET_REFERENCE_ENABLED='0',GIG_HISTORY_STORE_ENABLED='0',GIG_ALPACA_STORE_ENABLED='0',GIG_TERMINAL_L2_RECORDINGS=str(work/'recordings'))\nwith socket.socket()as s:assert s.connect_ex(('127.0.0.1',8787))!=0,'Existing process preserved;refusing startup probe'\nchecks=[];log=(work/'startup.log').open('w');p=subprocess.Popen(['bash','scripts/start_terminal.sh'],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT)\ndef get(path):\n with urllib.request.urlopen('http://127.0.0.1:8787'+path,timeout=2)as r:return json.load(r)\ntry:\n deadline=time.monotonic()+15\n while True:\n  if p.poll()is not None:raise RuntimeError('startup_failed;see preserved log')\n  try:\n   health=get('/api/v1/health');break\n  except OSError:\n   if time.monotonic()>deadline:raise RuntimeError('startup_timeout')\n   time.sleep(.1)\n assert health['native']and health['status']=='ok'and health['fixture_tests_safe'];checks.append('Actual start_terminal.sh serves real C++ engine with all external sources disabled')\n state=get('/api/v1/state')\n again=subprocess.run(['bash','scripts/start_terminal.sh'],cwd=work,env=env,capture_output=True,text=True,timeout=5)\n assert again.returncode==1 and 'Port 8787 is already in use'in again.stderr\n assert p.poll()is None and get('/api/v1/state')['book']==state['book'];checks.append('Second startup refuses occupied port without killing/replacing native server')\nfinally:\n p.terminate();p.wait(timeout=8);log.close()\nwith socket.socket()as s:assert s.connect_ex(('127.0.0.1',8787))!=0\nassert 'Application shutdown complete'in(work/'startup.log').read_text();checks.append('Actual launcher shuts down cleanly and releases listener')\nr={'schema':'gig.atlas.actual_startup_proof.v1','passed':len(checks),'failed':0,'skipped':0,'checks':checks,'native_build':health['engine'],'source_scope':'Authored native only;no SEC/Alpaca request or permission activation','launcher_copy_sha256_matches_source':__import__('hashlib').sha256((work/'scripts/start_terminal.sh').read_bytes()).hexdigest()==__import__('hashlib').sha256((root/'scripts/start_terminal.sh').read_bytes()).hexdigest(),'returncode':p.returncode}\n(root/'build/final-master/startup.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r))\n",
+    "check_package.py": "import hashlib,json,os,subprocess\nfrom pathlib import Path\nroot=Path.cwd();work=root/'build/final-master/package-source';env=dict(os.environ);env['SOURCE_DATE_EPOCH']=subprocess.check_output(['git','show','-s','--format=%ct','HEAD'],cwd=work,text=True).strip()\npaths=[]\nfor name in ('sdist-a','sdist-b'):\n out=root/'build/final-master'/name;out.mkdir()\n cmd=['/workspace/gig-tools/bin/python','-m','build','--sdist','--no-isolation','--outdir',str(out)]\n with (root/'build/final-master'/(name+'.log')).open('w')as log:subprocess.run(cmd,cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)\n paths.append(next(out.glob('*.tar.gz')))\nassert paths[0].read_bytes()==paths[1].read_bytes()\nmanifest=root/'build/final-master/sdist-inventory.json'\ncmd=['/workspace/gig-tools/bin/python','scripts/check_sdist_inventory.py',str(paths[0]),'--source-root',str(work),'--manifest',str(manifest)]\nwith (root/'build/final-master/sdist-inventory.log').open('w')as log:subprocess.run(cmd,cwd=root,stdout=log,stderr=subprocess.STDOUT,check=True)\nr={'schema':'gig.atlas.final.source_archive.v1','source_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=work,text=True).strip(),'source_worktree_clean':not subprocess.check_output(['git','status','--porcelain'],cwd=work,text=True).strip(),'source_date_epoch':env['SOURCE_DATE_EPOCH'],'two_archives_byte_identical':True,'members':len(json.loads(manifest.read_text())),'archives':[{'path':str(p.relative_to(root)),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}for p in paths],'scope':'Implementation snapshot;final report-only commit follows. No private data,secrets,compiled binaries or ignored build artifacts.'}\nassert r['source_worktree_clean'];(root/'build/final-master/source-archive.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r))\n",
+    "audit_pypi.py": "import hashlib,json,re,time,httpx\nfrom pathlib import Path\npins=[]\nfor line in Path('terminal/server/requirements.txt').read_text().splitlines():\n if not line:continue\n name,version=line.split('==');assert re.fullmatch(r'[A-Za-z0-9_.-]+',name)and re.fullmatch(r'[A-Za-z0-9_.+-]+',version);pins.append((name,version))\nresults=[];total=0\nwith httpx.Client(timeout=8,follow_redirects=False,headers={'Accept-Encoding':'identity','User-Agent':'GIG-ATLAS-public-dependency-metadata-review'})as client:\n for name,version in pins:\n  url=f'https://pypi.org/pypi/{name}/{version}/json'\n  try:\n   with client.stream('GET',url)as response:\n    if response.status_code!=200:raise ValueError('metadata_http_'+str(response.status_code))\n    raw=bytearray()\n    for chunk in response.iter_bytes():\n     if len(raw)+len(chunk)>2097152 or total+len(chunk)>8388608:raise ValueError('metadata_body_budget')\n     raw.extend(chunk);total+=len(chunk)\n   d=json.loads(raw);v=d['vulnerabilities'];assert isinstance(v,list)\n   results.append({'package':name,'version':version,'reported_version':d['info']['version'],'vulnerabilities':v,'bytes':len(raw),'response_sha256':hashlib.sha256(raw).hexdigest()})\n  except Exception as error:\n   results.append({'package':name,'version':version,'status':'UNVERIFIED_METADATA_FETCH','error_type':type(error).__name__});break\n  time.sleep(.1)\nr={'schema':'gig.atlas.pypi_metadata_advisory.v1','source':'official PyPI per-version JSON vulnerabilities metadata','results':results,'requested_pin_count':len(pins),'completed':len(results)==len(pins)and all('vulnerabilities'in r for r in results),'total_body_bytes':total,'known_advisory_count':sum(len(r.get('vulnerabilities',[]))for r in results),'scope':'Direct pinned server requirements only;not full transitive/OS/native dependency or penetration-test certification','retries':0,'provider_data_requests':0}\nPath('build/final-master/pypi-advisory.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps({k:v for k,v in r.items()if k!='results'}))\nraise SystemExit(0 if r['completed']and r['known_advisory_count']==0 else 1)\n"
+  },
+  "source_scope": {
+    "provider_requests_here": 0,
+    "actual_SEC_retrieval": false,
+    "actual_IEX_observations": false,
+    "actual_target_stock_count": null,
+    "owner_credentials_and_SEC_ready": "OWNER_REPORTED_CODESPACES_NOT_BOUND_HERE",
+    "owner_SEC_rejection": "OWNER_REPORTED_identity_resolution_SOURCE_SCHEMA_sec_directory_symbol;exact offending entry unavailable",
+    "SEC_repair": "Explicit supported routing subset;unsafe/malformed source still fails;no current official grammar or observed result invented",
+    "forbidden_Codespaces_access_retried": false,
+    "market_data_downloaded": false,
+    "restricted_LOBSTER_accessed": false,
+    "observed_source_qualification": false,
+    "probe": {
+      "schema": "gig.atlas.operational.sources.v1",
+      "readiness": {
+        "sec": {
+          "ready": false,
+          "reason": "sec_disabled_pending_fair_access_review",
+          "missing_configuration": [
+            "GIG_SEC_ENABLED",
+            "GIG_SEC_POLICY_REVIEWED",
+            "GIG_SEC_USER_AGENT"
+          ],
+          "action": "Run .venv/bin/python scripts/configure_sec.py --check;configure Codespaces secrets or the private helper,then restart. Never paste the contact value in chat.",
+          "last_error": null,
+          "enabled": false,
+          "policy_reviewed": false,
+          "user_agent_present": false,
+          "user_agent_valid": false,
+          "invalid_boolean_variables": [],
+          "configuration_source": "explicit_environment"
+        },
+        "alpaca": {
+          "ready": false,
+          "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+          "missing_configuration": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY"
+          ],
+          "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+          "last_error": null
+        },
+        "options": {
+          "ready": false,
+          "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+          "missing_configuration": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY",
+            "GIG_ALPACA_OPTIONS_ENABLED",
+            "GIG_ALPACA_OPTIONS_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_OPTIONS_INDICATIVE_APPROVED"
+          ],
+          "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+          "last_error": null
+        },
+        "alpaca_credential_presence": {
+          "ALPACA_pair_present": false,
+          "APCA_pair_present": false,
+          "paper_base_url_configured": false,
+          "paper_base_url_used_for_market_data": false
+        }
+      },
+      "stages": {
+        "alpaca_reads": {
+          "status": "BLOCKED_CONFIGURATION_OR_PERMISSION",
+          "missing": [
+            "GIG_ALPACA_ENABLED",
+            "GIG_ALPACA_PROTOCOL_REVIEWED",
+            "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+            "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+            "GIG_ALPACA_NO_COST_CONFIRMED",
+            "GIG_ALPACA_PERMISSION_REFERENCE",
+            "ALPACA_API_KEY_ID",
+            "ALPACA_API_SECRET_KEY"
+          ]
+        },
+        "sec_sources": {
+          "status": "BLOCKED_CONFIGURATION",
+          "missing": [
+            "GIG_SEC_ENABLED",
+            "GIG_SEC_POLICY_REVIEWED",
+            "GIG_SEC_USER_AGENT"
+          ]
+        },
+        "live": {
+          "status": "BLOCKED_EXISTING_LIVE_GATE",
+          "new_connections": 0
+        }
+      },
+      "milestone_2": "NOT_VERIFIED_TARGET_UI_PRIVACY_AND_FINAL_OWNER_ACCEPTANCE_REQUIRED",
+      "persistent_observed_storage": false,
+      "trading_operations": false,
+      "legal_and_plan_verification": "Existing operator permission records required;configured flags are not independent vendor/billing evidence",
+      "status": "INCOMPLETE_OR_BLOCKED_SOURCE_QUALIFICATION",
+      "observed_provider_qualification": false,
+      "identity_coverage": {
+        "runtime_searchable_identity_count": 13,
+        "accepted_provider_assets": 0,
+        "accepted_SEC_ticker_mappings": 0,
+        "count_status": "UNQUALIFIED_PROCESS_IDENTITY_COUNT",
+        "representative_symbols": {
+          "AAPL": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          },
+          "APLD": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          },
+          "CRWV": {
+            "catalog_identity": true,
+            "official_SEC_cik": null
+          }
+        },
+        "scope": "Search namespace may combine provider assets,SEC registrants and curated fallbacks;not a count of all current exchange-listed stocks"
+      },
+      "preflight": {
+        "schema": "gig.atlas.operational.preflight.v1",
+        "configuration": {
+          "sec": {
+            "ready": false,
+            "reason": "sec_disabled_pending_fair_access_review",
+            "missing_configuration": [
+              "GIG_SEC_ENABLED",
+              "GIG_SEC_POLICY_REVIEWED",
+              "GIG_SEC_USER_AGENT"
+            ],
+            "action": "Run .venv/bin/python scripts/configure_sec.py --check;configure Codespaces secrets or the private helper,then restart. Never paste the contact value in chat.",
+            "last_error": null,
+            "enabled": false,
+            "policy_reviewed": false,
+            "user_agent_present": false,
+            "user_agent_valid": false,
+            "invalid_boolean_variables": [],
+            "configuration_source": "explicit_environment"
+          },
+          "alpaca": {
+            "ready": false,
+            "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+            "missing_configuration": [
+              "GIG_ALPACA_ENABLED",
+              "GIG_ALPACA_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+              "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+              "GIG_ALPACA_NO_COST_CONFIRMED",
+              "GIG_ALPACA_PERMISSION_REFERENCE",
+              "ALPACA_API_KEY_ID",
+              "ALPACA_API_SECRET_KEY"
+            ],
+            "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+            "last_error": null
+          },
+          "options": {
+            "ready": false,
+            "reason": "alpaca_disabled_pending_entitlement_protocol_and_usage_review",
+            "missing_configuration": [
+              "GIG_ALPACA_ENABLED",
+              "GIG_ALPACA_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_PRIVATE_DISPLAY_APPROVED",
+              "GIG_ALPACA_CLOUD_PROCESSING_APPROVED",
+              "GIG_ALPACA_NO_COST_CONFIRMED",
+              "GIG_ALPACA_PERMISSION_REFERENCE",
+              "ALPACA_API_KEY_ID",
+              "ALPACA_API_SECRET_KEY",
+              "GIG_ALPACA_OPTIONS_ENABLED",
+              "GIG_ALPACA_OPTIONS_PROTOCOL_REVIEWED",
+              "GIG_ALPACA_OPTIONS_INDICATIVE_APPROVED"
+            ],
+            "action": "Review current provider policy/entitlement,configure the listed server variables/Codespaces secrets,then restart and Load available data. Never paste keys in chat.",
+            "last_error": null
+          },
+          "alpaca_credential_presence": {
+            "ALPACA_pair_present": false,
+            "APCA_pair_present": false,
+            "paper_base_url_configured": false,
+            "paper_base_url_used_for_market_data": false
+          }
+        },
+        "gateway_port_8787_in_use": false,
+        "environment_is_codespaces": false,
+        "authorization_flags_changed": false,
+        "network_provider_requests": 0,
+        "observed_retention_disabled_for_this_process": true,
+        "provider_entitlements": "Unknown until narrow source probes;assets/credentials are not market-data entitlement or vendor-rights proof",
+        "milestone_2": "NOT_VERIFIED_TARGET_PRIVATE_AUTHENTICATION_AND_OWNER_ACCEPTANCE_REQUIRED"
+      }
+    },
+    "permitted_dependency_network": "NPM audit,official PyPI version metadata and msgpack1.2.3 wheel;no market data or contacts transmitted"
+  },
+  "security": {
+    "msgpack_memory": {
+      "schema": "gig.msgpack.leak_regression.v1",
+      "version": [
+        1,
+        2,
+        3
+      ],
+      "rejections": 256,
+      "input_bytes": 16006,
+      "before_1_1_2_retained_bytes": 4137216,
+      "after_retained_bytes": 0,
+      "allowed_instrumentation_budget_bytes": 64024,
+      "before_evidence": "build/final-master/msgpack-before.log",
+      "actual_market_input": false
+    },
+    "initial_public_advisories": [
+      {
+        "package": "msgpack",
+        "version": "1.1.2",
+        "id": "GHSA-6v7p-g79w-8964",
+        "aliases": [
+          "CVE-2026-57585",
+          "PYSEC-2026-3625"
+        ],
+        "fixed_in": [
+          "1.2.1"
+        ],
+        "link": "https://osv.dev/vulnerability/GHSA-6v7p-g79w-8964"
+      },
+      {
+        "package": "msgpack",
+        "version": "1.1.2",
+        "id": "PYSEC-2026-3625",
+        "aliases": [
+          "CVE-2026-57585",
+          "GHSA-6v7p-g79w-8964"
+        ],
+        "fixed_in": [
+          "1.2.1"
+        ],
+        "link": "https://osv.dev/vulnerability/PYSEC-2026-3625"
+      },
+      {
+        "package": "msgpack",
+        "version": "1.1.2",
+        "id": "GHSA-j586-36cw-2gc2",
+        "aliases": [
+          "CVE-2026-114613"
+        ],
+        "fixed_in": [
+          "1.2.3"
+        ],
+        "link": "https://osv.dev/vulnerability/GHSA-j586-36cw-2gc2"
+      }
+    ],
+    "NPM": {
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 5,
+        "dev": 55,
+        "optional": 27,
+        "peer": 0,
+        "peerOptional": 0,
+        "total": 59
+      }
+    },
+    "pypi_metadata": {
+      "pins": 17,
+      "advisories": 0,
+      "receipts": [
+        {
+          "package": "anyio",
+          "version": "4.15.1",
+          "bytes": 6904,
+          "sha256": "e2ee22fad2fab3e66be503cba9b41945607d3076c9b7aa49b6e2f95ac323efab"
+        },
+        {
+          "package": "attrs",
+          "version": "26.1.0",
+          "bytes": 11038,
+          "sha256": "a882bf941fb4a0bb748d0194df544121cc130f5fb15a710ab6b804c17d2899b7"
+        },
+        {
+          "package": "certifi",
+          "version": "2026.10.23",
+          "bytes": 4631,
+          "sha256": "546ce90e02c152f5ff565baca6bc2a8f43c355855f637756f49a0143e312bdb2"
+        },
+        {
+          "package": "click",
+          "version": "8.5.0",
+          "bytes": 4722,
+          "sha256": "4e36adc9b46f837e10ce801b7a478f9146fefdfb287292b7668fc64b1474e41d"
+        },
+        {
+          "package": "h11",
+          "version": "0.16.0",
+          "bytes": 10603,
+          "sha256": "97f4efb9cc00826f0408076983adc1a1e48e8f2cabf403aaf250f724e081440d"
+        },
+        {
+          "package": "httpcore",
+          "version": "1.0.9",
+          "bytes": 24057,
+          "sha256": "e26eca5c3d288fe9e6446af9bcbca1038ba688629d5c8a2886c47d74718d87a2"
+        },
+        {
+          "package": "httpx",
+          "version": "0.28.1",
+          "bytes": 9117,
+          "sha256": "293bfab7bf587fcd0825f1bd8eed8e6303285ba14801b15659853827cbe30796"
+        },
+        {
+          "package": "idna",
+          "version": "3.20",
+          "bytes": 9180,
+          "sha256": "e7cbd26e23ce60f6cb3a151d2adf3b1b087bb8f10ac2d9d6db70fdccbf3bb041"
+        },
+        {
+          "package": "jsonschema",
+          "version": "4.23.0",
+          "bytes": 9752,
+          "sha256": "d3dbd3231e74a925ede39a13da820cd72d05d67b4d1af3f1c896c95b42794f9d"
+        },
+        {
+          "package": "jsonschema-specifications",
+          "version": "2025.9.1",
+          "bytes": 5037,
+          "sha256": "91810d8f79384375ad0c0cf631e06903e2790b030d3fad2f1ad657b20ddd839e"
+        },
+        {
+          "package": "referencing",
+          "version": "0.37.0",
+          "bytes": 4842,
+          "sha256": "a67968d8e03aa45e650fc2ff0d07796676db1a7841ce8e810bf2dba5af689464"
+        },
+        {
+          "package": "rpds-py",
+          "version": "2026.9.1",
+          "bytes": 116828,
+          "sha256": "93808b9ff27aabe26d9a4f03b28422d1d05c3fb8716d88f3826e7ddf4b0b258b"
+        },
+        {
+          "package": "starlette",
+          "version": "1.10.0",
+          "bytes": 8655,
+          "sha256": "97b97206e2e6e29b5283cd401a9c8d0a75738705f3fbc7f5db1fc487dfafdc9a"
+        },
+        {
+          "package": "typing_extensions",
+          "version": "4.16.0",
+          "bytes": 5631,
+          "sha256": "2140da00d62dde967f52d0be0ae28444f1d6a3fe603f52c83c23988c32122d5a"
+        },
+        {
+          "package": "uvicorn",
+          "version": "0.54.0",
+          "bytes": 8685,
+          "sha256": "a308e83961793f6114221aefe9e046ef587da0fc986c4dc50ace1ee43fbe9bcb"
+        },
+        {
+          "package": "websockets",
+          "version": "17.3",
+          "bytes": 142959,
+          "sha256": "c1edfba2f71e45b414422b59b99c2ac96549ae60d52c59a7d804ecfdf7a23d1b"
+        },
+        {
+          "package": "msgpack",
+          "version": "1.2.3",
+          "bytes": 87954,
+          "sha256": "f5ee786a4e5e8af2692c26c9e95d5cfc5970141c219cec9db2b96c96f791c1ba"
+        }
+      ]
+    },
+    "pypi_scope": "Direct server pins;not full transitive/OS/native security certification",
+    "dependency_license": "msgpack1.2.3 Apache-2.0",
+    "origin_host_proof_security_weakened": false,
+    "TLS_verification_disabled": false,
+    "permission_gates_granted": false,
+    "observed_storage_enabled": false,
+    "trading_operations": false,
+    "keys_or_contacts_emitted": false,
+    "paid_resources_added": false
+  },
+  "performance": {
+    "sources": {
+      "schema": "gig.atlas.final.source_measurements.v1",
+      "fixture": "INDEXED_AUTHORED_REGISTRY_50000_V1",
+      "fixture_sha256": "135dd656a23fd75a8343e1a05d32ea65f7cf42a4b85a7b6f4e86cad590c643fa",
+      "generator_seed": null,
+      "generator": "deterministic indexed rows;no RNG",
+      "input_bytes": 4681674,
+      "source_entries": 50000,
+      "accepted": 45000,
+      "excluded": 5000,
+      "warmups": 1,
+      "repetitions": 3,
+      "samples": [
+        {
+          "seconds": 0.20599047999712639,
+          "source_entries_per_second": 242729.66401504338
+        },
+        {
+          "seconds": 0.1922258879931178,
+          "source_entries_per_second": 260110.64650038257
+        },
+        {
+          "seconds": 0.204754371981835,
+          "source_entries_per_second": 244195.0299573374
+        }
+      ],
+      "decode_and_parse_peak_tracked_bytes": 36396501,
+      "whole_process_peak_rss_KiB": 137420,
+      "msgpack_version": "1.2.3",
+      "python": "3.12.14",
+      "architecture": "x86_64",
+      "CPU": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "snapshot": {
+        "symbols": 4,
+        "events": 256,
+        "source_exclusions": 40,
+        "source_diagnostic_examples": 16,
+        "snapshot_bytes": 469693,
+        "frame_budget_bytes": 1048576,
+        "processing_seconds": 0.007865269988542423,
+        "events_per_second": 32548.15160483022,
+        "classification": "AUTHORED_IN_PROCESS_NOT_EXCHANGE_THROUGHPUT"
+      },
+      "limitations": [
+        "Synthetic single-process measurements,not market latency or SLA",
+        "Throughput repetitions exclude JSON decoding;memory pass includes decoding",
+        "RSS includes input,warmup and tracing instrumentation;not isolated production peak",
+        "No raw market data,observed source or persistence"
+      ]
+    },
+    "browser": {
+      "schema": "gig.atlas.final.browser.performance.v1",
+      "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+      "warmups": 1,
+      "repetitions": 3,
+      "samples": [
+        {
+          "initial_navigation_and_settle_ms": 760.606084,
+          "stock_route_ms": 155.951141,
+          "health_roundtrip_ms": 9.483918999999787,
+          "script_seconds": 0.128785,
+          "task_seconds": 0.344883,
+          "used_js_heap_bytes": 4749076,
+          "dom_nodes": 1191,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-Kz7u3ikp.js",
+              "bytes": 236210
+            },
+            {
+              "path": "/assets/ResearchDesk-BZcujSqm.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-BVrwTy34.js",
+              "bytes": 2323
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 757.8728330000004,
+          "stock_route_ms": 147.48052000000007,
+          "health_roundtrip_ms": 10.56349500000033,
+          "script_seconds": 0.140007,
+          "task_seconds": 0.323093,
+          "used_js_heap_bytes": 5080468,
+          "dom_nodes": 1192,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-Kz7u3ikp.js",
+              "bytes": 236210
+            },
+            {
+              "path": "/assets/ResearchDesk-BZcujSqm.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-BVrwTy34.js",
+              "bytes": 2323
+            }
+          ]
+        },
+        {
+          "initial_navigation_and_settle_ms": 769.4559679999998,
+          "stock_route_ms": 146.59278199999972,
+          "health_roundtrip_ms": 4.750684000000547,
+          "script_seconds": 0.154585,
+          "task_seconds": 0.340715,
+          "used_js_heap_bytes": 4563748,
+          "dom_nodes": 1285,
+          "initial_scripts": [
+            {
+              "path": "/assets/index-Kz7u3ikp.js",
+              "bytes": 236210
+            },
+            {
+              "path": "/assets/ResearchDesk-BZcujSqm.js",
+              "bytes": 4497
+            },
+            {
+              "path": "/assets/marketContract-DM0W2FhH.js",
+              "bytes": 1813
+            },
+            {
+              "path": "/assets/directoryContract-BVrwTy34.js",
+              "bytes": 2323
+            }
+          ]
+        }
+      ],
+      "browser": "154.0.8037.57",
+      "limitations": [
+        "Isolated Chromium contexts with disabled cache;browser process reused",
+        "Navigation includes networkidle wait;not pure rendering latency",
+        "CDP sampled JS heap,not native/GPU memory or long-run growth",
+        "Loopback fake providers;no Android/external Codespaces acceptance"
+      ]
+    },
+    "initial_entry": {
+      "path": "terminal/web/dist/assets/index-Kz7u3ikp.js",
+      "bytes": 236210,
+      "sha256": "6c9f0dfab7c649718a7e61c09f03c37ab5b40dd08eb9c4117466e7a4dfce1a37",
+      "gzip_bytes": 73005
+    }
+  },
+  "packaging": {
+    "source_archive": {
+      "schema": "gig.atlas.final.source_archive.v1",
+      "source_commit": "f1516d03c66ee97850e1b4a7a0add9e90e9a607b",
+      "source_worktree_clean": true,
+      "source_date_epoch": "1793318877",
+      "two_archives_byte_identical": true,
+      "members": 852,
+      "archives": [
+        {
+          "path": "build/final-master/sdist-a/gig_microstructure-0.1.1.tar.gz",
+          "bytes": 2705295,
+          "sha256": "773ca360bf89201e5eeeed019528968362b585ae5ff168735ad173717ec6bc0c"
+        },
+        {
+          "path": "build/final-master/sdist-b/gig_microstructure-0.1.1.tar.gz",
+          "bytes": 2705295,
+          "sha256": "773ca360bf89201e5eeeed019528968362b585ae5ff168735ad173717ec6bc0c"
+        }
+      ],
+      "scope": "Implementation snapshot;final report-only commit follows. No private data,secrets,compiled binaries or ignored build artifacts."
+    },
+    "inventory": {
+      "path": "build/final-master/sdist-inventory.json",
+      "bytes": 135569,
+      "sha256": "0d98070db4d29885c734ec80ea922eb7837d40c1d8a00b54daccd8d5fe47060d"
+    },
+    "scope": "Clean implementation checkout;final closure-only docs are a following commit"
+  },
+  "changed_implementation_files": [
+    {
+      "path": ".github/workflows/atlas-native-arm64.yml",
+      "bytes": 9631,
+      "sha256": "87002f876e8efaa1433bb95bc949e60126b93447652a09a5cc14bb2cb49851b4"
+    },
+    {
+      "path": "docs/final_release/FINAL_OWNER_ACCEPTANCE.md",
+      "bytes": 7404,
+      "sha256": "182edc3a8c459b6bcd674989a23b50674f154395288528b04987d37d50d660eb"
+    },
+    {
+      "path": "docs/final_release/REQUIREMENT_MATRIX.md",
+      "bytes": 9708,
+      "sha256": "f6f9ad92b73a4010107a16179e86ca332280155837351d8ae47b52226ac27f48"
+    },
+    {
+      "path": "scripts/qualify_atlas_offline.py",
+      "bytes": 8397,
+      "sha256": "2952b6c08f63c8c602447e132a52be18819b19ba638a1f8b426533224a714437"
+    },
+    {
+      "path": "scripts/qualify_sec_sources.py",
+      "bytes": 16559,
+      "sha256": "674eeda1f28f8daa72bb53278190f847fd967ec03c8223533f12b963c019bd27"
+    },
+    {
+      "path": "scripts/start_terminal.sh",
+      "bytes": 1095,
+      "sha256": "21f3875b491e89241a437a336070ec1858e3e45234885d74402fe7634bfc8fd2"
+    },
+    {
+      "path": "terminal/server/requirements.txt",
+      "bytes": 300,
+      "sha256": "b1c9eb72be8d052e6ea9552977ed983883366b06043ca267c20ae55e3c65d8e0"
+    },
+    {
+      "path": "terminal/stocks/live.py",
+      "bytes": 21290,
+      "sha256": "842148c5a69148446571b5c3460178bfc0b550088c134aa679850a831fe2c004"
+    },
+    {
+      "path": "terminal/stocks/qualification.py",
+      "bytes": 12923,
+      "sha256": "73c135e71f6e7620a7d9febed15e964459e1682c5d754d048713db0fd7557171"
+    },
+    {
+      "path": "terminal/stocks/sec_identity.py",
+      "bytes": 2467,
+      "sha256": "52e09b9bbcc5ca5ec0822a78285ab6c79f9ceaecdacae4f0f1a45e14292c6b9a"
+    },
+    {
+      "path": "terminal/stocks/service.py",
+      "bytes": 28262,
+      "sha256": "4608445aacf1bfd987302a54cfff529d0289639f60eaa3137a2661d59d8dfb37"
+    },
+    {
+      "path": "terminal/stocks/test_sec_directory_boundary.py",
+      "bytes": 9628,
+      "sha256": "4bbd66b51b3f222f07e097175267123f30bafa24bb687ae99aa9ae8504601b9c"
+    },
+    {
+      "path": "terminal/stocks/test_sec_integration.py",
+      "bytes": 10352,
+      "sha256": "921ff45a60fdbe936f268b1925547c2a44bd0fa7479c1b94b26c8a57bba40f64"
+    },
+    {
+      "path": "terminal/test_atlas_arm64_policy.py",
+      "bytes": 1511,
+      "sha256": "b3bcec2abe2d2e63a7054f2c8cbae4937b6c34b26c095b8e155ce6d381c0460b"
+    },
+    {
+      "path": "terminal/tests/mobile-camera-validation.mjs",
+      "bytes": 4994,
+      "sha256": "669acfba8996f176b79403628aa831e44465da42957cf0a9a78e935a21f31c97"
+    },
+    {
+      "path": "terminal/tests/product-validation.mjs",
+      "bytes": 9155,
+      "sha256": "3210be5a3680f95451a8fa36db983a6ed1a2430eab9b9ec4ba6d5bc8a6618370"
+    },
+    {
+      "path": "terminal/tests/product_fixture_server.py",
+      "bytes": 1708,
+      "sha256": "962bd4565b0095a20d45ebe2575a854dec0951b0c3355566c42b9ba6480880d5"
+    },
+    {
+      "path": "terminal/tests/run_source_qualification_suite.py",
+      "bytes": 1040,
+      "sha256": "751636421c19aa1967add6edc5dfd35624a3dca6ef590871f59b88319a30510b"
+    },
+    {
+      "path": "terminal/web/src/QuoteCloud.tsx",
+      "bytes": 10513,
+      "sha256": "bf003d16c3fda99127cb51b0f4420f70099442ae485f28ec72ecc5fdf8ab94ff"
+    },
+    {
+      "path": "terminal/web/src/UniverseWorkspace.tsx",
+      "bytes": 7671,
+      "sha256": "1edaf731fda1ffa945c38d73d2cc9e9b7ceaf32edf224ca70d42fb7c2cce5295"
+    },
+    {
+      "path": "terminal/web/src/directoryContract.test.ts",
+      "bytes": 2583,
+      "sha256": "5844b11c92146e86cb82925fe3c13e501b671840bbdda2af98a1b38d49a4324a"
+    },
+    {
+      "path": "terminal/web/src/directoryContract.ts",
+      "bytes": 3509,
+      "sha256": "0816e10f33e680caf8e1be9454b143b0517f9f1015327f7c4f9815ee1c56d353"
+    },
+    {
+      "path": "terminal/web/src/marketGeometry.test.ts",
+      "bytes": 3074,
+      "sha256": "fa10e90cdb04da2523e5e807c7c7856707e5971cfddf369e83ae93e0969942c5"
+    },
+    {
+      "path": "terminal/web/src/marketGeometry.ts",
+      "bytes": 2372,
+      "sha256": "c1156e408a3b12ad19d7cc3f068281000fa60c643bd7bd7902bcd811c184d0df"
+    }
+  ],
+  "closure_document_files": [
+    "docs/final_release/FINAL_ENGINEERING_REPORT.md",
+    "docs/final_release/evidence.json",
+    "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+    "docs/completion/COMPLETION_MATRIX.md",
+    "docs/product/PRODUCT_COMPLETION.md",
+    "docs/milestones/RELEASE_READINESS.md",
+    "docs/milestones/OPERATIONAL_QUALIFICATION_RUNBOOK.md"
+  ],
+  "logs": [
+    {
+      "path": "build/final-master/before-pypi-advisory.log",
+      "bytes": 389,
+      "sha256": "73bf289facaa31500e91d62990fc61bf1eab95d9b6694c5f20124c61b9281927"
+    },
+    {
+      "path": "build/final-master/before-security-source-measurements.log",
+      "bytes": 1832,
+      "sha256": "089a4b473116c19ff74e7c7e8a5f746d7048cee871901b63fbedc4f0ae8e6017"
+    },
+    {
+      "path": "build/final-master/browser-final.log",
+      "bytes": 560,
+      "sha256": "7659a1f6044fb0941bc24e93c9a283105460f4263bddbd6dd55e17e4b2165c4f"
+    },
+    {
+      "path": "build/final-master/browser-mobile-extension.log",
+      "bytes": 27,
+      "sha256": "212b8af66b6a067d14676f4ee83c4aae1a0d2375e99182b9d9e75bc9de1abc9c"
+    },
+    {
+      "path": "build/final-master/browser-mobile-final.log",
+      "bytes": 27,
+      "sha256": "212b8af66b6a067d14676f4ee83c4aae1a0d2375e99182b9d9e75bc9de1abc9c"
+    },
+    {
+      "path": "build/final-master/browser-qualified.log",
+      "bytes": 587,
+      "sha256": "4b5c14c8169723a440505590f7de306f5573f0f6ab668d638e97d85f62f27b69"
+    },
+    {
+      "path": "build/final-master/browser.log",
+      "bytes": 560,
+      "sha256": "7659a1f6044fb0941bc24e93c9a283105460f4263bddbd6dd55e17e4b2165c4f"
+    },
+    {
+      "path": "build/final-master/clang-asan-ubsan-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/final-master/clang-asan-ubsan-test.log",
+      "bytes": 20189,
+      "sha256": "576f0926822dc8cd0dfb156d0a42fd3bed2a48d73b4f2a282f07d048cfc5b954"
+    },
+    {
+      "path": "build/final-master/clang-debug-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/final-master/clang-debug-test.log",
+      "bytes": 20179,
+      "sha256": "d9902c31f65d5ec5592170cdfe1ce5b820ab07bfcf7c5ee3ecc98c4d7fc476a5"
+    },
+    {
+      "path": "build/final-master/clang-release-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/final-master/clang-release-test.log",
+      "bytes": 20183,
+      "sha256": "2e837068b703c7d06dbbc420c9392dd2de3f52c1b834bb70a28aacf425643efc"
+    },
+    {
+      "path": "build/final-master/frontend-final.log",
+      "bytes": 7712,
+      "sha256": "edef2b673391b957826d8647673c41fdbd4275c15a941f67027233926a2dde92"
+    },
+    {
+      "path": "build/final-master/frontend.log",
+      "bytes": 7532,
+      "sha256": "01e090ff084c036e76b34fb4a8892a72f7920a656f97ab609ff26e04cd07941d"
+    },
+    {
+      "path": "build/final-master/gcc-asan-ubsan-build.log",
+      "bytes": 7613,
+      "sha256": "a05e1b9615418dd2631f6e424a846638de4d198595ae693e6fadb660cc4ecbca"
+    },
+    {
+      "path": "build/final-master/gcc-asan-ubsan-test.log",
+      "bytes": 17283,
+      "sha256": "0ccf640459c70ec1c7d80351212ad4bfa1467f3cea4412189ed407e1bf4f1a6f"
+    },
+    {
+      "path": "build/final-master/gcc-debug-build.log",
+      "bytes": 7608,
+      "sha256": "19d4c0ae39f48b55fad8e8b82479cf2e602f06bbb7360e2d3c50922edf980680"
+    },
+    {
+      "path": "build/final-master/gcc-debug-test.log",
+      "bytes": 17273,
+      "sha256": "073dc0951b81a9a815b353660893dac82df93f75695284117f42eae9425502ca"
+    },
+    {
+      "path": "build/final-master/gcc-python-asan-ubsan-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/final-master/gcc-python-asan-ubsan-test.log",
+      "bytes": 20704,
+      "sha256": "ec61b2718ab384ea81ce25e1b4f73593589f3ceaf795a751b74495351ea76a24"
+    },
+    {
+      "path": "build/final-master/gcc-python-debug-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/final-master/gcc-python-debug-test.log",
+      "bytes": 20563,
+      "sha256": "cb556f8b7c7b4beeab8be01f065c46da86acd8d760c019b2ef6e15c031345a83"
+    },
+    {
+      "path": "build/final-master/gcc-python-release-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/final-master/gcc-python-release-test.log",
+      "bytes": 20567,
+      "sha256": "8d7934066f9de660d61a074d0c532ad52d4d2f6fd3c2ab0f848c039bb82cd274"
+    },
+    {
+      "path": "build/final-master/gcc-release-build.log",
+      "bytes": 7319,
+      "sha256": "18295944c1defa652874c97ccf22f285a2adb3afb26f54e8052631007c733359"
+    },
+    {
+      "path": "build/final-master/gcc-release-test.log",
+      "bytes": 17277,
+      "sha256": "69fba55ed34cd10b735f65cd431e6131ce3601f47c933fc946502982fb2e08d7"
+    },
+    {
+      "path": "build/final-master/geometry-before.log",
+      "bytes": 2630,
+      "sha256": "97d8070daaadec94d81cbf830dafbbea2a29f03c6136f84847e231e840c5b189"
+    },
+    {
+      "path": "build/final-master/metadata-budget-before.log",
+      "bytes": 1776,
+      "sha256": "83c40c27e171ecf84714309548b0f849c0df9e7222a5192a562e4b5375b483e6"
+    },
+    {
+      "path": "build/final-master/msgpack-after.log",
+      "bytes": 702,
+      "sha256": "7c4f5581bb61355236494cb32bd6a50b04be2b3e48487b2bd4048a1b6ae2b355"
+    },
+    {
+      "path": "build/final-master/msgpack-before.log",
+      "bytes": 2364,
+      "sha256": "cdf542c494cae19083a79b46f2d76a56efe4632e80b894fbb78a53c093894f7c"
+    },
+    {
+      "path": "build/final-master/msgpack-update.log",
+      "bytes": 888,
+      "sha256": "d99527a2b05eb9caadb855c32c713e37ab216bdbf7cd583ec0e3d7e6b196f42a"
+    },
+    {
+      "path": "build/final-master/native-matrix.log",
+      "bytes": 2974,
+      "sha256": "d76652029c7ac36a103ecaf42ea3f1dc6b21d957b6a9c369fa978a767e4d4556"
+    },
+    {
+      "path": "build/final-master/native-python-matrix.log",
+      "bytes": 1526,
+      "sha256": "f1cad9c696249908ecfef2e98d0eb08fa28254bcf132bf4ec3c64ed49cb6e815"
+    },
+    {
+      "path": "build/final-master/npm-audit-stderr.log",
+      "bytes": 208,
+      "sha256": "45342ca54fc3787657ce6eb4dbe6d4510cbf68d24318d44416c0176ab31ebf4b"
+    },
+    {
+      "path": "build/final-master/package-result.log",
+      "bytes": 718,
+      "sha256": "fb114720c50e14231b28228f7187ab94d7168eacdfa017de3106d9cde552c13b"
+    },
+    {
+      "path": "build/final-master/packaging.log",
+      "bytes": 101,
+      "sha256": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424"
+    },
+    {
+      "path": "build/final-master/pypi-advisory.log",
+      "bytes": 389,
+      "sha256": "691e14aec2882f66d8e7be7624252d741eaed079aaa80fee599dc755bc375162"
+    },
+    {
+      "path": "build/final-master/python-matrix.log",
+      "bytes": 4046,
+      "sha256": "224f480484e3323ee66fb8ae60ed86523d6a9ea81f06dbe55007a9eb83d4928f"
+    },
+    {
+      "path": "build/final-master/sdist-a.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/final-master/sdist-b.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "build/final-master/sdist-inventory.log",
+      "bytes": 81,
+      "sha256": "c6c04267ec767a69640df2a241403d12415fb185f32f15d90d47054df2b754ea"
+    },
+    {
+      "path": "build/final-master/sec-boundary-before.log",
+      "bytes": 3289,
+      "sha256": "863993b22a21f5586d6dc1c4d6286797146bc49b81de52f7d5e9f32d08216691"
+    },
+    {
+      "path": "build/final-master/sec-boundary-targeted.log",
+      "bytes": 2608,
+      "sha256": "9f1f1905c6e3e483c713bb960cfbc39ea023484b772bb5b7257ca11726606d29"
+    },
+    {
+      "path": "build/final-master/security-final.log",
+      "bytes": 383,
+      "sha256": "31180c530b56a822686cd8c688bf2073e418bcf6d38442206890c08f3927bab7"
+    },
+    {
+      "path": "build/final-master/security.log",
+      "bytes": 383,
+      "sha256": "d41fcdce26e2afe61520a48782fad627aba0fa3ab9493e8ee19f04f23b0d8ea7"
+    },
+    {
+      "path": "build/final-master/source-measurements.log",
+      "bytes": 1857,
+      "sha256": "6fc19583aabdad74b6e6f5e0ce8f29dd4ed61cf73d5705bc38fc37d81f499163"
+    },
+    {
+      "path": "build/final-master/sources-debug-final.log",
+      "bytes": 16790,
+      "sha256": "4373036b4d5039bad3e30a230e4df93393333e4ad759dd2685d3f4fc7bd9443d"
+    },
+    {
+      "path": "build/final-master/sources-debug.log",
+      "bytes": 16790,
+      "sha256": "f921f110aeb41fdde52b70f75b78b546dd2fdeb3d34d9d57f928c9db9e4ba0b4"
+    },
+    {
+      "path": "build/final-master/sources-release-final.log",
+      "bytes": 16790,
+      "sha256": "2a509eeb3018fbaa736b9793a0f20930e1e702f8ae65f94718b7777fd3d099d4"
+    },
+    {
+      "path": "build/final-master/sources-release.log",
+      "bytes": 16595,
+      "sha256": "640a620dae6c92cfebc13e635f9a5a141872a020766548e02211eff4178fdd04"
+    },
+    {
+      "path": "build/final-master/sources-sanitizer-final.log",
+      "bytes": 17184,
+      "sha256": "4dae38c49cbde75c227b99ad6c96e5d96eff11874d336541e4959ecd896ee7f3"
+    },
+    {
+      "path": "build/final-master/sources-sanitizer.log",
+      "bytes": 17472,
+      "sha256": "4255b3ca1056ae58792cd1efffb42abfd331506f09b23cd65be001a1ac2b0580"
+    },
+    {
+      "path": "build/final-master/startup-result.log",
+      "bytes": 904,
+      "sha256": "de52bb84d8dcb9b1e495049bb381eb13e7d2d4bac0698169504aea4f1597beb2"
+    },
+    {
+      "path": "build/final-master/stocks-debug-final.log",
+      "bytes": 35123,
+      "sha256": "ddc31928e756d71d8f5285aa533a25c5481986ac376751b3c4b1d2e24010ceed"
+    },
+    {
+      "path": "build/final-master/stocks-release-final.log",
+      "bytes": 35123,
+      "sha256": "ef2d5bed61ecc1a85d8d0cc7697b15538ef0d18ec670d5ab7dc8e3d19030c0f0"
+    },
+    {
+      "path": "build/final-master/stocks-sanitizer-final.log",
+      "bytes": 35141,
+      "sha256": "6561b08dd4c787d3541512fad06aa72f50df22d88c3eadf2dc93a3ddc514098a"
+    },
+    {
+      "path": "build/final-master/terminal-debug-final.log",
+      "bytes": 40682,
+      "sha256": "79fa09af0b7892d5390ee8f02b19cea17fa81efa38a9f91b06093050eab31f1b"
+    },
+    {
+      "path": "build/final-master/terminal-release-final.log",
+      "bytes": 40306,
+      "sha256": "cef8632a4393a35fcae861cdc676231a9a21f7fed701cc57db5727279379bf38"
+    },
+    {
+      "path": "build/final-master/terminal-sanitizer-final.log",
+      "bytes": 41063,
+      "sha256": "8501c23bdfc9797ac2eb46c9e82cc4144466294d8bad5d2d826410450b925861"
+    },
+    {
+      "path": "build/final-master/tls-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/final-master/wheel.log",
+      "bytes": 113,
+      "sha256": "2afe51026489791b57a455a51f0efc133f9976e77800737f4a76bbd33f3caf58"
+    },
+    {
+      "path": "build/final-master/security-final/packaging.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "build/final-master/security-final/python-matrix.log",
+      "bytes": 4179,
+      "sha256": "70b5d1df623baf700681f2a96ea3d359088cbed932674559573133dd7ec6e1e2"
+    },
+    {
+      "path": "build/final-master/security-final/security.log",
+      "bytes": 383,
+      "sha256": "0fccc0b367e4f5b8b967000a3cb0921d68c61f30edf0f91e8003e147d0239699"
+    },
+    {
+      "path": "build/final-master/security-final/sources-debug-final.log",
+      "bytes": 17160,
+      "sha256": "80477353ebe634e7e7b431edc9f6cb179b12ae033af5e5ef10e722b9f4d695a2"
+    },
+    {
+      "path": "build/final-master/security-final/sources-release-final.log",
+      "bytes": 17160,
+      "sha256": "44fc690cb61e3ca95947e6a479a1deb94de00f5c238c38b6c67f4ee8096ad58c"
+    },
+    {
+      "path": "build/final-master/security-final/sources-sanitizer-final.log",
+      "bytes": 17554,
+      "sha256": "e6e29a8fceb357bbf20f59f478d46a3e61406e02442ac07e77b69b59693992c1"
+    },
+    {
+      "path": "build/final-master/security-final/stocks-debug-final.log",
+      "bytes": 35123,
+      "sha256": "00cdbffd45818a2f6d0a9d8573390922c23d20ef8dc6a33f09a69dfa20187e03"
+    },
+    {
+      "path": "build/final-master/security-final/stocks-release-final.log",
+      "bytes": 35123,
+      "sha256": "f01b0b86bca52cc0d29518418e1c944c2a2b4d0092ba4078991ec4d6430386b5"
+    },
+    {
+      "path": "build/final-master/security-final/stocks-sanitizer-final.log",
+      "bytes": 35141,
+      "sha256": "9bda508d5f282ffc5fd19818c031da66f8814d496f524166c4497c0f8b94cfc3"
+    },
+    {
+      "path": "build/final-master/security-final/terminal-debug-final.log",
+      "bytes": 40306,
+      "sha256": "08b48aafb7c098cc8f3f6780a9a8dee2e79e4eaf8bec2fa8f43da779f8cf0d49"
+    },
+    {
+      "path": "build/final-master/security-final/terminal-release-final.log",
+      "bytes": 40306,
+      "sha256": "00782801f12a424338478336279a44b96540795e5d7f5d6bf1828fd5868be08b"
+    },
+    {
+      "path": "build/final-master/security-final/terminal-sanitizer-final.log",
+      "bytes": 41063,
+      "sha256": "6c01a6b5a900a93fb0eebbcb694fc45b9b6b6c5bf025ea0f4e3eec599bf295ee"
+    },
+    {
+      "path": "build/final-master/security-final/tls-stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/final-master/security-final/wheel.log",
+      "bytes": 113,
+      "sha256": "da9b215fcd1a6101552d14bb8341f6ea6a92b4c8cf5971cd9d1dee9aa04423c8"
+    },
+    {
+      "path": "build/final-master/browser-qualified/advanced-research-validation.log",
+      "bytes": 9400,
+      "sha256": "82d03b818f518b7e8b380ae9d5a58c5deb578107f47bab77807d7783a3ea8f1a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas-final-validation.log",
+      "bytes": 1272,
+      "sha256": "5653cf5b79b4d887c7a551227b968cf1e22b00ba2ac3d289a6e78b65637bfda9"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas-validation.log",
+      "bytes": 3763,
+      "sha256": "ff92f093c0ff3b5f7a95c1d3c3788a699e9a7ba212b56bc395328ff8c2c5ea1a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas2-validation.log",
+      "bytes": 3204,
+      "sha256": "235dcb5afb726efd9e9b9937c9b903f8107306f1b7f531a027ec5b5030628c7d"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas2_fixture_server.log",
+      "bytes": 22040,
+      "sha256": "bf92ab58668e4c37cbbbc5e638ab423e9f6621ace16f1f48c500c1529d7a814f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas4-validation.log",
+      "bytes": 2142,
+      "sha256": "d1f8591e3b7fe94e14478789b9f49046497e259f11b83658fdd15fe3a76ba435"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas4_fixture_server.log",
+      "bytes": 9676,
+      "sha256": "055071277c728719f08419140dfd52b66656032cd2e3a8403dc2ecc511a85d6c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas5-validation.log",
+      "bytes": 1561,
+      "sha256": "2157bdfab404290ee05a64f6357d9398d4cedb67edc9391c1d2ba831dad76257"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas5_fixture_server.log",
+      "bytes": 8199,
+      "sha256": "53abc83dc310a99da3cbdc0f526a92e7208d3ab3af8b631bf808f4cbfa991d04"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas_final_fixture_server.log",
+      "bytes": 7112,
+      "sha256": "c62b10cfaafe82629ec0262c715c0b86f64ca4b5c27ce4b5dc75dd58c4ddcc40"
+    },
+    {
+      "path": "build/final-master/browser-qualified/atlas_fixture_server.log",
+      "bytes": 34810,
+      "sha256": "15578565d8e0e9b89dac3e27123fdbe919766f95363d132747309887539c7489"
+    },
+    {
+      "path": "build/final-master/browser-qualified/browser-validation.log",
+      "bytes": 6366,
+      "sha256": "033e710482d20ef6e15a250eabc1c84a11af963c46dde885cf4041732e051576"
+    },
+    {
+      "path": "build/final-master/browser-qualified/build.log",
+      "bytes": 2186,
+      "sha256": "806634daf0cce4ec79b4f2847886073dbb1639b3d9d023b4e0101250ea3df820"
+    },
+    {
+      "path": "build/final-master/browser-qualified/discovery-validation.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/gpu-quote.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    },
+    {
+      "path": "build/final-master/browser-qualified/gpu-recovery-validation.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/final-master/browser-qualified/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/final-master/browser-qualified/live-market-validation.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/live_market_fixture_server.log",
+      "bytes": 11916,
+      "sha256": "df7b316b2c574ad120d282e304629f62e4d5231c4adb5ab9d776a302deafc73b"
+    },
+    {
+      "path": "build/final-master/browser-qualified/market-unavailable-validation.log",
+      "bytes": 166,
+      "sha256": "5d163b4689601eefd035b811ebb264202e8a43fb8fc5dd80c9aa2d1a817503ef"
+    },
+    {
+      "path": "build/final-master/browser-qualified/mobile-camera-validation.log",
+      "bytes": 377,
+      "sha256": "4e384b44ee48a5867b6e83958dbe4e57259f92927c48dd0df6407c4a07f3115c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/native.log",
+      "bytes": 43417,
+      "sha256": "766d2474edea0f5be0cd4861536e1d4f1a49b1c4b54950e10d61d908a2da6e74"
+    },
+    {
+      "path": "build/final-master/browser-qualified/performance.log",
+      "bytes": 2678,
+      "sha256": "1023d16acc9da8c4d4640f09f3f7b6ab646a31109f80b7d02664453f19bf9c91"
+    },
+    {
+      "path": "build/final-master/browser-qualified/phase-next-validation.log",
+      "bytes": 883,
+      "sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0"
+    },
+    {
+      "path": "build/final-master/browser-qualified/phase_next_fixture_server.log",
+      "bytes": 28833,
+      "sha256": "af442197471dec2e6083663eba403dacebbb3834b7b0ea3590169717bae6a932"
+    },
+    {
+      "path": "build/final-master/browser-qualified/product-validation.log",
+      "bytes": 106,
+      "sha256": "f875b9028a0f349559f2ec4991a3f79677cbc26b4d6b163771c8fba51685ac4d"
+    },
+    {
+      "path": "build/final-master/browser-qualified/ratio-history-validation.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/final-master/browser-qualified/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/final-master/browser-qualified/sec-completion-validation.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/final-master/browser-qualified/sec-integration-validation.log",
+      "bytes": 1126,
+      "sha256": "2386e56333873146b3fef6aa66dfbff23430b453a51da098550da871159cf83b"
+    },
+    {
+      "path": "build/final-master/browser-qualified/sec_fixture_server.log",
+      "bytes": 8775,
+      "sha256": "f4432054636b4306c80589c4a01fbfd4c77aea46f1da3a37132bdf17cbd445fc"
+    },
+    {
+      "path": "build/final-master/browser-qualified/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/final-master/browser-qualified/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "path": "build/final-master/browser-qualified/stock_fixture_server.log",
+      "bytes": 13873,
+      "sha256": "71f6416b331731d61453a7e1c8e0806d63aa986adde2581e1a846f6b044f115a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace-qualification.log",
+      "bytes": 4355,
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/canyon-synthetic-desktop.png",
+      "bytes": 156744,
+      "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/dome-synthetic-desktop.png",
+      "bytes": 143319,
+      "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/events-synthetic-desktop.png",
+      "bytes": 147430,
+      "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/flow-synthetic-desktop.png",
+      "bytes": 156293,
+      "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/height-synthetic-desktop.png",
+      "bytes": 152889,
+      "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/iex-authored-dome.png",
+      "bytes": 160961,
+      "sha256": "47464726be42dea091382ceee9d5450dbbee9ec579382f7a2c9d766570de123a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/iex-authored-ribbon.png",
+      "bytes": 141053,
+      "sha256": "5b07a90633f1977d11efddd9402ef0b2a1b666cf06367c29e02e42a6ef9a5270"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/ribbon-synthetic-desktop.png",
+      "bytes": 144403,
+      "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "bytes": 140403,
+      "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "bytes": 136288,
+      "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/vwap-synthetic-desktop.png",
+      "bytes": 137378,
+      "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/advanced-3d/wheel-synthetic-desktop.png",
+      "bytes": 153153,
+      "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-1280.png",
+      "bytes": 280776,
+      "sha256": "a87079420cad3de310660b728ee40989e8b00bb3cba0b7d9845cf97b3e0c5848"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-1920.png",
+      "bytes": 288781,
+      "sha256": "ef158de907e171f4847ac0c025382cb5f141a41adf07b1b1d9bff79d82cb8d0a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-360.png",
+      "bytes": 256707,
+      "sha256": "362078f473329dfea76b16c47d6813abe4c6fe4708096764776e33f01148ad66"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-390.png",
+      "bytes": 258632,
+      "sha256": "8d00b1edabfe0c5704e151a85499883b826dc685c564463d20f381e1927c6be4"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-dark-768.png",
+      "bytes": 252453,
+      "sha256": "e4421125d939042e13b950d5bf664396cb996ee3b8abc73eb76fa515593e6a5e"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-light-1280.png",
+      "bytes": 288159,
+      "sha256": "a67bf91e60dcd39c655b8a9678293cdd7ab6c023d5a10ab061d8c218d6ec1c54"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-ratios-dark.png",
+      "bytes": 349453,
+      "sha256": "83e895c27098a124b03f1bfaabee5e1ced6b677dc1a808712d2562c1e96d3371"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-trends-dark.png",
+      "bytes": 316463,
+      "sha256": "48238ac177bfd2cd4f80a2f0d1a08ee738c3f70b674b8c05ff1a9cfc7fafa7b2"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-viewport-1280.png",
+      "bytes": 135967,
+      "sha256": "a0cc6366a4f52fb9f300a217cf5865abaeb095252bab9d24b73446547fe5d235"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas/visual/financial-viewport-390.png",
+      "bytes": 62544,
+      "sha256": "0285351573834a050f4175b4a7a9c9ed67f68e2260c2f41b966fc04226ac8bc7"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/command-center-dark.png",
+      "bytes": 186483,
+      "sha256": "439532ad61ec36075c49ed17b49ca4fc2b7c97ecf8e1c1826a87fe68e0e5f7b7"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/command-center-light.png",
+      "bytes": 190072,
+      "sha256": "03ef971dff38c1d00c951d5568e72265bfa1a488799586d6c9eed1aef85e3b71"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 193422,
+      "sha256": "701e185a647aaeda72d5067410f787b2af90f8b508fa4d24bfd51e5acb7da602"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/filings-dark.png",
+      "bytes": 227323,
+      "sha256": "8e8687c2513753053db784a43d6967fe8be6c66165c1ec19ce3ecf026e8bc03c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 302604,
+      "sha256": "daa02f5cb96939292e3b9a5fa642ac3227ffbfb65087d72d2b3f74d931cd0603"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 332974,
+      "sha256": "7e435443e590f70330f337d20cac8d197d2b088ae39b61f22956bacc95c99629"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 355664,
+      "sha256": "f0fee64fa2a485fcf85d0b686147f425d4940b15407a2181014159442f250320"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/microstructure-dark.png",
+      "bytes": 358631,
+      "sha256": "78450e1874ec4320e4518f83b655dc5c718bd9b1e06caf7440eac966f1770e69"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/operations-dark.png",
+      "bytes": 209853,
+      "sha256": "b6898c8c94463ceb7be954c87bdf103e0644d619b4de20feb2bf9ef1bb51dac5"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/operations-light.png",
+      "bytes": 217020,
+      "sha256": "5ae35b5e31c134928460ceb86edf48e8671e50abb9c54bbbe552f3849da21012"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/research-dark.png",
+      "bytes": 258443,
+      "sha256": "43e54b381197c1cbdbbfb9d51fe99febd5934662d96614f8b998189eea469177"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 474495,
+      "sha256": "6219a2941219ff612cc0702455c997259f9693b0e9631dd7c715f3dc8cebc083"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 448045,
+      "sha256": "8677ad3e3cf2da65805abc87d8f7d8d215d6fd0cac80f39e99aad10df7770c12"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 460034,
+      "sha256": "31de41ef33d52e3698876add9113cbbdc471e3896224184b7ae51c40b179b4ff"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/aligned-statements-dark.png",
+      "bytes": 379107,
+      "sha256": "7d97afd07c1773ea54a8186e64432f26d9c2b3c16fa3295974d12084ef3e5b49"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-compact-dark.png",
+      "bytes": 157852,
+      "sha256": "47bf617fffa96dac75627df651a30990aec5c9e43f1a12005bc5371042ce24b3"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-wide-dark.png",
+      "bytes": 191629,
+      "sha256": "f3e692fb1d7814b3879d63a214945a3be00c05c593e0cf7b4cdda4baf66524fd"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/command-center-wide-light.png",
+      "bytes": 195503,
+      "sha256": "80f24b2e77d210097f721d87185518ebaf5a8666a9d9386f3fb353ccef721e56"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/private-history-fixture.png",
+      "bytes": 511642,
+      "sha256": "8e7c89139db3f70b72c65973ccf9266abb2aed2f3a79f2a0eb1558d8fb4978fe"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-mobile-dark.png",
+      "bytes": 330759,
+      "sha256": "9c155d337108423c49a48774517546a6df04ebc0fec35b00a620b54a6491a19a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-mobile-light.png",
+      "bytes": 331676,
+      "sha256": "06d99ad569879850c36eb7a07cc3595939673c3e6c17edf398d4b5ee4db03d69"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas4/visual/risk-models-dark.png",
+      "bytes": 343443,
+      "sha256": "24922a4b81f6f11243b8b059ab603d2d06d030387181efafea93c2d865a1b397"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas5/visual/evaluation-dark.png",
+      "bytes": 494085,
+      "sha256": "e038805ab622c234513a380300bd2b57a0858426611e7e392b323ee4194bc0fe"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas5/visual/pinned-ingestion-dark.png",
+      "bytes": 566428,
+      "sha256": "cefa7bf9182cb8d21856fc502051cbd7b08682af30c26431e54af421419e8eae"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas5/visual/portfolio-dark.png",
+      "bytes": 415637,
+      "sha256": "98990e3e325577c93e8452c50d18bbfe330053d3d27974b85a4729d1e7f93782"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas5/visual/research-mobile-dark.png",
+      "bytes": 450838,
+      "sha256": "bc1a1b874705cc2ddcddfec975bf9ef4b87947aa9bcd60114480b8b3e9ffaf65"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/atlas5/visual/research-mobile-light.png",
+      "bytes": 447282,
+      "sha256": "0910d82e14edc0382151a157d26d417173cb04c7827e31d5996f074b988632d2"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/completion/default-gated-mobile.png",
+      "bytes": 273770,
+      "sha256": "94620d90606269f345be9930f6b566f09a18caa9fb7b95e65dea951bc36e9786"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/continuation/discovery-crwv-gated.png",
+      "bytes": 410409,
+      "sha256": "2d8a135e764908f12a1826008e1993d0e447052418447d6ff6d06fbd36d9aeca"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/development-next/operations-retention-synthetic.png",
+      "bytes": 214905,
+      "sha256": "2c87af0e996d6f4936d197c05912ec5966fedb73203ac0f894ea55dc80299282"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/final/visual/dataset-research-dark.png",
+      "bytes": 618602,
+      "sha256": "f4705802f5cff0a8b4fba8245a3f913c4bccc57edf3b9dabf0a74f50f9b92062"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/final/visual/final-mobile-dark.png",
+      "bytes": 262837,
+      "sha256": "dcf18bd8a42eb3b8ccf61effa1860e91f660fa43a42da51151a9b3e8691b3d10"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/final/visual/final-mobile-light.png",
+      "bytes": 264925,
+      "sha256": "e235765963a72da5b70546234c5ba3c86c663957253228bd0b0bcb216bd59f64"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/final/visual/garch-search-dark.png",
+      "bytes": 317490,
+      "sha256": "a721c4e60987f8985f279dbd99b0bbb01cf00d632b8f0feaf751c3da0a36c1cb"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/final/visual/return-command-center.png",
+      "bytes": 189593,
+      "sha256": "119322e220c4212b59ed1b70b795df41b22d7e74ecd49cd546310e12dfae6d73"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/live-market/live-market-desktop-synthetic.png",
+      "bytes": 598694,
+      "sha256": "a919aa87acfe16783d9715cb8c0fa958767a19f93a49465534be706ae1636bf1"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/live-market/live-market-mobile-synthetic.png",
+      "bytes": 661178,
+      "sha256": "b05463c6e67b0011172483f4d4c4b413155e70e26cc8c56eb635729e82ef2308"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/mobile-touch/advanced-replay-touch.png",
+      "bytes": 139549,
+      "sha256": "beaf5c97be5418271abb5ac190fa562570c956dc03086c20b286ff04607c981c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/mobile-touch/garch-modeled-touch.png",
+      "bytes": 65236,
+      "sha256": "289100fcaeb83b5029f2a377d02adb5c1c233ae28ef110ccab00bc5b846d844a"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/mobile-touch/level1-authored-touch.png",
+      "bytes": 63074,
+      "sha256": "10d61f4b5cfba6991097e59bd73fe6d560a2b89403a55dedc98e834356459375"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/phase-next/historical-comparison-synthetic.png",
+      "bytes": 175076,
+      "sha256": "78aeb7a1f65082edc2af137c55514ddb578291e630c9230b66e448b3fe9262e4"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/phase-next/historical-mobile-synthetic.png",
+      "bytes": 114289,
+      "sha256": "99dbc658ed7e289320482b61ddf838e1d35c3377387b19b846c536d1d4430072"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/command-center-after-synthetic.png",
+      "bytes": 158929,
+      "sha256": "1ea94a106350bee60a38b18f4051e83259e9546fdecb6061268f1c609167141f"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/command-center-mobile-after-synthetic.png",
+      "bytes": 64568,
+      "sha256": "0eb5a2ad8768ae8627a53d12f1cc75f27eedb624a6439de0241978f9e9915a91"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/command-center-mobile-light-after-synthetic.png",
+      "bytes": 63856,
+      "sha256": "9da9b97cd918430e63527b9efe758cae9d46f15a50a70e48bdccb2011a01b808"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/comparison-3d-after-synthetic.png",
+      "bytes": 82613,
+      "sha256": "9087128ebe49aed40646406e76e898dad2aa3c546ab023eac292580361758b5c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/model-surface-after-synthetic.png",
+      "bytes": 65385,
+      "sha256": "c76a0d68feb9b5868e100f36f17f4735ad6f8768b1ba18c0884ce4a0743083b1"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/quotes-3d-after-synthetic.png",
+      "bytes": 70145,
+      "sha256": "972c65532cc488f8b665dfa6dff0b653b9306e437c2b3557c51ba9b4c1fdad8e"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/sec-reference-subset-synthetic.png",
+      "bytes": 181677,
+      "sha256": "8a7b6c64aee465ade5a683de39b2a3a465e984e9b6cde05733e67ff2c561a1cc"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/trades-3d-after-synthetic.png",
+      "bytes": 71161,
+      "sha256": "0afad0c9ec797e32078bda9930886112b3e450905cebcbe2ff320c57717cb8cb"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/universe-after-synthetic.png",
+      "bytes": 150601,
+      "sha256": "9addb0dd83e794ac0ed315d8c661b3ad9c6d784d9fc763334d7035525db89f1e"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/product/volatility-3d-after-synthetic.png",
+      "bytes": 80796,
+      "sha256": "7aa9f6d284ae51d77d9aebe686ef4bf722967d4334b3cde9112260c0ceb1c18c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/scope-audit/ratio-history-synthetic-desktop.png",
+      "bytes": 124379,
+      "sha256": "37504f5a468f227164cc418f7bb96c7dee7738984f806ba60b20e3abfd7c6b28"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/scope-audit/ratio-history-synthetic-mobile.png",
+      "bytes": 56028,
+      "sha256": "d6aaa5a3689fc6795193aec3102908365d4a06d04a08fc80ead4ad98020b3121"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/sec-repair/visual/failed-refresh-cache-preserved.png",
+      "bytes": 403178,
+      "sha256": "ec5dd0d92d7b69ac651231c3edea7694e9265089404a89348d26782b27aaf8d3"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/sec-repair/visual/reported-aapl.png",
+      "bytes": 400539,
+      "sha256": "68f15ad060f835509ed2418b23c827009a6d8c1648f2edcfe787629f019cfdf5"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/sec-repair/visual/sec-mobile.png",
+      "bytes": 389662,
+      "sha256": "4d1ffa1db9cd44495b88c7d1f4e7838241a7cbc839dada57d15c679e86ce6bd7"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/terminal/browser/desktop-native-3d.png",
+      "bytes": 351855,
+      "sha256": "68db25ade2e7c68a2e85c29c8d3e597edb77970e6cf0b44161418ae9f975e0e4"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/terminal/browser/desktop-native-fallback.png",
+      "bytes": 317577,
+      "sha256": "9e7c1895b40e305c139b262418fa9850eeb71cef71c04620357818c16e16fd95"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/terminal/browser/desktop-native-simulation.png",
+      "bytes": 179466,
+      "sha256": "90d5a94fc447db28fff3fbdb2e3f35610ebe755a58c89fba250fc6de5ba48c7c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/terminal/browser/mobile-native-orderbook.png",
+      "bytes": 184254,
+      "sha256": "29b071235bc892e0ad4bdd242adff517376cebc20ef32cddf24105b4f958f10d"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/command-center-dark-1280.png",
+      "bytes": 133092,
+      "sha256": "6a61068b2757d42682829478f72af151bed97d0c5caf8e3459238eb2128f2e56"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/command-center-light-390.png",
+      "bytes": 65691,
+      "sha256": "b7f7a7246da58b6f9bb55dfa89390b3796c34247dc30c1bb2c50a491df6f689d"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/execution-simulator-dark-1280.png",
+      "bytes": 124054,
+      "sha256": "fdfb8746ae30563ac8afb7e43a9c3ae86cb044b68f5a70c9451dfc027108656c"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/historical-replay-dark-1280.png",
+      "bytes": 141748,
+      "sha256": "01be28c3e3c4cdbd1728124ebfeba5dd2a0c824ccdc238121bd3af8680542f86"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/live-markets-dark-1280.png",
+      "bytes": 122794,
+      "sha256": "9c9c96335d5ccccd3ffacd55c7f13ab98f1f7cbedfee56089f05b0bbe3d997c4"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/live-markets-light-390.png",
+      "bytes": 61023,
+      "sha256": "95ffba383ec1e8c9b869dd6447d282b96a26952f96c5d6544d5c51a93b5f62eb"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/market-depth-dark-1280.png",
+      "bytes": 141387,
+      "sha256": "7ed073858ab50f1365ebbead9d49c77a148ca36516ce0872bb14ae7de7b39017"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/multi-stock-comparison-dark-1280.png",
+      "bytes": 130029,
+      "sha256": "8145d03f3ac5053160edc503e4524b96059fce0dbe551837efa12890b3821649"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/operations-dark-1280.png",
+      "bytes": 161041,
+      "sha256": "810793c9c40f0222eb57c00fd03b25daf1bbc3ef3320e405c28b38fcb515f8c2"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/operations-light-390.png",
+      "bytes": 61797,
+      "sha256": "3098d2d0ba523dbe76085339c0cced1f40af955edb0cddc148d9133e6f68ec51"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/order-book-dark-1280.png",
+      "bytes": 140045,
+      "sha256": "79887d1e36f25bf7acaf1e1e247e41ba77ae663b0df34abb8e6fb4f82444c433"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/order-flow-dark-1280.png",
+      "bytes": 140415,
+      "sha256": "2420beff5b2c0b8be5cb1dc4ca18976c2fe98fc29c21ffa3e7123899459e0bdb"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/research-validation-dark-1280.png",
+      "bytes": 138979,
+      "sha256": "438373608a4962bb23e04215f7c0e3453829ce8a86f07ac61bf697c0e95f5e01"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/securities-universe-dark-1280.png",
+      "bytes": 128772,
+      "sha256": "9695c9cad1ae97bcdaf0d9a13e93c499fadcfe1c1f616aea2fa7b43b7cd53e6b"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/stock-intelligence-dark-1280.png",
+      "bytes": 135798,
+      "sha256": "e6210e2ba6d4894befa2a8ba42eba0ab9168250253d52adfdd3028fd5234f4a8"
+    },
+    {
+      "path": "build/final-master/browser-qualified/workspace/build/workspaces/stock-intelligence-light-390.png",
+      "bytes": 58199,
+      "sha256": "e24f228edfc4e8c35cdaeccb9bc33f930cd6950b9abf421b1e5d013cccb94ecf"
+    }
+  ],
+  "visual_review": {
+    "reviewed_current": [
+      "build/mobile-touch/level1-authored-touch.png",
+      "build/mobile-touch/advanced-replay-touch.png",
+      "build/product/sec-reference-subset-synthetic.png"
+    ],
+    "reviewed_pre_security_equivalent_TS": [
+      "build/atlas2/visual/financial-trends-dark.png"
+    ],
+    "scope": "Representative human/model visual inspection,not all99 individually reviewed",
+    "classification": "AUTHORED_NOT_ACTUAL_COMPANY_OR_PROVIDER_DATA",
+    "physical_device": false,
+    "physical_GPU": false,
+    "forced_clicks_added": false
+  },
+  "failures_preserved": {
+    "SEC": {
+      "path": "build/final-master/sec-boundary-before.log",
+      "bytes": 3289,
+      "sha256": "863993b22a21f5586d6dc1c4d6286797146bc49b81de52f7d5e9f32d08216691"
+    },
+    "metadata_budget": {
+      "path": "build/final-master/metadata-budget-before.log",
+      "bytes": 1776,
+      "sha256": "83c40c27e171ecf84714309548b0f849c0df9e7222a5192a562e4b5375b483e6"
+    },
+    "numeric_geometry": {
+      "path": "build/final-master/geometry-before.log",
+      "bytes": 2630,
+      "sha256": "97d8070daaadec94d81cbf830dafbbea2a29f03c6136f84847e231e840c5b189"
+    },
+    "msgpack": {
+      "path": "build/final-master/msgpack-before.log",
+      "bytes": 2364,
+      "sha256": "cdf542c494cae19083a79b46f2d76a56efe4632e80b894fbb78a53c093894f7c"
+    },
+    "before_public_advisories": {
+      "path": "build/final-master/before-pypi-advisory.json",
+      "bytes": 10146,
+      "sha256": "185445111c0cd8d0ae22085238faf94f3fcf1c3c5257e1aae8c1dc4a8b51185b"
+    },
+    "earlier_browser_campaign": {
+      "path": "build/final-master/browser-final/campaign.json",
+      "bytes": 48244,
+      "sha256": "65abf700224fe53e45eccfc383a863976dbcf4d844fe3b6a0ef145e5389aa12b"
+    },
+    "superseded_empty_input_touch_campaign": {
+      "path": "build/final-master/mobile-before-input-wait/campaign.json",
+      "bytes": 48244,
+      "sha256": "d0e23739726003e3d06afde3ef2347c87fd07082576e92bb0631e1d0ab658668"
+    }
+  },
+  "environment": {
+    "CPU": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "architecture": "x86_64",
+    "GCC": "14.2.0",
+    "Clang": "19.1.7",
+    "CPython": "3.12.14",
+    "Node": "24.19.0",
+    "Chromium": "154.0.8037.57",
+    "renderer": "SwiftShader",
+    "msgpack": "1.2.3",
+    "enforced_network_policy": "No SEC/Alpaca hosts",
+    "provider_secret_bindings": 0,
+    "authenticated_Codespaces_execution_attached": false,
+    "current_candidate_ARM64": false,
+    "current_candidate_hosted_CI": false
+  },
+  "limitations": [
+    "No actual provider or private target/owner acceptance",
+    "No current candidate ARM64/hosted run;none dispatched",
+    "No complete US universe/full XBRL/PIT/empirical L3 or forecast efficacy claim",
+    "Live-interpreter LSan,not full CPython/third-party shutdown cleanliness",
+    "Prebuilt MessagePack wheel not fully ASan-instrumented;memory regression exercises real C extension",
+    "No private or raw observed-data publication",
+    "Performance is local synthetic workload,not market latency/device SLO",
+    "Source archive is implementation commit;final docs commit follows"
+  ],
+  "task_servers_stopped": true
+}

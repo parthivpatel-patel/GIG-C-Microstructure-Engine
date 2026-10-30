@@ -1,3 +1,16 @@
+# Current final acceptance procedure
+
+Use [ONE updated final Codespaces session](../final_release/FINAL_OWNER_ACCEPTANCE.md)
+after engineering,not repeated intermediate commands. Candidate implementation
+f1516d03c66ee97850e1b4a7a0add9e90e9a607b includes SEC subset handling and the
+MessagePack1.2.3 security update. Existing server requirements must be updated once;
+keys and ready SEC configuration are preserved. The current procedure protects prior
+source reports from overwrite. Earlier detailed limits/commands below are retained
+as historical context;the linked final session is authoritative for this candidate.
+No live/provider/owner acceptance is claimed by these instructions.
+
+---
+
 # Existing Codespace: bounded operational qualification
 
 For the reported standalone SEC `ValueError`, use the focused
