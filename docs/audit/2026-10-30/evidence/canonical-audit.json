@@ -1,0 +1,47 @@
+{
+  "tests": 8,
+  "failures": 0,
+  "skipped": 0,
+  "hashes": [
+    {
+      "test": "itch.validation_demo_reference",
+      "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "match": true
+    },
+    {
+      "test": "itch.independent_reference",
+      "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "match": true
+    },
+    {
+      "test": "itch.context_reference",
+      "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "match": true
+    },
+    {
+      "test": "itch.streaming_reference",
+      "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "match": true
+    },
+    {
+      "test": "itch.l3_reference",
+      "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "match": true
+    },
+    {
+      "test": "itch.auction_reference",
+      "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "match": true
+    },
+    {
+      "test": "itch.admin_reference",
+      "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "match": true
+    },
+    {
+      "test": "itch.hy_reference",
+      "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "match": true
+    }
+  ]
+}

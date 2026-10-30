@@ -1,0 +1,32 @@
+{
+  "schema": "gig.audit.documentation_validation.v1",
+  "audited_head": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "requirements": 176,
+  "requirement_counts": {
+    "IMPLEMENTED_AND_VERIFIED": 136,
+    "BLOCKED_EXTERNAL_DEPENDENCY": 11,
+    "IMPLEMENTED_NOT_FULLY_VERIFIED": 7,
+    "PARTIALLY_IMPLEMENTED": 13,
+    "NOT_APPLICABLE": 6,
+    "NOT_IMPLEMENTED": 1,
+    "UNKNOWN_REQUIREMENT_EVIDENCE": 2
+  },
+  "findings": 19,
+  "priority_counts": {
+    "P0": 0,
+    "P1": 3,
+    "P2": 13,
+    "P3": 3
+  },
+  "models_and_variants": 25,
+  "renewed_offline_test_outcomes": 760,
+  "renewed_failures": 0,
+  "renewed_skips": 0,
+  "native_hashes_unchanged": 8,
+  "relative_document_links_valid": true,
+  "matrix_paths_valid": true,
+  "all_referenced_source_test_bytes_unchanged": true,
+  "production_files_modified": 0,
+  "provider_requests": 0,
+  "workflow_dispatches": 0
+}

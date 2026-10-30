@@ -1,0 +1,127 @@
+{
+  "schema": "gig.audit.delivery.manifest.v1",
+  "audited_head": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "artifact_scope": "Documentation and safe authored offline evidence only;manifest excludes itself",
+  "files": [
+    {
+      "path": "AUDIT_EVIDENCE_INDEX.md",
+      "bytes": 7130,
+      "sha256": "d88513c2c990ff8bbd933577418812e99c5f249df4e15a4a06bd5705f71507de"
+    },
+    {
+      "path": "FINAL_ACCEPTANCE_CHECKLIST.md",
+      "bytes": 7342,
+      "sha256": "e73eb57fda6e6c8b440600f9e8765dc9beabc7965381f89c1b8414a8cf3abca0"
+    },
+    {
+      "path": "FINAL_INSTITUTIONAL_READINESS_AUDIT.md",
+      "bytes": 16426,
+      "sha256": "1e6d97d9238804aee31a8908b4a0df35783593159e0e271681260907bf414dc5"
+    },
+    {
+      "path": "IMPLEMENTATION_COMPLETION_PLAN.md",
+      "bytes": 6527,
+      "sha256": "0f8fb182f91a9d046a514ab433b77270acc925052d1c40d97442097d8a42bb44"
+    },
+    {
+      "path": "PRODUCTION_READINESS_GAPS.md",
+      "bytes": 25569,
+      "sha256": "22e0faf3b4f0aadeb75c8cbd966aeecc479f42ec40470bdbae6783614e8f65da"
+    },
+    {
+      "path": "QUANTITATIVE_MODEL_VALIDATION_MATRIX.md",
+      "bytes": 38987,
+      "sha256": "6b7c7c9be274ea3acf66999352933ef3b090260f481169d3df2e9697f202321b"
+    },
+    {
+      "path": "REQUIREMENTS_COMPLIANCE_MATRIX.md",
+      "bytes": 155987,
+      "sha256": "e8259e948525d40815e243269db5cb945f5903d9f7c36af6ec7ff5bed966f0b9"
+    },
+    {
+      "path": "evidence/audit-validation.json",
+      "bytes": 870,
+      "sha256": "5e44e4e9b158d8a01aaf9a8bab8e11e09d9a92a42f1310402560defc223b1e43"
+    },
+    {
+      "path": "evidence/canonical-audit.json",
+      "bytes": 1342,
+      "sha256": "838034e934fcb4d94341aa5c213e8faa5b80d690283a00ebf39cc0ecd1891aa0"
+    },
+    {
+      "path": "evidence/canonical-tests.log",
+      "bytes": 1112,
+      "sha256": "265bd933c106cb8c8f8ea15e8f4be1c287ef43704209e9f676250b044341e60d"
+    },
+    {
+      "path": "evidence/frontend-tests.log",
+      "bytes": 7711,
+      "sha256": "7c81be0921ab0cc5c89d995bd28008820746ce2ee6b5fc802d23af2402133a60"
+    },
+    {
+      "path": "evidence/options-boundary.json",
+      "bytes": 1237,
+      "sha256": "ccfbf3ef8e077bbe3b2c6f17e8ca0defa3fffce7bdbcd6e939556d0e33311d44"
+    },
+    {
+      "path": "evidence/owner-operational.json",
+      "bytes": 1065,
+      "sha256": "e428e769e9ad428e283b259a085685c33dd60987d05eaa7eab3dd4da42d70e61"
+    },
+    {
+      "path": "evidence/prior-receipts.json",
+      "bytes": 516,
+      "sha256": "fdec3c33d72e78c41256610ccbb794eb014418e555faa4346b38d1abd4f43a45"
+    },
+    {
+      "path": "evidence/referenced-files.json",
+      "bytes": 19386,
+      "sha256": "6fac0dee5b6294688024069be61db09f91795be973b4c09db561184444a6ca8e"
+    },
+    {
+      "path": "evidence/requirements-sources.json",
+      "bytes": 4180,
+      "sha256": "bd7a75e9f9f08ee73c057af24ee7fd39d1ce03dc56fa7982c7312b0a5fe1d3d7"
+    },
+    {
+      "path": "evidence/security-tests.log",
+      "bytes": 383,
+      "sha256": "fb20cf13d86c362ef06b4117d300a474842a138a1770ad3411f4673d3b2cec86"
+    },
+    {
+      "path": "evidence/source-tests.log",
+      "bytes": 26342,
+      "sha256": "475c01ae855fa62301c6f7fc49fd03f76f9848d5b6010f15bfc85253e3ff1d54"
+    },
+    {
+      "path": "evidence/stock-tests.log",
+      "bytes": 35123,
+      "sha256": "b2299380d9d330ab0a14b6baf9f28f14d110f8965368489022476fd5f51490fe"
+    },
+    {
+      "path": "evidence/terminal-tests.log",
+      "bytes": 40306,
+      "sha256": "ffeff9a2b5b07c11ed1d09a68569f4b688bc956bb81dd6af837226225030e64b"
+    },
+    {
+      "path": "evidence/validation-summary.json",
+      "bytes": 3697,
+      "sha256": "a1fff89b491317c7128afba7c50d9c508f4bea12fc31cdb266c04ac9ef3389dc"
+    },
+    {
+      "path": "findings.json",
+      "bytes": 25569,
+      "sha256": "65288e4bfe545dad0e586994336618c094acbaf5fa8744666e461636bf57a7cf"
+    },
+    {
+      "path": "models.json",
+      "bytes": 30244,
+      "sha256": "70cd2f5acdbded739f423ac1070944ff37bb561f31fed55850d9d63d37eb6a2e"
+    },
+    {
+      "path": "requirements.json",
+      "bytes": 232580,
+      "sha256": "33609be445e1bb155ac6380a76aaf9c555c9777b337b22467d7b0517bdf07029"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "gig.audit.authored.options-boundary.v1",
+  "network_used": false,
+  "native_canonical_unchanged": true,
+  "cases": [
+    {
+      "input": {
+        "spot": 100.0,
+        "strike": 100.0,
+        "years": 1,
+        "volatility": 0.2
+      },
+      "direct_price": 7.965567455405804,
+      "scenario_surface_cells": 153,
+      "http_status": 200
+    },
+    {
+      "input": {
+        "spot": 1e-06,
+        "strike": 1e-06,
+        "years": 1,
+        "volatility": 0.2
+      },
+      "direct_price": 7.9655674554058e-08,
+      "scenario_error": "model_parameter",
+      "http_status": 422,
+      "http_body": {
+        "schema_version": "1",
+        "error": {
+          "code": "OPTION_MODEL",
+          "message": "invalid bounded theoretical scenario"
+        }
+      }
+    },
+    {
+      "input": {
+        "spot": 10000000.0,
+        "strike": 10000000.0,
+        "years": 1,
+        "volatility": 0.2
+      },
+      "direct_price": 796556.7455405798,
+      "scenario_error": "model_parameter",
+      "http_status": 422,
+      "http_body": {
+        "schema_version": "1",
+        "error": {
+          "code": "OPTION_MODEL",
+          "message": "invalid bounded theoretical scenario"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "gig.readiness.audit.receipt_verification.v1",
+  "audited_HEAD": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "evidence_manifest_sha256": "4b1cc4f80ae0e5a7b0913f69f436fa19782519b9405e9d931462f2d364d20d88",
+  "checked": {
+    "production_sources": 5,
+    "reviewed_sources": 31,
+    "documentation": 6,
+    "logs": 89,
+    "screenshot_inventory": 99
+  },
+  "missing": [],
+  "mismatches": [],
+  "scope": "Hash/byte consistency of retained evidence;not signed/external attestation;tests not all rerun"
+}

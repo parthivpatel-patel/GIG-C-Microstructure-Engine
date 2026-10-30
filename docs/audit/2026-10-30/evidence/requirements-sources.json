@@ -1,0 +1,99 @@
+[
+  {
+    "id": "H01",
+    "title": "Current comprehensive audit directive",
+    "sha256": "1a553fd0d088d7c08b50a83a6ab6a43e531ecd810153ca9c9d7f89d6fa53611f",
+    "bytes": 16057,
+    "lines": 617,
+    "review_scope": "Read in full;active audit instruction",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/d8600868-cbac-498e-bdd9-19c060065ec3/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H02",
+    "title": "Unified original terminal directive",
+    "sha256": "f49e62241e0c24c3ed3067dff6d274a4ba940307f15394b7b134e6dcf57f6bd4",
+    "bytes": 46796,
+    "lines": 2005,
+    "review_scope": "Targeted sections10\u201344 and50:architecture/data/replay/workspaces/3D/analytics/security/tests/finalcapabilities;not every historical governance line certified",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/bfb7def5-0051-4f77-b5b9-621b97fe8f1b/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H03",
+    "title": "Master backend engineering directive",
+    "sha256": "4333e6cd586fe82223353440e42d5a32b1b0f0475c5ab5f1c1c43bc39de4a6a6",
+    "bytes": 18995,
+    "lines": 797,
+    "review_scope": "Conditional quantitative/risk workstreams,versioned contracts",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/df906be7-b172-4f84-90de-1624f2d8538f/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H04",
+    "title": "Product completion:US universe,market data,institutional UI",
+    "sha256": "4d2a816807963208d8f04a3463f526e4a218b165367098a0cbe659c119a93161",
+    "bytes": 12360,
+    "lines": 433,
+    "review_scope": "6\u201321,52\u2013134,136\u2013387",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/1b9c6c5f-1654-47a5-88ae-21cf6660ddc7/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H05",
+    "title": "Live market intelligence and3D upgrade",
+    "sha256": "82c9e3dd7a60708854c856dd521d6be5166839a72db2812802d53b9fce89e532",
+    "bytes": 11456,
+    "lines": 405,
+    "review_scope": "69\u2013275,297\u2013352",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/86aa762f-925d-4222-bb98-743063031656/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H06",
+    "title": "Final master:real market data first,two milestones",
+    "sha256": "0191b495e18d21cc28bec857cb46b27af62f0665efceb737de5a883a56a73717",
+    "bytes": 23609,
+    "lines": 932,
+    "review_scope": "159\u2013374,419\u2013692,806\u2013822",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/54d1d655-2f43-40fe-8d03-b377b2cd5c41/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H07",
+    "title": "PhaseNext:US coverage andpaperaccount market data",
+    "sha256": "d1e111042467b6666dab282ccbc0f4dfa8078c295ffed768deac9baae898af4c",
+    "bytes": 11079,
+    "lines": 396,
+    "review_scope": "71\u2013143,145\u2013277",
+    "source_kind": "USER_DIRECTIVE_ATTACHMENT",
+    "workspace_path": "/workspace/attachments/ac03b06c-31a7-4973-acdb-14de402dce51/Pasted text.txt",
+    "copied_contents": false
+  },
+  {
+    "id": "H08",
+    "title": "Original complete C++ master specification",
+    "source_kind": "UNAVAILABLE_ORIGINAL_ATTACHMENT",
+    "status": "UNKNOWN_REQUIREMENT_EVIDENCE",
+    "reason": "Sediment file_00000000813081f99066d33cd90e630a could not be authorized or resolved;no repeat attempted",
+    "secondary_recovery": [
+      "docs/ARCHITECTURE.md",
+      "docs/decisions/0001-approved-contracts.md",
+      "docs/PHASE_2_BOOK.md"
+    ]
+  },
+  {
+    "id": "H09",
+    "title": "GIG ATLAS institutional transformation and subsequent explicit user authorizations",
+    "source_kind": "CONVERSATION_TEXT",
+    "status": "RECOVERABLE_FROM_CONVERSATION_NOT_AN_INDEPENDENT_GIT_ARTIFACT",
+    "sections": "Design system,9 original workspaces,v2,Stock Intelligence,WCAG target,mobile;later12workspaces/13modes,eightvisualization andno-trading directives",
+    "warning": "Original immutable file hash not available;do not invent one"
+  }
+]

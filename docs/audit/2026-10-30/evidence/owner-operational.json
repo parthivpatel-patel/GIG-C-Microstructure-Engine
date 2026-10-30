@@ -1,0 +1,31 @@
+{
+  "schema": "gig.audit.owner_operational_evidence.v1",
+  "date": "2026-10-30",
+  "authority": "OWNER_SUPPLIED_NOT_INDEPENDENTLY_REPRODUCED",
+  "sec": {
+    "configuration_ready": true,
+    "accepted_ticker_mappings": 10429,
+    "identity_symbols_verified": [
+      "AAPL",
+      "APLD",
+      "CRWV"
+    ],
+    "selected_records_reconciled": 1772,
+    "selected_record_mismatches": 0,
+    "filings_available": true,
+    "financial_facts_available": true,
+    "tested_sha": null,
+    "report_sha256": null,
+    "source_response_sha256": null,
+    "limits": "Selected-record scope only;not complete financial statements,PIT or exchange listing universe"
+  },
+  "alpaca": {
+    "credentials_present_owner_report": true,
+    "account": "Basic",
+    "market_data_enabled": false,
+    "provider_permission_confirmation": "PENDING",
+    "audit_requests": 0,
+    "options_enabled": false
+  },
+  "interpretation": "Do not substitute older directory digests or earlier tested commits for the missing October30 report identity. Bind existing results;do not repeat setup."
+}

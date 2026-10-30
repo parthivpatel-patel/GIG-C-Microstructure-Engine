@@ -1,0 +1,72 @@
+{
+  "schema": "gig.audit.validation.v1",
+  "audited_head": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "date": "2026-10-30",
+  "platform": "x86_64",
+  "renewed_test_outcomes": 760,
+  "unique_tests": "NOT_CLAIMED_OVERLAPPING_COHORTS",
+  "reruns": [
+    {
+      "log": "build/readiness-audit/evidence/source-tests.log",
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_source_qualification_suite.py",
+      "pass": 142,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "475c01ae855fa62301c6f7fc49fd03f76f9848d5b6010f15bfc85253e3ff1d54",
+      "bytes": 26342
+    },
+    {
+      "log": "build/readiness-audit/evidence/security-tests.log",
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python -m unittest terminal.test_browser_access terminal.test_codespaces_origin terminal.test_stream_proof terminal.test_request_proof terminal.stocks.test_repair.Authentication terminal.test_atlas_arm64_policy",
+      "pass": 52,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "fb20cf13d86c362ef06b4117d300a474842a138a1770ad3411f4673d3b2cec86",
+      "bytes": 383
+    },
+    {
+      "log": "build/readiness-audit/evidence/frontend-tests.log",
+      "command": "npm test (cwd terminal/web)",
+      "pass": 77,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "7c81be0921ab0cc5c89d995bd28008820746ce2ee6b5fc802d23af2402133a60",
+      "bytes": 7711
+    },
+    {
+      "log": "build/readiness-audit/evidence/canonical-tests.log",
+      "command": "/workspace/gig-tools/bin/ctest --test-dir build/python-release -R '^itch\\.(independent_reference|context_reference|l3_reference|streaming_reference|validation_demo_reference|auction_reference|admin_reference|hy_reference)$' --output-on-failure --output-junit build/readiness-audit/evidence/canonical-audit.xml",
+      "pass": 8,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "265bd933c106cb8c8f8ea15e8f4be1c287ef43704209e9f676250b044341e60d",
+      "bytes": 1112
+    },
+    {
+      "log": "build/readiness-audit/evidence/stock-tests.log",
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_live_market_suite.py",
+      "pass": 207,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "b2299380d9d330ab0a14b6baf9f28f14d110f8965368489022476fd5f51490fe",
+      "bytes": 35123
+    },
+    {
+      "log": "build/readiness-audit/evidence/terminal-tests.log",
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_native_suite.py --expected-tests 274",
+      "pass": 274,
+      "fail": 0,
+      "skip": 0,
+      "sha256": "ffeff9a2b5b07c11ed1d09a68569f4b688bc956bb81dd6af837226225030e64b",
+      "bytes": 40306
+    }
+  ],
+  "environment_policy": "Command-scoped provider enable/retention flags0 on security,stock,terminal/probe;no persisted configuration changes. Source suite independently guards fixture-only execution. No SEC/Alpaca/LOBSTER requests. No hosted workflow launched.",
+  "probe": "options-boundary.json:one normal positive control,two confirmed scenario-domain counterexamples;native replay canonical unchanged",
+  "harness_corrections": [
+    "Frontend initial log destination used one too many parent directories;failed before npm execution;corrected path,77tests passed.",
+    "Initial ctest command not on PATH;exit127 before test execution;used existing /workspace/gig-tools/bin/ctest,8tests passed."
+  ],
+  "retained_full_matrix": "Hash-verified,not all reexecuted in this audit;prior-receipts.json and overnight manifest define scope",
+  "no_production_modifications": true
+}
