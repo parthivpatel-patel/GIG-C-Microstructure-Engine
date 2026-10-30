@@ -1,4 +1,27 @@
-# SEC rejection isolation checkpoint — 2026-10-30 UTC
+# SEC terminal-reference repair — October29,2026 America/New_York
+
+Baseline eb5e4bb0fd53bf93990d148aa0dfcf94626ccc19,feat/atlas-final-release.
+Owner diagnostic identifies REFERENCE_PATTERN on a5-character terminal-separator
+reference,key7324/ordinal7325 of10430,unrelated to requested exactAAPL. Fixed local
+reference syntax to admit one terminal marker as opaque reference text;application
+routing stays unchanged and marker references are explicit exclusions,never aliases.
+Profile sec.reference.terminal-marker.v3. Full validation precedes atomic publication;
+duplicate/conflicting and cached/curated identity safeguards remain strict.
+
+Authored10430-row/parser and CLI regressions failed before and pass after;17new
+regression methods. Final source126,stock207,terminal274 per Debug/Release/ASan+UBSan
+pass with0failures/errors/skips and all3liveLSan0. Security52,TLS/WSS8,native frozen8
+pass;all8canonical hashes unchanged. [Repair report](milestones/SEC_TERMINAL_REFERENCE_REPAIR.md)
+and[evidence](milestones/sec_terminal_reference_evidence.json) record exact commands.
+
+Actual ticker/CIK/source body remain undisclosed and no liveSECrequest occurred here:
+hosts not permitted and identifying User-Agent absent. Owner's existing ready setup
+is not requested again. Exact next action:the report's single pull+qualification
+command in the existing Codespace;actual provider success remains unverified.
+No Alpaca gate,retention,trading,main,workflow,native or frontend change. Validated
+delivery commit follows this checkpoint;no background execution after task completion.
+
+# Previous SEC rejection isolation checkpoint — 2026-10-30 UTC
 
 Baseline5b5eb36aaa21fd259028daf06f28b3277133e9b5 on feat/atlas-final-release.
 Owner's ready Codespace still fails sec_directory_symbol. Traced CLI to strict

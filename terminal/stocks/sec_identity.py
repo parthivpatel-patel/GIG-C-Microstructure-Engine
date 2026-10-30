@@ -7,9 +7,10 @@ URL='https://www.sec.gov/files/company_tickers.json'
 MAX_ISSUERS=50000
 
 # This is a reference-text admission bound,not an exchange/provider ticker grammar.
+# A single terminal marker is opaque reference text,not a missing class to infer.
 # Safe but non-routable forms are explicit exclusions,never aliases or URL inputs.
-REFERENCE_SYMBOL=r'[A-Za-z0-9]+(?:[.\-/$^][A-Za-z0-9]+)*'
-PARSER_PROFILE='sec.reference.strict-admission.v2'
+REFERENCE_SYMBOL=r'[A-Za-z0-9]+(?:[.\-/$^][A-Za-z0-9]+)*[.\-/$^]?'
+PARSER_PROFILE='sec.reference.terminal-marker.v3'
 
 
 def symbol_condition(value):

@@ -34,7 +34,7 @@ class RejectionContext(unittest.TestCase):
                 self.assertEqual(d['parser_path'],'reference_admission')
 
     def test_reference_syntax_flags_identify_structure_without_printing_values(self):
-        for value,expected in [('AUTH_',['UNDERSCORE','DISALLOWED_ASCII']),('AUTH-',['TRAILING_SEPARATOR']),('AUTH..A',['REPEATED_SEPARATOR']),(' AAPL',['WHITESPACE','DISALLOWED_ASCII']),('A\nB',['CONTROL','WHITESPACE','DISALLOWED_ASCII']),('Aé',['NON_ASCII'])]:
+        for value,expected in [('AUTH_',['UNDERSCORE','DISALLOWED_ASCII']),('AUTH--',['TRAILING_SEPARATOR','REPEATED_SEPARATOR']),('AUTH..A',['REPEATED_SEPARATOR']),(' AAPL',['WHITESPACE','DISALLOWED_ASCII']),('A\nB',['CONTROL','WHITESPACE','DISALLOWED_ASCII']),('Aé',['NON_ASCII'])]:
             with self.subTest(flags=expected):
                 d,output=self.fail_cli(value)
                 self.assertTrue(set(expected)<=set(d['shape_flags']))

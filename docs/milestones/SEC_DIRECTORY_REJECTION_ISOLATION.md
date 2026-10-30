@@ -1,5 +1,11 @@
 # SEC directory rejection: remaining condition isolated
 
+**Follow-up:** Owner diagnostics now identify a five-character terminal-marker
+reference at key7324/ordinal7325 of10430. See [the bounded terminal-reference repair](SEC_TERMINAL_REFERENCE_REPAIR.md).
+The older uncertainty and unchanged-policy findings below describe the isolation
+checkpoint; the new report documents the justified version3 policy change and its
+regressions. Actual SEC requalification remains unverified here.
+
 2026-10-30 UTC. Baseline and verified remote branch:
 `5b5eb36aaa21fd259028daf06f28b3277133e9b5`, `feat/atlas-final-release`.
 Main remains `12f3a53943dc245e36f2cbbc35b9910fb21c0718`.

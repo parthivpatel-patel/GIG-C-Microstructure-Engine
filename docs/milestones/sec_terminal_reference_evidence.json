@@ -1,0 +1,664 @@
+{
+  "schema": "gig.sec.terminal_reference_repair.evidence.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "eb5e4bb0fd53bf93990d148aa0dfcf94626ccc19",
+  "branch": "feat/atlas-final-release",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "owner_observation": {
+    "origin": "OWNER_REPORTED_ACTUAL_CODESPACES",
+    "independently_retrieved_here": false,
+    "stage": "identity_resolution",
+    "category": "SOURCE_SCHEMA",
+    "code": "sec_directory_symbol",
+    "parser": "sec.reference.strict-admission.v2",
+    "parser_path": "reference_admission",
+    "condition": "REFERENCE_PATTERN",
+    "record_key": "7324",
+    "record_ordinal": 7325,
+    "input_records": 10430,
+    "field": "ticker",
+    "value_type": "string",
+    "string_length": 5,
+    "shape_flags": [
+      "TRAILING_SEPARATOR"
+    ],
+    "requested_symbol": "AAPL",
+    "requested_relation": "OTHER_STRING",
+    "requested_exact_records": 1,
+    "publication": "REJECTED_NO_NEW_SNAPSHOT",
+    "source_sha256": "b5be63822ef78687908848b349820d9d6a962af9287e2164f44f4b217259f4ea",
+    "actual_ticker": "NOT_PROVIDED_NOT_INFERRED",
+    "actual_CIK": "NOT_PROVIDED_NOT_INFERRED"
+  },
+  "root_cause": "Local reference grammar requires an alphanumeric group after every separator,rejecting an unrelated terminal-marker reference before routing exclusion and exact requested identity resolution",
+  "repair": {
+    "previous_profile": "sec.reference.strict-admission.v2",
+    "profile": "sec.reference.terminal-marker.v3",
+    "previous_reference_pattern": "[A-Za-z0-9]+(?:[.\\-/$^][A-Za-z0-9]+)*",
+    "reference_pattern": "[A-Za-z0-9]+(?:[.\\-/$^][A-Za-z0-9]+)*[.\\-/$^]?",
+    "reference_policy_changed": true,
+    "routing_policy_changed": false,
+    "marker_classification": "OPAQUE_NONROUTABLE_REFERENCE_EXPLICIT_EXCLUSION",
+    "source_symbol_normalization": "NONE",
+    "identity_and_duplicate_validation_before_exclusion": true,
+    "source_records_silently_ignored": false,
+    "legacy_all_rows_still_rejects_exclusions": true,
+    "failure_schema": "gig.sec.qualification.failure.v2"
+  },
+  "engineering_status": "REPORTED_SHAPE_REPRODUCED_AND_REPAIRED_WITH_AUTHORED_FIXTURES",
+  "live_SEC_qualification": "UNVERIFIED_NOT_PERFORMED_HERE",
+  "official_security_meaning_of_marker": "UNVERIFIED_NO_EXACT_SYMBOL_OR_CURRENT_LEXICAL_SPEC;no tradability/listing inference",
+  "failing_before": {
+    "tests": 2,
+    "failures": 1,
+    "errors": 1,
+    "scope": "Authored parser and real CLI with mocked transports;not actual provider response",
+    "receipt": {
+      "path": "build/sec-terminal-marker/failing-before.log",
+      "bytes": 2147,
+      "sha256": "ad54ff37b1a0899c2bfaaa8fbe712fca45e9d9760e85e9683377cd0cb579b6cc"
+    }
+  },
+  "before_after": {
+    "scope": "AUTHORED_SHAPE_REPRODUCTION_NOT_OBSERVED_SEC_DATA",
+    "fixture_sha256": "1cdc4be352a61089e03ef5433850e36644430b9deebdf2ea2be23577ae3d1077",
+    "fixture_record_count": 10430,
+    "before": {
+      "parser_profile": "sec.reference.strict-admission.v2",
+      "parser_source_sha256": "e6b4d671a6d69ae4aa46c6a87a23c0192f8dcdf19f047a58b8f6f64f396b0120",
+      "parser_path": "reference_admission",
+      "condition": "REFERENCE_PATTERN",
+      "record_key": "7324",
+      "record_ordinal": 7325,
+      "input_records": 10430,
+      "field": "ticker",
+      "value_type": "string",
+      "string_length": 5,
+      "shape_flags": [
+        "TRAILING_SEPARATOR"
+      ],
+      "shape_scope": "FIRST_64_CODEPOINTS",
+      "requested_symbol": "AAPL",
+      "requested_relation": "OTHER_STRING",
+      "requested_exact_records": 1,
+      "publication": "REJECTED_NO_NEW_SNAPSHOT",
+      "source_sha256": "1cdc4be352a61089e03ef5433850e36644430b9deebdf2ea2be23577ae3d1077"
+    },
+    "after": {
+      "parser_profile": "sec.reference.terminal-marker.v3",
+      "accepted_rows": 10429,
+      "AAPL_cik": "0000320193",
+      "integrity": {
+        "input_rows": 10430,
+        "accepted_rows": 10429,
+        "excluded_rows": 1,
+        "excluded": {
+          "unsupported_routing_symbol": 1
+        },
+        "excluded_examples": [
+          {
+            "record_key": "7324",
+            "ticker_sha256": "bbc73189be12cd01c5a7b125a1dd05682d24b91915529d5d8661dc8de6b8a16d",
+            "reason": "unsupported_routing_symbol"
+          }
+        ],
+        "examples_truncated": false,
+        "coverage": "ACCEPTED_ROUTABLE_SUBSET",
+        "normalization": "NONE_EXACT_SOURCE_SYMBOLS"
+      },
+      "native_or_provider_routing_of_marker": false
+    }
+  },
+  "new_regression_methods": 17,
+  "final_matrix": [
+    {
+      "configuration": "debug",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "tests": 126,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 5.784556626982521,
+      "verified": true,
+      "log": "build/sec-terminal-marker/sources-debug.log"
+    },
+    {
+      "configuration": "debug",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 23.139723486005096,
+      "verified": true,
+      "log": "build/sec-terminal-marker/stocks-debug.log"
+    },
+    {
+      "configuration": "debug",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 19.860519904003013,
+      "verified": true,
+      "log": "build/sec-terminal-marker/terminal-debug.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "tests": 126,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 5.937630758999148,
+      "verified": true,
+      "log": "build/sec-terminal-marker/sources-release.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 22.343105178995756,
+      "verified": true,
+      "log": "build/sec-terminal-marker/stocks-release.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 17.311528270016424,
+      "verified": true,
+      "log": "build/sec-terminal-marker/terminal-release.log"
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "tests": 126,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 13.127294231002452,
+      "verified": true,
+      "log": "build/sec-terminal-marker/sources-sanitizer.log",
+      "live_lsan_check": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 49.10617316898424,
+      "verified": true,
+      "log": "build/sec-terminal-marker/stocks-sanitizer.log",
+      "live_lsan_check": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 74.84601855400251,
+      "verified": true,
+      "log": "build/sec-terminal-marker/terminal-sanitizer.log",
+      "live_lsan_check": 0
+    }
+  ],
+  "security": {
+    "passed": 52,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "-m",
+      "unittest",
+      "terminal.test_browser_access",
+      "terminal.test_codespaces_origin",
+      "terminal.test_stream_proof",
+      "terminal.test_request_proof",
+      "terminal.stocks.test_repair.Authentication",
+      "terminal.test_atlas_arm64_policy"
+    ],
+    "environment": {
+      "GIG_SEC_ENABLED": "0",
+      "GIG_ALPACA_ENABLED": "0",
+      "GIG_LIVE_ENABLED": "0",
+      "GIG_COINBASE_ENABLED": "0",
+      "GIG_ALPACA_STORE_ENABLED": "0",
+      "GIG_HISTORY_STORE_ENABLED": "0",
+      "PYTHONPATH": "build/python-release/python:."
+    }
+  },
+  "TLS_WSS": {
+    "passed": 8,
+    "failed": 0,
+    "checks": [
+      "TLS verified actual frontend HTML",
+      "TLS proxy actual C++ state",
+      "exact HTTP issuer failure reproduced without proof",
+      "forwarded HTTPS Origin mutates native prefix",
+      "foreign Origin denied behind TLS proxy",
+      "two verified WSS upgrades101 preserve native prefix",
+      "cross-origin non-simple preflight denied despite rewritten Origin",
+      "actual proxy Origin/Host/HTTPS header capture"
+    ],
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/check_rewritten_http_tls.py"
+    ],
+    "environment": {
+      "GIG_SEC_ENABLED": "0",
+      "GIG_ALPACA_ENABLED": "0",
+      "GIG_LIVE_ENABLED": "0",
+      "GIG_COINBASE_ENABLED": "0",
+      "GIG_ALPACA_STORE_ENABLED": "0",
+      "GIG_HISTORY_STORE_ENABLED": "0",
+      "PYTHONPATH": "build/python-release/python:."
+    },
+    "scope": "Actual local TLS proxy/native engine,not external Codespaces access or authentication evidence"
+  },
+  "native_frozen": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "configuration": "Release",
+    "all_eight_unchanged": true,
+    "cases": [
+      {
+        "case": "itch.validation_demo_reference",
+        "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+        "reported_hashes": [
+          "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.independent_reference",
+        "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "reported_hashes": [
+          "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.context_reference",
+        "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "reported_hashes": [
+          "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.streaming_reference",
+        "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "reported_hashes": [
+          "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.l3_reference",
+        "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "reported_hashes": [
+          "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+          "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.auction_reference",
+        "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "reported_hashes": [
+          "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.admin_reference",
+        "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "reported_hashes": [
+          "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+        ],
+        "unchanged": true
+      },
+      {
+        "case": "itch.hy_reference",
+        "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "reported_hashes": [
+          "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+        ],
+        "unchanged": true
+      }
+    ],
+    "command": [
+      "/workspace/gig-tools/bin/ctest",
+      "--test-dir",
+      "build/python-release",
+      "-R",
+      "^itch\\.(independent_reference|context_reference|l3_reference|streaming_reference|validation_demo_reference|auction_reference|admin_reference|hy_reference)$",
+      "-V",
+      "--output-junit",
+      "/workspace/GIG-C-Microstructure-Engine/build/sec-terminal-marker/canonical.xml"
+    ]
+  },
+  "counts_scope": "Per-cohort executed outcomes,not a unique test total;unchanged existing native bindings reused;all final matrix failures/errors/skips zero",
+  "environment": {
+    "architecture": "x86_64",
+    "runtime": {
+      "observations_current": true,
+      "network_policy_state": "enforced",
+      "sec_www_allowed": false,
+      "sec_data_allowed": false,
+      "runtime_variable_bindings": 0,
+      "secret_bindings": 0,
+      "official_SEC_requests": 0
+    },
+    "local_SEC_check": {
+      "schema": "gig.sec.configuration.v1",
+      "ready": false,
+      "reason": "sec_disabled_pending_fair_access_review",
+      "missing_configuration": [
+        "GIG_SEC_ENABLED",
+        "GIG_SEC_POLICY_REVIEWED",
+        "GIG_SEC_USER_AGENT"
+      ],
+      "enabled": false,
+      "policy_reviewed": false,
+      "user_agent_present": false,
+      "user_agent_valid": false,
+      "invalid_boolean_variables": [],
+      "configuration_source": "environment",
+      "contact_disclosed": false
+    }
+  },
+  "limits_preserved": {
+    "reference_characters_max": 64,
+    "issuer_rows_max": 50000,
+    "body_bytes_max": 8388608,
+    "exclusion_examples_max": 16,
+    "registry_timeout_seconds": 10,
+    "SEC_request_cadence_seconds": 1.01,
+    "automatic_retries_added": false,
+    "TLS_verification_changed": false,
+    "permission_or_rate_limit_changed": false,
+    "raw_contact_or_ticker_disclosed": false,
+    "Alpaca_gate_changed": false,
+    "trading_enabled": false,
+    "observed_storage_enabled": false,
+    "private_configuration_changed": false,
+    "new_provider_requests": 0,
+    "main_changed": false,
+    "workflow_dispatched": false
+  },
+  "limitations": [
+    "Exact source row and security meaning not provided or independently retrieved",
+    "Official current lexical specification unverified;bounded opaque reference admission does not certify exchange ticker legitimacy",
+    "The rest of the actual SEC response and subsequent companyfacts stages require real Codespaces qualification",
+    "No SEC egress or identifying contact here;owner existing ready configuration is separate",
+    "No new hosted or ARM64 qualification;no native implementation changed",
+    "LSan is live-interpreter only,not CPython shutdown leak cleanliness;existing Starlette/httpx deprecation warning retained"
+  ],
+  "source_inventory": [
+    {
+      "path": "terminal/stocks/sec_identity.py",
+      "bytes": 6130,
+      "sha256": "0da4965f538be915140b648e67a5ba4bcab140ee3a803ea0d20b2a5582d40186"
+    },
+    {
+      "path": "terminal/stocks/test_sec_identity_diagnostics.py",
+      "bytes": 8899,
+      "sha256": "067ea73db44e5497483f562a6a74e0e81fab7fc86cf78488919916051ca3a929"
+    },
+    {
+      "path": "terminal/stocks/test_sec_terminal_reference.py",
+      "bytes": 10920,
+      "sha256": "83eac7493923f6013cecff0ddb836181358ce51a75969540a3e8c9cf33f873e3"
+    },
+    {
+      "path": "terminal/tests/run_source_qualification_suite.py",
+      "bytes": 1094,
+      "sha256": "beefbb9ad21129495c8f85e4cb58a804524b88343884d48117ad39180d5f8367"
+    },
+    {
+      "path": "docs/milestones/SEC_TERMINAL_REFERENCE_REPAIR.md",
+      "bytes": 8173,
+      "sha256": "93ff141b64d3c601e9da38d5eda028af2985e60c16ab9418d6700f4503bb7b40"
+    },
+    {
+      "path": "docs/milestones/SEC_DIRECTORY_REJECTION_ISOLATION.md",
+      "bytes": 10633,
+      "sha256": "46b87f8b99aa2c7c2b879d39a8f87432e22434a5d6d310e445577a0bb177f1e1"
+    },
+    {
+      "path": "docs/final_release/FINAL_ENGINEERING_REPORT.md",
+      "bytes": 16033,
+      "sha256": "223b7c0a9d6f4fe7bb031cd4a0c37b6d72f6f491dd9ab26e1a67572eef64fd3e"
+    },
+    {
+      "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+      "bytes": 72220,
+      "sha256": "bf364424f20bd56ad9573dd3a57890b1e802c479ce03864403298c56d87f505d"
+    }
+  ],
+  "logs": [
+    {
+      "path": "build/sec-terminal-marker/sources-debug.log",
+      "bytes": 23611,
+      "sha256": "6704464dc0fae87dcf277ddc11f9e0f2839408ad51b361a2678d3d2874e88753"
+    },
+    {
+      "path": "build/sec-terminal-marker/stocks-debug.log",
+      "bytes": 35123,
+      "sha256": "b868b134cfb301c6ee3b52a4f44d75c1eb13aab0544be320cf4fc751b796e40c"
+    },
+    {
+      "path": "build/sec-terminal-marker/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "3f33a85df38937bde7e2e2347d77c6526ba6583d8ec98f950e75fb84eb86130e"
+    },
+    {
+      "path": "build/sec-terminal-marker/sources-release.log",
+      "bytes": 23611,
+      "sha256": "68db0e45960c204e7543f86846af78b46365f5d6148a2b44b34216a629dd66b2"
+    },
+    {
+      "path": "build/sec-terminal-marker/stocks-release.log",
+      "bytes": 35123,
+      "sha256": "acd61e87861ea04c22bee6421fd911601935b90dbe38cf969e5a84127b0dd56f"
+    },
+    {
+      "path": "build/sec-terminal-marker/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "22443568a26801c35117e3642c315b4662c4b15437ec667a58e55fb639d95997"
+    },
+    {
+      "path": "build/sec-terminal-marker/sources-sanitizer.log",
+      "bytes": 24006,
+      "sha256": "9535c9a8a01190178686ca3556ebc83e70753ee4d9c721cfe5fc3869abf84fea"
+    },
+    {
+      "path": "build/sec-terminal-marker/stocks-sanitizer.log",
+      "bytes": 35141,
+      "sha256": "272f2026c4f2ba3316af19d422247836b7c021b6feebea0f21a5199d610c1716"
+    },
+    {
+      "path": "build/sec-terminal-marker/terminal-sanitizer.log",
+      "bytes": 41063,
+      "sha256": "b3cc66b0221d3dd40b7b392929f801a9346dd1d22cf9f177b24d2bfe56cadb44"
+    },
+    {
+      "path": "build/sec-terminal-marker/matrix.json",
+      "bytes": 5747,
+      "sha256": "be1eb93ed5a52ac9aaa6deb632fae4191a8beade96bbf1a7789766f1997f7ed7"
+    },
+    {
+      "path": "build/sec-terminal-marker/run_matrix.py",
+      "bytes": 2210,
+      "sha256": "86ae556a5a00d009c46f880495b5d33a68ec978220ffa59f180b1ab93f24f709"
+    },
+    {
+      "path": "build/sec-terminal-marker/security.log",
+      "bytes": 383,
+      "sha256": "6d20fec69adc8e688e581dfda763f5abb11540d7701cc1dbb41214ce785f9cb5"
+    },
+    {
+      "path": "build/sec-terminal-marker/tls.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "build/sec-terminal-marker/canonical.log",
+      "bytes": 7753,
+      "sha256": "fef32b5960918bbaace97a43baf8c02b1c6b2db3b3162d55d5b5bcda75f39411"
+    },
+    {
+      "path": "build/sec-terminal-marker/canonical.xml",
+      "bytes": 4302,
+      "sha256": "1df5497ac83d67af0e66c6747e3a7e9607f1e2c26173f32a2e54dec8bb17cca0"
+    },
+    {
+      "path": "build/sec-terminal-marker/before-after.json",
+      "bytes": 1667,
+      "sha256": "3d6c4ffb90b4bacadf145db9056f73c4f3a6e94ac5ee986bce2828396ab01e96"
+    },
+    {
+      "path": "build/sec-terminal-marker/baseline_sec_identity.py",
+      "bytes": 6040,
+      "sha256": "e6b4d671a6d69ae4aa46c6a87a23c0192f8dcdf19f047a58b8f6f64f396b0120"
+    },
+    {
+      "path": "build/sec-terminal-marker/local-config-check.json",
+      "bytes": 403,
+      "sha256": "6037f8789a22e2b587685224d925fa7dfa9fa1e8c2d4b4f09f3b6c84401d788b"
+    },
+    {
+      "path": "build/sec-terminal-marker/runtime-summary.json",
+      "bytes": 218,
+      "sha256": "784053527a7a6a74f1b0c1dc27c77e410a2529b8dd5356fb380b033842727d7f"
+    }
+  ],
+  "owner_command": "git pull --ff-only origin feat/atlas-final-release && .venv/bin/python scripts/qualify_sec_sources.py --fetch --resolve-identity --symbol AAPL --as-of 2026-10-28"
+}

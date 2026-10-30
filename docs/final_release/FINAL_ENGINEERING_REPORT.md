@@ -1,5 +1,12 @@
 # GIG ATLAS: final engineering and operational readiness
 
+**Latest SEC follow-up, October29,2026 America/New_York:** Owner diagnostics identify
+an unrelated terminal-marker reference rejected by local syntax. The bounded
+[version3 reference-policy repair](../milestones/SEC_TERMINAL_REFERENCE_REPAIR.md)
+reproduces and fixes that shape while preserving exact AAPL routing and directory
+conflict checks. Actual SEC source qualification remains unverified in this executor.
+Earlier findings and evidence below are retained as historical checkpoints.
+
 **SEC follow-up, 2026-10-30 UTC:** The owner confirms that release `5b5eb36` still
 rejects the actual directory with `sec_directory_symbol`. The earlier routing repair
 did not resolve that source condition. See [the remaining rejection investigation](../milestones/SEC_DIRECTORY_REJECTION_ISOLATION.md).
