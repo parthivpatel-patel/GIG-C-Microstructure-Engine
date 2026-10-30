@@ -15,6 +15,9 @@ except OSError:
 else:
     connection.close()
     raise SystemExit('Port 8787 is already in use. Stop the existing GIG server with Ctrl+C in its terminal, then restart. No process was killed or replaced.')
+import msgpack
+if msgpack.version < (1, 2, 3):
+    raise SystemExit('Security dependency update required: run .venv/bin/python -m pip install -r terminal/server/requirements.txt. Existing SEC configuration and keys are unchanged.')
 PYTHON
 # Safe readiness only;private JSON is independently loaded by the backend as well.
 .venv/bin/python scripts/configure_sec.py --check

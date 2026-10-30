@@ -49,6 +49,7 @@ class Configuration(unittest.TestCase):
    with patch('terminal.stocks.sec_config.resolve',side_effect=lambda e:resolve({},root=root)):
     w=StockWorkspace();self.assertTrue(w.configuration()['sec']['ready']);self.assertNotIn('test@example.invalid',json.dumps(w.configuration()))
    start=Path('scripts/start_terminal.sh').read_text();self.assertLess(start.index('scripts/configure_sec.py --check'),start.index('exec .venv/bin/python -m terminal.server'))
+   self.assertIn('if msgpack.version < (1, 2, 3):',start)
  def test_alpaca_flags_are_not_changed_by_sec_parsing_or_private_file(self):
   w=StockWorkspace(environment={**SEC_ENV,'GIG_ALPACA_ENABLED':'true'});self.assertFalse(w.configuration()['alpaca']['ready'])
 

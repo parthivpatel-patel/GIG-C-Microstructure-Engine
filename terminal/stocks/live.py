@@ -10,8 +10,13 @@ from terminal.providers.kraken import timestamp_ns
 ENDPOINT='wss://stream.data.alpaca.markets/v2/iex'
 class ProtocolError(ValueError):pass
 
-def unpack(raw):
+def secure_msgpack():
     import msgpack
+    if msgpack.version<(1,2,3):raise ProtocolError('msgpack_security_patch_required')
+    return msgpack
+
+def unpack(raw):
+    msgpack=secure_msgpack()
     if type(raw) is not bytes or not 1<=len(raw)<=32768:raise ProtocolError('binary_frame_budget')
     def pairs(rows):
         out={}
@@ -64,6 +69,7 @@ class LiveIEX:
         return int(value)
     def require(self):
         self.symbol_limit()
+        secure_msgpack()  # Refuse an unpatched runtime before any upstream open.
         keys=self.workspace.permission('alpaca')
         if self.workspace.environment.get('GIG_ALPACA_LIVE_ENABLED')!='1':raise ValueError('live_explicit_enable_required')
         return keys

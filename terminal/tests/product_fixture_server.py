@@ -11,7 +11,7 @@ from terminal.server.app import create_app
 import uvicorn
 os.environ['GIG_TERMINAL_ALLOWED_ORIGINS']='http://127.0.0.1:18798'
 async def reference_fetch(url,headers,cap):
- if url=='https://www.sec.gov/files/company_tickers.json':return json.dumps({'0':{'ticker':'NEWQ','title':'Authored new registrant','cik_str':42},'1':{'ticker':'AAPL','title':'Authored Apple registrant','cik_str':320193}}).encode()
+ if url=='https://www.sec.gov/files/company_tickers.json':return json.dumps({'0':{'ticker':'NEWQ','title':'Authored new registrant','cik_str':42},'1':{'ticker':'AAPL','title':'Authored Apple registrant','cik_str':320193},'2':{'ticker':'AUTH/WARRANT','title':'Authored unsupported routing symbol','cik_str':43}}).encode()
  return await fetch(url,headers,cap)
 w=StockWorkspace(environment={**ENV,'GIG_ALPACA_LIVE_ENABLED':'1'},fetcher=reference_fetch)
 f=files();lines=f['nasdaq'].decode().splitlines();f['nasdaq']=('\n'.join(lines[:-1])+ '\n'+'\n'.join(f'{s}|{n}|Q|N|N|100|N|N' for s,n in ([('MSFT','Authored Microsoft'),('NVDA','Authored NVIDIA')]+[(f'EX{i:03}',f'Authored research security {i}') for i in range(50)]))+'\n'+lines[-1]+'\n').encode();w.catalog=parse_files(f);w.directory.state={'status':'ACCEPTED','last_error':None,'accepted_count':len(w.catalog.rows),'last_success':w.catalog.source['received_at']}

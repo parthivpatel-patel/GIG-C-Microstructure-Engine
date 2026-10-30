@@ -49,7 +49,7 @@ class StockWorkspace:
             row=self.catalog.instrument(ticker)
             return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','security_type':row.get('security_type','UNCLASSIFIED'),'listing_status':row.get('listing_status','UNVERIFIED'),'identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
     async def refresh_identities(self):
-        from .sec_identity import parse,URL
+        from .sec_identity import parse_reference,URL
         from .identity import SEEDS
         headers=self.permission('sec')
         now=self.clock()
@@ -59,12 +59,12 @@ class StockWorkspace:
         if self.lock.locked():raise AccessError('upstream_refresh_busy')
         async with self.lock:
             async with asyncio.timeout(10):
-                payload,digest=await self.fetch('sec',URL,headers);rows=parse(payload)
+                payload,digest=await self.fetch('sec',URL,headers);rows,integrity=parse_reference(payload)
                 for ticker,_,_,cik in SEEDS:
                     if ticker in rows and rows[ticker]['cik']!=str(cik).zfill(10):raise AccessError('sec_directory_curated_identity_conflict')
                 for ticker,row in self.issuers.items():
                     if ticker in self.cache and (ticker not in rows or rows[ticker]['cik']!=row['cik']):raise AccessError('sec_directory_cached_issuer_change')
-                source={'url':URL,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':self.origin,'scope':'Current SEC ticker mapping;not historical listing identity or feed entitlement'}
+                source={'url':URL,'sha256':digest,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':self.origin,'integrity':integrity,'scope':'Current SEC ticker mapping,accepted routable subset with explicit exclusions;not historical listing identity or feed entitlement'}
                 accepted=self.clock()
                 self.issuers,self.issuer_source=rows,source
                 self.sec_identity_accepted=accepted
@@ -81,7 +81,12 @@ class StockWorkspace:
         except ValueError:
             if type(ticker) is not str or ticker not in self.issuers:raise ValueError('unsupported_market_symbol') from None
             row=self.issuers[ticker]
-            return {'symbol':ticker,'name':row['company_name'],'exchange':'UNVERIFIED','asset_id':None,'identity_source':{**self.issuer_source,'authority':'SEC_TICKER_IDENTITY_NOT_PROVIDER_ASSET_QUALIFICATION','as_of':None}}
+            source={**self.issuer_source,'authority':'SEC_TICKER_IDENTITY_NOT_PROVIDER_ASSET_QUALIFICATION','as_of':None}
+            if 'integrity' in source:
+                # Source-level diagnostics live once in directory status,not in each
+                # of256 retained market events. Preserve digest/counts and exact ID.
+                source['integrity']={k:source['integrity'][k] for k in ('input_rows','accepted_rows','excluded_rows','coverage','normalization')}
+            return {'symbol':ticker,'name':row['company_name'],'exchange':'UNVERIFIED','asset_id':None,'identity_source':source}
     def market_search(self,query):
         found=self.catalog.search(query);q=query.strip().casefold();symbols=[r['symbol'] for r in found['results']]
         matches=[s for s,r in self.issuers.items() if q in s.casefold() or q in r['company_name'].casefold()]

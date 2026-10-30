@@ -138,6 +138,7 @@ jobs:
           build/wheel-consumer/bin/python -c 'import platform; assert platform.machine() == "aarch64"'
           /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 274
           /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_live_market_suite.py
+          /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_source_qualification_suite.py
           build/wheel-consumer/bin/python -m unittest terminal.test_atlas_arm64_policy
       - name: Source archive reproducibility and integrity
         if: matrix.compiler == 'gcc' && matrix.preset == 'release'

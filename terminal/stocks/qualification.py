@@ -87,10 +87,12 @@ async def collect_stream(stream,symbols,seconds):
         await stream.close()
 
 
-def stage_error(error):
+def stage_error(error,stage='source_qualification'):
     # Never propagate transport exceptions,URLs,provider bodies or configuration values.
-    return {'status':'BLOCKED_OR_REJECTED','error_type':type(error).__name__,
-            'reason':'permission_credentials_transport_or_contract;see sanitized readiness/source status',
+    from scripts.qualify_sec_sources import failure_result
+    safe=failure_result(error,stage)
+    return {'status':'BLOCKED_OR_REJECTED','error_type':safe['error_type'],
+            'reason':safe['reason'],'diagnostic':safe['diagnostic'],
             'raw_data_retained':False}
 
 
@@ -109,35 +111,38 @@ async def qualify_sources(workspace,*,end,seconds=30,exclusive_stream_window=Fal
     stages=result['stages'];histories=[]
     try:
         if config['alpaca']['ready']:
+            source_stage='asset_reference'
             try:
                 await workspace.asset_reference.refresh();stages['assets']=reference_summary(workspace)
                 for symbol in ('AAPL','MSFT'):
+                    source_stage='history_'+symbol
                     h=await acquire(workspace,symbol,'bars',start,end,'1Day',1)
                     histories.append(h)
                     stages['history_'+symbol]={'status':history_status(h),'symbol':symbol,'record_count':h['record_count'],'origin':h['origin'],
                         'requested_interval':h['requested_interval'],'source_records':h['source_records'],'has_more':h['has_more'],'complete_market_history':False}
-                expected=comparison_reference(histories)
+                source_stage='historical_comparison';expected=comparison_reference(histories)
                 stages['comparison']={'status':'PASS_EXACT_COMMON_TIMESTAMP_REFERENCE' if expected['exact_shared_timestamps']>=2 else 'INCONCLUSIVE_SHARED_COVERAGE',
                     'shared_timestamps':expected['exact_shared_timestamps'],
                     'calculation_sha256':hashlib.sha256(json.dumps(expected,sort_keys=True,separators=(',',':')).encode()).hexdigest()}
                 if compare and expected['exact_shared_timestamps']>=2:stages['comparison']['frontend_agreement']=await compare(histories,expected)
-            except Exception as exc:stages['alpaca_reads']=stage_error(exc)
+            except Exception as exc:stages['alpaca_reads']=stage_error(exc,source_stage)
         else:stages['alpaca_reads']={'status':'BLOCKED_CONFIGURATION_OR_PERMISSION','missing':config['alpaca']['missing_configuration']}
         # SEC is independent of market-data authorization,so still attempt when eligible.
         if config['sec']['ready']:
+            source_stage='sec_identity'
             try:
                 await cadence(workspace);await workspace.refresh_identities()
                 stages['sec_identity']={'status':'PASS_OBSERVED_IDENTITY_REFERENCE' if workspace.origin=='OBSERVED_OFFICIAL_RESPONSE' else 'FIXTURE_NOT_PROVIDER_QUALIFICATION',
                     'count':len(workspace.issuers),'symbols':{s:workspace.issuers.get(s,{}).get('cik') for s in ('AAPL','APLD','CRWV')},'source':workspace.issuer_source}
                 if 'AAPL' not in workspace.issuers:raise ValueError('SEC_exact_AAPL_identity_unavailable')
-                await cadence(workspace);await workspace.refresh('AAPL','sec')
+                source_stage='sec_financials';await cadence(workspace);await workspace.refresh('AAPL','sec')
                 accepted=workspace.cache['AAPL']['sec'];financials=accepted.get('financials')
                 await cadence(workspace)
-                raw,_=await asyncio.to_thread(official_fetch,workspace.resolve('AAPL')['cik'],workspace.environment)
+                source_stage='sec_reconciliation';raw,_=await asyncio.to_thread(official_fetch,workspace.resolve('AAPL')['cik'],workspace.environment)
                 check=reconcile(raw,financials,financials['as_of_filing_date'])
                 stages['sec_financials']={**check,'component_status':accepted['components'],
                     'scope':'Selected public SEC facts/filings;not complete statements or intraday PIT archive'}
-            except Exception as exc:stages['sec_sources']=stage_error(exc)
+            except Exception as exc:stages['sec_sources']=stage_error(exc,source_stage)
         else:stages['sec_sources']={'status':'BLOCKED_CONFIGURATION','missing':config['sec']['missing_configuration']}
         if config['alpaca']['ready'] and workspace.environment.get('GIG_ALPACA_LIVE_ENABLED')=='1':
             if not exclusive_stream_window:stages['live']={'status':'BLOCKED_SHARED_ACCOUNT_WINDOW_NOT_CONFIRMED','new_connections':0}
@@ -146,7 +151,7 @@ async def qualify_sources(workspace,*,end,seconds=30,exclusive_stream_window=Fal
                     stream=(stream_factory or LiveIEX)(workspace,retry_budget=1)
                     symbols=['AAPL','MSFT'][:stream.symbol_limit()]
                     stages['live']=await collect_stream(stream,symbols,seconds)
-                except Exception as exc:stages['live']=stage_error(exc)
+                except Exception as exc:stages['live']=stage_error(exc,'live_stream')
         else:stages['live']={'status':'BLOCKED_EXISTING_LIVE_GATE','new_connections':0}
         required=('assets','history_AAPL','history_MSFT','comparison','sec_identity','sec_financials','live')
         passed=all(stages.get(k,{}).get('status','').startswith('PASS_') or k=='sec_financials' and stages.get(k,{}).get('status')=='AGREEMENT_WITHIN_SELECTED_RECORD_SCOPE' for k in required)

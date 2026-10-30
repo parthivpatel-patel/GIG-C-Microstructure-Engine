@@ -16,11 +16,12 @@ REFERENCE_TAGS.update({'cost_of_revenue':('CostOfRevenue','CostOfGoodsAndService
 # Exact tokens only. Prefix matching can both hide lower-case validator codes and
 # disclose arbitrary exception text that happens to begin with SEC_ or backend_.
 ERROR_GROUPS={
+ 'DEPENDENCY':('msgpack_security_patch_required',),
  'CONFIGURATION':('sec_disabled_pending_fair_access_review','sec_identifying_user_agent_required','sec_private_configuration_invalid'),
  'INPUT':('invalid_symbol','unsupported_symbol','SEC_invalid_cik'),
  'SOURCE_SCHEMA':('sec_directory_budget','sec_directory_schema','sec_directory_cik','sec_directory_symbol','sec_directory_title',
    'sec_structure','sec_facts','sec_fact_budget','sec_fact_record','sec_numeric','sec_text','sec_date','sec_accession','sec_filing_fiscal_year'),
- 'SOURCE_IDENTITY':('sec_directory_duplicate_symbol','sec_directory_curated_identity_conflict','sec_directory_cached_issuer_change','sec_identity','SEC_authoritative_symbol_unavailable'),
+ 'SOURCE_IDENTITY':('sec_directory_duplicate_symbol','sec_directory_curated_identity_conflict','sec_directory_cached_issuer_change','sec_directory_no_supported_symbols','sec_identity','SEC_authoritative_symbol_unavailable'),
  'SOURCE_SEMANTICS':('sec_fact_period','sec_contradictory_fact'),
  'SOURCE_JSON':('source_duplicate_field','source_constant','duplicate_field','invalid_constant','upstream_json_nesting','upstream_expected_json_shape'),
  'RESOURCE_LIMIT':('source_body_budget','SEC_body_budget','upstream_body_budget'),
@@ -57,7 +58,7 @@ def failure_result(error,stage='initialization',diagnostics=None):
     elif isinstance(error,OSError):code='local_io_failure';category='LOCAL_IO'
     if stage=='input_validation' and code=='sec_date':category='INPUT'
     kind=type(error).__name__
-    if kind not in {'ValueError','AccessError','JSONDecodeError','UnicodeDecodeError','RecursionError','TimeoutError','ReadTimeout','ConnectTimeout','PoolTimeout','WriteTimeout','ProxyError','ConnectError','RemoteProtocolError','ReadError','WriteError','KeyError','TypeError','AttributeError','OSError','FileNotFoundError','FileExistsError','PermissionError'}:kind='Exception'
+    if kind not in {'ValueError','AccessError','ProtocolError','JSONDecodeError','UnicodeDecodeError','RecursionError','TimeoutError','ReadTimeout','ConnectTimeout','PoolTimeout','WriteTimeout','ProxyError','ConnectError','RemoteProtocolError','ReadError','WriteError','KeyError','TypeError','AttributeError','OSError','FileNotFoundError','FileExistsError','PermissionError'}:kind='Exception'
     diagnostic={'stage':stage,'category':category,'code':code}
     if status is not None:diagnostic['http_status']=status
     return {'schema':'gig.sec.qualification.failure.v2','status':'BLOCKED_OR_INVALID','error_type':kind,
