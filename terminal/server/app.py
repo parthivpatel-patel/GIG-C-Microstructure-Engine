@@ -24,6 +24,7 @@ from .config import launch_settings
 from .connection import observation, origin_value
 from .stream_tickets import StreamTickets, authorize_socket, PROTOCOL
 from .market_events import MarketEvents
+from .analysis import AnalysisGate
 from .request_proofs import RequestProofs, bootstrap_context, authorize_mutation
 import gig_microstructure as gig
 
@@ -126,7 +127,7 @@ def create_app(stock_workspace=None):
     stock_live_lock=asyncio.Lock()
     lock = asyncio.Lock()
     work_lock = asyncio.Lock()
-    analysis_lock = asyncio.Lock()
+    analysis = AnalysisGate()
     l2_directory=Path(os.environ.get('GIG_TERMINAL_L2_RECORDINGS',str(ROOT/'terminal'/'recordings'/'l2')))
     def observed_processing_allowed():
         from terminal.providers.supervisor import configured_permission
@@ -173,6 +174,7 @@ def create_app(stock_workspace=None):
         try:
             yield
         finally:
+            await analysis.close()
             assets_worker.cancel()
             with suppress(asyncio.CancelledError):await assets_worker
             directory_worker.cancel()
@@ -189,6 +191,7 @@ def create_app(stock_workspace=None):
 
     app = Starlette(lifespan=lifespan)
     app.state.native = native
+    app.state.analysis = analysis
     from terminal.stocks.service import StockWorkspace
     stocks=StockWorkspace() if stock_workspace is None else stock_workspace
     stock_live=LiveIEX(stocks)
@@ -371,8 +374,8 @@ def create_app(stock_workspace=None):
         if set(request.query_params)-{'period'}:return error('RATIO_HISTORY_QUERY','only bounded period accepted',422)
         try:
             view=stocks.view(request.path_params['symbol']);source=view['fundamentals'];normalized=source.get('financials',{'history':{},'as_of_filing_date':None})
-            if analysis_lock.locked():return error('RATIO_HISTORY_BUSY','one bounded analytical request at a time',429)
-            async with analysis_lock:history=await asyncio.to_thread(reported_history,normalized,request.query_params.get('period','annual'))
+            if analysis.busy:return error('RATIO_HISTORY_BUSY','one bounded analytical request at a time',429)
+            history=await analysis.run(reported_history,normalized,request.query_params.get('period','annual'))
             return {**history,'instrument':view['instrument'],'data_origin':view['classification'],'observed_at':source.get('received_at'),'source_records':source.get('source_records',[])}
         except (ValueError,KeyError,TypeError,OverflowError):return error('RATIO_HISTORY_UNAVAILABLE','invalid query or accepted reported financial history unavailable',422)
 
@@ -383,7 +386,8 @@ def create_app(stock_workspace=None):
         data=await bounded_json(request)
         if stocks.history_store is None:return error('DATASET_DISABLED','private history storage required',409)
         if set(data)!={'revisions','weights'}:return error('DATASET_QUERY','explicit revision aliases and weights required',422)
-        try:return await asyncio.to_thread(analyze_revisions,stocks.history_store,data['revisions'],data['weights'])
+        if analysis.busy:return error('DATASET_ANALYSIS_BUSY','one bounded analytical request at a time',429)
+        try:return await analysis.run(analyze_revisions,stocks.history_store,data['revisions'],data['weights'])
         except (ValueError,KeyError,TypeError):return error('DATASET_INELIGIBLE','verified raw compatible revisions and20–64 exact matched intervals required',422)
 
     @route('/api/v1/stocks/garch-optimization',methods=['POST'])
@@ -392,9 +396,9 @@ def create_app(stock_workspace=None):
         from terminal.stocks.advanced_models import optimize_garch
         data=await bounded_json(request)
         if set(data)!={'returns'}:return error('GARCH_QUERY','bounded ordered returns required',422)
-        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        if analysis.busy:return error('MODELS_BUSY','one diagnostic fit at a time',429)
         try:
-            async with analysis_lock:return await asyncio.to_thread(optimize_garch,data['returns'])
+            return await analysis.run(optimize_garch,data['returns'])
         except (ValueError,TypeError,OverflowError):return error('GARCH_INVALID','invalid bounded returns',422)
 
     @route('/api/v2/companies/{symbol}/availability',methods=['GET'])
@@ -659,9 +663,9 @@ def create_app(stock_workspace=None):
         data=await bounded_json(request)
         rolling=set(data)=={'returns','walk_forward'} and data['walk_forward'] is True
         if not rolling and set(data)!={'returns','train_end','validation_end'}:return error('EVALUATION_QUERY','ordered returns and explicit chronological split boundaries or bounded walk-forward required',422)
-        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        if analysis.busy:return error('MODELS_BUSY','one diagnostic fit at a time',429)
         try:
-            async with analysis_lock:return await asyncio.to_thread(walk_forward,data['returns']) if rolling else await asyncio.to_thread(evaluate,data['returns'],data['train_end'],data['validation_end'])
+            return await analysis.run(walk_forward,data['returns']) if rolling else await analysis.run(evaluate,data['returns'],data['train_end'],data['validation_end'])
         except (ValueError,TypeError,KeyError,OverflowError):return error('EVALUATION_INVALID','invalid ordered data or holdout boundaries',422)
 
     @route('/api/v1/stocks/models', methods=['POST'])
@@ -670,9 +674,9 @@ def create_app(stock_workspace=None):
         from terminal.stocks.models import fit
         data=await bounded_json(request)
         if set(data)!={'returns'}:return error('MODELS_INPUT','bounded authored decimal returns required',422)
-        if analysis_lock.locked():return error('MODELS_BUSY','one diagnostic fit at a time',429)
+        if analysis.busy:return error('MODELS_BUSY','one diagnostic fit at a time',429)
         try:
-            async with analysis_lock:return await asyncio.to_thread(fit,data['returns'])
+            return await analysis.run(fit,data['returns'])
         except (ValueError,OverflowError,TypeError):return error('MODELS_INVALID','invalid bounded diagnostic model input',422)
 
     @route('/api/v1/stocks/scenarios', methods=['POST'])

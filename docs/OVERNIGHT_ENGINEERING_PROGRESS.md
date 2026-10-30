@@ -1,4 +1,31 @@
-# SEC terminal-reference repair — October29,2026 America/New_York
+# Overnight stability checkpoint — October29,2026 America/New_York
+
+Baselinee6517314cb843cdad1e14281dbcd1001e7bee6d5,feat/atlas-final-release.
+Repository/source audit indexed859trackedfiles and reviewed actual native,model,
+data,backend,12workspace/13mode paths. [Scope/gaps](overnight/REMAINING_GAPS.md).
+Reproduced analytical cancellation admitting2physicalworkers despitebusyguard;
+fixed worker-owned admission,shared dataset budget and graceful drain. Reproduced
+fixed-HMM finite-variance1e308 producingNaN;fixed scaled/log-density arithmetic,
+typed parameter checks and explicit likelihood-capacity failure.16newregressions,
+including independent70-digit path oracle. No speculative new models added.
+
+Executed final gates: GCC Python-enabled158/158/159;Clang155/155/155;all8frozenhashes
+match in all6configs. Sources142,stocks207,terminal274 each Debug/Release/ASan+UBSan,
+all0failures/errors/skips,3liveLSan0. Frontend77,browser357(including12workspaces,
+13modes),security52,TLS/WSS8,wheel14,packaging3,actualstartup/shutdown3pass.
+Browser build/assets stayed stable for24cohorts;all serversstopped. Synthetic model,
+browser and unchanged journal scaling measured;no speedup/exchange-latency claim.
+
+Implementation milestone commit follows this validated checkpoint. Exact next
+action:build/verify two identical safe source archives from its clean detached
+checkout,finish overnight completion/evidence report,then push report checkpoint.
+All raw logs/artifacts are ignored under build/overnight. Do not repeat successful
+matrices unless production code changes. SEC terminal-marker repair preserved;
+actual SEC/Alpaca access remains unverified here(no permitted hosts/credentials).
+No provider/storage gate,trading,main or workflow change. Morning owner sequence:
+[acceptance](overnight/MORNING_ACCEPTANCE.md). No background continuation is claimed.
+
+# Previous SEC terminal-reference repair — October29,2026 America/New_York
 
 Baseline eb5e4bb0fd53bf93990d148aa0dfcf94626ccc19,feat/atlas-final-release.
 Owner diagnostic identifies REFERENCE_PATTERN on a5-character terminal-separator
