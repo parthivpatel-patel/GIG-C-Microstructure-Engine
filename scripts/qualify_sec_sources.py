@@ -60,6 +60,10 @@ def failure_result(error,stage='initialization',diagnostics=None):
     kind=type(error).__name__
     if kind not in {'ValueError','AccessError','ProtocolError','JSONDecodeError','UnicodeDecodeError','RecursionError','TimeoutError','ReadTimeout','ConnectTimeout','PoolTimeout','WriteTimeout','ProxyError','ConnectError','RemoteProtocolError','ReadError','WriteError','KeyError','TypeError','AttributeError','OSError','FileNotFoundError','FileExistsError','PermissionError'}:kind='Exception'
     diagnostic={'stage':stage,'category':category,'code':code}
+    from terminal.stocks.sec_identity import SECReferenceSymbolError
+    if type(error)is SECReferenceSymbolError:
+        kind='ValueError'  # Preserve existing failure.v2 consumers.
+        diagnostic['directory_rejection']=error.diagnostic()
     if status is not None:diagnostic['http_status']=status
     return {'schema':'gig.sec.qualification.failure.v2','status':'BLOCKED_OR_INVALID','error_type':kind,
             'reason':code,'diagnostic':diagnostic,'diagnostics':diagnostics or {},'raw_retained':False,'contact_disclosed':False}
@@ -142,7 +146,7 @@ async def resolve_reference(symbol,workspace):
     """Resolve exact SEC ticker identity,including non-seed companies;never guess a CIK."""
     from terminal.stocks.identity import symbol as validate_symbol
     validate_symbol(symbol)
-    await workspace.refresh_identities()
+    await workspace.refresh_identities(requested_symbol=symbol)
     row=workspace.issuers.get(symbol)
     if row is None:raise ValueError('SEC_authoritative_symbol_unavailable')
     return {**row,'source':workspace.issuer_source}

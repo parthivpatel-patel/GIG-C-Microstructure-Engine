@@ -1,5 +1,12 @@
 # GIG ATLAS: final engineering and operational readiness
 
+**SEC follow-up, 2026-10-30 UTC:** The owner confirms that release `5b5eb36` still
+rejects the actual directory with `sec_directory_symbol`. The earlier routing repair
+did not resolve that source condition. See [the remaining rejection investigation](../milestones/SEC_DIRECTORY_REJECTION_ISOLATION.md).
+Exact guard/record diagnostics are now fixture-verified; actual SEC qualification
+and the specific live rejected value remain unverified. Historical evidence below is
+preserved and does not establish resolution of this blocker.
+
 October29,2026,America/New_York. Baseline `73d6725898f54ad97ff926e674e93f137c3d1fd7`.
 Validated implementation,committed,pushed and remotely verified:
 `f1516d03c66ee97850e1b4a7a0add9e90e9a607b` on `feat/atlas-final-release`.

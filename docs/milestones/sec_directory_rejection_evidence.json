@@ -1,0 +1,498 @@
+{
+  "schema": "gig.sec.directory_rejection.evidence.v1",
+  "date_utc": "2026-10-30",
+  "baseline": "5b5eb36aaa21fd259028daf06f28b3277133e9b5",
+  "branch": "feat/atlas-final-release",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "owner_failure": {
+    "origin": "OWNER_REPORTED_CODESPACES",
+    "stage": "identity_resolution",
+    "category": "SOURCE_SCHEMA",
+    "reason": "sec_directory_symbol",
+    "configuration_ready": true,
+    "actual_guard_condition": "UNVERIFIED_NO_LIVE_RESPONSE",
+    "actual_record": "UNVERIFIED",
+    "live_blocker_resolved": false
+  },
+  "findings": {
+    "CLI_path": "resolve_reference -> refresh_identities -> parse_reference",
+    "remaining_guard_conditions": [
+      "NON_STRING",
+      "EMPTY",
+      "TOO_LONG",
+      "REFERENCE_PATTERN"
+    ],
+    "other_production_path": "legacy parse -> LEGACY_EXCLUSIONS_NOT_ALLOWED;not this CLI",
+    "literal_AAPL_passes_guard": true,
+    "previous_routing_fix_occurs_after_guard": true,
+    "current_official_schema_retrieved": false,
+    "local_reference_policy_changed": false,
+    "routing_policy_changed": false
+  },
+  "fixed_reproduced_defect": "Four separate rejection predicates lose record/condition context in the old CLI JSON;safe diagnostic ambiguity repaired,unknown live source not presumed repaired",
+  "failing_before": {
+    "tests": 1,
+    "failing_subcases": 7,
+    "scope": "Authored ambiguity regression;not actual captured SEC record",
+    "receipt": {
+      "path": "build/sec-identity-isolation/failing-before.log",
+      "bytes": 9262,
+      "sha256": "4c368b55a9903e49e94d29ca0034cabc5609b44f1d9099eca220b2e5a2d2923e"
+    }
+  },
+  "new_regression_methods": 15,
+  "targeted": {
+    "passed": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "matrix": [
+    {
+      "configuration": "debug",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "passed": 109,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 5.508
+    },
+    {
+      "configuration": "debug",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "passed": 207,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 23.783
+    },
+    {
+      "configuration": "release",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "passed": 109,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 5.586
+    },
+    {
+      "configuration": "release",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "passed": 207,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 23.81
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "passed": 109,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 8.873,
+      "live_lsan_check": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "passed": 207,
+      "returncode": 0,
+      "verified": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration_seconds": 36.056,
+      "live_lsan_check": 0
+    }
+  ],
+  "additional_regressions": {
+    "terminal_release": {
+      "passed": 274,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_frozen_release": {
+      "passed": 8,
+      "failures": 0,
+      "skipped": 0,
+      "all_eight_unchanged": true,
+      "cases": [
+        {
+          "case": "itch.validation_demo_reference",
+          "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+          "reported_hashes": [
+            "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.independent_reference",
+          "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+          "reported_hashes": [
+            "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.context_reference",
+          "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+          "reported_hashes": [
+            "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.streaming_reference",
+          "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+          "reported_hashes": [
+            "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.l3_reference",
+          "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+          "reported_hashes": [
+            "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807",
+            "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+            "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.auction_reference",
+          "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+          "reported_hashes": [
+            "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.admin_reference",
+          "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+          "reported_hashes": [
+            "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03"
+          ],
+          "unchanged": true
+        },
+        {
+          "case": "itch.hy_reference",
+          "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+          "reported_hashes": [
+            "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+          ],
+          "unchanged": true
+        }
+      ]
+    }
+  },
+  "counting": "Per-cohort executed outcomes,not unique tests/coverage;native-backed suites reuse unchanged existing native builds",
+  "safe_authored_example": {
+    "scope": "AUTHORED_FIXTURE_NOT_OFFICIAL_SEC_RESULT",
+    "exit_code": 2,
+    "result": {
+      "schema": "gig.sec.qualification.failure.v2",
+      "status": "BLOCKED_OR_INVALID",
+      "error_type": "ValueError",
+      "reason": "sec_directory_symbol",
+      "diagnostic": {
+        "stage": "identity_resolution",
+        "category": "SOURCE_SCHEMA",
+        "code": "sec_directory_symbol",
+        "directory_rejection": {
+          "parser_profile": "sec.reference.strict-admission.v2",
+          "parser_source_sha256": "e6b4d671a6d69ae4aa46c6a87a23c0192f8dcdf19f047a58b8f6f64f396b0120",
+          "parser_path": "reference_admission",
+          "condition": "REFERENCE_PATTERN",
+          "record_key": "7",
+          "record_ordinal": 1,
+          "input_records": 2,
+          "field": "ticker",
+          "value_type": "string",
+          "string_length": 5,
+          "shape_flags": [
+            "UNDERSCORE",
+            "DISALLOWED_ASCII"
+          ],
+          "shape_scope": "FIRST_64_CODEPOINTS",
+          "requested_symbol": "AAPL",
+          "requested_relation": "OTHER_STRING",
+          "requested_exact_records": 1,
+          "publication": "REJECTED_NO_NEW_SNAPSHOT",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "diagnostics": {
+        "completed_stages": [
+          "input_validation",
+          "sec_configuration"
+        ],
+        "configuration": {
+          "ready": true,
+          "configuration_source": "environment",
+          "missing_configuration": [],
+          "contact_disclosed": false
+        }
+      },
+      "raw_retained": false,
+      "contact_disclosed": false
+    }
+  },
+  "live_environment": {
+    "runtime": {
+      "observations_current": true,
+      "network_policy_state": "enforced",
+      "sec_www_allowed": false,
+      "sec_data_allowed": false,
+      "runtime_variable_bindings": 0,
+      "secret_bindings": 0,
+      "official_SEC_requests": 0
+    },
+    "SEC_configuration": {
+      "schema": "gig.sec.configuration.v1",
+      "ready": false,
+      "reason": "sec_disabled_pending_fair_access_review",
+      "missing_configuration": [
+        "GIG_SEC_ENABLED",
+        "GIG_SEC_POLICY_REVIEWED",
+        "GIG_SEC_USER_AGENT"
+      ],
+      "enabled": false,
+      "policy_reviewed": false,
+      "user_agent_present": false,
+      "user_agent_valid": false,
+      "invalid_boolean_variables": [],
+      "configuration_source": "environment",
+      "contact_disclosed": false
+    },
+    "actual_local_qualification": {
+      "exit_code": 2,
+      "stage": "sec_configuration",
+      "reason": "sec_disabled_pending_fair_access_review",
+      "source_request_performed": false
+    }
+  },
+  "security": {
+    "raw_ticker_or_row_in_diagnostic": false,
+    "contact_disclosed": false,
+    "diagnostic_value_shape_codepoints_max": 64,
+    "directory_records_max": 50000,
+    "body_bytes_max": 8388608,
+    "acceptance_policy_changed": false,
+    "strict_duplicates_and_identity_conflicts_preserved": true,
+    "atomic_publication_preserved": true,
+    "new_provider_requests": 0,
+    "automatic_retries_added": false,
+    "permission_gates_changed": false,
+    "private_configuration_changed": false,
+    "observed_retention_enabled": false,
+    "trading_enabled": false,
+    "main_changed": false,
+    "workflows_dispatched": false
+  },
+  "not_repeated": [
+    "Unchanged frontend/browser/packaging matrix",
+    "Full native compiler matrix",
+    "New hosted or ARM64 qualification"
+  ],
+  "limitations": [
+    "Actual rejected official value,record and source hash remain unverified",
+    "Current official lexical/null/schema guarantees not independently verified",
+    "No permitted SEC hosts or identifying contact here;owner ready Codespace is separate",
+    "Sanitizer LSan checks are live-interpreter checks,not CPython shutdown leak cleanliness",
+    "Existing Starlette/httpx deprecation warnings retained"
+  ],
+  "sources": [
+    {
+      "path": "scripts/qualify_sec_sources.py",
+      "bytes": 16827,
+      "sha256": "7e24b0146345bcd032d5ed500e241b883417589ccf5fec4a32132c225f88d89c"
+    },
+    {
+      "path": "terminal/stocks/qualification.py",
+      "bytes": 12946,
+      "sha256": "0d17ea503b85c7f216211d8b81bef3afc216c9de33b7e1b3b44329707ea39db4"
+    },
+    {
+      "path": "terminal/stocks/sec_identity.py",
+      "bytes": 6040,
+      "sha256": "e6b4d671a6d69ae4aa46c6a87a23c0192f8dcdf19f047a58b8f6f64f396b0120"
+    },
+    {
+      "path": "terminal/stocks/service.py",
+      "bytes": 28574,
+      "sha256": "0c18c5fc89805877e538a9eee1bbf16b9a036b1d8ee29fec35e2071677bf93c9"
+    },
+    {
+      "path": "terminal/stocks/test_sec_identity_diagnostics.py",
+      "bytes": 8877,
+      "sha256": "6e19c59511e8e8e1e6ba60987a977fb8bbd023ccd765b667fc0531ed37d7772f"
+    },
+    {
+      "path": "terminal/tests/run_source_qualification_suite.py",
+      "bytes": 1069,
+      "sha256": "ac012bb3d19ba262a4e950a964addd755c85d3819edc64b3f052b5bdb250c13f"
+    },
+    {
+      "path": "docs/milestones/SEC_DIRECTORY_REJECTION_ISOLATION.md",
+      "bytes": 10204,
+      "sha256": "4ec49882cf72f8d561a308297f75dc65d5b5258908d30602089c23ee0c832346"
+    },
+    {
+      "path": "docs/final_release/FINAL_ENGINEERING_REPORT.md",
+      "bytes": 15542,
+      "sha256": "6e13912e68da1d5285c7616746573311d6fe60a116fab3e6d0b7168f65b1da0f"
+    },
+    {
+      "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+      "bytes": 70631,
+      "sha256": "e818baca7129b3e5de6d059c48da728f507e6cc4aefe97450464965c076d177d"
+    }
+  ],
+  "logs": [
+    {
+      "path": "build/sec-identity-isolation/targeted.log",
+      "bytes": 3375,
+      "sha256": "8d31a0fab793b4b117d9c556c9592473d4f0454b1eb882bf937e1d178dcc13a9"
+    },
+    {
+      "path": "build/sec-identity-isolation/sources-debug.log",
+      "bytes": 20204,
+      "sha256": "15cb1bf7b028b5614b7de9b20b6e372a20a8f493876904572611b2f8fb277301"
+    },
+    {
+      "path": "build/sec-identity-isolation/sources-release.log",
+      "bytes": 20204,
+      "sha256": "c21a838f165f150755a0245a2c84b8b961ee5a101cd18f9284c81d34031a7d62"
+    },
+    {
+      "path": "build/sec-identity-isolation/sources-sanitizer.log",
+      "bytes": 20598,
+      "sha256": "0ce6d1f23c94fca7d8e53f6eac07e44c5cf751360cd8d54799f3f9155a54925d"
+    },
+    {
+      "path": "build/sec-identity-isolation/stocks-debug.log",
+      "bytes": 35123,
+      "sha256": "3c417369ff8d5511c5f88ed99205022cf4181702607ffdac0601481b1377e6b5"
+    },
+    {
+      "path": "build/sec-identity-isolation/stocks-release.log",
+      "bytes": 35123,
+      "sha256": "65e9786a5310e6312150f4686d0bca526ec82581473078c6c56261e6b9baef7e"
+    },
+    {
+      "path": "build/sec-identity-isolation/stocks-sanitizer.log",
+      "bytes": 35141,
+      "sha256": "ca3a46dab09f09e28ce976b15d6a98c892c2f58bca4ebff823620087918c9822"
+    },
+    {
+      "path": "build/sec-identity-isolation/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "e683b7552736c5d7465c44ceb9acf013180ed69b5a289a24b7628899ea83d618"
+    },
+    {
+      "path": "build/sec-identity-isolation/canonical.log",
+      "bytes": 7753,
+      "sha256": "819e90900a5f93cdb5da2947326f79060289418fdae912019ff24332651df274"
+    },
+    {
+      "path": "build/sec-identity-isolation/canonical.xml",
+      "bytes": 4302,
+      "sha256": "07c3e989b15f5160846bd77a65954af43ee3a5fb4d74c17e154b6159a38dbe16"
+    },
+    {
+      "path": "build/sec-identity-isolation/matrix.json",
+      "bytes": 2559,
+      "sha256": "4c8f1953bf8e25a7f8079b814834f9ef90bfd1d915d3be49b80c3911ef99d93e"
+    },
+    {
+      "path": "build/sec-identity-isolation/run_matrix.py",
+      "bytes": 1564,
+      "sha256": "67572f8007b908a20c251110a2f05d47197dbd23efda6302521ad038acf432f7"
+    },
+    {
+      "path": "build/sec-identity-isolation/local-config-check.json",
+      "bytes": 403,
+      "sha256": "6037f8789a22e2b587685224d925fa7dfa9fa1e8c2d4b4f09f3b6c84401d788b"
+    },
+    {
+      "path": "build/sec-identity-isolation/local-qualification-blocked.json",
+      "bytes": 594,
+      "sha256": "074f85cfd24d75cff7cfff6d61c2591d375aca7af5567d18e4254147664b8e37"
+    },
+    {
+      "path": "build/sec-identity-isolation/runtime-summary.json",
+      "bytes": 218,
+      "sha256": "784053527a7a6a74f1b0c1dc27c77e410a2529b8dd5356fb380b033842727d7f"
+    },
+    {
+      "path": "build/sec-identity-isolation/authored-example.json",
+      "bytes": 1602,
+      "sha256": "bfae1d9a84037d6251ced9efd3c7eed22f977f204b82cce0650805822e0cdb2b"
+    }
+  ],
+  "owner_verification_command": "git pull --ff-only origin feat/atlas-final-release && .venv/bin/python scripts/qualify_sec_sources.py --fetch --resolve-identity --symbol AAPL --as-of 2026-10-28"
+}

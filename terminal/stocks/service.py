@@ -48,9 +48,10 @@ class StockWorkspace:
         except ValueError:
             row=self.catalog.instrument(ticker)
             return {'symbol':ticker,'company_name':row['name'],'exchange':row['exchange'],'cik':None,'currency':'USD','security_type':row.get('security_type','UNCLASSIFIED'),'listing_status':row.get('listing_status','UNVERIFIED'),'identity_source':'market_catalog_not_SEC_issuer_verified','identity_as_of':self.catalog.source['as_of']}
-    async def refresh_identities(self):
-        from .sec_identity import parse_reference,URL
-        from .identity import SEEDS
+    async def refresh_identities(self,*,requested_symbol=None):
+        from .sec_identity import parse_reference,SECReferenceSymbolError,URL
+        from .identity import SEEDS,symbol
+        if requested_symbol is not None:symbol(requested_symbol)
         headers=self.permission('sec')
         now=self.clock()
         if self.sec_identity_accepted is not None and 0<=now-self.sec_identity_accepted<60:
@@ -59,7 +60,11 @@ class StockWorkspace:
         if self.lock.locked():raise AccessError('upstream_refresh_busy')
         async with self.lock:
             async with asyncio.timeout(10):
-                payload,digest=await self.fetch('sec',URL,headers);rows,integrity=parse_reference(payload)
+                payload,digest=await self.fetch('sec',URL,headers)
+                try:rows,integrity=parse_reference(payload,requested_symbol=requested_symbol)
+                except SECReferenceSymbolError as error:
+                    error.attach_source_digest(digest)
+                    raise
                 for ticker,_,_,cik in SEEDS:
                     if ticker in rows and rows[ticker]['cik']!=str(cik).zfill(10):raise AccessError('sec_directory_curated_identity_conflict')
                 for ticker,row in self.issuers.items():

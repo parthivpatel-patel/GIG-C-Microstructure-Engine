@@ -1,4 +1,28 @@
-# Final master directive closure — October29,2026 America/New_York
+# SEC rejection isolation checkpoint — 2026-10-30 UTC
+
+Baseline5b5eb36aaa21fd259028daf06f28b3277133e9b5 on feat/atlas-final-release.
+Owner's ready Codespace still fails sec_directory_symbol. Traced CLI to strict
+reference admission, before the previous routing/exclusion fix. Exact literal AAPL
+passes this guard. Reproduced/fixed diagnostic ambiguity across all4 predicates;
+preserved admission policy,conflict/duplicate rejection and refresh atomicity.
+Safe diagnostics identify condition,record position,requested-symbol relation and
+source/parser fingerprints without raw rows or contact. No new provider requests.
+
+New15 regressions pass;source109+stock207 per Debug/Release/ASan+UBSan all pass with
+zero failures/errors/skips;both sanitizer liveLSan0. Terminal Release274 and8 native
+frozen reference cases pass;all8 canonical hashes unchanged. Detailed commands,
+log hashes and limitations:[investigation](milestones/SEC_DIRECTORY_REJECTION_ISOLATION.md),
+[evidence](milestones/sec_directory_rejection_evidence.json).
+
+Remaining blocker:actual current SEC record/schema cannot be acquired here;no valid
+User-Agent or permitted SEC host. Do not claim the live blocker fixed. Exact next
+action is the single ordinary qualification command in the investigation,using the
+owner's existing setup. Use its bounded diagnostic to justify any further repair;
+do not guess/broaden reference grammar or discard malformed entries. No Alpaca,
+retention,trading,main or workflow change. Verified delivery commit follows this
+checkpoint;no execution continues after the session stops.
+
+# Previous final master directive closure — October29,2026 America/New_York
 
 Implementation f1516d03c66ee97850e1b4a7a0add9e90e9a607b is committed,pushed and remote
 verified on feat/atlas-final-release. Engineering is complete for the declared bounded

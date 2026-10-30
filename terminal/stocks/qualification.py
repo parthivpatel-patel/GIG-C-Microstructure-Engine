@@ -131,7 +131,7 @@ async def qualify_sources(workspace,*,end,seconds=30,exclusive_stream_window=Fal
         if config['sec']['ready']:
             source_stage='sec_identity'
             try:
-                await cadence(workspace);await workspace.refresh_identities()
+                await cadence(workspace);await workspace.refresh_identities(requested_symbol='AAPL')
                 stages['sec_identity']={'status':'PASS_OBSERVED_IDENTITY_REFERENCE' if workspace.origin=='OBSERVED_OFFICIAL_RESPONSE' else 'FIXTURE_NOT_PROVIDER_QUALIFICATION',
                     'count':len(workspace.issuers),'symbols':{s:workspace.issuers.get(s,{}).get('cik') for s in ('AAPL','APLD','CRWV')},'source':workspace.issuer_source}
                 if 'AAPL' not in workspace.issuers:raise ValueError('SEC_exact_AAPL_identity_unavailable')
