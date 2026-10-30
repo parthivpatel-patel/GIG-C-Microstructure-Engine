@@ -16,9 +16,15 @@ all0failures/errors/skips,3liveLSan0. Frontend77,browser357(including12workspace
 Browser build/assets stayed stable for24cohorts;all serversstopped. Synthetic model,
 browser and unchanged journal scaling measured;no speedup/exchange-latency claim.
 
-Implementation milestone commit follows this validated checkpoint. Exact next
-action:build/verify two identical safe source archives from its clean detached
-checkout,finish overnight completion/evidence report,then push report checkpoint.
+Implementation cc29dd0bf7e8ece39189e864df21ef007038034e is committed,pushed and remote
+verified. Clean detached implementation checkout produced2byte-identical archives,
+865safe/intended members;fresh archive-built wheel installed separately passes14/14.
+All source implementation gates are complete;the following delivery is docs-only.
+Exact next action after delivery:owner's one final permitted source/private-target
+acceptance session,not another speculative feature or blanket matrix rerun.
+See[completion report](overnight/OVERNIGHT_COMPLETION_REPORT.md) and
+[safe evidence](overnight/overnight_evidence.json). Final report SHA is recorded in
+the delivery response and verified remote branch;this file cannot embed its own SHA.
 All raw logs/artifacts are ignored under build/overnight. Do not repeat successful
 matrices unless production code changes. SEC terminal-marker repair preserved;
 actual SEC/Alpaca access remains unverified here(no permitted hosts/credentials).

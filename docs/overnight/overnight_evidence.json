@@ -1,0 +1,2263 @@
+{
+  "schema": "gig.atlas.overnight.evidence.v1",
+  "date": "2026-10-29 America/New_York",
+  "baseline": "e6517314cb843cdad1e14281dbcd1001e7bee6d5",
+  "implementation_commit": "cc29dd0bf7e8ece39189e864df21ef007038034e",
+  "branch": "feat/atlas-final-release",
+  "main_unchanged": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+  "delivery": "Documentation-only commit follows;final remote SHA verified in delivery response. Tests used production bytes identical to implementation commit.",
+  "assessment": {
+    "engineering": "COMPLETE_DECLARED_BOUNDED_PRIVATE_RESEARCH_CONTRACT_WITH_EXPLICIT_PARTIAL_AND_OPTIONAL_GAPS",
+    "offline": "VERIFIED",
+    "real_provider": "NOT_VERIFIED_HERE",
+    "owner_acceptance": "PENDING",
+    "current_candidate_ARM64": "NOT_EXECUTED",
+    "production_readiness": "NOT_ESTABLISHED_OR_AUTHORIZED"
+  },
+  "audit": {
+    "tracked_paths_indexed": 859,
+    "scope": "All tracked paths indexed;semantic source review is targeted,not line-by-line certification",
+    "groups": {
+      ".devcontainer": {
+        "files": 2,
+        "bytes": 800
+      },
+      ".github": {
+        "files": 3,
+        "bytes": 24225
+      },
+      ".gitignore": {
+        "files": 1,
+        "bytes": 1081
+      },
+      "CMakeLists.txt": {
+        "files": 1,
+        "bytes": 27924
+      },
+      "CMakePresets.json": {
+        "files": 1,
+        "bytes": 2113
+      },
+      "README.md": {
+        "files": 1,
+        "bytes": 4579
+      },
+      "THIRD_PARTY_NOTICES.md": {
+        "files": 1,
+        "bytes": 5129
+      },
+      "benchmarks": {
+        "files": 19,
+        "bytes": 95632
+      },
+      "cmake": {
+        "files": 1,
+        "bytes": 555
+      },
+      "docs": {
+        "files": 361,
+        "bytes": 12539533
+      },
+      "examples": {
+        "files": 3,
+        "bytes": 29451
+      },
+      "fixtures": {
+        "files": 6,
+        "bytes": 14706
+      },
+      "include": {
+        "files": 27,
+        "bytes": 102331
+      },
+      "pyproject.toml": {
+        "files": 1,
+        "bytes": 835
+      },
+      "python": {
+        "files": 9,
+        "bytes": 65289
+      },
+      "requirements-python.lock": {
+        "files": 1,
+        "bytes": 350
+      },
+      "schemas": {
+        "files": 14,
+        "bytes": 294734
+      },
+      "scripts": {
+        "files": 77,
+        "bytes": 408258
+      },
+      "src": {
+        "files": 22,
+        "bytes": 255337
+      },
+      "terminal": {
+        "files": 254,
+        "bytes": 1477020
+      },
+      "tests": {
+        "files": 54,
+        "bytes": 482099
+      }
+    },
+    "requirements_matrix": "docs/overnight/REMAINING_GAPS.md",
+    "workspaces": 12,
+    "visualization_modes": 13,
+    "candidate_models_not_silently_added": [
+      "cointegration/statistical_arbitrage",
+      "fitted mean-reversion",
+      "cross-sectional factor models",
+      "portfolio optimizer",
+      "EGARCH/GJR/IV models"
+    ],
+    "optional_missing": [
+      "per-asset Euler risk contributions"
+    ],
+    "partial": [
+      "full original-availability PIT/financial statement coverage",
+      "empirical VPIN/market-impact/forecast calibration",
+      "physical-device/accessibility certification"
+    ]
+  },
+  "implemented": {
+    "cancellation": "Worker-owned shielded analytical admission and graceful drain;dataset now shares one-worker gate",
+    "numerics": "Finite-scale Gaussian log-density and typed parameter/capacity rejection in existing fixed missing-emission HMM",
+    "new_tests": 16,
+    "normal_successful_API_schemas_preserved": true,
+    "additive_failure": "DATASET_ANALYSIS_BUSY HTTP429",
+    "model_oracle": "70-digit Decimal latent-path enumeration,missing/prefix and finite/capacity controls",
+    "native_or_frontend_source_changed": false,
+    "SEC_profile": "sec.reference.terminal-marker.v3 preserved"
+  },
+  "failing_before": {
+    "selected_regressions": 3,
+    "failures": 3,
+    "errors": 0,
+    "scope": "Authored reproductions,not provider observations",
+    "receipt": {
+      "path": "build/overnight/regression-before.log",
+      "bytes": 3617,
+      "sha256": "bd2a04c66c4e1c4a5cbf124209a7a86c723c665bee67cbc15ad2333ea885e494"
+    },
+    "resource_before": {
+      "second_HTTP_status": 200,
+      "physical_workers_started_while_first_blocked": 2
+    },
+    "resource_after": {
+      "second_HTTP_status": 429,
+      "physical_workers_started_while_first_blocked": 1
+    }
+  },
+  "native_six": [
+    {
+      "name": "gcc-python-debug",
+      "directory": "build/python-debug",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/python-debug",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/python-debug",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/gcc-python-debug.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 158,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 78.89701818898902
+    },
+    {
+      "name": "gcc-python-release",
+      "directory": "build/python-release",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/python-release",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/python-release",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/gcc-python-release.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 158,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 63.00025766302133
+    },
+    {
+      "name": "gcc-python-asan-ubsan",
+      "directory": "build/python-asan-ubsan",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/python-asan-ubsan",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/python-asan-ubsan",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/gcc-python-asan-ubsan.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 159,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 154.46320541700698
+    },
+    {
+      "name": "clang-debug",
+      "directory": "build/phase9-clang-debug",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/phase9-clang-debug",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/phase9-clang-debug",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/clang-debug.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 59.18412405697745
+    },
+    {
+      "name": "clang-release",
+      "directory": "build/phase9-clang-release",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/phase9-clang-release",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/phase9-clang-release",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/clang-release.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 57.687192112993216
+    },
+    {
+      "name": "clang-asan-ubsan",
+      "directory": "build/phase9-clang-asan-ubsan",
+      "commands": [
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/cmake",
+            "--build",
+            "build/phase9-clang-asan-ubsan",
+            "-j",
+            "2"
+          ],
+          "returncode": 0
+        },
+        {
+          "argv": [
+            "/workspace/gig-tools/bin/ctest",
+            "--test-dir",
+            "build/phase9-clang-asan-ubsan",
+            "--output-on-failure",
+            "-j",
+            "2",
+            "--output-junit",
+            "/workspace/GIG-C-Microstructure-Engine/build/overnight/clang-asan-ubsan.xml"
+          ],
+          "returncode": 0
+        }
+      ],
+      "tests": 155,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 85.23859121999703
+    }
+  ],
+  "canonical": {
+    "expected": {
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "results": [
+      {
+        "configuration": "gcc-python-debug",
+        "tests": 158,
+        "frozen_hashes_unchanged": 8
+      },
+      {
+        "configuration": "gcc-python-release",
+        "tests": 158,
+        "frozen_hashes_unchanged": 8
+      },
+      {
+        "configuration": "gcc-python-asan-ubsan",
+        "tests": 159,
+        "frozen_hashes_unchanged": 8
+      },
+      {
+        "configuration": "clang-debug",
+        "tests": 155,
+        "frozen_hashes_unchanged": 8
+      },
+      {
+        "configuration": "clang-release",
+        "tests": 155,
+        "frozen_hashes_unchanged": 8
+      },
+      {
+        "configuration": "clang-asan-ubsan",
+        "tests": 155,
+        "frozen_hashes_unchanged": 8
+      }
+    ],
+    "all_48_comparisons_unchanged": true
+  },
+  "python_nine": [
+    {
+      "configuration": "debug",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "tests": 142,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 9.384021695004776,
+      "verified": true,
+      "log": "build/overnight/sources-debug.log"
+    },
+    {
+      "configuration": "debug",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 35.09955195899238,
+      "verified": true,
+      "log": "build/overnight/stocks-debug.log"
+    },
+    {
+      "configuration": "debug",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-debug/python:."
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 39.49134922999656,
+      "verified": true,
+      "log": "build/overnight/terminal-debug.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "tests": 142,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 10.979855796991615,
+      "verified": true,
+      "log": "build/overnight/sources-release.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 31.801116613991326,
+      "verified": true,
+      "log": "build/overnight/stocks-release.log"
+    },
+    {
+      "configuration": "release",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-release/python:."
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 28.8122690890159,
+      "verified": true,
+      "log": "build/overnight/terminal-release.log"
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "tests": 142,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 29.877127910003765,
+      "verified": true,
+      "log": "build/overnight/sources-sanitizer.log",
+      "live_lsan_check": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "tests": 207,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "returncode": 0,
+      "elapsed_seconds": 66.10712343399064,
+      "verified": true,
+      "log": "build/overnight/stocks-sanitizer.log",
+      "live_lsan_check": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "environment": {
+        "PYTHONPATH": "build/python-asan-ubsan/python:.",
+        "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+        "PYTHONMALLOC": "malloc",
+        "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1"
+      },
+      "counts": {
+        "errors": 0,
+        "expected": 274,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 274
+      },
+      "returncode": 0,
+      "elapsed_seconds": 154.6410351409868,
+      "verified": true,
+      "log": "build/overnight/terminal-sanitizer.log",
+      "live_lsan_check": 0
+    }
+  ],
+  "extra_tests": {
+    "targeted_new": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0
+    },
+    "frontend": {
+      "passed": 77,
+      "failed": 0,
+      "skipped": 0,
+      "command": "npm --prefix terminal/web test"
+    },
+    "browser": {
+      "passed": 357,
+      "failed": 0,
+      "skipped": 0,
+      "cohorts": 23,
+      "additional_performance_cohorts": 1,
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python scripts/qualify_atlas_offline.py --output build/overnight/browser",
+      "ordinary_clicks": true,
+      "forced_clicks": false,
+      "production_assets_stable_between_cohorts": true
+    },
+    "security": {
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0,
+      "command": "PYTHONPATH=build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python -m unittest terminal.test_browser_access terminal.test_codespaces_origin terminal.test_stream_proof terminal.test_request_proof terminal.stocks.test_repair.Authentication terminal.test_atlas_arm64_policy"
+    },
+    "TLS_WSS": {
+      "passed": 8,
+      "failed": 0,
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "exact HTTP issuer failure reproduced without proof",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "cross-origin non-simple preflight denied despite rewritten Origin",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "command": "PYTHONPATH=build/python-release/python:. GIG_SEC_ENABLED=0 GIG_ALPACA_ENABLED=0 GIG_LIVE_ENABLED=0 GIG_COINBASE_ENABLED=0 /workspace/gig-terminal-clean-venv/bin/python terminal/tests/check_rewritten_http_tls.py"
+    },
+    "installed_wheel": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "command": "PYTHONPATH=tests /workspace/gig-terminal-clean-venv/bin/python -m unittest test_python test_export_contracts"
+    },
+    "package_patterns": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "command": "/workspace/gig-tools/bin/python -m unittest discover -s tests -p test_sdist_patterns.py"
+    },
+    "actual_startup": {
+      "schema": "gig.atlas.actual_startup_proof.v1",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "checks": [
+        "Actual start_terminal.sh serves real C++ engine with all external sources disabled",
+        "Second startup refuses occupied port without killing/replacing native server",
+        "Actual launcher shuts down cleanly and releases listener"
+      ],
+      "native_build": {
+        "compiler": "14.2.0",
+        "python": "3.12.14",
+        "pybind11": "2.13.6",
+        "package_version": "0.1.1",
+        "schema_version": "1.0",
+        "build_type": "Release",
+        "config_flags": " -O3 -DNDEBUG",
+        "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+        "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC"
+      },
+      "source_scope": "Authored native only;no SEC/Alpaca request or permission activation",
+      "launcher_copy_sha256_matches_source": true,
+      "returncode": -15
+    },
+    "fresh_wheel_consumer": {
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "command": "PYTHONPATH=build/overnight/fresh-wheel:tests /workspace/gig-terminal-clean-venv/bin/python -m unittest test_python test_export_contracts",
+      "identity": {
+        "loaded_package": "/workspace/GIG-C-Microstructure-Engine/build/overnight/fresh-wheel/gig_microstructure/__init__.py",
+        "source": "freshly installed wheel built from verified clean source archive",
+        "package_version": "0.1.1"
+      }
+    }
+  },
+  "counts_scope": "Per-cohort outcomes,not unique tests or percent coverage;all final failures/errors/skips0. Initial failures and harness issues separately preserved.",
+  "source_archive": {
+    "schema": "gig.atlas.final.source_archive.v1",
+    "source_commit": "cc29dd0bf7e8ece39189e864df21ef007038034e",
+    "source_worktree_clean": true,
+    "source_date_epoch": "1793326520",
+    "two_archives_byte_identical": true,
+    "members": 865,
+    "archives": [
+      {
+        "path": "build/overnight/sdist-a/gig_microstructure-0.1.1.tar.gz",
+        "bytes": 2785607,
+        "sha256": "d5ed9792794d4055de1394bf865f309ab93d660c97137835c3e59781d35e9851"
+      },
+      {
+        "path": "build/overnight/sdist-b/gig_microstructure-0.1.1.tar.gz",
+        "bytes": 2785607,
+        "sha256": "d5ed9792794d4055de1394bf865f309ab93d660c97137835c3e59781d35e9851"
+      }
+    ],
+    "scope": "Implementation snapshot;final report-only commit follows. No private data,secrets,compiled binaries or ignored build artifacts."
+  },
+  "fresh_wheel": {
+    "receipt": {
+      "path": "build/overnight/fresh-wheel-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "bytes": 477838,
+      "sha256": "0e72665d2f9e5b1c63c31241b08e47a34fcb674e1efea1cc7c217b4b93c5cfc6"
+    },
+    "source": "Verified implementation source archive,not an existing checkout/cache",
+    "build_command": "CXX=/usr/bin/g++ CC=/usr/bin/gcc /workspace/gig-tools/bin/python -m build --wheel --no-isolation --outdir build/overnight/fresh-wheel-dist build/overnight/sdist-consumer/gig_microstructure-0.1.1",
+    "install": "--no-index --no-deps --target build/overnight/fresh-wheel;existing environment not overwritten",
+    "native_package_only": "Terminal source is deployed via Git,not the native wheel",
+    "independent_machine": false
+  },
+  "measurements": {
+    "schema": "gig.overnight.measurement.v1",
+    "origin": "AUTHORED_SYNTHETIC_ONLY",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "CPU": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "source_commit": "e6517314cb843cdad1e14281dbcd1001e7bee6d5",
+    "working_tree_dirty": true,
+    "model_measurements": [
+      {
+        "name": "diagnostic_hmm_garch_kalman",
+        "input_observations": 40,
+        "warmups": 1,
+        "repetitions": 5,
+        "duration_ns": [
+          2133343,
+          3801531,
+          2153065,
+          2690087,
+          3788283
+        ],
+        "median_ns": 2690087,
+        "canonical_output_sha256": "e3bdf38c1d5937f0fe2c63b98aa8cb407d3ba6f2e8f23a87a869ae2d3aecde34"
+      },
+      {
+        "name": "garch_coordinate_search",
+        "input_observations": 40,
+        "warmups": 1,
+        "repetitions": 5,
+        "duration_ns": [
+          8851699,
+          9598548,
+          34231285,
+          13213606,
+          10267264
+        ],
+        "median_ns": 10267264,
+        "canonical_output_sha256": "27b1c5ddb423777688fabf47790180d891e0294a0083bda595848c55039c1f1f"
+      },
+      {
+        "name": "fixed_missing_HMM",
+        "input_observations": 240,
+        "warmups": 1,
+        "repetitions": 5,
+        "duration_ns": [
+          2692210,
+          107803245,
+          3695199,
+          4272374,
+          3506206
+        ],
+        "median_ns": 3695199,
+        "canonical_output_sha256": "907eb3ea5090a7fe7eae0d55e470d348a7187452ac618e2b2e2afd1ba81458bd"
+      }
+    ],
+    "journal_scaling": [
+      {
+        "records": 128,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 128,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 1566112,
+        "peak_pmr_bytes": 2348960,
+        "allocations": 9,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 2750754,
+        "peak_RSS_kib": 12672,
+        "RSS_method": "POSIX wait4 per-child ru_maxrss,KiB on Linux",
+        "command": [
+          "build/python-release/benchmarks/gig_journal_memory_probe",
+          "128",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12525984,
+        "peak_pmr_bytes": 18788768,
+        "allocations": 12,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 56444505,
+        "peak_RSS_kib": 13972,
+        "RSS_method": "POSIX wait4 per-child ru_maxrss,KiB on Linux",
+        "command": [
+          "build/python-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "0"
+        ]
+      },
+      {
+        "records": 4096,
+        "reset_every": 0,
+        "resets": 0,
+        "record_bytes": 12232,
+        "record_capacity": 4096,
+        "restart_bytes": 3720,
+        "restart_capacity": 0,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 50102688,
+        "peak_pmr_bytes": 75153824,
+        "allocations": 14,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 383908020,
+        "peak_RSS_kib": 50744,
+        "RSS_method": "POSIX wait4 per-child ru_maxrss,KiB on Linux",
+        "command": [
+          "build/python-release/benchmarks/gig_journal_memory_probe",
+          "4096",
+          "0"
+        ]
+      },
+      {
+        "records": 1024,
+        "reset_every": 128,
+        "resets": 8,
+        "record_bytes": 12232,
+        "record_capacity": 1024,
+        "restart_bytes": 3720,
+        "restart_capacity": 8,
+        "logical_entry_bytes": 15944,
+        "engine_object_bytes": 14808,
+        "snapshot_bytes": 6624,
+        "metadata_bytes": 5576,
+        "initial_pmr_bytes": 416,
+        "live_pmr_bytes": 12555744,
+        "peak_pmr_bytes": 18803648,
+        "allocations": 24,
+        "post_destroy_live_bytes": 0,
+        "elapsed_ns": 30231746,
+        "peak_RSS_kib": 13976,
+        "RSS_method": "POSIX wait4 per-child ru_maxrss,KiB on Linux",
+        "command": [
+          "build/python-release/benchmarks/gig_journal_memory_probe",
+          "1024",
+          "128"
+        ]
+      }
+    ],
+    "python_process_peak_RSS_kib": 12672,
+    "limits": "Shared host/concurrent validation;not isolated/tail/exchange/production latency evidence. Journal unchanged;tracked PMR differs from RSS. Model timings have no before/after speedup claim."
+  },
+  "browser_performance": {
+    "schema": "gig.atlas.final.browser.performance.v1",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_LATENCY",
+    "warmups": 1,
+    "repetitions": 3,
+    "samples": [
+      {
+        "initial_navigation_and_settle_ms": 750.7366029999998,
+        "stock_route_ms": 264.54052200000024,
+        "health_roundtrip_ms": 3.623975999999857,
+        "script_seconds": 0.133131,
+        "task_seconds": 0.331658,
+        "used_js_heap_bytes": 4366828,
+        "dom_nodes": 1191,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Kz7u3ikp.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BZcujSqm.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-BVrwTy34.js",
+            "bytes": 2323
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 808.9783219999999,
+        "stock_route_ms": 165.14986899999985,
+        "health_roundtrip_ms": 3.168162999999822,
+        "script_seconds": 0.154333,
+        "task_seconds": 0.394052,
+        "used_js_heap_bytes": 4626688,
+        "dom_nodes": 1285,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Kz7u3ikp.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BZcujSqm.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-BVrwTy34.js",
+            "bytes": 2323
+          }
+        ]
+      },
+      {
+        "initial_navigation_and_settle_ms": 758.6164340000005,
+        "stock_route_ms": 138.7966290000004,
+        "health_roundtrip_ms": 8.338525000000118,
+        "script_seconds": 0.12905,
+        "task_seconds": 0.319068,
+        "used_js_heap_bytes": 4622896,
+        "dom_nodes": 1192,
+        "initial_scripts": [
+          {
+            "path": "/assets/index-Kz7u3ikp.js",
+            "bytes": 236210
+          },
+          {
+            "path": "/assets/ResearchDesk-BZcujSqm.js",
+            "bytes": 4497
+          },
+          {
+            "path": "/assets/marketContract-DM0W2FhH.js",
+            "bytes": 1813
+          },
+          {
+            "path": "/assets/directoryContract-BVrwTy34.js",
+            "bytes": 2323
+          }
+        ]
+      }
+    ],
+    "browser": "154.0.8037.57",
+    "limitations": [
+      "Isolated Chromium contexts with disabled cache;browser process reused",
+      "Navigation includes networkidle wait;not pure rendering latency",
+      "CDP sampled JS heap,not native/GPU memory or long-run growth",
+      "Loopback fake providers;no Android/external Codespaces acceptance"
+    ]
+  },
+  "bundle": {
+    "entry_bytes": 236210,
+    "source_changed": false,
+    "assets": {
+      ".vite/manifest.json": "601c1d6f708853b496442f7e59314fbdd8b6c8833a44d92d8b50f8164ed6b72b",
+      "assets/Landscape3D-DgshB_36.js": "135d55351ce9ba045a02d910220b8d2e3a9c35ef82ee3fe19642bb15b4ecffaf",
+      "assets/LiveMarket-vW_6WBV_.js": "e0973844111971dd3ef8e899af9f667f50149d429d6dd5cfc0beaeafffa4c691",
+      "assets/MarketHealth-D0_Nr0eo.js": "d894fff71f4020c047ad186adc8b0312e94a3f394461ac343d092cf2d679f56d",
+      "assets/ModelSurface-DeyfcwIP.js": "9f46cf3150fea8675bdff348793a46f075db5105d857d09db6df55e5b9c137f1",
+      "assets/OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+      "assets/QuoteCloud-DJfqFdQs.js": "8553517b669fa3d243d767362c81da96536f4ddf81aa1561bb25e7c38b93ccbe",
+      "assets/ResearchDesk-BZcujSqm.js": "c3f2a28d276d6a12c45c28ce7f765e8e4e306dd22d548a40340710833a25317f",
+      "assets/ResearchLab-C0ZIAUYX.js": "e70b9d89f0ca7a6f80ad3a5d2b8e8663701572f502391ebbf81b16f5dbedca6d",
+      "assets/ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+      "assets/ResearchScene-D6H1X30_.js": "c238b7da3a0a5b22fbd1d34ce9109d12aa165b79f2fa97403c83002d0542a3bf",
+      "assets/StockIntelligence-Dw0m8Bjv.js": "9969cc19b7a6b2da5790421af72aac51f86426d5f9103560a67b908dd2b295c8",
+      "assets/UniverseWorkspace-BQEyF2zF.js": "5de093d1aa75515536f1c2ed7eae7f8152a7af14d6f41061c441a4d6938eecea",
+      "assets/VolatilitySurface-D6YKg2-J.js": "789d52deb53465d3ebc4bfa84a0ac0d0d0650da90515e512285ed6a6f65fcbdc",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+      "assets/index-Kz7u3ikp.js": "6c9f0dfab7c649718a7e61c09f03c37ab5b40dd08eb9c4117466e7a4dfce1a37",
+      "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+      "index.html": "194b5de896ad70cbf9f4533c8a7b4f097d6338c67ef9394cf1c78c5469787f66"
+    },
+    "Three_deferred_on_Command_Center": true
+  },
+  "visual_review": {
+    "screenshots": 99,
+    "origin": "AUTHORED_SYNTHETIC_ONLY",
+    "inspected": [
+      "build/overnight/browser/workspace/build/atlas4/visual/command-center-wide-light.png",
+      "build/overnight/browser/workspace/build/atlas5/visual/research-mobile-light.png"
+    ],
+    "scope": "Desktop overview and expanded long stitched mobile research;not physical Android/GPU or formal screen-reader certification"
+  },
+  "screenshot_inventory": [
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/canyon-synthetic-desktop.png",
+      "bytes": 156744,
+      "sha256": "ee51db6c598907b812c14fe816bb5c9a7cebf936344e7e49406fa7fe643fe798"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/dome-synthetic-desktop.png",
+      "bytes": 143319,
+      "sha256": "c1d11b41c97c06b47cecc158a8fa81d77d3508105ddbf2964824d0b80b1f8330"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/events-synthetic-desktop.png",
+      "bytes": 147430,
+      "sha256": "535072968fde90ebc233ea548f9320dce18e7cb3f919df1f30c3badffbd59892"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/flow-synthetic-desktop.png",
+      "bytes": 156293,
+      "sha256": "346eedac99943617d4f64e5aa06c215e0beda187e2dfa4466043cc0a2c2541a9"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/height-synthetic-desktop.png",
+      "bytes": 152889,
+      "sha256": "15db255c56f42a6c4ffa8f510bbdf8c871011abc32df998c762f5c0a7a054237"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/iex-authored-dome.png",
+      "bytes": 156910,
+      "sha256": "691c4e9ede6d6744b2452196d1155ef34efbd8139de60393073ba85797c8de2a"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/iex-authored-ribbon.png",
+      "bytes": 140745,
+      "sha256": "a2302edb11ffcdf27b01b7392b9ae8ded3ffc12e085e3047ed6a227dd7eeec49"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/ribbon-synthetic-desktop.png",
+      "bytes": 144403,
+      "sha256": "2813f81563da0a23d5cac547345c22ba764d381cb58221aab02d591d197f7de1"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "bytes": 140403,
+      "sha256": "21410251318616521887e5e2be7b5fa2e70ffcc71d1a651800cb638ab3d18fb0"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "bytes": 136288,
+      "sha256": "9b291267519d4ece9eca1b64bfff2cf0abc0d9a49b66c471448000cb63ad6edd"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/vwap-synthetic-desktop.png",
+      "bytes": 137378,
+      "sha256": "70399c54c1d689d0dbc61940b331d176150c8573eda47346c5fb04df9c11fd3f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/advanced-3d/wheel-synthetic-desktop.png",
+      "bytes": 153153,
+      "sha256": "b0378c2f50e383e265dbceabe7842585f30e39947433984fb8e1c06e3193281f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-dark-1280.png",
+      "bytes": 280441,
+      "sha256": "c58e91cf3cf53ca7fa4e17c7ba7f0dac242a961163e957b683b9393cb0a9e3d3"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-dark-1920.png",
+      "bytes": 288340,
+      "sha256": "56ab5cde8a4df533464bb96055992014310a45242803e3ca778a12d5fbd170f6"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-dark-360.png",
+      "bytes": 255874,
+      "sha256": "cc274890678c42ba1df44456b554ea259fa58b5b590dd62378aeaf481a82afa7"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-dark-390.png",
+      "bytes": 257985,
+      "sha256": "ba5b4d5043f5a843ecd631a7f1725dbba5fa079069226873ec8e5d456c524b94"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-dark-768.png",
+      "bytes": 252285,
+      "sha256": "11c5b0e6626daca46559f649aeeede36f66a8e81189389215318b0e477082e07"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-light-1280.png",
+      "bytes": 288080,
+      "sha256": "adf4c04b2bfe0cfbe3132ff6edbf0ffa3aa6df967f24960dffcfc42f0ee88ac3"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-ratios-dark.png",
+      "bytes": 349138,
+      "sha256": "eeca98f4b52f45b1478c270fe8688c421dabe91ea023fe7cdb6f441f83a5dc47"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-trends-dark.png",
+      "bytes": 316122,
+      "sha256": "9bc0a84970ac8b0331d485a1ba61fc12a9d267301f12051c26ce3b43faa0ff09"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-viewport-1280.png",
+      "bytes": 135837,
+      "sha256": "d28599f9c07298a610506dd98d0ef3270594ee244deec254c4c6d6ec9cef5f87"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas/visual/financial-viewport-390.png",
+      "bytes": 62367,
+      "sha256": "3b79c9a06aac863ab2dbf48ff40c5fe21811ca822ca4b0d7241836c503c0b138"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/command-center-dark.png",
+      "bytes": 186483,
+      "sha256": "439532ad61ec36075c49ed17b49ca4fc2b7c97ecf8e1c1826a87fe68e0e5f7b7"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/command-center-light.png",
+      "bytes": 190185,
+      "sha256": "a03a7578d6e7c5ce095940530c0398abb1048bbb9cdfa191d0a34f55986b36c6"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/execution-simulation-dark.png",
+      "bytes": 193422,
+      "sha256": "701e185a647aaeda72d5067410f787b2af90f8b508fa4d24bfd51e5acb7da602"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/filings-dark.png",
+      "bytes": 226801,
+      "sha256": "01ed8e873b29b4ebf19a3dcb99a38f57ca3d5af44adc6d7496dddab6757640b8"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/financial-statements-dark.png",
+      "bytes": 302571,
+      "sha256": "7a84e1c38ea6bd6da58b9f16189fdde398b5d4694c85d1b64983468d1a4c37ab"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/financial-trends-dark.png",
+      "bytes": 332988,
+      "sha256": "2575bd26e1c09b89c81d96ca02e84c0fd94a994aaab649429f626edc6dc934bb"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/historical-replay-dark.png",
+      "bytes": 355664,
+      "sha256": "f0fee64fa2a485fcf85d0b686147f425d4940b15407a2181014159442f250320"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/microstructure-dark.png",
+      "bytes": 358631,
+      "sha256": "78450e1874ec4320e4518f83b655dc5c718bd9b1e06caf7440eac966f1770e69"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/operations-dark.png",
+      "bytes": 209341,
+      "sha256": "c920625ffdc1814ed27b803637c52d7800552edaaa10f920a8f367740a58ce38"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/operations-light.png",
+      "bytes": 216619,
+      "sha256": "d5e8925a2fe263b6c4379388e20afdf210d3a9d6130cdda9ae52d4b82e504dda"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/research-dark.png",
+      "bytes": 258443,
+      "sha256": "43e54b381197c1cbdbbfb9d51fe99febd5934662d96614f8b998189eea469177"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/stock-intelligence-light.png",
+      "bytes": 474377,
+      "sha256": "d0daccb4fc851555ec9e5a4c72bb15adb6f0dd1cc0ee9fa40b03ea8e43ddbd9f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/stock-mobile-dark.png",
+      "bytes": 447307,
+      "sha256": "fb04a3ccfc2546ba95fe5e4bb8e12a7d7ccedeff70eb78ae37655ea4848dc108"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas2/visual/stock-mobile-light.png",
+      "bytes": 459813,
+      "sha256": "f7377a0483a0c7b6a45c32fd7c95715ecf42c04237f0f6a85748267e55a505e9"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/aligned-statements-dark.png",
+      "bytes": 379380,
+      "sha256": "e01738a489f6f134293c3caad85ded4280b72776c51097bf3d916a9bd945d8b2"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/command-center-compact-dark.png",
+      "bytes": 157852,
+      "sha256": "47bf617fffa96dac75627df651a30990aec5c9e43f1a12005bc5371042ce24b3"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/command-center-wide-dark.png",
+      "bytes": 191629,
+      "sha256": "f3e692fb1d7814b3879d63a214945a3be00c05c593e0cf7b4cdda4baf66524fd"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/command-center-wide-light.png",
+      "bytes": 195505,
+      "sha256": "83c1ff564f7b7c1299fb37db39b862b72c8a818838a8c5cceb3ca7af3b8954a9"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/private-history-fixture.png",
+      "bytes": 511920,
+      "sha256": "cfbc646cb99ae0e3a62d0cf6552df131c3ab141a62e68c967b128148214dda7b"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/risk-mobile-dark.png",
+      "bytes": 331339,
+      "sha256": "ee43da6bcadea93bc161a592c5b0e3ce70683c2af39abd4c2bdc8022ba40d13f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/risk-mobile-light.png",
+      "bytes": 332078,
+      "sha256": "6b0b6e7b0fa3404d5b3b4c33ca073829993bcc343a71021813cda20a540f64bd"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas4/visual/risk-models-dark.png",
+      "bytes": 343518,
+      "sha256": "50772d3ee9ffbce293273488a66936f66ba6736a79ecd93b9ba290c7777c6240"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas5/visual/evaluation-dark.png",
+      "bytes": 494483,
+      "sha256": "f82c12d2b2ab78538e3ee9e261f1a421304a53ae22110358c5e3582d92ecd356"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas5/visual/pinned-ingestion-dark.png",
+      "bytes": 567747,
+      "sha256": "ac7564ddfaf145ab2dd455e44475248d55b08b99da6c6bf35a128c10be963727"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas5/visual/portfolio-dark.png",
+      "bytes": 416034,
+      "sha256": "d14c5add2d3086c03c2c70b599cdd179165358fde1076ed64fb9f53e394b6253"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas5/visual/research-mobile-dark.png",
+      "bytes": 284632,
+      "sha256": "bdf5aef234515304c83062f15f3864d181e1ab74e4a7299f4f325acee2165693"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/atlas5/visual/research-mobile-light.png",
+      "bytes": 447606,
+      "sha256": "f23569c87c5c2907cd3848d8e42903f28bf27512ba3a3104149a935d26fa9cee"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/completion/default-gated-mobile.png",
+      "bytes": 273659,
+      "sha256": "54a8747b8f4a06e8ed1ea0da89bdd6935fcd270857105abda7df7cc0056afd95"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/continuation/discovery-crwv-gated.png",
+      "bytes": 410409,
+      "sha256": "2d8a135e764908f12a1826008e1993d0e447052418447d6ff6d06fbd36d9aeca"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/development-next/operations-retention-synthetic.png",
+      "bytes": 214922,
+      "sha256": "1b91a16b8abc00e2a0e3c40848a20f9b00a64476697c7642c4e42038aa997746"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/final/visual/dataset-research-dark.png",
+      "bytes": 618642,
+      "sha256": "91920bd9c56a593216c639914bd7a8736a409bccc0bcab4010d1076ec689e63d"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/final/visual/final-mobile-dark.png",
+      "bytes": 264261,
+      "sha256": "d65464d04a6958268fd6a5baf797b9ccfaf004543e7ec3174d23dc4538b315a6"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/final/visual/final-mobile-light.png",
+      "bytes": 266466,
+      "sha256": "ab699db6a943e2572df629e154e8acd49691b7073b01333ebab56107c80992f9"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/final/visual/garch-search-dark.png",
+      "bytes": 317876,
+      "sha256": "7a25d2898d2bfd7facd22c9db4dc7e2954b34ac4bc025cbb0dd93571ecd3b36f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/final/visual/return-command-center.png",
+      "bytes": 189593,
+      "sha256": "119322e220c4212b59ed1b70b795df41b22d7e74ecd49cd546310e12dfae6d73"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/live-market/live-market-desktop-synthetic.png",
+      "bytes": 599096,
+      "sha256": "d13d9a52f173891cfd364df9acd0e7e90d24340c970afca031fe33fadc07e64c"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/live-market/live-market-mobile-synthetic.png",
+      "bytes": 660980,
+      "sha256": "0cdf719884b8f9192be878f4f91c1149a777ad9108ec2b536d959b2cf5dc898d"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/mobile-touch/advanced-replay-touch.png",
+      "bytes": 139549,
+      "sha256": "beaf5c97be5418271abb5ac190fa562570c956dc03086c20b286ff04607c981c"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/mobile-touch/garch-modeled-touch.png",
+      "bytes": 65236,
+      "sha256": "289100fcaeb83b5029f2a377d02adb5c1c233ae28ef110ccab00bc5b846d844a"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/mobile-touch/level1-authored-touch.png",
+      "bytes": 63074,
+      "sha256": "10d61f4b5cfba6991097e59bd73fe6d560a2b89403a55dedc98e834356459375"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/phase-next/historical-comparison-synthetic.png",
+      "bytes": 175616,
+      "sha256": "82f9d90b832e8d00d2814541707c3816a610df4339ba9b3b026b9bd0017ddf9a"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/phase-next/historical-mobile-synthetic.png",
+      "bytes": 114884,
+      "sha256": "7a91aecca494bf37197c7b5c547d358b5091f56747e2e1cd397b0b7d149afa74"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/command-center-after-synthetic.png",
+      "bytes": 158929,
+      "sha256": "1ea94a106350bee60a38b18f4051e83259e9546fdecb6061268f1c609167141f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/command-center-mobile-after-synthetic.png",
+      "bytes": 64588,
+      "sha256": "039dd7317dd364e19f07a53b062e41040b751ea16f3479a308bfb0af0fa986db"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/command-center-mobile-light-after-synthetic.png",
+      "bytes": 63860,
+      "sha256": "e01e24bc6ae17597d6247ba62eed127e311c24d7e4c81be8e092291053d07c58"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/comparison-3d-after-synthetic.png",
+      "bytes": 82613,
+      "sha256": "9087128ebe49aed40646406e76e898dad2aa3c546ab023eac292580361758b5c"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/model-surface-after-synthetic.png",
+      "bytes": 65385,
+      "sha256": "c76a0d68feb9b5868e100f36f17f4735ad6f8768b1ba18c0884ce4a0743083b1"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/quotes-3d-after-synthetic.png",
+      "bytes": 70145,
+      "sha256": "972c65532cc488f8b665dfa6dff0b653b9306e437c2b3557c51ba9b4c1fdad8e"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/sec-reference-subset-synthetic.png",
+      "bytes": 181539,
+      "sha256": "83fd247d108171fdf52f631d9580be25fae3fb087c0b330e56b2dd0bdbf35cbc"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/trades-3d-after-synthetic.png",
+      "bytes": 70875,
+      "sha256": "c80146fbce898612d12cc6f37343d6539cb9ca28ff9dc9b1018130f861fdea35"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/universe-after-synthetic.png",
+      "bytes": 154548,
+      "sha256": "cd55704edde267261bdf4ac6d563a0db4a9e57a4947be44d34c675cdf634b4e6"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/product/volatility-3d-after-synthetic.png",
+      "bytes": 80794,
+      "sha256": "308624dbb6fc89d60bad73717ca7f40b5f08c77df11dba926386f648d0c27dcb"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/scope-audit/ratio-history-synthetic-desktop.png",
+      "bytes": 124065,
+      "sha256": "39a5014bbdfbffe1429b2fe62ffc0063689d072687882b471d0b33fdd02bcfc1"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/scope-audit/ratio-history-synthetic-mobile.png",
+      "bytes": 55793,
+      "sha256": "2662f3809274dae8f11c3efdb9eb8eef7456e7069e00ec155a9b75f7abc4860d"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/sec-repair/visual/failed-refresh-cache-preserved.png",
+      "bytes": 403272,
+      "sha256": "057c3ee74ca588ef555b07768afae9b5056fa9024f3fca6cdb5ddcfff4c09c6e"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/sec-repair/visual/reported-aapl.png",
+      "bytes": 400633,
+      "sha256": "7ae6544ca38490b58848d2e4a5d88b6ceba17655885b5aefca389c013a5d9f50"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/sec-repair/visual/sec-mobile.png",
+      "bytes": 389829,
+      "sha256": "f7dc12e6c660e2d459562b3b701f50d78fd512b9c90125c6f7b60c0f831b7e1f"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/terminal/browser/desktop-native-3d.png",
+      "bytes": 362578,
+      "sha256": "ce3ab9c35a9417f62a2febe08caa567aa628355274978d8eee06bbd9054920e9"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/terminal/browser/desktop-native-fallback.png",
+      "bytes": 316618,
+      "sha256": "3011e53e7fa46b514aff8cd11d981bab52ef2d77a0ddad8dd165199dfe831924"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/terminal/browser/desktop-native-simulation.png",
+      "bytes": 179466,
+      "sha256": "90d5a94fc447db28fff3fbdb2e3f35610ebe755a58c89fba250fc6de5ba48c7c"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/terminal/browser/mobile-native-orderbook.png",
+      "bytes": 184254,
+      "sha256": "29b071235bc892e0ad4bdd242adff517376cebc20ef32cddf24105b4f958f10d"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/command-center-dark-1280.png",
+      "bytes": 133092,
+      "sha256": "6a61068b2757d42682829478f72af151bed97d0c5caf8e3459238eb2128f2e56"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/command-center-light-390.png",
+      "bytes": 65691,
+      "sha256": "b7f7a7246da58b6f9bb55dfa89390b3796c34247dc30c1bb2c50a491df6f689d"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/execution-simulator-dark-1280.png",
+      "bytes": 124054,
+      "sha256": "fdfb8746ae30563ac8afb7e43a9c3ae86cb044b68f5a70c9451dfc027108656c"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/historical-replay-dark-1280.png",
+      "bytes": 141748,
+      "sha256": "01be28c3e3c4cdbd1728124ebfeba5dd2a0c824ccdc238121bd3af8680542f86"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/live-markets-dark-1280.png",
+      "bytes": 122799,
+      "sha256": "97c1c9e544484e583349d745b001b50c99ad7c776d9b702a8e4a2fb8fe013793"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/live-markets-light-390.png",
+      "bytes": 61023,
+      "sha256": "95ffba383ec1e8c9b869dd6447d282b96a26952f96c5d6544d5c51a93b5f62eb"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/market-depth-dark-1280.png",
+      "bytes": 141387,
+      "sha256": "7ed073858ab50f1365ebbead9d49c77a148ca36516ce0872bb14ae7de7b39017"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/multi-stock-comparison-dark-1280.png",
+      "bytes": 130029,
+      "sha256": "8145d03f3ac5053160edc503e4524b96059fce0dbe551837efa12890b3821649"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/operations-dark-1280.png",
+      "bytes": 161012,
+      "sha256": "590c4a60d66f20e0ee9168771a186020b5f39e46fd6d6c54f715849050a21fc0"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/operations-light-390.png",
+      "bytes": 61797,
+      "sha256": "3098d2d0ba523dbe76085339c0cced1f40af955edb0cddc148d9133e6f68ec51"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/order-book-dark-1280.png",
+      "bytes": 140045,
+      "sha256": "79887d1e36f25bf7acaf1e1e247e41ba77ae663b0df34abb8e6fb4f82444c433"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/order-flow-dark-1280.png",
+      "bytes": 140415,
+      "sha256": "2420beff5b2c0b8be5cb1dc4ca18976c2fe98fc29c21ffa3e7123899459e0bdb"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/research-validation-dark-1280.png",
+      "bytes": 138979,
+      "sha256": "438373608a4962bb23e04215f7c0e3453829ce8a86f07ac61bf697c0e95f5e01"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/securities-universe-dark-1280.png",
+      "bytes": 128772,
+      "sha256": "9695c9cad1ae97bcdaf0d9a13e93c499fadcfe1c1f616aea2fa7b43b7cd53e6b"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/stock-intelligence-dark-1280.png",
+      "bytes": 134562,
+      "sha256": "70128898926b19c63547df795d3a6261f60f9845d0f41e4ece14e4833620207a"
+    },
+    {
+      "path": "build/overnight/browser/workspace/build/workspaces/stock-intelligence-light-390.png",
+      "bytes": 58199,
+      "sha256": "e24f228edfc4e8c35cdaeccb9bc33f930cd6950b9abf421b1e5d013cccb94ecf"
+    }
+  ],
+  "blocked": {
+    "environment": {
+      "observations_current": true,
+      "network_policy_state": "enforced",
+      "permitted_hosts": {
+        "sec_directory": false,
+        "SEC_data": false,
+        "Alpaca_paper": false,
+        "Alpaca_data": false,
+        "Alpaca_stream": false
+      },
+      "secret_bindings": 0,
+      "runtime_variable_bindings": 0,
+      "capabilities": []
+    },
+    "local_readiness": {
+      "sec": false,
+      "alpaca": false,
+      "options": false
+    },
+    "owner_Codespace_configuration": "Owner reports existing ready configuration;no new setup requested;not bound here",
+    "provider_requests": 0,
+    "observed_retention_disabled_for_probes": true,
+    "actual_source_counts_or_live_results": "NOT_MEASURED_NOT_INVENTED",
+    "rights": "Applicable Alpaca/private/cloud/display records not invented;support381230 not assumed resolved",
+    "LOBSTER": "Restricted attachment not inspected/extracted/processed"
+  },
+  "safety": {
+    "main_changed": false,
+    "provider_gates_changed": false,
+    "private_configuration_changed": false,
+    "new_dependencies": false,
+    "trading_enabled": false,
+    "observed_storage_enabled": false,
+    "market_data_downloaded": false,
+    "workflows_dispatched": false,
+    "paid_resources_used": false,
+    "raw_data_or_secrets_committed": false,
+    "test_assertions_weakened": false,
+    "frozen_expectations_changed": false,
+    "servers_stopped": true,
+    "fixture_ports_checked_closed": [
+      8787,
+      18787,
+      18788,
+      18789,
+      18792,
+      18793,
+      18794,
+      18796,
+      18797,
+      18798
+    ]
+  },
+  "limitations": [
+    "Same-host x86_64 execution,not ARM64/current hosted or external Codespaces evidence",
+    "No real SEC/Alpaca qualification;owner-reported previous directory failure is not presumed resolved live",
+    "Bounded named research models,not predictive profitability/empirical calibration",
+    "Fixed-HMM parameters supplied by caller may themselves leak future information;prefix tests do not authenticate parameter availability",
+    "Current financial/PIT coverage partial;per-asset Euler attribution and other candidate extensions not claimed implemented",
+    "Live-interpreter LSan checkpoints,not CPython shutdown leak certification",
+    "Worker admission is per app/event loop,not a machine/cluster quota or preemptive thread deadline",
+    "Shared-host timing samples and PMR/RSS accounting are not exchange latency,tail SLO or physical GPU evidence",
+    "Initial measurement tool absence and fresh-wheel inherited compiler failure retained;resolved in harness without suppressions",
+    "Starlette/httpx deprecation and optional large Three chunk warning retained"
+  ],
+  "production_sources": [
+    {
+      "path": "terminal/server/analysis.py",
+      "bytes": 1524,
+      "sha256": "82ffaf32c27371c4ad858f6ec25fdef84c47d55f16b4db78489f428868dbe434"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 57826,
+      "sha256": "17ad34c543a895b7f3e78048f4e0da5d7bf0ee94f2e3ea86be4795155baee4c8"
+    },
+    {
+      "path": "terminal/stocks/advanced_models.py",
+      "bytes": 4627,
+      "sha256": "ca9db49726a0f6e85539609b5ad1fdfd07b02e5211ed373b53cea5219f51eb26"
+    },
+    {
+      "path": "terminal/stocks/test_overnight.py",
+      "bytes": 10547,
+      "sha256": "21b4c11df12e28a1dedbcb2c4a7e53cb3297c8dab06685c09b48d027e80519b4"
+    },
+    {
+      "path": "terminal/tests/run_source_qualification_suite.py",
+      "bytes": 1106,
+      "sha256": "a635fd52aa55bc76503c58ecb4104feb5d59ec1daf282ef09d1f4b0342f77ece"
+    }
+  ],
+  "reviewed_sources": [
+    {
+      "path": "terminal/stocks/models.py",
+      "bytes": 6722,
+      "sha256": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2"
+    },
+    {
+      "path": "terminal/stocks/evaluation.py",
+      "bytes": 4170,
+      "sha256": "17a474f2711f93b144b0683e5a85e131757d5fb41de760f165ea280c583cb663"
+    },
+    {
+      "path": "terminal/stocks/research.py",
+      "bytes": 3329,
+      "sha256": "a4ee5015a71932348796fa14a8e77e5f8cd65522007e988b457a5372e4b342b0"
+    },
+    {
+      "path": "terminal/stocks/portfolio.py",
+      "bytes": 5439,
+      "sha256": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92"
+    },
+    {
+      "path": "terminal/stocks/risk.py",
+      "bytes": 3269,
+      "sha256": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c"
+    },
+    {
+      "path": "terminal/stocks/price_research.py",
+      "bytes": 2417,
+      "sha256": "ff4a22dbe0438342e8cfec52bd59b7db289db4d82e3a45674f595461ae437239"
+    },
+    {
+      "path": "terminal/stocks/quote_analytics.py",
+      "bytes": 1748,
+      "sha256": "ab5c898b1db666527bc366e95d7d28fdcc8de97f4ee7fb6e31fcfae1bd4854ee"
+    },
+    {
+      "path": "terminal/stocks/live_metrics.py",
+      "bytes": 3369,
+      "sha256": "ce7cdd19dba8bd857883ca7f6d586f922800b1a2baaea69db2f5aa9510b47612"
+    },
+    {
+      "path": "terminal/stocks/sec_identity.py",
+      "bytes": 6130,
+      "sha256": "0da4965f538be915140b648e67a5ba4bcab140ee3a803ea0d20b2a5582d40186"
+    },
+    {
+      "path": "terminal/stocks/service.py",
+      "bytes": 28574,
+      "sha256": "0c18c5fc89805877e538a9eee1bbf16b9a036b1d8ee29fec35e2071677bf93c9"
+    },
+    {
+      "path": "terminal/stocks/prices.py",
+      "bytes": 4012,
+      "sha256": "ea4c16d576cd70acd8aae4b06b3025239fe32ecce6f52dd7f2bdd46aa5a928c1"
+    },
+    {
+      "path": "terminal/stocks/live.py",
+      "bytes": 21290,
+      "sha256": "842148c5a69148446571b5c3460178bfc0b550088c134aa679850a831fe2c004"
+    },
+    {
+      "path": "terminal/stocks/sec_history.py",
+      "bytes": 4966,
+      "sha256": "3b7a337fcf17552e0f387439f5add3b00326ab8d4cd64484be2905f9a02ccd72"
+    },
+    {
+      "path": "terminal/stocks/vintages.py",
+      "bytes": 4857,
+      "sha256": "cf8da98fe5c947c9a38eaf1c4ed2a23ad5f9cc925c495c38162871f75724a04b"
+    },
+    {
+      "path": "terminal/stocks/history_store.py",
+      "bytes": 7257,
+      "sha256": "d1e774598b0d62ba8f85dec3f3eb3246cbc7a3ed998967b2a827047dc764440e"
+    },
+    {
+      "path": "terminal/stocks/observation_store.py",
+      "bytes": 8253,
+      "sha256": "8ce855ce4587c9f46b7196e3f01f757d21255dd06543180963c9ca945728c4b7"
+    },
+    {
+      "path": "terminal/stocks/datasets.py",
+      "bytes": 3238,
+      "sha256": "2081ce8cb6ce4b6ca2a34e61b3fba3cb1c319d87a81f1a8935415b1b443fc786"
+    },
+    {
+      "path": "terminal/stocks/qualification.py",
+      "bytes": 12946,
+      "sha256": "0d17ea503b85c7f216211d8b81bef3afc216c9de33b7e1b3b44329707ea39db4"
+    },
+    {
+      "path": "include/gig/book/order_book.hpp",
+      "bytes": 3407,
+      "sha256": "0fff19acec016b62d49941a917cb11f2f11070e85d10a590c23cd876308c95b8"
+    },
+    {
+      "path": "src/book/order_book.cpp",
+      "bytes": 23910,
+      "sha256": "b751d6144e271e8bdaa45e65078f3f083c1786d86c3ca8303da79e2f6c70b4df"
+    },
+    {
+      "path": "src/replay/replay.cpp",
+      "bytes": 20972,
+      "sha256": "e8461558e7b5b51ffeefdc7ac45cbef451084cab05311d0e17e5e63e0d35ad09"
+    },
+    {
+      "path": "src/analytics/flow_metrics.cpp",
+      "bytes": 12314,
+      "sha256": "e3d3b3c9495a414bc6cc9f990f8552144f735e6adc73fee9820f7de282610b2e"
+    },
+    {
+      "path": "include/gig/execution/execution.hpp",
+      "bytes": 4631,
+      "sha256": "d699a2d642f36692052a778a47b8b75bc85800b45e1454462426c35f57ab1e68"
+    },
+    {
+      "path": "terminal/server/market_events.py",
+      "bytes": 2854,
+      "sha256": "be5b4f4c91af2f26c66d980a829b6ce928195e0d356b6da6f46da0d1b0cfd207"
+    },
+    {
+      "path": "terminal/web/src/ResearchDiagnostics.tsx",
+      "bytes": 10617,
+      "sha256": "7c5a994757f36749b9cd97a9828595e867ca0ca888b74747bc49c3c9e8420214"
+    },
+    {
+      "path": "terminal/web/src/PortfolioLab.tsx",
+      "bytes": 4477,
+      "sha256": "2f59f3dc767f5b447eabe038ae2b675b57a8e9e143a63626d4c35065a460bbb9"
+    },
+    {
+      "path": "terminal/web/src/DatasetLab.tsx",
+      "bytes": 3597,
+      "sha256": "6dccc5d0a6facd6ea5693638c23f19b0344b0b6bedc10d8c79fc0e2225cfae67"
+    },
+    {
+      "path": "scripts/qualify_atlas.py",
+      "bytes": 3962,
+      "sha256": "9467be6979cdd09cdc21d2222babd08dd8127421c9fb23702ea57c079cb3ded6"
+    },
+    {
+      "path": "scripts/qualify_atlas_offline.py",
+      "bytes": 8397,
+      "sha256": "2952b6c08f63c8c602447e132a52be18819b19ba638a1f8b426533224a714437"
+    },
+    {
+      "path": "scripts/start_terminal.sh",
+      "bytes": 1095,
+      "sha256": "21f3875b491e89241a437a336070ec1858e3e45234885d74402fe7634bfc8fd2"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 835,
+      "sha256": "cb1108d6b43025f904e41f20eab46c728554014ce3e0c38a91502d9431478031"
+    }
+  ],
+  "documentation": [
+    {
+      "path": "docs/overnight/OVERNIGHT_COMPLETION_REPORT.md",
+      "bytes": 15163,
+      "sha256": "23c41f00040a0824d7da2f1923edef491d710eb60c4a7c06984e4b132c5b8ae3"
+    },
+    {
+      "path": "docs/overnight/REMAINING_GAPS.md",
+      "bytes": 14096,
+      "sha256": "562e401fad57339449d4c1fbaf699260c78a3f5f77998c8f3b957a0fec45f8e9"
+    },
+    {
+      "path": "docs/overnight/MORNING_ACCEPTANCE.md",
+      "bytes": 5580,
+      "sha256": "b906df799c14299847ce46c771b3ec65fc595eb9187c870e0e6534faf17fd2de"
+    },
+    {
+      "path": "docs/overnight/QUANTITATIVE_CONTRACTS.md",
+      "bytes": 6598,
+      "sha256": "8af2224e135db4631eb9b916bb1cbb396cd9a7c4083975ebf02e274b57e8e8a0"
+    },
+    {
+      "path": "docs/OVERNIGHT_ENGINEERING_PROGRESS.md",
+      "bytes": 74585,
+      "sha256": "ccaff2f261b9a8454c58ef1475eab0e13b8f54dcd66736d616d901ed355c10dc"
+    },
+    {
+      "path": "docs/final_release/FINAL_ENGINEERING_REPORT.md",
+      "bytes": 16505,
+      "sha256": "52326db08bc25e93c1dec44e73c661929d420c1f8b8b4b33efc54eb77d5ed5ab"
+    }
+  ],
+  "logs": [
+    {
+      "path": "build/overnight/regression-before.log",
+      "bytes": 3617,
+      "sha256": "bd2a04c66c4e1c4a5cbf124209a7a86c723c665bee67cbc15ad2333ea885e494"
+    },
+    {
+      "path": "build/overnight/analysis-before.log",
+      "bytes": 103,
+      "sha256": "9701bdec8f0398e2713ef93288ebe50155f6bd8d9fd79febcc922744b28baa9c"
+    },
+    {
+      "path": "build/overnight/analysis-after.log",
+      "bytes": 103,
+      "sha256": "54c49c60f1843e7c1ed5a12beccd78e7df19952acd2219400b643394cffc7cae"
+    },
+    {
+      "path": "build/overnight/hmm-before.log",
+      "bytes": 120,
+      "sha256": "da2f83d0adcb01bfd0ff01ceacf8426b21a6d8addcd6febe7270c828e8e9aca2"
+    },
+    {
+      "path": "build/overnight/targeted-final.log",
+      "bytes": 3144,
+      "sha256": "3e1b7959afd65055022eeffbd4ed6b8f0af10843953f07242d0f635594e37bf1"
+    },
+    {
+      "path": "build/overnight/frontend.log",
+      "bytes": 7713,
+      "sha256": "2eda5e60774ef28af911579e49ee5c7e4f777ba0af6424351793b98eb94fc827"
+    },
+    {
+      "path": "build/overnight/security.log",
+      "bytes": 383,
+      "sha256": "e90258c00da4f20e31afe8f86046dd228aa41ca4c1d9d7079e6c520462e995a3"
+    },
+    {
+      "path": "build/overnight/tls.log",
+      "bytes": 4364,
+      "sha256": "b83ad04fe653d961f0ba9c0606109029b985d6968f8c911e016c69c1501cc5a6"
+    },
+    {
+      "path": "build/overnight/wheel-consumer.log",
+      "bytes": 113,
+      "sha256": "e03b62d64b8ab191be0e1dff6ef7fb6e00412d776f41567f07162bc970c38bce"
+    },
+    {
+      "path": "build/overnight/packaging-patterns.log",
+      "bytes": 101,
+      "sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d"
+    },
+    {
+      "path": "build/overnight/fresh-wheel-consumer.log",
+      "bytes": 113,
+      "sha256": "29a302484d479114972e4cc0b5eb2c1f33a84a6d781dab0ba88afe30116cade3"
+    },
+    {
+      "path": "build/overnight/fresh-wheel-build.log",
+      "bytes": 5652,
+      "sha256": "d1fd050b4a482bfa3aaef6ecbec34ee37d5e97f19cd4fc2f6f146e1e65497dd3"
+    },
+    {
+      "path": "build/overnight/fresh-wheel-install.log",
+      "bytes": 462,
+      "sha256": "6b1e76bb929a2da6f2c5d731d34de71c10ae442d93825a003d5063e9b1690af2"
+    },
+    {
+      "path": "build/overnight/fresh-wheel-identity.json",
+      "bytes": 226,
+      "sha256": "8fae2703951a1d1296f511ab15763bfd5ae0d91aff55ad089242734be9e627af"
+    },
+    {
+      "path": "build/overnight/fresh-wheel-initial.log",
+      "bytes": 708,
+      "sha256": "286512998c12061534c5f0a8dfcaac767dd90edfcc1570f235d371f34b2b9dc5"
+    },
+    {
+      "path": "build/overnight/measurement-initial.log",
+      "bytes": 979,
+      "sha256": "594ba89ac03ac9eb0edb90386a99cbabb89f92c8f2561d67fec782c1874007a9"
+    },
+    {
+      "path": "build/overnight/measure.py",
+      "bytes": 2530,
+      "sha256": "a7425fc9344d46e349d13581a1f74e6b0c256035775edbcb41d2bb2596e618c4"
+    },
+    {
+      "path": "build/overnight/measurements.json",
+      "bytes": 4659,
+      "sha256": "0dbafe433c36bcc9447b195992ea69e75cda121512e649c100b607e642702738"
+    },
+    {
+      "path": "build/overnight/measurements.log",
+      "bytes": 3679,
+      "sha256": "029b33e6d7c65d47ed6021aad207643a15712f93777486644ee1138c9bc3d3b1"
+    },
+    {
+      "path": "build/overnight/browser-campaign.log",
+      "bytes": 587,
+      "sha256": "4b5c14c8169723a440505590f7de306f5573f0f6ab668d638e97d85f62f27b69"
+    },
+    {
+      "path": "build/overnight/browser/campaign.json",
+      "bytes": 47636,
+      "sha256": "58ce1454639ed504338926709a057189b30236205e66a92fcc60fee2c0efb81a"
+    },
+    {
+      "path": "build/overnight/browser/build.log",
+      "bytes": 2186,
+      "sha256": "28704264d762b6e8231457d39ad0e1c45eb261e35681c07301186c6f6629b2e9"
+    },
+    {
+      "path": "build/overnight/browser/performance.log",
+      "bytes": 2691,
+      "sha256": "26214dd8d4d119d4da0fb1eb4d1f24f0c5ac00ccb49b97e9733895a4ea549642"
+    },
+    {
+      "path": "build/overnight/startup.json",
+      "bytes": 980,
+      "sha256": "433bf83efe547b70005692d032019b1e8b56bb63c9ae3c344a81780b2d6df534"
+    },
+    {
+      "path": "build/overnight/startup-proof/startup.log",
+      "bytes": 1041,
+      "sha256": "99a4e30efb67f637e2eca3d3055a93790be048923d840664b36393ebd9652291"
+    },
+    {
+      "path": "build/overnight/verify_startup.py",
+      "bytes": 3038,
+      "sha256": "da71cf67d1b2385db03222b55968b0c2c31d21662e237db5e41cc460aa68d72c"
+    },
+    {
+      "path": "build/overnight/package-proof.log",
+      "bytes": 712,
+      "sha256": "509c72016c3458d903c7d84056c8eaf2bc96cac92bc90e027d41eb6c0da099ce"
+    },
+    {
+      "path": "build/overnight/source-archive.json",
+      "bytes": 790,
+      "sha256": "0d8fe8406df35a5774c360e36d94f58c6612a52646c39259f3acb3bd286dfb1a"
+    },
+    {
+      "path": "build/overnight/sdist-inventory.json",
+      "bytes": 137748,
+      "sha256": "7b749d5cf78b60952e969719f2055a5c7fd44df20a7638a17f825f5f5ea2fcf1"
+    },
+    {
+      "path": "build/overnight/sdist-inventory.log",
+      "bytes": 81,
+      "sha256": "f0d840eac811ea00255bc7d639ff4a19124aa2a43310bc010a93ed88701f7879"
+    },
+    {
+      "path": "build/overnight/check_package.py",
+      "bytes": 1823,
+      "sha256": "451f33060c2945132190406e1f9f916d9621eb639ab0812ca6f3ff98c038bf90"
+    },
+    {
+      "path": "build/overnight/runtime-summary.json",
+      "bytes": 312,
+      "sha256": "5d5ca54f67efe292dcd2018d9d1644f0856a919549599d79276fe2f5f4032734"
+    },
+    {
+      "path": "build/overnight/local-operational-preflight.json",
+      "bytes": 2881,
+      "sha256": "60ea01b3aadfcfc459a40c183b66e4d49339b03ac562c42c2f6ca4f207dab337"
+    },
+    {
+      "path": "build/overnight/tracked-inventory.json",
+      "bytes": 147051,
+      "sha256": "cb6a5b8291eb661d5a05da6fd01c84afd948b71c94309dcfdfd2b6fe8a94b136"
+    },
+    {
+      "path": "build/overnight/canonical-comparison.json",
+      "bytes": 1533,
+      "sha256": "9ba4699b952c5451e317c21a3685c898e42a1e4f9d93c30b4590c8baa234311c"
+    },
+    {
+      "path": "build/overnight/run_native_matrix.py",
+      "bytes": 1826,
+      "sha256": "2ad2f4cf38705d5bf88110ba6bf8afdefad099575663f2bcdab07ac692b1aef8"
+    },
+    {
+      "path": "build/overnight/run_python_matrix.py",
+      "bytes": 2200,
+      "sha256": "c8d11b60a2578be51ebfccfa7e3657b81c70a0e999a3500113658ecb642e80c7"
+    },
+    {
+      "path": "build/overnight/native-matrix.json",
+      "bytes": 4569,
+      "sha256": "7e674d5e508f281ce0a1eafaac10cb8ef8f9d8d3c3cd1736325ff28e085e39d4"
+    },
+    {
+      "path": "build/overnight/matrix.json",
+      "bytes": 5654,
+      "sha256": "44bcff8b10b04f5e341e17f2ea94db623fd23ca978fe261204544824f3cd9130"
+    },
+    {
+      "path": "build/overnight/sources-debug.log",
+      "bytes": 26342,
+      "sha256": "c103df3b7964bc0fc86298ad57c8aadcd1015abc325729ffe87f5a6cd1fa89a6"
+    },
+    {
+      "path": "build/overnight/stocks-debug.log",
+      "bytes": 35493,
+      "sha256": "f04db516547cd04d1a6840bcdbe235168c6307d239bd4572aae40a551172f78f"
+    },
+    {
+      "path": "build/overnight/terminal-debug.log",
+      "bytes": 40306,
+      "sha256": "aa0b6a818cbad14edc6187f596f6b8e7555f257ca9bb496d889cdc38cdff56cb"
+    },
+    {
+      "path": "build/overnight/sources-release.log",
+      "bytes": 26342,
+      "sha256": "60448f6e514293d9ee2083cc63fae28b0482c957bd34285604c32d93bcac3ec3"
+    },
+    {
+      "path": "build/overnight/stocks-release.log",
+      "bytes": 35493,
+      "sha256": "733c347563ef7b2e184290779380ae3a9f2f3a4eda483f2dd799cbf63f01573d"
+    },
+    {
+      "path": "build/overnight/terminal-release.log",
+      "bytes": 40306,
+      "sha256": "f4a942bb336e2d7a1dd447dc539d0add44bea3999d1a64ed2d0dbb23cedff9cc"
+    },
+    {
+      "path": "build/overnight/sources-sanitizer.log",
+      "bytes": 30290,
+      "sha256": "b7a527b5947aba7bed8c21141154d844224131ab0abf78cdbb17472070893681"
+    },
+    {
+      "path": "build/overnight/stocks-sanitizer.log",
+      "bytes": 35141,
+      "sha256": "bf674014faa31c09adebebe9acc23223bfc994ab51af334bd001d62bf2619389"
+    },
+    {
+      "path": "build/overnight/terminal-sanitizer.log",
+      "bytes": 41064,
+      "sha256": "b101ddebaae4fd83eb5e81867d0dd54223b4a826712c974efb9be010e2dd63ca"
+    },
+    {
+      "path": "build/overnight/gcc-python-debug-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/overnight/gcc-python-debug-test.log",
+      "bytes": 20563,
+      "sha256": "43f6c3adab96d036bb55b17da4114bb6bacad48635d97998f214ba17297d415f"
+    },
+    {
+      "path": "build/overnight/gcc-python-debug.xml",
+      "bytes": 45537,
+      "sha256": "d21ca45c7db4be9d915c59e76b6696a4a205fd1b52e13f9800483315bc63cd8e"
+    },
+    {
+      "path": "build/overnight/gcc-python-release-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/overnight/gcc-python-release-test.log",
+      "bytes": 20567,
+      "sha256": "b4b10c05bf68a8947d8648ded519b486060afcf5184d70702205e44bf778f422"
+    },
+    {
+      "path": "build/overnight/gcc-python-release.xml",
+      "bytes": 45534,
+      "sha256": "87c0c1e91fafe04c67f57c610651cdc434f3d065c167c21b0d12822b7b91dc70"
+    },
+    {
+      "path": "build/overnight/gcc-python-asan-ubsan-build.log",
+      "bytes": 63,
+      "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+    },
+    {
+      "path": "build/overnight/gcc-python-asan-ubsan-test.log",
+      "bytes": 20704,
+      "sha256": "7131fc740a1330823da7824cf644bdd1b36af19373cd304119baa1b56120861a"
+    },
+    {
+      "path": "build/overnight/gcc-python-asan-ubsan.xml",
+      "bytes": 45764,
+      "sha256": "0c8364d3e11a1b34875ad35b7fbd93ee746b1607b1ce340e7c721ecaae8fc92e"
+    },
+    {
+      "path": "build/overnight/clang-debug-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/overnight/clang-debug-test.log",
+      "bytes": 20179,
+      "sha256": "2fa89f29b03ae2d168a983d4fcc4a0e72a3006e32c2ad22aea89cef40d881043"
+    },
+    {
+      "path": "build/overnight/clang-debug.xml",
+      "bytes": 43069,
+      "sha256": "711237ef23cd8ec2b6ee3e192a30879490f015cba91bde4f467e9559977c8d2f"
+    },
+    {
+      "path": "build/overnight/clang-release-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/overnight/clang-release-test.log",
+      "bytes": 20183,
+      "sha256": "73fc06f91d596d837339277c11389f02a9ee31c8647eb75a0fdcc911af26f63a"
+    },
+    {
+      "path": "build/overnight/clang-release.xml",
+      "bytes": 43075,
+      "sha256": "821cf71d76b3594c38a2e6a838e8835eaa955d4786fb0921800af619183e5d50"
+    },
+    {
+      "path": "build/overnight/clang-asan-ubsan-build.log",
+      "bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "build/overnight/clang-asan-ubsan-test.log",
+      "bytes": 20189,
+      "sha256": "f0defea742f6f6f019e8e394bc8bcf3e745d2cb1f340420b370cc9f7779766e9"
+    },
+    {
+      "path": "build/overnight/clang-asan-ubsan.xml",
+      "bytes": 43025,
+      "sha256": "7a1b40619c949405671e0ace5f68de5c157953f58d311eff089f0627bfa66203"
+    },
+    {
+      "path": "build/overnight/browser/browser-validation.log",
+      "bytes": 6318,
+      "sha256": "8ffa7506cec259b003f724c37f1ee5fd1939880b53a679728a12ea80b2838018"
+    },
+    {
+      "path": "build/overnight/browser/stock-intelligence-validation.log",
+      "bytes": 908,
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "path": "build/overnight/browser/stock-loading-validation.log",
+      "bytes": 983,
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "path": "build/overnight/browser/atlas-validation.log",
+      "bytes": 3633,
+      "sha256": "14b1627c79cf39e9a147082fbfb7f465abed1dafb548e6035ed5a8ca09f573c1"
+    },
+    {
+      "path": "build/overnight/browser/atlas2-validation.log",
+      "bytes": 3022,
+      "sha256": "f70e3fb1a76eac36ad33a7327dc5a17a7080e6bde58e02f9ad9e41339c54df49"
+    },
+    {
+      "path": "build/overnight/browser/recorded-playback-validation.log",
+      "bytes": 396,
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "path": "build/overnight/browser/live-controls-validation.log",
+      "bytes": 496,
+      "sha256": "101c82417ef8a4013cccad93261808740b1034c9c4f2c248cc834fb07e584659"
+    },
+    {
+      "path": "build/overnight/browser/ratio-history-validation.log",
+      "bytes": 30,
+      "sha256": "03361980258ca43c521f124abe78ca919bcf592028a3393d487b737890d946f2"
+    },
+    {
+      "path": "build/overnight/browser/live-market-validation.log",
+      "bytes": 255,
+      "sha256": "ffe0a81dd6dac8c32832017cae064b41a0ced6b535bfcdca4e3bc319565c8a5f"
+    },
+    {
+      "path": "build/overnight/browser/sec-completion-validation.log",
+      "bytes": 24,
+      "sha256": "ccb06d20aac24b71110125f3744ef1431b92afdab93aed37b1722ba108b9cc37"
+    },
+    {
+      "path": "build/overnight/browser/discovery-validation.log",
+      "bytes": 42,
+      "sha256": "1107ac7d8822740fd45c4a8092b755e6d22961f6a4972226e09eedc329e85a6f"
+    },
+    {
+      "path": "build/overnight/browser/gpu-recovery-validation.log",
+      "bytes": 24,
+      "sha256": "cf06d9b2dd1814bcc37244fef8003ba058aa0ae99426589372545143dabc5eed"
+    },
+    {
+      "path": "build/overnight/browser/market-unavailable-validation.log",
+      "bytes": 166,
+      "sha256": "5d163b4689601eefd035b811ebb264202e8a43fb8fc5dd80c9aa2d1a817503ef"
+    },
+    {
+      "path": "build/overnight/browser/atlas4-validation.log",
+      "bytes": 2038,
+      "sha256": "a47a11dbe5bed72a817fbed80c4e91ea3852377317c96438197f695eab4c5670"
+    },
+    {
+      "path": "build/overnight/browser/atlas5-validation.log",
+      "bytes": 1496,
+      "sha256": "e2f8f622ff3dd22bafa32b17c3605b9fcb86340a93f11a8ead88089a60310e81"
+    },
+    {
+      "path": "build/overnight/browser/atlas-final-validation.log",
+      "bytes": 1207,
+      "sha256": "6ba0a03220312bfd41f827498c23099bb82b58e58e00632b3636ee37c667a2b7"
+    },
+    {
+      "path": "build/overnight/browser/sec-integration-validation.log",
+      "bytes": 1087,
+      "sha256": "c8e7fc5da1e431fd034f29bb0dda3b0362518be6da28cb31fc2d99fb7dc7d23b"
+    },
+    {
+      "path": "build/overnight/browser/product-validation.log",
+      "bytes": 106,
+      "sha256": "f875b9028a0f349559f2ec4991a3f79677cbc26b4d6b163771c8fba51685ac4d"
+    },
+    {
+      "path": "build/overnight/browser/phase-next-validation.log",
+      "bytes": 883,
+      "sha256": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0"
+    },
+    {
+      "path": "build/overnight/browser/advanced-research-validation.log",
+      "bytes": 9432,
+      "sha256": "3b6414f2807b42716ce32a6c15b7b9e808bff967c5a2da50f2eb41d0d77d8295"
+    },
+    {
+      "path": "build/overnight/browser/workspace-qualification.log",
+      "bytes": 4355,
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "path": "build/overnight/browser/mobile-camera-validation.log",
+      "bytes": 377,
+      "sha256": "4e384b44ee48a5867b6e83958dbe4e57259f92927c48dd0df6407c4a07f3115c"
+    },
+    {
+      "path": "build/overnight/browser/gpu-quote.log",
+      "bytes": 20,
+      "sha256": "69f4f03bd0980cc5f51ed1f104f291d3f12667eef763b764ba272f6b2bafeeca"
+    }
+  ],
+  "morning_instructions": "docs/overnight/MORNING_ACCEPTANCE.md"
+}

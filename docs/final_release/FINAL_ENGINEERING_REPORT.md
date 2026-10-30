@@ -1,5 +1,12 @@
 # GIG ATLAS: final engineering and operational readiness
 
+**Overnight follow-up, October29,2026 America/New_York:** The
+[current completion report](../overnight/OVERNIGHT_COMPLETION_REPORT.md) records
+implementation cc29dd0,analytical cancellation/resource and fixed-HMM numerical
+repairs,16new regressions,full six-configuration/native/Python/browser verification,
+clean-source reproduction and the short morning acceptance sequence. Earlier
+campaign counts below are retained as historical evidence,not current provider proof.
+
 **Latest SEC follow-up, October29,2026 America/New_York:** Owner diagnostics identify
 an unrelated terminal-marker reference rejected by local syntax. The bounded
 [version3 reference-policy repair](../milestones/SEC_TERMINAL_REFERENCE_REPAIR.md)
