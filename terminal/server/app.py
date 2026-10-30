@@ -269,13 +269,25 @@ def create_app(stock_workspace=None):
         from terminal.stocks.sec_config import enabled as sec_enabled
         safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and not sec_enabled(os.environ.get('GIG_SEC_ENABLED')) and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.origin=='OBSERVED_OFFICIAL_RESPONSE' and (stocks.cache or sec_enabled(stocks.environment.get('GIG_SEC_ENABLED')) or stocks.environment.get('GIG_ALPACA_ENABLED')=='1')) and not task_active and not recording and not observed_replay)
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
-                'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe}
+                'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe,
+                'analytical_resources':analysis.status(),'browser_push_resources':market_events.status()}
 
     @route('/api/v1/state', methods=['GET'])
     @json_endpoint
     async def state(request):
         async with lock:
             return native.state()
+
+    @route('/api/v2/research/concentration', methods=['GET'])
+    @json_endpoint
+    async def research_concentration(request):
+        from .concentration import calculate
+        try:
+            if set(request.query_params)-{'side','depth'} or len(request.query_params.multi_items())!=len(request.query_params):
+                raise ValueError('concentration_query')
+            return calculate(native.state(),request.query_params.get('side','both'),int(request.query_params.get('depth','10')))
+        except (ValueError,TypeError):
+            return error('CONCENTRATION_INPUT','invalid bounded research selection',400)
 
     @route('/api/v1/schema', methods=['GET'])
     @json_endpoint

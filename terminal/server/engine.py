@@ -214,6 +214,8 @@ class NativeSession:
             core=view.pop('native_core_status',{'scope':'unavailable','published':False})
             result.update(view)
             result['diagnostics']['native_status']=core
+        from .concentration import calculate
+        result['research_metrics']={'concentration':calculate(result)}
         return result
 
     def simulation(self, algorithm, quantity='100', slices=5):

@@ -1,5 +1,15 @@
 # Quantitative and risk model validation
 
+> **Historical snapshot — superseded for current implementation status.**
+> Original document source commit: `ae570a2778befff59ac0fe38c143ab083ea2046f`. The original table below is preserved
+> as historical evidence;its `NOT IMPLEMENTED` portfolio row and fixed-only
+> HMM/GARCH assessment do not describe the current release baseline
+> `10eaee30d598807a23e42a8b60abe3d5a5dc2514`.
+> Current bounded models and limits: [quantitative contracts](../overnight/QUANTITATIVE_CONTRACTS.md),
+> [current gaps](../overnight/REMAINING_GAPS.md),and
+> [Sprint1 contract/status index](../remediation/sprint-1/MODEL_STATUS.md).
+> No historical test result is retroactively changed by this notice.
+
 No new collection of fitted models is added. The audit distinguishes executable
 mathematics from statistical estimation, calibration and observed performance.
 

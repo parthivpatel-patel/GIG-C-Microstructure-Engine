@@ -9,7 +9,8 @@ class MarketEvents:
     def __init__(self,source,*,clients=8,interval=.25,heartbeat=1.):
         self.source=source;self.limit=clients;self.interval=interval;self.heartbeat=heartbeat
         self.clients=0;self.sent=0;self.coalesced=0;self.timeouts=0;self.closed=False
-    def status(self):return {'clients':self.clients,'maximum_clients':self.limit,'snapshots_sent':self.sent,'coalesced_checks':self.coalesced,'send_timeouts':self.timeouts,'policy':'Latest snapshots coalesce;no per-client event backlog;source ingestion independent'}
+        self.in_flight_sends=0;self.in_flight_bytes=0;self.peak_in_flight_bytes=0
+    def status(self):return {'clients':self.clients,'maximum_clients':self.limit,'snapshots_sent':self.sent,'coalesced_checks':self.coalesced,'send_timeouts':self.timeouts,'application_queue_depth':0,'in_flight_sends':self.in_flight_sends,'in_flight_body_bytes':self.in_flight_bytes,'peak_in_flight_body_bytes':self.peak_in_flight_bytes,'upstream_queue_depth':'UNAVAILABLE_NO_PUBLIC_TRANSPORT_METRIC','policy':'Latest snapshots coalesce;no per-client event backlog;source ingestion independent;stable checks are not a count of dropped source events'}
     def reserve(self):
         if self.closed or self.clients>=self.limit:return False
         self.clients+=1;return True
@@ -39,9 +40,14 @@ class BoundedEvents(StreamingResponse):
         super().__init__(hub.frames(profile),media_type='text/event-stream',headers={'Cache-Control':'no-store','X-Accel-Buffering':'no','Cross-Origin-Resource-Policy':'same-origin'})
     async def stream_response(self,send):
         async def bounded(message):
+            size=len(message.get('body',b''))
+            self.hub.in_flight_sends+=1;self.hub.in_flight_bytes+=size
+            self.hub.peak_in_flight_bytes=max(self.hub.peak_in_flight_bytes,self.hub.in_flight_bytes)
             try:await asyncio.wait_for(send(message),2.)
             except TimeoutError:
                 self.hub.timeouts+=1;raise SendDeadline from None
+            finally:
+                self.hub.in_flight_sends-=1;self.hub.in_flight_bytes-=size
         try:await super().stream_response(bounded)
         except SendDeadline:pass
     async def __call__(self,scope,receive,send):

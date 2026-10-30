@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
-export type Point={strike:number;years:number;volatility:number;theoretical_price?:number};
+export type Point={strike:number;years:number;volatility:number;theoretical_price?:number|null;reason?:string};
 export function VolatilitySurface({rows,pointsOnly=false}:{rows:Point[][];pointsOnly?:boolean}){
  const host=useRef<HTMLDivElement>(null),[fallback,setFallback]=useState(false);
  useEffect(()=>{if(!host.current)return;const container=host.current;let renderer:THREE.WebGLRenderer;

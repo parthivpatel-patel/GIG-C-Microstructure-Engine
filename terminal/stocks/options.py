@@ -1,8 +1,11 @@
 """European Black–Scholes scenario analytics. Never an observed options chain."""
 import datetime,math,re
 
+MIN_PRICE=1e-6
+MAX_PRICE=1e7
+
 def finite(x,lo,hi):
-    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+    if type(x) not in (int,float) or not lo<=x<=hi or not math.isfinite(x):raise ValueError('model_parameter')
     return float(x)
 
 def contract(code):
@@ -15,7 +18,7 @@ def contract(code):
     return {'underlying':m[1],'expiration':expiry.isoformat(),'right':'call' if m[3]=='C' else 'put','strike_millis':str(strike),'authority':'parsed OCC-shaped identifier;listing and deliverable not verified'}
 
 def price(spot,strike,years,volatility,rate=0.,dividend=0.,right='call'):
-    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+    s=finite(spot,MIN_PRICE,MAX_PRICE);k=finite(strike,MIN_PRICE,MAX_PRICE);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
     if right not in ('call','put'):raise ValueError('option_right')
     root=math.sqrt(t);d1=(math.log(s/k)+(r-q+v*v/2)*t)/(v*root);d2=d1-v*root
     cdf=lambda x:.5*math.erfc(-x/math.sqrt(2));pdf=math.exp(-d1*d1/2)/math.sqrt(2*math.pi)
@@ -42,12 +45,20 @@ def scenario(config):
     args={k:config[k] for k in ('spot','strike','years','volatility','rate','dividend','right') if k in config}
     for k in ('spot','strike','years','volatility'):
         if k not in args:raise ValueError('option_parameters')
-    metrics=price(**args);surface=[]
+    # The base domain is exactly price()'s domain. An optional display grid must
+    # never invalidate a valid base scenario or silently clip a derived strike.
+    metrics=price(**args);surface=[];unavailable=0
     for i in range(9):
         maturity=.05+i*.11875;row=[]
         for j in range(17):
             strike=args['spot']*(.6+j*.05)
-            row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+            point={'strike':strike,'years':maturity,'volatility':args['volatility']}
+            if MIN_PRICE<=strike<=MAX_PRICE:
+                point['theoretical_price']=price(**{**args,'strike':strike,'years':maturity})['price']
+            else:
+                point.update(theoretical_price=None,reason='derived_strike_outside_price_domain')
+                unavailable+=1
+            row.append(point)
         surface.append(row)
     iv=implied(config['target_price'],args['spot'],args['strike'],args['years'],args.get('rate',0),args.get('dividend',0),args.get('right','call')) if 'target_price' in config else None
-    return {'classification':'THEORETICAL_SCENARIO','model':'European Black–Scholes,continuous rate/dividend,constant volatility','metrics':metrics,'implied_volatility':iv,'surface':surface,'surface_scope':'flat input volatility grid;not observed smile/chain or calibrated market surface','greek_units':'vega per1.0 volatility,rho per1.0 rate,theta per year;spot/strike same currency','limitations':['American exercise,discrete dividends and market frictions excluded','No observed quote,open interest,listing or tradable contract claim','Floating-point model approximation;not exact engine monetary arithmetic']}
+    return {'classification':'THEORETICAL_SCENARIO','model':'European Black–Scholes,continuous rate/dividend,constant volatility','metrics':metrics,'implied_volatility':iv,'surface':surface,'surface_coverage':{'schema':'gig.options.grid.v2','total':153,'available':153-unavailable,'unavailable':unavailable,'policy':'Out-of-domain derived strikes retain their coordinates and null price;no clipping or base-metric invalidation'},'surface_scope':'flat input volatility grid;not observed smile/chain or calibrated market surface','greek_units':'vega per1.0 volatility,rho per1.0 rate,theta per year;spot/strike same currency','limitations':['American exercise,discrete dividends and market frictions excluded','No observed quote,open interest,listing or tradable contract claim','Floating-point model approximation;not exact engine monetary arithmetic']}
