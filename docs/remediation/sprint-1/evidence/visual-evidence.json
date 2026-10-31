@@ -1,0 +1,22 @@
+[
+  {
+    "path": "evidence/concentration-authored-390.png",
+    "sha256": "c1144cc222d551fde16d2b32f45248af00c61a36226d2d741d88b032ddf53e51",
+    "origin": "AUTHORED_SYNTHETIC_BROWSER_FIXTURES"
+  },
+  {
+    "path": "evidence/concentration-authored-1280.png",
+    "sha256": "960503aa4be117637c75e8091e87f523952c3493b24ec6e8bdce70dd5c0930d3",
+    "origin": "AUTHORED_SYNTHETIC_BROWSER_FIXTURES"
+  },
+  {
+    "path": "evidence/portfolio-dark.png",
+    "sha256": "d61be36d99d541da487499af23f342402d29077208d082e6d0e9c1187ff92f3e",
+    "origin": "AUTHORED_SYNTHETIC_BROWSER_FIXTURES"
+  },
+  {
+    "path": "evidence/options-authored.png",
+    "sha256": "874bd8c08f14672e178df6443fb7c2262ca1afe97aa3d311a776c1f05fa3213d",
+    "origin": "AUTHORED_SYNTHETIC_BROWSER_FIXTURES"
+  }
+]

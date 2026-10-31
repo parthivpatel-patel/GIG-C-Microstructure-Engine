@@ -1,0 +1,85 @@
+{
+  "schema": "gig.atlas.visual.v1",
+  "classification": "HISTORICAL_SYNTHETIC",
+  "passed": 21,
+  "failed": 0,
+  "checks": [
+    "global search routes to curated company/native-backed workspace",
+    "v2 exact ratios,source fields and twelve descriptors are loaded",
+    "reported annual history charts carry descriptions and exact tables",
+    "quarter filter does not turn annual or YTD values into quarters",
+    "source receipt,reconciliation warning and exact ratio remain accessible",
+    "responsive financial layout at360px",
+    "responsive financial layout at390px",
+    "responsive financial layout at768px",
+    "responsive financial layout at1280px",
+    "responsive financial layout at1920px",
+    "light theme persists and remains readable",
+    "core theme text and links meet4.5:1 contrast token checks",
+    "all focusable controls retain names and skip link works",
+    "native help dialog traps focus and Escape dismisses",
+    "all persistent workspace names remain keyboard accessible",
+    "filing explorer exposes original references and amendment filter",
+    "invalid v2 descriptor yields explicit error without fabricated ratio",
+    "stale response remains explicitly cached and not live",
+    "all twelve workspaces remain bounded across60 viewport/section combinations",
+    "global same-symbol selection overrides a different local selection",
+    "browser has no uncaught application errors"
+  ],
+  "screenshots": [
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-dark-360.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-dark-390.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-viewport-390.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-dark-768.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-dark-1280.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-viewport-1280.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-dark-1920.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-ratios-dark.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-trends-dark.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/build/atlas/visual/financial-light-1280.png"
+  ],
+  "performance": [
+    {
+      "width": 360,
+      "scroll": 360,
+      "viewport": 360,
+      "dom": 319,
+      "resources": 37
+    },
+    {
+      "width": 390,
+      "scroll": 390,
+      "viewport": 390,
+      "dom": 319,
+      "resources": 37
+    },
+    {
+      "width": 768,
+      "scroll": 768,
+      "viewport": 768,
+      "dom": 319,
+      "resources": 37
+    },
+    {
+      "width": 1280,
+      "scroll": 1280,
+      "viewport": 1280,
+      "dom": 319,
+      "resources": 37
+    },
+    {
+      "width": 1920,
+      "scroll": 1920,
+      "viewport": 1920,
+      "dom": 319,
+      "resources": 37
+    }
+  ],
+  "browser": "154.0.8037.57",
+  "renderer": "Headless Chromium SwiftShader;not physical Android/external Codespaces",
+  "limitations": [
+    "No actual SEC/Alpaca observations or restricted data",
+    "No full WCAG audit or screen-reader/physical-device qualification",
+    "Native source/canonical identities unchanged"
+  ]
+}

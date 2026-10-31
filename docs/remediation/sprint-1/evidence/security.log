@@ -1,0 +1,7 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/test_browser_access.py:5: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+....................................................
+----------------------------------------------------------------------
+Ran 52 tests in 3.435s
+
+OK

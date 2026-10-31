@@ -1,0 +1,6 @@
+gcc-python-release PASS {'tests': 158, 'failures': 0, 'skipped': 0, 'disabled': 0}
+gcc-python-debug PASS {'tests': 158, 'failures': 0, 'skipped': 0, 'disabled': 0}
+clang-debug PASS {'tests': 155, 'failures': 0, 'skipped': 0, 'disabled': 0}
+clang-release PASS {'tests': 155, 'failures': 0, 'skipped': 0, 'disabled': 0}
+gcc-python-asan-ubsan PASS {'tests': 159, 'failures': 0, 'skipped': 0, 'disabled': 0}
+clang-asan-ubsan PASS {'tests': 155, 'failures': 0, 'skipped': 0, 'disabled': 0}

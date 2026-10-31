@@ -1,0 +1,17 @@
+{
+  "schema": "gig.remediation.source_archive.v1",
+  "implementation_commit": "3f4c1984603c03f35d92d32a5aaaa5d0b874f0d3",
+  "archives_byte_identical": true,
+  "members": 879,
+  "archives": [
+    {
+      "bytes": 2830779,
+      "sha256": "e44ee7dd73b752c580e1348d53c830c6421a5c17f6734545a62ddea4d473164e"
+    },
+    {
+      "bytes": 2830779,
+      "sha256": "e44ee7dd73b752c580e1348d53c830c6421a5c17f6734545a62ddea4d473164e"
+    }
+  ],
+  "scope": "Implementation checkpoint archive;source andsafe authored fixtures only;final evidence/report commit follows"
+}

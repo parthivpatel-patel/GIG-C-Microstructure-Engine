@@ -1,0 +1,107 @@
+{
+  "origin": "AUTHORED_NATIVE_STATUS_EVENTS",
+  "unchanged_native_core": true,
+  "samples": [
+    {
+      "records": 128,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 128,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 1566112,
+      "peak_pmr_bytes": 2348960,
+      "allocations": 9,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 1918082,
+      "peak_process_RSS_KiB": 13284,
+      "command": [
+        "/workspace/GIG-C-Microstructure-Engine/build/python-release/benchmarks/gig_journal_memory_probe",
+        "128",
+        "0"
+      ]
+    },
+    {
+      "records": 1024,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 1024,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12525984,
+      "peak_pmr_bytes": 18788768,
+      "allocations": 12,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 12536750,
+      "peak_process_RSS_KiB": 13972,
+      "command": [
+        "/workspace/GIG-C-Microstructure-Engine/build/python-release/benchmarks/gig_journal_memory_probe",
+        "1024",
+        "0"
+      ]
+    },
+    {
+      "records": 4096,
+      "reset_every": 0,
+      "resets": 0,
+      "record_bytes": 12232,
+      "record_capacity": 4096,
+      "restart_bytes": 3720,
+      "restart_capacity": 0,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 50102688,
+      "peak_pmr_bytes": 75153824,
+      "allocations": 14,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 56658458,
+      "peak_process_RSS_KiB": 50736,
+      "command": [
+        "/workspace/GIG-C-Microstructure-Engine/build/python-release/benchmarks/gig_journal_memory_probe",
+        "4096",
+        "0"
+      ]
+    },
+    {
+      "records": 1024,
+      "reset_every": 128,
+      "resets": 8,
+      "record_bytes": 12232,
+      "record_capacity": 1024,
+      "restart_bytes": 3720,
+      "restart_capacity": 8,
+      "logical_entry_bytes": 15944,
+      "engine_object_bytes": 14808,
+      "snapshot_bytes": 6624,
+      "metadata_bytes": 5576,
+      "initial_pmr_bytes": 416,
+      "live_pmr_bytes": 12555744,
+      "peak_pmr_bytes": 18803648,
+      "allocations": 24,
+      "post_destroy_live_bytes": 0,
+      "elapsed_ns": 11610989,
+      "peak_process_RSS_KiB": 13976,
+      "command": [
+        "/workspace/GIG-C-Microstructure-Engine/build/python-release/benchmarks/gig_journal_memory_probe",
+        "1024",
+        "128"
+      ]
+    }
+  ],
+  "scope": "One bounded process per case;not a speedup/tail-latency benchmark"
+}

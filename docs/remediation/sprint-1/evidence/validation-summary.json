@@ -1,0 +1,244 @@
+{
+  "schema": "gig.remediation.validation.v1",
+  "baseline": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "implementation_commit": "3f4c1984603c03f35d92d32a5aaaa5d0b874f0d3",
+  "audit_commit": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+  "python_cohorts": [
+    {
+      "configuration": "debug",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+      "tests": 142,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 8.108975315000862,
+      "log": "build/audit-remediation-1/evidence/sources-debug.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "debug",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+      "tests": 207,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 26.01724729000125,
+      "log": "build/audit-remediation-1/evidence/stocks-debug.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "debug",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+      "tests": 274,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 21.49745273400913,
+      "log": "build/audit-remediation-1/evidence/terminal-debug.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "debug",
+      "cohort": "remediation",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.801758959016297,
+      "log": "build/audit-remediation-1/evidence/remediation-debug.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "release",
+      "cohort": "sources",
+      "tests": 142,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "build/audit-remediation-1/evidence/sources-release.log",
+      "execution": "Actual earlier execution in this sprint;not repeated"
+    },
+    {
+      "configuration": "release",
+      "cohort": "stocks",
+      "tests": 207,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "log": "build/audit-remediation-1/evidence/stocks-release.log",
+      "execution": "Actual earlier execution in this sprint;not repeated"
+    },
+    {
+      "configuration": "release",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+      "tests": 274,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 24.574715360009577,
+      "log": "build/audit-remediation-1/evidence/terminal-release.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "release",
+      "cohort": "remediation",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.6459164269908797,
+      "log": "build/audit-remediation-1/evidence/remediation-release.log",
+      "lsan_live_checkpoint": null
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+      "tests": 142,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 17.834086299990304,
+      "log": "build/audit-remediation-1/evidence/sources-sanitizer.log",
+      "lsan_live_checkpoint": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+      "tests": 207,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 59.89903991500614,
+      "log": "build/audit-remediation-1/evidence/stocks-sanitizer.log",
+      "lsan_live_checkpoint": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+      "tests": 274,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 96.80961541700526,
+      "log": "build/audit-remediation-1/evidence/terminal-sanitizer.log",
+      "lsan_live_checkpoint": 0
+    },
+    {
+      "configuration": "sanitizer",
+      "cohort": "remediation",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.431694140017498,
+      "log": "build/audit-remediation-1/evidence/remediation-sanitizer.log",
+      "lsan_live_checkpoint": 0
+    }
+  ],
+  "python_outcomes": 1944,
+  "native_outcomes": 940,
+  "native_build_scope": "Actual CTest reruns on unchanged native-source build directories,not a fresh compile orARM64 run",
+  "canonical_comparisons": 48,
+  "canonical_mismatches": 0,
+  "frontend": {
+    "pass": 81,
+    "fail": 0,
+    "skip": 0
+  },
+  "security": {
+    "pass": 52,
+    "fail": 0,
+    "skip": 0
+  },
+  "browser": {
+    "pass": 153,
+    "fail": 0,
+    "skip": 0,
+    "cohorts": 4
+  },
+  "local_TLS": {
+    "pass": 20,
+    "fail": 0,
+    "cohorts": 3
+  },
+  "installed_existing_native_wheel": {
+    "interface": 8,
+    "exports": 6,
+    "fail": 0,
+    "skip": 0,
+    "scope": "Existing0.1.1 wheel on unchanged native/Python binding source;not a newly built remediation wheel"
+  },
+  "sdist_patterns": 3,
+  "sdist_members": 879,
+  "source_archives_byte_identical": true,
+  "provider_requests": 0,
+  "hosted_workflows_dispatched": 0,
+  "hosted_ARM64": "NOT_EXECUTED",
+  "Codespaces_target": "NOT_QUALIFIED",
+  "failures_preserved": [
+    "7-method failing-before option cohort:1failure and7subtest errors",
+    "Initial Release terminal274:2errors due isolated-worktree missing native diagnostic path;fixed command-scoped GIG_TERMINAL_NATIVE_BUILD andreran all274",
+    "Initial teardown attempt could not read /proc/PID/cwd;only sprint-created fixture PIDs fromowned logs were subsequently stopped"
+  ],
+  "source_binding": "Full matrices used working production bytes subsequently committed unchanged as implementation SHA;25new regressions andresource qualifier also executed after commit. Source-to-test receipts verify exact bytes."
+}

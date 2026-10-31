@@ -1,0 +1,386 @@
+[
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-debug",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "a42864443e9b051568668c81cfeb12c42c4cc98320640514f7448c1bb1616065"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-release",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "3a620a85b10ec7cb5c72a46420f94747e9bd14a71b922e34915182ae2c279d54"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "gcc-python-asan-ubsan",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "a0be6a90db7d3c01cf404ac1daea76b9596869492a6d5c6c392dc5a0b5da2201"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-debug",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "5e6345f2f2ed3e4395a74d5e78171509bfc7490ec9aac7bde621424a2fde5d94"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-release",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "c1a35d7d30ec703f32f731e1b29439595ac27969cdc341dd5ff15522fff521a1"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.independent_reference",
+    "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matching_output_token": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.context_reference",
+    "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matching_output_token": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.l3_reference",
+    "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matching_output_token": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.streaming_reference",
+    "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matching_output_token": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.validation_demo_reference",
+    "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matching_output_token": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.auction_reference",
+    "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matching_output_token": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.admin_reference",
+    "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matching_output_token": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  },
+  {
+    "configuration": "clang-asan-ubsan",
+    "test": "itch.hy_reference",
+    "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matching_output_token": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "matched": true,
+    "xml_sha256": "a233aeda6121b7e6c507c5696e0549c00afa86d49dc1132d2dda08fa40e47541"
+  }
+]

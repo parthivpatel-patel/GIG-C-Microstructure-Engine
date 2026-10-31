@@ -1,0 +1,65 @@
+{
+  "audit_commit": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+  "source_catalog_sha256": "bd7a75e9f9f08ee73c057af24ee7fd39d1ce03dc56fa7982c7312b0a5fe1d3d7",
+  "further_original_master_recovered": false,
+  "sources": [
+    {
+      "id": "H01",
+      "title": "Current comprehensive audit directive",
+      "sha256": "1a553fd0d088d7c08b50a83a6ab6a43e531ecd810153ca9c9d7f89d6fa53611f",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H02",
+      "title": "Unified original terminal directive",
+      "sha256": "f49e62241e0c24c3ed3067dff6d274a4ba940307f15394b7b134e6dcf57f6bd4",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H03",
+      "title": "Master backend engineering directive",
+      "sha256": "4333e6cd586fe82223353440e42d5a32b1b0f0475c5ab5f1c1c43bc39de4a6a6",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H04",
+      "title": "Product completion:US universe,market data,institutional UI",
+      "sha256": "4d2a816807963208d8f04a3463f526e4a218b165367098a0cbe659c119a93161",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H05",
+      "title": "Live market intelligence and3D upgrade",
+      "sha256": "82c9e3dd7a60708854c856dd521d6be5166839a72db2812802d53b9fce89e532",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H06",
+      "title": "Final master:real market data first,two milestones",
+      "sha256": "0191b495e18d21cc28bec857cb46b27af62f0665efceb737de5a883a56a73717",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H07",
+      "title": "PhaseNext:US coverage andpaperaccount market data",
+      "sha256": "d1e111042467b6666dab282ccbc0f4dfa8078c295ffed768deac9baae898af4c",
+      "status": "RECOVERED"
+    },
+    {
+      "id": "H08",
+      "title": "Original complete C++ master specification",
+      "sha256": null,
+      "status": "UNKNOWN_REQUIREMENT_EVIDENCE"
+    },
+    {
+      "id": "H09",
+      "title": "GIG ATLAS institutional transformation and subsequent explicit user authorizations",
+      "sha256": null,
+      "status": "RECOVERABLE_FROM_CONVERSATION_NOT_AN_INDEPENDENT_GIT_ARTIFACT"
+    }
+  ],
+  "concentration_original_quote": "Liquidity concentration",
+  "formula_found_in_recovered_historical_requirement": false,
+  "unknown_original_master": "H08 remains unavailable;secondary architecture reports are not an original approval",
+  "scope": "No restricted ZIP,private credentials or market-data directory accessed"
+}

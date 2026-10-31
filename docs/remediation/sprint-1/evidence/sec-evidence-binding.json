@@ -1,0 +1,51 @@
+{
+  "schema": "gig.remediation.sec_evidence_binding.v1",
+  "authority": "OWNER_SUPPLIED_OCTOBER30_NOT_REPRODUCED",
+  "reported": {
+    "accepted_ticker_mappings": 10429,
+    "identity_matches": [
+      "AAPL",
+      "APLD",
+      "CRWV"
+    ],
+    "selected_records": 1772,
+    "mismatches": 0
+  },
+  "existing_tracked_document_candidates": [
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/HISTORICAL_ITCH_ENGINEERING_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/LOBSTER_REPRODUCIBILITY_GUIDE.md",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/NATIVE_ARM64_REPAIR_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/P1E_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/P1G_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/P1H_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/P1I_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/P1J_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/PHASE12_ENGINEERING_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/PHASE4_HISTORICAL_ENGINEERING_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/PHASE5_ENGINEERING_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/PHASE_8_INTERFACE.md",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/PRIVATE_SYNTHETIC_CANDIDATE_MANIFEST.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/RC_CLOSURE_EVIDENCE.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/backend/backend_audit.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/backend/phase3_evidence.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase4-flow-metrics.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase6-execution-tca.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase7-engine.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase8-python-interface.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase9-engine.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/baselines/phase9-python-interface.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/completion/FINAL_REPORT.md",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/evidence/lobster_dataset_acceptance.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/evidence/provider_qualification.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/live-market/IMPLEMENTATION_REPORT.md",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/milestones/SEC_TERMINAL_REFERENCE_REPAIR.md",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/milestones/engineering_evidence.json",
+    "10eaee30d598807a23e42a8b60abe3d5a5dc2514:docs/milestones/sec_terminal_reference_evidence.json"
+  ],
+  "exact_owner_output_bytes_recovered": false,
+  "tested_owner_commit": null,
+  "owner_output_sha256": null,
+  "source_response_sha256": null,
+  "status": "MISSING_RECEIPT_NOT_SEC_SETUP_FAILURE",
+  "limitations": "No SEC contact/configuration inspection or provider request;earlier directory digests and hashes of paraphrased owner reports are not the missing original receipt"
+}

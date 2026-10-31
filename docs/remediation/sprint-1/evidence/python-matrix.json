@@ -1,0 +1,192 @@
+[
+  {
+    "configuration": "debug",
+    "cohort": "sources",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_source_qualification_suite.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 8.108975315000862,
+    "log": "build/audit-remediation-1/evidence/sources-debug.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "debug",
+    "cohort": "stocks",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_live_market_suite.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+    "tests": 207,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 26.01724729000125,
+    "log": "build/audit-remediation-1/evidence/stocks-debug.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "debug",
+    "cohort": "terminal",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+    "tests": 274,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 21.49745273400913,
+    "log": "build/audit-remediation-1/evidence/terminal-debug.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "debug",
+    "cohort": "remediation",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint1.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 3.801758959016297,
+    "log": "build/audit-remediation-1/evidence/remediation-debug.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "release",
+    "cohort": "sources",
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log": "build/audit-remediation-1/evidence/sources-release.log",
+    "execution": "Actual earlier execution in this sprint;not repeated"
+  },
+  {
+    "configuration": "release",
+    "cohort": "stocks",
+    "tests": 207,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log": "build/audit-remediation-1/evidence/stocks-release.log",
+    "execution": "Actual earlier execution in this sprint;not repeated"
+  },
+  {
+    "configuration": "release",
+    "cohort": "terminal",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+    "tests": 274,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 24.574715360009577,
+    "log": "build/audit-remediation-1/evidence/terminal-release.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "release",
+    "cohort": "remediation",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint1.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 3.6459164269908797,
+    "log": "build/audit-remediation-1/evidence/remediation-release.log",
+    "lsan_live_checkpoint": null
+  },
+  {
+    "configuration": "sanitizer",
+    "cohort": "sources",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_source_qualification_suite.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 17.834086299990304,
+    "log": "build/audit-remediation-1/evidence/sources-sanitizer.log",
+    "lsan_live_checkpoint": 0
+  },
+  {
+    "configuration": "sanitizer",
+    "cohort": "stocks",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_live_market_suite.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+    "tests": 207,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 59.89903991500614,
+    "log": "build/audit-remediation-1/evidence/stocks-sanitizer.log",
+    "lsan_live_checkpoint": 0
+  },
+  {
+    "configuration": "sanitizer",
+    "cohort": "terminal",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+    "tests": 274,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 96.80961541700526,
+    "log": "build/audit-remediation-1/evidence/terminal-sanitizer.log",
+    "lsan_live_checkpoint": 0
+  },
+  {
+    "configuration": "sanitizer",
+    "cohort": "remediation",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_remediation_sprint1.py"
+    ],
+    "native_diagnostic_build": "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 6.431694140017498,
+    "log": "build/audit-remediation-1/evidence/remediation-sanitizer.log",
+    "lsan_live_checkpoint": 0
+  }
+]

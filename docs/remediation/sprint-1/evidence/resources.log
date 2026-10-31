@@ -1,0 +1,8 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+.Executing <Task finished name='Task-7' coro=<BrowserPush.test_five_thousand_burst_quiet_and_reconnect_prefixes_stay_bounded() done, defined at /workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/test_research_resources.py:95> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.183 seconds
+......
+----------------------------------------------------------------------
+Ran 7 tests in 2.309s
+
+OK

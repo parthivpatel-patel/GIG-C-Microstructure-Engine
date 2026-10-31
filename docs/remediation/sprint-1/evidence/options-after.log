@@ -1,0 +1,7 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py:7: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.141s
+
+OK

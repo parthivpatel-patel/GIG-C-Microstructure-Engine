@@ -1,0 +1,14 @@
+{
+  "schema": "gig.evidence.text_normalization.v1",
+  "path": "evidence/frontend-build.log",
+  "raw_source_path": "build/audit-remediation-1/evidence/frontend-build.log",
+  "raw_sha256": "3780f07298b73081dbab56057d65db4e6097fe4e313a1131cdb71f6315dc2852",
+  "published_sha256": "3bd521c73389566ce4271c50504e99b843a086a77b41ffdbed646edb0038a92c",
+  "transformation": "Remove trailing ASCII spaces/tabs on published text lines only;warning andtest content unchanged. Exact original log retained inignored build evidence.",
+  "changed_lines": [
+    {
+      "line": 31,
+      "removed_trailing_whitespace": " "
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "gig.alpaca.permission.update.v1",
+  "owner_update_received": "2026-10-31 America/New_York",
+  "authority": "OWNER_SUPPLIED_SUPPORT_SUMMARY_NOT_INDEPENDENTLY_VERIFIED",
+  "basic_personal_noncommercial_research_confirmed_owner_report": true,
+  "basic_real_time_IEX_availability_confirmed_owner_report": true,
+  "private_Codespaces_processing": "PENDING_EXPLICIT_CONFIRMATION",
+  "private_authenticated_browser_display": "PENDING_EXPLICIT_CONFIRMATION",
+  "historical_IEX_access_and_limits": "PENDING_EXPLICIT_CONFIRMATION",
+  "support_response_bytes_available": false,
+  "support_response_sha256": null,
+  "gates_changed": false,
+  "provider_requests": 0,
+  "streaming_activated": false,
+  "credentials_inspected_or_changed": false,
+  "orders": 0,
+  "observed_retention_enabled": false,
+  "qualification_executed": false
+}

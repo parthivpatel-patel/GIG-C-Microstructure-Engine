@@ -1,0 +1,226 @@
+{
+  "schema": "gig.remediation.changes.v1",
+  "baseline": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+  "implementation_commit": "3f4c1984603c03f35d92d32a5aaaa5d0b874f0d3",
+  "files": [
+    {
+      "path": "docs/backend/QUANT_MODEL_VALIDATION.md",
+      "sha256": "ae3513ff0969c6e68d496e803d9fe0b1a0a1dca25f409d306c6191c1bc9c6b94",
+      "bytes": 4358,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "docs/remediation/sprint-1/CONCENTRATION_RESEARCH_CONTRACT.md",
+      "sha256": "df1934bc5703b28b095abbff07b3124e3ade1a41c24a340e8cb4f896a12f217a",
+      "bytes": 3182,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "docs/remediation/sprint-1/MODEL_STATUS.md",
+      "sha256": "b2403a9e203e4500fd123937655c74c32b8e4a83650a4f2fa3a7ded905c3220f",
+      "bytes": 2720,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "docs/remediation/sprint-1/OPTIONS_GRID_CONTRACT.md",
+      "sha256": "7c669029aef4ff2794b74b950921a9acf4a63cd7243e652cf596f9fd94a17a8b",
+      "bytes": 1631,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "docs/remediation/sprint-1/RESEARCH_SESSION_ENVELOPE.md",
+      "sha256": "7f0f89737f069f09771abe12567a5b48a6eeec8307cd572406f412aae5b404e7",
+      "bytes": 4235,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "scripts/qualify_remediation_envelope.py",
+      "sha256": "0e30bf531414dd71e5f9459ec4d0eb4302bc9e2a1297ce87754a15e0c563e9da",
+      "bytes": 5478,
+      "verification": [
+        "evidence/envelope.json",
+        "evidence/journal-scaling.json"
+      ]
+    },
+    {
+      "path": "terminal/server/analysis.py",
+      "sha256": "ccb76ad562497c4a108148a5c4cfec2ab74b48a86106110c5250abb09c8d67f0",
+      "bytes": 3096,
+      "verification": [
+        "terminal/test_research_resources.py",
+        "terminal/stocks/test_overnight.py"
+      ]
+    },
+    {
+      "path": "terminal/server/app.py",
+      "sha256": "25fe817bb07e4c6d87138b15bacc2f56b368c3a092c4266ca60c18e870dfc122",
+      "bytes": 58561,
+      "verification": [
+        "terminal/test_concentration.py",
+        "terminal/test_research_resources.py",
+        "terminal/test_request_proof.py"
+      ]
+    },
+    {
+      "path": "terminal/server/concentration.py",
+      "sha256": "32654dcba91700de5d8b8ea43e09bbccfd0154c637cbeb58374b6bcf35c1715e",
+      "bytes": 3602,
+      "verification": [
+        "terminal/test_concentration.py",
+        "terminal/tests/remediation-sprint1-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/server/engine.py",
+      "sha256": "bd9e7d19a9ae01561661ff43f324c3f983162358ff06a5c6088d170e2266d566",
+      "bytes": 17896,
+      "verification": [
+        "terminal/test_concentration.py",
+        "terminal/server/test_server.py"
+      ]
+    },
+    {
+      "path": "terminal/server/market_events.py",
+      "sha256": "1fca2386fe15420ea4a5e1c08c0237862f19ef94b20b22abe49305f5746ddf9d",
+      "bytes": 3535,
+      "verification": [
+        "terminal/test_research_resources.py",
+        "terminal/stocks/test_projection.py"
+      ]
+    },
+    {
+      "path": "terminal/stocks/options.py",
+      "sha256": "4623e45d88d937c4335cd2a72ec40b266f1fa0ca8cdafb64d46d94b6e306ccf2",
+      "bytes": 4577,
+      "verification": [
+        "terminal/stocks/test_remediation_options.py",
+        "terminal/tests/remediation-sprint1-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/stocks/test_remediation_options.py",
+      "sha256": "4dc75c29e82709f70baf232ee429f1a1d7f6bc99ddd2a561c1e0a52b91e51d27",
+      "bytes": 4722,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/test_concentration.py",
+      "sha256": "88eb471bf65bfd0ac36c5c47fda752651e98c66d8695b0c57921f9127583ed2b",
+      "bytes": 6012,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/test_research_resources.py",
+      "sha256": "b8f3b99c69bcf67d6db24f5f0cc768ad8637c090dc0d5e282cd947d4a6b3446b",
+      "bytes": 7130,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/tests/atlas5-validation.mjs",
+      "sha256": "460faf0bcd292f933380bf07ecdb98196f9caf0b0c23702eb2a395ad946384f4",
+      "bytes": 6810,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/tests/remediation-sprint1-validation.mjs",
+      "sha256": "90e84e657c8e3e1a90b40b2eaac9244c57425f88ac822eab2ae9e8722d38f152",
+      "bytes": 3804,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/tests/run_remediation_sprint1.py",
+      "sha256": "dfb5777c7ce2d3b938c45d48b930ef03e4287e63a8caa6c5d4a650ff115f1842",
+      "bytes": 1059,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "sha256": "d764ae2ecf6b33517655117f50b1ea1894178896604ad3e79c056434cb876bb1",
+      "bytes": 37353,
+      "verification": [
+        "terminal/tests/workspace-qualification.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/ConcentrationPanel.tsx",
+      "sha256": "95732cdb6ba1b80ce429a7c0a9367886eab20f4949ee4b64e6b805d692db8013",
+      "bytes": 1841,
+      "verification": [
+        "terminal/tests/remediation-sprint1-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/PortfolioLab.tsx",
+      "sha256": "c3bc8d669f4b955d6c67570c05808f33fcfebf68d39a6715916b8624c9f15ddd",
+      "bytes": 4598,
+      "verification": [
+        "terminal/tests/atlas5-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/ResearchDiagnostics.tsx",
+      "sha256": "cf66f0236db35802580583e3d6b0c8b3e74dfb094ad6802ed756a408f9cd754a",
+      "bytes": 10705,
+      "verification": [
+        "terminal/tests/atlas5-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/StockIntelligence.tsx",
+      "sha256": "b65d4c09db21a70ea5957e1d50f6cdad1b8f640794979434ed44092e5b216319",
+      "bytes": 19250,
+      "verification": [
+        "terminal/tests/remediation-sprint1-validation.mjs",
+        "terminal/tests/atlas-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/VolatilitySurface.tsx",
+      "sha256": "da41364e39487b2c1f4fd2dc74b96519e3b613d9bbada1a41d00c25a4eda9db4",
+      "bytes": 3455,
+      "verification": [
+        "terminal/tests/remediation-sprint1-validation.mjs"
+      ]
+    },
+    {
+      "path": "terminal/web/src/format.test.ts",
+      "sha256": "31bb1a82a8388b203b9e2ab0a3d3549a8fb3d390f8c149f6f4d226499d506b76",
+      "bytes": 3975,
+      "verification": [
+        "Dedicated regression runner,frontend build orsource/link review;see test evidence"
+      ]
+    },
+    {
+      "path": "terminal/web/src/format.ts",
+      "sha256": "e39fddc37e970936eb867f2661a0560f08a096eb29f628cd1dc344f471beacaa",
+      "bytes": 3156,
+      "verification": [
+        "terminal/web/src/format.test.ts",
+        "terminal/tests/atlas5-validation.mjs"
+      ]
+    }
+  ],
+  "native_cpp_bindings_workflows_provider_gate_files_changed": false
+}

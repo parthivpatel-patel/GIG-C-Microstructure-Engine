@@ -1,0 +1,159 @@
+{
+  "results": [
+    {
+      "configuration": "gcc-python-debug",
+      "build_directory": "build/python-debug",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/gcc-python-debug.xml"
+      ],
+      "counts": {
+        "tests": 158,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 45.34281339799054,
+      "log": "build/audit-remediation-1/evidence/gcc-python-debug.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    },
+    {
+      "configuration": "gcc-python-release",
+      "build_directory": "build/python-release",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/gcc-python-release.xml"
+      ],
+      "counts": {
+        "tests": 158,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 43.057719859003555,
+      "log": "build/audit-remediation-1/evidence/gcc-python-release.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    },
+    {
+      "configuration": "gcc-python-asan-ubsan",
+      "build_directory": "build/python-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/gcc-python-asan-ubsan.xml"
+      ],
+      "counts": {
+        "tests": 159,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 100.50600898999255,
+      "log": "build/audit-remediation-1/evidence/gcc-python-asan-ubsan.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    },
+    {
+      "configuration": "clang-debug",
+      "build_directory": "build/phase9-clang-debug",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/clang-debug.xml"
+      ],
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 36.07291226400412,
+      "log": "build/audit-remediation-1/evidence/clang-debug.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    },
+    {
+      "configuration": "clang-release",
+      "build_directory": "build/phase9-clang-release",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/clang-release.xml"
+      ],
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 38.835280864994274,
+      "log": "build/audit-remediation-1/evidence/clang-release.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "build_directory": "build/phase9-clang-asan-ubsan",
+      "command": [
+        "/workspace/gig-tools/bin/ctest",
+        "--test-dir",
+        "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+        "--output-on-failure",
+        "-j",
+        "2",
+        "--output-junit",
+        "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/evidence/clang-asan-ubsan.xml"
+      ],
+      "counts": {
+        "tests": 155,
+        "failures": 0,
+        "skipped": 0,
+        "disabled": 0
+      },
+      "frozen_hashes_unchanged": 8,
+      "seconds": 74.22655399900395,
+      "log": "build/audit-remediation-1/evidence/clang-asan-ubsan.log",
+      "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS"
+    }
+  ],
+  "expected_hashes": {
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+  },
+  "all_48_unchanged": true
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "gig.remediation.resume.verification.v1",
+  "review_date": "2026-10-31 America/New_York",
+  "recovered_implementation": "3f4c1984603c03f35d92d32a5aaaa5d0b874f0d3",
+  "production_changes_during_resume": 0,
+  "source_files_fingerprint_verified": 26,
+  "initial_evidence_receipts_fingerprint_verified": 73,
+  "test_runtime_and19installed_distributions_unchanged": true,
+  "architecture": "x86_64",
+  "newly_rerun_cohort": {
+    "tests": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_log_sha256": "f4152f36b499801c709d0314bda0e3a600e51fd042915781f54048c44e581433",
+  "historical_same_sprint_matrix": "Earlier1944Python/940native outcomes recovered andhash-verified;not reexecuted during continuation",
+  "provider_calls": 0,
+  "workflow_dispatches": 0
+}

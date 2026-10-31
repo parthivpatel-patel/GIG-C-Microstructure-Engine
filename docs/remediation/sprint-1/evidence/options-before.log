@@ -1,0 +1,132 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py:7: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+EEEEEEEF..
+======================================================================
+ERROR: test_boundaries_and_adjacent_inputs_preserve_base_metrics (terminal.stocks.test_remediation_options.ScenarioDomain.test_boundaries_and_adjacent_inputs_preserve_base_metrics) (spot=1e-06)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 20, in test_boundaries_and_adjacent_inputs_preserve_base_metrics
+    config=self.config(spot);out=scenario(config)
+                                 ^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 50, in scenario
+    row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: model_parameter
+
+======================================================================
+ERROR: test_boundaries_and_adjacent_inputs_preserve_base_metrics (terminal.stocks.test_remediation_options.ScenarioDomain.test_boundaries_and_adjacent_inputs_preserve_base_metrics) (spot=1.0000000000000002e-06)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 20, in test_boundaries_and_adjacent_inputs_preserve_base_metrics
+    config=self.config(spot);out=scenario(config)
+                                 ^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 50, in scenario
+    row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: model_parameter
+
+======================================================================
+ERROR: test_boundaries_and_adjacent_inputs_preserve_base_metrics (terminal.stocks.test_remediation_options.ScenarioDomain.test_boundaries_and_adjacent_inputs_preserve_base_metrics) (spot=9999999.999999998)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 20, in test_boundaries_and_adjacent_inputs_preserve_base_metrics
+    config=self.config(spot);out=scenario(config)
+                                 ^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 50, in scenario
+    row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: model_parameter
+
+======================================================================
+ERROR: test_boundaries_and_adjacent_inputs_preserve_base_metrics (terminal.stocks.test_remediation_options.ScenarioDomain.test_boundaries_and_adjacent_inputs_preserve_base_metrics) (spot=10000000.0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 20, in test_boundaries_and_adjacent_inputs_preserve_base_metrics
+    config=self.config(spot);out=scenario(config)
+                                 ^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 50, in scenario
+    row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: model_parameter
+
+======================================================================
+ERROR: test_extreme_valid_cross_parameters_are_finite (terminal.stocks.test_remediation_options.ScenarioDomain.test_extreme_valid_cross_parameters_are_finite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 55, in test_extreme_valid_cross_parameters_are_finite
+    self.assertTrue(all(math.isfinite(v) for v in scenario(c)['metrics'].values()))
+                                                  ^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 50, in scenario
+    row.append({'strike':strike,'years':maturity,'volatility':args['volatility'],'theoretical_price':price(**{**args,'strike':strike,'years':maturity})['price']})
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: model_parameter
+
+======================================================================
+ERROR: test_invalid_nonfinite_and_huge_parameters_reject (terminal.stocks.test_remediation_options.ScenarioDomain.test_invalid_nonfinite_and_huge_parameters_reject) (name='spot', value_type='int')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 49, in test_invalid_nonfinite_and_huge_parameters_reject
+    with self.assertRaises(ValueError):scenario(c)
+                                       ^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 45, in scenario
+    metrics=price(**args);surface=[]
+            ^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 18, in price
+    s=finite(spot,.000001,1e7);k=finite(strike,.000001,1e7);t=finite(years,1e-6,10);v=finite(volatility,1e-6,5);r=finite(rate,-.5,.5);q=finite(dividend,-.5,.5)
+      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/options.py", line 5, in finite
+    if type(x) not in (int,float) or not math.isfinite(x) or not lo<=x<=hi:raise ValueError('model_parameter')
+                                         ^^^^^^^^^^^^^^^^
+OverflowError: int too large to convert to float
+
+======================================================================
+ERROR: test_ordinary_grid_preserves_all_153_original_cells (terminal.stocks.test_remediation_options.ScenarioDomain.test_ordinary_grid_preserves_all_153_original_cells)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 37, in test_ordinary_grid_preserves_all_153_original_cells
+    self.assertEqual(out['surface_coverage']['unavailable'],0)
+                     ~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'surface_coverage'
+
+======================================================================
+FAIL: test_boundary_http_success_without_native_mutation (terminal.stocks.test_remediation_options.ScenarioHTTP.test_boundary_http_success_without_native_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-1/worktree/terminal/stocks/test_remediation_options.py", line 69, in test_boundary_http_success_without_native_mutation
+    self.assertEqual(response.status_code,200)
+AssertionError: 422 != 200
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.124s
+
+FAILED (failures=1, errors=7)
