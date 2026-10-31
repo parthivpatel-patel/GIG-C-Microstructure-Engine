@@ -1,0 +1,8 @@
+[
+  {
+    "path": "frontend-build.log",
+    "original_sha256": "16c3a0e9970bad55e46a6bc3e3ceac844346843d111a267c7a7f9aa73ca55528",
+    "published_sha256": "c187180a185620b5d206aef92996099b8bc65dd6e4ffb9ab03cea1a4a120d286",
+    "reason": "Trailing ASCII whitespace/newline normalization only;warning text unchanged;original retained in ignored build directory"
+  }
+]

@@ -1,0 +1,385 @@
+{
+  "schema": "gig.remediation.sprint2.evidence_manifest.v1",
+  "baseline": "6bcd28c786e171abe8704845cab5d4fee0484ce1",
+  "implementation_commit": "62d8d50e2dd629db181114eaceb5845509a137b6",
+  "branch": "fix/atlas-private-qualification-2",
+  "audit_commit": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+  "final_delivery": "Subsequent documentation/evidence-only tip;exact remote commit verified at delivery;manifest does not hash itself",
+  "path_base": "docs/remediation/sprint-2/",
+  "source_binding": "evidence/source-binding.json",
+  "files": [
+    {
+      "path": "DEPLOYMENT_RUNTIME_QUALIFICATION.md",
+      "bytes": 6057,
+      "sha256": "59dfb2532b63241e19ed001d0244d1555615284f9bf1a8ad3678f6338c5cf011"
+    },
+    {
+      "path": "FINAL_OWNER_ACCEPTANCE.md",
+      "bytes": 10658,
+      "sha256": "76be4b227d237c1cede0193acf4faf4aa6396f7ff0439576206ebbad552e65a5"
+    },
+    {
+      "path": "INDEPENDENT_REVIEW.md",
+      "bytes": 8261,
+      "sha256": "b6a0f015ee20687cf20d209db13818bec5d05de91716dafbd46de4af44d8b9b5"
+    },
+    {
+      "path": "OFFLINE_RECOVERY_RESOURCES.md",
+      "bytes": 6550,
+      "sha256": "7003ad94ec8fa42317b47a1755c07bfa81bd772aee2b6896b768eb15c801d4c1"
+    },
+    {
+      "path": "REMAINING_BLOCKERS.md",
+      "bytes": 6385,
+      "sha256": "c9cc69f7abf69a8ba7f380810dd462516d67214cc7ff72ac13f8d07f7d55ee15"
+    },
+    {
+      "path": "SEC_EVIDENCE_BINDING.md",
+      "bytes": 5768,
+      "sha256": "044adf4ea8f6630fb99af8042a0349ea738f88350cf466ce7cd6d816a8e3a0eb"
+    },
+    {
+      "path": "evidence/atlas5-validation.log",
+      "bytes": 1501,
+      "sha256": "01513e46dc2eda7b41432f5d78821aaa12bc9b17ddee429d7df01436b21576e5"
+    },
+    {
+      "path": "evidence/browser-assets.json",
+      "bytes": 2104,
+      "sha256": "59bfc52cf36b1155f99194f0462f05ec30fc11fe5b481189d81830f689468c89"
+    },
+    {
+      "path": "evidence/browser-server.log",
+      "bytes": 10386,
+      "sha256": "9c54866394655a6c2b8c42a3745c0e04533a423b2c71935183cd2f7e936c2169"
+    },
+    {
+      "path": "evidence/deployment-initial-import-error.log",
+      "bytes": 1010,
+      "sha256": "f5279c93bdee90d1099341dbbd11f78a9debba1b804c220bc31e14a671eb27be"
+    },
+    {
+      "path": "evidence/envelope-precommit.json",
+      "bytes": 1361,
+      "sha256": "60e95dcceac314969e120f781e3c859ffe650b6dce90664a1f7dbf24d0788c58"
+    },
+    {
+      "path": "evidence/envelope.json",
+      "bytes": 1374,
+      "sha256": "15c38f6af927e7da76f7e9a48ee3a2204a61cc6173f1abb1c48f65c1ddc5b6fe"
+    },
+    {
+      "path": "evidence/evidence-normalization.json",
+      "bytes": 366,
+      "sha256": "174452b7c9e083e7a2ccbb7d9d856be3aff52fa5238cfe770a6cc127f571c699"
+    },
+    {
+      "path": "evidence/frontend-build.log",
+      "bytes": 2185,
+      "sha256": "c187180a185620b5d206aef92996099b8bc65dd6e4ffb9ab03cea1a4a120d286"
+    },
+    {
+      "path": "evidence/frontend-tests.log",
+      "bytes": 8056,
+      "sha256": "1c3babf43e1b654c53560b6324aef03eec4d0eae456e0f587760591b6877440f"
+    },
+    {
+      "path": "evidence/journal-scaling.json",
+      "bytes": 3053,
+      "sha256": "70cfbfc8363ebb7e0f9b453d9a36f0f0fc9be5014f3aa5fd54fbf824637df64b"
+    },
+    {
+      "path": "evidence/local-receipt-server.log",
+      "bytes": 479,
+      "sha256": "3b2d768b8ae46d7ae5ad1632efbb7c527005463fa5a1474b2ea0eb84583bbf89"
+    },
+    {
+      "path": "evidence/native-identities.json",
+      "bytes": 2385,
+      "sha256": "3388c9f7fc89d5a9880c04ee486b57aef40ed16b11ad7305f554230b14d60958"
+    },
+    {
+      "path": "evidence/native-reference.log",
+      "bytes": 1112,
+      "sha256": "502adafda47cc5e6f3ef5fe4e12ca894a863f032bd9675d259d7662dd279a992"
+    },
+    {
+      "path": "evidence/native-reference.xml",
+      "bytes": 4304,
+      "sha256": "2225ef9f46bd25e7d0a7b67d80a0e8ae667ec3d290d2bc6875add551f8e13d54"
+    },
+    {
+      "path": "evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "path": "evidence/prior-evidence-review.json",
+      "bytes": 685,
+      "sha256": "8d53c1cae4521fb99b544ce8ee5e554c7e93ebf5f6515fc8d12a0fcacf3f3c9c"
+    },
+    {
+      "path": "evidence/python-matrix.json",
+      "bytes": 5280,
+      "sha256": "5ecb52dedd49744131281cff753138c9618339396deab7148fda1137e014773c"
+    },
+    {
+      "path": "evidence/remediation-sprint1-validation.log",
+      "bytes": 958,
+      "sha256": "de1e89b90f6843b99a2895b1da5d069f3ede2264c9da32a126975fe3d2637766"
+    },
+    {
+      "path": "evidence/resource-clean.log",
+      "bytes": 61,
+      "sha256": "0658d2909bb41cfa2ca5b3d6e92c7bbebbf6e70cb938879962d961cabd648300"
+    },
+    {
+      "path": "evidence/resource-run.log",
+      "bytes": 61,
+      "sha256": "0658d2909bb41cfa2ca5b3d6e92c7bbebbf6e70cb938879962d961cabd648300"
+    },
+    {
+      "path": "evidence/runtime-duration.json",
+      "bytes": 196,
+      "sha256": "3ce50000b514cf555a23657150e07f6c4a8d0a1ab8942b33a603ebac177f3838"
+    },
+    {
+      "path": "evidence/runtime-local.json",
+      "bytes": 15627,
+      "sha256": "56de2107cba289a2c37e3dd0fdc21343b735f564a00dd1a005f5152d60c67978"
+    },
+    {
+      "path": "evidence/runtime-offline.json",
+      "bytes": 15313,
+      "sha256": "e43d07c1954a0bddf4a0c29562eb2cfb25e95ed2a83ef174dfa482340212844c"
+    },
+    {
+      "path": "evidence/sdist-a.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "evidence/sdist-b.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "evidence/sdist-comparison.json",
+      "bytes": 305,
+      "sha256": "3459a7b18bd0c66ede83bd6814f2488305fd9809efcb72502e9f3b61bf2bb875"
+    },
+    {
+      "path": "evidence/sdist-inventory.log",
+      "bytes": 81,
+      "sha256": "c8f3ffba14eb3ef5f6a3cae2e394a5cb171497ccad54ddf67c1495754182366b"
+    },
+    {
+      "path": "evidence/sdist-members.json",
+      "bytes": 155326,
+      "sha256": "e4ee45f081a99ff31658c675370ee299c8804902f6d0ab38ded5311fd2e0149e"
+    },
+    {
+      "path": "evidence/sdist-patterns.log",
+      "bytes": 101,
+      "sha256": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424"
+    },
+    {
+      "path": "evidence/sec-binding.log",
+      "bytes": 115,
+      "sha256": "a7e019248fedbaa5dc09d64b7f893b5186e51a81ac5e7eda5af8b1c2d1597046"
+    },
+    {
+      "path": "evidence/security.log",
+      "bytes": 424,
+      "sha256": "153a8e6e6591f72220f6d6100a7934fd5665eb4611ea143053dac3ed2ef62492"
+    },
+    {
+      "path": "evidence/shutdown-review.log",
+      "bytes": 100,
+      "sha256": "f17e74ae6d4c64bbf7742b3b4c4070447c991e5a061c812e883aa883e88edd81"
+    },
+    {
+      "path": "evidence/source-binding.json",
+      "bytes": 2383,
+      "sha256": "3082c3b25c03bbfe064683124ccbb5efcd15a7d44e66762eaae5cfa05693a4b0"
+    },
+    {
+      "path": "evidence/sources-asan-ubsan.log",
+      "bytes": 28501,
+      "sha256": "63fc2d1afcc0de3b7b68ee3e9b0dfcde7ebebc6dcf5b806f58afa0455ac84299"
+    },
+    {
+      "path": "evidence/sources-debug.log",
+      "bytes": 26377,
+      "sha256": "895c66664c97d4650fb9f34d29fd4f3faeddf79579d15eeffc0d9304d7f22b6d"
+    },
+    {
+      "path": "evidence/sources-release.log",
+      "bytes": 26377,
+      "sha256": "5aee7dad9582d0207be649c7f05ed382e32edd25a93ce2472c3f0ecf37f6ad50"
+    },
+    {
+      "path": "evidence/sprint1-asan-ubsan.log",
+      "bytes": 4847,
+      "sha256": "84eb243972d051333df9d0807eb17ccd00f2cdf161d58dc5bf185317d89916b9"
+    },
+    {
+      "path": "evidence/sprint1-debug.log",
+      "bytes": 4829,
+      "sha256": "bad6b8985a2b97d2ab81553716c4c7dc567587277a4b02f9ef10c3b6b4e54909"
+    },
+    {
+      "path": "evidence/sprint1-release.log",
+      "bytes": 4829,
+      "sha256": "f7d0e2ad3bc9c368f4d948ca52c456545b701496c0d80e2e65e6567dd8147af4"
+    },
+    {
+      "path": "evidence/sprint2-asan-ubsan.log",
+      "bytes": 5248,
+      "sha256": "ce38f15eef7d27b271c998a874f9da23594ca93d9780f2f52c38adbb453562c2"
+    },
+    {
+      "path": "evidence/sprint2-debug.log",
+      "bytes": 5230,
+      "sha256": "4210f726da1c362951f59525ae818cffff878999bbc4e50f9a801141e35cf484"
+    },
+    {
+      "path": "evidence/sprint2-initial-host-error.log",
+      "bytes": 6793,
+      "sha256": "1bb692f6b9d93e6c278f0d00c9d108f02c466f9e6793930cb496b418229c0423"
+    },
+    {
+      "path": "evidence/sprint2-release.log",
+      "bytes": 5230,
+      "sha256": "cd8a8f5e9656d6bdc580d133b9a46705d74dfc3fbc134c74e460038f9ecea81e"
+    },
+    {
+      "path": "evidence/stocks-asan-ubsan.log",
+      "bytes": 35176,
+      "sha256": "7eeca8e44317ee50a233793beea8a263f0134eb8de2b4543fefc536422e1d377"
+    },
+    {
+      "path": "evidence/stocks-debug.log",
+      "bytes": 35158,
+      "sha256": "c2be21bcc560c00b22a3f75a1d0dce27e820b8266915f2b0de628c0d0b18647c"
+    },
+    {
+      "path": "evidence/stocks-release.log",
+      "bytes": 35158,
+      "sha256": "2534820fef92a8b5cf7eb0d8317a8b37a2046c55eb94f9eb7fad5b9f38502ad3"
+    },
+    {
+      "path": "evidence/terminal-asan-ubsan.log",
+      "bytes": 40757,
+      "sha256": "b60f969e7a319cd56645ec87e31936ca16a431addf439bdefd3d84adbbed8717"
+    },
+    {
+      "path": "evidence/terminal-debug.log",
+      "bytes": 40341,
+      "sha256": "31bf3bc2c6b7ab4d5148a1c33ebe13c61c3dea5b19f80a240c7f784397e5e51f"
+    },
+    {
+      "path": "evidence/terminal-release.log",
+      "bytes": 40341,
+      "sha256": "bf2f25c805ba0dddb3980d5f9cbeca6212dc12eb3b8d36dec53f8fc0c31d92cc"
+    },
+    {
+      "path": "evidence/tls-forwarded.log",
+      "bytes": 2530,
+      "sha256": "2a293eed623741e6b5d693a49d1a0c54c154e07e21b6fdd2299b518b9985409c"
+    },
+    {
+      "path": "evidence/tls-http-proof.log",
+      "bytes": 4364,
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "path": "evidence/tls-stream-proof.log",
+      "bytes": 3763,
+      "sha256": "241f171889e8b228c83c957d7674284157e1d8a89745452dcbb084d71936f266"
+    },
+    {
+      "path": "evidence/toolchains.json",
+      "bytes": 447,
+      "sha256": "33574165bfa500bff2c620ce74a3c2f423759e3ccddb412835c1489a064042a2"
+    },
+    {
+      "path": "evidence/visual-evidence.json",
+      "bytes": 2185,
+      "sha256": "cd864e27042541a2ee8d494aaad887cd5228e9c53e33a3ef0445734330a57cca"
+    },
+    {
+      "path": "evidence/wheel-exports.log",
+      "bytes": 959,
+      "sha256": "30465463f87f69fa0247f5016aed25a5e8e2bb414f281b9cda8bf88f7c48145a"
+    },
+    {
+      "path": "evidence/wheel-interface.log",
+      "bytes": 964,
+      "sha256": "4464f4a2bfba47ca2b3a295f9a17f547ae1dbf384aecfeeb17476f0372f8497c"
+    }
+  ],
+  "bytes_before_manifest": 641369,
+  "executed_results": {
+    "python_configurations": [
+      "debug",
+      "release",
+      "asan-ubsan"
+    ],
+    "python_tests_per_configuration": 678,
+    "python_outcomes": 2034,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "security": 55,
+    "local_TLS_checks": 20,
+    "frontend": 81,
+    "browser": 12,
+    "native_reference_tests": 8,
+    "canonical_identities_unchanged": 8,
+    "existing_installed_wheel_checks": 14,
+    "packaging_regressions": 3,
+    "intended_sdist_members": 965,
+    "sdist_repeat_bytes_identical": true
+  },
+  "earlier_failures_preserved": [
+    "evidence/deployment-initial-import-error.log:1 new-test import setup error",
+    "evidence/sprint2-initial-host-error.log:1 new-test unapproved TestClient Host error;security retained"
+  ],
+  "inherited_results_not_rerun": {
+    "Sprint1_native_six_matrix_outcomes": 940,
+    "Sprint1_all_workspace_viewport_theme_checks": 120
+  },
+  "native_scope": "No native/binding/build/workflow source edits;8 actual reference reruns on existing Release binary;not fresh Clang/ARM64 compilation",
+  "provider_requests": 0,
+  "workflow_dispatches": 0,
+  "observed_data_access": false,
+  "credentials_or_permissions_changed": false,
+  "private_target_authentication_verified": false,
+  "real_SEC_evidence_bound": false,
+  "owner_reported_SEC_counts": {
+    "identities": 10429,
+    "selected_reconciliation_records": 1772,
+    "status": "OWNER_REPORTED_NOT_NEWLY_VERIFIED"
+  },
+  "privacy_review": {
+    "status": "REVIEWED_SAFE_SOURCE_AND_AUTHORED_FIXTURE_EVIDENCE",
+    "raw_market_rows": false,
+    "market_archives": false,
+    "secrets_or_private_contact": false,
+    "allowed_extensions": [
+      ".md",
+      ".json",
+      ".log",
+      ".xml"
+    ],
+    "warning_normalization_receipt": "evidence/evidence-normalization.json",
+    "screenshots": "Only hashes/paths of authored fixture screenshots;no observed-market images"
+  },
+  "expected_protected_remote_refs": {
+    "main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "feat/atlas-final-release": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+    "fix/atlas-audit-remediation-1": "6bcd28c786e171abe8704845cab5d4fee0484ce1",
+    "audit/atlas-readiness-20261030": "67ad42d08daf45d8c523c733587cdbd88852b81d"
+  }
+}

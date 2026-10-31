@@ -1,0 +1,15 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/terminal/test_private_deployment.py:117: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+E........
+======================================================================
+ERROR: test_health_freezes_startup_source_receipt (terminal.test_private_deployment.AppReceipt.test_health_freezes_startup_source_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/terminal/test_private_deployment.py", line 119, in test_health_freezes_startup_source_receipt
+    from terminal.stocks.workspace import StockWorkspace
+ModuleNotFoundError: No module named 'terminal.stocks.workspace'
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.507s
+
+FAILED (errors=1)

@@ -1,0 +1,208 @@
+[
+  {
+    "configuration": "debug",
+    "cohort": "sprint2",
+    "expected": 30,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 0.9161538919979648,
+    "log": "sprint2-debug.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint2.py"
+    ]
+  },
+  {
+    "configuration": "debug",
+    "cohort": "sprint1",
+    "expected": 25,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 3.2329219349994673,
+    "log": "sprint1-debug.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint1.py"
+    ]
+  },
+  {
+    "configuration": "debug",
+    "cohort": "sources",
+    "expected": 142,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 6.193716953999683,
+    "log": "sources-debug.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_source_qualification_suite.py"
+    ]
+  },
+  {
+    "configuration": "debug",
+    "cohort": "stocks",
+    "expected": 207,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 20.62229554700025,
+    "log": "stocks-debug.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_live_market_suite.py"
+    ]
+  },
+  {
+    "configuration": "debug",
+    "cohort": "terminal",
+    "expected": 274,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 13.364599203003309,
+    "log": "terminal-debug.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ]
+  },
+  {
+    "configuration": "release",
+    "cohort": "sprint2",
+    "expected": 30,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 0.9236531179994927,
+    "log": "sprint2-release.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint2.py"
+    ]
+  },
+  {
+    "configuration": "release",
+    "cohort": "sprint1",
+    "expected": 25,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 3.376904767999804,
+    "log": "sprint1-release.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_remediation_sprint1.py"
+    ]
+  },
+  {
+    "configuration": "release",
+    "cohort": "sources",
+    "expected": 142,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 6.83731497700137,
+    "log": "sources-release.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_source_qualification_suite.py"
+    ]
+  },
+  {
+    "configuration": "release",
+    "cohort": "stocks",
+    "expected": 207,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 20.702595552000275,
+    "log": "stocks-release.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_live_market_suite.py"
+    ]
+  },
+  {
+    "configuration": "release",
+    "cohort": "terminal",
+    "expected": 274,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 12.244607919001282,
+    "log": "terminal-release.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ]
+  },
+  {
+    "configuration": "asan-ubsan",
+    "cohort": "sprint2",
+    "expected": 30,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 2.8755056409972894,
+    "log": "sprint2-asan-ubsan.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_remediation_sprint2.py"
+    ]
+  },
+  {
+    "configuration": "asan-ubsan",
+    "cohort": "sprint1",
+    "expected": 25,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 5.776004056999227,
+    "log": "sprint1-asan-ubsan.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_remediation_sprint1.py"
+    ]
+  },
+  {
+    "configuration": "asan-ubsan",
+    "cohort": "sources",
+    "expected": 142,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 10.488683262999984,
+    "log": "sources-asan-ubsan.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_source_qualification_suite.py"
+    ]
+  },
+  {
+    "configuration": "asan-ubsan",
+    "cohort": "stocks",
+    "expected": 207,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 34.65049595600067,
+    "log": "stocks-asan-ubsan.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_live_market_suite.py"
+    ]
+  },
+  {
+    "configuration": "asan-ubsan",
+    "cohort": "terminal",
+    "expected": 274,
+    "exit_code": 0,
+    "verified_pass": true,
+    "seconds": 58.57288796899957,
+    "log": "terminal-asan-ubsan.log",
+    "command": [
+      "/workspace/gig-terminal-clean-venv/bin/python",
+      "scripts/run_python_sanitized.py",
+      "terminal/tests/run_native_suite.py",
+      "--expected-tests",
+      "274"
+    ]
+  }
+]

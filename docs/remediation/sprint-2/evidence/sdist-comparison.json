@@ -1,0 +1,8 @@
+{
+  "source_sha": "62d8d50e2dd629db181114eaceb5845509a137b6",
+  "two_archives_byte_identical": true,
+  "sha256": "9d4459f4c9eee72eb60fe4ef229a332407c84a5982d097714f405c36ee046219",
+  "bytes": 4173083,
+  "members": 965,
+  "scope": "Current code commit including Sprint1 reports;not native wheel rebuild"
+}

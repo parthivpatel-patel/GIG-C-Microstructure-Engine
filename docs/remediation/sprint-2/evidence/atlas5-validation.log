@@ -1,0 +1,27 @@
+{
+  "schema": "gig.atlas.phase5.browser.v1",
+  "classification": "AUTHORED_FIXTURES_NOT_LIVE_PROVIDER_ACCEPTANCE",
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    "bounded IEX pagination stores a pinned30-record synthetic revision without replacing stock cache",
+    "private backup restore is explicit and preserves the same revision",
+    "explicit portfolio weights produce independent .006 historical VaR and invalidate on edit",
+    "training-only and walk-forward evaluations show explicit split identity and unused suffix",
+    "new research layouts fit360/390 light and dark without page overflow",
+    "native transport and browser error invariants preserved"
+  ],
+  "screenshots": [
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/build/atlas5/visual/pinned-ingestion-dark.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/build/atlas5/visual/portfolio-dark.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/build/atlas5/visual/evaluation-dark.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/build/atlas5/visual/research-mobile-light.png",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/build/atlas5/visual/research-mobile-dark.png"
+  ],
+  "browser": "154.0.8037.57",
+  "limitations": [
+    "Viewport emulation,not physical Android/external Codespaces",
+    "No official Alpaca or SEC observations"
+  ]
+}

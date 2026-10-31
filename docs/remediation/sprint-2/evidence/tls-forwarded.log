@@ -1,0 +1,64 @@
+{
+  "schema": "gig.codespaces.forwarded_tls.v1",
+  "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled",
+  "checks": [
+    "TLS verified actual frontend HTML",
+    "TLS proxy actual C++ state",
+    "forwarded HTTPS Origin mutates native prefix",
+    "foreign Origin denied behind TLS proxy",
+    "two verified WSS upgrades101 preserve native prefix",
+    "actual proxy Origin/Host/HTTPS header capture"
+  ],
+  "passed": 6,
+  "failed": 0,
+  "captured_proxy_headers": {
+    "schema_version": "1",
+    "policy_version": "codespaces-request-proof-v4",
+    "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+    "configured_origins": [
+      "https://authored-tls-check-8787.app.github.dev"
+    ],
+    "request": {
+      "origin": "https://authored-tls-check-8787.app.github.dev",
+      "host": "127.0.0.1:56037",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "https"
+    },
+    "last_mutation": {
+      "origin": "https://attacker.invalid",
+      "host": "127.0.0.1:56037",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "https",
+      "decision": "rejected_origin",
+      "authorization": "origin_mismatch",
+      "authorized_browser_origin": null,
+      "failure_condition": "origin_mismatch"
+    },
+    "last_websocket": {
+      "origin": "https://authored-tls-check-8787.app.github.dev",
+      "host": "127.0.0.1:56037",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "wss",
+      "has_application_protocol": false,
+      "has_stream_proof": false,
+      "decision": "accepted",
+      "authorization": "accepted_origin",
+      "attempt_id": null,
+      "upgrade_status": 101
+    },
+    "last_browser_bootstrap": null,
+    "last_request_proof_bootstrap": null,
+    "last_authenticated_websocket": null,
+    "connected_clients": 2,
+    "maximum_clients": 8,
+    "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+    "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers"
+  },
+  "scope": "Local HTTPS/WSS reverse-proxy reproduction;not owner Codespace/private GitHub authentication evidence"
+}

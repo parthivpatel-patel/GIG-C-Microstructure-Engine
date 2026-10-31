@@ -1,0 +1,25 @@
+{
+  "source": "AUTHORED_SYNTHETIC_ONLY",
+  "stable_assets": {
+    "index.html": "83af510a9c1b4df48fff21e59bf7c67c240acb1809024097d5d99476f88acaa2",
+    "assets/index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+    "assets/MarketHealth-BxlvspA_.js": "3f4c852a75593f95ca7ce19bfd3a3906ec5049be60deed5ffddaef8334e49b3c",
+    "assets/UniverseWorkspace-BXCCLBbp.js": "309aaae8fcfec3d03ddc56afc40667e1fb0db5db4d0c5a0677b3a5eff6d18fda",
+    "assets/VolatilitySurface-Dir2sPFr.js": "61ac9d54d8b8f9d271992a22e55c6cdbae7d33cb21dd7fb12cf1f1eb79dda8fb",
+    "assets/OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+    "assets/QuoteCloud-DLBFxLuz.js": "2d0e5148139474c83bfa0b204da9c7b8b25f127fa513a5ac217874a5fcf90372",
+    "assets/index-CtUAn7tb.js": "ded698c997ff13e08a2ab931b53c19c6ec18138e1f93bf02ebc4607ecf3097cb",
+    "assets/StockIntelligence-Dk-i5rI6.js": "8f26059634e6a45fe69baaf2fdb5466c8f9697038d2b1d281ea652ed105e9582",
+    "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+    "assets/LiveMarket-D41Z_HOV.js": "d32ba1251ca91e726c10ab668862090499199f480052d27d82c2b90262ed812c",
+    "assets/Landscape3D-CN0oK8Xh.js": "751c12f81a0355f97beb25e2741430b14f62e8549e7f34187019cdb0eac26bd8",
+    "assets/marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0",
+    "assets/ModelSurface-DGd-JudQ.js": "c28c5e28daecba91913d69c11b4610b556d70c5cfc760249da8e39622c8c735a",
+    "assets/ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+    "assets/ResearchScene-BqEwU2zB.js": "3c3e1778c685a9e951860b4d5c917b3b0e1530a1de647482c391e8c580d0a290",
+    "assets/ResearchLab-CmT1D0hM.js": "2c7414c02f313a2a93d020e7bbf52c8079b8f450514f1eddb54fd1d7fda978e7",
+    "assets/ResearchDesk-CDZSGSfS.js": "bced95817abfa3d75ada0a2543d7e3bdc5cf33d975c6fdb9f9ec7784ca033a3b",
+    ".vite/manifest.json": "a9ce033ed11f09ed6bdf99182e80c6256026d89d060f765722805229884d409b"
+  },
+  "mutated_during_test": false
+}

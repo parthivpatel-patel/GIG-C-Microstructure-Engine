@@ -1,0 +1,15 @@
+{
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+  "clang": "NOT_AVAILABLE_AT_SELECTED_PATH_NOT_EXECUTED",
+  "cmake": "cmake version 3.31.6",
+  "git": "git version 2.52.0",
+  "kernel": "Linux 6.18.57 x86_64 GNU/Linux",
+  "python": "3.12.14",
+  "openssl": "OpenSSL 3.5.8 25 Aug 2026",
+  "sqlite": "3.53.1",
+  "expat": "expat_2.8.3",
+  "architecture": "x86_64",
+  "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C"
+}

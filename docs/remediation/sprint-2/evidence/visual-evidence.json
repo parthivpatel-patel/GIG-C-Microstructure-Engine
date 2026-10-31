@@ -1,0 +1,53 @@
+{
+  "images": [
+    {
+      "path": "build/remediation-sprint1-browser/concentration-authored-1280.png",
+      "sha256": "960503aa4be117637c75e8091e87f523952c3493b24ec6e8bdce70dd5c0930d3",
+      "bytes": 292812,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/remediation-sprint1-browser/concentration-authored-390.png",
+      "sha256": "c1144cc222d551fde16d2b32f45248af00c61a36226d2d741d88b032ddf53e51",
+      "bytes": 248120,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/remediation-sprint1-browser/options-authored.png",
+      "sha256": "9f6b981783ef3e1751fe80d3dbea5070b8fc3c269dc78e76ec76f193f7921418",
+      "bytes": 247110,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/atlas5/visual/evaluation-dark.png",
+      "sha256": "3fe83e82115e4b2377605aa978b1b162b91def3116147b78891e630b3498b71d",
+      "bytes": 504228,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/atlas5/visual/pinned-ingestion-dark.png",
+      "sha256": "7332ccffe6d79f2136a1918733549d62ff1f003bbee5b9ab1b6ee1208e67f288",
+      "bytes": 569134,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/atlas5/visual/portfolio-dark.png",
+      "sha256": "2fa275dc9f61856dab243155794b268fc62549908c6c52b2145064c804e4624e",
+      "bytes": 423133,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/atlas5/visual/research-mobile-dark.png",
+      "sha256": "9150151ef59a830cc72b3d9310b732dc7fcedadcfb5f91084eae91f820359b54",
+      "bytes": 456360,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    },
+    {
+      "path": "build/atlas5/visual/research-mobile-light.png",
+      "sha256": "68ba789e7ca6e541e5103bf02cd27a7a79630b51756710214b222b2f85729718",
+      "bytes": 457542,
+      "origin": "AUTHORED_SYNTHETIC_FIXTURE_NOT_OBSERVED_MARKET"
+    }
+  ],
+  "scope": "Current ordinary-click Chromium/SwiftShader evidence;images remain in ignored worktree build output;no target/physical-device claim"
+}

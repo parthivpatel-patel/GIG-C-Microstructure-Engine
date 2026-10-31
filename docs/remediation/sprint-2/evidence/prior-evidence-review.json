@@ -1,0 +1,21 @@
+{
+  "schema": "gig.sprint2.prior_evidence_review.v1",
+  "baseline": "6bcd28c786e171abe8704845cab5d4fee0484ce1",
+  "checks": [
+    {
+      "manifest": "SPRINT_1_EVIDENCE_MANIFEST.json",
+      "verified_files": 78,
+      "exact_baseline_bytes_match": true,
+      "path_base": "docs/remediation/sprint-1/"
+    },
+    {
+      "manifest": "SOURCE_TO_TEST_MANIFEST.json",
+      "verified_files": 26,
+      "exact_baseline_bytes_match": true,
+      "path_base": ""
+    }
+  ],
+  "application_review": "options,concentration,formatting,analysis worker ownership,SSE counters,cancellation,API/browser regression paths",
+  "provider_requests": 0,
+  "prior_results_are_not_new_executions": true
+}

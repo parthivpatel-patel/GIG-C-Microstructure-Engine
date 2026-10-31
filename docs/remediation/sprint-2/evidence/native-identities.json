@@ -1,0 +1,75 @@
+{
+  "command": [
+    "/workspace/gig-tools/bin/ctest",
+    "--test-dir",
+    "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+    "-R",
+    "^(itch\\.independent_reference|itch\\.context_reference|itch\\.l3_reference|itch\\.streaming_reference|itch\\.validation_demo_reference|itch\\.auction_reference|itch\\.admin_reference|itch\\.hy_reference)$",
+    "--output-on-failure",
+    "-j",
+    "2",
+    "--output-junit",
+    "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/evidence/native-reference.xml"
+  ],
+  "exit_code": 0,
+  "seconds": 20.780487135998555,
+  "tests": [
+    {
+      "test": "itch.validation_demo_reference",
+      "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.independent_reference",
+      "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.context_reference",
+      "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.streaming_reference",
+      "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.l3_reference",
+      "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.auction_reference",
+      "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.admin_reference",
+      "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    },
+    {
+      "test": "itch.hy_reference",
+      "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "matched": true,
+      "failed": false,
+      "skipped": false
+    }
+  ],
+  "scope": "Eight rerun reference oracles on unchanged Sprint1 native Release build;no fresh compilation/ARM64"
+}

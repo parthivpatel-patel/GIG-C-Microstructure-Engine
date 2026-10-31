@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-c++"
+	tests="8"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="7fa7688cd3b9"
+	time="20"
+	timestamp="2026-10-31T15:37:21"
+	>
+	<testcase name="itch.validation_demo_reference" classname="itch.validation_demo_reference" time="0.112709" status="run">
+		<properties/>
+		<system-out>PASS: P1I independent end-to-end scenarios=4 repeated_runs=4 negative_controls=0 cli_controls=10 canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520
+</system-out>
+	</testcase>
+	<testcase name="itch.independent_reference" classname="itch.independent_reference" time="0.209225" status="run">
+		<properties/>
+		<system-out>PASS independent ITCH oracle: 10000 cases; seed=1729; canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e
+coverage: valid=1585; framing=412; enum_sweep=1024; numeric=17; negative=398; adversarial=6564; no external data
+</system-out>
+	</testcase>
+	<testcase name="itch.context_reference" classname="itch.context_reference" time="0.508579" status="run">
+		<properties/>
+		<system-out>PASS context independent oracle: sessions=515 events=12104 randomized_mutations=10000 seed=5255494 canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_reference" classname="itch.streaming_reference" time="0.719556" status="run">
+		<properties/>
+		<system-out>fixture_python_zlib_runtime=1.3.2
+streaming_fixtures=475 framed_source_records_across_fixtures=3993 accepted_source_records_across_fixtures=3989 categories={"bounded":205,"compressed_limit":1,"corrupt":12,"decompressed_limit":1,"expansion_limit":1,"framing":5,"header_limit":1,"identity":2,"semantic":4,"trailing":2,"truncated":205,"valid":36} canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5
+</system-out>
+	</testcase>
+	<testcase name="itch.l3_reference" classname="itch.l3_reference" time="20.5541" status="run">
+		<properties/>
+		<system-out>{"candidates": 2228, "canonical_sha256": "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807", "observed_validated": false, "scope": "synthetic independent model versus byte-adapter/native engine", "seed": 5255495, "sessions": 164}
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.009s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.005s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.099s
+
+OK
+sessions=10032 source_candidates=65186 rejected_candidates=10025 seed=5255495 canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991
+{"candidates": 476, "canonical_sha256": "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c", "negative_controls": 3, "scope": "synthetic readiness supplement, not observed validation", "sessions": 67}
+{"canonical_sha256": "4618d9b3c94d34535001c8f9e6a2a54cfd5708ac72b58116425b0...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_reference" classname="itch.auction_reference" time="0.816655" status="run">
+		<properties/>
+		<system-out>AUCTION independent wire_cases=40129 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6
+</system-out>
+	</testcase>
+	<testcase name="itch.admin_reference" classname="itch.admin_reference" time="0.421664" status="run">
+		<properties/>
+		<system-out>ADMIN independent wire_cases=25233 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03
+</system-out>
+	</testcase>
+	<testcase name="itch.hy_reference" classname="itch.hy_reference" time="0.368886" status="run">
+		<properties/>
+		<system-out>HY independent synthetic oracle decode_cases=8002 context_candidates=16000 sessions=320 seed=917717 negative_control=False canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af
+</system-out>
+	</testcase>
+</testsuite>

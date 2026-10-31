@@ -1,0 +1,22 @@
+Internal ctest changing into directory: /workspace/GIG-C-Microstructure-Engine/build/python-release
+Test project /workspace/GIG-C-Microstructure-Engine/build/python-release
+    Start 53: itch.l3_reference
+    Start 63: itch.auction_reference
+1/8 Test #63: itch.auction_reference ...........   Passed    0.82 sec
+    Start 34: itch.streaming_reference
+2/8 Test #34: itch.streaming_reference .........   Passed    0.72 sec
+    Start 70: itch.admin_reference
+3/8 Test #70: itch.admin_reference .............   Passed    0.42 sec
+    Start 21: itch.context_reference
+4/8 Test #21: itch.context_reference ...........   Passed    0.51 sec
+    Start 78: itch.hy_reference
+5/8 Test #78: itch.hy_reference ................   Passed    0.37 sec
+    Start  3: itch.validation_demo_reference
+6/8 Test  #3: itch.validation_demo_reference ...   Passed    0.11 sec
+    Start 11: itch.independent_reference
+7/8 Test #11: itch.independent_reference .......   Passed    0.21 sec
+8/8 Test #53: itch.l3_reference ................   Passed   20.55 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =  20.56 sec

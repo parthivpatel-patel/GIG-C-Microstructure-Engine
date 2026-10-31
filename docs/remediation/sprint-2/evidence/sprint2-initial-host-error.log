@@ -1,0 +1,58 @@
+test_canceled_close_retains_worker_and_later_close_drains (terminal.test_sprint2_review.ShutdownOwnership.test_canceled_close_retains_worker_and_later_close_drains) ... ok
+test_repeated_canceled_close_and_failed_worker_remain_accounted (terminal.test_sprint2_review.ShutdownOwnership.test_repeated_canceled_close_and_failed_worker_remain_accounted) ... ok
+test_duplicate_nonfinite_nesting_and_encoding_reject (terminal.test_sec_evidence_binding.ArtifactBoundaries.test_duplicate_nonfinite_nesting_and_encoding_reject) ... ok
+test_private_write_never_overwrites_or_follows_links (terminal.test_sec_evidence_binding.ArtifactBoundaries.test_private_write_never_overwrites_or_follows_links) ... ok
+test_symlink_fifo_and_oversize_reads_refuse (terminal.test_sec_evidence_binding.ArtifactBoundaries.test_symlink_fifo_and_oversize_reads_refuse) ... ok
+test_bool_negative_and_contradictory_counts (terminal.test_sec_evidence_binding.Binding.test_bool_negative_and_contradictory_counts) ... ok
+test_cli_exclusive_private_output_and_no_secret_echo (terminal.test_sec_evidence_binding.Binding.test_cli_exclusive_private_output_and_no_secret_echo) ... ok
+test_complete_binding_is_owner_declaration_only (terminal.test_sec_evidence_binding.Binding.test_complete_binding_is_owner_declaration_only) ... ok
+test_date_cutoffs_offset_and_precision_are_not_invented (terminal.test_sec_evidence_binding.Binding.test_date_cutoffs_offset_and_precision_are_not_invented) ... ok
+test_declaration_counts_dates_and_scope_must_match (terminal.test_sec_evidence_binding.Binding.test_declaration_counts_dates_and_scope_must_match) ... ok
+test_different_source_and_declaration_digests_reject (terminal.test_sec_evidence_binding.Binding.test_different_source_and_declaration_digests_reject) ... ok
+test_directory_accounting_and_source_receipt_bounds (terminal.test_sec_evidence_binding.Binding.test_directory_accounting_and_source_receipt_bounds) ... ok
+test_directory_count_unavailable_is_not_owner_count_confirmation (terminal.test_sec_evidence_binding.Binding.test_directory_count_unavailable_is_not_owner_count_confirmation) ... ok
+test_expected_bytes_and_report_tampering_reject (terminal.test_sec_evidence_binding.Binding.test_expected_bytes_and_report_tampering_reject) ... ok
+test_invalid_schema_scope_and_privacy_claims (terminal.test_sec_evidence_binding.Binding.test_invalid_schema_scope_and_privacy_claims) ... ok
+test_mismatch_and_empty_results_never_become_agreement (terminal.test_sec_evidence_binding.Binding.test_mismatch_and_empty_results_never_become_agreement) ... ok
+test_missing_declaration_preserves_missing_provenance (terminal.test_sec_evidence_binding.Binding.test_missing_declaration_preserves_missing_provenance) ... ok
+test_unknown_sensitive_fields_are_never_serialized (terminal.test_sec_evidence_binding.Binding.test_unknown_sensitive_fields_are_never_serialized) ... ok
+test_health_freezes_startup_source_receipt (terminal.test_private_deployment.AppReceipt.test_health_freezes_startup_source_receipt) ... /workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/terminal/test_private_deployment.py:117: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+ERROR
+test_codespace_metadata_and_expanded_origins_are_not_authentication (terminal.test_private_deployment.Deployment.test_codespace_metadata_and_expanded_origins_are_not_authentication) ... ok
+test_dependency_inventory_is_read_only_and_pin_specific (terminal.test_private_deployment.Deployment.test_dependency_inventory_is_read_only_and_pin_specific) ... ok
+test_exact_receipt_no_network_by_default (terminal.test_private_deployment.Deployment.test_exact_receipt_no_network_by_default) ... ok
+test_explicit_loopback_is_fixed_bounded_and_redacted (terminal.test_private_deployment.Deployment.test_explicit_loopback_is_fixed_bounded_and_redacted) ... ok
+test_missing_and_escaping_assets_fail (terminal.test_private_deployment.Deployment.test_missing_and_escaping_assets_fail) ... ok
+test_runtime_mismatch_and_stale_startup_receipt (terminal.test_private_deployment.Deployment.test_runtime_mismatch_and_stale_startup_receipt) ... ok
+test_symlink_asset_rejected (terminal.test_private_deployment.Deployment.test_symlink_asset_rejected) ... ok
+test_wrong_sha_dirty_and_untracked_runtime_detected (terminal.test_private_deployment.Deployment.test_wrong_sha_dirty_and_untracked_runtime_detected) ... ok
+test_abrupt_exit_during_restore_preserves_destination_then_restart_restores (terminal.test_sprint2_recovery.Recovery.test_abrupt_exit_during_restore_preserves_destination_then_restart_restores) ... ok
+test_interrupted_backup_without_manifest_is_not_accepted_or_overwritten (terminal.test_sprint2_recovery.Recovery.test_interrupted_backup_without_manifest_is_not_accepted_or_overwritten) ... ok
+test_outer_backup_digest_cannot_hide_corrupt_internal_revision (terminal.test_sprint2_recovery.Recovery.test_outer_backup_digest_cannot_hide_corrupt_internal_revision) ... ok
+
+======================================================================
+ERROR: test_health_freezes_startup_source_receipt (terminal.test_private_deployment.AppReceipt.test_health_freezes_startup_source_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/terminal/test_private_deployment.py", line 126, in test_health_freezes_startup_source_receipt
+    self.assertEqual(client.get('/api/v1/health').json()['application_release'], startup)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-terminal-clean-venv/lib/python3.12/site-packages/httpx/_models.py", line 832, in json
+    return jsonlib.loads(self.content, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.767s
+
+FAILED (errors=1)
+SPRINT2_COUNTS={"errors": 1, "expected": 30, "failures": 0, "skipped": 0, "tests": 30}

@@ -1,0 +1,68 @@
+{
+  "schema": "gig.sprint2.source.binding.v1",
+  "baseline": "6bcd28c786e171abe8704845cab5d4fee0484ce1",
+  "implementation": "62d8d50e2dd629db181114eaceb5845509a137b6",
+  "files": [
+    {
+      "path": "scripts/bind_sec_evidence.py",
+      "bytes": 1373,
+      "sha256": "87e4f4730f1d099df860058e0efc41c437eb2de421ac1a6785a04a99edcf8e56"
+    },
+    {
+      "path": "scripts/qualify_private_deployment.py",
+      "bytes": 1336,
+      "sha256": "8ef69ddb77aa05d85829c12878aaf79d15d6373fb0d1677d941db1679af34738"
+    },
+    {
+      "path": "terminal/server/app.py",
+      "bytes": 58733,
+      "sha256": "6199506651361549703bf3b8580bb5ec8e903c639a34a14d5f64efc9e9261327"
+    },
+    {
+      "path": "terminal/test_private_deployment.py",
+      "bytes": 7607,
+      "sha256": "2aade62c36a5945c8217ae7921554204f03e4f6629dc18ba6df822f9e54f1513"
+    },
+    {
+      "path": "terminal/test_sec_evidence_binding.py",
+      "bytes": 9781,
+      "sha256": "bd4fae19451c9fb2553d9d9284de8012533cfa0cb2f974716b66440e801a5edd"
+    },
+    {
+      "path": "terminal/test_sprint2_recovery.py",
+      "bytes": 4392,
+      "sha256": "82da8d29c1c00b27bf32e892a490f184fc732898f4d841d877771c06392ae6a9"
+    },
+    {
+      "path": "terminal/test_sprint2_review.py",
+      "bytes": 2442,
+      "sha256": "3233c55debbfd8c876fabdd1f0f827faa9173c9a067721b319b4152b11bc6cf2"
+    },
+    {
+      "path": "terminal/tests/run_remediation_sprint2.py",
+      "bytes": 1225,
+      "sha256": "6616aae93308211a09c72f466bdf65d77b069f7b879cbecebc1612b4cbf0e020"
+    },
+    {
+      "path": "terminal/verification/__init__.py",
+      "bytes": 80,
+      "sha256": "90606c81b3746ba91ab44107678ebd58a55ae61fa0ff7adf371e00b42461f51f"
+    },
+    {
+      "path": "terminal/verification/artifacts.py",
+      "bytes": 3362,
+      "sha256": "84ab230811f7dd1c2864619a7bb17801d76682ff7ecd7be6e71d88d1853f12f1"
+    },
+    {
+      "path": "terminal/verification/deployment.py",
+      "bytes": 10036,
+      "sha256": "58809d2fea682ac8f0e7482fe232bef727acad9f45cd4c76a24adae328a7b9a7"
+    },
+    {
+      "path": "terminal/verification/sec_binding.py",
+      "bytes": 8344,
+      "sha256": "b22bf94684ef228cdef97730e8698090ae1b71ccb0c63eca8fad577a3af82c6f"
+    }
+  ],
+  "test_scope": "Matrices executed on these same implementation/test bytes before commit;clean-commit runtime/resource/archive checks follow;no subsequent production edits"
+}

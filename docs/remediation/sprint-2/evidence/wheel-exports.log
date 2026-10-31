@@ -1,0 +1,11 @@
+test_export_rejects_known_digest_contradictions_before_writing (__main__.ExportDigestTests.test_export_rejects_known_digest_contradictions_before_writing) ... ok
+test_matching_and_unavailable_digests_preserved (__main__.ExportDigestTests.test_matching_and_unavailable_digests_preserved) ... ok
+test_verify_rejects_self_consistently_rehashed_contradictions (__main__.ExportDigestTests.test_verify_rejects_self_consistently_rehashed_contradictions) ... ok
+test_missing_vwap_profile_rejects_before_writing (__main__.ExportReferenceTests.test_missing_vwap_profile_rejects_before_writing) ... ok
+test_pov_volume_and_oracle_profile_references (__main__.ExportReferenceTests.test_pov_volume_and_oracle_profile_references) ... ok
+test_verifier_checks_profile_references_read_only (__main__.ExportReferenceTests.test_verifier_checks_profile_references_read_only) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.290s
+
+OK

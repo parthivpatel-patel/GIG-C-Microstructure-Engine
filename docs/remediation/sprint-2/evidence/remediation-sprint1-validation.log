@@ -1,0 +1,22 @@
+{
+  "schema": "gig.remediation.browser.v1",
+  "origin": "AUTHORED_FIXTURES_NOT_PROVIDER_ACCEPTANCE",
+  "passed": 6,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    "Native-backed readonly research metric retains source and proposal status",
+    "Concentration ordinary-click details and contained layout at390px",
+    "Concentration ordinary-click details and contained layout at1280px",
+    "Options boundary0.000001:valid base metrics,explicit auxiliary coverage",
+    "Options boundary10000000:valid base metrics,explicit auxiliary coverage",
+    "Options boundary100:valid base metrics,explicit auxiliary coverage"
+  ],
+  "images": [
+    "build/remediation-sprint1-browser/concentration-authored-390.png",
+    "build/remediation-sprint1-browser/concentration-authored-1280.png",
+    "build/remediation-sprint1-browser/options-authored.png"
+  ],
+  "browser": "154.0.8037.57",
+  "device": "Emulated viewports;not physical Android or current Codespaces"
+}

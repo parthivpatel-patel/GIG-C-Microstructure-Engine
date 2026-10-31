@@ -1,0 +1,6 @@
+{
+  "seconds": 0.09700905300269369,
+  "source_sha": "62d8d50e2dd629db181114eaceb5845509a137b6",
+  "observed_request_count": 0,
+  "scope": "offline receipt inventory process;not service latency"
+}

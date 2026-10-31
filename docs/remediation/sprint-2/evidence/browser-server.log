@@ -1,0 +1,137 @@
+/workspace/GIG-C-Microstructure-Engine/build/audit-remediation-2/worktree/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+INFO:     Started server process [20031]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18793 (Press CTRL+C to quit)
+INFO:     127.0.0.1:39976 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39988 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39998 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39998 - "GET /assets/index-CtUAn7tb.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /assets/index-Bi5AfQUv.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /assets/ResearchDesk-CDZSGSfS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39998 - "GET /assets/marketContract-DM0W2FhH.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40024 - "GET /assets/directoryContract-BVrwTy34.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40024 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39998 - "GET /api/v1/catalog HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40038 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40030 - "GET /api/v1/recordings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40030 - "POST /api/v1/stream-ticket HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40030 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v2/securities/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40052 - "WebSocket /api/v1/stream" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:40044 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "POST /api/v1/control HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "POST /api/v1/control HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "POST /api/v1/control HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39988 - "GET /api/v2/research/concentration HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40030 - "GET /assets/LiveMarket-D41Z_HOV.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /assets/StockIntelligence-Dk-i5rI6.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40044 - "GET /api/v2/companies/AAPL/availability HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40030 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40024 - "GET /api/v2/companies/AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "POST /api/v1/stocks/load HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40038 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40038 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40038 - "POST /api/v1/stocks/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40038 - "GET /assets/VolatilitySurface-Dir2sPFr.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /assets/OrbitControls-Cv-8zGjJ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "POST /api/v1/stocks/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "POST /api/v1/stocks/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40008 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /assets/index-CtUAn7tb.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38920 - "GET /assets/index-Bi5AfQUv.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /assets/marketContract-DM0W2FhH.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38920 - "GET /assets/ResearchDesk-CDZSGSfS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38932 - "GET /assets/directoryContract-BVrwTy34.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38920 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/catalog HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38932 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38966 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38940 - "GET /api/v1/recordings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38940 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38966 - "GET /api/v2/securities/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "POST /api/v1/stream-ticket HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38970 - "WebSocket /api/v1/stream" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:38954 - "GET /assets/StockIntelligence-Dk-i5rI6.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38966 - "GET /assets/LiveMarket-D41Z_HOV.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38954 - "GET /api/v2/companies/AAPL/availability HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38966 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38940 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38932 - "GET /api/v2/companies/AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/load HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38932 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/history-ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/history-store?revision=1df039caa8aad8761abc075b897ae011f1fc5ef26bb1101663383671c19bfbdb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38906 - "GET /api/v1/stocks/company?symbol=AAPL HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store?revision=1df039caa8aad8761abc075b897ae011f1fc5ef26bb1101663383671c19bfbdb HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/stocks/history-store HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v2/companies/AAPL/risk HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/portfolio HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/evaluation HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38910 - "POST /api/v1/stocks/evaluation HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [20031]
