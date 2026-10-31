@@ -114,6 +114,8 @@ def json_endpoint(function):
 
 
 def create_app(stock_workspace=None):
+    from terminal.verification.deployment import release_receipt
+    application_release = release_receipt(ROOT)
     origins = origins_from_environment()
     _, _, expected_codespaces_origin = launch_settings(os.environ)
     connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None, 'last_request_proof_bootstrap': None}
@@ -270,7 +272,8 @@ def create_app(stock_workspace=None):
         safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and not sec_enabled(os.environ.get('GIG_SEC_ENABLED')) and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.origin=='OBSERVED_OFFICIAL_RESPONSE' and (stocks.cache or sec_enabled(stocks.environment.get('GIG_SEC_ENABLED')) or stocks.environment.get('GIG_ALPACA_ENABLED')=='1')) and not task_active and not recording and not observed_replay)
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
                 'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe,
-                'analytical_resources':analysis.status(),'browser_push_resources':market_events.status()}
+                'analytical_resources':analysis.status(),'browser_push_resources':market_events.status(),
+                'application_release':application_release}
 
     @route('/api/v1/state', methods=['GET'])
     @json_endpoint
