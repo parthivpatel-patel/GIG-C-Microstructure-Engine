@@ -29,7 +29,7 @@ type Workspace={sec_refresh?:{status:string;reason?:string;next_refresh_seconds?
 type OptionResult={classification:string;metrics:Record<string,number>;implied_volatility:number|null;surface:Point[][];surface_scope:string;surface_coverage?:{total:number;available:number;unavailable:number};limitations:string[]};
 const tabs=['Overview','Live Market','Financials','Filings','Institutional','Options','Quant & Risk','News'] as const;
 function saved(key:string){try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x.filter((s:unknown)=>typeof s==='string'&&/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(s)).slice(0,20):[]}catch{return []}}
-function Details({value,label}:{value:unknown;label:string}){const [open,setOpen]=useState(false);return <details className="json-view" onToggle={e=>setOpen(e.currentTarget.open)}><summary>{label}</summary>{open&&<pre>{pretty(value)}</pre>}</details>}
+function Details({value,label}:{value:unknown;label:string}){const [open,setOpen]=useState(false);return <details className="json-view" aria-label={label} onToggle={e=>setOpen(e.currentTarget.open)}><summary>{label}</summary>{open&&<pre>{pretty(value)}</pre>}</details>}
 function Box({title,children}:{title:string;children:React.ReactNode}){return <section className="panel"><header className="panel-header"><h2>{title}</h2></header><div className="panel-content">{children}</div></section>}
 function StockIntelligence({selectedSymbol='AAPL',selectionRevision=0}:{selectedSymbol?:string;selectionRevision?:number}){
  const [contract,setContract]=useState<CompanyV2|null>(null),[v2error,setV2Error]=useState('');
