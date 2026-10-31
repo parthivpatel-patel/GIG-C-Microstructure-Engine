@@ -1,0 +1,16 @@
+/workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/independent_math.py:4: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+test_authored_causal_turnover_backtest (__main__.IndependentMath.test_authored_causal_turnover_backtest) ... ok
+test_garch_direct_two_step_likelihood (__main__.IndependentMath.test_garch_direct_two_step_likelihood) ... ok
+test_hmm_against_brute_force_all_hidden_paths (__main__.IndependentMath.test_hmm_against_brute_force_all_hidden_paths) ... ok
+test_kalman_closed_form_and_missing_prediction (__main__.IndependentMath.test_kalman_closed_form_and_missing_prediction) ... ok
+test_native_best_quote_independent_rationals (__main__.IndependentMath.test_native_best_quote_independent_rationals) ... ok
+test_options_raw_value_is_correct_despite_stale_browser_assertion (__main__.IndependentMath.test_options_raw_value_is_correct_despite_stale_browser_assertion) ... ok
+test_portfolio_exact_sample_variance_and_tail (__main__.IndependentMath.test_portfolio_exact_sample_variance_and_tail) ... ok
+test_order_account_position_rest_destinations_rejected_without_fetch (__main__.PaperBoundary.test_order_account_position_rest_destinations_rejected_without_fetch) ... ok
+test_order_routes_absent_no_upstream_or_permission_changes (__main__.PaperBoundary.test_order_routes_absent_no_upstream_or_permission_changes) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.094s
+
+OK

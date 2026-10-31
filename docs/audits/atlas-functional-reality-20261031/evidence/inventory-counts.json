@@ -1,0 +1,19 @@
+{
+  "audited_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+  "inventory_rows": 463,
+  "primary_classifications": {
+    "SIMULATED": 126,
+    "DISCONNECTED": 20,
+    "UNVERIFIED": 312,
+    "VISUAL_ONLY": 1,
+    "REAL_STATIC_REFERENCE": 2,
+    "BROKEN": 2
+  },
+  "verified_offline_functional_rows": 148,
+  "provider_verified_functional_rows": 0,
+  "inventory_unit": "Source-declared UI/options and route-method contracts plus capabilities;not deduplicated user journeys or universal historical requirement count",
+  "static_JSX_declarations": 306,
+  "route_method_contracts": 51,
+  "workspaces": 12,
+  "3d_modes_including_legacy": 15
+}

@@ -1,0 +1,172 @@
+{
+  "original_audit_reports": [
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/FINAL_INSTITUTIONAL_READINESS_AUDIT.md",
+      "bytes": 16426,
+      "sha256": "1e6d97d9238804aee31a8908b4a0df35783593159e0e271681260907bf414dc5"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/REQUIREMENTS_COMPLIANCE_MATRIX.md",
+      "bytes": 155987,
+      "sha256": "e8259e948525d40815e243269db5cb945f5903d9f7c36af6ec7ff5bed966f0b9"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/QUANTITATIVE_MODEL_VALIDATION_MATRIX.md",
+      "bytes": 38987,
+      "sha256": "6b7c7c9be274ea3acf66999352933ef3b090260f481169d3df2e9697f202321b"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/PRODUCTION_READINESS_GAPS.md",
+      "bytes": 25569,
+      "sha256": "22e0faf3b4f0aadeb75c8cbd966aeecc479f42ec40470bdbae6783614e8f65da"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/IMPLEMENTATION_COMPLETION_PLAN.md",
+      "bytes": 6527,
+      "sha256": "0f8fb182f91a9d046a514ab433b77270acc925052d1c40d97442097d8a42bb44"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/FINAL_ACCEPTANCE_CHECKLIST.md",
+      "bytes": 7342,
+      "sha256": "e73eb57fda6e6c8b440600f9e8765dc9beabc7965381f89c1b8414a8cf3abca0"
+    },
+    {
+      "source": "67ad42d08daf45d8c523c733587cdbd88852b81d",
+      "path": "docs/audit/2026-10-30/AUDIT_EVIDENCE_INDEX.md",
+      "bytes": 7130,
+      "sha256": "d88513c2c990ff8bbd933577418812e99c5f249df4e15a4a06bd5705f71507de"
+    }
+  ],
+  "original_findings": [
+    {
+      "id": "A01",
+      "priority": "P1",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A02",
+      "priority": "P1",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A03",
+      "priority": "P1",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A04",
+      "priority": "P2",
+      "disposition": "RESOLVED"
+    },
+    {
+      "id": "A05",
+      "priority": "P2",
+      "disposition": "OPEN"
+    },
+    {
+      "id": "A06",
+      "priority": "P2",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A07",
+      "priority": "P2",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A08",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    },
+    {
+      "id": "A09",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    },
+    {
+      "id": "A10",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    },
+    {
+      "id": "A11",
+      "priority": "P2",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A12",
+      "priority": "P2",
+      "disposition": "BLOCKED_EXTERNAL_DEPENDENCY"
+    },
+    {
+      "id": "A13",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    },
+    {
+      "id": "A14",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    },
+    {
+      "id": "A15",
+      "priority": "P3",
+      "disposition": "RESOLVED"
+    },
+    {
+      "id": "A16",
+      "priority": "P3",
+      "disposition": "RESOLVED"
+    },
+    {
+      "id": "A17",
+      "priority": "P3",
+      "disposition": "DEFERRED_OPTIONAL"
+    },
+    {
+      "id": "A18",
+      "priority": "P2",
+      "disposition": "OPEN_UNKNOWN_EVIDENCE"
+    },
+    {
+      "id": "A19",
+      "priority": "P2",
+      "disposition": "PARTIALLY_ADDRESSED"
+    }
+  ],
+  "Sprint2_reports": [
+    {
+      "path": "docs/remediation/sprint-2/DEPLOYMENT_RUNTIME_QUALIFICATION.md",
+      "sha256": "59dfb2532b63241e19ed001d0244d1555615284f9bf1a8ad3678f6338c5cf011"
+    },
+    {
+      "path": "docs/remediation/sprint-2/FINAL_OWNER_ACCEPTANCE.md",
+      "sha256": "76be4b227d237c1cede0193acf4faf4aa6396f7ff0439576206ebbad552e65a5"
+    },
+    {
+      "path": "docs/remediation/sprint-2/INDEPENDENT_REVIEW.md",
+      "sha256": "b6a0f015ee20687cf20d209db13818bec5d05de91716dafbd46de4af44d8b9b5"
+    },
+    {
+      "path": "docs/remediation/sprint-2/OFFLINE_RECOVERY_RESOURCES.md",
+      "sha256": "7003ad94ec8fa42317b47a1755c07bfa81bd772aee2b6896b768eb15c801d4c1"
+    },
+    {
+      "path": "docs/remediation/sprint-2/REMAINING_BLOCKERS.md",
+      "sha256": "c9cc69f7abf69a8ba7f380810dd462516d67214cc7ff72ac13f8d07f7d55ee15"
+    },
+    {
+      "path": "docs/remediation/sprint-2/SEC_EVIDENCE_BINDING.md",
+      "sha256": "044adf4ea8f6630fb99af8042a0349ea738f88350cf466ce7cd6d816a8e3a0eb"
+    }
+  ],
+  "historical_scope_A18": "UNKNOWN_PRESERVED",
+  "estimator_A19": "PROPOSED_NOT_RETROACTIVE_ACCEPTANCE",
+  "owner_private_and_SEC_observations": "OWNER_REPORTED_POSITIVE_NOT_INDEPENDENTLY_REVALIDATED"
+}

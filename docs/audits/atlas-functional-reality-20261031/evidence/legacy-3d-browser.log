@@ -1,0 +1,10 @@
+Landscape buttons [ 'Enable 3D landscape' ]
+labels [
+  'Bar intervalDailyHourlyMinute',
+  'Scenario spot',
+  'Scenario strike',
+  'Years to expiry',
+  'Scenario volatility',
+  'Optional theoretical target price'
+]
+{"checks":["Native legacy landscape changes actual pixels after native replay event,not camera input","Legacy theoretical flat volatility plane changes pixels when declared volatility changes;not observed smile"],"passed":2,"failed":0}

@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /7\.96556746/. Input:
+
+'THEORETICAL_SCENARIO · Price ≈ 7.966 · IV not requested'
+
+    at file:///workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/tests/stock-intelligence-validation.mjs:15:312 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'THEORETICAL_SCENARIO · Price ≈ 7.966 · IV not requested',
+  expected: /7\.96556746/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

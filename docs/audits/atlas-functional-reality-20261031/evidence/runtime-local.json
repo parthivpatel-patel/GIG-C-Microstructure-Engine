@@ -1,0 +1,625 @@
+{
+  "checkout_receipt": {
+    "errors": [],
+    "frontend_entry_sha256": "ded698c997ff13e08a2ab931b53c19c6ec18138e1f93bf02ebc4607ecf3097cb",
+    "frontend_index_sha256": "83af510a9c1b4df48fff21e59bf7c67c240acb1809024097d5d99476f88acaa2",
+    "schema": "gig.application.release.v1",
+    "source_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+    "tracked_clean": true
+  },
+  "expected_source_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+  "external_requests": 0,
+  "failures": [],
+  "launcher": {
+    "bind_host": "127.0.0.1",
+    "codespaces_metadata_present": false,
+    "exact_forwarded_origin_only": false,
+    "private_port_authentication": "UNVERIFIED_EXTERNAL_GATE"
+  },
+  "limitations": [
+    "Startup receipt is not loaded-byte attestation or authentication",
+    "No provider, credentials, port visibility or private configuration inspected",
+    "No vulnerability clearance; run offline pip check and target advisory review",
+    "Offline proxy tests do not prove owner HTTPS/WSS or GitHub access control"
+  ],
+  "local_server": {
+    "startup_receipt": {
+      "frontend_entry_sha256": "ded698c997ff13e08a2ab931b53c19c6ec18138e1f93bf02ebc4607ecf3097cb",
+      "frontend_index_sha256": "83af510a9c1b4df48fff21e59bf7c67c240acb1809024097d5d99476f88acaa2",
+      "source_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+      "tracked_clean": true
+    },
+    "status": "MATCH"
+  },
+  "network_requests": 1,
+  "private_target_acceptance": "UNVERIFIED",
+  "runtime": {
+    "all_direct_pins_match": true,
+    "architecture": "x86_64",
+    "expat": "expat_2.8.3",
+    "implementation": "CPython",
+    "installed": [
+      {
+        "dependencies": [
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "exceptiongroup"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "idna"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "typing_extensions"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "trio"
+          }
+        ],
+        "name": "anyio",
+        "version": "4.15.1"
+      },
+      {
+        "dependencies": [],
+        "name": "attrs",
+        "version": "26.1.0"
+      },
+      {
+        "dependencies": [],
+        "name": "certifi",
+        "version": "2026.10.23"
+      },
+      {
+        "dependencies": [],
+        "name": "click",
+        "version": "8.5.0"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "jsonschema"
+          }
+        ],
+        "name": "gig-microstructure",
+        "version": "0.1.1"
+      },
+      {
+        "dependencies": [],
+        "name": "h11",
+        "version": "0.16.0"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "certifi"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "h11"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "anyio"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "h2"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "socksio"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "trio"
+          }
+        ],
+        "name": "httpcore",
+        "version": "1.0.9"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "anyio"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "certifi"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "httpcore"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "idna"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "brotli"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "brotlicffi"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "click"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "pygments"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "rich"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "h2"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "socksio"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "zstandard"
+          }
+        ],
+        "name": "httpx",
+        "version": "0.28.1"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "ruff"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "mypy"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "ty"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "pytest"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "hypothesis"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "coverage"
+          }
+        ],
+        "name": "idna",
+        "version": "3.20"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "attrs"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "importlib-resources"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "jsonschema-specifications"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "pkgutil-resolve-name"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "referencing"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "rpds-py"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "fqdn"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "idna"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "isoduration"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "jsonpointer"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "rfc3339-validator"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "rfc3987"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "uri-template"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "webcolors"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "fqdn"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "idna"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "isoduration"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "jsonpointer"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "rfc3339-validator"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "rfc3986-validator"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "uri-template"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "webcolors"
+          }
+        ],
+        "name": "jsonschema",
+        "version": "4.23.0"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "referencing"
+          }
+        ],
+        "name": "jsonschema-specifications",
+        "version": "2025.9.1"
+      },
+      {
+        "dependencies": [],
+        "name": "msgpack",
+        "version": "1.2.3"
+      },
+      {
+        "dependencies": [],
+        "name": "pip",
+        "version": "25.0.1"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "attrs"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "rpds-py"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "typing-extensions"
+          }
+        ],
+        "name": "referencing",
+        "version": "0.37.0"
+      },
+      {
+        "dependencies": [],
+        "name": "rpds-py",
+        "version": "2026.9.1"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "anyio"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "typing-extensions"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "httpx2"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "httpx"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "itsdangerous"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "jinja2"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "opentelemetry-api"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "python-multipart"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "pyyaml"
+          }
+        ],
+        "name": "starlette",
+        "version": "1.10.0"
+      },
+      {
+        "dependencies": [],
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      },
+      {
+        "dependencies": [
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "click"
+          },
+          {
+            "conditional": false,
+            "direct_reference": false,
+            "name": "h11"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "typing-extensions"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "httptools"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "python-dotenv"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "pyyaml"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "uvloop"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "watchfiles"
+          },
+          {
+            "conditional": true,
+            "direct_reference": false,
+            "name": "websockets"
+          }
+        ],
+        "name": "uvicorn",
+        "version": "0.54.0"
+      },
+      {
+        "dependencies": [],
+        "name": "websockets",
+        "version": "17.3"
+      }
+    ],
+    "openssl": "OpenSSL 3.5.8 25 Aug 2026",
+    "pins": [
+      {
+        "actual": "4.15.1",
+        "expected": "4.15.1",
+        "matches": true,
+        "name": "anyio"
+      },
+      {
+        "actual": "26.1.0",
+        "expected": "26.1.0",
+        "matches": true,
+        "name": "attrs"
+      },
+      {
+        "actual": "2026.10.23",
+        "expected": "2026.10.23",
+        "matches": true,
+        "name": "certifi"
+      },
+      {
+        "actual": "8.5.0",
+        "expected": "8.5.0",
+        "matches": true,
+        "name": "click"
+      },
+      {
+        "actual": "0.16.0",
+        "expected": "0.16.0",
+        "matches": true,
+        "name": "h11"
+      },
+      {
+        "actual": "1.0.9",
+        "expected": "1.0.9",
+        "matches": true,
+        "name": "httpcore"
+      },
+      {
+        "actual": "0.28.1",
+        "expected": "0.28.1",
+        "matches": true,
+        "name": "httpx"
+      },
+      {
+        "actual": "3.20",
+        "expected": "3.20",
+        "matches": true,
+        "name": "idna"
+      },
+      {
+        "actual": "4.23.0",
+        "expected": "4.23.0",
+        "matches": true,
+        "name": "jsonschema"
+      },
+      {
+        "actual": "2025.9.1",
+        "expected": "2025.9.1",
+        "matches": true,
+        "name": "jsonschema-specifications"
+      },
+      {
+        "actual": "0.37.0",
+        "expected": "0.37.0",
+        "matches": true,
+        "name": "referencing"
+      },
+      {
+        "actual": "2026.9.1",
+        "expected": "2026.9.1",
+        "matches": true,
+        "name": "rpds-py"
+      },
+      {
+        "actual": "1.10.0",
+        "expected": "1.10.0",
+        "matches": true,
+        "name": "starlette"
+      },
+      {
+        "actual": "4.16.0",
+        "expected": "4.16.0",
+        "matches": true,
+        "name": "typing_extensions"
+      },
+      {
+        "actual": "0.54.0",
+        "expected": "0.54.0",
+        "matches": true,
+        "name": "uvicorn"
+      },
+      {
+        "actual": "17.3",
+        "expected": "17.3",
+        "matches": true,
+        "name": "websockets"
+      },
+      {
+        "actual": "1.2.3",
+        "expected": "1.2.3",
+        "matches": true,
+        "name": "msgpack"
+      }
+    ],
+    "python": "3.12.14",
+    "runtime_lock_sha256": "b1c9eb72be8d052e6ea9552977ed983883366b06043ca267c20ae55e3c65d8e0",
+    "security_clearance": "UNVERIFIED_REQUIRES_TARGET_PATCH_AND_ADVISORY_REVIEW",
+    "sqlite": "3.53.1"
+  },
+  "schema": "gig.private.deployment.qualification.v1",
+  "status": "PASS_OFFLINE_CHECKS_ONLY"
+}

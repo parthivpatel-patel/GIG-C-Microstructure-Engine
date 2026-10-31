@@ -1,0 +1,67 @@
+[
+  {
+    "path": "geometry.mjs",
+    "sha256": "9445e15a12c8ea252fd43403a0601c3ee435bccc43bc96fc3b9371d65f6f8f83",
+    "bytes": 7671
+  },
+  {
+    "path": "independent_math.py",
+    "sha256": "435d68dbe7d7d91c5a31b816a6981899216ad4b00320f82e96b142c879111d7f",
+    "bytes": 4568
+  },
+  {
+    "path": "browser.py",
+    "sha256": "fe498558aecca261daea60db4287ef46632c9f732b142202c02a2d643d469970",
+    "bytes": 3508
+  },
+  {
+    "path": "legacy-3d.mjs",
+    "sha256": "6bfac2c7b6afba842532ea54cd323f22da2cc48399b8c399847897bb8031dc04",
+    "bytes": 3065
+  },
+  {
+    "path": "budget_server.py",
+    "sha256": "075ad2d4d956f49009b1ed03a59cd1cd943a54899370d004127c64ecafc5f412",
+    "bytes": 647
+  },
+  {
+    "path": "budget_probe.mjs",
+    "sha256": "52d4d97cf9eaed205862e6da08c7d4eea123e7d6e9c6678d53b32b525f8bafe5",
+    "bytes": 1782
+  },
+  {
+    "path": "budget_probe.py",
+    "sha256": "71747560136fddfed2b53ed58da7b0ebc9b6eeb64a5796687c09b91652d70647",
+    "bytes": 1474
+  },
+  {
+    "path": "controls.mjs",
+    "sha256": "6dcbda36ee260303255fa0dda2cf3d6d43f6b5adc7aa2a9f0fbd5b6e4a07624a",
+    "bytes": 1700
+  },
+  {
+    "path": "inventory.py",
+    "sha256": "8c428adf457a0d8fb2a66f0db90b3e28c81697eedb275c3013ffa4ba5bf5c317",
+    "bytes": 11823
+  },
+  {
+    "path": "validate.py",
+    "sha256": "4f808d7d88f0f34e313038f9fbd46ac030afb80438bd6fdec7e11fd08b870a1b",
+    "bytes": 2078
+  },
+  {
+    "path": "run_native.py",
+    "sha256": "37ff1ecb55eca27f5243c96f66eeadb0961625c36001b8b08c8bad69d28319fb",
+    "bytes": 2118
+  },
+  {
+    "path": "local_receipt.py",
+    "sha256": "49aba1ea57a2047847ca3393f4834e3df858fc9102dbd6756699a1d248e6e716",
+    "bytes": 2190
+  },
+  {
+    "path": "offline-guard/sitecustomize.py",
+    "sha256": "7778961555bfd540373287fc2de788b08cbbabc3590ec28fa753e93748a20e88",
+    "bytes": 687
+  }
+]

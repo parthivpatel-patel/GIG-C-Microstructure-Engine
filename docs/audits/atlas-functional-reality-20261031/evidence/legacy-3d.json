@@ -1,0 +1,9 @@
+{
+  "passed": 2,
+  "failed": 0,
+  "checks": [
+    "Native legacy landscape changes actual pixels after native replay event,not camera input",
+    "Legacy theoretical flat volatility plane changes pixels when declared volatility changes;not observed smile"
+  ],
+  "scope": "AUTHORED_SYNTHETIC;camera unchanged;legacy modes beyond13 denominator"
+}

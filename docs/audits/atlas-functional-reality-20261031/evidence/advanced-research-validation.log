@@ -1,0 +1,215 @@
+PASS Three.js not requested by Command Center
+PASS native snapshot source preserves synthetic origin and real C++ prices
+PASS snapshots cannot silently fabricate order events
+PASS height authored geometry,labels,inspection,and bounded draw calls
+PASS canyon authored geometry,labels,inspection,and bounded draw calls
+PASS events authored geometry,labels,inspection,and bounded draw calls
+PASS vwap authored geometry,labels,inspection,and bounded draw calls
+PASS flow authored geometry,labels,inspection,and bounded draw calls
+PASS wheel authored geometry,labels,inspection,and bounded draw calls
+PASS dome authored geometry,labels,inspection,and bounded draw calls
+PASS ribbon authored geometry,labels,inspection,and bounded draw calls
+PASS camera presets,key pan,drag rotation,and wheel zoom are functional
+PASS local timeline,symbol filtering,voxel/point toggle,and no native mutation
+PASS real WebGL context loss yields2D and retry creates fresh usable renderer
+PASS all8 models fit both themes at360,390,768,1280,1920 without page overflow
+PASS 2D toggle and reduced-motion keyboard semantics remain accessible
+PASS closing laboratory releases its canvas
+PASS WebGL construction failure has working table/2D fallback
+PASS Level1 ribbon and dome use actual fixture quote history with truthful origin
+PASS Level1 depth and unsigned-flow modes explicitly unavailable
+PASS existing four Level1 geometries remain functional
+PASS existing GARCH surface,parameters,camera,and recovery are preserved
+PASS stable production assets and no uncaught application errors
+{
+  "schema": "gig.advanced3d.browser.v1",
+  "classification": "AUTHORED_FIXTURES_WITH_NATIVE_CPP_BACKEND_AND_SWIFTSHADER_NOT_LIVE_QUALIFICATION",
+  "passed": 23,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    "Three.js not requested by Command Center",
+    "native snapshot source preserves synthetic origin and real C++ prices",
+    "snapshots cannot silently fabricate order events",
+    "height authored geometry,labels,inspection,and bounded draw calls",
+    "canyon authored geometry,labels,inspection,and bounded draw calls",
+    "events authored geometry,labels,inspection,and bounded draw calls",
+    "vwap authored geometry,labels,inspection,and bounded draw calls",
+    "flow authored geometry,labels,inspection,and bounded draw calls",
+    "wheel authored geometry,labels,inspection,and bounded draw calls",
+    "dome authored geometry,labels,inspection,and bounded draw calls",
+    "ribbon authored geometry,labels,inspection,and bounded draw calls",
+    "camera presets,key pan,drag rotation,and wheel zoom are functional",
+    "local timeline,symbol filtering,voxel/point toggle,and no native mutation",
+    "real WebGL context loss yields2D and retry creates fresh usable renderer",
+    "all8 models fit both themes at360,390,768,1280,1920 without page overflow",
+    "2D toggle and reduced-motion keyboard semantics remain accessible",
+    "closing laboratory releases its canvas",
+    "WebGL construction failure has working table/2D fallback",
+    "Level1 ribbon and dome use actual fixture quote history with truthful origin",
+    "Level1 depth and unsigned-flow modes explicitly unavailable",
+    "existing four Level1 geometries remain functional",
+    "existing GARCH surface,parameters,camera,and recovery are preserved",
+    "stable production assets and no uncaught application errors"
+  ],
+  "errors": [],
+  "renders": [
+    {
+      "model": "height",
+      "engine": "three.js r180",
+      "renderMs": "35.80000000074506",
+      "drawCalls": "9",
+      "geometries": "7",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "620"
+    },
+    {
+      "model": "canyon",
+      "engine": "three.js r180",
+      "renderMs": "57.80000000074506",
+      "drawCalls": "9",
+      "geometries": "7",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "620"
+    },
+    {
+      "model": "events",
+      "engine": "three.js r180",
+      "renderMs": "3.900000002235174",
+      "drawCalls": "3",
+      "geometries": "3",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "120",
+      "triangles": "0"
+    },
+    {
+      "model": "vwap",
+      "engine": "three.js r180",
+      "renderMs": "16.300000000745058",
+      "drawCalls": "6",
+      "geometries": "6",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "28",
+      "triangles": "0"
+    },
+    {
+      "model": "flow",
+      "engine": "three.js r180",
+      "renderMs": "16.5",
+      "drawCalls": "5",
+      "geometries": "5",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "28",
+      "triangles": "0"
+    },
+    {
+      "model": "wheel",
+      "engine": "three.js r180",
+      "renderMs": "19.399999998509884",
+      "drawCalls": "5",
+      "geometries": "5",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "384",
+      "triangles": "0"
+    },
+    {
+      "model": "dome",
+      "engine": "three.js r180",
+      "renderMs": "31.100000001490116",
+      "drawCalls": "5",
+      "geometries": "4",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "24",
+      "triangles": "368"
+    },
+    {
+      "model": "ribbon",
+      "engine": "three.js r180",
+      "renderMs": "34.80000000074506",
+      "drawCalls": "5",
+      "geometries": "4",
+      "camera": "12.999999999999996,10,16",
+      "testid": "advanced-research-canvas",
+      "samples": "64",
+      "triangles": "62"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "build/advanced-3d/height-synthetic-desktop.png",
+      "sha256": "2307d42c8889cdd9edfda0330cc3d562af9c5b4a69c4a6eeb625ec0a32c831e2"
+    },
+    {
+      "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+      "sha256": "ef43662751cbe26efcab8877cdf8d6d1a02edec347d1f5789708ff8aaf288931"
+    },
+    {
+      "path": "build/advanced-3d/events-synthetic-desktop.png",
+      "sha256": "0044da1ce9439a0cc0d0e50ebe574ed17669529b84462a1ed836fcfbb4eb5150"
+    },
+    {
+      "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+      "sha256": "f1a928bbd1bf9c4515f5db4e0b342e6c41bfa2e4ac553a649d3ed9596ffffd9e"
+    },
+    {
+      "path": "build/advanced-3d/flow-synthetic-desktop.png",
+      "sha256": "bf543b4f50dceb256715e791bcce35cbe44d19f8266a81579e85c8b269bc8f54"
+    },
+    {
+      "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+      "sha256": "03b3900fa736e6eabca7c90d1b3c2207e544964e034b20773f1a9c4f56da692e"
+    },
+    {
+      "path": "build/advanced-3d/dome-synthetic-desktop.png",
+      "sha256": "546d81c0cb33720410cb4d7a4d05ea5f3830164d1eb02d5ce525f5f08e505937"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+      "sha256": "7a06aabc82d6fc4d7e5d759dcd2f4ed1d9ef9ef1193a5bfa0497fb4328f7c40b"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "sha256": "5d4f16290c300be39196f9cd038c69c63acd74d1d13e94e3ab5758bdfb446ddd"
+    },
+    {
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "sha256": "5cc823e0d02401de812ccaf25d5b557b22026be6422bee1837251b47d7518030"
+    },
+    {
+      "path": "build/advanced-3d/iex-authored-ribbon.png",
+      "sha256": "f89f54c3790c3132d4bd49200c666bb2bdbb595b003caeac837c129180a968fa"
+    },
+    {
+      "path": "build/advanced-3d/iex-authored-dome.png",
+      "sha256": "c46aa3102930db32de0cb132acdc7113899cdbcaec00b957b81eb9a41a307075"
+    }
+  ],
+  "asset_sha256": {
+    "Landscape3D-CN0oK8Xh.js": "751c12f81a0355f97beb25e2741430b14f62e8549e7f34187019cdb0eac26bd8",
+    "LiveMarket-D41Z_HOV.js": "d32ba1251ca91e726c10ab668862090499199f480052d27d82c2b90262ed812c",
+    "MarketHealth-BxlvspA_.js": "3f4c852a75593f95ca7ce19bfd3a3906ec5049be60deed5ffddaef8334e49b3c",
+    "ModelSurface-DGd-JudQ.js": "c28c5e28daecba91913d69c11b4610b556d70c5cfc760249da8e39622c8c735a",
+    "OrbitControls-Cv-8zGjJ.js": "cfa87bb30f3cdbcfb8c305e20d1ee5e0d3b4f11f6ca97528db315dc64176e6ff",
+    "QuoteCloud-DLBFxLuz.js": "2d0e5148139474c83bfa0b204da9c7b8b25f127fa513a5ac217874a5fcf90372",
+    "ResearchDesk-CDZSGSfS.js": "bced95817abfa3d75ada0a2543d7e3bdc5cf33d975c6fdb9f9ec7784ca033a3b",
+    "ResearchLab-CmT1D0hM.js": "2c7414c02f313a2a93d020e7bbf52c8079b8f450514f1eddb54fd1d7fda978e7",
+    "ResearchLab-gFa97j1M.css": "319bc54dd8be1091cfe2091584492f6f0cb034e9d4d64575f10bd335cb482439",
+    "ResearchScene-BqEwU2zB.js": "3c3e1778c685a9e951860b4d5c917b3b0e1530a1de647482c391e8c580d0a290",
+    "StockIntelligence-Dk-i5rI6.js": "8f26059634e6a45fe69baaf2fdb5466c8f9697038d2b1d281ea652ed105e9582",
+    "UniverseWorkspace-BXCCLBbp.js": "309aaae8fcfec3d03ddc56afc40667e1fb0db5db4d0c5a0677b3a5eff6d18fda",
+    "VolatilitySurface-Dir2sPFr.js": "61ac9d54d8b8f9d271992a22e55c6cdbae7d33cb21dd7fb12cf1f1eb79dda8fb",
+    "directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+    "index-Bi5AfQUv.css": "257ff538ff9e724b693b2c53b767c4d0ef295ae037e3b09016a2fe625458ffff",
+    "index-CtUAn7tb.js": "ded698c997ff13e08a2ab931b53c19c6ec18138e1f93bf02ebc4607ecf3097cb",
+    "marketContract-DM0W2FhH.js": "dd364ce1f8643b0e76e14183cee55e65cc2a7bbbf161fbaf9732ef95717420a0"
+  }
+}

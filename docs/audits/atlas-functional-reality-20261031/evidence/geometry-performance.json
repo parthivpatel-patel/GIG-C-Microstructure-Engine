@@ -1,0 +1,89 @@
+{
+  "schema": "gig.advanced3d.projection_performance.v1",
+  "origin": "HISTORICAL_SYNTHETIC",
+  "fixture": "authored-research-v1",
+  "seed": "NONE_FIXED_AUTHORED_INTEGER_RULES",
+  "fixture_events": 240,
+  "warmup_per_model": 10,
+  "measured_per_model": 100,
+  "models": [
+    {
+      "model": "height",
+      "marks": 384,
+      "source_paths": 64,
+      "surface_vertices": 1240,
+      "surface_triangles": 620,
+      "median_projection_ms": 1.0478019999999901,
+      "p95_projection_ms": 1.660236999999995
+    },
+    {
+      "model": "canyon",
+      "marks": 384,
+      "source_paths": 64,
+      "surface_vertices": 1240,
+      "surface_triangles": 620,
+      "median_projection_ms": 1.044842000000017,
+      "p95_projection_ms": 1.5820879999999988
+    },
+    {
+      "model": "events",
+      "marks": 120,
+      "source_paths": 0,
+      "surface_vertices": 0,
+      "surface_triangles": 0,
+      "median_projection_ms": 0.14203500000002123,
+      "p95_projection_ms": 0.21003999999999223
+    },
+    {
+      "model": "vwap",
+      "marks": 28,
+      "source_paths": 3,
+      "surface_vertices": 0,
+      "surface_triangles": 0,
+      "median_projection_ms": 0.11715099999997847,
+      "p95_projection_ms": 0.17577199999999493
+    },
+    {
+      "model": "flow",
+      "marks": 28,
+      "source_paths": 28,
+      "surface_vertices": 0,
+      "surface_triangles": 0,
+      "median_projection_ms": 0.12931600000001708,
+      "p95_projection_ms": 0.2605270000000246
+    },
+    {
+      "model": "wheel",
+      "marks": 384,
+      "source_paths": 384,
+      "surface_vertices": 0,
+      "surface_triangles": 0,
+      "median_projection_ms": 0.4899350000000027,
+      "p95_projection_ms": 0.6845270000000028
+    },
+    {
+      "model": "dome",
+      "marks": 24,
+      "source_paths": 0,
+      "surface_vertices": 216,
+      "surface_triangles": 368,
+      "median_projection_ms": 0.1193930000000023,
+      "p95_projection_ms": 0.19350400000001855
+    },
+    {
+      "model": "ribbon",
+      "marks": 64,
+      "source_paths": 0,
+      "surface_vertices": 64,
+      "surface_triangles": 62,
+      "median_projection_ms": 0.12554799999998068,
+      "p95_projection_ms": 0.20604200000002493
+    }
+  ],
+  "output_sha256": "222811765f4d91b5ac85af367c28cbbd2a01664d58c99dd1e77322e58365eaaa",
+  "process_max_rss_kib": 124340,
+  "architecture": "x64",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "node": "v24.19.0",
+  "scope": "Node projection only;includes allocations;no live feed,no GPU,no exchange latency guarantee"
+}

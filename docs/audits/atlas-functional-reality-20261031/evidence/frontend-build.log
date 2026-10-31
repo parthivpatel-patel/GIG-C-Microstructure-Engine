@@ -1,0 +1,40 @@
+
+> gig-institutional-terminal@0.1.0 build
+> tsc -b && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 72 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.46 kB │ gzip:   0.31 kB
+dist/.vite/manifest.json                     3.86 kB │ gzip:   0.71 kB
+dist/assets/ResearchLab-gFa97j1M.css         2.77 kB │ gzip:   0.89 kB
+dist/assets/index-Bi5AfQUv.css              53.27 kB │ gzip:  10.44 kB
+dist/assets/marketContract-DM0W2FhH.js       1.81 kB │ gzip:   0.80 kB
+dist/assets/directoryContract-BVrwTy34.js    2.32 kB │ gzip:   0.88 kB
+dist/assets/VolatilitySurface-Dir2sPFr.js    2.50 kB │ gzip:   1.37 kB
+dist/assets/MarketHealth-BxlvspA_.js         2.52 kB │ gzip:   1.08 kB
+dist/assets/ResearchDesk-CDZSGSfS.js         4.49 kB │ gzip:   1.83 kB
+dist/assets/ResearchScene-BqEwU2zB.js        5.51 kB │ gzip:   2.45 kB
+dist/assets/ModelSurface-DGd-JudQ.js         6.82 kB │ gzip:   2.96 kB
+dist/assets/Landscape3D-CN0oK8Xh.js          6.96 kB │ gzip:   2.93 kB
+dist/assets/UniverseWorkspace-BXCCLBbp.js    7.94 kB │ gzip:   2.94 kB
+dist/assets/QuoteCloud-DLBFxLuz.js          10.17 kB │ gzip:   4.31 kB
+dist/assets/ResearchLab-CmT1D0hM.js         25.14 kB │ gzip:   9.61 kB
+dist/assets/LiveMarket-D41Z_HOV.js          34.34 kB │ gzip:  11.21 kB
+dist/assets/StockIntelligence-Dk-i5rI6.js   82.67 kB │ gzip:  22.76 kB
+dist/assets/index-CtUAn7tb.js              239.07 kB │ gzip:  74.97 kB
+dist/assets/OrbitControls-Cv-8zGjJ.js      514.41 kB │ gzip: 127.55 kB
+
+✓ built in 288ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

@@ -1,0 +1,14 @@
+{
+  "python": "Python 3.12.14",
+  "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+  "clang": "Debian clang version 19.1.7 (3+b1)",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "cmake": "cmake version 3.31.6",
+  "git": "git version 2.52.0",
+  "architecture": "x86_64",
+  "openssl": "OpenSSL 3.5.8 25 Aug 2026",
+  "sqlite": "3.53.1",
+  "expat": "expat_2.8.3",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C"
+}

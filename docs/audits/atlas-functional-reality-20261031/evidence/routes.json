@@ -1,0 +1,359 @@
+[
+  {
+    "path": "terminal/server/app.py",
+    "line": 265,
+    "route": "/api/v1/health",
+    "method": "GET",
+    "handler": "health"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 280,
+    "route": "/api/v1/state",
+    "method": "GET",
+    "handler": "state"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 286,
+    "route": "/api/v2/research/concentration",
+    "method": "GET",
+    "handler": "research_concentration"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 297,
+    "route": "/api/v1/schema",
+    "method": "GET",
+    "handler": "schema"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 302,
+    "route": "/api/v1/connection",
+    "method": "GET",
+    "handler": "connection_status"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 322,
+    "route": "/api/v1/request-proof",
+    "method": "GET",
+    "handler": "request_proof"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 337,
+    "route": "/api/v1/stream-ticket",
+    "method": "POST",
+    "handler": "stream_ticket"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 363,
+    "route": "/api/v1/catalog",
+    "method": "GET",
+    "handler": "catalog"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 380,
+    "route": "/api/v2/companies/{symbol}",
+    "method": "GET",
+    "handler": "company_v2"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 387,
+    "route": "/api/v2/companies/{symbol}/ratio-history",
+    "method": "GET",
+    "handler": "ratio_history"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 399,
+    "route": "/api/v1/stocks/dataset-analysis",
+    "method": "POST",
+    "handler": "dataset_analysis"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 410,
+    "route": "/api/v1/stocks/garch-optimization",
+    "method": "POST",
+    "handler": "garch_optimization"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 421,
+    "route": "/api/v2/companies/{symbol}/availability",
+    "method": "GET",
+    "handler": "company_availability"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 431,
+    "route": "/api/v2/securities",
+    "method": "GET",
+    "handler": "securities"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 443,
+    "route": "/api/v2/securities/status",
+    "method": "GET",
+    "handler": "securities_status"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 447,
+    "route": "/api/v1/stocks/assets-refresh",
+    "method": "POST",
+    "handler": "assets_refresh"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 454,
+    "route": "/api/v1/stocks/market-history",
+    "method": "POST",
+    "handler": "market_history"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 463,
+    "route": "/api/v1/stocks/directory-refresh",
+    "method": "POST",
+    "handler": "directory_refresh"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 470,
+    "route": "/api/v1/stocks/market-search",
+    "method": "GET",
+    "handler": "market_search"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 476,
+    "route": "/api/v1/stocks/events",
+    "method": "POST",
+    "handler": "stock_events"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 484,
+    "route": "/api/v1/stocks/live",
+    "method": "GET",
+    "handler": "stock_live_control"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 484,
+    "route": "/api/v1/stocks/live",
+    "method": "POST",
+    "handler": "stock_live_control"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 499,
+    "route": "/api/v1/stocks/history-ingest",
+    "method": "POST",
+    "handler": "history_ingest"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 515,
+    "route": "/api/v1/stocks/history-store",
+    "method": "GET",
+    "handler": "history_store"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 515,
+    "route": "/api/v1/stocks/history-store",
+    "method": "POST",
+    "handler": "history_store"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 546,
+    "route": "/api/v2/companies/{symbol}/acceptance-view",
+    "method": "GET",
+    "handler": "acceptance_view"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 556,
+    "route": "/api/v2/companies/{symbol}/vintage",
+    "method": "GET",
+    "handler": "company_vintage"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 566,
+    "route": "/api/v2/companies/{symbol}/accounting-checks",
+    "method": "GET",
+    "handler": "accounting_checks"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 576,
+    "route": "/api/v2/companies/{symbol}/statements",
+    "method": "GET",
+    "handler": "statements_v2"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 588,
+    "route": "/api/v2/companies/{symbol}/historical",
+    "method": "GET",
+    "handler": "historical_v2"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 596,
+    "route": "/api/v2/companies/{symbol}/filings",
+    "method": "GET",
+    "handler": "filings_v2"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 609,
+    "route": "/api/v1/stocks/search",
+    "method": "GET",
+    "handler": "stock_search"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 616,
+    "route": "/api/v1/stocks/company",
+    "method": "GET",
+    "handler": "stock_company"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 622,
+    "route": "/api/v1/stocks/load",
+    "method": "POST",
+    "handler": "stock_load"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 630,
+    "route": "/api/v1/stocks/sec-directory",
+    "method": "POST",
+    "handler": "sec_directory"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 639,
+    "route": "/api/v1/stocks/sec-history",
+    "method": "POST",
+    "handler": "sec_history"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 648,
+    "route": "/api/v1/stocks/refresh",
+    "method": "POST",
+    "handler": "stock_refresh"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 660,
+    "route": "/api/v1/stocks/options",
+    "method": "POST",
+    "handler": "stock_options"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 668,
+    "route": "/api/v1/stocks/portfolio",
+    "method": "POST",
+    "handler": "stock_portfolio"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 676,
+    "route": "/api/v1/stocks/evaluation",
+    "method": "POST",
+    "handler": "stock_evaluation"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 688,
+    "route": "/api/v1/stocks/models",
+    "method": "POST",
+    "handler": "stock_models"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 699,
+    "route": "/api/v1/stocks/scenarios",
+    "method": "POST",
+    "handler": "stock_scenarios"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 708,
+    "route": "/api/v2/companies/{symbol}/risk",
+    "method": "GET",
+    "handler": "stock_risk"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 719,
+    "route": "/api/v1/stocks/research",
+    "method": "POST",
+    "handler": "stock_research"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 728,
+    "route": "/api/v1/control",
+    "method": "POST",
+    "handler": "control"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 758,
+    "route": "/api/v1/simulate",
+    "method": "POST",
+    "handler": "simulate"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 768,
+    "route": "/api/v1/validate",
+    "method": "POST",
+    "handler": "validate"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 783,
+    "route": "/api/v1/recordings",
+    "method": "GET",
+    "handler": "sessions"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 790,
+    "route": "/api/v1/recording",
+    "method": "POST",
+    "handler": "recording"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 872,
+    "route": "/api/v1/stream",
+    "method": "WEBSOCKET",
+    "handler": "stream"
+  },
+  {
+    "path": "terminal/server/app.py",
+    "line": 907,
+    "route": "/{path:path}",
+    "method": "GET",
+    "handler": "static"
+  }
+]

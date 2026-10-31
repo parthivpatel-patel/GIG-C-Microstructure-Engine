@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Linux-clang++"
+	tests="155"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="7fa7688cd3b9"
+	time="26"
+	timestamp="2026-10-31T16:25:08"
+	>
+	<testcase name="evidence.integrity_contracts" classname="evidence.integrity_contracts" time="1.61359" status="run">
+		<properties/>
+		<system-out>...............................................
+----------------------------------------------------------------------
+Ran 47 tests in 1.533s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="itch.query_failure_atomicity" classname="itch.query_failure_atomicity" time="0.00397903" status="run">
+		<properties/>
+		<system-out>checkpoint_allocation_sites=22 depth_allocation_sites=2 pmr_peak_bytes=429375 live_bytes_after_destroy=0
+</system-out>
+	</testcase>
+	<testcase name="itch.validation_demo_reference" classname="itch.validation_demo_reference" time="0.149788" status="run">
+		<properties/>
+		<system-out>PASS: P1I independent end-to-end scenarios=4 repeated_runs=4 negative_controls=0 cli_controls=10 canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520
+</system-out>
+	</testcase>
+	<testcase name="itch.validation_demo_negative_controls" classname="itch.validation_demo_negative_controls" time="0.102343" status="run">
+		<properties/>
+		<system-out>PASS: P1I independent end-to-end scenarios=4 repeated_runs=4 negative_controls=17 cli_controls=10 canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520
+</system-out>
+	</testcase>
+	<testcase name="itch.framer_basic" classname="itch.framer_basic" time="0.0022203" status="run">
+		<properties/>
+		<system-out>BinaryFile basic passed
+</system-out>
+	</testcase>
+	<testcase name="itch.framer_errors" classname="itch.framer_errors" time="0.00280464" status="run">
+		<properties/>
+		<system-out>BinaryFile errors passed
+</system-out>
+	</testcase>
+	<testcase name="itch.framer_limits" classname="itch.framer_limits" time="0.00216968" status="run">
+		<properties/>
+		<system-out>BinaryFile limits passed
+</system-out>
+	</testcase>
+	<testcase name="itch.framer_allocation" classname="itch.framer_allocation" time="0.00276426" status="run">
+		<properties/>
+		<system-out>BinaryFile allocation passed
+</system-out>
+	</testcase>
+	<testcase name="itch.framer_properties" classname="itch.framer_properties" time="0.00539348" status="run">
+		<properties/>
+		<system-out>BinaryFile properties passed
+</system-out>
+	</testcase>
+	<testcase name="itch.decoder_contracts" classname="itch.decoder_contracts" time="0.00321665" status="run">
+		<properties/>
+		<system-out>sizeof DecodedRecord=304 Header=16 Message=48
+</system-out>
+	</testcase>
+	<testcase name="itch.independent_reference" classname="itch.independent_reference" time="0.24424" status="run">
+		<properties/>
+		<system-out>PASS independent ITCH oracle: 10000 cases; seed=1729; canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e
+coverage: valid=1585; framing=412; enum_sweep=1024; numeric=17; negative=398; adversarial=6564; no external data
+</system-out>
+	</testcase>
+	<testcase name="itch.oracle_negative_control" classname="itch.oracle_negative_control" time="0.0423416" status="run">
+		<properties/>
+		<system-out>REJECTED wrong-endian: first divergence row=0 label=control-A field=4 expected='6618611909121' actual='1108152157446'
+REJECTED wrong-field-offset: first divergence row=0 label=control-A field=5 expected='144964032628459586' actual='72623859790382856'
+REJECTED wrong-quantity: first divergence row=0 label=control-A field=7 expected='16909061' actual='16909060'
+REJECTED wrong-row-alignment: first divergence row=0 label=control-A field=1 expected='69' actual='65'
+PASS T05 oracle negative controls: 4/4 rejected; correct baseline accepted
+</system-out>
+	</testcase>
+	<testcase name="itch.context_lifecycle" classname="itch.context_lifecycle" time="0.0030692" status="run">
+		<properties/>
+		<system-out>context lifecycle passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_identity" classname="itch.context_identity" time="0.00278026" status="run">
+		<properties/>
+		<system-out>context identity passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_observations" classname="itch.context_observations" time="0.00256557" status="run">
+		<properties/>
+		<system-out>context observations passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_policies" classname="itch.context_policies" time="0.00283005" status="run">
+		<properties/>
+		<system-out>context policies passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_limits" classname="itch.context_limits" time="0.00271383" status="run">
+		<properties/>
+		<system-out>context limits passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_allocation" classname="itch.context_allocation" time="0.00288664" status="run">
+		<properties/>
+		<system-out>context allocation passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_numeric" classname="itch.context_numeric" time="0.00285968" status="run">
+		<properties/>
+		<system-out>context numeric passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_provenance" classname="itch.context_provenance" time="0.00354819" status="run">
+		<properties/>
+		<system-out>context provenance passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+</system-out>
+	</testcase>
+	<testcase name="itch.context_reference" classname="itch.context_reference" time="0.767472" status="run">
+		<properties/>
+		<system-out>PASS context independent oracle: sessions=515 events=12104 randomized_mutations=10000 seed=5255494 canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e
+</system-out>
+	</testcase>
+	<testcase name="itch.context_oracle_negative_control" classname="itch.context_oracle_negative_control" time="0.0397404" status="run">
+		<properties/>
+		<system-out>REJECTED wrong-remaining-after-execution first divergence event=5
+REJECTED accept-retired-reference-reuse first divergence event=11
+REJECTED broken-trade-restores-liquidity first divergence event=9
+REJECTED wrong-event-alignment first divergence event=4
+PASS context oracle negative controls: 4/4 rejected; correct baseline accepted
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_streaming" classname="itch.auction_streaming" time="0.00658226" status="run">
+		<properties/>
+		<system-out>auction_streaming_allocation_fault_sites=33 authored_records=22 native_records=7 external_observations=15
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_stream_faults" classname="itch.auction_stream_faults" time="0.184698" status="run">
+		<properties/>
+		<system-out>auction_fault_variants=10 fragmentation_schedules=20 independently_checked_prefix_counts=true
+exhaustive_gzip_prefixes=699 fragment_schedules=2097 independent_native_external_receipt_oracle=true
+</system-out>
+	</testcase>
+	<testcase name="itch.admin_streaming" classname="itch.admin_streaming" time="0.0079608" status="run">
+		<properties/>
+		<system-out>admin_streaming_allocation_fault_sites=33 authored_records=23 native_records=7 external_observations=16
+</system-out>
+	</testcase>
+	<testcase name="itch.hy_streaming" classname="itch.hy_streaming" time="0.00631188" status="run">
+		<properties/>
+		<system-out>hy_streaming_allocation_fault_sites=33 authored_records=21 native_records=7 external_observations=14
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_basic" classname="itch.streaming_basic" time="0.00394109" status="run">
+		<properties/>
+		<system-out>streaming basic passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_fragments" classname="itch.streaming_fragments" time="0.27183" status="run">
+		<properties/>
+		<system-out>streaming_fragment_and_cut_schedules=2119 source_bytes=507 compressed_bytes=530
+streaming fragments passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_corruption" classname="itch.streaming_corruption" time="0.00484506" status="run">
+		<properties/>
+		<system-out>streaming corruption passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_semantics" classname="itch.streaming_semantics" time="0.0105122" status="run">
+		<properties/>
+		<system-out>streaming semantics passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_budgets" classname="itch.streaming_budgets" time="0.00550434" status="run">
+		<properties/>
+		<system-out>streaming budgets passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_allocation" classname="itch.streaming_allocation" time="0.00665376" status="run">
+		<properties/>
+		<system-out>streaming_allocation_sites create=10 feed=23
+streaming allocation passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_restart" classname="itch.streaming_restart" time="0.00499748" status="run">
+		<properties/>
+		<system-out>streaming restart passed
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_reference" classname="itch.streaming_reference" time="0.76339" status="run">
+		<properties/>
+		<system-out>fixture_python_zlib_runtime=1.3.2
+streaming_fixtures=475 framed_source_records_across_fixtures=3993 accepted_source_records_across_fixtures=3989 categories={"bounded":205,"compressed_limit":1,"corrupt":12,"decompressed_limit":1,"expansion_limit":1,"framing":5,"header_limit":1,"identity":2,"semantic":4,"trailing":2,"truncated":205,"valid":36} canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_oracle_negative_control" classname="itch.streaming_oracle_negative_control" time="0.0692661" status="run">
+		<properties/>
+		<system-out>negative_controls=6 rejected=6
+fixture_python_zlib_runtime=1.3.2
+streaming_fixtures=1 framed_source_records_across_fixtures=20 accepted_source_records_across_fixtures=20 categories={"valid":1} canonical_sha256=1dc0bbd419fd011aa2c98a15275f81c8a527dfc1e7a08d022c712b23263144a4
+</system-out>
+	</testcase>
+	<testcase name="itch.gzip_valid" classname="itch.gzip_valid" time="0.00378594" status="run">
+		<properties/>
+		<system-out>gzip valid checks=13225 passed
+</system-out>
+	</testcase>
+	<testcase name="itch.gzip_errors" classname="itch.gzip_errors" time="0.0186328" status="run">
+		<properties/>
+		<system-out>gzip errors checks=162170 passed
+</system-out>
+	</testcase>
+	<testcase name="itch.gzip_limits" classname="itch.gzip_limits" time="0.00258632" status="run">
+		<properties/>
+		<system-out>gzip limits checks=2528 passed
+</system-out>
+	</testcase>
+	<testcase name="itch.gzip_allocation" classname="itch.gzip_allocation" time="0.00226126" status="run">
+		<properties/>
+		<system-out>gzip_reached_allocation_sites=4
+gzip allocation checks=168 passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_checkpoint" classname="itch.reconstruction_checkpoint" time="0.0136984" status="run">
+		<properties/>
+		<system-out>restart_allocation_failpoints=32
+SHA256 known vectors/padding and authenticated prefix restart tests passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_sha256_reference" classname="itch.reconstruction_sha256_reference" time="0.0882401" status="run">
+		<properties/>
+		<system-out>hashlib independent cases=139 canonical_sha256=99988a9776beb88a1d443916f248edbb980ae89b07cd367fd0e75dacc88d8d93
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_framing" classname="itch.reconstruction_framing" time="0.0931857" status="run">
+		<properties/>
+		<system-out>framing source_bytes=507 source_records=18 fragment_cut_schedules=2027 trailing_controls=1
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_recovery_boundary" classname="itch.reconstruction_recovery_boundary" time="0.00322298" status="run">
+		<properties/>
+		<system-out>native_snapshot_exact64=passed over65=atomic_rejection adapter_complete_seed=unsupported
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_initialization" classname="itch.reconstruction_initialization" time="0.00982448" status="run">
+		<properties/>
+		<system-out>seed_factory allocation_failure_positions=24 cleanup_live_bytes=0
+reconstruction initialization passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_golden" classname="itch.reconstruction_golden" time="0.00324643" status="run">
+		<properties/>
+		<system-out>reconstruction golden passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_observations" classname="itch.reconstruction_observations" time="0.00320628" status="run">
+		<properties/>
+		<system-out>reconstruction observations passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_multisymbol" classname="itch.reconstruction_multisymbol" time="0.00231962" status="run">
+		<properties/>
+		<system-out>reconstruction multisymbol passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_numeric" classname="itch.reconstruction_numeric" time="0.00328881" status="run">
+		<properties/>
+		<system-out>reconstruction numeric passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_atomicity" classname="itch.reconstruction_atomicity" time="0.00310543" status="run">
+		<properties/>
+		<system-out>reconstruction atomicity passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_allocation" classname="itch.reconstruction_allocation" time="0.00395375" status="run">
+		<properties/>
+		<system-out>allocation_sites direct_native_first_add=5 create=6 native_add=6 native_replace=5; armed_noalloc_native_E_X_external=3
+reconstruction allocation passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_budgets" classname="itch.reconstruction_budgets" time="0.00350686" status="run">
+		<properties/>
+		<system-out>reconstruction budgets passed
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_restart" classname="itch.reconstruction_restart" time="0.00292034" status="run">
+		<properties/>
+		<system-out>reconstruction restart passed
+</system-out>
+	</testcase>
+	<testcase name="itch.l3_reference" classname="itch.l3_reference" time="26.0389" status="run">
+		<properties/>
+		<system-out>{"candidates": 2228, "canonical_sha256": "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807", "observed_validated": false, "scope": "synthetic independent model versus byte-adapter/native engine", "seed": 5255495, "sessions": 164}
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.011s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.006s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.137s
+
+OK
+sessions=10032 source_candidates=65186 rejected_candidates=10025 seed=5255495 canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991
+{"candidates": 476, "canonical_sha256": "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c", "negative_controls": 3, "scope": "synthetic readiness supplement, not observed validation", "sessions": 67}
+{"canonical_sha256": "4618d9b3c94d34535001c8f9e6a2a54cfd5708ac72b58116425b0...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_demo" classname="itch.reconstruction_demo" time="0.0480514" status="run">
+		<properties/>
+		<system-out>SYNTHETIC ONLY; authored empty start; fixture SHA256=4acea8683fc2f669451c5585e78a799c142f1cc4a3676a810de96f35f179ba81
+source=0 type=S outcome=external context=1 native=0 external=1
+source=1 type=R outcome=external context=2 native=0 external=2
+source=2 type=R outcome=external context=3 native=0 external=3
+source=3 type=A outcome=native context=4 native=1 external=3
+source=4 type=A outcome=native context=5 native=2 external=3
+source=5 type=A outcome=native context=6 native=3 external=3
+source=6 type=E outcome=native context=7 native=4 external=3
+source=7 type=X outcome=native context=8 native=5 external=3
+source=8 type=D outcome=native context=9 native=6 external=3
+source=9 type=U outcome=native context=10 native=7 external=3
+source=10 type=P outcome=external context=11 native=7 external=4
+source=11 type=Q outcome=external context=12 native=7 external=5
+source=12 type=B outcome=external context=13 native=7 external=6
+book=1 journal=6 revision=6 remaining=15
+  orders [id,side_ascii,ticks,lots,FIFO_ticket]=[[103...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="itch.l3_oracle_negative_control" classname="itch.l3_oracle_negative_control" time="0.0773415" status="run">
+		<properties/>
+		<system-out>negative_controls=6 rejected=6
+sessions=32 source_candidates=186 rejected_candidates=25 seed=5255495 canonical_sha256=9b6eef506c280ffe84dba8dd64ee1761b372b5d5a68ea7c924a9393ea1a668e0
+</system-out>
+	</testcase>
+	<testcase name="market_data.aggregate_depth" classname="market_data.aggregate_depth" time="0.0143159" status="run">
+		<properties/>
+		<system-out>aggregate-depth:10000 independent transitions;2 injected failures;2 successful sweeps;exact metrics/sequence/atomicity/budgets pass
+</system-out>
+	</testcase>
+	<testcase name="observed.readiness_contracts" classname="observed.readiness_contracts" time="0.5062" status="run">
+		<properties/>
+		<system-out>lobster unknown-initialization/native subset/reference effect/allocation controls passed
+lobster authored parser/resource/atomicity checks passed
+{"canonical_sha256": "aa92cb56fa402ba4ee1c7aae0f1d4fb479839f3b08c85d7b728a1ceea4a8e3e8", "cases": 82, "observed_processed": false, "scope": "authored independent LOBSTER parser"}
+{"canonical_sha256": "9f3e7d3776c248cdf4636614a0385eb4a5cb2a43b0fd8fb74274971c178703ff", "full_l3_complete": false, "observed_processed": false, "scenarios": 12, "scope": "independent authored known-subset and observable reference effects", "source_rows": 32}
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.071s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.083s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_wire" classname="itch.auction_wire" time="0.00211905" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.auction_context" classname="itch.auction_context" time="0.00305972" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.auction_integration" classname="itch.auction_integration" time="0.00490842" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.auction_allocation" classname="itch.auction_allocation" time="0.00300892" status="run">
+		<properties/>
+		<system-out>auction_context_allocation_sites=3 observation_allocations=0 sizeof_message=48 sizeof_record=304
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_restart" classname="itch.auction_restart" time="0.00313832" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.auction_reference" classname="itch.auction_reference" time="0.975013" status="run">
+		<properties/>
+		<system-out>AUCTION independent wire_cases=40129 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6
+</system-out>
+	</testcase>
+	<testcase name="itch.auction_reference_negative_control" classname="itch.auction_reference_negative_control" time="1.20558" status="run">
+		<properties/>
+		<system-out>AUCTION independent wire_cases=40129 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=True canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6
+</system-out>
+	</testcase>
+	<testcase name="itch.admin_wire" classname="itch.admin_wire" time="0.0024836" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.admin_context" classname="itch.admin_context" time="0.00285028" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.admin_integration" classname="itch.admin_integration" time="0.00307244" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.admin_allocation" classname="itch.admin_allocation" time="0.00288993" status="run">
+		<properties/>
+		<system-out>admin_context_allocation_sites=3 observation_allocations=0 sizeof_message=48 sizeof_record=304
+</system-out>
+	</testcase>
+	<testcase name="itch.admin_restart" classname="itch.admin_restart" time="0.00308329" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.admin_reference" classname="itch.admin_reference" time="0.528631" status="run">
+		<properties/>
+		<system-out>ADMIN independent wire_cases=25233 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03
+</system-out>
+	</testcase>
+	<testcase name="itch.admin_reference_negative_control" classname="itch.admin_reference_negative_control" time="0.582178" status="run">
+		<properties/>
+		<system-out>ADMIN independent wire_cases=25233 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=True canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03
+</system-out>
+	</testcase>
+	<testcase name="itch.hy_wire" classname="itch.hy_wire" time="0.00286282" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.hy_context" classname="itch.hy_context" time="0.00305526" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.hy_fragments" classname="itch.hy_fragments" time="0.00281269" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.hy_integration" classname="itch.hy_integration" time="0.00253928" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.hy_allocation" classname="itch.hy_allocation" time="0.00614896" status="run">
+		<properties/>
+		<system-out>hy_creation_allocation_fault_sites=3 observation_allocations=0
+</system-out>
+	</testcase>
+	<testcase name="itch.hy_restart" classname="itch.hy_restart" time="0.00327414" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="itch.hy_reference" classname="itch.hy_reference" time="0.390916" status="run">
+		<properties/>
+		<system-out>HY independent synthetic oracle decode_cases=8002 context_candidates=16000 sessions=320 seed=917717 negative_control=False canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af
+</system-out>
+	</testcase>
+	<testcase name="itch.hy_reference_negative_control" classname="itch.hy_reference_negative_control" time="0.439737" status="run">
+		<properties/>
+		<system-out>HY independent synthetic oracle decode_cases=8002 context_candidates=16000 sessions=320 seed=917717 negative_control=True canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af
+</system-out>
+	</testcase>
+	<testcase name="itch.context_prepare" classname="itch.context_prepare" time="0.00380625" status="run">
+		<properties/>
+		<system-out>prepared context guards/ownership/allocation tests passed; token_bytes=1496
+</system-out>
+	</testcase>
+	<testcase name="execution.schedules" classname="execution.schedules" time="0.00292737" status="run">
+		<properties/>
+		<system-out>PASS: schedules, 24 checks
+</system-out>
+	</testcase>
+	<testcase name="execution.costs" classname="execution.costs" time="0.00366745" status="run">
+		<properties/>
+		<system-out>PASS: costs, 9 checks
+</system-out>
+	</testcase>
+	<testcase name="execution.integration" classname="execution.integration" time="0.00383716" status="run">
+		<properties/>
+		<system-out>schedule fault positions=6
+integration fault positions=44
+PASS: integration, 101 checks
+</system-out>
+	</testcase>
+	<testcase name="execution.cost_limits" classname="execution.cost_limits" time="0.00278576" status="run">
+		<properties/>
+		<system-out>PASS: cost_limits, 26 checks
+</system-out>
+	</testcase>
+	<testcase name="execution.independent_reference" classname="execution.independent_reference" time="0.211871" status="run">
+		<properties/>
+		<system-out>PASS: 5129 independent Fraction/integer arithmetic, apportionment, participation and cost cases; seed 6011
+</system-out>
+	</testcase>
+	<testcase name="simulation.basic" classname="simulation.basic" time="0.00273101" status="run">
+		<properties/>
+		<system-out>PASS: basic, 6 checks
+</system-out>
+	</testcase>
+	<testcase name="simulation.tif" classname="simulation.tif" time="0.0055223" status="run">
+		<properties/>
+		<system-out>PASS: tif, 8 checks
+</system-out>
+	</testcase>
+	<testcase name="simulation.latency" classname="simulation.latency" time="0.00297758" status="run">
+		<properties/>
+		<system-out>PASS: latency, 13 checks
+</system-out>
+	</testcase>
+	<testcase name="simulation.faults" classname="simulation.faults" time="0.00343908" status="run">
+		<properties/>
+		<system-out>real allocation failure positions=29
+PASS: faults, 96 checks
+</system-out>
+	</testcase>
+	<testcase name="simulation.reports" classname="simulation.reports" time="0.0019518" status="run">
+		<properties/>
+		<system-out>PASS: reports, 14 checks
+</system-out>
+	</testcase>
+	<testcase name="simulation.independent_reference" classname="simulation.independent_reference" time="0.284582" status="run">
+		<properties/>
+		<system-out>PASS: 1000 independent synthetic matching/cancel/client-report states; seeds 5,42,1729,2027
+</system-out>
+	</testcase>
+	<testcase name="analytics.flow_contracts" classname="analytics.flow_contracts" time="0.0027693" status="run">
+		<properties/>
+		<system-out>PASS: OFI, quote lag/tick signing, horizons, clock/order/gap/reset/age/sampling boundaries and exact hand references
+</system-out>
+	</testcase>
+	<testcase name="analytics.flow_reference" classname="analytics.flow_reference" time="0.138186" status="run">
+		<properties/>
+		<system-out>PASS: 2000 independent Fraction flow cases, seed 4099
+</system-out>
+	</testcase>
+	<testcase name="analytics.book_contracts" classname="analytics.book_contracts" time="0.00279684" status="run">
+		<properties/>
+		<system-out>PASS: hand calculations, missing states, malformed snapshots, exact boundaries, provenance and nonmutation
+</system-out>
+	</testcase>
+	<testcase name="analytics.book_reference" classname="analytics.book_reference" time="0.103277" status="run">
+		<properties/>
+		<system-out>PASS: 2650 independent Fraction book metric cases, seed 3071
+</system-out>
+	</testcase>
+	<testcase name="numeric.contracts" classname="numeric.contracts" time="0.00271594" status="run">
+		<properties/>
+		<system-out>numeric contracts: 0 failures
+</system-out>
+	</testcase>
+	<testcase name="numeric.independent_reference" classname="numeric.independent_reference" time="0.116227" status="run">
+		<properties/>
+		<system-out>PASS: 10624 independent integer/Fraction reference cases (seed 1729)
+</system-out>
+	</testcase>
+	<testcase name="benchmark.fixture_reference" classname="benchmark.fixture_reference" time="0.518255" status="run">
+		<properties/>
+		<system-out>PASS:16 fixture cases,4 seeds, counts1/16/512/2048; explicit fixed-width quantity-then-price reference
+</system-out>
+	</testcase>
+	<testcase name="benchmark.compiler_metadata" classname="benchmark.compiler_metadata" time="0.125005" status="run">
+		<properties/>
+		<system-out>test_missing_metadata_rejects_without_ambient_fallback (__main__.SelectedCompilerTests.test_missing_metadata_rejects_without_ambient_fallback) ... ok
+test_uses_selected_cache_compiler_with_spaces (__main__.SelectedCompilerTests.test_uses_selected_cache_compiler_with_spaces) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.005s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="replay.config" classname="replay.config" time="0.00291897" status="run">
+		<properties/>
+		<system-out>config: 8 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.continuity" classname="replay.continuity" time="0.00304218" status="run">
+		<properties/>
+		<system-out>continuity: 5 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.gaps" classname="replay.gaps" time="0.00300708" status="run">
+		<properties/>
+		<system-out>gaps: 13 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.subevents" classname="replay.subevents" time="0.00308779" status="run">
+		<properties/>
+		<system-out>subevents: 14 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.multistream" classname="replay.multistream" time="0.00252775" status="run">
+		<properties/>
+		<system-out>multistream: 19 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.filtering" classname="replay.filtering" time="0.00229043" status="run">
+		<properties/>
+		<system-out>filtering: 9 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.reset" classname="replay.reset" time="0.00303612" status="run">
+		<properties/>
+		<system-out>reset: 11 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.recovery" classname="replay.recovery" time="0.00335587" status="run">
+		<properties/>
+		<system-out>recovery: 13 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.atomicity" classname="replay.atomicity" time="0.00380856" status="run">
+		<properties/>
+		<system-out>replay allocation failure sites=32
+atomicity: 124 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.canonical" classname="replay.canonical" time="0.00631495" status="run">
+		<properties/>
+		<system-out>canonical: 7 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="replay.batch" classname="replay.batch" time="0.00334857" status="run">
+		<properties/>
+		<system-out>batch: 2 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.basic" classname="book.basic" time="0.00297471" status="run">
+		<properties/>
+		<system-out>basic: 24 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.cancel_execute" classname="book.cancel_execute" time="0.00205583" status="run">
+		<properties/>
+		<system-out>cancel_execute: 19 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.replace" classname="book.replace" time="0.00239636" status="run">
+		<properties/>
+		<system-out>replace: 14 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.boundaries" classname="book.boundaries" time="0.00290193" status="run">
+		<properties/>
+		<system-out>boundaries: 18 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.recovery" classname="book.recovery" time="0.00281255" status="run">
+		<properties/>
+		<system-out>recovery: 10 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.allocations" classname="book.allocations" time="0.00510145" status="run">
+		<properties/>
+		<system-out>allocation failure sites exercised=35
+allocations: 178 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="book.reference" classname="book.reference" time="0.111935" status="run">
+		<properties/>
+		<system-out>reference operations=20000, seeds=1,42,1729,999
+reference: 1317089 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.add" classname="event.add" time="0.00240142" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+add: 516 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.cancel" classname="event.cancel" time="0.00238986" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+cancel: 8 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.replace" classname="event.replace" time="0.00277412" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+replace: 12 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.trade" classname="event.trade" time="0.00279627" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+trade: 16 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.quote" classname="event.quote" time="0.00332577" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+quote: 16 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.reset" classname="event.reset" time="0.00414896" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+reset: 18 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.session" classname="event.session" time="0.00252465" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+session: 14 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.snapshot" classname="event.snapshot" time="0.00272624" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+snapshot: 55 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.metadata" classname="event.metadata" time="0.00269434" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+metadata: 39 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.timestamps" classname="event.timestamps" time="0.00267162" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+timestamps: 15 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="event.provenance" classname="event.provenance" time="0.00301409" status="run">
+		<properties/>
+		<system-out>owned MarketEvent bytes=12208
+provenance: 46 checks, 0 failures
+</system-out>
+	</testcase>
+	<testcase name="types.valid_buy" classname="types.valid_buy" time="0.00287895" status="run">
+		<properties/>
+		<system-out>PASS: valid_buy
+</system-out>
+	</testcase>
+	<testcase name="types.valid_sell" classname="types.valid_sell" time="0.00308084" status="run">
+		<properties/>
+		<system-out>PASS: valid_sell
+</system-out>
+	</testcase>
+	<testcase name="types.zero_id" classname="types.zero_id" time="0.00268635" status="run">
+		<properties/>
+		<system-out>PASS: zero_id
+</system-out>
+	</testcase>
+	<testcase name="types.zero_price" classname="types.zero_price" time="0.00263415" status="run">
+		<properties/>
+		<system-out>PASS: zero_price
+</system-out>
+	</testcase>
+	<testcase name="types.negative_price" classname="types.negative_price" time="0.00256254" status="run">
+		<properties/>
+		<system-out>PASS: negative_price
+</system-out>
+	</testcase>
+	<testcase name="types.zero_quantity" classname="types.zero_quantity" time="0.00285761" status="run">
+		<properties/>
+		<system-out>PASS: zero_quantity
+</system-out>
+	</testcase>
+	<testcase name="types.zero_based_sequence" classname="types.zero_based_sequence" time="0.00266809" status="run">
+		<properties/>
+		<system-out>PASS: zero_based_sequence
+</system-out>
+	</testcase>
+	<testcase name="types.max_price" classname="types.max_price" time="0.002892" status="run">
+		<properties/>
+		<system-out>PASS: max_price
+</system-out>
+	</testcase>
+	<testcase name="types.max_quantity" classname="types.max_quantity" time="0.00297021" status="run">
+		<properties/>
+		<system-out>PASS: max_quantity
+</system-out>
+	</testcase>
+	<testcase name="types.max_id" classname="types.max_id" time="0.00222804" status="run">
+		<properties/>
+		<system-out>PASS: max_id
+</system-out>
+	</testcase>
+	<testcase name="types.max_sequence" classname="types.max_sequence" time="0.00273875" status="run">
+		<properties/>
+		<system-out>PASS: max_sequence
+</system-out>
+	</testcase>
+	<testcase name="harness.failure_is_nonzero" classname="harness.failure_is_nonzero" time="0.0081915" status="run">
+		<properties/>
+		<system-out>-- Verified expected exit 1: FAIL: deliberate_failure
+</system-out>
+	</testcase>
+	<testcase name="demo.smoke" classname="demo.smoke" time="0.00357041" status="run">
+		<properties/>
+		<system-out>GIG C++ Microstructure Engine: Phase 2 deterministic replay ready
+SYNTHETIC fixture: orders=2 remaining_lots=30 journal_records=11
+</system-out>
+	</testcase>
+	<testcase name="replay.journal_model" classname="replay.journal_model" time="0.0631413" status="run">
+		<properties/>
+		<system-out>journal_churn_cycles=32 accepted_events=4128 peak_pmr=4727264 allocations=35552 deallocations=35552
+</system-out>
+	</testcase>
+	<testcase name="replay.journal_allocation" classname="replay.journal_allocation" time="0.00285839" status="run">
+		<properties/>
+		<system-out>reset allocation failure sites=16
+</system-out>
+	</testcase>
+	<testcase name="replay.journal_preoptimization_equivalence" classname="replay.journal_preoptimization_equivalence" time="0.0532881" status="run">
+		<properties/>
+		<system-out>{"independent_state_model": "separately executed by model mode", "pre_optimization_equivalent": true, "prefixes": 128, "trace_sha256": "52e4a35f05f279891d10f25453196bfbd8fb38f5a0448224e681b70304e37fc8"}
+</system-out>
+	</testcase>
+	<testcase name="benchmark.correctness" classname="benchmark.correctness" time="0.00292162" status="run">
+		<properties/>
+		<system-out>{"standard_library":"libstdc++-20250315","scope":"validated_add_order_payload_only","workload_version":2,"events":1024,"seed":42,"batches":2,"warmup":1,"repetitions":2,"threads":1,"instrument_max_price_ticks":1000000,"oracle_valid_per_batch":384,"workload_fnv1a64":"2968649453516677556","samples":[{"elapsed_ns":8028,"checked_count":768},{"elapsed_ns":7552,"checked_count":768}]}
+</system-out>
+	</testcase>
+	<testcase name="benchmark.reject_0" classname="benchmark.reject_0" time="0.00658411" status="run">
+		<properties/>
+		<system-out>-- Verified expected exit 1: argument out of range
+</system-out>
+	</testcase>
+	<testcase name="benchmark.reject_bad" classname="benchmark.reject_bad" time="0.0111396" status="run">
+		<properties/>
+		<system-out>-- Verified expected exit 1: argument out of range
+</system-out>
+	</testcase>
+	<testcase name="benchmark.book_smoke" classname="benchmark.book_smoke" time="0.0421796" status="run">
+		<properties/>
+		<system-out>PASS: 8 correctness-gated workloads, sample counts, canonical artifacts and invalid CLI
+</system-out>
+	</testcase>
+	<testcase name="itch.benchmark_correctness" classname="itch.benchmark_correctness" time="0.0485768" status="run">
+		<properties/>
+		<system-out>{"canonical": {"buffer_bytes": 65535, "bytes": 38002, "checksum": 1001101000, "fixture_fnv1a64": 11420996094707702053, "records": 1000, "repetitions": 3}, "independent_fixture_sha256": "e95dc26b867ad2a0f912e8953347b5f70735f612c62ac51ce020f7fb22448dd9"}
+</system-out>
+	</testcase>
+	<testcase name="itch.context_benchmark_correctness" classname="itch.context_benchmark_correctness" time="0.0329476" status="run">
+		<properties/>
+		<system-out>{"canonical": {"allocations": 3, "checksum": 800, "fixture_fnv1a64": 7967916050227752611, "lifetime_orders": 64, "matches": 32, "records": 130, "repetitions": 3, "retired_orders": 64, "warmups": 2}, "independent_payload_sha256": "a4a12ccf1e55553f38c531b9ec435796943636e016d20536f1e2100951d84e95"}
+</system-out>
+	</testcase>
+	<testcase name="itch.reconstruction_benchmark_correctness" classname="itch.reconstruction_benchmark_correctness" time="0.0699737" status="run">
+		<properties/>
+		<system-out>{"canonical": [{"checksum": 100, "container_complete": false, "external_records": 3, "fixture_sha256": "e4f66f7fda2b2e9c8ffde201ef8b65c7e0146342e56741673bacb29fc01a9eaa", "initialization": "authored_complete_empty_synthetic", "input_bytes": 362, "journal_records_per_symbol": 4, "lifetime_orders": 4, "live_bytes_after_destroy": 0, "matches": 2, "native_records": 8, "orders_per_symbol": 1, "receipt_fnv1a64": 6655083600617945710, "records": 11, "repetitions": 3, "seed": 5255495, "symbols": 2, "warmups": 2, "workload": "synthetic_two_book_reconstruction_v1"}, {"checksum": 6400, "container_complete": false, "external_records": 3, "fixture_sha256": "5c0c19b59f8d1cf69f2aedbc2dd61319980ac9d32fad3888fa362880ee89bfec", "initialization": "authored_complete_empty_synthetic", "input_bytes": 2224, "journal_records_per_symbol": 32, "lifetime_orders": 32, "live_bytes_after_destroy": 0, "matches": 16, "native_records": 64, "orders_per_symbol": 8, "receipt_fnv1a64": 5707264075945669542, "records": 67, "repetitions": 3, "seed":...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="itch.profile_probe" classname="itch.profile_probe" time="0.301838" status="run">
+		<properties/>
+		<system-out>{"allocation_profile": "full_128_order_sweep", "fixture_sha256": "9180c359dd0a21ef72f3c28638d2d9e304de106295115f0154077998d1b489eb", "independent_checks": "passed", "negative_controls": 5, "peak_pmr": 60176462, "profile": "128_live_1024_journal_per_book", "query_allocation_failures_reached": 45}
+</system-out>
+	</testcase>
+	<testcase name="itch.streaming_benchmark_correctness" classname="itch.streaming_benchmark_correctness" time="0.119772" status="run">
+		<properties/>
+		<system-out>{"canonical": [{"accepted_prefix_bytes": 2294, "accepted_prefix_sha256": "1bf891bef168b635eacbb25517992dc58d0a5994ab888ffbe393c6846a43a41b", "active_orders": 0, "compressed_bytes": 2319, "compressed_sha256": "e28080da328dc6eb6b2008e07be3dfcb2ecc97b2f6035420bd4838c96395e939", "compression_fixture": "manual_RFC1951_stored_blocks", "decompressed_bytes": 2296, "decompressed_sha256": "660d64a4f9c96a045860e33dfdb0f00e088663c141318f05e4e0c54562fe14e8", "external_records": 8, "initialization": "authored_complete_empty_synthetic", "journal_records_per_symbol": 32, "lifetime_orders": 32, "live_bytes_after_destroy": 0, "matches": 16, "native_records": 64, "observed_market_validated": false, "orders_per_symbol": 8, "publication_eligible": true, "receipt_fnv1a64": 14992302548165670836, "records": 72, "retired_orders": 32, "seed": 5255495, "session_complete": true, "source_complete": true, "symbols": 2, "workload": "synthetic_two_book_gzip_streaming_v1"}, {"accepted_prefix_bytes": 8678, "accepted_prefix_sha256": "5a5d1471b...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="itch.decode_timing_contract" classname="itch.decode_timing_contract" time="0.0428328" status="run">
+		<properties/>
+		<system-out>decode timing arithmetic/nearest-rank controls passed; no performance gate or exchange latency claim
+</system-out>
+	</testcase>
+	<testcase name="replay.journal_memory_accounting" classname="replay.journal_memory_accounting" time="0.0622328" status="run">
+		<properties/>
+		<system-out>6 journal storage cases: exact independent byte accounting and cleanup; invalid-input control passed
+</system-out>
+	</testcase>
+</testsuite>

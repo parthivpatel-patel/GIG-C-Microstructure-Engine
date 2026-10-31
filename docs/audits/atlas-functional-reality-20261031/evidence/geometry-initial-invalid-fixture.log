@@ -1,0 +1,38 @@
+✔ height:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (7.484941ms)
+✔ canyon:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.98858ms)
+✔ events:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.525837ms)
+✔ vwap:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.784164ms)
+✔ flow:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.125125ms)
+✔ wheel:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.044916ms)
+✖ dome:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.162468ms)
+✔ ribbon:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (2.188178ms)
+✔ Level1 quotes:changing input,empty,flat,extreme,state,independent formula (1.471497ms)
+✔ Level1 comparison:changing input,empty,flat,extreme,state,independent formula (0.486831ms)
+✔ Level1 volatility:changing input,empty,flat,extreme,state,independent formula (0.376647ms)
+✔ Level1 trades:changing input,empty,flat,extreme,state,independent formula (0.164983ms)
+✔ GARCH:all441 mathematical vertices,flat/increase/decrease/missing/extreme parameters (1.602815ms)
+✔ Independent VPIN/VWAP direction/volume arithmetic,not depth-implied flow (0.577962ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 142.607532
+
+✖ failing tests:
+
+test at ../geometry.mjs:11:2
+✖ dome:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.162468ms)
+  SyntaxError: Cannot convert 337.5 to a BigInt
+      at BigInt (<anonymous>)
+      at buildResearchPlot (file:///workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/web/src/research3d.ts:120:156)
+      at plot (file:///workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/geometry.mjs:13:18)
+      at TestContext.<anonymous> (file:///workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/geometry.mjs:24:199)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

@@ -1,0 +1,42 @@
+/workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+INFO:     Started server process [36823]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18797 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57958 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60948 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60950 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60950 - "GET /assets/index-CtUAn7tb.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60960 - "GET /assets/index-Bi5AfQUv.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60950 - "GET /assets/ResearchDesk-CDZSGSfS.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60960 - "GET /assets/marketContract-DM0W2FhH.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60964 - "GET /assets/directoryContract-BVrwTy34.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60960 - "GET /api/v1/state HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60964 - "GET /api/v1/catalog HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60950 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60984 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60974 - "GET /api/v1/recordings HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60994 - "POST /api/v1/stream-ticket HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60974 - "GET /api/v2/securities/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:32778 - "WebSocket /api/v1/stream" [accepted]
+INFO:     connection open
+INFO:     127.0.0.1:60974 - "GET /assets/LiveMarket-D41Z_HOV.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60974 - "GET /assets/ResearchLab-CmT1D0hM.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /assets/ResearchLab-gFa97j1M.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /api/v1/stocks/market-search?q= HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60974 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60974 - "POST /api/v1/stocks/events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "POST /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60984 - "GET /api/v1/stocks/live HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60984 - "GET /assets/ResearchScene-BqEwU2zB.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /assets/OrbitControls-Cv-8zGjJ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /assets/QuoteCloud-DLBFxLuz.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60994 - "GET /api/v1/request-proof HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36823]

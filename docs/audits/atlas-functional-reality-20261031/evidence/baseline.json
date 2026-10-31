@@ -1,0 +1,14 @@
+{
+  "repository": "parthivpatel-patel/GIG-C-Microstructure-Engine",
+  "audited_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+  "source_branch": "fix/atlas-private-qualification-2",
+  "audit_branch": "audit/atlas-functional-reality-20261031",
+  "remote_candidate_verified": true,
+  "source_tree_clean": true,
+  "application_changes_authorized": false,
+  "provider_calls_authorized": false,
+  "orders_authorized": false,
+  "cloud_current": true,
+  "cloud_network_policy_enforced": true,
+  "cloud_secret_bindings": 0
+}

@@ -1,0 +1,11 @@
+/workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+INFO:     Started server process [36833]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18798 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52726 - "GET /api/v1/health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [36833]

@@ -1,0 +1,15 @@
+[
+  {
+    "path": "frontend-build.log",
+    "raw_sha256": "f40ea8c988392821a085163a4ff44e753fc28b3264523ba838e349d324dcc879",
+    "published_sha256": "d26da2f9689b4149a973a74c37b11000d508830d46a0fe164d3124c0aefc9d5f",
+    "change": "Trailing ASCII whitespace/newline only;warning content preserved;raw original remains in ignored build evidence"
+  },
+  {
+    "artifact_path": "FEATURE_INVENTORY.csv",
+    "path_base": "audit_report_directory",
+    "raw_sha256": "6f06a5c1acaf5f2015eec7d78a33fb3247abe895d2e14984fc8626a2c974aab5",
+    "published_sha256": "e505b56da670a7fcde5f6dc38c514936d110a39601120776c37c466ec967e212",
+    "change": "CSV CRLF to LF only;DictReader semantic records identical;not application/test changes"
+  }
+]

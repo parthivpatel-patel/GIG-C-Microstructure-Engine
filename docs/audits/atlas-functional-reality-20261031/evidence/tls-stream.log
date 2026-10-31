@@ -1,0 +1,89 @@
+{
+  "schema": "gig.codespaces.rewritten_origin_tls.v1",
+  "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled",
+  "checks": [
+    "TLS verified actual frontend HTML",
+    "TLS proxy actual C++ state",
+    "forwarded HTTPS Origin mutates native prefix",
+    "foreign Origin denied behind TLS proxy",
+    "two verified WSS upgrades101 preserve native prefix",
+    "actual proxy Origin/Host/HTTPS header capture"
+  ],
+  "passed": 6,
+  "failed": 0,
+  "captured_proxy_headers": {
+    "schema_version": "1",
+    "policy_version": "codespaces-request-proof-v4",
+    "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+    "configured_origins": [
+      "https://authored-tls-check-8787.app.github.dev"
+    ],
+    "request": {
+      "origin": "https://authored-tls-check-8787.app.github.dev",
+      "host": "127.0.0.1:37117",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "https"
+    },
+    "last_mutation": {
+      "origin": "https://authored-tls-check-8787.app.github.dev",
+      "host": "127.0.0.1:37117",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "https",
+      "decision": "allowed",
+      "authorization": "exact_origin",
+      "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+      "failure_condition": null
+    },
+    "last_websocket": {
+      "origin": "http://localhost:8787",
+      "host": "localhost:8787",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "wss",
+      "has_application_protocol": true,
+      "has_stream_proof": true,
+      "decision": "accepted",
+      "authorization": "accepted_codespaces_rewrite_ticket",
+      "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+      "upgrade_status": 101
+    },
+    "last_browser_bootstrap": {
+      "origin": "https://authored-tls-check-8787.app.github.dev",
+      "host": "127.0.0.1:37117",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "https",
+      "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+      "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+      "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+      "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+      "decision": "issued"
+    },
+    "last_request_proof_bootstrap": null,
+    "last_authenticated_websocket": {
+      "origin": "http://localhost:8787",
+      "host": "localhost:8787",
+      "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+      "x_forwarded_proto": "https",
+      "x_forwarded_port": "443",
+      "asgi_scheme": "wss",
+      "has_application_protocol": true,
+      "has_stream_proof": true,
+      "decision": "accepted",
+      "authorization": "accepted_codespaces_rewrite_ticket",
+      "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+      "upgrade_status": 101
+    },
+    "connected_clients": 2,
+    "maximum_clients": 8,
+    "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+    "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers"
+  },
+  "scope": "Test proxy deliberately rewrites Origin+Host exactly as reported;HTTPS proof minted with unchanged approved Origin. Not identification of the owner rewriting component."
+}

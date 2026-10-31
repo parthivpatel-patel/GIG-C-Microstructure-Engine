@@ -1,0 +1,11 @@
+{
+  "schema": "gig.functional.audit.startup.v1",
+  "source_sha": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+  "seconds_to_first_successful_health": 0.35547968900209526,
+  "poll_interval_seconds": 0.025,
+  "single_warm_filesystem_launch": true,
+  "backend_native": true,
+  "source": "AUTHORED_NATIVE_REPLAY_EMPTY_PROVIDER_ENVIRONMENT",
+  "scope": "Import/native initialization/Uvicorn-to-first-health;not remote browser latency",
+  "sigterm_to_exit_seconds": 0.2139422390027903
+}

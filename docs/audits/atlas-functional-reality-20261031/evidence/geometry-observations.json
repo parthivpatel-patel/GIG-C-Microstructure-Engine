@@ -1,0 +1,145 @@
+{
+  "scope": "Independent authored changing-input numerical tests;not actual market validation",
+  "models": [
+    {
+      "model": "height",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 8,
+      "axes": [
+        "SOURCE PRICE (linear occupied range)",
+        "DISPLAYED QUANTITY (linear)",
+        "CAPTURE ORDINAL (not elapsed time)"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "canyon",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 8,
+      "axes": [
+        "SIGNED PRICE DISTANCE FROM EACH MID",
+        "CUMULATIVE SIDE QUANTITY",
+        "CAPTURE ORDINAL (not elapsed time)"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "events",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 2,
+      "axes": [
+        "SOURCE EVENT PRICE",
+        "EVENT QUANTITY",
+        "CAPTURE ORDINAL"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "vwap",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 2,
+      "axes": [
+        "SOURCE PRICE",
+        "CUMULATIVE EXECUTED QUANTITY",
+        "CAPTURE ORDINAL"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "flow",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 2,
+      "axes": [
+        "CAPTURE ORDINAL",
+        "DECLARED EXECUTION QUANTITY",
+        "BUY (+) / SELL (−) FLOW"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "wheel",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 8,
+      "axes": [
+        "ANGLE = SIDE / OCCUPIED LEVEL RANK",
+        "CAPTURE ORDINAL",
+        "RADIUS = DISPLAYED QUANTITY"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "dome",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 4,
+      "axes": [
+        "CAPTURE ORDINAL",
+        "ROLLING LOG-MID VARIATION",
+        "DECORATIVE CROSS-SECTION (no market axis)"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "ribbon",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 24,
+      "axes": [
+        "CAPTURE ORDINAL",
+        "SOURCE BID / ASK PRICE",
+        "BID / ASK EDGE"
+      ],
+      "limits": "Normalized geometry may be unchanged by uniform rescaling;no motion is fabricated"
+    },
+    {
+      "model": "L1-quotes",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 24
+    },
+    {
+      "model": "L1-comparison",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 12
+    },
+    {
+      "model": "L1-volatility",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 4
+    },
+    {
+      "model": "L1-trades",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "marks": 12
+    },
+    {
+      "model": "GARCH-response",
+      "classification": "SIMULATED",
+      "data_driven_mapping": true,
+      "provider_verified": false,
+      "vertices": 441,
+      "limits": "No stale/disconnected market input applies;declared parameter model,not observed surface"
+    }
+  ]
+}

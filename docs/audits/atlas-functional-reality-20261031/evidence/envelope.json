@@ -1,0 +1,42 @@
+{
+  "source_head": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+  "source_dirty": false,
+  "schema": "gig.remediation.envelope.v1",
+  "source": "AUTHORED_SYNTHETIC_ONLY",
+  "platform": "x86_64",
+  "input_events": 5000,
+  "source_records": {
+    "receipts": 5000,
+    "evicted": 4744,
+    "history": 256,
+    "dedup": 256
+  },
+  "elapsed_seconds": 1.5878585270002077,
+  "fixture_processing_events_per_second": 3148.895140832245,
+  "python_tracked_current_bytes": 914023,
+  "python_tracked_peak_bytes": 945808,
+  "peak_process_RSS_KiB": 36984,
+  "cpu_user_seconds": 2.149498,
+  "cpu_system_seconds": 0.02726,
+  "concentration_ns_per_call": [
+    573279.33,
+    551983.05,
+    546093.12,
+    540418.07,
+    574362.41
+  ],
+  "concentration_workload": "40uint64-max levels;1warmup,5samples each100calls;tracemalloc enabled",
+  "accepted_count_identity_sha256": "6c9864f30b712520a232bf2c4bc69eea5ba35872c51d349c462a762d41eb01a6",
+  "limits": {
+    "address_space_bytes": 536870912,
+    "cpu_soft_seconds": 20,
+    "cpu_hard_seconds": 22,
+    "single_output_file_bytes": 33554432,
+    "parent_wall_timeout_seconds": 30
+  },
+  "limitations": [
+    "Not exchange throughput or one-way latency",
+    "Tracemalloc overhead/shared-host contention included;not a speedup benchmark",
+    "Virtual-address cap is not a global RSS quota;browser/native resources separate"
+  ]
+}

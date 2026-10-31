@@ -1,0 +1,38 @@
+{
+  "images": [
+    {
+      "path": "legacy-landscape-authored.png",
+      "sha256": "ae93618779b00efc262ab3d3db30e5bb0b3c005b8b2fd14c020ab0ac11fa51be",
+      "bytes": 38704,
+      "origin": "HISTORICAL_SYNTHETIC_ONLY",
+      "visually_inspected_here": true
+    },
+    {
+      "path": "legacy-options-authored.png",
+      "sha256": "da633c5d6bf453ce57dfe0cb4ac6118b52a59c913428d2ca2410594593d06df3",
+      "bytes": 19365,
+      "origin": "HISTORICAL_SYNTHETIC_ONLY",
+      "visually_inspected_here": false
+    },
+    {
+      "path": "height-synthetic-desktop.png",
+      "sha256": "2307d42c8889cdd9edfda0330cc3d562af9c5b4a69c4a6eeb625ec0a32c831e2",
+      "bytes": 152931,
+      "origin": "HISTORICAL_SYNTHETIC_ONLY",
+      "visually_inspected_here": false
+    },
+    {
+      "path": "ribbon-synthetic-mobile-dark.png",
+      "sha256": "5cc823e0d02401de812ccaf25d5b557b22026be6422bee1837251b47d7518030",
+      "bytes": 140399,
+      "origin": "HISTORICAL_SYNTHETIC_ONLY",
+      "visually_inspected_here": true
+    }
+  ],
+  "other_render_receipts": "advanced-browser.json",
+  "notes": [
+    "Cropped legacy canvas has adjacent UI legend outside image",
+    "Mobile ribbon capture includes focused skip link;pointer impact remains unverified",
+    "No observed market rows,provider images or owner screenshots"
+  ]
+}

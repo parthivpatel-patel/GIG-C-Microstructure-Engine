@@ -1,0 +1,17 @@
+{
+  "schema": "gig.audit.response_budget.v1",
+  "finding": "S3-BUDGET",
+  "reproduced": true,
+  "pass": false,
+  "application_expected_limit_bytes": 2097152,
+  "authored_chunked_response_bytes": 3145728,
+  "resource": {
+    "decodedBodySize": 3145728,
+    "encodedBodySize": 3145728,
+    "transferSize": 3146028
+  },
+  "client_rejection_visible": false,
+  "optional_catalog_error_swallowed": true,
+  "actual_text_characters_consumed": 3145728,
+  "scope": "Production generic decoded() reads all text before budget check when Content-Length absent;controlled local synthetic endpoint only;no application source edits"
+}

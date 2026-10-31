@@ -1,0 +1,7 @@
+/workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/test_codespaces_origin.py:5: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+.......................................................
+----------------------------------------------------------------------
+Ran 55 tests in 3.121s
+
+OK

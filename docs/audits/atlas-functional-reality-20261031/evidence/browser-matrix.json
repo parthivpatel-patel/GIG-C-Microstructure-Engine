@@ -1,0 +1,17 @@
+[
+  {
+    "script": "workspace-qualification",
+    "exit_code": 0,
+    "seconds": 11.384049847001734
+  },
+  {
+    "script": "stock-intelligence-validation",
+    "exit_code": 1,
+    "seconds": 3.61613373399814
+  },
+  {
+    "script": "advanced-research-validation",
+    "exit_code": 0,
+    "seconds": 23.118806209000468
+  }
+]

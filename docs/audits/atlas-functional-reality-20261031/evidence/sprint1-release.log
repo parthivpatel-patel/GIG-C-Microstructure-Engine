@@ -1,0 +1,34 @@
+/workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/stocks/test_remediation_options.py:7: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+test_boundaries_and_adjacent_inputs_preserve_base_metrics (terminal.stocks.test_remediation_options.ScenarioDomain.test_boundaries_and_adjacent_inputs_preserve_base_metrics) ... ok
+test_extreme_valid_cross_parameters_are_finite (terminal.stocks.test_remediation_options.ScenarioDomain.test_extreme_valid_cross_parameters_are_finite) ... ok
+test_invalid_nonfinite_and_huge_parameters_reject (terminal.stocks.test_remediation_options.ScenarioDomain.test_invalid_nonfinite_and_huge_parameters_reject) ... ok
+test_ordinary_grid_preserves_all_153_original_cells (terminal.stocks.test_remediation_options.ScenarioDomain.test_ordinary_grid_preserves_all_153_original_cells) ... ok
+test_boundary_http_success_without_native_mutation (terminal.stocks.test_remediation_options.ScenarioHTTP.test_boundary_http_success_without_native_mutation) ... ok
+test_invalid_inputs_still_fail_closed (terminal.stocks.test_remediation_options.ScenarioHTTP.test_invalid_inputs_still_fail_closed) ... ok
+test_unauthorized_origin_still_rejected (terminal.stocks.test_remediation_options.ScenarioHTTP.test_unauthorized_origin_still_rejected) ... ok
+test_asymmetric_side_selection_and_partial_depth (terminal.test_concentration.Concentration.test_asymmetric_side_selection_and_partial_depth) ... ok
+test_bounded_exhaustive_decimal_oracle (terminal.test_concentration.Concentration.test_bounded_exhaustive_decimal_oracle) ... ok
+test_empty_zero_denominator_and_zero_level_are_distinct (terminal.test_concentration.Concentration.test_empty_zero_denominator_and_zero_level_are_distinct) ... ok
+test_equal_and_concentrated_independent_hand_values (terminal.test_concentration.Concentration.test_equal_and_concentrated_independent_hand_values) ... ok
+test_extreme_quantities_are_exact_without_overflow (terminal.test_concentration.Concentration.test_extreme_quantities_are_exact_without_overflow) ... ok
+test_malformed_levels_and_budgets_fail_closed (terminal.test_concentration.Concentration.test_malformed_levels_and_budgets_fail_closed) ... ok
+test_provenance_and_unavailable_source_never_upgraded (terminal.test_concentration.Concentration.test_provenance_and_unavailable_source_never_upgraded) ... ok
+test_gated_live_mode_does_not_fabricate_depth (terminal.test_concentration.ConcentrationAPI.test_gated_live_mode_does_not_fabricate_depth) ... ok
+test_query_contract_and_duplicate_keys (terminal.test_concentration.ConcentrationAPI.test_query_contract_and_duplicate_keys) ... ok
+test_versioned_readonly_endpoint_and_state_are_consistent (terminal.test_concentration.ConcentrationAPI.test_versioned_readonly_endpoint_and_state_are_consistent) ... ok
+test_client_and_payload_exhaustion_are_explicit (terminal.test_research_resources.BrowserPush.test_client_and_payload_exhaustion_are_explicit) ... ok
+test_five_thousand_burst_quiet_and_reconnect_prefixes_stay_bounded (terminal.test_research_resources.BrowserPush.test_five_thousand_burst_quiet_and_reconnect_prefixes_stay_bounded) ... Executing <Task finished name='Task-73' coro=<BrowserPush.test_five_thousand_burst_quiet_and_reconnect_prefixes_stay_bounded() done, defined at /workspace/GIG-C-Microstructure-Engine/build/functional-reality-audit/worktree/terminal/test_research_resources.py:96> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.156 seconds
+ok
+test_quiet_source_coalesces_checks_and_emits_heartbeat (terminal.test_research_resources.BrowserPush.test_quiet_source_coalesces_checks_and_emits_heartbeat) ... ok
+test_real_send_timeout_cleans_up_without_disabling_deadline (terminal.test_research_resources.BrowserPush.test_real_send_timeout_cleans_up_without_disabling_deadline) ... ok
+test_slow_reader_in_flight_bytes_and_cancellation_cleanup (terminal.test_research_resources.BrowserPush.test_slow_reader_in_flight_bytes_and_cancellation_cleanup) ... ok
+test_health_exposes_local_resources_without_source_loss_claims (terminal.test_research_resources.ResourceHTTP.test_health_exposes_local_resources_without_source_loss_claims) ... ok
+test_cancellation_reports_physical_worker_until_drain (terminal.test_research_resources.Workers.test_cancellation_reports_physical_worker_until_drain) ... ok
+test_repeated_success_and_failure_preserve_admission_budget (terminal.test_research_resources.Workers.test_repeated_success_and_failure_preserve_admission_budget) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 2.878s
+
+OK
+REMEDIATION_COUNTS={"tests": 25, "failures": 0, "errors": 0, "skipped": 0}

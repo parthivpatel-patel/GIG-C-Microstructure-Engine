@@ -1,0 +1,22 @@
+✔ height:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (7.583352ms)
+✔ canyon:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.176569ms)
+✔ events:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.884337ms)
+✔ vwap:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.0731ms)
+✔ flow:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.029186ms)
+✔ wheel:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.953891ms)
+✔ dome:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (0.935805ms)
+✔ ribbon:deterministic changing input,zero change,empty,stale,disconnected,extremes,units (1.588508ms)
+✔ Level1 quotes:changing input,empty,flat,extreme,state,independent formula (1.215068ms)
+✔ Level1 comparison:changing input,empty,flat,extreme,state,independent formula (0.454036ms)
+✔ Level1 volatility:changing input,empty,flat,extreme,state,independent formula (0.517449ms)
+✔ Level1 trades:changing input,empty,flat,extreme,state,independent formula (0.423267ms)
+✔ GARCH:all441 mathematical vertices,flat/increase/decrease/missing/extreme parameters (1.479568ms)
+✔ Independent VPIN/VWAP direction/volume arithmetic,not depth-implied flow (0.248572ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.50767

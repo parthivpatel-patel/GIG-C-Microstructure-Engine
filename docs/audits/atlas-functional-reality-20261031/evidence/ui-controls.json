@@ -1,0 +1,3104 @@
+[
+  {
+    "path": "terminal/web/src/AcceptanceView.tsx",
+    "line": 3,
+    "tag": "summary",
+    "label": "Acceptance-time retained-cache research",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/AcceptanceView.tsx",
+    "line": 3,
+    "tag": "input",
+    "label": "Filing acceptance cutoff",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/AcceptanceView.tsx",
+    "line": 3,
+    "tag": "button",
+    "label": "Read acceptance-qualified cache",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{!at||busy}"
+  },
+  {
+    "path": "terminal/web/src/AlignedStatements.tsx",
+    "line": 10,
+    "tag": "button",
+    "label": "{busy?'Loading aligned reported periods…':'Load aligned reported periods'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/AlignedStatements.tsx",
+    "line": 10,
+    "tag": "summary",
+    "label": "Exact reported value",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/AlignedStatements.tsx",
+    "line": 10,
+    "tag": "summary",
+    "label": "Selected-component accounting consistency checks",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 24,
+    "tag": "summary",
+    "label": "{label}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 46,
+    "tag": "dialog",
+    "label": "<h2 id=\"atlas-help-title\">Research with explicit evidence</h2> <p>Stock Intelligence separates reported financial facts, cached source responses and theoretical models. Missing val",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 46,
+    "tag": "button",
+    "label": "Close help",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 46,
+    "tag": "a",
+    "label": "Skip to workspace",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 47,
+    "tag": "a",
+    "label": "GIG ATLAS Microstructure Research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 47,
+    "tag": "button",
+    "label": "{name}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "button",
+    "label": "Toggle workspace navigation",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "input",
+    "label": "Global company search",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "button",
+    "label": "Search companies",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "button",
+    "label": "{r.symbol} · {r.company_name}",
+    "handler": [
+      "onClick"
+    ],
+    "type": "button",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "button",
+    "label": "Toggle color theme",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 48,
+    "tag": "button",
+    "label": "Research help",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 49,
+    "tag": "select",
+    "label": "Operating mode",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy||!state||equityWorkspace}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "{value}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 51,
+    "tag": "button",
+    "label": "Dismiss error",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "select",
+    "label": "Live provider",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "option",
+    "label": "Kraken · review required",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "option",
+    "label": "Coinbase Exchange · review required",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "select",
+    "label": "Live instrument",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "option",
+    "label": "BTC/USD",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "option",
+    "label": "ETH/USD",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "select",
+    "label": "Live depth",
+    "handler": [],
+    "type": null,
+    "disabled": true
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "option",
+    "label": "10 levels per side",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "button",
+    "label": "Connect public feed",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 61,
+    "tag": "button",
+    "label": "Disconnect feed",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "select",
+    "label": "Replay source",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy||state.mode!=='HISTORICAL_REPLAY'}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "option",
+    "label": "Selected recorded L2 session",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "option",
+    "label": "Native L3 authored scenario",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "option",
+    "label": "Provider-shaped aggregate L2 fixture",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "select",
+    "label": "Recorded L2 session",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "option",
+    "label": "Select a private session",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "option",
+    "label": "{s.identity} · {s.instrument} · {s.origin} · {s.status}",
+    "handler": [],
+    "type": null,
+    "disabled": "{s.status!=='AVAILABLE'}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "button",
+    "label": "Save authored L2 recording",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "button",
+    "label": "Load L2 session",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live||!selectedSession}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "button",
+    "label": "Delete L2 session",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live||!selectedSession}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "button",
+    "label": "Start permitted recording",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||state.provider!=='kraken'||state.feed.state!=='LIVE_VERIFIED'}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 62,
+    "tag": "button",
+    "label": "Stop recording",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 64,
+    "tag": "button",
+    "label": "Pause visualization",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "select",
+    "label": "Execution algorithm",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "option",
+    "label": "TWAP",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "option",
+    "label": "VWAP",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "option",
+    "label": "POV",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "input",
+    "label": "Simulation quantity",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "input",
+    "label": "Simulation slices",
+    "handler": [
+      "onChange"
+    ],
+    "type": "number",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "button",
+    "label": "{busy?'Running native simulation…':'Run simulation'}",
+    "handler": [],
+    "type": "submit",
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 68,
+    "tag": "button",
+    "label": "Export simulated report ↓",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Refresh catalog",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Validate authored ITCH",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Validate authored LOBSTER",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Record authored source",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Verify recorded replay",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Delete authored recording",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 71,
+    "tag": "button",
+    "label": "Export synthetic research snapshot ↓",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{!syntheticExportAllowed(state.origin)}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 72,
+    "tag": "button",
+    "label": "{fallback?'Use WebGL':'Force 2D fallback'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "input",
+    "label": "Seek replay position",
+    "handler": [
+      "onChange"
+    ],
+    "type": "range",
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "button",
+    "label": "Restart replay",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "button",
+    "label": "{state.playing?'Pause replay':'Play replay'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "button",
+    "label": "Step replay",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "select",
+    "label": "Replay speed",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{busy||live}"
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "option",
+    "label": "1×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "option",
+    "label": "2×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "option",
+    "label": "4×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/App.tsx",
+    "line": 81,
+    "tag": "option",
+    "label": "8×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/BalanceComparison.tsx",
+    "line": 7,
+    "tag": "summary",
+    "label": "Exact balance comparison table",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ConcentrationPanel.tsx",
+    "line": 10,
+    "tag": "summary",
+    "label": "Exact concentration,formula scope and source lineage",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "summary",
+    "label": "Analyze selected immutable datasets",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "input",
+    "label": "{'Select dataset '+r.revision.slice(0,8)}",
+    "handler": [
+      "onChange"
+    ],
+    "type": "checkbox",
+    "disabled": "{!selected.includes(r.revision)&&selected.length>=4}"
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "input",
+    "label": "{'Dataset weight '+r.revision.slice(0,8)}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "Analyze pinned dataset intervals",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||!selected.length}"
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "Export authored derived research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/DatasetLab.tsx",
+    "line": 9,
+    "tag": "summary",
+    "label": "Revision identities,exclusions and calculation receipt",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/EquityPanels.tsx",
+    "line": 6,
+    "tag": "summary",
+    "label": "{prices.quote_history!.length} retained quote observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 8,
+    "tag": "select",
+    "label": "Filing type filter",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 8,
+    "tag": "option",
+    "label": "All",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 8,
+    "tag": "option",
+    "label": "{f}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 10,
+    "tag": "button",
+    "label": "First page",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||offset===0}"
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 10,
+    "tag": "button",
+    "label": "Previous filings",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||offset===0}"
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 10,
+    "tag": "button",
+    "label": "Next filings",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||page?.next_offset==null}"
+  },
+  {
+    "path": "terminal/web/src/FilingExplorer.tsx",
+    "line": 11,
+    "tag": "a",
+    "label": "Open official filing ↗",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 11,
+    "tag": "summary",
+    "label": "Exact chart values and periods",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 16,
+    "tag": "select",
+    "label": "Financial reporting period",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 16,
+    "tag": "option",
+    "label": "Annual",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 16,
+    "tag": "option",
+    "label": "Quarter-length",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 16,
+    "tag": "option",
+    "label": "Year-to-date length",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 16,
+    "tag": "option",
+    "label": "All reported periods",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 18,
+    "tag": "button",
+    "label": "{name}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 19,
+    "tag": "summary",
+    "label": "Exact value & source",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 20,
+    "tag": "button",
+    "label": "{name}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 20,
+    "tag": "summary",
+    "label": "Full precision",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 21,
+    "tag": "summary",
+    "label": "Formula, exact value & limitations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/FinancialWorkspace.tsx",
+    "line": 23,
+    "tag": "summary",
+    "label": "Source receipts & data-quality boundary",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "select",
+    "label": "Historical security",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "{s}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "select",
+    "label": "Historical observation type",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "OHLCV bars",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "Level 1 quotes",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "Trade prints",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "select",
+    "label": "Historical interval",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "Daily",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "Hourly",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "option",
+    "label": "Minute",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "input",
+    "label": "Market history start",
+    "handler": [
+      "onChange"
+    ],
+    "type": "date",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "input",
+    "label": "Market history end",
+    "handler": [
+      "onChange"
+    ],
+    "type": "date",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "input",
+    "label": "Compare historical stocks",
+    "handler": [
+      "onChange"
+    ],
+    "type": "checkbox",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 12,
+    "tag": "button",
+    "label": "{busy?'Reading bounded interval…':'Load historical observations'}",
+    "handler": [],
+    "type": null,
+    "disabled": "{busy||!permission}"
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 13,
+    "tag": "button",
+    "label": "Previous observations",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{offset===0}"
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 13,
+    "tag": "button",
+    "label": "Next observations",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{offset+50>=selected.record_count}"
+  },
+  {
+    "path": "terminal/web/src/HistoricalMarket.tsx",
+    "line": 15,
+    "tag": "summary",
+    "label": "Historical source receipts and scope",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "summary",
+    "label": "Private historical snapshot archive",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "summary",
+    "label": "Ingest an explicitly permitted historical interval",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "input",
+    "label": "History start date",
+    "handler": [
+      "onChange"
+    ],
+    "type": "date",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "input",
+    "label": "History end date",
+    "handler": [
+      "onChange"
+    ],
+    "type": "date",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "select",
+    "label": "History ingestion timeframe",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "option",
+    "label": "1Day",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "option",
+    "label": "1Hour",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "option",
+    "label": "1Min",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Ingest permitted historical interval",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Create private backup",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Restore private backup",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Delete private backup",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Save accepted {symbol} history snapshot",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Inspect snapshot {r.revision.slice(0,8)}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "Delete snapshot {r.revision.slice(0,8)}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/HistoryArchive.tsx",
+    "line": 14,
+    "tag": "summary",
+    "label": "Risk and source evidence for this exact revision",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape.tsx",
+    "line": 10,
+    "tag": "button",
+    "label": "Enable 3D landscape",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{fallback}"
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "select",
+    "label": "Landscape observation window",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "8 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "24 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "48 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "select",
+    "label": "Landscape price range",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "5 per side",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "10 per side",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "option",
+    "label": "20 per side",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "button",
+    "label": "Reset camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{twoD||unavailable}"
+  },
+  {
+    "path": "terminal/web/src/Landscape3D.tsx",
+    "line": 49,
+    "tag": "button",
+    "label": "{unavailable?'Retry 3D view':twoD?'3D view':'2D fallback'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveIEX.tsx",
+    "line": 8,
+    "tag": "summary",
+    "label": "Permission-gated IEX Level1 stream",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveIEX.tsx",
+    "line": 8,
+    "tag": "button",
+    "label": "Start authorized IEX stream for {symbol}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/LiveIEX.tsx",
+    "line": 8,
+    "tag": "button",
+    "label": "Stop stock stream",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "input",
+    "label": "Search authorized stock directory <input value={query} maxLength={80} onChange={e=>setQuery(e.target.value)}/>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "button",
+    "label": "Find stocks",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "input",
+    "label": "<input type=\"checkbox\" checked={selected.includes(s)} disabled={busy||!selected.includes(s)&&selected.length>=limit} onChange={()=>setSelected(a=>a.includes(s)?a.filter(x=>x!==s):[",
+    "handler": [
+      "onChange"
+    ],
+    "type": "checkbox",
+    "disabled": "{busy||!selected.includes(s)&&selected.length>=limit}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "button",
+    "label": "{watch.includes(s)?`Remove ${s} from watchlist`:`Save ${s} to watchlist`}",
+    "handler": [
+      "onClick"
+    ],
+    "type": "button",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "summary",
+    "label": "Saved research watchlist · {watch.length} symbols (not subscriptions)",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 25,
+    "tag": "button",
+    "label": "{s} saved research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{!selected.includes(s)&&selected.length>=limit}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "input",
+    "label": "<input type=\"checkbox\" checked={bars} onChange={e=>setBars(e.target.checked)}/> Include minute bars",
+    "handler": [
+      "onChange"
+    ],
+    "type": "checkbox",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "button",
+    "label": "Apply authorized subscriptions",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||!selected.length||selected.length>limit||!feed?.readiness.ready}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "button",
+    "label": "Stop shared stream",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "button",
+    "label": "{paused?'Resume current display':'Pause visualization'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{!feed}"
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "select",
+    "label": "<option value={32}>32 observations</option> <option value={64}>64 observations</option> <option value={256}>256 observations</option>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "option",
+    "label": "32 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "option",
+    "label": "64 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "option",
+    "label": "256 observations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 26,
+    "tag": "button",
+    "label": "{cloud?'Hide Level 1 3D':'Enable Level 1 3D'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 27,
+    "tag": "button",
+    "label": "Reconnect browser stream",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 28,
+    "tag": "summary",
+    "label": "Window analytics and exact metrics",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 29,
+    "tag": "button",
+    "label": "{cloud?'Hide coordinated 3D':'Open coordinated 3D comparison'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 33,
+    "tag": "summary",
+    "label": "Analytics and licensing boundaries",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/LiveMarket.tsx",
+    "line": 38,
+    "tag": "summary",
+    "label": "Per-symbol quotes,trades and source diagnostics",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/MarketHealth.tsx",
+    "line": 7,
+    "tag": "button",
+    "label": "Refresh equity health",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "input",
+    "label": "Model omega",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "input",
+    "label": "Model alpha",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "input",
+    "label": "Model beta",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Apply declared model",
+    "handler": [],
+    "type": null,
+    "disabled": "{paused}"
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "{paused?'Resume model edits':'Pause model edits'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Reset model camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{fallback}"
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Top model camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{fallback}"
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Fullscreen model",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{fallback}"
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Retry model 3D",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ModelSurface.tsx",
+    "line": 6,
+    "tag": "summary",
+    "label": "Model formula,grid and 2D alternative",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "select",
+    "label": "Observed option expiration",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "option",
+    "label": "All returned",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "option",
+    "label": "{x}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "select",
+    "label": "Observed option right",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "option",
+    "label": "Calls and puts",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "option",
+    "label": "Calls",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "option",
+    "label": "Puts",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionChain.tsx",
+    "line": 6,
+    "tag": "input",
+    "label": "Observed option strike",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/OptionalBoundary.tsx",
+    "line": 7,
+    "tag": "button",
+    "label": "Reload application assets",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "summary",
+    "label": "Explicit portfolio risk laboratory",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "input",
+    "label": "{`Portfolio alias ${i+1}`}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "input",
+    "label": "{`Portfolio weight ${i+1}`}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "button",
+    "label": "Remove asset {i+1}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "textarea",
+    "label": "{`Portfolio returns ${i+1}`}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "button",
+    "label": "Add authored asset",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{rows.length>=4}"
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "button",
+    "label": "Calculate portfolio risk",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/PortfolioLab.tsx",
+    "line": 7,
+    "tag": "summary",
+    "label": "Portfolio formulas,exposures and exact evidence",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "select",
+    "label": "{`Research geometry ${symbols.join(\", \")}`}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Quote evolution / source prices",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Coordinated midprice change / basis points",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Rolling 8-return variation / not annualized",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Trade activity / log source size",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "select",
+    "label": "<option value={1}>1×</option> <option value={1.5}>1.5×</option> <option value={2}>2×</option>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "1×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "1.5×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "2×",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "{frozen?'Resume this chart':'Pause this chart'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "select",
+    "label": "<option value=\"standard\">Standard</option> <option value=\"accessible\">Teal / amber</option>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Standard",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "option",
+    "label": "Teal / amber",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "{p} camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{failed}"
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Fullscreen quote cloud",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{failed}"
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Retry Level 1 3D",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/QuoteCloud.tsx",
+    "line": 23,
+    "tag": "summary",
+    "label": "Axes,source and camera details",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/RatioHistory.tsx",
+    "line": 3,
+    "tag": "button",
+    "label": "{busy?'Loading reported ratio history…':'Load reported ratio history'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/RatioHistory.tsx",
+    "line": 3,
+    "tag": "summary",
+    "label": "Exact history,periods & provenance",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/RatioHistory.tsx",
+    "line": 3,
+    "tag": "summary",
+    "label": "Original input facts and limitations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/RatioHistory.tsx",
+    "line": 3,
+    "tag": "summary",
+    "label": "History source receipts",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 4,
+    "tag": "button",
+    "label": "Explore securities",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 4,
+    "tag": "button",
+    "label": "Continue {selected} research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 5,
+    "tag": "button",
+    "label": "<span>{n}</span> <strong>{title}</strong> <small>{description}</small>",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Manage monitoring",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "<strong>{s}</strong> <span>{q?`${q.data.bid} / ${q.data.ask}`:'Quote not acquired'}</span> <small>{q?`${q.state} · ${q.timestamp}`:'Saved identity;not a stream subscription'}</smal",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDesk.tsx",
+    "line": 6,
+    "tag": "button",
+    "label": "Open {selected} company",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 7,
+    "tag": "summary",
+    "label": "Training identity,holdouts and complete evidence",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 22,
+    "tag": "summary",
+    "label": "Risk source hashes and method",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Fit diagnostic models",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 24,
+    "tag": "summary",
+    "label": "Exact configuration and fit diagnostics",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 25,
+    "tag": "summary",
+    "label": "Chronological held-out likelihood evaluation",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 25,
+    "tag": "input",
+    "label": "<input type=\"checkbox\" checked={walkForward} onChange={e=>setWalkForward(e.target.checked)}/> Bounded expanding-window walk-forward(max4 folds)",
+    "handler": [
+      "onChange"
+    ],
+    "type": "checkbox",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 25,
+    "tag": "input",
+    "label": "Training split index",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{walkForward}"
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 25,
+    "tag": "input",
+    "label": "Validation split index",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{walkForward}"
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 25,
+    "tag": "button",
+    "label": "Evaluate chronological holdouts",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 26,
+    "tag": "summary",
+    "label": "Constrained conditional GARCH search",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 26,
+    "tag": "button",
+    "label": "Optimize conditional GARCH likelihood",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 26,
+    "tag": "summary",
+    "label": "Search diagnostics and training receipt",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 27,
+    "tag": "summary",
+    "label": "Authored single-asset stress scenarios",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 27,
+    "tag": "input",
+    "label": "Scenario quantity <input value={quantity} maxLength={25} onChange={e=>setQuantity(e.target.value)}/>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 27,
+    "tag": "input",
+    "label": "Scenario price <input value={scenarioPrice} maxLength={25} onChange={e=>setScenarioPrice(e.target.value)}/>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 27,
+    "tag": "input",
+    "label": "Fractional price shocks <input value={shocks} maxLength={300} onChange={e=>setShocks(e.target.value)}/>",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchDiagnostics.tsx",
+    "line": 27,
+    "tag": "button",
+    "label": "Calculate linear scenarios",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 19,
+    "tag": "button",
+    "label": "{open?'Close advanced research':'Open advanced research'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Research source",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "{rows?'Retained IEX Level 1 quotes':'Supplied native snapshot history'}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Authored two-symbol depth / event fixture v1",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Research model",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "{name}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Research symbol",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{!displayed.symbols.length}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "{s}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Depth levels",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{!['height','canyon','wheel'].includes(model)}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "{v}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Book / event side",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": "{!['height','canyon','wheel','events'].includes(model)}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Both sides",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Bids",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Asks",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "select",
+    "label": "Event glyph",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Voxels",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 20,
+    "tag": "option",
+    "label": "Point cloud",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "{frozen?'Resume research input':'Pause research input'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Previous research step",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{end<=first}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "input",
+    "label": "Research time navigation",
+    "handler": [
+      "onChange"
+    ],
+    "type": "range",
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Next research step",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{end>=last}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "Follow latest research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 23,
+    "tag": "button",
+    "label": "{failed?'Retry research WebGL':twoD?'Enable research 3D':'Use research 2D'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 27,
+    "tag": "summary",
+    "label": "Method,provenance and limitations",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 28,
+    "tag": "summary",
+    "label": "Accessible research sample table · {plot.marks.length} samples",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 28,
+    "tag": "button",
+    "label": "Previous sample page",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{page===0}"
+  },
+  {
+    "path": "terminal/web/src/ResearchLab.tsx",
+    "line": 28,
+    "tag": "button",
+    "label": "Next sample page",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{(page+1)*24>=plot.marks.length}"
+  },
+  {
+    "path": "terminal/web/src/ResearchScene.tsx",
+    "line": 35,
+    "tag": "button",
+    "label": "Reset research camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchScene.tsx",
+    "line": 35,
+    "tag": "button",
+    "label": "Top camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchScene.tsx",
+    "line": 35,
+    "tag": "button",
+    "label": "Front camera",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/ResearchScene.tsx",
+    "line": 35,
+    "tag": "button",
+    "label": "Fullscreen research",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 32,
+    "tag": "summary",
+    "label": "{label}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "summary",
+    "label": "Company search, watchlist & recent research",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "input",
+    "label": "Stock ticker or company",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "button",
+    "label": "Search stocks",
+    "handler": [],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "button",
+    "label": "{r.symbol} · {r.company_name}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "button",
+    "label": "{s}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 53,
+    "tag": "button",
+    "label": "{s}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "{watch.includes(id.symbol)?'Remove from watchlist':'Add to watchlist'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "Load available data",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||loading}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "Refresh SEC disclosures",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||loading||!company.capabilities.sec_refresh}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "Resolve official SEC identities",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||loading||!company.configuration.sec?.ready}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "Load bounded older filings",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||loading||!company.capabilities.sec_refresh}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "select",
+    "label": "Equity bar interval",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "option",
+    "label": "Daily",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "option",
+    "label": "Hourly",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "option",
+    "label": "Minute",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 56,
+    "tag": "button",
+    "label": "Refresh authorized IEX prices",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||loading||!company.capabilities.iex_refresh}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 58,
+    "tag": "summary",
+    "label": "Provider setup and data availability · configuration is not validation",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 59,
+    "tag": "button",
+    "label": "{t}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 67,
+    "tag": "input",
+    "label": "{String(label)}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 67,
+    "tag": "select",
+    "label": "Option right",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 67,
+    "tag": "option",
+    "label": "Call",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 67,
+    "tag": "option",
+    "label": "Put",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 67,
+    "tag": "button",
+    "label": "Calculate theoretical options",
+    "handler": [],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 68,
+    "tag": "textarea",
+    "label": "Authored decimal returns",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 68,
+    "tag": "button",
+    "label": "Analyze authored returns",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy}"
+  },
+  {
+    "path": "terminal/web/src/StockIntelligence.tsx",
+    "line": 69,
+    "tag": "a",
+    "label": "{r.event}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 9,
+    "tag": "input",
+    "label": "Search securities",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "Search directory",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "Refresh Alpaca asset reference",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||!status?.asset_reference?.ready}"
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "{busy?'Validating both source files…':'Refresh official directory'}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||!status?.approved}"
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 9,
+    "tag": "button",
+    "label": "Refresh SEC registrants",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{busy||!status?.sec_ready}"
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 11,
+    "tag": "select",
+    "label": "{label}",
+    "handler": [
+      "onChange"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 11,
+    "tag": "option",
+    "label": "All accepted values",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 11,
+    "tag": "option",
+    "label": "{v.replaceAll('_',' ')}",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 14,
+    "tag": "button",
+    "label": "{`Research ${r.symbol}`}",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": null
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 15,
+    "tag": "button",
+    "label": "Previous securities",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{offset===0}"
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 15,
+    "tag": "button",
+    "label": "Next securities",
+    "handler": [
+      "onClick"
+    ],
+    "type": null,
+    "disabled": "{page?.next_offset==null}"
+  },
+  {
+    "path": "terminal/web/src/UniverseWorkspace.tsx",
+    "line": 15,
+    "tag": "summary",
+    "label": "Coverage,normalization and source rules",
+    "handler": [],
+    "type": null,
+    "disabled": null
+  }
+]
