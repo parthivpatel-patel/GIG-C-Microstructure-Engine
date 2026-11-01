@@ -15,6 +15,12 @@ Audit source: `69c9f48e061c96e7151f80ffba53a2d3813d08a8` (read without merging).
 
 Evidence: `build/atlas-sprint3/evidence/` outside this worktree. No provider requests, secrets, raw market data, native code or canonical definitions changed.
 
-## Next packages
+## Fake-only paper backend — verified checkpoint
 
-Uncommitted `terminal/paper/` is partial, untested fake-broker infrastructure. It has no application routes yet and no network transport. Next: validate durable intent/risk/reconciliation, integrate a separately labeled fake-only panel; improve readability/symbol-to-research navigation; run affected security/browser/native regressions and write source-grounded guides. Actual Alpaca access and order submission remain prohibited.
+Implemented durable fake intent/risk/reconciliation infrastructure, default-off workspace, strict Origin/proof API, exact-cent limit/day integer-share contract and independent no-network tests. See `PAPER_SANDBOX_CONTRACT.md`.
+
+Final backend cohort: **51/51** in native-backed Python Debug, Release and ASan/UBSan; zero failures/skips. Live LSan checks returned0; this excludes CPython shutdown-leak certification. The earlier47-test runs and two subsequent49-test checks are superseded for the new cohort by51-test runs. Existing Python regressions separately passed678/configuration (2,034 total). Native unchanged-source existing builds passed940 CTest outcomes and48/48 frozen identity comparisons across six GCC/Clang configurations. Existing Starlette TestClient deprecation warnings remain visible.
+
+Paper UI, typography/canvases, company-to-research navigation and authored export are currently uncommitted but survived. New actual-browser cohort passed6 groups,120 dark/light viewport/workspace combinations and28 screenshots. Its initial selector and shorthand-color-parser failures are preserved in ignored evidence; controls were never force-clicked and thresholds were not weakened.
+
+Next: checkpoint frontend after advanced15-mode and financial/security browser regressions, finish guides and source-bound evidence. Actual Alpaca access and order submission remain prohibited. No claim of current native ARM64, owner Codespaces authentication or observed-market qualification.

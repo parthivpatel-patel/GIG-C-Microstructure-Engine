@@ -55,3 +55,6 @@ test-results/
 
 # Explicitly authorized private observation ledger.
 .gig-observations/
+
+# Private authored paper-sandbox state; never broker/provider records
+.gig-paper-demo/

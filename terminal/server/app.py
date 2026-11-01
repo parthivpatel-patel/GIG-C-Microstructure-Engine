@@ -113,7 +113,7 @@ def json_endpoint(function):
     return endpoint
 
 
-def create_app(stock_workspace=None):
+def create_app(stock_workspace=None, *, paper_workspace=None):
     from terminal.verification.deployment import release_receipt
     application_release = release_receipt(ROOT)
     origins = origins_from_environment()
@@ -199,6 +199,9 @@ def create_app(stock_workspace=None):
     stock_live=LiveIEX(stocks)
     app.state.stocks=stocks
     app.state.stock_live=stock_live
+    from terminal.paper.workspace import PaperWorkspace
+    paper = PaperWorkspace(ROOT / '.gig-paper-demo') if paper_workspace is None else paper_workspace
+    app.state.paper = paper
     market_events=MarketEvents(stock_live)
     app.state.market_events=market_events
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
@@ -752,6 +755,27 @@ def create_app(stock_workspace=None):
             if action in ('mode','dataset'):
                 await feed.close()
             return native.state()
+
+    @route('/api/v1/paper/status', methods=['GET'])
+    @json_endpoint
+    async def paper_status(request: Request):
+        from terminal.paper.contracts import PaperError
+        try:
+            return paper.status()
+        except (PaperError, OSError):
+            return error('PAPER_STATE_UNAVAILABLE', 'Private fake state failed integrity or resource checks', 422)
+
+    @route('/api/v1/paper/control', methods=['POST'])
+    @json_endpoint
+    async def paper_control(request: Request):
+        from terminal.paper.contracts import PaperError
+        data = await bounded_json(request)
+        try:
+            return await paper.action(data)
+        except PaperError as exc:
+            return error('PAPER_REJECTED', exc.code, 409 if exc.code == 'paper_workspace_busy' else 422)
+        except (OSError, MemoryError):
+            return error('PAPER_RESOURCE_UNAVAILABLE', 'Private fake state unavailable; reconcile before further admission', 422)
 
     @route('/api/v1/simulate', methods=['POST'])
     @json_endpoint
