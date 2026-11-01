@@ -16,3 +16,9 @@ Use the isolated Sprint 3 branch, a private port and an offline fixture environm
 | 9–10 min | Operations and test evidence. | Eight unchanged identities, compiler/sanitizer/reference tests and negative controls. External ARM64/provider/Codespaces/physical-device qualification still requires current evidence. |
 
 Before presenting, run the applicable offline tests and confirm your actual checkout. Never show a credential/contact file. If time is short, demonstrate one coherent input→native/model→API→browser path and one meaningful negative case rather than claiming every model is economically validated.
+
+## Optional Sprint4 extension (offline explanation)
+
+Show the historical panel's explicit feed/time/adjustment controls and default-disabled state. Explain how authorized accepted bars would produce trailing research and a separate bar-derived dome while depth models remain unavailable. Use `terminal/tests/run_sprint4_browser.py` only in its isolated authored fixture environment to demonstrate populated paths;label screenshots AUTHORED_FIXTURE_NOT_PROVIDER. Show source revision/parameter binding and exact-byte export verification.
+
+Then show the disabled paper-provider panel beside the authored sandbox. Explain persist-before-send,unknown acknowledgment,no blind create retry,exact FILL-ledger reconciliation and the difference between a kill gate and proof that outstanding orders were canceled. Never enable permissions or create a provider order as an interview demonstration under this sprint's authorization.

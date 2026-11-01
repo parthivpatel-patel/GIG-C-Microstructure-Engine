@@ -154,7 +154,11 @@ class Acquisition(unittest.IsolatedAsyncioTestCase):
         calls=[]
         def transport(request):calls.append(request);return httpx.Response(429)
         original=httpx.AsyncClient
-        w=StockWorkspace(environment=ENV)
+        # Exercise the actual HTTP429/cooldown path under an explicitly authored
+        # historical policy. MockTransport never authenticates or opens a socket.
+        history_policy={'GIG_ALPACA_HISTORY_'+k:'1' for k in ('ENABLED','CLOUD_APPROVED','PRIVATE_DISPLAY_APPROVED','PROTOCOL_REVIEWED','NO_COST_CONFIRMED','IEX_APPROVED')}
+        history_policy['GIG_ALPACA_HISTORY_PERMISSION_REFERENCE']='AUTHORED_OFFLINE_NOT_OWNER_PERMISSION'
+        w=StockWorkspace(environment={**ENV,**history_policy})
         with patch('terminal.stocks.service.httpx.AsyncClient',lambda **kw:original(transport=httpx.MockTransport(transport),**kw)):
             for _ in range(2):
                 with self.assertRaises(ValueError):await self.fast(w,lambda:acquire(w,'AAPL','bars','2026-10-20','2026-10-20'))

@@ -20,3 +20,13 @@ Use Stock Intelligence → **Options**, **Quant & Risk**, portfolio/history tool
 The advanced research laboratory can export only its unchanged public authored fixture, selected model/symbol/capture/depth/side, results and SHA256. Retained provider observations are excluded from that export. Recompute through `authoredResearchBundle`/`buildResearchPlot` for deterministic comparison. This is not a general empirical provenance or retention grant.
 
 No implemented cointegration/pairs-selection, cross-sectional factor engine, portfolio optimizer, learned fair-value signal or profitable strategy should be claimed. Adding speculative models is outside this remediation sprint.
+
+## Accepted historical-bar research
+
+The separate exact-time historical workflow uses only a server-accepted revision,not arbitrary browser-provided prices. For close C(t):simple return=C(t)/C(t−1)−1;log return=ln(C(t)/C(t−1));SMA is the arithmetic mean of the last declared number of closes;close drawdown=1−C(t)/maximum close so far. Simple returns,SMA,drawdown,volume and supplied-VWAP notional use exact rational arithmetic. Logs and square roots explicitly use binary64.
+
+Realized log variation is sqrt(sum(log-return²));rolling variation uses the last declared number of eligible consecutive return positions. Both are unannualized descriptive variation,not calibrated volatility forecasts. Warmup/missing inputs are unavailable,not zero. Caller-declared elapsed-gap thresholds can break return pairs;there is no inferred holiday/halt calendar. SMA uses the available supplied closes;it is not a filled calendar-time average. First-to-last interval return still spans the selected interval even if an internal return is excluded by gap policy.
+
+Volume retains source units. Notional turnover requires each positive-volume bar's **supplied** VWAP;close×volume is not substituted. Raw/split/dividend/all adjustment is explicitly requested and disclosed,not independently corporate-action-reconciled. Cross-stock percentage comparisons start at identical exact shared source endpoints;unmatched timestamps are excluded without interpolation.
+
+Outputs depend only on their accepted input prefix for fixed parameters. Source receipts,exact timestamps,window,gap policy and revision accompany the result. Authorized historical exports carry the exact Python-sorted UTF8 payload string and SHA256;the browser verifies those bytes rather than reserializing floats. Observed export requires its separate retention permission. This does not alter the existing authored JavaScript export contract or frozen native identities.

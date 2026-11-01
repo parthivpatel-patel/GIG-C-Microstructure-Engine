@@ -21,3 +21,11 @@
 **How is 3D scientifically honest?** Explicit source/coverage/symbol/time, model-specific required inputs, exact inspection/table alternatives and no fabricated depth. Event-driven rendering and disposal preserve responsiveness. Node geometry timing/SwiftShader pixels are not real-GPU throughput or exchange latency.
 
 **What is still missing?** Genuine provider permission/qualification for the selected scopes, current-owner deployment acceptance/current ARM64, observed complete initialization and independent empirical L3 comparison, real broker transport/risk approval/account/order qualification and long-session operational testing. Optional speculative models and production live trading are outside this sprint.
+
+**Why not multiply filled quantity by average fill price?** A broker's average can be rounded. The narrow paper adapter sums exact individual FILL activity quantities/prices and reconciles cash/positions against a durable starting baseline. Unsupported fractional/subcent/fee histories fail closed.
+
+**Does double-reading account state make it atomic?** No. Two equal bounded REST collections can miss concurrent changes. A separately reviewed exclusive-account policy and real qualification are still needed;this development only proves fixture behavior.
+
+**Why separate historical bars from best quotes?** A bar contains trades/aggregate price information,not a resting bid/ask queue. The typed bar-derived visualization channel uses trailing log-close variation without inventing quotes or depth. Exact shared endpoints make cross-symbol research comparable without interpolated prices.
+
+**What does a passing fixture prove?** The executed mathematical,security,resource or lifecycle invariant within that authored profile. It does not grant provider rights,authenticate the owner's private Codespace,prove real-market completeness or qualify an ARM64 build that was not executed.

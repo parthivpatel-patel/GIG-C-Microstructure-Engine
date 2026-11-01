@@ -16,3 +16,9 @@
 | Operations | Inspect service/provider states, transport diagnostics, dataset/model availability and bounded resources. | Ready configuration is not external authentication, provider qualification or operational acceptance. Never display credentials. |
 
 All workspaces retain their actual functionality. Detailed JSON/source inspection remains expandable rather than replacing readable summaries. Theme changes affect the shared shell and controls; large canvases remain optional and have 2D or table alternatives. The empirical market-data and authorization limitations in [data guide](MARKET_DATA_AND_LIMITATIONS.md) apply everywhere.
+
+## Sprint4 additions without new workspaces
+
+Stock Intelligence and Multi-Stock Comparison now include a collapsible exact-time historical workflow:explicit IEX/SIP,UTC window,adjustment,trailing research,source receipts,compatible3D and exact-byte export when separately allowed. Default provider-off states remain honest. Multi-stock research shows exact shared endpoints in a readable percentage comparison/table;this is historical,not a live feed.
+
+Execution Simulator preserves native simulation and the authored fake sandbox,then adds a separately labeled disabled Alpaca paper-provider boundary. It displays no invented provider balance. Its fixture-tested future controls remain server-gated. The topbar now labels the connected local/native API transport separately from genuine feed health. All12workspaces and15existing visualization modes remain present;no live provider was activated.

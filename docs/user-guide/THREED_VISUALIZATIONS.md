@@ -14,7 +14,7 @@ Fifteen existing modes are retained, rather than replaced by decorative scenes. 
 | VWAP corridor | Explicit execution records, retained window only. |
 | Flow / VPIN-style | Declared execution directions and toy uncalibrated volume buckets; not calibrated toxicity. |
 | Cylindrical depth wheel | Supplied depth; angle is categorical level rank. |
-| Volatility dome | Derived quote variation / modeled shape; not observed implied volatility. |
+| Volatility dome | Derived quote variation,or backend trailing historical-bar log variation / modeled shape;not observed implied volatility. |
 | Spread ribbon | Actual supplied best quotes; display interpolation does not fill missing observations. |
 | GARCH variance laboratory | Declared model parameters and shock/prior-variance grid; no observed attribution. |
 | Native liquidity landscape | Discrete supplied native depth over retained capture/time; separate deterministic replay. |
@@ -29,3 +29,9 @@ Advanced research offers model, symbol, side/depth filters, source, time, pause,
 L1 sources cannot supply height/canyon/wheel/events or signed-flow/VWAP inputs merely because the renderer exists. Missing inputs yield an explicit unavailable state. Choose the separately labeled authored fixture only for learning. Changing theme preserves identities and geometry. Reduced motion disables inertia/automatic effects where applicable; there is no automatic market spin. Navigation/context loss disposes GPU objects; construction loss falls back to 2D/table and retry is explicit.
 
 Current browser evidence uses desktop Chromium and software SwiftShader. It is not physical Android, Safari, a discrete GPU, long-session GPU leak certification or live-provider qualification.
+
+## Historical input eligibility
+
+The Sprint4 exact-time history panel supplies accepted bars through a separate typed bar-derived channel,never fake bid/ask quotes. The dome uses backend trailing log-close variation and displays unavailable during warmup. Its modeled cross-section/display normalization is not observed implied volatility. Historical quotes preserve exact fixed-decimal values and can drive the spread ribbon and quote-derived variation;zero/crossed quotes are retained at source but excluded from eligible geometry with a count. Prints do not become signed executions or resting depth.
+
+Height,canyon,wheel,order events,signed flow and execution VWAP remain unavailable from bar/quote-only inputs. The explicitly authored two-symbol depth/event fixture remains selectable for education. Symbol changes clear the accepted scene instead of relabeling old geometry. Time slicing,pause,reset,camera/2D and sample inspection remain separate per renderer. The main historical result export,when independently permitted,is distinct from the unchanged authored-only laboratory export.

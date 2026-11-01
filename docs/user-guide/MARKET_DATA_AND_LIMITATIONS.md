@@ -23,3 +23,13 @@ Existing owner-reported 10,429 identities and 1,772-record reconciliation remain
 ## Qualification still required
 
 Current-commit owner Codespaces private authentication/HTTPS-WSS, provider permissions and read-only qualification, source-bound observed evidence, current native ARM64, physical-device usability and separately authorized real paper account/order tests remain distinct gates. Passing fixtures or displaying a connected local browser does not close them.
+
+## Sprint4 historical and paper permission ledger
+
+The owner reports Alpaca Support affirmed individual personal/noncommercial Basic research/backtesting,local storage,venue-limited real-timeIEX,and historicalSIP with explicit feed=sip/end at least15minutes old. Redistribution,multi-user display and business-entity retail-plan use remain prohibited. Those statements do not independently answer private Codespaces processing/display or historicalIEX scope. No new provider call or fresh official API-document retrieval was made in this sprint;existing repository references are the implementation profile,not live verification.
+
+All provider/history/paper gates remain default-off. Historical v2 adds independent enable/cloud/private-display/protocol/no-cost/reference and IEX/SIP flags;exports require their own permission. Even the legacy v1 real historical path now requires the specific IEX historical permission. Authored transports can never produce OBSERVED origin. Separate paper execution flags do not inherit market-data authorization.
+
+Historical limits:four pages×64physical records,512KiBresponse/result,30second operation,one active query,max2bounded429retries,no retries for other errors,no feed fallback. Exact source nanoseconds and offsets survive normalization. Identical normalized records collapse with physical page counts retained;this is not proof of a complete or corrected tape. Memory cache16queries,logical60secondTTL,access pruning and periodic60second cleanup;physical deletion is not instantaneous at the TTL boundary. Explicit deletion is available. No observed disk cache is enabled. Session evidence remains UNKNOWN unless an explicit schedule supplies limited coverage.
+
+The owner-verified Sprint3 directory count is10,423SEC ticker mappings,not a verified exchange-listed universe. Prior owner-reported10,429identity and1,772reconciliation counts retain their original evidence scopes;they are not replaced or reverified by these authored tests. Provider account/market qualification,private-target authentication,ARM64current candidate and real historical completeness are separate future evidence gates.
