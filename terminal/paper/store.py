@@ -10,6 +10,7 @@ import os
 from pathlib import Path
 import sqlite3
 import stat
+import re
 
 from .contracts import PaperError, MAX_ORDERS, MAX_AUDIT, STATES, canonical, client_id, intent, integer
 
@@ -19,7 +20,9 @@ APP_ID = 1195984720
 
 
 class IntentStore:
-    def __init__(self, directory, *, before_commit=None):
+    def __init__(self, directory, *, before_commit=None, profile='fake-paper-v1'):
+        if profile!='fake-paper-v1' and not re.fullmatch(r'alpaca-paper-v1:[0-9a-f]{64}:[0-9]{1,16}',profile):raise PaperError('paper_store_profile')
+        self.profile=profile
         self.root = Path(directory).absolute()
         if any(p.is_symlink() for p in (self.root, *self.root.parents)):
             raise PaperError('paper_store_symlink')
@@ -27,7 +30,7 @@ class IntentStore:
         meta = self.root.stat()
         if meta.st_uid != os.getuid() or meta.st_mode & 0o077:
             raise PaperError('paper_store_private_directory_required')
-        self.path = self.root / 'paper-demo.sqlite3'
+        self.path = self.root / ('paper-demo.sqlite3' if profile=='fake-paper-v1' else 'paper-provider.sqlite3')
         self.before_commit = before_commit
         fd = os.open(self.path, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
         try:
@@ -43,10 +46,10 @@ class IntentStore:
                                  'CREATE TABLE state(id INTEGER PRIMARY KEY CHECK(id=1),payload BLOB NOT NULL,digest TEXT NOT NULL);'
                                  'CREATE TABLE audit(seq INTEGER PRIMARY KEY,payload BLOB NOT NULL,previous TEXT NOT NULL,digest TEXT NOT NULL);'
                                  'CREATE TABLE fake(id INTEGER PRIMARY KEY CHECK(id=1),payload BLOB NOT NULL,digest TEXT NOT NULL);')
-                value = {'schema': 'gig.paper.state.v1', 'profile': 'fake-paper-v1', 'kill': True,
+                value = {'schema': 'gig.paper.state.v1', 'profile': profile, 'kill': True,
                          'clock_ms': 0, 'snapshot_revision': 0, 'orders': {}}
                 self._save(db, value, 'INITIALIZED')
-            self._load(db)
+            if self._load(db)['profile']!=profile:raise PaperError('paper_store_profile_binding')
 
     @contextmanager
     def connection(self):
@@ -99,7 +102,7 @@ class IntentStore:
     @staticmethod
     def _validate(value):
         try:
-            if type(value) is not dict or set(value) != {'schema', 'profile', 'kill', 'clock_ms', 'snapshot_revision', 'orders'} or value['schema'] != 'gig.paper.state.v1' or value['profile'] != 'fake-paper-v1' or type(value['kill']) is not bool or type(value['orders']) is not dict or len(value['orders']) > MAX_ORDERS:
+            if type(value) is not dict or set(value) != {'schema', 'profile', 'kill', 'clock_ms', 'snapshot_revision', 'orders'} or value['schema'] != 'gig.paper.state.v1' or (value['profile'] != 'fake-paper-v1' and (type(value['profile'])is not str or not re.fullmatch(r'alpaca-paper-v1:[0-9a-f]{64}:[0-9]{1,16}',value['profile']))) or type(value['kill']) is not bool or type(value['orders']) is not dict or len(value['orders']) > MAX_ORDERS:
                 raise PaperError('paper_store_contract')
             integer(value['clock_ms'], 0, 2**63 - 1); integer(value['snapshot_revision'])
             for request, record in value['orders'].items():
@@ -131,10 +134,13 @@ class IntentStore:
         db.execute('INSERT INTO audit VALUES(?,?,?,?)', (count + 1, payload, parent, hashlib.sha256(parent.encode() + payload).hexdigest()))
 
     def mutate(self, event, operation):
+        return self.transact(event,lambda db,value:operation(value))
+
+    def transact(self,event,operation):
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')
             value = self._load(db)
-            result = operation(value)
+            result = operation(db,value)
             self._save(db, value, event)
             if self.before_commit:
                 self.before_commit()

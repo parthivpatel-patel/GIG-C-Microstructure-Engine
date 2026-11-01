@@ -10,6 +10,7 @@ from .contracts import PaperError, ACTIVE, STATES, MAX_ORDERS, canonical, cents,
 class FakeBroker:
     synthetic = True
     def __init__(self, store, clock):
+        if store.read()['profile']!='fake-paper-v1':raise PaperError('paper_fake_profile_binding')
         self.store, self.clock = store, clock
         self.failure = None
         self.place_calls = 0

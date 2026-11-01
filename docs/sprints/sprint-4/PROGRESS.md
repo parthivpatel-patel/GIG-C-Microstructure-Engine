@@ -13,3 +13,13 @@ New `terminal/alpaca_wire.py` and `terminal/stocks/historical_v2.py` implement a
 Limits:4pages×64records,512KiBwire/result,one active query,30second operation budget,16in-memory query results,60secondTTL,explicit deletion. No observed disk retention enabled. No automatic startup acquisition,no feed fallback,no session/calendar completeness claim. Official API profile references exist in the repository;no fresh official-doc retrieval or real-provider qualification is claimed.
 
 Next exact action:implement paper-only adapter/normalization and durable-engine integration with deterministic broker fixtures;then historical/research API+browser workflows,streaming regressions,guides and complete affected validation. No Alpaca/provider/account/order operation is authorized.
+
+## Paper protocol/engine checkpoint
+
+Implemented `terminal/paper/alpaca.py`:fixed paper-host/path/order allowlist,default-disabled independently reviewed expiring session,account+session-bound journal,exact cent/whole-share account/order parsing,eligibility and fresh IEX reference requirements,stable double-collection with explicit non-atomic/exclusive-account-policy limitation,durable FILL-activity reconciliation rather than rounded average price,position/cash reconciliation,partial/terminal states,cancel uncertainty,kill/idempotent restart and safe finite errors. No credential reader or real provider was used by tests. The injectable HTTP boundary remains unauthorized by default.
+
+Targeted combined cohort passes113tests(33new paper cases+52Sprint3+28historical),0failures/skips. New cases cover lost create acknowledgments,one-create behavior,actual POST429no-retry,exact partial fills with deliberately misleading rounded-average fields,duplicate/conflicting executions,cancel/fill race,pending cancel,unsupported replacements,unexplained cash/positions,unknown/stale references,blocked/wrong accounts,expiry,risk-profile binding,allocation rollback,restart and duplicate update hints. Tests use an independently authored integer provider ledger. Sprint3fake UI/API semantics preserved.
+
+Real operation remains blocked:cloud/display/execution/audit-retention permissions,exclusive-account/coherence policy,actual source/account/order qualification and owner risk limits are not approved here. REST double-read is not claimed exchange-atomic. Fractional/subcent/unexplained-fee/cash profiles fail closed. No real provider UI is activated.
+
+Next:connect historical adapter to source-bound research/API/UI and compatible bar-derived3D,add disabled provider-readiness API,then full regressions/browser/security/native checks and update existing guides.

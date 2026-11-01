@@ -1,6 +1,7 @@
 """Fail-closed intent admission/reconciliation;no default broker/network transport."""
 import asyncio
 import copy
+import hashlib
 import time
 from .contracts import (PaperError, ExecutionGate, RiskLimits, ACTIVE, TERMINAL,
                         STATES, MAX_ORDERS, cents, intent, nonce, client_id, integer)
@@ -14,11 +15,15 @@ class PaperEngine:
         self.lock = asyncio.Lock(); self.account = None
 
     def _transport(self):
-        if not isinstance(self.broker, FakeBroker):
-            self.gate.require()
-            # A future separately qualified adapter must establish account/order
-            # coherence. No credentials or network factory exists in this sprint.
+        if isinstance(self.broker,FakeBroker):return
+        from .alpaca import AlpacaPaperBroker
+        self.gate.require()
+        if type(self.broker)is not AlpacaPaperBroker:
             raise PaperError('paper_network_transport_not_qualified')
+        self.broker.require()
+        from .contracts import canonical
+        if hashlib.sha256(canonical(self.limits.view())).hexdigest()!=self.broker.authorization.risk_sha256:
+            raise PaperError('paper_reviewed_risk_binding_mismatch')
 
     def _now(self):
         return integer(self.clock(), 0, 2**63 - 1)
@@ -26,7 +31,7 @@ class PaperEngine:
     async def _call(self, method, *args):
         self._transport()
         try:
-            return await asyncio.wait_for(method(*args), 2)
+            return await asyncio.wait_for(method(*args), 10 if not isinstance(self.broker,FakeBroker) else 2)
         except asyncio.CancelledError:
             raise
         except PaperError:
@@ -63,7 +68,11 @@ class PaperEngine:
                 'broker_id': remote['broker_id'], 'uncertain': state in ('UNKNOWN', 'SUBMITTED', 'CANCEL_REQUESTED')}
 
     def _snapshot(self, value, now):
-        if type(value) is not dict or value.get('classification') != 'HISTORICAL_SYNTHETIC' or value.get('paper') is not True or value.get('verified') is not True or value.get('coherent') is not True or value.get('account_id') != 'AUTHORED-FAKE-PAPER':
+        from .alpaca import AlpacaPaperBroker
+        actual=type(self.broker)is AlpacaPaperBroker
+        expected_id=self.broker.authorization.account_id if actual else 'AUTHORED-FAKE-PAPER'
+        allowed_origins=('HISTORICAL_SYNTHETIC','OBSERVED_PAPER_RESPONSE') if actual else ('HISTORICAL_SYNTHETIC',)
+        if type(value) is not dict or value.get('classification') not in allowed_origins or value.get('paper') is not True or value.get('verified') is not True or value.get('coherent') is not True or value.get('account_id') != expected_id:
             raise PaperError('paper_unknown_or_nonpaper_account')
         age = now - integer(value.get('at_ms'), 0, 2**63 - 1)
         if not 0 <= age <= self.limits.max_snapshot_age_ms:
@@ -171,6 +180,7 @@ class PaperEngine:
                 if existing['intent'] != definition:
                     raise PaperError('paper_idempotency_conflict')
                 return copy.deepcopy(existing)  # No repeat create,even after unknown acknowledgment.
+            if not isinstance(self.broker,FakeBroker):await self._call(self.broker.prepare_symbol,definition['symbol'])
             account = await self._refresh(); now = self._now()
             def reserve(state):
                 if now < state['clock_ms'] or now - account['at_ms'] > self.limits.max_snapshot_age_ms or account['revision'] < state['snapshot_revision']:
@@ -214,7 +224,7 @@ class PaperEngine:
                 if self.account['opening_equity_cents'] - self.account['equity_cents'] >= self.limits.max_daily_loss_cents:
                     raise PaperError('paper_daily_loss_limit')
                 state['kill'] = False
-            self.store.mutate('FAKE_EXAMPLE_LIMITS_ACKNOWLEDGED', arm)
+            self.store.mutate('FAKE_EXAMPLE_LIMITS_ACKNOWLEDGED' if isinstance(self.broker,FakeBroker) else 'QUALIFIED_PAPER_POLICY_ACKNOWLEDGED', arm)
             return self.view()
 
     async def cancel(self, request_id):
@@ -251,13 +261,16 @@ class PaperEngine:
 
     def view(self):
         state = self.store.read()
-        return {'schema': 'gig.paper.sandbox.v1', 'classification': 'HISTORICAL_SYNTHETIC',
-                'mode': 'FAKE_BROKER_NOT_ALPACA', 'external_execution_enabled': False,
+        from .alpaca import AlpacaPaperBroker
+        actual=type(self.broker)is AlpacaPaperBroker
+        fake=isinstance(self.broker,FakeBroker)
+        return {'schema': 'gig.paper.sandbox.v1', 'classification': self.account['classification'] if actual and self.account else 'UNAVAILABLE' if actual else 'HISTORICAL_SYNTHETIC' if fake else 'UNAVAILABLE',
+                'mode': 'ALPACA_PAPER_REQUIRES_QUALIFIED_SESSION' if actual else 'FAKE_BROKER_NOT_ALPACA' if fake else 'DISABLED', 'external_execution_enabled': False if not actual else self.broker.transport is not None and not self.broker.transport.fixture,
                 'account': copy.deepcopy(self.account), 'kill_switch': state['kill'],
                 'orders': [{'request_id': k, **r} for k, r in state['orders'].items()],
                 'requires_reconciliation': any(r['uncertain'] for r in state['orders'].values()),
-                'risk_limits': self.limits.view(), 'audit': self.store.audit_receipt(),
-                'limitations': ['Fake balances,eligibility,marks,session and fills are authored.',
+                'risk_limits': ({**self.limits.view(),'profile':'EXPLICIT_SESSION_REVIEW_BINDING','review_sha256':self.broker.authorization.risk_sha256} if actual else self.limits.view()), 'audit': self.store.audit_receipt(),
+                'limitations': (['PaperREST double-read is not exchange-atomic;exclusive-account/session/reconciliation policy required.','Exact cumulative fills derive from durable FILL activities,not rounded average price.','No live-money hosts,fractional positions,subcent accounting or unexplained cash movements.'] if actual else ['Fake balances,eligibility,marks,session and fills are authored.',
                                 'No Alpaca access,account authentication or order submission.',
                                 'Snapshot revision is local fake consistency metadata,not an exchange sequence.',
-                                'Real transport/account/permission/risk qualification remains blocked.']}
+                                'Real transport/account/permission/risk qualification remains blocked.'])}
