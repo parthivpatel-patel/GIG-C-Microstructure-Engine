@@ -57,6 +57,13 @@ async def transaction(workspace):
         workspace.market_history_pending -= 1
 
 async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pages=4):
+    # Legacy v1 remains readable for authored fixtures;real history must pass
+    # the same independent cloud/display/feed scope as the v2 interface.
+    def specific_permission():
+        if workspace.fetcher is None:
+            from .historical_v2 import HistoricalPermission
+            HistoricalPermission.configured(workspace.environment).require('iex')
+    specific_permission()
     key = query_key(workspace,symbol,kind,start,end,timeframe,max_pages)
     headers = workspace.permission('alpaca')
     cached = workspace.market_history_cache.get(key)
@@ -79,6 +86,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
             return {**cached[1], 'cache_status':'ACCEPTED_REFERENCE_REUSED'}
         for page in range(max_pages):
             await asyncio.sleep(max(0,1.01-(workspace.clock()-workspace.last_request)))
+            specific_permission()
             params = {'symbols':symbol,'start':lower,'end':upper,'feed':'iex','limit':64,'sort':'asc'}
             if kind == 'bars':
                 params.update(timeframe=timeframe,adjustment='raw')
