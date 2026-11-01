@@ -113,7 +113,7 @@ def json_endpoint(function):
     return endpoint
 
 
-def create_app(stock_workspace=None, *, paper_workspace=None):
+def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=None, paper_provider=None):
     from terminal.verification.deployment import release_receipt
     application_release = release_receipt(ROOT)
     origins = origins_from_environment()
@@ -158,6 +158,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None):
             # Expiry is enforced on every read;the bounded cleanup sweep need not
             # race the first operator mutation during application startup.
             await asyncio.sleep(60)
+            historical.prune()
             if not work_lock.locked():
                 async with work_lock:
                     try:
@@ -202,6 +203,30 @@ def create_app(stock_workspace=None, *, paper_workspace=None):
     from terminal.paper.workspace import PaperWorkspace
     paper = PaperWorkspace(ROOT / '.gig-paper-demo') if paper_workspace is None else paper_workspace
     app.state.paper = paper
+    from terminal.stocks.historical_v2 import HistoricalClient,HistoricalPermission,validate_plan as history_plan
+    from terminal.alpaca_wire import HTTPWire
+    from terminal.stocks.auth import credentials
+    history_permission=HistoricalPermission.configured(stocks.environment)
+    # No credential callback is evaluated at construction. Only explicit future
+    # historical permission can select the HTTP transport;no startup acquisition.
+    history_transport=None
+    try:
+        history_permission.require('iex' if 'iex' in history_permission.feeds else 'sip')
+        history_transport=HTTPWire(lambda:history_permission.require('iex' if 'iex' in history_permission.feeds else 'sip'),lambda:stocks.permission('alpaca'),history_plan)
+    except ValueError:pass
+    historical=historical_client or HistoricalClient(history_transport,permission=history_permission,identity=stocks.market_identity)
+    app.state.historical=historical
+    from terminal.paper.provider_workspace import PaperProviderWorkspace
+    def current_paper_reference(symbol):
+        # Reading an already accepted quote does not enable or open a market feed.
+        stocks.permission('alpaca');view=stock_live.view()
+        row=next((r for r in view['observations'] if r['symbol']==symbol and r['kind']=='quote' and r['state']=='LIVE' and r['origin']=='OBSERVED_OFFICIAL_RESPONSE'),None)
+        if not row or row['receive_age_seconds']>5:raise ValueError('paper_fresh_authorized_iex_reference_required')
+        from terminal.paper.alpaca import exact_money
+        return {'symbol':symbol,'price_cents':exact_money(row['data']['ask'],True),'at_ms':int(time.time()*1000-row['receive_age_seconds']*1000),'feed':'iex','origin':row['origin']}
+    provider_paper=paper_provider or PaperProviderWorkspace(ROOT/'.gig-paper-provider',environment={k:v for k,v in os.environ.items() if k.startswith('GIG_PAPER_')},credential_headers=lambda:credentials(stocks.environment),reference=current_paper_reference)
+    app.state.paper_provider=provider_paper
+
     market_events=MarketEvents(stock_live)
     app.state.market_events=market_events
     allowed_hosts = sorted({'127.0.0.1', 'localhost', '[::1]'} | {urlsplit(x).hostname for x in origins})
@@ -273,6 +298,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None):
         observed_replay=bool(native.recorded_session and native.recorded_session.manifest['origin']=='LIVE_OBSERVED')
         from terminal.stocks.sec_config import enabled as sec_enabled
         safe=(os.environ.get('GIG_LIVE_ENABLED')!='1' and os.environ.get('GIG_COINBASE_ENABLED')!='1' and not sec_enabled(os.environ.get('GIG_SEC_ENABLED')) and os.environ.get('GIG_ALPACA_ENABLED')!='1' and not (stocks.origin=='OBSERVED_OFFICIAL_RESPONSE' and (stocks.cache or sec_enabled(stocks.environment.get('GIG_SEC_ENABLED')) or stocks.environment.get('GIG_ALPACA_ENABLED')=='1')) and not task_active and not recording and not observed_replay)
+        safe=safe and type(historical.transport)is not HTTPWire and not provider_paper.readiness()['network_transport_active']
         return {'schema_version': '1', 'status': 'ok', 'native': True, 'engine': gig.native_build_info(),
                 'live_connected':connected,'recording_enabled':recording,'maximum_clients':MAX_CLIENTS,'fixture_tests_safe':safe,
                 'analytical_resources':analysis.status(),'browser_push_resources':market_events.status(),
@@ -451,6 +477,61 @@ def create_app(stock_workspace=None, *, paper_workspace=None):
         if await bounded_json(request)!={}:return error('ASSET_REFERENCE_QUERY','empty object required',422)
         try:return await stocks.asset_reference.refresh()
         except (ValueError,TimeoutError):return error('ASSET_REFERENCE_BLOCKED','approved account configuration,source access,cooldown and complete asset response required',422)
+
+    @route('/api/v2/market/history/readiness',methods=['GET'])
+    @json_endpoint
+    async def historical_readiness(request):return historical.readiness()
+
+    @route('/api/v2/market/history',methods=['POST'])
+    @json_endpoint
+    async def historical_acquire(request):
+        from terminal.alpaca_wire import WireError
+        value=await bounded_json(request)
+        try:return await historical.acquire(value)
+        except WireError as e:return error('HISTORICAL_REJECTED',e.code,422)
+        except (ValueError,TypeError,KeyError,TimeoutError):return error('HISTORICAL_REJECTED','historical_schema_resource_or_deadline',422)
+
+    @route('/api/v2/market/research',methods=['POST'])
+    @json_endpoint
+    async def historical_research(request):
+        from terminal.stocks.historical_research import analyze,compare,export
+        from terminal.alpaca_wire import WireError
+        value=await bounded_json(request)
+        if ('export' in value and type(value['export'])is not bool) or set(value)-{'revisions','window','gap_policy','max_gap_seconds','export'} or type(value.get('revisions'))is not list or not 1<=len(value['revisions'])<=4:return error('RESEARCH_QUERY','1to4accepted revisions and bounded parameters required',422)
+        try:
+            parameters={k:value[k]for k in ('window','gap_policy','max_gap_seconds')if k in value}
+            if value.get('export') is True:
+                if len(value['revisions'])!=1:raise WireError('historical_export_single_revision')
+                return export(historical,value['revisions'][0],**parameters)
+            cores=[historical.accepted(revision)for revision in value['revisions']]
+            analyses=await analysis.run(lambda:[analyze(core,**parameters)for core in cores])
+            return {'schema':'gig.historical.research.workflow.v1','analyses':analyses,'comparison':compare(analyses)if len(analyses)>1 else None}
+        except (ValueError,TypeError,KeyError,OverflowError)as e:return error('RESEARCH_REJECTED',e.code if isinstance(e,WireError)else 'historical_research_invalid_or_unavailable',422)
+
+    @route('/api/v2/market/history/cache',methods=['POST'])
+    @json_endpoint
+    async def historical_delete(request):
+        value=await bounded_json(request)
+        if set(value)-{'revision'}:return error('CACHE_QUERY','optional accepted revision only',422)
+        try:return historical.delete(value.get('revision'))
+        except ValueError:return error('CACHE_QUERY','invalid revision',422)
+
+    @route('/api/v2/paper/status',methods=['GET'])
+    @json_endpoint
+    async def paper_provider_status(request):
+        from terminal.paper.contracts import PaperError
+        try:return provider_paper.status()
+        except (ValueError,OSError):return error('PAPER_PROVIDER_UNAVAILABLE','state failed integrity checks',422)
+
+    @route('/api/v2/paper/control',methods=['POST'])
+    @json_endpoint
+    async def paper_provider_control(request):
+        from terminal.paper.contracts import PaperError
+        value=await bounded_json(request)
+        try:
+            async with asyncio.timeout(30):return await provider_paper.action(value)
+        except PaperError as e:return error('PAPER_PROVIDER_REJECTED',e.code,422)
+        except (ValueError,OSError,MemoryError,TimeoutError):return error('PAPER_PROVIDER_UNAVAILABLE','reconcile_before_further_admission',422)
 
     @route('/api/v1/stocks/market-history',methods=['POST'])
     @json_endpoint

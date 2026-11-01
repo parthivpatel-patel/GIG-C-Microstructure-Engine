@@ -168,6 +168,8 @@ class PaperEngine:
                 raise PaperError('paper_buying_power')
             if position * mark + buys.get(symbol, 0) + q * p > self.limits.max_position_cents:
                 raise PaperError('paper_position_exposure_limit')
+            if (position*mark+buys.get(symbol,0)+q*p)*10000>account['equity_cents']*self.limits.max_concentration_bps:
+                raise PaperError('paper_symbol_concentration_limit')
             gross = sum(n * account['marks'][s] for s, n in account['positions'].items()) + sum(buys.values())
             if gross + q * p > self.limits.max_gross_cents:
                 raise PaperError('paper_gross_exposure_limit')
@@ -264,8 +266,12 @@ class PaperEngine:
         from .alpaca import AlpacaPaperBroker
         actual=type(self.broker)is AlpacaPaperBroker
         fake=isinstance(self.broker,FakeBroker)
+        external=False
+        if actual:
+            try:self._transport();external=type(self.broker.transport).__name__=='HTTPWire'
+            except PaperError:pass
         return {'schema': 'gig.paper.sandbox.v1', 'classification': self.account['classification'] if actual and self.account else 'UNAVAILABLE' if actual else 'HISTORICAL_SYNTHETIC' if fake else 'UNAVAILABLE',
-                'mode': 'ALPACA_PAPER_REQUIRES_QUALIFIED_SESSION' if actual else 'FAKE_BROKER_NOT_ALPACA' if fake else 'DISABLED', 'external_execution_enabled': False if not actual else self.broker.transport is not None and not self.broker.transport.fixture,
+                'mode': 'ALPACA_PAPER_REQUIRES_QUALIFIED_SESSION' if actual else 'FAKE_BROKER_NOT_ALPACA' if fake else 'DISABLED', 'external_execution_enabled': external,
                 'account': copy.deepcopy(self.account), 'kill_switch': state['kill'],
                 'orders': [{'request_id': k, **r} for k, r in state['orders'].items()],
                 'requires_reconciliation': any(r['uncertain'] for r in state['orders'].values()),

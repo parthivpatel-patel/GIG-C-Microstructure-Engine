@@ -23,3 +23,13 @@ Targeted combined cohort passes113tests(33new paper cases+52Sprint3+28historical
 Real operation remains blocked:cloud/display/execution/audit-retention permissions,exclusive-account/coherence policy,actual source/account/order qualification and owner risk limits are not approved here. REST double-read is not claimed exchange-atomic. Fractional/subcent/unexplained-fee/cash profiles fail closed. No real provider UI is activated.
 
 Next:connect historical adapter to source-bound research/API/UI and compatible bar-derived3D,add disabled provider-readiness API,then full regressions/browser/security/native checks and update existing guides.
+
+## Historical research and disabled provider UI checkpoint
+
+Recovered the interrupted integration without resetting or changing branches. Source-bound v2 historical APIs now support exact accepted revisions, trailing exact-return/SMA/drawdown and disclosed binary64 log-variation research, exact-endpoint multi-symbol comparison, separately gated exact-byte exports and explicit cache deletion. Historical bars have a separate bar-derived visualization input;no invented quotes/depth. Historical quotes can supply quote-compatible research;all paths preserve feed,adjustment,origin,exact source timestamps and receipt hashes.
+
+Added independently gated paper-provider readiness/control APIs and UI alongside the unchanged fake sandbox. Construction does not access keys,accounts or HTTP. Starting a future qualified session requires independent execution/policy gates,explicit account/session/risk binding and all eight owner risk values. Added concentration admission checks. Browser controls do not grant permission. Default configuration remains disabled and creates no provider database.
+
+Checkpoint verification:81 targeted Python tests(9newAPI+11research+28history+33paper),52Sprint3 tests,101frontend tests;all pass,zero failures/skips. TypeScript/production build passes. InitialJS242.59kB;new optional historical17kB and provider8.43kB chunks remain deferred. Existing514.41kBThree chunk warning is retained. No provider call,account access or paper order occurred;all broker operations used authored fixtures. Browser/full supported matrix verification follows;this checkpoint does not claim completed live qualification.
+
+Next:focused transport/revocation tests,new historical/provider browser fixtures,existing browser/security/native regression checks,then update guides and evidence reports.

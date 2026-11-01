@@ -9,7 +9,7 @@ export type ResearchModel=typeof MODELS[number][0];
 export type BookSample={ordinal:number;time:string;symbol:string;scale:string;quantityScale:string;bids:{price_ticks:string;quantity:string}[];asks:{price_ticks:string;quantity:string}[]};
 export type ResearchEvent={ordinal:number;time:string;symbol:string;kind:'ADD'|'CANCEL'|'DELETE'|'EXECUTE';order:string;side:'bid'|'ask';price:string;quantity:string;aggressor?:'buy'|'sell'};
 export type QuoteSample={ordinal:number;time:string;symbol:string;bid:string;ask:string;bidSize:string;askSize:string;scale:string;state:string};
-export type ResearchSource={id:string;origin:string;provider:string;coverage:string;symbols:string[];books:BookSample[];events:ResearchEvent[];quotes:QuoteSample[];notes:string[]};
+export type ResearchSource={id:string;origin:string;provider:string;coverage:string;symbols:string[];books:BookSample[];events:ResearchEvent[];quotes:QuoteSample[];notes:string[];barDerived?:{ordinal:number;time:string;symbol:string;close:string;variation:number|null}[]};
 export type Mark={x:number;y:number;z:number;value:number;label:string;color:string;ordinal:number};
 export type Surface={vertices:number[];indices:number[];color:string};
 export type Plot={marks:Mark[];lines:{points:number[][];color:string}[];surfaces:Surface[];axes:[string,string,string];notes:string[];summary:string[]};
@@ -74,6 +74,14 @@ function quotesFor(books:BookSample[],quotes:QuoteSample[]){return quotes.length
 export function buildResearchPlot(source:ResearchSource,model:ResearchModel,symbol:string,end:number,depth=6,side:'both'|'bid'|'ask'='both'):Plot{
  const out:Plot={marks:[],lines:[],surfaces:[],axes:['SOURCE PRICE','SOURCE QUANTITY','CAPTURE ORDINAL'],notes:[...source.notes],summary:[]};
  if(!Number.isSafeInteger(end)||!Number.isSafeInteger(depth)||depth<1||depth>12)throw Error('Invalid bounded research view');
+ // A bar-derived model is a separate typed input;never turn close/high/low into bid/ask.
+ if(model==='dome'&&source.barDerived){
+  if(source.barDerived.length>256)throw Error('Historical bar geometry budget');
+  const bars=source.barDerived.filter(r=>r.symbol===symbol&&r.ordinal<=end),values=bars.filter(r=>r.variation!==null&&Number.isFinite(r.variation)&&r.variation>=0),maximum=Math.max(0,...values.map(r=>r.variation!))||1,first=bars[0]?.ordinal||0,last=bars.at(-1)?.ordinal||first,vertices:number[]=[],indices:number[]=[];
+  out.axes=['HISTORICAL BAR CAPTURE ORDINAL','TRAILING LOG-CLOSE VARIATION (not annualized)','MODELED CROSS-SECTION / NO MARKET AXIS'];
+  for(const [i,r] of values.entries()){const x=(r.ordinal-first)/Math.max(1,last-first)*12-6,y=r.variation!/maximum*5;for(let j=0;j<=8;j++){const z=j/8*6-3;vertices.push(x,y*Math.sqrt(Math.max(0,1-(z/3)**2)),z);if(i&&j){const n=i*9+j;indices.push(n-10,n-9,n-1,n-9,n-1,n)}}out.marks.push({x,y,z:0,value:r.variation!,ordinal:r.ordinal,color:'#bca0ff',label:`${r.symbol} · backend trailing log-close variation ${r.variation};source close ${r.close};ns ${r.time};HISTORICAL BAR DERIVATION;not a quote/IV/depth observation`})}
+  if(indices.length)out.surfaces.push({vertices,indices,color:'#bca0ff'});out.summary.push(`Vertical normalized range 0→${Math.max(0,...values.map(r=>r.variation!))} log-return units`,`${values.length} eligible trailing-bar samples`,`Historical endpoint ${bars.at(-1)?.time||'unavailable'}ns`);out.notes.push('Modeled dome shape scaled only by supplied backend historical-return statistics. Other depth/quote/event models require their actual inputs.');return out;
+ }
  const books=source.books.filter(b=>b.symbol===symbol&&b.ordinal<=end).slice(-32),events=source.events.filter(e=>e.symbol===symbol&&e.ordinal<=end).slice(-256),quotes=quotesFor(books,source.quotes.filter(q=>q.symbol===symbol&&q.ordinal<=end).slice(-128));
  const ordinals=[...books,...events,...quotes].map(x=>x.ordinal),minO=Math.min(...ordinals),maxO=Math.max(...ordinals),time=(v:number)=>(maxO===minO?0:(v-minO)/(maxO-minO)*8-4);
  const entries=books.flatMap(b=>(['bid','ask'] as const).filter(s=>side==='both'||s===side).flatMap(s=>b[s==='bid'?'bids':'asks'].slice(0,depth).map(l=>({b,s,p:BigInt(l.price_ticks),q:BigInt(l.quantity)}))));

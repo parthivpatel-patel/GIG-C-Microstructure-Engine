@@ -105,6 +105,7 @@ class AlpacaPaperBroker:
         if self.last_request is not None:
             if now<self.last_request:raise PaperError('paper_monotonic_clock_regression')
             await self.sleep(max(0,.36-(now-self.last_request)))
+        self.require()
         self.last_request=self.monotonic()
         try:
             response=await self.transport.send(method,url,body)

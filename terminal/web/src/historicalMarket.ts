@@ -9,7 +9,7 @@ export function historyNanoseconds(value:unknown):bigint{
  const ns=BigInt(ms)*1000000n+BigInt((m[2]||'').padEnd(9,'0')||'0');
  if(ns<0n||ns>9223372036854775807n)throw Error('Historical clock boundary rejected');return ns;
 }
-function amount(value:unknown):bigint{
+export function historicalAmount(value:unknown):bigint{
  if(typeof value!=='string'||value.length>48)throw Error('Historical numeric field rejected');
  const m=/^(\d+(?:\.\d*)?|\.\d+)(?:[Ee]([+-]?\d{1,3}))?$/.exec(value);
  if(!m)throw Error('Historical numeric field rejected');
@@ -33,7 +33,7 @@ export function validateHistory(raw:unknown,symbol:string,kind:string):MarketHis
   if(ns!==historyNanoseconds(r.timestamp)||ns<lower||ns>=upper)throw Error('Historical source clock or interval disagreement');
   if(ns<prior||kind==='bars'&&ns===prior)throw Error('Historical ordering rejected');prior=ns;
   const fields=kind==='bars'?['open','high','low','close','volume']:kind==='quotes'?['bid','ask','bid_size','ask_size']:['price','size'];
-  const numbers=new Map(fields.map(field=>[field,amount(r[field as keyof HistoryRow])]));
+  const numbers=new Map(fields.map(field=>[field,historicalAmount(r[field as keyof HistoryRow])]));
   if(fields.some(field=>(kind==='bars'&&field!=='volume'||kind==='trades')&&numbers.get(field)===0n))throw Error('Historical positive price/quantity rejected');
   if(kind==='bars'&&(numbers.get('low')!>numbers.get('high')!||['open','close'].some(k=>numbers.get(k)!<numbers.get('low')!||numbers.get(k)!>numbers.get('high')!)))throw Error('Historical OHLC rejected');
  }

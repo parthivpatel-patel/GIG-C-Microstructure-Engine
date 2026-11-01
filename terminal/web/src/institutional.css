@@ -30,3 +30,5 @@ body{font-size:16px;line-height:1.6}.atlas-shell{font-size:16px;color:var(--atla
 /* Keep exact analytical axes readable;the legacy theme used7px labels. */
 .atlas-shell .landscape-axes{font-size:13px;line-height:1.6;letter-spacing:.02em;display:flex;flex-wrap:wrap;gap:10px;color:var(--atlas-muted);background:var(--atlas-raised);border-color:var(--atlas-line)}
 .atlas-shell .landscape-axes span{flex:1 1 180px;min-width:0;overflow-wrap:anywhere}.atlas-shell .landscape-footer,.atlas-shell .book-foot{font-size:13px;line-height:1.6}.atlas-shell .landscape-footer{flex-wrap:wrap}
+
+.atlas-shell .paper-provider,.atlas-shell .historical-research-v2{margin-top:24px}.atlas-shell .transport-context{font-size:13px;color:var(--atlas-muted)}

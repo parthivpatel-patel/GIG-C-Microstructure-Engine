@@ -55,3 +55,13 @@ export async function readSecurities(query:string,offset:number,signal:AbortSign
 }
 export async function readDirectoryStatus(signal:AbortSignal):Promise<unknown>{return await readBoundedFinancial('/api/v2/securities/status',signal)}
 export async function readCompanyAvailability(symbol:string,signal:AbortSignal):Promise<unknown>{if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol))throw Error('Invalid issuer');return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/availability',signal)}
+
+/** Explicit v2 market/paper paths;credentials and provider destinations are server-owned. */
+export async function requestV2<T=unknown>(path:string,body?:unknown):Promise<T>{
+ if(!['/market/history','/market/history/readiness','/market/history/cache','/market/research','/paper/status','/paper/control'].includes(path))throw Error('Invalid versioned research endpoint');
+ const target='/api/v2'+path,c=new AbortController(),timer=setTimeout(()=>c.abort(),30000);
+ try{const headers:Record<string,string>={'Content-Type':'application/json'};
+ if(body!==undefined){const proof=await decoded(await fetch('/api/v1/request-proof',{headers:{'X-GIG-Bootstrap':'same-origin-v1','X-GIG-Browser-Origin':location.origin,'X-GIG-Target':target},signal:c.signal}),c.signal);if(!/^[A-Za-z0-9_-]{43}$/.test(proof.proof))throw Error('Invalid research request proof');headers['X-GIG-Request-Proof']=proof.proof}
+ return await decoded(await fetch(target,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:c.signal}),c.signal) as T;
+ }finally{clearTimeout(timer)}
+}

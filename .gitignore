@@ -58,3 +58,6 @@ test-results/
 
 # Private authored paper-sandbox state; never broker/provider records
 .gig-paper-demo/
+
+# Independently gated future paper-provider audit state;never credentials
+.gig-paper-provider/

@@ -55,13 +55,14 @@ class HistoricalPermission:
     no_cost:bool=False
     reference:str=''
     feeds:tuple=()
+    export_approved:bool=False
     def require(self,feed):
         if not all(v is True for v in (self.enabled,self.cloud,self.private_display,self.protocol_reviewed,self.no_cost)) or type(self.reference) is not str or not 1<=len(self.reference)<=256 or any(ord(c)<32 or ord(c)>126 for c in self.reference):
             raise WireError('historical_provider_disabled_pending_specific_permissions')
         if feed not in self.feeds or feed not in ('iex','sip'):raise WireError('historical_feed_not_authorized')
     @classmethod
     def configured(cls,e):
-        return cls(*(e.get('GIG_ALPACA_HISTORY_'+k)=='1' for k in ('ENABLED','CLOUD_APPROVED','PRIVATE_DISPLAY_APPROVED','PROTOCOL_REVIEWED','NO_COST_CONFIRMED')),e.get('GIG_ALPACA_HISTORY_PERMISSION_REFERENCE',''),tuple(f for f in ('iex','sip') if e.get('GIG_ALPACA_HISTORY_'+f.upper()+'_APPROVED')=='1'))
+        return cls(*(e.get('GIG_ALPACA_HISTORY_'+k)=='1' for k in ('ENABLED','CLOUD_APPROVED','PRIVATE_DISPLAY_APPROVED','PROTOCOL_REVIEWED','NO_COST_CONFIRMED')),e.get('GIG_ALPACA_HISTORY_PERMISSION_REFERENCE',''),tuple(f for f in ('iex','sip') if e.get('GIG_ALPACA_HISTORY_'+f.upper()+'_APPROVED')=='1'),e.get('GIG_ALPACA_HISTORY_EXPORT_APPROVED')=='1')
 
 
 def validate_query(q,now_ns):
@@ -82,7 +83,11 @@ def validate_plan(method,url,body=None):
     u=urlsplit(url);query=parse_qs(u.query,keep_blank_values=True)
     if method!='GET' or body is not None or u.scheme!='https' or u.netloc!='data.alpaca.markets' or u.path not in ('/v2/stocks/bars','/v2/stocks/quotes','/v2/stocks/trades') or u.fragment or any(len(v)!=1 for v in query.values()):raise WireError('history_fixed_destination')
     allowed={'symbols','start','end','feed','limit','sort','page_token'}|({'timeframe','adjustment'} if u.path.endswith('bars') else set())
-    if set(query)-allowed or query.get('limit')!=['64'] or query.get('sort')!=['asc'] or query.get('feed') not in (['iex'],['sip']):raise WireError('history_wire_query')
+    required={'symbols','start','end','feed','limit','sort'}|({'timeframe','adjustment'} if u.path.endswith('bars') else set())
+    if not required<=set(query) or set(query)-allowed or query.get('limit')!=['64'] or query.get('sort')!=['asc'] or query.get('feed') not in (['iex'],['sip']):raise WireError('history_wire_query')
+    try:symbol(query['symbols'][0]);lo=ns(query['start'][0]);hi=ns(query['end'][0])
+    except (ValueError,KeyError,TypeError):raise WireError('history_wire_query') from None
+    if hi<=lo or 'page_token' in query and (len(query['page_token'][0])>512 or any(not 32<ord(c)<127 for c in query['page_token'][0])):raise WireError('history_wire_query')
 
 
 class HistoricalClient:
@@ -95,11 +100,12 @@ class HistoricalClient:
         self.schedule=schedule or SessionSchedule()
         self.lock=asyncio.Lock();self.cache=OrderedDict();self.last_request=None;self.failures=0
     def readiness(self):
+        self.prune()
         feeds=[];reasons=[]
         for f in ('iex','sip'):
             try:self.permission.require(f);feeds.append(f)
             except WireError as e:reasons.append(e.code)
-        return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'licensing':'General personal-use permission does not establish private-cloud/display/historical-feed permission.'}
+        return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'export_ready':type(self.transport)is FixtureWire or self.permission.export_approved,'licensing':'General personal-use permission does not establish private-cloud/display/historical-feed permission.'}
     def prune(self):
         now=self.monotonic()
         for key,(accepted,_) in list(self.cache.items()):
@@ -110,18 +116,20 @@ class HistoricalClient:
         for k in keys:del self.cache[k]
         return {'deleted':len(keys),'scope':'in_process_only_no_provider_request'}
     def accepted(self,identity):
+        if type(identity)is not str or not re.fullmatch('[0-9a-f]{64}',identity):raise WireError('history_accepted_revision_identity')
         self.prune()
         for _,v in self.cache.values():
             if v['canonical_sha256']==identity:
                 self.permission.require(v['feed'])
                 return json.loads(canonical(v))
         raise WireError('history_accepted_revision_unavailable_or_expired')
-    async def _fetch(self,url):
+    async def _fetch(self,url,query):
         for attempt in range(3):
             now=self.monotonic()
             if self.last_request is not None:
                 if now<self.last_request:raise WireError('history_clock_regression')
                 await self.sleep(max(0,1.01-(now-self.last_request)))
+            self.permission.require(query['feed']);validate_query(query,self.now_ns())
             self.last_request=self.monotonic()
             response=await self.transport.send('GET',url)
             try:return decode(response)
@@ -147,7 +155,7 @@ class HistoricalClient:
                     if q['kind']=='bars':params.update(timeframe=q['timeframe'],adjustment=q['adjustment'])
                     if token:params['page_token']=token
                     url=BASE+q['kind']+'?'+urlencode(params);validate_plan('GET',url)
-                    payload,digest=await self._fetch(url)
+                    payload,digest=await self._fetch(url,q)
                     if type(payload)is not dict or type(payload.get(q['kind']))is not dict or set(payload[q['kind']])-{q['symbol']} or type(payload[q['kind']].get(q['symbol'],[]))is not list or len(payload[q['kind']].get(q['symbol'],[]))>64:raise WireError('history_page_identity_or_budget')
                     rows=payload[q['kind']].get(q['symbol'],[])
                     for raw in rows:
@@ -157,6 +165,7 @@ class HistoricalClient:
                             if q['kind']=='bars':r=bars({'symbol':q['symbol'],'bars':[wire]},q['symbol'])['bars'][0]
                             else:r=(quote if q['kind']=='quotes' else trade)({'symbol':q['symbol'],'quote' if q['kind']=='quotes' else 'trade':wire},q['symbol'])
                             annotations={} if q['kind']=='bars' else metadata(raw)
+                            if q['kind']!='bars':r['scope']='Historical '+q['feed'].upper()+' requested source;not a real-time/depth or corrected-tape claim'
                         except (ValueError,TypeError,KeyError,OverflowError):raise WireError('history_row_schema') from None
                         if not ns(q['start'])<=exact<ns(q['end']):raise WireError('history_record_outside_interval')
                         digest_row=hashlib.sha256(canonical({**r,'annotations':annotations})).hexdigest()

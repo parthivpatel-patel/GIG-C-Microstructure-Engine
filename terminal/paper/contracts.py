@@ -89,6 +89,7 @@ class RiskLimits:
     max_open_orders: int = 8
     max_snapshot_age_ms: int = 5000
     max_price_distance_bps: int = 500
+    max_concentration_bps: int = 10000
 
     def __post_init__(self):
         for v in (self.max_order_cents, self.max_position_cents, self.max_gross_cents, self.max_daily_loss_cents):
@@ -96,6 +97,7 @@ class RiskLimits:
         integer(self.max_open_orders, 1, 8)
         integer(self.max_snapshot_age_ms, 1, 10000)
         integer(self.max_price_distance_bps, 1, 1000)
+        integer(self.max_concentration_bps, 1, 10000)
 
     def view(self):
         return {'profile': 'EXAMPLE_NOT_OWNER_APPROVED_FOR_BROKER', **asdict(self)}
