@@ -24,3 +24,11 @@ Final backend cohort: **51/51** in native-backed Python Debug, Release and ASan/
 Paper UI, typography/canvases, company-to-research navigation and authored export are currently uncommitted but survived. New actual-browser cohort passed6 groups,120 dark/light viewport/workspace combinations and28 screenshots. Its initial selector and shorthand-color-parser failures are preserved in ignored evidence; controls were never force-clicked and thresholds were not weakened.
 
 Next: checkpoint frontend after advanced15-mode and financial/security browser regressions, finish guides and source-bound evidence. Actual Alpaca access and order submission remain prohibited. No claim of current native ARM64, owner Codespaces authentication or observed-market qualification.
+
+## Frontend integration — verified checkpoint
+
+Shared readable dark/light typography and controls, large responsive analytical canvases, theme-aware quote background with observer cleanup, generic AAPL/MSFT/NVDA company-to-Level1 navigation, missing-selected-symbol isolation, the explicit fake-only execution panel and authored-only parameter/result export are implemented. All15 existing mappings are retained;no financial formula or native mapping changed. Provider observations cannot use the authored export.
+
+Frontend94/94 tests and TypeScript/Vite production build pass. Final browser matrix: nine programs exited0 against one stable asset snapshot,including the entire formerly failing stock program,stock loading/global selection,financial comparisons/filing navigation,advanced models/WebGL loss/retry,12workspaces,hostile-origin/bootstrap,handshake/reconnection and the new6-group Sprint3 program. No forced clicks. Sampled rendered HTML text across all12views/both themes had0 failures;token text/control contrast thresholds were not reduced. This is not complete WCAG certification or physical-device acceptance. Screenshots remain in ignored evidence.
+
+Next: finalize source-grounded operating/interview guides,packaging/installed-consumer checks,evidence manifest and remaining-gap report. Existing provider/live/ARM64/external authentication blockers remain open.
