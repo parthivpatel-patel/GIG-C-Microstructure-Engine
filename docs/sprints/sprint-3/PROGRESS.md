@@ -32,3 +32,13 @@ Shared readable dark/light typography and controls, large responsive analytical 
 Frontend94/94 tests and TypeScript/Vite production build pass. Final browser matrix: nine programs exited0 against one stable asset snapshot,including the entire formerly failing stock program,stock loading/global selection,financial comparisons/filing navigation,advanced models/WebGL loss/retry,12workspaces,hostile-origin/bootstrap,handshake/reconnection and the new6-group Sprint3 program. No forced clicks. Sampled rendered HTML text across all12views/both themes had0 failures;token text/control contrast thresholds were not reduced. This is not complete WCAG certification or physical-device acceptance. Screenshots remain in ignored evidence.
 
 Next: finalize source-grounded operating/interview guides,packaging/installed-consumer checks,evidence manifest and remaining-gap report. Existing provider/live/ARM64/external authentication blockers remain open.
+
+## Final implementation hardening — verified
+
+- Market discovery now validates bounded rows/counts/source metadata and finishes its initial loading state. Malformed responses retain an explicit recoverable directory error, independent of feed status. Focused company selection is no longer overwritten by discovery completion.
+- Enlarged native landscape axis labels from7px to13px with responsive wrapping. Existing financial/geometry mathematics unchanged.
+- Repaired the additional native browser program's DevTools body-cache dependency by forwarding each paused original mutation once through `route.fetch`, then delivering that same response to the application. No duplicate save/order/cancel or weaker numerical assertion. All21 native-browser checks pass,including controlled WebSocket interruption/reconnection.
+- A new valid8KiB-page SQLite fixture failed before repair. Enforce4KiB pages before writes so4,096pages really means16MiB. Preserve and reject unsupported files rather than migrate silently. Final paper cohort52/52 in Debug,Release andASan/UBSan;0failures/skips,liveLSan0.
+- Frontend96/96,production build passed. Final qualification runner:12programs exited0 against immutable assets. Runner owns only its loopback child servers and has a Python loopback-only network guard;it never kills an existing listener or changes port visibility. Reproducible commands and source receipt are retained.
+
+Pending delivery only:finish source-bound report/manifest and operating/interview guides;verify sdist/private-data exclusion and final remote SHA. No provider,ARM64,real paper or owner-device acceptance claim. All substantial source changes are checkpointed before documentation closure.

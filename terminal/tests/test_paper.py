@@ -251,6 +251,14 @@ class Paper(unittest.IsolatedAsyncioTestCase):
         code="from terminal.paper.store import IntentStore; import os,sys; s=IntentStore(sys.argv[1],before_commit=lambda:os._exit(23)); s.mutate('AUTHORED_CRASH',lambda x:x.__setitem__('kill',False))"
         r=subprocess.run([sys.executable,'-c',code,str(self.root)],timeout=5,check=False)
         self.assertEqual(r.returncode,23);self.assertEqual(self.store.read(),before)
+    async def test_nonstandard_sqlite_page_size_rejected(self):
+        # max_page_count4096 is16MiB only for4KiB pages. Preserve a valid but
+        # unsupported8KiB database and reject it before any application mutation.
+        with sqlite3.connect(self.store.path) as db:
+            db.execute('PRAGMA page_size=8192');db.execute('VACUUM')
+        before=self.store.path.read_bytes()
+        with self.assertRaisesRegex(PaperError,'page_size'):self.store.read()
+        self.assertEqual(self.store.path.read_bytes(),before)
     async def test_file_permissions_and_symlinks(self):
         self.assertEqual(self.store.path.stat().st_mode&0o777,0o600)
         link=Path(self.temp.name)/'link';link.symlink_to(self.root,target_is_directory=True)

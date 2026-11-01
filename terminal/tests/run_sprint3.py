@@ -10,7 +10,7 @@ for key in ('GIG_SEC_ENABLED','GIG_ALPACA_ENABLED','GIG_LIVE_ENABLED','GIG_COINB
 for key in ('CODESPACES','CODESPACE_NAME','GIG_TERMINAL_ALLOWED_ORIGINS'):
     os.environ.pop(key,None)
 suite=unittest.defaultTestLoader.loadTestsFromNames(['terminal.tests.test_paper','terminal.test_paper_api'])
-expected=51
+expected=52
 assert suite.countTestCases()==expected,suite.countTestCases()
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 print('SPRINT3_COUNTS='+json.dumps({'tests':result.testsRun,'expected':expected,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped)}))

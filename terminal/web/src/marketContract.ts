@@ -12,3 +12,11 @@ export function validateMarketState(raw:unknown):Feed{
  }
  return v;
 }
+
+export type MarketDirectory={results:{symbol:string}[];catalog_count:number;matches:number;returned?:number;source:{authority:string;as_of?:string|null}};
+/** Identity discovery never asserts current listing coverage,CIK or feed permission. */
+export function validateMarketDirectory(raw:unknown):MarketDirectory{
+ const x=raw as MarketDirectory;
+ if(!object(x)||!Array.isArray(x.results)||x.results.length>20||x.results.some(r=>!object(r)||typeof r.symbol!=='string'||!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(r.symbol))||new Set(x.results.map(r=>r.symbol)).size!==x.results.length||!count(x.catalog_count)||x.catalog_count>150000||!count(x.matches)||x.matches>x.catalog_count||x.results.length>x.matches||x.returned!==undefined&&x.returned!==x.results.length||!object(x.source)||typeof x.source.authority!=='string'||!x.source.authority.trim()||x.source.authority.length>180||x.source.as_of!=null&&(typeof x.source.as_of!=='string'||x.source.as_of.length>64))throw Error('Invalid bounded market directory contract');
+ return x;
+}

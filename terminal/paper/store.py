@@ -55,6 +55,8 @@ class IntentStore:
             if self.path.is_symlink() or self.path.stat().st_size > MAX_DB:
                 raise PaperError('paper_store_file_boundary')
             db = sqlite3.connect(self.path, timeout=2)
+            if db.execute('PRAGMA page_size').fetchone() != (4096,):
+                raise PaperError('paper_store_page_size')
             db.execute('PRAGMA synchronous=FULL')
             db.execute('PRAGMA max_page_count=4096')
             with db:
