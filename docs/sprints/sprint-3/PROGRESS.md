@@ -42,3 +42,11 @@ Next: finalize source-grounded operating/interview guides,packaging/installed-co
 - Frontend96/96,production build passed. Final qualification runner:12programs exited0 against immutable assets. Runner owns only its loopback child servers and has a Python loopback-only network guard;it never kills an existing listener or changes port visibility. Reproducible commands and source receipt are retained.
 
 Pending delivery only:finish source-bound report/manifest and operating/interview guides;verify sdist/private-data exclusion and final remote SHA. No provider,ARM64,real paper or owner-device acceptance claim. All substantial source changes are checkpointed before documentation closure.
+
+## Delivery closure
+
+All implementation is pushed through `05dad31361997ee21537eeb1006d0a3fce24df61`;nine guides are pushed at `6006e105c41be11d53c34e0d008a8289225d9b6a`. Final52-test paper cohort passes in allthree Python configurations;existing2,034Python outcomes,native940and48frozen comparisons,frontend96,native browser21andall12final browser programs pass. Final assets stayed unchanged throughout qualification. Installedwheel14,packaging3and1,060-member clean source archive verification pass.20localTLS/WSS checks and56security/diagnostic checks pass;scope overlaps other cohorts and is not owner authentication evidence.
+
+Evidence/limitations: `IMPLEMENTATION_REPORT.md`, `evidence/SPRINT3_EVIDENCE.json`, `evidence/SOURCE_AND_FILES.json`. Four unedited authored/unavailable screenshots are retained under `visual/`;full safe local evidence is ignored outside the worktree. No failed final applicable test remains. Priorfailed-before and intentionally corrupted-control evidence is retained and distinguished.
+
+Exact next action: owner may inspect the delivered candidate using the userguide's privateCodespaces update/start instructions once this delivery is reviewed. Do not enable providers or real paper execution. Genuine provider rights/read-only qualification,current-candidateARM64,targetauthentication/device acceptance and realbrokertransport/risk approval remain separate gates. There is no authorized pending background work or workflow dispatch. No additional speculative models/infrastructure were added.
