@@ -54,7 +54,7 @@ Use a separate provider-disabled local test environment, not an active acquisiti
 npm --prefix terminal/web test
 ```
 
-The strict fake Sprint3 backend cohort expects 52 tests;the additional Sprint4 cohort below expects 93. Browser fixture scripts require their named loopback fixture servers, Playwright/Chromium and a completed frontend build. Never rebuild assets during browser tests. See `docs/sprints/sprint-3/IMPLEMENTATION_REPORT.md` for exact executed evidence and environment limitations. Native builds and sanitizers follow `CMakePresets.json` and `docs/REPRODUCIBILITY.md`.
+The strict fake Sprint3 backend cohort expects 52 tests;the additional Sprint4 cohort below expects 95. Browser fixture scripts require their named loopback fixture servers, Playwright/Chromium and a completed frontend build. Never rebuild assets during browser tests. See `docs/sprints/sprint-3/IMPLEMENTATION_REPORT.md` for exact executed evidence and environment limitations. Native builds and sanitizers follow `CMakePresets.json` and `docs/REPRODUCIBILITY.md`.
 
 For developer browser qualification in a separate stopped/provider-disabled instance,install `terminal/tests` dependencies and Chromium in the development environment first. Then run:
 

@@ -221,9 +221,17 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         # Reading an already accepted quote does not enable or open a market feed.
         stocks.permission('alpaca');view=stock_live.view()
         row=next((r for r in view['observations'] if r['symbol']==symbol and r['kind']=='quote' and r['state']=='LIVE' and r['origin']=='OBSERVED_OFFICIAL_RESPONSE'),None)
-        if not row or row['receive_age_seconds']>5:raise ValueError('paper_fresh_authorized_iex_reference_required')
         from terminal.paper.alpaca import exact_money
-        return {'symbol':symbol,'price_cents':exact_money(row['data']['ask'],True),'at_ms':int(time.time()*1000-row['receive_age_seconds']*1000),'feed':'iex','origin':row['origin']}
+        from terminal.stocks.historical_v2 import ns
+        import math
+        # A recently received but old/crossed/wrong-feed observation is not a
+        # fresh execution reference. Source and receipt clocks remain distinct.
+        if not row or view.get('phase')!='SUBSCRIBED' or view.get('readiness',{}).get('ready')is not True or row.get('provider')!='alpaca' or row.get('feed')!='iex':raise ValueError('paper_fresh_authorized_iex_reference_required')
+        age=row.get('receive_age_seconds');source_ns=ns(row.get('timestamp'));now_ns=time.time_ns()
+        if type(age)not in(int,float) or not math.isfinite(age) or not 0<=age<=5 or str(source_ns)!=row.get('source_timestamp_ns') or not 0<=now_ns-source_ns<=5*10**9:raise ValueError('paper_source_and_receive_freshness_required')
+        bid,ask=exact_money(row['data']['bid'],True),exact_money(row['data']['ask'],True)
+        if bid>ask:raise ValueError('paper_ordered_best_quote_required')
+        return {'symbol':symbol,'price_cents':ask,'at_ms':min(source_ns,now_ns-int(age*10**9))//10**6,'feed':'iex','origin':row['origin']}
     provider_paper=paper_provider or PaperProviderWorkspace(ROOT/'.gig-paper-provider',environment={k:v for k,v in os.environ.items() if k.startswith('GIG_PAPER_')},credential_headers=lambda:credentials(stocks.environment),reference=current_paper_reference)
     app.state.paper_provider=provider_paper
 

@@ -61,6 +61,20 @@ class API(unittest.TestCase):
    await e.arm_demo(True)
    with self.assertRaisesRegex(ValueError,'concentration'):await e.submit('x',{'symbol':'AAPL','side':'buy','quantity':'3','limit_price':'100','type':'limit','time_in_force':'day'})
   asyncio.run(run());self.assertEqual(fake.place_calls,0)
+ def paper_reference(self,patch=None):
+  from unittest.mock import patch as mock
+  from terminal.stocks.historical_v2 import ns
+  now=ns('2024-01-02T14:30:30Z');w=StockWorkspace(environment={});app=create_app(stock_workspace=w);w.permission=lambda _:{} # No credential lookup;authored policy boundary only.
+  row=dict(symbol='AAPL',kind='quote',state='LIVE',provider='alpaca',feed='iex',origin='OBSERVED_OFFICIAL_RESPONSE',receive_age_seconds=.1,timestamp='2024-01-02T14:30:29Z',source_timestamp_ns=str(now-10**9),data=dict(bid='99',ask='100'))
+  row.update(patch or {});app.state.stock_live.view=lambda:dict(phase='SUBSCRIBED',readiness={'ready':True},observations=[row])
+  with mock('terminal.server.app.time.time_ns',return_value=now):return app.state.paper_provider.reference('AAPL')
+ def test_paper_reference_rejects_wrong_feed_stale_source_and_crossed_quote(self):
+  from terminal.stocks.historical_v2 import ns
+  for change in ({'feed':'sip'},{'data':dict(bid='101',ask='100')},{'data':dict(bid='0',ask='100')},{'timestamp':'2024-01-02T14:30:10Z','source_timestamp_ns':str(ns('2024-01-02T14:30:10Z'))},{'timestamp':'2024-01-02T14:30:31Z','source_timestamp_ns':str(ns('2024-01-02T14:30:31Z'))},{'source_timestamp_ns':'0'},{'receive_age_seconds':-1}):
+   with self.subTest(change=change),self.assertRaises(ValueError):self.paper_reference(change)
+ def test_paper_reference_preserves_conservative_source_age(self):
+  from terminal.stocks.historical_v2 import ns
+  r=self.paper_reference();self.assertEqual(r['price_cents'],10000);self.assertEqual(r['at_ms'],ns('2024-01-02T14:30:29Z')//10**6);self.assertEqual(r['feed'],'iex')
  def test_fixture_provider_session_complete_no_real_calls(self):
   clock=PaperClock();remote=Provider(clock);wire=FixtureWire(remote.call);auth=PaperAuthorization(GATE,True,True,True,True,True,True,True,True,ACCOUNT,START,clock.ms+900000,hashlib.sha256(canonical(LIMITS.view())).hexdigest())
   paper=PaperProviderWorkspace(Path(self.temp.name)/'protocol',authorization=auth,limits=LIMITS,transport=wire,clock=clock.now,monotonic=clock.monotonic,sleep=clock.sleep,reference=lambda s:dict(symbol=s,feed='iex',origin='HISTORICAL_SYNTHETIC',at_ms=clock.ms,price_cents=10000))
