@@ -1,7 +1,7 @@
 """Exact-time explicit-feed historical reads. No automatic startup acquisition.
 
-API/profile assumptions are explicit;HTTPWire is only supplied at an approved
-future server integration boundary. FixtureWire is the sole transport used here.
+API/profile assumptions are explicit. HTTPWire requires specific server-owned
+permissions; FixtureWire remains explicitly synthetic and cannot qualify a provider.
 """
 import asyncio
 from collections import OrderedDict
@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import time
+import random
 from urllib.parse import urlencode, urlsplit, parse_qs
 from fractions import Fraction
 from decimal import Decimal
@@ -91,10 +92,11 @@ def validate_plan(method,url,body=None):
 
 
 class HistoricalClient:
-    def __init__(self,transport=None,*,permission=HistoricalPermission(),clock=time.time,monotonic=time.monotonic,sleep=asyncio.sleep,identity=None,schedule=None,clock_ns=None):
+    def __init__(self,transport=None,*,permission=HistoricalPermission(),clock=time.time,monotonic=time.monotonic,sleep=asyncio.sleep,identity=None,schedule=None,clock_ns=None,random_source=random.random):
         if transport is not None and type(transport) not in (FixtureWire,HTTPWire):raise WireError('history_transport_boundary')
         self.transport,self.permission=transport,permission
         self.clock,self.monotonic,self.sleep=clock,monotonic,sleep
+        self.random_source=random_source
         self.now_ns=clock_ns or (time.time_ns if clock is time.time else lambda:int(Decimal(str(clock()))*10**9))
         self.identity=identity or (lambda s:{'symbol':s,'identity_authority':'REQUESTED_IDENTIFIER_NOT_LISTING_VERIFICATION'})
         self.schedule=schedule or SessionSchedule()
@@ -105,7 +107,7 @@ class HistoricalClient:
         for f in ('iex','sip'):
             try:self.permission.require(f);feeds.append(f)
             except WireError as e:reasons.append(e.code)
-        return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'export_ready':type(self.transport)is FixtureWire or self.permission.export_approved,'licensing':'General personal-use permission does not establish private-cloud/display/historical-feed permission.'}
+        return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'export_ready':type(self.transport)is FixtureWire or self.permission.export_approved,'licensing':'Specific cloud/display/feed permission must be configured;configuration is not independent provider qualification.'}
     def prune(self):
         now=self.monotonic()
         for key,(accepted,_) in list(self.cache.items()):
@@ -136,7 +138,9 @@ class HistoricalClient:
             except WireError as e:
                 if e.status!=429 or attempt==2:raise
                 if e.retry_after is not None and e.retry_after>5:raise WireError('history_rate_limit_retry_budget',status=429)
-                await self.sleep(max(1, e.retry_after or 2**attempt))
+                from .retry import retry_delay
+                await self.sleep(retry_delay(attempt+1,minimum=max(1,e.retry_after or 0),
+                                            ceiling=5,random_source=self.random_source))
         raise WireError('history_retry_budget')
     async def acquire(self,query):
         now_ns=self.now_ns();q=validate_query(query,now_ns);self.permission.require(q['feed'])

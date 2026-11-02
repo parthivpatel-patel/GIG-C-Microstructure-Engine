@@ -144,7 +144,8 @@ async def qualify_sources(workspace,*,end,seconds=30,exclusive_stream_window=Fal
                     'scope':'Selected public SEC facts/filings;not complete statements or intraday PIT archive'}
             except Exception as exc:stages['sec_sources']=stage_error(exc,source_stage)
         else:stages['sec_sources']={'status':'BLOCKED_CONFIGURATION','missing':config['sec']['missing_configuration']}
-        if config['alpaca']['ready'] and workspace.environment.get('GIG_ALPACA_LIVE_ENABLED')=='1':
+        from .live import stream_enabled
+        if config['alpaca']['ready'] and stream_enabled(workspace.environment):
             if not exclusive_stream_window:stages['live']={'status':'BLOCKED_SHARED_ACCOUNT_WINDOW_NOT_CONFIRMED','new_connections':0}
             else:
                 try:

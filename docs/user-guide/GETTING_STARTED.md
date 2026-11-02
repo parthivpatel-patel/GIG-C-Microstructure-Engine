@@ -89,3 +89,7 @@ The Order Book uses paired bid/ask tables on desktop and stacked tables on phone
 Enable an optional3D view to see slow camera orbit. **Pause automatic orbit** affects only the camera;**Pause visualization/research input** freezes the displayed input window. Neither changes provider ingestion permissions. Reduced-motion preference disables automatic orbit. Hidden/offscreen/empty scenes suspend work. See the existing3Dguide for controls and input limitations.
 
 Qualification evidence and exact candidate commits are in `docs/design/gig-redesign/IMPLEMENTATION_REPORT.md`. This frontend does not activate data providers or paper execution. Keep existing private Codespaces forwarding and configuration boundaries unchanged.
+
+## Approved private IEX profile
+
+For owner-only, noncommercial Codespaces IEX research under the recorded Support #384778 scope, use [the private IEX runbook](../qualification/PRIVATE_IEX_RUNBOOK.md). The explicit new launcher provides a read-only stream gate while keeping legacy live and paper execution flags zero. Normal startup remains default-disabled. Readiness is offline configuration evidence; actual provider, private-edge and current ARM64 acceptance remain separate.

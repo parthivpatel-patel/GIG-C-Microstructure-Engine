@@ -11,7 +11,7 @@ permissions:
   contents: read
 jobs:
   build-and-test:
-    if: inputs.free_usage_verified && (github.ref == 'refs/heads/feat/bootstrap-cpp20-engine' || github.ref == 'refs/heads/feat/atlas-final-release')
+    if: inputs.free_usage_verified && (github.ref == 'refs/heads/feat/bootstrap-cpp20-engine' || github.ref == 'refs/heads/feat/atlas-final-release' || github.ref == 'refs/heads/development/gig-ui-redesign')
     timeout-minutes: 60
     runs-on: ubuntu-24.04-arm
     strategy:
@@ -131,12 +131,16 @@ jobs:
           GIG_COINBASE_ENABLED: '0'
           GIG_SEC_ENABLED: '0'
           GIG_ALPACA_ENABLED: '0'
+          GIG_ALPACA_IEX_STREAM_ENABLED: '0'
+          GIG_ALPACA_LIVE_ENABLED: '0'
+          GIG_PAPER_EXECUTION_ENABLED: '0'
           GIG_TERMINAL_NATIVE_BUILD: ${{ github.workspace }}/build/release
           GIG_TERMINAL_L2_RECORDINGS: ${{ runner.temp }}/gig-terminal-recordings
         run: |
           build/wheel-consumer/bin/python -m pip install -r terminal/server/requirements.txt
           build/wheel-consumer/bin/python -c 'import platform; assert platform.machine() == "aarch64"'
           /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 274
+          PYTHONPATH="${{ github.workspace }}/terminal/tests/offline_guard:${{ github.workspace }}" build/wheel-consumer/bin/python terminal/tests/run_final_qualification.py
       - name: Source archive reproducibility and integrity
         if: matrix.compiler == 'gcc' && matrix.preset == 'release'
         shell: bash

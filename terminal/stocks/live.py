@@ -1,7 +1,7 @@
 """Bounded IEX MessagePack stream,official alpaca-py protocol profile.
 No network on construction/import. Explicit owner gates and lifecycle required.
 """
-import asyncio,datetime,hashlib,json,math,time
+import asyncio,datetime,hashlib,json,math,time,random
 from decimal import Decimal
 from .identity import instrument
 from .prices import timestamp,decimal
@@ -9,6 +9,12 @@ from terminal.providers.kraken import timestamp_ns
 
 ENDPOINT='wss://stream.data.alpaca.markets/v2/iex'
 class ProtocolError(ValueError):pass
+
+def stream_enabled(environment):
+    # Explicit new configuration always wins, including false/invalid values.
+    # The legacy name is supported only when the new key is entirely absent.
+    return environment.get('GIG_ALPACA_IEX_STREAM_ENABLED',
+                           environment.get('GIG_ALPACA_LIVE_ENABLED')) == '1'
 
 def secure_msgpack():
     import msgpack
@@ -45,9 +51,10 @@ def amount(v,positive=False):
     return decimal(v,positive)
 
 class LiveIEX:
-    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5):
+    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5,random_source=random.random):
         if type(retry_budget) is not int or not 1<=retry_budget<=5:raise ValueError('live_retry_budget')
         self.retry_budget=retry_budget
+        self.random_source=random_source
         from .session_schedule import SessionSchedule
         from .market_catalog import MarketCatalog
         self.catalog=workspace.catalog
@@ -71,7 +78,7 @@ class LiveIEX:
         self.symbol_limit()
         secure_msgpack()  # Refuse an unpatched runtime before any upstream open.
         keys=self.workspace.permission('alpaca')
-        if self.workspace.environment.get('GIG_ALPACA_LIVE_ENABLED')!='1':raise ValueError('live_explicit_enable_required')
+        if not stream_enabled(self.workspace.environment):raise ValueError('live_explicit_enable_required')
         return keys
     def process(self,raw):
         # Accepted event dictionaries are never edited by process();copy containers only.
@@ -225,6 +232,8 @@ class LiveIEX:
                     # WebSocket closure/handshake failures never log exception text or keys.
                     self.phase='DISCONNECTED';self.state='BACKOFF';self.failures+=1;self.reason='transport_closed'
                 if self.failures>=self.retry_budget:self.state='FAILED';self.reason='retry_budget_exhausted';return
-                try:await asyncio.wait_for(self.stop_event.wait(),min(30,2**min(self.failures,5)))
+                from .retry import retry_delay
+                delay=retry_delay(self.failures,random_source=self.random_source)
+                try:await asyncio.wait_for(self.stop_event.wait(),delay)
                 except asyncio.TimeoutError:pass
         finally:self.socket=None;self.phase='DISCONNECTED'
