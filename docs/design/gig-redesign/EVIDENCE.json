@@ -1,0 +1,1874 @@
+{
+  "TLS": [
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": null,
+        "last_browser_bootstrap": null,
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "origin_mismatch",
+          "authorized_browser_origin": null,
+          "decision": "rejected_origin",
+          "failure_condition": "origin_mismatch",
+          "host": "127.0.0.1:44403",
+          "origin": "https://attacker.invalid",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": null,
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": null,
+          "authorization": "accepted_origin",
+          "decision": "accepted",
+          "has_application_protocol": false,
+          "has_stream_proof": false,
+          "host": "127.0.0.1:44403",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "127.0.0.1:44403",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "schema": "gig.codespaces.forwarded_tls.v1",
+      "scope": "Local HTTPS/WSS reverse-proxy reproduction;not owner Codespace/private GitHub authentication evidence",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    },
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_browser_bootstrap": {
+          "asgi_scheme": "https",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "issued",
+          "host": "127.0.0.1:38079",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "exact_origin",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "allowed",
+          "failure_condition": null,
+          "host": "127.0.0.1:38079",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": null,
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "127.0.0.1:38079",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "schema": "gig.codespaces.rewritten_origin_tls.v1",
+      "scope": "Test proxy deliberately rewrites Origin+Host exactly as reported;HTTPS proof minted with unchanged approved Origin. Not identification of the owner rewriting component.",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    },
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_browser_bootstrap": {
+          "asgi_scheme": "https",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "issued",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "codespaces_rewrite_request_proof",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "allowed",
+          "failure_condition": null,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": {
+          "asgi_scheme": "https",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "same_origin_read",
+          "fetch_site": "same-origin",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "reported_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "target": "/api/v1/stream-ticket",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "exact HTTP issuer failure reproduced without proof",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "cross-origin non-simple preflight denied despite rewritten Origin",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 8,
+      "schema": "gig.codespaces.rewritten_http_issuer.v1",
+      "scope": "Test proxy rewrites HTTP POST and WS Origin/Host exactly as reported. Same-origin read proofs validate ticket issuer and native mutations. Not owner external authentication evidence.",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    }
+  ],
+  "application_commit": "8971257af4e1400726d8aa72d33e0dd9debf4b79",
+  "assets": {
+    "assets": {
+      ".vite/manifest.json": "7a8c844321a2d514bada15cfdb8a6526becc0df358294f1457d6b41903bb0d13",
+      "assets/HistoricalResearch-CCDv6QRP.js": "d9f0c48bd65e444fc6b1d28f5ed05448f91e0efb1bd73595d1c7afef67174a52",
+      "assets/Landscape3D-DKRbVGCq.js": "eb3085865b333d3ad47598baf64d513e9d93e2f9327a7e2864b03985224783a8",
+      "assets/LiveMarket-HRylr1xb.js": "1a7a30c3abf58cce60df0ceb0fb3d71f650c2cb61c9a38e2c1ff24905ba40903",
+      "assets/MarketHealth-TML_KOWz.js": "a83ea82e8a277a9d22654b928aa3dc846118d44088a76c030dacd54743a2d619",
+      "assets/ModelSurface-Bb6nq5tK.js": "b945ba1bc16542f284570b1a7904b0e08752fcc64c8b7c7b0f89914cffc8ae16",
+      "assets/OrbitControls-DgvY0sml.js": "5f73f6ac9131939ff19a3515d579de1d8fb1eb6478a0efb541b20b506c675a38",
+      "assets/PaperProvider-DPMHKaQU.js": "0f7c43132f26dfa5a76bf79d4a2d3b3f8ed5661a60b807c311ff7938abc99c24",
+      "assets/PaperSandbox-D8QBb_2E.js": "cd36b5adc96400901287995834ff77294b3b1a75141429972c1f84342c70bff9",
+      "assets/QuoteCloud-D7FwJIr-.js": "d5b866565897d019f15486e7e42ff0c7a8ba0f14195a171eb612e53c43737e53",
+      "assets/ResearchDesk-BbYCuonS.js": "350d93318a5be358cb09dc6a5f15f45079b90ad4c282d12721ebcaf7b922c27a",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-D2ArHD8g.js": "991a932a5b55dfad2a6bfb73209648863f4bc3d4c4fb608c6837e831174dca99",
+      "assets/ResearchScene-CT5huRsM.js": "cad3e4f947dfa7ea5c8c74d842bc19fa2564e932a96b0a1a1a23729b06166d1a",
+      "assets/StockIntelligence-sA5vPybS.js": "0408e8b379f9b9f4727ab3e1b0fcfcdb5f3b5db621ef71a6374a9f7a700ffa54",
+      "assets/UniverseWorkspace-B-ohj8B7.js": "f32659eb9913c5d18c9e5a0b6cf15d030d99469b1ced378c1bf58b5511261ae4",
+      "assets/VolatilitySurface-v6CWhvV2.js": "54f257df4d20dc98c808c579d6b454c46a1fc6ba1d016632c50def749f16ddb6",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-DOhNuZs8.css": "1df259581b1e807500656b11fc1d281eb9206ec6b1352d3cd3af870bc9068738",
+      "assets/index-DiO7bLaX.js": "861c5c474e12047ab61969391c0d8b102dab969f64c5d81e28bd4b5a8dc81031",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "10f523a72dff9330b0461ef2023eddb1a1bfb996b192340a39619988b7a9a5fe"
+    },
+    "mutated": false,
+    "scope": "Built before browser;authored fixtures,not provider/owner target"
+  },
+  "backend_tests": {
+    "asan_ubsan": 274,
+    "debug": 274,
+    "failures": 0,
+    "live_lsan_check": 0,
+    "release": 274,
+    "shutdown_lsan_disabled": true,
+    "skipped": 0
+  },
+  "baseline": "0c03a698fdac1be8b1032b255208a3ef2320341a",
+  "browser_programs": [
+    {
+      "exit_code": 0,
+      "script": "gig-redesign-validation",
+      "seconds": 16.88540547800949
+    },
+    {
+      "exit_code": 0,
+      "script": "browser-validation",
+      "seconds": 13.655961751006544
+    },
+    {
+      "exit_code": 0,
+      "script": "contrast-scan",
+      "seconds": 5.744055263989139
+    },
+    {
+      "exit_code": 0,
+      "script": "measure_sprint3_browser",
+      "seconds": 5.086158496007556
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-intelligence-validation",
+      "seconds": 5.936175923008705
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-loading-validation",
+      "seconds": 19.25035183201544
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas-validation",
+      "seconds": 19.81132645200705
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas2-validation",
+      "seconds": 26.209925195988035
+    },
+    {
+      "exit_code": 0,
+      "script": "advanced-research-validation",
+      "seconds": 28.10157716498361
+    },
+    {
+      "exit_code": 0,
+      "script": "workspace-qualification",
+      "seconds": 9.854989657003898
+    },
+    {
+      "exit_code": 0,
+      "script": "check_bootstrap_sop",
+      "seconds": 0.8163081659877207
+    },
+    {
+      "exit_code": 0,
+      "script": "check_browser_handshake",
+      "seconds": 1.6746573529962916
+    },
+    {
+      "exit_code": 0,
+      "script": "sprint3-validation",
+      "seconds": 15.035567609011196
+    }
+  ],
+  "changed_files": [
+    "A\tdocs/design/gig-redesign/EVIDENCE.json",
+    "A\tdocs/design/gig-redesign/IMPLEMENTATION_REPORT.md",
+    "A\tdocs/design/gig-redesign/PROGRESS.md",
+    "A\tdocs/design/gig-redesign/visual/command-center-dark.png",
+    "A\tdocs/design/gig-redesign/visual/financial-light.png",
+    "A\tdocs/design/gig-redesign/visual/financial-statements-dark.png",
+    "A\tdocs/design/gig-redesign/visual/financial-trends-dark.png",
+    "A\tdocs/design/gig-redesign/visual/order-book-desktop-dark.png",
+    "A\tdocs/design/gig-redesign/visual/order-book-phone-light.png",
+    "A\tdocs/design/gig-redesign/visual/research-3d-dark.png",
+    "A\tterminal/tests/gig-redesign-validation.mjs",
+    "A\tterminal/web/src/Navigation.tsx",
+    "A\tterminal/web/src/OrbitMotion.tsx",
+    "A\tterminal/web/src/OrderBook.tsx",
+    "A\tterminal/web/src/TerminalHeader.tsx",
+    "A\tterminal/web/src/WorkspaceLaunchpad.tsx",
+    "A\tterminal/web/src/bookPresentation.test.ts",
+    "A\tterminal/web/src/bookPresentation.ts",
+    "A\tterminal/web/src/cameraMotion.test.ts",
+    "A\tterminal/web/src/cameraMotion.ts",
+    "A\tterminal/web/src/terminal.css",
+    "A\tterminal/web/src/workspaces.css",
+    "D\tterminal/web/src/atlas.css",
+    "D\tterminal/web/src/institutional.css",
+    "D\tterminal/web/src/styles.css",
+    "M\tdocs/user-guide/GETTING_STARTED.md",
+    "M\tdocs/user-guide/THREED_VISUALIZATIONS.md",
+    "M\tterminal/tests/browser-validation.mjs",
+    "M\tterminal/tests/run_sprint3_browser.py",
+    "M\tterminal/web/index.html",
+    "M\tterminal/web/package.json",
+    "M\tterminal/web/src/App.tsx",
+    "M\tterminal/web/src/DepthChart.tsx",
+    "M\tterminal/web/src/Landscape3D.tsx",
+    "M\tterminal/web/src/ModelSurface.tsx",
+    "M\tterminal/web/src/QuoteCloud.tsx",
+    "M\tterminal/web/src/ResearchDesk.tsx",
+    "M\tterminal/web/src/ResearchLab.tsx",
+    "M\tterminal/web/src/ResearchScene.tsx",
+    "M\tterminal/web/src/VolatilitySurface.tsx",
+    "M\tterminal/web/src/main.tsx",
+    "M\tterminal/web/src/research3d.css",
+    "M\tterminal/web/src/research3d.ts"
+  ],
+  "contrast": {
+    "failures": 0,
+    "sampled_text": 5848,
+    "scope": "Rendered HTML text including below-fold content at1440x1100;closed details and inactive controls excluded;not screen-reader or full WCAG certification",
+    "workspace_theme_views": 24
+  },
+  "credentials_inspected": false,
+  "css_cleanup": {
+    "input_files": [
+      "styles.css",
+      "atlas.css",
+      "institutional.css"
+    ],
+    "method": "Remove only earlier overwritten declarations for identical selectors in identical at-rule contexts;preserve important priority and source order. Readable output and semantic neutral colors;browser validation required.",
+    "removed_overwritten_declarations": 61,
+    "removed_superseded_shell_selectors": 148,
+    "retained_declarations": 559
+  },
+  "frontend_tests": {
+    "failed": 0,
+    "ladder": 4,
+    "motion": 12,
+    "passed": 118,
+    "prior": 102,
+    "skipped": 0
+  },
+  "geometry_parity": {
+    "change": "Ask-side display color #f5a869\u2192#f27b89 only;coordinates,quantities,numerical values,axes,labels,source identity and source events match across384cases;not an independent exchange oracle.",
+    "checks": 384,
+    "failed": 0,
+    "new_display_hash": "2f04850cfc04e07559999d7afd3c1ea14a1f0161fa7c549827efab3dfb376143",
+    "old_display_hash": "222811765f4d91b5ac85af367c28cbbd2a01664d58c99dd1e77322e58365eaaa",
+    "schema": "gig.redesign.geometry_parity.v1",
+    "source_identical": true
+  },
+  "independent_native_oracle": {
+    "architecture": "x86_64",
+    "elapsed_ns": 555868224,
+    "failures": 0,
+    "independent_assertions": 17143,
+    "origin": "HISTORICAL_SYNTHETIC",
+    "prefix_hash": "46a8d3d0a7471e4302873ae8678f15588c518875dab7cb86af70c445e3312ffb",
+    "python": "3.12.14",
+    "schema": "gig.terminal.native_oracle.v1",
+    "scope": "Author-written dictionary/price/quantity/Fraction oracle, not observed-market evidence",
+    "simulations": [
+      {
+        "algorithm": "TWAP",
+        "sha256": "969c976abb1149e6c3c066e7c5b3a4886bd5139d1b8c1510ad1ff39f45132f18"
+      },
+      {
+        "algorithm": "VWAP",
+        "sha256": "0f8cd954657b73b965cca5abe59658488f7ea97ad194d470857c6758c2b96841"
+      },
+      {
+        "algorithm": "POV",
+        "sha256": "f0e7de0380bf8b7e3edf33f1380aa12747966cc48e79577e601e1127a8dcf687"
+      }
+    ],
+    "skipped": 0,
+    "states_compared": 241
+  },
+  "limitations": [
+    "No real provider/current ARM64/owner private Codespaces/physical mobile qualification",
+    "3Dshader contrast and long-sessionGPU leaks not certified;table/2D alternatives retained",
+    "Controlled visibility-event test is not a physical browser tab/OS acceptance test",
+    "No standalone lint script;strict TypeScript/noUnused build and existing tests executed",
+    "Historical failed logs are bound by digest and retained locally;no warning or original mathematical assertion was suppressed"
+  ],
+  "logs": [
+    {
+      "bytes": 2427,
+      "path": "all-motion-build.log",
+      "sha256": "3c28d529ec3e9ba632b4c8c09ab6d3607941b647bf6a152c020a8c201fcf372d"
+    },
+    {
+      "bytes": 41156,
+      "path": "backend-asan.log",
+      "sha256": "bbfaf286a8131b2c9ba21fce3e8a65b37c4d5d19f374bb0af22b745744eafaf3"
+    },
+    {
+      "bytes": 40337,
+      "path": "backend-debug.log",
+      "sha256": "ff8b203986d214b402cc9b53617ef522ee2dd3a178e288d1924654f225fbfa37"
+    },
+    {
+      "bytes": 40337,
+      "path": "backend-release.log",
+      "sha256": "304e9c52547cacdd23e30f463968c5b342f5e2cb02ea580d5e2a0c157c81877c"
+    },
+    {
+      "bytes": 0,
+      "path": "binding.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2427,
+      "path": "brand-build.log",
+      "sha256": "678f57b65813e46b99c5db494cf784c30c56bd936c010fbd6f67bb0e43568637"
+    },
+    {
+      "bytes": 11151,
+      "path": "brand-unit-tests.log",
+      "sha256": "85ef1dd2269a439e67bb4dd5362646837d198fdcabca69fcd9d4b8d8a3e61d37"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-final/atlas-final-server.log",
+      "sha256": "71fc74df121276d23d9e35d4f1ae6bb1c20575c14351272d7d4f32df83b95a50"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-final/atlas2-final-server.log",
+      "sha256": "b10253861bb3e08f00f61829098380cc7f8b39084e2674d9f3f0002a919b4a32"
+    },
+    {
+      "bytes": 1287,
+      "path": "browser-final/gig-redesign-validation-final.log",
+      "sha256": "833a63cccd488d4f5af31c1e257012217e099c3404a8f7527f76f9ee1618e80f"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-final/live-final-server.log",
+      "sha256": "5d18c2423d84cec07e9587791aecc089b4a756c9c585fa67f1b105807851f7e0"
+    },
+    {
+      "bytes": 5653,
+      "path": "browser-final/native-final-server.log",
+      "sha256": "982aad00dd299a87ba6a7baace44679406063599bb0772114100dfc8243c9f66"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-final/stock-final-server.log",
+      "sha256": "bf39ee20968aa0b4f4d0b9c860ad13b0732abda573757ad4003111db74340d8e"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-final/workspaces-final-server.log",
+      "sha256": "35e4e89ceb1c5b1a3103da7f6b70f70a6af2b21f76a7db5bcf3f28cb1ad5d54e"
+    },
+    {
+      "bytes": 10657,
+      "path": "browser-final-brand/advanced-research-validation-final.log",
+      "sha256": "12c487bdbc55dc63d957183dc3187309006c06a0e048821a15105bccdfbd45f5"
+    },
+    {
+      "bytes": 19994,
+      "path": "browser-final-brand/atlas-final-server.log",
+      "sha256": "03f563723dddbf0cd6459becd12f393dd82dc1ec4011cfcc025a359e95f6693c"
+    },
+    {
+      "bytes": 3603,
+      "path": "browser-final-brand/atlas-validation-final.log",
+      "sha256": "48f04a74c61c9cdcda15b1b9967a83b39b7fd2cfdec285270561a8d95a1f118b"
+    },
+    {
+      "bytes": 23290,
+      "path": "browser-final-brand/atlas2-final-server.log",
+      "sha256": "b371693a8e73167e0496f34bba6377187b7d2ae14bf15efe9a30f65a2b644ad7"
+    },
+    {
+      "bytes": 2980,
+      "path": "browser-final-brand/atlas2-validation-final.log",
+      "sha256": "5d18e30a570330cede77944974bac8ac9165b7f2042e0c37397a17962699023a"
+    },
+    {
+      "bytes": 6350,
+      "path": "browser-final-brand/browser-validation-final.log",
+      "sha256": "bd33a045fbfbf3e6bcdfa3f5704048c74732db810a58bfbe488a2620938febf6"
+    },
+    {
+      "bytes": 382,
+      "path": "browser-final-brand/check_bootstrap_sop-final.log",
+      "sha256": "8d56df180ea77e246aa2253d71a8523e6f8935e83341f24478805ca6653cc3e5"
+    },
+    {
+      "bytes": 486,
+      "path": "browser-final-brand/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-final-brand/contrast-scan-final.log",
+      "sha256": "b4d589d2bab2f35c4f9f599a543bba0289216a4480449c5178767e31d6c02d29"
+    },
+    {
+      "bytes": 806,
+      "path": "browser-final-brand/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 3000,
+      "path": "browser-final-brand/live-final-server.log",
+      "sha256": "ec591e3c8c733979de75f32ed7f12b935ccc283920ca73efc2b63b0c9ef383f9"
+    },
+    {
+      "bytes": 2553,
+      "path": "browser-final-brand/measure_sprint3_browser-final.log",
+      "sha256": "a9904ba04a7d2ef4099cfa6feddfed1e1badd820d64e8a8588e70167517aefbc"
+    },
+    {
+      "bytes": 66907,
+      "path": "browser-final-brand/native-final-server.log",
+      "sha256": "730e87840ddd33b34fa8c61f90978faa64066b67cad707e5584d2652839ebd17"
+    },
+    {
+      "bytes": 11784,
+      "path": "browser-final-brand/sprint3-validation-final.log",
+      "sha256": "d8a03da97d671ac7637ac35d40d2a7c1b121f9215526ec1e627c681f6e09255f"
+    },
+    {
+      "bytes": 13989,
+      "path": "browser-final-brand/stock-final-server.log",
+      "sha256": "eb5156febc6c63b24e413735fbd7e3ed376fe907a707cb3485f004acf40f3b14"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-final-brand/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser-final-brand/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser-final-brand/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16383,
+      "path": "browser-final-brand/workspaces-final-server.log",
+      "sha256": "2d0deaddf0fdfa7919e956ad1ecfff020590e40ba96c87a81362eec2f1ad95f1"
+    },
+    {
+      "bytes": 398,
+      "path": "browser-final-brand-driver.log",
+      "sha256": "4fde4d738f7bb18af05445f14e0574e8c450211a7fc48e02ec93b2ed72edbca8"
+    },
+    {
+      "bytes": 407,
+      "path": "browser-final-driver.log",
+      "sha256": "ad457d3cf4cd3674d25d895697b68957e5b6966cd9697531e33179f49a12f567"
+    },
+    {
+      "bytes": 900,
+      "path": "browser-initial-driver.log",
+      "sha256": "8e4469b24a84d8bade198b791ba33163aa8d7e230ca6088f3c2d245c76954ec9"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-preview/atlas-final-server.log",
+      "sha256": "a6540f731b98e2f4263c28a006096535c3960fb9e9628780d7d65ba82f4c3986"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-preview/atlas2-final-server.log",
+      "sha256": "c810e91060f2d35022ca78b9f323ba6605d267aaa9dcdfd57cbc5e18f50a548a"
+    },
+    {
+      "bytes": 499,
+      "path": "browser-preview/gig-redesign-validation-final.log",
+      "sha256": "f1edd8a6e2c676305030fece2522aa6a71331ae4bbf80717a2e2105fee3932f4"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-preview/live-final-server.log",
+      "sha256": "7bd4726b0d699a80e2ba9e42fce3066d80d34a2ca74414843442e93a24931243"
+    },
+    {
+      "bytes": 5339,
+      "path": "browser-preview/native-final-server.log",
+      "sha256": "db1743339386ecef3a21aa0aa96b5cb0444068453a81e847f4bb6e00e341afd3"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-preview/stock-final-server.log",
+      "sha256": "9984c509653004e6d5baf7f960303ac7963d5202b4582ca188b24b11aa90f24d"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-preview/workspaces-final-server.log",
+      "sha256": "5bd316c02052140359190587993edbe42485b54f3f02dd7a352d4652cedc4039"
+    },
+    {
+      "bytes": 407,
+      "path": "browser-preview-driver.log",
+      "sha256": "a75cb3e6abef39202d77648d46356b556d37dd8aaca238d031c45163c05d6cfa"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-qualified/atlas-final-server.log",
+      "sha256": "1aa21b33fae39882e92c9496acef9b8e14514dfa13b3d23f170f938c509005d8"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-qualified/atlas2-final-server.log",
+      "sha256": "e87745ec670a9f22c48d4f934bd3b44bce252ab62703db584930115627798fbd"
+    },
+    {
+      "bytes": 1066,
+      "path": "browser-qualified/gig-redesign-validation-final.log",
+      "sha256": "537df65b76235537e60f9a8819eb50506582283a0252741a34be723ccfb0ce29"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-qualified/live-final-server.log",
+      "sha256": "5d42251088a3633223f2f6c02185e435916b97cf2737c19f3437f35c84486bf5"
+    },
+    {
+      "bytes": 5589,
+      "path": "browser-qualified/native-final-server.log",
+      "sha256": "89b3d2b6359daae0998b0c0dcb22ff0389abad1290ae82f6d8b611ba99303503"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-qualified/stock-final-server.log",
+      "sha256": "f3713c8f773c2e18604e0f8e33f0df7657ccf054e458f48861e5f87882f9f42b"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-qualified/workspaces-final-server.log",
+      "sha256": "62feac700f7d3918371f92a99f48564fe8ebf98e42829214d2e484601a765b64"
+    },
+    {
+      "bytes": 407,
+      "path": "browser-qualified-driver.log",
+      "sha256": "021f63f62d550749465062ec6d182dfc16c0cf1f271d4be24d856ec6e83bcddd"
+    },
+    {
+      "bytes": 2427,
+      "path": "browser-ready-build.log",
+      "sha256": "5a973936b6903fa675ce7a341853de87c2c66f79f7bca3c70f1b1b7ae08802ad"
+    },
+    {
+      "bytes": 11149,
+      "path": "browser-ready-tests.log",
+      "sha256": "53efcd16936ca7919e1ced588f4f37b05b98e3509765dc55931c6f327d40c9b6"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-redesign/atlas-final-server.log",
+      "sha256": "34b538eb94b5a621d53cff1e9401a39337012d042d2afdfeddf872ebc8c02ae7"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-redesign/atlas2-final-server.log",
+      "sha256": "b4e181d391c5b0ca0c8540f9de793477f1da3e1a2658068ef6d68fac0ab5a0c1"
+    },
+    {
+      "bytes": 785,
+      "path": "browser-redesign/gig-redesign-validation-final.log",
+      "sha256": "54d656715c03d7ba64deb86b909013d485bb3127b111ab824fe2bc759f888724"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-redesign/live-final-server.log",
+      "sha256": "02705ce7070a748a14b9cf8bcc59743d9284cb7352b07a08a980cdc3171920c1"
+    },
+    {
+      "bytes": 5505,
+      "path": "browser-redesign/native-final-server.log",
+      "sha256": "b19ff2b957eb558117d3cb9b6b8ad2ef6626edcd9d0cbede91cd0511b591147e"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-redesign/stock-final-server.log",
+      "sha256": "a9693b749aa29d0d0ac9094f4af8ed7e10dded112cef72a53eedcab7174e9440"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-redesign/workspaces-final-server.log",
+      "sha256": "9513349f7fa6635eadb2d35e321ee49556b71f687ea10d7466f8fa7c4aa7b22c"
+    },
+    {
+      "bytes": 407,
+      "path": "browser-redesign-driver.log",
+      "sha256": "50566376a0203c2a7f8e87c72966652398aeefd8fc8acf6d75eb565a38cafe9f"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-stable/atlas-final-server.log",
+      "sha256": "8011661e3804b1214accab7b66aafe035ecae3444aa4514870f1abcc503f2f26"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-stable/atlas2-final-server.log",
+      "sha256": "740c1c8f21f06fb80814ec7e8e7172b782203dd26e55617dd0c6e0adcd2c0947"
+    },
+    {
+      "bytes": 6418,
+      "path": "browser-stable/browser-validation-final.log",
+      "sha256": "7efe8ec04c98a20d4f4b0bdaabd7ffb1d3163d04e2bd2e0ec405cf6c57d497d7"
+    },
+    {
+      "bytes": 806,
+      "path": "browser-stable/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-stable/live-final-server.log",
+      "sha256": "98c32c1b510fc040b0ce547e6d260cdef649bb73af3194ac332043b5b2a6b6f9"
+    },
+    {
+      "bytes": 17074,
+      "path": "browser-stable/native-final-server.log",
+      "sha256": "99393a1acbecdac7069075d090ef25feffe0ea3e32900cb36dadd764a3e5bd4a"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-stable/stock-final-server.log",
+      "sha256": "6eb9e19aab3d74e7a68505a7e3eff20e523f39dbeea24f1730748f7b66d5614e"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-stable/workspaces-final-server.log",
+      "sha256": "6fe9bc5134faf25cb0853d4c99cd5cd647b1071b11d53b7008032ee25a887cf4"
+    },
+    {
+      "bytes": 430,
+      "path": "browser-stable-driver.log",
+      "sha256": "8bcbbeed78d2d610546bef8f16e34666e2832893d4f4000df3ffafa6b4aa9547"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-visual/atlas-final-server.log",
+      "sha256": "6a0a2198adf59efcefce3ee08b3e6703a9849a47561b95164067d389a7d6fb57"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-visual/atlas2-final-server.log",
+      "sha256": "f92f90935f7f7471da5a495054300d3c86a505a05cd896f91eac96465dd5c3ee"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-visual/live-final-server.log",
+      "sha256": "a8d3b26ea0cb0f7e40a42408e86811e02931c1e3b320d63a027cff1811c08703"
+    },
+    {
+      "bytes": 416,
+      "path": "browser-visual/native-final-server.log",
+      "sha256": "e2ae600c9d94540bae6be1389c925a168c3d72977690a07e5f75684a67cf5c0e"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-visual/stock-final-server.log",
+      "sha256": "c8b123eee6303d7850e5567467b39ade854ef187aa2695b03c3e59df276f2d29"
+    },
+    {
+      "bytes": 679,
+      "path": "browser-visual/workspaces-final-server.log",
+      "sha256": "304e1478bf1135d7d76ae9ce4ec8f61660c33c20df687ab66c1f7ebae4e52248"
+    },
+    {
+      "bytes": 654,
+      "path": "browser-visual-driver.log",
+      "sha256": "ab00a3abb5e7d305052f9937ff081da548d0269ec90345d85a4e74c4295fa7ef"
+    },
+    {
+      "bytes": 351,
+      "path": "compact-before.log",
+      "sha256": "8671287e844177dd3d0f203929fa23d1e7bea5861d0241ecb4683b37760b6880"
+    },
+    {
+      "bytes": 2427,
+      "path": "declutter-build-fixed.log",
+      "sha256": "976ad6cc7a713026a6eba97ed85df2724a0314419477ac7d447d893a25c8cfc3"
+    },
+    {
+      "bytes": 497,
+      "path": "declutter-build.log",
+      "sha256": "14d10a08f05ba2e2aa75c3992a9b36c9c5218cdff73177a0f20050408bd9c190"
+    },
+    {
+      "bytes": 11152,
+      "path": "declutter-tests.log",
+      "sha256": "c70561c2fedf6497c45149acf10b82573437eeceb73646660ae6a51b54d4b7e0"
+    },
+    {
+      "bytes": 10657,
+      "path": "delivery-browser/advanced-research-validation-final.log",
+      "sha256": "085d469b819c3d9593ab385b067b8c5cc5821e7adb4d8b345e9c179f948ffcd5"
+    },
+    {
+      "bytes": 20079,
+      "path": "delivery-browser/atlas-final-server.log",
+      "sha256": "ba3635f51f5208295a4553deb8ffd6096ca657937ac06cadf8997a0093a8474b"
+    },
+    {
+      "bytes": 3603,
+      "path": "delivery-browser/atlas-validation-final.log",
+      "sha256": "8c78c0652123a60f04bef84e01fbb59ab34c7df14a72f8beda67c118480b0770"
+    },
+    {
+      "bytes": 23715,
+      "path": "delivery-browser/atlas2-final-server.log",
+      "sha256": "bb6644635077e201501d6713ebacf150bd5ea8211ab7eb42e861516cbc860169"
+    },
+    {
+      "bytes": 2980,
+      "path": "delivery-browser/atlas2-validation-final.log",
+      "sha256": "5d18e30a570330cede77944974bac8ac9165b7f2042e0c37397a17962699023a"
+    },
+    {
+      "bytes": 6337,
+      "path": "delivery-browser/browser-validation-final.log",
+      "sha256": "f8544649e72b0088df4f12767bfa77ff62b97d5df9f32171bd4c933d206c6cb5"
+    },
+    {
+      "bytes": 382,
+      "path": "delivery-browser/check_bootstrap_sop-final.log",
+      "sha256": "0bc74392f6e6c794c6eac76c1e0a468888186b39a5034d38b45e0bcc08e3a9dc"
+    },
+    {
+      "bytes": 486,
+      "path": "delivery-browser/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "delivery-browser/contrast-scan-final.log",
+      "sha256": "b4d589d2bab2f35c4f9f599a543bba0289216a4480449c5178767e31d6c02d29"
+    },
+    {
+      "bytes": 806,
+      "path": "delivery-browser/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 2929,
+      "path": "delivery-browser/live-final-server.log",
+      "sha256": "59303fdb1b53606dedfe18f3a43e37fb122bc8ad386d78441805c720c59ec3af"
+    },
+    {
+      "bytes": 2560,
+      "path": "delivery-browser/measure_sprint3_browser-final.log",
+      "sha256": "a1c19ff780c296285d25c3d7a0608cda7c625daf03be4198ce2b6f843f985ee8"
+    },
+    {
+      "bytes": 67251,
+      "path": "delivery-browser/native-final-server.log",
+      "sha256": "9f6886372cc348e7d04aa7f1905f410e8e9e18d7af533212e057697f6070bf0b"
+    },
+    {
+      "bytes": 11700,
+      "path": "delivery-browser/sprint3-validation-final.log",
+      "sha256": "8cc6d9645798e384369fa81eb346d7f9e4e0777438743a39dabea4e4379cd649"
+    },
+    {
+      "bytes": 13989,
+      "path": "delivery-browser/stock-final-server.log",
+      "sha256": "4367ce20690d4105ffa92ff5b1215d7a65397544ecf1c378917cb57c04a6946e"
+    },
+    {
+      "bytes": 908,
+      "path": "delivery-browser/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "delivery-browser/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "delivery-browser/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16383,
+      "path": "delivery-browser/workspaces-final-server.log",
+      "sha256": "4321b9a1123dad25101072c4de11c262bc97de1d6e571686b9d92ed57d3bdf74"
+    },
+    {
+      "bytes": 397,
+      "path": "delivery-browser-driver.log",
+      "sha256": "1a43c826ab0e857317ec2a7224150e03958083280ac49815a512b4a9aeb70607"
+    },
+    {
+      "bytes": 2427,
+      "path": "delivery-build.log",
+      "sha256": "3e4ad59163d803f85202f01d9f8acc438fbf37f524abb27e80b807afa0791fcb"
+    },
+    {
+      "bytes": 11147,
+      "path": "delivery-unit-tests.log",
+      "sha256": "6f514d609bc50d533c332f5d57fac93dfe083525863e6bfdaeb4f7a0a32d1140"
+    },
+    {
+      "bytes": 10674,
+      "path": "final-browser/advanced-research-validation-final.log",
+      "sha256": "2d4960d82db365f2f293ed551968b225545a499c6513dab5be22335c497a6dd3"
+    },
+    {
+      "bytes": 20079,
+      "path": "final-browser/atlas-final-server.log",
+      "sha256": "72f1305e22dc8f6951d2df219aef2b555421d8318c772fab9a18ad2a2bd3ba22"
+    },
+    {
+      "bytes": 3603,
+      "path": "final-browser/atlas-validation-final.log",
+      "sha256": "8c78c0652123a60f04bef84e01fbb59ab34c7df14a72f8beda67c118480b0770"
+    },
+    {
+      "bytes": 23797,
+      "path": "final-browser/atlas2-final-server.log",
+      "sha256": "e670943be6b9985c2063a808b28f1d364837f840407e199f8496c444805ad8ec"
+    },
+    {
+      "bytes": 2980,
+      "path": "final-browser/atlas2-validation-final.log",
+      "sha256": "5d18e30a570330cede77944974bac8ac9165b7f2042e0c37397a17962699023a"
+    },
+    {
+      "bytes": 6321,
+      "path": "final-browser/browser-validation-final.log",
+      "sha256": "94583e75e1960f7ab27d4184ad14e837d68fa8aff1d8507f51671d702b023e07"
+    },
+    {
+      "bytes": 382,
+      "path": "final-browser/check_bootstrap_sop-final.log",
+      "sha256": "311f6cc5567e92765ff15f7916ab289674dea72943b9e56d994b6bb9c14f105d"
+    },
+    {
+      "bytes": 486,
+      "path": "final-browser/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "final-browser/contrast-scan-final.log",
+      "sha256": "b4d589d2bab2f35c4f9f599a543bba0289216a4480449c5178767e31d6c02d29"
+    },
+    {
+      "bytes": 806,
+      "path": "final-browser/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 2929,
+      "path": "final-browser/live-final-server.log",
+      "sha256": "071e90df50b5a4693a23b88da287c6be2129e8f2df9c87a30cdc0280637e0ddd"
+    },
+    {
+      "bytes": 2561,
+      "path": "final-browser/measure_sprint3_browser-final.log",
+      "sha256": "f6e838c81006f55c5a9ee0886ad7a553e8d72ddd3c5d8783380401ef213302a3"
+    },
+    {
+      "bytes": 67804,
+      "path": "final-browser/native-final-server.log",
+      "sha256": "9cbe80b6edeef53543e63a09561158d7c688c22359781e3d5fd48f692bada515"
+    },
+    {
+      "bytes": 11616,
+      "path": "final-browser/sprint3-validation-final.log",
+      "sha256": "1d5a7182070232f6ac519014ab6e4ef3a552848faaba4a095875f3af35202696"
+    },
+    {
+      "bytes": 13989,
+      "path": "final-browser/stock-final-server.log",
+      "sha256": "b50c8ea153c7c19f69f430faf1c7a1a0bc08c4517165c7d646e5b164f88344bb"
+    },
+    {
+      "bytes": 908,
+      "path": "final-browser/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "final-browser/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "final-browser/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16525,
+      "path": "final-browser/workspaces-final-server.log",
+      "sha256": "2fefe00a7ddb32de6b1744ec2f2697f25b5272cf2e7cbd906f6fafe010edc4bf"
+    },
+    {
+      "bytes": 396,
+      "path": "final-browser-driver.log",
+      "sha256": "cf7e3f068922caa2c68e7316c1fe474cb7aff7edd4e7a8ae6ea9ff0c69980f0f"
+    },
+    {
+      "bytes": 2427,
+      "path": "final-build.log",
+      "sha256": "e1bcad9ffbccdecb4251bb5c16d7f70f21713865526b4e39e7fc6a2c94aeed8c"
+    },
+    {
+      "bytes": 11144,
+      "path": "final-frontend-tests.log",
+      "sha256": "84a5b050707713cf3b982576369a7fe903939ba5131f09d6a916609afe9725c9"
+    },
+    {
+      "bytes": 465,
+      "path": "geometry-parity.log",
+      "sha256": "e4e48a5460e6d34e7343338a6521181657eec16eee513354bcda46208ca1166c"
+    },
+    {
+      "bytes": 2501,
+      "path": "motion-build-initial.log",
+      "sha256": "d5d94790fcf849645cce412f7be671fd1c55df2d6d4c367c34577b019e68d31b"
+    },
+    {
+      "bytes": 10810,
+      "path": "motion-frontend.log",
+      "sha256": "029dbaf485a75ab020034f6fa3d0acf3d04c09e538f9972851aa1908b6e14d2b"
+    },
+    {
+      "bytes": 1112,
+      "path": "native-eight.log",
+      "sha256": "5346aca4d2f9a560d4a9d0823965f9758dd018432287b844ca6ea4179c0a7530"
+    },
+    {
+      "bytes": 833,
+      "path": "native-oracle.log",
+      "sha256": "ef37a7e76379e5d751c2cd85c192e378ffe8d56c521a79010069e3d4a984e12f"
+    },
+    {
+      "bytes": 10703,
+      "path": "qualified-browser/advanced-research-validation-final.log",
+      "sha256": "a76e9dfb8c9152ad8eaf984b87671ffa3df93d0daa516e5afb51273981cfe271"
+    },
+    {
+      "bytes": 20306,
+      "path": "qualified-browser/atlas-final-server.log",
+      "sha256": "c5a7f93e6b9660c957e2f7bea1c31911dbc68a268e9bf4ea5c78e68c909c8556"
+    },
+    {
+      "bytes": 3603,
+      "path": "qualified-browser/atlas-validation-final.log",
+      "sha256": "48f04a74c61c9cdcda15b1b9967a83b39b7fd2cfdec285270561a8d95a1f118b"
+    },
+    {
+      "bytes": 23715,
+      "path": "qualified-browser/atlas2-final-server.log",
+      "sha256": "36615e0aa43a145f92bda90120294d80697b0e5d25fc520ec00eba89060e58c4"
+    },
+    {
+      "bytes": 2980,
+      "path": "qualified-browser/atlas2-validation-final.log",
+      "sha256": "5d18e30a570330cede77944974bac8ac9165b7f2042e0c37397a17962699023a"
+    },
+    {
+      "bytes": 6337,
+      "path": "qualified-browser/browser-validation-final.log",
+      "sha256": "234c7aed3fc741823db47abc1cafa4259dccc96c2e666f3c9701e0e23131b2a7"
+    },
+    {
+      "bytes": 382,
+      "path": "qualified-browser/check_bootstrap_sop-final.log",
+      "sha256": "cd8cd8210fae53d7589b832d7402db576175b4eae767d13b42ad005f22a3fb74"
+    },
+    {
+      "bytes": 486,
+      "path": "qualified-browser/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "qualified-browser/contrast-scan-final.log",
+      "sha256": "b4d589d2bab2f35c4f9f599a543bba0289216a4480449c5178767e31d6c02d29"
+    },
+    {
+      "bytes": 806,
+      "path": "qualified-browser/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 2929,
+      "path": "qualified-browser/live-final-server.log",
+      "sha256": "434e930306681d50c57b151a61cbe85984e5d850d596b26c7412db1c4507c1ed"
+    },
+    {
+      "bytes": 2562,
+      "path": "qualified-browser/measure_sprint3_browser-final.log",
+      "sha256": "1750a2492b72ff249b2a1afc029f4734e34ab8cc19bcd66b86dac766199ad0ab"
+    },
+    {
+      "bytes": 67247,
+      "path": "qualified-browser/native-final-server.log",
+      "sha256": "fcf147dc9fc86c44be1f21f14b8f0f722d656218c52e9f3f9f801ac4931de4c2"
+    },
+    {
+      "bytes": 11728,
+      "path": "qualified-browser/sprint3-validation-final.log",
+      "sha256": "baaf7bb9709a878166225423a50a03cb09c2b44f3e5b0669551d49d6c0bbdd5a"
+    },
+    {
+      "bytes": 13989,
+      "path": "qualified-browser/stock-final-server.log",
+      "sha256": "a269d3458f70a66e4c88709c95029fb3dd2a07b2a90a869c0e0d8be12642a0b6"
+    },
+    {
+      "bytes": 908,
+      "path": "qualified-browser/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "qualified-browser/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "qualified-browser/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16383,
+      "path": "qualified-browser/workspaces-final-server.log",
+      "sha256": "6678867adf1b1a416285836191c79f07f75d58d15c7ed27dfa2194a9897623cf"
+    },
+    {
+      "bytes": 398,
+      "path": "qualified-browser-driver.log",
+      "sha256": "4984964b3c27acb494a2c8f91250e06598befac5de24cb18bf7657994159bfb0"
+    },
+    {
+      "bytes": 2427,
+      "path": "qualified-build.log",
+      "sha256": "fd97a85306ce0712e86f859382f8bc6fc62f6776c802c44ce094714aca54ac32"
+    },
+    {
+      "bytes": 11152,
+      "path": "qualified-unit-tests.log",
+      "sha256": "a90dbd9557a2c2ae98c9c1d35b1d7bfe803a1562da0adc5614d38e8d36d82eb1"
+    },
+    {
+      "bytes": 2427,
+      "path": "redesign-build-fixed.log",
+      "sha256": "601693ca72cf3d150956986eca1f3a758fda14dcd62b4cb655a1f13f9bec2ccc"
+    },
+    {
+      "bytes": 2427,
+      "path": "redesign-build-initial.log",
+      "sha256": "fd2e180e68acd873d6a826c6ba42ba2db05c65c8f15513c6bf349f18092dc642"
+    },
+    {
+      "bytes": 365,
+      "path": "redesign-build.log",
+      "sha256": "966ac9fbadf7d086269110bc0acc7281440c02c0820d3d08d96612bda0a6d5c7"
+    },
+    {
+      "bytes": 11153,
+      "path": "redesign-tests-fixed.log",
+      "sha256": "ddd6e224269274d918171cb9bb86f48bd8c6aa2bd69f528dca8240b3d0caf934"
+    },
+    {
+      "bytes": 11148,
+      "path": "redesign-tests-initial.log",
+      "sha256": "c2fe82811eccb4ef2b40e1328712e51e2b82d757c33268a2a4411085f4a398e9"
+    },
+    {
+      "bytes": 11147,
+      "path": "redesign-tests.log",
+      "sha256": "2df469b6b1b6bd272e9d809cd39a43b1ac1c6b132dccb3b4e35ade104b631f4d"
+    },
+    {
+      "bytes": 2530,
+      "path": "tls-forwarded.log",
+      "sha256": "0b46a73f9c85233d90aafee24145249cb0ba1e413aae592842daca03b816d946"
+    },
+    {
+      "bytes": 4364,
+      "path": "tls-http.log",
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "bytes": 3763,
+      "path": "tls-stream.log",
+      "sha256": "2ca6a2c8be0e3be13650655231ea2dd9c26655835fb517d2a6844a3f04ea03ec"
+    },
+    {
+      "bytes": 2427,
+      "path": "visual-build-pause.log",
+      "sha256": "d5342dfc85cc0856bec7499fd0c1084eca17f5cf7418df1db267c5c2e8ec49eb"
+    },
+    {
+      "bytes": 2427,
+      "path": "visual-build.log",
+      "sha256": "46a602b4a5583d33ec06a972bd106575a798422d0e79d800c1c9ccee9e85b03b"
+    },
+    {
+      "bytes": 11146,
+      "path": "visual-unit-tests.log",
+      "sha256": "970a547ce0ffa5c812acfcd9072bfd00cbcec90e9ad4a75eaba3f58cae73fa45"
+    }
+  ],
+  "native_eight": {
+    "expected_hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "failed": 0,
+    "scope": "Actual rerun on unchanged native-source GCCRelease build;no new compiler/ARM64 qualification",
+    "tests": 8,
+    "xml_sha256": "e1c2da228289269893e55ecf6ebce901748641f77af1671dcfebdd13a6289718"
+  },
+  "new_browser": {
+    "checks": [
+      "GIG identity,system typography,accessible12-workspace navigation and real native transport",
+      "two-sided exact native ladders expose size,cumulative quantity and source units",
+      "native static-data camera automatically orbits only when visible",
+      "accessible pause/resume and manual reset preserve independent camera control",
+      "actual offscreen intersection suspends the loop and returning resumes it",
+      "visibility event suspension and browser reduced-motion preference stop camera work",
+      "multicolor authored research geometry rotates without changing native book or replay",
+      "context loss retains2D table and retry creates a usable independent renderer",
+      "navigation disposes removed renderer loops and canvases",
+      "all12workspace pages remain accessible in both themes at1440and390px"
+    ],
+    "errors": [],
+    "failed": 0,
+    "frames": [
+      {
+        "frames": 18,
+        "interval_ms": 800,
+        "scene": "native"
+      }
+    ],
+    "passed": 10,
+    "schema": "gig.redesign.browser.v1",
+    "scope": "Loopback native/authored fixtures;software Chromium. Visibility event case is controlled injection;not physical-device or owner private authentication evidence.",
+    "screenshots": [
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-command-center-dark.png",
+        "sha256": "028e428fd6dafcb6c7600deeaa5a8331c71a52411b53db371f87e5246f8a6b9b"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-order-book-dark.png",
+        "sha256": "85cd6554d6996d9e9ac123e9321810adbba17246668d8c656f12a297a611fc6e"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-order-book-detail-dark.png",
+        "sha256": "26ad683a8d6af790c1a9ded4e2aeff4872b1e07e1974500eefc8aa4302a222ab"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-research-3d-dark.png",
+        "sha256": "e520b8d211baf848b27ee1da78f29455bf13c5d923d39130a3d50573d71822f9"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-stock-intelligence-dark-1440.png",
+        "sha256": "b1107db5a2470a5011799b2b1edb3421f05686ab4cf5eb2596d47ffa718f9631"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-execution-simulator-dark-1440.png",
+        "sha256": "d15100ecac311f5e9e935488836db17cea5e24bf730ff5abb03c42d65c6dfbbd"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-operations-dark-1440.png",
+        "sha256": "5e92547f82e54e5a1367302ed9a3902501f7c8059505507f4e5820e5bfe4a60d"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-command-center-dark-390.png",
+        "sha256": "43edc64086d42efadbffe51ccdcb4eb8bd468ee27783164befcf57779319951a"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-stock-intelligence-dark-390.png",
+        "sha256": "1bca0aeda43649cb2d46fd741d4051aae63ac9b8021abcee7c9b6de857c26510"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-order-book-dark-390.png",
+        "sha256": "a614618598fc4c63bfe23badbea369faefe4a5aa8fb4da14e30b5a7e4d5ceb2e"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-stock-intelligence-light-1440.png",
+        "sha256": "69028ca78283be9a6c9da2506de6c2e0d4704e9e6266b48139dc021c7d344d0c"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-execution-simulator-light-1440.png",
+        "sha256": "decdd62654766635a1fd42fc75e5f0d0a5251b4680be30f903c65f748b4c214a"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-operations-light-1440.png",
+        "sha256": "d40a9630522d0c3537c0c880e753a9619b6628d2307be44657e35af75b461b49"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-command-center-light-390.png",
+        "sha256": "2f2e5a79570d385ea9b7c23cc02e8ffb9569e82a940322e39fdf6597f028a448"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-stock-intelligence-light-390.png",
+        "sha256": "4b3bb77c7c7a94f43e13d4069fe1ef0de42c83bc456d2e1f8eba6ea1f141c6eb"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/evidence/delivery-browser/visual/gig-order-book-light-390.png",
+        "sha256": "629e3ec1af6cff20e7e87098e34e2126ac00034c2290f2e422d917f53d54b48c"
+      }
+    ],
+    "skipped": 0
+  },
+  "performance": {
+    "browser": "154.0.8037.57",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_PERFORMANCE",
+    "limitations": [
+      "Networkidle included;not pure rendering time.",
+      "Independent contexts,disabled cache,reused browser process.",
+      "Sampled JS heap excludes native/GPU allocations and does not establish long-session boundedness.",
+      "No external provider,physical Android or owner Codespaces request."
+    ],
+    "repetitions": 3,
+    "samples": [
+      {
+        "company_route_ms": 128.26548699999967,
+        "dom_nodes": 1057,
+        "initial_navigation_and_settle_ms": 820.6071400000001,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.098314,
+        "task_seconds": 0.348482,
+        "used_js_heap_bytes": 4425676
+      },
+      {
+        "company_route_ms": 126.44522800000004,
+        "dom_nodes": 967,
+        "initial_navigation_and_settle_ms": 833.8864100000001,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.11751,
+        "task_seconds": 0.38554,
+        "used_js_heap_bytes": 4439392
+      },
+      {
+        "company_route_ms": 117.0995669999993,
+        "dom_nodes": 1056,
+        "initial_navigation_and_settle_ms": 826.5394809999998,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.101101,
+        "task_seconds": 0.353991,
+        "used_js_heap_bytes": 4351872
+      }
+    ],
+    "schema": "gig.sprint3.browser.performance.v1",
+    "warmups": 1
+  },
+  "permissions_activated": false,
+  "provider_calls": 0,
+  "real_orders": 0,
+  "report_scope": "Final documentation-only delivery adds this report, manifest, screenshot inventory and checkpoint closure; application source commit is immutable.",
+  "schema": "gig.ui_redesign.evidence.v1",
+  "screenshots": [
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/command-center-dark.png",
+      "sha256": "028e428fd6dafcb6c7600deeaa5a8331c71a52411b53db371f87e5246f8a6b9b"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/order-book-desktop-dark.png",
+      "sha256": "26ad683a8d6af790c1a9ded4e2aeff4872b1e07e1974500eefc8aa4302a222ab"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/order-book-phone-light.png",
+      "sha256": "629e3ec1af6cff20e7e87098e34e2126ac00034c2290f2e422d917f53d54b48c"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/research-3d-dark.png",
+      "sha256": "e520b8d211baf848b27ee1da78f29455bf13c5d923d39130a3d50573d71822f9"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/financial-statements-dark.png",
+      "sha256": "67192b4d51a200174799eb9f69166f83fee03efd54632d7502f62efdee803cae"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/financial-trends-dark.png",
+      "sha256": "75499fe2a5adeaa953eb732318c6c5dea55b0f6a0d818bf29e43763e8aa1bf5f"
+    },
+    {
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_FIXTURE_NOT_OBSERVED_MARKET",
+      "path": "docs/design/gig-redesign/visual/financial-light.png",
+      "sha256": "4a2733952394941818686d1cb0b5eab881e834123d6da1c333cb5c934967d94c"
+    }
+  ],
+  "source_byte_binding": "Application source hashes were verified equal before delivery;commit receipt can predate the final source commit because verified work was staged before committing.",
+  "test_source_receipt": {
+    "assets": {
+      ".vite/manifest.json": "7a8c844321a2d514bada15cfdb8a6526becc0df358294f1457d6b41903bb0d13",
+      "assets/HistoricalResearch-CCDv6QRP.js": "d9f0c48bd65e444fc6b1d28f5ed05448f91e0efb1bd73595d1c7afef67174a52",
+      "assets/Landscape3D-DKRbVGCq.js": "eb3085865b333d3ad47598baf64d513e9d93e2f9327a7e2864b03985224783a8",
+      "assets/LiveMarket-HRylr1xb.js": "1a7a30c3abf58cce60df0ceb0fb3d71f650c2cb61c9a38e2c1ff24905ba40903",
+      "assets/MarketHealth-TML_KOWz.js": "a83ea82e8a277a9d22654b928aa3dc846118d44088a76c030dacd54743a2d619",
+      "assets/ModelSurface-Bb6nq5tK.js": "b945ba1bc16542f284570b1a7904b0e08752fcc64c8b7c7b0f89914cffc8ae16",
+      "assets/OrbitControls-DgvY0sml.js": "5f73f6ac9131939ff19a3515d579de1d8fb1eb6478a0efb541b20b506c675a38",
+      "assets/PaperProvider-DPMHKaQU.js": "0f7c43132f26dfa5a76bf79d4a2d3b3f8ed5661a60b807c311ff7938abc99c24",
+      "assets/PaperSandbox-D8QBb_2E.js": "cd36b5adc96400901287995834ff77294b3b1a75141429972c1f84342c70bff9",
+      "assets/QuoteCloud-D7FwJIr-.js": "d5b866565897d019f15486e7e42ff0c7a8ba0f14195a171eb612e53c43737e53",
+      "assets/ResearchDesk-BbYCuonS.js": "350d93318a5be358cb09dc6a5f15f45079b90ad4c282d12721ebcaf7b922c27a",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-D2ArHD8g.js": "991a932a5b55dfad2a6bfb73209648863f4bc3d4c4fb608c6837e831174dca99",
+      "assets/ResearchScene-CT5huRsM.js": "cad3e4f947dfa7ea5c8c74d842bc19fa2564e932a96b0a1a1a23729b06166d1a",
+      "assets/StockIntelligence-sA5vPybS.js": "0408e8b379f9b9f4727ab3e1b0fcfcdb5f3b5db621ef71a6374a9f7a700ffa54",
+      "assets/UniverseWorkspace-B-ohj8B7.js": "f32659eb9913c5d18c9e5a0b6cf15d030d99469b1ced378c1bf58b5511261ae4",
+      "assets/VolatilitySurface-v6CWhvV2.js": "54f257df4d20dc98c808c579d6b454c46a1fc6ba1d016632c50def749f16ddb6",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-DOhNuZs8.css": "1df259581b1e807500656b11fc1d281eb9206ec6b1352d3cd3af870bc9068738",
+      "assets/index-DiO7bLaX.js": "861c5c474e12047ab61969391c0d8b102dab969f64c5d81e28bd4b5a8dc81031",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "10f523a72dff9330b0461ef2023eddb1a1bfb996b192340a39619988b7a9a5fe"
+    },
+    "commit": "86b6a3aa98afe0c7536b8feda9eff76b527052d9",
+    "scope": "Offline fixtures on this machine;not provider,ARM64 or Codespaces authentication evidence",
+    "source_sha256": {
+      "terminal/paper/__init__.py": "c7e54f42a88fff5d391da31994a3f7cf695f6e0886fec5de0da844e735a1c584",
+      "terminal/paper/alpaca.py": "bf5c2801daeedcf9f630fb4630a864274387ae156c8dcae7b14e109b1e38616d",
+      "terminal/paper/contracts.py": "8b280070d1fbee6ca018b8f74885d125d579cb2b6cb7cb1a4e5b150689c5179b",
+      "terminal/paper/engine.py": "eb69693c1b7c62591c53b50c3b3972295d6b180677eafa53a6735409b4fea334",
+      "terminal/paper/fake.py": "b00a1be6e49a2a2222614225575736cafb8ecc2e16d8591d07b70a32a0373625",
+      "terminal/paper/provider_workspace.py": "cbaed3940e654606b8953a372778352ffefdca6897819bdb818b4237fea5cd74",
+      "terminal/paper/store.py": "67778c04483bc089409b877094382715608748dba73f035a48efabd3232cdf16",
+      "terminal/paper/test_alpaca.py": "8361116aa611292d4af00815e162dbe1e2fb9509b5ecc17afdc27808f49d8b1b",
+      "terminal/paper/workspace.py": "e604229d6de8d44445a6b43554a97cd76e017b1bd36feddd18cda5e74c68eb71",
+      "terminal/providers/__init__.py": "faa67119b3d87d45b5f20c62c249ff80764c1e6fe6d80248101b1bd98a595130",
+      "terminal/providers/coinbase_candidate.py": "af36a851c1e933aca9689a91abb62339ec1eee5e091f21993ea5f59760325c58",
+      "terminal/providers/coinbase_transport.py": "d158598169323a384b9171925117582f08697a5b661e672d9d95c20987774757",
+      "terminal/providers/fixtures.py": "e8d355dfba077f701a09020091a389684b6731469bc483e1c21b6b76527fa807",
+      "terminal/providers/kraken.py": "e536746f98db198c85beabaa00a5c61182c5b79fe0238ed3e2791611265a2c14",
+      "terminal/providers/supervisor.py": "bef28f0e395fce5635cba30558d6e13ef6203009a613f4a586b5a23303e4d6c8",
+      "terminal/providers/test_coinbase_candidate.py": "2e40325eec3355c71d0230b5ec08ea8a7428eb30eace87823d3b805305d65055",
+      "terminal/providers/test_coinbase_supervisor.py": "2e9602c81e61dbc3ac263e29d9fcd720360077b557f1b63f86fe3e8232e20d07",
+      "terminal/providers/test_differential.py": "a2bc2751e75fcb4b4710b34312a336c93f1622dc1e5924bda10e5db214ebf82a",
+      "terminal/providers/test_integrity.py": "7d8ac3114685f3338141da158e91bb1c36f9c1682150859dd8741ec21bca04cf",
+      "terminal/providers/test_kraken.py": "6bc1e549a7ced34917a98387c53d2b8743043c0435c9640bc5698ad49b4c4b8f",
+      "terminal/providers/test_kraken_admin.py": "7b6e4f7c9586dd43f49598d34180b50ce4be13a2f52a7eb3f19f3afa373fcdc1",
+      "terminal/providers/test_supervisor.py": "22c0f439be1c8836ef95d8761e33cc80fbcb97a7666f24b508da71860dff315a",
+      "terminal/providers/test_transport.py": "225e2aee12cc16524a16a2ad0321585cfd2d8ee789e8840e87212945c5191246",
+      "terminal/server/__init__.py": "ccfbfcb4c0bd4239cbbb22965d2f4a5163f2b468ff2d0c15d085576ffec320ff",
+      "terminal/server/__main__.py": "7a2bc306d7d93e396b7b5772e938f6e7bcde75356d059118d3f2e7459252b4d1",
+      "terminal/server/analysis.py": "ccb76ad562497c4a108148a5c4cfec2ab74b48a86106110c5250abb09c8d67f0",
+      "terminal/server/app.py": "6c69ff7e014665720c21c215db9d37e5b885a3d99c0d4b5dd263e54a609cb87e",
+      "terminal/server/backend_contract.py": "733596df9d0b0852cd0c09fc5552f1b359c1f31cac26a6a5d2678de8ee98c90b",
+      "terminal/server/concentration.py": "32654dcba91700de5d8b8ea43e09bbccfd0154c637cbeb58374b6bcf35c1715e",
+      "terminal/server/config.py": "5c5cfd1a9bb6756a61c6b38e5db9d70e4088eaf9d769cadf9440358339e57b48",
+      "terminal/server/connection.py": "3bd2848fb126d82066df0643d1f5911f40ef888bd44fa32ecadcc3453a884507",
+      "terminal/server/engine.py": "bd9e7d19a9ae01561661ff43f324c3f983162358ff06a5c6088d170e2266d566",
+      "terminal/server/fixtures.py": "d909088a8308c25dda6b9e23b2e2e0d9835c6f721673d7f88e9648fc0fa81dcd",
+      "terminal/server/market_delta.py": "43db0b2b49019d3a110affc23c5acbfd61eee444ffccd325ce80f2415e9baeca",
+      "terminal/server/market_events.py": "1fca2386fe15420ea4a5e1c08c0237862f19ef94b20b22abe49305f5746ddf9d",
+      "terminal/server/request_proofs.py": "aeeec8175997650db14be1541be0b2d181357b63d32b932d8d79277d684f33ae",
+      "terminal/server/stream_tickets.py": "ad05918c405f0520df8027e56f7674f4deb2ecf83564d8138741a1c12a3d55ef",
+      "terminal/server/test_server.py": "5c85a2c828d3713b55d907932a147c6c81fe2aa96f7a5517f6e603a08a00f5e6",
+      "terminal/stocks/__init__.py": "5a99a821890afb49c3f140084c7eaf213179186513b4e89b3a47b69061639393",
+      "terminal/stocks/accounting.py": "b17c537b762245bcb4e64ed5b08a70d8ab3ab8b9e23435308437110571a51473",
+      "terminal/stocks/acquisition.py": "06c1df9a3a462a783971e29ae06c24b715a21ae13870d52fd2b2c27a295b3e4a",
+      "terminal/stocks/advanced_models.py": "ca9db49726a0f6e85539609b5ad1fdfd07b02e5211ed373b53cea5219f51eb26",
+      "terminal/stocks/alpaca_history.py": "a4a192b501094eec435455eebde03d449403c7067f2e0b5f94598805793ef93c",
+      "terminal/stocks/alpaca_reference.py": "1cf3a1d175108d6db944593c3e14c021345b4145c8d527a99a1c2d0ef93e6ec2",
+      "terminal/stocks/alpaca_transport.py": "13d5253c2c718e9344e11fd051d22eeb1c21f6f1a649b225ac807f7424ff5732",
+      "terminal/stocks/auth.py": "76a17c85653cc59734d83ce30837a26f2d63e985dc0c83c755b0b7c65720b37a",
+      "terminal/stocks/datasets.py": "2081ce8cb6ce4b6ca2a34e61b3fba3cb1c319d87a81f1a8935415b1b443fc786",
+      "terminal/stocks/directory.py": "5dd06ccd796f8790855282ed958690322bcf2ae93263e5c5f39a96526afcbb34",
+      "terminal/stocks/disclosures.py": "dc1a5026b7cf6fe4fd5c59923f94855dd4b5a04f0463d015051d4d1bc1a164ad",
+      "terminal/stocks/discovery.py": "9c8e4c9270489e78ddf2f9398c4098ba348494e95d152c85eef19c9e9de07611",
+      "terminal/stocks/evaluation.py": "17a474f2711f93b144b0683e5a85e131757d5fb41de760f165ea280c583cb663",
+      "terminal/stocks/feed_health.py": "d9e23df9100d43ef00fc1302dd25909823b951b0d77d44d779ff4591fc8aa20d",
+      "terminal/stocks/financials.py": "b94b69bbbe2938e9e642148239a96c421e40a608a8d61bf67c3a249ccf513d28",
+      "terminal/stocks/historical_research.py": "ea9d03d8784d0342410300d6a22cf5e1d1f571aca3d97ecd79562d46af7305a5",
+      "terminal/stocks/historical_v2.py": "b3b3725a2b8fd95ac2caedfa195be307bb8f45dbcff65a1314b703668a6b207c",
+      "terminal/stocks/history.py": "297740584e8d68488b09392b6fb333c75c8e6e8c53319d61ddb814c422786dc6",
+      "terminal/stocks/history_backup.py": "24cc7358cfde5fb2bf90ace62526871583131f5b76f6d2702ee376c63b137ac3",
+      "terminal/stocks/history_store.py": "d1e774598b0d62ba8f85dec3f3eb3246cbc7a3ed998967b2a827047dc764440e",
+      "terminal/stocks/identity.py": "54ee20dbef6f43e86d86a1ce2464d6fcff6a8dd1618d251e207d9c8c65f00ac9",
+      "terminal/stocks/live.py": "842148c5a69148446571b5c3460178bfc0b550088c134aa679850a831fe2c004",
+      "terminal/stocks/live_metrics.py": "ce7cdd19dba8bd857883ca7f6d586f922800b1a2baaea69db2f5aa9510b47612",
+      "terminal/stocks/market_catalog.py": "469f2de3f2aaca14d91a4fb65bf8105c99ca33bb5fd6a9c486beff19290e8ff4",
+      "terminal/stocks/models.py": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2",
+      "terminal/stocks/observation_store.py": "8ce855ce4587c9f46b7196e3f01f757d21255dd06543180963c9ca945728c4b7",
+      "terminal/stocks/option_feed.py": "525af9519759f275f134b791b9f195c6b605b8616d95bfc05975ee8771fba056",
+      "terminal/stocks/options.py": "4623e45d88d937c4335cd2a72ec40b266f1fa0ca8cdafb64d46d94b6e306ccf2",
+      "terminal/stocks/portfolio.py": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92",
+      "terminal/stocks/price_research.py": "ff4a22dbe0438342e8cfec52bd59b7db289db4d82e3a45674f595461ae437239",
+      "terminal/stocks/prices.py": "ea4c16d576cd70acd8aae4b06b3025239fe32ecce6f52dd7f2bdd46aa5a928c1",
+      "terminal/stocks/qualification.py": "0d17ea503b85c7f216211d8b81bef3afc216c9de33b7e1b3b44329707ea39db4",
+      "terminal/stocks/quote_analytics.py": "ab5c898b1db666527bc366e95d7d28fdcc8de97f4ee7fb6e31fcfae1bd4854ee",
+      "terminal/stocks/ratio_history.py": "52296eb7b511adf617509d3378d1dc2cfc8cf62b4f8ee894380c46ee91634613",
+      "terminal/stocks/research.py": "a4ee5015a71932348796fa14a8e77e5f8cd65522007e988b457a5372e4b342b0",
+      "terminal/stocks/risk.py": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c",
+      "terminal/stocks/sec.py": "b73037382e130156fa7b921e33e3197b3469c0c02f45515f9d883f297cf3a0bb",
+      "terminal/stocks/sec_config.py": "cafa2cacc78172312ec968d11d09326a380d3000a8eb9ba1261837900f8d779c",
+      "terminal/stocks/sec_history.py": "3b7a337fcf17552e0f387439f5add3b00326ab8d4cd64484be2905f9a02ccd72",
+      "terminal/stocks/sec_identity.py": "0da4965f538be915140b648e67a5ba4bcab140ee3a803ea0d20b2a5582d40186",
+      "terminal/stocks/service.py": "0c18c5fc89805877e538a9eee1bbf16b9a036b1d8ee29fec35e2071677bf93c9",
+      "terminal/stocks/session_schedule.py": "7f7e6a50b41759929f483e2ca26ab79790fad1df97c1301bbb65a7e1496d0d43",
+      "terminal/stocks/statements.py": "b20839f778b0f27a7213159d71734556db7fd87038be1b311b11421e0892808e",
+      "terminal/stocks/test_acceptance.py": "950bd04179c8bde42c13f692701eefa620c10f630083c3d6569859b7682ce8be",
+      "terminal/stocks/test_alpaca_data.py": "83c273db86045c986a74030c383ccf6883618c54347734fd1ee7b3359f0bab8b",
+      "terminal/stocks/test_availability.py": "9ae26b83d1aa18324d0620f6a68acd1f9cebb832eeffe27fe26977f6efbac215",
+      "terminal/stocks/test_backend.py": "3605e4eb21fdf8100d86b9639b7d3b172d9681a24e0ff7044ce9c225840adb9b",
+      "terminal/stocks/test_catalog.py": "057717dc347f73687247784f067432288f9d8407a08f58514fab30cce61ae7fa",
+      "terminal/stocks/test_completion.py": "3716334f29d615ec99159009a3766bc5c9ea3c112cf8e826fad706bb1d09f620",
+      "terminal/stocks/test_directory.py": "39e0bca689baa396fba81f797d9bc509ad6e45b8647e3b7dbe031e10956890e1",
+      "terminal/stocks/test_discovery.py": "1c44e6b08ef157d98539b002132b81b8b04f9506b19bbde0b41bda635af49386",
+      "terminal/stocks/test_final.py": "fd53a6a2a9114fd488c980ab002a3f8d03640e124d1a7792f2f1189c5f160376",
+      "terminal/stocks/test_historical_research.py": "491dacd57054c0ff938099952315b7a65c9873bb8d6a663d27a6a4c2c7d9a576",
+      "terminal/stocks/test_live_market.py": "5d6f82b41323a1bd941006760278d9aaffe9e9ea4453eb9847b56575685d35cb",
+      "terminal/stocks/test_observation_store.py": "886dd4223d72790291d8a97b2690419b963d8a501b45097af732d8a4ecaa2bbb",
+      "terminal/stocks/test_operational.py": "043ac000d4b884f1f9b3c95020c082a21d687f24d9d60c3ed28ede3cf525f728",
+      "terminal/stocks/test_overnight.py": "21b4c11df12e28a1dedbcb2c4a7e53cb3297c8dab06685c09b48d027e80519b4",
+      "terminal/stocks/test_phase3.py": "67996895dfa36746d71550521215427a69db2081d1528f880c2ffd27534a7b4c",
+      "terminal/stocks/test_phase4.py": "c9e36adcab74ff5d7b2906d9bc80c740945cd4e1f9eea8e0763ddf01c0d1c3ab",
+      "terminal/stocks/test_phase5.py": "e4692854b5dee431c658185a3a5b962ff054fd6331111ef7a2bcf4f5bb575e40",
+      "terminal/stocks/test_projection.py": "e66751e8b05fe7446f9cb3dadef11372fd98ee533f58b25039737ac196b10d43",
+      "terminal/stocks/test_ratio_history.py": "dde2e9320e718175d3f13ef00b78b270ce71bde963dcc76bf949b152f3a13a70",
+      "terminal/stocks/test_remediation_options.py": "4dc75c29e82709f70baf232ee429f1a1d7f6bc99ddd2a561c1e0a52b91e51d27",
+      "terminal/stocks/test_repair.py": "607ecfe74a8e9dac7c76c116f664d8dfb68cb4cb295c56a7406f84aedb308337",
+      "terminal/stocks/test_sec_directory_boundary.py": "4bbd66b51b3f222f07e097175267123f30bafa24bb687ae99aa9ae8504601b9c",
+      "terminal/stocks/test_sec_expansion.py": "7707ff95bf36a775c4150b362a8ef40e1c86ea0e2e91f085787f7b22e48886d4",
+      "terminal/stocks/test_sec_identity_diagnostics.py": "067ea73db44e5497483f562a6a74e0e81fab7fc86cf78488919916051ca3a929",
+      "terminal/stocks/test_sec_integration.py": "921ff45a60fdbe936f268b1925547c2a44bd0fa7479c1b94b26c8a57bba40f64",
+      "terminal/stocks/test_sec_qualification.py": "0cb6ca1b605af591d17e5d8c67f8ad222e7ce98d773635df9580b90fd38b0649",
+      "terminal/stocks/test_sec_terminal_reference.py": "83eac7493923f6013cecff0ddb836181358ce51a75969540a3e8c9cf33f873e3",
+      "terminal/stocks/test_sprint4_history.py": "950a3b8f531a6209d26de0c18163fc7d0a38726a9e5a4582d0f342c348576ec0",
+      "terminal/stocks/test_workspace.py": "e389480220f1d18dfb5e728aa6edc316e8816b5238e621dd0ad6b96508404219",
+      "terminal/stocks/vintages.py": "cf8da98fe5c947c9a38eaf1c4ed2a23ad5f9cc925c495c38162871f75724a04b",
+      "terminal/tests/advanced-research-validation.mjs": "e18913b9b1b216f62ae947635448e077229f5a06cc15328c01aeeafed9a6bbeb",
+      "terminal/tests/api-boundaries.py": "201adc6bf475189e17bcf031ed809b04e673b36f845ff9bc51e4de8074fc2b96",
+      "terminal/tests/atlas-final-performance.mjs": "de283ffb297ea41a9b3ec8b43b3520eda0de764ac7994ce2e21c28e73c38f52c",
+      "terminal/tests/atlas-final-validation.mjs": "43681a9dc0a673e876196f4e3ab37011c6348bc2e6ac9228260bdd6d43639b82",
+      "terminal/tests/atlas-validation.mjs": "3d97311773b4683d2bcc3a478d825d4ff37087535c450bcf37b8c418def9f665",
+      "terminal/tests/atlas2-performance.mjs": "c91b06559551456828fecf51fd39284bcb53dbe70263ec5f2a896f4f4cc1d528",
+      "terminal/tests/atlas2-validation.mjs": "035da588c7de5a588d58148d31664b4a36a49ac9ae4b1ffaebb8d29e9ec315b5",
+      "terminal/tests/atlas2_fixture_server.py": "95c1daacebdb36afe63615aac651fcca1090bd4fd36f7c576d4f8d2e442737fe",
+      "terminal/tests/atlas4-validation.mjs": "018232740ddc323fc48bdf2812158ab1fed9f24c4a3914e822359039a22a613d",
+      "terminal/tests/atlas4_fixture_server.py": "0f964e70a15a199755b79ea855ed4ede53bdefeda2a17bff38715c66e71f8555",
+      "terminal/tests/atlas5-validation.mjs": "460faf0bcd292f933380bf07ecdb98196f9caf0b0c23702eb2a395ad946384f4",
+      "terminal/tests/atlas5_fixture_server.py": "14a3179c999d393c9ef0ad5f4157efd7c4f36fff00801484369169fabc402b85",
+      "terminal/tests/atlas_final_fixture_server.py": "0b7a26ce155d68cb91af6e6f9a1549fefd291fe6765deccc7695fd983e0f2cee",
+      "terminal/tests/atlas_fixture_server.py": "efdaf302a2e430b5ec19806d1240a24039d820aac8f067066ee903a78cdb8592",
+      "terminal/tests/benchmark_gateway.py": "baa58c3389bec219fcc28c3672afe8df76538ec774ac49b13bfc49e3df9971bb",
+      "terminal/tests/browser-validation.mjs": "f103c11e292dd893ec594d87dad2853245843e422ac9b3f70b411587353b80fa",
+      "terminal/tests/check_bootstrap_sop.mjs": "2d33482a4255eadf14e230ccacd3b92e02f8152de82575ffdb83f17f562669e6",
+      "terminal/tests/check_browser_handshake.mjs": "da2a7ca145b55d3021863b16d77b1b6f64ebe0fe0cc0c45d35a71bfdd4e7351d",
+      "terminal/tests/check_forwarded_tls.py": "509c5ec3c07308b3293488a3814c384f1c982511e3dc75bc8e64264c81986527",
+      "terminal/tests/check_market_projection.py": "66d90c115ee119345229ef9a532e87379facfafe94995e3d357921a027de5e32",
+      "terminal/tests/check_rewritten_http_tls.py": "c5320ab4f1853bf205e09f6e377cf1588bb106b470e4cbab706194664513ed28",
+      "terminal/tests/check_rewritten_stream_tls.py": "e1a50d6fc4a2ca54a13d24af537a3f58660cce70bf8efbc1989c937682ab7baa",
+      "terminal/tests/compare_observation_store.py": "de05e7c1ea3be4358e29258a2c83a09d11b2deb7475782104656a312bf96cf7d",
+      "terminal/tests/contrast-scan.mjs": "3bea9623bc9af2fbb4bfb4fe0a79f262bad987c27ae53f34e6560864c06b33a6",
+      "terminal/tests/discovery-validation.mjs": "29facef7c6b6a28f968bd1223b13d4b16d610e4084b42ac8117eb6343565d649",
+      "terminal/tests/fixture-safety.mjs": "e0438e0a4d9fa214d167be3e77ced6c2179e13b20ce6111813d3343eff8a5d4d",
+      "terminal/tests/gig-redesign-validation.mjs": "71f204b837bc4244a241c93b3563bc7b33600b862c2c0e4e98fbcdbbdb050611",
+      "terminal/tests/gpu-recovery-validation.mjs": "f45682f7f4d683213d4f27ffc6eb9bb98f0354f20eefdc6485e2e1088fcdeaee",
+      "terminal/tests/live-controls-validation.mjs": "3b5d49d8ff4eaeea77af63465999ea6424bd2e4e842e2ee3975f76fd4931565c",
+      "terminal/tests/live-market-validation.mjs": "d64ca8c02203dbc04b09b190d4e41cc3650b3190ee611586ab11516371cd622c",
+      "terminal/tests/live_market_fixture_server.py": "60ca98678f4cc784345e63284f3cce28452c3746c689880c05d2991b3058b7bd",
+      "terminal/tests/market-unavailable-validation.mjs": "28348899360e949b843f5e5d3ee23b8f33a2d82b2686231de75e659c82ad2cf1",
+      "terminal/tests/measure_alpaca_reference.py": "09fdb90c7bc6553e87eb6d825c20ef82eafc3b76c26100294d0fd19a472bcc74",
+      "terminal/tests/measure_directory.py": "9dbe4dcf451d37e252ed2ff4c69372f69c3cb9b77086c3b341a7cc6f142c4630",
+      "terminal/tests/measure_live_market.py": "28bb01e4417eabaca3330212a62956e3e8a15b2a7c7d48a4bed76f29d920b38d",
+      "terminal/tests/measure_market_ingestion.py": "609efb293b88986bb3852b3ad779036194f679a9b8e9764e41ab19f77d21aff6",
+      "terminal/tests/measure_observation_store.py": "00e304836a80302beb1a121b36df9deab493f32bd4727b35e47938ba50395604",
+      "terminal/tests/measure_paper.py": "7585889242f3b822de31b35de2b784838b428ef8e749745d8de13e6ce60b0d9d",
+      "terminal/tests/measure_ratio_history.py": "e7a5177f9867dac5904bf5c48ca69ca1e6f1debbf0edd3bd55667997351140ed",
+      "terminal/tests/measure_research3d.mjs": "77d52ec38f5445f12f5522feafc649842e466f4dbef574ed575e4b8629590bcf",
+      "terminal/tests/measure_sec_directory.py": "dad0387789b4e3b3f3c807ba670b37b4c6fcca088ad0550ae0b835be881f6ba6",
+      "terminal/tests/measure_sprint3_browser.mjs": "810bd3a22a464b19e774f4dc1fe6ec07bd8d4af861670283581e429c3f75fdf9",
+      "terminal/tests/measure_sprint4.py": "95ac7f46ab22b6e62635a08ebfd7c9b1c81dcf47584d6db36075cbeb4b4b3122",
+      "terminal/tests/mobile-camera-validation.mjs": "669acfba8996f176b79403628aa831e44465da42957cf0a9a78e935a21f31c97",
+      "terminal/tests/native-oracle.py": "6a7422315775e2ad7fd4e644db0e3749ed629919a1f7777287301443306afc00",
+      "terminal/tests/offline_guard/sitecustomize.py": "c66fdbb7bd96d7cc34a4e791228986d4784cc72a6ad8a1b5d4acfbf46988b5ff",
+      "terminal/tests/phase-next-validation.mjs": "45dc3eaaf9cf731511c04ec6867470a07d86046e3e2e811c06c2161f2b27dfb2",
+      "terminal/tests/phase_next_fixture_server.py": "966f71095b2acdfbe8b15dea4ace54f5f9dedc691243c2f6e6ef6da6f83fae90",
+      "terminal/tests/product-performance.mjs": "20a3a3db785364277f2f250be448f03e493b57bed2cefe68a4278a808ce1b134",
+      "terminal/tests/product-validation.mjs": "3210be5a3680f95451a8fa36db983a6ed1a2430eab9b9ec4ba6d5bc8a6618370",
+      "terminal/tests/product_fixture_server.py": "962bd4565b0095a20d45ebe2575a854dec0951b0c3355566c42b9ba6480880d5",
+      "terminal/tests/ratio-history-validation.mjs": "858ea98dbfe1b0545bf1ed5e2f8e9607f46a45759598e6a00dffd106abb412d4",
+      "terminal/tests/recorded-playback-validation.mjs": "835c8f435c115b1a623feeed37fd091f043cc167433a6a9f8ccb762e8a96851c",
+      "terminal/tests/remediation-sprint1-validation.mjs": "90e84e657c8e3e1a90b40b2eaac9244c57425f88ac822eab2ae9e8722d38f152",
+      "terminal/tests/run_atlas_browser_suite.py": "5ced004a001897f29089433e464d6aec97c9033c5d94eb449591c0b11c9e9fa1",
+      "terminal/tests/run_live_market_suite.py": "6259a9aaad74dda921414267832f8e9dec15504fa8d01a59b271a9d1457d4edb",
+      "terminal/tests/run_native_suite.py": "ac296aa053f366c84a85dc4572ba8a76183865b3aa5a7d2c95af00f412752ca6",
+      "terminal/tests/run_remediation_sprint1.py": "dfb5777c7ce2d3b938c45d48b930ef03e4287e63a8caa6c5d4a650ff115f1842",
+      "terminal/tests/run_remediation_sprint2.py": "6616aae93308211a09c72f466bdf65d77b069f7b879cbecebc1612b4cbf0e020",
+      "terminal/tests/run_source_qualification_suite.py": "a635fd52aa55bc76503c58ecb4104feb5d59ec1daf282ef09d1f4b0342f77ece",
+      "terminal/tests/run_sprint3.py": "e405136e6b98c8d034d3a40c0ff8124eface4f31fd4f2b0623876b75d4da5536",
+      "terminal/tests/run_sprint3_browser.py": "bba340a4af853eb0ddb5ffba22602bf8838cabfe9857e4c58edd5e12f3ef699b",
+      "terminal/tests/run_sprint4.py": "a8331d9e8427d1e6a0e19bbebc9db9380c4aa5f0137b871abae5da542ed93393",
+      "terminal/tests/run_sprint4_browser.py": "5b7609b98f9362e0ed7837e2885363822270367692e46eb394419c3284a539df",
+      "terminal/tests/sec-completion-validation.mjs": "0d38e0e7c05387f68c8e5b33cfedbd48a851d8f281f82e6c38ef284358d3273b",
+      "terminal/tests/sec-integration-validation.mjs": "8e33338e840d6dc2c497bf4613b8e81474f6bf776603d8087c8af28ae4625636",
+      "terminal/tests/sec_fixture_server.py": "8e6657b7a36ffd2cdc07e2c6456ddbfec44da4e3ef3b7638a0a776b0e8971d88",
+      "terminal/tests/sprint3-validation.mjs": "f01f94e6d5ef0e5f7207f9ecc7384fbbc195bcb707ee208dd6cc7dfee7d57830",
+      "terminal/tests/sprint4-validation.mjs": "3336b73c73d43a63e73daa4156a5b853cb1040f0c07b5dfe27e5b2c5485cce65",
+      "terminal/tests/sprint4_fixture_server.py": "533abfb36e6a404f36abd13ef52c61bc8549be72bed1d711f7f76f192097b12b",
+      "terminal/tests/stock-intelligence-validation.mjs": "534ef7f7fce68b919f9892265e69ca9ab42ab63c2d5a9757b1c8b80b054e78a5",
+      "terminal/tests/stock-loading-validation.mjs": "cfc84365b9767a937ea7917e4de135c8fa4fa0fc3edb30788e5b610d3e3a23be",
+      "terminal/tests/stock_fixture_server.py": "c865c7816521cce1983bbee6a72b0d111ef81b7bb46b619d64e73709a6ef6dde",
+      "terminal/tests/test_native_depth.py": "c094387618b60cca6ef481cf0b5c974272e1ac208bf3391b4805c9cf23c2da77",
+      "terminal/tests/test_paper.py": "44f6f4ba5e95635d1ca7c010974244b463fbd5f6ab220682ac7eed24879fbb21",
+      "terminal/tests/wait-state.mjs": "52e4a4fd29615a06731b994aa8518b3a5a90b7318d0179753375edaf43fff277",
+      "terminal/tests/wait-state.test.mjs": "41672f7dff1557d381f9a9dd55848968b99cc5003755e9ccb2308fa125eaa615",
+      "terminal/tests/workspace-qualification.mjs": "3e5bb3ced1c2bef0ae1069176c60ed6e2ed58ebe67c40ee6e06af741826e70fa",
+      "terminal/web/src/AcceptanceView.tsx": "053b532d9e44f2207e0121fcc2daab1ed4ac873d6461aa3a1e18a35fa9e12689",
+      "terminal/web/src/AlignedStatements.tsx": "9eb942028267df8f7ba50d75b5cff4eda18802c1e78ab4f269293e4339ed04ba",
+      "terminal/web/src/App.tsx": "d1fbee7e14f78ee949ca0d8f95dcef136579576525caf2c4bf77dfca31fd48cf",
+      "terminal/web/src/BalanceComparison.tsx": "ebec966fb78098d13b2a76e542cde6ca4a12d29d97f219f722f29d1cd1cebb52",
+      "terminal/web/src/CompanyCoverage.tsx": "3a40d74e976e9df82061458eb2856122ccd21bda409fe8cd8733253795b8b1a5",
+      "terminal/web/src/ConcentrationPanel.tsx": "95732cdb6ba1b80ce429a7c0a9367886eab20f4949ee4b64e6b805d692db8013",
+      "terminal/web/src/DatasetLab.tsx": "6dccc5d0a6facd6ea5693638c23f19b0344b0b6bedc10d8c79fc0e2225cfae67",
+      "terminal/web/src/DepthChart.tsx": "e6c1a63d87f113b4a322bb3472417752b9264ab5bdee00c7c4f25a3226306c48",
+      "terminal/web/src/EquityPanels.tsx": "d6a8f27c11d0c77eff350ed1b9bcf2033e4815c62cb98ba55d10fdb82c38942a",
+      "terminal/web/src/FilingExplorer.tsx": "d6b2109d2fabcf1bcbbb827bc7515a66cdd452fb4049917bb070522e2af51471",
+      "terminal/web/src/FinancialWorkspace.tsx": "c74caf2f92dbc1b70512585df9b7fe45aa244faa01b40efadb53ce4087cc89f4",
+      "terminal/web/src/HistoricalMarket.tsx": "b4cc2dad41a38e0d802f9b86bfe6e6cefb7fa5614c4b924999b6b4407947fd6e",
+      "terminal/web/src/HistoricalResearch.tsx": "f80d863f1cd5d5a4996b3ccd0f127c33717767460836df5023fd74f190855429",
+      "terminal/web/src/HistoryArchive.tsx": "09309155e65339110dda23699ff8acb4f0b63d25ee5ad5d651dc49aff7fba3e8",
+      "terminal/web/src/Landscape.tsx": "b262d80c2bc981efcb3d5b7ac9a641f1f4a2e5eec7f4ae0fc982f2a6990865ca",
+      "terminal/web/src/Landscape3D.tsx": "fce2056215430f3144fb0f2f2f42fd710cac2a7ae60340ac8337b1b77d71a87f",
+      "terminal/web/src/LiveIEX.tsx": "6964bf4501c1c4b80b1222f119656b13483c97195f995d455c7174e0f774701c",
+      "terminal/web/src/LiveMarket.tsx": "20429a29b70d628f43bb0ff8e93d8db0ce18d6686b1c033822c5627433dcf5c2",
+      "terminal/web/src/MarketHealth.tsx": "23c6f8624a4282dd85779806f847a779e62100366e7ea070941ea59af39c3744",
+      "terminal/web/src/ModelSurface.tsx": "44e1efbe9cb6eda70ac33f3c39209483f6a35fcb431fbcc80046d38b628358d0",
+      "terminal/web/src/Navigation.tsx": "7ae721e0a7d4c20c10e3681ac78d6709f035911c34383fd988b76fa652c7643d",
+      "terminal/web/src/OptionChain.tsx": "5cb2c91c3e7a59ad6ce635a1ac9d1a2ada5a022685ed2eb294a6b450898cda00",
+      "terminal/web/src/OptionalBoundary.tsx": "7e66324a9afb6d29cd1035d6b2e9ce0f58d4017c482079255a5b8424baff161a",
+      "terminal/web/src/OrbitMotion.tsx": "790264d81fbf2d05d2493d753a6db86cd2ec4f37b3b6bf438aabad682f408639",
+      "terminal/web/src/OrderBook.tsx": "623744405f7c1ed19283d941fe97ee7d35dad734749ab7892376bb292c8f25a4",
+      "terminal/web/src/PaperProvider.tsx": "019f75f70e137fe4a1d399a1c0fc16715546061a8fd630bdb0f2cfa3df1e6ca8",
+      "terminal/web/src/PaperSandbox.tsx": "9d3f454f5f08590635dd85a6e5604b8247282fdd8d7bc673dddcaebb187a78ce",
+      "terminal/web/src/PortfolioLab.tsx": "c3bc8d669f4b955d6c67570c05808f33fcfebf68d39a6715916b8624c9f15ddd",
+      "terminal/web/src/QuoteCloud.tsx": "2cdcf72dc43452b1db0e87cbd3d84114e91a2103c30a448e8290f0694bdf5674",
+      "terminal/web/src/RatioHistory.tsx": "7de37e39033cc413f8d9eb3fb4043eb3bc3863ac1bbb97b9bcb7366d4edbc760",
+      "terminal/web/src/ResearchDesk.tsx": "319f2f6e241bc9d87e5876b2d79d6ef8c55f02e3cc64a165fe846e7e880f34bf",
+      "terminal/web/src/ResearchDiagnostics.tsx": "cf66f0236db35802580583e3d6b0c8b3e74dfb094ad6802ed756a408f9cd754a",
+      "terminal/web/src/ResearchLab.tsx": "32659e5ec245fb2478eb830fe16779f58028a940a2031f44a5b7812d66275053",
+      "terminal/web/src/ResearchScene.tsx": "52cb63c2560542cd3f97327095a0d52bd0d484e87d2568305a6c3b56cb70daa9",
+      "terminal/web/src/ResearchSummary.tsx": "4f8babedc298c11f16d2b7d684ed03d2e129b958da7b9a962e3540cc8643bd54",
+      "terminal/web/src/SECStatus.tsx": "1f19136181997c4ed1ee7e1685c0fdaa6f5514c30846200a3e2d7550acf8e4a6",
+      "terminal/web/src/StockIntelligence.tsx": "11d2b391bc726f45444cb1ce94fd7e23b140d25d4e020312fbb9804d9e9163cf",
+      "terminal/web/src/TerminalHeader.tsx": "7db7257aa6fb55fc2a2eb198003ff18289f479f669582f79735607116221b3e1",
+      "terminal/web/src/UniverseWorkspace.tsx": "1edaf731fda1ffa945c38d73d2cc9e9b7ceaf32edf224ca70d42fb7c2cce5295",
+      "terminal/web/src/VolatilitySurface.tsx": "87f088950b5da8263d45d05bbd96f9235492e1d3ea21a9994009a8db062ebcaa",
+      "terminal/web/src/WorkspaceIcon.tsx": "7c846c59dcac3c49afd94e4be5a551475589ca9677e66aba25c2c2eca17e409f",
+      "terminal/web/src/WorkspaceLaunchpad.tsx": "797603477274389b1c92bccf8e44927924a207b43c2914c8401fc717ca79b476",
+      "terminal/web/src/api.ts": "a08703a843229e0a0020838a85b4199be3ea96a0107ecf45005b7f3728de6e4a",
+      "terminal/web/src/bookPresentation.test.ts": "35ec0d60f162c60f03fadac1be23035f6d6eb5e02d361646914a6398ba7523eb",
+      "terminal/web/src/bookPresentation.ts": "773b1150d32fb569a79b85bc094e388d976518c8370d43d1f901341b5d6124fa",
+      "terminal/web/src/cameraMotion.test.ts": "cef0f7f00f8203445077c5d126b36ec4b0b351cc3a93335bcae1e4f3f863b8ab",
+      "terminal/web/src/cameraMotion.ts": "8d7a8bc026f25b9076fde0a20dd730a1f576782a8e0def6b9a0ba0f72b4e7fc5",
+      "terminal/web/src/contracts.ts": "50f835af33b168d13dce9a13d573bfc739aa508a146e3f02b24633e21e4c883a",
+      "terminal/web/src/directoryContract.test.ts": "5844b11c92146e86cb82925fe3c13e501b671840bbdda2af98a1b38d49a4324a",
+      "terminal/web/src/directoryContract.ts": "0816e10f33e680caf8e1be9454b143b0517f9f1015327f7c4f9815ee1c56d353",
+      "terminal/web/src/financial.test.ts": "6c78ab29bbd0154c25a8de484fd9830f55a1b5b14bb42a99a799bcc2a63a97fe",
+      "terminal/web/src/financial.ts": "9ce6d84832d23196b56a7e017d4955975ea622e25b1cb19b32595e2c0b5e6231",
+      "terminal/web/src/format.test.ts": "31bb1a82a8388b203b9e2ab0a3d3549a8fb3d390f8c149f6f4d226499d506b76",
+      "terminal/web/src/format.ts": "e39fddc37e970936eb867f2661a0560f08a096eb29f628cd1dc344f471beacaa",
+      "terminal/web/src/historicalMarket.test.ts": "dd619066a214cf09e551ab192a35f070550c1c75d8f884a628f7f1f325980cdf",
+      "terminal/web/src/historicalMarket.ts": "efa2a75f37e1925776c5c559d469a865aa31093ad96524dee8324d838aa1c54c",
+      "terminal/web/src/historicalResearch.test.ts": "e063c8286feb2750d44cf0b0dd0200f5132e00c1df3e05dffe383786ceca4609",
+      "terminal/web/src/historicalResearch.ts": "b20eae2e013449e5cfbc1bc2238befd16ee03263590dab9cdfc9bd04e98577b0",
+      "terminal/web/src/main.tsx": "9b561ca1854aa80d39145c898ca055b96265ab5e84a3680b35160f9c1f501a58",
+      "terminal/web/src/marketContract.test.ts": "3fe9143da56e9f51f49faac7855c8d5ba2d771e775a07c489c121e30764defca",
+      "terminal/web/src/marketContract.ts": "c211f8da0d6ab4c3ee0c182272d5b3afe38fb899d3c905f7e62842f3143bcce4",
+      "terminal/web/src/marketDelta.test.ts": "95623f102ec0813f08f598c1a955534c0042705995bbccc825ae1496580ee96a",
+      "terminal/web/src/marketDelta.ts": "8195ac84eeee690df5ac65b8b72c882afc6df976b7e581da95b56c1e16775ec0",
+      "terminal/web/src/marketGeometry.test.ts": "fa10e90cdb04da2523e5e807c7c7856707e5971cfddf369e83ae93e0969942c5",
+      "terminal/web/src/marketGeometry.ts": "c1156e408a3b12ad19d7cc3f068281000fa60c643bd7bd7902bcd811c184d0df",
+      "terminal/web/src/marketPlot.test.ts": "4fe070faac3dc2561deed071d957dfdc4bcbdd33c87456fe3c11a7e5e2ad7b5c",
+      "terminal/web/src/marketPlot.ts": "f533d9062f893ba8fa04f59ca9bc434dfef5ae46ec44e459b544e61edba07b62",
+      "terminal/web/src/marketStream.test.ts": "4abf55bfb95d79b1486736bf9f31c8fc06027775cf711124d525b2b65729d65a",
+      "terminal/web/src/marketStream.ts": "0fe131e69dd437d3814c2244cb4c0b60c6f2a8d77090146931cd7af6a53958c7",
+      "terminal/web/src/marketStreamProtocol.ts": "8ceebcb7b2148ef0be591ec4478e0e3ae807fbf4d5c617dce05f4173dc6009fd",
+      "terminal/web/src/modelSurface.test.ts": "ee23cbd252c027c642e01732f97b63c71933d91d17d5f73843bde427b93f3958",
+      "terminal/web/src/modelSurface.ts": "e5084db3bc19bc3009d704c9119b8e4647939d9c50b8ab83750df605a795c3b5",
+      "terminal/web/src/ratioHistory.test.ts": "69b3c13bb011b9221d9f3ba66aa9a2f87901e723771fc5d5143047a5b4d899b1",
+      "terminal/web/src/ratioHistory.ts": "1a83a7a922e6f936a0609a77eeb374d50a45685c1358e5a791e03b2c9b4aa83c",
+      "terminal/web/src/research3d.css": "711d939a7ddea8ce0a1548b6bdb8ef97dbee0d740ca32f900eb6dd4d6932d00d",
+      "terminal/web/src/research3d.test.ts": "5908d71d65cfd028eb1f6390b2555e3bcce8d601d3a6dcf0a41341ae74bc349a",
+      "terminal/web/src/research3d.ts": "09f401b60920dace8be139957fb6ddbdf25939224f8a49ff50998ea10c7df345",
+      "terminal/web/src/researchExport.test.ts": "d69ff188e200084f2f0e9ad47e3929fc9a980ef4b45ef761a7c7812df4284464",
+      "terminal/web/src/researchExport.ts": "dd8168cbe79b7658d8462807e1531a6670ea8c65e16b244a9a16cb04956e320a",
+      "terminal/web/src/response.test.ts": "c9a164a9188294ad5e25a90ff44ce1bbbfdede802dd758c713935e4b80870763",
+      "terminal/web/src/response.ts": "43edfee3fc20857968794f6807fd2908d62a6b94d58ab96f4472b344cf93153b",
+      "terminal/web/src/secStatus.ts": "7cb7cf09b65e1a3b7fb7e76eb4e57155ae02ce0c02d9cffd8dbf4a69b4e3ae13",
+      "terminal/web/src/stream.ts": "44a236e6b6e7b3722111a42ef5de3aa7b5f2bd1ae42a1e52a9f9dea0f4563494",
+      "terminal/web/src/terminal.css": "08ed19d1e135bb3aff654c3b6f79d254c87c45ee85d1e8542c9dc05c23381a69",
+      "terminal/web/src/workspaces.css": "72dc4653f1ea442bda33cc9db21b126b6c1ad37ffaaa1378b5f73b4e034f51db"
+    },
+    "tracked_dirty": true
+  },
+  "unchanged_backend_native_dependencies": []
+}
