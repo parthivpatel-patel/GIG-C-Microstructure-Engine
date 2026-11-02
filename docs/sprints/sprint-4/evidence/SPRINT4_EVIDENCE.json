@@ -1,0 +1,2156 @@
+{
+  "additional_security": {
+    "failures": 0,
+    "overlap": "part of broader terminal regressions",
+    "skipped": 0,
+    "tests": 28
+  },
+  "application_baseline": "4522948d94770ea94a6e152b68a695063d711fd4",
+  "application_commit": "d40622ee201af9339326b14e810f2bfa56462be8",
+  "arm64_current_candidate": "NOT_EXECUTED",
+  "branch": "feat/atlas-sprint-4-market-data-paper",
+  "browser_performance": {
+    "browser": "154.0.8037.57",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_PERFORMANCE",
+    "limitations": [
+      "Networkidle included;not pure rendering time.",
+      "Independent contexts,disabled cache,reused browser process.",
+      "Sampled JS heap excludes native/GPU allocations and does not establish long-session boundedness.",
+      "No external provider,physical Android or owner Codespaces request."
+    ],
+    "repetitions": 3,
+    "samples": [
+      {
+        "company_route_ms": 133.6265099999996,
+        "dom_nodes": 901,
+        "initial_navigation_and_settle_ms": 689.8190709999999,
+        "initial_scripts": [
+          {
+            "bytes": 242590,
+            "path": "/assets/index-CAJKUtN7.js"
+          },
+          {
+            "bytes": 4497,
+            "path": "/assets/ResearchDesk-D2_jFVu7.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.076412,
+        "task_seconds": 0.238904,
+        "used_js_heap_bytes": 4333124
+      },
+      {
+        "company_route_ms": 134.64952100000028,
+        "dom_nodes": 901,
+        "initial_navigation_and_settle_ms": 767.774504,
+        "initial_scripts": [
+          {
+            "bytes": 242590,
+            "path": "/assets/index-CAJKUtN7.js"
+          },
+          {
+            "bytes": 4497,
+            "path": "/assets/ResearchDesk-D2_jFVu7.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.121681,
+        "task_seconds": 0.312415,
+        "used_js_heap_bytes": 4385784
+      },
+      {
+        "company_route_ms": 146.2702959999997,
+        "dom_nodes": 994,
+        "initial_navigation_and_settle_ms": 761.3112250000004,
+        "initial_scripts": [
+          {
+            "bytes": 242590,
+            "path": "/assets/index-CAJKUtN7.js"
+          },
+          {
+            "bytes": 4497,
+            "path": "/assets/ResearchDesk-D2_jFVu7.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.108527,
+        "task_seconds": 0.30374,
+        "used_js_heap_bytes": 4352648
+      }
+    ],
+    "schema": "gig.sprint3.browser.performance.v1",
+    "warmups": 1
+  },
+  "browser_programs": [
+    {
+      "exit_code": 0,
+      "log_sha256": "793f587fd8dc6d00cde9fbdc50d431e3a232eff024c04eb9cac8ad3b57a3f701",
+      "schema": "gig.terminal.browser_validation.v1",
+      "script": "browser-validation",
+      "seconds": 12.202644211996812
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "7474f7c319454e858be306ce29a94173ebe7715945e79ecfb12b53eb54c6b626",
+      "script": "contrast-scan",
+      "seconds": 5.280304327025078
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "aae0a4fc757fa0fdda852d251d41efdedec9a8a430c281fcfde75d58cf64253e",
+      "schema": "gig.sprint3.browser.performance.v1",
+      "script": "measure_sprint3_browser",
+      "seconds": 4.737561194022419
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+      "passed": 10,
+      "schema": "gig.stock.browser.v1",
+      "script": "stock-intelligence-validation",
+      "seconds": 6.05772498701117
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926",
+      "passed": 10,
+      "schema": "gig.stock.loading_browser.v1",
+      "script": "stock-loading-validation",
+      "seconds": 18.449489206977887
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "c31a74f15162f78d6fd4d1f967762b5a0bb5076f74a56215fd2769f0c61bded0",
+      "passed": 21,
+      "schema": "gig.atlas.visual.v1",
+      "script": "atlas-validation",
+      "seconds": 19.878407504002098
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "2ad3ae858106ee702ce10507fa3470d662dbbb8e8bc7256fdbf84f46cb060295",
+      "passed": 11,
+      "schema": "gig.atlas.phase2.visual.v1",
+      "script": "atlas2-validation",
+      "seconds": 28.949043144995812
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "f27022defeb99022228fe71896756622770417e3649e28422a657c51e6778a69",
+      "passed": 23,
+      "schema": "gig.advanced3d.browser.v1",
+      "script": "advanced-research-validation",
+      "seconds": 31.486594809015514,
+      "skipped": 0
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd",
+      "passed": 120,
+      "schema": "gig.atlas.workspace_qualification.v1",
+      "script": "workspace-qualification",
+      "seconds": 10.114242226001807,
+      "skipped": 0
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "6764a131db207c473a602925f451c29a8397bb2e7f33bc1eccdbd57525da6d8a",
+      "schema": "gig.bootstrap.sop_negative.v1",
+      "script": "check_bootstrap_sop",
+      "seconds": 0.818126136000501
+    },
+    {
+      "exit_code": 0,
+      "log_sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac",
+      "schema": "gig.browser.handshake_evidence.v1",
+      "script": "check_browser_handshake",
+      "seconds": 1.5749482350074686
+    },
+    {
+      "exit_code": 0,
+      "failed": 0,
+      "log_sha256": "f6f3400e9321a8929aa04ff3ee334457a7d79aee2ccd01ce6912e8a472ae87cc",
+      "passed": 7,
+      "schema": "gig.sprint3.browser.v1",
+      "script": "sprint3-validation",
+      "seconds": 15.157256464008242,
+      "skipped": 0
+    }
+  ],
+  "contrast_summary": {
+    "failures": 0,
+    "sampled_text_nodes": 5536,
+    "scope": "Rendered HTML text including below-fold content at1440x1100;closed details and inactive controls excluded;not screen-reader or full WCAG certification",
+    "workspace_theme_views": 24
+  },
+  "frontend": {
+    "failed": 0,
+    "log_sha256": "7d0e04f7f6a2f554e476e0f56636663a7f914883e883274bfd2f5ca10d8d3c4b",
+    "passed": 102,
+    "skipped": 0
+  },
+  "geometry_performance": {
+    "architecture": "x64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "fixture": "authored-research-v1",
+    "fixture_events": 240,
+    "measured_per_model": 100,
+    "models": [
+      {
+        "marks": 384,
+        "median_projection_ms": 0.9866979999999899,
+        "model": "height",
+        "p95_projection_ms": 1.3883629999999982,
+        "source_paths": 64,
+        "surface_triangles": 620,
+        "surface_vertices": 1240
+      },
+      {
+        "marks": 384,
+        "median_projection_ms": 1.0254580000000146,
+        "model": "canyon",
+        "p95_projection_ms": 1.7714699999999652,
+        "source_paths": 64,
+        "surface_triangles": 620,
+        "surface_vertices": 1240
+      },
+      {
+        "marks": 120,
+        "median_projection_ms": 0.14086900000000924,
+        "model": "events",
+        "p95_projection_ms": 0.2688389999999572,
+        "source_paths": 0,
+        "surface_triangles": 0,
+        "surface_vertices": 0
+      },
+      {
+        "marks": 28,
+        "median_projection_ms": 0.11706799999996065,
+        "model": "vwap",
+        "p95_projection_ms": 0.16570600000000013,
+        "source_paths": 3,
+        "surface_triangles": 0,
+        "surface_vertices": 0
+      },
+      {
+        "marks": 28,
+        "median_projection_ms": 0.11165399999998726,
+        "model": "flow",
+        "p95_projection_ms": 0.18980800000002773,
+        "source_paths": 28,
+        "surface_triangles": 0,
+        "surface_vertices": 0
+      },
+      {
+        "marks": 384,
+        "median_projection_ms": 0.4819240000000491,
+        "model": "wheel",
+        "p95_projection_ms": 0.5919339999999806,
+        "source_paths": 384,
+        "surface_triangles": 0,
+        "surface_vertices": 0
+      },
+      {
+        "marks": 24,
+        "median_projection_ms": 0.11730000000000018,
+        "model": "dome",
+        "p95_projection_ms": 0.15323100000000522,
+        "source_paths": 0,
+        "surface_triangles": 368,
+        "surface_vertices": 216
+      },
+      {
+        "marks": 64,
+        "median_projection_ms": 0.1274970000000053,
+        "model": "ribbon",
+        "p95_projection_ms": 0.19166699999999537,
+        "source_paths": 0,
+        "surface_triangles": 62,
+        "surface_vertices": 64
+      }
+    ],
+    "node": "v24.19.0",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "output_sha256": "222811765f4d91b5ac85af367c28cbbd2a01664d58c99dd1e77322e58365eaaa",
+    "process_max_rss_kib": 124992,
+    "schema": "gig.advanced3d.projection_performance.v1",
+    "scope": "Node projection only;includes allocations;no live feed,no GPU,no exchange latency guarantee",
+    "seed": "NONE_FIXED_AUTHORED_INTEGER_RULES",
+    "warmup_per_model": 10
+  },
+  "limitations": [
+    "No provider/network/account/order qualification,privateCodespaces authentication or physical-device acceptance.",
+    "No native source/binding/build change;940actualCTest outcomes reuse existing exact-source builds.",
+    "Python sanitizer uses live LSan checkpoint,not shutdown-leak certification.",
+    "No fresh external dependency advisory scan;existing pins,pip check and packaging regressions only.",
+    "Log digests bind local retained files;not a signed independent attestation."
+  ],
+  "logs": [
+    {
+      "bytes": 10095,
+      "path": "api-tests.log",
+      "sha256": "eeadd0c7090577e67321b9becc31b336382846a6eb25750bd9e6e1333d6d659d"
+    },
+    {
+      "bytes": 0,
+      "path": "binding-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 214,
+      "path": "binding.log",
+      "sha256": "547d03ac2f2fc138fb97471a6feead0c609c771ea6a5fce11a52f542d6ef03c2"
+    },
+    {
+      "bytes": 1851,
+      "path": "boundaries-initial.log",
+      "sha256": "43a909a4ed5224a00d531f97c3f7c6ea05632f1d4e57d6aeab235f20189202d6"
+    },
+    {
+      "bytes": 9707,
+      "path": "browser-existing/advanced-research-validation-final.log",
+      "sha256": "25bf4713cfb8f7d1aeb7becdf7806d76a5e29587db2967903d02e0e26a772af0"
+    },
+    {
+      "bytes": 20219,
+      "path": "browser-existing/atlas-final-server.log",
+      "sha256": "7a39b589120fd67720415f4d4b097ac40ea0aa7c2e83a449c49ed6360634dfe5"
+    },
+    {
+      "bytes": 3583,
+      "path": "browser-existing/atlas-validation-final.log",
+      "sha256": "bfb5d287b914e773a264356ea35cb9e1f0acc97bdba127d5a78f443c779c617c"
+    },
+    {
+      "bytes": 23795,
+      "path": "browser-existing/atlas2-final-server.log",
+      "sha256": "8827c81042beb36b6989e29439e3e949990f7a93b89046936e60318d67427de1"
+    },
+    {
+      "bytes": 2952,
+      "path": "browser-existing/atlas2-validation-final.log",
+      "sha256": "2ad3ae858106ee702ce10507fa3470d662dbbb8e8bc7256fdbf84f46cb060295"
+    },
+    {
+      "bytes": 6328,
+      "path": "browser-existing/browser-validation-final.log",
+      "sha256": "99731ed6f6adc412f871b22d6e458071898378131b49c1838c088f494658ea40"
+    },
+    {
+      "bytes": 382,
+      "path": "browser-existing/check_bootstrap_sop-final.log",
+      "sha256": "2bac37d65bdf0e73cc428cca2f8d23bb7f9e7f4a724a2a7c3374ec41dcde2ec4"
+    },
+    {
+      "bytes": 486,
+      "path": "browser-existing/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-existing/contrast-scan-final.log",
+      "sha256": "7474f7c319454e858be306ce29a94173ebe7715945e79ecfb12b53eb54c6b626"
+    },
+    {
+      "bytes": 2927,
+      "path": "browser-existing/live-final-server.log",
+      "sha256": "219dbd5e6358af26c989f39609d6de55824641a01ce6366c2b0338730378b070"
+    },
+    {
+      "bytes": 2553,
+      "path": "browser-existing/measure_sprint3_browser-final.log",
+      "sha256": "4467b3c050d46bf9643408f6dc78a8fc5e21f64e2954ee4d5ab95bf8f7ffdfcb"
+    },
+    {
+      "bytes": 56438,
+      "path": "browser-existing/native-final-server.log",
+      "sha256": "96578b2b349d7fc4d3eb0de40d9049d9b0ebba8cc8dd8b5b0e0ba819e2ee0894"
+    },
+    {
+      "bytes": 11648,
+      "path": "browser-existing/sprint3-validation-final.log",
+      "sha256": "0e62ecbbe29d5289dfb32d466c94217efa0d0b090dee4e189086b9e3ae259dc9"
+    },
+    {
+      "bytes": 13987,
+      "path": "browser-existing/stock-final-server.log",
+      "sha256": "9c6d7e7f1337ef57c2586ffa3dd25966d1b79dba402bc1973d7242ed604950e5"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-existing/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser-existing/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser-existing/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16381,
+      "path": "browser-existing/workspaces-final-server.log",
+      "sha256": "a7e3cd08150487e71a3f17ca284510436c54fd9fa3e8bf32d755a25fe3f32877"
+    },
+    {
+      "bytes": 366,
+      "path": "browser-existing-driver.log",
+      "sha256": "3352d5f41c6c427d3f1ecec084f9e642272cec33eefe23d7c50db8f9954f4d34"
+    },
+    {
+      "bytes": 9710,
+      "path": "browser-final-assets/advanced-research-validation-final.log",
+      "sha256": "b9397ca029131aa5991aa5bc7ed642dbd26d64e2ab0f7bf3d2357c442a168f91"
+    },
+    {
+      "bytes": 20219,
+      "path": "browser-final-assets/atlas-final-server.log",
+      "sha256": "aa1065bd9a3135a3adb9cfe04b899ea431c1ed21534763dcb2684eee78db6349"
+    },
+    {
+      "bytes": 3583,
+      "path": "browser-final-assets/atlas-validation-final.log",
+      "sha256": "bfb5d287b914e773a264356ea35cb9e1f0acc97bdba127d5a78f443c779c617c"
+    },
+    {
+      "bytes": 23628,
+      "path": "browser-final-assets/atlas2-final-server.log",
+      "sha256": "dd7d6feaa70b58cbed045b29c684aee521d5d252a52c8999098c7c2844c7de83"
+    },
+    {
+      "bytes": 2952,
+      "path": "browser-final-assets/atlas2-validation-final.log",
+      "sha256": "2ad3ae858106ee702ce10507fa3470d662dbbb8e8bc7256fdbf84f46cb060295"
+    },
+    {
+      "bytes": 6342,
+      "path": "browser-final-assets/browser-validation-final.log",
+      "sha256": "185d4dc967493360a2d402ea77e3b3e7369748c151768b65b1bff36a8d9a0b43"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-final-assets/contrast-scan-final.log",
+      "sha256": "7474f7c319454e858be306ce29a94173ebe7715945e79ecfb12b53eb54c6b626"
+    },
+    {
+      "bytes": 2998,
+      "path": "browser-final-assets/live-final-server.log",
+      "sha256": "aa9688063a5204153bcda53249b148a7a6f608e6fb148ff2a1c5007faba12b77"
+    },
+    {
+      "bytes": 2554,
+      "path": "browser-final-assets/measure_sprint3_browser-final.log",
+      "sha256": "9bf6e1edd1d31dea2f5ce7d1ba4102633a3267d19ad6e8dc553ec9d0b66d4a27"
+    },
+    {
+      "bytes": 32704,
+      "path": "browser-final-assets/native-final-server.log",
+      "sha256": "794b86e5d4841cafc0ee5d97ee08f5b4dd70d53ce4ee26c9824cea5fa4ccb842"
+    },
+    {
+      "bytes": 13987,
+      "path": "browser-final-assets/stock-final-server.log",
+      "sha256": "3ac3c679e47f8cf84e04c1f9a698cd042371927204bcbf4fc50aa09d6943deec"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-final-assets/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser-final-assets/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser-final-assets/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16381,
+      "path": "browser-final-assets/workspaces-final-server.log",
+      "sha256": "8de2cba35d9dae81a1a643731ad6f86eb77d7b0abadf5c140c93f7338b7e4244"
+    },
+    {
+      "bytes": 599,
+      "path": "browser-final-assets-driver.log",
+      "sha256": "3c1a5b710581d7636bd31ecabd963feb4a47e8573804f1f7890eb777132f49fb"
+    },
+    {
+      "bytes": 9707,
+      "path": "browser-final-qualified/advanced-research-validation-final.log",
+      "sha256": "f27022defeb99022228fe71896756622770417e3649e28422a657c51e6778a69"
+    },
+    {
+      "bytes": 20089,
+      "path": "browser-final-qualified/atlas-final-server.log",
+      "sha256": "9131fa669e870cca0df493dfaf4a6d885d082db63c2d76a65c1527dd59e4ab8d"
+    },
+    {
+      "bytes": 3583,
+      "path": "browser-final-qualified/atlas-validation-final.log",
+      "sha256": "c31a74f15162f78d6fd4d1f967762b5a0bb5076f74a56215fd2769f0c61bded0"
+    },
+    {
+      "bytes": 23880,
+      "path": "browser-final-qualified/atlas2-final-server.log",
+      "sha256": "912074bf3d098969e81fee8b7e8fc5c2d04e8f2057d6414b751b351ea981ceb7"
+    },
+    {
+      "bytes": 2952,
+      "path": "browser-final-qualified/atlas2-validation-final.log",
+      "sha256": "2ad3ae858106ee702ce10507fa3470d662dbbb8e8bc7256fdbf84f46cb060295"
+    },
+    {
+      "bytes": 6357,
+      "path": "browser-final-qualified/browser-validation-final.log",
+      "sha256": "793f587fd8dc6d00cde9fbdc50d431e3a232eff024c04eb9cac8ad3b57a3f701"
+    },
+    {
+      "bytes": 382,
+      "path": "browser-final-qualified/check_bootstrap_sop-final.log",
+      "sha256": "6764a131db207c473a602925f451c29a8397bb2e7f33bc1eccdbd57525da6d8a"
+    },
+    {
+      "bytes": 486,
+      "path": "browser-final-qualified/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-final-qualified/contrast-scan-final.log",
+      "sha256": "7474f7c319454e858be306ce29a94173ebe7715945e79ecfb12b53eb54c6b626"
+    },
+    {
+      "bytes": 2998,
+      "path": "browser-final-qualified/live-final-server.log",
+      "sha256": "934d518884eb929572ece96b20baf58efc8f898fed721cb110beeaf33681179b"
+    },
+    {
+      "bytes": 2551,
+      "path": "browser-final-qualified/measure_sprint3_browser-final.log",
+      "sha256": "aae0a4fc757fa0fdda852d251d41efdedec9a8a430c281fcfde75d58cf64253e"
+    },
+    {
+      "bytes": 56605,
+      "path": "browser-final-qualified/native-final-server.log",
+      "sha256": "cfc54b2949d3e9828d0b1bf828f7b1e5bb53002286ad90c721f64c61e64be9b2"
+    },
+    {
+      "bytes": 11844,
+      "path": "browser-final-qualified/sprint3-validation-final.log",
+      "sha256": "f6f3400e9321a8929aa04ff3ee334457a7d79aee2ccd01ce6912e8a472ae87cc"
+    },
+    {
+      "bytes": 13817,
+      "path": "browser-final-qualified/stock-final-server.log",
+      "sha256": "17b5c876700a64aa26c628f01371d9855f5affac4d4f54abdd394568488eacca"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-final-qualified/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser-final-qualified/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser-final-qualified/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16381,
+      "path": "browser-final-qualified/workspaces-final-server.log",
+      "sha256": "b94246e39159100b562777309832f212e1af5ae78f4a8df37b89eb299a2bd23e"
+    },
+    {
+      "bytes": 365,
+      "path": "browser-final-qualified-driver.log",
+      "sha256": "046af9e6d0a854c79890f8aadcce5ab0f64d0830364bae9a125d12613d125c29"
+    },
+    {
+      "bytes": 9722,
+      "path": "browser-regression-release/advanced-research-validation-final.log",
+      "sha256": "70809fc7536640915b061e48557dbff4835d42c040cc6488fc2fa1fa153358dc"
+    },
+    {
+      "bytes": 20007,
+      "path": "browser-regression-release/atlas-final-server.log",
+      "sha256": "d313d384c4d422779f862d32d63ca33492ac63e3b2455043031051697b141541"
+    },
+    {
+      "bytes": 3583,
+      "path": "browser-regression-release/atlas-validation-final.log",
+      "sha256": "bfb5d287b914e773a264356ea35cb9e1f0acc97bdba127d5a78f443c779c617c"
+    },
+    {
+      "bytes": 23965,
+      "path": "browser-regression-release/atlas2-final-server.log",
+      "sha256": "95cda28fd8c51b26174cdcb9fe0502420b163b503397e9ac4624f18c0f6acaf0"
+    },
+    {
+      "bytes": 2952,
+      "path": "browser-regression-release/atlas2-validation-final.log",
+      "sha256": "2ad3ae858106ee702ce10507fa3470d662dbbb8e8bc7256fdbf84f46cb060295"
+    },
+    {
+      "bytes": 6372,
+      "path": "browser-regression-release/browser-validation-final.log",
+      "sha256": "4bd6ea57becbb7813cbaf9a3f3f3b0d94b39b37eb680194a89f578431dc6c836"
+    },
+    {
+      "bytes": 382,
+      "path": "browser-regression-release/check_bootstrap_sop-final.log",
+      "sha256": "eeab0c841caa495c78f98fb2085f5d96d953b805d106138544fc35b709d1c243"
+    },
+    {
+      "bytes": 486,
+      "path": "browser-regression-release/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2512,
+      "path": "browser-regression-release/contrast-scan-final.log",
+      "sha256": "f907204804ea16a051b332310c47a483c54e31812cec9f6d12bb9811c901ea05"
+    },
+    {
+      "bytes": 2927,
+      "path": "browser-regression-release/live-final-server.log",
+      "sha256": "fa5eb84ad72e362cf00e2dc3a2a7ccfef43762352be1af1956dcf942fd301d72"
+    },
+    {
+      "bytes": 2556,
+      "path": "browser-regression-release/measure_sprint3_browser-final.log",
+      "sha256": "305e2e999402327af7b1e913d94dbb36970c679497d073c1a63c02dd9d44cf47"
+    },
+    {
+      "bytes": 56580,
+      "path": "browser-regression-release/native-final-server.log",
+      "sha256": "efd1fef6a3e7224d25c0c279098965712122af955d7bc6e6c57c04c5d54459f4"
+    },
+    {
+      "bytes": 11928,
+      "path": "browser-regression-release/sprint3-validation-final.log",
+      "sha256": "afa626c6288f695892408ff9df71feffff55ce1de9d2307fc6f1f3372a7c52b5"
+    },
+    {
+      "bytes": 13817,
+      "path": "browser-regression-release/stock-final-server.log",
+      "sha256": "cbc9ac142d53739431bc5c26d594ceabc69fcf3c59d2dbe46869de01cd66fdd0"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-regression-release/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser-regression-release/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser-regression-release/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16523,
+      "path": "browser-regression-release/workspaces-final-server.log",
+      "sha256": "30aaefbee83902252c2394cbcc32bde3de6abc5162c1d5d717c17812c57915e3"
+    },
+    {
+      "bytes": 365,
+      "path": "browser-regression-release-driver.log",
+      "sha256": "d28c6b67bfe7f47426218217c3752101341b1e37f1589cf50d954e186a257271"
+    },
+    {
+      "bytes": 5636,
+      "path": "browser-sprint4-aria/browser.log",
+      "sha256": "d833e0c5af4c35f088e4f0352f6aa3fa8ecfacdb5586b5816e9dcebf18f4fbdc"
+    },
+    {
+      "bytes": 5388,
+      "path": "browser-sprint4-aria/server.log",
+      "sha256": "dc12e092218c84c4626b5af5a2d311d46a899782da55aa856f977ce55743cfc8"
+    },
+    {
+      "bytes": 318,
+      "path": "browser-sprint4-aria-driver.log",
+      "sha256": "615bf0d7552772b5e7815ec7ef1d584eed8e52c1d0e5f3f46b0efc1b30cf7466"
+    },
+    {
+      "bytes": 1111,
+      "path": "browser-sprint4-comparison/browser.log",
+      "sha256": "9d5943cdbde9807a5da15a65e51df8f790f09bb2acf88e07e05291b9edccdde8"
+    },
+    {
+      "bytes": 5388,
+      "path": "browser-sprint4-comparison/server.log",
+      "sha256": "a935861cc6cb3a34a3b9db5862ec41329cd6ecaca6bf996f3fc5d2cb447e8ea7"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-comparison-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1111,
+      "path": "browser-sprint4-debug-comparison/browser.log",
+      "sha256": "9d5943cdbde9807a5da15a65e51df8f790f09bb2acf88e07e05291b9edccdde8"
+    },
+    {
+      "bytes": 5388,
+      "path": "browser-sprint4-debug-comparison/server.log",
+      "sha256": "e1112d4724a6f37ffecce1ebec698c5ca177e0555ea4c3e9b433e1d083eceee9"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-debug-comparison-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 574,
+      "path": "browser-sprint4-final/browser.log",
+      "sha256": "316f43fec2e4cb541c02dbf1cbb4b01e241cabdb0fe76ecedf4e5592693eafbf"
+    },
+    {
+      "bytes": 3354,
+      "path": "browser-sprint4-final/server.log",
+      "sha256": "db05079b870430657b71652dfd859dcf64540a3fb33c538e2be30184f4a89e90"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-final-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 805,
+      "path": "browser-sprint4-final-panels/browser.log",
+      "sha256": "381337e55b5c9186daaa40c41bcafb7b810b9664950c7da1c2d2e28d8fd26d4d"
+    },
+    {
+      "bytes": 6628,
+      "path": "browser-sprint4-final-panels/server.log",
+      "sha256": "335579a6f70227e30a1e0e301f01cdc09fb0d7f2d0fe7c5b2648c5d380834c5c"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-final-panels-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 805,
+      "path": "browser-sprint4-final-qualified/browser.log",
+      "sha256": "381337e55b5c9186daaa40c41bcafb7b810b9664950c7da1c2d2e28d8fd26d4d"
+    },
+    {
+      "bytes": 6628,
+      "path": "browser-sprint4-final-qualified/server.log",
+      "sha256": "3b10ff93786f75c26e75c4e01ce6065d3afabe65f704d444eae5a1c38fdfac63"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-final-qualified-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1113,
+      "path": "browser-sprint4-initial/browser.log",
+      "sha256": "bd219cb566406153a93465c07e3d7282f961f8d5906fc7af2c427228fd5d9793"
+    },
+    {
+      "bytes": 5722,
+      "path": "browser-sprint4-initial/server.log",
+      "sha256": "320efb582add14c058aba2c741d10b458a1569c6423bb96bdf9127698e9e3bd9"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-initial-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 805,
+      "path": "browser-sprint4-qualified/browser.log",
+      "sha256": "381337e55b5c9186daaa40c41bcafb7b810b9664950c7da1c2d2e28d8fd26d4d"
+    },
+    {
+      "bytes": 6628,
+      "path": "browser-sprint4-qualified/server.log",
+      "sha256": "26a488afd1cc6938015253fc3d11c85122d86de1e960a52eaded73695d18c844"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-qualified-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 805,
+      "path": "browser-sprint4-release/browser.log",
+      "sha256": "381337e55b5c9186daaa40c41bcafb7b810b9664950c7da1c2d2e28d8fd26d4d"
+    },
+    {
+      "bytes": 6628,
+      "path": "browser-sprint4-release/server.log",
+      "sha256": "75675ce770985b2eacf6c3fa41990ac4e8ceb6bd6923989e022effdd524de823"
+    },
+    {
+      "bytes": 0,
+      "path": "browser-sprint4-release-driver.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 344,
+      "path": "browser-sprint4-repaired-driver.log",
+      "sha256": "0f4df9b525796e4b21e37efbb15e35906f4ecf702b2abadc2720edeb351dc38d"
+    },
+    {
+      "bytes": 13006,
+      "path": "checkpoint-paper.log",
+      "sha256": "995890396d7fbdc6b835c6cf64d7082f8cc0f0970caf967992c865955e9e9e14"
+    },
+    {
+      "bytes": 20189,
+      "path": "clang-asan-ubsan.log",
+      "sha256": "369b7c0d1cdf2bd57961ea5757116c2e84fe879252ebe201bf3ffdb5d8c1e827"
+    },
+    {
+      "bytes": 20179,
+      "path": "clang-debug.log",
+      "sha256": "f364cac90202d6ba7f0c836d59fea45f38d287d42139d4ba1eba579418084b6e"
+    },
+    {
+      "bytes": 20183,
+      "path": "clang-release.log",
+      "sha256": "db6754566fa5a63d597a00c79de2ca1e75e7c5788ed2037e358aa3e511af8e19"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build-accessible-final.log",
+      "sha256": "dbbe561e82e569ae6cce57fb0902b569ca60e6a413039380f30d1880a1bc1a57"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build-accessible.log",
+      "sha256": "e1edcf35bec3ea72e8d6fd0dc3799582ae9db066f1996bb1dc87525821e34e5f"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build-final.log",
+      "sha256": "7d21b267029d2264df746c1b03860c9161366ab238616320e9ab742a77ae00e1"
+    },
+    {
+      "bytes": 2353,
+      "path": "frontend-build-initial.log",
+      "sha256": "f058e366ca8723d1f85cbd4edf54cd1a85ae96bda8b9d063700c7cb4ad8ed818"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build-provider.log",
+      "sha256": "b1ddb73e6cbb1fea83926be17e27db468770a1ccd03d0d8822398e9d9dd7afd2"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build-readable.log",
+      "sha256": "b8fd356c6d2cace6e4b96f60a9935a0529a1a6b37b4d5ba2ba1decb7f64f905a"
+    },
+    {
+      "bytes": 2353,
+      "path": "frontend-build.log",
+      "sha256": "fde161d89fd29e9f820413bff6b12b8960c24289e7981064f62053c6e162068f"
+    },
+    {
+      "bytes": 9869,
+      "path": "frontend-tests-final.log",
+      "sha256": "0542dbfc4574b467f88d94b502932870b5de1caf62e650ebbdf19f70bb86c193"
+    },
+    {
+      "bytes": 9871,
+      "path": "frontend-tests-readable.log",
+      "sha256": "7d0e04f7f6a2f554e476e0f56636663a7f914883e883274bfd2f5ca10d8d3c4b"
+    },
+    {
+      "bytes": 9764,
+      "path": "frontend-tests-resume.log",
+      "sha256": "280d0763e462ddc3b5d93de92baee43be98ffe5f2b4943758aebe82e93ccc12f"
+    },
+    {
+      "bytes": 9760,
+      "path": "frontend-tests.log",
+      "sha256": "976db9c789bd246a907755fa74e1bbb6e18b7c53083e2fc33fd000b3122bb128"
+    },
+    {
+      "bytes": 20704,
+      "path": "gcc-python-asan-ubsan.log",
+      "sha256": "d3eaabf05447f20a620fcf97ee562160208c905e7c26c3d06c5991eb23c806c9"
+    },
+    {
+      "bytes": 20563,
+      "path": "gcc-python-debug.log",
+      "sha256": "2a2d993439af9d6604547ea279f05a695d3a36ba0287c3fc999c79a57af4de77"
+    },
+    {
+      "bytes": 20567,
+      "path": "gcc-python-release.log",
+      "sha256": "ee1e1924c8e7dc75f8cbf8da661fe3afb75dfa864b911083cb46b8b7461af0df"
+    },
+    {
+      "bytes": 0,
+      "path": "geometry-performance-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 24238,
+      "path": "history-initial.log",
+      "sha256": "a4ea28c9eb00d2daccf0e62e7648bb1d7d94d99841a07195c72ca23d623c9c01"
+    },
+    {
+      "bytes": 3271,
+      "path": "history-tests.log",
+      "sha256": "4ed06c4c345fc65da3fb2b490d78fc8b84ef1db12eaf6f7fab3fdc576d4723a3"
+    },
+    {
+      "bytes": 833,
+      "path": "independent-native-oracle.log",
+      "sha256": "72eb0e65e5ea5781a7abc9dd10731cac11d9547b1e1009fc6f122a3d0f6139b6"
+    },
+    {
+      "bytes": 512,
+      "path": "legacy429-repaired.log",
+      "sha256": "f6a9e322553a7588318922b49aa637cd15ca1b66b47acbdfbe4e79dbc8576bac"
+    },
+    {
+      "bytes": 485,
+      "path": "native-driver.log",
+      "sha256": "0bda9f94a66c72cde43117709c4fdc1e30c2feed02ad5f21d5a9c5617915e018"
+    },
+    {
+      "bytes": 3097,
+      "path": "paper-adapter-initial.log",
+      "sha256": "bfd412f106bf58ba8fde709b7f7ffe6447f478b10f79510b48be2b07f45267ab"
+    },
+    {
+      "bytes": 686,
+      "path": "paper-reference-after.log",
+      "sha256": "df6e8a692ec4dc13d01327bfb6a9ec1fd7439b2e9749526ecd71998dde7733bc"
+    },
+    {
+      "bytes": 8848,
+      "path": "paper-reference-before.log",
+      "sha256": "93b2d23ee2ac0acc36f57068db6e4e3129f599a17b7208c8a242edee6c660e4f"
+    },
+    {
+      "bytes": 132,
+      "path": "performance-committed.log",
+      "sha256": "33f21a9252e1721217fc7ae60d149ffb8c341d3376a246507d0762f6e447761d"
+    },
+    {
+      "bytes": 132,
+      "path": "performance-final.log",
+      "sha256": "ae46d51882e3d67b365193005defacf798014f70c7fb3be88c9c1a246750f07e"
+    },
+    {
+      "bytes": 1854,
+      "path": "performance-initial-invalid-fixture.log",
+      "sha256": "67e0b7ac612dc7c64a406a83348be696e24e93270e37596d17e89a1566f44b0f"
+    },
+    {
+      "bytes": 132,
+      "path": "performance-sprint4.log",
+      "sha256": "943c641b5f9b125230a6a8d30b64f9b0676a84ada4902c5083cc993d7aeed6ed"
+    },
+    {
+      "bytes": 294,
+      "path": "pip-check.log",
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "bytes": 578,
+      "path": "python-driver-final.log",
+      "sha256": "3013f714f8218529d862c2a1c9e681ceb16ade29763c1e22c143518403960d46"
+    },
+    {
+      "bytes": 577,
+      "path": "python-driver-qualified.log",
+      "sha256": "6b8d497173c3196efe630249078f616c85ffc3a5a0999cd99a8ccfd227cfac06"
+    },
+    {
+      "bytes": 578,
+      "path": "python-driver-reference-final.log",
+      "sha256": "9ffb16cd24a2be3dfcb3311a1ff991e71b3076d6105505dbe3382d2639282b7e"
+    },
+    {
+      "bytes": 150,
+      "path": "python-driver.log",
+      "sha256": "64782b53da20c9f7e085600910263a05f4d9a94bc0130045e5956b68626e5da0"
+    },
+    {
+      "bytes": 4626,
+      "path": "research-tests.log",
+      "sha256": "0f55329bb67ca669c1375f87a5836714bc8234d239450f2c5f3fc610f707645a"
+    },
+    {
+      "bytes": 540,
+      "path": "schedule-after.log",
+      "sha256": "2f5b1255a91092533242321abb45920573379e3fa9600d1a375b9865659d69e0"
+    },
+    {
+      "bytes": 1597,
+      "path": "schedule-before.log",
+      "sha256": "bcf951080c66e0b93f4f116cb10e820316944abb7ea38fc31ec84efd750d541f"
+    },
+    {
+      "bytes": 150,
+      "path": "sdist-build.log",
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "bytes": 82,
+      "path": "sdist-inventory.log",
+      "sha256": "23829d5d5e3969172c00fc92f0d62699759f614e96f4d76a0c9b49f8fcc14c22"
+    },
+    {
+      "bytes": 602,
+      "path": "sdist-patterns.log",
+      "sha256": "a6a178cf7727ff46dfa7aaf5536e8158267991697c031274dfc47716fc53dab6"
+    },
+    {
+      "bytes": 4525,
+      "path": "security-extra.log",
+      "sha256": "90d0f1e8baa421e3b8577d87b39b21edec1db0fdc2ee636ed23e7f7bce01ef16"
+    },
+    {
+      "bytes": 29210,
+      "path": "sources-asan-ubsan.log",
+      "sha256": "b1031f211b9df9d3c44dce5c934605e6f0e90e4000ba9d4356774ff123453d5c"
+    },
+    {
+      "bytes": 26371,
+      "path": "sources-debug.log",
+      "sha256": "26be0cc871eaaece2be0964b835fc3e0c6d432ecd42d00924139d053694d9bea"
+    },
+    {
+      "bytes": 26371,
+      "path": "sources-release.log",
+      "sha256": "cebf2ec03e03b33ba600131d56fee47c045719ebbc4903197b732bfd98c167c1"
+    },
+    {
+      "bytes": 4835,
+      "path": "sprint1-asan-ubsan.log",
+      "sha256": "7963949050ae53c8e7ce61c0a1d112202503593d198bfa52fe018ecbe34c264e"
+    },
+    {
+      "bytes": 4817,
+      "path": "sprint1-debug.log",
+      "sha256": "d690db52304b975120a4c704480075c2cb38f940ff6a05ad086f5c8fc3afeba9"
+    },
+    {
+      "bytes": 4817,
+      "path": "sprint1-release.log",
+      "sha256": "082c30126a2401c51104c48ca960fe0d3d2314cc0491626be2f24e2e9dd7be02"
+    },
+    {
+      "bytes": 5242,
+      "path": "sprint2-asan-ubsan.log",
+      "sha256": "5c34d03333a65e82934ac425956fdbf9b282757adbe2a065e1849bfc43b95fc2"
+    },
+    {
+      "bytes": 5224,
+      "path": "sprint2-debug.log",
+      "sha256": "bf6950646909e8ba0b4b0c473a1dabded02d059a80b6ff462293e3f484ac6f8f"
+    },
+    {
+      "bytes": 5224,
+      "path": "sprint2-release.log",
+      "sha256": "6849b56556eccc7a6e4f917f09f52ed408c8ba5b98e437671b4b056fd9fef7f4"
+    },
+    {
+      "bytes": 5890,
+      "path": "sprint3-api-preservation.log",
+      "sha256": "be81fb2fc15f22fffdd30e96243150f272226f61a7e5fafb74139ab94064504f"
+    },
+    {
+      "bytes": 6267,
+      "path": "sprint3-asan-ubsan.log",
+      "sha256": "89a86e264387b94d490597a05ecaa06a143ff20ef1d99413ded6f651440bc0f8"
+    },
+    {
+      "bytes": 5890,
+      "path": "sprint3-debug.log",
+      "sha256": "a3164d1ada3401fc926cb0dae005b43dfebe4a64a111bc5c8081faba17b16a91"
+    },
+    {
+      "bytes": 5890,
+      "path": "sprint3-preservation-initial.log",
+      "sha256": "471a8ad1a19a7f2986d13546d8cb60ba57dbea06e0e0022dce51b30ce3e8497a"
+    },
+    {
+      "bytes": 5890,
+      "path": "sprint3-release.log",
+      "sha256": "ca8dace6f4aabe77aec2713ad00cd07f63120141557a0721fa2e9dd6e2e852e5"
+    },
+    {
+      "bytes": 5890,
+      "path": "sprint3-resume.log",
+      "sha256": "35e81da5631d4e7a5d2ab8ccbd9111260ab7b0eec42ef74f179a3ad0d8fa1143"
+    },
+    {
+      "bytes": 12833,
+      "path": "sprint4-asan-ubsan.log",
+      "sha256": "dde4d755c077ee9c08ad21da8f3da4420064829dbe47dfe721996451e0a43a1c"
+    },
+    {
+      "bytes": 12449,
+      "path": "sprint4-calendar-checkpoint.log",
+      "sha256": "68e71bec9e794394899d4c125d5df465e5d2b19ec4a18d002cb8212f41b11cbc"
+    },
+    {
+      "bytes": 12449,
+      "path": "sprint4-debug.log",
+      "sha256": "e5a95b80fa33bc00551f0fd48dc3f959b89fd3c0f70ed400a6dd053f0568f6da"
+    },
+    {
+      "bytes": 12449,
+      "path": "sprint4-release.log",
+      "sha256": "d0980eb91cc24d2bb12368d34890d0cd6c1cc618f9ddb74af0e0cb40d89efb6e"
+    },
+    {
+      "bytes": 35170,
+      "path": "stocks-asan-ubsan.log",
+      "sha256": "a46f0c37f69901530e33723db1e402bb37b9d6b81a724075e49bba993b8ddeea"
+    },
+    {
+      "bytes": 36144,
+      "path": "stocks-debug-before-policy-fixture.log",
+      "sha256": "a62b9ef5c2a17f49c9bcf7517731ae4f1238da9ccb8ac5a2823ffa494aa6de58"
+    },
+    {
+      "bytes": 35152,
+      "path": "stocks-debug.log",
+      "sha256": "111bf7263fb9395c154b2b7719b83a18d79a3dcd3a230a896aef37e322cd6d5b"
+    },
+    {
+      "bytes": 35152,
+      "path": "stocks-release.log",
+      "sha256": "c96f2b8806d5fa92bad76254f9f27f42c49477047ad64d6e1cafa416be071be1"
+    },
+    {
+      "bytes": 40745,
+      "path": "terminal-asan-ubsan.log",
+      "sha256": "3f49251b1ba026571dd2dad94b9f0b9f1c247c7795e0c7f9d5196197f32bcf44"
+    },
+    {
+      "bytes": 40335,
+      "path": "terminal-debug.log",
+      "sha256": "ad5a003ba441e8ff5056ae0261009f081b9b86664647bfd7fb8b3bdcaf64d970"
+    },
+    {
+      "bytes": 40335,
+      "path": "terminal-release.log",
+      "sha256": "5e754a7f88859e38888100eb0264ba11b088674f2233378bdaac124e0d47249f"
+    },
+    {
+      "bytes": 2530,
+      "path": "tls-forwarded.log",
+      "sha256": "48ad92adcd8c7914d0dfacfc2d50c20c930e2f64d966d69027386816ca059b05"
+    },
+    {
+      "bytes": 4364,
+      "path": "tls-http.log",
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "bytes": 3763,
+      "path": "tls-stream.log",
+      "sha256": "0961bb42563e8bb72e8bcbd9aae751d583d04f9145951dd85e1b58bb45f97f87"
+    },
+    {
+      "bytes": 1037,
+      "path": "wheel-exports.log",
+      "sha256": "59c1346c3ca77466f87297453b7fba222cef5a1e75fa7b8d0e58f478cf74b74d"
+    },
+    {
+      "bytes": 988,
+      "path": "wheel-interface.log",
+      "sha256": "499dc982d63a47381f385b6a651ff49050956d3e9811bd58abeb2d6d4124f587"
+    }
+  ],
+  "native": {
+    "all_48_unchanged": true,
+    "expected_hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "results": [
+      {
+        "build_directory": "build/python-debug",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/gcc-python-debug.xml"
+        ],
+        "configuration": "gcc-python-debug",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/gcc-python-debug.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 33.187318006006535
+      },
+      {
+        "build_directory": "build/python-release",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/gcc-python-release.xml"
+        ],
+        "configuration": "gcc-python-release",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/gcc-python-release.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 28.155848459980916
+      },
+      {
+        "build_directory": "build/python-asan-ubsan",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/gcc-python-asan-ubsan.xml"
+        ],
+        "configuration": "gcc-python-asan-ubsan",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 159
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/gcc-python-asan-ubsan.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 66.4892872700002
+      },
+      {
+        "build_directory": "build/phase9-clang-debug",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-debug",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/clang-debug.xml"
+        ],
+        "configuration": "clang-debug",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 155
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/clang-debug.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 30.567432239011396
+      },
+      {
+        "build_directory": "build/phase9-clang-release",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-release",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/clang-release.xml"
+        ],
+        "configuration": "clang-release",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 155
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/clang-release.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 23.27149930500309
+      },
+      {
+        "build_directory": "build/phase9-clang-asan-ubsan",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/phase9-clang-asan-ubsan",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/clang-asan-ubsan.xml"
+        ],
+        "configuration": "clang-asan-ubsan",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 155
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/atlas-sprint4/evidence/clang-asan-ubsan.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 53.660129850992234
+      }
+    ]
+  },
+  "native_oracle": {
+    "architecture": "x86_64",
+    "elapsed_ns": 551652104,
+    "failures": 0,
+    "independent_assertions": 17143,
+    "origin": "HISTORICAL_SYNTHETIC",
+    "prefix_hash": "46a8d3d0a7471e4302873ae8678f15588c518875dab7cb86af70c445e3312ffb",
+    "python": "3.12.14",
+    "schema": "gig.terminal.native_oracle.v1",
+    "scope": "Author-written dictionary/price/quantity/Fraction oracle, not observed-market evidence",
+    "simulations": [
+      {
+        "algorithm": "TWAP",
+        "sha256": "969c976abb1149e6c3c066e7c5b3a4886bd5139d1b8c1510ad1ff39f45132f18"
+      },
+      {
+        "algorithm": "VWAP",
+        "sha256": "0f8cd954657b73b965cca5abe59658488f7ea97ad194d470857c6758c2b96841"
+      },
+      {
+        "algorithm": "POV",
+        "sha256": "f0e7de0380bf8b7e3edf33f1380aa12747966cc48e79577e601e1127a8dcf687"
+      }
+    ],
+    "skipped": 0,
+    "states_compared": 241
+  },
+  "new_browser": {
+    "checks": [
+      "explicit IEX authored historical load binds accepted bar research and provenance",
+      "bar-specific 3D uses trailing variation;depth is unavailable;timeline and 2D remain operable",
+      "research window change and exact-byte export preserve source revision and parameters",
+      "historical SIP stays explicit;quotes render ribbon without invented depth",
+      "symbol-specific selection clears old accepted research;no relabeling",
+      "multi-stock historical comparison uses exact source endpoints and readable independent columns",
+      "paper provider fixture starts killed,arms exact reviewed limits,and enforces durable identity",
+      "kill/cancel/reconcile does not mutate native replay or imply a real broker connection",
+      "light theme and390px viewport preserve ordinary-click access without page overflow"
+    ],
+    "errors": [],
+    "failed": 0,
+    "passed": 9,
+    "scope": "Authored offline fixture,loopback Chromium;not Alpaca or owner Codespace qualification",
+    "screenshots": [
+      {
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/browser-sprint4-final-qualified/historical-research-dark.png",
+        "sha256": "f44efc4bfd6f88857872c0e23e00f015c299e93299fc28bf4b3b209139913eb4",
+        "source": "AUTHORED_FIXTURE_NOT_PROVIDER"
+      },
+      {
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/browser-sprint4-final-qualified/historical-comparison-dark.png",
+        "sha256": "97e46ee3b555bbb34d5a8889e5b1a36289b2029e37d3bc2c539ef8622dcb2a8e",
+        "source": "AUTHORED_FIXTURE_NOT_PROVIDER"
+      },
+      {
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/browser-sprint4-final-qualified/paper-fixture-dark.png",
+        "sha256": "288d49c014ecbc50854b31a476a85a8639de7078453d3cbe647aaff82953898d",
+        "source": "AUTHORED_FIXTURE_NOT_PROVIDER"
+      },
+      {
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/browser-sprint4-final-qualified/paper-fixture-light.png",
+        "sha256": "b7b7003ff58731af69f09ad74931c056cb93c5b518d2a17756ea0e9dc513ce55",
+        "source": "AUTHORED_FIXTURE_NOT_PROVIDER"
+      },
+      {
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/atlas-sprint4/evidence/browser-sprint4-final-qualified/paper-fixture-mobile.png",
+        "sha256": "405a202af0cc9b9228d330167a2e7aac90658b7d59c1a0e1c70821703f1a678c",
+        "source": "AUTHORED_FIXTURE_NOT_PROVIDER"
+      }
+    ]
+  },
+  "observed_retention_enabled": false,
+  "owner_acceptance": "PENDING",
+  "packaging": {
+    "archive_application_commit": "d40622ee201af9339326b14e810f2bfa56462be8",
+    "archive_sha256": "7351db32a0f0b8595350bcd35510fbc278e9fc45c8005506960b8d6a344cd349",
+    "export_tests": 6,
+    "installed_unchanged_native_wheel_version": "0.1.1",
+    "interface_tests": 8,
+    "inventory_sha256": "8812f4b994fdbb4c87fc29d7a8bbee7084d4aaf4abc6a71272219021d4d26341",
+    "scope": "Application checkpoint before final evidence/report additions;no new wheel compilation or distribution",
+    "sdist_pattern_tests": 3,
+    "source_archive_members": 1087
+  },
+  "performance": {
+    "architecture": "x86_64",
+    "classification": "AUTHORED_FIXTURES_NOT_PROVIDER_PERFORMANCE",
+    "cpu": "",
+    "history": [
+      {
+        "analysis_sha256": "cd4943671ca472b5f76a34d41190d4ec4d77ba5dcfdb2458948d96a06d14d746",
+        "pages": 4,
+        "peak_traced_python_bytes": 1136780,
+        "retained_traced_python_bytes": 925937,
+        "rows": 256,
+        "rows_per_second": 1424.4562047781922,
+        "seconds": 0.1797177050029859,
+        "source_sha256": "2a11abb6ff2be5840151f45aea72f73326ab5bb6773b9747e3ddd49649ecec5a"
+      },
+      {
+        "analysis_sha256": "cd4943671ca472b5f76a34d41190d4ec4d77ba5dcfdb2458948d96a06d14d746",
+        "pages": 4,
+        "peak_traced_python_bytes": 1136892,
+        "retained_traced_python_bytes": 926049,
+        "rows": 256,
+        "rows_per_second": 1377.3597110783614,
+        "seconds": 0.18586284900084138,
+        "source_sha256": "2a11abb6ff2be5840151f45aea72f73326ab5bb6773b9747e3ddd49649ecec5a"
+      },
+      {
+        "analysis_sha256": "cd4943671ca472b5f76a34d41190d4ec4d77ba5dcfdb2458948d96a06d14d746",
+        "pages": 4,
+        "peak_traced_python_bytes": 1135188,
+        "retained_traced_python_bytes": 924345,
+        "rows": 256,
+        "rows_per_second": 1522.9859149879055,
+        "seconds": 0.16809085197746754,
+        "source_sha256": "2a11abb6ff2be5840151f45aea72f73326ab5bb6773b9747e3ddd49649ecec5a"
+      },
+      {
+        "analysis_sha256": "cd4943671ca472b5f76a34d41190d4ec4d77ba5dcfdb2458948d96a06d14d746",
+        "pages": 4,
+        "peak_traced_python_bytes": 1133592,
+        "retained_traced_python_bytes": 922749,
+        "rows": 256,
+        "rows_per_second": 1038.265641147237,
+        "seconds": 0.2465650310041383,
+        "source_sha256": "2a11abb6ff2be5840151f45aea72f73326ab5bb6773b9747e3ddd49649ecec5a"
+      },
+      {
+        "analysis_sha256": "cd4943671ca472b5f76a34d41190d4ec4d77ba5dcfdb2458948d96a06d14d746",
+        "pages": 4,
+        "peak_traced_python_bytes": 1134770,
+        "retained_traced_python_bytes": 923927,
+        "rows": 256,
+        "rows_per_second": 1310.7958709930988,
+        "seconds": 0.19530119499540888,
+        "source_sha256": "2a11abb6ff2be5840151f45aea72f73326ab5bb6773b9747e3ddd49649ecec5a"
+      }
+    ],
+    "history_repetitions": 5,
+    "history_warmups": 1,
+    "limitations": [
+      "Tracemalloc measures Python allocation bytes,not native/GPU memory or total allocation count.",
+      "RSS includes interpreter/imported native package;shared concurrent environment,not isolated hardware qualification.",
+      "Throttling uses deterministic virtual time;not network/provider latency.",
+      "Historical window256rows;paper32create/cancel intents,not capacity certification or crash testing."
+    ],
+    "logical_cpus": 5,
+    "paper": [
+      {
+        "canonical_view_sha256": "662f3e95fb9f15af4aff03f3c762077231ae943aec0c7f89a127d8faff23be72",
+        "fake_creates": 32,
+        "fixture_requests": 680,
+        "intents": 32,
+        "intents_per_second": 9.210864940392781,
+        "peak_traced_python_bytes": 451548,
+        "private_store_bytes": {
+          "paper-provider.sqlite3": 143360
+        },
+        "retained_traced_python_bytes": 229659,
+        "seconds": 3.4741579870169517
+      },
+      {
+        "canonical_view_sha256": "662f3e95fb9f15af4aff03f3c762077231ae943aec0c7f89a127d8faff23be72",
+        "fake_creates": 32,
+        "fixture_requests": 680,
+        "intents": 32,
+        "intents_per_second": 8.224328086682378,
+        "peak_traced_python_bytes": 439614,
+        "private_store_bytes": {
+          "paper-provider.sqlite3": 143360
+        },
+        "retained_traced_python_bytes": 217725,
+        "seconds": 3.890895361022558
+      },
+      {
+        "canonical_view_sha256": "662f3e95fb9f15af4aff03f3c762077231ae943aec0c7f89a127d8faff23be72",
+        "fake_creates": 32,
+        "fixture_requests": 680,
+        "intents": 32,
+        "intents_per_second": 7.50543612760036,
+        "peak_traced_python_bytes": 443150,
+        "private_store_bytes": {
+          "paper-provider.sqlite3": 143360
+        },
+        "retained_traced_python_bytes": 221261,
+        "seconds": 4.263576353987446
+      }
+    ],
+    "paper_repetitions": 3,
+    "paper_warmups": 1,
+    "process_peak_rss_kib": 24060,
+    "python": "3.12.14",
+    "schema": "gig.sprint4.offline.measurements.v1",
+    "seed": "fixed authored modulo11 prices;no RNG",
+    "source_commit": "d40622ee201af9339326b14e810f2bfa56462be8",
+    "tracked_dirty": false
+  },
+  "provider_calls": 0,
+  "python_matrix": [
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-debug.log",
+      "seconds": 1.4683916520152707,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-debug.log",
+      "seconds": 1.3232551350083668,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-debug.log",
+      "seconds": 1.178737539012218,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint1",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 25,
+      "log": "sprint1-debug.log",
+      "seconds": 3.4408393170160707,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-debug.log",
+      "seconds": 6.2486175690137316,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-debug.log",
+      "seconds": 21.73713803399005,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-debug.log",
+      "seconds": 15.12971107600606,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-release.log",
+      "seconds": 1.4689434100000653,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-release.log",
+      "seconds": 0.9698664770112373,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-release.log",
+      "seconds": 0.9194503759790678,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint1",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 25,
+      "log": "sprint1-release.log",
+      "seconds": 3.0762940220010933,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-release.log",
+      "seconds": 5.890545804984868,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-release.log",
+      "seconds": 21.52794110297691,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-release.log",
+      "seconds": 15.170906231011031,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-asan-ubsan.log",
+      "seconds": 7.988570886984235,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-asan-ubsan.log",
+      "seconds": 4.346591264009476,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-asan-ubsan.log",
+      "seconds": 3.5849005699856207,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint1",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_remediation_sprint1.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 25,
+      "log": "sprint1-asan-ubsan.log",
+      "seconds": 8.071877246984513,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-asan-ubsan.log",
+      "seconds": 12.608263859990984,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-asan-ubsan.log",
+      "seconds": 37.18606560199987,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-asan-ubsan.log",
+      "seconds": 58.62602692798828,
+      "verified_pass": true
+    }
+  ],
+  "python_outcomes": 2478,
+  "qualification": "OFFLINE_AUTHORED_ONLY",
+  "real_orders": 0,
+  "remote_refs_observed": {
+    "refs/heads/audit/atlas-functional-reality-20261031": "69c9f48e061c96e7151f80ffba53a2d3813d08a8",
+    "refs/heads/feat/atlas-final-release": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+    "refs/heads/feat/atlas-sprint-3-functional-completion": "4522948d94770ea94a6e152b68a695063d711fd4",
+    "refs/heads/feat/atlas-sprint-4-market-data-paper": "d40622ee201af9339326b14e810f2bfa56462be8",
+    "refs/heads/fix/atlas-private-qualification-2": "5c9c9c6e38bf027c8ed731caa9e5c241cd25a4d9",
+    "refs/heads/main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718"
+  },
+  "schema": "gig.sprint4.evidence.v1",
+  "screenshots": [
+    {
+      "classification": "AUTHORED_FIXTURE_NOT_OBSERVED_PROVIDER",
+      "path": "docs/sprints/sprint-4/visual/paper-fixture-light.png",
+      "sha256": "b7b7003ff58731af69f09ad74931c056cb93c5b518d2a17756ea0e9dc513ce55"
+    },
+    {
+      "classification": "AUTHORED_FIXTURE_NOT_OBSERVED_PROVIDER",
+      "path": "docs/sprints/sprint-4/visual/historical-research-dark.png",
+      "sha256": "f44efc4bfd6f88857872c0e23e00f015c299e93299fc28bf4b3b209139913eb4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURE_NOT_OBSERVED_PROVIDER",
+      "path": "docs/sprints/sprint-4/visual/paper-fixture-dark.png",
+      "sha256": "288d49c014ecbc50854b31a476a85a8639de7078453d3cbe647aaff82953898d"
+    },
+    {
+      "classification": "AUTHORED_FIXTURE_NOT_OBSERVED_PROVIDER",
+      "path": "docs/sprints/sprint-4/visual/paper-fixture-mobile.png",
+      "sha256": "405a202af0cc9b9228d330167a2e7aac90658b7d59c1a0e1c70821703f1a678c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURE_NOT_OBSERVED_PROVIDER",
+      "path": "docs/sprints/sprint-4/visual/historical-comparison-dark.png",
+      "sha256": "97e46ee3b555bbb34d5a8889e5b1a36289b2029e37d3bc2c539ef8622dcb2a8e"
+    }
+  ],
+  "tls": [
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": null,
+        "last_browser_bootstrap": null,
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "origin_mismatch",
+          "authorized_browser_origin": null,
+          "decision": "rejected_origin",
+          "failure_condition": "origin_mismatch",
+          "host": "127.0.0.1:52801",
+          "origin": "https://attacker.invalid",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": null,
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": null,
+          "authorization": "accepted_origin",
+          "decision": "accepted",
+          "has_application_protocol": false,
+          "has_stream_proof": false,
+          "host": "127.0.0.1:52801",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "127.0.0.1:52801",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "schema": "gig.codespaces.forwarded_tls.v1",
+      "scope": "Local HTTPS/WSS reverse-proxy reproduction;not owner Codespace/private GitHub authentication evidence",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    },
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_browser_bootstrap": {
+          "asgi_scheme": "https",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "issued",
+          "host": "127.0.0.1:43331",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "exact_origin",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "allowed",
+          "failure_condition": null,
+          "host": "127.0.0.1:43331",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": null,
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "127.0.0.1:43331",
+          "origin": "https://authored-tls-check-8787.app.github.dev",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "schema": "gig.codespaces.rewritten_origin_tls.v1",
+      "scope": "Test proxy deliberately rewrites Origin+Host exactly as reported;HTTPS proof minted with unchanged approved Origin. Not identification of the owner rewriting component.",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    },
+    {
+      "captured_proxy_headers": {
+        "authority": "Exact Origin or endpoint-bound same-origin proof;forwarded headers never grant authority",
+        "configured_origins": [
+          "https://authored-tls-check-8787.app.github.dev"
+        ],
+        "connected_clients": 2,
+        "expected_codespaces_origin": "https://authored-tls-check-8787.app.github.dev",
+        "last_authenticated_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_browser_bootstrap": {
+          "asgi_scheme": "https",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "issued",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "websocket_url": "wss://authored-tls-check-8787.app.github.dev/api/v1/stream",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_mutation": {
+          "asgi_scheme": "https",
+          "authorization": "codespaces_rewrite_request_proof",
+          "authorized_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "allowed",
+          "failure_condition": null,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_request_proof_bootstrap": {
+          "asgi_scheme": "https",
+          "browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "decision": "same_origin_read",
+          "fetch_site": "same-origin",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "reported_browser_origin": "https://authored-tls-check-8787.app.github.dev",
+          "target": "/api/v1/stream-ticket",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "last_websocket": {
+          "asgi_scheme": "wss",
+          "attempt_id": "01234567-89ab-cdef-0123-000000000001",
+          "authorization": "accepted_codespaces_rewrite_ticket",
+          "decision": "accepted",
+          "has_application_protocol": true,
+          "has_stream_proof": true,
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "upgrade_status": 101,
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "maximum_clients": 8,
+        "policy_version": "codespaces-request-proof-v4",
+        "privacy": "Bounded connection/browser context and public attempt ID;no cookies,tickets,client IP or arbitrary headers",
+        "request": {
+          "asgi_scheme": "https",
+          "host": "localhost:8787",
+          "origin": "http://localhost:8787",
+          "x_forwarded_host": "authored-tls-check-8787.app.github.dev",
+          "x_forwarded_port": "443",
+          "x_forwarded_proto": "https"
+        },
+        "schema_version": "1"
+      },
+      "checks": [
+        "TLS verified actual frontend HTML",
+        "TLS proxy actual C++ state",
+        "exact HTTP issuer failure reproduced without proof",
+        "forwarded HTTPS Origin mutates native prefix",
+        "foreign Origin denied behind TLS proxy",
+        "two verified WSS upgrades101 preserve native prefix",
+        "cross-origin non-simple preflight denied despite rewritten Origin",
+        "actual proxy Origin/Host/HTTPS header capture"
+      ],
+      "failed": 0,
+      "passed": 8,
+      "schema": "gig.codespaces.rewritten_http_issuer.v1",
+      "scope": "Test proxy rewrites HTTP POST and WS Origin/Host exactly as reported. Same-origin read proofs validate ticket issuer and native mutations. Not owner external authentication evidence.",
+      "tls_verification": "CERT_REQUIRED/check_hostname with dedicated ephemeral test CA;no verification disabled"
+    }
+  ]
+}

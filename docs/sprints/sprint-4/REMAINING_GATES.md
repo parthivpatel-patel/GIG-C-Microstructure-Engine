@@ -1,0 +1,27 @@
+# Sprint 4 remaining authorization and operational gates
+
+Application checkpoint `d40622ee201af9339326b14e810f2bfa56462be8`,isolated branch `feat/atlas-sprint-4-market-data-paper`. This is a bounded offline candidate,not a production release. No protected branch merge,provider activation or workflow dispatch is authorized by these instructions.
+
+| Gate | Current evidence | Required future evidence/action | Status |
+|---|---|---|---|
+| General Alpaca personal use | Owner reports written individual/noncommercial Basic research/local-storage permission;redistribution/multi-user/business use excluded | Preserve exact original provider wording/reference privately | OWNER-REPORTED;not expanded |
+| Private-cloud processing/display | Specific Codespaces and private browser questions remain unanswered | Affirmative applicable provider permission and retained private reference;then explicit bounded read-only qualification authorization | BLOCKED |
+| Historical IEX | Implemented fixed profile and fixtures;no provider response acquired | Specific scope/entitlement/API profile confirmation and authorized bounded AAPL+second-symbol test | BLOCKED |
+| Historical SIP | Owner-reported Basic explicitSIP/end≥15minutes old;nanosecond boundary enforced offline | Cloud/display approval,source endpoint/schema/coverage qualification,explicit bounded test authorization | BLOCKED |
+| Live IEX | Existing gated shared MessagePack/SSE infrastructure passes offline ordering/reconnect/quiet/isolation/resource regressions | Confirm eligible plan limits/cloud/display,then separately authorize read-only stream;record real source/receive clocks,gaps and per-symbol results | IMPLEMENTED / NOT LIVE-QUALIFIED |
+| Historical retention/export | New cache is memory-only with logicalTTL/deletion;observed export gate off | Approved cloud-memory/storage/export scope,retention/deletion policy and bounded acquisition plan;no redistribution inferred | DEFAULT OFF |
+| Actual paper account access | Paper adapter,fixed host and fake-transport tests exist;no account authentication occurred | Independent specific provider/cloud/display/audit-retention approvals,account/profile verification,exclusive-account policy,explicit≤15minute session and all8owner risk values/digest | DEFAULT OFF / NOT AUTHORIZED |
+| Paper order/cancel/recovery | Exact durable intents,FILL reconciliation,unknown acknowledgments,cancel races and restart pass fixtures | Separate owner authorization for actual paper submit/cancel;genuine account/position/open-order/activity coherence,availability/settlement,rate limits,unknown recovery and kill tests within explicit limits | BLOCKED;fixture success is insufficient |
+| Broker profile breadth | Limit/day/whole-share/exact-cent,long-held-share profile only | Fail closed on fractional/subcent/unexplained fees/external orders/incomplete source;review expansions independently rather than relaxing checks | INTENTIONAL BOUNDARY |
+| Market calendar/completeness | Existing bounded configured schedule can be shared;absence isUNKNOWN | Independently sourced authorized historical calendar/halts/actions and complete interval/source integrity if future claims require them | UNVERIFIED;no inference |
+| Private Codespaces authentication | Local TLS/WSS/proof/forged-header negatives pass;owner previously accepted Sprint3 | Exact-candidate private GitHub port/auth/browser qualification;local proxy fixtures are not owner-edge evidence | OWNER ACCEPTANCE PENDING |
+| Current native ARM64 | Existing earlier qualifications apply only to their tested commits;no new run dispatched | Owner-authorized eligible free manual workflow against exact candidate,all mandatory jobs/eightidentities and Python evidence | NOT EXECUTED |
+| Physical mobile / other browsers | Chromium software-rendered360/390/768/1280/1920and theme/keyboard checks | Final owner acceptance on actual Android/desktop targets;no intermediate checks requested | PENDING |
+| Runtime security | Fixed destinations,defaultoff gates,body/time/page/resource tests,existing pins,pipcheck and source archive validation pass | Current deployment-specific dependency/security clearance and actual auth/privateport confirmation | PARTIAL QUALIFICATION |
+| Full-session production brokerage / empirical L3 / alpha | Not established by this sprint's data or scope | Separate requirements,rights,source evidence and authorization;do not claim from fixtures | OUT OF CURRENT QUALIFICATION |
+
+No additional development feature expansion is required to demonstrate the implemented bounded offline paths. Actual provider contracts can still reveal integration defects;the implementation is not represented as empirically qualified. REST double collection is not atomic and source clocks are not synchronized. A passed test does not grant a data/order permission.
+
+The next milestone is a separately authorized read-only provider qualification only after the specific cloud/display/feed questions are answered. Keep all paper execution and observed-retention flags off. Actual paper account/order qualification is a later independent gate,with source/clock/account/risk review and explicit approval. No key re-entry or repeated SEC configuration is requested.
+
+Existing nine user/interview guides describe operation,models and limitations. Exact-SHA owner handoff commands are in `IMPLEMENTATION_REPORT.md`;opening the disabled historical/provider panels should not start acquisition. Owner manual acceptance occurs after development delivery,not between implementation packages.
