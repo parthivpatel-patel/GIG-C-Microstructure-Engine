@@ -54,7 +54,7 @@ The confirmation asserts the actual private, single-user, personal noncommercial
 
 The command reads one AAPL historical page each for bars, quotes and trades, then opens at most one 30-second IEX stream. It does not query an account or submit/cancel orders. Historical requests use a five-minute UTC interval on the previous weekday, at most 64 physical rows each. Weekday selection is not an exchange holiday/calendar assertion. An optional exact interval can be supplied with both `--start-time` and `--end-time` in RFC3339 UTC; `--seconds` allows 5–60 seconds.
 
-Hard budgets: 120 seconds overall, at most nine historical HTTP attempts (three 429-bounded attempts per kind), 192 historical physical rows, one stream connection with no reconnect, 32KiB stream frames and 256 retained in-memory events. HTTP responses remain byte-bounded by the existing 512KiB transport. No raw records, prices, credentials, cursors or SEC contact values are printed; reports contain counts, source receipts and hashes. Process exit discards the accepted in-memory observations.
+Budgets: a cooperative 120-second acquisition timeout, at most nine historical HTTP attempts (three 429-bounded attempts per kind), 192 historical physical rows, one stream connection with no reconnect, 32KiB stream frames and 256 retained in-memory events. HTTP responses remain byte-bounded by the existing 512KiB transport. No raw records, prices, credentials, cursors or SEC contact values are printed; reports contain counts, source receipts and hashes. WebSocket cleanup uses the existing three-second close timeout after acquisition; this is not a measured or OS kill-enforced total process deadline. Process exit discards the accepted in-memory observations.
 
 Interpretation:
 

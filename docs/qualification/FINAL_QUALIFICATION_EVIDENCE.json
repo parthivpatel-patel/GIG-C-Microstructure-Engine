@@ -1,0 +1,1109 @@
+{
+  "TLS": [
+    {
+      "failed": 0,
+      "passed": 6,
+      "program": "check_forwarded_tls",
+      "scope": "Local HTTPS/WSS reverse-proxy reproduction;not owner Codespace/private GitHub authentication evidence"
+    },
+    {
+      "failed": 0,
+      "passed": 6,
+      "program": "check_rewritten_stream_tls",
+      "scope": "Test proxy deliberately rewrites Origin+Host exactly as reported;HTTPS proof minted with unchanged approved Origin. Not identification of the owner rewriting component."
+    },
+    {
+      "failed": 0,
+      "passed": 8,
+      "program": "check_rewritten_http_tls",
+      "scope": "Test proxy rewrites HTTP POST and WS Origin/Host exactly as reported. Same-origin read proofs validate ticket issuer and native mutations. Not owner external authentication evidence."
+    }
+  ],
+  "arm64": {
+    "compiler": "Debian clang version 19.1.7 (3+b1)",
+    "fragment_cross_compilation": "PASS_AARCH64_OBJECT_ONLY",
+    "fragment_scope": "Exact arithmetic function bodies extracted unchanged from exact.hpp;ErrorCode enum declaration stub;not full-engine compilation or linking",
+    "full_engine_cross_compilation": "PENDING_AARCH64_CXX_SYSROOT_UNAVAILABLE",
+    "host": "x86_64",
+    "muloti4_emitted": false,
+    "native_arm64_runtime": "PENDING_NO_NATIVE_AARCH64_MACHINE",
+    "object_sha256": "9b2a797203de496782f64782fd0ee2f22939e922050891a2923bafa44b77411a",
+    "schema": "gig.arm64.portability.scope.v1",
+    "source_sha256": "9ae3dadb762b07fd04a7ae7202c29cdc182c042a658c0c873cbdeddd0801ea04",
+    "workflow_dispatches": 0
+  },
+  "assets": {
+    "assets": {
+      ".vite/manifest.json": "7a8c844321a2d514bada15cfdb8a6526becc0df358294f1457d6b41903bb0d13",
+      "assets/HistoricalResearch-CCDv6QRP.js": "d9f0c48bd65e444fc6b1d28f5ed05448f91e0efb1bd73595d1c7afef67174a52",
+      "assets/Landscape3D-DKRbVGCq.js": "eb3085865b333d3ad47598baf64d513e9d93e2f9327a7e2864b03985224783a8",
+      "assets/LiveMarket-HRylr1xb.js": "1a7a30c3abf58cce60df0ceb0fb3d71f650c2cb61c9a38e2c1ff24905ba40903",
+      "assets/MarketHealth-TML_KOWz.js": "a83ea82e8a277a9d22654b928aa3dc846118d44088a76c030dacd54743a2d619",
+      "assets/ModelSurface-Bb6nq5tK.js": "b945ba1bc16542f284570b1a7904b0e08752fcc64c8b7c7b0f89914cffc8ae16",
+      "assets/OrbitControls-DgvY0sml.js": "5f73f6ac9131939ff19a3515d579de1d8fb1eb6478a0efb541b20b506c675a38",
+      "assets/PaperProvider-DPMHKaQU.js": "0f7c43132f26dfa5a76bf79d4a2d3b3f8ed5661a60b807c311ff7938abc99c24",
+      "assets/PaperSandbox-D8QBb_2E.js": "cd36b5adc96400901287995834ff77294b3b1a75141429972c1f84342c70bff9",
+      "assets/QuoteCloud-D7FwJIr-.js": "d5b866565897d019f15486e7e42ff0c7a8ba0f14195a171eb612e53c43737e53",
+      "assets/ResearchDesk-BbYCuonS.js": "350d93318a5be358cb09dc6a5f15f45079b90ad4c282d12721ebcaf7b922c27a",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-D2ArHD8g.js": "991a932a5b55dfad2a6bfb73209648863f4bc3d4c4fb608c6837e831174dca99",
+      "assets/ResearchScene-CT5huRsM.js": "cad3e4f947dfa7ea5c8c74d842bc19fa2564e932a96b0a1a1a23729b06166d1a",
+      "assets/StockIntelligence-sA5vPybS.js": "0408e8b379f9b9f4727ab3e1b0fcfcdb5f3b5db621ef71a6374a9f7a700ffa54",
+      "assets/UniverseWorkspace-B-ohj8B7.js": "f32659eb9913c5d18c9e5a0b6cf15d030d99469b1ced378c1bf58b5511261ae4",
+      "assets/VolatilitySurface-v6CWhvV2.js": "54f257df4d20dc98c808c579d6b454c46a1fc6ba1d016632c50def749f16ddb6",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-DOhNuZs8.css": "1df259581b1e807500656b11fc1d281eb9206ec6b1352d3cd3af870bc9068738",
+      "assets/index-DiO7bLaX.js": "861c5c474e12047ab61969391c0d8b102dab969f64c5d81e28bd4b5a8dc81031",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "10f523a72dff9330b0461ef2023eddb1a1bfb996b192340a39619988b7a9a5fe"
+    },
+    "mutated": false,
+    "scope": "Built before browser;authored fixtures,not provider/owner target"
+  },
+  "baseline": "7f43073dfb27dcf6613dea56f5274a69cacd4adb",
+  "branch": "development/gig-ui-redesign",
+  "browser": [
+    {
+      "exit_code": 0,
+      "script": "gig-redesign-validation",
+      "seconds": 29.09745882198331
+    },
+    {
+      "exit_code": 0,
+      "script": "browser-validation",
+      "seconds": 19.960215033002896
+    },
+    {
+      "exit_code": 0,
+      "script": "contrast-scan",
+      "seconds": 6.758005925017642
+    },
+    {
+      "exit_code": 0,
+      "script": "measure_sprint3_browser",
+      "seconds": 5.84100559700164
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-intelligence-validation",
+      "seconds": 5.490361078002024
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-loading-validation",
+      "seconds": 19.336656875995686
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas-validation",
+      "seconds": 23.436087223992217
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas2-validation",
+      "seconds": 26.038211578998016
+    },
+    {
+      "exit_code": 0,
+      "script": "advanced-research-validation",
+      "seconds": 30.170248720998643
+    },
+    {
+      "exit_code": 0,
+      "script": "workspace-qualification",
+      "seconds": 10.408246238017455
+    },
+    {
+      "exit_code": 0,
+      "script": "check_bootstrap_sop",
+      "seconds": 0.8668981730006635
+    },
+    {
+      "exit_code": 0,
+      "script": "check_browser_handshake",
+      "seconds": 1.7244028800050728
+    },
+    {
+      "exit_code": 0,
+      "script": "sprint3-validation",
+      "seconds": 18.18432965001557
+    }
+  ],
+  "browser_source_binding": {
+    "explanation": "Final diagnostic refinements touched only the new test module/runner after browser capture;the final35-test cohort was rerun in all3configurations. All browser-loaded application modules and22compiled assets stayed unchanged.",
+    "modified_test_only_files": [
+      "terminal/stocks/test_final_qualification.py",
+      "terminal/tests/run_final_qualification.py"
+    ],
+    "receipt_sha256": "34ef3abf241f2262748b3838ceae56329fa9b048cacffdac81cb15d38448c509",
+    "unchanged_runtime_and_frontend_source": true
+  },
+  "contrast": {
+    "failures": 0,
+    "scope": "Rendered HTML text including below-fold content at1440x1100;closed details and inactive controls excluded;not screen-reader or full WCAG certification",
+    "views": 24
+  },
+  "date": "2026-11-02 America/New_York",
+  "files_at_implementation_commit": [
+    ".github/workflows/native-arm64.yml",
+    "docs/qualification/ALPACA_PERMISSION_LEDGER.md",
+    "docs/qualification/PRIVATE_IEX_RUNBOOK.md",
+    "docs/qualification/PROGRESS.md",
+    "docs/user-guide/GETTING_STARTED.md",
+    "scripts/private_iex.py",
+    "terminal/stocks/historical_v2.py",
+    "terminal/stocks/live.py",
+    "terminal/stocks/private_iex.py",
+    "terminal/stocks/qualification.py",
+    "terminal/stocks/retry.py",
+    "terminal/stocks/test_final_qualification.py",
+    "terminal/test_arm64_terminal_policy.py",
+    "terminal/tests/run_final_qualification.py"
+  ],
+  "frontend": {
+    "failures": 0,
+    "skipped": 0,
+    "strict_typescript_and_build": "PASS",
+    "tests": 118
+  },
+  "implementation_commit": "2689e0b5613710cd35cf5a6cbe002a56bf86d47b",
+  "limitations": [
+    "Live/historical provider pending;this task lacks credentials and private owner environment",
+    "No full AArch64 C++ sysroot/hardware;fragment-only cross compilation is not native/runtime qualification",
+    "LSan live checkpoint0;Python shutdown leak checking disabled as in baseline",
+    "Local TLS/proxy fixtures are not GitHub private-port authentication evidence",
+    "No physical-device/fullWCAG/long-sessionGPU/currentARM64 qualification",
+    "Native results reuse unchanged-source builds;not new native compilation",
+    "Vite deferred-chunk and Starlette TestClient warnings retained;no fresh external vulnerability advisory clearance"
+  ],
+  "local_readiness": {
+    "credentials": {
+      "ALPACA_pair_present": false,
+      "APCA_pair_present": false,
+      "paper_base_url_configured": false,
+      "paper_base_url_used_for_market_data": false
+    },
+    "disk_capture_enabled": false,
+    "execution_enabled": false,
+    "expected_origin": null,
+    "network_requests": 0,
+    "permission_reference": "Alpaca Support #384778; owner-reported confirmation 2026-11-02",
+    "private_port_verified": false,
+    "profile": "EXPLICIT_OWNER_INVOKED_READ_ONLY_IEX",
+    "provider_verified": false,
+    "ready": false,
+    "reason": "owner_private_codespace_required",
+    "required_operator_assertion": "Port8787 PRIVATE; authenticated owner only; personal noncommercial use",
+    "schema": "gig.private.iex.readiness.v1",
+    "scope": "Configuration/protocol readiness only;native,assets,private authentication and providers qualify separately"
+  },
+  "logs": [
+    {
+      "bytes": 1878,
+      "path": "aarch64-cross.log",
+      "sha256": "cc20e3fb6777e280c2d5ff3ca6e96d01d63f3ebcf4ae52b6640d581373592bcc"
+    },
+    {
+      "bytes": 203,
+      "path": "aarch64-full-source-attempt.log",
+      "sha256": "6d960e106aee6931cab9cfb7be7582523d5c44e0ca78c393a25642a9a4e8a00d"
+    },
+    {
+      "bytes": 0,
+      "path": "binding.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 10706,
+      "path": "browser/advanced-research-validation-final.log",
+      "sha256": "4eb3701f48690854076f76f36c87485c861b2121b4eaf63578d1b4463472172e"
+    },
+    {
+      "bytes": 19909,
+      "path": "browser/atlas-final-server.log",
+      "sha256": "88dbd14b63853a2e474f10b1edbf01dbe51996e911e4a921144a9a9ab163ffb1"
+    },
+    {
+      "bytes": 3603,
+      "path": "browser/atlas-validation-final.log",
+      "sha256": "8c78c0652123a60f04bef84e01fbb59ab34c7df14a72f8beda67c118480b0770"
+    },
+    {
+      "bytes": 23630,
+      "path": "browser/atlas2-final-server.log",
+      "sha256": "d7b749cd3fa5ad893fd494c0bc911f50ac544ec5dee20229b22bc442d754b258"
+    },
+    {
+      "bytes": 2980,
+      "path": "browser/atlas2-validation-final.log",
+      "sha256": "5d18e30a570330cede77944974bac8ac9165b7f2042e0c37397a17962699023a"
+    },
+    {
+      "bytes": 6410,
+      "path": "browser/browser-validation-final.log",
+      "sha256": "e4e07dfbd9dd5ee44d06b6c355a260a5ea27e2f2d5d893b76235ab4b9dd5fcda"
+    },
+    {
+      "bytes": 382,
+      "path": "browser/check_bootstrap_sop-final.log",
+      "sha256": "6650badfb148afbdf42ae32f948d60c724620abf337cb0d974ed96ee8d63ba6d"
+    },
+    {
+      "bytes": 486,
+      "path": "browser/check_browser_handshake-final.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser/contrast-scan-final.log",
+      "sha256": "b4d589d2bab2f35c4f9f599a543bba0289216a4480449c5178767e31d6c02d29"
+    },
+    {
+      "bytes": 806,
+      "path": "browser/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 2929,
+      "path": "browser/live-final-server.log",
+      "sha256": "526498587b52f10c2fe245572afdc95dfbf49474851146d452113198d0768032"
+    },
+    {
+      "bytes": 2555,
+      "path": "browser/measure_sprint3_browser-final.log",
+      "sha256": "e8ae3a6e957b73e188919b07450f20dccfbb40392514280366391519ec64f750"
+    },
+    {
+      "bytes": 67798,
+      "path": "browser/native-final-server.log",
+      "sha256": "cd25ae035b1e05ce848e6669d5c01e82fde61599428cd77142fcca40c3fdfd2d"
+    },
+    {
+      "bytes": 12176,
+      "path": "browser/sprint3-validation-final.log",
+      "sha256": "ab29e7211927e3da9d0cfd3821b646e8d86bb5bb26f785e4bc1aadde5a1fd842"
+    },
+    {
+      "bytes": 13819,
+      "path": "browser/stock-final-server.log",
+      "sha256": "329dd4831ad9586c70ac84b13294414dd31dbb7a72d770d230d100fd8df99a71"
+    },
+    {
+      "bytes": 908,
+      "path": "browser/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 983,
+      "path": "browser/stock-loading-validation-final.log",
+      "sha256": "05f428c266d2474d12a7aebb5779925a4929ce55c08b053c5f4aab800932a926"
+    },
+    {
+      "bytes": 4355,
+      "path": "browser/workspace-qualification-final.log",
+      "sha256": "7d5caf5b133ca9de758873c6d9e2ef60257a9324abfa1e203467f6515a2cf3dd"
+    },
+    {
+      "bytes": 16525,
+      "path": "browser/workspaces-final-server.log",
+      "sha256": "f7def3b608751480ae7756073af2a3a591098afbd46771a0a21c5d7a6a65da36"
+    },
+    {
+      "bytes": 399,
+      "path": "browser-driver.log",
+      "sha256": "dc7b6308f6aecd8e4b1aaa5f9675e6034e1e38fdbe2f98cc0595cf35319ffac8"
+    },
+    {
+      "bytes": 2530,
+      "path": "check_forwarded_tls.log",
+      "sha256": "d6190526d3a2e29090d09cd61f61d72d2632bb21e3ece13946ce344dcc25aa22"
+    },
+    {
+      "bytes": 4364,
+      "path": "check_rewritten_http_tls.log",
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "bytes": 3763,
+      "path": "check_rewritten_stream_tls.log",
+      "sha256": "f6247e5baaa9b956be8d4d5cf8d8be112f1298880a186640afd8890edef13913"
+    },
+    {
+      "bytes": 1031,
+      "path": "failing-before.log",
+      "sha256": "d2966bb4bf7b9cc42ae53761adf89f42f1546d419d92b148724d874adb6c0497"
+    },
+    {
+      "bytes": 6289,
+      "path": "final-asan-ubsan.log",
+      "sha256": "8dca41c92737d3cb5e087866369765bcfa513308120e1de50c27c46a40eb2294"
+    },
+    {
+      "bytes": 7035,
+      "path": "final-debug-boundary-initial-failure.log",
+      "sha256": "65e743a3c6d53ed81345d260fffeacc47c20191903b6d42eb79f72500d253f45"
+    },
+    {
+      "bytes": 6271,
+      "path": "final-debug.log",
+      "sha256": "934d94de04ef134519801ac38bfc99b4a9ff85cc3f006ad89426b066c0d88c25"
+    },
+    {
+      "bytes": 6271,
+      "path": "final-release.log",
+      "sha256": "0fc71d8d6e9da089f488515bc2a4174b2a8ee90ebad4c04acf96356490175dce"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build.log",
+      "sha256": "b5c696f2f4c2b27943cf676350b724b0e6c93bc761c0b9032e08a31e0cf01f8a"
+    },
+    {
+      "bytes": 11162,
+      "path": "frontend.log",
+      "sha256": "873859196fc1f09d30745a509dab67566d1498a84995543e25fec8a9844e88c3"
+    },
+    {
+      "bytes": 5380,
+      "path": "gate-failing-before-qualified.log",
+      "sha256": "ddde5d1ebeb179a99e010725396cbed4dfe7e9fb10df3f68a618c4f6e8413e86"
+    },
+    {
+      "bytes": 9284,
+      "path": "gate-failing-before.log",
+      "sha256": "e0fc3adfeacc770fe751bb9ec95b3f0bcb0f2499b04cd81ee5ef6d74e1725237"
+    },
+    {
+      "bytes": 20704,
+      "path": "gcc-python-asan-ubsan.log",
+      "sha256": "15c1c933b66e75695705da547b726c1b3f76fce5558dd182904444955aa8aacf"
+    },
+    {
+      "bytes": 20563,
+      "path": "gcc-python-debug.log",
+      "sha256": "cbea39b41757de08c3bfa19d1810d9c8bf1af953f1eb6bf1fe15bb01818d3848"
+    },
+    {
+      "bytes": 20567,
+      "path": "gcc-python-release.log",
+      "sha256": "c0d481f0675f60fd5a2b40fc6bcd1a697e7376859ce0f9debce6782f219db7dd"
+    },
+    {
+      "bytes": 250,
+      "path": "native-driver.log",
+      "sha256": "a33a380310432e405ee910d10a9a98d4345f1fb79ecaf30be8066922440ba314"
+    },
+    {
+      "bytes": 10784,
+      "path": "new-tests-initial.log",
+      "sha256": "9f2bd118e9661e797979df559a291c1258d29349c9669d725bb0805ac7a8c298"
+    },
+    {
+      "bytes": 5846,
+      "path": "new-tests.log",
+      "sha256": "d98b39513b19ee10e997ba883c2410e024d2fbf9707dd490f0750a0fd99a4712"
+    },
+    {
+      "bytes": 101,
+      "path": "packaging-qualified.log",
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "bytes": 297,
+      "path": "packaging.log",
+      "sha256": "b137824454f235e91e04fa531da7c7a7b6080d919b01c7c97cd9b6ce89ad64d1"
+    },
+    {
+      "bytes": 294,
+      "path": "pip-check.log",
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "bytes": 595,
+      "path": "python-driver.log",
+      "sha256": "77d51ce2afff04e062f2c80ba760582088f5431a701b51d762d3973596e92c77"
+    },
+    {
+      "bytes": 6070,
+      "path": "qualification-34-final-asan-ubsan.log",
+      "sha256": "fa6536cb385955dd03d4dc13b14574f3b14c5e103c64b061846ffe889ab2c8b2"
+    },
+    {
+      "bytes": 6052,
+      "path": "qualification-34-final-debug.log",
+      "sha256": "5420e6f1ea4d759ae5d96c8b0293e9ad444d08aec176266427f8eecec5c1d670"
+    },
+    {
+      "bytes": 6052,
+      "path": "qualification-34-final-release.log",
+      "sha256": "2d72761b34994118346bbbc521139884295af220e38451b8d494f25af2d6279a"
+    },
+    {
+      "bytes": 150,
+      "path": "sdist-build-qualified.log",
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "bytes": 132,
+      "path": "sdist-build.log",
+      "sha256": "3dbf2149a83369d6e54eb381aa35bcf3fdbdcdec751cff3d605b52e985a0d03b"
+    },
+    {
+      "bytes": 82,
+      "path": "sdist-inventory.log",
+      "sha256": "ba5ffbd7f29acda1f5be9e4934acbfcf06cae8f2bf1a1c249ccccb7238504b98"
+    },
+    {
+      "bytes": 29228,
+      "path": "sources-asan-ubsan.log",
+      "sha256": "51a65ca8fc6d3f7c37211f9894722087ba53bc862b9364eb2209f8880fd8913c"
+    },
+    {
+      "bytes": 26373,
+      "path": "sources-debug.log",
+      "sha256": "8515f87c9158216a611caffdd40643f4670a87137f8c47d4307d810276985e96"
+    },
+    {
+      "bytes": 26373,
+      "path": "sources-release.log",
+      "sha256": "01696303d5b7a49ecf7ca485a93562e7c384f9f526b974ad8be4b8fe9668e000"
+    },
+    {
+      "bytes": 6271,
+      "path": "sprint3-asan-ubsan.log",
+      "sha256": "56d57781d4ed1e771014ed08bd0ddc4714eb06b6b6bd019c6bdc76282d95e669"
+    },
+    {
+      "bytes": 5892,
+      "path": "sprint3-debug.log",
+      "sha256": "b79bcc1472b5938a393edfcfa7104aef4cbc6c41c9d647b402db157ad701592f"
+    },
+    {
+      "bytes": 5892,
+      "path": "sprint3-release.log",
+      "sha256": "390e3015094c8c641dcaded1fbbb46a4438dde75fdab21fab6bb38fc22b1ea9d"
+    },
+    {
+      "bytes": 12469,
+      "path": "sprint4-asan-ubsan.log",
+      "sha256": "7a059bd2b177ac19ef975c7e5f8934f8e7b393ac4c36b6da28aef778f578c289"
+    },
+    {
+      "bytes": 12451,
+      "path": "sprint4-debug.log",
+      "sha256": "2dd5b0f1485aefe45a36dd641c0798f09ff232c2b116a01a13d29058dc5fe111"
+    },
+    {
+      "bytes": 12451,
+      "path": "sprint4-release.log",
+      "sha256": "2adb23a1f2cfb97fac97a18a6a383bd199fa95d9c9b04afc0e6e757e01d57ff7"
+    },
+    {
+      "bytes": 35172,
+      "path": "stocks-asan-ubsan.log",
+      "sha256": "5d33c09c92f9416a8041d203c42b0850f06dc78bb9b4cb45c0624ccf9aae0b92"
+    },
+    {
+      "bytes": 35154,
+      "path": "stocks-debug.log",
+      "sha256": "38d70fb487720d57b4b49e6049eaa061b2ff934bf5753413e6998032cf9739cd"
+    },
+    {
+      "bytes": 35154,
+      "path": "stocks-release.log",
+      "sha256": "559418ddb887fd2dea4c1dfe1543152221b63c99217b75258c4ce209538a00b0"
+    },
+    {
+      "bytes": 40762,
+      "path": "terminal-asan-ubsan.log",
+      "sha256": "0d57a9a8f1e4effcec2115e63ad350399b7e340cc20d3b985ac41076ea8441fa"
+    },
+    {
+      "bytes": 51279,
+      "path": "terminal-debug-original-branch-policy-failure.log",
+      "sha256": "845c4597d095441e70b5fd46b85c6ef1aae245506a356d013eaf5e08d2f86b16"
+    },
+    {
+      "bytes": 40337,
+      "path": "terminal-debug.log",
+      "sha256": "351fbec8cff3c02703dc4e718f4672886a7fa40f3f86062f544b89740188118b"
+    },
+    {
+      "bytes": 40722,
+      "path": "terminal-release.log",
+      "sha256": "7196d56624b6cc0b0de2764e320fbf7bbfc2f93a0ec57bbffbd5b39488d2e0f0"
+    },
+    {
+      "bytes": 78,
+      "path": "tls-driver.log",
+      "sha256": "d7e7c9742e5e85cdfb029977c84eb87be55a968367a47b43a5e1db138911ce85"
+    }
+  ],
+  "native": {
+    "all_24_unchanged": true,
+    "expected_hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "results": [
+      {
+        "build_directory": "build/python-debug",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-debug.xml"
+        ],
+        "configuration": "gcc-python-debug",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-debug.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 31.589505121984985
+      },
+      {
+        "build_directory": "build/python-release",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-release.xml"
+        ],
+        "configuration": "gcc-python-release",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-release.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 33.346461062988965
+      },
+      {
+        "build_directory": "build/python-asan-ubsan",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-asan-ubsan.xml"
+        ],
+        "configuration": "gcc-python-asan-ubsan",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 159
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/final-qualification/gcc-python-asan-ubsan.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 77.16738325799815
+      }
+    ]
+  },
+  "native_total": 475,
+  "new_browser": {
+    "checks": [
+      "GIG identity,system typography,accessible12-workspace navigation and real native transport",
+      "two-sided exact native ladders expose size,cumulative quantity and source units",
+      "native static-data camera automatically orbits only when visible",
+      "accessible pause/resume and manual reset preserve independent camera control",
+      "actual offscreen intersection suspends the loop and returning resumes it",
+      "visibility event suspension and browser reduced-motion preference stop camera work",
+      "multicolor authored research geometry rotates without changing native book or replay",
+      "context loss retains2D table and retry creates a usable independent renderer",
+      "navigation disposes removed renderer loops and canvases",
+      "all12workspace pages remain accessible in both themes at1440and390px"
+    ],
+    "errors": [],
+    "failed": 0,
+    "frames": [
+      {
+        "frames": 19,
+        "interval_ms": 800,
+        "scene": "native"
+      }
+    ],
+    "passed": 10,
+    "schema": "gig.redesign.browser.v1",
+    "scope": "Loopback native/authored fixtures;software Chromium. Visibility event case is controlled injection;not physical-device or owner private authentication evidence.",
+    "screenshots": [
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-command-center-dark.png",
+        "sha256": "028e428fd6dafcb6c7600deeaa5a8331c71a52411b53db371f87e5246f8a6b9b"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-order-book-dark.png",
+        "sha256": "4b0530995febafe8369fdd43028c9a36181868946d9fb6ccf5aba3d6407042bc"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-order-book-detail-dark.png",
+        "sha256": "26ad683a8d6af790c1a9ded4e2aeff4872b1e07e1974500eefc8aa4302a222ab"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-research-3d-dark.png",
+        "sha256": "0a92c372c91250e67da01f8da8ede4e296dd88ac975b3ff2050c783a73303bb4"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-stock-intelligence-dark-1440.png",
+        "sha256": "b1107db5a2470a5011799b2b1edb3421f05686ab4cf5eb2596d47ffa718f9631"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-execution-simulator-dark-1440.png",
+        "sha256": "d15100ecac311f5e9e935488836db17cea5e24bf730ff5abb03c42d65c6dfbbd"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-operations-dark-1440.png",
+        "sha256": "0c3df253883d2d42a32e0d161905144356716405218c3f63658273b7e2ec8207"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-command-center-dark-390.png",
+        "sha256": "43edc64086d42efadbffe51ccdcb4eb8bd468ee27783164befcf57779319951a"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-stock-intelligence-dark-390.png",
+        "sha256": "1bca0aeda43649cb2d46fd741d4051aae63ac9b8021abcee7c9b6de857c26510"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-order-book-dark-390.png",
+        "sha256": "a614618598fc4c63bfe23badbea369faefe4a5aa8fb4da14e30b5a7e4d5ceb2e"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-stock-intelligence-light-1440.png",
+        "sha256": "69028ca78283be9a6c9da2506de6c2e0d4704e9e6266b48139dc021c7d344d0c"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-execution-simulator-light-1440.png",
+        "sha256": "decdd62654766635a1fd42fc75e5f0d0a5251b4680be30f903c65f748b4c214a"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-operations-light-1440.png",
+        "sha256": "c116350afbc2fd79448ca146bbe42dd1d852e2721a41ce80ed69d944eff68e03"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-command-center-light-390.png",
+        "sha256": "2f2e5a79570d385ea9b7c23cc02e8ffb9569e82a940322e39fdf6597f028a448"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-stock-intelligence-light-390.png",
+        "sha256": "4b3bb77c7c7a94f43e13d4069fe1ef0de42c83bc456d2e1f8eba6ea1f141c6eb"
+      },
+      {
+        "classification": "AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET",
+        "path": "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/final-qualification/browser/visual/gig-order-book-light-390.png",
+        "sha256": "629e3ec1af6cff20e7e87098e34e2126ac00034c2290f2e422d917f53d54b48c"
+      }
+    ],
+    "skipped": 0
+  },
+  "packaging": {
+    "archive_sha256": "6476fad5823d0f8e52ae125c8a51c0c60d53f2b654eef5b21cccc70a78b5545d",
+    "failures": 0,
+    "manifest_sha256": "2a81fc3a9cc081da1ab1db2ba6ff26411146bb814377f5ac040996e26a191c9e",
+    "pattern_tests": 3,
+    "scope": "Actual source archive at implementation checkpoint;not a new wheel or installed-consumer rebuild",
+    "sdist_members": 1123
+  },
+  "paid_resources": 0,
+  "performance": {
+    "browser": "154.0.8037.57",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_PERFORMANCE",
+    "limitations": [
+      "Networkidle included;not pure rendering time.",
+      "Independent contexts,disabled cache,reused browser process.",
+      "Sampled JS heap excludes native/GPU allocations and does not establish long-session boundedness.",
+      "No external provider,physical Android or owner Codespaces request."
+    ],
+    "repetitions": 3,
+    "samples": [
+      {
+        "company_route_ms": 126.55902699999979,
+        "dom_nodes": 967,
+        "initial_navigation_and_settle_ms": 988.358248,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.112145,
+        "task_seconds": 0.488781,
+        "used_js_heap_bytes": 4506252
+      },
+      {
+        "company_route_ms": 133.51637300000039,
+        "dom_nodes": 1057,
+        "initial_navigation_and_settle_ms": 816.5583680000004,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.111466,
+        "task_seconds": 0.359801,
+        "used_js_heap_bytes": 4434860
+      },
+      {
+        "company_route_ms": 134.29232600000068,
+        "dom_nodes": 967,
+        "initial_navigation_and_settle_ms": 849.6299220000001,
+        "initial_scripts": [
+          {
+            "bytes": 249055,
+            "path": "/assets/index-DiO7bLaX.js"
+          },
+          {
+            "bytes": 4423,
+            "path": "/assets/ResearchDesk-BbYCuonS.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.099641,
+        "task_seconds": 0.400831,
+        "used_js_heap_bytes": 4420220
+      }
+    ],
+    "schema": "gig.sprint3.browser.performance.v1",
+    "warmups": 1
+  },
+  "permissions_applied_to_current_runtime": false,
+  "provenance": "All executed integration inputs are authored/fixture or unchanged native tests;no observed market input processed",
+  "python": [
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-debug.log",
+      "seconds": 2.747198950004531,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-debug.log",
+      "seconds": 1.0165156279981602,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-debug.log",
+      "seconds": 7.207957944978261,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-debug.log",
+      "seconds": 23.445281266991515,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-debug.log",
+      "seconds": 20.603877029003343,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-release.log",
+      "seconds": 2.2150470849883277,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-release.log",
+      "seconds": 1.5368508830142673,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-release.log",
+      "seconds": 7.264615350984968,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-release.log",
+      "seconds": 21.925828784005716,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-release.log",
+      "seconds": 15.479284650005866,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-asan-ubsan.log",
+      "seconds": 7.119120098010171,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-asan-ubsan.log",
+      "seconds": 4.998204560019076,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sources",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_source_qualification_suite.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 142,
+      "log": "sources-asan-ubsan.log",
+      "seconds": 12.843268108990742,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-asan-ubsan.log",
+      "seconds": 38.82093951900606,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-asan-ubsan.log",
+      "seconds": 68.48111496597994,
+      "verified_pass": true
+    },
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-debug.log",
+      "seconds": 0.41640605800785124,
+      "verified_pass": true
+    },
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-release.log",
+      "seconds": 0.41536454900051467,
+      "verified_pass": true
+    },
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-asan-ubsan.log",
+      "seconds": 1.5186551509832498,
+      "verified_pass": true
+    }
+  ],
+  "python_total": 2418,
+  "real_account_requests": 0,
+  "real_order_requests": 0,
+  "real_provider_requests": 0,
+  "schema": "gig.final.qualification.evidence.v1",
+  "source_sha256": {
+    ".github/workflows/native-arm64.yml": "c18c36a6c5f05e77c391b9965c69bf48b8a21cd18c9f0e90b1b4798a3bb3ba52",
+    "scripts/private_iex.py": "d8534c401761c30267b132726a08e0b783ea768b34722ea522311672dd50c6fb",
+    "terminal/stocks/historical_v2.py": "193dc702af6a6f2268ca6ec90d50807c96418c5fd5d6f3b0f22024af9bda1888",
+    "terminal/stocks/live.py": "9ad17ed57c4086402b7ed6c3c6d8cf3f707004c0df1dee3f8b8bfde16ffd4ae9",
+    "terminal/stocks/private_iex.py": "ddf20c912bf9aa773441467087b5a4d1c0a38979ac48251e6ce993f829c463fa",
+    "terminal/stocks/qualification.py": "3ab08fbac27dc80d2960d8a86519bd281ff4ab37501b26e7bd832356488258ef",
+    "terminal/stocks/retry.py": "2414756718edde7ee3a41b1882ad77b54b76dbbab8b57f9c28d07ba6ee03cc7b",
+    "terminal/stocks/test_final_qualification.py": "ca3def9c5095d160808a17b69534f26f3e70bea0cddaf52f99dc6e3ad07fa7b1",
+    "terminal/test_arm64_terminal_policy.py": "5e1c775e989b6191e32e155cf072212ab4dd177cc4c05b66c853ca6216436706",
+    "terminal/tests/run_final_qualification.py": "16afab23c4c2c06d72ed070af47f62a10db314f35ef73218f2f332d819a8596d"
+  },
+  "workflow_dispatches": 0
+}
