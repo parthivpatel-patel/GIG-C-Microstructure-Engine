@@ -75,6 +75,10 @@ class API(unittest.TestCase):
  def test_paper_reference_preserves_conservative_source_age(self):
   from terminal.stocks.historical_v2 import ns
   r=self.paper_reference();self.assertEqual(r['price_cents'],10000);self.assertEqual(r['at_ms'],ns('2024-01-02T14:30:29Z')//10**6);self.assertEqual(r['feed'],'iex')
+ def test_default_history_reuses_bounded_session_schedule_without_acquisition(self):
+  path=Path(self.temp.name)/'authored-session.json';path.write_text(json.dumps(dict(schema='gig.session.schedule.v1',source='AUTHORED_NOT_EXCHANGE_CALENDAR',symbols=['AAPL'],intervals=[dict(start='2024-01-02T14:30:00Z',end='2024-01-02T21:00:00Z',state='REGULAR')])))
+  app=create_app(stock_workspace=StockWorkspace(environment={'GIG_MARKET_SESSION_FILE':str(path)}))
+  self.assertIs(app.state.historical.schedule,app.state.stock_live.schedule);self.assertEqual(app.state.historical.schedule.at('AAPL','2024-01-02T15:00:00Z')['state'],'REGULAR');self.assertIsNone(app.state.historical.transport)
  def test_fixture_provider_session_complete_no_real_calls(self):
   clock=PaperClock();remote=Provider(clock);wire=FixtureWire(remote.call);auth=PaperAuthorization(GATE,True,True,True,True,True,True,True,True,ACCOUNT,START,clock.ms+900000,hashlib.sha256(canonical(LIMITS.view())).hexdigest())
   paper=PaperProviderWorkspace(Path(self.temp.name)/'protocol',authorization=auth,limits=LIMITS,transport=wire,clock=clock.now,monotonic=clock.monotonic,sleep=clock.sleep,reference=lambda s:dict(symbol=s,feed='iex',origin='HISTORICAL_SYNTHETIC',at_ms=clock.ms,price_cents=10000))
