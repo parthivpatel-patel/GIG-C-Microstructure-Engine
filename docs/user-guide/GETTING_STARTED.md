@@ -1,21 +1,21 @@
-# Start GIG ATLAS
+# Start GIG
 
-GIG ATLAS is a private research application. The C++ engine runs deterministic order-book, replay and simulation calculations. A Python service exposes bounded APIs. The browser displays results and their source labels. Provider execution stays disabled by default;the native simulator and authored paper sandbox do not place broker orders.
+GIG — Order Book & Market Microstructure Terminal is a private research application. The C++ engine runs deterministic order-book, replay and simulation calculations. A Python service exposes bounded APIs. The browser displays results and their source labels. Provider execution stays disabled by default;the native simulator and authored paper sandbox do not place broker orders.
 
 ## Existing Codespace
 
-Preserve any local changes before switching branches; do not reset or clean the worktree. These commands select the isolated Sprint 4 candidate and leave protected branches unchanged:
+Preserve any local changes before switching branches; do not reset or clean the worktree. These commands select the isolated GIG frontend-redesign candidate and leave protected branches unchanged:
 
 ```bash
-git fetch origin feat/atlas-sprint-4-market-data-paper:refs/remotes/origin/feat/atlas-sprint-4-market-data-paper
+git fetch origin development/gig-ui-redesign:refs/remotes/origin/development/gig-ui-redesign
 ```
 
 ```bash
-git switch feat/atlas-sprint-4-market-data-paper
+git switch development/gig-ui-redesign
 ```
 
 ```bash
-git pull --ff-only origin feat/atlas-sprint-4-market-data-paper
+git pull --ff-only origin development/gig-ui-redesign
 ```
 
 For an existing working environment, install the locked frontend dependencies and compile finalized assets:
@@ -79,3 +79,13 @@ Safe offline developer check,with a native package already installed:
 ```
 
 The network-disabled fixture/browser procedure is documented in `docs/sprints/sprint-4/IMPLEMENTATION_REPORT.md`. There are no owner instructions to enter credentials or activate provider/order gates in this sprint. Stop the application with Ctrl+C in its owning terminal;provider enablement is not part of stopping or restarting.
+
+## New GIG workstation
+
+The product name is GIG. Navigation is grouped into Workspace,Market Structure,Research andSystem;all12workspaces remain. Compact navigation changes the desktop rail to icons without losing accessible names. The skip link moves keyboard users directly to the main workspace. Source/replay configuration and concentration diagnostics use disclosures;open them when needed. Playback remains directly available.
+
+The Order Book uses paired bid/ask tables on desktop and stacked tables on phones. Size and cumulative quantities use exact supplied units;the cumulative-depth chart uses occupied level rank,not interpolated price distance. Exact backend values remain available in tooltips/details even when headline numbers are compactly formatted.
+
+Enable an optional3D view to see slow camera orbit. **Pause automatic orbit** affects only the camera;**Pause visualization/research input** freezes the displayed input window. Neither changes provider ingestion permissions. Reduced-motion preference disables automatic orbit. Hidden/offscreen/empty scenes suspend work. See the existing3Dguide for controls and input limitations.
+
+Qualification evidence and exact candidate commits are in `docs/design/gig-redesign/IMPLEMENTATION_REPORT.md`. This frontend does not activate data providers or paper execution. Keep existing private Codespaces forwarding and configuration boundaries unchanged.

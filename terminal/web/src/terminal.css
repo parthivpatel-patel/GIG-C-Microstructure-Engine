@@ -328,3 +328,12 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
  .atlas-shell .book-table th,.atlas-shell .book-table td { font-size: 14px; }
  .atlas-shell .ladder-scroll { max-height: 340px; }
 }
+/* A skip link stays keyboard reachable but never overlays content after mouse navigation. */
+.atlas-shell .atlas-skip { top: 12px; left: 16px; transform: translateY(calc(-100% - 24px)); z-index: 1000; }
+.atlas-shell .atlas-skip:not(:focus-visible) { clip-path: inset(50%); pointer-events: none; }
+.atlas-shell .atlas-skip:focus-visible { transform: none; clip-path: none; pointer-events: auto; }
+/* Compact navigation keeps the wordmark inside its rail;mobile retains identity. */
+.atlas-shell.atlas-nav-collapsed .brand>span:last-child { display: none; }
+@media(max-width:760px) {
+ .atlas-shell.atlas-nav-collapsed .brand>span:last-child { display: flex; }
+}
