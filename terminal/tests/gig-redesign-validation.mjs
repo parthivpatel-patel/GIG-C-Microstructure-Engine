@@ -12,8 +12,8 @@ const check=async(name,fn)=>{await fn();checks.push(name);console.log('PASS '+na
 try{
  page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});page.setDefaultTimeout(15000);page.on('pageerror',e=>errors.push(e.message));
  await assertFixtureServer(page,base);await page.goto(base);await page.getByTestId('connection-status').filter({hasText:'CONNECTED'}).waitFor();
- const go=async(name)=>{await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name,exact:true}).click();await page.getByRole('heading',{level:1,name:name+'.',exact:true}).waitFor()};
- const shot=async(name)=>{const path=out+'/gig-'+name+'.png';await page.screenshot({path,fullPage:false});screenshots.push({path,sha256:crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),classification:'AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET'})};
+ const go=async(name)=>{await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name,exact:true}).click();await page.getByRole('heading',{level:1,name:name+'.',exact:true}).waitFor();await page.waitForFunction(()=>![...document.querySelectorAll('.page-content [role="status"],.page-content .loading-panel')].some(el=>el.getBoundingClientRect().height&&/^Loading (company research workspace|market workspace|security master|research desk|equity health|mathematical research surface|offline paper sandbox|disabled paper-provider boundary)/.test(el.textContent.trim())));if(name==='Stock Intelligence')await page.getByRole('heading',{name:'AAPL · Apple Inc.',exact:true}).waitFor()};
+ const shot=async(name,target)=>{const path=out+'/gig-'+name+'.png';if(target)await target.screenshot({path});else await page.screenshot({path,fullPage:false});screenshots.push({path,sha256:crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),classification:'AUTHORED_NATIVE_OR_FIXTURE_NOT_OBSERVED_MARKET'})};
  await check('GIG identity,system typography,accessible12-workspace navigation and real native transport',async()=>{
   assert.match(await page.title(),/^GIG \| Order Book/);assert.doesNotMatch(await page.locator('body').innerText(),/\bATLAS\b/);
   await page.getByRole('link',{name:'GIG Order Book & Market Microstructure Terminal',exact:true}).waitFor();
@@ -28,7 +28,7 @@ try{
  await check('two-sided exact native ladders expose size,cumulative quantity and source units',async()=>{
   await go('Order Book');const book=page.getByRole('region',{name:'Displayed order book',exact:true});await book.getByRole('table').first().waitFor();assert.equal(await book.getByRole('table').count(),2);assert.equal(await book.getByRole('columnheader',{name:'Cumulative',exact:true}).count(),2);
   assert.equal(await book.locator('.book-row.bid').count(),Math.min(40,before.book.bids.length));assert.equal(await book.locator('.book-row.ask').count(),Math.min(40,before.book.asks.length));
-  const expected=before.book.bids.reduce((sum,r)=>sum+BigInt(r.quantity),0n);assert.ok(expected>0n);await book.getByText(/HISTORICAL_SYNTHETIC/).waitFor();await shot('order-book-dark');
+  const expected=before.book.bids.reduce((sum,r)=>sum+BigInt(r.quantity),0n);assert.ok(expected>0n);await book.getByText(/HISTORICAL_SYNTHETIC/).waitFor();await shot('order-book-dark');await shot('order-book-detail-dark',book);
  });
  await go('Market Depth');const landscape=page.getByRole('region',{name:'Liquidity landscape',exact:true}),canvas=landscape.getByTestId('liquidity-canvas');await landscape.getByRole('button',{name:'Enable 3D landscape',exact:true}).click();await canvas.waitFor();await canvas.scrollIntoViewIfNeeded();
  const motionReady=async(c)=>{const prior=Number(await c.getAttribute('data-motion-frames')||0);await page.waitForFunction(({el,prior})=>Number(el.dataset.motionFrames)>prior+2,{el:await c.elementHandle(),prior})};
@@ -57,7 +57,7 @@ try{
   const names=['Command Center','Securities Universe','Stock Intelligence','Live Markets','Multi-Stock Comparison','Order Book','Market Depth','Order Flow','Historical Replay','Execution Simulator','Research & Validation','Operations'];
   for(const theme of ['dark','light']){
    if(await page.locator('html').getAttribute('data-theme')!==theme)await page.getByRole('button',{name:'Toggle color theme',exact:true}).click();
-   for(const width of [1440,390]){await page.setViewportSize({width,height:1000});for(const name of names){await go(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,`${theme}/${width}/${name}`);assert.doesNotMatch(await page.locator('body').innerText(),/\bATLAS\b/);if(width===1440&&['Stock Intelligence','Execution Simulator','Operations'].includes(name)||width===390&&['Order Book','Stock Intelligence','Command Center'].includes(name))await shot(name.replaceAll(' ','-').toLowerCase()+'-'+theme+'-'+width)}}
+   for(const width of [1440,390]){await page.setViewportSize({width,height:1000});for(const name of names){await go(name);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false,`${theme}/${width}/${name}`);assert.doesNotMatch(await page.locator('body').innerText(),/\bATLAS\b/);if(width===1440&&['Stock Intelligence','Execution Simulator','Operations'].includes(name)||width===390&&['Order Book','Stock Intelligence','Command Center'].includes(name))await shot(name.replaceAll(' ','-').toLowerCase()+'-'+theme+'-'+width,name==='Order Book'?page.getByRole('region',{name:'Displayed order book',exact:true}):undefined)}}
   }
  });
  assert.deepEqual(errors,[]);

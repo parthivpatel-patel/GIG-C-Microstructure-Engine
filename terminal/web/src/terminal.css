@@ -317,3 +317,14 @@ button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
  .atlas-shell .page-heading { flex-direction: column; }
  .atlas-shell .page-footer { flex-direction: column; }
 }
+
+/* The product descriptor is a separate readable line,including on phones. */
+.atlas-shell .brand>span:last-child { display: flex; flex-direction: column; min-width: 0; gap: 3px; }
+.atlas-shell .brand-sub { display: block; font-size: 13px; white-space: normal; }
+.atlas-shell .sidebar-bottom p { display: block; }
+@media(max-width:600px) {
+ .atlas-shell .book-ladders { grid-template-columns: minmax(0,1fr); }
+ .atlas-shell .ladder-side:first-child { border-right: 0; border-bottom: 1px solid var(--atlas-line); }
+ .atlas-shell .book-table th,.atlas-shell .book-table td { font-size: 14px; }
+ .atlas-shell .ladder-scroll { max-height: 340px; }
+}

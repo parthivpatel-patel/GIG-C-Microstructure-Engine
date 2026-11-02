@@ -10,7 +10,7 @@ export function Navigation({selected,onSelect}:{selected:Workspace;onSelect:(nam
  return <aside className="sidebar gig-navigation">
   <a className="brand" href="#workspace-main" aria-label="GIG Order Book & Market Microstructure Terminal">
    <span className="brand-mark" aria-hidden="true"><i/><i/><i/></span>
-   <span><strong>GIG</strong><span className="brand-sub">Order Book & Market<br/>Microstructure Terminal</span></span>
+   <span><strong>GIG</strong><span className="brand-sub">Order Book &amp; Market Microstructure Terminal</span></span>
   </a>
   <nav id="atlas-sections" aria-label="Research sections">
    {groups.map(group=><div className="navigation-group" key={group.label}>
