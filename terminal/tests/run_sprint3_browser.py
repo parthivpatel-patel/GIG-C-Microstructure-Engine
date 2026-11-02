@@ -11,6 +11,7 @@ parser=argparse.ArgumentParser(description='Offline provider-disabled native/bro
 parser.add_argument('--output',type=Path,default=Path('build/sprint3-qualification'))
 parser.add_argument('--node-modules',type=Path,help='Optional existing Playwright modules;creates/removes only a new test-local symlink')
 parser.add_argument('--skip-build',action='store_true',help='Require finalized assets already built;hash checks still enforce immutability')
+parser.add_argument('--redesign',action='store_true',help='Include GIG redesign branding,camera lifecycle and visual checks before existing programs')
 args=parser.parse_args();work=Path(__file__).resolve().parents[2];out=args.output.resolve();out.mkdir(parents=True,exist_ok=True);env=dict(os.environ)
 if not args.skip_build:
  with (out/'build.log').open('w')as log:subprocess.run(['npm','--offline','--prefix','terminal/web','run','build'],cwd=work,check=True,stdout=log,stderr=subprocess.STDOUT)
@@ -44,10 +45,10 @@ receipt={'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=work,te
 (out/'source-receipt.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
 processes=[];logs=[];before=snapshot();rows=[]
 try:
- for name,port,args in servers:
+ for name,port,server_args in servers:
   with socket.socket()as guard:guard.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1);guard.bind(('127.0.0.1',port))
   log=(out/(name+'-final-server.log')).open('w');logs.append(log)
-  p=subprocess.Popen([sys.executable,*args],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT);processes.append(p)
+  p=subprocess.Popen([sys.executable,*server_args],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT);processes.append(p)
   for _ in range(100):
    if p.poll()is not None:raise AssertionError(name+' exited')
    try:
@@ -55,7 +56,7 @@ try:
     break
    except OSError:time.sleep(.1)
   else:raise AssertionError(name+' not ready')
- for name in ('browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation'):
+ for name in (('gig-redesign-validation',)if args.redesign else())+('browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation'):
   assert snapshot()==before,'assets changed before'+name
   begin=time.monotonic()
   with(out/(name+'-final.log')).open('w')as log:r=subprocess.run(['node','terminal/tests/'+name+'.mjs'],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=300)

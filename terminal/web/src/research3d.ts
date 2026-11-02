@@ -85,7 +85,7 @@ export function buildResearchPlot(source:ResearchSource,model:ResearchModel,symb
  const books=source.books.filter(b=>b.symbol===symbol&&b.ordinal<=end).slice(-32),events=source.events.filter(e=>e.symbol===symbol&&e.ordinal<=end).slice(-256),quotes=quotesFor(books,source.quotes.filter(q=>q.symbol===symbol&&q.ordinal<=end).slice(-128));
  const ordinals=[...books,...events,...quotes].map(x=>x.ordinal),minO=Math.min(...ordinals),maxO=Math.max(...ordinals),time=(v:number)=>(maxO===minO?0:(v-minO)/(maxO-minO)*8-4);
  const entries=books.flatMap(b=>(['bid','ask'] as const).filter(s=>side==='both'||s===side).flatMap(s=>b[s==='bid'?'bids':'asks'].slice(0,depth).map(l=>({b,s,p:BigInt(l.price_ticks),q:BigInt(l.quantity)}))));
- const prices=[...entries.map(e=>e.p),...events.map(e=>BigInt(e.price))],lo=prices.length?prices.reduce((a,b)=>a<b?a:b):0n,hi=prices.length?prices.reduce((a,b)=>a>b?a:b):1n,span=hi-lo||1n,x=(p:bigint)=>ratio(p-lo,span)*12-6,maxQ=entries.reduce((m,e)=>e.q>m?e.q:m,1n),color=(s:string)=>s==='bid'?'#35cdb0':'#f5a869';
+ const prices=[...entries.map(e=>e.p),...events.map(e=>BigInt(e.price))],lo=prices.length?prices.reduce((a,b)=>a<b?a:b):0n,hi=prices.length?prices.reduce((a,b)=>a>b?a:b):1n,span=hi-lo||1n,x=(p:bigint)=>ratio(p-lo,span)*12-6,maxQ=entries.reduce((m,e)=>e.q>m?e.q:m,1n),color=(s:string)=>s==='bid'?'#35cdb0':'#f27b89';
  const label=(e:typeof entries[number])=>`${e.s.toUpperCase()} price ${e.p}/${e.b.scale};quantity ${e.q}/${e.b.quantityScale};capture ${e.b.ordinal};source/replay ns ${e.b.time}`;
  if(['height','canyon','wheel'].includes(model)&&!entries.length){out.notes.push('No supplied depth in this source/window. Level 1 quotes cannot populate this model.');return out}
  if(model==='height'||model==='canyon'){
