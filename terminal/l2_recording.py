@@ -5,14 +5,14 @@ log is ever created unless operator permission and recording are separately enab
 """
 import hashlib
 from itertools import islice
-import json
 import os
 from pathlib import Path
 import shutil
 import tempfile
 import time
-from .providers.kraken import Permission,ProviderError,decode,_pairs
-from .recording import canonical,root_path,safe_id
+from .providers.kraken import Permission,ProviderError,decode
+from .recording import canonical,root_path,safe_id,sync_directory
+from .verification.artifacts import read_bytes,decode as decode_object
 
 MAX_RECORDS=512
 MAX_BYTES=2*1024*1024
@@ -20,13 +20,16 @@ MAX_AGE=86400
 SCHEMA='gig.terminal.l2_log.v1'
 SCHEMA2='gig.terminal.l2_log.v2'
 
+def recording_object(raw):
+    try:return decode_object(raw)
+    except ValueError as error:
+        # Preserve the existing public duplicate-key classification.
+        if getattr(error,'code',None)=='duplicate_json_field':
+            raise ProviderError('duplicate_json_key') from None
+        raise
+
 def bounded_entries(path,limit):
     with os.scandir(path) as scan:return [Path(e.path) for e in islice(scan,limit)]
-
-def sync_directory(path):
-    descriptor=os.open(path,os.O_RDONLY|os.O_DIRECTORY)
-    try:os.fsync(descriptor)
-    finally:os.close(descriptor)
 
 def optional_ns(value):
     if value is None:return
@@ -117,10 +120,9 @@ def load_l2(directory,identity,*,clock=time.time):
     for name,limit in [('manifest.json',8192),('events.jsonl',MAX_BYTES)]:
         path=target/name
         if path.is_symlink():raise ValueError('recording_path')
-        with path.open('rb') as stream:value=stream.read(limit+1)
-        if len(value)>limit:raise ValueError('recording_budget')
+        value=read_bytes(path,limit)
         content.append(value)
-    m=json.loads(content[0],object_pairs_hook=_pairs)
+    m=recording_object(content[0])
     if type(m) is not dict:raise ValueError('recording_manifest')
     if (m.get('schema') not in (SCHEMA,SCHEMA2) or m.get('identity')!=identity or m.get('complete') is not True
             or m.get('origin') not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED') or m.get('provider')!='kraken'
@@ -137,7 +139,7 @@ def load_l2(directory,identity,*,clock=time.time):
     if content[1] and not content[1].endswith(b'\n'):raise ValueError('recording_truncated')
     rows=[];previous=None
     for i,line in enumerate(content[1].splitlines()):
-        row=json.loads(line,object_pairs_hook=_pairs)
+        row=recording_object(line)
         keys={'ordinal','receive_monotonic_ns','raw'}
         if m['schema']==SCHEMA2:keys|={'receive_unix_ns','normalized'}
         if type(row) is not dict or set(row)!=keys or type(row['ordinal']) is not int or row['ordinal']!=i:

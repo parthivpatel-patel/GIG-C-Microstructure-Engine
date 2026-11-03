@@ -1,13 +1,13 @@
 """Bounded native-validated prefix cache; no synthetic order identities or observed uploads."""
 from copy import deepcopy
 from itertools import islice
-import json
 import time
 from pathlib import Path
 import gig_microstructure as gig
-from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2,bounded_entries
+from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2,bounded_entries,recording_object
 from .recording import canonical,root_path,safe_id
-from .providers.kraken import KrakenBookAdapter,_pairs
+from .providers.kraken import KrakenBookAdapter
+from .verification.artifacts import read_bytes
 
 MAX_CACHE_BYTES=8*1024*1024
 
@@ -16,9 +16,8 @@ def metadata(directory,identity):
     if target.is_symlink() or not target.is_dir():raise ValueError('recording_path')
     path=target/'manifest.json'
     if path.is_symlink():raise ValueError('recording_path')
-    with path.open('rb') as stream:raw=stream.read(8193)
-    if len(raw)>8192:raise ValueError('recording_manifest_budget')
-    m=json.loads(raw,object_pairs_hook=_pairs)
+    raw=read_bytes(path,8192)
+    m=recording_object(raw)
     if type(m) is not dict or m.get('schema') not in (SCHEMA,SCHEMA2) or m.get('identity')!=identity or m.get('complete') is not True:
         raise ValueError('recording_manifest')
     return m
@@ -150,9 +149,8 @@ def prune_expired(directory,*,now=None,active_stage=None):
                 candidate=path/name
                 if candidate.is_symlink() or not candidate.is_file():continue
                 try:
-                    with candidate.open('rb') as stream:raw=stream.read(8193)
-                    if len(raw)>8192:continue
-                    m=json.loads(raw,object_pairs_hook=_pairs);created=m.get('created_unix_seconds');retention=m.get('retention_seconds')
+                    raw=read_bytes(candidate,8192)
+                    m=recording_object(raw);created=m.get('created_unix_seconds');retention=m.get('retention_seconds')
                     if type(created) is int and type(retention) is int and 0<=created and 1<=retention<=MAX_AGE:deadline=created+retention;break
                 except (OSError,ValueError,AttributeError):continue
             expired=path!=active_stage and (instant>deadline if deadline is not None else instant-path.stat().st_mtime>MAX_AGE)

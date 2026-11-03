@@ -4,6 +4,12 @@ from pathlib import Path
 from .history_store import MAX_PAYLOAD,MAX_SNAPSHOTS,RETENTION_SECONDS,verify
 
 
+def _sync_directory(path):
+    fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY)
+    try:os.fsync(fd)
+    finally:os.close(fd)
+
+
 def _private(path):
     s=path.lstat()
     if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or s.st_mode&0o077 or s.st_size>32*1024*1024:raise ValueError('history_backup_private_file')
@@ -46,12 +52,18 @@ def backup(store):
                 try:
                     _copy(source,target);count=_validate(target,store)
                 finally:target.close()
-            _private(stage);raw=stage.read_bytes();digest=hashlib.sha256(raw).hexdigest()
+            _private(stage)
+            fd=os.open(stage,os.O_RDONLY|os.O_NOFOLLOW)
+            try:os.fsync(fd)
+            finally:os.close(fd)
+            raw=stage.read_bytes();digest=hashlib.sha256(raw).hexdigest()
             # link is atomic no-replace;an existing backup is never overwritten.
             os.link(stage,final);stage.unlink()
             record={'schema':'gig.history.backup.v1','sha256':digest,'bytes':len(raw),'revisions':count,'database_version':1}
             fd=os.open(manifest,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
             with os.fdopen(fd,'w') as f:json.dump(record,f,sort_keys=True);f.flush();os.fsync(f.fileno())
+            try:_sync_directory(store.path.parent)
+            except OSError:raise OSError('history_backup_publication_uncertain') from None
             return record
         finally:
             if stage.exists():stage.unlink()
@@ -82,7 +94,9 @@ def restore(store):
 
 def delete_backup(store):
     with store.lock:
+        changed=False
         for name in ('history.backup.json','history.backup.sqlite3'):
             path=store.path.parent/name
-            if path.exists():_private(path);path.unlink()
+            if path.exists():_private(path);path.unlink();changed=True
+        if changed:_sync_directory(store.path.parent)
         return {'schema':'gig.history.backup.v1','deleted':True}
