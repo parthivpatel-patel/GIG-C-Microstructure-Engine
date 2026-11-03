@@ -31,3 +31,5 @@ Reproduce offline from the repository root with the installed native module and 
 ```
 
 The cohort requires exactly 33 executed tests, zero failures/errors/skips. It disables provider/execution gates; its injected connector cannot contact a provider. The manual-only owner-gated ARM64 workflow includes the cohort but was not dispatched in this sprint.
+
+Additional legacy qualification loads the **actual committed Sprint 1 writer** from `git show 90ebb956df5143670702bcc512de81821cdfa23d:terminal/stocks/observation_store.py` into a private temporary module. It authors four independent SQLite databases: empty, two captures (12 retained events), a pruned suffix (3 retained events) and expired history (0 eligible events). Current recovery equals the old writer's expected recovery exactly in all four cases. The old writer source hash, database hashes and expected/actual result hashes are recorded in EVIDENCE.json. This is compatibility with genuine baseline-produced version-1 artifacts, not just current encoder round-tripping or processing an owner's database.

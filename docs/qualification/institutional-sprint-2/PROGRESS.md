@@ -1,15 +1,22 @@
-# Sprint 2 checkpoint
+# Sprint 2 completed checkpoint
 
-Source baseline: `90ebb956df5143670702bcc512de81821cdfa23d`, branch `development/gig-ui-redesign`.
+Branch: `development/gig-ui-redesign`. Baseline: `90ebb956df5143670702bcc512de81821cdfa23d`.
 
-Implemented: bounded ObservationStore recovery, strict payload/metadata validation, single read snapshot, nonrepairing damaged-store restart; independent failing-before fixtures; a 33-test strict cohort; bounded real-clock four-symbol/ASGI workload with slow-consumer timeout, cancellation, reconnect and storage failure; inclusion in the existing manual owner-gated ARM64 workflow.
+Pushed implementation: `c9c75c486cf6ef44b1556bf3858eaaff53578aa0`. Pushed browser instrumentation repair: `b91de9e0189a6a4ebbcb1c1cbcc583945495e297`. A final documentation-only closure binds the evidence; obtain its full SHA from `git log -1` and the delivery message. No claim is made that the benchmark or prior receipt was executed against a future documentation commit.
 
-Preflight: 300 batches / 2,200 accepted authored observations, all recovered exactly, one automatic reconnect and two explicit restarts, one injected ENOSPC, eight clients, ninth refused, one timed-out slow consumer, zero surviving clients/in-flight sends. This was a dirty-source exploration, not final qualification.
+Completed: bounded row/byte/type/metadata admission, strict JSON/policy/identity validation, a single read snapshot, damaged-store nonrepairing initialization, independent corrupt-ledger/SQLITE_FULL/snapshot regressions, baseline-writer legacy compatibility, four-symbol actual-clock ASGI workload, package/runtime/browser/TLS checks and exact-SHA source upgrade/rollback qualification. Existing native/UI/private configuration/permissions are preserved.
 
-Final qualification in progress: refreshed recovery/provider tests across Debug, Release and ASan/UBSan; unchanged cohorts retain their executed results. Frontend build/unit and native identity/ABI checks executed separately. Exact-source sustained measurements, artifact/deployment receipts and final evidence closure follow the implementation checkpoint. No provider, owner-edge, ARM64 or production acceptance is established.
+Final evidence:
 
-Resume by inspecting this directory and `build/production-hardening-s2/` logs/matrix; do not repeat successful unchanged cohorts. Finish the clean-source workload and package/runtime/security checks; write final reports/manifest; commit and push documentation after verifying branch/protected refs. Never activate provider/retention/execution gates for qualification.
+- 33 new tests/configuration; 756 total cohort outcomes/configuration in Debug, Release and ASan/UBSan: 2,268 passed, zero failures/errors/skips.
+- Native Release 11/11 including eight unchanged frozen identities and three binding contracts; unchanged-source existing binaries, not a new compile.
+- Installed existing wheel 8+6 tests and research example; 118 frontend tests and production build; all22 assets unchanged.
+- Browser final40 checks; original recorded-program CDP body-cache failure preserved and repaired without duplicate POSTs or weakened mathematical assertions. Clean-candidate handshake/native startup receipt matches.
+- Verified local TLS20 checks; genuine baseline-writer legacy4 cases; temporary Git round-trip5 cases; sdist patterns3 and 1,142-member archive inventory.
+- Clean implementation workload: 900 batches, 6,600 accepted/recovered authored observations, 92.874206 s wall, 68.011113 s process CPU, 164,192 KiB RSS peak including full recovery/harness. History capped256; allclients/sends/in-flight bytes/backlog end0. Full scope and limitations are in SUSTAINED_WORKLOAD.md.
 
-Implementation checkpoint pushed: `c9c75c486cf6ef44b1556bf3858eaaff53578aa0`. Final Python matrix: 756 outcomes/configuration in Debug, Release and ASan/UBSan (2,268 total), no failures/errors/skips. Native Release: 11 CTest cases including eight unchanged frozen identities and three binding contracts. Frontend: 118 unit tests and production build, 22 asset hashes unchanged. Clean 900-batch workload: 6,600 accepted/recovered authored events in 92.874 s; 164,192 KiB peak RSS includes complete recovery/test harness. Runtime pins and loopback startup receipt match; sdist inventory passes 1,142 members. Local verified-TLS: 20 checks.
+No outstanding independent code repair was confirmed by this bounded sprint. No provider requests, account access, credentials, market datasets, trading/execution activation, public port, paid resource, workflow dispatch or protected-branch merge occurred.
 
-Browser closure: redesign10/native21 passed. Recorded replay originally failed because a consumed Fetch body was absent from Chromium CDP cache; backend operation returned200. The repaired instrument forwards the original paused request exactly once, captures JSON before fulfilling it and asserts ten forwards/no retries. All nine original replay checks now pass. No native/application semantics or numerical assertions changed. Remaining work: close report/manifest, document actual resource limits and exact-SHA upgrade/rollback, then push docs; all external provider/private-edge/ARM64/advisory gates remain pending.
+Exact next action: read SPRINT2_REPORT.md/EVIDENCE.json and perform the owner-target procedure in DEPLOYMENT_ACCEPTANCE.md only when entering acceptance. Remaining gates are target advisory/OS/artifact clearance, owner-authenticated private Codespaces/browser, exact-candidate native ARM64 and separately authorized actual provider qualification. Longer session/hardware durability remain unqualified; do not relabel offline fixtures or older ARM64 runs as current acceptance. No further work continues after this session stops.
+
+If resuming, first verify the final remote SHA and clean state. Reuse successful source-bound evidence; do not restart the sprint or activate providers to manufacture a pass. Repair only a newly reproduced defect or proceed with an explicitly authorized target acceptance gate.
