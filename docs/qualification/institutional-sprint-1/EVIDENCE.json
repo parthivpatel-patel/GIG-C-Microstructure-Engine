@@ -1,0 +1,1318 @@
+{
+  "application_source_sha256": {
+    "scripts/qualify_production_performance.py": "613e135305bf35e917d8204ff734e949c8815d542d5711a49e5afbe8ea4f3ac2",
+    "terminal/l2_playback.py": "c206f966a98c4e9d83b9ae08682a169baa363ece61661b1aa73983e71525bcb8",
+    "terminal/l2_recording.py": "1a04df2b2549422014fd974ce92ae5bc52e243f576853052a96edab967941be0",
+    "terminal/recording.py": "a5af322479b68b35ff23753b46b877315da8045c52e7aeb38440458d6142eda9",
+    "terminal/stocks/history_backup.py": "00988235f07107c3e92c2f232bf8c7603ca18c9afd173088e834d88c4efa1fa9",
+    "terminal/test_arm64_terminal_policy.py": "227d34b95b4cfce085fd4b7fb848fe4eb146339bb3ce8e5da22400c50c4ae415",
+    "terminal/test_production_hardening.py": "dbc55d4899b24d1ff244391cdb06b073cbd6643c591e51195328c8269fe1a95f",
+    "terminal/tests/run_production_hardening.py": "9049e69231d974c46923f0a617c9e2b37b81d801c0e32c5e240f76a488df8028"
+  },
+  "archive": {
+    "manifest_sha256": "6f56edb65090d6643d6f0650d3d89aa04fc4c6674965d9c456cae6b9de210ddb",
+    "members": 1129,
+    "scope": "Core runtime11f1e9c checkpoint archive;later CI-policy and final evidence/docs excluded;not a published release archive",
+    "sha256": "b16e7b77e3527a285574708615967073c14b6cd35d55eea2a843e2deb4f8be72"
+  },
+  "baseline": "3cc75815714ffb2b73fa2e78b0a44060a34d733d",
+  "branch": "development/gig-ui-redesign",
+  "browser": [
+    {
+      "exit_code": 0,
+      "program": "gig-redesign-validation"
+    },
+    {
+      "exit_code": 0,
+      "program": "browser-validation"
+    },
+    {
+      "exit_code": 0,
+      "program": "recorded-playback-validation"
+    }
+  ],
+  "browser_checks": {
+    "gig": 10,
+    "native": 21,
+    "recorded": 9
+  },
+  "date": "2026-11-02 America/New_York",
+  "deliverables": {
+    "INSTITUTIONAL_PRODUCTION_AUDIT.md": "ac206c13bc3479e692effa4b6c40aaf11d37038c59c1e48766d154366f6f6a4f",
+    "P0_REMEDIATION_REPORT.md": "a9e888e271e6382481711e2cc77585409adf0023e523f8eb8d469816bd5291c5",
+    "PERFORMANCE_BASELINE.md": "c3a98ce8b810ea43515bc8fa501790d3e5009ca92442cad00138966b55cfedb2",
+    "PRODUCTION_READINESS_MATRIX.md": "eb8d07adb90000d8b81e116961cdc3081242b7029b8d7d878147b2175a668004",
+    "RELIABILITY_QUALIFICATION.md": "191115e375fd7966d739eba287b3e5f0478c47c86fd1e5a996cef68181adcc42",
+    "REMAINING_WORK_PLAN.md": "a4a1e57d4607c8b7ebb3d144c01437cbf7696bb824f3a54d5f7b7575a662725f"
+  },
+  "failed_before": {
+    "assertion_failures": 2,
+    "backup_assertion_failures": 2,
+    "backup_methods": 2,
+    "errors": 5,
+    "fifo_timeouts": 4,
+    "recording_methods": 7
+  },
+  "frontend": {
+    "assets": {
+      ".vite/manifest.json": "7a8c844321a2d514bada15cfdb8a6526becc0df358294f1457d6b41903bb0d13",
+      "assets/HistoricalResearch-CCDv6QRP.js": "d9f0c48bd65e444fc6b1d28f5ed05448f91e0efb1bd73595d1c7afef67174a52",
+      "assets/Landscape3D-DKRbVGCq.js": "eb3085865b333d3ad47598baf64d513e9d93e2f9327a7e2864b03985224783a8",
+      "assets/LiveMarket-HRylr1xb.js": "1a7a30c3abf58cce60df0ceb0fb3d71f650c2cb61c9a38e2c1ff24905ba40903",
+      "assets/MarketHealth-TML_KOWz.js": "a83ea82e8a277a9d22654b928aa3dc846118d44088a76c030dacd54743a2d619",
+      "assets/ModelSurface-Bb6nq5tK.js": "b945ba1bc16542f284570b1a7904b0e08752fcc64c8b7c7b0f89914cffc8ae16",
+      "assets/OrbitControls-DgvY0sml.js": "5f73f6ac9131939ff19a3515d579de1d8fb1eb6478a0efb541b20b506c675a38",
+      "assets/PaperProvider-DPMHKaQU.js": "0f7c43132f26dfa5a76bf79d4a2d3b3f8ed5661a60b807c311ff7938abc99c24",
+      "assets/PaperSandbox-D8QBb_2E.js": "cd36b5adc96400901287995834ff77294b3b1a75141429972c1f84342c70bff9",
+      "assets/QuoteCloud-D7FwJIr-.js": "d5b866565897d019f15486e7e42ff0c7a8ba0f14195a171eb612e53c43737e53",
+      "assets/ResearchDesk-BbYCuonS.js": "350d93318a5be358cb09dc6a5f15f45079b90ad4c282d12721ebcaf7b922c27a",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-D2ArHD8g.js": "991a932a5b55dfad2a6bfb73209648863f4bc3d4c4fb608c6837e831174dca99",
+      "assets/ResearchScene-CT5huRsM.js": "cad3e4f947dfa7ea5c8c74d842bc19fa2564e932a96b0a1a1a23729b06166d1a",
+      "assets/StockIntelligence-sA5vPybS.js": "0408e8b379f9b9f4727ab3e1b0fcfcdb5f3b5db621ef71a6374a9f7a700ffa54",
+      "assets/UniverseWorkspace-B-ohj8B7.js": "f32659eb9913c5d18c9e5a0b6cf15d030d99469b1ced378c1bf58b5511261ae4",
+      "assets/VolatilitySurface-v6CWhvV2.js": "54f257df4d20dc98c808c579d6b454c46a1fc6ba1d016632c50def749f16ddb6",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-DOhNuZs8.css": "1df259581b1e807500656b11fc1d281eb9206ec6b1352d3cd3af870bc9068738",
+      "assets/index-DiO7bLaX.js": "861c5c474e12047ab61969391c0d8b102dab969f64c5d81e28bd4b5a8dc81031",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "10f523a72dff9330b0461ef2023eddb1a1bfb996b192340a39619988b7a9a5fe"
+    },
+    "failed": 0,
+    "passed": 118,
+    "skipped": 0,
+    "typescript_build": "PASS"
+  },
+  "frozen_identities": 8,
+  "implementation_commit": "56c503c3c4c47cbf95e32c4b8fc6a35700a69edb",
+  "limitations": [
+    "No actual power-cut/RPO/RTO or hostile shared-filesystem qualification",
+    "Native tests/benchmarks reuse unchanged-source binaries;not fresh native compilation",
+    "Python liveLSan0;shutdown leak check disabled as documented",
+    "Finite authored service percentiles are not end-to-end exchange/owner latency",
+    "No current nativeARM64,live Alpaca or owner GitHub/private-edge/device evidence"
+  ],
+  "logs": [
+    {
+      "bytes": 119,
+      "path": "arm-policy-asan-ubsan.log",
+      "sha256": "d3ece095c9394b11242645e59d7c054f71b343f316ea982347164ad7a423ad15"
+    },
+    {
+      "bytes": 101,
+      "path": "arm-policy-debug.log",
+      "sha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0"
+    },
+    {
+      "bytes": 1894,
+      "path": "arm-policy-failing-before.log",
+      "sha256": "af2ab1cd58b97c44644990c92c31c6997dc1653a753cb8d1828ffac233cd60cb"
+    },
+    {
+      "bytes": 101,
+      "path": "arm-policy-release.log",
+      "sha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0"
+    },
+    {
+      "bytes": 1397,
+      "path": "backup-failing-before.log",
+      "sha256": "c8861a0d20a97a5942a3930b01c62fd40856f084b55dfe9764c297651540e2f6"
+    },
+    {
+      "bytes": 0,
+      "path": "binding-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 142,
+      "path": "binding.log",
+      "sha256": "493717ea36c4a943deca4934485ac229fc6a2e42ed4a93e1ea8486842e90d10e"
+    },
+    {
+      "bytes": 6386,
+      "path": "browser/browser-validation.log",
+      "sha256": "5c13b834b803be173046be457d21accf75444a2d5ab1c36927f1055d43f0386d"
+    },
+    {
+      "bytes": 806,
+      "path": "browser/gig-redesign-validation.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 396,
+      "path": "browser/recorded-playback-validation.log",
+      "sha256": "497f4eba8c71ac01715786607856d793fa5041f55016594be48cd5d13bfdd425"
+    },
+    {
+      "bytes": 26916,
+      "path": "browser/server.log",
+      "sha256": "201121e689a6872fe246fccb1241b42b84479b8b24f8c15657e6f599139f4ed0"
+    },
+    {
+      "bytes": 78,
+      "path": "browser-driver.log",
+      "sha256": "4ef2b6788a800f47a7a09572d5480988245a499f4177d77050ea29423d4a0165"
+    },
+    {
+      "bytes": 10975,
+      "path": "failing-before.log",
+      "sha256": "d53dd28be9cd94ec1beb290eb2a4651aedd67948d91d61d6df183461b3c2d554"
+    },
+    {
+      "bytes": 3473,
+      "path": "fault-final.log",
+      "sha256": "4855daa6d8a8f619a3189ea9abde015869e851bd000868a135293a083e118ca0"
+    },
+    {
+      "bytes": 989,
+      "path": "fault-tests.log",
+      "sha256": "d06d0289167d51457973a792a846eca9edf7d9338cc24cc642e7dbe4efffdf78"
+    },
+    {
+      "bytes": 6289,
+      "path": "final-asan-ubsan.log",
+      "sha256": "2d99b8cd8bff2914623da1631895a0e9c71f2e29949a3b17c4eaeaab70b44b17"
+    },
+    {
+      "bytes": 6271,
+      "path": "final-debug.log",
+      "sha256": "675da137077312b9eae3902f6d834441248f3937c0754aee9e4fbc306f8e846f"
+    },
+    {
+      "bytes": 6271,
+      "path": "final-release.log",
+      "sha256": "0fc71d8d6e9da089f488515bc2a4174b2a8ee90ebad4c04acf96356490175dce"
+    },
+    {
+      "bytes": 4566,
+      "path": "focused-24.log",
+      "sha256": "b7f71f155148b10ad10069727691ced2a9a7c0e0212c2057f9025a09ac64e0dd"
+    },
+    {
+      "bytes": 5433,
+      "path": "focused-29.log",
+      "sha256": "7891f5cd9b64d35e21ce5c956123359ce084905df65fa834d9276914603892f0"
+    },
+    {
+      "bytes": 105,
+      "path": "focused-after.log",
+      "sha256": "3620372a77ff77348511ad2f28d5a52ec818cfa0d89078b68cd46bd6d43b6a9f"
+    },
+    {
+      "bytes": 2427,
+      "path": "frontend-build.log",
+      "sha256": "2a4fbe773df939a7aa40e316d46c7c88c937de43f5fd0f3b93aff28d60b324e9"
+    },
+    {
+      "bytes": 11152,
+      "path": "frontend.log",
+      "sha256": "9fafa8800d582301d5cabe9df95168f51c3840423b833afc87603f32f38b757c"
+    },
+    {
+      "bytes": 20704,
+      "path": "gcc-python-asan-ubsan.log",
+      "sha256": "f37ae0fb7938a61e1eb3065318f4a61f95ea0e5041a92b272c1e7176807ae4e4"
+    },
+    {
+      "bytes": 20563,
+      "path": "gcc-python-debug.log",
+      "sha256": "49bb407e1417532295cfc44338155012587cc2061dbd94051590396f531e6589"
+    },
+    {
+      "bytes": 20567,
+      "path": "gcc-python-release.log",
+      "sha256": "eb8d290c87580b8f35842be5f65a1270ce6b3441e4dbc745524ecca1d7e532a4"
+    },
+    {
+      "bytes": 5451,
+      "path": "hardening-asan-ubsan.log",
+      "sha256": "66e7335e25121edf057d5fe96f143a01694bf3746442d2c7004346e01c1fd95c"
+    },
+    {
+      "bytes": 5433,
+      "path": "hardening-debug.log",
+      "sha256": "8539d1070d82ae8c120ab84cf9413a611e89dd405aec1436304535fb8dc1b20f"
+    },
+    {
+      "bytes": 5433,
+      "path": "hardening-release.log",
+      "sha256": "d81173b621fc699fb7d6e72db7c541dc23ea695e3dbe66cb58766612b23d2f5b"
+    },
+    {
+      "bytes": 250,
+      "path": "native-driver.log",
+      "sha256": "fd239bec4c22790da774912d1322ddfb6d37337b215948a9720812f7c91d3540"
+    },
+    {
+      "bytes": 101,
+      "path": "packaging.log",
+      "sha256": "edb4e2159c923ea45a32656078835cdf531c3d7b414c670dd786978875cb0678"
+    },
+    {
+      "bytes": 5133,
+      "path": "performance-clean.log",
+      "sha256": "916846903195922d3457f46caf984bfd3be921312ddf36f358c8181b1dbe134e"
+    },
+    {
+      "bytes": 5134,
+      "path": "performance-final-preflight.log",
+      "sha256": "4b306027a645641aa554dffbfe70191f643ade814e53a2a3d23403b8ac584f0b"
+    },
+    {
+      "bytes": 3920,
+      "path": "performance.log",
+      "sha256": "c3201ffe18d48416cd01e9d6d05673af3cd35488eeffc8b2bc160fb13f055203"
+    },
+    {
+      "bytes": 294,
+      "path": "pip-check.log",
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "bytes": 4584,
+      "path": "pre-backup-hardening-asan-ubsan.log",
+      "sha256": "dd6c5527f6264334b69341e9d6429bb17f7879f5d726eaf4fe5fc0e80c91b783"
+    },
+    {
+      "bytes": 4566,
+      "path": "pre-backup-hardening-debug.log",
+      "sha256": "ce0a2afea9c42e08c0da7a97ee5cfa94f51142896c1bd9024605513933fde8fa"
+    },
+    {
+      "bytes": 4566,
+      "path": "pre-backup-hardening-release.log",
+      "sha256": "134f1b390b059046d862bdaff7b5808b52a2343302177b07c65f1ab69ec20207"
+    },
+    {
+      "bytes": 5244,
+      "path": "pre-backup-sprint2-asan-ubsan.log",
+      "sha256": "e97ada3b2f9f301d71faa7b2a7a9fd6d40bb79438e534fa4f25773d4bc52c17e"
+    },
+    {
+      "bytes": 5226,
+      "path": "pre-backup-sprint2-debug.log",
+      "sha256": "f6d2994c799979bddf81ad1f951a9c392c28a990f768c7fcc53a10e3bc9d66e9"
+    },
+    {
+      "bytes": 5226,
+      "path": "pre-backup-sprint2-release.log",
+      "sha256": "aa633e14005ebe3e18cdf34f3f04be86d582acb312c25bf7154fda0eb7dc7afb"
+    },
+    {
+      "bytes": 749,
+      "path": "python-driver.log",
+      "sha256": "a0e0a170888692e3ffe4815d255d5a5f16301fd3168c04235147b9ec96eb5276"
+    },
+    {
+      "bytes": 150,
+      "path": "sdist-build.log",
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "bytes": 82,
+      "path": "sdist-inventory.log",
+      "sha256": "b55ba9d63cf531ffba17f03742d2d789fa3b99a94f72b9c2dde35eeecbb57d40"
+    },
+    {
+      "bytes": 5244,
+      "path": "sprint2-asan-ubsan.log",
+      "sha256": "96fce45db52d5630836c51e5d19ed9fa744dffd718a24cca166d90b90e63340c"
+    },
+    {
+      "bytes": 5226,
+      "path": "sprint2-debug.log",
+      "sha256": "e80b094dc6bfbb5a3d770b7b859e5eeab72116692c36df3145f97c47c4b28b99"
+    },
+    {
+      "bytes": 5226,
+      "path": "sprint2-release.log",
+      "sha256": "2534efac514adbaf400c92acfbb3a153aa134994693d1c69beec06569e5f091f"
+    },
+    {
+      "bytes": 6271,
+      "path": "sprint3-asan-ubsan.log",
+      "sha256": "36e8713bb1338a3e08f805e98aeb03066b46d039d6e85790f7f29904db3d4217"
+    },
+    {
+      "bytes": 5892,
+      "path": "sprint3-debug.log",
+      "sha256": "cfeed74e419be2d80c06fc45322ce4ce5d5d1e1889045fd8893d24bd82c0e0a4"
+    },
+    {
+      "bytes": 5892,
+      "path": "sprint3-release.log",
+      "sha256": "1beb0c525ca544981391908dd042ad96b7dbb01433a8a5778dc6966867100817"
+    },
+    {
+      "bytes": 12469,
+      "path": "sprint4-asan-ubsan.log",
+      "sha256": "74f98ca46cd6560a32035c0a911c770242d248af885c0fde5fb25bc4acbc54c4"
+    },
+    {
+      "bytes": 12451,
+      "path": "sprint4-debug.log",
+      "sha256": "880db05041c3fcdba77b163c7a4aad1cbd5c7cbe271aea586b15e4b9cb19417a"
+    },
+    {
+      "bytes": 12451,
+      "path": "sprint4-release.log",
+      "sha256": "43173de3d2376fae4c1bc91d106321c82145264afe0e271545cf4e95c43a2de2"
+    },
+    {
+      "bytes": 35172,
+      "path": "stocks-asan-ubsan.log",
+      "sha256": "cd5c5fed43ad5f77d02b382d437b73df1a0f84a1b577dd02d890dbe274f900e6"
+    },
+    {
+      "bytes": 35154,
+      "path": "stocks-debug.log",
+      "sha256": "ea84babb9e44081902725b1941e6f1eb3b3b971cd8a1c0ad46944bedbb2eaeba"
+    },
+    {
+      "bytes": 35154,
+      "path": "stocks-release.log",
+      "sha256": "2bfa583aa0c5fbbffa72a7f7b6705687a8be3761efd775424a9deececa8334c7"
+    },
+    {
+      "bytes": 40355,
+      "path": "terminal-asan-ubsan.log",
+      "sha256": "09c55e833e4e871ed907f18246d789733670ddfedb04fd3f93dbdf3b802654f7"
+    },
+    {
+      "bytes": 40337,
+      "path": "terminal-debug.log",
+      "sha256": "e89d7fe50fd24bceaf9c0e5c7fe02c58740fb57bd7c94732c8e24c4fd7014a2e"
+    },
+    {
+      "bytes": 40337,
+      "path": "terminal-release.log",
+      "sha256": "b6c99df8996067cce6c9ddf0e3b9d6f55190ce08b222c629d30599b02c2f2206"
+    }
+  ],
+  "native_hash_comparisons": 24,
+  "native_matrix": {
+    "all_24_unchanged": true,
+    "expected_hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "results": [
+      {
+        "build_directory": "build/python-debug",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-debug",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-debug.xml"
+        ],
+        "configuration": "gcc-python-debug",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-debug.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 29.56452887400519
+      },
+      {
+        "build_directory": "build/python-release",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-release",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-release.xml"
+        ],
+        "configuration": "gcc-python-release",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 158
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-release.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 26.914045777986757
+      },
+      {
+        "build_directory": "build/python-asan-ubsan",
+        "command": [
+          "/workspace/gig-tools/bin/ctest",
+          "--test-dir",
+          "/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan",
+          "--output-on-failure",
+          "-j",
+          "2",
+          "--output-junit",
+          "/workspace/GIG-C-Microstructure-Engine/build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-asan-ubsan.xml"
+        ],
+        "configuration": "gcc-python-asan-ubsan",
+        "counts": {
+          "disabled": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 159
+        },
+        "frozen_hashes_unchanged": 8,
+        "log": "build/gig-ui-redesign/worktree/build/production-hardening-s1/gcc-python-asan-ubsan.log",
+        "scope": "Rerun on unchanged native-source build;not a fresh compile of modified terminal Python/TS",
+        "seconds": 62.99756477298797
+      }
+    ]
+  },
+  "native_total": 475,
+  "open_p1": [
+    "actual private Codespaces edge/current-SHA owner acceptance",
+    "live/historical IEX/provider and timestamp/unit qualification",
+    "current nativeARM64 runtime",
+    "target OS/dependency/advisory clearance",
+    "longer realistic sustained-load assurance"
+  ],
+  "p0": "NONE_CONFIRMED_IN_BOUNDED_REVIEW_NOT_PROOF_OF_ABSENCE",
+  "paid_resources": 0,
+  "performance": {
+    "artifacts": {
+      "native-raw.json": "2d011ec353c4e848bc6803df95ea7d715df65a4b235c3c23dc6dc04d149a487a",
+      "reconstruction-raw.json": "f49f3f3abb0b37a8f1c60ad01174c77bceeeae420e479cd4534458738e0313b1",
+      "replay.canonical": "2a6a94bd19b2b08a650b8c980742b96d617a5e4854c8768ad33d9c60e7fd657f",
+      "workload.canonical": "ea6f1369de5c8c63d80efa34719118f1b1bfcf16759d195eb25011deeaf8f86b"
+    },
+    "classification": "AUTHORED_LOCAL_NOT_PRODUCTION_LATENCY",
+    "environment": {
+      "affinity": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "architecture": "x86_64",
+      "compiler": "c++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "compiler_arg1": "",
+      "compiler_executable": "/usr/bin/c++",
+      "compiler_id": "GNU",
+      "compiler_metadata_sha256": "e4e56540cb8482e54327df05547ea2682f316cb0dcd65b257b2d8298a24c4dd8",
+      "compiler_version": "14.2.0",
+      "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+      "native_binary_sha256": "e7868ab4134baa16542fd59eb67f7591b410db4bd78cfa013d5c8e13c387d485",
+      "native_build": {
+        "binding_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC -fvisibility=hidden; IPO disabled",
+        "build_type": "Release",
+        "compiler": "14.2.0",
+        "config_flags": " -O3 -DNDEBUG",
+        "core_flags": "-Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -std=c++20 -fPIC",
+        "package_version": "0.1.1",
+        "pybind11": "2.13.6",
+        "python": "3.12.14",
+        "schema_version": "1.0"
+      },
+      "os": "Linux-6.18.57-x86_64-with-glibc2.41",
+      "python": "3.12.14"
+    },
+    "methodology": "Serial service times include wrapper/timer overhead;bulk and serial native passes separate. Python service pass and throughput share instrumentation. Memory tracing in separate pass. No arrival queue/network/GitHub edge/GPU benchmark;finite local workload,not long-soak or universal institutional SLA.",
+    "native": {
+      "add": {
+        "maximum_ns": 327894,
+        "median_operations_per_second": 3976884.3596594795,
+        "operations_per_repetition": 64,
+        "p50_ns": 283,
+        "p95_ns": 376,
+        "p99_ns": 596,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "cancel": {
+        "maximum_ns": 275,
+        "median_operations_per_second": 5852231.163130944,
+        "operations_per_repetition": 64,
+        "p50_ns": 198,
+        "p95_ns": 252,
+        "p99_ns": 270,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "depth_snapshot": {
+        "maximum_ns": 297,
+        "median_operations_per_second": 7587433.313574392,
+        "operations_per_repetition": 64,
+        "p50_ns": 146,
+        "p95_ns": 150,
+        "p99_ns": 249,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "event_copy_add": {
+        "maximum_ns": 192,
+        "median_operations_per_second": 7213706.04147881,
+        "operations_per_repetition": 64,
+        "p50_ns": 182,
+        "p95_ns": 187,
+        "p99_ns": 190,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "event_copy_snapshot": {
+        "maximum_ns": 134,
+        "median_operations_per_second": 10938301.1451034,
+        "operations_per_repetition": 64,
+        "p50_ns": 118,
+        "p95_ns": 124,
+        "p99_ns": 126,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "execution": {
+        "maximum_ns": 254,
+        "median_operations_per_second": 7207207.207207208,
+        "operations_per_repetition": 64,
+        "p50_ns": 167,
+        "p95_ns": 194,
+        "p99_ns": 253,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "payload_copy": {
+        "maximum_ns": 33,
+        "median_operations_per_second": 429530201.3422819,
+        "operations_per_repetition": 64,
+        "p50_ns": 26,
+        "p95_ns": 29,
+        "p99_ns": 32,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 192
+      },
+      "replay": {
+        "maximum_ns": 247046,
+        "median_operations_per_second": 130221.8451214624,
+        "operations_per_repetition": 128,
+        "p50_ns": 4310,
+        "p95_ns": 5835,
+        "p99_ns": 219483,
+        "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+        "samples": 384
+      }
+    },
+    "native_peak_process_bytes": 9293824,
+    "native_physical_journal_record_bytes": 12232,
+    "process": {
+      "cpu_scope": "Parent process only;native child excluded;not sampled utilization",
+      "cpu_seconds": 16.623732606,
+      "wall_seconds": 16.692735891992925
+    },
+    "provider_projection": {
+      "evicted": 256,
+      "maximum_ns": 10232492,
+      "maximum_wire_bytes": 21917,
+      "median_events_per_second": 336.09327705948544,
+      "output_sha256": "90d8fecbce83ad90c5d05a0f16e56f7b8f6088bab61494c0dffae77693dfdaac",
+      "p50_ns": 3266325,
+      "p95_ns": 4192819,
+      "p99_ns": 5016359,
+      "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+      "retained": 256,
+      "retained_counts_each128": [
+        128,
+        256,
+        256,
+        256
+      ],
+      "samples": 1536,
+      "scope": "Authored four-symbol quote normalization+metrics+projection+independent client reconstruction;no network or real slow consumer"
+    },
+    "python_replay": {
+      "maximum_ns": 2089207,
+      "median_events_per_second": 926.5059840850014,
+      "output_sha256": "50330739abe4d5143f970fa5acebc3345e46799700061e9d7b7bd3991b49f76a",
+      "p50_ns": 1088821,
+      "p95_ns": 1439959,
+      "p99_ns": 1855502,
+      "percentiles": "nearest_rank_serial_service_not_arrival_latency",
+      "samples": 192
+    },
+    "reconstruction": {
+      "allocation_attempts": 808,
+      "allocations": 808,
+      "build_configuration": "Release",
+      "checksum": 409600,
+      "compiler": "GCC 14.2.0",
+      "container_complete": false,
+      "context_reserved_bytes": 16464,
+      "deallocations": 808,
+      "elapsed_ns": [
+        5014265,
+        4478845,
+        4139475
+      ],
+      "external_records": 3,
+      "fixture_sha256": "24a7644b318d3c6da1896683fd001194e17cd3d5aa1803358af476929c49ffcd",
+      "initialization": "authored_complete_empty_synthetic",
+      "input_bytes": 17120,
+      "journal_element_bytes": 6262784,
+      "journal_entry_bytes": 12232,
+      "journal_records_per_symbol": 256,
+      "lifetime_orders": 256,
+      "live_bytes_after_destroy": 0,
+      "live_bytes_before_destroy": 6458312,
+      "matches": 128,
+      "median_ns_per_record": 8696.79,
+      "native_records": 512,
+      "orders_per_symbol": 64,
+      "peak_pmr_bytes": 8036560,
+      "pmr_budget_bytes": 134217728,
+      "prepared_context_bytes": 1496,
+      "receipt_fnv1a64": 13807319871657760880,
+      "reconstructor_bytes": 98456,
+      "records": 515,
+      "repetitions": 3,
+      "scope": "create_decode_context_native_journal_receipts_validate_destroy",
+      "seed": 5255495,
+      "source_context_bytes": 840,
+      "source_receipt_bytes": 344,
+      "symbols": 2,
+      "throughput_records_per_second": 114985,
+      "warmups": 2,
+      "workload": "synthetic_two_book_reconstruction_v1"
+    },
+    "schema": "gig.production.performance.v1",
+    "source_commit": "11f1e9cfe6898970461855829650220a9e57bb5d",
+    "source_sha256": {
+      "benchmarks/book_benchmark.cpp": "e8cd7cb139c4b9cd66475da6c5480a0be0c3ce6f6cf5e92f315dee8d2ee161b3",
+      "benchmarks/copy_probe.cpp": "14396968386c5a867778658735b7d862e19bedc7482124f3a8a858cce4ae8dc2",
+      "benchmarks/copy_probe.hpp": "d66c844450b509f8d4e8c718a231ffcb06bf5fb47728be6949b6cf9cb5734183",
+      "benchmarks/execution_benchmark.cpp": "943a9c1a8ea243c4b21896b30bad574841f4763f811240c242e13152d3c17f87",
+      "benchmarks/flow_benchmark.cpp": "5eb7d9d57749df8ba9c55b904fc253cd58d34305828d63d346e151771096762a",
+      "benchmarks/itch_benchmark.cpp": "a6a16b5ee440b9628bdf2be784f28d14a709ff916a71bbea88b4da461a84d9b6",
+      "benchmarks/itch_context_benchmark.cpp": "93334896c090b8962acb338644f46d1f6e022427b22416c44951e96fb43a5d3c",
+      "benchmarks/itch_decode_latency.cpp": "7dc62c890d8a260b488f84e222f8dba7d3163bf065c3bff5b8ef4915c4a2e71c",
+      "benchmarks/itch_profile_probe.cpp": "1e02d4f4194cec0cdcf82d16aa4fff23cb7817dc845652c51b54fbae7f6f3e59",
+      "benchmarks/itch_reconstruction_benchmark.cpp": "2334ab67a54c2914ee92c66bc3e6ac83ac5a97463487a2d01f66bb184906859f",
+      "benchmarks/itch_streaming_benchmark.cpp": "27f8f3c4f2f9cf670117a745dc4501badf90aa0f1322baef8e7de65942d79a25",
+      "benchmarks/journal_memory_probe.cpp": "b57aa397cb1770fcbdda8eadfaf2283655f8f95f81201acf341c02ed420da25a",
+      "benchmarks/memory_stats.hpp": "6b14d5ebdc49f90d9e6e68f4e998647119db5768b06c009d75da9771d2ab4dd3",
+      "benchmarks/research_benchmark.cpp": "804b369bdf6e9ba2abe496422e8e3d87a3c5ccecae110261e0289512fe84af22",
+      "benchmarks/simulation_benchmark.cpp": "4fda590293a088ca9ec620b076efda3f51bed62cbc65f1c7b8de3e698e4eec1b",
+      "benchmarks/validator_batch.cpp": "f23f07b3e4c1d29374af6448b92ca787a5a1cf5f85ca2bd7d54260f7b06a89c7",
+      "benchmarks/validator_batch.hpp": "8d5dd4e809bcf1304e59e82cb18ffb1e9c070169658ee2065ab6e50da4c2fc6d",
+      "benchmarks/validator_benchmark.cpp": "85ff0cdfa0fb3daf9d408e949e92e902e1b58a5ac9fff6bcb6f586dc153b012b",
+      "include/gig/analytics/book_metrics.hpp": "56aa765bfc04389f7bdc351cf3f28cb927aa0f5264a53936d1bbdc895c085c59",
+      "include/gig/analytics/exact.hpp": "9ae3dadb762b07fd04a7ae7202c29cdc182c042a658c0c873cbdeddd0801ea04",
+      "include/gig/analytics/flow_metrics.hpp": "7359e661e487c9fbe2d7bd1ef0c5cf0dbcbd9aed583186443a050f7597b789a8",
+      "include/gig/book/order_book.hpp": "0fff19acec016b62d49941a917cb11f2f11070e85d10a590c23cd876308c95b8",
+      "include/gig/core/numeric.hpp": "4b96432c3bcdb2e54cd993f14f4223629ca47c2d051df0b51e8f26bedeca0768",
+      "include/gig/core/result.hpp": "b0c8854164f9bfaf92753d71a21607a12f39c4ea174bc88bdf79ef7c34d96df5",
+      "include/gig/detail/canonical.hpp": "4c95efce76d02fee8e8b18c9be23ae3ce3877af6e73a8f60eb73ddcf4c28a35c",
+      "include/gig/events/contracts.hpp": "c26c29603fec6d017692971cf3115206ea92a6a9ad3cce539ff36a36bfd9f241",
+      "include/gig/execution/execution.hpp": "d699a2d642f36692052a778a47b8b75bc85800b45e1454462426c35f57ab1e68",
+      "include/gig/itch/binary_file.hpp": "1d8564f1d7eaaf7c8e4d702068bd02a2c4755b3a945d7abe262965d92cb96e15",
+      "include/gig/itch/context.hpp": "78ff6e271a8a15e2eb4711c39c2ea7f61b744ec8eeb811f8bd764a3de68863e9",
+      "include/gig/itch/decoder.hpp": "705ba99b0c3581a458ee34413f69fcfb9bfc9ded0cff1aaa39f1774c2e44e437",
+      "include/gig/itch/gzip.hpp": "8e49a15d7169b3bfd4a8801b2335d8c2fc453d6c9eb24267dbfbcf3081f34e63",
+      "include/gig/itch/input_adapter.hpp": "79fe2e094576dc31f97d644d9a16a4c54c5f90effc2e47845e611f8f538e4baf",
+      "include/gig/itch/reconstruction.hpp": "685062b846b19e3a1130e767e6db8a7ebff4a14848639ea98754536abd0cc265",
+      "include/gig/itch/restart.hpp": "d8c57e611c17c1eab8ef8251397b61ea1c7e1a20b323b9374660f400fa6684d5",
+      "include/gig/itch/seed.hpp": "f21e4e61dbc229d746d59770b7459fc04a4ba8a952ff89903b6b2efd4d97863b",
+      "include/gig/itch/sha256.hpp": "eeb411b30706e1297a5a0b82d9d9297a4f1c78b6d31197f03587f18d411768b1",
+      "include/gig/itch/streaming.hpp": "55de329c69a7980f6c53fe440b1f559935dc715f47d25578c42406f278015ed2",
+      "include/gig/itch/wire.hpp": "4f7baba66b91ed293ea773fb49bf0341c5ff229d0e3542f3edd6499b072f9921",
+      "include/gig/lobster/adapter.hpp": "1b89d625ab9fba7fccb739e8d728dfc90c87fa478e9a202649282eb6b14c944b",
+      "include/gig/lobster/reconstruction.hpp": "080767f337137bf6177345e9788d3eb34517248ac882b76bbce1fd3f19ec6577",
+      "include/gig/market_data/aggregate_depth.hpp": "59d0abc97805462510524dbc3665b30fd35f3b1bca937cc8d5b829531d30f887",
+      "include/gig/market_event.hpp": "081988fd7ab0ccca74ce56ea7068ef04692b3fdea5828092ccf65ef9cd54c619",
+      "include/gig/memory/tracked_resource.hpp": "7d76ad70c0ea9b5f9f7d6aaefec66c0f2677dfee8ef79498a942fb87e0effb5c",
+      "include/gig/replay/replay.hpp": "a618020d5e7fc8a69517f1bf2dab78a26b04de697a6b4801cb6179c5c9699204",
+      "include/gig/simulation/simulator.hpp": "554445aca9cf95f319b63c54c276ea52d9e5fd1dd6d3d2a3504fc576f5ebb9a7",
+      "scripts/benchmark_atlas_final.py": "b02107b10173732ad32c19654ca80c5bdfe6b164ef0096d7247226b371ac5cbb",
+      "scripts/benchmark_atlas_history.py": "759a3413c7cb56f9b19f4c2eae7601997e143dd1cd691964c4c1224853dddc93",
+      "scripts/benchmark_atlas_integration.py": "ffca34109539a3c83342aace2222fdb34d378071395cf804728bac658b58d860",
+      "scripts/benchmark_atlas_models.py": "650c37984f475ab5d901e6a959ba6d97cdc2f5184ce0fd9358502e3a5b86a961",
+      "scripts/benchmark_coinbase_candidate.py": "ee36625daf03628121c53b8f9a77720d591d5641c55c69b78f6e45e744daa0e1",
+      "scripts/benchmark_lobster_synthetic.py": "02bd38430d38394d866cc958f5a6b10498f7be8f64d4435f1392e833c915c70f",
+      "scripts/benchmark_python.py": "e8ba9206b2d0b559f60bee0b7d9b15d349a5220b61377781062d999a93c3f852",
+      "scripts/benchmark_recorded_l2.py": "049df14bc61e072678d95285a652d004fa803c695c7149fb6689596ce7e963bb",
+      "scripts/benchmark_stock_intelligence.py": "31c07285d271ac40c6b995e32dea340efcd398540acb6f1b3d444561a13ddab3",
+      "scripts/benchmark_terminal_feed.py": "33120a57eb82f43e9d35bd92919ad30a74781d7dedf4a77ee8dc235f5c7b6a77",
+      "scripts/bind_sec_evidence.py": "87e4f4730f1d099df860058e0efc41c437eb2de421ac1a6785a04a99edcf8e56",
+      "scripts/check_adapter_differential.py": "547ff3b2c4633550a887ad58ab873358ad041feb4dfd315b38a21536d696407a",
+      "scripts/check_book_benchmark.py": "abc2621bbb1f7a1bff2663322bb295e24ccef91c509d6a0353dc386be0933877",
+      "scripts/check_book_metrics.py": "27d33a8d4ab3160f6c77f47d240f2b80c329015a6b2567573ed4bbbbae1e5034",
+      "scripts/check_execution_reference.py": "8423a0eef57e8d38d1becf6ca227ca98cb830e791fafb60c97600534fab82897",
+      "scripts/check_flow_metrics.py": "6e1379b9d4d7d58366291cd29314166923bcddc6f264fae60499b9a90ebe4751",
+      "scripts/check_initialization_manifest.py": "9f9b332c9dc781dc122f113615cc5d1e11fa459df77f5ebae4552e3f63540245",
+      "scripts/check_itch_admin_reference.py": "7f44294f13773dea3c55fbacdb5cebcae43c22893e6ce4020cdb308f271b00a1",
+      "scripts/check_itch_auction_reference.py": "4555bbd6b82ff7a05826c2896415b869c282c68690ff41297e37bd0af92c9f66",
+      "scripts/check_itch_benchmark.py": "44b509eeecac02ef8439d7fd1721de56feded60171aea45a98e9804e5da3b8d4",
+      "scripts/check_itch_context_benchmark.py": "050ade3446ea9c956d5d201aaf2efe41969e68be19787e0cf358db87660e4247",
+      "scripts/check_itch_context_reference.py": "b0b3c5682ff30abe002fbe3952596e8e224cbc86fb56e1cceacb87d768dde61d",
+      "scripts/check_itch_decode_latency.py": "38dc25c5ffc261e8e4767040abc6033b49abd089ed17f85e9c78ae2286aaba24",
+      "scripts/check_itch_hy_reference.py": "73e4b3b0f98e084e32131e5fefdf45402f02241213655e856e5b62b54092f1fe",
+      "scripts/check_itch_l3_reference.py": "769bf998152011bdd74f1b1062c6d2a568ccefa80df6f891f297f735a2567210",
+      "scripts/check_itch_profile_probe.py": "72305d26033567fc3b94b5e74a801c097690952ce170a1ef0e3b697dbe5fbc78",
+      "scripts/check_itch_readiness_reference.py": "bc0759b6168638125f25d7b93fb297cf6b30783478bf9a34bdb71bd1707ec978",
+      "scripts/check_itch_reconstruction_benchmark.py": "2d4d0ea66dae7d3d56583a4b84b565b96bdea34cafb87f1c63a55aa1bcb33d86",
+      "scripts/check_itch_reference.py": "ee59d9e8dbc9c12af2b5702995d082e2baa4dec51adc364dd0c5b396c025d567",
+      "scripts/check_itch_sha256_reference.py": "2cb557c932899714e4861f2fc273c3f3c79c9887e8b4c378dc2066984775952b",
+      "scripts/check_itch_streaming_benchmark.py": "fa4cc94856635630e9332bf51ac1400fddc401961c9bbe4b8b6da469b81900c0",
+      "scripts/check_itch_streaming_reference.py": "4be2effa74be384eda9acb0dd37539638e2d7bf78882e92f6c72a99240ec9cf0",
+      "scripts/check_itch_validation_demo.py": "aa983c263b589819fc8bb25f214e966b5db2007ca456e6a3cfa23fabc5c1ed6b",
+      "scripts/check_journal_storage.py": "7ce1929c804e37f74b4e9a9e726d6638a16faf35376164ad1fbed33150a6782b",
+      "scripts/check_lobster_reconstruction.py": "2bbc4c5e363d12715361c2f89813ddeed2ee083ea511b20a1b9e1d67281512f5",
+      "scripts/check_lobster_reference.py": "61c280b20fe34251f19cf5a9f3589d175fc2e1d7170aa6ad3a22576f111419d9",
+      "scripts/check_numeric_reference.py": "78943cdb78eea503a9e9dbae9a2e8ceea582bda137442be6f7a8a6712e927bca",
+      "scripts/check_observed_l3_readiness.py": "174f8fe161d80a30929d769ac0ce6cd997c4e789ad737e5a4906e5f31fba00c9",
+      "scripts/check_python_lsan_control.py": "4fe244cd02f406ab937a0435ccc5b5a8906aa3e935c63626383423d03b4159b8",
+      "scripts/check_sdist_inventory.py": "fb5f7aa13fcdcb110f45695956f1453b21e8820f6b539b2653fa5f4fbb32a9c3",
+      "scripts/check_seeded_reference.py": "867b9f633d0fd9960645db7fdf2008d6484c7fe15b88825f34c629babf954272",
+      "scripts/check_simulation_reference.py": "ac4f3b9cf9ec5214eb2cc24ca2ad12375f1136e1dfbb56ab1c18f3e285644559",
+      "scripts/check_stock_configuration.py": "289dcecdeafbdfead7b5531d663748eefdfb624e054f651a637bb7f46a5106cc",
+      "scripts/check_validation_evidence.py": "9486d49fafec8dc6cfd4eca8d5ba40cfba11f2b8d5481b6252efcd4db8bd28b0",
+      "scripts/check_workload_reference.py": "e26ec558705736a3c6e82667e7d235b0a3976f448845e5e85b85650f96281035",
+      "scripts/configure_sec.py": "c07207ac313bac8e31269854bb13df676d2e4f29e33d86572c7930680bab26ee",
+      "scripts/demo_bounded_comparison.py": "3b9c4ef159e2ec2dfd6348f354def6288ea942c8f813f0c0dfb9e162a31b8ae8",
+      "scripts/diagnose_provider_access.py": "4390631cb25ac2675599d18c8999a7ef41ea3a8bdf5cf94a5c5e64d665077639",
+      "scripts/diagnose_websocket_access.py": "17f4ffc9dcd0e7191558cc91ece43757c79b5992d9e1f4336954865a49455790",
+      "scripts/generate_schemas.py": "1f097d21b2a273462d2c515f767e21e2c4903c70195281b217730bdc1d0cbc56",
+      "scripts/lobster_archive.py": "833ba061635d913e2ddb0493c31cbe0fd6adbff7c6182ffa47f6452071cd4e68",
+      "scripts/lobster_synthetic.py": "6d0eaac3cb993bbaf0e12e35adcdee4ab5dc521aa38433f2219268237c545baa",
+      "scripts/measure_benchmark_child.py": "64d5268522e8d800c33a72f54a1a1095994032ed9b2f7737d628c96fae382498",
+      "scripts/private_iex.py": "d8534c401761c30267b132726a08e0b783ea768b34722ea522311672dd50c6fb",
+      "scripts/qualify_alpaca_history.py": "738821e7c66b4fb00399c86fc561addb7359d54e6389cf4d8a79bc09d31e5e48",
+      "scripts/qualify_alpaca_live.py": "86c550f37282680f67e6c15c8325000cd5f4881f06f04c07d95c15df5b060ea2",
+      "scripts/qualify_alpaca_market_history.py": "984022b8bd4162473a10f9c0b3da3a4ff13522cac9fc4252551abd7b15308495",
+      "scripts/qualify_alpaca_reference.py": "b4a1784d309873c386f7c498b7b4dcd24aa1d5c83e3817cee840ec1568ec2549",
+      "scripts/qualify_atlas.py": "9467be6979cdd09cdc21d2222babd08dd8127421c9fb23702ea57c079cb3ded6",
+      "scripts/qualify_atlas_offline.py": "2952b6c08f63c8c602447e132a52be18819b19ba638a1f8b426533224a714437",
+      "scripts/qualify_private_deployment.py": "8ef69ddb77aa05d85829c12878aaf79d15d6373fb0d1677d941db1679af34738",
+      "scripts/qualify_production_performance.py": "613e135305bf35e917d8204ff734e949c8815d542d5711a49e5afbe8ea4f3ac2",
+      "scripts/qualify_provider_subscription.py": "a4a2457c0df27bd8894349fc51b4a184ff186230ff2cac0580951d1f561cf4c7",
+      "scripts/qualify_remediation_envelope.py": "0e30bf531414dd71e5f9459ec4d0eb4302bc9e2a1297ce87754a15e0c563e9da",
+      "scripts/qualify_sec_sources.py": "7e24b0146345bcd032d5ed500e241b883417589ccf5fec4a32132c225f88d89c",
+      "scripts/replay_terminal_l2.py": "9f4ceae2cab4b62b014efdd12c5b676251a38f768f9960d96d9c80573e65d973",
+      "scripts/review_dependencies.py": "fe5233cc13358e3d6e5b1dc85e208497aceb46f087f623df6d8bc0da6e8f482c",
+      "scripts/run_benchmark.py": "7ea3d7bacf75218963dec4cdf7a4c86548fd968ce8482b52515c0ba6d2e70630",
+      "scripts/run_bounded_comparison.py": "18ce7fa6e278fb41e09ae9006926b3d184dcf3a45ddd3951e300e4e8eb6a2a78",
+      "scripts/run_engine_baseline.py": "dcdc5a4567b9f180da915e5a6c12c62c4143eee93b7f809033aafa0295da44a1",
+      "scripts/run_lobster_validation.py": "c36eae6beb163be655384fcc1828b80c9df197e452647323780453e8b256dcd6",
+      "scripts/run_phase2_benchmark.py": "8ca58f58d4f9a2c50ef40c9c05bf39a6c1d7798e980edd19f841bb4980de3415",
+      "scripts/run_python_sanitized.py": "363bc1926642bee17e99418b35d672a996b2055be7e74c63252009db34d7bd17",
+      "scripts/run_research_benchmark.py": "0f222d57616f61e2bc6b37f3f45711d8437df0c36b9721e4164155e75577894a",
+      "scripts/run_synthetic_l3_demo.py": "850bc5da093e3c285b82c27b6ed5ce784330e923f0dbcd7bd8c2941712a64061",
+      "scripts/verify_reproduction.py": "6eb9aeacd82b71d6f20a27b4afa9ae7f995a2ebb02b444a2b0a3fc588642fb68",
+      "scripts/verify_terminal_feed.py": "e8aa152a8cafe7130e9bb94a8bd20cf57be8f600d8974cd8d737fcbd4dc57f5c",
+      "src/analytics/book_metrics.cpp": "7736fb73f2bb1767991f5399e54f54cc56910700d9e283b9f52aa666305704f3",
+      "src/analytics/flow_metrics.cpp": "e3d3b3c9495a414bc6cc9f990f8552144f735e6adc73fee9820f7de282610b2e",
+      "src/book/order_book.cpp": "b751d6144e271e8bdaa45e65078f3f083c1786d86c3ca8303da79e2f6c70b4df",
+      "src/events/validation.cpp": "77cbe02581658692bd4fb54c680c4bfd613caf320b6d3fc5c2d796cc6c994b2e",
+      "src/execution/execution.cpp": "7b17c90e810c5f39d10dbc0b96ab588832d3dd870dcf7e6e3e31255319dae61e",
+      "src/itch/binary_file.cpp": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6",
+      "src/itch/context.cpp": "15f82532071d44f718cef551229b183137e976ec1af464d306d1c680af451fcb",
+      "src/itch/decoder.cpp": "2acce214e96d2dd59f1ca4c8d2d0d3f3511970f12776cded27e3c44f94be7812",
+      "src/itch/gzip.cpp": "af95436d5f665c12ee6c83fed194b33f4c4747877fb6a9ac084bef10a6c516f8",
+      "src/itch/input_adapter.cpp": "6e460ab5f0004f0f2d1c4694e8e2d79ab497992a60cb2f3625d78899d252afcd",
+      "src/itch/reconstruction.cpp": "dcd37502934687af16a5ac05155dbe23d0a1ba1151b96037f715f277383c63ec",
+      "src/itch/restart.cpp": "84bc6c8645ac023c863a7ab9a60ebc4118fe572542877f9743db8ecd3477e620",
+      "src/itch/seed.cpp": "17f29b7f4e83ccd96a17a71e55369255bf7a9f8f947157aac2127d2a3e03da74",
+      "src/itch/sha256.cpp": "376756916be1add85aa261c23d8c1bf5e983d863697d1a30734469143b85aed3",
+      "src/itch/streaming.cpp": "05c234ffb3f6c8c5a2460d2d168015b35e967d1ad835b9136b99ba1c7d14b86d",
+      "src/lobster/adapter.cpp": "4079fcab4ffd0cb2869de654313cfeabb28ac59e046d4ee3dd7f361cdc26b77f",
+      "src/lobster/reconstruction.cpp": "b01d63d90ec8a69ffce5a7a8b8e2a15aa3394c30fc5cadea8b4d45d9b009f248",
+      "src/main.cpp": "eda7db97d2dcb6bd46e143c75a15c69fc1203284a8b585ceb63813c9bd894cf4",
+      "src/market_data/aggregate_depth.cpp": "c640a83d66c1f2929b038c69d845795d1f79107d6d94dc80f635c5b220914a67",
+      "src/replay/canonical.cpp": "169acdec6f7e3a6082f93c63f2d6902d7ea677a02b749dcc11aea9a3e47d991c",
+      "src/replay/replay.cpp": "e8461558e7b5b51ffeefdc7ac45cbef451084cab05311d0e17e5e63e0d35ad09",
+      "src/simulation/simulator.cpp": "c8581e377fde029c151b020170465a96fd25d986c3e07f8936e787bed52b701f",
+      "terminal/server/__init__.py": "ccfbfcb4c0bd4239cbbb22965d2f4a5163f2b468ff2d0c15d085576ffec320ff",
+      "terminal/server/__main__.py": "7a2bc306d7d93e396b7b5772e938f6e7bcde75356d059118d3f2e7459252b4d1",
+      "terminal/server/analysis.py": "ccb76ad562497c4a108148a5c4cfec2ab74b48a86106110c5250abb09c8d67f0",
+      "terminal/server/app.py": "6c69ff7e014665720c21c215db9d37e5b885a3d99c0d4b5dd263e54a609cb87e",
+      "terminal/server/backend_contract.py": "733596df9d0b0852cd0c09fc5552f1b359c1f31cac26a6a5d2678de8ee98c90b",
+      "terminal/server/concentration.py": "32654dcba91700de5d8b8ea43e09bbccfd0154c637cbeb58374b6bcf35c1715e",
+      "terminal/server/config.py": "5c5cfd1a9bb6756a61c6b38e5db9d70e4088eaf9d769cadf9440358339e57b48",
+      "terminal/server/connection.py": "3bd2848fb126d82066df0643d1f5911f40ef888bd44fa32ecadcc3453a884507",
+      "terminal/server/engine.py": "bd9e7d19a9ae01561661ff43f324c3f983162358ff06a5c6088d170e2266d566",
+      "terminal/server/fixtures.py": "d909088a8308c25dda6b9e23b2e2e0d9835c6f721673d7f88e9648fc0fa81dcd",
+      "terminal/server/market_delta.py": "43db0b2b49019d3a110affc23c5acbfd61eee444ffccd325ce80f2415e9baeca",
+      "terminal/server/market_events.py": "1fca2386fe15420ea4a5e1c08c0237862f19ef94b20b22abe49305f5746ddf9d",
+      "terminal/server/request_proofs.py": "aeeec8175997650db14be1541be0b2d181357b63d32b932d8d79277d684f33ae",
+      "terminal/server/stream_tickets.py": "ad05918c405f0520df8027e56f7674f4deb2ecf83564d8138741a1c12a3d55ef",
+      "terminal/server/test_server.py": "5c85a2c828d3713b55d907932a147c6c81fe2aa96f7a5517f6e603a08a00f5e6",
+      "terminal/stocks/__init__.py": "5a99a821890afb49c3f140084c7eaf213179186513b4e89b3a47b69061639393",
+      "terminal/stocks/accounting.py": "b17c537b762245bcb4e64ed5b08a70d8ab3ab8b9e23435308437110571a51473",
+      "terminal/stocks/acquisition.py": "06c1df9a3a462a783971e29ae06c24b715a21ae13870d52fd2b2c27a295b3e4a",
+      "terminal/stocks/advanced_models.py": "ca9db49726a0f6e85539609b5ad1fdfd07b02e5211ed373b53cea5219f51eb26",
+      "terminal/stocks/alpaca_history.py": "a4a192b501094eec435455eebde03d449403c7067f2e0b5f94598805793ef93c",
+      "terminal/stocks/alpaca_reference.py": "1cf3a1d175108d6db944593c3e14c021345b4145c8d527a99a1c2d0ef93e6ec2",
+      "terminal/stocks/alpaca_transport.py": "13d5253c2c718e9344e11fd051d22eeb1c21f6f1a649b225ac807f7424ff5732",
+      "terminal/stocks/auth.py": "76a17c85653cc59734d83ce30837a26f2d63e985dc0c83c755b0b7c65720b37a",
+      "terminal/stocks/datasets.py": "2081ce8cb6ce4b6ca2a34e61b3fba3cb1c319d87a81f1a8935415b1b443fc786",
+      "terminal/stocks/directory.py": "5dd06ccd796f8790855282ed958690322bcf2ae93263e5c5f39a96526afcbb34",
+      "terminal/stocks/disclosures.py": "dc1a5026b7cf6fe4fd5c59923f94855dd4b5a04f0463d015051d4d1bc1a164ad",
+      "terminal/stocks/discovery.py": "9c8e4c9270489e78ddf2f9398c4098ba348494e95d152c85eef19c9e9de07611",
+      "terminal/stocks/evaluation.py": "17a474f2711f93b144b0683e5a85e131757d5fb41de760f165ea280c583cb663",
+      "terminal/stocks/feed_health.py": "d9e23df9100d43ef00fc1302dd25909823b951b0d77d44d779ff4591fc8aa20d",
+      "terminal/stocks/financials.py": "b94b69bbbe2938e9e642148239a96c421e40a608a8d61bf67c3a249ccf513d28",
+      "terminal/stocks/historical_research.py": "ea9d03d8784d0342410300d6a22cf5e1d1f571aca3d97ecd79562d46af7305a5",
+      "terminal/stocks/historical_v2.py": "193dc702af6a6f2268ca6ec90d50807c96418c5fd5d6f3b0f22024af9bda1888",
+      "terminal/stocks/history.py": "297740584e8d68488b09392b6fb333c75c8e6e8c53319d61ddb814c422786dc6",
+      "terminal/stocks/history_backup.py": "00988235f07107c3e92c2f232bf8c7603ca18c9afd173088e834d88c4efa1fa9",
+      "terminal/stocks/history_store.py": "d1e774598b0d62ba8f85dec3f3eb3246cbc7a3ed998967b2a827047dc764440e",
+      "terminal/stocks/identity.py": "54ee20dbef6f43e86d86a1ce2464d6fcff6a8dd1618d251e207d9c8c65f00ac9",
+      "terminal/stocks/live.py": "9ad17ed57c4086402b7ed6c3c6d8cf3f707004c0df1dee3f8b8bfde16ffd4ae9",
+      "terminal/stocks/live_metrics.py": "ce7cdd19dba8bd857883ca7f6d586f922800b1a2baaea69db2f5aa9510b47612",
+      "terminal/stocks/market_catalog.py": "469f2de3f2aaca14d91a4fb65bf8105c99ca33bb5fd6a9c486beff19290e8ff4",
+      "terminal/stocks/models.py": "7ff277bb6c447e8c21823ff7f83a431195851c2e97cd6b6af779db8fdda48ef2",
+      "terminal/stocks/observation_store.py": "8ce855ce4587c9f46b7196e3f01f757d21255dd06543180963c9ca945728c4b7",
+      "terminal/stocks/option_feed.py": "525af9519759f275f134b791b9f195c6b605b8616d95bfc05975ee8771fba056",
+      "terminal/stocks/options.py": "4623e45d88d937c4335cd2a72ec40b266f1fa0ca8cdafb64d46d94b6e306ccf2",
+      "terminal/stocks/portfolio.py": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92",
+      "terminal/stocks/price_research.py": "ff4a22dbe0438342e8cfec52bd59b7db289db4d82e3a45674f595461ae437239",
+      "terminal/stocks/prices.py": "ea4c16d576cd70acd8aae4b06b3025239fe32ecce6f52dd7f2bdd46aa5a928c1",
+      "terminal/stocks/private_iex.py": "ddf20c912bf9aa773441467087b5a4d1c0a38979ac48251e6ce993f829c463fa",
+      "terminal/stocks/qualification.py": "3ab08fbac27dc80d2960d8a86519bd281ff4ab37501b26e7bd832356488258ef",
+      "terminal/stocks/quote_analytics.py": "ab5c898b1db666527bc366e95d7d28fdcc8de97f4ee7fb6e31fcfae1bd4854ee",
+      "terminal/stocks/ratio_history.py": "52296eb7b511adf617509d3378d1dc2cfc8cf62b4f8ee894380c46ee91634613",
+      "terminal/stocks/research.py": "a4ee5015a71932348796fa14a8e77e5f8cd65522007e988b457a5372e4b342b0",
+      "terminal/stocks/retry.py": "2414756718edde7ee3a41b1882ad77b54b76dbbab8b57f9c28d07ba6ee03cc7b",
+      "terminal/stocks/risk.py": "c7708fc8a4af32135f187021565b9bbfe861fcd1b57cdd617e79124cbe7bc25c",
+      "terminal/stocks/sec.py": "b73037382e130156fa7b921e33e3197b3469c0c02f45515f9d883f297cf3a0bb",
+      "terminal/stocks/sec_config.py": "cafa2cacc78172312ec968d11d09326a380d3000a8eb9ba1261837900f8d779c",
+      "terminal/stocks/sec_history.py": "3b7a337fcf17552e0f387439f5add3b00326ab8d4cd64484be2905f9a02ccd72",
+      "terminal/stocks/sec_identity.py": "0da4965f538be915140b648e67a5ba4bcab140ee3a803ea0d20b2a5582d40186",
+      "terminal/stocks/service.py": "0c18c5fc89805877e538a9eee1bbf16b9a036b1d8ee29fec35e2071677bf93c9",
+      "terminal/stocks/session_schedule.py": "7f7e6a50b41759929f483e2ca26ab79790fad1df97c1301bbb65a7e1496d0d43",
+      "terminal/stocks/statements.py": "b20839f778b0f27a7213159d71734556db7fd87038be1b311b11421e0892808e",
+      "terminal/stocks/test_acceptance.py": "950bd04179c8bde42c13f692701eefa620c10f630083c3d6569859b7682ce8be",
+      "terminal/stocks/test_alpaca_data.py": "83c273db86045c986a74030c383ccf6883618c54347734fd1ee7b3359f0bab8b",
+      "terminal/stocks/test_availability.py": "9ae26b83d1aa18324d0620f6a68acd1f9cebb832eeffe27fe26977f6efbac215",
+      "terminal/stocks/test_backend.py": "3605e4eb21fdf8100d86b9639b7d3b172d9681a24e0ff7044ce9c225840adb9b",
+      "terminal/stocks/test_catalog.py": "057717dc347f73687247784f067432288f9d8407a08f58514fab30cce61ae7fa",
+      "terminal/stocks/test_completion.py": "3716334f29d615ec99159009a3766bc5c9ea3c112cf8e826fad706bb1d09f620",
+      "terminal/stocks/test_directory.py": "39e0bca689baa396fba81f797d9bc509ad6e45b8647e3b7dbe031e10956890e1",
+      "terminal/stocks/test_discovery.py": "1c44e6b08ef157d98539b002132b81b8b04f9506b19bbde0b41bda635af49386",
+      "terminal/stocks/test_final.py": "fd53a6a2a9114fd488c980ab002a3f8d03640e124d1a7792f2f1189c5f160376",
+      "terminal/stocks/test_final_qualification.py": "ca3def9c5095d160808a17b69534f26f3e70bea0cddaf52f99dc6e3ad07fa7b1",
+      "terminal/stocks/test_historical_research.py": "491dacd57054c0ff938099952315b7a65c9873bb8d6a663d27a6a4c2c7d9a576",
+      "terminal/stocks/test_live_market.py": "5d6f82b41323a1bd941006760278d9aaffe9e9ea4453eb9847b56575685d35cb",
+      "terminal/stocks/test_observation_store.py": "886dd4223d72790291d8a97b2690419b963d8a501b45097af732d8a4ecaa2bbb",
+      "terminal/stocks/test_operational.py": "043ac000d4b884f1f9b3c95020c082a21d687f24d9d60c3ed28ede3cf525f728",
+      "terminal/stocks/test_overnight.py": "21b4c11df12e28a1dedbcb2c4a7e53cb3297c8dab06685c09b48d027e80519b4",
+      "terminal/stocks/test_phase3.py": "67996895dfa36746d71550521215427a69db2081d1528f880c2ffd27534a7b4c",
+      "terminal/stocks/test_phase4.py": "c9e36adcab74ff5d7b2906d9bc80c740945cd4e1f9eea8e0763ddf01c0d1c3ab",
+      "terminal/stocks/test_phase5.py": "e4692854b5dee431c658185a3a5b962ff054fd6331111ef7a2bcf4f5bb575e40",
+      "terminal/stocks/test_projection.py": "e66751e8b05fe7446f9cb3dadef11372fd98ee533f58b25039737ac196b10d43",
+      "terminal/stocks/test_ratio_history.py": "dde2e9320e718175d3f13ef00b78b270ce71bde963dcc76bf949b152f3a13a70",
+      "terminal/stocks/test_remediation_options.py": "4dc75c29e82709f70baf232ee429f1a1d7f6bc99ddd2a561c1e0a52b91e51d27",
+      "terminal/stocks/test_repair.py": "607ecfe74a8e9dac7c76c116f664d8dfb68cb4cb295c56a7406f84aedb308337",
+      "terminal/stocks/test_sec_directory_boundary.py": "4bbd66b51b3f222f07e097175267123f30bafa24bb687ae99aa9ae8504601b9c",
+      "terminal/stocks/test_sec_expansion.py": "7707ff95bf36a775c4150b362a8ef40e1c86ea0e2e91f085787f7b22e48886d4",
+      "terminal/stocks/test_sec_identity_diagnostics.py": "067ea73db44e5497483f562a6a74e0e81fab7fc86cf78488919916051ca3a929",
+      "terminal/stocks/test_sec_integration.py": "921ff45a60fdbe936f268b1925547c2a44bd0fa7479c1b94b26c8a57bba40f64",
+      "terminal/stocks/test_sec_qualification.py": "0cb6ca1b605af591d17e5d8c67f8ad222e7ce98d773635df9580b90fd38b0649",
+      "terminal/stocks/test_sec_terminal_reference.py": "83eac7493923f6013cecff0ddb836181358ce51a75969540a3e8c9cf33f873e3",
+      "terminal/stocks/test_sprint4_history.py": "950a3b8f531a6209d26de0c18163fc7d0a38726a9e5a4582d0f342c348576ec0",
+      "terminal/stocks/test_workspace.py": "e389480220f1d18dfb5e728aa6edc316e8816b5238e621dd0ad6b96508404219",
+      "terminal/stocks/vintages.py": "cf8da98fe5c947c9a38eaf1c4ed2a23ad5f9cc925c495c38162871f75724a04b"
+    },
+    "sustained_memory": {
+      "python_traced_current_bytes": 73054,
+      "python_traced_peak_bytes": 1432845,
+      "replay_scaling": [
+        {
+          "events": 16,
+          "journal_size": "16",
+          "needs_recovery": false,
+          "pmr_allocations": "63",
+          "pmr_deallocations": "24",
+          "pmr_live_bytes": "198200",
+          "pmr_peak_bytes": "295192"
+        },
+        {
+          "events": 64,
+          "journal_size": "64",
+          "needs_recovery": false,
+          "pmr_allocations": "211",
+          "pmr_deallocations": "76",
+          "pmr_live_bytes": "790536",
+          "pmr_peak_bytes": "1178488"
+        },
+        {
+          "events": 128,
+          "journal_size": "128",
+          "needs_recovery": false,
+          "pmr_allocations": "405",
+          "pmr_deallocations": "142",
+          "pmr_live_bytes": "1580344",
+          "pmr_peak_bytes": "2356232"
+        }
+      ],
+      "whole_process_peak_rss_kib": 43320
+    },
+    "tracked_dirty": false,
+    "workload": {
+      "input_sha256": "f02991c4c829b280673764cf99e69ede76ee53c1c85bfd03e6e47a19131c60d7",
+      "native_seed": 1729,
+      "observations": 512,
+      "orders": 64,
+      "provider_symbols": 4,
+      "python_generator": "explicit_fixture_v1",
+      "repetitions": 3,
+      "warmup": 1
+    }
+  },
+  "prior_qualification": {
+    "SEC_cohort142": "Historical source-bound evidence;not rerun this sprint",
+    "TLS_checks20": "Historical source-bound evidence;not rerun this sprint",
+    "evidence_sha256": "7f4880c5bbbd893ff8eb57c12042a9b52d9492831a831085ac5634807730befb",
+    "intentional_CI_policy_changes": [
+      ".github/workflows/native-arm64.yml",
+      "terminal/test_arm64_terminal_policy.py"
+    ],
+    "source_files_verified_unchanged": 8
+  },
+  "python_matrix": [
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-debug.log",
+      "seconds": 0.46604873597971164,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-debug.log",
+      "seconds": 1.6717731700045988,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-debug.log",
+      "seconds": 1.0667585209885146,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-debug.log",
+      "seconds": 22.34269704198232,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-debug.log",
+      "seconds": 17.745097768987762,
+      "verified_pass": true
+    },
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-release.log",
+      "seconds": 0.4154286860139109,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-release.log",
+      "seconds": 2.022710115998052,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-release.log",
+      "seconds": 1.2736272719921544,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-release.log",
+      "seconds": 21.093369461013936,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-release.log",
+      "seconds": 17.147715702012647,
+      "verified_pass": true
+    },
+    {
+      "cohort": "final",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_final_qualification.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 35,
+      "log": "final-asan-ubsan.log",
+      "seconds": 1.567379158019321,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint4",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint4.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 96,
+      "log": "sprint4-asan-ubsan.log",
+      "seconds": 5.481757339992328,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint3",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_sprint3.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 52,
+      "log": "sprint3-asan-ubsan.log",
+      "seconds": 3.4214523529808503,
+      "verified_pass": true
+    },
+    {
+      "cohort": "stocks",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_live_market_suite.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 207,
+      "log": "stocks-asan-ubsan.log",
+      "seconds": 38.121975847985595,
+      "verified_pass": true
+    },
+    {
+      "cohort": "terminal",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_native_suite.py",
+        "--expected-tests",
+        "274"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 274,
+      "log": "terminal-asan-ubsan.log",
+      "seconds": 64.01905952300876,
+      "verified_pass": true
+    },
+    {
+      "cohort": "hardening",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_production_hardening.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 29,
+      "log": "hardening-debug.log",
+      "seconds": 1.216942092985846,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "debug",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-debug.log",
+      "seconds": 0.9696826529980171,
+      "verified_pass": true
+    },
+    {
+      "cohort": "hardening",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_production_hardening.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 29,
+      "log": "hardening-release.log",
+      "seconds": 1.1662784100044519,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "release",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-release.log",
+      "seconds": 0.916799811006058,
+      "verified_pass": true
+    },
+    {
+      "cohort": "hardening",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_production_hardening.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 29,
+      "log": "hardening-asan-ubsan.log",
+      "seconds": 4.2741918039973825,
+      "verified_pass": true
+    },
+    {
+      "cohort": "sprint2",
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/tests/run_remediation_sprint2.py"
+      ],
+      "configuration": "asan-ubsan",
+      "exit_code": 0,
+      "expected": 30,
+      "log": "sprint2-asan-ubsan.log",
+      "seconds": 3.1319089230091777,
+      "verified_pass": true
+    }
+  ],
+  "python_total": 2169,
+  "real_account_requests": 0,
+  "real_order_requests": 0,
+  "real_provider_requests": 0,
+  "restricted_datasets_accessed": 0,
+  "runtime_implementation_commit": "11f1e9cfe6898970461855829650220a9e57bb5d",
+  "schema": "gig.institutional.sprint1.evidence.v1",
+  "workflow_dispatches": 0,
+  "workflow_policy_checks": [
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "-m",
+        "unittest",
+        "terminal.test_arm64_terminal_policy"
+      ],
+      "configuration": "debug",
+      "failures": 0,
+      "tests": 3
+    },
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "-m",
+        "unittest",
+        "terminal.test_arm64_terminal_policy"
+      ],
+      "configuration": "release",
+      "failures": 0,
+      "tests": 3
+    },
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "scripts/run_python_sanitized.py",
+        "terminal/test_arm64_terminal_policy.py"
+      ],
+      "configuration": "asan-ubsan",
+      "failures": 0,
+      "tests": 3
+    }
+  ]
+}
