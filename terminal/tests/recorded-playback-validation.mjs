@@ -5,8 +5,25 @@ import {chromium} from 'playwright';import assert from 'node:assert/strict';
 const base=process.env.TERMINAL_URL||'http://127.0.0.1:8787';assert.match(base,/^http:\/\/(127\.0\.0\.1|localhost):8787$/);
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
 try{
- const page=await browser.newPage();await assertFixtureServer(page,base);await page.request.post(base+'/api/v1/recording',{headers:{Origin:new URL(base).origin},data:{action:'delete_l2',identity:'authored-l2-v2'}});await page.goto(base);await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name:'Historical Replay',exact:true}).click();
- async function mutation(action,operation){const committed=page.waitForResponse(r=>r.request().method()==='POST'&&JSON.parse(r.request().postData()||'{}').action===action);await operation();const response=await committed;assert.equal(response.status(),200);return response.json()}
+ let forwardedMutations=0;const page=await browser.newPage();await assertFixtureServer(page,base);await page.request.post(base+'/api/v1/recording',{headers:{Origin:new URL(base).origin},data:{action:'delete_l2',identity:'authored-l2-v2'}});await page.goto(base);await page.getByRole('navigation',{name:'Research sections',exact:true}).getByRole('button',{name:'Historical Replay',exact:true}).click();
+ // Streamed Fetch response bodies need not survive in Chromium's CDP cache.
+ // Forward the paused original request once and capture its actual JSON before
+ // fulfilling the browser request. No second POST or synthetic response is used.
+ async function mutation(action,operation){
+  const endpoint=['save_l2_fixture','load_l2','delete_l2'].includes(action)?'recording':'control';
+  const pattern='**/api/v1/'+endpoint;let captured,count=0;
+  const handler=async route=>{
+   assert.equal(route.request().method(),'POST');assert.equal(route.request().postDataJSON().action,action);
+   const response=await route.fetch({maxRedirects:0,maxRetries:0,timeout:10000});
+   assert.equal(response.status(),200);captured=await response.json();count++;forwardedMutations++;
+   await route.fulfill({response});await response.dispose();
+  };
+  await page.route(pattern,handler);
+  try{
+   const committed=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/'+endpoint&&r.request().method()==='POST'&&JSON.parse(r.request().postData()||'{}').action===action);
+   await operation();assert.equal((await committed).status(),200);assert.equal(count,1);assert.ok(captured);return captured;
+  }finally{await page.unroute(pattern,handler)}
+ }
  await mutation('mode',()=>page.getByLabel('Operating mode').selectOption('HISTORICAL_REPLAY'));
  await mutation('save_l2_fixture',()=>page.getByRole('button',{name:'Save authored L2 recording',exact:true}).click());
  await page.getByLabel('Recorded L2 session').selectOption('authored-l2-v2');
@@ -23,5 +40,6 @@ try{
  state=await(await page.request.get(base+'/api/v1/state')).json();assert.equal(state.position,5);assert.equal(state.playing,false);assert.equal(state.book.bids[0].price_ticks,'9900000000');
  await mutation('delete_l2',()=>page.getByRole('button',{name:'Delete L2 session',exact:true}).click());
  state=await mutation('dataset',()=>page.getByLabel('Replay source').selectOption('terminal-authored-v2'));assert.equal(state.provider,'authored');
- console.log(JSON.stringify({schema:'gig.browser.recorded_l2.v1',passed:9,failed:0,checks:['save authored native log','discover/select','native exact step','seek exact quantity','causal OFI corresponds to native prefix','restart prefix0','speed and playback to EOF','delete with owned cache','return to L3 authored source'],observed_data:false},null,2));
+ assert.equal(forwardedMutations,10);
+ console.log(JSON.stringify({forwarded_mutations:forwardedMutations,mutation_retries:0,schema:'gig.browser.recorded_l2.v1',passed:9,failed:0,checks:['save authored native log','discover/select','native exact step','seek exact quantity','causal OFI corresponds to native prefix','restart prefix0','speed and playback to EOF','delete with owned cache','return to L3 authored source'],observed_data:false},null,2));
 }finally{await browser.close()}
