@@ -142,6 +142,7 @@ jobs:
           /usr/bin/time -v build/wheel-consumer/bin/python terminal/tests/run_native_suite.py --expected-tests 274
           PYTHONPATH="${{ github.workspace }}/terminal/tests/offline_guard:${{ github.workspace }}" build/wheel-consumer/bin/python terminal/tests/run_final_qualification.py
           PYTHONPATH="${{ github.workspace }}/terminal/tests/offline_guard:${{ github.workspace }}" build/wheel-consumer/bin/python terminal/tests/run_production_hardening.py
+          PYTHONPATH="${{ github.workspace }}/terminal/tests/offline_guard:${{ github.workspace }}" build/wheel-consumer/bin/python terminal/tests/run_institutional_sprint2.py
       - name: Source archive reproducibility and integrity
         if: matrix.compiler == 'gcc' && matrix.preset == 'release'
         shell: bash
