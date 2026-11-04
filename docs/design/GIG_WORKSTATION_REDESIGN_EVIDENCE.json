@@ -1,0 +1,2695 @@
+{
+  "advanced_evidence_sha256": "ffd190f173ea33ca41e64aeb182c4bf87074838e6290634e8034ddfeccf9adaf",
+  "assets": {
+    ".vite/manifest.json": {
+      "bytes": 4761,
+      "sha256": "098e02bfe798878f9b1206eb3d57ff93652d92626da6b1960fd3a9ffe959dde6"
+    },
+    "assets/HistoricalResearch-B_VWEC8Q.js": {
+      "bytes": 21541,
+      "sha256": "e50c4ee03523fe4527ab8e43a667ffcf4c62420a4ef90673d399fc24ad2e622e"
+    },
+    "assets/Landscape3D-BhrcdQ9x.js": {
+      "bytes": 7480,
+      "sha256": "be13b5c7f5ed7031f2af99b78a1c1380dbf8c4fda274b610524f51040aea9c69"
+    },
+    "assets/LiveMarket-DgL6Qlmk.js": {
+      "bytes": 36181,
+      "sha256": "572cedd197a9d52cf7ac0ea00f117bde701864f456fc20d90c2b1bf89b6161a0"
+    },
+    "assets/MarketHealth-Mk129HC8.js": {
+      "bytes": 2529,
+      "sha256": "af1161ecf73721860c0d06e09f55064e871ca967d2b30407c7f8240ec25bd855"
+    },
+    "assets/ModelSurface-C67v4PXc.js": {
+      "bytes": 7547,
+      "sha256": "e50ea6ed767828ccf933f5730c370ded364d0b73990a5725f65c532b450e753f"
+    },
+    "assets/OrbitControls-CsNYB8nn.js": {
+      "bytes": 517066,
+      "sha256": "f9602bdd758a771fcb71c8e11dc80240ab139a67eacc7ed6f4bba72799ca7785"
+    },
+    "assets/PaperProvider-Dqk0gY4b.js": {
+      "bytes": 8495,
+      "sha256": "baff66d56a891971fa49ca1bc6906baec325e08e5c6dad3bd1633385964d39b8"
+    },
+    "assets/PaperSandbox-BTM3kwr2.js": {
+      "bytes": 8037,
+      "sha256": "2c4723db35151bf6318ccc157f67a3123abb98ffc7c8d2f7a245c3baf7aae8ca"
+    },
+    "assets/QuoteCloud-HrHvsnB9.js": {
+      "bytes": 10475,
+      "sha256": "6a7d0ca93f308f8a296e39ceb32726c1096e0529a3fd87bf295058c0f7687d40"
+    },
+    "assets/ResearchDesk-BeSE6W5l.js": {
+      "bytes": 4945,
+      "sha256": "e15ed02688dac29a1b720fd5c4caccc4ff6749e584b21a7096fd7fbf2a2b7059"
+    },
+    "assets/ResearchLab-Bk1iN6Og.js": {
+      "bytes": 28979,
+      "sha256": "93597c20ebff8afcd78c4addb473df074676ef162408ee4271bf08fccd6bb329"
+    },
+    "assets/ResearchLab-D0vzy70c.css": {
+      "bytes": 2780,
+      "sha256": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519"
+    },
+    "assets/ResearchScene-MCUyTbqZ.js": {
+      "bytes": 5593,
+      "sha256": "6d874f4c6b908e6edf0e48c2a2c16049562b82fa75c3b28ab27bc9957071759c"
+    },
+    "assets/StockIntelligence-BbOTzlRj.js": {
+      "bytes": 83535,
+      "sha256": "7992977daccdf2bac4f8e2ba3cdfecd18c2ef851d0cbebae56e9bd57ff633719"
+    },
+    "assets/UniverseWorkspace-BAHtGI-Z.js": {
+      "bytes": 8174,
+      "sha256": "73a8f90cb2e14884fbf9f79dfc0790cb08221fee08d74fc677d178e65e332ef2"
+    },
+    "assets/VolatilitySurface-Dpz3H1_h.js": {
+      "bytes": 3925,
+      "sha256": "b1f69b14e08085b352ac0a23369e3bff18cf504bbc21882cb029b4f6488bef97"
+    },
+    "assets/directoryContract-BVrwTy34.js": {
+      "bytes": 2323,
+      "sha256": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e"
+    },
+    "assets/index-C7ysD_XU.css": {
+      "bytes": 94931,
+      "sha256": "d49e965617dfc732db2d358fcfb650ccbf6b989b7271a241c3f355da45c57f42"
+    },
+    "assets/index-CnnoXi1X.js": {
+      "bytes": 254545,
+      "sha256": "11a7858a03dac02225319264d6b6d3413df3230e3d4d8630d517b1b0ebfd1c44"
+    },
+    "assets/marketContract-C6ksBMry.js": {
+      "bytes": 2494,
+      "sha256": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090"
+    },
+    "index.html": {
+      "bytes": 490,
+      "sha256": "a8d7a1f50bffff0966ce2334c5dfd5edd87d6fca54922540c9dc26e90a722f80"
+    }
+  },
+  "backend": {
+    "configuration": "Existing Release extension with loopback-only fixture socket guard;no real providers",
+    "errors": 0,
+    "failures": 0,
+    "native_terminal_api": 274,
+    "skipped": 0,
+    "source_changed": false,
+    "stock_provider_sec": 207
+  },
+  "baseline": "237167358969b0c7cec04c639b412fbe494bb192",
+  "branch": "development/gig-ui-redesign",
+  "browser_checks": {
+    "advanced_3d": 23,
+    "existing_gig": 10,
+    "fake_paper_and_research": 7,
+    "final_failures": 0,
+    "financial_and_filing_layout": 11,
+    "native": 21,
+    "new_workstation": 6,
+    "recorded_replay": 9,
+    "skips": 0,
+    "stock_intelligence": 10,
+    "total": 97
+  },
+  "browser_origin_and_ticket_capture": {
+    "bootstrap_and_socket_correlated": true,
+    "browser": "154.0.8037.57",
+    "credential_headers_recorded": false,
+    "document": {
+      "host": "127.0.0.1:8787",
+      "origin": "http://127.0.0.1:8787",
+      "protocol": "http:"
+    },
+    "outgoing_browser_handshake": {
+      "origin": "http://127.0.0.1:8787",
+      "url": "ws://127.0.0.1:8787/api/v1/stream"
+    },
+    "schema": "gig.browser.handshake_evidence.v1",
+    "scope": "Local browser CDP capture;not owner private Codespaces edge capture"
+  },
+  "browser_programs": [
+    {
+      "exit_code": 0,
+      "script": "gig-workstation-validation",
+      "seconds": 14.2650600410052
+    },
+    {
+      "exit_code": 0,
+      "script": "gig-redesign-validation",
+      "seconds": 16.630894966998312
+    },
+    {
+      "exit_code": 0,
+      "script": "browser-validation",
+      "seconds": 12.438800094001635
+    },
+    {
+      "exit_code": 0,
+      "script": "contrast-scan",
+      "seconds": 5.48584198399476
+    },
+    {
+      "exit_code": 0,
+      "script": "advanced-research-validation",
+      "seconds": 28.169861426998978
+    },
+    {
+      "exit_code": 0,
+      "script": "measure_sprint3_browser",
+      "seconds": 4.988722690999566
+    },
+    {
+      "exit_code": 0,
+      "script": "recorded-playback-validation",
+      "seconds": 1.9239098530015326
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-intelligence-validation",
+      "seconds": 5.342908093996812
+    },
+    {
+      "exit_code": 0,
+      "script": "sprint3-validation",
+      "seconds": 12.814406443001644
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas2-validation",
+      "seconds": 21.321617829002207
+    }
+  ],
+  "changed_source_sha256": {
+    "docs/design/GIG_WORKSTATION_REDESIGN_PROGRESS.md": "d48eea287b00ee6d34f6dbc7e98634e0993e6b1f63e54000c89792ef9ee5f410",
+    "terminal/tests/atlas2-validation.mjs": "f863fc781e5dcfb8f83ae05e59fd7499257b2dec8781e146bc0d3f75a53afe63",
+    "terminal/tests/browser-validation.mjs": "cdaed3da1793d9a435700e3b322b268b343a3e2666bd5db9e7a41a01114067fb",
+    "terminal/tests/gig-workstation-validation.mjs": "b8bb6afbc189859220f5e80e59e242a7c514473bfcdfc7611614968c876626ba",
+    "terminal/tests/run_sprint3_browser.py": "0a4f181b16adeacd69c8fa9396fcfec209f9e7b43eb29f91a541c8c7d9c78715",
+    "terminal/tests/sprint3-validation.mjs": "08941fc243ca5d977159e943da04fbe2e22d118a436dca62ea72844196406d5f",
+    "terminal/tests/stock-intelligence-validation.mjs": "dc04c2b251d15f889184727e6c14b834d9149dbb87096301a7b8790dd86e7e35",
+    "terminal/web/package.json": "f27315deeebb8bd35b3371f4c2f3e58862bc0c50d2160027f21fda9822a2e836",
+    "terminal/web/src/App.tsx": "fef6a12eaa4815174dfc8b8cd1a2c02d9b68d66b48febca2469b3a7a5cd4fe8b",
+    "terminal/web/src/Landscape3D.tsx": "6fe7df0f167ea0bd77b57d89552915eefe16ed77f5eaceb395765b21c7599453",
+    "terminal/web/src/LiveMarket.tsx": "55082a40fc33307fc360d2c544869a376220bb74e693674bf80e67d4fdfbe9eb",
+    "terminal/web/src/Navigation.tsx": "1f7ad88ae94d8cdfc9f31e1520db3fc484de92fe9e985b0857aadaa08e025744",
+    "terminal/web/src/OrbitMotion.tsx": "15981626d816544df6a962f1cdac0ff3966bbd66c34fda861d6b7dfaddcfbd66",
+    "terminal/web/src/OrderBook.tsx": "ea015c95a53dc42d6f738a07a29d3aee2a4bc2873d5566460f110c8fe54133bd",
+    "terminal/web/src/ResearchDesk.tsx": "5775331e89e35bd0961805f92c77b6a37b6fa80ea88a98a899164e2dfc17bd04",
+    "terminal/web/src/StockIntelligence.tsx": "444778a33ce94ddd630296f13a37e2d0a2072f65f1b2d2df784be9223bce4208",
+    "terminal/web/src/TerminalHeader.tsx": "bb3ab9bfb5f98c24f39e75f47c7d00f3bbfef0d074a83a9b161037774327fbe7",
+    "terminal/web/src/UniverseWorkspace.tsx": "8e21bd53a85924c9677cca966e097a8fb86b9b3d118f593a2bd8370124a0fcaf",
+    "terminal/web/src/WorkspaceHeading.tsx": "471fbc1c13225b8986f03c5b3a783ceb6fc0fc758da3a91a2583aea778022fa7",
+    "terminal/web/src/WorkspaceIcon.tsx": "7d358d8b3a5f2647edf167af2a204322fe1e7446b8d530a541a2933924fc21c0",
+    "terminal/web/src/WorkspaceLaunchpad.tsx": "9c03fef0dc47c97e16fcec8ac727c0835b82b20eb21ed3f217497b647dcdc0bd",
+    "terminal/web/src/main.tsx": "dc18b0ec9f92f687cd791bf5d8c10301c36b29bd28a940efe17975b87b57d17d",
+    "terminal/web/src/workstation.css": "c8da38460591ac4d7280d384e652afdf0a2bdf3c93aef927e062d937fc377ce7",
+    "terminal/web/src/workstation.test.ts": "94c1408f0379081964646ce6555302a55583bcaed69ff82b2292e1132d1756aa",
+    "terminal/web/src/workstation.ts": "b2e218432469f307d494a048a541a5895ddfc3d1b0fd063b04b3f88db8c7e1f6"
+  },
+  "clean_checkpoint_receipt": {
+    "local_server": {
+      "startup_receipt": {
+        "frontend_entry_sha256": "11a7858a03dac02225319264d6b6d3413df3230e3d4d8630d517b1b0ebfd1c44",
+        "frontend_index_sha256": "a8d7a1f50bffff0966ce2334c5dfd5edd87d6fca54922540c9dc26e90a722f80",
+        "source_sha": "6d1f5123db874b3df23d9b3161004749a54ec35e",
+        "tracked_clean": true
+      },
+      "status": "MATCH"
+    },
+    "owner_private_authentication": "UNVERIFIED",
+    "source": "6d1f5123db874b3df23d9b3161004749a54ec35e",
+    "status": "PASS_OFFLINE_CHECKS_ONLY"
+  },
+  "client_date": "2026-11-03",
+  "closure_scope": "Following commit is documentation only. Browser qualification binds precommit byte-identical sources/assets;clean-checkpoint health/CDP receipt binds committed implementation.",
+  "contrast": {
+    "contexts": 24,
+    "failures": 0,
+    "not_full_wcag_or_screen_reader_certification": true,
+    "sampled_elements": 5686,
+    "scope": "Rendered HTML text including below-fold content at1440x1100;closed details and inactive controls excluded;not screen-reader or full WCAG certification"
+  },
+  "deleted_sources": [
+    "terminal/web/src/terminal.css"
+  ],
+  "documentation_sha256": {
+    "GIG_WORKSTATION_REDESIGN.md": "fef585fb356a367feec08cf10c4018e42716759ae8c7a9859199941996ebc5fa",
+    "GIG_WORKSTATION_REDESIGN_PROGRESS.md": "00c8c75f17eeaa2f5f6f8fbb7730493b8e5f976b106d5260c9a68fce5a5ad6ce"
+  },
+  "evidence_root": "build/gig-redesign-next",
+  "frontend": {
+    "failures": 0,
+    "new_dependencies": 0,
+    "skipped": 0,
+    "typescript_and_production_build": "PASS",
+    "unit_tests": 123,
+    "warnings": [
+      "Existing deferred approximately517kB OrbitControls chunk warning retained",
+      "npm update notice retained;no upgrade performed"
+    ]
+  },
+  "ignored_log_artifact_hashes": [
+    {
+      "bytes": 40337,
+      "path": "backend-native-274.log",
+      "sha256": "2665baba03eadce125e7097afdbb5a7e3053df898720d856ca2a1f1eb2c17427"
+    },
+    {
+      "bytes": 7742,
+      "path": "bind.py",
+      "sha256": "eb2b7c4ed1511b35d4be521eaf0b6acdb8e3f751b76446fe8a3e2f5c9b30975e"
+    },
+    {
+      "bytes": 677,
+      "path": "browser/atlas-final-server.log",
+      "sha256": "0d3774fff31fb212f606e7916b90ab1c75c363f5d07e5727cdbc878883026084"
+    },
+    {
+      "bytes": 677,
+      "path": "browser/atlas2-final-server.log",
+      "sha256": "f4ba269547e82c02deac413c83bfe2a5a0f93c97f47102b5022118f81f23dec7"
+    },
+    {
+      "bytes": 109,
+      "path": "browser/browser-final-matrix.json",
+      "sha256": "fa063b87e6f445d1853c06cff2e0af09053a9144e08f0c923e001a9dff9b67e3"
+    },
+    {
+      "bytes": 710,
+      "path": "browser/gig-workstation-validation-final.log",
+      "sha256": "b09289937b6201086df74ef249c2b61f130d5b2566ce566d968abc5ef6c042db"
+    },
+    {
+      "bytes": 677,
+      "path": "browser/live-final-server.log",
+      "sha256": "813e39b63fb8ca870fd252d690e37febb4d7c83c255c76042076f83839802da2"
+    },
+    {
+      "bytes": 14742,
+      "path": "browser/native-final-server.log",
+      "sha256": "58651bceda81d011a7feca8878b2aeab8e725b6d2742bf0ea319c1327ca7c16e"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser/source-receipt.json",
+      "sha256": "acd0f5e0705308f44da4299081142395b8377210ab9265d3b327dbf3ab79727c"
+    },
+    {
+      "bytes": 677,
+      "path": "browser/stock-final-server.log",
+      "sha256": "afd02a193e90c5e2c99aa5ddbb40ea23dc45e80c8fa78e707ecde9a8c811ef2b"
+    },
+    {
+      "bytes": 28147,
+      "path": "browser/visual/workstation/results.json",
+      "sha256": "97680501ecb925d5c407f4d2af9e8c6e7469e92ea8b1332628920375cd1dc8fb"
+    },
+    {
+      "bytes": 677,
+      "path": "browser/workspaces-final-server.log",
+      "sha256": "146fff13062b69bc5def8c8f24ce13b3eedc612ec2c5762603267f91f13b8bc4"
+    },
+    {
+      "bytes": 710,
+      "path": "browser/workstation-initial-failure.log",
+      "sha256": "b09289937b6201086df74ef249c2b61f130d5b2566ce566d968abc5ef6c042db"
+    },
+    {
+      "bytes": 413,
+      "path": "browser-driver.log",
+      "sha256": "419e2146c21a6051ac890581b70f14b988bf52768e721ca85dab2da3991a1678"
+    },
+    {
+      "bytes": 10689,
+      "path": "browser-final/advanced-research-validation-final.log",
+      "sha256": "772ce838ff666ba190063063736d8a1bdef7433c25231eae5a2ad8f75f847519"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-final/atlas-final-server.log",
+      "sha256": "ddf1432a54a0dc189e9917d4049a4b52c30e71de6ba6f718d6eb670a911018ea"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-final/atlas2-final-server.log",
+      "sha256": "3a78df73abbfd17b72f3e4a6bc60eae2fc8da9cf157b75b0922a318d6f5f8761"
+    },
+    {
+      "bytes": 722,
+      "path": "browser-final/browser-final-matrix.json",
+      "sha256": "3730424655bb9bff2b193d2a71538b77725a63ba2798faf8367ac1fb3215df80"
+    },
+    {
+      "bytes": 6414,
+      "path": "browser-final/browser-validation-final.log",
+      "sha256": "9518b5f512602d353e3435d79acaebb8995765d3e55297979154b82b040ba9d5"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-final/contrast-scan-final.log",
+      "sha256": "4880095bccafc60221b64f2fa2b79fadd1cfd3f1fb865709df63be4659514a03"
+    },
+    {
+      "bytes": 806,
+      "path": "browser-final/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 345,
+      "path": "browser-final/gig-workstation-validation-final.log",
+      "sha256": "3318a7235d1301df596eb09caaa4815bcce775620d9d0ab1cddaab9b5e4f5098"
+    },
+    {
+      "bytes": 2927,
+      "path": "browser-final/live-final-server.log",
+      "sha256": "a608cdacf1a066e7c7cdf4d34bd771232184b7d258b32e6183f2883153489844"
+    },
+    {
+      "bytes": 6414,
+      "path": "browser-final/native-browser/results.json",
+      "sha256": "9518b5f512602d353e3435d79acaebb8995765d3e55297979154b82b040ba9d5"
+    },
+    {
+      "bytes": 56267,
+      "path": "browser-final/native-final-server.log",
+      "sha256": "81be264a458622db8e2dcb3fabf20fe3879c40b873f0483b14c5e595616875ae"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-final/source-receipt.json",
+      "sha256": "4672a35c126b592de8e59c2151d3a7cca6cad53c1884c1e609f5cb31d4fd45f7"
+    },
+    {
+      "bytes": 1275,
+      "path": "browser-final/sprint3-validation-final.log",
+      "sha256": "ddae690269795611d09dddc8c69cf7eb27b05d10c67256e6582f7ae6ed9930c1"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-final/stock-final-server.log",
+      "sha256": "26d0a808b91f3df081dbd1859df57fe545cb4ab6128169224d0ed8498723ec16"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-final/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 1077,
+      "path": "browser-final/visual/browser.json",
+      "sha256": "e8fa1ca1feb55f43d3d87e37bbb91ad9aef935eb8cc351b484fb1ad365e5988a"
+    },
+    {
+      "bytes": 3005,
+      "path": "browser-final/visual/contrast-scan.json",
+      "sha256": "e32537f183beddcec0cc40b7707c9037339be5b22b7a83980dd0208e766f7811"
+    },
+    {
+      "bytes": 6593,
+      "path": "browser-final/visual/gig-redesign-result.json",
+      "sha256": "ab39ffe5d0887d4328844f0a396c0ec9e05aeb231a98a356daa25b4953f4e764"
+    },
+    {
+      "bytes": 27899,
+      "path": "browser-final/visual/workstation/results.json",
+      "sha256": "409163f1624e3568086545f9cec0de7b8ce74b58994e5f2a33cfd8075ee27aae"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-final/workspaces-final-server.log",
+      "sha256": "a27eec59d4405f9612e60b25405dc8419cda0eb2ed37824d8e12cf638751b1d7"
+    },
+    {
+      "bytes": 592,
+      "path": "browser-final-driver.log",
+      "sha256": "15974121d4a286b4c2d92b54885099beb97211c5383655245b018c12e063d4ea"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-financial/atlas-final-server.log",
+      "sha256": "1fab6b1c022342c13966c8a1ed1f7c4a450d49c56cabc67d14c3a86fd87a6155"
+    },
+    {
+      "bytes": 21981,
+      "path": "browser-financial/atlas2-final-server.log",
+      "sha256": "d22909cc7eae9aa1269cccaee815239b806105c9a7d38f9c22090c4b4783129c"
+    },
+    {
+      "bytes": 3274,
+      "path": "browser-financial/atlas2-validation-final.log",
+      "sha256": "0946c5a33950a51cb23d78500784b422efe1ffaae559ca6f696fb2f59a75e19b"
+    },
+    {
+      "bytes": 101,
+      "path": "browser-financial/browser-final-matrix.json",
+      "sha256": "89a57ac7a59a2de5d405abdfa29d146e826fa430989a1f0f4b79856f7c8a2c32"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-financial/live-final-server.log",
+      "sha256": "b886e3e58fe7b3b154cabe2c888e654e6a2895778c8a8b49070b7afdf0b06809"
+    },
+    {
+      "bytes": 414,
+      "path": "browser-financial/native-final-server.log",
+      "sha256": "8549c40aa9198bf6dadc8aaa4a2f500617dbb9fc615470398bad2fa56d39a1d8"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-financial/source-receipt.json",
+      "sha256": "92507312ad62581e7a0ff358e12af792f063f4b844e3ea524ff0b141c497da1f"
+    },
+    {
+      "bytes": 2453,
+      "path": "browser-financial/stable-assets-final.json",
+      "sha256": "421b5ee466b535a27bde941d391262a97a7ca37f37d46f423cb9dab2584e0478"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-financial/stock-final-server.log",
+      "sha256": "50179d65b22e00027264ea80636f3878634a56ed54a7176c2a52d3ba55d8c770"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-financial/workspaces-final-server.log",
+      "sha256": "9287a74ffb8b37f28c87bd75d7e0857af1a11e48efea099a4eb2d96345134a85"
+    },
+    {
+      "bytes": 27,
+      "path": "browser-financial-driver.log",
+      "sha256": "7e588128dd5ddd53cbac37df9e2ec194a17acb223bd656fa535b103c8e923b5f"
+    },
+    {
+      "bytes": 903,
+      "path": "browser-inventory-initial.log",
+      "sha256": "7bcc0714df23e82776e9521d8e7372313d3c33092504fbcf41ece5b2c339075c"
+    },
+    {
+      "bytes": 10650,
+      "path": "browser-qualified/advanced-research-validation-final.log",
+      "sha256": "2c4fefeacc102adb2ff67da0f3900773bedc2aed1bb29217fc5ac94755216475"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-qualified/atlas-final-server.log",
+      "sha256": "70fdfb7c400d370ac2e8aaafd0ca501480aa79a9c879c15c728ed8a0ef2990be"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-qualified/atlas2-final-server.log",
+      "sha256": "2f089ecf90d2210a5e6404434c4cc0a7fb4a469ded57b4b672e33f3956dad215"
+    },
+    {
+      "bytes": 724,
+      "path": "browser-qualified/browser-final-matrix.json",
+      "sha256": "e8135d7ba55a17f757dbeb1311969da766e2c82b23a936a0fcb09e2ad3551cf2"
+    },
+    {
+      "bytes": 6426,
+      "path": "browser-qualified/browser-validation-final.log",
+      "sha256": "d0750ca92ffa9bc7399774ce66fe99691b80e03f9b3a13865dea76aa61bc9346"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-qualified/contrast-scan-final.log",
+      "sha256": "6c68a8c601b8bb96feba2eaed6e4667c2225185b4f100657303222e0d1037b8d"
+    },
+    {
+      "bytes": 806,
+      "path": "browser-qualified/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 416,
+      "path": "browser-qualified/gig-workstation-validation-final.log",
+      "sha256": "672484652df02c9d92a5636127b164e8cd11662931ffbba083dd456f1d56d354"
+    },
+    {
+      "bytes": 2927,
+      "path": "browser-qualified/live-final-server.log",
+      "sha256": "359b5594e0e6342badf02b234d0add6cf77142d47bad362b54bf30a28541eee0"
+    },
+    {
+      "bytes": 2556,
+      "path": "browser-qualified/measure_sprint3_browser-final.log",
+      "sha256": "32e75451a83d5f1667d8afeb18df75b66e9c4289572fc05dcfd1f81d28686c8f"
+    },
+    {
+      "bytes": 6426,
+      "path": "browser-qualified/native-browser/results.json",
+      "sha256": "d0750ca92ffa9bc7399774ce66fe99691b80e03f9b3a13865dea76aa61bc9346"
+    },
+    {
+      "bytes": 56254,
+      "path": "browser-qualified/native-final-server.log",
+      "sha256": "bc7b1996668d66b510d5e44330c65fffef9ae25f258d2dd9dc54ad0fd67eb0e8"
+    },
+    {
+      "bytes": 450,
+      "path": "browser-qualified/recorded-playback-validation-final.log",
+      "sha256": "20a2967b0d7c952fccf1ef7d9d3ef4ca16e45fb7c37cd5032ee4b000705e8625"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-qualified/source-receipt.json",
+      "sha256": "b11bba9affdcac5dc1403e66b6ae654f0eabb90a9b65c4c124e916ef4892c700"
+    },
+    {
+      "bytes": 2453,
+      "path": "browser-qualified/stable-assets-final.json",
+      "sha256": "421b5ee466b535a27bde941d391262a97a7ca37f37d46f423cb9dab2584e0478"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-qualified/stock-final-server.log",
+      "sha256": "23e937bed753fd2c64a755fe1c354a9eef4901da65812ad6b967be0c1edab61d"
+    },
+    {
+      "bytes": 3005,
+      "path": "browser-qualified/visual/contrast-scan.json",
+      "sha256": "8ab78ce9a79492ecde9a49a54d6b84c7e9b446df20408a955f3ec766bb2004ca"
+    },
+    {
+      "bytes": 6657,
+      "path": "browser-qualified/visual/gig-redesign-result.json",
+      "sha256": "d2a6585c97f776323c6f72b965dff376a6a8f4f1a92ffab4df98dc2991a476f7"
+    },
+    {
+      "bytes": 2555,
+      "path": "browser-qualified/visual/performance.json",
+      "sha256": "8c4ac0c0941402a5199dbcb78b7b6ae0a32c2f338d4490d1d7ec8f24b0e7c095"
+    },
+    {
+      "bytes": 28060,
+      "path": "browser-qualified/visual/workstation/results.json",
+      "sha256": "fb941595daa1427e5707d2eccf7d0e95b25fb2a0f6b5f3d7442330930165a660"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-qualified/workspaces-final-server.log",
+      "sha256": "6d2b7713c6e334ee3b984a924cac674558037385b82ee9c0cc720293f5b5953f"
+    },
+    {
+      "bytes": 225,
+      "path": "browser-qualified-driver.log",
+      "sha256": "d9a12caeba27b22d9e64bb137c472983ace9ef63eba0f6815356c2239727b5cb"
+    },
+    {
+      "bytes": 65,
+      "path": "browser-recovery-driver.log",
+      "sha256": "b04e47006a00de0c69de85a00494f8fa0b5f9e426dae208f9161dea5f187a350"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-recovery-final/atlas-final-server.log",
+      "sha256": "5566467bb9b40014bfe798ba39a98a7fa0b589ac342f70b699709c7f3e3acfea"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-recovery-final/atlas2-final-server.log",
+      "sha256": "87287a92452352cc759523a7d821cf268e445d8823def414b6a15eb11e5c8af1"
+    },
+    {
+      "bytes": 210,
+      "path": "browser-recovery-final/browser-final-matrix.json",
+      "sha256": "e0936ce0e08a58a79e5321df1876826c617fab1ce5cd51731818a7ef29a711b7"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-recovery-final/live-final-server.log",
+      "sha256": "3df0f918ea2b5f98b26b514e549b4324b1a23b7507550c091ecdf9db8f6c5498"
+    },
+    {
+      "bytes": 26412,
+      "path": "browser-recovery-final/native-final-server.log",
+      "sha256": "cb11f81048495eaab301e37388fa4d4f7fcffea15039e2602aeb58cc25e3b2e3"
+    },
+    {
+      "bytes": 450,
+      "path": "browser-recovery-final/recorded-playback-validation-final.log",
+      "sha256": "20a2967b0d7c952fccf1ef7d9d3ef4ca16e45fb7c37cd5032ee4b000705e8625"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-recovery-final/source-receipt.json",
+      "sha256": "155a1ffc5c405a72827e1691f4eaa2e1635bfcf542dfa9133cd2a58faec43d6c"
+    },
+    {
+      "bytes": 12550,
+      "path": "browser-recovery-final/sprint3-validation-final.log",
+      "sha256": "dd2145bf97beb7e4566c358d6b1775b4022d09a60428c7eafcff59438b176d91"
+    },
+    {
+      "bytes": 2453,
+      "path": "browser-recovery-final/stable-assets-final.json",
+      "sha256": "b7fbd624fc5ccb04914c93ed9ffcd37a0c15d18bc5ab981f9bc14f714cd838c7"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-recovery-final/stock-final-server.log",
+      "sha256": "08f80829c6a99599ee22646dd815fab10dec90d72e8ac08bb7c240400bcbdecd"
+    },
+    {
+      "bytes": 11955,
+      "path": "browser-recovery-final/visual/browser.json",
+      "sha256": "43192b3ae1cf7d9dafca4bcd8cce24ebb3d5a7fa614877c0ea708bb7d5b12ae2"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-recovery-final/workspaces-final-server.log",
+      "sha256": "d9f6452ac47990fae1c0e91cb005047d0a0649e2274096114fa9fd678bf794b2"
+    },
+    {
+      "bytes": 66,
+      "path": "browser-stock-driver.log",
+      "sha256": "a0b1d958f12a962aece577585277272b44c9ca84b674291102362c2e8c6ea3c2"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-stock-final/atlas-final-server.log",
+      "sha256": "9eca934ce6a0eb3aff5590616b72260b624e87d4d6670caf20cddd2ff024b42f"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-stock-final/atlas2-final-server.log",
+      "sha256": "bef74e90fc852b511ae8c624e6763d78a3ebecdbc46594bd2de4c80059b87a2b"
+    },
+    {
+      "bytes": 211,
+      "path": "browser-stock-final/browser-final-matrix.json",
+      "sha256": "d8baaebdc7444ef0f3b7bbb57dd1c6ac65abfcace309fc6b813accb6331db352"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-stock-final/live-final-server.log",
+      "sha256": "e47f15f465f0ce52112c5ca0120b07967c0eda584f675b68e43011003002c812"
+    },
+    {
+      "bytes": 26774,
+      "path": "browser-stock-final/native-final-server.log",
+      "sha256": "08bb53bd26bc87f67d5341d18cbffb20437c653cf29f652f09e97d34abc72e12"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-stock-final/source-receipt.json",
+      "sha256": "b11bba9affdcac5dc1403e66b6ae654f0eabb90a9b65c4c124e916ef4892c700"
+    },
+    {
+      "bytes": 12466,
+      "path": "browser-stock-final/sprint3-validation-final.log",
+      "sha256": "c1a20a7a94aeadf1a88fe86bd6dc8da26a8084a9065b1f02c99262b3700fd08f"
+    },
+    {
+      "bytes": 2453,
+      "path": "browser-stock-final/stable-assets-final.json",
+      "sha256": "421b5ee466b535a27bde941d391262a97a7ca37f37d46f423cb9dab2584e0478"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-stock-final/stock-final-server.log",
+      "sha256": "214b9f1ec402aa4d31bc2f188bc1c501e41e5a9af7fe8746240170e2ac1f8f42"
+    },
+    {
+      "bytes": 908,
+      "path": "browser-stock-final/stock-intelligence-validation-final.log",
+      "sha256": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2"
+    },
+    {
+      "bytes": 11871,
+      "path": "browser-stock-final/visual/browser.json",
+      "sha256": "808f386bdecc71757ee28384879087f87088dd955f2d990cf3a9d51b39d2dc67"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-stock-final/workspaces-final-server.log",
+      "sha256": "2b93fe1598bd1aa2f8b0411beaab7eaebfd72f72a1780c8193f4240e0d397f8a"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v2/atlas-final-server.log",
+      "sha256": "afb10834c46db1be52e69cb6b2c8618318297bbb1f04ec036298a3c77594bf75"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v2/atlas2-final-server.log",
+      "sha256": "69c59440a558f6a193c15ed1cb5cfc98039e9c4fac05ea007acbc75096149c3f"
+    },
+    {
+      "bytes": 109,
+      "path": "browser-v2/browser-final-matrix.json",
+      "sha256": "b2bf1f950dc6e6a740c6b0c21743dae28e968b37d06917476446695163441089"
+    },
+    {
+      "bytes": 710,
+      "path": "browser-v2/gig-workstation-validation-final.log",
+      "sha256": "b09289937b6201086df74ef249c2b61f130d5b2566ce566d968abc5ef6c042db"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v2/live-final-server.log",
+      "sha256": "280761ce0515ac73a1c45b5117e5c7fc550c7f9792231f012745afd62b379271"
+    },
+    {
+      "bytes": 14742,
+      "path": "browser-v2/native-final-server.log",
+      "sha256": "1262c551e207efbdf12b0f7d6bd97d4dc7b1c2d505088c4f99646b061205a664"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-v2/source-receipt.json",
+      "sha256": "2aab1a39aed138057f42c150330cb9b468e6e2bb185acf2a0c1316191d910de7"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v2/stock-final-server.log",
+      "sha256": "ca4d608187a94309a338c6df21d606884c6e63a3c177e56410ab669998d0cdbf"
+    },
+    {
+      "bytes": 28213,
+      "path": "browser-v2/visual/workstation/results.json",
+      "sha256": "5bd344e83e1165d61fe151b33a1e26767826b4ed408ec3939f56e01b93b26066"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v2/workspaces-final-server.log",
+      "sha256": "fc686aca1249ad1abb4383540807905f6ed5dc05daf76ac989c73775afee6a5f"
+    },
+    {
+      "bytes": 413,
+      "path": "browser-v2-driver.log",
+      "sha256": "2f7aabb872d842b193229896cf955ad510651af8d1627ff752f011c8f3873eda"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v3/atlas-final-server.log",
+      "sha256": "4bb3ed962cebd787a880b387cfd502bc2b8e3f38d347f20cf3181584c0719e04"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v3/atlas2-final-server.log",
+      "sha256": "1dba8e85514f97f29e7085ab0c96f9e9625bb2008c0e896c900e55713867f2fd"
+    },
+    {
+      "bytes": 515,
+      "path": "browser-v3/browser-final-matrix.json",
+      "sha256": "214bd3623d1c6c02d7c64e84a26ed3a464fa595fe8e493d331795e0c80d054bd"
+    },
+    {
+      "bytes": 6402,
+      "path": "browser-v3/browser-validation-final.log",
+      "sha256": "2b169e9a495ed30ec165d8e208cf219a66f83bd4426ef00762237960e17a1bfb"
+    },
+    {
+      "bytes": 2513,
+      "path": "browser-v3/contrast-scan-final.log",
+      "sha256": "f8347ab3c58aa589119e1980f218033352c0884ad050cb1e473ad20c06ced59c"
+    },
+    {
+      "bytes": 806,
+      "path": "browser-v3/gig-redesign-validation-final.log",
+      "sha256": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0"
+    },
+    {
+      "bytes": 345,
+      "path": "browser-v3/gig-workstation-validation-final.log",
+      "sha256": "3318a7235d1301df596eb09caaa4815bcce775620d9d0ab1cddaab9b5e4f5098"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v3/live-final-server.log",
+      "sha256": "21200350ec442736cf58ffd90b6045fdd642ce48142f6cf070211a3a287366f7"
+    },
+    {
+      "bytes": 6402,
+      "path": "browser-v3/native-browser/results.json",
+      "sha256": "2b169e9a495ed30ec165d8e208cf219a66f83bd4426ef00762237960e17a1bfb"
+    },
+    {
+      "bytes": 43688,
+      "path": "browser-v3/native-final-server.log",
+      "sha256": "590aa64b51dec34d64033620775df9fdf6b87cd7d36280669d67edd9a6909219"
+    },
+    {
+      "bytes": 34105,
+      "path": "browser-v3/source-receipt.json",
+      "sha256": "3baa77176bbb819ae72a2a050ac496059ee5416240578e6433b9950e596cd929"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v3/stock-final-server.log",
+      "sha256": "0457c2717c3da542f4fe2fa7c49a4d13f35b92c2972342a8fe0b078078e1036e"
+    },
+    {
+      "bytes": 401,
+      "path": "browser-v3/stock-intelligence-validation-final.log",
+      "sha256": "ec203efd0b396c4f72eab8786b0347aeef0b666e0cd8ca5cfa76cb8efc18b412"
+    },
+    {
+      "bytes": 3005,
+      "path": "browser-v3/visual/contrast-scan.json",
+      "sha256": "2913c982a0ea1b36aaf3604b332e0d0bad0009e52339fc91d90eb1eb7923050c"
+    },
+    {
+      "bytes": 6545,
+      "path": "browser-v3/visual/gig-redesign-result.json",
+      "sha256": "67d050f945454940756db0610370052d9d287bb5eed0987e7d15cb84e7236c89"
+    },
+    {
+      "bytes": 27833,
+      "path": "browser-v3/visual/workstation/results.json",
+      "sha256": "530b936e72ad5b87fb5e99cc4e424d9c2139620636ad3932649709327019e485"
+    },
+    {
+      "bytes": 677,
+      "path": "browser-v3/workspaces-final-server.log",
+      "sha256": "c1d1b5214b54210fa470223c6598e2c87b8ca58c05de275bd2a3422af2a023c8"
+    },
+    {
+      "bytes": 538,
+      "path": "browser-v3-driver.log",
+      "sha256": "0c8ff5a3fbdd2a3dcb0f83b03c3edf8bcba05e3dcb042cf236f2690c627f1ad1"
+    },
+    {
+      "bytes": 2427,
+      "path": "build.log",
+      "sha256": "85a7978f415372329bbfe9d35a448338279d9f040757b67539b2bd5ee8d39817"
+    },
+    {
+      "bytes": 2530,
+      "path": "check_forwarded_tls.json",
+      "sha256": "f0bf448d9eb45254b099aad40d7d8c71db1e4b5f145a5ec32e5c8457b849762d"
+    },
+    {
+      "bytes": 0,
+      "path": "check_forwarded_tls.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4364,
+      "path": "check_rewritten_http_tls.json",
+      "sha256": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f"
+    },
+    {
+      "bytes": 0,
+      "path": "check_rewritten_http_tls.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3763,
+      "path": "check_rewritten_stream_tls.json",
+      "sha256": "6ef59c0d70dcbddb5b0a327b1de2a4e952da375d87561c6db871b5b37e24bb88"
+    },
+    {
+      "bytes": 0,
+      "path": "check_rewritten_stream_tls.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2292,
+      "path": "clean-checkpoint/assets.json",
+      "sha256": "1365b957bf88dccb7a119b497c1bfee03328ab01539cca085757fe321bd634bb"
+    },
+    {
+      "bytes": 486,
+      "path": "clean-checkpoint/check_browser_handshake.log",
+      "sha256": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac"
+    },
+    {
+      "bytes": 15627,
+      "path": "clean-checkpoint/deployment-receipt.json",
+      "sha256": "a55a714fe97d37853d408016f79748e4714e79a23ff65aec3712ef2d415497d0"
+    },
+    {
+      "bytes": 9593,
+      "path": "clean-checkpoint/deployment-receipt.log",
+      "sha256": "c5e6d9f7092768a6f7058b3b27f014f8d5e932d123bbd4287664911b09ee43ac"
+    },
+    {
+      "bytes": 73,
+      "path": "clean-checkpoint/results.json",
+      "sha256": "f4f421557d138b7d00fede08368fecd19b4a936ced1ca1972ebdacce25a2fa03"
+    },
+    {
+      "bytes": 1726,
+      "path": "clean-checkpoint/server.log",
+      "sha256": "621523ea9ec689686ebc9c428eb9019e6e6681c9ab1d96182a5ff5f8968f747a"
+    },
+    {
+      "bytes": 26,
+      "path": "clean-probe.log",
+      "sha256": "1d964b08c267652cf00f149c3ef96ed667aa08ec0b554b81fb255f18ed89e332"
+    },
+    {
+      "bytes": 3396,
+      "path": "clean_probe.py",
+      "sha256": "6b4ec55e4bb3d01e59364b0bfb18b861a1c815718633309c112c8f904b4ebbbf"
+    },
+    {
+      "bytes": 3273,
+      "path": "financial-visual/results.json",
+      "sha256": "720680069dfa86db4f750e73bfc2f534824a1fe9d0dd0449d2e54eae7361e97a"
+    },
+    {
+      "bytes": 992,
+      "path": "native-identities.json",
+      "sha256": "07a833d4fcf777e1e886236b32e69cb457488601c9ea04884fb8b5d5aae717c7"
+    },
+    {
+      "bytes": 1112,
+      "path": "native-identities.log",
+      "sha256": "1a1e761804396698ea110097fd5396d043535139df7fe4b5964d8fcac18b7826"
+    },
+    {
+      "bytes": 4301,
+      "path": "native-identities.xml",
+      "sha256": "b30b527963673dec58993503d17d34573df66c8d935075dd042c1cd89cb2396a"
+    },
+    {
+      "bytes": 1274,
+      "path": "run_tls.py",
+      "sha256": "ae7764f8bd47f6d1d28472d33d184b5e5ba09bb1e2dafb8791885103768699cb"
+    },
+    {
+      "bytes": 35154,
+      "path": "stocks-207.log",
+      "sha256": "623439ee966f59be4bfb738706b14dae3d3a2569c52e43208827f6d8810cd354"
+    },
+    {
+      "bytes": 93,
+      "path": "tls-driver.log",
+      "sha256": "9ce667c66a7e16f5ee8949bbe69aaf18b02ab2f73aaf615005618a658e6de589"
+    },
+    {
+      "bytes": 642,
+      "path": "tls-matrix.json",
+      "sha256": "be933e52b6be1e38a64af88943713488b97dca7b1b2692c558e4dfa39b620ec6"
+    },
+    {
+      "bytes": 11640,
+      "path": "unit.log",
+      "sha256": "bba0a1ac97de5ac390fe3c6101fc5a1a2da1b0a41bf53953bab49753a8c2891c"
+    }
+  ],
+  "implementation_checkpoints": [
+    "08d2a9505c025792c585ba0d3cb02ed779d6eb34",
+    "6d1f5123db874b3df23d9b3161004749a54ec35e"
+  ],
+  "initial_failures": [
+    "Inventory could not hash intentionally deleted stylesheet until deletion was staged",
+    "Authored new browser expectation used incorrect disabled-paper heading",
+    "Existing stock/paper browser flows required explicit new disclosure/view selection after reload",
+    "Actual screenshot review reproduced legacy main offset/shortcut orientation,unwrapped authority text and grid styling interfering with table rows;repaired with regression"
+  ],
+  "inspected_screenshots": [
+    "browser-qualified/visual/workstation/command-center-dark-1440.png",
+    "browser-qualified/visual/workstation/stock-intelligence-dark-1440.png",
+    "browser-qualified/visual/workstation/native-camera-dark.png",
+    "financial-visual/financial-trends-dark.png"
+  ],
+  "native_arm64": "NOT_EXECUTED_FOR_THIS_CANDIDATE",
+  "native_frozen_identities": {
+    "counts": {
+      "disabled": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 8
+    },
+    "hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "scope": "Existing unchanged-source Release binaries;not fresh native or ARM64 compilation"
+  },
+  "new_native_compilation": false,
+  "performance": {
+    "browser": "154.0.8037.57",
+    "classification": "LOCAL_AUTHORED_NOT_PRODUCTION_PERFORMANCE",
+    "limitations": [
+      "Networkidle included;not pure rendering time.",
+      "Independent contexts,disabled cache,reused browser process.",
+      "Sampled JS heap excludes native/GPU allocations and does not establish long-session boundedness.",
+      "No external provider,physical Android or owner Codespaces request."
+    ],
+    "repetitions": 3,
+    "samples": [
+      {
+        "company_route_ms": 126.6658010000001,
+        "dom_nodes": 1213,
+        "initial_navigation_and_settle_ms": 758.022228,
+        "initial_scripts": [
+          {
+            "bytes": 254545,
+            "path": "/assets/index-CnnoXi1X.js"
+          },
+          {
+            "bytes": 4945,
+            "path": "/assets/ResearchDesk-BeSE6W5l.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.094601,
+        "task_seconds": 0.292255,
+        "used_js_heap_bytes": 4985632
+      },
+      {
+        "company_route_ms": 120.16878699999961,
+        "dom_nodes": 1213,
+        "initial_navigation_and_settle_ms": 825.1301619999999,
+        "initial_scripts": [
+          {
+            "bytes": 254545,
+            "path": "/assets/index-CnnoXi1X.js"
+          },
+          {
+            "bytes": 4945,
+            "path": "/assets/ResearchDesk-BeSE6W5l.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.115068,
+        "task_seconds": 0.370479,
+        "used_js_heap_bytes": 4943280
+      },
+      {
+        "company_route_ms": 114.07870700000058,
+        "dom_nodes": 1213,
+        "initial_navigation_and_settle_ms": 815.6257850000006,
+        "initial_scripts": [
+          {
+            "bytes": 254545,
+            "path": "/assets/index-CnnoXi1X.js"
+          },
+          {
+            "bytes": 4945,
+            "path": "/assets/ResearchDesk-BeSE6W5l.js"
+          },
+          {
+            "bytes": 2494,
+            "path": "/assets/marketContract-C6ksBMry.js"
+          },
+          {
+            "bytes": 2323,
+            "path": "/assets/directoryContract-BVrwTy34.js"
+          }
+        ],
+        "script_seconds": 0.123394,
+        "task_seconds": 0.346204,
+        "used_js_heap_bytes": 4890168
+      }
+    ],
+    "schema": "gig.sprint3.browser.performance.v1",
+    "warmups": 1
+  },
+  "privacy": {
+    "artifact_publication": "Hashes and safe summaries only;screenshots/logs/bundles not committed",
+    "owner_local_subscription_ack_patch": "Not present in task worktree;provider/backend source unchanged",
+    "paid_resources": false,
+    "private_port_visibility_changed": false,
+    "provider_or_account_access": false,
+    "raw_market_data": false,
+    "secrets_or_contact_values": false,
+    "trading_or_permissions_activated": false
+  },
+  "remaining_qualification": [
+    "Owner actual authenticated private Codespaces/browser",
+    "Authorized live/history provider observations",
+    "Physical Android/GPU/screen-reader review",
+    "Target advisory/OS security clearance",
+    "Current candidate nativeARM64"
+  ],
+  "responsive": {
+    "combinations": [
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-command",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-directory",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-company",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-markets",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-book",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-depth",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-flow",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-replay",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-research",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-operations",
+        "theme": "dark",
+        "width": 1366,
+        "workspace": "Operations"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-command",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-directory",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-company",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-markets",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-book",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-depth",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-flow",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-replay",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-research",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-operations",
+        "theme": "dark",
+        "width": 1440,
+        "workspace": "Operations"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-command",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-directory",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-company",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-markets",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-book",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-depth",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-flow",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-replay",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-research",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-operations",
+        "theme": "dark",
+        "width": 1920,
+        "workspace": "Operations"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-command",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-directory",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-company",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-markets",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-book",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-depth",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-flow",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-replay",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-research",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-operations",
+        "theme": "dark",
+        "width": 390,
+        "workspace": "Operations"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-command",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-directory",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-company",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-markets",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-book",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-depth",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-flow",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-replay",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-research",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-operations",
+        "theme": "dark",
+        "width": 360,
+        "workspace": "Operations"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-command",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-directory",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-company",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-markets",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-book",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-depth",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-flow",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-replay",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-research",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 768,
+        "layout": "workspace-stage stage-operations",
+        "theme": "light",
+        "width": 1366,
+        "workspace": "Operations"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-command",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-directory",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-company",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-markets",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-book",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-depth",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-flow",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-replay",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-research",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 900,
+        "layout": "workspace-stage stage-operations",
+        "theme": "light",
+        "width": 1440,
+        "workspace": "Operations"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-command",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-directory",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-company",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-markets",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-book",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-depth",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-flow",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-replay",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-research",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 1080,
+        "layout": "workspace-stage stage-operations",
+        "theme": "light",
+        "width": 1920,
+        "workspace": "Operations"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-command",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-directory",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-company",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-markets",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-book",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-depth",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-flow",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-replay",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-research",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 844,
+        "layout": "workspace-stage stage-operations",
+        "theme": "light",
+        "width": 390,
+        "workspace": "Operations"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-command",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Command Center"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-directory",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Securities Universe"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-company",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Stock Intelligence"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-markets",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Live Markets"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-comparison",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Multi-Stock Comparison"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-book",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Order Book"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-depth",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Market Depth"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-flow",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Order Flow"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-replay",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Historical Replay"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-simulation",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Execution Simulator"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-research",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Research & Validation"
+      },
+      {
+        "height": 800,
+        "layout": "workspace-stage stage-operations",
+        "theme": "light",
+        "width": 360,
+        "workspace": "Operations"
+      }
+    ],
+    "count": 120,
+    "scope": "Actual Chromium viewport emulation at1366x768,1440x900,1920x1080,390x844,360x800;not physical devices"
+  },
+  "schema": "gig.workstation.redesign.evidence.v1",
+  "screenshots": [
+    {
+      "bytes": 135889,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+      "sha256": "b2640dce9b5b0927bd46deb8853eec4b8a7dbfc838427b900da910606510c966"
+    },
+    {
+      "bytes": 111027,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/dome-synthetic-desktop.png",
+      "sha256": "f17c9b2808b6d45fa9316e110eb746c480196fa16109ede20ef2e0ca984a4b60"
+    },
+    {
+      "bytes": 112837,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/events-synthetic-desktop.png",
+      "sha256": "d7870e0b898c3498618307712a50103d00ade46a76fc948f04913ae541872b5a"
+    },
+    {
+      "bytes": 124980,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/flow-synthetic-desktop.png",
+      "sha256": "7ca5bcfdd09eb5183b38b03122290194fb54d19040e236857fc30535d2ca6db8"
+    },
+    {
+      "bytes": 128704,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/height-synthetic-desktop.png",
+      "sha256": "37f28a4d5255c8580c2f7f4dbd47340e7e2c93ba5aca2a8da87949fe42668f72"
+    },
+    {
+      "bytes": 95041,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/iex-authored-dome.png",
+      "sha256": "92064ff2460262c18ae5774f54144fc46ac867fb34a3552e020d08653a4af397"
+    },
+    {
+      "bytes": 95603,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/iex-authored-ribbon.png",
+      "sha256": "2f4f4ee81d425e5cf2d536518cdcdeeff9e6385a7bd4573d7698c14c78a82e85"
+    },
+    {
+      "bytes": 111380,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+      "sha256": "391d984ab9e6a3d837961258a2dee4094b03ee32986ff58a3fde72357141c2ea"
+    },
+    {
+      "bytes": 77627,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "sha256": "962a62bf97a17d338215c2d4d3f1abc885d17a483d82d7599303e04a7774bb90"
+    },
+    {
+      "bytes": 76177,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "sha256": "200588797d442bb29d381f377c045142193bd26ab28b9483c488da8cdd00da30"
+    },
+    {
+      "bytes": 101296,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+      "sha256": "ac1742cb5a0cd14ccbc80fed5d09439fcdc8d893ce9210eb0dec73ac9164b9fb"
+    },
+    {
+      "bytes": 136811,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+      "sha256": "e035999871e9c92d5b29e128789c9994c1c1c49bbecb175edccec34c7bc93cf2"
+    },
+    {
+      "bytes": 180239,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/native-browser/desktop-native-3d.png",
+      "sha256": "1a59c26ace5ae40329a0a78bd029baaf348476967afc9218ab0651318a7605d5"
+    },
+    {
+      "bytes": 168513,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/native-browser/desktop-native-fallback.png",
+      "sha256": "57d1ede51b5e61ff5cfaf1b36ed31a094a26697109050873b0e342fcf1f905ea"
+    },
+    {
+      "bytes": 150299,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/native-browser/desktop-native-simulation.png",
+      "sha256": "e49bb521e151adf0a0dceb4bbbd4269edd96ac063b5f58036528d1e08a48fe5b"
+    },
+    {
+      "bytes": 54641,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/native-browser/mobile-native-orderbook.png",
+      "sha256": "a55b9ff11768e9d3af3a8b9808438e54737d3a2a4c2ef2691ad5d6f480058357"
+    },
+    {
+      "bytes": 71592,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-command-center-dark-390.png",
+      "sha256": "3d504e4fa938fcb4ac68769f8c0126c0d10a8a30149e2c70c243bc89877421a6"
+    },
+    {
+      "bytes": 182793,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-command-center-dark.png",
+      "sha256": "3cf4f8cbc67896570942b104eabe31457b60286c1c4e4490314ab5c0f0e59f69"
+    },
+    {
+      "bytes": 69150,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-command-center-light-390.png",
+      "sha256": "7d8659db64d80343b008f845282285129ec1d1a4029b8741730c302a0f9202c9"
+    },
+    {
+      "bytes": 142250,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-execution-simulator-dark-1440.png",
+      "sha256": "820011ea99f2e4b345412d4114ff3c0f4df3eef3c2f17404b6fba55c509f13ff"
+    },
+    {
+      "bytes": 140600,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-execution-simulator-light-1440.png",
+      "sha256": "276906b825e2c8da0aa58a30a111028f247f9e48d918e719dfff4f3d320554e4"
+    },
+    {
+      "bytes": 182876,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-operations-dark-1440.png",
+      "sha256": "5dd0aaf85686875f3f1d79b8b869ac0a71c7fc74e35de9c0fc2f2c5d2366b425"
+    },
+    {
+      "bytes": 180788,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-operations-light-1440.png",
+      "sha256": "c6328cf1900b8c4befa2b1e759b6f09aa7e3956bab9f67606024918f8ad4f9c9"
+    },
+    {
+      "bytes": 58144,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-order-book-dark-390.png",
+      "sha256": "ba23e94607291ff050816b3208c62eb55e7a5f18cc20d6a0a188bf75f7be33fa"
+    },
+    {
+      "bytes": 167387,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-order-book-dark.png",
+      "sha256": "4d81d67a16a488e41cb450557f97e0d1066686a7887b81eaba1c56ff51ce659d"
+    },
+    {
+      "bytes": 79875,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-order-book-detail-dark.png",
+      "sha256": "62e87b8b8153fa1201cfd7c9013e48e7c24e48df61524af31c6edd3e7c4c36e1"
+    },
+    {
+      "bytes": 53408,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-order-book-light-390.png",
+      "sha256": "edf07adb016a3687c48112c55fe62a6549b96f378b66c3453a735ca0402cd481"
+    },
+    {
+      "bytes": 164528,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-research-3d-dark.png",
+      "sha256": "6773115f346d1cefcef96cce0cfa541c6257deca5b60affeaf020eb597b1476b"
+    },
+    {
+      "bytes": 158080,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-stock-intelligence-dark-1440.png",
+      "sha256": "c521b0af847b9ad74fa8bcb15e1851cf29608661d213c328cb5c8df4e70b839f"
+    },
+    {
+      "bytes": 71691,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-stock-intelligence-dark-390.png",
+      "sha256": "a5f6ae8c04168cd63959cc85489b08f4056f8c694f7bc53d683ce2b6b8dd6bc9"
+    },
+    {
+      "bytes": 155397,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-stock-intelligence-light-1440.png",
+      "sha256": "1437a168dd5066096030cff888e7673be02df623551a550e02a8f9cadaa0465f"
+    },
+    {
+      "bytes": 69639,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/gig-stock-intelligence-light-390.png",
+      "sha256": "989f62abe9df7c32be86fe7cffd530711bfeec0652f084dc8f839e06a52fc520"
+    },
+    {
+      "bytes": 161041,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/command-center-dark-1440.png",
+      "sha256": "b9f080be74085c218d8b756b5e94554c60947fc5a4c13906508ac0b8846fb3ef"
+    },
+    {
+      "bytes": 60831,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/command-center-dark-390.png",
+      "sha256": "fbaad3675890e10304e1aff52ad1d05a7090d6462641a130aa8e7d93dee6ce2c"
+    },
+    {
+      "bytes": 58717,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/command-center-light-390.png",
+      "sha256": "3b60d11989bd2b849b35919b8bf9644729686347b715b91ee6481f7593069bb8"
+    },
+    {
+      "bytes": 123176,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/execution-simulator-dark-1440.png",
+      "sha256": "cac5cac2f8be5bcfc35131afedc2f1693b43ca9983e34b30675ec59f4117265c"
+    },
+    {
+      "bytes": 131667,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/historical-replay-dark-1440.png",
+      "sha256": "34eb98c80e45f9ac698d7a884e56ab76674208f51c4113ef61e519fe1460948b"
+    },
+    {
+      "bytes": 166735,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/live-markets-dark-1440.png",
+      "sha256": "f3b067630e4d74422612069d8d0f2994c49650a42287cf3a9386bf6483406d89"
+    },
+    {
+      "bytes": 165440,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/live-markets-light-1440.png",
+      "sha256": "47710ba08b4dd31148f5fa3c2008cea8820a0103422bd63edee76125d62e307c"
+    },
+    {
+      "bytes": 126080,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/market-depth-dark-1440.png",
+      "sha256": "76daabf673ab0d02bdb46a82fd2e429a7cdeaa4ce3c7e55f86f1cb818067096e"
+    },
+    {
+      "bytes": 56400,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/market-depth-dark-390.png",
+      "sha256": "75a9b74279dc0b1fe9dd19a69c3601fca36c71f20a21668cd434a6fad16dfe7f"
+    },
+    {
+      "bytes": 55098,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/market-depth-light-390.png",
+      "sha256": "b8aa8ff7cbd2409acba7f4a86c821fe3d0587207249a2678518c1d93994edacc"
+    },
+    {
+      "bytes": 167004,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/multi-stock-comparison-dark-1440.png",
+      "sha256": "10ffddab31be60a0b0085e491c149b7a9ed742191e15fa8a94e2210f542c4055"
+    },
+    {
+      "bytes": 155907,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/native-camera-dark.png",
+      "sha256": "851c66b606b284d4a78ae86c6603fab67fd4ccc3d33889cb171b10f0c02702ed"
+    },
+    {
+      "bytes": 168282,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/operations-dark-1440.png",
+      "sha256": "9c0435fe5f69a2d1cb3c282e8836590d6116fc022a4e1c67cd94e9fa8aadc408"
+    },
+    {
+      "bytes": 166358,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/operations-light-1440.png",
+      "sha256": "f5e2db2fae5184372b6ef09eb74f8b67582829affad3f78778a30b405fbbac73"
+    },
+    {
+      "bytes": 127245,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/order-book-dark-1440.png",
+      "sha256": "39a2d255c2ace5239818217d846279b4cdb8ec041684bd1292a82cc2ca8540ea"
+    },
+    {
+      "bytes": 127641,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/order-flow-dark-1440.png",
+      "sha256": "219210a7ef5f8abba78df008cfc2f01b2262a081b0d9bebedf6dee8fda846898"
+    },
+    {
+      "bytes": 131571,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/research-validation-dark-1440.png",
+      "sha256": "bf7283b1db9f7c729ceae8c73f779c615dd1de45ebe30c150c462847d9a253a6"
+    },
+    {
+      "bytes": 179068,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/securities-universe-dark-1440.png",
+      "sha256": "081f12e4b6416e36126b61ce39ab495b35bbf2f9c749d20def16df06969596e4"
+    },
+    {
+      "bytes": 137120,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/stock-intelligence-dark-1440.png",
+      "sha256": "674f83e8fd501d103819a1f44b9154d17b1b657cb10ef32247e9d0a3d0f70c98"
+    },
+    {
+      "bytes": 58417,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/stock-intelligence-dark-390.png",
+      "sha256": "dc91e0c8de342d4e4f102f5a7eda9f07c4af7125130ce96b0b6ad687fb081dc7"
+    },
+    {
+      "bytes": 135061,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/stock-intelligence-light-1440.png",
+      "sha256": "e8bc5bb15752d7661c931a8e2c824889fa517b86e35208ab37537fca048cd8f8"
+    },
+    {
+      "bytes": 57091,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-qualified/visual/workstation/stock-intelligence-light-390.png",
+      "sha256": "3ea1466ce07e68cb1013ffc81db6b092e2c8759a01fed5a5e2ce5410d46dceec"
+    },
+    {
+      "bytes": 174810,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Command-Center-1280-dark.png",
+      "sha256": "e91a1291ab7723470e63062c9b74ef67e809590ef3a7305baa45298e972c531f"
+    },
+    {
+      "bytes": 171774,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Command-Center-1280-light.png",
+      "sha256": "df7b207ce9b2418447eadcff51fb3dd3615d839e3e6ca193beca6ea67fb0407a"
+    },
+    {
+      "bytes": 146249,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Execution-Simulator-1280-dark.png",
+      "sha256": "0c7486a70862832880dfa23529307449e308ac612269e39f2b510d3bc4eef9a9"
+    },
+    {
+      "bytes": 153027,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Execution-Simulator-1280-light.png",
+      "sha256": "8a4f467964ba48206241cd00e40370d687a4901558db81d27217a5e287aa591f"
+    },
+    {
+      "bytes": 148226,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Historical-Replay-1280-dark.png",
+      "sha256": "1ca935c6a3e19cc823253ad111f18d9941927151eb72cd0924a49a91ca954696"
+    },
+    {
+      "bytes": 144039,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Historical-Replay-1280-light.png",
+      "sha256": "92753fedb7e48ca735d9a27e6fb5eeabb01a983ed0d75f75f227ed8e8670b20d"
+    },
+    {
+      "bytes": 177406,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Live-Markets-1280-dark.png",
+      "sha256": "92a8b26b66a954d080060896d09691554ce0ada5e5aa4513dfa5046061493a88"
+    },
+    {
+      "bytes": 175274,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Live-Markets-1280-light.png",
+      "sha256": "9a1721cdad456eb5976ef0b60a719eb6d34df75a95d37c97d8c68c5171e504de"
+    },
+    {
+      "bytes": 131880,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Market-Depth-1280-dark.png",
+      "sha256": "e767bfc909a2d47f0d368b1f3c440e2231c9fbf169ac62d31e260e63d2cb136c"
+    },
+    {
+      "bytes": 128105,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Market-Depth-1280-light.png",
+      "sha256": "10a0b9690b904476d377908d15b27d9f62ad7dbae9c5ff7e4211a0ed1e75ba79"
+    },
+    {
+      "bytes": 172856,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Multi-Stock-Comparison-1280-dark.png",
+      "sha256": "1128dc5f8f7e5ee8879310f9934bc340fe89ef05b17128c943d50740b29ec165"
+    },
+    {
+      "bytes": 170355,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Multi-Stock-Comparison-1280-light.png",
+      "sha256": "10f4cd87388f63e974503b45f8bffbfba1ed38b734c3bbf507d4271c19344285"
+    },
+    {
+      "bytes": 170477,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Operations-1280-dark.png",
+      "sha256": "1f508b67106e503393df369d265a227ff2d4abcf28b26f507ff8353c60c6173b"
+    },
+    {
+      "bytes": 168460,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Operations-1280-light.png",
+      "sha256": "b932d3f20dccb1b38ec9d88c032ff3084d1f455f535a7cec075bfcadea19cf07"
+    },
+    {
+      "bytes": 132043,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Order-Book-1280-dark.png",
+      "sha256": "c5a93a8027574e9a9680f2e712adcc8d44725c747b0e03f4c68e23368393f7a3"
+    },
+    {
+      "bytes": 128178,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Order-Book-1280-light.png",
+      "sha256": "b4e5b7525e4baf13f2cdaf103b91b4f08152fc1a73ee3b01a01d67b1b9a14695"
+    },
+    {
+      "bytes": 135545,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Order-Flow-1280-dark.png",
+      "sha256": "6d9e784953d007f99a333a4462126f4bc6b18d80be25ec7c62bc656212fe3280"
+    },
+    {
+      "bytes": 131320,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Order-Flow-1280-light.png",
+      "sha256": "24e26c7f8a5811b99f0ba24db9cdddf8c397e20d23131c5c4d4a98dccb3876a1"
+    },
+    {
+      "bytes": 134254,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Research-and-Validation-1280-dark.png",
+      "sha256": "e73695948cc40d4d819bd0636cea05f41c2e128b622e144651cf0e8fbffdb101"
+    },
+    {
+      "bytes": 131744,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Research-and-Validation-1280-light.png",
+      "sha256": "bb48e3bfcb724ed2608f915e957b7ebc0e8080c4e9dbca4606d68b05da28c62a"
+    },
+    {
+      "bytes": 196392,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Securities-Universe-1280-dark.png",
+      "sha256": "e765898b3d0cff354ee225211e19d00c39cadeba6ac97d348e30ee7b22461448"
+    },
+    {
+      "bytes": 192358,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Securities-Universe-1280-light.png",
+      "sha256": "1b73325771ef98f17437857fdbf8e8d157339715ae29250b74d664f45fdeeeb9"
+    },
+    {
+      "bytes": 93147,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Stock-Intelligence-1280-dark.png",
+      "sha256": "b6b26a46d94b505181f07128e663b84aca2b9a8d833c1b112301b8f1bcedb22c"
+    },
+    {
+      "bytes": 143167,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Stock-Intelligence-1280-light.png",
+      "sha256": "ab7101483334715137f8975808704c60d16a6732605c696cfa379f19766ba876"
+    },
+    {
+      "bytes": 71692,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Stock-Intelligence-390-dark.png",
+      "sha256": "88728a21c7739cf71ac47adb3a90c67b54256e8494a44cfcf42de8933fca3f02"
+    },
+    {
+      "bytes": 69640,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/Stock-Intelligence-390-light.png",
+      "sha256": "5f1f808d178024a17a8697b1254e60fba9c82b86421f3552b70bc27892b16b4f"
+    },
+    {
+      "bytes": 106158,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/authored-3d-dark.png",
+      "sha256": "7f813233e9adf0f7df13af3bfe46e925e2a90263e35c846d2cf475fce32a83e5"
+    },
+    {
+      "bytes": 121948,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/browser-stock-final/visual/paper-authored-dark.png",
+      "sha256": "59add0cd6dedef20709cab98aa5c66e188ff16867a7bd92dd974465e11b11376"
+    },
+    {
+      "bytes": 166416,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/command-center-dark.png",
+      "sha256": "a5b850a950592d6e3955e8f3791d6e20874c91412af527b20797b7a374fe7576"
+    },
+    {
+      "bytes": 165438,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/command-center-light.png",
+      "sha256": "50f5dbf865a90497ce3d6977bf8a0188c0eff2cbb80154b95e58c54cd1c26eea"
+    },
+    {
+      "bytes": 149315,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/execution-simulation-dark.png",
+      "sha256": "275111bf1625d543e6f6138aff8ce02ad74168c05e0620e2d1c64b78da4427f3"
+    },
+    {
+      "bytes": 147652,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/filings-dark.png",
+      "sha256": "e5c1e4ce1eef1128733d80a69bd47db4794a54256a63fdc7be690c68ef3c28a9"
+    },
+    {
+      "bytes": 141800,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/financial-statements-dark.png",
+      "sha256": "f64714afaddf20157859b5d40b46d88d3a859867eb0d7458d6751ae117ce17da"
+    },
+    {
+      "bytes": 128667,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/financial-trends-dark.png",
+      "sha256": "653967167157a9ee68c3913b367535c142853b4860cb1f0ebc3d83ca1de97b7c"
+    },
+    {
+      "bytes": 142754,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/historical-replay-dark.png",
+      "sha256": "d2b6f241cdc9a361a57fdd1fe24b22d67e19c59955f810231bc2a603738bd3b9"
+    },
+    {
+      "bytes": 137441,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/microstructure-dark.png",
+      "sha256": "76c67d879d3ebdc0583a3015019227be53c29d9bd60d6aade75238ed2e36523a"
+    },
+    {
+      "bytes": 164790,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/operations-dark.png",
+      "sha256": "6a408e950254d41bccb2bdf8a157b64011028a4a3f6d820250c2c551125768d7"
+    },
+    {
+      "bytes": 167351,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/operations-light.png",
+      "sha256": "bf86293c68e6adf57cb30c8e107f4a23e0f66fec75751bb41ce26caf7229e520"
+    },
+    {
+      "bytes": 129622,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/research-dark.png",
+      "sha256": "15b8fd334d306a52d00ed3c2e56c484bf4fd624678ff50d128f243da9989177c"
+    },
+    {
+      "bytes": 142612,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/stock-intelligence-light.png",
+      "sha256": "30ecee7ae44d7790a6169d80e5e1a55b3fe23b467d366b89c550171fb110d0a9"
+    },
+    {
+      "bytes": 66071,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/stock-mobile-dark.png",
+      "sha256": "6096165a5a61adf5e869833fc91b5489b4ed0d82875999fafd1626e92bbfcd97"
+    },
+    {
+      "bytes": 65459,
+      "classification": "AUTHORED_NATIVE_OR_FINANCIAL_PROVIDER_FIXTURE_NOT_OBSERVED_MARKET",
+      "committed": false,
+      "path": "build/gig-redesign-next/financial-visual/stock-mobile-light.png",
+      "sha256": "50ca7b2c75650245582998e3a6b5b1aee1d3c3184dcee9145011432f18fc9117"
+    }
+  ],
+  "timezone": "America/New_York",
+  "verified_local_tls": [
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/check_forwarded_tls.py"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "program": "check_forwarded_tls"
+    },
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/check_rewritten_stream_tls.py"
+      ],
+      "failed": 0,
+      "passed": 6,
+      "program": "check_rewritten_stream_tls"
+    },
+    {
+      "command": [
+        "/workspace/gig-terminal-clean-venv/bin/python",
+        "terminal/tests/check_rewritten_http_tls.py"
+      ],
+      "failed": 0,
+      "passed": 8,
+      "program": "check_rewritten_http_tls"
+    }
+  ],
+  "visual_review": "Actual browser images inspected,including initial gutter/table failures and corrected native/financial/mobile/light/dark images;not based solely on counts."
+}
