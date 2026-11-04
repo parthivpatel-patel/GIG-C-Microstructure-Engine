@@ -90,3 +90,6 @@ body{font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums} button,i
 
 .gig-workstation .company-sec-status{padding:0 18px;background:var(--atlas-surface);border-radius:6px;border-left:3px solid var(--accent)}.gig-workstation .company-sec-status summary{font-size:13px}.gig-workstation .company-sec-status>.panel{border:0}.gig-workstation .company-sec-status[open]{padding-bottom:18px}
 :root[data-theme=light] .gig-workstation .company-research-tabs button,:root[data-theme=light] .gig-workstation .workspace-shortcuts button{background:transparent}
+
+/* Native table semantics must override legacy display:grid on .book-row. */
+.gig-workstation .book-table tbody tr{display:table-row;height:auto;position:static;padding:0}.gig-workstation .book-table tbody :is(td,th){position:static;display:table-cell}.gig-workstation .depth-workbench .orderbook-panel .book-ladders{grid-template-columns:minmax(0,1fr)}.gig-workstation .depth-workbench .orderbook-panel .ladder-side+div{border-left:0;border-top:1px solid var(--line)}.gig-workstation .depth-workbench .book-table :is(td,th){padding:8px 12px;font-size:13px}

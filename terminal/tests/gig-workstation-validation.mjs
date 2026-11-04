@@ -41,6 +41,12 @@ try{
   }
  });
  await page.setViewportSize({width:1440,height:900});if(await page.locator('html').getAttribute('data-theme')!=='dark')await page.getByRole('button',{name:'Toggle color theme',exact:true}).click();
+ await check('native ladder columns cannot overlap at the desktop target widths',async()=>{
+  for(const [width,height]of [[1366,768],[1440,900],[1920,1080]]){await page.setViewportSize({width,height});for(const name of ['Order Book','Market Depth']){
+   await go(name);const book=page.getByRole('region',{name:'Displayed order book',exact:true});const rows=await book.locator('tbody tr').evaluateAll(list=>list.map(row=>({display:getComputedStyle(row).display,cells:[...row.children].map(c=>{const r=c.getBoundingClientRect();return{left:r.left,right:r.right,width:r.width}})})));
+   assert.equal(rows.length,name==='Order Book'?20:10);for(const row of rows){assert.equal(row.display,'table-row');assert.equal(row.cells.length,3);for(let i=0;i<3;i++){assert.ok(row.cells[i].width>=24);if(i)assert.ok(row.cells[i-1].right<=row.cells[i].left+1,`${name}/${width}:overlapping columns`)}}
+  }}await page.setViewportSize({width:1440,height:900});
+ });
  await check('research and simulation views reveal existing tools without conflating broker execution',async()=>{
   await go('Execution Simulator');await page.getByRole('button',{name:'Offline paper sandbox',exact:true}).click();await page.getByRole('region',{name:'Paper execution infrastructure',exact:true}).waitFor();await page.getByRole('button',{name:'Disabled paper boundary',exact:true}).click();await page.getByRole('heading',{name:'Alpaca paper provider boundary',exact:true}).waitFor();await page.getByRole('button',{name:'Native simulator',exact:true}).click();await page.getByLabel('Simulation quantity',{exact:true}).waitFor();
   await go('Research & Validation');await page.getByRole('button',{name:'Validation & evidence',exact:true}).click();await page.getByRole('button',{name:'Validate authored ITCH',exact:true}).waitFor();await page.getByRole('button',{name:'3D laboratory',exact:true}).click();await page.getByRole('button',{name:'Open advanced research',exact:true}).waitFor();await page.getByRole('button',{name:'Model scenarios',exact:true}).click();await page.getByRole('region',{name:'Research surface explorer',exact:true}).waitFor();
