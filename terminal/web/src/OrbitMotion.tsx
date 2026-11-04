@@ -1,10 +1,15 @@
 import {useEffect, useRef, useState} from 'react';
 import type {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import {createCameraMotion} from './cameraMotion';
+import {sceneActivity} from './workstation';
 
 export function bindCameraMotion(host: HTMLElement, canvas: HTMLCanvasElement,
   controls: OrbitControls, draw: () => void, paused: boolean) {
   let frames = 0;
+  const activity = document.createElement('span');
+  activity.className = 'gig-scene-status';
+  // This describes camera scheduling, never source freshness or market motion.
+  host.appendChild(activity);
   const motion = createCameraMotion({
     request: callback => requestAnimationFrame(callback),
     cancel: id => cancelAnimationFrame(id),
@@ -17,6 +22,7 @@ export function bindCameraMotion(host: HTMLElement, canvas: HTMLCanvasElement,
     },
     state: value => {
       canvas.dataset.motionState = value;
+      activity.textContent = sceneActivity(value);
       controls.autoRotate = value === 'orbiting';
     }
   });
@@ -42,7 +48,7 @@ export function bindCameraMotion(host: HTMLElement, canvas: HTMLCanvasElement,
     set: motion.set,
     get stepping() { return motion.stepping; },
     dispose() {
-      motion.dispose(); observer.disconnect();
+      motion.dispose(); activity.remove(); observer.disconnect();
       controls.removeEventListener('start', start);
       controls.removeEventListener('end', end);
       media.removeEventListener('change', preference);

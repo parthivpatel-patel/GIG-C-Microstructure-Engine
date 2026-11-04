@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test src/response.test.ts src/researchExport.test.ts src/historicalResearch.test.ts src/format.test.ts src/financial.test.ts src/marketPlot.test.ts src/marketStream.test.ts src/marketContract.test.ts src/marketDelta.test.ts src/ratioHistory.test.ts src/marketGeometry.test.ts src/modelSurface.test.ts src/directoryContract.test.ts src/historicalMarket.test.ts src/research3d.test.ts src/cameraMotion.test.ts src/bookPresentation.test.ts"
+    "test": "node --experimental-strip-types --test src/response.test.ts src/researchExport.test.ts src/historicalResearch.test.ts src/format.test.ts src/financial.test.ts src/marketPlot.test.ts src/marketStream.test.ts src/marketContract.test.ts src/marketDelta.test.ts src/ratioHistory.test.ts src/marketGeometry.test.ts src/modelSurface.test.ts src/directoryContract.test.ts src/historicalMarket.test.ts src/research3d.test.ts src/cameraMotion.test.ts src/bookPresentation.test.ts src/workstation.test.ts"
   },
   "dependencies": {
     "react": "19.1.1",

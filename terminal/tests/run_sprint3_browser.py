@@ -12,6 +12,8 @@ parser.add_argument('--output',type=Path,default=Path('build/sprint3-qualificati
 parser.add_argument('--node-modules',type=Path,help='Optional existing Playwright modules;creates/removes only a new test-local symlink')
 parser.add_argument('--skip-build',action='store_true',help='Require finalized assets already built;hash checks still enforce immutability')
 parser.add_argument('--redesign',action='store_true',help='Include GIG redesign branding,camera lifecycle and visual checks before existing programs')
+known_programs=('gig-workstation-validation','gig-redesign-validation','browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation','recorded-playback-validation')
+parser.add_argument('--programs',nargs='+',choices=known_programs,help='Run selected existing programs against the same finalized assets;never an arbitrary path')
 args=parser.parse_args();work=Path(__file__).resolve().parents[2];out=args.output.resolve();out.mkdir(parents=True,exist_ok=True);env=dict(os.environ)
 if not args.skip_build:
  with (out/'build.log').open('w')as log:subprocess.run(['npm','--offline','--prefix','terminal/web','run','build'],cwd=work,check=True,stdout=log,stderr=subprocess.STDOUT)
@@ -56,7 +58,7 @@ try:
     break
    except OSError:time.sleep(.1)
   else:raise AssertionError(name+' not ready')
- for name in (('gig-redesign-validation',)if args.redesign else())+('browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation'):
+ for name in args.programs or ((('gig-workstation-validation','gig-redesign-validation')if args.redesign else())+('browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation')):
   assert snapshot()==before,'assets changed before'+name
   begin=time.monotonic()
   with(out/(name+'-final.log')).open('w')as log:r=subprocess.run(['node','terminal/tests/'+name+'.mjs'],cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT,timeout=300)
