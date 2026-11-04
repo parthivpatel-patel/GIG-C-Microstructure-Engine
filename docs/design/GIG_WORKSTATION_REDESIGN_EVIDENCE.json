@@ -183,7 +183,6 @@
     }
   ],
   "changed_source_sha256": {
-    "docs/design/GIG_WORKSTATION_REDESIGN_PROGRESS.md": "d48eea287b00ee6d34f6dbc7e98634e0993e6b1f63e54000c89792ef9ee5f410",
     "terminal/tests/atlas2-validation.mjs": "f863fc781e5dcfb8f83ae05e59fd7499257b2dec8781e146bc0d3f75a53afe63",
     "terminal/tests/browser-validation.mjs": "cdaed3da1793d9a435700e3b322b268b343a3e2666bd5db9e7a41a01114067fb",
     "terminal/tests/gig-workstation-validation.mjs": "b8bb6afbc189859220f5e80e59e242a7c514473bfcdfc7611614968c876626ba",
@@ -208,6 +207,9 @@
     "terminal/web/src/workstation.css": "c8da38460591ac4d7280d384e652afdf0a2bdf3c93aef927e062d937fc377ce7",
     "terminal/web/src/workstation.test.ts": "94c1408f0379081964646ce6555302a55583bcaed69ff82b2292e1132d1756aa",
     "terminal/web/src/workstation.ts": "b2e218432469f307d494a048a541a5895ddfc3d1b0fd063b04b3f88db8c7e1f6"
+  },
+  "checkpoint_document_sha256": {
+    "docs/design/GIG_WORKSTATION_REDESIGN_PROGRESS.md": "d48eea287b00ee6d34f6dbc7e98634e0993e6b1f63e54000c89792ef9ee5f410"
   },
   "clean_checkpoint_receipt": {
     "local_server": {
@@ -235,6 +237,7 @@
   "deleted_sources": [
     "terminal/web/src/terminal.css"
   ],
+  "documentation_binding": "checkpoint_document_sha256 binds implementation6d1f512;documentation_sha256 binds current delivery documents. Runtime/test source hashes are unchanged.",
   "documentation_sha256": {
     "GIG_WORKSTATION_REDESIGN.md": "fef585fb356a367feec08cf10c4018e42716759ae8c7a9859199941996ebc5fa",
     "GIG_WORKSTATION_REDESIGN_PROGRESS.md": "00c8c75f17eeaa2f5f6f8fbb7730493b8e5f976b106d5260c9a68fce5a5ad6ce"
