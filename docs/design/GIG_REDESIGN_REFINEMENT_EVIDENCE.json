@@ -1,0 +1,684 @@
+{
+  "after": {
+    "financialHeadingY": 690.09375,
+    "firstFactBottom": 883.046875,
+    "firstFactY": 849.453125,
+    "paneHeight": 826,
+    "scrollHeight": 1686,
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "artifact_sha256": {
+    "build/advanced-3d/browser.json": "4d401a70d38428f1a00b0e6a6707cb83f2824230a01bfd17b2cb898704de6d63",
+    "build/gig-redesign-refinement/clean-checkpoint/check_browser_handshake.log": "ce9fef23f504c92e0b3a783c9265c7e0720eea0efab5dc98480703812baa7aac",
+    "build/gig-redesign-refinement/clean-checkpoint/deployment-receipt.json": "32c6da372edc92125d114122f3b7c03d23a936bb1e8ca7fbe48d4e513bf4af8f",
+    "build/gig-redesign-refinement/delivery-build.log": "80d7883d89a36ca506aef3541b0c4ee149e81f9c1cfb89d3c44bf1cef02a47da",
+    "build/gig-redesign-refinement/delivery-unit.log": "f77a4eceaa80cea7d862792107ed293aa1463251b33abee8345d60115012a3b8",
+    "build/gig-redesign-refinement/delivery/advanced-research-validation-final.log": "3a515a97e366ce4451b054c9e76f87c8dd3499b89cb3d08bb48e62c0384d2295",
+    "build/gig-redesign-refinement/delivery/atlas-final-server.log": "81b9c84ae6efa65de8d6ba7f9fc8024fc52abffcc794148d9356814c604b0f94",
+    "build/gig-redesign-refinement/delivery/atlas-final-validation-final.log": "a3b5c080d45dd584d4fb80dc5e4112a13a9761d63bfe10d0d836154c6800950b",
+    "build/gig-redesign-refinement/delivery/atlas2-final-server.log": "0aea86e5d78240e083a24231e969cff5df8edb28641e27e5fd8250f4cda2374f",
+    "build/gig-redesign-refinement/delivery/atlas2-validation-final.log": "a797ca88720612b9284ece7d8d7779a8373da360fad989721db621ca4f0f1422",
+    "build/gig-redesign-refinement/delivery/atlas4-validation-final.log": "91c2f5dfcd8454e711ccaba6b1782f9b6b0df8b34e2f9487ce3fd8618cda9a42",
+    "build/gig-redesign-refinement/delivery/atlas5-validation-final.log": "76de789aa1590839b96a7a46a0849f6e3412d69f27494d290bb012d8d49d9be6",
+    "build/gig-redesign-refinement/delivery/browser-final-matrix.json": "162ae5ef5e4105f8736c07edca773e309ee8e4eba558e421123bbf98667baae2",
+    "build/gig-redesign-refinement/delivery/browser-validation-final.log": "e24b5fc0d143a1c2eb83b045149b4a49057de06ec2db7f632ed1556c9ea65283",
+    "build/gig-redesign-refinement/delivery/contrast-scan-final.log": "ae6266d57ae71faf22e3b66cf449630a125b42f6f75a65c447698353ac752881",
+    "build/gig-redesign-refinement/delivery/financial-visual/results.json": "5acdfcd268177d953e2916387094bb88c03613e3ea22edf6d1e80015b7dd82fd",
+    "build/gig-redesign-refinement/delivery/gig-redesign-validation-final.log": "4aecdfbca61673086cc3d01b04b0143c791c792ecef104859a6c89f2945924c0",
+    "build/gig-redesign-refinement/delivery/gig-workstation-validation-final.log": "af53f46e2e6825f9e8ad5e94a00ef003ec3d513fe8b0e804838356fe56b8580f",
+    "build/gig-redesign-refinement/delivery/history-final-server.log": "574618330a58c45caa89710dbd3638a08ae2a2a306ed3107561f9061868e5d58",
+    "build/gig-redesign-refinement/delivery/history-visual/results.json": "7618303dc7d81e31b9f8937fee8cdf247d6686a85d1a38943c394bf45d871900",
+    "build/gig-redesign-refinement/delivery/integrated-final-server.log": "4ab5411fa32d715dcebb6db901762371af1c8e544966d84159060a2f7b49d734",
+    "build/gig-redesign-refinement/delivery/integrated-visual/results.json": "b77df3caafad1c63586b76be1b336eaee6d06b63953eb11d1eab552493f15cb4",
+    "build/gig-redesign-refinement/delivery/live-final-server.log": "20ce22f873578e8e14c81012d6dad61fce4d3ade23bafbe6fe5b613b852fe600",
+    "build/gig-redesign-refinement/delivery/native-browser/results.json": "e24b5fc0d143a1c2eb83b045149b4a49057de06ec2db7f632ed1556c9ea65283",
+    "build/gig-redesign-refinement/delivery/native-final-server.log": "e9691719f47355fdf535c8ac172339c51bb71d7af0d0e232e811353959846a63",
+    "build/gig-redesign-refinement/delivery/recovery-final-server.log": "cdcdca301667d44594b260bf731de6ee1cfd0ead9eb8bdc4bb59552e86f43104",
+    "build/gig-redesign-refinement/delivery/recovery-visual/results.json": "a6cb23a7e55a4f5f06ec7fb2724dbba8a11e6f03ed303efce182598ff586b743",
+    "build/gig-redesign-refinement/delivery/source-receipt.json": "96352d57c46d83bc55fe0bc5cde857aaa225e6e516ec48cad638fcee7ec1ae3a",
+    "build/gig-redesign-refinement/delivery/stable-assets-final.json": "212020524e1b92ab80843a043faf22650b8723c72c081c2c530e789e6b34410b",
+    "build/gig-redesign-refinement/delivery/stock-final-server.log": "f5be7e6dc799ff3dda3088991f0cc01ccdc1eb9a6395580d7c1e5ad3fc911278",
+    "build/gig-redesign-refinement/delivery/stock-intelligence-validation-final.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "build/gig-redesign-refinement/delivery/visual/contrast-scan.json": "758cfcf47c8c5441ec8c291c0b615fa1d33ed9af4e6780d3bb5abea23a88387d",
+    "build/gig-redesign-refinement/delivery/visual/gig-redesign-result.json": "2cff58886776240389c2a7d1a82b53d98ac8d79cac3d9bba55e1147c39f36bcf",
+    "build/gig-redesign-refinement/delivery/visual/workstation/results.json": "e6260c9b26088fefb7e543830aa2eed6df67ad019561d9a7062935bf969860c9",
+    "build/gig-redesign-refinement/delivery/workspaces-final-server.log": "dc846f871571ca4cdeaf2dfa8c7da37cec6db0210a120c93210da3c618d9d9ed",
+    "build/gig-redesign-refinement/failing-before/gig-workstation-validation-final.log": "03a348f857038830eadee2ef25a7b94e29f76bf1a28895b1bad058f565bcda5e",
+    "build/gig-redesign-refinement/native-api-274.log": "782024751f655ad08aaa520348e68e71abd232752977db80eca30cdbfb433891",
+    "build/gig-redesign-refinement/overview-measurement.json": "1b32d499ce4ce3d755b0d13bcc6f4215e2c36fa37b629bd20e1763365ebd1209",
+    "build/gig-redesign-refinement/stock-backend-207.log": "21d7098892dfba7dbf07a7900f0dba20d16b73799b74919ddf31aca246ad0d66"
+  },
+  "baseline": "3c4c790873f660dec9570497ffceb0929d51255f",
+  "before": {
+    "financialHeadingY": 957.359375,
+    "loadedPanels": 8,
+    "paneHeight": 826,
+    "providerScope": "AUTHORED_NATIVE_FIXTURE;NO_EXTERNAL_REQUESTS",
+    "scrollHeight": 2891,
+    "viewport": [
+      1440,
+      900
+    ]
+  },
+  "branch": "development/gig-ui-redesign",
+  "browser_assertions": {
+    "failed": 0,
+    "passed": 103,
+    "skipped": 0
+  },
+  "browser_programs": [
+    {
+      "exit_code": 0,
+      "script": "gig-workstation-validation",
+      "seconds": 13.96544997789897
+    },
+    {
+      "exit_code": 0,
+      "script": "gig-redesign-validation",
+      "seconds": 15.677396615967155
+    },
+    {
+      "exit_code": 0,
+      "script": "browser-validation",
+      "seconds": 11.993309278041124
+    },
+    {
+      "exit_code": 0,
+      "script": "stock-intelligence-validation",
+      "seconds": 5.390671862987801
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas2-validation",
+      "seconds": 20.478872986044735
+    },
+    {
+      "exit_code": 0,
+      "script": "contrast-scan",
+      "seconds": 5.430870810057968
+    },
+    {
+      "exit_code": 0,
+      "script": "advanced-research-validation",
+      "seconds": 26.51596224401146
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas4-validation",
+      "seconds": 11.806524313986301
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas5-validation",
+      "seconds": 10.648284132010303
+    },
+    {
+      "exit_code": 0,
+      "script": "atlas-final-validation",
+      "seconds": 10.404575774096884
+    }
+  ],
+  "clean_startup": {
+    "browser_socket_correlated": true,
+    "external_requests": 0,
+    "local_server": "MATCH",
+    "private_target_acceptance": "UNVERIFIED",
+    "source": "5879408dad5d84bbd41e0a26ce4a7222fa189325",
+    "status": "PASS_OFFLINE_CHECKS_ONLY"
+  },
+  "closure_scope": "Subsequent documentation-only commit;code hash assertions exclude documentation deliberately",
+  "code_sha256": {
+    "terminal/tests/atlas-final-validation.mjs": "a919b9b2ede739b090076018d4d04088d7a89f51ebc91bc29f6ca78adb6b00b4",
+    "terminal/tests/atlas4-validation.mjs": "295f7ffee396854a37679fdf5cd6903e757c76d7e4db3ae50154fabf7b204e68",
+    "terminal/tests/atlas5-validation.mjs": "3e1a3498f1cc8840f6d8b0c414e889cf54cd83e1daf2df56c5ccacead46c7209",
+    "terminal/tests/gig-workstation-validation.mjs": "cdbdb630c9a3b208ae6b28fb1cc0f11644a3b3404a80b5dfddd19c8a0ee241be",
+    "terminal/tests/run_sprint3_browser.py": "9f1a991d3d83960e4dc2e1bed1c07e31337c2ef4a5894d8ee00c314b5a9c8631",
+    "terminal/web/src/FinancialWorkspace.tsx": "a20eb56867ae94ceb3c4f09389e8d275e15cf217037ac504a2663683db258f78",
+    "terminal/web/src/StockIntelligence.tsx": "eda0581792a00835f8f734e03290e05a19cfcb97950903d61ed15c683af7f8df",
+    "terminal/web/src/workstation.css": "114345eb3afd14b5d6f077096c2a8a7222d291c10884832519f82e719bc98ec8"
+  },
+  "contrast": {
+    "contexts": 24,
+    "samples": 5690,
+    "scope": "Rendered HTML text including below-fold content at1440x1100;closed details and inactive controls excluded;not screen-reader or full WCAG certification",
+    "threshold_failures": 0
+  },
+  "date": "2026-11-09",
+  "documentation_sha256": {
+    "docs/design/GIG_REDESIGN_REFINEMENT.md": "f8be441537f33721e85d5097ac5bf476b7820307bfef523d0f3e23831fc6c388",
+    "docs/design/GIG_REDESIGN_REFINEMENT_PROGRESS.md": "d4a630484a7fb367a1f40834c6cad07348223a10ca2eb97cc0be0e5c10c7a531"
+  },
+  "frontend": {
+    "failed": 0,
+    "passed": 123,
+    "skipped": 0,
+    "typescript_build": "PASS",
+    "warning": "Deferred Three.js/OrbitControls517.06kB chunk exceeds Vite advisory"
+  },
+  "limitations": [
+    "No new native Debug/Release/sanitizer/Clang/ARM64 compilation or eight-identity execution",
+    "No new localTLS run;previous evidence retained",
+    "No actual owner private edge,physical device,live provider or empirical L3 qualification",
+    "Build artifacts/screenshots ignored and workspace-local;hashes alone do not reproduce their bytes"
+  ],
+  "privacy": "No credentials,provider/account calls,raw market data,orders,public forwarding,paid services or workflow dispatch;backend and native source unchanged",
+  "python": {
+    "errors": 0,
+    "failures": 0,
+    "native_module": "Existing Release build",
+    "skipped": 0,
+    "stocks_sec_provider": 207,
+    "terminal_native_api": 274
+  },
+  "responsive": {
+    "cases": 120,
+    "themes": 2,
+    "viewports": [
+      [
+        1366,
+        768
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1920,
+        1080
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        360,
+        800
+      ]
+    ],
+    "workspaces": 12
+  },
+  "retained_native_evidence": {
+    "baseline_manifest_sha256": "0d2d86dfe3a31fdb72579c49708d566c24f8957c0d11bbc3aa10e482f9affdc9",
+    "hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "not_rerun_in_this_refinement": true
+  },
+  "schema": "gig.redesign.refinement.evidence.v1",
+  "screenshots": [
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/command-center-dark.png",
+      "sha256": "a5b850a950592d6e3955e8f3791d6e20874c91412af527b20797b7a374fe7576"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/command-center-light.png",
+      "sha256": "50f5dbf865a90497ce3d6977bf8a0188c0eff2cbb80154b95e58c54cd1c26eea"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/execution-simulation-dark.png",
+      "sha256": "275111bf1625d543e6f6138aff8ce02ad74168c05e0620e2d1c64b78da4427f3"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/filings-dark.png",
+      "sha256": "26067c84404d203a1260e7548e8d74212002f2ae0fdb9971b4d0ecbe5d024b3d"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/financial-statements-dark.png",
+      "sha256": "f84fa763fe5695d7dddd0206b20d8caf02c7f2e97a1793c13683348b32f0f17f"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/financial-trends-dark.png",
+      "sha256": "7ce4af7a03622e3f4a229d4fba1a7b9da2dd03341e5376d0c95b99d14f3d378b"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/historical-replay-dark.png",
+      "sha256": "b84bbe0175752ef20c2124b719fdacdd46c811a79b1fab185e49621ed39317e7"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/microstructure-dark.png",
+      "sha256": "cf23a8652713e4c50123f703ea81628ef07fb30df31fd0393b4c07183c3616f8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/operations-dark.png",
+      "sha256": "aa6c0a313b098e444db92082e931c314d641019869be6b49ee70e4e88bc85ac1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/operations-light.png",
+      "sha256": "3ff18b38d7e05c8c74ceb27ae678f43fae37dcb2e80cc8f20398f2524b7ed1a5"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/research-dark.png",
+      "sha256": "15b8fd334d306a52d00ed3c2e56c484bf4fd624678ff50d128f243da9989177c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/stock-intelligence-light.png",
+      "sha256": "58b98a1b09b4f225eb71422212713727def029609d8f8d04cdb890ef43eebaa4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/stock-mobile-dark.png",
+      "sha256": "a227a24190acc4afcc53e7a2d05b7b075e059f92c2e78caf4e795d1c9ce13277"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/financial-visual/stock-mobile-light.png",
+      "sha256": "bd69050b8599708e4d66657ccf85decdc046bbfbf2731e3024398fde2f0d0948"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/aligned-statements-dark.png",
+      "sha256": "eecaa2eafd0b0d86362142f2ac425d040bd65e7b79736adad60838de1c0c781c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/command-center-compact-dark.png",
+      "sha256": "726fc1a0545c716f5c90bb2c973d3e6663c1c199e0c8956b69bf074c8dc69aad"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/command-center-wide-dark.png",
+      "sha256": "67ce4e9be56e0bf920a0c6936d80dd7b036b6395f7f44c8e8c07d9e7aba66176"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/command-center-wide-light.png",
+      "sha256": "9f74d80602f0002c5aafbcda78dc9934a96ef9dd6d3d7a98fcd2b66365c5b077"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/private-history-fixture.png",
+      "sha256": "e96811053a220a79b4e07e06cca48104ba615255b5a49290e4d37634f08d1f84"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/risk-mobile-dark.png",
+      "sha256": "4efe59c602a130b81d7da8ed013ee991b76bb0628002bd4f6589e0db163bbdb5"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/risk-mobile-light.png",
+      "sha256": "628e51adc44bf14b718d9df278af5a99e4e1cd3adb5f9879004cc0a22d3124e5"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/history-visual/risk-models-dark.png",
+      "sha256": "d1f9e8ab7dab5fd7994cba3e138d249bd145aa2f7839aa3e974a32f45e2c6c3f"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/integrated-visual/dataset-research-dark.png",
+      "sha256": "b97f61e90ff0367357f4b6331407052fd4a32260b8c3ae6fc894e947b53b2969"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/integrated-visual/final-mobile-dark.png",
+      "sha256": "6dab99e61c1f94c50c107559b65b991745c580885abea5848632e2090bcc3c38"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/integrated-visual/final-mobile-light.png",
+      "sha256": "0104f283fe2d1e077b4a511d1bb81e9b83960968badeb407f7feee0c8c5a5606"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/integrated-visual/garch-search-dark.png",
+      "sha256": "bb7b3769537ff4f7a00fd1b43bbd9d7b04be47d30e65dee4fb3acfd523e558af"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/integrated-visual/return-command-center.png",
+      "sha256": "fec499e555477454a5dabd609da7a7092818615b9d380fa4ab08a7caf8c4c435"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/native-browser/desktop-native-3d.png",
+      "sha256": "1a59c26ace5ae40329a0a78bd029baaf348476967afc9218ab0651318a7605d5"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/native-browser/desktop-native-fallback.png",
+      "sha256": "57d1ede51b5e61ff5cfaf1b36ed31a094a26697109050873b0e342fcf1f905ea"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/native-browser/desktop-native-simulation.png",
+      "sha256": "81a613a649b25e5b5b3301b01c80804c6551b340833c58cf0af88d7ab973f045"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/native-browser/mobile-native-orderbook.png",
+      "sha256": "13cce99c92fc04608f85d89704ab9cc9cbfad0d0f967b5d73253b37263af5fe2"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/recovery-visual/evaluation-dark.png",
+      "sha256": "3a3ab763a4bf1edf2fe2109242095250c6dfc9ac53f4611917cca653d6bb2ccc"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/recovery-visual/pinned-ingestion-dark.png",
+      "sha256": "39852b2e803a6d51c32a204fc2d44d9fbc0233efca6ad06e6f88f3eaf721002e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/recovery-visual/portfolio-dark.png",
+      "sha256": "867246993823709288d4b6873be75846769a9ab2e1c7fb3e1aff48ff98075484"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/recovery-visual/research-mobile-dark.png",
+      "sha256": "51184959d08aadbdb9a8f018a08ec2a1f7deea689643c399f3afaee0d2284e80"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/recovery-visual/research-mobile-light.png",
+      "sha256": "94a715d58d21792d2e3275435c369cc98308fae98796b258c25c00b4ec635ca8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-command-center-dark-390.png",
+      "sha256": "3d504e4fa938fcb4ac68769f8c0126c0d10a8a30149e2c70c243bc89877421a6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-command-center-dark.png",
+      "sha256": "3cf4f8cbc67896570942b104eabe31457b60286c1c4e4490314ab5c0f0e59f69"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-command-center-light-390.png",
+      "sha256": "7d8659db64d80343b008f845282285129ec1d1a4029b8741730c302a0f9202c9"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-execution-simulator-dark-1440.png",
+      "sha256": "820011ea99f2e4b345412d4114ff3c0f4df3eef3c2f17404b6fba55c509f13ff"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-execution-simulator-light-1440.png",
+      "sha256": "276906b825e2c8da0aa58a30a111028f247f9e48d918e719dfff4f3d320554e4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-operations-dark-1440.png",
+      "sha256": "475a5e63c0c1957bbdcc45595172104a45ffd83ffd80acd48432f10a300088e4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-operations-light-1440.png",
+      "sha256": "97bd1ff7fc63d3899bd814a3551fa342c19bb07d963857397ddf14f6aed71e0e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-order-book-dark-390.png",
+      "sha256": "ba23e94607291ff050816b3208c62eb55e7a5f18cc20d6a0a188bf75f7be33fa"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-order-book-dark.png",
+      "sha256": "4d81d67a16a488e41cb450557f97e0d1066686a7887b81eaba1c56ff51ce659d"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-order-book-detail-dark.png",
+      "sha256": "62e87b8b8153fa1201cfd7c9013e48e7c24e48df61524af31c6edd3e7c4c36e1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-order-book-light-390.png",
+      "sha256": "edf07adb016a3687c48112c55fe62a6549b96f378b66c3453a735ca0402cd481"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-research-3d-dark.png",
+      "sha256": "5e7c54177c5742c85fe071196f30f89cd0f99f3ab337f885ea4d7465159018ff"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-stock-intelligence-dark-1440.png",
+      "sha256": "b2975d597c4045a7d74465d1d82edb4afd190ef40c3f4a7b452a383879519ed1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-stock-intelligence-dark-390.png",
+      "sha256": "7a4b6ecdcf40354cd59378ca84d94633651d289a653a268a100d82ebd2090682"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-stock-intelligence-light-1440.png",
+      "sha256": "9c96f4f0596adc1e508651002ff0c5c8988de5c45558c5581b7ad38f83b29872"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/gig-stock-intelligence-light-390.png",
+      "sha256": "d878263ae57ac5b8da74818d7ac401088a58ce4d5f83d6eb4da996da5a4c6114"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/command-center-dark-1440.png",
+      "sha256": "b9f080be74085c218d8b756b5e94554c60947fc5a4c13906508ac0b8846fb3ef"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/command-center-dark-390.png",
+      "sha256": "fbaad3675890e10304e1aff52ad1d05a7090d6462641a130aa8e7d93dee6ce2c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/command-center-light-390.png",
+      "sha256": "3b60d11989bd2b849b35919b8bf9644729686347b715b91ee6481f7593069bb8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/execution-simulator-dark-1440.png",
+      "sha256": "cac5cac2f8be5bcfc35131afedc2f1693b43ca9983e34b30675ec59f4117265c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/historical-replay-dark-1440.png",
+      "sha256": "34eb98c80e45f9ac698d7a884e56ab76674208f51c4113ef61e519fe1460948b"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/live-markets-dark-1440.png",
+      "sha256": "f3b067630e4d74422612069d8d0f2994c49650a42287cf3a9386bf6483406d89"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/live-markets-light-1440.png",
+      "sha256": "47710ba08b4dd31148f5fa3c2008cea8820a0103422bd63edee76125d62e307c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/market-depth-dark-1440.png",
+      "sha256": "76daabf673ab0d02bdb46a82fd2e429a7cdeaa4ce3c7e55f86f1cb818067096e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/market-depth-dark-390.png",
+      "sha256": "75a9b74279dc0b1fe9dd19a69c3601fca36c71f20a21668cd434a6fad16dfe7f"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/market-depth-light-390.png",
+      "sha256": "b8aa8ff7cbd2409acba7f4a86c821fe3d0587207249a2678518c1d93994edacc"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/multi-stock-comparison-dark-1440.png",
+      "sha256": "10ffddab31be60a0b0085e491c149b7a9ed742191e15fa8a94e2210f542c4055"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/native-camera-dark.png",
+      "sha256": "851c66b606b284d4a78ae86c6603fab67fd4ccc3d33889cb171b10f0c02702ed"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/operations-dark-1440.png",
+      "sha256": "5e60d8e330bf60b8cfda24e384ee5ca209ed15791ab827068403bc714592dcab"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/operations-light-1440.png",
+      "sha256": "e7455dbbd29736ec410c5d5cd8aa88bec37031c7ba8f48d09d3acb7d6dc395e5"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/order-book-dark-1440.png",
+      "sha256": "39a2d255c2ace5239818217d846279b4cdb8ec041684bd1292a82cc2ca8540ea"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/order-flow-dark-1440.png",
+      "sha256": "219210a7ef5f8abba78df008cfc2f01b2262a081b0d9bebedf6dee8fda846898"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/research-validation-dark-1440.png",
+      "sha256": "bf7283b1db9f7c729ceae8c73f779c615dd1de45ebe30c150c462847d9a253a6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/securities-universe-dark-1440.png",
+      "sha256": "081f12e4b6416e36126b61ce39ab495b35bbf2f9c749d20def16df06969596e4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/stock-intelligence-dark-1440.png",
+      "sha256": "63710c11422fd1d158dd9e250944dc25d74c23ac3c8c8ce1d2ccf346f0b26513"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/stock-intelligence-dark-390.png",
+      "sha256": "0fe715bdd389610036a7a24d0baf0ed0cf88fca607dc988774be0593ba0135a1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/stock-intelligence-light-1440.png",
+      "sha256": "68e7d39d8eb4fc9e0656f17ea53bcbeabb1d71c47371762578d36dcc51fa49d2"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/gig-redesign-refinement/delivery/visual/workstation/stock-intelligence-light-390.png",
+      "sha256": "96948547e4d92badc13f24cbbe4c4c4288adb84b12da7befa740cf23388fcd74"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+      "sha256": "d4690bafaa80db979b9541c221779c3e729fa237a95098ef67c9cd1c171638ba"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/dome-synthetic-desktop.png",
+      "sha256": "4e066643f73406ee7e89c6545a8ebdbd33efa95ba3db95daa6695a3aed033ce6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/events-synthetic-desktop.png",
+      "sha256": "0fe52f688ae6ee7ece92889e2c0fa1699c007b5f4b880514e4aef166b7d11acd"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/flow-synthetic-desktop.png",
+      "sha256": "eb873091f28bd23db33046a14f365412473bcc8355f9e419fd67c88e97d852fe"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/height-synthetic-desktop.png",
+      "sha256": "8930b8b152212ffe87596cc8fa09d458bb525fb16fde4c7b8ed0ed669502e981"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/iex-authored-dome.png",
+      "sha256": "d512e384beafd27f67167d2ffdb26bd8ac0eb0fecf537aa81890854c51a0ac7e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/iex-authored-ribbon.png",
+      "sha256": "66de47dccb477f4cfb6c518a3ec263cbad01ef9fbae52be80e2a6748aabd6480"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+      "sha256": "6751289b6742d598525478422b70384e723d4016682735d70455122d02df474c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "sha256": "962a62bf97a17d338215c2d4d3f1abc885d17a483d82d7599303e04a7774bb90"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "sha256": "200588797d442bb29d381f377c045142193bd26ab28b9483c488da8cdd00da30"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+      "sha256": "626849262a431c5d7266f4bd41a22f028b17f828498dde616a1542a03760e9af"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_STATES_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+      "sha256": "9089c76682d8f2e3a15dd6cba39ac7fcf071ef1f92defb2c6b164c7cf94442e8"
+    }
+  ],
+  "stable_assets": {
+    "assets": {
+      ".vite/manifest.json": "f61156d43f539f4f59ba3cc13be6e1af7db35ef135727a492cd0b469eb72a934",
+      "assets/HistoricalResearch-CMLQin9H.js": "7561a0d92d1f44e6f20b6ecc691d531b1b0edbe44778adf821fd0733baaecb16",
+      "assets/Landscape3D-CDKjRQOn.js": "b4df94f4ad2543bf47cdc24c5beeb4bf0354a1b068bdb3b5f1bc366e1e4fc365",
+      "assets/LiveMarket-LTCcflwx.js": "e937ad54a1008a59b877ee627d01a71c680b81bddbdb7d0ce464a04d1be0a195",
+      "assets/MarketHealth-B120er9N.js": "f926c6acecf1d60eeb02e8723a1afba8d7b5f589707d3d121d8f36131f5d02c8",
+      "assets/ModelSurface-1M2p0jks.js": "4e933b5961929315fbcfa92356f81bfde8ad0de187183b7c6409637308670fc3",
+      "assets/OrbitControls-TIo_uk5c.js": "e8c4aee66cc181a06ab3e233252ee80ab912cc784ffb7a47d6f0c365d2c4407e",
+      "assets/PaperProvider-CS_j5cko.js": "8db4e8428e5abffe2fdcf61d901bbb36623585f91315ddebf2fe4ca4283ac602",
+      "assets/PaperSandbox-Cf7sKaDg.js": "9519788e860930e88ed61bed6b4b5753ec70b289c18b86681f8de4df2c05b8c2",
+      "assets/QuoteCloud-B7oXXd0J.js": "d70151c66d81ecce8af86f3a016e8f617f430d4360224f3c422c95bd08d46197",
+      "assets/ResearchDesk-8S2Yy5t5.js": "d46c31757964177b9a9b323f653d39131a815b0d13ecae63edd958568486d30b",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-vSQt5I4o.js": "5061bed9e8566bb62e047f99dba116eb24a8205ebce791593f639e6dfc80b464",
+      "assets/ResearchScene-BE7n845W.js": "932139abfff79c438a12928f0ab3ceb6c162c4e808d31a09ec0bec9ef513a7b9",
+      "assets/StockIntelligence-BZK4S5jJ.js": "548b0d3b7135be4e0c9ce30c7c7e24c772253c555702f89be64c1f4ed6bdebd1",
+      "assets/UniverseWorkspace-DmBC_Ejt.js": "666a71a9a23a2681474cfba0a231c431b9ae3beaf98def8ac61b49b994912c7c",
+      "assets/VolatilitySurface-B81iQEOb.js": "c82898bda9a2e3d6f642700423e6a4abf0718b7e46194c73a349f5e26517accc",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-CJVEJeXd.js": "776d084102078b0848998155247a41831f1c69b7e5371fd66d5e53e4c478a1c4",
+      "assets/index-DNyU3Dld.css": "4dc99b57f544631474c30efabd894ea5bf10d1c6831403c879150f9336ddb3d0",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "e89a6ea08f2b5903b752a67b8955d16f0949b295ce2dd81827d0a723fb250bb9"
+    },
+    "mutated": false,
+    "scope": "Built before browser;authored fixtures,not provider/owner target"
+  },
+  "tested_implementation": "5879408dad5d84bbd41e0a26ce4a7222fa189325",
+  "visually_inspected": [
+    "stock-intelligence-dark-1440.png",
+    "stock-intelligence-light-1440.png",
+    "stock-intelligence-dark-390.png"
+  ]
+}
