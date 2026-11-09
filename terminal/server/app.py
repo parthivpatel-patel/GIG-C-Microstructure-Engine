@@ -544,11 +544,11 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     @route('/api/v1/stocks/market-history',methods=['POST'])
     @json_endpoint
     async def market_history(request):
-        from terminal.stocks.alpaca_history import acquire
+        from terminal.stocks.alpaca_history import acquire,failure_code
         data=await bounded_json(request)
         if set(data)-{'symbol','kind','start','end','timeframe','max_pages'} or not {'symbol','kind','start','end'}<=set(data):return error('MARKET_HISTORY_QUERY','symbol,kind and bounded calendar dates required;no URLs,keys or paid feed selection',422)
         try:return await acquire(stocks,data['symbol'],data['kind'],data['start'],data['end'],data.get('timeframe','1Day'),data.get('max_pages',4))
-        except (ValueError,KeyError,TypeError,OverflowError,TimeoutError,HTTPError):return error('MARKET_HISTORY_REJECTED','source configuration,rate limit,response or interval validation rejected;previous accepted result preserved',422)
+        except (ValueError,KeyError,TypeError,OverflowError,TimeoutError,HTTPError)as exc:return error('MARKET_HISTORY_REJECTED',failure_code(exc),422)
 
     @route('/api/v1/stocks/directory-refresh',methods=['POST'])
     @json_endpoint

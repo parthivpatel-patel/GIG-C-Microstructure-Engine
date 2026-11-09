@@ -10,6 +10,27 @@ from .prices import bars, quote, trade, market_window
 from .sec import date
 from terminal.providers.kraken import timestamp_ns
 
+def failure_code(error):
+    """Fixed diagnostics only: never reflect provider bodies, URLs or credentials."""
+    import httpx
+    if isinstance(error, (TimeoutError, httpx.TimeoutException)):
+        return 'historical_deadline'
+    code = error.args[0] if error.args and type(error.args[0]) is str else None
+    known = {
+        'upstream_http_401': 'historical_credentials_rejected',
+        'upstream_http_403': 'historical_provider_forbidden',
+        'upstream_http_429': 'historical_rate_limited',
+        'upstream_failure_cooldown': 'historical_rate_limited',
+        'upstream_rate_limit_one_request_per_second': 'historical_rate_limited',
+        'market_history_interval': 'historical_interval_rejected',
+        'market_history_page_budget': 'historical_interval_rejected',
+    }
+    if code in known:
+        return known[code]
+    if isinstance(error, httpx.HTTPError):
+        return 'historical_source_unavailable'
+    return 'historical_source_configuration_or_schema_rejected'
+
 def query_key(workspace, symbol, kind, start, end, timeframe, max_pages):
     workspace.market_identity(symbol)
     date(start)
