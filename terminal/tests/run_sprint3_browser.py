@@ -12,7 +12,7 @@ parser.add_argument('--output',type=Path,default=Path('build/sprint3-qualificati
 parser.add_argument('--node-modules',type=Path,help='Optional existing Playwright modules;creates/removes only a new test-local symlink')
 parser.add_argument('--skip-build',action='store_true',help='Require finalized assets already built;hash checks still enforce immutability')
 parser.add_argument('--redesign',action='store_true',help='Include GIG redesign branding,camera lifecycle and visual checks before existing programs')
-known_programs=('gig-workstation-validation','gig-redesign-validation','browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation','recorded-playback-validation')
+known_programs=('gig-workstation-validation','gig-redesign-validation','browser-validation','contrast-scan','measure_sprint3_browser','stock-intelligence-validation','stock-loading-validation','atlas-validation','atlas2-validation','advanced-research-validation','workspace-qualification','check_bootstrap_sop','check_browser_handshake','sprint3-validation','recorded-playback-validation','atlas4-validation','atlas5-validation','atlas-final-validation')
 parser.add_argument('--programs',nargs='+',choices=known_programs,help='Run selected existing programs against the same finalized assets;never an arbitrary path')
 args=parser.parse_args();work=Path(__file__).resolve().parents[2];out=args.output.resolve();out.mkdir(parents=True,exist_ok=True);env=dict(os.environ)
 if not args.skip_build:
@@ -22,7 +22,8 @@ env['PYTHONPATH']=str(work/'terminal/tests/offline_guard')+os.pathsep+str(work)+
 # Native wheel/build path is supplied by the invoking validated environment.
 (out/'visual').mkdir(parents=True,exist_ok=True)
 env['GIG_SPRINT3_EVIDENCE']=str(out/'visual')
-for k in ('GIG_SEC_ENABLED','GIG_ALPACA_ENABLED','GIG_LIVE_ENABLED','GIG_COINBASE_ENABLED','GIG_ALPACA_STORE_ENABLED','GIG_HISTORY_STORE_ENABLED'):env[k]='0'
+for key,folder in [('GIG_ATLAS2_EVIDENCE','financial-visual'),('GIG_ATLAS4_EVIDENCE','history-visual'),('GIG_ATLAS5_EVIDENCE','recovery-visual'),('GIG_FINAL_EVIDENCE','integrated-visual')]:env.setdefault(key,str(out/folder))
+for k in ('GIG_SEC_ENABLED','GIG_ALPACA_ENABLED','GIG_ALPACA_IEX_STREAM_ENABLED','GIG_ALPACA_LIVE_ENABLED','GIG_PAPER_EXECUTION_ENABLED','GIG_LIVE_ENABLED','GIG_COINBASE_ENABLED','GIG_ALPACA_STORE_ENABLED','GIG_HISTORY_STORE_ENABLED'):env[k]='0'
 for k in ('CODESPACES','CODESPACE_NAME','GIG_TERMINAL_ALLOWED_ORIGINS'):env.pop(k,None)
 private=tempfile.TemporaryDirectory(prefix='gig-s3-fixtures-',dir='/tmp');env['GIG_SPRINT3_PAPER']=private.name+'/private'
 link=work/'terminal/tests/node_modules';owned_link=False
@@ -31,6 +32,9 @@ if not link.exists():
  link.symlink_to(args.node_modules.resolve(),target_is_directory=True);owned_link=True
 code="from terminal.server.app import create_app;from terminal.stocks.service import StockWorkspace;from terminal.paper.workspace import PaperWorkspace;import uvicorn,os;uvicorn.run(create_app(stock_workspace=StockWorkspace(environment={}),paper_workspace=PaperWorkspace(os.environ['GIG_SPRINT3_PAPER'])),host='127.0.0.1',port=8787,proxy_headers=False)"
 servers=[('native',8787,['-c',code]),('stock',18787,['terminal/tests/stock_fixture_server.py']),('atlas',18788,['terminal/tests/atlas_fixture_server.py']),('atlas2',18789,['terminal/tests/atlas2_fixture_server.py']),('live',18797,['terminal/tests/live_market_fixture_server.py']),('workspaces',18798,['terminal/tests/phase_next_fixture_server.py'])]
+# Historical workflows use owned temporary stores and are launched only on request.
+for program,name,port,script in [('atlas4-validation','history',18792,'atlas4_fixture_server.py'),('atlas5-validation','recovery',18793,'atlas5_fixture_server.py'),('atlas-final-validation','integrated',18794,'atlas_final_fixture_server.py')]:
+ if args.programs and program in args.programs:servers.append((name,port,['terminal/tests/'+script]))
 def snapshot():return {str(p.relative_to(work/'terminal/web/dist')):hashlib.sha256(p.read_bytes()).hexdigest()for p in (work/'terminal/web/dist').rglob('*')if p.is_file()}
 env['TERMINAL_URL']='http://127.0.0.1:8787';env['TERMINAL_EVIDENCE']=str(out/'native-browser')
 # Bind public source bytes without enumerating private configuration/data trees.

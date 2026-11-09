@@ -1,0 +1,11 @@
+# GIG redesign continuation — 2026-11-09
+
+Branch `development/gig-ui-redesign`; starting source `3c4c790873f660dec9570497ffceb0929d51255f`. The prior12-workspace redesign is preserved. Initial workspace changes consisted only of the pending regression and task-owned dependency links. No subscription-acknowledgment patch was present here; backend/provider source was not modified.
+
+Reproduced before: at1440×900 the financial heading was y957.359 and the Overview scroll height2,891px. The surviving failing-before browser assertion confirms the initial viewport miss. Repair: primary facts precede coverage material; historical tooling and general source explanations use explicit disclosure; original reporting rules remain available below the overview values and unchanged in the full financial workspace. Freshness/errors remain above the values.
+
+Measured after: heading y690.094, first value bounds849.453–883.047, scroll height1,686px. All eight primary figures remain, missing values stay unavailable and L1 quote context remains separate from depth. Disclosure opens do not start a provider stream.
+
+Executed current checks:123frontend tests, TypeScript/production build,207stock/provider and274native/API Python checks. Browser programs passed8new workstation checks (including120workspace/theme/viewport combinations),10existing GIG,21native/browser,10Stock Intelligence,11financial/filing,23advanced3D,9historical workflows,6backup/recovery and5integrated research checks. Existing numerical/source/persistence assertions remain intact. Source-bound screenshots/logs remain ignored under build/gig-redesign-refinement. Unchanged native calculations/frozen identities retain prior evidence; no new ARM64/native compilation is claimed.
+
+The existing fixture launcher now owns optional historical/recovery fixture servers only when requested, isolates their output paths, and explicitly forces provider/execution gates off. No provider request, account access, live/paper order, paid resource or public port occurred. The remaining closure work is a clean-checkpoint startup receipt, visual review and source-bound report/manifest. Do not restart the12-workspace redesign.

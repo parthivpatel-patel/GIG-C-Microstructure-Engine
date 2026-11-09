@@ -6,7 +6,7 @@ import crypto from 'node:crypto';
 import {assertFixtureServer} from './fixture-safety.mjs';
 const base='http://127.0.0.1:8787',out=(process.env.GIG_SPRINT3_EVIDENCE||'build/gig-redesign-next/visual')+'/workstation';fs.mkdirSync(out,{recursive:true});
 const names=['Command Center','Securities Universe','Stock Intelligence','Live Markets','Multi-Stock Comparison','Order Book','Market Depth','Order Flow','Historical Replay','Execution Simulator','Research & Validation','Operations'];
-const checks=[],combinations=[],screenshots=[],errors=[];let failure,page;
+const checks=[],combinations=[],screenshots=[],errors=[];let failure,page,overviewMetrics;
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader']});
 const check=async(name,fn)=>{await fn();checks.push(name);console.log('PASS '+name)};
 const shot=async name=>{const path=out+'/'+name+'.png';await page.screenshot({path});screenshots.push({path,sha256:crypto.createHash('sha256').update(fs.readFileSync(path)).digest('hex'),classification:'AUTHORED_NATIVE_FIXTURE_NOT_REAL_PROVIDER'})};
@@ -19,6 +19,20 @@ try{
   await page.getByRole('textbox',{name:'Global company search'}).fill('NVDA');await page.getByRole('button',{name:'Search companies',exact:true}).click();await page.getByRole('region',{name:'Company search results'}).getByRole('button',{name:/NVDA/}).click();await page.getByRole('heading',{name:/NVDA ·/}).waitFor();
   await page.getByRole('textbox',{name:'Global company search'}).fill('AAPL');await page.getByRole('button',{name:'Search companies',exact:true}).click();await page.getByRole('region',{name:'Company search results'}).getByRole('button',{name:/AAPL/}).click();await page.getByRole('heading',{name:'AAPL · Apple Inc.',exact:true}).waitFor();
   assert.equal(await page.getByTestId('origin-label').count(),0);assert.equal((await(await page.request.get(base+'/api/v1/state')).json()).engine.native,true);
+ });
+ await check('company financial summary precedes secondary acquisition workflows',async()=>{
+  await go('Stock Intelligence');await page.locator('.page-content').evaluate(e=>{e.scrollTop=0});
+  const heading=page.getByRole('heading',{name:'Financial snapshot',exact:true});const box=await heading.boundingBox();assert.ok(box&&box.y<850,`Financial heading must enter the initial900px viewport,got ${box?.y}`);
+  assert.equal(await page.locator('.company-history-tools').getAttribute('open'),null);
+  overviewMetrics=await page.evaluate(()=>{const pane=document.querySelector('.page-content'),heading=[...document.querySelectorAll('h2')].find(e=>e.textContent==='Financial snapshot');return{viewport:[innerWidth,innerHeight],paneHeight:pane.clientHeight,scrollHeight:pane.scrollHeight,financialHeadingY:heading.getBoundingClientRect().top,firstFactY:document.querySelector('.atlas-fact-card strong')?.getBoundingClientRect().top,firstFactBottom:document.querySelector('.atlas-fact-card strong')?.getBoundingClientRect().bottom}});
+  assert.ok(overviewMetrics.firstFactBottom<=900,`First financial value must be fully visible,got bottom ${overviewMetrics.firstFactBottom}`);
+  const feed=await(await page.request.get(base+'/api/v1/stocks/live')).json();assert.equal(feed.connection_count,0);
+ });
+ await check('historical and source tools stay reachable through explicit disclosure',async()=>{
+  await page.getByText('Historical prices & research datasets',{exact:true}).click();await page.getByRole('heading',{name:'Observed price history',exact:true}).waitFor();await page.getByText('Private historical snapshot archive',{exact:true}).waitFor();
+  await page.getByText('Historical prices & research datasets',{exact:true}).click();await page.getByText('Provider setup and data availability · configuration is not validation',{exact:true}).click();await page.getByText(/01 \/ Identity evidence/).waitFor();
+  const financial=page.getByRole('region',{name:'Reported financial research',exact:true});await financial.getByText('Reported-period rules and limitations',{exact:true}).click();await financial.getByText(/No cumulative-to-quarter subtraction/).waitFor();await financial.getByText('Reported-period rules and limitations',{exact:true}).click();
+  const feed=await(await page.request.get(base+'/api/v1/stocks/live')).json();assert.equal(feed.connection_count,0);await page.getByText('Provider setup and data availability · configuration is not validation',{exact:true}).click();
  });
  await check('all12 compositions in both themes and all five target viewports',async()=>{
   for(const theme of ['dark','light']){
@@ -59,5 +73,5 @@ try{
  });
  await check('no browser runtime errors',async()=>assert.deepEqual(errors,[]));
 }catch(e){failure=String(e.stack||e);if(page){await shot('failure');fs.writeFileSync(out+'/failure-text.txt',await page.locator('body').innerText())}}
-finally{await browser.close();fs.writeFileSync(out+'/results.json',JSON.stringify({schema:'gig.workstation.redesign.v1',passed:checks.length,failed:failure?1:0,skipped:0,checks,combinations,screenshots,errors,failure,scope:'Local native C++ plus authored fixtures;ordinary clicks,no provider calls,no real GPU/device/private owner edge qualification'},null,2));if(failure)console.error(failure)}
+finally{await browser.close();fs.writeFileSync(out+'/results.json',JSON.stringify({schema:'gig.workstation.redesign.v1',passed:checks.length,failed:failure?1:0,skipped:0,checks,combinations,screenshots,errors,failure,overviewMetrics,scope:'Local native C++ plus authored fixtures;ordinary clicks,no provider calls,no real GPU/device/private owner edge qualification'},null,2));if(failure)console.error(failure)}
 if(failure)process.exit(1);
