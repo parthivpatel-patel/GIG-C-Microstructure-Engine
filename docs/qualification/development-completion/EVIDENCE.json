@@ -1,0 +1,866 @@
+{
+  "artifact_sha256": {
+    "build/advanced-3d/browser.json": "89cdb8faab54dba0253f6c1a8062df9022380f80dcde505ea381bea167f59df5",
+    "build/development-completion/binding-cohorts.json": "6e50ba063e1f121a477b2803a21b246d7f9c63f142effd12898e6632fbe711f8",
+    "build/development-completion/binding-driver.log": "7c8eb4947d44f0dd259a3b3ff16ff484710d785b1143ecbb67252176f0901ae4",
+    "build/development-completion/browser-delivered-driver.log": "6fcea7d5d8c0f6d05eed03905401b59f6ceb42de0adce3c33d420812336a0938",
+    "build/development-completion/browser-delivered-tail-driver.log": "9d26bdb17551fb9bc3e7446633a04d20f02ed6e383712db9e9390b87a95631e1",
+    "build/development-completion/browser-delivered-tail/advanced-research-validation-final.log": "1a702b2c2ba3124f46d9982c68e68a2ce1504c20a4b73a638b1c4e59b0eb9441",
+    "build/development-completion/browser-delivered-tail/atlas-final-server.log": "8e73bfd74e3450aeff1517520ed2172fcb3a87997ce4012444f26fb783c370fc",
+    "build/development-completion/browser-delivered-tail/atlas2-final-server.log": "d24b1d14e9f4e04d5f5aa3c5c2c7f24912f37ffb7b0df0c781b4ac5dac51b855",
+    "build/development-completion/browser-delivered-tail/browser-final-matrix.json": "fdf41e5057993e7ccc96a27c24c48daef1341b6d5bfad00763e14e7115b2ab41",
+    "build/development-completion/browser-delivered-tail/browser-validation-final.log": "f7a540875cba66dc736cefaaf29536ae5fcfcff9272581e03e1e35c9ee68f379",
+    "build/development-completion/browser-delivered-tail/gig-workstation-validation-final.log": "af53f46e2e6825f9e8ad5e94a00ef003ec3d513fe8b0e804838356fe56b8580f",
+    "build/development-completion/browser-delivered-tail/live-final-server.log": "38827e8555f0ab09d77bf00a83e8defcc52d67dfaf80a8c394131cc4800ef9c4",
+    "build/development-completion/browser-delivered-tail/native-browser/results.json": "f7a540875cba66dc736cefaaf29536ae5fcfcff9272581e03e1e35c9ee68f379",
+    "build/development-completion/browser-delivered-tail/native-final-server.log": "9023b45e785c16401d2c7038808a74292a6b0a56826ca527edea70298dda3ca7",
+    "build/development-completion/browser-delivered-tail/source-receipt.json": "143c1d04ccda5be1e3b6a670e4d6193e08e8f00388a6b82d48baaf59baa8e075",
+    "build/development-completion/browser-delivered-tail/stable-assets-final.json": "fbd655583873eb128efd1beb9f23a2df2f197ac0e75bbba729488ebbace48193",
+    "build/development-completion/browser-delivered-tail/stock-final-server.log": "283832d6e9c3f7eaab9dec8d13630b1bf5755b23bc516dffff623157b00c4e76",
+    "build/development-completion/browser-delivered-tail/visual/workstation/results.json": "40fb23cd000979b999c2123f429f0989ec7e8404e10e1c078453a1f099e7570f",
+    "build/development-completion/browser-delivered-tail/workspaces-final-server.log": "afb138158e89dff4e9f0af8eed68c5158fa8a710361e50ac679f079fe66ac55e",
+    "build/development-completion/browser-delivered/atlas-final-server.log": "7cf354f969c3383afe78288339febadf301916eae2b87ce84097aea3a2e092bb",
+    "build/development-completion/browser-delivered/atlas-final-validation-final.log": "e4b244c4f065fa2098921039438e0cad469e0e938f3c46c92171de12a9f0c9d9",
+    "build/development-completion/browser-delivered/atlas2-final-server.log": "277323a55623201e3aaa254d1bd1b0080047f21aad14ed5f21d4c93c48ccca64",
+    "build/development-completion/browser-delivered/atlas4-validation-final.log": "e1aa10958d226a143c045a06b9640482115c73309f89063a0b3378538d80eec6",
+    "build/development-completion/browser-delivered/atlas5-validation-final.log": "943f39577ea32f17b7ab4ebb77573ea7e4f8db0fd319fba231b078c6fc1f8399",
+    "build/development-completion/browser-delivered/browser-final-matrix.json": "4d722590e366dc2efcde6184104d23508aa8e7618d2fcf11f9c885e65f0eab5b",
+    "build/development-completion/browser-delivered/completion-validation-final.log": "7fe3dbf3a2c735aa8c1fddd41535ab7f92ff355410d9035387592534700252c1",
+    "build/development-completion/browser-delivered/gig-workstation-validation-final.log": "b2dff2374adead02d261639db58449156f59bd01feb22ace800b89fff1d34560",
+    "build/development-completion/browser-delivered/history-final-server.log": "d114fd600fbc0042bb84f29c81d784ccbd3e4c0e778f4fd94c88e4cc559e261e",
+    "build/development-completion/browser-delivered/history-visual/results.json": "487cdb516d3673c577afa8eeb7467165b5cc4a7b00484d3a622817ecab06eafa",
+    "build/development-completion/browser-delivered/integrated-final-server.log": "dcf66bdea04e4e35a322ade9b8d40b1b5b57c438c82f25831fd136630145f22c",
+    "build/development-completion/browser-delivered/integrated-visual/results.json": "ff9b17b5934e296649bd5ce212f62046224ed948a6843291fe097c6db3b42bdb",
+    "build/development-completion/browser-delivered/live-final-server.log": "6e670af7286c25eb0f7789816e26d544cefa6e56e6b29d877ed8cfd65af9e8e1",
+    "build/development-completion/browser-delivered/native-final-server.log": "520763c8ee3056c9205b1ef395680b2ed86195d42efe6ddc94aa0d59a12eae47",
+    "build/development-completion/browser-delivered/phase-next-validation-final.log": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+    "build/development-completion/browser-delivered/recovery-final-server.log": "62d9047fe32f33458bd524d3b97cfd243882ff1621f6b033c4c92df04fb6697b",
+    "build/development-completion/browser-delivered/recovery-visual/results.json": "55fefd63801f4eea64d96a6c20d0bb251fb39c28cb686431ac29253205a4c07e",
+    "build/development-completion/browser-delivered/source-receipt.json": "93d122373d6983c4cc8a2a45ee545f1572c246483976ef38059a6fe0d2e9882b",
+    "build/development-completion/browser-delivered/stock-final-server.log": "d7ff11a5b96aa70d5592c05de8e4a3f582b2a17370b7da1cf84fc4cf11b6a6d6",
+    "build/development-completion/browser-delivered/stock-intelligence-validation-final.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "build/development-completion/browser-delivered/visual/completion-results.json": "39afa73545b65d08c5cd1aecbcbbcf28f89dc0c8d717dd98e3c22fe463e141aa",
+    "build/development-completion/browser-delivered/visual/workstation/results.json": "fc9b2302713271c36c21bc6fb62ed8012c00aea713022c2a476e2cf3694bc5d5",
+    "build/development-completion/browser-delivered/workspaces-final-server.log": "b0a00e39cdca9b221753c9e834dec57f48c68bda2d306d8027d1eba00f8b4043",
+    "build/development-completion/browser-delivery-driver.log": "de32c872bca9e42ef794a9a8462a9a11263e7e0124df9b59df54eed59ead2052",
+    "build/development-completion/browser-delivery/atlas-final-server.log": "9b54a0f60f15ebb85ad2de61d8eccf4bf77097f2d0b342565240e4d96facce81",
+    "build/development-completion/browser-delivery/atlas2-final-server.log": "a12f8860f63af82b34e833953044885adf8164b4ebe2cb62e2e1782c2c538ecb",
+    "build/development-completion/browser-delivery/browser-final-matrix.json": "cdf7478c0d94687cebec599a33c9ff27c583d53ae62c67fb88f343e0268bb816",
+    "build/development-completion/browser-delivery/completion-validation-final.log": "11f6a5e6ec5e5e3f59483180042dd129a60b66fe41065c7c252d29d2540a8c3d",
+    "build/development-completion/browser-delivery/history-final-server.log": "c93dd732de33746f0e2880703d0f8d5048359777025fc7af4629a1053afe1e7d",
+    "build/development-completion/browser-delivery/integrated-final-server.log": "82c1f652dd59446ff4093ff942ad59216d9e2fbeb8a57c8fc4d39b0c7570daaf",
+    "build/development-completion/browser-delivery/live-final-server.log": "3947203631d80755aa1d169c22a3dc5b9f15fbb6c4d8d6cde9896b3db1af203e",
+    "build/development-completion/browser-delivery/native-final-server.log": "a6550afb1d60ef738a9f37039901a348e1957dd9d89d56c8a6a6685c6e205f73",
+    "build/development-completion/browser-delivery/recovery-final-server.log": "7ec093dbf1f2cf2c89a835fc48d15d6d08ef18715065569e0578c5ee294ea547",
+    "build/development-completion/browser-delivery/source-receipt.json": "7c702e4bf56d61942a4b7f6daa619e146130b8ff35473a7c01c75efdcb707e38",
+    "build/development-completion/browser-delivery/stock-final-server.log": "d76994ce301e09913a92abe694d226dac4b36da4dd92c177a95d685b2026f699",
+    "build/development-completion/browser-delivery/workspaces-final-server.log": "87897febff63e99d0b0102ff3def22a83e4ef03027618fb53fcdf16e5ca178a5",
+    "build/development-completion/browser-development-driver.log": "4e7f2cfee4cac2b264d8312a75b94f5e4b6ad138fb55119523667b96436ba0fd",
+    "build/development-completion/browser-development/atlas-final-server.log": "2cbd89a0c8e8c7327dc4390ea02a92ad4c2d22dc0c7acefc2865065b55f8d076",
+    "build/development-completion/browser-development/atlas2-final-server.log": "c73618333997438d51af4ade094b129a53027ba9779676e3991f49e944d4a153",
+    "build/development-completion/browser-development/browser-final-matrix.json": "8cf47f1bb39d908ed3972201ff4a1befad4054e7121ea55690c37d8d3eae0b4d",
+    "build/development-completion/browser-development/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-development/history-final-server.log": "da6af03090c88ad76c84952b76be336b85de7446f6047ca11bea900712dedba1",
+    "build/development-completion/browser-development/integrated-final-server.log": "90c066c2fafc7aa83fcfc29e93b585718c37271c3d459957941d7b9078b6b934",
+    "build/development-completion/browser-development/live-final-server.log": "97f9d9a66816b0a73c6415d00e769ccc5ec0d5ee46e2a70cd688f1b1efa98dec",
+    "build/development-completion/browser-development/native-final-server.log": "f25aa089a6de2e26bcfa51194135ce40d720a7b71401e58d4b56d58658c4a699",
+    "build/development-completion/browser-development/phase-next-validation-final.log": "0ef2637890e802d0cd33e86c465b4b4b0343cc4e75bdcd0fea80b6a477671377",
+    "build/development-completion/browser-development/recovery-final-server.log": "cd2ef4ded28422da9f2796f91074f0c99d89bbe42e18d5cf32e6b30055634a92",
+    "build/development-completion/browser-development/source-receipt.json": "587fabb69c4a668d33d8062cf2afb0f006b21c1728cf81722a53d97c5c002fa6",
+    "build/development-completion/browser-development/stock-final-server.log": "aab25ea72ba657deeb9ca9c2a06a4c44388af528ee6cbf2d8738a0b2bc8f577c",
+    "build/development-completion/browser-development/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-development/workspaces-final-server.log": "008f49a00ecf063268909fa783832f58306e9cffcc8417f13ecbcd5e7daf8169",
+    "build/development-completion/browser-existing-initial-driver.log": "eca5b42df87854558c35bfb42e0daebc3e1c57cb067286ea6df9b1b05e4e1319",
+    "build/development-completion/browser-existing-initial/atlas-final-server.log": "af86308d94c0443407de79b26ea5d4b58c430ba6d7d67cd2f7b5c41ae652575c",
+    "build/development-completion/browser-existing-initial/atlas2-final-server.log": "4df6d2a419cd2f8570208f3b246cc90254670aa24737122b22162a67a85dbb77",
+    "build/development-completion/browser-existing-initial/browser-final-matrix.json": "00a4c3fec02e7342b4104c03e77e949160c0f1d2dda6636531117731b79820b3",
+    "build/development-completion/browser-existing-initial/history-final-server.log": "32b060ab83d234b94e149b9d55702cdfd044f1dfadf72571ded364c0fb7aa320",
+    "build/development-completion/browser-existing-initial/integrated-final-server.log": "ca2e4c4f776044f8f835a4f17305f2d81ab37ab5d9b487e6902268093863a699",
+    "build/development-completion/browser-existing-initial/live-final-server.log": "cc249b36ce4f52f9761f7289fad73be697eb59c46653e386e82a41c35339d731",
+    "build/development-completion/browser-existing-initial/native-final-server.log": "6a22b2a9c5f138d788230d30ad1f6b34177eccbde48ed3f6bdf7521f81fccbbd",
+    "build/development-completion/browser-existing-initial/phase-next-validation-final.log": "06da0e39f256015ed3ddfca91f1b153c3247be31e7c749a6418c00293347edf5",
+    "build/development-completion/browser-existing-initial/recovery-final-server.log": "de7dab4a64ac9e533bf0482365ded750ff23ddf05054c6ecfb11abfde7706b4a",
+    "build/development-completion/browser-existing-initial/source-receipt.json": "c0a625a04fa5c6db2ed77b765c833357543fc24691bc29af0de7aca965d0cb70",
+    "build/development-completion/browser-existing-initial/stock-final-server.log": "c513600a7b6a380a758a8f24dd038592240760724e6abdf3bac4350df7a4828e",
+    "build/development-completion/browser-existing-initial/workspaces-final-server.log": "2b904985200d7892797bbfbeb9636f9b9b9c3473089948490cce0df4d82b1ac1",
+    "build/development-completion/browser-final-driver.log": "d6d2369c98f1d551b7f3896667068000e2c41332a05e386a3ac1ef68b943a5a8",
+    "build/development-completion/browser-final-sequential-driver.log": "f84701fc3425e69b77470277fd3f99005304638029e3d3454240a2a05d668236",
+    "build/development-completion/browser-final-sequential/atlas-final-server.log": "bc43754e2ad8159562addee2e70a94166d374a12f6f23d6d217a3f8f7edd5b7d",
+    "build/development-completion/browser-final-sequential/atlas2-final-server.log": "155c157986c4342507ee7630c2a8319d4d74dc44c7131cf4be29fe32d42f3e6c",
+    "build/development-completion/browser-final-sequential/browser-final-matrix.json": "8556d186cbda6c398dc152deaf93e94d8e5c2377b2dfa3b78ed9a837ab788982",
+    "build/development-completion/browser-final-sequential/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-final-sequential/history-final-server.log": "cb69e54ac6769ffe11a8057bc91b61d90008987a747317f477ded39271fa659f",
+    "build/development-completion/browser-final-sequential/integrated-final-server.log": "78573b84ba07e798cd50d166cfdc3ceae653697d98e848b8d707dc39acfa0014",
+    "build/development-completion/browser-final-sequential/live-final-server.log": "774ad0d606cba0a97993baecb67a51c6fbcaaecba5f1fb9678a1c984569c99c5",
+    "build/development-completion/browser-final-sequential/native-final-server.log": "ab071ef7ee100820406573729dce396752b979c0092dd436cb4fe300d00c1c5b",
+    "build/development-completion/browser-final-sequential/phase-next-validation-final.log": "d5b34b7de9a05b163cfc4c5a4e1cb244b50f8f312091dc4f2cd02b04a958ce16",
+    "build/development-completion/browser-final-sequential/recovery-final-server.log": "7efde973b63a2275fab6eeb734acb67fdf6d2ea4092a2ed965783a4ef745a9d7",
+    "build/development-completion/browser-final-sequential/source-receipt.json": "8c6f6af45be9365b52e4c55fec2d6848f969503efaf447bfcdf9e1529b248705",
+    "build/development-completion/browser-final-sequential/stock-final-server.log": "4b03cd64aec6be935ce00e1ca8275f4293f26fd869b0df11f85a3097b42d3d98",
+    "build/development-completion/browser-final-sequential/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-final-sequential/workspaces-final-server.log": "8046bdfa39d920169b318fbdee14b5009d208602b5a766c9d5ffbf69013474de",
+    "build/development-completion/browser-final/atlas-final-server.log": "c341b886badd0669d524d80ff411f55ac47468d918da9c3d6ed68a3302348e8f",
+    "build/development-completion/browser-final/atlas2-final-server.log": "b2638c91c4a50a80987373508bbe28bd0e3bb6ce0cd82b85961411212817c73d",
+    "build/development-completion/browser-final/browser-final-matrix.json": "2413e233c4dd3811b4d170182424d68d69833639f209797656d8fd47c909c104",
+    "build/development-completion/browser-final/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-final/history-final-server.log": "8ea7fcb1f023a142d2a5a627e847b82d7c0a395f2aeee1d4dba72bbb1b8b1d68",
+    "build/development-completion/browser-final/integrated-final-server.log": "84b96b3f288619c6ac9fec0caf03559aa216dc97fafd66736d6593aac6dabc88",
+    "build/development-completion/browser-final/live-final-server.log": "e7235381d7fff5d246cb11c7dc24defdb2446d67d2fbd6f5bb2b81d44f1d940a",
+    "build/development-completion/browser-final/native-final-server.log": "45cfc036200fd2fa249f2bfe4a849e69ed332d8c2dad820b395ba2cc26ab14d7",
+    "build/development-completion/browser-final/phase-next-validation-final.log": "918a69093df93a0ebbe50d373cb81a6b6f4a71a54351a1f2ac3112d3b6260de9",
+    "build/development-completion/browser-final/recovery-final-server.log": "8851ffb7547cc694488f45716f1590e658a35af047b582b6d8359aeffcdaafcf",
+    "build/development-completion/browser-final/source-receipt.json": "8c6f6af45be9365b52e4c55fec2d6848f969503efaf447bfcdf9e1529b248705",
+    "build/development-completion/browser-final/stock-final-server.log": "b4c055a57c11c18e7354dee9f2c8d9958998c2f1a7244fb327df451abeefc926",
+    "build/development-completion/browser-final/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-final/workspaces-final-server.log": "e71c07e550d620b361ec45cc7f81edcc3dfe3a417e85167ad8d3baef1ebf786b",
+    "build/development-completion/browser-focused-driver.log": "00e8b4a968dbb116fd10e2c72e6e3461567e36ec716bf4e69d9e195359372b4c",
+    "build/development-completion/browser-focused/atlas-final-server.log": "49544958684671cf96d64c12b969bceb29e95544f00bd2a0e44f4b0282040a37",
+    "build/development-completion/browser-focused/atlas2-final-server.log": "b47e934081935622044919f42efa878fd654614f35b83ad65de7e41122101695",
+    "build/development-completion/browser-focused/browser-final-matrix.json": "b159d32514b392d1ed0c2996eed3807b03d260370608d3bc27309a9cce4e641a",
+    "build/development-completion/browser-focused/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-focused/live-final-server.log": "4d2b3dd889795f15ca64163ac4f40f0537c1d3fb90222858220e2fb4e255e8a9",
+    "build/development-completion/browser-focused/native-final-server.log": "eeca8199c35ef6ce70c0d0b1c9f5bbdcde0119570d60af14fee77dd4d45da803",
+    "build/development-completion/browser-focused/source-receipt.json": "5b1798c3fd8e3197dc42b99ccb4cdd56265ee1bb3d9b5b4eed881de1123e5591",
+    "build/development-completion/browser-focused/stable-assets-final.json": "f57ab6920a6c4c927c0d3739265e1db3a28c3d945d6d61e6ffd2db9dea90fb52",
+    "build/development-completion/browser-focused/stock-final-server.log": "77ee7787709dcc4803d30b6c1968dba05853b670f2e94b8c77e97e42dcfd5aa4",
+    "build/development-completion/browser-focused/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-focused/workspaces-final-server.log": "43a091baecb2de8293594488e6670557c568830a773e7c94f913fb6311f94766",
+    "build/development-completion/browser-history-diagnostic-driver.log": "8caa1748b38d450f20d30892bb5341c8ceb64abb96844f239ff6f3c72e3843c1",
+    "build/development-completion/browser-history-diagnostic/atlas-final-server.log": "aa9522c776c4a2f12603f33b997f296d1ff88244e1fc2c83cdaf5bc9061fc4d0",
+    "build/development-completion/browser-history-diagnostic/atlas2-final-server.log": "dd28adb5d012f42061c56081c81a94f4788bf1bb949ddc9f232fd089f68d05aa",
+    "build/development-completion/browser-history-diagnostic/browser-final-matrix.json": "a896728b5bfff736dc51fc0b7321b3e710bfae4f9a37adfd8f2a5efa31d5ffbc",
+    "build/development-completion/browser-history-diagnostic/live-final-server.log": "076e1baa267a3d5490fdcf9cfbe74d3d8e9c80444dfc98cf8f46006724b0a78f",
+    "build/development-completion/browser-history-diagnostic/native-final-server.log": "cc5d846c003fd94d22787f002a20dbd5933bee066e736390c46b551dbbf100eb",
+    "build/development-completion/browser-history-diagnostic/phase-next-validation-final.log": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+    "build/development-completion/browser-history-diagnostic/source-receipt.json": "61fa4fc049e19f0f968ada097c3e00a0b749ee7ac6f98660678a0d2cbab6542b",
+    "build/development-completion/browser-history-diagnostic/stable-assets-final.json": "f57ab6920a6c4c927c0d3739265e1db3a28c3d945d6d61e6ffd2db9dea90fb52",
+    "build/development-completion/browser-history-diagnostic/stock-final-server.log": "70839c7d1d740299b28d430c25552136e56235017cff73e0bc242c28261103e4",
+    "build/development-completion/browser-history-diagnostic/workspaces-final-server.log": "a609b77a81a6f654776826c80c2072ab4c8aebefdc4cabaabbb83c7a325b126e",
+    "build/development-completion/browser-qualified-driver.log": "99feea0f009433ec9654fbe9b2831a799b0e5f4aa5cb2a81555d5ce983fa1a04",
+    "build/development-completion/browser-qualified/advanced-research-validation-final.log": "54fbbde5dbf00ddc834d62986d868a7fccffc6ec017178b009070a027888ecda",
+    "build/development-completion/browser-qualified/atlas-final-server.log": "be9603444f67f5e7cb51a4517a437d2f9a0d4009e639f78dc992aea83147e3ce",
+    "build/development-completion/browser-qualified/atlas-final-validation-final.log": "9729ff82c0525b24ba4d808bf8cb0988827cdbf73e9259f7997b2fac7c3c7965",
+    "build/development-completion/browser-qualified/atlas2-final-server.log": "3bcb097e27f607d174fb428884953ad83e3dcc750af4bc8f294648e3cadb1458",
+    "build/development-completion/browser-qualified/atlas4-validation-final.log": "d5ed6ca4c8a20f177818cb128abb275c1a0d8653fdf5d29bfc9d6908fc474ccc",
+    "build/development-completion/browser-qualified/atlas5-validation-final.log": "de0c49cd93d166b5096d79f6c0487f02183dd746a9810ad57fd99ae710bab049",
+    "build/development-completion/browser-qualified/browser-final-matrix.json": "a08f6c2626dbe5bbf863632ae6b7d695b793d4e1d29448063941cce355fcbc5a",
+    "build/development-completion/browser-qualified/browser-validation-final.log": "377a2f8d89dba5ee7f0821527a4095241e5d34b123e32f192a5b2b42acd2e623",
+    "build/development-completion/browser-qualified/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-qualified/gig-workstation-validation-final.log": "af53f46e2e6825f9e8ad5e94a00ef003ec3d513fe8b0e804838356fe56b8580f",
+    "build/development-completion/browser-qualified/history-final-server.log": "ca4ea89e7c53de7ac397a755cb36971b5b27cbe04676f729546184c34c750fde",
+    "build/development-completion/browser-qualified/history-visual/results.json": "00e41aabf3ad03f9660ca30b2a7e62c0b1b34e4cbb50c0ff42a4632ccaffde9d",
+    "build/development-completion/browser-qualified/integrated-final-server.log": "71c3562697550a39d40e9412f9dadd7717b139000aabe4eccc7574196dad33c3",
+    "build/development-completion/browser-qualified/integrated-visual/results.json": "843470c8fc7802cc7656ff1b3a5a765d0c36ad3dd1d62a8a28e8b46c8e662a09",
+    "build/development-completion/browser-qualified/live-final-server.log": "d671fb4116a97a19865560bee6fbf60c59db67037608a977ea15abdf235f3df5",
+    "build/development-completion/browser-qualified/native-browser/results.json": "377a2f8d89dba5ee7f0821527a4095241e5d34b123e32f192a5b2b42acd2e623",
+    "build/development-completion/browser-qualified/native-final-server.log": "87ca97b172a30ac4cd0f7a1e7cdd0b300373e08ece771bd939a9fc956e66f584",
+    "build/development-completion/browser-qualified/phase-next-validation-final.log": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+    "build/development-completion/browser-qualified/recovery-final-server.log": "e8751df29cc59195b0574c83e042ed07f6c7eba7662e88b23d296d75bca18e9d",
+    "build/development-completion/browser-qualified/recovery-visual/results.json": "ce06cf124c9f7c1223948761d44c6c2c9cd472385335f9af4750547f28829504",
+    "build/development-completion/browser-qualified/source-receipt.json": "0f042053757d65cda0eaef0c3f0b4a21904a14ce26543d158bb8ae1e53bf2aad",
+    "build/development-completion/browser-qualified/stable-assets-final.json": "f57ab6920a6c4c927c0d3739265e1db3a28c3d945d6d61e6ffd2db9dea90fb52",
+    "build/development-completion/browser-qualified/stock-final-server.log": "b3d2f8b551a590dbdb80b1b67b690c9009639bab4286d4fe6ac644fe14eb6a5c",
+    "build/development-completion/browser-qualified/stock-intelligence-validation-final.log": "9b17312da08f2299e93b4fb0c6b9ce2c95b6ff4da13d6472d8828f16480eecd2",
+    "build/development-completion/browser-qualified/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-qualified/visual/workstation/results.json": "6993a977564b18a0038bc35e0684c79524dc971756e643ca8d4fbec4c5482cb5",
+    "build/development-completion/browser-qualified/workspaces-final-server.log": "1e43cea43a0c03f847f56702402343d9a2d38454b9922d74fde7f2b0198f3aec",
+    "build/development-completion/browser-repro-pair-driver.log": "f16c70fa79edb5aa6d49dc0d4c516e5d24ae63f7ad65c48ca42adcdd5c08df03",
+    "build/development-completion/browser-repro-pair/atlas-final-server.log": "4ab0bcc780aa1a5fc402df06413c219598203e17cf8948fb77f3cffc178459f0",
+    "build/development-completion/browser-repro-pair/atlas2-final-server.log": "2b519243c9c5eae025278a4eaa9b5399e1583c67d3892809d2387838fd03b09d",
+    "build/development-completion/browser-repro-pair/browser-final-matrix.json": "6ce7a743396eb3ec67575a22bb7db0367853e86d02d92242c449b3f7d6263587",
+    "build/development-completion/browser-repro-pair/completion-validation-final.log": "da4d67e69577a1d2bb132afc3a163c965d739c844e2c1a9ad176d4d1ef1982df",
+    "build/development-completion/browser-repro-pair/live-final-server.log": "9c49674196506634fe83fd8f3d56dd353601304279b1fab2369d3ca37ae736fb",
+    "build/development-completion/browser-repro-pair/native-final-server.log": "d8b23eac3b0d32a5dbe7500a11cf3e659d1b116cf070d955111eb0aa67405945",
+    "build/development-completion/browser-repro-pair/phase-next-validation-final.log": "a3fe64f4d0e2ce7006ca40a1e24ddc797eded3fcb4933246f72b7935d5e89ae0",
+    "build/development-completion/browser-repro-pair/source-receipt.json": "61fa4fc049e19f0f968ada097c3e00a0b749ee7ac6f98660678a0d2cbab6542b",
+    "build/development-completion/browser-repro-pair/stable-assets-final.json": "f57ab6920a6c4c927c0d3739265e1db3a28c3d945d6d61e6ffd2db9dea90fb52",
+    "build/development-completion/browser-repro-pair/stock-final-server.log": "93137adfb03d81d63cbd82a80de897a7125a45e996a991c2bbceef5157a119be",
+    "build/development-completion/browser-repro-pair/visual/completion-results.json": "87da591c4856b277481f32bd44f1a72198a09d41012eb4dba1ef09729271fa8c",
+    "build/development-completion/browser-repro-pair/workspaces-final-server.log": "8fcac136f146a6181bd2f33a4ba5f30ddde3461f4cba01755d01c221a91296ce",
+    "build/development-completion/build-delivery.log": "2b3b35838987254d484e646972520d1f80a4428901d5269e7e4e7e57a9e81bba",
+    "build/development-completion/build.log": "d96c4ab46153f5720cdb541b49605f52354172aecddf95a945104fd7ad0a72cc",
+    "build/development-completion/diagnostics-failing-before.log": "d0441d3dceb26560d823e2b6b74cb60e2d0a37904f66ac143c9de9d3fc1e7f30",
+    "build/development-completion/environment.json": "2088c4db87ec1c264420dd44de30d2dc53a32b6d00f7ac669c5e0448bb5f4964",
+    "build/development-completion/failing-before-driver.log": "27bdc2ab8f21225a35693a298c73e338c4e9f1704607635da96699652de1c77d",
+    "build/development-completion/failing-before/atlas-final-server.log": "1b58e8b0bc65b7fe19fc58bdbb425faf068a278689409a3784f80703980c963c",
+    "build/development-completion/failing-before/atlas2-final-server.log": "50d100bfa90b9e3a5a972b064e7937414350503fbad2a7706d345c2b5a2cfad3",
+    "build/development-completion/failing-before/browser-final-matrix.json": "0e86527a1337a8f3ed4b0b84606fff0d90211f79c856ae371256bd9020215405",
+    "build/development-completion/failing-before/completion-validation-final.log": "3f6df4b21cb98eeb8afc50e7f22948f7636542800dee880b87611ccaec89822e",
+    "build/development-completion/failing-before/live-final-server.log": "44eb42a552da4aa676a36454f8b5cf088cef8165a8cc8cee71e6585051988f7d",
+    "build/development-completion/failing-before/native-final-server.log": "6910dd25e2905b6bf4bf97211800b27a66a6d37f19b388d6001938a3b6dc240d",
+    "build/development-completion/failing-before/source-receipt.json": "bdb7be8691e67a5a256029fb3b79d2625da37468a8ded88e9fede8a39f932f7a",
+    "build/development-completion/failing-before/stock-final-server.log": "6108604fe6aa54b83b29a77294aea1c26a42fc2122aea4df6d3efa2dda2ec0e8",
+    "build/development-completion/failing-before/workspaces-final-server.log": "7af64c5edc95a857381a6ac835997d3fb9739e932c7a1f8392913b4dcec9ea82",
+    "build/development-completion/forwarded-tls.log": "2a82c1a804829d87ab8beb0619d85d3bc2310f4ee51bcc66e01afaf3cefdc7ee",
+    "build/development-completion/frontend-delivery.log": "642cb65c811f5ca6f3412e6ea5e953676644e8f31e2e036df9e69c2ea40321c0",
+    "build/development-completion/frontend-final.log": "72151a6bc92cdfe784dc33ea6e7e758744dcd60c404136de899badbbcec84716",
+    "build/development-completion/frontend.log": "eaadf6ec2d15cbb496420125a6e4e9b48e658a4e3af2698cf339a2754986a546",
+    "build/development-completion/frozen-eight-detail.log": "dd4ae41a854175209cd0fb525e7a18d7497a2ada9cf1802ff3986a73810cb92b",
+    "build/development-completion/frozen-eight.log": "683fa156b428cda50716bfce0f14e667017d21ad71d225c7961b375656043535",
+    "build/development-completion/frozen-hash-verification.json": "d0a04c4722aaca6756b26fc203bc7de0e3589c8628073e3c2925e0a34acca076",
+    "build/development-completion/historical-independent-reproduction.log": "79428ab14b753f66126387f3ed74f9995b0772dd9afa77d68288c48bd248d6f5",
+    "build/development-completion/history-58-asan-ubsan.log": "3233cc946d61a03d0adc4c830592ebc1ad8db88b2c11d7eed9db9affffbf30df",
+    "build/development-completion/history-58-debug.log": "e6a6e580b5802a557d23c1a0928d255d3e24566f9f3a11f60408f373c4e281ed",
+    "build/development-completion/history-concurrency-reproduction.log": "79428ab14b753f66126387f3ed74f9995b0772dd9afa77d68288c48bd248d6f5",
+    "build/development-completion/history-python.log": "68c426c6a62e550854369245c582ceeb71fc91ca52ec26d4ad66faa511210b34",
+    "build/development-completion/native-api-274-asan-ubsan.log": "09da7906382d3d001b6e533deeb14ba4ebcb82af6bee4e2cf979f8102642e1d1",
+    "build/development-completion/native-api-274-debug.log": "f327498b1e86a795f71aba0cb3205a59a9b8c67bb239dbc844adc143ac4e32e8",
+    "build/development-completion/native-api-274-final.log": "3b62906fedb33055e43ced9df2f4c173c878bf60c0f6b54f66d049c3036d7419",
+    "build/development-completion/native-api-274.log": "b330d2bf96596b43d135913761c8556375b72f8e3865254abb55241dcf8072f7",
+    "build/development-completion/npm-ls.log": "26be74809569e1506e2efb8beef550e4a023d8fa417ebc0280176af000504e31",
+    "build/development-completion/packaging-final.log": "edb4e2159c923ea45a32656078835cdf531c3d7b414c670dd786978875cb0678",
+    "build/development-completion/packaging.log": "3c01f1f44335819b4e9336eed8dbbd65e343940bf43f2ba4e86c263c3dea8197",
+    "build/development-completion/pip-check.log": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313",
+    "build/development-completion/rewritten-http-tls.log": "bae4019d097fcc0956c2fde2fc197092f2d94f8609ed96f7ae8347cbf83b520f",
+    "build/development-completion/rewritten-stream-tls.log": "bf0448a68274598a01aa75cd9b2c472a5fb3369d375051d60c4652102eee96c9",
+    "build/development-completion/sprint4-browser-final/assets.json": "832421a6832951b36d148bef4d416251c1fcb166a9c584914d83891eb25d24e2",
+    "build/development-completion/sprint4-browser-final/browser.log": "381337e55b5c9186daaa40c41bcafb7b810b9664950c7da1c2d2e28d8fd26d4d",
+    "build/development-completion/sprint4-browser-final/result.json": "e8772a4dfc3ade10b96ebcc6d8ac0c52b5cb4a9a8d200897799c7b73bde9b967",
+    "build/development-completion/sprint4-browser-final/server.log": "0e49e5b1037ae229f075c8e45b6f63fdf9b03b3e35e5548a8c120993c14ad13b",
+    "build/development-completion/sprint4-browser/assets.json": "832421a6832951b36d148bef4d416251c1fcb166a9c584914d83891eb25d24e2",
+    "build/development-completion/sprint4-browser/browser.log": "22fb0fbeec18eeb55600e35ca4196dd8bf86c59042d070c102c7651baa0a850b",
+    "build/development-completion/sprint4-browser/result.json": "6c72d7ea1ba5aa0e26f4f0c360121ad32c8032e032b31b7f457b577c46763903",
+    "build/development-completion/sprint4-browser/server.log": "125e0a875d47ed5d444b0b848d67f7c2cb184ccbcce405d209006aeeb3b1c117",
+    "build/development-completion/sprint4-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/development-completion/sprint4-final-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/development-completion/stock-211.log": "5b6fd5ecca9e29f69d92023d2120071c082610f506ec57e2a39d93c2e17c920c",
+    "build/development-completion/stocks-211-asan-ubsan.log": "8d71ac7cddbf3998e6cebbf95140ce299a8a1bdd61bf587fefb20c89043bce43",
+    "build/development-completion/stocks-211-debug.log": "0047581057a2d770652031e9bd724abc8dd6a3e5ca0bf91f23083c42e65507c4",
+    "build/phase-next/browser.json": "43227c674ba0f19bedb47dbc520e79768d5dc75af4973f931a979f4a6fcd6343"
+  },
+  "assets": {
+    ".vite/manifest.json": "18962f6a004cf7d43fe18f2fe94c55987fe6ba79cb7d4c5cf90e83ee2f252d69",
+    "assets/HistoricalResearch-D8TICBo8.js": "57df6ce132ef60d12c8a2afa2866758de14ee9b98aeda4b29d555e4ff13fc94b",
+    "assets/Landscape3D-DDGpJFmf.js": "bfa70d654806b0bd869d0af56a35c6edbe2b47897a973e9c42d50ad9075ae507",
+    "assets/LiveMarket-HWdSqqec.js": "952aab271259b3e507287014f48ed83d28e340bc369545cf0b9b64035b44af07",
+    "assets/MarketHealth-DO2n1is8.js": "176286ec0036f4d1f7ed4a1890a270165dac72d6371405603fbb63ad9c079f58",
+    "assets/ModelSurface-DvNKhpMG.js": "e9c810ebab3360eaf4d8106033ffdcb14519a5fdc70db5df89715828fbf36444",
+    "assets/OrbitControls-BtP2Z3PA.js": "a9ca156575b81dd354e70c048389b4e09b1dc85e301836cb69aa22f69d51e6a6",
+    "assets/PaperProvider-coR13Qe_.js": "419eec0a284e276a87d74715fcd3ab8a583e49d6ab7e195a221caf811918d2e0",
+    "assets/PaperSandbox-DN-wQrrA.js": "c61cc94fac86e52adf638886903d0601a1fd795259a00829c8733cb46194463a",
+    "assets/QuoteCloud-DZ6TJAki.js": "d93592f2cc16d254b1d1147dddf41f9fea569b6a6be97b0109a4a1cb7602d5f5",
+    "assets/ResearchDesk-DpbsK9-k.js": "8b8010298346d4ab9db89162cf9c442087ddf032fd21fd82a6858bcfb0b3cc17",
+    "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+    "assets/ResearchLab-DoIUCglN.js": "ab7ec790322befe193405bc77d741adc92c89af20c33c1011f3e0b0e19b2cbc5",
+    "assets/ResearchScene-EzAE-7Y3.js": "9782184921212cfbfec23c39d59448392a9f71391c2d25a0b7c5d2069a2d8794",
+    "assets/StockIntelligence-BIn6j1bZ.js": "ebcfa6df9b6819e78a963b5f5348f2e17b97328e758d5aaef000cab926a9b87f",
+    "assets/UniverseWorkspace-By8j4RZB.js": "510c3f548015cef2394f6ed4e986be4348c6063335d774a816986b1614043bcd",
+    "assets/VolatilitySurface-B40j5cT5.js": "03a022ef98be0133763d3c62debb7929868c587a106c3ef467f0799372c2e8ba",
+    "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+    "assets/index-CvmgOqK7.css": "ee3c8ba532bf5f3b41ca3c47f8c736beea099633826b704d80151af2e999301c",
+    "assets/index-DZ9xThy3.js": "c763707f0d11c6ee13edbe205353ccd21cc3a51f850aa1e1b01efe3a645d9d7b",
+    "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+    "index.html": "5b3feab2e8e3d0dd2888b6c70d9d538428250ceb93ea92f47ebaf8d932098116"
+  },
+  "baseline": "51de738f19174581fd10af20e962ead3107ba7d6",
+  "branch": "development/gig-ui-redesign",
+  "browser": {
+    "actual_provider_or_owner_edge": false,
+    "counts": {
+      "advanced-research-validation": 23,
+      "atlas-final-validation": 5,
+      "atlas4-validation": 9,
+      "atlas5-validation": 6,
+      "browser-validation": 21,
+      "completion-validation": 10,
+      "gig-workstation-validation": 8,
+      "phase-next-validation": 10,
+      "stock-intelligence-validation": 10
+    },
+    "failed": 0,
+    "final_successful_programs": [
+      {
+        "exit_code": 0,
+        "script": "completion-validation",
+        "seconds": 7.144759403076023
+      },
+      {
+        "exit_code": 0,
+        "script": "phase-next-validation",
+        "seconds": 15.165540690999478
+      },
+      {
+        "exit_code": 0,
+        "script": "stock-intelligence-validation",
+        "seconds": 5.090405374998227
+      },
+      {
+        "exit_code": 0,
+        "script": "atlas4-validation",
+        "seconds": 11.876795541029423
+      },
+      {
+        "exit_code": 0,
+        "script": "atlas5-validation",
+        "seconds": 10.653678851085715
+      },
+      {
+        "exit_code": 0,
+        "script": "atlas-final-validation",
+        "seconds": 10.553130776039325
+      },
+      {
+        "exit_code": 0,
+        "script": "gig-workstation-validation",
+        "seconds": 14.021592604927719
+      },
+      {
+        "exit_code": 0,
+        "script": "advanced-research-validation",
+        "seconds": 27.5881582290167
+      },
+      {
+        "exit_code": 0,
+        "script": "browser-validation",
+        "seconds": 11.62361366697587
+      }
+    ],
+    "passed": 102,
+    "responsive_cases": 120,
+    "skipped": 0,
+    "source_binding": "First six successes use browser-delivered;last three were rerun after correcting obsolete heading assertion. Asset maps identical. Original failed attempt preserved. Dirty source receipts retained,matching runtime bytes verified.",
+    "workspaces": 12
+  },
+  "closure": "Following documentation-only commit;obtain its SHA from Git. This manifest does not hash itself.",
+  "date": "2026-11-09",
+  "dependency_changes": false,
+  "dependency_consistency": {
+    "npm_ls_offline": "PASS",
+    "pip_check": "PASS",
+    "security_advisory_clearance": "NOT_ESTABLISHED"
+  },
+  "documentation_sha256": {
+    "docs/qualification/development-completion/COMPLETION_MATRIX.json": "51869a000cafb02497979f2d2fed5c3f7c2d2e659fc9703170474ea00b2d72bd",
+    "docs/qualification/development-completion/COMPLETION_MATRIX.md": "03fb1883bf716f16ff3507f53d40aef07930bff6eb0ea88b62ffdea0ca59fedd",
+    "docs/qualification/development-completion/DEVELOPMENT_REPORT.md": "5ff6aa720b613a6e7e30c9cc2c8cead932bf67f1a553df74ad6bb2831ef2c199",
+    "docs/qualification/development-completion/PROGRESS.md": "b303c5a1c0949b5b4dc124357d8a9a9e72169198eb98b751ddc05b1728435882"
+  },
+  "environment": {
+    "clang": "Not on PATH;no fresh compile attempted",
+    "dependencies_changed": false,
+    "driver_python": "3.12.14",
+    "gcc": "g++ (Debian 14.2.0-19) 14.2.0",
+    "initial_entry": {
+      "bytes": 254545,
+      "path": "assets/index-DZ9xThy3.js"
+    },
+    "machine": "x86_64",
+    "node": "v24.19.0",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "runtime_python": "Python 3.12.14",
+    "scope": "Existing x86_64 native bindings;not fresh native compilation or ARM64"
+  },
+  "frontend": {
+    "cancelled": 0,
+    "chunk_advisory": "Existing deferred Three.js/OrbitControls >500kB;not suppressed",
+    "failed": 0,
+    "passed": 130,
+    "skipped": 0,
+    "typescript_build": "PASS"
+  },
+  "frozen_native": {
+    "hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "scope": "Executed existing unchanged-source Release binaries;not new compile or ARM64",
+    "status": "PASS"
+  },
+  "implementation": "b3d7b9ba7ad4922dc0ad934d2a5152906fbf2969",
+  "matrix": {
+    "decision": "Feasible bounded repairs offline verified;full historical institutional scope and actual owner/provider/ARM64 acceptance not complete",
+    "requirements": 49,
+    "scope": "48 implementation/qualification areas plus one separate historical A18/A19 decision row;not a new feature requirement",
+    "statuses": {
+      "BLOCKED": 7,
+      "COMPLETE": 34,
+      "NOT APPLICABLE": 1,
+      "NOT IMPLEMENTED": 2,
+      "PARTIAL": 5
+    }
+  },
+  "native_arm64": "NOT_EXECUTED",
+  "new_native_compilation": false,
+  "owner_acceptance": "NOT_STARTED",
+  "package_patterns": {
+    "failed": 0,
+    "passed": 3,
+    "skipped": 0
+  },
+  "privacy": "Only source,authored tests and safe metadata committed;no credentials,restricted input,raw provider rows,screenshots,binaries,database,provider activation,trading,public ports or paid resource. No workflow dispatch. Ignored artifacts remain workspace-local;hashes alone do not preserve their bytes.",
+  "protected_refs_expected": {
+    "feat/atlas-final-release": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
+    "feat/atlas-sprint-4-market-data-paper": "0c03a698fdac1be8b1032b255208a3ef2320341a",
+    "main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718"
+  },
+  "provider_requests": 0,
+  "python": {
+    "cohorts_overlap": true,
+    "configurations": [
+      "release",
+      "debug",
+      "asan-ubsan"
+    ],
+    "errors": 0,
+    "failures": 0,
+    "per_configuration": {
+      "focused_history": 58,
+      "native_api": 274,
+      "stocks": 211
+    },
+    "sanitizers": {
+      "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1",
+      "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
+      "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
+      "shutdown_leak_clearance": false
+    },
+    "scope": "Existing native bindings,not a fresh native compile",
+    "skipped": 0
+  },
+  "regression_checkpoint": "7781efb4afa30dab15a1b76ac6c51a8282ed41c6",
+  "runtime_source_sha256": {
+    "terminal/server/app.py": "0bf1987e4da29371986ef6c9c85d6b2aa72be592035c0a34f46ffaf4a8d74f04",
+    "terminal/stocks/alpaca_history.py": "5fbccb7a35d05eedd6c2b80ee1f8d3a70caea3f12dc0c5fecefe1c3c443a39a8",
+    "terminal/stocks/test_history_diagnostics.py": "366fb8f6c72c3a95cbf50178c044d171034fdab6c0b1cea18e80707e886f47fe",
+    "terminal/tests/completion-validation.mjs": "cbe57fc9087d7838c9e0ccf9dc0168589378aa8312c8cd5062a24a1d20e15022",
+    "terminal/tests/gig-workstation-validation.mjs": "c04c023965d695c6c079233dbe274ccc2f7010066045dba13bb3623f33be8323",
+    "terminal/tests/phase-next-validation.mjs": "a4b32d00c2760c1560651e0ab41c7a4779947beca8eca249a0bc6a1da38b4fcf",
+    "terminal/tests/run_live_market_suite.py": "109d928ff71c9d726eb0134a006b9bcc51b4eceb95835796015e2615c56bdb05",
+    "terminal/tests/run_sprint3_browser.py": "238880d0f76550701f2151f3049fb47f86bc1ce9075e340fa3215bc9dc816f0e",
+    "terminal/tests/sprint4-validation.mjs": "b4e46ef93ad0d6886e79c84f597e9ec562a4da6c383ae898f1efa6fc2d056ce1",
+    "terminal/web/package.json": "6014ef5fa5b9629f6bc6ade2d94f57576d7a63a77a6f9d3778d9c6d0bdb1da10",
+    "terminal/web/src/EquityPanels.tsx": "abbc0880e1295047ade2f3969dc7644bc9cb251a566b1390bde9dbfa7dd9ece4",
+    "terminal/web/src/HistoricalMarket.tsx": "1d3f422155502027c414529581401a84f8ba59c5c2685000f847066746fd7624",
+    "terminal/web/src/HistoricalResearch.tsx": "eecd7be0afbbc64bd4ca4c9b42225c4a41ba1e06c0fb6840d4a3a7976c97096d",
+    "terminal/web/src/HistoryArchive.tsx": "375554b7170b71a0ff1907775c079d2912f071b49fd20b243584f8be7dc1da45",
+    "terminal/web/src/StockIntelligence.tsx": "46073b3ef70df1584ca8b7a8d38d987b4eb3c835c5729d8ffb37b4fd438b770f",
+    "terminal/web/src/barChart.test.ts": "77366c887ce3d6b6c62b00f21d125d31ea517a43b95f7409f1fcaaf503ea24ae",
+    "terminal/web/src/barChart.ts": "4d09881265177323034412c1873c01a5a601093be4ff1708e6605469cdb09410",
+    "terminal/web/src/workstation.css": "e375ffd3b659e41059ee100249c2af03679e90c45547c6efa37b6daaf2bc6499"
+  },
+  "schema": "gig.development.completion.evidence.v1",
+  "screenshots": [
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/canyon-synthetic-desktop.png",
+      "sha256": "c9379aa8022dceaaf099db517f6eb4ac3410e4688e54b48adeb7e9a4f73c5b58"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/dome-synthetic-desktop.png",
+      "sha256": "1a00a9165a1ed4d63837a09b4e9435896d8321c64e430ef2185a3a6adcbce1f2"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/events-synthetic-desktop.png",
+      "sha256": "c91f16641df2804fc894f2310428666c1d9f7e69f731496ef997cccfdcc0b0d0"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/flow-synthetic-desktop.png",
+      "sha256": "99e7c482092a202541d30233594d67b7bd50719d0e91ef02526ce9b747144ac8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/height-synthetic-desktop.png",
+      "sha256": "59016bf51a52c346084c19a9967646a8357995fc852032b2cd093a48f71e6fa6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/iex-authored-dome.png",
+      "sha256": "9fd66311c491b3959725e08c4f52f674580370d762bd0040f510c25a42242f76"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/iex-authored-ribbon.png",
+      "sha256": "66de47dccb477f4cfb6c518a3ec263cbad01ef9fbae52be80e2a6748aabd6480"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-desktop.png",
+      "sha256": "ec45bc8ab86de9478cebb979e2fe55758a315ee83ffe9b9026a8c55c9d679821"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-dark.png",
+      "sha256": "962a62bf97a17d338215c2d4d3f1abc885d17a483d82d7599303e04a7774bb90"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/ribbon-synthetic-mobile-light.png",
+      "sha256": "200588797d442bb29d381f377c045142193bd26ab28b9483c488da8cdd00da30"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/vwap-synthetic-desktop.png",
+      "sha256": "ff330cb40073650f117e29c510ec854d5023a6d45400c364c6e875a7f264f3d6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/advanced-3d/wheel-synthetic-desktop.png",
+      "sha256": "476d38bfcdf9265e842a153706048f9c028c5700e54805aa6219318a3fd660df"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/aligned-statements-dark.png",
+      "sha256": "eecaa2eafd0b0d86362142f2ac425d040bd65e7b79736adad60838de1c0c781c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/command-center-compact-dark.png",
+      "sha256": "726fc1a0545c716f5c90bb2c973d3e6663c1c199e0c8956b69bf074c8dc69aad"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/command-center-wide-dark.png",
+      "sha256": "67ce4e9be56e0bf920a0c6936d80dd7b036b6395f7f44c8e8c07d9e7aba66176"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/command-center-wide-light.png",
+      "sha256": "9f74d80602f0002c5aafbcda78dc9934a96ef9dd6d3d7a98fcd2b66365c5b077"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/private-history-fixture.png",
+      "sha256": "423db0a099bd0776fd031fa988f08676ff5155b067ecd8b94d17c1abeac13b65"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/risk-mobile-dark.png",
+      "sha256": "bbeea8462fbaf21b9308e6b58552d39a87db2f340f5299a394966bd4bde3d7ff"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/risk-mobile-light.png",
+      "sha256": "aa3c9efe920deb8e564a050f834a57c04f6ee9fd8a98b868a5117fdf1b15d655"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/history-visual/risk-models-dark.png",
+      "sha256": "6d7b88f202d54d6c84cf5121c3c25e2b83567ab8de5c2acf3dad991a48508378"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/integrated-visual/dataset-research-dark.png",
+      "sha256": "86cabc0279a1a8cbb6b8cf3b56bf1184c6047f0b71b45068f830ef02f8bb9d0c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/integrated-visual/final-mobile-dark.png",
+      "sha256": "9c54350065f86825015490cfbb140b7bd8abb55ce8eae3d6acf5301554b5b01c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/integrated-visual/final-mobile-light.png",
+      "sha256": "0294de0a0c12acfaae5192f3c9d7ba3c8887e7b9ce6c488dc908def09191097a"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/integrated-visual/garch-search-dark.png",
+      "sha256": "bb7b3769537ff4f7a00fd1b43bbd9d7b04be47d30e65dee4fb3acfd523e558af"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/integrated-visual/return-command-center.png",
+      "sha256": "fec499e555477454a5dabd609da7a7092818615b9d380fa4ab08a7caf8c4c435"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/recovery-visual/evaluation-dark.png",
+      "sha256": "3a3ab763a4bf1edf2fe2109242095250c6dfc9ac53f4611917cca653d6bb2ccc"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/recovery-visual/pinned-ingestion-dark.png",
+      "sha256": "c5338de0500facbd33719e420d600923fabf06c0f776c4b84f7923bd76b5890e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/recovery-visual/portfolio-dark.png",
+      "sha256": "867246993823709288d4b6873be75846769a9ab2e1c7fb3e1aff48ff98075484"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/recovery-visual/research-mobile-dark.png",
+      "sha256": "51184959d08aadbdb9a8f018a08ec2a1f7deea689643c399f3afaee0d2284e80"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/recovery-visual/research-mobile-light.png",
+      "sha256": "94a715d58d21792d2e3275435c369cc98308fae98796b258c25c00b4ec635ca8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/visual/authored-company-candles.png",
+      "sha256": "6007ba47d793c3c675ccd13c7850db3dbeb7384027a06f66467be0f4e8efb082"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/visual/historical-integrity-authored.png",
+      "sha256": "cbe7cdf1c8ad1d5c0206ef0809b87eb10257b2029c7fd89798c08c69f55460b3"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered/visual/workstation/failure.png",
+      "sha256": "f2d73dc0c4b78ebea999800bab97d2519792c05fcf87c5fb38445a69aa217e99"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/native-browser/desktop-native-3d.png",
+      "sha256": "ac317b4bd72c9c49c021567c969a576881d03e499296c0ada4d8b57b32b70d8f"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/native-browser/desktop-native-fallback.png",
+      "sha256": "f7aba1454fe11a3011684078b6c4ef2c5e1c2fd5e621825cab22077e9e45358a"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/native-browser/desktop-native-simulation.png",
+      "sha256": "81a613a649b25e5b5b3301b01c80804c6551b340833c58cf0af88d7ab973f045"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/native-browser/mobile-native-orderbook.png",
+      "sha256": "a55b9ff11768e9d3af3a8b9808438e54737d3a2a4c2ef2691ad5d6f480058357"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/command-center-dark-1440.png",
+      "sha256": "b9f080be74085c218d8b756b5e94554c60947fc5a4c13906508ac0b8846fb3ef"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/command-center-dark-390.png",
+      "sha256": "fbaad3675890e10304e1aff52ad1d05a7090d6462641a130aa8e7d93dee6ce2c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/command-center-light-390.png",
+      "sha256": "3b60d11989bd2b849b35919b8bf9644729686347b715b91ee6481f7593069bb8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/execution-simulator-dark-1440.png",
+      "sha256": "cac5cac2f8be5bcfc35131afedc2f1693b43ca9983e34b30675ec59f4117265c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/historical-replay-dark-1440.png",
+      "sha256": "34eb98c80e45f9ac698d7a884e56ab76674208f51c4113ef61e519fe1460948b"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/live-markets-dark-1440.png",
+      "sha256": "f3b067630e4d74422612069d8d0f2994c49650a42287cf3a9386bf6483406d89"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/live-markets-light-1440.png",
+      "sha256": "47710ba08b4dd31148f5fa3c2008cea8820a0103422bd63edee76125d62e307c"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/market-depth-dark-1440.png",
+      "sha256": "76daabf673ab0d02bdb46a82fd2e429a7cdeaa4ce3c7e55f86f1cb818067096e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/market-depth-dark-390.png",
+      "sha256": "75a9b74279dc0b1fe9dd19a69c3601fca36c71f20a21668cd434a6fad16dfe7f"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/market-depth-light-390.png",
+      "sha256": "b8aa8ff7cbd2409acba7f4a86c821fe3d0587207249a2678518c1d93994edacc"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/multi-stock-comparison-dark-1440.png",
+      "sha256": "10ffddab31be60a0b0085e491c149b7a9ed742191e15fa8a94e2210f542c4055"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/native-camera-dark.png",
+      "sha256": "851c66b606b284d4a78ae86c6603fab67fd4ccc3d33889cb171b10f0c02702ed"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/operations-dark-1440.png",
+      "sha256": "20fe26e773271e6267738dcb89c9a0fd0151751260a8da8a05adae242d6bb891"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/operations-light-1440.png",
+      "sha256": "c29cc8e9fbaf6c901ecfe6419b85a775799036a2c4f94453d617cf2f9bad7ae0"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/order-book-dark-1440.png",
+      "sha256": "39a2d255c2ace5239818217d846279b4cdb8ec041684bd1292a82cc2ca8540ea"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/order-flow-dark-1440.png",
+      "sha256": "219210a7ef5f8abba78df008cfc2f01b2262a081b0d9bebedf6dee8fda846898"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/research-validation-dark-1440.png",
+      "sha256": "bf7283b1db9f7c729ceae8c73f779c615dd1de45ebe30c150c462847d9a253a6"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/securities-universe-dark-1440.png",
+      "sha256": "081f12e4b6416e36126b61ce39ab495b35bbf2f9c749d20def16df06969596e4"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/stock-intelligence-dark-1440.png",
+      "sha256": "63710c11422fd1d158dd9e250944dc25d74c23ac3c8c8ce1d2ccf346f0b26513"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/stock-intelligence-dark-390.png",
+      "sha256": "0fe715bdd389610036a7a24d0baf0ed0cf88fca607dc988774be0593ba0135a1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/stock-intelligence-light-1440.png",
+      "sha256": "68e7d39d8eb4fc9e0656f17ea53bcbeabb1d71c47371762578d36dcc51fa49d2"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/browser-delivered-tail/visual/workstation/stock-intelligence-light-390.png",
+      "sha256": "96948547e4d92badc13f24cbbe4c4c4288adb84b12da7befa740cf23388fcd74"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/sprint4-browser-final/historical-comparison-dark.png",
+      "sha256": "587582fddb9758035ec60f972ada54ffdaea87155c2f8ac14e64a6f409c6e83e"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/sprint4-browser-final/historical-research-dark.png",
+      "sha256": "ea252ce9b2bb780501c517375ed7aaae745e4fa205534069b34beab0091b33d8"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/sprint4-browser-final/paper-fixture-dark.png",
+      "sha256": "6f0f05cf0d617c7c7753af8bf1b920508164c741d655e59dffea4ceff01542ac"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/sprint4-browser-final/paper-fixture-light.png",
+      "sha256": "4346ac11b45343dcb99cf485ef05e11fb41e4d3036ef657a8726bbfd4dba33d2"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/development-completion/sprint4-browser-final/paper-fixture-mobile.png",
+      "sha256": "ccec740e715b5d6fce3622dce8768d1bfc90fb3976331e41b81af905a2f99ce1"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/phase-next/historical-comparison-synthetic.png",
+      "sha256": "5237784f77fcf5ff2ea3adb5c93328ff86b9a46c786e88491da57009b3de579b"
+    },
+    {
+      "classification": "AUTHORED_FIXTURES_OR_UNAVAILABLE_NOT_LIVE_PROVIDER",
+      "path": "build/phase-next/historical-mobile-synthetic.png",
+      "sha256": "6b0fb3dcf709a43e83d8c00c98c0a38ceefcfad557e58b71b6efab837d83e085"
+    }
+  ],
+  "sprint4_browser": {
+    "assets": {
+      ".vite/manifest.json": "65332abf45a6b952c427694b65511644ffa5a434a8cc78f2e1888185c84622b6",
+      "assets/HistoricalResearch-C7pxMu76.js": "bcec31f3278756d56bdf624ae307fc36cee55ea2ab545945adb6952b84ac77ee",
+      "assets/Landscape3D-_-pdVeiU.js": "e6aeefc47fa790786cde01a54e62e1614db3c681c5d7acf779895bbeacd3ca23",
+      "assets/LiveMarket-CwOG9-ci.js": "a4aca49397353b6bf12b970a2f3a9a2ef3c3f2e8df39a9e53800dcf0f6b9e5a3",
+      "assets/MarketHealth-DA2-9hVe.js": "f87cf9552357d86d543e2fb46dc5badaa76f415fafad8e197949baf4edf51fa8",
+      "assets/ModelSurface-CYf3Dja5.js": "7ae0989d8d72d26a0d19cd2761441f9d960c31544eb21670e83569ef1ddbb4d4",
+      "assets/OrbitControls-BDv1VNnC.js": "d1103ae99e56db50eca0e660e904650261ae957e31d3aad5aea6137e37c3ed3c",
+      "assets/PaperProvider-BH2RSa28.js": "cde3374bbf1f42d944f3013f8327d2b7fcf0eea32a922dd3ff9d7c154047b2a5",
+      "assets/PaperSandbox-CdnbMjUV.js": "b0b0127447e5832ca163178d1205ad758e378260520054234b292906c05d339c",
+      "assets/QuoteCloud-D7bIG61S.js": "2d26bc52a3d33d3aaee55fba5be9a60d80ebfda5020d1a2c01d15684f4548d1e",
+      "assets/ResearchDesk-B-CP5EV2.js": "b7155b42904d0179ba6fec9fed45016a89d24fa6f8e8158c42500e003f576314",
+      "assets/ResearchLab-D0vzy70c.css": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519",
+      "assets/ResearchLab-DSKnRy0x.js": "dd2dfd3686fcb1e3d6c2ebd0ccd6466f3eec225c4bd64a49071b8fd1d49ba11a",
+      "assets/ResearchScene-DkI3Ps12.js": "75faa300eb8ce7e0b4bcb4db7ee2c284e2fd9ddec7c0bce95e53b0403699f202",
+      "assets/StockIntelligence-DpDif6V-.js": "8a65aa45a33482301e1f0987d704cbe1203eb12dba704d314f3d2f27f9343d0d",
+      "assets/UniverseWorkspace-zU5bSdHv.js": "e578fc41777f5aeb837c9c3e0c47f427c8bb0dc79b39aee67e41d17fd2f35b3b",
+      "assets/VolatilitySurface-COGKt8iP.js": "0a5308a0246a520fe943468dd8642afac4404dc9cad93ab45b9a38ccd9ad1ed5",
+      "assets/directoryContract-BVrwTy34.js": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e",
+      "assets/index-B3pOQUyv.js": "7a9ec99375bc61c1c6558dedc466f8cc8212a85fa2216194cebd7031577de54c",
+      "assets/index-CvmgOqK7.css": "ee3c8ba532bf5f3b41ca3c47f8c736beea099633826b704d80151af2e999301c",
+      "assets/marketContract-C6ksBMry.js": "8632e3431a9070656923c14269565a512f8deea93de6c4c3d6e6debf30b5e090",
+      "index.html": "7e5e866eedff0b1f3493386b8ebf7dc0d0bb9fa1395e86ad64ef26ec889298bd"
+    },
+    "errors": 0,
+    "failed": 0,
+    "note": "Historical/fake transport assertions;no broker account/order traffic. Production runtime code same except later source-aware container heading.",
+    "passed": 9,
+    "scope": "Authored offline fixture,loopback Chromium;not Alpaca or owner Codespace qualification"
+  },
+  "timezone": "America/New_York",
+  "tls": {
+    "checks": {
+      "forwarded-tls": 6,
+      "rewritten-http-tls": 8,
+      "rewritten-stream-tls": 6
+    },
+    "scope": "Verified local HTTPS/WSS proxies with ephemeral CA;not owner authentication",
+    "total": 20
+  },
+  "unsuccessful_attempts": {
+    "baseline_chart": {
+      "path": "build/development-completion/failing-before/completion-validation-final.log",
+      "sha256": "3f6df4b21cb98eeb8afc50e7f22948f7636542800dee880b87611ccaec89822e"
+    },
+    "baseline_diagnostics": {
+      "path": "build/development-completion/diagnostics-failing-before.log",
+      "sha256": "d0441d3dceb26560d823e2b6b74cb60e2d0a37904f66ac143c9de9d3fc1e7f30"
+    },
+    "closed_disclosure": {
+      "path": "build/development-completion/browser-existing-initial/phase-next-validation-final.log",
+      "sha256": "06da0e39f256015ed3ddfca91f1b153c3247be31e7c749a6418c00293347edf5"
+    },
+    "diagnostic_build_path": {
+      "path": "build/development-completion/native-api-274.log",
+      "sha256": "b330d2bf96596b43d135913761c8556375b72f8e3865254abb55241dcf8072f7"
+    },
+    "new_node_import": {
+      "path": "build/development-completion/frontend.log",
+      "sha256": "eaadf6ec2d15cbb496420125a6e4e9b48e658a4e3af2698cf339a2754986a546"
+    },
+    "overlapping_rate_budget": {
+      "path": "build/development-completion/browser-final-sequential/phase-next-validation-final.log",
+      "sha256": "d5b34b7de9a05b163cfc4c5a4e1cb244b50f8f312091dc4f2cd02b04a958ce16"
+    },
+    "parallel_dependency_link": {
+      "path": "build/development-completion/browser-final/phase-next-validation-final.log",
+      "sha256": "918a69093df93a0ebbe50d373cb81a6b6f4a71a54351a1f2ac3112d3b6260de9"
+    },
+    "runtime_not_build_backend": {
+      "path": "build/development-completion/packaging.log",
+      "sha256": "3c01f1f44335819b4e9336eed8dbbd65e343940bf43f2ba4e86c263c3dea8197"
+    },
+    "stale_literal_company_title": {
+      "path": "build/development-completion/browser-delivery/completion-validation-final.log",
+      "sha256": "11f6a5e6ec5e5e3f59483180042dd129a60b66fe41065c7c252d29d2540a8c3d"
+    },
+    "stale_observed_history_expectation": {
+      "path": "build/development-completion/browser-delivered/gig-workstation-validation-final.log",
+      "sha256": "b2dff2374adead02d261639db58449156f59bd01feb22ace800b89fff1d34560"
+    }
+  },
+  "visually_inspected": [
+    "build/development-completion/browser-delivered/visual/authored-company-candles.png"
+  ]
+}
