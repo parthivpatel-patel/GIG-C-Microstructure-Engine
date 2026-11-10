@@ -1,0 +1,782 @@
+{
+  "schema": "gig.development.completion.matrix.v3",
+  "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
+  "branch": "development/gig-ui-redesign",
+  "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
+  "status_semantics": "COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.",
+  "requirements": [
+    {
+      "id": "CORE01",
+      "status": "COMPLETE",
+      "requirement": "C++20 typed order book,identity,FIFO and exact arithmetic",
+      "source": [
+        "include/gig/book/order_book.hpp",
+        "src/book/order_book.cpp",
+        "include/gig/analytics/exact.hpp"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Eight baseline Release frozen-reference programs;baseline native/API cohort",
+      "explanation": "Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "CORE02",
+      "status": "COMPLETE",
+      "requirement": "ITCH framing,decoding,context and synthetic L3 reconstruction",
+      "source": [
+        "src/itch/binary_file.cpp",
+        "src/itch/decoder.cpp",
+        "src/itch/context.cpp",
+        "src/itch/reconstruction.cpp"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Eight frozen-reference programs with independent source/oracle candidates",
+      "explanation": "Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "CORE03",
+      "status": "COMPLETE",
+      "requirement": "Python/native integration and native-backed browser",
+      "source": [
+        "python/gig_microstructure/__init__.py",
+        "terminal/server/engine.py",
+        "terminal/server/analysis.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: 274 native/API checks with existing Debug,Release and sanitized bindings;native browser journey",
+      "explanation": "NativeSession owns gig.Replay and calls C++ calculations;this is not a mock implementation. No native source/build input changes in this sprint.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "CORE04",
+      "status": "COMPLETE",
+      "requirement": "Deterministic replay,journal and recovery contracts",
+      "source": [
+        "src/replay/replay.cpp",
+        "terminal/server/engine.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Frozen L3/streaming references;native/recovery browser checks;retained Sprint2 journal evidence",
+      "explanation": "Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "CORE05",
+      "status": "BLOCKED",
+      "requirement": "Complete observed historical Level 3 validation",
+      "source": [
+        "include/gig/itch/reconstruction.hpp",
+        "terminal/stocks/historical_v2.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: No new observed dataset used",
+      "explanation": "Requires independently complete initialization and order-level reference evidence. IEX L1 and five-level reference observations cannot supply it.",
+      "disposition": "External source/rights/reference evidence;not fabricated or inferred",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "UI01",
+      "status": "COMPLETE",
+      "requirement": "GIG-only branding,application shell,search,themes and navigation",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/web/src/Navigation.tsx",
+        "terminal/web/src/workstation.ts",
+        "terminal/web/src/workstation.css"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline frontend and workstation browser checks;prior screenshot manifest",
+      "explanation": "All12 destinations have dedicated compositions;legacy atlas-* selectors/storage identifiers remain technical compatibility keys.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI02",
+      "status": "COMPLETE",
+      "requirement": "Command Center workspace",
+      "source": [
+        "terminal/web/src/ResearchDesk.tsx",
+        "terminal/web/src/WorkspaceLaunchpad.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Saved research and source-aware entry actions;no fabricated market summary.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI03",
+      "status": "COMPLETE",
+      "requirement": "Securities Universe workspace",
+      "source": [
+        "terminal/web/src/UniverseWorkspace.tsx",
+        "terminal/stocks/discovery.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Search,filters,pagination,identity-source and coverage are present;not a claim of complete US listing coverage.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI04",
+      "status": "COMPLETE",
+      "requirement": "Stock Intelligence workspace",
+      "source": [
+        "terminal/web/src/StockIntelligence.tsx",
+        "terminal/web/src/FinancialWorkspace.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Company identity,reported facts,periods,ratios,filings,source controls and theoretical tools are connected;missing values remain missing.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI05",
+      "status": "COMPLETE",
+      "requirement": "Live Markets workspace",
+      "source": [
+        "terminal/web/src/LiveMarket.tsx",
+        "terminal/stocks/live.py",
+        "terminal/web/src/TradeTapePanel.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Shared bounded quote/trade observations,subscription controls,per-symbol health and source labels;offline verified,not live qualified. New progressive retained-tape view exposes exact reference/lineage values and unresolved outcomes;application browser interaction was not launched.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI06",
+      "status": "COMPLETE",
+      "requirement": "Multi-Stock Comparison workspace",
+      "source": [
+        "terminal/web/src/LiveMarket.tsx",
+        "terminal/web/src/HistoricalMarket.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Up to4 active symbols,retained quote comparisons and exact shared historical timestamps;no interpolated source data.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI07",
+      "status": "COMPLETE",
+      "requirement": "Order Book workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/web/src/bookPresentation.ts"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Native price/quantity ladders,cumulative quantities and source status are accessible;observed IEX is not expanded into L3.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI08",
+      "status": "COMPLETE",
+      "requirement": "Market Depth workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/web/src/Landscape3D.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Native retained depth,2D alternatives,camera controls and source restrictions;not invented depth.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI09",
+      "status": "COMPLETE",
+      "requirement": "Order Flow workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/server/analysis.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Native event/imbalance/flow views retain exact metrics and provenance;coalesced snapshots are not a complete trade tape.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI10",
+      "status": "COMPLETE",
+      "requirement": "Historical Replay workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/server/engine.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI11",
+      "status": "COMPLETE",
+      "requirement": "Execution Simulator workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "src/simulation/simulator.cpp",
+        "src/execution/execution.cpp"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Native scenarios,fills/costs and lifecycle remain simulated;fake-paper sandbox and disabled broker boundary are separate.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI12",
+      "status": "COMPLETE",
+      "requirement": "Research & Validation workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/web/src/ResearchLab.tsx",
+        "terminal/web/src/ResearchDiagnostics.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Model scenarios,3D laboratory,validation and evidence workflows are accessible;no predictive-success claim.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UI13",
+      "status": "COMPLETE",
+      "requirement": "Operations workspace",
+      "source": [
+        "terminal/web/src/App.tsx",
+        "terminal/web/src/MarketHealth.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "explanation": "Health,source/configuration,retention and diagnostic statuses are read-only or explicitly gated;no credentials displayed.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "VIS01",
+      "status": "COMPLETE",
+      "requirement": "Eight advanced research projections",
+      "source": [
+        "terminal/web/src/research3d.ts",
+        "terminal/web/src/ResearchLab.tsx",
+        "terminal/web/src/ResearchScene.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline23advanced browser checks and frontend geometry tests",
+      "explanation": "Height,canyon,events,VWAP,flow/VPIN,wheel,dome,ribbon use declared input classes. Depth/events/signed flow unavailable without eligible source. Snapshot changes never invent executions.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "VIS02",
+      "status": "COMPLETE",
+      "requirement": "Existing four L1 projections and three native/model scenes",
+      "source": [
+        "terminal/web/src/QuoteCloud.tsx",
+        "terminal/web/src/Landscape3D.tsx",
+        "terminal/web/src/VolatilitySurface.tsx",
+        "terminal/web/src/ModelSurface.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline advanced/native browser checks;retained15-mode controlled-input evidence",
+      "explanation": "Four coordinated quote modes,native depth,option scenario/indicative-point and GARCH mathematical surfaces remain. Mathematical surfaces are not calibrated observed volatility.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "VIS03",
+      "status": "COMPLETE",
+      "requirement": "3D camera,orbit,pause,reset,visibility,cleanup and fallback",
+      "source": [
+        "terminal/web/src/cameraMotion.ts",
+        "terminal/web/src/ResearchScene.tsx",
+        "terminal/web/src/QuoteCloud.tsx",
+        "terminal/web/src/Landscape3D.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline advanced/workstation browser checks;cameraMotion unit tests",
+      "explanation": "Independent controls,hidden/reduced-motion suspension,explicit empty/recovery states and GPU disposal exist. Camera orbit is not a source update.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "VIS04",
+      "status": "BLOCKED",
+      "requirement": "Sustained physical GPU,mobile and independent-browser acceptance",
+      "source": [
+        "terminal/web/src/ResearchScene.tsx",
+        "terminal/web/src/OptionalBoundary.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Chromium/SwiftShader and emulated widths only",
+      "explanation": "Actual owner hardware/browser sustained behavior is not established by software WebGL.",
+      "disposition": "Owner/environment qualification;not additional visualization implementation",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "DATA01",
+      "status": "COMPLETE",
+      "requirement": "Broad discovery independent of SEC/feed entitlement",
+      "source": [
+        "terminal/stocks/market_catalog.py",
+        "terminal/stocks/alpaca_reference.py",
+        "terminal/stocks/sec_identity.py",
+        "terminal/web/src/UniverseWorkspace.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Stock/catalog/SEC cohorts and historical browser identity checks",
+      "explanation": "Accepted reference catalogs/SEC routing and curated fallback are separate;AAPL/APLD/CRWV have generic discovery paths without guessed CIKs.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "DATA02",
+      "status": "PARTIAL",
+      "requirement": "Complete,current US-listed security universe",
+      "source": [
+        "terminal/stocks/directory.py",
+        "terminal/stocks/alpaca_reference.py",
+        "terminal/stocks/discovery.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Parser/catalog fixtures;no fresh authoritative import",
+      "explanation": "Existing bounded authoritative directory/asset importers are implemented. Current full listing coverage cannot be asserted without an actual authorized source import/reconciliation;SEC registrants alone are not complete US listings.",
+      "disposition": "No missing importer was found. Actual acquisition/source coverage needs the authorized configured target;no CIK or listing contents invented.",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+    },
+    {
+      "id": "SEC01",
+      "status": "COMPLETE",
+      "requirement": "SEC identity admission,selected facts,ratios,filings and provenance",
+      "source": [
+        "terminal/stocks/sec_identity.py",
+        "terminal/stocks/financials.py",
+        "terminal/stocks/ratio_history.py",
+        "terminal/stocks/sec.py",
+        "terminal/web/src/FinancialWorkspace.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline211stock/source cohort;financial browser references retained and rerun where affected",
+      "explanation": "Exact reported periods,source/hash/missingness,terminal-marker reference admission,duplicates/conflicts and bounded filing pagination exist. Not a full financial-statement reconstruction.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "SEC02",
+      "status": "PARTIAL",
+      "requirement": "Complete historical financial statements and point-in-time source history",
+      "source": [
+        "terminal/stocks/sec_history.py",
+        "terminal/web/src/secHistory.ts",
+        "terminal/web/src/StockIntelligence.tsx",
+        "terminal/stocks/statements.py",
+        "terminal/stocks/vintages.py"
+      ],
+      "test_evidence": "10 continuation tests plus selected existing SEC expansion tests in the 86-test no-launch cohort;3 pure frontend continuation helpers;source-bound prior statement/PIT tests retained",
+      "explanation": "Later advertised shards are now reachable in explicit bounded batches up to128 descriptors,hash-bound to CIK+validated advertisement. Each operation still<=2old shards/25s/1024selected filings;batch replaces filing view and preserves financial receipt. Full XBRL presentation and original PIT receipt/vintage coverage remain incomplete.",
+      "disposition": "Feasible shard continuation implemented. Complete statement/vintage contract and source history remain open;not declared outside approved scope.",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "PARTIAL history implementation;missing source coverage and complete presentation/vintage requirements remain explicit"
+    },
+    {
+      "id": "SEC03",
+      "status": "BLOCKED",
+      "requirement": "Real-provider SEC reconciliation for this delivered source",
+      "source": [
+        "terminal/stocks/qualification.py",
+        "scripts/qualify_sec_sources.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Existing owner observations retained separately;no request in this task",
+      "explanation": "Identifying configuration and permitted target access are unavailable here;fixtures do not establish fresh provider results.",
+      "disposition": "Owner existing configured environment;no secret/contact re-entry requested",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "MD01",
+      "status": "COMPLETE",
+      "requirement": "Read-only IEX permissions,credentials and fixed destinations",
+      "source": [
+        "terminal/stocks/private_iex.py",
+        "terminal/stocks/auth.py",
+        "terminal/stocks/alpaca_transport.py",
+        "terminal/stocks/live.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline211cohort;private-IEX qualification tests retained",
+      "explanation": "Explicit read-only stream gate,reviewed permission scopes,server-only credentials and fixed data hosts;real/paper execution remain independently disabled.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "MD02",
+      "status": "COMPLETE",
+      "requirement": "Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions",
+      "source": [
+        "terminal/stocks/live.py",
+        "terminal/stocks/retry.py",
+        "terminal/stocks/test_reconnect_stability.py",
+        "terminal/server/market_events.py",
+        "terminal/stocks/trade_tape.py",
+        "terminal/stocks/test_live_recovery.py"
+      ],
+      "test_evidence": "Baseline86 no-launch cohort includes lifecycle/ordering/quiet/duplicate tests plus actual Python/TypeScript wire-view check;not actual provider qualification",
+      "explanation": "A reproduced one-quote-per-reconnect flap could reset failure count indefinitely. Retry count now resets only after a stable subscribed interval(default30s,bounded1–300),including quiet transport liveness without inventing observations. Backoff,permissions,generation isolation and source-gap limitations remain.",
+      "disposition": "Repaired and offline verified;not a lossless-capture claim",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "MD03",
+      "status": "COMPLETE",
+      "requirement": "Historical IEX bars,quotes,trades and explicit delayed-SIP profile",
+      "source": [
+        "terminal/stocks/alpaca_history.py",
+        "terminal/stocks/historical_v2.py",
+        "terminal/web/src/HistoricalMarket.tsx",
+        "terminal/web/src/HistoricalResearch.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline58focused historical tests and browser journeys",
+      "explanation": "Bounded pages,exact nanoseconds,OHLC,duplicate accounting,cache TTL and explicit SIP15-minute boundary. No automatic feed upgrade;no complete-session inference.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "MD04",
+      "status": "COMPLETE",
+      "requirement": "Historical bar display and source error reporting",
+      "source": [
+        "terminal/web/src/barChart.ts",
+        "terminal/web/src/EquityPanels.tsx",
+        "terminal/stocks/alpaca_history.py",
+        "terminal/server/app.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: New7unit+4Python+10browser checks;retained failing-before logs",
+      "explanation": "This sprint fixes synthetic-as-observed chart labels,validates bounded exact OHLC before geometry,and distinguishes fixed safe failure categories without reflecting source bodies.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "MD05",
+      "status": "BLOCKED",
+      "requirement": "Actual owner IEX live/historical qualification",
+      "source": [
+        "scripts/private_iex.py",
+        "docs/qualification/PRIVATE_IEX_RUNBOOK.md"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Zero provider requests in this task",
+      "explanation": "Owner-reported Support384778 covers the narrow private research use. This runtime has no configured credentials/private-owner environment. No fresh source/entitlement/freshness evidence.",
+      "disposition": "Environment-dependent read-only qualification;do not activate credentials or gates here",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "MD06",
+      "status": "PARTIAL",
+      "requirement": "Complete corrected exchange tape and lossless reconnect",
+      "source": [
+        "terminal/stocks/trade_tape.py",
+        "terminal/stocks/test_trade_tape.py",
+        "terminal/web/src/tradeTape.ts",
+        "terminal/web/src/TradeTapePanel.tsx",
+        "terminal/tests/check_trade_contract.py"
+      ],
+      "test_evidence": "13 pure ledger tests,including 1000 independent integer-map candidates/negative controls;5 TypeScript admission tests,2 actual leaf SSR checks,6 actual Python→TypeScript normalized-packet checks;86 no-launch tests per binding environment",
+      "explanation": "Bounded normalized reference ledger now supports exact original matching,correction chains,retirement,duplicates,capture-order replay,provenance and fail-closed totals. Explicit authored C-cancellation contract works. Observed cancellation/error action profile and complete/lossless exchange capture remain unimplemented/unqualified. Version 2 also fences local capture namespaces,so equal per-process generations cannot mix records from separate captures. This namespace is not an exchange session/sequence.",
+      "disposition": "PARTIAL because working reference reconciliation now exists,not because the stronger requirement was removed. Observed action semantics and lossless/source-complete contract still need authoritative evidence and an explicit decision.",
+      "action_now": "Bounded normalized reconciliation is implemented. Do not guess observed cancellation/error codes or promise complete/lossless exchange history. Authoritative source/action/completeness contract is still required.",
+      "work_class": "Implemented bounded reconciliation;stronger observed cancellation/complete-tape subrequirements remain open",
+      "missing_implementation": [
+        "Observed cancellation/error profile pending authoritative mapping",
+        "Complete exchange tape and lossless recovery with independently complete sequence/backfill authority"
+      ]
+    },
+    {
+      "id": "RES01",
+      "status": "COMPLETE",
+      "requirement": "Research configuration,calculations,results and authored exports",
+      "source": [
+        "terminal/stocks/research.py",
+        "terminal/stocks/advanced_models.py",
+        "terminal/stocks/portfolio.py",
+        "terminal/stocks/evaluation.py",
+        "terminal/web/src/researchExport.ts"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baselinefrontend and stock cohorts;native mathematical references retained",
+      "explanation": "Bounded HMM/GARCH/Kalman diagnostics,causal strategy/walk-forward,risk/portfolio and deterministic exports exist. Native exact mathematics remain unchanged.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "RES02",
+      "status": "COMPLETE",
+      "requirement": "Historical bar-to-research/compatible3D workflow",
+      "source": [
+        "terminal/stocks/historical_research.py",
+        "terminal/web/src/historicalResearch.ts",
+        "terminal/web/src/HistoricalResearch.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline58historical Python checks;Sprint4 browser numerical/export assertions",
+      "explanation": "Accepted revisions drive exact trailing returns,SMA,drawdown and log variation. Quotes feed quote projections;bars cannot become depth or signed events.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "RES03",
+      "status": "BLOCKED",
+      "requirement": "Empirical forecasting quality,calibrated fills or alpha",
+      "source": [
+        "terminal/stocks/evaluation.py",
+        "src/simulation/simulator.cpp"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: No new observed evaluation dataset",
+      "explanation": "Mathematical and causal fixture agreement do not establish predictive accuracy,profitability or exchange execution fidelity.",
+      "disposition": "Requires independently justified observed-data study;not software completion evidence",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "REL01",
+      "status": "COMPLETE",
+      "requirement": "Bounded observation persistence,recovery,backup and corruption rejection",
+      "source": [
+        "terminal/stocks/observation_store.py",
+        "terminal/stocks/history_store.py",
+        "terminal/stocks/history_backup.py"
+      ],
+      "test_evidence": "10 ObservationStore persistence/failure/restart tests in the 86-test no-launch cohort per binding environment;retained Sprint 2 admission/resource evidence",
+      "explanation": "Preflight counts/bytes/types,single read snapshot,strict payloads/hash chain and private snapshots exist. Observed retention defaults off;no storage activated here.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "REL02",
+      "status": "PARTIAL",
+      "requirement": "Crash-safe hot live/L3 recovery and hardware durability guarantees",
+      "source": [
+        "terminal/stocks/live.py",
+        "terminal/stocks/test_live_recovery.py",
+        "terminal/stocks/test_reconnect_stability.py",
+        "terminal/stocks/observation_store.py",
+        "include/gig/itch/restart.hpp"
+      ],
+      "test_evidence": "5 worker recovery + 5 stability fixtures,10 observation-store tests and 3 projection tests in 86 no-launch tests per binding environment;prior native restart/ledger evidence retained",
+      "explanation": "Runtime recovery now handles rapid-flap retry accounting,terminated-worker orphan subscriptions,explicit validated restart,unexpected cancellation status,cleanup,generation isolation and fresh-data requirements. Historical ledger and authenticated authored cold replay exist. Durable process-crash hot/L3 restoration and hardware guarantees still do not.",
+      "disposition": "Runtime feed recovery is implemented and offline verified. The stronger persistent/hot-L3 requirement remains PARTIAL pending a coherent checkpoint/source/initialization contract;it is not silently excluded.",
+      "action_now": "Current in-memory worker recovery is implemented;define source/state/atomicity contract before claiming crash-safe hot L3",
+      "work_class": "Implemented hot worker lifecycle;durable cross-process/native-L3 state recovery remains an open subrequirement",
+      "missing_implementation": [
+        "Joint durable cross-process native/source hot checkpoint",
+        "Complete observed L3 initialization/source authority",
+        "Target hardware durability and recovery envelope qualification"
+      ]
+    },
+    {
+      "id": "SECURITY01",
+      "status": "COMPLETE",
+      "requirement": "Strict private Origin/Host,HTTP proof and WebSocket lifecycle",
+      "source": [
+        "terminal/server/app.py",
+        "terminal/server/request_proofs.py",
+        "terminal/server/stream_tickets.py",
+        "terminal/server/connection.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline274native/API tests;existing localTLS/forged-header tests",
+      "explanation": "Exact configured origins,bounded target-bound one-use proofs,Host checks and sanitized diagnostics retained;no wildcard CORS or arbitrary forwarded-header trust.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "SECURITY02",
+      "status": "COMPLETE",
+      "requirement": "Frontend budgets,errors and disabled execution safeguards",
+      "source": [
+        "terminal/web/src/response.ts",
+        "terminal/server/app.py",
+        "terminal/paper/alpaca.py",
+        "terminal/stocks/private_iex.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend and211/274backend checks;prior fake-broker evidence retained",
+      "explanation": "Incremental2MiB read,abort/cancel,strict mutations and default-disabled independent paper/live controls. No provider/account calls or orders in this task.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "SECURITY03",
+      "status": "PARTIAL",
+      "requirement": "Runtime/dependency security clearance",
+      "source": [
+        "terminal/server/requirements.txt",
+        "terminal/web/package-lock.json",
+        "docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md"
+      ],
+      "test_evidence": "Public npm production+full graph audits:0listed vulnerabilities;pip-audit2.10.1 on17pinned server requirements:0listed vulnerabilities/0skipped;pipcheck/build",
+      "explanation": "Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.",
+      "disposition": "Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+    },
+    {
+      "id": "OPS01",
+      "status": "COMPLETE",
+      "requirement": "Private startup,exact-SHA upgrade,rollback and qualification tools",
+      "source": [
+        "scripts/start_terminal.sh",
+        "scripts/qualify_private_deployment.py",
+        "docs/qualification/institutional-sprint-2/DEPLOYMENT_ACCEPTANCE.md"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Prior clean receipt plus baseline development checks;no owner deployment claimed",
+      "explanation": "Existing runbooks preserve local changes,do not reset/clean,bind source/assets and distinguish offline/edge qualification. No missing new deployment tool found.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "OPS02",
+      "status": "BLOCKED",
+      "requirement": "Owner-authenticated Codespaces HTTPS/WSS acceptance",
+      "source": [
+        "scripts/start_terminal.sh",
+        "terminal/tests/check_browser_handshake.mjs"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Only local browser/forwarding fixtures available",
+      "explanation": "No actual owner edge,cookies/credentials or private-port authentication accessed.",
+      "disposition": "Single final owner acceptance after delivery;no intermediate manual tests requested",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "OPS03",
+      "status": "BLOCKED",
+      "requirement": "Current-candidate genuine native ARM64 qualification",
+      "source": [
+        ".github/workflows/native-arm64.yml",
+        "terminal/test_arm64_terminal_policy.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Manual-only/free-owner/branch policy tests;not dispatched",
+      "explanation": "Earlier tested SHAs do not qualify new code. Existing six-configuration workflow includes strict native/API and updated stock cohort.",
+      "disposition": "Owner-authorized free runner execution against exact delivered SHA;not cross-compile-as-runtime evidence",
+      "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
+      "work_class": "External source,permission,target or empirical qualification"
+    },
+    {
+      "id": "UX01",
+      "status": "COMPLETE",
+      "requirement": "Readable dark/light,responsive,keyboard and reduced-motion engineering",
+      "source": [
+        "terminal/web/src/workstation.css",
+        "terminal/web/src/Navigation.tsx",
+        "terminal/web/src/cameraMotion.ts"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend/workstation browser checks;prior5690text-contrast evidence",
+      "explanation": "Semantic controls,focus,contained table/navigation scrolling,comfortable text and responsive canvases implemented;no new visual redesign in this sprint.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "UX02",
+      "status": "PARTIAL",
+      "requirement": "Full WCAG2.2AA and physical-device acceptance",
+      "source": [
+        "terminal/web/src/BarValues.tsx",
+        "terminal/web/src/EquityPanels.tsx",
+        "terminal/web/src/HistoricalMarket.tsx",
+        "terminal/web/src/barValues.test.ts"
+      ],
+      "test_evidence": "3 actual leaf-component SSR tests within 143 frontend tests;TypeScript/build. No application/browser launch.",
+      "explanation": "Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.",
+      "disposition": "Feasible text alternative implemented. Physical devices,screen readers and exhaustive WCAG2.2AA/current browser qualification remain unverified.",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+    },
+    {
+      "id": "CLEAN01",
+      "status": "COMPLETE",
+      "requirement": "Obsolete user-facing branding and safe frontend cleanup",
+      "source": [
+        "terminal/web/index.html",
+        "terminal/web/src/workstation.ts",
+        "terminal/web/src/App.tsx"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Branding unit/browser checks and source search",
+      "explanation": "User-facing identity is GIG. Historical reports and compatibility technical keys are preserved;unused code is not deleted merely on a name-based guess.",
+      "disposition": "Implemented bounded research contract;retain tested behavior",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Implemented bounded development contract"
+    },
+    {
+      "id": "SCOPE01",
+      "status": "NOT APPLICABLE",
+      "requirement": "Real/paper execution,paid feeds,public deployment and redistribution",
+      "source": [
+        "terminal/stocks/private_iex.py",
+        "terminal/paper/alpaca.py"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Default-disabled boundary tests",
+      "explanation": "Explicitly outside this observation-only sprint. Existing fake-paper harness is not owner order authorization.",
+      "disposition": "Keep disabled;no expenditure,provider/account mutation or public forwarding",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Excluded by current observation-only directive"
+    },
+    {
+      "id": "SCOPE02",
+      "status": "PARTIAL",
+      "requirement": "Historical A18/A19 requirement and concentration acceptance",
+      "source": [
+        "terminal/server/concentration.py",
+        "docs/remediation/sprint-2/REMAINING_BLOCKERS.md"
+      ],
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Existing exact supplied-depth HHI tests;original69c9f48 audit read from Git",
+      "explanation": "Exact source-bound supplied-depth HHI exists. Earlier audit preserves unknown original estimator/baseline. Attempt to recover the original pasted master text in this session failed authorization/resolution;no restricted dataset was accessed.",
+      "disposition": "Owner decision:recover the original requirement or approve a prospective versioned baseline/HHIv1 contract. No retroactive acceptance or new estimator invented.",
+      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
+      "work_class": "Historical requirement/estimator decision;not safe to invent acceptance"
+    }
+  ],
+  "tested_application": "b37fd030375a93f6f79ae389505fb278d66304ed",
+  "row_count_scope": "48 implementation/qualification areas plus one separate historical A18/A19 decision row;not a new feature requirement",
+  "previous_matrix_commit": "e0d5741dcef172b9d7cd30754221429479f67192",
+  "current_report": "REPORT.md",
+  "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
+  "evidence_policy": "86 selected no-launch Python tests per existing binding environment,143 frontend tests/build,6 actual Python→TypeScript packet/view checks and 1000 bounded independent oracle candidates. No application/API server,browser app,provider or owner acceptance executed.",
+  "implementation_checkpoints": [
+    "f35c0ca84a7cec9425987caf2d011709ec7b87a0",
+    "9984b87725ddfcb2afbe6cdaa582569b1cc60ddb",
+    "f046f653b64f7064314cf2f24c63f04d17a56d10",
+    "69fa9be4fb9eb0a5062ed4f37ab1c31c704d740e",
+    "ff5e06d965b6859a856ef857c4ebdde36f64cc87",
+    "b37fd030375a93f6f79ae389505fb278d66304ed"
+  ],
+  "date": "2026-11-10",
+  "timezone": "America/New_York",
+  "counts": {
+    "COMPLETE": 34,
+    "BLOCKED": 7,
+    "PARTIAL": 7,
+    "NOT APPLICABLE": 1,
+    "NOT IMPLEMENTED": 0,
+    "BROKEN": 0
+  }
+}
