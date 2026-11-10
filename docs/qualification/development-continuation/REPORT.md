@@ -1,125 +1,113 @@
-# GIG development continuation report
+# GIG — development completion sprint, November 10, 2026
 
-Date: November 10, 2026 (America/New_York). Branch: `development/gig-ui-redesign`.
+Timezone: America/New_York. Branch: `development/gig-ui-redesign`. Starting local/remote source: `4cf522dcdfbee260409541f38a01b77b23f7db5c`;initial tree clean. Tested source: `e6087da1f67efc5280210040a109671964934ab8`. Earlier continuation evidence/report remain preserved in Git at the starting commit. This report supersedes the prior completion assessment without deleting its history.
 
-## Result and scope
+## Outcome
 
-The interrupted implementation was preserved and extended. Bounded trade-reference reconciliation, local capture isolation and hot worker recovery are now implemented and offline verified. The full historical development scope is **not declared complete**: stronger corrected exchange-tape, durable hot L3, full historical statement/vintage and legacy acceptance contracts remain explicit in the matrix. No feature was silently excluded as optional. The earlier report's optional-scope wording is superseded by this report.
+Implemented coordinated durable **Level 1 control recovery**, stricter retained SEC filing-vintage admission, frontend contract/accessibility/cancellation improvements and two reproduced integration/resource repairs. The project is **not declared fully development-complete or production-ready**. Stronger source-complete tape, joint native/source hot L3 and complete XBRL/vintage contracts remain unfinished and explicitly listed. No required feature was silently reclassified optional.
 
-No application, server, browser application, provider connection, deployment or final acceptance test was started. No credentials, raw market dataset, account/order operation or observed storage were used. Public npm/PyPI advisory metadata queries were performed; these were not market-data requests. GIG branding, all 12 workspaces/15 visualization modes, native calculations, execution-disabled controls and private-Origin boundaries were preserved.
+**Counts reconcile:** 48 reviewed implementation/qualification areas plus the separately preserved historical A18/A19 decision row (SCOPE02) = **49 entries**. Status totals remain **34 COMPLETE,7 PARTIAL,7 BLOCKED,1 NOT APPLICABLE**. There are zero wholly NOT IMPLEMENTED rows,but missing subrequirements remain within PARTIAL rows. Counts are not a readiness percentage. All seven partial and seven blocked rows now have individual dispositions,dependencies and evidence/effort requirements in COMPLETION_MATRIX.md/JSON.
 
-The reviewed baseline is `e0d5741dcef172b9d7cd30754221429479f67192`. The user's latest interrupted checkpoint `f35c0ca84a7cec9425987caf2d011709ec7b87a0` was preserved. It contained the SEC continuation, retry-stability and text-alternative work below. Follow-up implementation commits:
+No application,ASGI server,browser application,network listener,market-data provider,account,order,workflow,deployment or final acceptance was started. No owner secrets were read or printed. No paid service,new dependency,observed-data retention,public port or protected branch was enabled/changed. C++ sources,bindings,formulas,eight frozen expectations,12-workspace design and15visualization modes remain intact.
 
-- `9984b87725ddfcb2afbe6cdaa582569b1cc60ddb`: bounded trade reconciliation, progressive frontend view, orphan/interrupted worker recovery and regressions.
-- `f046f653b64f7064314cf2f24c63f04d17a56d10`: actual Python-to-TypeScript packet contract check and strict feed/generation admission.
-- `69fa9be4fb9eb0a5062ed4f37ab1c31c704d740e`: local capture namespace, versioned derived contract and cross-capture rejection.
-- `ff5e06d965b6859a856ef857c4ebdde36f64cc87`: executable no-application developer subset.
-- `b37fd030375a93f6f79ae389505fb278d66304ed`: persistence and projection compatibility included in that fixed subset.
+## Implementation checkpoints
 
-The final documentation-only commit is identified by Git, avoiding a recursively embedded self-hash. Evidence binds the tested source and each changed file separately.
+- `b48a973aa59572ef9895c241ead1df3fc9dca484`: first durable-control and strict filing-vintage implementation;106Release no-launch tests passed at that checkpoint.
+- `3944c92e2f394c85fdb18d4f589cc4591c0a684f`: recovery failure boundaries,hand-over correction and typed/cancellable/paginated frontend;115cases passed per binding environment at that checkpoint.
+- `aca684502038d2347689625cf9b92a66e982354e`: control-only ledger verification streams instead of materializing decoded events;116cases passed per environment.
+- `e6087da1f67efc5280210040a109671964934ab8`: legacy helper compatibility restored,strict API admission explicit,and four unchanged legacy acceptance tests included;121cases passed per environment.
 
-## Implemented behavior
+The final report/evidence-only commit is identified by Git rather than recursively embedding its own SHA. Full code and artifact hashes are bound in EVIDENCE.json.
 
-### Corrected trade references
+## Durable recovery contract
 
-`terminal/stocks/trade_tape.py` consumes the existing bounded normalized observation contract without mutating its inputs or the native book. Exact decimal/rational arithmetic matches original price and size before applying corrections. It preserves original source time/capture priority, correction lineage, venue/tape/reference scope and source-frame hashes. Different replacement IDs retire old IDs; same-ID corrections retain original lineage. Identical semantic duplicates are counted; conflicting duplicates, missing originals, reused IDs, malformed values, mixed origin and changed capture context fail closed. Receipt order is respected even when source clocks move backwards. A causal-prefix test verifies future corrections cannot change earlier results.
+`terminal/stocks/live_checkpoint.py` defines a bounded4096-byte private stream-control envelope. It contains only symbol/channel intent,local capture namespace,generation,accepted receipt,connection/failure counts,retry budget,active flag and protocol phase. Credentials,market prices and native book state are not serialized in it.
 
-The derived `gig.bounded.trade_reconciliation.v2` includes the local capture namespace plus generation and symbol. A namespace is generated per LiveIEX instance and retained with its observations. It is **not an exchange sequence, exchange session or trading date**. Equal generations from separate process captures cannot be merged. Legacy records without that field are still retained as historical observations; a corrected derived total cannot be certified from them. The raw observation/metrics contracts remain available. This derived schema is additive and versioned; none of the eight native reference identities changes.
+`ObservationStore.append(...,control=...)` commits accepted observations and their control/tail binding in **one SQLite transaction**. The existing source hash chain,record/byte/type limits,synchronous FULL policy and accepted-state-after-storage publication remain. Corrupt or inconsistent checkpoints are rejected before another valid frame can overwrite them. Legacy ledgers without the optional table still recover;uncoordinated legacy appends explicitly invalidate a known checkpoint instead of leaving a stale recovery hint. An older writer that does not know the extension cannot qualify a stale checkpoint:tail comparison fails closed.
 
-Cancellation removal is implemented only for an explicitly selected **authored** `AUTHORED_CANCEL_C_V1` fixture contract. Observed cancellation/error action codes remain unqualified; the implementation does not guess their meaning. An observed cancellation, unknown original or evicted original produces `UNRESOLVED` with a null aggregate, never automatic liquidity restoration. Existing raw metrics continue to suppress ambiguous correction/cancellation volume. The new panel exposes an independently validated derived result without replacing those conservative raw metrics.
+`recover_control()` verifies source rows and the checkpoint under one SQLite read snapshot. It now streams validation without constructing the full decoded observation list. The existing `recover()` API/output remains unchanged. Control restore checks the current permissions,catalog and subscription budget before publishing a prepared state. It is idempotent before use,requires an idle worker and preserves the previous ledger/capture/receipt boundary for diagnostics. A new local capture namespace and a higher subsequent connection generation prevent mixing captures or accepting an old phase acknowledgment.
 
-Budgets remain 256 retained observations and at most four symbols. The reducer validates reference/data lengths, source hashes, origin, positive exact price/size, safe generation/receipt integers and capture order. A derived complete-tape flag is always false and native-book mutation count always zero. MemoryError propagates; input observations remain unchanged. Hashes establish deterministic retained-content consistency, not authenticated exchange completeness. Replaying the same retained records with the same capture metadata reproduces the same derived result; newly captured sessions intentionally have distinct namespaces.
+Restore is **intent-only**:no socket/task is created,old observations are not inserted as current live input,and no native L3 book is restored. A fresh source observation is required after an explicit validated start. Retry exhaustion is retained across restore;automatic run cannot bypass it. An explicit new start creates a new bounded retry operation. Failure counts are committed before backoff so interruption cannot erase a completed failed attempt. Generation/receipt exhaustion,storage exhaustion,allocation failure,orphan subscriptions,interruption,stale acknowledgments and rapid retry behavior are tested.
 
-Frontend admission checks validate symbol/generation/capture, lineage membership in the actual retained window, counts, decimal precision and rational totals using integers. The progressive text table exposes exact price/size/source nanoseconds and lineage, paginates 32 rows, and explicitly labels incomplete known prefixes. Missing input is unavailable, not zero full-market volume. The actual Python decoder/view output is accepted by the actual TypeScript contract checker in the no-server regression.
+The optional constructor switch `GIG_ALPACA_RECOVER_CONTROL=1` applies only when the already gated private observation store is present;it restores intent,never auto-connects. The switch is not set here. Storage remains disabled by default and still requires the existing source-use/retention authorization. Invalid/corrupt explicit recovery fails closed. A stopped or disconnected source never becomes live merely because a control file exists.
 
-### In-memory feed recovery
+This is **not** a joint source/native hot L3 snapshot,lossless exchange reconnect guarantee,authenticated complete tape,power-loss hardware certification or RPO/RTO claim. Current IEX Level1 never supplies invented resting orders or depth.
 
-A reproduced orphan subscription previously blocked explicit restart after its worker had ended. Restart now recognizes only a known completed worker in DISCONNECTED phase as orphaned. Inputs/authorization are validated before its state is cleared. An active handover still cannot be overwritten by another start.
+## Corrected trade-tape integration repair
 
-Unexpected coroutine cancellation previously left a misleading worker state. It now publishes `RECOVERY_REQUIRED` and clears socket/phase; explicit owner stop instead publishes `STOPPED`. Cleanup, pending subscriptions and fresh-observation requirements are tested. Source accounting/generation fences and existing backoff/jitter remain in effect. Recovery diagnostics explicitly say `hot_l3_restored=false` and source loss is unknown because no exchange sequence is supplied.
+The supported bounded reference state machine is preserved:exact normalized arithmetic,original-price/size matching,reference retirement/correction chains,duplicate/conflict handling,source/capture/generation isolation,causal replay and lineage. Authored `C` cancellation is supported only by the explicit authored-fixture contract. Unsupported observed cancellation/error actions remain UNRESOLVED with null aggregates;no action semantics were guessed and no liquidity is restored.
 
-At the preserved f35 checkpoint, one quote on each flapping connection previously reset the failure counter indefinitely. Reset now requires a configured stable subscribed interval (default 30 seconds, bounded 1–300), including a quiet healthy connection. A quote alone is insufficient. Retry exhaustion, rapid reconnects, quiet feeds, unauthorized attempts and malformed restart isolation are covered with fake sockets/clocks. No live provider was contacted.
+A new failing-before test reproduced a real window mismatch on an in-place AAPL→NVDA handover:the published history excluded old-symbol observations,but derivation input counts still included them. The browser's existing admission check therefore rejected the otherwise valid feed. Reconciliation now uses the **exact published history window**. Internal bounded source retention is preserved. The actual normalized handover output is also accepted by the actual TypeScript validator in the cross-language test. No source history or receipt was fabricated/skipped to make it pass.
 
-These are runtime worker/subscription repairs, not durable joint native/source hot restoration after process loss. The historical observation store and authenticated authored cold replay remain separate. No crash-safe hot L3 guarantee, exact-once exchange delivery or no-loss backfill claim is made.
+Observed cancellation semantics and a complete/lossless exchange-tape contract remain open. Current retained-buffer agreement cannot establish full-market completeness.
 
-### Preserved SEC and accessibility completion
+## SEC filing-vintage and frontend improvements
 
-SEC history now supports explicit continuation through up to 128 validated advertised older-shard descriptors. Each operation remains bounded to at most two older shards, 25 seconds and 1,024 selected filing entries. A digest binds the continuation to CIK and the validated advertisement; source changes reject before shard publication. Fixed official source paths, shared request-rate waits and per-read permission checks remain mandatory. A selected batch replaces the filing view; it does not imply cumulative full financial history. Original financial receipt metadata is preserved, with a separate filing receipt driving frontend refresh.
+A valid-accession join alone was insufficient:the prior retained filter admitted a fact even when its reported form conflicted with the matched filing. The strict profile now checks accession,form and filing date;excludes mismatches;rejects contradictory same-accession metadata and changed content under the same retained fact ID;and preserves exact acceptance clocks. Missing/future acceptance never becomes filing midnight or a substituted current filing.
 
-Exact keyboard-readable tables supplement historical candlestick hover values in company/archive views; the calendar-history workspace reuses its existing table. Units, source captions, nanosecond timestamps and zero volume remain visible. Native help dialogs, skip link, keyboard controls, GIG identity and existing theme/layouts were preserved. SSR checks validate actual leaf markup; they are not visual browser or assistive-device acceptance.
+Accepted selections include matched filing references,superseded retained fact IDs,distinct amendment accessions,a declared selection policy and a reproducible selection SHA256. The policy selects the latest eligible retained fact for the same concept/start/end/unit;it does not add amendments or infer legal amendment relationships. Original response-vintage receipt is explicitly null where the retained input does not supply it. Complete XBRL contexts,dimensions,presentation and original source vintages remain unimplemented.
 
-## Reproduced failures and retained limitations
+**Compatibility repair:**the first strict implementation regressed two existing helper tests that intentionally supply only accession/time metadata. These tests and their original numerical assertions were preserved unchanged. The helper retains its legacy default as `LEGACY_ACCESSION_TIME_V1`,including conservative ambiguous-time exclusions. The **v2 read-only API explicitly selects `STRICT_FILING_METADATA_V1`**,and the frontend requires that profile in both result and lineage. Legacy data never silently acquires a strict metadata claim. The four old pure acceptance cases are now permanently included in the no-launch cohort.
 
-Failing-before logs are bound in EVIDENCE.json:
+The browser-side pure validator checks exact symbol/cutoff/profile,integer nanosecond time,record budgets,lineage,source IDs,filing/fact consistency and explicit partial-vintage scope. It performs no financial-ratio calculation. Actual Python output is compared against this validator offline. The real leaf component provides exact text values,a named keyboard-scrollable region,scoped headers/time semantics,32-row pagination,visible counts,empty states and lineage disclosure. The former silent100-row cutoff is gone. Requests abort on cutoff change or unmount,so old asynchronous results cannot replace the chosen selection. There is no source request on the cache-only API and no new observed export/retention permission.
 
-- Retry-flap regression expected two attempts but made six before a fixture guard stopped the old loop.
-- Orphan-worker restart raised `subscription_update_pending`.
-- Interrupted worker remained CONNECTING instead of RECOVERY_REQUIRED.
+## Final development verification
 
-Final versions pass without reducing retry assertions or weakening risk/security checks. Early developer attempts also exposed a test-side Fraction string conversion issue and TypeScript import/unused-variable errors; these were corrected before final test/build success. A no-launch guard caught two app/API tests in an early broad selection; the fixed 86-test developer subset deliberately excludes those app-factory tests. The future full 244-case cohort still contains them and is registered, not executed. No original full-suite assertion was removed. Retained setup/cache/path failures and older exploratory logs are not presented as final passes.
+| Cohort / command | Actual final result | Limits |
+|---|---|---|
+| `terminal/tests/run_no_launch_suite.py`,existing Release bindings |121passed,0failures/errors/skips|Selected developer cohort;not API/server acceptance|
+| Same,existing Debug bindings |121passed,0failures/errors/skips|No fresh native build|
+| Same,existing ASan/UBSan bindings |121passed,0failures/errors/skips|Existing binding environment/CPython sanitizer policy|
+| `npm --prefix terminal/web test` |153passed,0failed/cancelled/skipped|Pure/leaf SSR/fake fetch;not browser launch|
+| `terminal/tests/check_trade_contract.py` |8market+5SEC=13checks passed|Actual Python→TypeScript normalization/admission;no app|
+| `npm --prefix terminal/web run build` |TypeScript/Vite PASS|Assets built only;not served|
+| `tests/test_sdist_patterns.py` |3passed|Packaging-pattern regression;not a new wheel qualification|
+| Full stock/API registry |275registered,0executed|Retained for later authorized app/API qualification|
 
-## Executed developer validation
+The fixed121-test selection includes21checkpoint/recovery/resource cases,9new strict-vintage cases,4unchanged legacy acceptance cases,6worker recovery cases and existing store/shard/ordering/retry/proof regressions. The pre-existing trade tests include1000independent integer-map candidates and corruption negative controls;projection tests include1000independently reconstructed windows. Those assertions are not additional unittest counts. Final source was verified after each further relevant repair;overlapping earlier106/115/116case totals are historical checkpoints,not additional unique tests.
 
-| Check | Passed | Failed / errors | Skipped | Scope |
-|---|---:|---:|---:|---|
-| No-launch subset, existing Release bindings | 86 | 0 / 0 | 0 | Fake transports, SEC fixtures, reducer, persistence and projection |
-| Same subset, existing Debug bindings | 86 | 0 / 0 | 0 | Same tests; no fresh native build |
-| Same subset, existing ASan/UBSan bindings | 86 | 0 / 0 | 0 | Halt-on-error; existing CPython sanitizer policy |
-| Frontend Node tests | 143 | 0 | 0 | Includes 5 tape admission, 2 actual tape SSR, 3 bar SSR and 3 SEC cursor tests |
-| Python normalized packets → TypeScript contract | 6 | 0 | 0 | Real decoder/view, authored trade/correction/cancel; no app |
-| Source archive include-pattern regressions | 3 | 0 | 0 | Packaging pattern scope only; no new installed-wheel campaign |
-| TypeScript + Vite production build | PASS | 0 | n/a | Build only; no serving assets |
-| Dependency consistency | PASS | 0 | n/a | Existing runtime environment |
-| Public npm audits, production and full graph | 0 listed vulnerabilities | 0 findings | n/a | Current public advisory metadata |
-| pip-audit 2.10.1, 17 pinned server requirements | 0 listed vulnerabilities | 0 findings | 0 | Public PyPI service; isolated audit tool |
+The no-launch runner rejects bind/connect/connect_ex and application-factory calls. Fixture subprocesses perform controlled SQLite interruption only. No original mandatory assertions were removed or loosened. The initial frontend159count included6duplicate registrations from importing a test module as fixture data;fixture data was moved into its own module,leaving153actual final registrations with the same mathematical assertions. An early new filing test selected the wrong unrelated synthetic row;it was corrected before the genuine matching-accession failing-before reproduction. An intermediate edit failed compilation and was corrected before delivery.
 
-The 13 reducer tests include 1,000 seeded independently computed integer-map candidates plus deliberately corrupted expected totals. They also cover allocation failure, causal prefixes, precision, generation/symbol/capture boundaries, source inconsistencies and cancellation rejection. Those candidates are assertions inside a test, not 1,000 additional unittest cases. Ten persistence tests include interrupted writes, corruption, abrupt process exit, 10,050-observation capacity trimming and concurrent pruning. Three projection tests include 1,000 reconstructed windows; they do not establish actual browser-push latency.
+Retained failures include the genuine handover mismatch,strict-vintage admission reproduction,control memory reproduction and the introduced legacy compatibility regression. Final developer cohorts have no remaining failures. Full application/browser/security-edge/owner acceptance is **not inferred** from these outcomes.
 
-The no-launch runner hard-rejects socket bind/connect/connect_ex and application factory calls, with an exact expected count of 86. It is committed at `terminal/tests/run_no_launch_suite.py`. The dedicated cross-language tool applies the same no-server policy. Fake lifecycle coroutines and temporary private synthetic SQLite files are not application startup or enabled observed-data retention.
+No new native GCC/Clang compilation,CTest/eight-hash execution,ARM64 runtime,wheel-consumer campaign,application/API program,HTTPS/WSS service,browser screenshot or provider reconciliation occurred. The eight frozen identities are retained from the prior source-bound evidence;their source/expected inputs are unchanged,**not rerun**. ASan uses `detect_leaks=1:leak_check_at_exit=0:halt_on_error=1`;UBSan halts on errors. This does not establish CPython shutdown leak clearance.
 
-No new C++ compilation, native CTest, eight-hash execution, real API server, browser application, TLS/WSS service, screenshot or ARM64 run occurred. The baseline's eight frozen identities and prior API/browser evidence are retained as source-bound prior evidence, **not rerun results**. Native sources, bindings, CMake and reference expectations are unchanged. Existing Release/Debug/sanitized binding artifacts were used for these Python environments. ASan options include `detect_leaks=1:leak_check_at_exit=0:halt_on_error=1`; this does not prove Python process-shutdown leak clearance. UBSan halts on errors.
+Warnings retained:Starlette/httpx TestClient deprecation on import(no client instantiated),and the pre-existing deferred Three.js chunk-size advisory. Dependency pins are unchanged. Prior public npm/PyPI advisory results remain prior evidence,not a new deployed OS/transitive-artifact clearance. No warnings or sanitizer findings were suppressed.
 
-Warnings retained: Starlette/httpx TestClient deprecation on import (no TestClient is started), the existing deferred Three.js chunk advisory (>500 kB), and a pip-cache permission warning on `pip check` (consistency check passed). The pip-audit tool also warned that `--no-deps` is intended for pinned requirements and recommends fully hashed pins; this bounded audit is not a new reproducible lockfile or full transitive resolution. No warnings were suppressed. Advisory success does not clear target OS, all optional/transitive artifacts, future CVEs or the owner-private edge.
+## Measured resource evidence
 
-## Measured resource sample
+Control-only verification of256authored padded ledger records above1MiB had a traced Python peak of **2,784,254bytes before** and **44,070bytes after** streaming verification. The regression ceiling is512KiB. This measures that fixture/function's Python allocations,not total terminal RAM or a universal budget. Full legacy ledger recovery retains its existing materialized output.
 
-The source-bound pure reducer sample used 256 authored normalized observations across AAPL/MSFT/NVDA/CRWV, five warmups and 30 repetitions, checking 64 active records per symbol on each pass. CPython 3.12.14, Linux x86_64. Four-symbol reducer time: median 5.644 ms, minimum 5.086 ms, maximum 7.485 ms. Additional traced peak excluding input construction/imports: 79337 bytes. Whole-process peak RSS: 21140 KiB. This was measured at `ff5e06d965b6859a856ef857c4ebdde36f64cc87`; the later no-launch-runner-only commit does not alter measured reducer code.
+A separate authored four-symbol SQLite/checkpoint sample at `3944c92e2f394c85fdb18d4f589cc4591c0a684f` used3repetitions,5warmup frames then64timed frames with4observations each. Median four-observation frame times were1.383,1.364,1.332ms;each repetition admitted276observations including warmup,retained256in memory and persisted276. Database size606,208bytes;checkpoint envelope479bytes;process peak RSS41,564KiB. CPU:Intel Xeon Platinum8573C,x86_64,CPython3.12.14. Later streaming verification improves the post-timing control-read path;these timing results remain explicitly bound to their measured earlier source,not relabeled a new candidate service benchmark.
 
-This is a small deterministic function measurement. It is not source/network/ingestion latency, total terminal memory, a full-session capacity claim, p99 service latency or an institutional SLA. No equivalent full corrected-tape baseline was available, so no speedup is claimed. Built initial JS remains about 254.5 kB, while the approximately 517 kB Three.js/OrbitControls chunk remains deferred. Exact final asset bytes/hashes are in EVIDENCE.json; no browser execution or GPU performance was measured here.
+These are local temporary synthetic SQLite/function measurements,not provider latency,250ms service-cadence proof,long-session backpressure,hardware power-loss behavior,RPO/RTO or an institutional SLA. Detailed samples and hashes are in EVIDENCE.json. No performance improvement beyond the measured control-memory fixture is claimed. Initial built JS is about254.5kB and deferred Three.js/OrbitControls about517kB;no browser/GPU responsiveness measurement was performed.
 
-## Requirement reconciliation and unfinished work
+## Outstanding scope and conditional effort
 
-The matrix retains 48 reviewed implementation/qualification areas plus the separate historical A18/A19 decision row: **34 COMPLETE, 7 PARTIAL, 7 BLOCKED, 0 wholly NOT IMPLEMENTED, 1 NOT APPLICABLE**. COMPLETE refers to each stated bounded contract and cited evidence. It is not an overall readiness percentage.
+All seven partial and seven blocked entries were reassessed. Remaining missing code is distinguished from unavailable qualification:
 
-Both formerly unimplemented rows are now partially implemented, with missing subrequirements explicit:
+- **MD06:** observed cancellation/error profile and source-complete/lossless tape authority missing. Once a bounded action profile is authoritative,implementation/testing is roughly1–2engineer-days. A complete tape cannot be promised or estimated from IEX inputs lacking sequence/backfill authority.
+- **REL02:** bounded L1 intent recovery is implemented;native/source joint hot L3 checkpoint and complete initialization are not. A defined bounded contract could require3–7engineer-days plus target durability work. No native book is synthesized from L1.
+- **SEC02:** retained filing joins/lineage improve history,but complete XBRL context/presentation/extension and original-vintage ingestion still require implementation and legitimate input specifications. A scoped full implementation is roughly2–4engineer-weeks,not a fixture-only acceptance task;missing original receipts cannot be recreated by coding.
+- **DATA02:** import tooling exists;current full listed-universe coverage needs a real authorized source import/reconciliation,roughly0.5–1engineer-day after target/source readiness.
+- **SECURITY03 / UX02:** target runtime/artifact clearance and actual browser/device/assistive acceptance remain pending under the no-launch directive. Allow roughly0.5–2days and1–3days respectively once authorized targets are available;unknown findings may change effort.
+- **SCOPE02:** original A18/A19 baseline/estimator is unknown. Recover the specification or approve a prospective versioned contract;do not retroactively close historical acceptance with the existing HHI extension.
 
-- **MD06:** canonical correction chains and authored cancellation work. The observed cancellation/error action mapping and complete/lossless exchange-tape recovery still need authoritative source semantics and replay/completeness authority. These cannot be guessed from field shape or IEX Level 1.
-- **REL02:** hot in-memory worker recovery works. Joint durable source/native hot checkpoints are still missing; a coherent state/initialization contract and target durability qualification are required. Authored cold replay and retained historical observations are not a substitute.
+These are conditional engineering estimates,not commitments or authorization to expand scope. External waiting time is unbounded. A single reliable total cannot be stated until the stronger source/fidelity/initialization contracts are defined. Those unfinished requirements are not silently removed from approved scope.
 
-The other five PARTIAL rows remain: full current listing coverage (importers exist; actual source coverage must be reconciled); full statement/XBRL and PIT-vintage fidelity (bounded filing batches now reachable; original missing source receipts are not recreated); target runtime/artifact security clearance; exhaustive accessibility/device acceptance; and the original A18/A19 baseline/estimator decision. Attempting to resolve the original pasted master attachment failed authorization/resolution. The documentation-only audit preserves the unknown requirement; this task does not invent an estimator or retroactive acceptance. No LOBSTER attachment was opened.
+The seven blocked items still need actual observed L3/reference evidence,target browser/GPU/device access,current official SEC receipts,owner IEX qualification,empirical research data/study,private Codespaces edge acceptance and current-candidate genuine ARM64. All feasible independent changes found in this pass were completed without provider calls. The matrix identifies the exact evidence for each blocker. Fixtures,old ARM64 runs and a private-launch script do not establish current real-world qualification.
 
-The seven BLOCKED rows remain complete observed L3/reference validation, physical GPU/browser/device acceptance, current real SEC reconciliation, owner IEX qualification, empirical forecasting/fill/alpha validation, private Codespaces edge acceptance, and current-candidate genuine ARM64. No new dataset, source authority, owner credentials or hardware evidence was fabricated.
+No launch/deployment/acceptance instructions are executed or requested now. Existing exact-SHA upgrade/rollback/private-source runbooks remain preserved for a later explicitly authorized phase. Keep real and paper execution,provider access and observed retention disabled here. No new keys,spending or general authorization discussion is requested.
 
-**Required decisions/evidence before stronger implementation claims:** an authoritative observed cancellation/error profile; the intended tape completeness/backfill guarantee and source; a defined joint durable hot-checkpoint contract; a full financial-statement/vintage fidelity contract with legitimate input authority; and the missing historical A18/A19 specification or explicitly prospective versioned decision. These are narrower unresolved contracts, not requests to repeat credentials or an invitation to add speculative features. No general provider-authorization discussion was reopened.
+## Reproduction without application startup
 
-No deployment instructions are being executed and no intermediate manual test is requested. Existing exact-SHA private deployment/rollback and provider qualification runbooks remain available for a later separately authorized acceptance phase. Keep real and paper execution off, private ports authenticated, storage separately permission-gated and IEX Level 1 distinct from replay/model depth.
-
-## Reproduce developer checks without launching
-
-Run from the repository root using an existing appropriate binding build and installed project test dependencies:
+Use existing project test dependencies and the intended native binding directory:
 
 ```bash
 PYTHONPATH=<binding-build>/python:. <venv>/bin/python terminal/tests/run_no_launch_suite.py
 PYTHONPATH=<binding-build>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py
-```
-
-These commands need no provider credentials. The sanitizer profile additionally requires its matching ASan/libstdc++ preload and the options documented above. The root `terminal/tests/offline_guard` can also be added to inherited PYTHONPATH to prevent external network use in fixture child processes. Release/Debug/sanitized source receipts, exact local commands and log hashes are recorded in EVIDENCE.json.
-
-Frontend-only checks:
-
-```bash
 npm --prefix terminal/web test
 npm --prefix terminal/web run build
 ```
 
-They compile/test without starting a server. The full `run_live_market_suite.py`, browser programs, deployment qualification and launcher must wait while the no-launch directive is active. The pure reducer resource experiment is reproducible using `event(i+1,symbol=['AAPL','MSFT','NVDA','CRWV'][i%4],price=100+i,size=1+i%10)` for i in 0..255, then four `reconcile(rows,symbol,1)` calls per pass. See the measured parameters and code/source hashes in the evidence manifest.
+The sanitizer environment and exact local command profiles are in EVIDENCE.json. These are developer checks;do not run the full app/API cohort,launcher,preview,browser programs or deployment qualification while the no-launch directive remains in force. The resource regression itself is reproducible with `terminal.stocks.test_live_checkpoint.Checkpoint.test_control_verification_streams_large_ledger_without_materializing_all_events` under the same no-network guard.

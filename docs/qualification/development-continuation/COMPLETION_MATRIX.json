@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.matrix.v3",
+  "schema": "gig.development.completion.matrix.v4",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -77,7 +77,10 @@
       "explanation": "Requires independently complete initialization and order-level reference evidence. IEX L1 and five-level reference observations cannot supply it.",
       "disposition": "External source/rights/reference evidence;not fabricated or inferred",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Independently complete observed L3 initialization,source/order-level reference and lawful dataset use.",
+      "evidence_to_unblock": "A bound initialization manifest,source/reference hashes and independently reproducible observed-order comparisons.",
+      "independent_work": "Existing bounded native eligibility,decoding,replay and reference infrastructure retained;no new source observations invented."
     },
     {
       "id": "UI01",
@@ -325,7 +328,10 @@
       "explanation": "Actual owner hardware/browser sustained behavior is not established by software WebGL.",
       "disposition": "Owner/environment qualification;not additional visualization implementation",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Actual target hardware/browser/GPU and permission to launch.",
+      "evidence_to_unblock": "Recorded current-SHA lifecycle,interaction,resource and responsive/device results across15 modes.",
+      "independent_work": "Current leaf markup/contract checks only;no WebGL or browser launched."
     },
     {
       "id": "DATA01",
@@ -355,8 +361,12 @@
       "test_evidence": "Retained prior checkpoint evidence unless updated below: Parser/catalog fixtures;no fresh authoritative import",
       "explanation": "Existing bounded authoritative directory/asset importers are implemented. Current full listing coverage cannot be asserted without an actual authorized source import/reconciliation;SEC registrants alone are not complete US listings.",
       "disposition": "No missing importer was found. Actual acquisition/source coverage needs the authorized configured target;no CIK or listing contents invented.",
-      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
-      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path",
+      "completed_this_session": "Existing bounded importers reviewed;no new importer or authoritative listing data invented.",
+      "remaining_implementation_or_qualification": "Current complete listing coverage requires an actual authorized source import and reconciliation,not SEC registrants.",
+      "dependency": "Configured permitted listing source/private target;source coverage and freshness evidence.",
+      "effort_estimate": "0.5–1 engineer-day for bounded qualification after the source/target is available;ongoing listing completeness remains a source responsibility."
     },
     {
       "id": "SEC01",
@@ -384,13 +394,21 @@
         "terminal/web/src/secHistory.ts",
         "terminal/web/src/StockIntelligence.tsx",
         "terminal/stocks/statements.py",
-        "terminal/stocks/vintages.py"
+        "terminal/stocks/vintages.py",
+        "terminal/stocks/test_filing_vintage.py",
+        "terminal/web/src/AcceptanceView.tsx",
+        "terminal/web/src/acceptanceContract.ts",
+        "terminal/web/src/AcceptanceFacts.tsx"
       ],
-      "test_evidence": "10 continuation tests plus selected existing SEC expansion tests in the 86-test no-launch cohort;3 pure frontend continuation helpers;source-bound prior statement/PIT tests retained",
+      "test_evidence": "9new strict-vintage cases plus4unchanged legacy acceptance cases,10shard continuation cases and selected SEC expansion regressions in121no-launch tests;10new frontend checks;5actual Python→TypeScript SEC assertions.",
       "explanation": "Later advertised shards are now reachable in explicit bounded batches up to128 descriptors,hash-bound to CIK+validated advertisement. Each operation still<=2old shards/25s/1024selected filings;batch replaces filing view and preserves financial receipt. Full XBRL presentation and original PIT receipt/vintage coverage remain incomplete.",
       "disposition": "Feasible shard continuation implemented. Complete statement/vintage contract and source history remain open;not declared outside approved scope.",
-      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
-      "work_class": "PARTIAL history implementation;missing source coverage and complete presentation/vintage requirements remain explicit"
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
+      "work_class": "PARTIAL history implementation;missing source coverage and complete presentation/vintage requirements remain explicit",
+      "completed_this_session": "Strict accession/form/filing-date admission,conflict rejection,amendment selection lineage/hash and cancellable/paginated frontend added. Legacy helper profile retained unchanged;v2 explicitly selects strict profile.",
+      "remaining_implementation_or_qualification": "Full XBRL contexts,dimensions,presentation/extension taxonomy ingestion and authenticated original response vintages remain missing;current companyfacts cannot reconstruct missing receipts.",
+      "dependency": "Defined statement/input fidelity profile and legitimately retained source-vintage/presentation evidence.",
+      "effort_estimate": "Roughly2–4 engineer-weeks for a scoped full XBRL/presentation/vintage implementation plus independent fixtures after inputs and fidelity are defined;not a claim this is completed."
     },
     {
       "id": "SEC03",
@@ -404,7 +422,10 @@
       "explanation": "Identifying configuration and permitted target access are unavailable here;fixtures do not establish fresh provider results.",
       "disposition": "Owner existing configured environment;no secret/contact re-entry requested",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Configured identifying SEC User-Agent and permitted owner target;current task forbids provider calls.",
+      "evidence_to_unblock": "Current-candidate official-source reconciliation receipts with report/source SHA,date/count/scope.",
+      "independent_work": "New strict retained-cache joins and independent authored source tests completed without requests."
     },
     {
       "id": "MD01",
@@ -484,7 +505,10 @@
       "explanation": "Owner-reported Support384778 covers the narrow private research use. This runtime has no configured credentials/private-owner environment. No fresh source/entitlement/freshness evidence.",
       "disposition": "Environment-dependent read-only qualification;do not activate credentials or gates here",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Owner-private target,credentials/authorized feed and a separately approved read-only test.",
+      "evidence_to_unblock": "Bounded actual IEX live/historical receipts showing entitlement,source clock,freshness,venue and no trading.",
+      "independent_work": "Offline stream/checkpoint/subscription correctness improved;no credentials inspected or provider contacted."
     },
     {
       "id": "MD06",
@@ -497,15 +521,19 @@
         "terminal/web/src/TradeTapePanel.tsx",
         "terminal/tests/check_trade_contract.py"
       ],
-      "test_evidence": "13 pure ledger tests,including 1000 independent integer-map candidates/negative controls;5 TypeScript admission tests,2 actual leaf SSR checks,6 actual Python→TypeScript normalized-packet checks;86 no-launch tests per binding environment",
+      "test_evidence": "Existing13 ledger tests/1000oracle candidates retained;new handover-window regression and actual TypeScript admission for the handover;8cross-language market checks. Observed cancellation profile still unqualified.",
       "explanation": "Bounded normalized reference ledger now supports exact original matching,correction chains,retirement,duplicates,capture-order replay,provenance and fail-closed totals. Explicit authored C-cancellation contract works. Observed cancellation/error action profile and complete/lossless exchange capture remain unimplemented/unqualified. Version 2 also fences local capture namespaces,so equal per-process generations cannot mix records from separate captures. This namespace is not an exchange session/sequence.",
       "disposition": "PARTIAL because working reference reconciliation now exists,not because the stronger requirement was removed. Observed action semantics and lossless/source-complete contract still need authoritative evidence and an explicit decision.",
-      "action_now": "Bounded normalized reconciliation is implemented. Do not guess observed cancellation/error codes or promise complete/lossless exchange history. Authoritative source/action/completeness contract is still required.",
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
       "work_class": "Implemented bounded reconciliation;stronger observed cancellation/complete-tape subrequirements remain open",
       "missing_implementation": [
         "Observed cancellation/error profile pending authoritative mapping",
         "Complete exchange tape and lossless recovery with independently complete sequence/backfill authority"
-      ]
+      ],
+      "completed_this_session": "Supported bounded correction/authored-cancellation rules preserved;symbol-handover published-window mismatch reproduced and fixed. Capture/source lineage remains isolated.",
+      "remaining_implementation_or_qualification": "Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.",
+      "dependency": "Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.",
+      "effort_estimate": "1–2 engineer-days for a specified bounded observed-action profile;complete/lossless guarantees cannot be estimated or promised for a source that lacks that authority."
     },
     {
       "id": "RES01",
@@ -551,7 +579,10 @@
       "explanation": "Mathematical and causal fixture agreement do not establish predictive accuracy,profitability or exchange execution fidelity.",
       "disposition": "Requires independently justified observed-data study;not software completion evidence",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Legitimate observed evaluation data and independently defined out-of-sample research protocol.",
+      "evidence_to_unblock": "Versioned datasets/causal evaluation,independent comparisons and actual statistical results.",
+      "independent_work": "Mathematical/replay/export infrastructure retained;no forecast accuracy,alpha or calibrated fill claim."
     },
     {
       "id": "REL01",
@@ -562,7 +593,7 @@
         "terminal/stocks/history_store.py",
         "terminal/stocks/history_backup.py"
       ],
-      "test_evidence": "10 ObservationStore persistence/failure/restart tests in the 86-test no-launch cohort per binding environment;retained Sprint 2 admission/resource evidence",
+      "test_evidence": "Existing10 persistence tests plus21new control/recovery tests inside121no-launch tests per environment;legacy/full recover() behavior preserved.",
       "explanation": "Preflight counts/bytes/types,single read snapshot,strict payloads/hash chain and private snapshots exist. Observed retention defaults off;no storage activated here.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -574,21 +605,25 @@
       "requirement": "Crash-safe hot live/L3 recovery and hardware durability guarantees",
       "source": [
         "terminal/stocks/live.py",
-        "terminal/stocks/test_live_recovery.py",
-        "terminal/stocks/test_reconnect_stability.py",
+        "terminal/stocks/live_checkpoint.py",
         "terminal/stocks/observation_store.py",
+        "terminal/stocks/test_live_checkpoint.py",
         "include/gig/itch/restart.hpp"
       ],
-      "test_evidence": "5 worker recovery + 5 stability fixtures,10 observation-store tests and 3 projection tests in 86 no-launch tests per binding environment;prior native restart/ledger evidence retained",
-      "explanation": "Runtime recovery now handles rapid-flap retry accounting,terminated-worker orphan subscriptions,explicit validated restart,unexpected cancellation status,cleanup,generation isolation and fresh-data requirements. Historical ledger and authenticated authored cold replay exist. Durable process-crash hot/L3 restoration and hardware guarantees still do not.",
+      "test_evidence": "21 checkpoint/resource/lifecycle tests plus6 worker recovery tests,5 retry stability fixtures and10 existing store tests inside121no-launch tests per binding environment;no hardware power-loss or hot L3 proof.",
+      "explanation": "Optional private control checkpoints commit with accepted observation frames. Restore verifies a coherent ledger/control snapshot,restores only intent and generation floor,requires explicit start and fresh input,and never opens a socket or restores L3. Legacy ledger behavior preserved;control-only verification streams rather than materializing events.",
       "disposition": "Runtime feed recovery is implemented and offline verified. The stronger persistent/hot-L3 requirement remains PARTIAL pending a coherent checkpoint/source/initialization contract;it is not silently excluded.",
-      "action_now": "Current in-memory worker recovery is implemented;define source/state/atomicity contract before claiming crash-safe hot L3",
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
       "work_class": "Implemented hot worker lifecycle;durable cross-process/native-L3 state recovery remains an open subrequirement",
       "missing_implementation": [
         "Joint durable cross-process native/source hot checkpoint",
         "Complete observed L3 initialization/source authority",
         "Target hardware durability and recovery envelope qualification"
-      ]
+      ],
+      "completed_this_session": "Coordinated durable L1 control and observation transactions,explicit intent-only recovery,new capture/generation,retained retry state,backoff publication,corruption/resource rejection and crash tests implemented.",
+      "remaining_implementation_or_qualification": "Joint native/source hot L3 snapshots and target hardware power-loss guarantees remain unimplemented/unqualified. L1 controls do not manufacture native depth state.",
+      "dependency": "Defined native/source checkpoint/initialization contract and actual complete L3 inputs;target filesystem/hardware qualification.",
+      "effort_estimate": "Approximately3–7 engineer-days for a bounded joint native/source hot-checkpoint contract after it is defined,plus target fault qualification. Hardware/provider guarantees are not derivable from unit tests."
     },
     {
       "id": "SECURITY01",
@@ -631,11 +666,15 @@
         "terminal/web/package-lock.json",
         "docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md"
       ],
-      "test_evidence": "Public npm production+full graph audits:0listed vulnerabilities;pip-audit2.10.1 on17pinned server requirements:0listed vulnerabilities/0skipped;pipcheck/build",
+      "test_evidence": "New strict control/filing/response admission and source-bound current121/153checks;prior pinned-dependency advisory evidence retained,not target security clearance.",
       "explanation": "Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.",
       "disposition": "Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.",
-      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
-      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path",
+      "completed_this_session": "Checkpoint byte/type/hash/tail admission strengthened;source validation streamed;response admission/cancellation strengthened. Dependency pins and authorization boundaries unchanged.",
+      "remaining_implementation_or_qualification": "Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.",
+      "dependency": "Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.",
+      "effort_estimate": "0.5–2 engineer-days after exact target artifacts are available;future advisory clearance is time-dependent."
     },
     {
       "id": "OPS01",
@@ -664,7 +703,10 @@
       "explanation": "No actual owner edge,cookies/credentials or private-port authentication accessed.",
       "disposition": "Single final owner acceptance after delivery;no intermediate manual tests requested",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Actual owner-authenticated private Codespaces edge and authorized application startup.",
+      "evidence_to_unblock": "Exact-SHA private-authentication/Origin/Host/HTTPS/WSS acceptance with source/assets receipts.",
+      "independent_work": "Existing exact-SHA deployment/rollback tooling retained;no local proxy fixture represented as target authentication."
     },
     {
       "id": "OPS03",
@@ -678,7 +720,10 @@
       "explanation": "Earlier tested SHAs do not qualify new code. Existing six-configuration workflow includes strict native/API and updated stock cohort.",
       "disposition": "Owner-authorized free runner execution against exact delivered SHA;not cross-compile-as-runtime evidence",
       "action_now": "Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints",
-      "work_class": "External source,permission,target or empirical qualification"
+      "work_class": "External source,permission,target or empirical qualification",
+      "dependency": "Current-candidate genuine free native ARM64 runner and owner-authorized manual execution.",
+      "evidence_to_unblock": "Actual run IDs,tested SHA,six job conclusions,test counts and eight reference identities.",
+      "independent_work": "Manual workflow unchanged;no dispatch,cross-compile-as-runtime claim or paid hardware."
     },
     {
       "id": "UX01",
@@ -703,13 +748,19 @@
         "terminal/web/src/BarValues.tsx",
         "terminal/web/src/EquityPanels.tsx",
         "terminal/web/src/HistoricalMarket.tsx",
-        "terminal/web/src/barValues.test.ts"
+        "terminal/web/src/barValues.test.ts",
+        "terminal/web/src/AcceptanceFacts.tsx",
+        "terminal/web/src/acceptanceFacts.test.ts"
       ],
-      "test_evidence": "3 actual leaf-component SSR tests within 143 frontend tests;TypeScript/build. No application/browser launch.",
+      "test_evidence": "153frontend checks include2new actual acceptance-leaf SSR checks;no application,browser or physical-device launch.",
       "explanation": "Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.",
       "disposition": "Feasible text alternative implemented. Physical devices,screen readers and exhaustive WCAG2.2AA/current browser qualification remain unverified.",
-      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
-      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path"
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
+      "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path",
+      "completed_this_session": "Exact retained fact table now keyboard-scrollable with named region,scoped headers,time semantics,empty states and32-row pagination. Stale async results cannot replace the selected cutoff.",
+      "remaining_implementation_or_qualification": "Current real-browser,assistive-technology,device and exhaustive WCAG2.2AA qualification remain unperformed under the no-launch directive.",
+      "dependency": "Separate authorization to launch/test actual browsers and access to target devices/assistive technology.",
+      "effort_estimate": "1–3 engineer-days for targeted acceptance and resulting confirmed repairs once browser/device tests are authorized;unknown failures cannot be estimated in advance."
     },
     {
       "id": "CLEAN01",
@@ -751,23 +802,25 @@
       "test_evidence": "Retained prior checkpoint evidence unless updated below: Existing exact supplied-depth HHI tests;original69c9f48 audit read from Git",
       "explanation": "Exact source-bound supplied-depth HHI exists. Earlier audit preserves unknown original estimator/baseline. Attempt to recover the original pasted master text in this session failed authorization/resolution;no restricted dataset was accessed.",
       "disposition": "Owner decision:recover the original requirement or approve a prospective versioned baseline/HHIv1 contract. No retroactive acceptance or new estimator invented.",
-      "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
-      "work_class": "Historical requirement/estimator decision;not safe to invent acceptance"
+      "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
+      "work_class": "Historical requirement/estimator decision;not safe to invent acceptance",
+      "completed_this_session": "Historical49th decision row preserved separately from48 reviewed areas. Existing exact supplied-depth HHI unchanged.",
+      "remaining_implementation_or_qualification": "Original A18/A19 baseline/estimator still unknown;no retroactive completion or substitute estimator.",
+      "dependency": "Recover original requirements or approve an explicitly prospective versioned contract.",
+      "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "b37fd030375a93f6f79ae389505fb278d66304ed",
+  "tested_application": "e6087da1f67efc5280210040a109671964934ab8",
   "row_count_scope": "48 implementation/qualification areas plus one separate historical A18/A19 decision row;not a new feature requirement",
-  "previous_matrix_commit": "e0d5741dcef172b9d7cd30754221429479f67192",
+  "previous_matrix_commit": "4cf522dcdfbee260409541f38a01b77b23f7db5c",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "86 selected no-launch Python tests per existing binding environment,143 frontend tests/build,6 actual Python→TypeScript packet/view checks and 1000 bounded independent oracle candidates. No application/API server,browser app,provider or owner acceptance executed.",
+  "evidence_policy": "121 selected no-launch Python tests per existing Release/Debug/ASan+UBSan binding environment;153 frontend tests;13 actual Python→TypeScript contract assertions;TypeScript/Vite build;3 packaging regressions. Application,server,sockets,providers,deployment,ARM64 and final acceptance not run.",
   "implementation_checkpoints": [
-    "f35c0ca84a7cec9425987caf2d011709ec7b87a0",
-    "9984b87725ddfcb2afbe6cdaa582569b1cc60ddb",
-    "f046f653b64f7064314cf2f24c63f04d17a56d10",
-    "69fa9be4fb9eb0a5062ed4f37ab1c31c704d740e",
-    "ff5e06d965b6859a856ef857c4ebdde36f64cc87",
-    "b37fd030375a93f6f79ae389505fb278d66304ed"
+    "b48a973aa59572ef9895c241ead1df3fc9dca484",
+    "3944c92e2f394c85fdb18d4f589cc4591c0a684f",
+    "aca684502038d2347689625cf9b92a66e982354e",
+    "e6087da1f67efc5280210040a109671964934ab8"
   ],
   "date": "2026-11-10",
   "timezone": "America/New_York",
@@ -778,5 +831,10 @@
     "NOT APPLICABLE": 1,
     "NOT IMPLEMENTED": 0,
     "BROKEN": 0
-  }
+  },
+  "starting_commit": "4cf522dcdfbee260409541f38a01b77b23f7db5c",
+  "reviewed_area_count": 48,
+  "historical_decision_rows": 1,
+  "total_rows": 49,
+  "development_complete": false
 }
