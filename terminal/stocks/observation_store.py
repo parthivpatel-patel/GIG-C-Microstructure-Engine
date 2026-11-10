@@ -108,7 +108,7 @@ class ObservationStore:
   with self.lock:
    with self.connect() as db:db.execute('BEGIN IMMEDIATE');self.trim(db);new_cached=self._summary(db)
    self.cached=new_cached
- def append(self,capture,events):
+ def append(self,capture,events,*,control=None):
   if type(capture) is not str or not re.fullmatch('[0-9a-f]{32}',capture) or not 1<=len(events)<=128:raise ValueError('observation_batch')
   rows=[];prior=None
   for event in events:
@@ -128,28 +128,43 @@ class ObservationStore:
     for receipt,created,raw in rows:
      digest=self.digest(previous,raw);db.execute('INSERT INTO records(capture,receipt,created,expires,payload,previous,digest) VALUES(?,?,?,?,?,?,?)',(capture,receipt,created,created+self.ttl,raw,previous,digest));previous=digest
     db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('capture',capture));db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('receipt',str(rows[-1][0])));self.trim(db);db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('tail',previous));new_cached=self._summary(db)
+    from . import live_checkpoint
+    if control is not None:live_checkpoint.write(db,control,self._metadata(db))
+    elif live_checkpoint.exists(db):db.execute('DELETE FROM live_checkpoint')
     if self.before_commit:self.before_commit()
    self.cached=new_cached
  def recover(self):
   with self.connect() as db:
-   # One SQLite read snapshot covers preflight, metadata and streamed rows.
    db.execute('BEGIN')
-   self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
-   seen=set();last_capture=None;last_receipt=None
-   for capture,receipt,created,expires,raw,parent,digest in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
-    if parent!=previous or type(digest)is not str or not re.fullmatch('[0-9a-f]{64}',digest) or self.digest(previous,raw)!=digest:raise ValueError('observation_corrupt_chain')
-    value=self._payload(raw,capture,receipt,created,expires)
-    if capture==last_capture:
-     if receipt!=last_receipt+1:raise ValueError('observation_receipt_order')
-    else:
-     if capture in seen:raise ValueError('observation_retired_capture')
-     seen.add(capture)
-    last_capture,last_receipt=capture,receipt
-    if expires>self.clock():result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
-    previous=digest
-   if previous!=meta['tail']:raise ValueError('observation_truncated_tail')
-   if last_capture is not None and (meta.get('capture')!=last_capture or meta.get('receipt')!=str(last_receipt)):raise ValueError('observation_metadata_tail_mismatch')
-   return result
+   return self._recover_rows(db)
+ def save_control(self,control):
+  from . import live_checkpoint
+  with self.connect() as db:
+   db.execute('BEGIN IMMEDIATE');live_checkpoint.write(db,control,self._metadata(db))
+   if self.before_commit:self.before_commit()
+ def recover_control(self):
+  from . import live_checkpoint
+  with self.connect() as db:
+   # Verify the source ledger and checkpoint under one SQLite read snapshot.
+   db.execute('BEGIN');self._recover_rows(db)
+   return live_checkpoint.read(db,self._metadata(db))
+ def _recover_rows(self,db):
+  self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
+  seen=set();last_capture=None;last_receipt=None
+  for capture,receipt,created,expires,raw,parent,digest in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
+   if parent!=previous or type(digest)is not str or not re.fullmatch('[0-9a-f]{64}',digest) or self.digest(previous,raw)!=digest:raise ValueError('observation_corrupt_chain')
+   value=self._payload(raw,capture,receipt,created,expires)
+   if capture==last_capture:
+    if receipt!=last_receipt+1:raise ValueError('observation_receipt_order')
+   else:
+    if capture in seen:raise ValueError('observation_retired_capture')
+    seen.add(capture)
+   last_capture,last_receipt=capture,receipt
+   if expires>self.clock():result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
+   previous=digest
+  if previous!=meta['tail']:raise ValueError('observation_truncated_tail')
+  if last_capture is not None and (meta.get('capture')!=last_capture or meta.get('receipt')!=str(last_receipt)):raise ValueError('observation_metadata_tail_mismatch')
+  return result
  def summary(self):
   with self.connect() as db:return self._summary(db)
  def _summary(self,db):

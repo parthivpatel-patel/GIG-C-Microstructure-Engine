@@ -74,6 +74,37 @@ class LiveIEX:
                 self.store=ObservationStore(e.get('GIG_ALPACA_STORE_DIRECTORY','.gig-observations'),allow_observed=True,permission_reference=e.get('GIG_ALPACA_STORAGE_REFERENCE'),retention_seconds=int(e['GIG_ALPACA_STORAGE_SECONDS']))
             except (ValueError,KeyError,OSError):self.store_reason='unapproved_or_invalid_storage_configuration'
         self.capture_id=self.source_session_id if self.store else None
+        self.restored_control=None
+        if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
+    def control(self,*,symbols=None,channels=None,generation=None,receipt=None,phase=None,pending=None):
+        pending=self.pending if pending is None else pending
+        selected=tuple(self.symbols if symbols is None else symbols);chosen=tuple(self.channels if channels is None else channels)
+        if pending:selected,chosen=pending['symbols'],pending['channels']
+        return {'schema':'gig.iex.control.v1','source_session_id':self.source_session_id,'symbols':sorted(selected),'channels':sorted(chosen or ('quotes','trades')),'generation':self.generation if generation is None else generation,'accepted_receipt':self.receipts if receipt is None else receipt,'failures':self.failures,'retry_budget':self.retry_budget,'connection_count':self.connection_count,'active':bool(selected) and not self.stop_event.is_set(),'phase':self.phase if phase is None else phase}
+    def persist_control(self):
+        if self.store:
+            try:self.store.save_control(self.control())
+            except (ValueError,OSError):raise ProtocolError('recovery_checkpoint_rejected') from None
+    def restore_control(self):
+        # No socket,task,credential serialization,observed-data replay or automatic start.
+        self.require()
+        if self.task and not self.task.done() or self.history or self.receipts:raise ValueError('live_recovery_requires_idle_worker')
+        if self.restored_control is not None:
+            if self.generation!=self.restored_control['generation']:raise ValueError('live_recovery_already_consumed')
+            return dict(self.restored_control)
+        if not self.store:raise ValueError('live_recovery_store_required')
+        envelope=self.store.recover_control()
+        if envelope is None:return {'status':'NO_CONTROL_CHECKPOINT','requires_fresh_observation':True}
+        old=envelope['control']
+        if len(old['symbols'])>self.symbol_limit():raise ValueError('live_recovery_symbol_budget')
+        for symbol in old['symbols']:self.workspace.market_identity(symbol)
+        # The saved capture stays historical. A new local namespace plus a higher
+        # connection generation fences acknowledgments and observations on restart.
+        receipt={'status':'RESTORED_INTENT_ONLY','checkpoint_sha256':envelope['checkpoint_sha256'],'previous_source_session_id':old['source_session_id'],'previous_accepted_receipt':old['accepted_receipt'],'generation':old['generation'],'was_active':old['active'],'requires_fresh_observation':True,'hot_l3_restored':False}
+        candidate=(tuple(old['symbols']),tuple(old['channels']),old['generation'],old['failures'],old['connection_count'],receipt);returned=dict(receipt)
+        self.symbols,self.channels,self.generation,self.failures,self.connection_count,self.restored_control=candidate
+        self.pending=None;self.phase='DISCONNECTED';self.state='RECOVERY_REQUIRED';self.reason='restored_intent_requires_explicit_start'
+        return returned
     def symbol_limit(self):
         value=self.workspace.environment.get('GIG_ALPACA_LIVE_MAX_SYMBOLS','4')
         if value not in ('1','2','3','4'):raise ValueError('live_invalid_symbol_limit')
@@ -105,6 +136,7 @@ class LiveIEX:
                     if any(type(row.get(k)) is not list or any(type(s) is not str for s in row[k]) or len(row[k])!=len(expected) or set(row[k])!=set(expected) for k in expected_channels) or any(v for k,v in row.items() if k not in ('T',*expected_channels)):raise ProtocolError('subscription_mismatch')
                     if pending['step']=='UNSUBSCRIBE_SENT':pending['step']='SUBSCRIBE_READY';symbols=();channels=()
                     else:
+                        if generation>=2**53-2:raise ProtocolError('generation_exhausted')
                         symbols,channels=pending['symbols'],pending['channels'];generation+=1
                         latest={};pending=None
                     phase='SUBSCRIBED'
@@ -138,7 +170,9 @@ class LiveIEX:
                 import msgpack
                 identity=hashlib.sha256(msgpack.packb(row)).hexdigest()
                 if identity in seen:dups+=1;continue
-                seen=(seen+[identity])[-256:];count+=1;last=received
+                seen=(seen+[identity])[-256:]
+                if count>=2**53-2:raise ProtocolError('receipt_exhausted')
+                count+=1;last=received
                 previous=latest.get(ticker+':'+kind);late=bool(previous and ns<int(previous['source_timestamp_ns']));late_count+=int(late)
                 event={'source_session_id':self.source_session_id,'instrument_metadata':self.workspace.market_identity(ticker),'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':hashlib.sha256(raw).hexdigest(),'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
                 if not late:latest[ticker+':'+kind]=event
@@ -148,7 +182,10 @@ class LiveIEX:
             else:raise ProtocolError('unsupported_message_type')
         prepared=(phase,latest,seen,count,dups,last,history,late_count,evicted,symbols,channels,generation,pending)
         if out and self.store:
-            try:self.store.append(self.capture_id,out)
+            try:self.store.append(self.capture_id,out,control=self.control(symbols=symbols,channels=channels,generation=generation,receipt=count,phase=phase,pending=pending or {}))
+            except (ValueError,OSError):raise ProtocolError('observation_storage_rejected_frame') from None
+        if self.store and not out:
+            try:self.store.save_control(self.control(symbols=symbols,channels=channels,generation=generation,receipt=count,phase=phase,pending=pending or {}))
             except (ValueError,OSError):raise ProtocolError('observation_storage_rejected_frame') from None
         self.phase,self.latest,self.seen,self.receipts,self.duplicates,self.last_data,self.history,self.out_of_order,self.evicted,self.symbols,self.channels,self.generation,self.pending=prepared
         return out
@@ -165,7 +202,7 @@ class LiveIEX:
         try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
         except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
         rows=[present(e) for e in self.latest.values()];history=[present(e) for e in self.history if e['symbol'] in self.symbols]
-        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':self.store.cached if self.store else {'enabled':False,'reason':self.store_reason},'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(self.history,s,self.generation,cancellation_contract='AUTHORED_CANCEL_C_V1' if self.connector else None) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts},'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
+        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':self.store.cached if self.store else {'enabled':False,'reason':self.store_reason},'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(self.history,s,self.generation,cancellation_contract='AUTHORED_CANCEL_C_V1' if self.connector else None) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts,'control_checkpoint':self.restored_control,'durable_control_enabled':bool(self.store)},'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
     async def start(self,symbols,channels=None):
         self.require()
         if type(symbols) is not list or not 1<=len(symbols)<=self.symbol_limit() or len(set(symbols))!=len(symbols):raise ValueError('live_symbol_budget')
@@ -179,7 +216,9 @@ class LiveIEX:
             if self.pending:raise ValueError('subscription_update_pending')
             import msgpack
             self.pending={'symbols':selected,'channels':chosen,'step':'UNSUBSCRIBE_SENT','started':self.clock()};self.state='UPDATING'
-            try:await asyncio.wait_for(self.socket.send(msgpack.packb({'action':'unsubscribe',**{c:list(self.symbols) for c in self.channels}})),3.)
+            try:
+                self.persist_control()
+                await asyncio.wait_for(self.socket.send(msgpack.packb({'action':'unsubscribe',**{c:list(self.symbols) for c in self.channels}})),3.)
             except Exception:
                 await self.close();self.state='FAILED';self.reason='subscription_send_failed';raise ValueError('subscription_send_failed') from None
             return
@@ -191,6 +230,8 @@ class LiveIEX:
             try:await self.task
             except asyncio.CancelledError:pass
         self.task=None;self.socket=None;self.pending=None;self.phase='DISCONNECTED';self.state='STOPPED'
+        try:self.persist_control()
+        except (ValueError,OSError):self.state='FAILED';self.reason='recovery_checkpoint_rejected';raise ValueError('recovery_checkpoint_rejected') from None
     async def run(self):
         import msgpack
         from websockets.asyncio.client import connect
@@ -202,7 +243,9 @@ class LiveIEX:
                 try:
                     keys=self.require()
                     if self.pending:self.symbols,self.channels=self.pending['symbols'],self.pending['channels'];self.pending=None
+                    if self.generation>=2**53-2:raise ProtocolError('generation_exhausted')
                     self.generation+=1;self.phase='CONNECTED_PENDING';self.latest={};self.state='CONNECTING';self.last_data=None
+                    self.persist_control()
                     async with connector(ENDPOINT,additional_headers={'Content-Type':'application/msgpack'},open_timeout=10,close_timeout=3,ping_interval=20,ping_timeout=10,max_size=32768,max_queue=4) as ws:
                         self.socket=ws;self.connection_count+=1
                         subscribed_at=None
@@ -248,3 +291,5 @@ class LiveIEX:
         finally:
             self.socket=None;self.phase='DISCONNECTED'
             if self.stop_event.is_set():self.state='STOPPED';self.reason='owner_stop'
+            try:self.persist_control()
+            except (ValueError,OSError):self.state='FAILED';self.reason='recovery_checkpoint_rejected'
