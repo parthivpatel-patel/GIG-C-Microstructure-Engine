@@ -12,12 +12,12 @@ socket.socket.bind=no_socket;socket.socket.connect=no_socket;socket.socket.conne
 from terminal.server import app
 app.create_app=no_socket
 from terminal.stocks.test_sec_expansion import Expansion
-names=['terminal.stocks.test_live_checkpoint','terminal.stocks.test_filing_vintage','terminal.stocks.test_observation_store','terminal.stocks.test_projection','terminal.stocks.test_trade_tape','terminal.stocks.test_live_recovery','terminal.stocks.test_sec_continuation','terminal.stocks.test_reconnect_stability','terminal.stocks.test_live_market.Semantics','terminal.stocks.test_final_qualification.AsyncReliability','terminal.stocks.test_final_qualification.RetryArithmetic']
+names=['terminal.stocks.test_acceptance','terminal.stocks.test_live_checkpoint','terminal.stocks.test_filing_vintage','terminal.stocks.test_observation_store','terminal.stocks.test_projection','terminal.stocks.test_trade_tape','terminal.stocks.test_live_recovery','terminal.stocks.test_sec_continuation','terminal.stocks.test_reconnect_stability','terminal.stocks.test_live_market.Semantics','terminal.stocks.test_final_qualification.AsyncReliability','terminal.stocks.test_final_qualification.RetryArithmetic']
 # This is a selected no-server development cohort,not the full API/fixed cohort.
 selected=[n for n in unittest.defaultTestLoader.getTestCaseNames(Expansion) if n not in ('test_endpoints_keep_origin_boundary_and_query_budgets','test_older_cached_page_is_readable_without_new_upstream_request')]
 names += ['terminal.stocks.test_sec_expansion.Expansion.'+n for n in selected]
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=116
+expected=121
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}

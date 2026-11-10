@@ -1,7 +1,9 @@
 """Independent authored filing-vintage admission; no SEC requests or application."""
 import copy,unittest
 from .sec import facts,filings
-from .vintages import at_acceptance_time
+from .vintages import at_acceptance_time as retained_acceptance
+
+def at_acceptance_time(*args):return retained_acceptance(*args,strict_filing_metadata=True)
 from .test_workspace import facts as raw_facts,submissions,CIK
 
 class FilingVintage(unittest.TestCase):
@@ -38,3 +40,8 @@ class FilingVintage(unittest.TestCase):
  def test_duplicates_identical_content_preserve_selection_and_cutoff_nanoseconds(self):
   financials,source=self.inputs();a=at_acceptance_time(financials,source,'2024-02-11T00:00:00.000000001Z');b=at_acceptance_time(financials,source+[copy.deepcopy(source[0])],'2024-02-11T00:00:00.000000001Z')
   self.assertEqual(a['selection_sha256'],b['selection_sha256']);self.assertTrue(a['cutoff_ns'].endswith('000000001'))
+
+ def test_strict_profile_never_infers_legacy_missing_form_and_filing_date(self):
+  financials,source=self.inputs();legacy=[{'accession':r['accession'],'accepted_at':r['accepted_at']}for r in source]
+  old=retained_acceptance(financials,legacy,'2024-02-11T00:00:00Z');self.assertTrue(old['history']['revenue']);self.assertEqual(old['admission_profile'],'LEGACY_ACCESSION_TIME_V1')
+  with self.assertRaises(ValueError):at_acceptance_time(financials,legacy,'2024-02-11T00:00:00Z')

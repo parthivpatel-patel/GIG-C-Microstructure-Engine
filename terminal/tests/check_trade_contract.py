@@ -36,7 +36,7 @@ from terminal.stocks.test_workspace import facts,submissions,CIK
 from terminal.stocks.sec import facts as normalize_facts,filings
 from terminal.stocks.vintages import at_acceptance_time
 cutoff='2024-02-11T00:00:00.000000001Z'
-financial={**at_acceptance_time(normalize_facts(facts(),CIK,'2024-12-31'),filings(submissions(),CIK)['filings'],cutoff),'instrument':c.workspace.resolve('AAPL'),'data_origin':'HISTORICAL_SYNTHETIC'}
+financial={**at_acceptance_time(normalize_facts(facts(),CIK,'2024-12-31'),filings(submissions(),CIK)['filings'],cutoff,strict_filing_metadata=True),'instrument':c.workspace.resolve('AAPL'),'data_origin':'HISTORICAL_SYNTHETIC'}
 code="""import fs from 'node:fs';import assert from 'node:assert/strict';
 const {validateAcceptance}=await import(process.argv[2]);const raw=JSON.parse(fs.readFileSync(process.argv[3],'utf8'));
 assert.equal(validateAcceptance(raw,'AAPL',raw.as_of),raw);

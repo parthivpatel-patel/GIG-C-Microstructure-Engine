@@ -640,7 +640,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         if set(request.query_params)!={'at'}:return error('ACCEPTANCE_QUERY','one explicit timezone-aware at required',422)
         try:
             view=stocks.view(request.path_params['symbol']);f=view['fundamentals']
-            return {**at_acceptance_time(f.get('financials',{}),f.get('filings',[]),request.query_params['at']),'instrument':view['instrument'],'data_origin':view['classification']}
+            return {**at_acceptance_time(f.get('financials',{}),f.get('filings',[]),request.query_params['at'],strict_filing_metadata=True),'instrument':view['instrument'],'data_origin':view['classification']}
         except (ValueError,KeyError,TypeError,OverflowError):return error('ACCEPTANCE_UNAVAILABLE','retained acceptance-qualified cache unavailable',422)
 
     @route('/api/v2/companies/{symbol}/vintage',methods=['GET'])
