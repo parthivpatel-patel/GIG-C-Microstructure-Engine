@@ -19,7 +19,7 @@ def filing_index(filings):
     result={}
     for row in filings:
         if type(row)is not dict or type(row.get('accession'))is not str or not re.fullmatch(r'\d{10}-\d{2}-\d{6}',row['accession']):raise ValueError('acceptance_filing_identity')
-        if row.get('form')not in FORMS:raise ValueError('acceptance_filing_form')
+        if type(row.get('form'))is not str or row['form']not in FORMS:raise ValueError('acceptance_filing_form')
         core={k:row.get(k)for k in ('accession','form','filed','report_date','accepted_at')}
         date(core['filed'])
         if core['report_date']is not None:date(core['report_date'])

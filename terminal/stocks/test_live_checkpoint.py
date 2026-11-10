@@ -65,6 +65,29 @@ class Checkpoint(unittest.TestCase):
    c,s=self.setup_client(d);c.process(packet(quote()));s.clock=lambda:10**12;s.prune()
    self.assertEqual(s.recover(),[]);self.assertEqual(s.recover_control()['control']['accepted_receipt'],1)
 
+ def test_abrupt_exit_cannot_commit_frame_without_corresponding_control(self):
+  import subprocess,sys
+  with tempfile.TemporaryDirectory()as d:
+   c,s=self.setup_client(d);c.process(packet(quote()));before=s.recover_control()
+   code="from terminal.stocks.observation_store import ObservationStore;from terminal.stocks.test_final import client,ready,packet,quote;import os,sys;s=ObservationStore(sys.argv[1]);c=client();ready(c);c.store=s;c.capture_id=c.source_session_id;s.before_commit=lambda:os._exit(77);c.process(packet(quote()))"
+   done=subprocess.run([sys.executable,'-c',code,d],capture_output=True,timeout=15)
+   self.assertEqual(done.returncode,77);self.assertEqual(ObservationStore(d).recover_control(),before);self.assertEqual(len(s.recover()),1)
+ def test_corrupt_control_cannot_be_overwritten_by_a_later_valid_frame(self):
+  with tempfile.TemporaryDirectory()as d:
+   c,s=self.setup_client(d);c.process(packet(quote()));before=c.receipts
+   with sqlite3.connect(s.path)as db:db.execute('UPDATE live_checkpoint SET digest=?',('f'*64,))
+   q=quote();q['bs']=99
+   with self.assertRaisesRegex(ValueError,'storage_rejected'):c.process(packet(q))
+   self.assertEqual(c.receipts,before);self.assertEqual(len(s.recover()),1)
+ def test_receipt_exhaustion_rejects_frame_without_mutating_source_prefix(self):
+  c=client();ready(c);c.receipts=2**53-2;before=copy.deepcopy((c.history,c.receipts))
+  with self.assertRaisesRegex(ValueError,'receipt_exhausted'):c.process(packet(quote()))
+  self.assertEqual((c.history,c.receipts),before)
+ def test_retry_exhaustion_is_retained_on_restart_and_never_autoconnects(self):
+  with tempfile.TemporaryDirectory()as d:
+   c,s=self.setup_client(d);c.failures=5;c.persist_control();other=client();other.store=s;other.restore_control()
+   self.assertEqual(other.failures,5);self.assertIsNone(other.task);self.assertEqual(other.state,'RECOVERY_REQUIRED')
+
 class Lifecycle(unittest.IsolatedAsyncioTestCase):
  async def test_recovered_generation_advances_before_fake_transport_and_old_ack_is_rejected(self):
   with tempfile.TemporaryDirectory()as d:
@@ -84,3 +107,29 @@ class Lifecycle(unittest.IsolatedAsyncioTestCase):
   with tempfile.TemporaryDirectory()as d:
    c,s=Checkpoint().setup_client(d);c.pending={'symbols':('NVDA',),'channels':('quotes','trades'),'step':'UNSUBSCRIBE_SENT','started':100};c.persist_control()
    other=client();other.store=s;other.restore_control();self.assertEqual(other.symbols,('NVDA',));self.assertIsNone(other.pending);self.assertEqual(other.phase,'DISCONNECTED')
+
+ async def test_generation_exhaustion_never_opens_transport(self):
+  c=client();c.generation=2**53-2;called=[];c.connector=lambda *a,**k:called.append(True)
+  await c.run();self.assertEqual(called,[]);self.assertEqual(c.reason,'generation_exhausted');self.assertEqual(c.state,'FAILED')
+
+ async def test_exhausted_recovery_never_retries_until_an_explicit_new_start(self):
+  with tempfile.TemporaryDirectory()as d:
+   c,s=Checkpoint().setup_client(d);c.failures=5;c.persist_control();other=client();other.store=s;other.restore_control();called=[];other.connector=lambda *a,**k:called.append(True)
+   await other.run();self.assertEqual(called,[]);self.assertEqual(other.reason,'retry_budget_exhausted');self.assertEqual(other.failures,5)
+
+ async def test_failure_count_is_durable_before_entering_backoff(self):
+  with tempfile.TemporaryDirectory()as d:
+   c,s=Checkpoint().setup_client(d);seen=[]
+   class Broken:
+    async def __aenter__(self):raise OSError('authored disconnect')
+    async def __aexit__(self,*args):pass
+   def random_value():
+    seen.append(s.recover_control()['control']['failures']);c.stop_event.set();return 0.
+   c.connector=lambda *a,**k:Broken();c.random_source=random_value
+   await c.run();self.assertEqual(seen,[1]);self.assertEqual(s.recover_control()['control']['failures'],1)
+
+ async def test_allocation_fault_cannot_open_transport_or_publish_partial_control(self):
+  with tempfile.TemporaryDirectory()as d:
+   c,s=Checkpoint().setup_client(d);before=s.recover_control();opened=[];c.connector=lambda *a,**k:opened.append(True)
+   s.before_commit=lambda:(_ for _ in ()).throw(MemoryError('authored allocation failure'))
+   await c.run();self.assertEqual(opened,[]);self.assertEqual(c.state,'FAILED');self.assertEqual(c.reason,'resource_exhausted');self.assertEqual(s.recover_control(),before)

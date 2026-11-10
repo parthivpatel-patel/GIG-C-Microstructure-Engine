@@ -37,7 +37,7 @@ def read(db,meta):
     if not exists(db):return None
     count=db.execute('SELECT count(*) FROM (SELECT 1 FROM live_checkpoint LIMIT 2)').fetchone()[0]
     if count==0:return None
-    if count!=1 or db.execute("SELECT count(*) FROM live_checkpoint WHERE singleton!=1 OR typeof(payload)!='blob' OR length(payload)>? OR typeof(digest)!='text' OR length(digest)!=64",(MAX_BYTES,)).fetchone()[0]:raise ValueError('live_checkpoint_budget')
+    if count!=1 or db.execute("SELECT count(*) FROM live_checkpoint WHERE typeof(singleton)!='integer' OR singleton!=1 OR typeof(payload)!='blob' OR length(payload)>? OR typeof(digest)!='text' OR length(digest)!=64",(MAX_BYTES,)).fetchone()[0]:raise ValueError('live_checkpoint_budget')
     raw,digest=db.execute('SELECT payload,digest FROM live_checkpoint WHERE singleton=1').fetchone()
     if hashlib.sha256(raw).hexdigest()!=digest:raise ValueError('live_checkpoint_digest')
     value=decode(raw)

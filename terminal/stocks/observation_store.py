@@ -121,6 +121,8 @@ class ObservationStore:
   with self.lock:
    with self.connect() as db:
     db.execute('BEGIN IMMEDIATE');meta=self._metadata(db)
+    from . import live_checkpoint
+    live_checkpoint.read(db,meta)
     if meta.get('capture')==capture:
      if rows[0][0]!=int(meta['receipt'])+1:raise ValueError('observation_receipt_order')
     elif db.execute('SELECT 1 FROM records WHERE capture=? LIMIT 1',(capture,)).fetchone():raise ValueError('observation_retired_capture')
@@ -140,7 +142,7 @@ class ObservationStore:
  def save_control(self,control):
   from . import live_checkpoint
   with self.connect() as db:
-   db.execute('BEGIN IMMEDIATE');live_checkpoint.write(db,control,self._metadata(db))
+   db.execute('BEGIN IMMEDIATE');meta=self._metadata(db);live_checkpoint.read(db,meta);live_checkpoint.write(db,control,meta)
    if self.before_commit:self.before_commit()
  def recover_control(self):
   from . import live_checkpoint

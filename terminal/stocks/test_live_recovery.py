@@ -44,3 +44,9 @@ class LiveRecovery(unittest.IsolatedAsyncioTestCase):
    async def recv(self):await asyncio.Event().wait()
   c.connector=lambda *a,**k:Hanging();c.task=asyncio.create_task(c.run());await opened.wait();await c.close()
   self.assertEqual(c.state,'STOPPED');self.assertEqual(c.phase,'DISCONNECTED');self.assertIsNone(c.socket);self.assertIsNone(c.pending);self.assertTrue(c.view()['recovery']['requires_fresh_observation']);self.assertFalse(c.view()['recovery']['hot_l3_restored'])
+ async def test_handover_derivation_uses_the_exact_published_symbol_window(self):
+  from .test_final import packet,quote
+  c=client();ready(c);c.process(packet(quote()));c.pending={'step':'SUBSCRIBE_SENT','symbols':('NVDA',),'channels':('quotes','trades'),'started':100}
+  c.process(packet({'T':'subscription','quotes':['NVDA'],'trades':['NVDA']}));view=c.view()
+  self.assertEqual(view['history'],[]);self.assertEqual(len(c.history),1)
+  self.assertEqual(view['trade_reconciliation']['NVDA']['input_records'],len(view['history']))

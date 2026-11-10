@@ -30,10 +30,9 @@ export async function openMarketStream(signal:AbortSignal):Promise<Response>{
  return response;
 }
 
-export async function readAcceptance<T>(symbol:string,at:string):Promise<T>{
+export async function readAcceptance<T>(symbol:string,at:string,signal?:AbortSignal):Promise<T>{
  if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!at||at.length>40)throw Error('Invalid acceptance query');
- const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);
- try{return await decoded(await fetch('/api/v2/companies/'+encodeURIComponent(symbol)+'/acceptance-view?at='+encodeURIComponent(at),{signal:controller.signal}),controller.signal) as T}finally{clearTimeout(timer)}
+ return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/acceptance-view?at='+encodeURIComponent(at),signal??new AbortController().signal) as T;
 }
 
 export async function readRatioHistory(symbol:string,period:string,signal:AbortSignal):Promise<unknown>{
