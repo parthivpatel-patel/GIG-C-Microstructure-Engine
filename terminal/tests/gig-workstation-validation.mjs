@@ -29,7 +29,7 @@ try{
   const feed=await(await page.request.get(base+'/api/v1/stocks/live')).json();assert.equal(feed.connection_count,0);
  });
  await check('historical and source tools stay reachable through explicit disclosure',async()=>{
-  await page.getByText('Historical prices & research datasets',{exact:true}).click();await page.getByRole('heading',{name:'Observed price history',exact:true}).waitFor();await page.getByText('Private historical snapshot archive',{exact:true}).waitFor();
+  await page.getByText('Historical prices & research datasets',{exact:true}).click();await page.getByRole('heading',{name:'Historical price inputs',exact:true}).waitFor();await page.getByText('Private historical snapshot archive',{exact:true}).waitFor();
   await page.getByText('Historical prices & research datasets',{exact:true}).click();await page.getByText('Provider setup and data availability · configuration is not validation',{exact:true}).click();await page.getByText(/01 \/ Identity evidence/).waitFor();
   const financial=page.getByRole('region',{name:'Reported financial research',exact:true});await financial.getByText('Reported-period rules and limitations',{exact:true}).click();await financial.getByText(/No cumulative-to-quarter subtraction/).waitFor();await financial.getByText('Reported-period rules and limitations',{exact:true}).click();
   const feed=await(await page.request.get(base+'/api/v1/stocks/live')).json();assert.equal(feed.connection_count,0);await page.getByText('Provider setup and data availability · configuration is not validation',{exact:true}).click();
