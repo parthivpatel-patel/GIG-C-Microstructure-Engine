@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {secHistoryRequest} from './secHistory.ts';
+const c=()=>({advertised_shards:4,shard_offset:0,next_shard_offset:1,advertisement_sha256:'a'.repeat(64),batch_policy:'selected batch'});
+test('old request stays backward-compatible;next batch binds public advertisement',()=>{assert.deepEqual(secHistoryRequest('AAPL'),{symbol:'AAPL',max_shards:1});assert.deepEqual(secHistoryRequest('CRWV',c()),{symbol:'CRWV',max_shards:1,shard_offset:1,advertisement_sha256:'a'.repeat(64)})});
+test('invalid,exhausted or unbound cursors never become source requests',()=>{for(const patch of [{next_shard_offset:null},{next_shard_offset:0},{next_shard_offset:4},{next_shard_offset:1.5},{advertised_shards:129},{advertisement_sha256:'bad'},{shard_offset:2}])assert.throws(()=>secHistoryRequest('AAPL',{...c(),...patch}));assert.throws(()=>secHistoryRequest('../private'))});
+test('symbol discovery is independent of SEC coverage and requested cursor is not mutated',()=>{const before=c();assert.equal(secHistoryRequest('APLD',before).symbol,'APLD');assert.deepEqual(before,c())});

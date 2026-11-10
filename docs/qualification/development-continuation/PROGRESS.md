@@ -1,0 +1,9 @@
+# GIG development continuation — November 10, 2026
+
+Baseline `e0d5741dcef172b9d7cd30754221429479f67192`;branch `development/gig-ui-redesign`. Initial tree clean;protected refs preserved. No application server,browser application,provider socket,account/order request,observed storage or acceptance campaign was launched.
+
+Implemented:hash-bound continuation through later advertised SEC filing shards,source-change rejection,shared-rate wait,permission recheck and batch UI with separate filing receipt refresh;stable-subscription retry reset that stops one-quote reconnect flapping;exact keyboard-readable historical bar tables,with the existing calendar-history table reused. Source permission,financial mathematics,native code and all15visualization modes are preserved.
+
+Executed developer checks:55Python tests each in existing Release/Debug/ASan+UBSan binding environments,136frontend tests,TypeScript/production build,3packaging tests and dependency consistency. The test profile forbids socket bind/connect and application factory calls.15newPython tests are registered in the future fixed226-case cohort;that app/API cohort was not run. Six new frontend tests include actual leaf-component SSR,not an application launch. Public npm production/full advisory and PyPI17-pinned-requirement audits report0listed vulnerabilities;target OS/transitive artifact/private deployment clearance remains unqualified.
+
+Pending closure:update the49-row matrix and review of the5PARTIAL/7BLOCKED/2NOT IMPLEMENTED rows,remove unsupported optional-scope assumptions,bind actual evidence and commit/push documentation. Do not launch the application or final acceptance. Unknown original A18/A19 requirements remain explicit;the prior original-master text attachment could not be resolved here. Keep full corrected-tape/hot-live-recovery requirements open pending an explicit contract decision;do not claim either from these improvements.

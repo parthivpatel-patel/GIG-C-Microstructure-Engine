@@ -729,10 +729,11 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     @route('/api/v1/stocks/sec-history',methods=['POST'])
     @json_endpoint
     async def sec_history(request):
-        from terminal.stocks.sec_history import load
+        from terminal.stocks.sec_history import load,admit_query
         data=await bounded_json(request)
-        if set(data)!={'symbol','max_shards'} or type(data['symbol']) is not str:return error('SEC_HISTORY_QUERY','symbol and max_shards required',422)
-        try:return await load(stocks,data['symbol'],data['max_shards'])
+        try:query=admit_query(data)
+        except ValueError:return error('SEC_HISTORY_QUERY','symbol,max_shards and optional bound shard continuation required',422)
+        try:return await load(stocks,**query)
         except Exception:return error('SEC_HISTORY_UNAVAILABLE','bounded advertised SEC history unavailable;accepted cache unchanged',422)
 
     @route('/api/v1/stocks/refresh', methods=['POST'])
