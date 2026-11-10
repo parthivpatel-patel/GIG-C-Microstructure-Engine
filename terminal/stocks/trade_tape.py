@@ -24,7 +24,7 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
  if type(history)is not list or len(history)>256:raise ValueError('trade_tape_record_budget')
  if type(symbol)is not str or not re.fullmatch(r'[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?',symbol) or type(generation)is not int or not 0<=generation<2**53:raise ValueError('trade_tape_scope')
  if cancellation_contract not in (None,'AUTHORED_CANCEL_C_V1'):raise ValueError('trade_tape_cancel_contract')
- active={};retired=set();seen={};parents=[];prior=0;origin=None;duplicates=corrections=cancels=processed=relevant=0;error=None
+ active={};retired=set();seen={};parents=[];prior=0;origin=None;session=None;duplicates=corrections=cancels=processed=relevant=0;error=None
  for row in history:
   receipt=None
   try:
@@ -32,6 +32,9 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
    if type(row.get('symbol'))is not str or not re.fullmatch(r'[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?',row['symbol']) or type(row.get('generation'))is not int or not 0<=row['generation']<2**53:raise Rejected('SCOPE')
    if row.get('symbol')!=symbol or row.get('generation')!=generation:continue
    relevant+=1;receipt=row.get('receipt_index')
+   capture=row.get('source_session_id')
+   if type(capture)is not str or not re.fullmatch('[a-f0-9]{32}',capture)or session not in (None,capture):raise Rejected('SOURCE_SESSION')
+   session=capture
    if type(receipt)is not int or not prior<receipt<2**53:raise Rejected('CAPTURE_ORDER')
    prior=receipt
    kind=row.get('kind')
@@ -83,6 +86,6 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
   except (Rejected,KeyError,TypeError,AttributeError)as exc:
    error={'code':str(exc)if isinstance(exc,Rejected)else'SCHEMA','receipt_index':receipt if type(receipt)is int and 0<=receipt<2**53 else None};break
  trades=sorted(active.values(),key=lambda r:r['original_receipt'])
- result={'schema':'gig.bounded.trade_reconciliation.v1','symbol':symbol,'generation':generation,'state':'UNRESOLVED'if error else'CONSISTENT_RETAINED_WINDOW'if seen else'NO_TRADE_INPUT','origin':origin or'UNAVAILABLE','input_records':len(history),'relevant_records':relevant,'accepted_prefix_records':processed,'duplicate_records':duplicates,'applied_corrections':corrections,'applied_cancels':cancels,'active_count':len(trades),'trades':trades,'error':error,'corrected_size_sum':None if error or not seen else _wire(sum((_amount(r['size'])for r in trades),Fraction())),'source_sha256':parents,'complete_tape':False,'order_book_mutations':0,'cancellation_contract':cancellation_contract,'policy':'Exact normalized references in capture order;source time retained,not reordered. No complete initial tape,exchange sequence,aggressor,lot conversion or L3 state inferred. Observed cancellation codes unqualified.'}
+ result={'schema':'gig.bounded.trade_reconciliation.v2','source_session_id':session,'symbol':symbol,'generation':generation,'state':'UNRESOLVED'if error else'CONSISTENT_RETAINED_WINDOW'if seen else'NO_TRADE_INPUT','origin':origin or'UNAVAILABLE','input_records':len(history),'relevant_records':relevant,'accepted_prefix_records':processed,'duplicate_records':duplicates,'applied_corrections':corrections,'applied_cancels':cancels,'active_count':len(trades),'trades':trades,'error':error,'corrected_size_sum':None if error or not seen else _wire(sum((_amount(r['size'])for r in trades),Fraction())),'source_sha256':parents,'complete_tape':False,'order_book_mutations':0,'cancellation_contract':cancellation_contract,'policy':'Exact normalized references in capture order;source time retained,not reordered. No complete initial tape,exchange sequence,aggressor,lot conversion or L3 state inferred. Observed cancellation codes unqualified.'}
  result['canonical_sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':')).encode()).hexdigest()
  return result

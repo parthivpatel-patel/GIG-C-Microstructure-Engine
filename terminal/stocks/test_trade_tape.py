@@ -7,7 +7,7 @@ from .trade_tape import reconcile
 def event(n,kind='trade',symbol='AAPL',generation=1,**data):
  payload={'price':'100','size':'2'}if kind=='trade'else{}
  payload.update({k:str(v)for k,v in data.items()})
- row={'provider':'alpaca','feed':'iex','symbol':symbol,'generation':generation,'receipt_index':n,'kind':kind,'origin':'HISTORICAL_SYNTHETIC','exchange_codes':{'x':'V'},'tape_code':'C','source_timestamp_ns':str(100+n),'trade_id':str(n)if kind=='trade'else None,'data':payload,'conditions':{}}
+ row={'source_session_id':'c'*32,'provider':'alpaca','feed':'iex','symbol':symbol,'generation':generation,'receipt_index':n,'kind':kind,'origin':'HISTORICAL_SYNTHETIC','exchange_codes':{'x':'V'},'tape_code':'C','source_timestamp_ns':str(100+n),'trade_id':str(n)if kind=='trade'else None,'data':payload,'conditions':{}}
  row['identity_sha256']=hashlib.sha256(json.dumps(row,sort_keys=True).encode()).hexdigest();row['source_sha256']='a'*64;return row
 
 def correction(n,old,new,op=100,os=2,cp=101,cs=1):return event(n,'correction',original_id=old,corrected_id=new,original_price=op,original_size=os,corrected_price=cp,corrected_size=cs)
@@ -77,3 +77,7 @@ class TradeTape(unittest.TestCase):
  def test_foreign_feed_and_boolean_generation_cannot_enter_reconciliation(self):
   for patch_value in [{'provider':'other'},{'feed':'sip'},{'generation':True},{'symbol':'../bad'}]:
    row=event(1);row.update(patch_value);r=reconcile([row],'AAPL',1);self.assertEqual(r['state'],'UNRESOLVED');self.assertIsNone(r['corrected_size_sum'])
+
+ def test_distinct_captures_with_same_generation_and_monotonic_receipts_cannot_mix(self):
+  rows=[event(1),correction(2,1,8)];rows[1]['source_session_id']='d'*32
+  r=reconcile(rows,'AAPL',1);self.assertEqual(r['state'],'UNRESOLVED');self.assertEqual(r['error']['code'],'SOURCE_SESSION');self.assertIsNone(r['corrected_size_sum'])
