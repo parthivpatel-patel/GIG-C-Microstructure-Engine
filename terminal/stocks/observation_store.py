@@ -148,9 +148,9 @@ class ObservationStore:
   from . import live_checkpoint
   with self.connect() as db:
    # Verify the source ledger and checkpoint under one SQLite read snapshot.
-   db.execute('BEGIN');self._recover_rows(db)
+   db.execute('BEGIN');self._recover_rows(db,materialize=False)
    return live_checkpoint.read(db,self._metadata(db))
- def _recover_rows(self,db):
+ def _recover_rows(self,db,*,materialize=True):
   self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
   seen=set();last_capture=None;last_receipt=None
   for capture,receipt,created,expires,raw,parent,digest in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
@@ -162,7 +162,7 @@ class ObservationStore:
     if capture in seen:raise ValueError('observation_retired_capture')
     seen.add(capture)
    last_capture,last_receipt=capture,receipt
-   if expires>self.clock():result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
+   if materialize and expires>self.clock():result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
    previous=digest
   if previous!=meta['tail']:raise ValueError('observation_truncated_tail')
   if last_capture is not None and (meta.get('capture')!=last_capture or meta.get('receipt')!=str(last_receipt)):raise ValueError('observation_metadata_tail_mismatch')

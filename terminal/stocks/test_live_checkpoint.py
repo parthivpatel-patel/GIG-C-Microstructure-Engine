@@ -88,6 +88,22 @@ class Checkpoint(unittest.TestCase):
    c,s=self.setup_client(d);c.failures=5;c.persist_control();other=client();other.store=s;other.restore_control()
    self.assertEqual(other.failures,5);self.assertIsNone(other.task);self.assertEqual(other.state,'RECOVERY_REQUIRED')
 
+ def test_control_verification_streams_large_ledger_without_materializing_all_events(self):
+  import tracemalloc
+  with tempfile.TemporaryDirectory()as d:
+   c=client();ready(c);rows=[]
+   for i in range(256):
+    q=quote();q['bs']=i+1;rows.extend(c.process(packet(q)))
+   for row in rows:row['authored_padding']='x'*4096
+   store=ObservationStore(d)
+   for i in (0,128):store.append(c.source_session_id,rows[i:i+128],control={**c.control(),'accepted_receipt':i+128})
+   self.assertGreater(store.cached['logical_payload_bytes'],1024*1024)
+   tracemalloc.start()
+   try:
+    saved=store.recover_control();_,peak=tracemalloc.get_traced_memory()
+   finally:tracemalloc.stop()
+   self.assertEqual(saved['control']['accepted_receipt'],256);self.assertLess(peak,512*1024,'control-only recovery must not build the complete decoded event list')
+
 class Lifecycle(unittest.IsolatedAsyncioTestCase):
  async def test_recovered_generation_advances_before_fake_transport_and_old_ack_is_rejected(self):
   with tempfile.TemporaryDirectory()as d:
