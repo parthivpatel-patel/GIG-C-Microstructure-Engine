@@ -1,3 +1,4 @@
+import {validateTradeTape} from './tradeTape.ts';
 import type {Feed} from './LiveMarket';
 function object(v:unknown){return v!==null&&typeof v==='object'&&!Array.isArray(v)}
 function count(v:unknown){return typeof v==='number'&&Number.isSafeInteger(v)&&v>=0}
@@ -10,6 +11,7 @@ export function validateMarketState(raw:unknown):Feed{
   const fields:{[key:string]:string[]}={quote:['bid','ask','bid_size','ask_size'],trade:['price','size'],bar:['open','high','low','close','volume'],correction:['original_price','corrected_price','original_size','corrected_size'],cancel:['price','size']};
   if(!fields[r.kind]||fields[r.kind].some(k=>typeof r.data[k]!=='string'||!r.data[k].trim()||!Number.isFinite(Number(r.data[k]))||Number(r.data[k])<0))throw Error('Invalid stock numeric observation');
  }
+ if(v.trade_reconciliation!==undefined){if(!object(v.trade_reconciliation)||Object.keys(v.trade_reconciliation).length!==v.symbols.length||Object.keys(v.trade_reconciliation).some(s=>!v.symbols.includes(s)))throw Error('Trade derivation scope rejected');for(const s of v.symbols){const t=validateTradeTape(v.trade_reconciliation[s],s,v.generation);if(t.input_records!==v.history.length)throw Error('Trade/source window disagreement');const scoped=v.history.filter(r=>r.symbol===s&&r.generation===v.generation),ids=new Set(scoped.map(r=>r.receipt_index));if(t.relevant_records>scoped.length||t.trades.some(r=>!ids.has(r.original_receipt)||r.lineage_receipts.some(n=>!ids.has(n))))throw Error('Trade/source lineage disagreement')}}
  return v;
 }
 
