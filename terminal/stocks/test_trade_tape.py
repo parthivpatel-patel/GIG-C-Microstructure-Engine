@@ -75,5 +75,5 @@ class TradeTape(unittest.TestCase):
   check(reconcile(rows[:1],'AAPL',1),{1:(100,2)});check(reconcile(rows[:2],'AAPL',1),{1:(100,2),2:(101,3)});check(reconcile(rows,'AAPL',1),{8:(105,7),2:(101,3)})
   rows[2]['data']['corrected_size']='9';check(reconcile(rows[:2],'AAPL',1),{1:(100,2),2:(101,3)})
  def test_foreign_feed_and_boolean_generation_cannot_enter_reconciliation(self):
-  for patch_value in [{'provider':'other'},{'feed':'sip'},{'generation':True}]:
+  for patch_value in [{'provider':'other'},{'feed':'sip'},{'generation':True},{'symbol':'../bad'}]:
    row=event(1);row.update(patch_value);r=reconcile([row],'AAPL',1);self.assertEqual(r['state'],'UNRESOLVED');self.assertIsNone(r['corrected_size_sum'])

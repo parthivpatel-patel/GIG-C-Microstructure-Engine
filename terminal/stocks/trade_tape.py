@@ -29,7 +29,7 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
   receipt=None
   try:
    if type(row)is not dict:raise Rejected('SCHEMA')
-   if type(row.get('symbol'))is not str or type(row.get('generation'))is not int or not 0<=row['generation']<2**53:raise Rejected('SCOPE')
+   if type(row.get('symbol'))is not str or not re.fullmatch(r'[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?',row['symbol']) or type(row.get('generation'))is not int or not 0<=row['generation']<2**53:raise Rejected('SCOPE')
    if row.get('symbol')!=symbol or row.get('generation')!=generation:continue
    relevant+=1;receipt=row.get('receipt_index')
    if type(receipt)is not int or not prior<receipt<2**53:raise Rejected('CAPTURE_ORDER')
