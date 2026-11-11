@@ -1,113 +1,96 @@
-# GIG — development completion sprint, November 10, 2026
+# GIG remaining-engineering continuation — November11,2026
 
-Timezone: America/New_York. Branch: `development/gig-ui-redesign`. Starting local/remote source: `4cf522dcdfbee260409541f38a01b77b23f7db5c`;initial tree clean. Tested source: `e6087da1f67efc5280210040a109671964934ab8`. Earlier continuation evidence/report remain preserved in Git at the starting commit. This report supersedes the prior completion assessment without deleting its history.
+Runtime source:`72e175e2f94981647e1921be97b875a452b7f3c5`,branch `development/gig-ui-redesign`. Overall continuation baseline:`3e17e7052a6b20478bd02d62a46c679660eeaac1`;initial recovered native milestone:`47e9b1697b1e528091c3e254458d6d365cd52d7f`. The closing documentation-only commit is intentionally not self-embedded;use the final Git remote receipt. All implementation milestones below were committed,pushed and independently checked against the remote branch.
 
-## Outcome
+## Implemented and published
 
-Implemented coordinated durable **Level 1 control recovery**, stricter retained SEC filing-vintage admission, frontend contract/accessibility/cancellation improvements and two reproduced integration/resource repairs. The project is **not declared fully development-complete or production-ready**. Stronger source-complete tape, joint native/source hot L3 and complete XBRL/vintage contracts remain unfinished and explicitly listed. No required feature was silently reclassified optional.
+| Commit | Working implementation |
+|---|---|
+|`47e9b1697b1e528091c3e254458d6d365cd52d7f`|Full healthy native L3 book/replay images,direct isolated import,Python binding and atomic authored native/source SQLite coordinator.|
+|`fb6adf24a9898bb4c2a6737ac7208837bac0654d`|Six-compiler-profile qualification,full260-event prefix reopen,prepublication restart-reader budget check,and isolated aggregate L2 images/bindings.|
+|`5a90f57c991b4ba661664894011aa0682e1723e0`|Reproduced concurrent-start worker race fixed;retired sockets fenced;safe phase/provider-code diagnostics validated and displayed.|
+|`2395277e945462fe8e1c4f3a1686efe9e6327184`|Bounded XBRL XML/context/dimension/unit/exact-fact reader,atomic filing batches,conservative acceptance-time selection and offline private export tool.|
+|`72e175e2f94981647e1921be97b875a452b7f3c5`|Failing-before JSON-reader publication regression and deterministic offline recovery/XBRL measurement tool.|
 
-**Counts reconcile:** 48 reviewed implementation/qualification areas plus the separately preserved historical A18/A19 decision row (SCOPE02) = **49 entries**. Status totals remain **34 COMPLETE,7 PARTIAL,7 BLOCKED,1 NOT APPLICABLE**. There are zero wholly NOT IMPLEMENTED rows,but missing subrequirements remain within PARTIAL rows. Counts are not a readiness percentage. All seven partial and seven blocked rows now have individual dispositions,dependencies and evidence/effort requirements in COMPLETION_MATRIX.md/JSON.
+The native checkpoint restores identities,FIFO,ledgers,revision,cursors and journal/restart state without reapplying historical book events. Authored source position/session/generation,prefix hash,dedup window and native state publish atomically;gaps/conflicts remain recovery-required across restart. L2 images preserve levels,sequence and revision without inventing order IDs. These are explicit opt-in SDK/coordinator contracts,not an automatically enabled app startup path,observed initialization authority or full hot ITCH context image.
 
-No application,ASGI server,browser application,network listener,market-data provider,account,order,workflow,deployment or final acceptance was started. No owner secrets were read or printed. No paid service,new dependency,observed-data retention,public port or protected branch was enabled/changed. C++ sources,bindings,formulas,eight frozen expectations,12-workspace design and15visualization modes remain intact.
+The XBRL path preserves source lexical values,expanded namespaces,dimensions,units,nil/precision,original missing receipts,amendment references and conflicts. Selection uses exact nanosecond acceptance cutoffs and never imputes missing periods or receipts. It uses existing exact financial calculations. No inline-XBRL/DTS/presentation completeness or current-v2 UI integration is claimed. See `XBRL_INSTANCE_PROFILE.md` for the executable input/export contract.
 
-## Implementation checkpoints
+Existing C++ calculations,private-origin policies,provider gates,execution-disabled configuration,GIG branding,12 workspaces and15 visualization modes remain intact. Frontend changes are limited to bounded provider diagnostics;there was no redesign or live activation.
 
-- `b48a973aa59572ef9895c241ead1df3fc9dca484`: first durable-control and strict filing-vintage implementation;106Release no-launch tests passed at that checkpoint.
-- `3944c92e2f394c85fdb18d4f589cc4591c0a684f`: recovery failure boundaries,hand-over correction and typed/cancellable/paginated frontend;115cases passed per binding environment at that checkpoint.
-- `aca684502038d2347689625cf9b92a66e982354e`: control-only ledger verification streams instead of materializing decoded events;116cases passed per environment.
-- `e6087da1f67efc5280210040a109671964934ab8`: legacy helper compatibility restored,strict API admission explicit,and four unchanged legacy acceptance tests included;121cases passed per environment.
+## Executed developer validation
 
-The final report/evidence-only commit is identified by Git rather than recursively embedding its own SHA. Full code and artifact hashes are bound in EVIDENCE.json.
+| Configuration/cohort | Actual outcome |
+|---|---|
+|GCC14.2 Debug CTest|148/148|
+|GCC14.2 Release CTest|148/148|
+|GCC14.2 ASan+UBSan CTest|149/149|
+|Clang19.1.7 Debug CTest|148/148|
+|Clang19.1.7 Release CTest|148/148|
+|Clang19.1.7 ASan+UBSan native CTest|145/145|
+|Guarded Python,each GCC Debug/Release/ASan+UBSan and Clang Debug/Release binding environment|175/175 in **each** of5 environments|
+|Frontend unit/contract tests|154passed,0failed,0skipped|
+|TypeScript + production build|PASS;initial JS254.45kB,gzip79.06kB;optional deferred OrbitControls/Three.js517.06kB|
+|Actual Python→TypeScript market/SEC admission|8+5 assertions passed|
+|Packaging-pattern regressions|3/3|
+|Installed source-built wheel SDK consumer|8/8|
+|Installed wheel recovery cases|19distinct cases passed(18-case run plus new preflight case)|
+|Current source archive|1,212members;selected current runtime/test bytes compared exactly;no build/cache/private DB/ZIP/native-binary payload|
 
-## Durable recovery contract
+Every native configuration executed98 hot-checkpoint assertions,real PMR allocation-failure checks and all eight frozen-reference programs. **All eight identities were actually rerun and matched in all six native profiles.** See `NATIVE_HOT_RECOVERY_EVIDENCE.json` for exact hashes and source/log receipts. Counts above are separate,overlapping cohorts;they are not a fabricated single assertion total.
 
-`terminal/stocks/live_checkpoint.py` defines a bounded4096-byte private stream-control envelope. It contains only symbol/channel intent,local capture namespace,generation,accepted receipt,connection/failure counts,retry budget,active flag and protocol phase. Credentials,market prices and native book state are not serialized in it.
+The175-case developer cohort forbids socket bind/connect and app factories. It includes16 L3/source recovery cases,3 L2 cases and32 XBRL cases alongside existing SEC,history,tape,persistence and stream regressions. Actual process-exit/SQLite restart,stale CAS,uncertain publication,real JSON-node-budget rejection,corruption,storage/resource,subscription and retry scenarios executed. No full app/API/browser cohort was launched.
 
-`ObservationStore.append(...,control=...)` commits accepted observations and their control/tail binding in **one SQLite transaction**. The existing source hash chain,record/byte/type limits,synchronous FULL policy and accepted-state-after-storage publication remain. Corrupt or inconsistent checkpoints are rejected before another valid frame can overwrite them. Legacy ledgers without the optional table still recover;uncoordinated legacy appends explicitly invalidate a known checkpoint instead of leaving a stale recovery hint. An older writer that does not know the extension cannot qualify a stale checkpoint:tail comparison fails closed.
+Clang Python ASan configuration was rejected by the repository's existing GNU/Linux-only Python sanitizer harness. That guard was preserved;Clang native sanitizer and GCC Python sanitizer profiles passed. The GCC harness provides its existing live-LSan coverage,not whole-CPython exit-leak clearance.
 
-`recover_control()` verifies source rows and the checkpoint under one SQLite read snapshot. It now streams validation without constructing the full decoded observation list. The existing `recover()` API/output remains unchanged. Control restore checks the current permissions,catalog and subscription budget before publishing a prepared state. It is idempotent before use,requires an idle worker and preserves the previous ledger/capture/receipt boundary for diagnostics. A new local capture namespace and a higher subsequent connection generation prevent mixing captures or accepting an old phase acknowledgment.
+## Reproduced failures and corrected validation issues
 
-Restore is **intent-only**:no socket/task is created,old observations are not inserted as current live input,and no native L3 book is restored. A fresh source observation is required after an explicit validated start. Retry exhaustion is retained across restore;automatic run cannot bypass it. An explicit new start creates a new bounded retry operation. Failure counts are committed before backoff so interruption cannot erase a completed failed attempt. Generation/receipt exhaustion,storage exhaustion,allocation failure,orphan subscriptions,interruption,stale acknowledgments and rapid retry behavior are tested.
+- Concurrent subscription commands originally produced2 active replacement workers;the independent test required1. Serialized ownership fixes it without dropping coverage.
+- Original `47e9b16` publication admitted a fault-injected20,001-node image that restart could not read. A real decoder-budget regression failed before and passes with the prepublication reader check. Durable and in-memory accepted prefixes stay unchanged on rejection.
+- A new aggregate test initially referenced nonexistent `GigError`;it was corrected to the SDK's existing `EngineError`. An early new source test expected an exception instead of the specified explicit RECOVERY_REQUIRED result;it now asserts the returned blocked state,unchanged prefix and persisted diagnostics. Neither involved weakening an established mathematical assertion.
+- First source-wheel build inherited tooling Python's unavailable `clang++ -pthread` default. Explicit installed `CXX=/usr/bin/g++ CC=/usr/bin/gcc` produced a successful source-built wheel. No production warning or security guard was disabled.
 
-The optional constructor switch `GIG_ALPACA_RECOVER_CONTROL=1` applies only when the already gated private observation store is present;it restores intent,never auto-connects. The switch is not set here. Storage remains disabled by default and still requires the existing source-use/retention authorization. Invalid/corrupt explicit recovery fails closed. A stopped or disconnected source never becomes live merely because a control file exists.
+Final failures/errors/skips are zero in the executed cohorts. Existing Starlette/httpx deprecation and the optional JavaScript chunk-size warning remain visible.
 
-This is **not** a joint source/native hot L3 snapshot,lossless exchange reconnect guarantee,authenticated complete tape,power-loss hardware certification or RPO/RTO claim. Current IEX Level1 never supplies invented resting orders or depth.
+## Measured local resource/performance envelope
 
-## Corrected trade-tape integration repair
+`terminal/tests/measure_hot_recovery.py` ran at exact source72e175e with GCC Release bindings on x86_64 Intel Xeon Platinum8573C,Python3.12.14. It performs2 warmups and10 measured repetitions with canonical-equality checks. Tracemalloc was enabled and affects timings. Raw samples,fixture/binary hashes,native PMR counters and environment metadata are in `HOT_RECOVERY_BENCHMARK.json`.
 
-The supported bounded reference state machine is preserved:exact normalized arithmetic,original-price/size matching,reference retirement/correction chains,duplicate/conflict handling,source/capture/generation isolation,causal replay and lineage. Authored `C` cancellation is supported only by the explicit authored-fixture contract. Unsupported observed cancellation/error actions remain UNRESOLVED with null aggregates;no action semantics were guessed and no liquidity is restored.
+| Authored accepted prefix | Checkpoint JSON bytes | Median SDK hot-import + validation |
+|---|---:|---:|
+|25events|31,148|3.740ms|
+|100events|114,152|5.910ms|
+|260events|291,702|30.041ms|
 
-A new failing-before test reproduced a real window mismatch on an in-place AAPL→NVDA handover:the published history excluded old-symbol observations,but derivation input counts still included them. The browser's existing admission check therefore rejected the otherwise valid feed. Reconciliation now uses the **exact published history window**. Internal bounded source retention is preserved. The actual normalized handover output is also accepted by the actual TypeScript validator in the cross-language test. No source history or receipt was fabricated/skipped to make it pass.
+Two tiny authored XBRL filings plus cutoff selection:median26.358ms. Process peak RSS57,144KiB;Python tracemalloc peak9,992,822bytes. The260-event prefix builder reported native PMR live6,267,064bytes and peak10,413,304bytes;these counters are for that native owner,not all process allocations. The default coordinator has separately bounded8MiB payload/20,000nodes/depth24 and16MiB DB(+up to16MiB rollback journal). The native journal layout was not redesigned.
 
-Observed cancellation semantics and a complete/lossless exchange-tape contract remain open. Current retained-buffer agreement cannot establish full-market completeness.
+An earlier local benchmark invocation measured15.454ms for the260-event import,showing shared-host/instrumentation variability. No performance improvement,SLA,RPO/RTO,exchange latency,observed-market throughput or full-session recovery claim follows from these small fixtures. Timed native import excludes source SQLite commit.
 
-## SEC filing-vintage and frontend improvements
+## Completion matrix and exact remaining work
 
-A valid-accession join alone was insufficient:the prior retained filter admitted a fact even when its reported form conflicted with the matched filing. The strict profile now checks accession,form and filing date;excludes mismatches;rejects contradictory same-accession metadata and changed content under the same retained fact ID;and preserves exact acceptance clocks. Missing/future acceptance never becomes filing midnight or a substituted current filing.
+49entries =48reviewed implementation/qualification areas plus1historical A18/A19 decision. **34COMPLETE /7PARTIAL /7BLOCKED /1NOT APPLICABLE**. The counts remain unchanged because stronger approved requirements remain open;the new bounded profiles are not substituted for them. Every row retains code evidence,tests,missing components and a completion condition in `COMPLETION_MATRIX.md/JSON`.
 
-Accepted selections include matched filing references,superseded retained fact IDs,distinct amendment accessions,a declared selection policy and a reproducible selection SHA256. The policy selects the latest eligible retained fact for the same concept/start/end/unit;it does not add amendments or infer legal amendment relationships. Original response-vintage receipt is explicitly null where the retained input does not supply it. Complete XBRL contexts,dimensions,presentation and original source vintages remain unimplemented.
+Actionable engineering remains:
 
-**Compatibility repair:**the first strict implementation regressed two existing helper tests that intentionally supply only accession/time metadata. These tests and their original numerical assertions were preserved unchanged. The helper retains its legacy default as `LEGACY_ACCESSION_TIME_V1`,including conservative ambiguous-time exclusions. The **v2 read-only API explicitly selects `STRICT_FILING_METADATA_V1`**,and the frontend requires that profile in both result and lineage. Legacy data never silently acquires a strict metadata claim. The four old pure acceptance cases are now permanently included in the no-launch cohort.
+1. REL02:full hot ITCH framer/decoder/context/receipt image coordinated with native state;optional product-session wiring and explicit migration/restart semantics. Aggregate images alone do not restore provider lexical checksum/source caches.
+2. SEC02:full DTS/schema/type and inline-XBRL transformation,presentation/calculation relationships,extension-taxonomy semantics,complete statement assembly and product integration. Missing original receipts/history cannot be recreated by code.
+3. MD06:authoritative observed cancellation/error action profile and complete/lossless sequence/backfill authority. The current IEX source does not establish those guarantees;do not invent them.
 
-The browser-side pure validator checks exact symbol/cutoff/profile,integer nanosecond time,record budgets,lineage,source IDs,filing/fact consistency and explicit partial-vintage scope. It performs no financial-ratio calculation. Actual Python output is compared against this validator offline. The real leaf component provides exact text values,a named keyboard-scrollable region,scoped headers/time semantics,32-row pagination,visible counts,empty states and lineage disclosure. The former silent100-row cutoff is gone. Requests abort on cutoff change or unmount,so old asynchronous results cannot replace the chosen selection. There is no source request on the cache-only API and no new observed export/retention permission.
+Other PARTIAL rows still require current security/target artifacts,full WCAG/device qualification,complete current securities-source coverage or the missing original A18/A19 contract. Seven BLOCKED rows require actual observed L3/reference evidence,current SEC/IEX source qualification,empirical research data,owner-private Codespaces/browser/GPU and current genuine ARM64 results. They are not fixture passes.
 
-## Final development verification
+Planning only:roughly3–7engineer-days for a tightly scoped remaining full-source/product recovery profile;several engineer-weeks for a specified full XBRL/DTS/inline/presentation profile and independent validation. These ranges depend on source/migration/fidelity decisions and exclude external/hardware qualification. No defensible whole-project completion date or readiness percentage is established.
 
-| Cohort / command | Actual final result | Limits |
-|---|---|---|
-| `terminal/tests/run_no_launch_suite.py`,existing Release bindings |121passed,0failures/errors/skips|Selected developer cohort;not API/server acceptance|
-| Same,existing Debug bindings |121passed,0failures/errors/skips|No fresh native build|
-| Same,existing ASan/UBSan bindings |121passed,0failures/errors/skips|Existing binding environment/CPython sanitizer policy|
-| `npm --prefix terminal/web test` |153passed,0failed/cancelled/skipped|Pure/leaf SSR/fake fetch;not browser launch|
-| `terminal/tests/check_trade_contract.py` |8market+5SEC=13checks passed|Actual Python→TypeScript normalization/admission;no app|
-| `npm --prefix terminal/web run build` |TypeScript/Vite PASS|Assets built only;not served|
-| `tests/test_sdist_patterns.py` |3passed|Packaging-pattern regression;not a new wheel qualification|
-| Full stock/API registry |275registered,0executed|Retained for later authorized app/API qualification|
+## Reproduction and continuation
 
-The fixed121-test selection includes21checkpoint/recovery/resource cases,9new strict-vintage cases,4unchanged legacy acceptance cases,6worker recovery cases and existing store/shard/ordering/retry/proof regressions. The pre-existing trade tests include1000independent integer-map candidates and corruption negative controls;projection tests include1000independently reconstructed windows. Those assertions are not additional unittest counts. Final source was verified after each further relevant repair;overlapping earlier106/115/116case totals are historical checkpoints,not additional unique tests.
-
-The no-launch runner rejects bind/connect/connect_ex and application-factory calls. Fixture subprocesses perform controlled SQLite interruption only. No original mandatory assertions were removed or loosened. The initial frontend159count included6duplicate registrations from importing a test module as fixture data;fixture data was moved into its own module,leaving153actual final registrations with the same mathematical assertions. An early new filing test selected the wrong unrelated synthetic row;it was corrected before the genuine matching-accession failing-before reproduction. An intermediate edit failed compilation and was corrected before delivery.
-
-Retained failures include the genuine handover mismatch,strict-vintage admission reproduction,control memory reproduction and the introduced legacy compatibility regression. Final developer cohorts have no remaining failures. Full application/browser/security-edge/owner acceptance is **not inferred** from these outcomes.
-
-No new native GCC/Clang compilation,CTest/eight-hash execution,ARM64 runtime,wheel-consumer campaign,application/API program,HTTPS/WSS service,browser screenshot or provider reconciliation occurred. The eight frozen identities are retained from the prior source-bound evidence;their source/expected inputs are unchanged,**not rerun**. ASan uses `detect_leaks=1:leak_check_at_exit=0:halt_on_error=1`;UBSan halts on errors. This does not establish CPython shutdown leak clearance.
-
-Warnings retained:Starlette/httpx TestClient deprecation on import(no client instantiated),and the pre-existing deferred Three.js chunk-size advisory. Dependency pins are unchanged. Prior public npm/PyPI advisory results remain prior evidence,not a new deployed OS/transitive-artifact clearance. No warnings or sanitizer findings were suppressed.
-
-## Measured resource evidence
-
-Control-only verification of256authored padded ledger records above1MiB had a traced Python peak of **2,784,254bytes before** and **44,070bytes after** streaming verification. The regression ceiling is512KiB. This measures that fixture/function's Python allocations,not total terminal RAM or a universal budget. Full legacy ledger recovery retains its existing materialized output.
-
-A separate authored four-symbol SQLite/checkpoint sample at `3944c92e2f394c85fdb18d4f589cc4591c0a684f` used3repetitions,5warmup frames then64timed frames with4observations each. Median four-observation frame times were1.383,1.364,1.332ms;each repetition admitted276observations including warmup,retained256in memory and persisted276. Database size606,208bytes;checkpoint envelope479bytes;process peak RSS41,564KiB. CPU:Intel Xeon Platinum8573C,x86_64,CPython3.12.14. Later streaming verification improves the post-timing control-read path;these timing results remain explicitly bound to their measured earlier source,not relabeled a new candidate service benchmark.
-
-These are local temporary synthetic SQLite/function measurements,not provider latency,250ms service-cadence proof,long-session backpressure,hardware power-loss behavior,RPO/RTO or an institutional SLA. Detailed samples and hashes are in EVIDENCE.json. No performance improvement beyond the measured control-memory fixture is claimed. Initial built JS is about254.5kB and deferred Three.js/OrbitControls about517kB;no browser/GPU responsiveness measurement was performed.
-
-## Outstanding scope and conditional effort
-
-All seven partial and seven blocked entries were reassessed. Remaining missing code is distinguished from unavailable qualification:
-
-- **MD06:** observed cancellation/error profile and source-complete/lossless tape authority missing. Once a bounded action profile is authoritative,implementation/testing is roughly1–2engineer-days. A complete tape cannot be promised or estimated from IEX inputs lacking sequence/backfill authority.
-- **REL02:** bounded L1 intent recovery is implemented;native/source joint hot L3 checkpoint and complete initialization are not. A defined bounded contract could require3–7engineer-days plus target durability work. No native book is synthesized from L1.
-- **SEC02:** retained filing joins/lineage improve history,but complete XBRL context/presentation/extension and original-vintage ingestion still require implementation and legitimate input specifications. A scoped full implementation is roughly2–4engineer-weeks,not a fixture-only acceptance task;missing original receipts cannot be recreated by coding.
-- **DATA02:** import tooling exists;current full listed-universe coverage needs a real authorized source import/reconciliation,roughly0.5–1engineer-day after target/source readiness.
-- **SECURITY03 / UX02:** target runtime/artifact clearance and actual browser/device/assistive acceptance remain pending under the no-launch directive. Allow roughly0.5–2days and1–3days respectively once authorized targets are available;unknown findings may change effort.
-- **SCOPE02:** original A18/A19 baseline/estimator is unknown. Recover the specification or approve a prospective versioned contract;do not retroactively close historical acceptance with the existing HHI extension.
-
-These are conditional engineering estimates,not commitments or authorization to expand scope. External waiting time is unbounded. A single reliable total cannot be stated until the stronger source/fidelity/initialization contracts are defined. Those unfinished requirements are not silently removed from approved scope.
-
-The seven blocked items still need actual observed L3/reference evidence,target browser/GPU/device access,current official SEC receipts,owner IEX qualification,empirical research data/study,private Codespaces edge acceptance and current-candidate genuine ARM64. All feasible independent changes found in this pass were completed without provider calls. The matrix identifies the exact evidence for each blocker. Fixtures,old ARM64 runs and a private-launch script do not establish current real-world qualification.
-
-No launch/deployment/acceptance instructions are executed or requested now. Existing exact-SHA upgrade/rollback/private-source runbooks remain preserved for a later explicitly authorized phase. Keep real and paper execution,provider access and observed retention disabled here. No new keys,spending or general authorization discussion is requested.
-
-## Reproduction without application startup
-
-Use existing project test dependencies and the intended native binding directory:
+Developer checks only;do not launch or deploy GIG:
 
 ```bash
-PYTHONPATH=<binding-build>/python:. <venv>/bin/python terminal/tests/run_no_launch_suite.py
-PYTHONPATH=<binding-build>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py
+ctest --test-dir <native-build> --output-on-failure -j 4
+PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/run_no_launch_suite.py
+PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py
+PYTHONPATH=<release-native-build>/python:. <venv>/bin/python terminal/tests/measure_hot_recovery.py
 npm --prefix terminal/web test
 npm --prefix terminal/web run build
 ```
 
-The sanitizer environment and exact local command profiles are in EVIDENCE.json. These are developer checks;do not run the full app/API cohort,launcher,preview,browser programs or deployment qualification while the no-launch directive remains in force. The resource regression itself is reproducible with `terminal.stocks.test_live_checkpoint.Checkpoint.test_control_verification_streams_large_ledger_without_materializing_all_events` under the same no-network guard.
+Use the supported sanitizer preload/CMake harness described in `NATIVE_HOT_RECOVERY.md`. The current source is offline verified for the stated bounded contracts. Live-provider,owner Codespaces,physical browser/GPU,native ARM64 and production acceptance remain **not verified**. No credential,gating,trading,provider,paid-resource,workflow,server or deployment action was performed. Continue from the final verified development-branch HEAD;do not restart completed packages or begin owner acceptance under the current no-launch instruction.

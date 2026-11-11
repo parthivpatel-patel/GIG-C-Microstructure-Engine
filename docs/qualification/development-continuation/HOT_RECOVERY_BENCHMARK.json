@@ -1,0 +1,162 @@
+{
+  "environment": {
+    "architecture": "x86_64",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "native_binary_sha256": "437fa94051df10d94345f3c58acc1d65721895b54fa9e6a36b5a9e081a1ec3db",
+    "native_build": "Release",
+    "native_compiler": "14.2.0",
+    "python": "3.12.14",
+    "system": "Linux"
+  },
+  "fixtures": {
+    "native_events_sha256": "c430b44093d640388c67fe0646f0b9204d617046b14cfc14b1172352a0f164b3",
+    "xbrl_sha256": [
+      "94568d6e330ba034e949bafc604fa5cce33639f0dbdf9dcf9e7ffcd9f26f39e6",
+      "f5ccb251cd3998dbfd7b9fb0d0d05f0e040c1bc0f4314436d4cd8f2f8df1fd16"
+    ]
+  },
+  "limitations": [
+    "Tiny deterministic authored fixtures,not observed market performance",
+    "Single local process;no isolated hardware or universal RPO/RTO/SLA claim",
+    "Validation/canonical equality included;no source SQLite commit in timed hot-import loop",
+    "Linux maxrss is monotonic process peak,not a delta allocation counter",
+    "Tracemalloc instrumentation affects timing",
+    "No application,listener,provider or account access"
+  ],
+  "native_hot_import": [
+    {
+      "accepted_events": 25,
+      "canonical_sha256": "6727ce95a6cc7b9289df0d5f34a7ed4781511ab7f44b31be2db3530e2f5bfb37",
+      "checkpoint_json_bytes": 31148,
+      "native_status": {
+        "journal_size": "25",
+        "needs_recovery": false,
+        "pmr_allocations": "123",
+        "pmr_deallocations": "60",
+        "pmr_live_bytes": "395704",
+        "pmr_peak_bytes": "795104"
+      },
+      "restoration": {
+        "p50_wall_ns": 3739542.0,
+        "p95_wall_ns": 5830462,
+        "p99_wall_ns": 5830462,
+        "process_cpu_ns": 35123607,
+        "quantiles": "nearest rank;p95/p99=max for ten samples;no SLA or exchange-latency inference",
+        "repetitions": 10,
+        "wall_ns": [
+          5683157,
+          1841553,
+          1577732,
+          3547436,
+          5233716,
+          4003513,
+          3931648,
+          1779624,
+          1603954,
+          5830462
+        ],
+        "warmups": 2
+      }
+    },
+    {
+      "accepted_events": 100,
+      "canonical_sha256": "8c4b675a808923963f9d3584b4e1f93b3b0ce80d6dda465a375632edf49b9734",
+      "checkpoint_json_bytes": 114152,
+      "native_status": {
+        "journal_size": "100",
+        "needs_recovery": false,
+        "pmr_allocations": "352",
+        "pmr_deallocations": "289",
+        "pmr_live_bytes": "1569976",
+        "pmr_peak_bytes": "3165176"
+      },
+      "restoration": {
+        "p50_wall_ns": 5910172.0,
+        "p95_wall_ns": 7372957,
+        "p99_wall_ns": 7372957,
+        "process_cpu_ns": 61566855,
+        "quantiles": "nearest rank;p95/p99=max for ten samples;no SLA or exchange-latency inference",
+        "repetitions": 10,
+        "wall_ns": [
+          5863045,
+          5728572,
+          5742563,
+          6239387,
+          5865883,
+          5912059,
+          6507718,
+          7372957,
+          6370244,
+          5908285
+        ],
+        "warmups": 2
+      }
+    },
+    {
+      "accepted_events": 260,
+      "canonical_sha256": "335bcdcfdf959720c3d58ea7fb5adfba60736c11572fa4c0d50a3a326c54e92e",
+      "checkpoint_json_bytes": 291702,
+      "native_status": {
+        "journal_size": "260",
+        "needs_recovery": false,
+        "pmr_allocations": "836",
+        "pmr_deallocations": "773",
+        "pmr_live_bytes": "6267064",
+        "pmr_peak_bytes": "10413304"
+      },
+      "restoration": {
+        "p50_wall_ns": 30041077.5,
+        "p95_wall_ns": 36193484,
+        "p99_wall_ns": 36193484,
+        "process_cpu_ns": 273472362,
+        "quantiles": "nearest rank;p95/p99=max for ten samples;no SLA or exchange-latency inference",
+        "repetitions": 10,
+        "wall_ns": [
+          15472922,
+          19467795,
+          20906945,
+          30050184,
+          34250320,
+          24016425,
+          31441396,
+          30031971,
+          36193484,
+          31612808
+        ],
+        "warmups": 2
+      }
+    }
+  ],
+  "process_maxrss_kib_after": 57144,
+  "process_maxrss_kib_before": 24700,
+  "python_tracemalloc": {
+    "coverage": "Python allocations only;native PMR reported separately",
+    "current_bytes": 7349543,
+    "peak_bytes": 9992822
+  },
+  "schema": "gig.offline.recovery_benchmark.v1",
+  "script_sha256": "f929ffca1cb4f1bd464d13f2f94a57e00cf3b93d0b34723b2b7ba91092bd428a",
+  "source_head": "72e175e2f94981647e1921be97b875a452b7f3c5",
+  "two_authored_xbrl_filings_and_selection": {
+    "p50_wall_ns": 26358224.0,
+    "p95_wall_ns": 41130337,
+    "p99_wall_ns": 41130337,
+    "process_cpu_ns": 288195866,
+    "quantiles": "nearest rank;p95/p99=max for ten samples;no SLA or exchange-latency inference",
+    "repetitions": 10,
+    "wall_ns": [
+      41130337,
+      33565460,
+      25930199,
+      26001206,
+      26337121,
+      25768645,
+      26379327,
+      25691170,
+      27927770,
+      29417220
+    ],
+    "warmups": 2
+  },
+  "xbrl_selection_sha256": "52e3ecafb3b33e70869a26d598b47727e8d313eb05d8af821d417b99327e1b30"
+}

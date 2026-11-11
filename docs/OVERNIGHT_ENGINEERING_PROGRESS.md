@@ -1,3 +1,11 @@
+# Current development checkpoint — November11,2026
+
+Branch `development/gig-ui-redesign`;runtime source `72e175e2f94981647e1921be97b875a452b7f3c5`,pushed/remote-verified. Native L3/L2 image recovery,atomic authored-source persistence,worker ownership repair and bounded XBRL instance/vintage tooling are implemented. Six native compiler profiles and all eight frozen identities passed;175 guarded Python cases per five environments,154frontend and source-built packaging checks passed. No application or provider was launched. Full development remains partial;see [current report](qualification/development-continuation/REPORT.md),[matrix](qualification/development-continuation/COMPLETION_MATRIX.md) and [exact resume steps](qualification/development-continuation/PROGRESS.md). Final documentation-only commit is identified by Git/remote receipt.
+
+Next action:full ITCH context/framer/receipt hot-state and opt-in product-session/migration integration,then scoped DTS/inline/presentation/full-statement work. Preserve completed images/coordinator and current security/provider boundaries. Do not start acceptance or rerun unrelated completed compiler matrices.
+
+## Preserved historical checkpoints
+
 # Overnight stability checkpoint — October29,2026 America/New_York
 
 Baselinee6517314cb843cdad1e14281dbcd1001e7bee6d5,feat/atlas-final-release.

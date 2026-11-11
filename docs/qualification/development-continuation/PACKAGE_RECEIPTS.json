@@ -1,0 +1,20 @@
+{
+  "schema": "gig.package.developer_receipt.v1",
+  "sdist_members": 1212,
+  "sdk_wheel_members": 21,
+  "packaging_pattern_tests": 3,
+  "installed_sdk_tests": 8,
+  "installed_recovery_tests": 19,
+  "private_build_payloads": false,
+  "current_sdist": {
+    "sha256": "ef77191ba26c68da643e7acc1cd94af3478bd7f2fcc3558b8a2f6662bba5e30a",
+    "bytes": 7869392
+  },
+  "sdk_wheel": {
+    "sha256": "0fee6aabd9cbde03932e29a8617da0af387f89d651afd06195b3a578c5ff9d50"
+  },
+  "scope": "Current source archive;SDK wheel built from earlier same native/Python runtime sources before final test-only/bounded XML lineage refinements;terminal is source-checkout tooling,not shipped in the SDK wheel",
+  "initial_failure": "Tooling Python advertised clang++ -pthread while clang++ absent from PATH;explicit CXX=/usr/bin/g++ and CC=/usr/bin/gcc produced successful source-built wheel;no project source suppression",
+  "installed_recovery_execution": "18-case installed cohort plus the distinct new restart-reader preflight case;all passed",
+  "final_source_archive_note": "Archive generated before documentation closure;runtime/test entries byte-compared against current source,including the new publication regression and benchmark script"
+}

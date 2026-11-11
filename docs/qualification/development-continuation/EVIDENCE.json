@@ -1,1164 +1,305 @@
 {
-  "schema": "gig.development.continuation.evidence.v3",
-  "date": "2026-11-10",
-  "timezone": "America/New_York",
+  "schema": "gig.development.continuation.evidence.v5",
   "branch": "development/gig-ui-redesign",
-  "starting_commit": "4cf522dcdfbee260409541f38a01b77b23f7db5c",
-  "tested_application": "e6087da1f67efc5280210040a109671964934ab8",
-  "implementation_checkpoints": [
-    "b48a973aa59572ef9895c241ead1df3fc9dca484",
-    "3944c92e2f394c85fdb18d4f589cc4591c0a684f",
-    "aca684502038d2347689625cf9b92a66e982354e",
-    "e6087da1f67efc5280210040a109671964934ab8"
-  ],
-  "closure": "Final documentation-only Git commit is deliberately not self-embedded;use git log/remote receipt.",
+  "starting_source": "3e17e7052a6b20478bd02d62a46c679660eeaac1",
+  "recovered_remote": "47e9b1697b1e528091c3e254458d6d365cd52d7f",
+  "tested_runtime_source": "72e175e2f94981647e1921be97b875a452b7f3c5",
+  "execution_date_from_client": "2026-11-11",
+  "closure": "Final documentation-only commit intentionally not self-embedded;verify Git remote receipt",
   "prior_evidence": {
-    "git_object": "4cf522dcdfbee260409541f38a01b77b23f7db5c:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "79ab233a8e9622d6e80f265a366473a7b5da807f305676928802ea7a10f20959",
-    "scope": "Historical source-bound results only;not current reruns"
+    "git_object": "3e17e7052a6b20478bd02d62a46c679660eeaac1:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "a1a655bfbdd58586d94518c9e79b5bda2c70629637c44ea0db120ec23bce8897"
   },
-  "environment": {
-    "architecture": "x86_64",
-    "system": "Linux",
-    "python": "3.12.14",
-    "node": "v24.19.0",
-    "provider_credentials_available": false,
-    "configuration": "Managed cloud status current,enforced restricted policy,secrets/runtime variables absent;no provider checks attempted"
-  },
-  "runtime_source_sha256": {
-    "terminal/server/app.py": {
-      "bytes": 66275,
-      "sha256": "5f23c6233f9d789f43647f6c5c4afd5aa79cf2daea10735c6cf692656ea1953b"
-    },
-    "terminal/stocks/live.py": {
-      "bytes": 28473,
-      "sha256": "0cf6dfa2be069f6d5f7f224bb5be7d905c19f1ccddcd3a6a4cf58ac6d9b4dd3a"
-    },
-    "terminal/stocks/live_checkpoint.py": {
-      "bytes": 4299,
-      "sha256": "2a26853765679df8e59bdf0353f7ea4566aa8c14dd3f6cdda852171b9d961df0"
-    },
-    "terminal/stocks/observation_store.py": {
-      "bytes": 13474,
-      "sha256": "379466c1689bd5ca4d723bc16c82210b97eabcf7acdb88ea71518c332b2cda54"
-    },
-    "terminal/stocks/test_filing_vintage.py": {
-      "bytes": 4452,
-      "sha256": "5fafe5218f3457e6d5d6fb4d1c3d2719d9eb52b15652250c33edf66dea59e9a8"
-    },
-    "terminal/stocks/test_live_checkpoint.py": {
-      "bytes": 11315,
-      "sha256": "0f1bacebd07af2cd7de812093c44d7d1fcb3c7351950be0082a8ad2d762bc3ea"
-    },
-    "terminal/stocks/test_live_recovery.py": {
-      "bytes": 3676,
-      "sha256": "a99d7aba860450a82cb54c6e894df9aa88bfb4bb8be84a9b9d6b2df0f445c471"
-    },
-    "terminal/stocks/vintages.py": {
-      "bytes": 7883,
-      "sha256": "ea25aeda5c83448754b515339d0b7545c6204615af418cc70c40d2edb21e624d"
-    },
-    "terminal/tests/check_trade_contract.py": {
-      "bytes": 4431,
-      "sha256": "7e7e7397de8e4dd9a26d4f65d21ac51847b5b987dd3887fd4838922321e0bf63"
-    },
-    "terminal/tests/run_live_market_suite.py": {
-      "bytes": 1282,
-      "sha256": "98cebb0cbc2729124ddb6e844b8708f4f5d54691ecca1fcd0e2df420965e643c"
-    },
-    "terminal/tests/run_no_launch_suite.py": {
-      "bytes": 2379,
-      "sha256": "aafbd54401daca46369a70217a21111c2ef817f391ae051d365ddbb036391373"
-    },
-    "terminal/web/package.json": {
-      "bytes": 1293,
-      "sha256": "d2b7e39c37e07493514a6cf2df5d51660c799a20d4f75239e65e21101681d238"
-    },
-    "terminal/web/src/AcceptanceFacts.tsx": {
-      "bytes": 2235,
-      "sha256": "2f4da95105bfaa6df8bae97555aa2e6e111c4b0dace1e7409e265ced4c0dfae9"
-    },
-    "terminal/web/src/AcceptanceView.tsx": {
-      "bytes": 2246,
-      "sha256": "180d7f865f6be6a31b97e2bf1e38878ce7af97d4d177ad6f095624be3f786395"
-    },
-    "terminal/web/src/acceptanceContract.test.ts": {
-      "bytes": 2390,
-      "sha256": "16ff0088f16d217744fff3d144aef6bc5b9e42999287c3af1ca5d10072a318d7"
-    },
-    "terminal/web/src/acceptanceContract.ts": {
-      "bytes": 4430,
-      "sha256": "e79cd08987ac6b1c9bb61a4d44ec1c0b163eeec6949854cff1fab6e566db3a3d"
-    },
-    "terminal/web/src/acceptanceFacts.test.ts": {
-      "bytes": 1749,
-      "sha256": "5290f2786ba759fe2c44f13d90f0a7401979d3abd6cd594cfef163ea60bce2f3"
-    },
-    "terminal/web/src/acceptanceFixture.ts": {
-      "bytes": 1136,
-      "sha256": "c7b75e1abe129298d787e769d32422e5303f60f1fc8ebcd880c867a495e41030"
-    },
-    "terminal/web/src/acceptanceRequest.test.ts": {
-      "bytes": 1748,
-      "sha256": "a5b6610cf8a44865f2f3d8cda7a26fa1b2131f26f15f5b14dbabbc68e0e48025"
-    },
-    "terminal/web/src/api.ts": {
-      "bytes": 6788,
-      "sha256": "11c66ad8cb12a616ab46defed81385399ad6f7d2665928e8781664757d53bd0d"
-    }
-  },
-  "matrix_source_sha256": {
-    ".github/workflows/native-arm64.yml": {
-      "bytes": 10101,
-      "sha256": "5999e222b08d9cfbc1fbdc67cc10bf78fd12326915a714454b04fe3ea2eea449"
-    },
-    "docs/qualification/PRIVATE_IEX_RUNBOOK.md": {
-      "bytes": 7863,
-      "sha256": "e9dd27bd0a21b03bad81ab880320c1843d4abbecdb43e1577a9786226af5ceb7"
-    },
-    "docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md": {
-      "bytes": 4332,
-      "sha256": "0ceb1f440ddb248480e001a12188312f9db040757a8c95b8d86191ca9c2709c7"
-    },
-    "docs/qualification/institutional-sprint-2/DEPLOYMENT_ACCEPTANCE.md": {
-      "bytes": 7694,
-      "sha256": "c54334dd12c7a499a06dd9a9527e972baddeccef26fbaeca5468e37db1ae5722"
-    },
-    "docs/remediation/sprint-2/REMAINING_BLOCKERS.md": {
-      "bytes": 6385,
-      "sha256": "c9cc69f7abf69a8ba7f380810dd462516d67214cc7ff72ac13f8d07f7d55ee15"
-    },
-    "include/gig/analytics/exact.hpp": {
-      "bytes": 3266,
-      "sha256": "9ae3dadb762b07fd04a7ae7202c29cdc182c042a658c0c873cbdeddd0801ea04"
+  "source_sha256": {
+    "CMakeLists.txt": {
+      "bytes": 28285,
+      "sha256": "3bee5db555fcbb1ffb5ec845bc44b0a632eb74af6a56e623b0f7596072a90fb7"
     },
     "include/gig/book/order_book.hpp": {
-      "bytes": 3407,
-      "sha256": "0fff19acec016b62d49941a917cb11f2f11070e85d10a590c23cd876308c95b8"
+      "bytes": 4165,
+      "sha256": "2f57cb0a338598e968b55b1874aeddd26ffc1c705482b9d28555771eaa6593cb"
     },
-    "include/gig/itch/reconstruction.hpp": {
-      "bytes": 5363,
-      "sha256": "685062b846b19e3a1130e767e6db8a7ebff4a14848639ea98754536abd0cc265"
+    "include/gig/market_data/aggregate_depth.hpp": {
+      "bytes": 2454,
+      "sha256": "8e9849f628ad21a4cdee9cc31e3fa7ca3a632e9e15c10381fddb7d10630660e6"
     },
-    "include/gig/itch/restart.hpp": {
-      "bytes": 2527,
-      "sha256": "d8c57e611c17c1eab8ef8251397b61ea1c7e1a20b323b9374660f400fa6684d5"
+    "include/gig/replay/replay.hpp": {
+      "bytes": 6015,
+      "sha256": "f0a148f2b79e5312e2c81ce7ba812918b5dd67f177f7ffd04b90de1f000c47fc"
+    },
+    "python/bindings/depth.cpp": {
+      "bytes": 4804,
+      "sha256": "8d027448bb48dbb6eda23fa08922f02bab1017597ca2305e051bb68e173b5898"
+    },
+    "python/bindings/module.cpp": {
+      "bytes": 8533,
+      "sha256": "4e33f73090ed8943332608be5d6d055ea1fc75231536e2fac6f1ede7ff30050f"
+    },
+    "python/bindings/wire.hpp": {
+      "bytes": 15958,
+      "sha256": "3d52f09b608b917d42a8c6f75343f964073e813249eb952bd0f1b3648c2101e8"
     },
     "python/gig_microstructure/__init__.py": {
-      "bytes": 23643,
-      "sha256": "9f97f0560d6cf24f3ba61e817259d80d0e8c94e5f1f4289a365535464bf91d6a"
+      "bytes": 24523,
+      "sha256": "4e22c656ff10e76324a090080bbb7cecd565a4a04ef869939606fdd8ad1e48f3"
     },
-    "scripts/private_iex.py": {
-      "bytes": 7888,
-      "sha256": "d8534c401761c30267b132726a08e0b783ea768b34722ea522311672dd50c6fb"
-    },
-    "scripts/qualify_private_deployment.py": {
-      "bytes": 1336,
-      "sha256": "8ef69ddb77aa05d85829c12878aaf79d15d6373fb0d1677d941db1679af34738"
-    },
-    "scripts/qualify_sec_sources.py": {
-      "bytes": 16827,
-      "sha256": "7e24b0146345bcd032d5ed500e241b883417589ccf5fec4a32132c225f88d89c"
-    },
-    "scripts/start_terminal.sh": {
-      "bytes": 1095,
-      "sha256": "21f3875b491e89241a437a336070ec1858e3e45234885d74402fe7634bfc8fd2"
+    "scripts/inspect_xbrl_instances.py": {
+      "bytes": 3152,
+      "sha256": "b09fc9cd05f2af5e08c02938244b3a7076747219893c89a4cedecb5a3f4b1ff2"
     },
     "src/book/order_book.cpp": {
-      "bytes": 23910,
-      "sha256": "b751d6144e271e8bdaa45e65078f3f083c1786d86c3ca8303da79e2f6c70b4df"
+      "bytes": 27539,
+      "sha256": "5e17b4e0eec6617571937e3b8609883263cbe98e0476e0cd9bf3ade3e6c77bad"
     },
-    "src/execution/execution.cpp": {
-      "bytes": 13735,
-      "sha256": "7b17c90e810c5f39d10dbc0b96ab588832d3dd870dcf7e6e3e31255319dae61e"
-    },
-    "src/itch/binary_file.cpp": {
-      "bytes": 4628,
-      "sha256": "9006d26c0d893a0517e14e5c92c094822cde75c84a2412fe8f588ec49c1181c6"
-    },
-    "src/itch/context.cpp": {
-      "bytes": 25868,
-      "sha256": "15f82532071d44f718cef551229b183137e976ec1af464d306d1c680af451fcb"
-    },
-    "src/itch/decoder.cpp": {
-      "bytes": 10922,
-      "sha256": "2acce214e96d2dd59f1ca4c8d2d0d3f3511970f12776cded27e3c44f94be7812"
-    },
-    "src/itch/reconstruction.cpp": {
-      "bytes": 27325,
-      "sha256": "dcd37502934687af16a5ac05155dbe23d0a1ba1151b96037f715f277383c63ec"
+    "src/market_data/aggregate_depth.cpp": {
+      "bytes": 7433,
+      "sha256": "39d961dd85d21b219ec0378d1ce895dd628fb45dea9530482daf9be7447d9a8c"
     },
     "src/replay/replay.cpp": {
-      "bytes": 20972,
-      "sha256": "e8461558e7b5b51ffeefdc7ac45cbef451084cab05311d0e17e5e63e0d35ad09"
+      "bytes": 28932,
+      "sha256": "2ecb697fe625819cb9da36312200f19851df45d18ceeb1af92946a9246c6d444"
     },
-    "src/simulation/simulator.cpp": {
-      "bytes": 18625,
-      "sha256": "c8581e377fde029c151b020170465a96fd25d986c3e07f8936e787bed52b701f"
-    },
-    "terminal/paper/alpaca.py": {
-      "bytes": 20995,
-      "sha256": "bf5c2801daeedcf9f630fb4630a864274387ae156c8dcae7b14e109b1e38616d"
-    },
-    "terminal/server/analysis.py": {
-      "bytes": 3096,
-      "sha256": "ccb76ad562497c4a108148a5c4cfec2ab74b48a86106110c5250abb09c8d67f0"
-    },
-    "terminal/server/app.py": {
-      "bytes": 66275,
-      "sha256": "5f23c6233f9d789f43647f6c5c4afd5aa79cf2daea10735c6cf692656ea1953b"
-    },
-    "terminal/server/concentration.py": {
-      "bytes": 3602,
-      "sha256": "32654dcba91700de5d8b8ea43e09bbccfd0154c637cbeb58374b6bcf35c1715e"
-    },
-    "terminal/server/connection.py": {
-      "bytes": 1322,
-      "sha256": "3bd2848fb126d82066df0643d1f5911f40ef888bd44fa32ecadcc3453a884507"
-    },
-    "terminal/server/engine.py": {
-      "bytes": 17896,
-      "sha256": "bd9e7d19a9ae01561661ff43f324c3f983162358ff06a5c6088d170e2266d566"
-    },
-    "terminal/server/market_events.py": {
-      "bytes": 3535,
-      "sha256": "1fca2386fe15420ea4a5e1c08c0237862f19ef94b20b22abe49305f5746ddf9d"
-    },
-    "terminal/server/request_proofs.py": {
-      "bytes": 3547,
-      "sha256": "aeeec8175997650db14be1541be0b2d181357b63d32b932d8d79277d684f33ae"
-    },
-    "terminal/server/requirements.txt": {
-      "bytes": 300,
-      "sha256": "b1c9eb72be8d052e6ea9552977ed983883366b06043ca267c20ae55e3c65d8e0"
-    },
-    "terminal/server/stream_tickets.py": {
-      "bytes": 2652,
-      "sha256": "ad05918c405f0520df8027e56f7674f4deb2ecf83564d8138741a1c12a3d55ef"
-    },
-    "terminal/stocks/advanced_models.py": {
-      "bytes": 4627,
-      "sha256": "ca9db49726a0f6e85539609b5ad1fdfd07b02e5211ed373b53cea5219f51eb26"
-    },
-    "terminal/stocks/alpaca_history.py": {
-      "bytes": 9471,
-      "sha256": "5fbccb7a35d05eedd6c2b80ee1f8d3a70caea3f12dc0c5fecefe1c3c443a39a8"
-    },
-    "terminal/stocks/alpaca_reference.py": {
-      "bytes": 7204,
-      "sha256": "1cf3a1d175108d6db944593c3e14c021345b4145c8d527a99a1c2d0ef93e6ec2"
-    },
-    "terminal/stocks/alpaca_transport.py": {
-      "bytes": 1761,
-      "sha256": "13d5253c2c718e9344e11fd051d22eeb1c21f6f1a649b225ac807f7424ff5732"
-    },
-    "terminal/stocks/auth.py": {
-      "bytes": 1185,
-      "sha256": "76a17c85653cc59734d83ce30837a26f2d63e985dc0c83c755b0b7c65720b37a"
-    },
-    "terminal/stocks/directory.py": {
-      "bytes": 10031,
-      "sha256": "5dd06ccd796f8790855282ed958690322bcf2ae93263e5c5f39a96526afcbb34"
-    },
-    "terminal/stocks/discovery.py": {
-      "bytes": 1759,
-      "sha256": "9c8e4c9270489e78ddf2f9398c4098ba348494e95d152c85eef19c9e9de07611"
-    },
-    "terminal/stocks/evaluation.py": {
-      "bytes": 4170,
-      "sha256": "17a474f2711f93b144b0683e5a85e131757d5fb41de760f165ea280c583cb663"
-    },
-    "terminal/stocks/financials.py": {
-      "bytes": 7900,
-      "sha256": "b94b69bbbe2938e9e642148239a96c421e40a608a8d61bf67c3a249ccf513d28"
-    },
-    "terminal/stocks/historical_research.py": {
-      "bytes": 7143,
-      "sha256": "ea9d03d8784d0342410300d6a22cf5e1d1f571aca3d97ecd79562d46af7305a5"
-    },
-    "terminal/stocks/historical_v2.py": {
-      "bytes": 15562,
-      "sha256": "193dc702af6a6f2268ca6ec90d50807c96418c5fd5d6f3b0f22024af9bda1888"
-    },
-    "terminal/stocks/history_backup.py": {
-      "bytes": 5800,
-      "sha256": "00988235f07107c3e92c2f232bf8c7603ca18c9afd173088e834d88c4efa1fa9"
-    },
-    "terminal/stocks/history_store.py": {
-      "bytes": 7257,
-      "sha256": "d1e774598b0d62ba8f85dec3f3eb3246cbc7a3ed998967b2a827047dc764440e"
+    "terminal/native_recovery.py": {
+      "bytes": 16094,
+      "sha256": "cb595d2f6f5a83755b884916cafac58dba87ba0790b3ca8b7aa9b6e9e37069cc"
     },
     "terminal/stocks/live.py": {
-      "bytes": 28473,
-      "sha256": "0cf6dfa2be069f6d5f7f224bb5be7d905c19f1ccddcd3a6a4cf58ac6d9b4dd3a"
-    },
-    "terminal/stocks/live_checkpoint.py": {
-      "bytes": 4299,
-      "sha256": "2a26853765679df8e59bdf0353f7ea4566aa8c14dd3f6cdda852171b9d961df0"
-    },
-    "terminal/stocks/market_catalog.py": {
-      "bytes": 3698,
-      "sha256": "469f2de3f2aaca14d91a4fb65bf8105c99ca33bb5fd6a9c486beff19290e8ff4"
-    },
-    "terminal/stocks/observation_store.py": {
-      "bytes": 13474,
-      "sha256": "379466c1689bd5ca4d723bc16c82210b97eabcf7acdb88ea71518c332b2cda54"
-    },
-    "terminal/stocks/portfolio.py": {
-      "bytes": 5439,
-      "sha256": "ea9b3879eb53212b04903d18869a2eeac444059f807872aa7e7b9c4443440b92"
-    },
-    "terminal/stocks/private_iex.py": {
-      "bytes": 3794,
-      "sha256": "ddf20c912bf9aa773441467087b5a4d1c0a38979ac48251e6ce993f829c463fa"
-    },
-    "terminal/stocks/qualification.py": {
-      "bytes": 12967,
-      "sha256": "3ab08fbac27dc80d2960d8a86519bd281ff4ab37501b26e7bd832356488258ef"
-    },
-    "terminal/stocks/ratio_history.py": {
-      "bytes": 2641,
-      "sha256": "52296eb7b511adf617509d3378d1dc2cfc8cf62b4f8ee894380c46ee91634613"
-    },
-    "terminal/stocks/research.py": {
-      "bytes": 3329,
-      "sha256": "a4ee5015a71932348796fa14a8e77e5f8cd65522007e988b457a5372e4b342b0"
-    },
-    "terminal/stocks/retry.py": {
-      "bytes": 1141,
-      "sha256": "2414756718edde7ee3a41b1882ad77b54b76dbbab8b57f9c28d07ba6ee03cc7b"
-    },
-    "terminal/stocks/sec.py": {
-      "bytes": 10765,
-      "sha256": "b73037382e130156fa7b921e33e3197b3469c0c02f45515f9d883f297cf3a0bb"
-    },
-    "terminal/stocks/sec_history.py": {
-      "bytes": 7037,
-      "sha256": "0e959bb34144edf892becd0929ec3f5bbc2fd4a2808549751bbf10d7633dc472"
-    },
-    "terminal/stocks/sec_identity.py": {
-      "bytes": 6130,
-      "sha256": "0da4965f538be915140b648e67a5ba4bcab140ee3a803ea0d20b2a5582d40186"
-    },
-    "terminal/stocks/statements.py": {
-      "bytes": 2602,
-      "sha256": "b20839f778b0f27a7213159d71734556db7fd87038be1b311b11421e0892808e"
-    },
-    "terminal/stocks/test_filing_vintage.py": {
-      "bytes": 4452,
-      "sha256": "5fafe5218f3457e6d5d6fb4d1c3d2719d9eb52b15652250c33edf66dea59e9a8"
-    },
-    "terminal/stocks/test_live_checkpoint.py": {
-      "bytes": 11315,
-      "sha256": "0f1bacebd07af2cd7de812093c44d7d1fcb3c7351950be0082a8ad2d762bc3ea"
+      "bytes": 29839,
+      "sha256": "d82e18094675809709dd2a4819b69004cc0108412da0af037f53027e0ddd1d9f"
     },
     "terminal/stocks/test_live_recovery.py": {
-      "bytes": 3676,
-      "sha256": "a99d7aba860450a82cb54c6e894df9aa88bfb4bb8be84a9b9d6b2df0f445c471"
+      "bytes": 5606,
+      "sha256": "abfea33178a16edb2dfb795e190e024d5e81fc5e919d83eeb45292fceab0bef1"
     },
-    "terminal/stocks/test_reconnect_stability.py": {
-      "bytes": 3549,
-      "sha256": "fbd9b761af0cbe5397c76183688b12fa00998533e34cd4ad4a8f5b6330ec063a"
+    "terminal/stocks/test_xbrl_collection.py": {
+      "bytes": 6083,
+      "sha256": "f12a75f6994b77a35cb6d42c541097af6b4ca9101518e6938f728bac9f2db398"
     },
-    "terminal/stocks/test_trade_tape.py": {
-      "bytes": 7320,
-      "sha256": "e7650db54a6aff1814cd117784fb5dc22ea55dedf32d9c40aa46980598946643"
+    "terminal/stocks/test_xbrl_instance.py": {
+      "bytes": 9797,
+      "sha256": "b9cde16946797a3f96556d5c84b4905c12839a08b6ca07d98987d24a98077332"
     },
-    "terminal/stocks/trade_tape.py": {
-      "bytes": 7283,
-      "sha256": "0ad5d6bbdbc9b5d53ca82d93bd572f66889e9c9402dba020aa62f20e9db5665f"
+    "terminal/stocks/test_xbrl_tool.py": {
+      "bytes": 3238,
+      "sha256": "5575b8082337ccc3a80332b10b7c9124c8bea37180d24b34af27abc6744e3003"
     },
-    "terminal/stocks/vintages.py": {
-      "bytes": 7883,
-      "sha256": "ea25aeda5c83448754b515339d0b7545c6204615af418cc70c40d2edb21e624d"
+    "terminal/stocks/xbrl_collection.py": {
+      "bytes": 7059,
+      "sha256": "1b11c2a14fb7e2b73caa61a1049057c729b1ad4966fad34b323cb3beb9367632"
     },
-    "terminal/test_arm64_terminal_policy.py": {
-      "bytes": 3164,
-      "sha256": "227d34b95b4cfce085fd4b7fb848fe4eb146339bb3ce8e5da22400c50c4ae415"
+    "terminal/stocks/xbrl_instance.py": {
+      "bytes": 20418,
+      "sha256": "10fb44244175d4fc52b762b711616d6c55ace4d37445ed7c27d0064450600831"
     },
-    "terminal/tests/check_browser_handshake.mjs": {
-      "bytes": 1922,
-      "sha256": "da2a7ca145b55d3021863b16d77b1b6f64ebe0fe0cc0c45d35a71bfdd4e7351d"
+    "terminal/test_aggregate_recovery.py": {
+      "bytes": 2058,
+      "sha256": "6bc0cf12666290c32a9539592ca6a4db631a9d7d16735c9d67625d6340fe1d44"
     },
-    "terminal/tests/check_trade_contract.py": {
-      "bytes": 4431,
-      "sha256": "7e7e7397de8e4dd9a26d4f65d21ac51847b5b987dd3887fd4838922321e0bf63"
+    "terminal/test_native_recovery.py": {
+      "bytes": 10914,
+      "sha256": "862d37abf664fadcf6615b473948a8792b2bbc98acd6c1a1e346c24cd2999403"
     },
-    "terminal/web/index.html": {
-      "bytes": 391,
-      "sha256": "433d8d83dacca0d507dfe0addd9f546e53aca8a96ae569f02ae3977412499af9"
+    "terminal/tests/measure_hot_recovery.py": {
+      "bytes": 4259,
+      "sha256": "f929ffca1cb4f1bd464d13f2f94a57e00cf3b93d0b34723b2b7ba91092bd428a"
     },
-    "terminal/web/package-lock.json": {
-      "bytes": 32624,
-      "sha256": "f970923694478945123d57820f4c73881e3f5755d1cbfd6f1ea4b8889055c9eb"
-    },
-    "terminal/web/src/AcceptanceFacts.tsx": {
-      "bytes": 2235,
-      "sha256": "2f4da95105bfaa6df8bae97555aa2e6e111c4b0dace1e7409e265ced4c0dfae9"
-    },
-    "terminal/web/src/AcceptanceView.tsx": {
-      "bytes": 2246,
-      "sha256": "180d7f865f6be6a31b97e2bf1e38878ce7af97d4d177ad6f095624be3f786395"
-    },
-    "terminal/web/src/App.tsx": {
-      "bytes": 37512,
-      "sha256": "fef6a12eaa4815174dfc8b8cd1a2c02d9b68d66b48febca2469b3a7a5cd4fe8b"
-    },
-    "terminal/web/src/BarValues.tsx": {
-      "bytes": 1132,
-      "sha256": "e605ff5775ffb4997be59a8e23d81e9c706075c0edf7fc9106a31ea8e03f3571"
-    },
-    "terminal/web/src/EquityPanels.tsx": {
-      "bytes": 5112,
-      "sha256": "f1a56c805ea2c4176da8f4aee616720ed641f17b6b8771ef5c64560b5d28c39f"
-    },
-    "terminal/web/src/FinancialWorkspace.tsx": {
-      "bytes": 9990,
-      "sha256": "a20eb56867ae94ceb3c4f09389e8d275e15cf217037ac504a2663683db258f78"
-    },
-    "terminal/web/src/HistoricalMarket.tsx": {
-      "bytes": 8595,
-      "sha256": "5a847babd3d1f3b32f380963547dd7da743df860149fcd12841d67e52052527c"
-    },
-    "terminal/web/src/HistoricalResearch.tsx": {
-      "bytes": 15746,
-      "sha256": "eecd7be0afbbc64bd4ca4c9b42225c4a41ba1e06c0fb6840d4a3a7976c97096d"
-    },
-    "terminal/web/src/Landscape3D.tsx": {
-      "bytes": 11778,
-      "sha256": "6fe7df0f167ea0bd77b57d89552915eefe16ed77f5eaceb395765b21c7599453"
+    "terminal/tests/run_no_launch_suite.py": {
+      "bytes": 2566,
+      "sha256": "cb6737b8634285482865e049012829e8679fc000b54373e8a1032043036f5676"
     },
     "terminal/web/src/LiveMarket.tsx": {
-      "bytes": 16221,
-      "sha256": "10a12c0e5baf39206229e904423caa292b51cb0d8b636c3c6927581e0cec2228"
+      "bytes": 16605,
+      "sha256": "0cb2bc6ae788974a6b6f8cdb9851e8d64834267171398420e5c643d3fb921735"
     },
-    "terminal/web/src/MarketHealth.tsx": {
-      "bytes": 2671,
-      "sha256": "23c6f8624a4282dd85779806f847a779e62100366e7ea070941ea59af39c3744"
+    "terminal/web/src/marketContract.test.ts": {
+      "bytes": 2874,
+      "sha256": "2edd052863f00c1ce33d7efd9af3051f989fc244e2d654cbe1072d07945cfbe1"
     },
-    "terminal/web/src/ModelSurface.tsx": {
-      "bytes": 9903,
-      "sha256": "44e1efbe9cb6eda70ac33f3c39209483f6a35fcb431fbcc80046d38b628358d0"
+    "terminal/web/src/marketContract.ts": {
+      "bytes": 4670,
+      "sha256": "96fb06a11806a0a122b3d0cc0108c350abf447800854eb91bfc84147211a5712"
     },
-    "terminal/web/src/Navigation.tsx": {
-      "bytes": 1959,
-      "sha256": "1f7ad88ae94d8cdfc9f31e1520db3fc484de92fe9e985b0857aadaa08e025744"
+    "tests/test_aggregate_depth.cpp": {
+      "bytes": 7811,
+      "sha256": "bd1e08fdf8053c56178674fd45c9f88e8489662814993a074228277b328658b8"
     },
-    "terminal/web/src/OptionalBoundary.tsx": {
-      "bytes": 770,
-      "sha256": "7e66324a9afb6d29cd1035d6b2e9ce0f58d4017c482079255a5b8424baff161a"
-    },
-    "terminal/web/src/QuoteCloud.tsx": {
-      "bytes": 13023,
-      "sha256": "2cdcf72dc43452b1db0e87cbd3d84114e91a2103c30a448e8290f0694bdf5674"
-    },
-    "terminal/web/src/ResearchDesk.tsx": {
-      "bytes": 4860,
-      "sha256": "5775331e89e35bd0961805f92c77b6a37b6fa80ea88a98a899164e2dfc17bd04"
-    },
-    "terminal/web/src/ResearchDiagnostics.tsx": {
-      "bytes": 10705,
-      "sha256": "cf66f0236db35802580583e3d6b0c8b3e74dfb094ad6802ed756a408f9cd754a"
-    },
-    "terminal/web/src/ResearchLab.tsx": {
-      "bytes": 11418,
-      "sha256": "32659e5ec245fb2478eb830fe16779f58028a940a2031f44a5b7812d66275053"
-    },
-    "terminal/web/src/ResearchScene.tsx": {
-      "bytes": 9592,
-      "sha256": "52cb63c2560542cd3f97327095a0d52bd0d484e87d2568305a6c3b56cb70daa9"
-    },
-    "terminal/web/src/StockIntelligence.tsx": {
-      "bytes": 21305,
-      "sha256": "6e70190a74f5284043278a3c9841824c982d6840ae5d58910a3e786f8ebd3761"
-    },
-    "terminal/web/src/TradeTapePanel.tsx": {
-      "bytes": 2779,
-      "sha256": "3f8ca057c0f62ae335467576fdff3e225843c181e3b4b360a7e24f9d4e5e2e0d"
-    },
-    "terminal/web/src/UniverseWorkspace.tsx": {
-      "bytes": 7840,
-      "sha256": "8e21bd53a85924c9677cca966e097a8fb86b9b3d118f593a2bd8370124a0fcaf"
-    },
-    "terminal/web/src/VolatilitySurface.tsx": {
-      "bytes": 6700,
-      "sha256": "87f088950b5da8263d45d05bbd96f9235492e1d3ea21a9994009a8db062ebcaa"
-    },
-    "terminal/web/src/WorkspaceLaunchpad.tsx": {
-      "bytes": 2876,
-      "sha256": "9c03fef0dc47c97e16fcec8ac727c0835b82b20eb21ed3f217497b647dcdc0bd"
-    },
-    "terminal/web/src/acceptanceContract.ts": {
-      "bytes": 4430,
-      "sha256": "e79cd08987ac6b1c9bb61a4d44ec1c0b163eeec6949854cff1fab6e566db3a3d"
-    },
-    "terminal/web/src/acceptanceFacts.test.ts": {
-      "bytes": 1749,
-      "sha256": "5290f2786ba759fe2c44f13d90f0a7401979d3abd6cd594cfef163ea60bce2f3"
-    },
-    "terminal/web/src/barChart.ts": {
-      "bytes": 4195,
-      "sha256": "4d09881265177323034412c1873c01a5a601093be4ff1708e6605469cdb09410"
-    },
-    "terminal/web/src/barValues.test.ts": {
-      "bytes": 2427,
-      "sha256": "660bc9d09114002555eec8aedb7888e305e864d71cb40393209eaaa625f7b0e2"
-    },
-    "terminal/web/src/bookPresentation.ts": {
-      "bytes": 536,
-      "sha256": "773b1150d32fb569a79b85bc094e388d976518c8370d43d1f901341b5d6124fa"
-    },
-    "terminal/web/src/cameraMotion.ts": {
-      "bytes": 1952,
-      "sha256": "8d7a8bc026f25b9076fde0a20dd730a1f576782a8e0def6b9a0ba0f72b4e7fc5"
-    },
-    "terminal/web/src/historicalResearch.ts": {
-      "bytes": 8734,
-      "sha256": "b20eae2e013449e5cfbc1bc2238befd16ee03263590dab9cdfc9bd04e98577b0"
-    },
-    "terminal/web/src/research3d.ts": {
-      "bytes": 23198,
-      "sha256": "09f401b60920dace8be139957fb6ddbdf25939224f8a49ff50998ea10c7df345"
-    },
-    "terminal/web/src/researchExport.ts": {
-      "bytes": 1391,
-      "sha256": "dd8168cbe79b7658d8462807e1531a6670ea8c65e16b244a9a16cb04956e320a"
-    },
-    "terminal/web/src/response.ts": {
-      "bytes": 3360,
-      "sha256": "43edfee3fc20857968794f6807fd2908d62a6b94d58ab96f4472b344cf93153b"
-    },
-    "terminal/web/src/secHistory.ts": {
-      "bytes": 1070,
-      "sha256": "672defad2787383ffa9f4e898a61e302bf3c599e4937691b4ab49c9f3af43797"
-    },
-    "terminal/web/src/tradeTape.ts": {
-      "bytes": 3939,
-      "sha256": "b94ef90b96cffba6126418f236bdfa5e20859dfbdf0a9f65d4dc35890add9cf1"
-    },
-    "terminal/web/src/workstation.css": {
-      "bytes": 47053,
-      "sha256": "e375ffd3b659e41059ee100249c2af03679e90c45547c6efa37b6daaf2bc6499"
-    },
-    "terminal/web/src/workstation.ts": {
-      "bytes": 4184,
-      "sha256": "b2e218432469f307d494a048a541a5895ddfc3d1b0fd063b04b3f88db8c7e1f6"
+    "tests/test_hot_checkpoint.cpp": {
+      "bytes": 3538,
+      "sha256": "43a6fa3b2f48f03ac61dfc27762c4e6cd15cfc3645982863aee9ae699c35d366"
     }
   },
-  "documentation_sha256": {
-    "docs/qualification/development-continuation/COMPLETION_MATRIX.json": {
-      "bytes": 58230,
-      "sha256": "4477d8f9b172f4b9e78505c297693441b69c173c994deabe781ba96f66209026"
+  "native_evidence": {
+    "path": "NATIVE_HOT_RECOVERY_EVIDENCE.json",
+    "bytes": 12406,
+    "sha256": "84a070397e733da2784fb64a03896800616a5e4977789ee93f1265f862217e8c",
+    "ctest_outcomes": {
+      "GCC_Debug": 148,
+      "GCC_Release": 148,
+      "GCC_ASan_UBSan": 149,
+      "Clang_Debug": 148,
+      "Clang_Release": 148,
+      "Clang_ASan_UBSan_native_only": 145
     },
-    "docs/qualification/development-continuation/COMPLETION_MATRIX.md": {
-      "bytes": 36338,
-      "sha256": "ff60be18eee07476e3d73a11817dfc068a9a7a60ac932667ae471e71cbcf5b70"
-    },
-    "docs/qualification/development-continuation/NEXT_PROGRESS.md": {
-      "bytes": 3865,
-      "sha256": "ea492f93ffd11f9231bfb8a5d434e8cc90129bae7ecd4514e586c19d137485f4"
-    },
-    "docs/qualification/development-continuation/PROGRESS.md": {
-      "bytes": 1903,
-      "sha256": "84b22d00bd65f736032bf652bfd70adcf15a502f8caa7925f34f954f43540b1c"
-    },
-    "docs/qualification/development-continuation/REPORT.md": {
-      "bytes": 18226,
-      "sha256": "9bda582f55b3f08432dee77df1000ddca3d70598db0d0f294857a1d8d5131d50"
-    }
+    "all_passed": true,
+    "eight_frozen_identities": "Actually rerun and matched in all six configurations",
+    "scope": "GCC14.2/Clang19.1,x86_64;not ARM64 or target acceptance"
   },
-  "artifacts_not_committed": {
-    "build/development-closure-next/no-launch-release-final.log": {
-      "bytes": 24674,
-      "sha256": "afb27ff2555df5ef93b33da7e27269a65c568432c489ab02c230ce10512311d8"
+  "guarded_python": [
+    {
+      "binding_profile": "native-debug",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 35507,
+        "sha256": "92dbd95ecae72ef0afd0aa960b75060d1c53f94e64c9b8c487ec1579c9d98b40"
+      },
+      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
     },
-    "build/development-closure-next/no-launch-debug-final.log": {
-      "bytes": 24674,
-      "sha256": "ada5a0f6f7b5435cf1187c8a66910095ae070da52d62f2cd59cf8db5985298b9"
+    {
+      "binding_profile": "native-release",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 35507,
+        "sha256": "b71a55d223b1775f7328e3a8f4093b9b29c3f3874ec2ce8da34783f26428c4c9"
+      },
+      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
     },
-    "build/development-closure-next/no-launch-asan-ubsan-final.log": {
-      "bytes": 24675,
-      "sha256": "d48f445c3202534691cb9a4ac571031ec9592682a28cd46ab2d7d067d2650a1a"
+    {
+      "binding_profile": "native-asan-ubsan",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 35507,
+        "sha256": "d0d58bfe1af4caff06f5d27e529aa3d7d0a41b56f7caee085509ab518b287023"
+      },
+      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
     },
-    "build/development-closure-next/frontend-final.log": {
-      "bytes": 14593,
-      "sha256": "84aa33981b0cdc3e6c4081355b0c0f2089bffd2cbb3a5f4a9287e476ef7f990d"
+    {
+      "binding_profile": "clang-debug",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 35507,
+        "sha256": "0c533fac2c7b43881a2ea1b78cbc9acdd6d92e67e88d23f687b559a15cb466b5"
+      },
+      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
     },
-    "build/development-closure-next/build-final.log": {
+    {
+      "binding_profile": "clang-release",
+      "tests": 175,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 35507,
+        "sha256": "2c3d3d8bfb4e595c0bb9c8687bde8a3352edc335a4da51ea491fca8ba359f9e3"
+      },
+      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+    }
+  ],
+  "frontend": {
+    "tests": 154,
+    "pass": 154,
+    "fail": 0,
+    "skipped": 0,
+    "test_log": {
+      "bytes": 14694,
+      "sha256": "600430013f5e0f39f858fc5f586871716cb04820a49e7fc233008c2b8d2ced47"
+    },
+    "production_build_log": {
       "bytes": 2427,
-      "sha256": "a4a5d4ad4e668fe9613a5d0563fc0eb8db4e312080deeccc9a7c6841093429f4"
+      "sha256": "85b7c96a0bff19d963271df89823a7a4f2e452a1bb2c2e4dea64ec9b6e8d9974"
     },
-    "build/development-closure-next/cross-language-final.log": {
+    "initial_js_kb": 254.45,
+    "initial_js_gzip_kb": 79.06,
+    "optional_orbit_three_js_kb": 517.06,
+    "visual_browser_or_gpu_validation": false
+  },
+  "cross_language": {
+    "market_assertions": 8,
+    "sec_assertions": 5,
+    "log": {
       "bytes": 602,
       "sha256": "ffcff77bc5ebeb7283933420385a1a42dfb5896c60d2671de9efe993a9cde9e2"
-    },
-    "build/development-closure-next/packaging-final.log": {
-      "bytes": 101,
-      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
-    },
-    "build/development-closure-next/cohort-registry.json": {
-      "bytes": 140,
-      "sha256": "6f86d02fa775ce8b03d1df1a9d95f9515ff8b0bfb029abff42093c55879fac6b"
-    },
-    "build/development-closure-next/checkpoint-resource.json": {
-      "bytes": 2530,
-      "sha256": "72d60acac4613072d46b698a9df3eff853d0c1bf741f1942bfe38f1fc9136fdb"
-    },
-    "build/development-closure-next/checkpoint-resource.log": {
-      "bytes": 2408,
-      "sha256": "f1b8b1673aa572170d27e7b4f7c15911db400d195f96bb0b43b76263b402faaa"
-    },
-    "build/development-closure-next/control-memory-after.json": {
-      "bytes": 347,
-      "sha256": "5810c4ecb8b48f6eb7ad7b76000c438e2d0341b0f3e492df6c620679b915deaf"
-    },
-    "build/development-closure-next/control-memory-after.log": {
-      "bytes": 593,
-      "sha256": "ee300554698689820c080b18b4722cd41724e1aed6431115dc92493a604805fe"
-    },
-    "build/development-closure-next/control-memory-failing-before.log": {
-      "bytes": 1430,
-      "sha256": "6ca21100cde65b129a07dd0844e3098d6adc234e38928d8621fc3108076aa7cf"
-    },
-    "build/development-closure-next/vintage-failing-before.log": {
-      "bytes": 2382,
-      "sha256": "70aa552d4ec155620a3e11c683a72fa459fa3e9a99f82528fd859824b4ffef7f"
-    },
-    "build/development-closure-next/legacy-vintage-regression-before.log": {
-      "bytes": 3877,
-      "sha256": "05f7673c697f0d7ca1cadf7776eaa68f8ac5fd5f9ff4d81806b1e0fcef1b8934"
-    },
-    "build/development-closure-next/vintage-fixture-first-attempt.log": {
-      "bytes": 2382,
-      "sha256": "70aa552d4ec155620a3e11c683a72fa459fa3e9a99f82528fd859824b4ffef7f"
-    },
-    "build/development-closure-next/handover-failing-before.log": {
-      "bytes": 1466,
-      "sha256": "687b937cf9149909631c77caf9dcf5b0aca5293a76644efff83b67633bb02dd7"
     }
   },
-  "python": {
-    "release": {
-      "app_factory_allowed": false,
-      "errors": 0,
-      "expected": 121,
-      "failures": 0,
-      "schema": "gig.no_launch.developer_tests.v1",
-      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
-      "selected_names": [
-        "terminal.stocks.test_acceptance",
-        "terminal.stocks.test_live_checkpoint",
-        "terminal.stocks.test_filing_vintage",
-        "terminal.stocks.test_observation_store",
-        "terminal.stocks.test_projection",
-        "terminal.stocks.test_trade_tape",
-        "terminal.stocks.test_live_recovery",
-        "terminal.stocks.test_sec_continuation",
-        "terminal.stocks.test_reconnect_stability",
-        "terminal.stocks.test_live_market.Semantics",
-        "terminal.stocks.test_final_qualification.AsyncReliability",
-        "terminal.stocks.test_final_qualification.RetryArithmetic",
-        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
-        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
-        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
-        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
-        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
-        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
-        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
-        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
-        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
-        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
-        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
-      ],
-      "skipped": 0,
-      "socket_attempts_allowed": false,
-      "tests": 121,
-      "elapsed_seconds": 4.419,
-      "binding_environment": "release",
-      "fresh_native_build": false
+  "packaging": {
+    "schema": "gig.package.developer_receipt.v1",
+    "sdist_members": 1212,
+    "sdk_wheel_members": 21,
+    "packaging_pattern_tests": 3,
+    "installed_sdk_tests": 8,
+    "installed_recovery_tests": 19,
+    "private_build_payloads": false,
+    "current_sdist": {
+      "sha256": "ef77191ba26c68da643e7acc1cd94af3478bd7f2fcc3558b8a2f6662bba5e30a",
+      "bytes": 7869392
     },
-    "debug": {
-      "app_factory_allowed": false,
-      "errors": 0,
-      "expected": 121,
-      "failures": 0,
-      "schema": "gig.no_launch.developer_tests.v1",
-      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
-      "selected_names": [
-        "terminal.stocks.test_acceptance",
-        "terminal.stocks.test_live_checkpoint",
-        "terminal.stocks.test_filing_vintage",
-        "terminal.stocks.test_observation_store",
-        "terminal.stocks.test_projection",
-        "terminal.stocks.test_trade_tape",
-        "terminal.stocks.test_live_recovery",
-        "terminal.stocks.test_sec_continuation",
-        "terminal.stocks.test_reconnect_stability",
-        "terminal.stocks.test_live_market.Semantics",
-        "terminal.stocks.test_final_qualification.AsyncReliability",
-        "terminal.stocks.test_final_qualification.RetryArithmetic",
-        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
-        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
-        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
-        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
-        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
-        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
-        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
-        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
-        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
-        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
-        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
-      ],
-      "skipped": 0,
-      "socket_attempts_allowed": false,
-      "tests": 121,
-      "elapsed_seconds": 7.292,
-      "binding_environment": "debug",
-      "fresh_native_build": false
+    "sdk_wheel": {
+      "sha256": "0fee6aabd9cbde03932e29a8617da0af387f89d651afd06195b3a578c5ff9d50"
     },
-    "asan-ubsan": {
-      "app_factory_allowed": false,
-      "errors": 0,
-      "expected": 121,
-      "failures": 0,
-      "schema": "gig.no_launch.developer_tests.v1",
-      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
-      "selected_names": [
-        "terminal.stocks.test_acceptance",
-        "terminal.stocks.test_live_checkpoint",
-        "terminal.stocks.test_filing_vintage",
-        "terminal.stocks.test_observation_store",
-        "terminal.stocks.test_projection",
-        "terminal.stocks.test_trade_tape",
-        "terminal.stocks.test_live_recovery",
-        "terminal.stocks.test_sec_continuation",
-        "terminal.stocks.test_reconnect_stability",
-        "terminal.stocks.test_live_market.Semantics",
-        "terminal.stocks.test_final_qualification.AsyncReliability",
-        "terminal.stocks.test_final_qualification.RetryArithmetic",
-        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
-        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
-        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
-        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
-        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
-        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
-        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
-        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
-        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
-        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
-        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
-        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
-      ],
-      "skipped": 0,
-      "socket_attempts_allowed": false,
-      "tests": 121,
-      "elapsed_seconds": 20.449,
-      "binding_environment": "asan-ubsan",
-      "fresh_native_build": false
+    "scope": "Current source archive;SDK wheel built from earlier same native/Python runtime sources before final test-only/bounded XML lineage refinements;terminal is source-checkout tooling,not shipped in the SDK wheel",
+    "initial_failure": "Tooling Python advertised clang++ -pthread while clang++ absent from PATH;explicit CXX=/usr/bin/g++ and CC=/usr/bin/gcc produced successful source-built wheel;no project source suppression",
+    "installed_recovery_execution": "18-case installed cohort plus the distinct new restart-reader preflight case;all passed",
+    "final_source_archive_note": "Archive generated before documentation closure;runtime/test entries byte-compared against current source,including the new publication regression and benchmark script"
+  },
+  "benchmark": {
+    "path": "HOT_RECOVERY_BENCHMARK.json",
+    "bytes": 4980,
+    "sha256": "20cf2386e11e93d340a3fea3ae0a73facdbd30c333472fec715e99336154022f",
+    "scope": "Two warmups/ten measured repetitions;authored tiny fixtures,tracemalloc enabled,shared local hardware;not an SLA"
+  },
+  "defect_reproduction": {
+    "concurrent_worker_original": {
+      "bytes": 1477,
+      "sha256": "ab000affdf741008e83453e07de6379920465af0b228306103a16b736e74cbb5"
+    },
+    "unreadable_publication_original": {
+      "bytes": 1241,
+      "sha256": "f05f753fa708099f2b1533e76640f3f57605bc8e87131cde9e4240b2414f08b6"
+    },
+    "unreadable_publication_fixed": {
+      "bytes": 98,
+      "sha256": "ecfae4c055fbe7795c0401c236d69c667f6ef424586d05ba2c5aaada6468bae5"
     }
   },
-  "python_commands": {
-    "release": "PYTHONPATH=terminal/tests/offline_guard:/workspace/GIG-C-Microstructure-Engine/build/python-release/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_no_launch_suite.py",
-    "debug": "PYTHONPATH=terminal/tests/offline_guard:/workspace/GIG-C-Microstructure-Engine/build/python-debug/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_no_launch_suite.py",
-    "asan-ubsan": "PYTHONPATH=terminal/tests/offline_guard:/workspace/GIG-C-Microstructure-Engine/build/python-asan-ubsan/python:. /workspace/gig-terminal-clean-venv/bin/python terminal/tests/run_no_launch_suite.py"
-  },
-  "sanitizer_environment": {
-    "LD_PRELOAD": "/usr/lib/gcc/x86_64-linux-gnu/14/libasan.so:/usr/lib/gcc/x86_64-linux-gnu/14/libstdc++.so",
-    "ASAN_OPTIONS": "detect_leaks=1:leak_check_at_exit=0:halt_on_error=1",
-    "UBSAN_OPTIONS": "halt_on_error=1:print_stacktrace=1",
-    "PYTHONMALLOC": "malloc",
-    "limitation": "Does not establish CPython shutdown leak clearance or a fresh native sanitizer matrix"
-  },
-  "frontend": {
-    "command": "npm --prefix terminal/web test",
-    "tests": 153,
-    "passed": 153,
-    "failed": 0,
-    "skipped": 0,
-    "cancelled": 0,
-    "new_tests": 10,
-    "build_command": "npm --prefix terminal/web run build",
-    "build": "PASS",
-    "browser_application": "NOT_STARTED",
-    "scope": "6new contract tests,2actual leaf SSR checks,2fake-fetch lifecycle checks;no visual/browser/assistive-device acceptance"
-  },
-  "actual_cross_language": {
-    "command": "PYTHONPATH=terminal/tests/offline_guard:<release-binding>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py",
-    "program_results": [
-      {
-        "schema": "gig.trade.cross_language.v1",
-        "passed": 8,
-        "failed": 0,
-        "scope": "Authored packets,actual normalized view,TypeScript admission;no application or provider"
-      },
-      {
-        "schema": "gig.filing.cross_language.v1",
-        "passed": 5,
-        "failed": 0,
-        "scope": "Authored SEC normalization and actual retained-vintage output to TypeScript admission;no app or provider"
-      }
-    ],
-    "passed": 13,
-    "failed": 0,
-    "scope": "Authored source bytes/normalization/views to actual TypeScript contracts;not HTTP server or provider"
-  },
-  "new_python_tests": {
-    "checkpoint_recovery_resource": 21,
-    "strict_filing_vintage": 9,
-    "handover_window": 1,
-    "total_new": 31,
-    "old_legacy_acceptance_added_to_subset_unchanged": 4,
-    "prior_no_launch_count": 86,
-    "current_count": 121
-  },
-  "full_app_stock_cohort": {
-    "registered": 275,
-    "executed": 0,
-    "status": "REGISTERED_NOT_EXECUTED",
-    "scope": "Full future application/API cohort;not no-launch subset"
-  },
-  "package_patterns": {
-    "command": "/workspace/gig-tools/bin/python -m unittest discover -s tests -p test_sdist_patterns.py",
-    "passed": 3,
-    "failed": 0,
-    "skipped": 0,
-    "scope": "Pattern regression only;not newly rebuilt/installed wheel qualification"
-  },
-  "resource_measurements": {
-    "control_only_memory": {
-      "schema": "gig.control.memory.regression.v1",
-      "authored_records": 256,
-      "logical_payload_bytes_minimum": 1048577,
-      "before_peak_bytes": 2784254,
-      "after_peak_bytes": 44070,
-      "test_ceiling_bytes": 524288,
-      "scope": "Python traced allocations for control-only verification of a padded authored ledger;not total RSS or a production SLA"
-    },
-    "authored_sqlite_frames": {
-      "schema": "gig.offline.checkpoint.resource.v1",
-      "source_commit": "3944c92e2f394c85fdb18d4f589cc4591c0a684f",
-      "architecture": "x86_64",
-      "cpu_model": "INTEL(R) XEON(R) PLATINUM 8573C",
-      "python": "3.12.14",
-      "classification": "AUTHORED_FOUR_SYMBOL_SQLITE_FIXTURE_NO_APPLICATION_OR_PROVIDER",
-      "samples": [
-        {
-          "repetition": 1,
-          "timed_frames": 64,
-          "timed_observations": 256,
-          "warmup_frames": 5,
-          "wall_seconds": 0.08917186793405563,
-          "cpu_seconds": 0.08926688899999996,
-          "per_four_observation_frame_ms": {
-            "median": 1.382578513585031,
-            "minimum": 0.947625027038157,
-            "maximum": 2.2145400289446115
-          },
-          "database_bytes": 606208,
-          "checkpoint_payload_bytes": 479,
-          "accepted_including_warmup": 276,
-          "retained_memory_observations": 256,
-          "persisted_observations": 276
-        },
-        {
-          "repetition": 2,
-          "timed_frames": 64,
-          "timed_observations": 256,
-          "warmup_frames": 5,
-          "wall_seconds": 0.08746710000559688,
-          "cpu_seconds": 0.08747144000000001,
-          "per_four_observation_frame_ms": {
-            "median": 1.364469586405903,
-            "minimum": 1.0134790791198611,
-            "maximum": 1.8263079691678286
-          },
-          "database_bytes": 606208,
-          "checkpoint_payload_bytes": 479,
-          "accepted_including_warmup": 276,
-          "retained_memory_observations": 256,
-          "persisted_observations": 276
-        },
-        {
-          "repetition": 3,
-          "timed_frames": 64,
-          "timed_observations": 256,
-          "warmup_frames": 5,
-          "wall_seconds": 0.08756384707521647,
-          "cpu_seconds": 0.08755532300000002,
-          "per_four_observation_frame_ms": {
-            "median": 1.331668987404555,
-            "minimum": 1.0206489823758602,
-            "maximum": 1.9863330526277423
-          },
-          "database_bytes": 606208,
-          "checkpoint_payload_bytes": 479,
-          "accepted_including_warmup": 276,
-          "retained_memory_observations": 256,
-          "persisted_observations": 276
-        }
-      ],
-      "process_peak_rss_kib": 41564,
-      "source_sha256": {
-        "terminal/stocks/live.py": "0cf6dfa2be069f6d5f7f224bb5be7d905c19f1ccddcd3a6a4cf58ac6d9b4dd3a",
-        "terminal/stocks/observation_store.py": "b46df7b01ac3aa89c6e2b23823b4fe496c2cc7c8ca4ab670ad52f4bb3ee67dd9",
-        "terminal/stocks/live_checkpoint.py": "2a26853765679df8e59bdf0353f7ea4566aa8c14dd3f6cdda852171b9d961df0"
-      },
-      "limits": "Not provider latency,a250ms service cadence,long-session capacity,power-loss durability,RPO/RTO or SLA;temporary local filesystem only"
-    },
-    "scope": "Only measured fixture/function/source;no market latency,hardware power-loss,RPO/RTO,service SLA or full-session resource guarantee"
-  },
-  "final_build_assets": {
-    ".vite/manifest.json": {
-      "bytes": 4798,
-      "sha256": "cc7d6cf077a3d328490a35b10fdd54ef34cd62dc3a26ed752f155821467cb24e"
-    },
-    "assets/HistoricalResearch-BYS6YZDM.js": {
-      "bytes": 21587,
-      "sha256": "dee5af5ed5613ad5f4eefb5aee27ff42bebdcd81dd5d51726b3349736fa01a5d"
-    },
-    "assets/Landscape3D-D6cVX7G4.js": {
-      "bytes": 7480,
-      "sha256": "b9578b167e941f8bba8a3994e0d1a35194198bf0c2eafe95e8bfebfe8816634b"
-    },
-    "assets/LiveMarket-CCwb4oDX.js": {
-      "bytes": 39706,
-      "sha256": "f1a95cd7069e9b62af02620dede5d489b870d85d3ae01557c4a496109b584d5e"
-    },
-    "assets/MarketHealth-CP-cU76o.js": {
-      "bytes": 2529,
-      "sha256": "94c69af291513195b6b1e8b375c80b7c246b3effdd02a8e32db104689d0a0c41"
-    },
-    "assets/ModelSurface-C4FN46uk.js": {
-      "bytes": 7547,
-      "sha256": "cb8abc0779da4f8ff65aa27d4dac542175a50da1ce7c6d646a2c411439e66023"
-    },
-    "assets/OrbitControls-WkeWSENu.js": {
-      "bytes": 517066,
-      "sha256": "e6647db969b081c794c6721374b58fd6565d5ecb35102fa3109ace27ff76664d"
-    },
-    "assets/PaperProvider-DafETOzm.js": {
-      "bytes": 8495,
-      "sha256": "f9bd8e2d7d8dd7b37ed950cf43d9a751a116d89e1eec35f7e4ee5ea477b38d5c"
-    },
-    "assets/PaperSandbox-Cm5brUse.js": {
-      "bytes": 8037,
-      "sha256": "d11baa85a07e3e987261e5bfc308d974234fd223712250ee7297de8c178ab6cc"
-    },
-    "assets/QuoteCloud-BWkGAsHi.js": {
-      "bytes": 10475,
-      "sha256": "9b33fd71d2d97b556533737e417e34c24fec68c296ca8582ce90e4a10083c41f"
-    },
-    "assets/ResearchDesk-CwjVTnYz.js": {
-      "bytes": 4945,
-      "sha256": "493618224d735c41dc9347cabd469f2cf2c1df07813faff5404d798420e8c91c"
-    },
-    "assets/ResearchLab-4jYTgldY.js": {
-      "bytes": 28979,
-      "sha256": "e21c843e7a4baf2eaa9cbcb38c766f3fc051d161fd2619f1cf09e0ca42005672"
-    },
-    "assets/ResearchLab-D0vzy70c.css": {
-      "bytes": 2780,
-      "sha256": "289f5d2e9336cc758d6c337a1aa6fb946be7a0c8d33fb8d26b89730279ceb519"
-    },
-    "assets/ResearchScene-ZUlTgQUg.js": {
-      "bytes": 5593,
-      "sha256": "8f3570d3c42116a8efa6c55e31e0e4868aa2d111a41f06c3c0b8a71f581bf9aa"
-    },
-    "assets/StockIntelligence-DxewayfM.js": {
-      "bytes": 90248,
-      "sha256": "dd9b6bace460034eb641fcb2abba69661d35bd8c6873c98975716219ccff9bb3"
-    },
-    "assets/UniverseWorkspace-CI_EQeud.js": {
-      "bytes": 8174,
-      "sha256": "74325d8a6c3502909baff45cae4f05dad637729c6b241c22f79d2a0ea579e342"
-    },
-    "assets/VolatilitySurface-BRhEJlJc.js": {
-      "bytes": 3925,
-      "sha256": "d7d3d8f6a2dad059772daead8a3e7da06622fd1362c9d1d978882e53f66b1641"
-    },
-    "assets/directoryContract-BVrwTy34.js": {
-      "bytes": 2323,
-      "sha256": "a4d2c108f624493894f79f1e08d9597c610aa2e9bb72de23fd834ea0cda1fb2e"
-    },
-    "assets/index-CvmgOqK7.css": {
-      "bytes": 96494,
-      "sha256": "ee3c8ba532bf5f3b41ca3c47f8c736beea099633826b704d80151af2e999301c"
-    },
-    "assets/index-doEnZIGz.js": {
-      "bytes": 254453,
-      "sha256": "ef8edd475b140492ef5097ab6cf84e036fe4bfe33929753568a246b7503b5c76"
-    },
-    "assets/marketContract-B3O8roZA.js": {
-      "bytes": 10131,
-      "sha256": "f926614096e6a34f78d4bfe3178c4cc2628e127fa9075e3a66b9615052d6b5e1"
-    },
-    "index.html": {
-      "bytes": 490,
-      "sha256": "d4b4d95960499937412ae1101b10e68a33072b1e5340de77f3e2f14abf6ebce4"
-    }
-  },
-  "frozen_native": {
-    "status": "UNCHANGED_EXPECTATIONS_AND_INPUTS_PRIOR_EVIDENCE_NOT_RERUN",
-    "expected_hashes": {
-      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
-      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
-      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
-      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
-      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
-      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
-      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
-      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
-    },
-    "new_execution": false,
-    "new_compilation": false,
-    "unchanged_protected_source_paths": [
-      "include",
-      "src",
-      "python",
-      "CMakeLists.txt",
-      ".github/workflows",
-      "terminal/stocks/private_iex.py",
-      "terminal/paper",
-      "terminal/server/requirements.txt",
-      "terminal/web/package-lock.json"
-    ]
-  },
-  "advisories": {
-    "new_audit_executed": false,
-    "dependency_pins_changed": false,
-    "prior_source_bound_results": {
-      "npm_production": {
-        "vulnerabilities": {
-          "info": 0,
-          "low": 0,
-          "moderate": 0,
-          "high": 0,
-          "critical": 0,
-          "total": 0
-        },
-        "dependencies": {
-          "prod": 5,
-          "dev": 55,
-          "optional": 27,
-          "peer": 0,
-          "peerOptional": 0,
-          "total": 59
-        }
-      },
-      "npm_full": {
-        "vulnerabilities": {
-          "info": 0,
-          "low": 0,
-          "moderate": 0,
-          "high": 0,
-          "critical": 0,
-          "total": 0
-        },
-        "dependencies": {
-          "prod": 5,
-          "dev": 55,
-          "optional": 27,
-          "peer": 0,
-          "peerOptional": 0,
-          "total": 59
-        }
-      },
-      "pypi": {
-        "audit_tool": "pip-audit 2.10.1 isolated outside project",
-        "pinned_requirements": 17,
-        "vulnerabilities": 0,
-        "skips": 0,
-        "service": "pypi",
-        "source_file_sha256": {
-          "bytes": 300,
-          "sha256": "b1c9eb72be8d052e6ea9552977ed983883366b06043ca267c20ae55e3c65d8e0"
-        },
-        "command": "/tmp/gig-security-audit-venv/bin/python -m pip_audit --no-deps --disable-pip -r terminal/server/requirements.txt --vulnerability-service pypi --timeout 5 --cache-dir /tmp/gig-pip-audit-cache --format json"
-      },
-      "scope": "Current public metadata only;not target OS/optional/transitive artifact or perpetual security clearance"
-    },
-    "scope": "Prior public advisory evidence retained;not deployed OS/transitive/owner-target clearance"
-  },
-  "failed_before_and_repaired": [
-    {
-      "artifact": "handover-failing-before.log",
-      "finding": "Derived window counted old-symbol observations excluded from published history"
-    },
-    {
-      "artifact": "vintage-failing-before.log",
-      "finding": "Fact admitted under matching accession but contradictory filing form"
-    },
-    {
-      "artifact": "control-memory-failing-before.log",
-      "finding": "Control-only recovery unnecessarily materialized decoded ledger;2784254B measured traced peak"
-    },
-    {
-      "artifact": "legacy-vintage-regression-before.log",
-      "finding": "Introduced strict-only helper requirement broke two old minimal-metadata tests;repaired with explicit API strict profile and preserved legacy helper"
-    }
+  "recorded_initial_failures_or_limits": [
+    "Original concurrent-start regression failed with two active workers",
+    "Original47e9 coordinator failed to reject a real oversized JSON-node image before commit",
+    "New aggregate test initially referenced nonexistent GigError;fixed test to existing EngineError without production changes",
+    "Early native source test expected an exception instead of explicit RECOVERY_REQUIRED;corrected to assert durable blocked result and unchanged prefix",
+    "Clang Python ASan configure guard rejected unsupported harness;native-only Clang sanitizer and supported GCC Python sanitizer profiles passed",
+    "First source-built wheel failed because tooling Python advertised unavailable clang++ on PATH;explicit installed GCC succeeded"
   ],
-  "unsuccessful_developer_attempts": [
-    "First new SEC fixture mutated an unrelated amendment row;corrected before genuine matching-accession reproduction",
-    "Intermediate syntax edit failed compilation and was corrected before source checkpoint",
-    "Initial frontend159registrations included6duplicate test registrations;fixture moved into a data-only module,final153preserve assertions"
-  ],
-  "warnings": [
-    "Existing Starlette/httpx TestClient import deprecation;no TestClient launched",
-    "Existing deferred Three.js chunk-size advisory;not suppressed"
-  ],
-  "requirement_totals": {
-    "reviewed_areas": 48,
-    "additional_historical_decision": 1,
-    "total": 49,
-    "counts": {
-      "COMPLETE": 34,
-      "BLOCKED": 7,
-      "PARTIAL": 7,
-      "NOT APPLICABLE": 1,
-      "NOT IMPLEMENTED": 0,
-      "BROKEN": 0
-    },
-    "whole_development_scope_complete": false
-  },
-  "scope_limitations": [
-    "Observed cancellation/error profile and complete/lossless tape authority missing",
-    "L1 control recovery is not joint native/source hot L3 recovery",
-    "Full XBRL/presentation/context/extension and authenticated vintage history still missing",
-    "Historical A18/A19 baseline/estimator remains unknown",
-    "Current provider/private edge/browser/device/empirical/ARM64 qualification pending"
+  "known_warnings": [
+    "Starlette httpx test-client deprecation on existing import;not suppressed",
+    "Vite optional deferred OrbitControls/Three.js chunk exceeds500kB;not suppressed"
   ],
   "not_executed": [
-    "Application/server/listener startup",
-    "Full app/API suite",
-    "Browser/WebGL/physical/assistive tests",
-    "HTTPS/WSS services",
-    "Any provider/account/order request",
-    "Owner Codespaces deployment",
-    "Current native ARM64 runtime",
-    "Fresh native CTest/hash execution",
-    "New wheel-consumer campaign"
+    "GIG application or ASGI app-factory tests",
+    "Listeners,preview,browser or real WebGL",
+    "Provider/account/market-data requests",
+    "Observed SEC/XBRL/LOBSTER processing or new retention",
+    "Owner Codespaces,workflow dispatch,native ARM64 runtime,power-loss hardware qualification",
+    "Trading or deployment"
   ],
-  "privacy": {
-    "raw_market_data_or_zip_accessed": false,
-    "credentials_disclosed": false,
-    "raw_data_DB_binaries_build_outputs_or_logs_committed": false,
-    "market_provider_connections": 0,
-    "application_or_server_launches": 0,
-    "owner_workflows_dispatched": 0,
-    "account_or_order_operations": 0,
-    "observed_retention_enabled": false,
-    "public_ports": 0,
-    "paid_resources": 0,
-    "review": "Source/tests/docs and safe counts/hashes only;all synthetic databases/temp fixtures remained private and ephemeral"
+  "requirement_counts": {
+    "reviewed_areas": 48,
+    "historical_decisions": 1,
+    "total": 49,
+    "COMPLETE": 34,
+    "PARTIAL": 7,
+    "BLOCKED": 7,
+    "NOT_APPLICABLE": 1
   },
-  "protected_refs_expected": {
-    "main": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
-    "feat/atlas-final-release": "10eaee30d598807a23e42a8b60abe3d5a5dc2514",
-    "feat/atlas-sprint-4-market-data-paper": "0c03a698fdac1be8b1032b255208a3ef2320341a"
-  }
+  "development_complete": false
 }
