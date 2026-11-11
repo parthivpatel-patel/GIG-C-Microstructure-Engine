@@ -47,11 +47,21 @@ struct ReplayBatchResult {
     std::size_t accepted{}; Error error{}; std::optional<std::size_t> failed_input_index{};
     explicit operator bool() const noexcept { return !error; }
 };
+struct ReplayOrderKey {
+    std::int64_t timestamp; std::uint32_t rank; std::uint64_t sequence; std::uint32_t subevent;
+    auto operator<=>(const ReplayOrderKey&) const = default;
+};
+struct ReplayStateImage {
+    std::uint32_t version;
+    BookStateImage book;
+    ReplayConfig config;
+    BoundedList<StreamCursor,8> cursors;
+    std::optional<std::uint64_t> last_ordinal;
+    std::optional<ReplayOrderKey> last_key;
+    std::pmr::vector<JournalEntry> journal;
+};
 class ReplayEngine {
-    struct OrderKey {
-        std::int64_t timestamp; std::uint32_t rank; std::uint64_t sequence; std::uint32_t subevent;
-        auto operator<=>(const OrderKey&) const = default;
-    };
+    using OrderKey=ReplayOrderKey;
     OrderBook book_;
     ReplayConfig config_;
     BoundedList<StreamCursor,8> cursors_;
@@ -96,5 +106,14 @@ public:
     std::optional<StreamCursor> cursor(StreamId) const noexcept;
     Result<ReplaySnapshot> depth(std::size_t) const noexcept;
     Result<std::pmr::string> canonical() const noexcept;
+    // Healthy accepted boundaries only. Failed/gapped source diagnostics belong to
+    // the coordinator, which must remain blocked after restoring its last good image.
+    Result<ReplayStateImage> checkpoint(std::pmr::memory_resource* =std::pmr::get_default_resource()) const noexcept;
+    // Direct state restoration, not reapplication of historical book events. The
+    // expected canonical bytes/config/rules/limits MUST be independently trusted.
+    // This comparison is integrity checking, not exchange-history authentication.
+    static Result<ReplayEngine> restore(const ReplayStateImage&,const InstrumentRules&,
+        const ReplayConfig&,const BookLimits&,std::string_view expected_canonical,
+        std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 };
 } // namespace gig

@@ -36,7 +36,7 @@ template<class E>inline constexpr unsigned enum_max=255;
 ENUM_MAX(MissingReason,3) ENUM_MAX(Side,1) ENUM_MAX(ClockDomain,3) ENUM_MAX(SequenceUnit,1)
 ENUM_MAX(Origin,1) ENUM_MAX(Source,4) ENUM_MAX(TransformationKind,4) ENUM_MAX(types::TimestampUnit,3)
 ENUM_MAX(ReplacePriority,1) ENUM_MAX(ResetReason,3) ENUM_MAX(SnapshotKind,1) ENUM_MAX(SnapshotCoverage,1) ENUM_MAX(SessionAction,3)
-ENUM_MAX(OrderingPolicy,1) ENUM_MAX(InitialBookState,1) ENUM_MAX(analytics::Unavailable,10) ENUM_MAX(analytics::TradeSign,2)
+ENUM_MAX(JournalDisposition,3) ENUM_MAX(OrderingPolicy,1) ENUM_MAX(InitialBookState,1) ENUM_MAX(analytics::Unavailable,10) ENUM_MAX(analytics::TradeSign,2)
 ENUM_MAX(simulation::TimeInForce,2) ENUM_MAX(simulation::ReportKind,5) ENUM_MAX(simulation::RejectReason,3) ENUM_MAX(execution::Algorithm,2) ENUM_MAX(execution::VolumeProfile,1)
 #undef ENUM_MAX
 template<class E>struct Codec<E,std::enable_if_t<std::is_enum_v<E>>>{static E get(py::handle h){auto n=read<std::uint32_t>(h);if(n>enum_max<E>)bad(ErrorCode::invalid_enum,"wire.enum");return static_cast<E>(n);}static py::object put(E e){return write(static_cast<unsigned>(e));}};
@@ -110,6 +110,14 @@ RECORD(BookLimits,F(max_orders),F(max_levels),F(max_snapshot_depth))
 RECORD(DepthLevel,F(price_ticks),F(quantity),F(order_count))
 RECORD(StreamStart,F(venue),F(scope),F(dataset),F(dataset_version),F(first_sequence),F(rank))
 RECORD(ReplayConfig,F(run_id),F(session),F(streams),F(ordering),F(timestamp_clock),F(additional_instruments),F(max_journal_records),F(initial_state))
+RECORD(QuantityLedger,F(added),F(cancelled),F(executed),F(discarded),F(recovered),F(replacement_in),F(replacement_out),F(total_in),F(total_out))
+RECORD(RestingOrder,F(order),F(priority))
+RECORD(BookStateImage,F(version),F(rules),F(limits),F(session),F(ledger),F(remaining),F(next_priority),F(revision),F(last_metadata),F(orders))
+RECORD(StreamCursor,F(start),F(expected),F(next_subevent),F(message_count),F(last_sequence),F(last_subevent),F(last_message_count),F(exhausted))
+RECORD(ReplayOrderKey,F(timestamp),F(rank),F(sequence),F(subevent))
+RECORD(JournalEntry,F(event),F(disposition),F(restart))
+RECORD(ReplayStateImage,F(version),F(book),F(config),F(cursors),F(last_ordinal),F(last_key),F(journal))
+
 RECORD(analytics::Metric,F(value),F(unavailable))
 RECORD(analytics::SnapshotReference,F(run_id),F(journal_prefix),F(revision),F(rules),F(session))
 RECORD(analytics::FlowQuote,F(source),F(timestamp),F(utc_clock),F(bid),F(ask))

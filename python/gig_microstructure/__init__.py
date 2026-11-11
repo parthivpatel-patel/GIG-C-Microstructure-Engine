@@ -235,6 +235,21 @@ class Replay:
                 raise
             accepted += 1
         return accepted
+    def checkpoint(self):
+        """Full healthy native state; not a research depth snapshot or source authentication."""
+        return deepcopy(_checked(self._owner.checkpoint()))
+    @classmethod
+    def restore_checkpoint(cls, image, rules, config, limits, expected_canonical, *, resource_budget_bytes='134217728'):
+        """Restore a trusted complete image without reapplying its historical book events.
+
+        Expected canonical bytes/config/rules/limits must come from independently
+        trusted local checkpoint evidence, not an arbitrary downloaded declaration.
+        Source continuity and recovery-required diagnostics remain coordinator-owned.
+        """
+        owner = _checked(_native.restore_replay(image,rules,config,limits,expected_canonical,resource_budget_bytes))
+        result = cls.__new__(cls)
+        result._owner = owner
+        return result
     def reset(self, document, restart_plan):
         _checked(self._owner.reset(validate_document(document).to_dict(), restart_plan))
     def recover(self, document):

@@ -266,6 +266,87 @@ Result<std::pmr::string> ReplayEngine::canonical() const noexcept {
     } catch (const std::bad_alloc&) { return Result<std::pmr::string>::failure(ErrorCode::resource_exhausted,"replay.canonical"); }
       catch (const std::length_error&) { return Result<std::pmr::string>::failure(ErrorCode::capacity,"replay.canonical"); }
 }
+Result<ReplayStateImage> ReplayEngine::checkpoint(std::pmr::memory_resource* resource) const noexcept {
+    if (needs_recovery()) return Result<ReplayStateImage>::failure(ErrorCode::recovery_required,"checkpoint.accepted_prefix");
+    if (!resource || journal_.size()>4096) return Result<ReplayStateImage>::failure(ErrorCode::capacity,"checkpoint.records");
+    auto book=book_.checkpoint(resource);if (!book) return Result<ReplayStateImage>::failure(book.error.code,book.error.field);
+    try {
+        ReplayStateImage image{1,std::move(*book.data),config_,cursors_,last_ordinal_,last_key_,std::pmr::vector<JournalEntry>(resource)};
+        image.journal.reserve(journal_.size());
+        for (const auto& record:journal_) image.journal.push_back({record.event,record.disposition,record.restart_index?std::optional<RestartPlan>(restart_plans_[*record.restart_index]):std::nullopt});
+        return Result<ReplayStateImage>::success(std::move(image));
+    } catch (const std::bad_alloc&) { return Result<ReplayStateImage>::failure(ErrorCode::resource_exhausted,"checkpoint.replay"); }
+      catch (const std::length_error&) { return Result<ReplayStateImage>::failure(ErrorCode::capacity,"checkpoint.replay"); }
+}
+Result<ReplayEngine> ReplayEngine::restore(const ReplayStateImage& image,const InstrumentRules& rules,
+        const ReplayConfig& config,const BookLimits& limits,std::string_view expected,std::pmr::memory_resource* resource) noexcept {
+    if (image.version!=1 || image.config!=config || image.book.rules!=rules || image.book.limits!=limits || expected.empty() || expected.size()>32*1024*1024)
+        return Result<ReplayEngine>::failure(ErrorCode::identity_mismatch,"checkpoint.contract");
+    if (image.journal.size()>config.max_journal_records || image.journal.size()>4096)
+        return Result<ReplayEngine>::failure(ErrorCode::capacity,"checkpoint.records");
+    if (const auto e=valid_list(image.cursors,"checkpoint.cursors")) return Result<ReplayEngine>::failure(e.code,e.field);
+    if (image.cursors.count!=config.streams.count) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.cursors");
+    auto book=OrderBook::restore(image.book,rules,limits,resource);if (!book) return Result<ReplayEngine>::failure(book.error.code,book.error.field);
+    auto result=create(rules,config,limits,resource);if (!result) return result;
+    auto& out=*result.data;
+    try {
+        RestartPlan starts;
+        for (std::size_t i=0;i<image.cursors.count;++i) {
+            const auto& c=*image.cursors.items[i];const auto& original=*config.streams.items[i];
+            if (c.start.scope.stream!=original.scope.stream || c.start.scope.unit!=original.scope.unit || c.start.dataset!=original.dataset || c.start.dataset_version!=original.dataset_version || c.start.venue!=original.venue || c.start.rank!=original.rank)
+                return Result<ReplayEngine>::failure(ErrorCode::identity_mismatch,"checkpoint.cursor_source");
+            auto calculated=cursor_start(c.start);
+            if (c.last_sequence) {
+                if (c.last_message_count==0 || c.last_subevent>=c.last_message_count) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.subevent");
+                consume(calculated,*c.last_sequence,c.last_subevent,c.last_message_count);
+            }
+            if (calculated!=c) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.cursor_boundary");
+            if (const auto e=starts.append(c.start)) return Result<ReplayEngine>::failure(e.code,e.field);
+        }
+        if (const auto e=plan_check(starts,image.book.session,rules.venue)) return Result<ReplayEngine>::failure(e.code,e.field);
+        std::size_t mutations=0;std::optional<Metadata> last_book;
+        out.journal_.reserve(image.journal.size());
+        for (const auto& entry:image.journal) {
+            if (entry.disposition!=JournalDisposition::book_event && entry.disposition!=JournalDisposition::filtered_instrument && entry.disposition!=JournalDisposition::reset && entry.disposition!=JournalDisposition::recovery)
+                return Result<ReplayEngine>::failure(ErrorCode::invalid_enum,"checkpoint.journal");
+            if (const auto e=validate(entry.event.metadata)) return Result<ReplayEngine>::failure(e.code,e.field);
+            const auto* event_rules=out.instrument_rules(entry.event.metadata);
+            if (!event_rules) return Result<ReplayEngine>::failure(ErrorCode::identity_mismatch,"checkpoint.instrument");
+            if (const auto e=validate(entry.event,*event_rules)) return Result<ReplayEngine>::failure(e.code,e.field);
+            if (entry.disposition==JournalDisposition::filtered_instrument) {
+                if (event_rules->instrument==rules.instrument) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.filter");
+            } else {
+                if (event_rules->instrument!=rules.instrument) return Result<ReplayEngine>::failure(ErrorCode::identity_mismatch,"checkpoint.book_instrument");
+                ++mutations;last_book=entry.event.metadata;
+            }
+            if ((entry.disposition==JournalDisposition::book_event || entry.disposition==JournalDisposition::filtered_instrument) &&
+                (std::holds_alternative<BookReset>(entry.event.payload) || std::holds_alternative<Snapshot>(entry.event.payload)))
+                return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.journal_disposition");
+            std::optional<std::size_t> index;
+            if (entry.disposition==JournalDisposition::reset) {
+                const auto* reset=std::get_if<BookReset>(&entry.event.payload);
+                if (!reset || !entry.restart || entry.restart->count!=config.streams.count) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.reset");
+                if (const auto e=valid_list(*entry.restart,"checkpoint.restart_plan")) return Result<ReplayEngine>::failure(e.code,e.field);
+                const BookSession next{entry.restart->items[0]->scope.session,reset->next_epoch};
+                if (const auto e=plan_check(*entry.restart,next,rules.venue)) return Result<ReplayEngine>::failure(e.code,e.field);
+                index=out.restart_plans_.size();out.restart_plans_.push_back(*entry.restart);
+            } else if (entry.restart) return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.restart");
+            if (entry.disposition==JournalDisposition::recovery) {
+                const auto* snapshot=std::get_if<Snapshot>(&entry.event.payload);
+                if (!snapshot || snapshot->kind!=SnapshotKind::order_level || snapshot->coverage!=SnapshotCoverage::complete)
+                    return Result<ReplayEngine>::failure(ErrorCode::unsupported,"checkpoint.recovery");
+            }
+            out.journal_.push_back({entry.event,entry.disposition,index});
+        }
+        if (image.book.revision!=mutations || image.book.last_metadata!=last_book || (image.journal.empty() && config.initial_state==InitialBookState::requires_snapshot))
+            return Result<ReplayEngine>::failure(ErrorCode::inconsistent_state,"checkpoint.book_boundary");
+        out.book_=std::move(*book.data);out.cursors_=image.cursors;out.last_ordinal_=image.last_ordinal;out.last_key_=image.last_key;out.continuity_error_.reset();
+        const auto actual=out.canonical();if (!actual) return Result<ReplayEngine>::failure(actual.error.code,actual.error.field);
+        if (std::string_view(*actual.data)!=expected) return Result<ReplayEngine>::failure(ErrorCode::identity_mismatch,"checkpoint.canonical");
+        return result;
+    } catch (const std::bad_alloc&) { return Result<ReplayEngine>::failure(ErrorCode::resource_exhausted,"checkpoint.restore_replay"); }
+      catch (const std::length_error&) { return Result<ReplayEngine>::failure(ErrorCode::capacity,"checkpoint.restore_replay"); }
+}
 static_assert(std::is_nothrow_copy_constructible_v<JournalEntry>);
 static_assert(std::is_nothrow_move_constructible_v<ReplayEngine>);
 } // namespace gig

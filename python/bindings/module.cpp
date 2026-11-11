@@ -8,6 +8,9 @@ class NativeReplay {
     ReplayEngine engine_;
 public:
     NativeReplay(InstrumentRules r,ReplayConfig c,BookLimits l,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),engine_(take(ReplayEngine::create(r,c,l,&memory_))) {if(l.max_snapshot_depth>4096)bad(ErrorCode::capacity,"binding.snapshot_depth");}
+    NativeReplay(const ReplayStateImage& image,InstrumentRules rules,ReplayConfig config,BookLimits limits,std::string_view canonical,std::size_t budget)
+        :memory_(std::pmr::get_default_resource(),budget),engine_(take(ReplayEngine::restore(image,rules,config,limits,canonical,&memory_))) {}
+    py::dict checkpoint(){return api([&](){return envelope("gig.replay_checkpoint",write(take(engine_.checkpoint(&memory_))));});}
     py::dict apply(py::handle event){return mutate([&](){auto e=read<MarketEvent>(body(event,"gig.event"));return engine_.apply(e);});}
     py::dict reset(py::handle event,py::handle plan){return mutate([&](){auto e=read<MarketEvent>(body(event,"gig.event"));auto p=read<RestartPlan>(plan);return engine_.reset(e,p);});}
     py::dict recover(py::handle event){return mutate([&](){auto e=read<MarketEvent>(body(event,"gig.event"));return engine_.recover(e);});}
@@ -31,9 +34,13 @@ void bind_schemas(py::module_&);
 void bind_depth(py::module_&);
 PYBIND11_MODULE(_native,m){
     m.attr("__version__")="0.1.1";m.attr("schema_version")="1.0";m.attr("__compiler__")=__VERSION__;m.attr("__build_type__")=GIG_PYTHON_BUILD_TYPE;m.attr("__config_flags__")=GIG_PYTHON_CONFIG_FLAGS;m.attr("__target_flags__")=GIG_PYTHON_TARGET_FLAGS;m.attr("__core_flags__")=GIG_PYTHON_CORE_FLAGS;m.attr("__python__")=PY_VERSION;m.attr("__pybind11__")=std::to_string(PYBIND11_VERSION_MAJOR)+"."+std::to_string(PYBIND11_VERSION_MINOR)+"."+std::to_string(PYBIND11_VERSION_PATCH);
-    py::class_<NativeReplay>(m,"_Replay").def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
+    py::class_<NativeReplay>(m,"_Replay").def("checkpoint",&NativeReplay::checkpoint).def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
     py::class_<NativeSimulation>(m,"_Simulation").def("submit",&NativeSimulation::submit).def("cancel",&NativeSimulation::cancel).def("advance",&NativeSimulation::advance).def("snapshot",&NativeSimulation::snapshot).def("canonical",&NativeSimulation::canonical).def("queue",&NativeSimulation::queue);
     m.def("new_replay",[](py::handle rules,py::handle config,py::handle limits,py::handle budget){return api([&](){return py::cast(std::make_unique<NativeReplay>(read<InstrumentRules>(rules),read<ReplayConfig>(config),read<BookLimits>(limits),read<std::size_t>(budget)));});});
+    m.def("restore_replay",[](py::handle image,py::handle rules,py::handle config,py::handle limits,py::handle canonical,py::handle budget){return api([&](){
+        auto state=read<ReplayStateImage>(body(image,"gig.replay_checkpoint"));auto expected=text(canonical,33554432);
+        return py::cast(std::make_unique<NativeReplay>(state,read<InstrumentRules>(rules),read<ReplayConfig>(config),read<BookLimits>(limits),expected,read<std::size_t>(budget)));
+    });});
     m.def("new_simulation",[](py::handle config,py::handle budget){return api([&](){return py::cast(std::make_unique<NativeSimulation>(read<simulation::SimConfig>(config),read<std::size_t>(budget)));});});
     m.def("validate_rules",[](py::handle rules){return api([&]()->py::object{auto r=read<InstrumentRules>(rules);require(validate(r));return write(r);});});
     m.def("event_roundtrip",[](py::handle value,py::handle rules,bool inspect){return api([&](){auto e=read<MarketEvent>(body(value,"gig.event"));auto r=read<InstrumentRules>(rules);require(validate(e,r,inspect?ValidationMode::inspect_incomplete:ValidationMode::complete));return envelope("gig.event",write(e));});});

@@ -29,6 +29,18 @@ struct DepthSnapshot {
         : rules(r),session(s),revision(rev),requested_depth(depth),bids(resource),asks(resource) {}
 };
 struct RestingOrder { AddOrder order; std::uint64_t priority; bool operator==(const RestingOrder&) const = default; };
+// Full order-level state, not a depth snapshot. Import requires an independently
+// trusted checkpoint envelope; invariants alone do not authenticate market history.
+struct BookStateImage {
+    std::uint32_t version;
+    InstrumentRules rules;
+    BookLimits limits;
+    BookSession session;
+    QuantityLedger ledger;
+    std::uint64_t remaining,next_priority,revision;
+    std::optional<Metadata> last_metadata;
+    std::pmr::vector<RestingOrder> orders;
+};
 class OrderBook {
     struct State;
     struct Deleter { std::pmr::memory_resource* resource; void operator()(State*) const noexcept; };
@@ -65,5 +77,8 @@ public:
     std::optional<DepthLevel> best_ask() const noexcept;
     Result<DepthSnapshot> depth(std::size_t requested) const noexcept;
     Result<std::pmr::string> canonical() const noexcept;
+    Result<BookStateImage> checkpoint(std::pmr::memory_resource* =std::pmr::get_default_resource()) const noexcept;
+    static Result<OrderBook> restore(const BookStateImage&,const InstrumentRules&,const BookLimits&,
+        std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 };
 } // namespace gig

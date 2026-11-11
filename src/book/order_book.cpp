@@ -6,6 +6,7 @@
 #include <map>
 #include <stdexcept>
 #include <unordered_map>
+#include <tuple>
 
 namespace gig {
 namespace {
@@ -337,5 +338,44 @@ Result<std::pmr::string> OrderBook::canonical() const noexcept {
         }
         return Result<std::pmr::string>::success(std::move(out));
     } catch (const std::bad_alloc&) { return Result<std::pmr::string>::failure(ErrorCode::resource_exhausted,"book.canonical"); }
+}
+Result<BookStateImage> OrderBook::checkpoint(std::pmr::memory_resource* resource) const noexcept {
+    if (!resource) return Result<BookStateImage>::failure(ErrorCode::missing_metadata,"checkpoint.resource");
+    if (const auto e=check_invariants()) return Result<BookStateImage>::failure(e.code,e.field);
+    try {
+        BookStateImage image{1,rules_,limits_,state_->session,state_->ledger,state_->remaining,state_->next_priority,state_->revision,last_metadata_,std::pmr::vector<RestingOrder>(resource)};
+        image.orders.reserve(state_->index.size());
+        for (const auto side:{Side::buy,Side::sell}) for (const auto& [price,level]:state_->prices(side)) {
+            (void)price;
+            for (const auto& order:level.fifo) image.orders.push_back(order);
+        }
+        std::sort(image.orders.begin(),image.orders.end(),[](const auto& a,const auto& b){return std::tuple{a.order.side,a.order.price_ticks,a.priority}<std::tuple{b.order.side,b.order.price_ticks,b.priority};});
+        return Result<BookStateImage>::success(std::move(image));
+    } catch (const std::bad_alloc&) { return Result<BookStateImage>::failure(ErrorCode::resource_exhausted,"checkpoint.book"); }
+      catch (const std::length_error&) { return Result<BookStateImage>::failure(ErrorCode::capacity,"checkpoint.book"); }
+}
+Result<OrderBook> OrderBook::restore(const BookStateImage& image,const InstrumentRules& rules,const BookLimits& limits,std::pmr::memory_resource* resource) noexcept {
+    if (image.version!=1 || image.rules!=rules || image.limits!=limits) return Result<OrderBook>::failure(ErrorCode::identity_mismatch,"checkpoint.book_contract");
+    if (image.orders.size()>limits.max_orders) return Result<OrderBook>::failure(ErrorCode::capacity,"checkpoint.orders");
+    if (image.last_metadata) if (const auto e=validate(*image.last_metadata)) return Result<OrderBook>::failure(e.code,e.field);
+    auto result=create(rules,image.session,limits,resource);if (!result) return result;
+    auto& book=*result.data;
+    try {
+        std::optional<std::tuple<Side,PriceTicks,std::uint64_t>> previous;
+        for (const auto& entry:image.orders) {
+            const auto key=std::tuple{entry.order.side,entry.order.price_ticks,entry.priority};
+            if ((previous && key<=*previous) || entry.priority>=image.next_priority)
+                return Result<OrderBook>::failure(ErrorCode::priority_violation,"checkpoint.priority");
+            previous=key;
+            if (entry.order.side!=Side::buy && entry.order.side!=Side::sell) return Result<OrderBook>::failure(ErrorCode::invalid_enum,"checkpoint.side");
+            if (entry.order.price_ticks<rules.minimum_price || entry.order.price_ticks>rules.maximum_price || entry.order.quantity>rules.maximum_quantity)
+                return Result<OrderBook>::failure(ErrorCode::invalid_range,"checkpoint.order");
+            if (const auto e=book.state_->insert_staged(entry.order,entry.priority,limits,resource)) return Result<OrderBook>::failure(e.code,e.field);
+        }
+        book.state_->ledger=image.ledger;book.state_->remaining=image.remaining;book.state_->next_priority=image.next_priority;book.state_->revision=image.revision;book.last_metadata_=image.last_metadata;
+        if (const auto e=book.check_invariants()) return Result<OrderBook>::failure(e.code,e.field);
+        return result;
+    } catch (const std::bad_alloc&) { return Result<OrderBook>::failure(ErrorCode::resource_exhausted,"checkpoint.restore_book"); }
+      catch (const std::length_error&) { return Result<OrderBook>::failure(ErrorCode::capacity,"checkpoint.restore_book"); }
 }
 } // namespace gig
