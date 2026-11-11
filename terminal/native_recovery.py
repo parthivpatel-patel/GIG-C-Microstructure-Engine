@@ -106,6 +106,7 @@ class NativeSourceRecovery:
     def _publish(self,state,native,*,initial=False):
         raw=encoded(state)
         if len(raw)>MAX_PAYLOAD:raise RecoveryError('checkpoint_payload_budget')
+        decode(raw)  # Refuse a state that the bounded restart reader could not admit.
         digest=hashlib.sha256(raw).hexdigest();stage='prepare'
         with self._connect()as db:
             try:
@@ -173,7 +174,7 @@ class NativeSourceRecovery:
             if doc['data']['payload']['tag']!='6':raise RecoveryError('complete_order_snapshot_required')
             return self._commit_event(record,doc,digest,recovery=True)
     def status(self):
-        return {'schema':'gig.native_source.status.v1','state':'PUBLICATION_UNCERTAIN'if self.uncertain else self._state['state'],'needs_recovery':self.uncertain or self._state['state']!='READY','generation':self._state['generation'],'capture_index':self._state['capture_index'],'capture_session':self._state['capture_session'],'diagnostic':self.local_reason or self._state['diagnostic'],'checkpoint_sha256':self._digest,'prefix_sha256':self._state['prefix_sha256'],'native_journal_records':self._native.status()['journal_size'],'origin':'HISTORICAL_SYNTHETIC','source_profile':'AUTHORED_TYPED_NATIVE_V1','provider_connected':False,'order_submission':False,'hot_restore':'Full native state import,not historical book-event reapplication','limits':'8MiB payload,16MiB database,up to16MiB rollback journal,32dedup identities;source/authenticity not established by hashes'}
+        return {'schema':'gig.native_source.status.v1','state':'PUBLICATION_UNCERTAIN'if self.uncertain else self._state['state'],'needs_recovery':self.uncertain or self._state['state']!='READY','generation':self._state['generation'],'capture_index':self._state['capture_index'],'capture_session':self._state['capture_session'],'diagnostic':self.local_reason or self._state['diagnostic'],'checkpoint_sha256':self._digest,'prefix_sha256':self._state['prefix_sha256'],'native_journal_records':self._native.status()['journal_size'],'origin':'HISTORICAL_SYNTHETIC','source_profile':'AUTHORED_TYPED_NATIVE_V1','provider_connected':False,'order_submission':False,'hot_restore':'Full native state import,not historical book-event reapplication','limits':'8MiB payload,20000JSON nodes/depth24,16MiB database,up to16MiB rollback journal,32dedup identities;source/authenticity not established by hashes'}
     def snapshot(self,depth='10'):
         if self.uncertain or self._state['state']!='READY':raise RecoveryError('unhealthy_source_snapshot_unavailable')
         return self._native.snapshot(depth).to_dict()

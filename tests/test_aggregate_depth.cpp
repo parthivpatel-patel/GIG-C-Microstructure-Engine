@@ -26,6 +26,19 @@ void tests(){
     std::size_t failed=0,succeeded=0;
     for(std::size_t n=0;n<4;++n){gig::TrackedResource memory;{AggregateDepth atomic(8,&memory);check(!snapshot(atomic,bid,ask),"allocation initial");memory.fail_after(n);auto error=atomic.update(remove,replace);if(error){++failed;check(atomic.revision()==1&&atomic.bids().size()==2&&atomic.asks()[0].quantity==10,"allocation rollback");}else ++succeeded;memory.disable_failure();}check(memory.stats().live_bytes==0&&memory.stats().live_blocks==0,"allocation cleanup");}
     check(failed==2&&succeeded==2,"real allocation failure sweep");
+    auto image=*b.checkpoint().data;auto hot=AggregateDepth::restore(image,8);
+    check(bool(hot)&&hot.data->revision()==b.revision()&&hot.data->sequence()==b.sequence(),"hot revision and source sequence retained");
+    check(!b.update({},replace,6)&&!hot.data->update({},replace,6),"same suffix after aggregate hot restore");
+    check(b.metrics().data->microprice==hot.data->metrics().data->microprice&&b.revision()==hot.data->revision(),"hot suffix independent equality");
+    check(!AggregateDepth::restore(image,7),"expected aggregate depth bound");
+    auto corrupt=image;corrupt.bids.push_back(corrupt.bids.front());check(!AggregateDepth::restore(corrupt,8),"checkpoint duplicate or unsorted level rejected");
+    corrupt=image;corrupt.asks[0].quantity=0;check(!AggregateDepth::restore(corrupt,8),"checkpoint zero quantity rejected");
+    corrupt=image;corrupt.initialized=false;check(!AggregateDepth::restore(corrupt,8),"false completeness boundary rejected");
+    corrupt=image;corrupt.revision=0;check(!AggregateDepth::restore(corrupt,8),"initialized zero revision rejected");
+    AggregateDepth blank(8);auto blank_image=*blank.checkpoint().data;auto restored_blank=AggregateDepth::restore(blank_image,8);
+    check(bool(restored_blank)&&!restored_blank.data->initialized()&&bool(restored_blank.data->update({},{})),"uninitialized remains ineligible");
+    for(std::size_t n=0;n<3;++n){gig::TrackedResource resource;{resource.fail_after(n);auto copy=b.checkpoint(&resource);if(n<2)check(!copy&&copy.error.code==gig::ErrorCode::resource_exhausted,"checkpoint real allocation rejection");else check(bool(copy),"checkpoint allocation succeeds");}check(resource.stats().live_bytes==0,"checkpoint allocation cleanup");}
+    for(std::size_t n=0;n<3;++n){gig::TrackedResource resource;{resource.fail_after(n);auto copy=AggregateDepth::restore(image,8,&resource);if(n<2)check(!copy&&copy.error.code==gig::ErrorCode::resource_exhausted,"restore real allocation rejection");else check(bool(copy),"restore allocation succeeds");}check(resource.stats().live_bytes==0,"restore allocation cleanup");}
     gig::TrackedResource tiny(std::pmr::get_default_resource(),1);AggregateDepth limited(8,&tiny);check(bool(snapshot(limited,bid,ask))&&limited.revision()==0,"budget bound");
     std::cout<<"aggregate-depth:10000 independent transitions;2 injected failures;2 successful sweeps;exact metrics/sequence/atomicity/budgets pass\n";
 }

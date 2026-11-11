@@ -107,3 +107,9 @@ class NativeRecovery(unittest.TestCase):
    with sqlite3.connect(c.path)as db:
     raw=db.execute('SELECT payload FROM checkpoint').fetchone()[0];v=json.loads(raw);v['canonical']+='x';raw=json.dumps(v).encode();db.execute('UPDATE checkpoint SET payload=?,digest=?',(raw,hashlib.sha256(raw).hexdigest()))
    with self.assertRaises(gig.EngineError):owner(d)
+
+ def test_large_bounded_native_prefix_can_be_reopened_without_generic_evidence_budget_failure(self):
+  with tempfile.TemporaryDirectory()as d:
+   c=owner(d)
+   for i in range(len(EVENTS)):c.apply(record(i))
+   restored=owner(d);self.assertEqual(restored.status()['capture_index'],len(EVENTS)-1);self.assertEqual(restored.accepted_canonical(),c.accepted_canonical())

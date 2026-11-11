@@ -13,6 +13,15 @@ struct Metrics {
     exact::Fraction bid_depth,ask_depth;
     bool locked{},crossed{};
 };
+// Local aggregate-state image only. Source identity, generation, wire checksum
+// cache and completeness evidence must be authenticated by the owning adapter.
+struct AggregateStateImage {
+    std::uint32_t version{1};std::size_t max_levels{};
+    std::optional<std::uint64_t> sequence;
+    std::uint64_t revision{};bool initialized{};
+    std::pmr::vector<Level> bids,asks;
+    explicit AggregateStateImage(std::pmr::memory_resource* r):bids(r),asks(r){}
+};
 class AggregateDepth {
     std::size_t limit_;std::pmr::memory_resource* resource_;
     std::pmr::vector<Level> bids_,asks_;
@@ -29,5 +38,8 @@ public:
     std::optional<std::uint64_t> sequence()const noexcept{return sequence_;}
     bool initialized()const noexcept{return initialized_;}
     Result<Metrics> metrics()const;
+    Result<AggregateStateImage> checkpoint(std::pmr::memory_resource* resource=std::pmr::get_default_resource())const noexcept;
+    static Result<AggregateDepth> restore(const AggregateStateImage&,std::size_t expected_max_levels,
+        std::pmr::memory_resource* resource=std::pmr::get_default_resource()) noexcept;
 };
 }

@@ -1,0 +1,276 @@
+{
+  "schema": "gig.native.hot_recovery.evidence.v1",
+  "branch": "development/gig-ui-redesign",
+  "starting_remote": "3e17e7052a6b20478bd02d62a46c679660eeaac1",
+  "initial_published_milestone": "47e9b1697b1e528091c3e254458d6d365cd52d7f",
+  "execution_date": "2026-11-11",
+  "architecture": "x86_64",
+  "environment": "Local Linux developer fixture executables only;no application,servers,provider or deployment",
+  "native_results": [
+    {
+      "compiler": "GCC 14.2.0",
+      "configuration": "debug",
+      "ctest_passed": 148,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 19327,
+        "sha256": "9f8e97942828e1556e1f7ce7367b438cfd162b3d9a8479d3782ebfa94c545087"
+      },
+      "native_log_receipt": {
+        "bytes": 130620,
+        "sha256": "d93414d31ed9273bf991ca1099440c0287b59d4e1c439d316d9ebec1fa552613"
+      },
+      "python_bindings_enabled": true
+    },
+    {
+      "compiler": "GCC 14.2.0",
+      "configuration": "release",
+      "ctest_passed": 148,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 19331,
+        "sha256": "c34b5b9bd4a79396b277f6a24f5d819082ca88881c86b88e72e5d95d3c8286c8"
+      },
+      "native_log_receipt": {
+        "bytes": 131210,
+        "sha256": "63df3c76394d6971260856761e0c0aa11b2e6f15e63084336af74f41308cd91c"
+      },
+      "python_bindings_enabled": true
+    },
+    {
+      "compiler": "GCC 14.2.0",
+      "configuration": "asan-ubsan",
+      "ctest_passed": 149,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 19468,
+        "sha256": "e0871d6450210a4c79fcb08c475f829d11e2fab87c655ebb5711044eb468bae2"
+      },
+      "native_log_receipt": {
+        "bytes": 134313,
+        "sha256": "cf5bf8cb967b93ad3d9281fc7751ee9bdbcf242ac72357b05df2be5a44039dc1"
+      },
+      "python_bindings_enabled": true
+    },
+    {
+      "compiler": "Clang 19.1.7",
+      "configuration": "debug",
+      "ctest_passed": 148,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 19325,
+        "sha256": "2ff8fbdf11cb664d731a634c62ed5764db9a8c5ff3b76f8d49f6675671beb0f8"
+      },
+      "native_log_receipt": {
+        "bytes": 130325,
+        "sha256": "1241a7206f36d3a66c4c6f0c7858a5f250e09b4e718682ee39b71f6870d800c1"
+      },
+      "python_bindings_enabled": true
+    },
+    {
+      "compiler": "Clang 19.1.7",
+      "configuration": "release",
+      "ctest_passed": 148,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 19329,
+        "sha256": "ba00875817a67d4b74f02a2cfd56c885fbc8781aae51b857a43375deb9e5cd40"
+      },
+      "native_log_receipt": {
+        "bytes": 130915,
+        "sha256": "0c814b17326bf0404c518016bd3a3e530eef102ef764ae5b3ece6b6505248180"
+      },
+      "python_bindings_enabled": true
+    },
+    {
+      "compiler": "Clang 19.1.7",
+      "configuration": "asan-ubsan",
+      "ctest_passed": 145,
+      "failed": 0,
+      "hot_checkpoint_assertions": 98,
+      "frozen_identities": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_receipt": {
+        "bytes": 18939,
+        "sha256": "b99e9dcd516cde4b68241412e338a74d81ab6fb0f9adaa8833367f062afe55cd"
+      },
+      "native_log_receipt": {
+        "bytes": 126906,
+        "sha256": "0f5467f946fb9efd218cb08ef4032f91f008cbeb0c890921017ca9231fe373af"
+      },
+      "python_bindings_enabled": false
+    }
+  ],
+  "python_persistence_results": [
+    {
+      "mode": "debug",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 118,
+        "sha256": "920bd3b180e5af57c7ccf2911000bb71df91cca03996e321eb36d8a43a96c246"
+      }
+    },
+    {
+      "mode": "release",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 118,
+        "sha256": "0b5fb1b07e71693af99dfca4299aa50c55b7a171f491e2239cda9111238780f0"
+      }
+    },
+    {
+      "mode": "asan-ubsan",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "log_receipt": {
+        "bytes": 118,
+        "sha256": "da0a68ee4c72a0c02b673db4773b6dfec312056674e78301bf79ab259cc65f72"
+      }
+    }
+  ],
+  "source_sha256": {
+    "include/gig/book/order_book.hpp": {
+      "bytes": 4165,
+      "sha256": "2f57cb0a338598e968b55b1874aeddd26ffc1c705482b9d28555771eaa6593cb"
+    },
+    "src/book/order_book.cpp": {
+      "bytes": 27539,
+      "sha256": "5e17b4e0eec6617571937e3b8609883263cbe98e0476e0cd9bf3ade3e6c77bad"
+    },
+    "include/gig/replay/replay.hpp": {
+      "bytes": 6015,
+      "sha256": "f0a148f2b79e5312e2c81ce7ba812918b5dd67f177f7ffd04b90de1f000c47fc"
+    },
+    "src/replay/replay.cpp": {
+      "bytes": 28932,
+      "sha256": "2ecb697fe625819cb9da36312200f19851df45d18ceeb1af92946a9246c6d444"
+    },
+    "python/bindings/wire.hpp": {
+      "bytes": 15958,
+      "sha256": "3d52f09b608b917d42a8c6f75343f964073e813249eb952bd0f1b3648c2101e8"
+    },
+    "python/bindings/module.cpp": {
+      "bytes": 8533,
+      "sha256": "4e33f73090ed8943332608be5d6d055ea1fc75231536e2fac6f1ede7ff30050f"
+    },
+    "python/gig_microstructure/__init__.py": {
+      "bytes": 24523,
+      "sha256": "4e22c656ff10e76324a090080bbb7cecd565a4a04ef869939606fdd8ad1e48f3"
+    },
+    "tests/test_hot_checkpoint.cpp": {
+      "bytes": 3538,
+      "sha256": "43a6fa3b2f48f03ac61dfc27762c4e6cd15cfc3645982863aee9ae699c35d366"
+    },
+    "terminal/native_recovery.py": {
+      "bytes": 16094,
+      "sha256": "cb595d2f6f5a83755b884916cafac58dba87ba0790b3ca8b7aa9b6e9e37069cc"
+    },
+    "terminal/test_native_recovery.py": {
+      "bytes": 9980,
+      "sha256": "6070d405baae731a55041e19dbc6c728b2aa832f6613aa73398c4786c95e4200"
+    },
+    "include/gig/market_data/aggregate_depth.hpp": {
+      "bytes": 2454,
+      "sha256": "8e9849f628ad21a4cdee9cc31e3fa7ca3a632e9e15c10381fddb7d10630660e6"
+    },
+    "src/market_data/aggregate_depth.cpp": {
+      "bytes": 7433,
+      "sha256": "39d961dd85d21b219ec0378d1ce895dd628fb45dea9530482daf9be7447d9a8c"
+    },
+    "python/bindings/depth.cpp": {
+      "bytes": 4804,
+      "sha256": "8d027448bb48dbb6eda23fa08922f02bab1017597ca2305e051bb68e173b5898"
+    },
+    "tests/test_aggregate_depth.cpp": {
+      "bytes": 7811,
+      "sha256": "bd1e08fdf8053c56178674fd45c9f88e8489662814993a074228277b328658b8"
+    },
+    "terminal/test_aggregate_recovery.py": {
+      "bytes": 2058,
+      "sha256": "6bc0cf12666290c32a9539592ca6a4db631a9d7d16735c9d67625d6340fe1d44"
+    },
+    "CMakeLists.txt": {
+      "bytes": 28285,
+      "sha256": "3bee5db555fcbb1ffb5ec845bc44b0a632eb74af6a56e623b0f7596072a90fb7"
+    }
+  },
+  "limitations": [
+    "Not native ARM64 runtime qualification",
+    "Clang Python ASan configuration intentionally rejected by existing GNU/Linux-only harness;native Clang sanitizer tests and GCC Python sanitizer tests executed",
+    "GCC Python uses existing live-LSan harness;not whole-CPython exit-leak clearance",
+    "Authored typed-native source contract only;not full hot ITCH decoder/context or observed initialization",
+    "Local hashes/SQLite detect consistency;not source authentication or power-loss hardware qualification",
+    "L2 image excludes provider lexical checksum caches and does not infer order identities"
+  ]
+}

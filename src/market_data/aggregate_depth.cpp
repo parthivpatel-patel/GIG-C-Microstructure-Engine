@@ -67,4 +67,39 @@ Error AggregateDepth::apply(std::span<const Level> bids,std::span<const Level>as
     }catch(const std::bad_alloc&){return {ErrorCode::resource_exhausted,"aggregate.memory"};}
 }
 Result<Metrics> AggregateDepth::metrics()const{return calculate(bids_,asks_);}
+Result<AggregateStateImage> AggregateDepth::checkpoint(std::pmr::memory_resource* resource)const noexcept {
+    if(!resource)return Result<AggregateStateImage>::failure(ErrorCode::invalid_range,"aggregate.checkpoint_resource");
+    try {
+        AggregateStateImage image(resource);image.max_levels=limit_;image.sequence=sequence_;
+        image.revision=revision_;image.initialized=initialized_;
+        image.bids.assign(bids_.begin(),bids_.end());image.asks.assign(asks_.begin(),asks_.end());
+        return Result<AggregateStateImage>::success(std::move(image));
+    }catch(const std::bad_alloc&){return Result<AggregateStateImage>::failure(ErrorCode::resource_exhausted,"aggregate.checkpoint_memory");}
+}
+Result<AggregateDepth> AggregateDepth::restore(const AggregateStateImage& image,std::size_t expected,std::pmr::memory_resource* resource)noexcept {
+    if(!resource||expected==0||expected>4096||image.version!=1||image.max_levels!=expected)
+        return Result<AggregateDepth>::failure(ErrorCode::inconsistent_metadata,"aggregate.checkpoint_contract");
+    if(image.bids.size()>expected||image.asks.size()>expected)
+        return Result<AggregateDepth>::failure(ErrorCode::capacity,"aggregate.checkpoint_depth");
+    if((!image.initialized&&(image.revision||image.sequence||!image.bids.empty()||!image.asks.empty()))||
+       (image.initialized&&image.revision==0))
+        return Result<AggregateDepth>::failure(ErrorCode::inconsistent_state,"aggregate.checkpoint_boundary");
+    auto ordered=[](const auto& side,bool bid){
+        for(std::size_t i=0;i<side.size();++i){
+            if(side[i].price_ticks<=0||side[i].quantity==0)return false;
+            if(i&&(bid?side[i-1].price_ticks<=side[i].price_ticks:side[i-1].price_ticks>=side[i].price_ticks))return false;
+        }return true;
+    };
+    if(!ordered(image.bids,true)||!ordered(image.asks,false))
+        return Result<AggregateDepth>::failure(ErrorCode::inconsistent_state,"aggregate.checkpoint_levels");
+    try {
+        AggregateDepth owner(expected,resource);
+        if(image.initialized){
+            if(const auto e=owner.snapshot(image.bids,image.asks,image.sequence))
+                return Result<AggregateDepth>::failure(e.code,e.field);
+            owner.revision_=image.revision;
+        }
+        return Result<AggregateDepth>::success(std::move(owner));
+    }catch(const std::bad_alloc&){return Result<AggregateDepth>::failure(ErrorCode::resource_exhausted,"aggregate.restore_memory");}
+}
 }
