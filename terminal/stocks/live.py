@@ -54,10 +54,12 @@ def amount(v,positive=False):
     return decimal(v,positive)
 
 class LiveIEX:
-    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5,random_source=random.random,stable_seconds=30):
+    def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5,random_source=random.random,stable_seconds=30,shutdown_seconds=3.):
         if type(retry_budget) is not int or not 1<=retry_budget<=5:raise ValueError('live_retry_budget')
         import math
         if type(stable_seconds) not in (int,float) or not math.isfinite(stable_seconds) or not 1<=stable_seconds<=300:raise ValueError('live_stability_budget')
+        if type(shutdown_seconds)not in(int,float)or not math.isfinite(shutdown_seconds)or not .001<=shutdown_seconds<=5:raise ValueError('live_shutdown_budget')
+        self.shutdown_seconds=shutdown_seconds
         self.stable_seconds=stable_seconds
         self.retry_budget=retry_budget
         self.random_source=random_source
@@ -236,11 +238,22 @@ class LiveIEX:
         async with self.command_lock:await self._close()
     async def _close(self):
         self.stop_event.set()
-        if self.task and not self.task.done():
-            self.task.cancel()
-            try:await self.task
+        # Revoke publication before awaiting possibly uncooperative transport
+        # cleanup. Keep the task reference on timeout;start cannot orphan it.
+        self.socket=None;self.pending=None;self.phase='DISCONNECTED';self.state='FAILED';self.reason='worker_stopping'
+        if self.task:
+            if not self.task.done():
+                self.task.cancel()
+                done,_=await asyncio.wait({self.task},timeout=self.shutdown_seconds)
+                if not done:
+                    self.state='FAILED';self.reason='worker_shutdown_pending';self.persist_control()
+                    raise ValueError('worker_shutdown_pending')
+            try:self.task.result()
             except asyncio.CancelledError:pass
-        self.task=None;self.socket=None;self.pending=None;self.phase='DISCONNECTED';self.state='STOPPED'
+            except Exception:
+                self.task=None;self.state='FAILED';self.reason='worker_shutdown_failure';self.persist_control()
+                raise ValueError('worker_shutdown_failure')from None
+        self.task=None;self.socket=None;self.pending=None;self.phase='DISCONNECTED';self.state='STOPPED';self.reason='owner_stop'
         try:self.persist_control()
         except (ValueError,OSError):self.state='FAILED';self.reason='recovery_checkpoint_rejected';raise ValueError('recovery_checkpoint_rejected') from None
     async def run(self):

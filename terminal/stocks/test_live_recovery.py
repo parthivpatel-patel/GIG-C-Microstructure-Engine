@@ -84,3 +84,25 @@ class LiveRecovery(unittest.IsolatedAsyncioTestCase):
     return packet({'T':'success','msg':'connected'})if self.i==1 else packet({'T':'error','code':999999999999,'msg':'AUTHORED_SECRET_MUST_NOT_BE_REFLECTED'})
   c.connector=lambda *a,**k:Refused();await c.run();r=c.view()['last_failure']
   self.assertEqual(r['category'],'PROVIDER_AUTH_REJECTION');self.assertEqual(r['phase'],'AUTH_SENT');self.assertEqual(r['provider_code'],'999999999999');self.assertNotIn('AUTHORED_SECRET',str(c.view()))
+ async def test_uncooperative_shutdown_is_bounded_fenced_and_cannot_publish_late_frames(self):
+  from .test_final import packet,quote
+  c=client();c.shutdown_seconds=.001;release=asyncio.Event();entered=asyncio.Event();starts=[];late=[]
+  async def worker():
+   c.phase='CONNECTED_PENDING';ready(c);marker=object();c.socket=marker;starts.append(marker);entered.set()
+   while not release.is_set():
+    try:await release.wait()
+    except asyncio.CancelledError:continue
+   try:c.process(packet(quote()),socket_owner=marker)
+   except ValueError as exc:late.append(str(exc))
+  with patch.object(c,'run',new=worker):
+   await c.start(['AAPL']);await asyncio.wait_for(entered.wait(),1);before=c.receipts;closing=asyncio.create_task(c.close())
+   try:
+    done,_=await asyncio.wait({closing},timeout=.05)
+    self.assertTrue(done,'close must not wait forever for a worker that suppresses cancellation')
+    with self.assertRaisesRegex(ValueError,'worker_shutdown_pending'):await closing
+    with self.assertRaisesRegex(ValueError,'worker_shutdown_pending'):await c.start(['NVDA'])
+    self.assertEqual(len(starts),1);self.assertIsNone(c.socket);self.assertEqual(c.receipts,before);self.assertNotEqual(c.state,'SUBSCRIBED')
+   finally:
+    release.set();await asyncio.sleep(0)
+    await asyncio.gather(closing,return_exceptions=True);await c.close()
+   self.assertEqual(late,['stale_transport_frame']);self.assertEqual(c.receipts,before)

@@ -1,0 +1,9 @@
+# Bounded IEX worker shutdown — offline regression
+
+A deterministic worker that suppressed cancellation reproduced indefinite waiting in the published20a63d9 `_close`. The regression failed against that original method loaded from Git. Current shutdown revokes socket publication rights and pending handovers before awaiting cleanup,waits a bounded transport-drain interval,and retains/fences the task if it has not stopped. A new subscription cannot replace that pending owner. A late frame from its retired socket is rejected before decoding/receipt publication.
+
+The default drain interval is3seconds,explicit developer configuration is bounded. This is a cancellation-wait budget,not an end-to-end storage/network SLA. Failed drain persists a fail-closed control state where configured;successful cleanup reports owner_stop. Unexpected worker exceptions are reduced to a fixed shutdown-failure code. Provider permissions,credentials,destinations,execution and recording gates are unchanged. There is no automatic account/provider call or new observed-data retention.
+
+Executed focused cohort:36passing live-recovery/checkpoint/retry tests. The new case verifies pending-owner admission denial,late-frame rejection and unchanged accepted receipts. Its first command used an incorrect test-class locator;after correction the original published close failed as expected. A strengthened fake worker then needed its initial protocol phase set before the handshake;five broad attempts and one focused attempt were interrupted at fixture setup and are not passes. The fixture now bounds its readiness wait and the corrected focused cohort passed. Original logs are retained locally.
+
+The final guarded registry contains263cases;its completed profiles and source/log hashes are recorded in the continuation evidence. No GIG application,server,Alpaca connection,account access or order was involved. No real-provider qualification is claimed.
