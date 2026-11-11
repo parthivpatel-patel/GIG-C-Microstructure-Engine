@@ -105,9 +105,11 @@ def context(node,cik):
   span={'kind':'duration','start':start,'end':end}
  elif len(p)==1 and p[0].name==tag(X,'forever'):span={'kind':'forever','start':None,'end':None}
  else:raise XBRLError('xbrl_period_profile')
- dims=[];opaque=[tree(n)for n in node.children if n.name not in (tag(X,'entity'),tag(X,'period'),tag(X,'scenario'))]+[tree(n)for n in entity.children if n.name not in (tag(X,'identifier'),tag(X,'segment'))];seen=set()
- containers=children(one(node,tag(X,'entity')),tag(X,'segment'))+children(node,tag(X,'scenario'))
- for container in containers:
+ dims=[];opaque=[{**tree(n),'context_element':'context'}for n in node.children if n.name not in (tag(X,'entity'),tag(X,'period'),tag(X,'scenario'))]+[{**tree(n),'context_element':'entity'}for n in entity.children if n.name not in (tag(X,'identifier'),tag(X,'segment'))];seen=set()
+ segments=children(entity,tag(X,'segment'));scenarios=children(node,tag(X,'scenario'))
+ if len(segments)>1 or len(scenarios)>1:raise XBRLError('xbrl_context_container_cardinality')
+ containers=[('segment',n)for n in segments]+[('scenario',n)for n in scenarios]
+ for placement,container in containers:
   for child in container.children:
    if child.name in (tag(D,'explicitMember'),tag(D,'typedMember')):
     dimension=qname(child.attrs.get('dimension',''),child)
@@ -115,12 +117,12 @@ def context(node,cik):
     seen.add(dimension)
     if child.name==tag(D,'explicitMember'):
      if child.children:raise XBRLError('xbrl_explicit_member_structure')
-     member={'dimension':dimension,'kind':'explicit','member':qname(child.text(),child)}
+     member={'dimension':dimension,'context_element':placement,'kind':'explicit','member':qname(child.text(),child)}
     else:
-     if len(child.children)!=1:raise XBRLError('xbrl_typed_member_structure')
-     member={'dimension':dimension,'kind':'typed','member':tree(child.children[0])}
+     if len(child.children)!=1 or child.text().strip():raise XBRLError('xbrl_typed_member_structure')
+     member={'dimension':dimension,'context_element':placement,'kind':'typed','member':tree(child.children[0])}
     dims.append(member)
-   else:opaque.append(tree(child))
+   else:opaque.append({**tree(child),'context_element':placement})
  if len(dims)>32 or len(opaque)>32:raise XBRLError('xbrl_dimension_budget')
  core={'issuer_cik':cik,'period':span,'dimensions':sorted(dims,key=lambda d:d['dimension']),'opaque_segment':opaque}
  return {**core,'identifier_lexical':wire,'semantic_sha256':digest(core)}
@@ -245,7 +247,7 @@ def _interpret_instance(root,source,concepts):
    conflicts.append({'semantic_key_sha256':digest(key),'source_fact_ids':[r['source_fact_id']for r in rows],'policy':'EXACT_VALUE_CONFLICT_NOT_ACCURACY_INTERVAL_INFERENCE'})
    for row in rows:row['admission']='CONFLICTED_EXACT_VALUES'
   else:duplicates+=len(rows)-1
- result={'schema':'gig.sec.xbrl.instance.v1','source':source,'concept_profile_sha256':digest(concepts),'contexts':contexts,'units':units,'facts':facts,'schema_references':schema_refs,'unsupported_nodes':unsupported,'conflicts':conflicts,'consistent_duplicate_facts':duplicates,'completeness':'BOUNDED_INSTANCE_PROFILE_NOT_COMPLETE_DTS_INLINE_PRESENTATION_OR_HISTORY','limits':{'input_bytes':MAX_BYTES,'facts':MAX_FACTS,'contexts':MAX_CONTEXTS,'units':MAX_UNITS},'taxonomy_authority':'Explicit caller profile,not automatically verified DTS;unknown concepts preserved,never selected','origin':source['origin']}
+ result={'schema':'gig.sec.xbrl.instance.v1','source':source,'concept_profile_sha256':digest(concepts),'contexts':contexts,'units':units,'facts':facts,'schema_references':schema_refs,'unsupported_nodes':unsupported,'conflicts':conflicts,'consistent_duplicate_facts':duplicates,'completeness':'BOUNDED_INSTANCE_PROFILE_NOT_COMPLETE_DTS_INLINE_PRESENTATION_OR_HISTORY','limits':{'input_bytes':MAX_BYTES,'facts':MAX_FACTS,'contexts':MAX_CONTEXTS,'units':MAX_UNITS},'context_semantic_profile':'DIM_CONTEXT_ELEMENT_V2','taxonomy_authority':'Explicit caller profile,not automatically verified DTS;unknown concepts preserved,never selected','origin':source['origin']}
  if len(canonical(result))>8*1024*1024:raise XBRLError('xbrl_output_budget')
  result['canonical_sha256']=digest(result);return result
 

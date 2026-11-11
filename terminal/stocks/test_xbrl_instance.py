@@ -70,3 +70,14 @@ class XBRLInstance(unittest.TestCase):
    with self.subTest(length=len(raw)),self.assertRaises(ValueError):parsed(raw)
  def test_deterministic_parse_and_original_inputs_are_preserved(self):
   raw=xml();m=manifest(raw);spec=selected_concepts(NS);before=copy.deepcopy((m,spec));a=parse_instance(raw,m,spec);b=parse_instance(raw,m,spec);self.assertEqual(a,b);self.assertEqual((m,spec),before)
+
+ def test_dimension_context_element_is_part_of_semantic_identity(self):
+  segment='<x:segment><d:explicitMember dimension="ext:RegionAxis">ext:NorthMember</d:explicitMember></x:segment>'
+  raw=xml(context_extra=segment);a=parsed(raw)['contexts']['I']
+  changed=raw.replace(segment.encode(),b'').replace(b'<x:instant>2023-12-31</x:instant></x:period></x:context>',b'<x:instant>2023-12-31</x:instant></x:period>'+segment.replace('segment','scenario').encode()+b'</x:context>')
+  b=parsed(changed)['contexts']['I'];self.assertNotEqual(a['semantic_sha256'],b['semantic_sha256']);self.assertEqual(a['dimensions'][0]['context_element'],'segment');self.assertEqual(b['dimensions'][0]['context_element'],'scenario')
+ def test_duplicate_segment_scenario_and_mixed_typed_member_are_rejected(self):
+  segment='<x:segment><d:typedMember dimension="ext:DeskAxis"><ext:Desk>A</ext:Desk></d:typedMember></x:segment>'
+  raw=xml(context_extra=segment)
+  for altered in (xml(context_extra=segment+segment.replace('DeskAxis','OtherAxis')),raw.replace(b'<x:instant>2023-12-31</x:instant></x:period></x:context>',b'<x:instant>2023-12-31</x:instant></x:period><x:scenario/><x:scenario/></x:context>'),raw.replace(b'><ext:Desk>',b'>unmodeled<ext:Desk>')):
+   with self.assertRaises(XBRLError):parsed(altered)

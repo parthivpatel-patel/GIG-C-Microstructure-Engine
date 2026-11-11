@@ -1,0 +1,9 @@
+# XBRL context placement repair — November 11, 2026
+
+The authored failing-before case showed that moving an identical explicit dimension from entity/segment to context/scenario produced the same semantic context hash. The previous representation omitted that placement. XBRL contexts and dimensional relationships distinguish these context elements; this repair preserves the distinction without claiming complete dimensional or taxonomy validation.
+
+`terminal/stocks/xbrl_instance.py` now includes `context_element` on explicit/typed dimensions and opaque content, rejects multiple segment/scenario containers, and rejects unmodeled mixed text around a typed member's required single child. Parsed output declares `DIM_CONTEXT_ELEMENT_V2`. Expanded namespace names, original XML hashes, lexical values, source filing/receipt metadata, periods and exact units remain intact. Dimensioned/opaque facts remain excluded from consolidated financial selection; no segment totals are invented.
+
+Derived hashes intentionally change for affected contexts/facts and the versioned parsed-output profile. Raw source digests and existing numerical financial contracts are unchanged. Previously retained artifacts are not silently rewritten. Native frozen identities are unrelated and remain mandatory.
+
+Two new test methods include placement collision, duplicate segment/scenario and mixed typed-member cases. The complete affected instance/inline/DTS/collection/tool cohort contains51 cases;failing-before and final receipts are retained under build/remaining-engineering/product-xbrl-*. Full XML Schema/custom types,dimension defaults/DRS/hypercubes,inline transformations/continuations,presentation precedence,calculation networks and complete statements remain explicitly incomplete. No official SEC source,private historical dataset or network endpoint was processed by these tests.
