@@ -50,3 +50,37 @@ class LiveRecovery(unittest.IsolatedAsyncioTestCase):
   c.process(packet({'T':'subscription','quotes':['NVDA'],'trades':['NVDA']}));view=c.view()
   self.assertEqual(view['history'],[]);self.assertEqual(len(c.history),1)
   self.assertEqual(view['trade_reconciliation']['NVDA']['input_records'],len(view['history']))
+ async def test_concurrent_subscription_commands_cannot_orphan_a_second_worker(self):
+  c=client();ready(c);active=set();started=[];peak=[0]
+  async def worker():
+   task=asyncio.current_task();active.add(task);started.append(task);peak[0]=max(peak[0],len(active))
+   try:await asyncio.Event().wait()
+   finally:active.discard(task)
+  with patch.object(c,'run',new=worker):
+   try:
+    await c.start(['AAPL']);await asyncio.sleep(0)
+    await asyncio.gather(c.start(['NVDA']),c.start(['MSFT']));await asyncio.sleep(0)
+    self.assertEqual(peak[0],1);self.assertEqual(len(active),1)
+   finally:
+    await c.close()
+    for task in started:
+     if not task.done():task.cancel()
+    await asyncio.gather(*started,return_exceptions=True)
+ async def test_retired_socket_cannot_publish_a_frame_into_current_generation(self):
+  from .test_final import packet,quote
+  c=client();ready(c);current=object();c.socket=current;before=c.view()
+  with self.assertRaisesRegex(ValueError,'stale_transport_frame'):c.process(packet(quote()),socket_owner=object())
+  self.assertEqual(c.view(),before)
+  self.assertEqual(len(c.process(packet(quote()),socket_owner=current)),1)
+ async def test_provider_auth_failure_is_classified_by_phase_without_echoing_message_or_guessing_code(self):
+  from .test_final import packet
+  c=client()
+  class Refused:
+   async def __aenter__(self):self.i=0;return self
+   async def __aexit__(self,*args):pass
+   async def send(self,_):pass
+   async def recv(self):
+    self.i+=1
+    return packet({'T':'success','msg':'connected'})if self.i==1 else packet({'T':'error','code':999999999999,'msg':'AUTHORED_SECRET_MUST_NOT_BE_REFLECTED'})
+  c.connector=lambda *a,**k:Refused();await c.run();r=c.view()['last_failure']
+  self.assertEqual(r['category'],'PROVIDER_AUTH_REJECTION');self.assertEqual(r['phase'],'AUTH_SENT');self.assertEqual(r['provider_code'],'999999999999');self.assertNotIn('AUTHORED_SECRET',str(c.view()))

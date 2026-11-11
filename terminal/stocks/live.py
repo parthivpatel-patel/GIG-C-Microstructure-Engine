@@ -8,7 +8,10 @@ from .prices import timestamp,decimal
 from terminal.providers.kraken import timestamp_ns
 
 ENDPOINT='wss://stream.data.alpaca.markets/v2/iex'
-class ProtocolError(ValueError):pass
+class ProtocolError(ValueError):
+    def __init__(self,code,*,provider_code=None):
+        self.provider_code=provider_code
+        super().__init__(code)
 
 def stream_enabled(environment):
     # Explicit new configuration always wins, including false/invalid values.
@@ -63,6 +66,7 @@ class LiveIEX:
         self.catalog=workspace.catalog
         self.schedule=SessionSchedule.configured(workspace.environment)
         self.workspace=workspace;self.connector=connector;self.clock=clock;self.wall=wall
+        self.command_lock=asyncio.Lock();self.failure_context=None
         self.task=None;self.stop_event=asyncio.Event();self.state='DISABLED';self.phase='DISCONNECTED';self.symbols=();self.latest={};self.seen=[];self.receipts=0;self.duplicates=0;self.generation=0;self.failures=0;self.reason=None;self.last_data=None;self.channels=('quotes','trades');self.history=[];self.out_of_order=0;self.evicted=0;self.pending=None;self.socket=None;self.connection_count=0
         self.source_session_id=__import__('uuid').uuid4().hex
         self.store=store;self.store_reason='disabled_by_default'
@@ -115,7 +119,8 @@ class LiveIEX:
         keys=self.workspace.permission('alpaca')
         if not stream_enabled(self.workspace.environment):raise ValueError('live_explicit_enable_required')
         return keys
-    def process(self,raw):
+    def process(self,raw,*,socket_owner=None):
+        if socket_owner is not None and socket_owner is not self.socket:raise ProtocolError('stale_transport_frame')
         # Accepted event dictionaries are never edited by process();copy containers only.
         # All new rows/counters are staged until the complete frame validates.
         symbols,channels,generation=self.symbols,self.channels,self.generation
@@ -124,7 +129,9 @@ class LiveIEX:
         phase,latest,seen,count,dups,last,history,late_count,evicted=candidate;out=[];received=self.clock();wall_ns=int(self.wall()*10**9)
         for row in unpack(raw):
             t=row.get('T')
-            if t=='error':raise ProtocolError('provider_error_'+str(row.get('code'))[:8] if type(row.get('code')) is int else 'provider_error')
+            if t=='error':
+                code=str(row['code'])if type(row.get('code'))is int else None
+                raise ProtocolError('provider_error_'+code if code is not None else'provider_error',provider_code=code)
             if t=='success':
                 if phase=='CONNECTED_PENDING' and row.get('msg')=='connected':phase='AUTH_PENDING'
                 elif phase=='AUTH_SENT' and row.get('msg')=='authenticated':phase='SUBSCRIBE_PENDING'
@@ -202,8 +209,10 @@ class LiveIEX:
         try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
         except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
         rows=[present(e) for e in self.latest.values()];history=[present(e) for e in self.history if e['symbol'] in self.symbols]
-        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':self.store.cached if self.store else {'enabled':False,'reason':self.store_reason},'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(history,s,self.generation,cancellation_contract='AUTHORED_CANCEL_C_V1' if self.connector else None) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts,'control_checkpoint':self.restored_control,'durable_control_enabled':bool(self.store)},'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
+        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':self.store.cached if self.store else {'enabled':False,'reason':self.store_reason},'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(history,s,self.generation,cancellation_contract='AUTHORED_CANCEL_C_V1' if self.connector else None) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts,'control_checkpoint':self.restored_control,'durable_control_enabled':bool(self.store)},'metrics':{s:metrics(self.history,s,self.generation) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'last_failure':dict(self.failure_context)if self.failure_context else None,'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
     async def start(self,symbols,channels=None):
+        async with self.command_lock:return await self._start(symbols,channels)
+    async def _start(self,symbols,channels=None):
         self.require()
         if type(symbols) is not list or not 1<=len(symbols)<=self.symbol_limit() or len(set(symbols))!=len(symbols):raise ValueError('live_symbol_budget')
         for s in symbols:self.workspace.market_identity(s)
@@ -220,10 +229,12 @@ class LiveIEX:
                 self.persist_control()
                 await asyncio.wait_for(self.socket.send(msgpack.packb({'action':'unsubscribe',**{c:list(self.symbols) for c in self.channels}})),3.)
             except Exception:
-                await self.close();self.state='FAILED';self.reason='subscription_send_failed';raise ValueError('subscription_send_failed') from None
+                await self._close();self.state='FAILED';self.reason='subscription_send_failed';raise ValueError('subscription_send_failed') from None
             return
-        await self.close();self.latest={};self.symbols=selected;self.channels=chosen;self.stop_event=asyncio.Event();self.state='CONNECTING';self.reason=None;self.failures=0;self.task=asyncio.create_task(self.run())
+        await self._close();self.latest={};self.symbols=selected;self.channels=chosen;self.stop_event=asyncio.Event();self.state='CONNECTING';self.reason=None;self.failure_context=None;self.failures=0;self.task=asyncio.create_task(self.run())
     async def close(self):
+        async with self.command_lock:await self._close()
+    async def _close(self):
         self.stop_event.set()
         if self.task and not self.task.done():
             self.task.cancel()
@@ -262,7 +273,7 @@ class LiveIEX:
                                     continue
                                 raise
                             if self.pending and self.clock()-self.pending['started']>15:raise TimeoutError('subscription_ack_timeout')
-                            accepted=self.process(raw)
+                            accepted=self.process(raw,socket_owner=ws)
                             if accepted and subscribed_at is not None and self.clock()-subscribed_at>=self.stable_seconds:self.failures=0
                             if self.pending and self.pending['step']=='SUBSCRIBE_READY':
                                 await asyncio.wait_for(ws.send(msgpack.packb({'action':'subscribe',**{c:list(self.pending['symbols']) for c in self.pending['channels']}})),3.)
@@ -277,6 +288,13 @@ class LiveIEX:
                 except MemoryError:
                     self.state='FAILED';self.reason='resource_exhausted';self.phase='DISCONNECTED';return
                 except ProtocolError as exc:
+                    phase=self.phase
+                    if exc.provider_code is None:category='LOCAL_PROTOCOL_REJECTION'
+                    elif phase in ('AUTH_SENT','AUTH_PENDING'):category='PROVIDER_AUTH_REJECTION'
+                    elif phase in ('SUBSCRIBE_SENT','SUBSCRIBE_PENDING')or self.pending:category='PROVIDER_SUBSCRIPTION_REJECTION'
+                    elif phase=='SUBSCRIBED':category='PROVIDER_RUNTIME_REJECTION'
+                    else:category='PROVIDER_CONNECT_REJECTION'
+                    self.failure_context={'category':category,'phase':phase,'provider_code':exc.provider_code,'code':str(exc)[:80]}
                     self.state='FAILED';self.reason=str(exc)[:64];self.phase='DISCONNECTED';return
                 except (ValueError,KeyError,TypeError,OverflowError):
                     self.state='FAILED';self.reason='protocol_or_authorization_rejected';self.phase='DISCONNECTED';return

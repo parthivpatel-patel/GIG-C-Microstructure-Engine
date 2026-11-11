@@ -17,7 +17,7 @@ names=['terminal.stocks.test_acceptance','terminal.stocks.test_live_checkpoint',
 selected=[n for n in unittest.defaultTestLoader.getTestCaseNames(Expansion) if n not in ('test_endpoints_keep_origin_boundary_and_query_budgets','test_older_cached_page_is_readable_without_new_upstream_request')]
 names += ['terminal.stocks.test_sec_expansion.Expansion.'+n for n in selected]
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=121
+expected=124
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}
