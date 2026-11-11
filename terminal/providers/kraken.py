@@ -70,7 +70,16 @@ def decode(raw: str) -> dict:
 def decimal_wire(value, *, maximum: int, scale: int) -> tuple[str, str]:
     if type(value) not in (str, Decimal, int) or type(value) is bool:
         raise ProviderError('decimal_required')
-    text = str(value)
+    if type(value)is Decimal:
+        if not value.is_finite():raise ProviderError('decimal_invalid')
+        # JSON numbers may use scientific notation. Expand only after checking
+        # its exact tuple size;format(...,'f') does not use Decimal precision.
+        sign,digits,exponent=value.as_tuple()
+        point=len(digits)+exponent
+        length=(point if exponent>=0 else len(digits)+1 if point>0 else 2-point+len(digits))+sign
+        if length>48:raise ProviderError('decimal_grammar')
+        text=format(value,'f')
+    else:text = str(value)
     if len(text) > 48 or not DECIMAL.fullmatch(text):
         raise ProviderError('decimal_grammar')
     try:

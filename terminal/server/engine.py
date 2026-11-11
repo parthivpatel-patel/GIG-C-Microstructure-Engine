@@ -27,6 +27,11 @@ def exact_quantity(value):
 class NativeSession:
     """Mutated only on the ASGI event loop, never shared with a background thread."""
     def __init__(self):
+        self._initialize()
+        self.restart()
+
+    def _initialize(self):
+        """Fresh process-local controls;restoration never opens feeds or resumes play."""
         self.live_feed = None
         self.recorded_session = None
         self.mode = 'HISTORICAL_REPLAY'
@@ -43,7 +48,15 @@ class NativeSession:
         self.stream_timeouts = 0
         self.last_simulation = None
         self.replay = None
-        self.restart()
+
+    def checkpoint(self,implementation_sha256):
+        from terminal.session_recovery import capture
+        return capture(self,implementation_sha256)
+
+    @classmethod
+    def restore_checkpoint(cls,payload,expected_sha256,implementation_sha256):
+        from terminal.session_recovery import restore
+        return restore(payload,expected_sha256,implementation_sha256,session_type=cls)
 
     def reset_aggregate(self):
         from terminal.providers.kraken import KrakenBookAdapter

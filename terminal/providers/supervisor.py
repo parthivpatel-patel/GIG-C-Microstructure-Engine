@@ -7,6 +7,7 @@ import asyncio
 from contextlib import suppress
 import os
 import random
+import math
 import time
 import gig_microstructure as gig
 from .kraken import KrakenBookAdapter, Permission, ProviderError, live_messages
@@ -28,7 +29,9 @@ def configured_permission(environment,provider='kraken'):
 
 class FeedSupervisor:
     def __init__(self,*,environment=None,transport=None,clock=time.monotonic_ns,
-                 wall_clock=time.time_ns,sleep=asyncio.sleep,jitter=None):
+                 wall_clock=time.time_ns,sleep=asyncio.sleep,jitter=None,shutdown_seconds=3.):
+        if type(shutdown_seconds)not in (int,float)or not math.isfinite(shutdown_seconds)or not .001<=shutdown_seconds<=5:raise ProviderError('shutdown_budget')
+        self.command_lock=asyncio.Lock();self.retired=None;self.shutdown_seconds=shutdown_seconds;self.consecutive_failures=0;self.retry_budget=8
         self.environment=os.environ if environment is None else environment
         self.transport=live_messages if transport is None else transport
         self.provider='kraken'
@@ -66,6 +69,8 @@ class FeedSupervisor:
         self.epoch+=1
         if self.stop_event:self.stop_event.set()
         old=self.task;self.task=None
+        if old is not None:self.retired=old
+        old=self.retired
         if old and not old.done():old.cancel()
         self.state,self.reason='DISCONNECTED','operator_disconnected'
         if self.adapter:self.adapter.disconnected()
@@ -73,14 +78,27 @@ class FeedSupervisor:
         return old
 
     async def close(self):
-        old=self.cancel()
+        async with self.command_lock:await self._close()
+
+    async def _close(self):
+        old=self.cancel();epoch=self.epoch
         if old:
-            with suppress(asyncio.CancelledError):await old
+            done,_=await asyncio.wait({old},timeout=self.shutdown_seconds)
+            if not done:
+                self.state,self.reason='ERROR','worker_shutdown_pending'
+                raise ProviderError(self.reason)
+            with suppress(asyncio.CancelledError,Exception):old.result()
+            if self.retired is old:self.retired=None
         if self.capture is not None:await self.capture.stop()
+        return epoch
 
     async def start(self,symbol='BTC/USD',*,provider='kraken'):
+        async with self.command_lock:return await self._start(symbol,provider=provider)
+
+    async def _start(self,symbol,*,provider):
         if symbol not in SYMBOLS or provider not in ('kraken','coinbase'):raise ProviderError('configuration')
-        await self.close()
+        epoch=await self._close()
+        if epoch!=self.epoch:raise ProviderError('control_command_superseded')
         if self.provider!=provider:self.capture=None
         self.provider=provider;self.symbol=symbol
         if self.observed_transport:
@@ -100,7 +118,7 @@ class FeedSupervisor:
             self.state,self.reason='ERROR','permission_or_current_protocol_unverified'
             raise
         self.symbol,self.permission=symbol,permission
-        self.reconnects=self.messages=self.failures=0
+        self.reconnects=self.messages=self.failures=self.consecutive_failures=0
         self._new_book();self.stop_event=asyncio.Event()
         self.state,self.reason='CONNECTING','awaiting_provider'
         epoch=self.epoch
@@ -113,7 +131,7 @@ class FeedSupervisor:
             try:
                 self._new_book()
                 self.state,self.reason='SYNCHRONIZING','fresh_snapshot_required'
-                deadline=self.clock()+15_000_000_000
+                deadline=self.clock()+15_000_000_000;stable_since=None
                 stream=self.transport(self.permission,stop=self.stop_event,symbol=self.symbol)
                 try:
                     async with asyncio.timeout(15):
@@ -143,7 +161,8 @@ class FeedSupervisor:
                             self.exchange_ns=receipt.get('source_timestamp_ns')
                             self.state='LIVE_VERIFIED' if self.observed_transport else 'TESTED_WITH_FIXTURES'
                             self.reason='validated_subscribed_L2_not_full_market_or_L3'
-                            attempt=0
+                            if stable_since is None:stable_since=now
+                            elif now-stable_since>=30_000_000_000:attempt=0;self.consecutive_failures=0
                         if self.adapter.state not in ('LIVE','CANDIDATE_READY') and self.clock()>deadline:
                             raise ProviderError('snapshot_deadline')
                         if self.adapter.status(self.clock())['state']=='STALE':
@@ -162,18 +181,24 @@ class FeedSupervisor:
                 raise
             except Exception as error:
                 # Do not publish exception text: it may contain provider payload or URLs.
-                self.failures+=1
+                if epoch!=self.epoch:return
+                self.failures+=1;self.consecutive_failures+=1
                 self.reason=error.code if isinstance(error,ProviderError) else 'provider_transport_or_integrity_failure'
                 terminal=isinstance(error,ProviderError) and error.code=='session_record_budget'
                 self.state='ERROR' if terminal else 'RESYNCING'
                 if self.adapter:self.adapter.disconnected()
                 self.received_at_ns=self.exchange_ns=None
                 if terminal:return
+                if self.consecutive_failures>=self.retry_budget:
+                    self.state,self.reason='ERROR','retry_budget_exhausted';return
             finally:self.pending=False
             if epoch!=self.epoch or self.stop_event.is_set():break
             self.reconnects+=1
             delay=min(30.0,2.0**min(attempt,5));attempt=min(attempt+1,5)
-            await self.sleep(delay*self.jitter(.8,1.2))
+            jitter=self.jitter(.8,1.2)
+            if type(jitter)not in (int,float)or not math.isfinite(jitter)or not .8<=jitter<=1.2:
+                self.state,self.reason='ERROR','invalid_retry_jitter';return
+            await self.sleep(delay*jitter)
 
     def view(self):
         now=self.clock()
@@ -205,7 +230,7 @@ class FeedSupervisor:
             'received_at_ns':self.received_at_ns,'position':0,'event_count':0,'playing':False,
             'feed':{'state':self.state,'reason':self.reason,'real_time':bool(native and self.observed_transport),
                 'sequence_complete':False,'capture_complete':False,'stale':not trusted,'data_age_ns':age,
-                'reconnections':self.reconnects,'messages':self.messages,'failures':self.failures,
+                'reconnections':self.reconnects,'messages':self.messages,'failures':self.failures,'consecutive_failures':self.consecutive_failures,'retry_budget':self.retry_budget,'retry_reset_after_stable_seconds':30,'retired_worker_pending':bool(self.retired and not self.retired.done()),
                 'depth':self.depth,'native_depth_counts':{s:len(native[s]) if native else 0 for s in ('bids','asks')},'last_kind':self.kind,'pending_receive':self.pending,
                 'snapshots':self.adapter.snapshots if self.adapter else 0,
                 'updates':self.adapter.updates if self.adapter else 0,
