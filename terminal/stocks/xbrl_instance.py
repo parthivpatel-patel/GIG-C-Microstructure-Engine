@@ -172,6 +172,9 @@ def selected_concepts(gaap_namespace):
 def parse_instance(raw,manifest,concepts,*,allow_observed=False):
  if type(raw)is not bytes or not 1<=len(raw)<=MAX_BYTES:raise XBRLError('xbrl_input_budget')
  source=validate_manifest(raw,manifest,allow_observed)
+ return _interpret_instance(parse_xml(raw),source,concepts)
+
+def _interpret_instance(root,source,concepts):
  if type(concepts)is not dict or len(concepts)>512:raise XBRLError('xbrl_concept_budget')
  for key,spec in concepts.items():
   if type(key)is not str or not re.fullmatch(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}',key)or type(spec)is not dict or set(spec)!={'kind','period_type','numerator','denominator','metric','local_name'}or spec['kind']!='numeric'or spec['period_type']not in ('instant','duration')or spec['metric']not in sec.TAGS or spec['local_name']not in sec.TAGS[spec['metric']]:raise XBRLError('xbrl_concept_profile')
@@ -181,7 +184,6 @@ def parse_instance(raw,manifest,concepts,*,allow_observed=False):
   if key.split('}',1)[1]!=spec['local_name']:raise XBRLError('xbrl_concept_name_profile')
   ns=key[1:].split('}',1)[0]
   if re.fullmatch(r'https?://fasb\.org/us-gaap/[0-9]{4}',ns)and selected_concepts(ns).get(key)!=spec:raise XBRLError('xbrl_selected_concept_contract')
- root=parse_xml(raw)
  if root.text().strip():raise XBRLError('xbrl_root_text')
  if root.name!=tag(X,'xbrl'):raise XBRLError('xbrl_instance_only_inline_unsupported')
  contexts={};units={};facts=[];unsupported=[];schema_refs=[];ids=set()

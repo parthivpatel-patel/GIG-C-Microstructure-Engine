@@ -7,7 +7,8 @@ this strict instance profile;hash consistency is not source authentication.
 import copy
 from . import sec
 from .financials import calculate
-from .xbrl_instance import parse_instance,selected_financials,canonical,digest,XBRLError
+from .xbrl_instance import selected_financials,canonical,digest,XBRLError
+from .inline_xbrl import parse_filing
 
 MAX_FILINGS=32;MAX_BATCH=8;MAX_BATCH_BYTES=8*1024*1024;MAX_COLLECTION_BYTES=16*1024*1024
 class FilingCollection:
@@ -26,7 +27,7 @@ class FilingCollection:
   if size>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
   candidate=dict(self._filings);sizes={a:len(canonical(v))for a,v in candidate.items()}
   for entry in entries:
-   value=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=value['source']
+   value=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=value['source']
    if source['issuer_cik']!=self.cik or source['origin']!=self.origin:raise XBRLError('xbrl_collection_source_scope')
    accession=source['accession']
    if accession in candidate and candidate[accession]!=value:raise XBRLError('xbrl_accession_content_conflict')
