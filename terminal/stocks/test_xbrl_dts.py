@@ -47,3 +47,10 @@ class DTS(unittest.TestCase):
   with patch('terminal.stocks.xbrl_dts.parse_xml',side_effect=AssertionError('NO_UNAUTHORIZED_PROCESSING'))as parser:
    with self.assertRaisesRegex(XBRLError,'not_approved'):evaluate(origin='OBSERVED_OFFICIAL_RESPONSE')
    parser.assert_not_called()
+
+ def test_linkbase_reference_requires_simple_xlink_type(self):
+  # An invalid reference must not produce an apparently usable taxonomy graph.
+  for bad_type in ('extended','',None):
+   raw=schema();raw=raw.replace(b'xl:type="simple"',b'' if bad_type is None else ('xl:type="'+bad_type+'"').encode())
+   with self.subTest(kind=bad_type),self.assertRaisesRegex(XBRLError,'linkbase_reference'):
+    evaluate([document('authored.xsd',raw),document('presentation.xml',presentation())])

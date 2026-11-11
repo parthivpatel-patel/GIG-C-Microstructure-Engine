@@ -16,11 +16,11 @@ names=['terminal.stocks.test_acceptance','terminal.stocks.test_live_checkpoint',
 # This is a selected no-server development cohort,not the full API/fixed cohort.
 selected=[n for n in unittest.defaultTestLoader.getTestCaseNames(Expansion) if n not in ('test_endpoints_keep_origin_boundary_and_query_budgets','test_older_cached_page_is_readable_without_new_upstream_request')]
 names += ['terminal.test_native_recovery','terminal.test_aggregate_recovery','terminal.stocks.test_xbrl_instance','terminal.stocks.test_xbrl_collection','terminal.stocks.test_xbrl_tool']
-names += ['terminal.test_session_recovery','terminal.stocks.test_inline_xbrl','terminal.stocks.test_xbrl_dts']
+names += ['terminal.test_itch_durable_recovery','terminal.test_session_recovery','terminal.stocks.test_inline_xbrl','terminal.stocks.test_xbrl_dts']
 names += ['terminal.providers.test_'+name for name in ('recovery_hardening','supervisor','coinbase_supervisor','transport','kraken','integrity','kraken_admin','differential')]
 names += ['terminal.stocks.test_sec_expansion.Expansion.'+n for n in selected]
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=263
+expected=273
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}

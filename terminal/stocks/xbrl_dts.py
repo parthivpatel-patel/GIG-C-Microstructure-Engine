@@ -72,7 +72,7 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
      destination=uri(urljoin(key,path));edges.append({'from':key,'to':destination,'kind':'include'if child.name==tag(XS,'include')else'import','namespace':expected});requests.append((destination,depth+1,expected,'schema'))
     if child.name==tag(L,'linkbaseRef'):
      href=child.attrs.get(tag(XL,'href'))
-     if not href:raise XBRLError('dts_linkbase_reference')
+     if child.attrs.get(tag(XL,'type'))!='simple'or type(href)is not str or not href:raise XBRLError('dts_linkbase_reference')
      destination=uri(urljoin(key,href));edges.append({'from':key,'to':destination,'kind':'linkbase'});requests.append((destination,depth+1,None,'linkbase'))
    for element in node.children:
     if element.name in(tag(XS,'simpleType'),tag(XS,'complexType')):unsupported.append({'uri':key,'feature':'CUSTOM_TYPE_VALIDATION_NOT_IMPLEMENTED'});continue
