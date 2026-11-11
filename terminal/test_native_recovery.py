@@ -13,6 +13,16 @@ def snapshot_doc():
  s={**scope(),'epoch':'1'};doc=event(100,6,{'kind':'0','coverage':'0','depth':'0','orders':[{'order':{'order_id':'91','side':'0','price_ticks':'9900','quantity':'13'},'priority_index':'3'},{'order':{'order_id':'92','side':'1','price_ticks':'9902','quantity':'17'},'priority_index':'1'}],'levels':[],'boundaries':[{'scope':s,'sequence':'100','last_subevent':'0','subevent_count':'1'}]});doc['data']['metadata']['scope']=known(s);return doc
 
 class NativeRecovery(unittest.TestCase):
+ def test_restart_reader_structure_budget_is_checked_before_durable_publication(self):
+  from terminal.verification.artifacts import EvidenceError
+  with tempfile.TemporaryDirectory()as d:
+   c=owner(d);before=c.status();canonical=c.accepted_canonical();checkpoint=gig.Replay.checkpoint
+   def oversized(instance):
+    image=checkpoint(instance);image['injected_oversized_metadata']=[None]*20001;return image
+   # Real JSON structure-budget failure,not a mocked decoder rejection. A faulty
+   # image producer must never publish a checkpoint that restart cannot admit.
+   with patch.object(gig.Replay,'checkpoint',new=oversized),self.assertRaisesRegex(EvidenceError,'json_structure_budget'):c.apply(record(0))
+   self.assertEqual(c.status(),before);self.assertEqual(c.accepted_canonical(),canonical);restored=owner(d);self.assertEqual(restored.status()['capture_index'],None);self.assertEqual(restored.accepted_canonical(),canonical)
  def test_hot_roundtrip_and_exact_suffix_match_direct_native(self):
   with tempfile.TemporaryDirectory()as d:
    c=owner(d);reference=gig.Replay(rules(),replay_config(),limits=LIMITS,resource_budget_bytes='33554432')
