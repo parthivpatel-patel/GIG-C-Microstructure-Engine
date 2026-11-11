@@ -32,6 +32,7 @@ public:
 };
 void bind_schemas(py::module_&);
 void bind_depth(py::module_&);
+void bind_itch_recovery(py::module_&);
 PYBIND11_MODULE(_native,m){
     m.attr("__version__")="0.1.1";m.attr("schema_version")="1.0";m.attr("__compiler__")=__VERSION__;m.attr("__build_type__")=GIG_PYTHON_BUILD_TYPE;m.attr("__config_flags__")=GIG_PYTHON_CONFIG_FLAGS;m.attr("__target_flags__")=GIG_PYTHON_TARGET_FLAGS;m.attr("__core_flags__")=GIG_PYTHON_CORE_FLAGS;m.attr("__python__")=PY_VERSION;m.attr("__pybind11__")=std::to_string(PYBIND11_VERSION_MAJOR)+"."+std::to_string(PYBIND11_VERSION_MINOR)+"."+std::to_string(PYBIND11_VERSION_PATCH);
     py::class_<NativeReplay>(m,"_Replay").def("checkpoint",&NativeReplay::checkpoint).def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
@@ -55,5 +56,6 @@ PYBIND11_MODULE(_native,m){
     m.def("fraction_roundtrip",[](py::handle value){return api([&](){return write(read<exact::Fraction>(value));});});
     bind_schemas(m);
     bind_depth(m);
+    bind_itch_recovery(m);
 }
 } // namespace gig::python
