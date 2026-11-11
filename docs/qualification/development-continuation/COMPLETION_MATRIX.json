@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.matrix.v5",
+  "schema": "gig.development.completion.matrix.v6",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -404,17 +404,21 @@
         "scripts/inspect_xbrl_instances.py",
         "terminal/stocks/test_xbrl_instance.py",
         "terminal/stocks/test_xbrl_collection.py",
-        "terminal/stocks/test_xbrl_tool.py"
+        "terminal/stocks/test_xbrl_tool.py",
+        "terminal/stocks/inline_xbrl.py",
+        "terminal/stocks/xbrl_dts.py",
+        "terminal/stocks/test_inline_xbrl.py",
+        "terminal/stocks/test_xbrl_dts.py"
       ],
-      "test_evidence": "32 authored XBRL tests(16parser/12collection/4tool) in all five supported binding environments;included in175 no-launch tests per environment. Existing strict-vintage/legacy/shard tests preserved;13 market/SEC cross-language assertions passed.",
-      "explanation": "New supplied-file XBRL instance profile preserves expanded contexts/dimensions/units,exact lexical facts,nil/precision,source hashes,original missing receipts and conflicts. Atomic bounded filing batches preserve explicit amendment links and select by nanosecond acceptance cutoff,with hash-bound pagination and private exports. Existing companyfacts/v2 UI remains unchanged;no new observed SEC data was requested.",
+      "test_evidence": "48authored XML cases:32instance/collection/tool,7inline,9DTS;all five binding profiles passed,including final fact/output bounds. Full263guarded cohort per5profiles;existing13cross-language assertions preserved.",
+      "explanation": "Existing filing batches/vintage selection now admit a bounded plain inline-XBRL1.1 profile with exact scaling/sign and original lexical/source lineage. Supplied-file DTS discovery binds source hashes,document kinds/import namespaces and missing references;simple presentation locators/order/cycles are supported. Unknown transforms/types/precedence remain explicit. No external URI is fetched.",
       "disposition": "Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.",
-      "action_now": "Implement the agreed next DTS/inline/presentation scope and independent fixtures before labeling outputs complete statements;no new SEC calls under current directive.",
+      "action_now": "Complete the next explicitly bounded transformation/type/relationship profile with independent fixtures,then statement/API integration. Structural closure is not schema or accounting validation.",
       "work_class": "PARTIAL:bounded instance/filing-vintage infrastructure complete;full statement semantics,product integration and historical source coverage remain open",
-      "completed_this_session": "Bounded safe XML instance admission;consolidated selected-fact conversion using existing exact financial calculations;namespace-qualified lineage;atomic idempotent multi-filing admission;conservative amendment/cutoff selection;safe offline CLI and private export.",
-      "remaining_implementation_or_qualification": "Full DTS/schema/type and inline-XBRL transformation,presentation/calculation linkbases,extension-taxonomy semantics,complete statement assembly and comprehensive authentic historical instance/vintage coverage remain missing. The new offline path is not automatically wired into existing v2 companyfacts APIs.",
+      "completed_this_session": "Fact interpreter refactored without changing strict instance API;plain inline scale/sign/nil/source gating;pre-materialization fact/output limits;DTS schema/import/include/linkbase discovery;declared concept metadata and conservative presentation graphs;missing/custom/conflicting semantics remain unvalidated.",
+      "remaining_implementation_or_qualification": "Full inline transformation/continuation/tuple/nested markup support,complete XML Schema/DTS custom-type and extension validation,equivalent/prohibited arc precedence across links,calculation relationships,complete statement assembly,v2/UI integration and authentic complete historical acquisition/receipt coverage remain missing.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
-      "effort_estimate": "Several engineer-weeks for a scoped full DTS/inline/presentation/extension and statement-integration implementation with independent validation. The earlier2\u20134-week planning range remains conditional on a defined fidelity/input profile;no reliable complete-universe date is established."
+      "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
     {
       "id": "SEC03",
@@ -461,10 +465,11 @@
         "terminal/stocks/trade_tape.py",
         "terminal/stocks/test_live_recovery.py",
         "terminal/stocks/test_live_recovery.py",
-        "terminal/web/src/marketContract.ts"
+        "terminal/web/src/marketContract.ts",
+        "terminal/stocks/test_live_recovery.py"
       ],
-      "test_evidence": "35 focused worker/checkpoint/retry tests;175 guarded offline cases per five environments;154 frontend checks and production build;phase/code diagnostic and stale-socket/concurrent-start regressions.",
-      "explanation": "A reproduced one-quote-per-reconnect flap could reset failure count indefinitely. Retry count now resets only after a stable subscribed interval(default30s,bounded1\u2013300),including quiet transport liveness without inventing observations. Backoff,permissions,generation isolation and source-gap limitations remain. Concurrent commands now serialize to prevent orphan workers;retired sockets cannot publish;provider error code and actual phase are bounded and redacted rather than inferred entitlement meanings.",
+      "test_evidence": "36focused IEX recovery/retry/checkpoint cases and263final guarded cases per five supported binding environments. Cancellation-resistant worker timeout and late-frame rejection reproduced/fixed;no live provider.",
+      "explanation": "A reproduced one-quote-per-reconnect flap could reset failure count indefinitely. Retry count now resets only after a stable subscribed interval(default30s,bounded1\u2013300),including quiet transport liveness without inventing observations. Backoff,permissions,generation isolation and source-gap limitations remain. Concurrent commands now serialize to prevent orphan workers;retired sockets cannot publish;provider error code and actual phase are bounded and redacted rather than inferred entitlement meanings. Bounded cancellation drain now revokes publication before await,retains a pending worker and denies replacement until drain;accepted prefix stays unchanged.",
       "disposition": "Repaired and offline verified;not a lossless-capture claim",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
       "work_class": "Implemented bounded development contract"
@@ -542,6 +547,29 @@
       "remaining_implementation_or_qualification": "Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.",
       "dependency": "Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.",
       "effort_estimate": "1\u20132 engineer-days for a specified bounded observed-action profile;complete/lossless guarantees cannot be estimated or promised for a source that lacks that authority."
+    },
+    {
+      "id": "MD07",
+      "status": "PARTIAL",
+      "requirement": "Official-contract Kraken cryptocurrency L2 and native/product integration",
+      "source": [
+        "terminal/providers/kraken.py",
+        "terminal/providers/supervisor.py",
+        "terminal/providers/test_recovery_hardening.py",
+        "terminal/providers/test_differential.py",
+        "terminal/server/engine.py",
+        "terminal/web/src/OrderBook.tsx",
+        "terminal/l2_research.py"
+      ],
+      "test_evidence": "62offline provider cases including10,000authored independent transitions;finite scientific JSON precision/CRC,one-worker concurrency,bounded retiring-worker fence,retry exhaustion and invalid jitter regressions;inside263guarded cases. No current official documentation or live payload received.",
+      "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.",
+      "disposition": "Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.",
+      "completed_this_session": "Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.",
+      "remaining_implementation_or_qualification": "Retrieve and verify the current official WebSocketv2 book/checksum/trade/status/session contract and applicable usage evidence;reconcile candidate rules and add source-versioned fixtures. Actual later private-provider and browser qualification remain unrun. Do not change the provisional flag before evidence exists.",
+      "dependency": "Current official protocol/rights evidence;earlier CONNECT403 and enforced policy excluding Kraken docs/feed domains remain recorded. No blocked operation was retried and no proxy bypass attempted.",
+      "action_now": "Obtain an authorized official specification copy or permitted documentation-only access,then implement verified source-specific differences. Continue offline contracts;never infer L3 or IEX equity depth.",
+      "effort_estimate": "1\u20133engineer-days for a bounded documented source-contract reconciliation/test package once authoritative material is available;live/owner qualification separate.",
+      "work_class": "PARTIAL candidate engineering;official-contract and observed qualification externally unverified"
     },
     {
       "id": "RES01",
@@ -626,24 +654,32 @@
         "terminal/native_recovery.py",
         "terminal/test_native_recovery.py",
         "terminal/test_aggregate_recovery.py",
-        "tests/test_hot_checkpoint.cpp"
+        "tests/test_hot_checkpoint.cpp",
+        "include/gig/itch/hot_checkpoint.hpp",
+        "src/itch/context_checkpoint.cpp",
+        "src/itch/hot_checkpoint.cpp",
+        "src/itch/hot_identity.hpp",
+        "terminal/session_recovery.py",
+        "terminal/test_session_recovery.py",
+        "tests/test_itch_hot_checkpoint.cpp"
       ],
-      "test_evidence": "Six GCC/Clang native CTest configurations:148/148/149 and148/148/145;98 hot-image assertions each and all eight frozen hashes. Current16 L3/source and3 L2 real-native recovery cases are included in175 guarded checks per five supported Python binding environments;actual process exits and PMR allocation failures covered.",
-      "explanation": "Full native L3 order-book/replay images and isolated restoration now work,without reapplying historical book events. A bounded authored typed-native coordinator atomically binds native image,source session/generation/capture position,prefix/dedup and binary identity. L2 aggregate images preserve levels,revision and sequence separately. L1 control recovery remains intent-only and does not fabricate depth.",
+      "test_evidence": "Six full native profiles149/149/150GCC and149/149/146Clang,221ITCH hot-context checks,46actual restore failpoints,eight actual frozen hashes each. Nine new real-native product-session/file/migration cases inside263guarded cases per5binding profiles.",
+      "explanation": "Owned typed ITCH source-context,receipt mapping and both native-book/replay images now restore isolated accepted authored-empty prefixes without source reapplication. Token ownership is fresh;active order identities/units and derived sequences agree. Explicit native product-session checkpoints restore position/speed paused,with immutable private files,canonical admission and bounded migration. No automatic application recovery or provider connection is enabled.",
       "disposition": "Authored native hot-state/source recovery is implemented and tested. Full ITCH framer/decoder/context/receipt hot state,optional product-session wiring and target power-loss guarantees remain separate open subrequirements.",
-      "action_now": "Next implement the full source-context/framer/receipt image and opt-in product-session integration against deterministic fixtures;do not claim observed recovery or launch GIG.",
+      "action_now": "Implement a versioned bounded full-ITCH image codec and seed/framer integration against the current typed images;preserve explicit independently trusted identity. Do not reimplement the completed native/session APIs or activate startup/provider paths.",
       "work_class": "PARTIAL:bounded authored native/source hot recovery complete;full source/product/target scope remains open",
       "missing_implementation": [
-        "Full hot ITCH source-context/framer/decoder/receipt checkpoint coordinated with the native book",
-        "Product-session integration and versioned migration of this opt-in authored profile;no automatic application startup path was enabled",
-        "Provider lexical checksum/source caches for a genuine L2 source,where authoritatively specified",
-        "Complete observed L3 initialization/source authority",
-        "Target filesystem/hardware power-loss qualification"
+        "Durable full ITCH image wire codec with independently trusted source/implementation identity",
+        "Complete-seed hot reconstructor profile;legacy seeded prefix replay remains working",
+        "Coordinated gzip/framer boundary or bounded partial-input recovery",
+        "Explicit application startup policy and persisted full-ITCH session integration",
+        "Genuine L2 provider lexical checksum/cache recovery where authoritative",
+        "Actual complete observed initialization and target power-loss qualification"
       ],
-      "completed_this_session": "Direct native full-state import;atomic SQLite source coordinator;healthy-prefix fencing;complete authored order-snapshot resynchronization;stale CAS/uncertain commit fencing;real crash/allocation/corruption tests;restart-reader prepublication budget guard;isolated L2 aggregate images.",
-      "remaining_implementation_or_qualification": "The authored typed-native profile is not a complete hot ITCH-context image or an observed source. L2 images do not reconstruct raw lexical checksum caches. New SDK/coordinator infrastructure is explicit and not automatically activated by the application. Hardware durability and empirical source recovery remain unqualified.",
+      "completed_this_session": "Typed context/book/receipt hot capture/import;fingerprint optional-dispatch repair;pre-copy4096vector limit;physical allocation-failure tests;actual NativeSession integration;private atomic new-file publication;real process-exit-after-publish and explicit migration/rollback-input preservation.",
+      "remaining_implementation_or_qualification": "Stable durable encoding/admission of the full typed ITCH image,seeded hot reconstruction,gzip/partial-framer coordination and optional application startup wiring remain missing. Product file recovery currently supports authored-native sessions,not observed/provider/recorded sources. Filesystem power-loss/owner/observed source guarantees remain unqualified.",
       "dependency": "Bounded typed-native contract now exists and is verified. Remaining work needs an explicit full source-image/migration profile,product integration tests and,for empirical claims,complete authorized source initialization plus actual target durability evidence.",
-      "effort_estimate": "Planning range3\u20137 engineer-days for a tightly scoped full-source/product integration and independent failure matrix;source-profile/migration decisions can change this. Hardware/provider qualification is additional and cannot be guaranteed by local fixtures."
+      "effort_estimate": "Planning range3\u20137engineer-days for a tightly scoped remaining codec/seed/framer/startup package and failure matrix after its artifact/migration profile is fixed;hardware/source qualification is separate."
     },
     {
       "id": "SECURITY01",
@@ -830,31 +866,31 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "72e175e2f94981647e1921be97b875a452b7f3c5",
-  "row_count_scope": "49 entries =48 reviewed implementation/qualification areas plus1 historical A18/A19 decision(SCOPE02);no requirement was removed",
-  "previous_matrix_commit": "3e17e7052a6b20478bd02d62a46c679660eeaac1",
+  "tested_application": "0c4196b2e0270dacfa07638c2c5d94f3de54cb49",
+  "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
+  "previous_matrix_commit": "53e5892c58390d9a5bd935d7a40a452beb842497",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current local receipts are in EVIDENCE.json and immutable native milestone receipts. COMPLETE denotes the stated bounded engineering contract,not live-provider,target-browser,ARM64 or production acceptance.",
+  "evidence_policy": "Current offline source-bound receipts in EVIDENCE.json;full compiler/hot and affected XML profiles recorded. No app/provider/ARM64 or actual browser qualification. Unchanged frontend154/build evidence retained from53e5892,not rerun.",
   "implementation_checkpoints": [
-    "47e9b1697b1e528091c3e254458d6d365cd52d7f",
-    "fb6adf24a9898bb4c2a6737ac7208837bac0654d",
-    "5a90f57c991b4ba661664894011aa0682e1723e0",
-    "2395277e945462fe8e1c4f3a1686efe9e6327184",
-    "72e175e2f94981647e1921be97b875a452b7f3c5"
+    "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
+    "56cd5c698fecfff3e31a309ee6c6a997137adc37",
+    "5768da42f25321257047208b92f580f83be788cc",
+    "20a63d90095cbd24b84215668dbae4c7c13b0d8f",
+    "0c4196b2e0270dacfa07638c2c5d94f3de54cb49"
   ],
   "date": "2026-11-11",
   "timezone": "America/New_York",
   "counts": {
     "COMPLETE": 34,
     "BLOCKED": 7,
-    "PARTIAL": 7,
+    "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "3e17e7052a6b20478bd02d62a46c679660eeaac1",
-  "reviewed_area_count": 48,
+  "starting_commit": "53e5892c58390d9a5bd935d7a40a452beb842497",
+  "reviewed_area_count": 49,
   "historical_decision_rows": 1,
-  "total_rows": 49,
+  "total_rows": 50,
   "development_complete": false,
   "historical_decision_ids": [
     "SCOPE02"

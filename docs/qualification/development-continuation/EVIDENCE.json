@@ -1,305 +1,337 @@
 {
-  "schema": "gig.development.continuation.evidence.v5",
+  "schema": "gig.development.continuation.evidence.v6",
   "branch": "development/gig-ui-redesign",
-  "starting_source": "3e17e7052a6b20478bd02d62a46c679660eeaac1",
-  "recovered_remote": "47e9b1697b1e528091c3e254458d6d365cd52d7f",
-  "tested_runtime_source": "72e175e2f94981647e1921be97b875a452b7f3c5",
+  "starting_source": "53e5892c58390d9a5bd935d7a40a452beb842497",
+  "tested_runtime_source": "0c4196b2e0270dacfa07638c2c5d94f3de54cb49",
   "execution_date_from_client": "2026-11-11",
-  "closure": "Final documentation-only commit intentionally not self-embedded;verify Git remote receipt",
+  "closure": "Final documentation commit intentionally not self-embedded;use verified Git remote receipt",
   "prior_evidence": {
-    "git_object": "3e17e7052a6b20478bd02d62a46c679660eeaac1:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "a1a655bfbdd58586d94518c9e79b5bda2c70629637c44ea0db120ec23bce8897"
+    "git_object": "53e5892c58390d9a5bd935d7a40a452beb842497:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "24f8fff1b99343715714c81a8ebc92558fa2fd654d81e6fa4f963c2a6c6caf76"
   },
   "source_sha256": {
     "CMakeLists.txt": {
-      "bytes": 28285,
-      "sha256": "3bee5db555fcbb1ffb5ec845bc44b0a632eb74af6a56e623b0f7596072a90fb7"
+      "bytes": 28651,
+      "sha256": "b5ea484091ff272bd5e5fed7f99c5fa07c37fb3bc8762ea929bb5e7f673143a3"
     },
-    "include/gig/book/order_book.hpp": {
-      "bytes": 4165,
-      "sha256": "2f57cb0a338598e968b55b1874aeddd26ffc1c705482b9d28555771eaa6593cb"
+    "include/gig/itch/context.hpp": {
+      "bytes": 11061,
+      "sha256": "8eb655516ae1443b6c6e1518d848d004550029f8e51e49be7e86a00d94fdd761"
     },
-    "include/gig/market_data/aggregate_depth.hpp": {
-      "bytes": 2454,
-      "sha256": "8e9849f628ad21a4cdee9cc31e3fa7ca3a632e9e15c10381fddb7d10630660e6"
+    "include/gig/itch/hot_checkpoint.hpp": {
+      "bytes": 1504,
+      "sha256": "39133826439e382ae554bf975c43c19cad32f60792c27bcd2efe92cf578cf00c"
+    },
+    "include/gig/itch/reconstruction.hpp": {
+      "bytes": 5851,
+      "sha256": "e8a209960ef79577adca4e092f7d338cf68b73b430d812b784344776e660d4c5"
     },
     "include/gig/replay/replay.hpp": {
-      "bytes": 6015,
-      "sha256": "f0a148f2b79e5312e2c81ce7ba812918b5dd67f177f7ffd04b90de1f000c47fc"
+      "bytes": 6079,
+      "sha256": "7c81c182c77e4f3145f272ddd8c237ec874e45e722408b443dbf3e9f998c2304"
     },
-    "python/bindings/depth.cpp": {
-      "bytes": 4804,
-      "sha256": "8d027448bb48dbb6eda23fa08922f02bab1017597ca2305e051bb68e173b5898"
+    "src/itch/context_checkpoint.cpp": {
+      "bytes": 6309,
+      "sha256": "d55916984fe083352ea30a500fd5362a4c561accf6fc410e11cc6831233778d9"
     },
-    "python/bindings/module.cpp": {
-      "bytes": 8533,
-      "sha256": "4e33f73090ed8943332608be5d6d055ea1fc75231536e2fac6f1ede7ff30050f"
+    "src/itch/hot_checkpoint.cpp": {
+      "bytes": 8881,
+      "sha256": "52e202d706fcfb931a2906989bf7e130533674b194dbbf50dccbcea110ad83d7"
     },
-    "python/bindings/wire.hpp": {
-      "bytes": 15958,
-      "sha256": "3d52f09b608b917d42a8c6f75343f964073e813249eb952bd0f1b3648c2101e8"
+    "src/itch/hot_identity.hpp": {
+      "bytes": 4215,
+      "sha256": "0203523d10243a53228bd2872a43aae839557d04ab3608191973df8793c54102"
     },
-    "python/gig_microstructure/__init__.py": {
-      "bytes": 24523,
-      "sha256": "4e22c656ff10e76324a090080bbb7cecd565a4a04ef869939606fdd8ad1e48f3"
+    "terminal/providers/kraken.py": {
+      "bytes": 20262,
+      "sha256": "0e682edcb2f78ab43a0127bb8be3a1cb6751cb28e14685a621d8e3764003e02a"
     },
-    "scripts/inspect_xbrl_instances.py": {
-      "bytes": 3152,
-      "sha256": "b09fc9cd05f2af5e08c02938244b3a7076747219893c89a4cedecb5a3f4b1ff2"
+    "terminal/providers/supervisor.py": {
+      "bytes": 17069,
+      "sha256": "6bb01550c7b688e1ec798611b7517016b088f4b4aa2b3b284271e7dc63994049"
     },
-    "src/book/order_book.cpp": {
-      "bytes": 27539,
-      "sha256": "5e17b4e0eec6617571937e3b8609883263cbe98e0476e0cd9bf3ade3e6c77bad"
+    "terminal/providers/test_recovery_hardening.py": {
+      "bytes": 4290,
+      "sha256": "7a09014f546c5bf810148bd8050c191dfb2d9f4a609950cce171569e4e292bba"
     },
-    "src/market_data/aggregate_depth.cpp": {
-      "bytes": 7433,
-      "sha256": "39d961dd85d21b219ec0378d1ce895dd628fb45dea9530482daf9be7447d9a8c"
+    "terminal/server/engine.py": {
+      "bytes": 18433,
+      "sha256": "d8e04481993f4db5d2e4edc2292eb250b3ba179e40b6b30b5726c623102314e8"
     },
-    "src/replay/replay.cpp": {
-      "bytes": 28932,
-      "sha256": "2ecb697fe625819cb9da36312200f19851df45d18ceeb1af92946a9246c6d444"
+    "terminal/session_recovery.py": {
+      "bytes": 7600,
+      "sha256": "f1ac08d748eeaff8b524c62cef27ff7c8de7223dc50c9ddb0a34a5d728732bc5"
     },
-    "terminal/native_recovery.py": {
-      "bytes": 16094,
-      "sha256": "cb595d2f6f5a83755b884916cafac58dba87ba0790b3ca8b7aa9b6e9e37069cc"
+    "terminal/stocks/inline_xbrl.py": {
+      "bytes": 5016,
+      "sha256": "3208c701204f24e5a4e985e31ed3143467597a099873faef7c0ce485232563e0"
     },
     "terminal/stocks/live.py": {
-      "bytes": 29839,
-      "sha256": "d82e18094675809709dd2a4819b69004cc0108412da0af037f53027e0ddd1d9f"
+      "bytes": 30877,
+      "sha256": "f68215c61be41438711fd22f67e9d53bbc846fa1e4add56da9994b50a4b85587"
+    },
+    "terminal/stocks/test_inline_xbrl.py": {
+      "bytes": 4794,
+      "sha256": "91a88e883454e3430c1b38cef08380336366258df880273cc44da7c103b30f2e"
     },
     "terminal/stocks/test_live_recovery.py": {
-      "bytes": 5606,
-      "sha256": "abfea33178a16edb2dfb795e190e024d5e81fc5e919d83eeb45292fceab0bef1"
+      "bytes": 7039,
+      "sha256": "2cf04a2b45353f10251b3b4765c14a4e08b60dfc5ec0fda5aa321e0fc4205082"
     },
-    "terminal/stocks/test_xbrl_collection.py": {
-      "bytes": 6083,
-      "sha256": "f12a75f6994b77a35cb6d42c541097af6b4ca9101518e6938f728bac9f2db398"
-    },
-    "terminal/stocks/test_xbrl_instance.py": {
-      "bytes": 9797,
-      "sha256": "b9cde16946797a3f96556d5c84b4905c12839a08b6ca07d98987d24a98077332"
-    },
-    "terminal/stocks/test_xbrl_tool.py": {
-      "bytes": 3238,
-      "sha256": "5575b8082337ccc3a80332b10b7c9124c8bea37180d24b34af27abc6744e3003"
+    "terminal/stocks/test_xbrl_dts.py": {
+      "bytes": 6266,
+      "sha256": "47c6a528695821587dab9dbc4a9501ff77ad9bc3a478f61c88aca2fc57b23d75"
     },
     "terminal/stocks/xbrl_collection.py": {
-      "bytes": 7059,
-      "sha256": "1b11c2a14fb7e2b73caa61a1049057c729b1ad4966fad34b323cb3beb9367632"
+      "bytes": 7080,
+      "sha256": "5c49516279c28910a6e1d8fe559a4dc683406dcbac642d0bf4f01ce136e9c5f5"
+    },
+    "terminal/stocks/xbrl_dts.py": {
+      "bytes": 11029,
+      "sha256": "2c72da604fdc067d0835419e684414d6b57f3a92ef019b2794bf4fafd2e67447"
     },
     "terminal/stocks/xbrl_instance.py": {
-      "bytes": 20418,
-      "sha256": "10fb44244175d4fc52b762b711616d6c55ace4d37445ed7c27d0064450600831"
+      "bytes": 20505,
+      "sha256": "b4c1ffbda9eb019d9b7e39aebb6f60c47d644a09f2633223da92ddd38c8ec1d0"
     },
-    "terminal/test_aggregate_recovery.py": {
-      "bytes": 2058,
-      "sha256": "6bc0cf12666290c32a9539592ca6a4db631a9d7d16735c9d67625d6340fe1d44"
-    },
-    "terminal/test_native_recovery.py": {
-      "bytes": 10914,
-      "sha256": "862d37abf664fadcf6615b473948a8792b2bbc98acd6c1a1e346c24cd2999403"
-    },
-    "terminal/tests/measure_hot_recovery.py": {
-      "bytes": 4259,
-      "sha256": "f929ffca1cb4f1bd464d13f2f94a57e00cf3b93d0b34723b2b7ba91092bd428a"
+    "terminal/test_session_recovery.py": {
+      "bytes": 6386,
+      "sha256": "cc6bcb3fa3182d8b75f191399b58f5ea2ee7d1633ca4cb1748ad3ea9cf8aeba2"
     },
     "terminal/tests/run_no_launch_suite.py": {
-      "bytes": 2566,
-      "sha256": "cb6737b8634285482865e049012829e8679fc000b54373e8a1032043036f5676"
+      "bytes": 2853,
+      "sha256": "b6fdbe71389f4a0d17e3a8149c8baad67c82a58c445572ea6b841c3002a67319"
     },
-    "terminal/web/src/LiveMarket.tsx": {
-      "bytes": 16605,
-      "sha256": "0cb2bc6ae788974a6b6f8cdb9851e8d64834267171398420e5c643d3fb921735"
-    },
-    "terminal/web/src/marketContract.test.ts": {
-      "bytes": 2874,
-      "sha256": "2edd052863f00c1ce33d7efd9af3051f989fc244e2d654cbe1072d07945cfbe1"
-    },
-    "terminal/web/src/marketContract.ts": {
-      "bytes": 4670,
-      "sha256": "96fb06a11806a0a122b3d0cc0108c350abf447800854eb91bfc84147211a5712"
-    },
-    "tests/test_aggregate_depth.cpp": {
-      "bytes": 7811,
-      "sha256": "bd1e08fdf8053c56178674fd45c9f88e8489662814993a074228277b328658b8"
-    },
-    "tests/test_hot_checkpoint.cpp": {
-      "bytes": 3538,
-      "sha256": "43a6fa3b2f48f03ac61dfc27762c4e6cd15cfc3645982863aee9ae699c35d366"
+    "tests/test_itch_hot_checkpoint.cpp": {
+      "bytes": 7310,
+      "sha256": "14004073b3b95fea50a0df1306553e4a038675407f45e54698b2c349d13d2e2e"
     }
   },
-  "native_evidence": {
-    "path": "NATIVE_HOT_RECOVERY_EVIDENCE.json",
-    "bytes": 12406,
-    "sha256": "84a070397e733da2784fb64a03896800616a5e4977789ee93f1265f862217e8c",
-    "ctest_outcomes": {
-      "GCC_Debug": 148,
-      "GCC_Release": 148,
-      "GCC_ASan_UBSan": 149,
-      "Clang_Debug": 148,
-      "Clang_Release": 148,
-      "Clang_ASan_UBSan_native_only": 145
+  "native": {
+    "current_receipt": "HOT_IMAGE_LIMITS_EVIDENCE.json",
+    "receipt": {
+      "bytes": 8535,
+      "sha256": "493940e39584b554f59aa81fbcd1046b068485911c1d736bc0eecc48429b8f95"
     },
-    "all_passed": true,
-    "eight_frozen_identities": "Actually rerun and matched in all six configurations",
-    "scope": "GCC14.2/Clang19.1,x86_64;not ARM64 or target acceptance"
+    "initial_checkpoint_receipt": "ITCH_HOT_CONTEXT_EVIDENCE.json",
+    "GCC_ctest_passed": [
+      149,
+      149,
+      150
+    ],
+    "Clang_ctest_passed": [
+      149,
+      149,
+      146
+    ],
+    "hot_itch_checks_each": 221,
+    "restore_allocation_failpoints_each": 46,
+    "eight_frozen_identities": "Actually executed and matched in all six profiles",
+    "Clang_Python_ASan": "Existing harness unsupported;Clang native sanitizer and GCC Python sanitizer executed"
   },
-  "guarded_python": [
+  "python": [
     {
       "binding_profile": "native-debug",
-      "tests": 175,
-      "failures": 0,
+      "cases": 263,
+      "failed": 0,
       "errors": 0,
-      "skips": 0,
-      "log_receipt": {
-        "bytes": 35507,
-        "sha256": "92dbd95ecae72ef0afd0aa960b75060d1c53f94e64c9b8c487ec1579c9d98b40"
+      "skipped": 0,
+      "receipt": {
+        "bytes": 50235,
+        "sha256": "d187b354560699b6571b93f0686554c254485748de774234af031b5374262bc2"
       },
-      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+      "scope": "Final guarded cohort including all current IEX,session,XML and provider repairs"
     },
     {
       "binding_profile": "native-release",
-      "tests": 175,
-      "failures": 0,
+      "cases": 263,
+      "failed": 0,
       "errors": 0,
-      "skips": 0,
-      "log_receipt": {
-        "bytes": 35507,
-        "sha256": "b71a55d223b1775f7328e3a8f4093b9b29c3f3874ec2ce8da34783f26428c4c9"
+      "skipped": 0,
+      "receipt": {
+        "bytes": 50235,
+        "sha256": "8bdeaacf2a1286b5b535535a8a2d8f8fd815c03494ccd0a8ce8898e9ee721cef"
       },
-      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+      "scope": "Final guarded cohort including all current IEX,session,XML and provider repairs"
     },
     {
       "binding_profile": "native-asan-ubsan",
-      "tests": 175,
-      "failures": 0,
+      "cases": 263,
+      "failed": 0,
       "errors": 0,
-      "skips": 0,
-      "log_receipt": {
-        "bytes": 35507,
-        "sha256": "d0d58bfe1af4caff06f5d27e529aa3d7d0a41b56f7caee085509ab518b287023"
+      "skipped": 0,
+      "receipt": {
+        "bytes": 50643,
+        "sha256": "b219925d5aa1dc6b210ca2794d3bac5ca2041ad0605925eceb5dd1a19bc6cfba"
       },
-      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+      "scope": "Final guarded cohort including all current IEX,session,XML and provider repairs"
     },
     {
       "binding_profile": "clang-debug",
-      "tests": 175,
-      "failures": 0,
+      "cases": 263,
+      "failed": 0,
       "errors": 0,
-      "skips": 0,
-      "log_receipt": {
-        "bytes": 35507,
-        "sha256": "0c533fac2c7b43881a2ea1b78cbc9acdd6d92e67e88d23f687b559a15cb466b5"
+      "skipped": 0,
+      "receipt": {
+        "bytes": 50235,
+        "sha256": "8c7194c966323287f7b38cfaecc7732435b1e6e3f0e4c78fe94c15a2a8970dc2"
       },
-      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+      "scope": "Final guarded cohort including all current IEX,session,XML and provider repairs"
     },
     {
       "binding_profile": "clang-release",
-      "tests": 175,
-      "failures": 0,
+      "cases": 263,
+      "failed": 0,
       "errors": 0,
-      "skips": 0,
-      "log_receipt": {
-        "bytes": 35507,
-        "sha256": "2c3d3d8bfb4e595c0bb9c8687bde8a3352edc335a4da51ea491fca8ba359f9e3"
+      "skipped": 0,
+      "receipt": {
+        "bytes": 50235,
+        "sha256": "9400e907d9deb7d11898c3c3dbf52d85882d4770b8e9fdf0966284e25246c96a"
       },
-      "scope": "Selected guarded no-application/no-network cohort;not full app/API/browser qualification"
+      "scope": "Final guarded cohort including all current IEX,session,XML and provider repairs"
     }
   ],
-  "frontend": {
-    "tests": 154,
-    "pass": 154,
-    "fail": 0,
-    "skipped": 0,
-    "test_log": {
-      "bytes": 14694,
-      "sha256": "600430013f5e0f39f858fc5f586871716cb04820a49e7fc233008c2b8d2ced47"
+  "focused": {
+    "l2_provider_cases": 62,
+    "product_session_cases": 9,
+    "inline_cases": 7,
+    "dts_cases": 9,
+    "all_xml_cases": 48,
+    "session_and_provider_log": {
+      "bytes": 577,
+      "sha256": "4e25790134c094d18f8ccf1848f2256458ef21dd0b2522350e8c500657e13745"
     },
-    "production_build_log": {
-      "bytes": 2427,
-      "sha256": "85b7c96a0bff19d963271df89823a7a4f2e452a1bb2c2e4dea64ec9b6e8d9974"
-    },
-    "initial_js_kb": 254.45,
-    "initial_js_gzip_kb": 79.06,
-    "optional_orbit_three_js_kb": 517.06,
-    "visual_browser_or_gpu_validation": false
+    "IEX_recovery_retry_checkpoint_cases": 36,
+    "IEX_receipt": {
+      "bytes": 397,
+      "sha256": "d212268b5decf19fcb757abf205e06ba7e5444757ae4ed571303a023e28572ab"
+    }
   },
   "cross_language": {
     "market_assertions": 8,
-    "sec_assertions": 5,
-    "log": {
+    "SEC_assertions": 5,
+    "receipt": {
       "bytes": 602,
       "sha256": "ffcff77bc5ebeb7283933420385a1a42dfb5896c60d2671de9efe993a9cde9e2"
     }
   },
-  "packaging": {
-    "schema": "gig.package.developer_receipt.v1",
-    "sdist_members": 1212,
-    "sdk_wheel_members": 21,
-    "packaging_pattern_tests": 3,
-    "installed_sdk_tests": 8,
-    "installed_recovery_tests": 19,
-    "private_build_payloads": false,
-    "current_sdist": {
-      "sha256": "ef77191ba26c68da643e7acc1cd94af3478bd7f2fcc3558b8a2f6662bba5e30a",
-      "bytes": 7869392
-    },
-    "sdk_wheel": {
-      "sha256": "0fee6aabd9cbde03932e29a8617da0af387f89d651afd06195b3a578c5ff9d50"
-    },
-    "scope": "Current source archive;SDK wheel built from earlier same native/Python runtime sources before final test-only/bounded XML lineage refinements;terminal is source-checkout tooling,not shipped in the SDK wheel",
-    "initial_failure": "Tooling Python advertised clang++ -pthread while clang++ absent from PATH;explicit CXX=/usr/bin/g++ and CC=/usr/bin/gcc produced successful source-built wheel;no project source suppression",
-    "installed_recovery_execution": "18-case installed cohort plus the distinct new restart-reader preflight case;all passed",
-    "final_source_archive_note": "Archive generated before documentation closure;runtime/test entries byte-compared against current source,including the new publication regression and benchmark script"
+  "frontend": {
+    "source_unchanged": true,
+    "current_tests": "NOT RERUN;previous154/build source-bound to53e5892;browser/app run prohibited",
+    "retained_prior_evidence": true
   },
-  "benchmark": {
-    "path": "HOT_RECOVERY_BENCHMARK.json",
-    "bytes": 4980,
-    "sha256": "20cf2386e11e93d340a3fea3ae0a73facdbd30c333472fec715e99336154022f",
-    "scope": "Two warmups/ten measured repetitions;authored tiny fixtures,tracemalloc enabled,shared local hardware;not an SLA"
+  "new_source_failures_and_repairs": {
+    "empty_optional_writer": "bad_optional_access;fixed has_value dispatch first;original new-hot-test.log retained locally",
+    "strict_compiler": "Explicit ByteOffset initializer and read-only ReplayConfig accessor fixed without weakening warnings",
+    "oversized_capture": "4097orders attempted image allocation before cap;now record_limit before any allocation",
+    "crypto_precision": "Finite scientific JSON Decimal1e-8 rejected;bounded tuple expansion now exact",
+    "physical_worker": "Concurrent starts admitted two workers;commands serialize and cancellation retains/fences retiring task",
+    "retry": "Valid snapshot/corrupt cycles reset attempts indefinitely;now8consecutive failure ceiling and stable30s reset",
+    "DTS": "Import incorrectly admitted a linkbase as a schema;explicit reference document kinds now enforced",
+    "inline": "Pre-materialization fact and complete-lineage output budgets added;no warning suppression",
+    "IEX_shutdown": "Published close waited indefinitely on suppressed cancellation. Bounded wait retains/fences task and revokes late publication;corrected handshake fixture passes.",
+    "test_locator": "One initial focused IEX command misspelled LiveRecovery;corrected invocation,not a product defect."
   },
-  "defect_reproduction": {
-    "concurrent_worker_original": {
-      "bytes": 1477,
-      "sha256": "ab000affdf741008e83453e07de6379920465af0b228306103a16b736e74cbb5"
+  "failure_receipts": {
+    "new-hot-test.log": {
+      "bytes": 105,
+      "sha256": "a07aa00cc37bbed06ae808f1016fb18686a4223fb35f0e665ffeb011509af9a4"
     },
-    "unreadable_publication_original": {
-      "bytes": 1241,
-      "sha256": "f05f753fa708099f2b1533e76640f3f57605bc8e87131cde9e4240b2414f08b6"
+    "kraken-precision-before.log": {
+      "bytes": 1828,
+      "sha256": "11e20b18939e9e7f7e8d44689d65d0dec469785d62e9b910fa29e3436ed5b43a"
     },
-    "unreadable_publication_fixed": {
-      "bytes": 98,
-      "sha256": "ecfae4c055fbe7795c0401c236d69c667f6ef424586d05ba2c5aaada6468bae5"
+    "kraken-worker-before.log": {
+      "bytes": 2876,
+      "sha256": "d2c92df84bc7dc576d9d5148ac742b37f15e3c5110546f30d81a64aae96f0e8d"
+    },
+    "dts-import-before.log": {
+      "bytes": 951,
+      "sha256": "07b7f86357950e6d06ac78b97a5ddfd46c6ea3e94ec361a10ff6618f4c8ebdef"
+    },
+    "hot-preflight-before.log": {
+      "bytes": 84,
+      "sha256": "1edfa4e14a510ecf40fe561265c727fe8e6cedf4ae58b418e34bf07cd80e7974"
+    },
+    "iex_original_published_close": {
+      "bytes": 1852,
+      "sha256": "40b0913bfd4d8e136c4aaba10ae093570b653a463cccdc298ea43b2e71e0f5a2"
     }
   },
-  "recorded_initial_failures_or_limits": [
-    "Original concurrent-start regression failed with two active workers",
-    "Original47e9 coordinator failed to reject a real oversized JSON-node image before commit",
-    "New aggregate test initially referenced nonexistent GigError;fixed test to existing EngineError without production changes",
-    "Early native source test expected an exception instead of explicit RECOVERY_REQUIRED;corrected to assert durable blocked result and unchanged prefix",
-    "Clang Python ASan configure guard rejected unsupported harness;native-only Clang sanitizer and supported GCC Python sanitizer profiles passed",
-    "First source-built wheel failed because tooling Python advertised unavailable clang++ on PATH;explicit installed GCC succeeded"
-  ],
-  "known_warnings": [
-    "Starlette httpx test-client deprecation on existing import;not suppressed",
-    "Vite optional deferred OrbitControls/Three.js chunk exceeds500kB;not suppressed"
-  ],
-  "not_executed": [
-    "GIG application or ASGI app-factory tests",
-    "Listeners,preview,browser or real WebGL",
-    "Provider/account/market-data requests",
-    "Observed SEC/XBRL/LOBSTER processing or new retention",
-    "Owner Codespaces,workflow dispatch,native ARM64 runtime,power-loss hardware qualification",
-    "Trading or deployment"
-  ],
-  "requirement_counts": {
-    "reviewed_areas": 48,
+  "requirements": {
+    "total": 50,
+    "reviewed_areas": 49,
     "historical_decisions": 1,
-    "total": 49,
     "COMPLETE": 34,
-    "PARTIAL": 7,
+    "PARTIAL": 8,
     "BLOCKED": 7,
-    "NOT_APPLICABLE": 1
+    "NOT_APPLICABLE": 1,
+    "scope_change": "MD07explicitly tracks the requested official KrakenL2 requirement;previous49rows retained"
   },
-  "development_complete": false
+  "not_executed": [
+    "GIG application,ASGI app factory,servers,preview or browser",
+    "Provider,account or live/paper trading",
+    "Official Kraken documentation/rights retrieval;provisional status retained",
+    "Observed raw input processing or retention",
+    "Codespaces deployment,workflow dispatch,native ARM64 runtime,hardware power-loss qualification"
+  ],
+  "development_complete": false,
+  "performance": "No new production latency/throughput or RPO/RTO claim;previous benchmark remains bound to72e175e,not new ITCH context",
+  "interrupted_tests": {
+    "reason": "Stronger authored worker fixture omitted initial CONNECTED_PENDING phase before handshake;fixed fixture and bounded readiness wait. Task-owned hung attempts were terminated,not passed.",
+    "receipts": {
+      "iex-shutdown-final-focused.log": {
+        "bytes": 271,
+        "sha256": "bd79b146c56cb87b8d64510db8eb8ee05dfabf9407ea6d14846aed5d0a3258b9"
+      },
+      "market-closure-no-launch-native-debug.log": {
+        "bytes": 13236,
+        "sha256": "009b628b9e125c9db5b02f73096406042893b98f417dd368d4e12645b6355c5b"
+      },
+      "market-closure-no-launch-native-release.log": {
+        "bytes": 13236,
+        "sha256": "009b628b9e125c9db5b02f73096406042893b98f417dd368d4e12645b6355c5b"
+      },
+      "market-closure-no-launch-native-asan-ubsan.log": {
+        "bytes": 13236,
+        "sha256": "009b628b9e125c9db5b02f73096406042893b98f417dd368d4e12645b6355c5b"
+      },
+      "market-closure-no-launch-clang-debug.log": {
+        "bytes": 13236,
+        "sha256": "009b628b9e125c9db5b02f73096406042893b98f417dd368d4e12645b6355c5b"
+      },
+      "market-closure-no-launch-clang-release.log": {
+        "bytes": 13236,
+        "sha256": "009b628b9e125c9db5b02f73096406042893b98f417dd368d4e12645b6355c5b"
+      }
+    },
+    "final_retry": "All263cases pass in each supported profile"
+  },
+  "packaging": {
+    "schema": "gig.package.current_source.v1",
+    "source": "20a63d90095cbd24b84215668dbae4c7c13b0d8f",
+    "sdist_members": 1233,
+    "wheel_members": 21,
+    "runtime_entries_compared": 24,
+    "sdist_sha256": "bd74617a21bdccb8f6079b6ed2d8e877a6ab2d24ffefb5f07e9194d48d4f0101",
+    "wheel_sha256": "d8e228546e14a39f0edb6b813901993f00656cdee1b23eaf3ab50ffc6aa58185",
+    "private_payloads": false,
+    "scope": "Current source archive24runtime/test entries byte-compared;source-built SDK wheel from20a63d9 remains byte-source-equivalent because later changes are terminal-only. No artifact release/publish.",
+    "current_runtime_source": "0c4196b2e0270dacfa07638c2c5d94f3de54cb49",
+    "installed_sdk_cases": 8,
+    "installed_recovery_cases": 28,
+    "packaging_pattern_cases": 3,
+    "receipt": {
+      "bytes": 762,
+      "sha256": "c62e1242a8ca47a2637b578374269c3b0532bec3fd148908172b8d75ff8ee5f4"
+    },
+    "install_consumer_receipt": {
+      "bytes": 964,
+      "sha256": "7e1c64b44f3f36fd30f0cdaed40d7c19469355085c8ffe7ca69e5efce89ae086"
+    },
+    "install_recovery_receipt": {
+      "bytes": 127,
+      "sha256": "a5b7b817c8c7a36f884b10d95605567abcc0fc0c4ed193cf21ccd458f19dbd28"
+    }
+  }
 }

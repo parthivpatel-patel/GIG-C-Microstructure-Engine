@@ -1,3 +1,11 @@
+# Current recovery/session checkpoint — November11,2026
+
+Branch `development/gig-ui-redesign`;latest runtime `0c4196b2e0270dacfa07638c2c5d94f3de54cb49`,pushed/remote-verified. ITCH context/receipt/two-book typed images,actual native-session restore/private migration,L2 worker/precision and IEX shutdown fences,plain inline-XBRL and supplied DTS/presentation are implemented offline. Final6compiler profiles/all8frozen hashes passed;263guarded Python cases per5binding profiles;source-built packaging passed. No GIG app/provider/workflow/deployment was started. Full development remains partial;Kraken provisional status unchanged.
+
+Read [current report](qualification/development-continuation/REPORT.md),[matrix](qualification/development-continuation/COMPLETION_MATRIX.md) and [exact resume instructions](qualification/development-continuation/PROGRESS.md). Next:durable full-ITCH codec/seed/framer integration,then remaining full XBRL semantics. Preserve completed APIs and do not repeat their implementation. Current matrix50=previous49+explicit Kraken MD07;no historical requirement removed. Final documentation-only closure commit is identified by Git/remote receipt.
+
+## Preserved previous checkpoints
+
 # Current development checkpoint — November11,2026
 
 Branch `development/gig-ui-redesign`;runtime source `72e175e2f94981647e1921be97b875a452b7f3c5`,pushed/remote-verified. Native L3/L2 image recovery,atomic authored-source persistence,worker ownership repair and bounded XBRL instance/vintage tooling are implemented. Six native compiler profiles and all eight frozen identities passed;175 guarded Python cases per five environments,154frontend and source-built packaging checks passed. No application or provider was launched. Full development remains partial;see [current report](qualification/development-continuation/REPORT.md),[matrix](qualification/development-continuation/COMPLETION_MATRIX.md) and [exact resume steps](qualification/development-continuation/PROGRESS.md). Final documentation-only commit is identified by Git/remote receipt.

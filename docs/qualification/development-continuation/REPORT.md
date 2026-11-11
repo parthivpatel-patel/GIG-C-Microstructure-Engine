@@ -1,96 +1,87 @@
-# GIG remaining-engineering continuation — November11,2026
+# GIG ITCH recovery and remaining-development checkpoint — November11,2026
 
-Runtime source:`72e175e2f94981647e1921be97b875a452b7f3c5`,branch `development/gig-ui-redesign`. Overall continuation baseline:`3e17e7052a6b20478bd02d62a46c679660eeaac1`;initial recovered native milestone:`47e9b1697b1e528091c3e254458d6d365cd52d7f`. The closing documentation-only commit is intentionally not self-embedded;use the final Git remote receipt. All implementation milestones below were committed,pushed and independently checked against the remote branch.
+Branch:`development/gig-ui-redesign`. Starting remote53e5892c58390d9a5bd935d7a40a452beb842497 was clean and verified. Latest implementation source:`0c4196b2e0270dacfa07638c2c5d94f3de54cb49`. All source milestones below were pushed and independently checked against the remote. Final documentation closure is identified by Git rather than a self-referential commit hash.
 
-## Implemented and published
+## Published implementation
 
-| Commit | Working implementation |
+|Commit|Verified working change|
 |---|---|
-|`47e9b1697b1e528091c3e254458d6d365cd52d7f`|Full healthy native L3 book/replay images,direct isolated import,Python binding and atomic authored native/source SQLite coordinator.|
-|`fb6adf24a9898bb4c2a6737ac7208837bac0654d`|Six-compiler-profile qualification,full260-event prefix reopen,prepublication restart-reader budget check,and isolated aggregate L2 images/bindings.|
-|`5a90f57c991b4ba661664894011aa0682e1723e0`|Reproduced concurrent-start worker race fixed;retired sockets fenced;safe phase/provider-code diagnostics validated and displayed.|
-|`2395277e945462fe8e1c4f3a1686efe9e6327184`|Bounded XBRL XML/context/dimension/unit/exact-fact reader,atomic filing batches,conservative acceptance-time selection and offline private export tool.|
-|`72e175e2f94981647e1921be97b875a452b7f3c5`|Failing-before JSON-reader publication regression and deterministic offline recovery/XBRL measurement tool.|
+|`b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c`|Preserved/fixed the interrupted fingerprint writer;owned ITCH context/receipt/two-book hot images and isolated import.|
+|`56cd5c698fecfff3e31a309ee6c6a997137adc37`|Actual NativeSession hot-state integration,private immutable checkpoint files,explicit native-validated migration;L2 precision/worker/retry repairs.|
+|`5768da42f25321257047208b92f580f83be788cc`|Bounded plain inline-XBRL1.1 and supplied DTS discovery/simple presentation relationships.|
+|`20a63d90095cbd24b84215668dbae4c7c13b0d8f`|Hot context pre-copy bounds and complete inline-output/fact bounds,with regressions.|
+|`0c4196b2e0270dacfa07638c2c5d94f3de54cb49`|Bounded IEX cancellation drain,retiring-worker admission fence and late socket publication rejection.|
 
-The native checkpoint restores identities,FIFO,ledgers,revision,cursors and journal/restart state without reapplying historical book events. Authored source position/session/generation,prefix hash,dedup window and native state publish atomically;gaps/conflicts remain recovery-required across restart. L2 images preserve levels,sequence and revision without inventing order IDs. These are explicit opt-in SDK/coordinator contracts,not an automatically enabled app startup path,observed initialization authority or full hot ITCH context image.
+The initial native milestone was published before continuing the other packages. No surviving code was discarded or left intentionally uncommitted. Protected branches,provider permissions,trading controls and frontend design remain unchanged.
 
-The XBRL path preserves source lexical values,expanded namespaces,dimensions,units,nil/precision,original missing receipts,amendment references and conflicts. Selection uses exact nanosecond acceptance cutoffs and never imputes missing periods or receipts. It uses existing exact financial calculations. No inline-XBRL/DTS/presentation completeness or current-v2 UI integration is claimed. See `XBRL_INSTANCE_PROFILE.md` for the executable input/export contract.
+## ITCH hot-context recovery
 
-Existing C++ calculations,private-origin policies,provider gates,execution-disabled configuration,GIG branding,12 workspaces and15 visualization modes remain intact. Frontend changes are limited to bounded provider diagnostics;there was no redesign or live activation.
+`SourceContext::checkpoint/restore` own directories,active/inactive lifetime orders,seed-retired references,matches/broken flags,manifest,policies,lifecycle,source locations/ordinals/timestamps and resource accounting. `SyntheticReconstructor::hot_checkpoint/restore_hot` additionally own receipts,per-book derived sequences and both native replay/book images. Direct isolated restoration verifies independently retained identity,expected code/configuration,receipt adjacency and active source/native identities,side,exact price/quantity and counts. It does not reapply source records to reconstruct the book. Donor prepared tokens cannot cross into the restored context;new token guards do not enter deterministic fingerprints.
 
-## Executed developer validation
+The interrupted writer matched empty optionals through `value()` before `has_value()`,causing bad_optional_access. Dispatch order was repaired. Strict ByteOffset/compiler errors were corrected without weakening warnings. A later4097-order context reproduced image allocation before the declared4096-row limit;preflight now rejects before any attempted copy and preserves accepted state.
 
-| Configuration/cohort | Actual outcome |
-|---|---|
-|GCC14.2 Debug CTest|148/148|
-|GCC14.2 Release CTest|148/148|
-|GCC14.2 ASan+UBSan CTest|149/149|
-|Clang19.1.7 Debug CTest|148/148|
-|Clang19.1.7 Release CTest|148/148|
-|Clang19.1.7 ASan+UBSan native CTest|145/145|
-|Guarded Python,each GCC Debug/Release/ASan+UBSan and Clang Debug/Release binding environment|175/175 in **each** of5 environments|
-|Frontend unit/contract tests|154passed,0failed,0skipped|
-|TypeScript + production build|PASS;initial JS254.45kB,gzip79.06kB;optional deferred OrbitControls/Three.js517.06kB|
-|Actual Python→TypeScript market/SEC admission|8+5 assertions passed|
-|Packaging-pattern regressions|3/3|
-|Installed source-built wheel SDK consumer|8/8|
-|Installed wheel recovery cases|19distinct cases passed(18-case run plus new preflight case)|
-|Current source archive|1,212members;selected current runtime/test bytes compared exactly;no build/cache/private DB/ZIP/native-binary payload|
+**This is a bounded owned typed C++ image**,not a deployed durable full-ITCH file loader. Authored-empty accepted complete-record boundaries are supported. Seeded hot reconstruction,stable serialized artifact admission,Python/full-ITCH bridge,gzip/partial-framer coordination and actual source/hardware recovery remain open. Existing seeded prefix replay and gzip-boundary replay remain unchanged. See `ITCH_HOT_CONTEXT.md`,`ITCH_HOT_CONTEXT_EVIDENCE.json` and final `HOT_IMAGE_LIMITS_EVIDENCE.json`.
 
-Every native configuration executed98 hot-checkpoint assertions,real PMR allocation-failure checks and all eight frozen-reference programs. **All eight identities were actually rerun and matched in all six native profiles.** See `NATIVE_HOT_RECOVERY_EVIDENCE.json` for exact hashes and source/log receipts. Counts above are separate,overlapping cohorts;they are not a fabricated single assertion total.
+## Product-session and market-data follow-through
 
-The175-case developer cohort forbids socket bind/connect and app factories. It includes16 L3/source recovery cases,3 L2 cases and32 XBRL cases alongside existing SEC,history,tape,persistence and stream regressions. Actual process-exit/SQLite restart,stale CAS,uncertain publication,real JSON-node-budget rejection,corruption,storage/resource,subscription and retry scenarios executed. No full app/API/browser cohort was launched.
+The actual NativeSession now supports explicit capture/restore APIs. Restore bypasses default20-event startup replay,restores native state/position/speed and resumes paused with fresh process-local controls. Only the authored native dataset is admitted;LIVE,SIMULATION,provider-shaped and recorded sessions are rejected. There is no new startup switch or network/file HTTP endpoint.
 
-Clang Python ASan configuration was rejected by the repository's existing GNU/Linux-only Python sanitizer harness. That guard was preserved;Clang native sanitizer and GCC Python sanitizer profiles passed. The GCC harness provides its existing live-LSan coverage,not whole-CPython exit-leak clearance.
+Private revisions use complete write/file fsync followed by exclusive atomic link publication and directory fsync. Rollback input is never overwritten. Before/after publication fault tests and a real child exit79 verify admissible restart behavior within this local filesystem. Explicit migration validates the native schema/rules/configuration/canonical state before rebinding implementation/binary metadata,and retains bounded source lineage. This is not proof of equivalence of arbitrary historical code semantics or hardware power-loss durability. See `SESSION_L2_RECOVERY.md`.
 
-## Reproduced failures and corrected validation issues
+L2 regressions reproduced finite scientific JSON quantity rejection,concurrent2-worker admission and endless snapshot/corruption retry cycles. Exact bounded Decimal expansion,serialized ownership,retiring-worker fences,8-consecutive-failure exhaustion and stable30-second retry reset now pass fixtures. Jitter is bounded/finite. Existing crypto L2 native/source-labelled book/depth/research interfaces are retained. **Kraken remains provisional**:current official protocol/rights evidence was not independently retrieved;the known blocked host was not retried or bypassed. No real Kraken data was obtained.
 
-- Concurrent subscription commands originally produced2 active replacement workers;the independent test required1. Serialized ownership fixes it without dropping coverage.
-- Original `47e9b16` publication admitted a fault-injected20,001-node image that restart could not read. A real decoder-budget regression failed before and passes with the prepublication reader check. Durable and in-memory accepted prefixes stay unchanged on rejection.
-- A new aggregate test initially referenced nonexistent `GigError`;it was corrected to the SDK's existing `EngineError`. An early new source test expected an exception instead of the specified explicit RECOVERY_REQUIRED result;it now asserts the returned blocked state,unchanged prefix and persisted diagnostics. Neither involved weakening an established mathematical assertion.
-- First source-wheel build inherited tooling Python's unavailable `clang++ -pthread` default. Explicit installed `CXX=/usr/bin/g++ CC=/usr/bin/gcc` produced a successful source-built wheel. No production warning or security guard was disabled.
+IEX shutdown now revokes socket publication rights before waiting,retains a cancellation-resistant worker on timeout and denies replacement. The original published close failed the deterministic regression;the repaired36-case IEX recovery/retry/checkpoint cohort passes. Permission gates,read-only destinations,subscription bounds,source accounting and execution/retention defaults are preserved. See `IEX_SHUTDOWN_REPAIR.md`.
 
-Final failures/errors/skips are zero in the executed cohorts. Existing Starlette/httpx deprecation and the optional JavaScript chunk-size warning remain visible.
+## SEC/XBRL
 
-## Measured local resource/performance envelope
+Plain inline-XBRL1.1 admits exact bounded scale/sign values,nil and original lexical/source lineage into the existing filing/vintage pipeline. DTS discovery consumes supplied files only,verifies source digests,document kinds/import namespaces,and preserves missing references without network fetches. Simple presentation locators/order/cycles are supported;unresolved/custom/precedence/split-role semantics are not labelled usable full hierarchies. Structural closure is separate from type/accounting validation.
 
-`terminal/tests/measure_hot_recovery.py` ran at exact source72e175e with GCC Release bindings on x86_64 Intel Xeon Platinum8573C,Python3.12.14. It performs2 warmups and10 measured repetitions with canonical-equality checks. Tracemalloc was enabled and affects timings. Raw samples,fixture/binary hashes,native PMR counters and environment metadata are in `HOT_RECOVERY_BENCHMARK.json`.
+All XML source/permission admission precedes XML processing. Entity/DTD/XInclude rules and bounded fact/complete-output limits remain enforced. Full transforms,continuations,tuples,nested fact markup,complete XML Schema/custom types,extension semantics,relationship precedence/calculation networks,complete statement assembly and read-only v2/UI integration remain missing. No missing historical periods or original receipts were fabricated. See `XBRL_NEXT_PROFILE.md`.
 
-| Authored accepted prefix | Checkpoint JSON bytes | Median SDK hot-import + validation |
-|---|---:|---:|
-|25events|31,148|3.740ms|
-|100events|114,152|5.910ms|
-|260events|291,702|30.041ms|
+## Actual developer validation
 
-Two tiny authored XBRL filings plus cutoff selection:median26.358ms. Process peak RSS57,144KiB;Python tracemalloc peak9,992,822bytes. The260-event prefix builder reported native PMR live6,267,064bytes and peak10,413,304bytes;these counters are for that native owner,not all process allocations. The default coordinator has separately bounded8MiB payload/20,000nodes/depth24 and16MiB DB(+up to16MiB rollback journal). The native journal layout was not redesigned.
+|Cohort/configuration|Outcome|
+|---|---:|
+|GCC14.2 Debug /Release /ASan+UBSan CTest|149/149 ·149/149 ·150/150|
+|Clang19.1.7 Debug /Release /native ASan+UBSan CTest|149/149 ·149/149 ·146/146|
+|New ITCH hot-context checks in **each** native profile|221passed;46actual restore allocation-failure points|
+|Eight frozen native identities in **each** of6profiles|All actually executed and matched|
+|Final guarded Python,each GCC Debug/Release/ASan+UBSan and Clang Debug/Release binding profile|263/263 in each of5profiles;0failures/errors/skips|
+|XML affected cohort|48/48 per5binding profiles|
+|Focused L2/provider +product session|62+9cases passed|
+|Focused IEX recovery/retry/checkpoint|36/36|
+|Actual Python→TypeScript market/SEC admission|8+5assertions passed|
+|Packaging patterns|3/3|
+|Source-built installed SDK consumer /native+session recovery|8/8 +28/28|
+|Current source archive|1,233members;24runtime/test entries byte-compared;no private/build/cache/DB/ZIP/native binary payload|
 
-An earlier local benchmark invocation measured15.454ms for the260-event import,showing shared-host/instrumentation variability. No performance improvement,SLA,RPO/RTO,exchange latency,observed-market throughput or full-session recovery claim follows from these small fixtures. Timed native import excludes source SQLite commit.
+These are separate overlapping cohorts,not a fabricated single assertion total. Clang Python ASan remains unsupported by the repository's existing GNU/Linux-only Python harness;Clang native sanitizer and GCC Python sanitizer profiles passed. Existing live-LSan coverage is not whole-CPython exit-leak clearance.
 
-## Completion matrix and exact remaining work
+One focused command initially misspelled the test-class locator. A strengthened fake worker then omitted the initial CONNECTED_PENDING handshake phase,so five broad attempts and one focused attempt stalled at fixture setup. Only those task-owned test processes were terminated;their partial logs are retained and not counted as passes. The fixture phase/readiness wait was corrected,and the final263-case cohort passed in all5profiles. Original reproducible production defects and intermediate new-code failures are retained separately. Existing Starlette/httpx deprecation remains visible;no assertions or warnings were suppressed.
 
-49entries =48reviewed implementation/qualification areas plus1historical A18/A19 decision. **34COMPLETE /7PARTIAL /7BLOCKED /1NOT APPLICABLE**. The counts remain unchanged because stronger approved requirements remain open;the new bounded profiles are not substituted for them. Every row retains code evidence,tests,missing components and a completion condition in `COMPLETION_MATRIX.md/JSON`.
+Frontend source is byte-unchanged by this continuation. Its prior154-test/production-build evidence remains bound to53e5892 and was **not rerun**. No current browser/WebGL/app/HTTPS/WSS target acceptance is claimed. No new production throughput,latency,RPO/RTO or hardware SLA is claimed;the older HOT_RECOVERY_BENCHMARK remains historical source-bound evidence,not a new ITCH-context measurement.
 
-Actionable engineering remains:
+## Completion accounting and remaining work
 
-1. REL02:full hot ITCH framer/decoder/context/receipt image coordinated with native state;optional product-session wiring and explicit migration/restart semantics. Aggregate images alone do not restore provider lexical checksum/source caches.
-2. SEC02:full DTS/schema/type and inline-XBRL transformation,presentation/calculation relationships,extension-taxonomy semantics,complete statement assembly and product integration. Missing original receipts/history cannot be recreated by code.
-3. MD06:authoritative observed cancellation/error action profile and complete/lossless sequence/backfill authority. The current IEX source does not establish those guarantees;do not invent them.
+The previous49rows are preserved. The user's explicit official-contract Kraken L2 requirement is now tracked as MD07,so **50entries =49reviewed areas +1historical A18/A19 decision**. Counts:34COMPLETE /8PARTIAL /7BLOCKED /1NOT APPLICABLE. This is an explicit new requirement row,not an extra historical decision or an invented completion percentage.
 
-Other PARTIAL rows still require current security/target artifacts,full WCAG/device qualification,complete current securities-source coverage or the missing original A18/A19 contract. Seven BLOCKED rows require actual observed L3/reference evidence,current SEC/IEX source qualification,empirical research data,owner-private Codespaces/browser/GPU and current genuine ARM64 results. They are not fixture passes.
+Full development remains incomplete. Next engineering packages:
 
-Planning only:roughly3–7engineer-days for a tightly scoped remaining full-source/product recovery profile;several engineer-weeks for a specified full XBRL/DTS/inline/presentation profile and independent validation. These ranges depend on source/migration/fidelity decisions and exclude external/hardware qualification. No defensible whole-project completion date or readiness percentage is established.
+1. Serialize/admit the full typed ITCH image with independently trusted artifact/source identity;add seeded hot reconstruction and coordinated framer/gzip recovery. Preserve the completed typed/native APIs.
+2. Complete remaining XBRL transformation/type/relationship/statement profiles and v2 integration;preserve unknown source coverage and missing receipts.
+3. Reconcile Kraken candidate semantics against verified official documentation before changing provisional status. Do not guess current wire/CRC/update options or exchange continuity.
+4. Obtain authoritative observed cancellation/backfill semantics and the missing historical A18/A19 contract. Do not invent complete/lossless tape guarantees.
 
-## Reproduction and continuation
+Actual observed L3 initialization/reference,private owner IEX/SEC/browser deployment,current native ARM64,device/WCAG and target dependency/hardware qualification remain separate blocked evidence. Existing owner-reported source observations stay owner-reported. Planning ranges remain conditional:days for a tightly bounded remaining recovery codec/seed/framer package;engineer-weeks for full XBRL semantics/statement scope. No defensible whole-project completion date or production-readiness claim follows from fixture success.
 
-Developer checks only;do not launch or deploy GIG:
+## Resume without launching
+
+Use the final development-branch HEAD and the source-bound matrix/evidence. Do not repeat completed recovery implementation or unrelated compiler matrices. Focus the next batch on the remaining full-ITCH codec/seed/framer contract. Developer tests only:
 
 ```bash
 ctest --test-dir <native-build> --output-on-failure -j 4
 PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/run_no_launch_suite.py
 PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py
-PYTHONPATH=<release-native-build>/python:. <venv>/bin/python terminal/tests/measure_hot_recovery.py
-npm --prefix terminal/web test
-npm --prefix terminal/web run build
 ```
 
-Use the supported sanitizer preload/CMake harness described in `NATIVE_HOT_RECOVERY.md`. The current source is offline verified for the stated bounded contracts. Live-provider,owner Codespaces,physical browser/GPU,native ARM64 and production acceptance remain **not verified**. No credential,gating,trading,provider,paid-resource,workflow,server or deployment action was performed. Continue from the final verified development-branch HEAD;do not restart completed packages or begin owner acceptance under the current no-launch instruction.
+Use the existing supported sanitizer preload/CMake harness. No application/server/provider/account/order/workflow/deployment or owner acceptance operation was performed. Current artifacts and failure receipts are in EVIDENCE.json and PACKAGE_CURRENT.json. Keep main/release/Sprint4 refs unchanged.

@@ -1,0 +1,15 @@
+{
+  "schema": "gig.package.current_source.v1",
+  "source": "20a63d90095cbd24b84215668dbae4c7c13b0d8f",
+  "sdist_members": 1233,
+  "wheel_members": 21,
+  "runtime_entries_compared": 24,
+  "sdist_sha256": "bd74617a21bdccb8f6079b6ed2d8e877a6ab2d24ffefb5f07e9194d48d4f0101",
+  "wheel_sha256": "d8e228546e14a39f0edb6b813901993f00656cdee1b23eaf3ab50ffc6aa58185",
+  "private_payloads": false,
+  "scope": "Current source archive24runtime/test entries byte-compared;source-built SDK wheel from20a63d9 remains byte-source-equivalent because later changes are terminal-only. No artifact release/publish.",
+  "current_runtime_source": "0c4196b2e0270dacfa07638c2c5d94f3de54cb49",
+  "installed_sdk_cases": 8,
+  "installed_recovery_cases": 28,
+  "packaging_pattern_cases": 3
+}
