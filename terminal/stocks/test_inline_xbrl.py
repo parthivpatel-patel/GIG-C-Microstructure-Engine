@@ -39,6 +39,9 @@ class InlineXBRL(unittest.TestCase):
    with self.assertRaises(ValueError):self.parse(raw)
   raw=html()
   with self.assertRaises(XBRLError):parse_inline(raw,manifest(raw,source_sha256='0'*64),selected_concepts(NS))
+  from unittest.mock import patch
+  with patch('terminal.stocks.inline_xbrl.MAX_FACTS',0),self.assertRaisesRegex(XBRLError,'inline_fact_budget'):self.parse(raw)
+  with patch('terminal.stocks.inline_xbrl.MAX_OUTPUT_BYTES',1),self.assertRaisesRegex(XBRLError,'inline_output_budget'):self.parse(raw)
  def test_atomic_collection_accepts_inline_without_changing_strict_instance_api(self):
   raw=html();c=FilingCollection('0000320193');receipt=c.ingest_batch([{'raw':raw,'manifest':manifest(raw),'concepts':selected_concepts(NS)}]);self.assertEqual(receipt['filings'],1);value=c.at_acceptance_time('2024-02-10T00:00:00Z');self.assertEqual(value['history']['revenue'][0]['value'],'-123450.0')
   with self.assertRaises(XBRLError):parse_instance(raw,manifest(raw),selected_concepts(NS))

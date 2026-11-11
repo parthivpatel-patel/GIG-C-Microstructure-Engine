@@ -45,5 +45,11 @@ void allocation(){
  for(std::size_t n=0;n<12;++n){gig::TrackedResource memory;memory.fail_after(n);{auto copied=h.reconstruction.hot_checkpoint(&memory);if(!copied)expect(copied.error.code==gig::ErrorCode::resource_exhausted,"capture allocation failure classification");}expect(memory.stats().live_bytes==0&&state(h.reconstruction)==before,"capture failure clean and atomic");}
  std::cout<<"hot_itch_restore_allocation_failpoints="<<count<<'\n';
 }
+void capture_preflight(){
+ auto cfg=config();cfg.context_policy.max_lifetime_orders=5000;auto made=SourceContext::create(cfg.source,cfg.context_policy);expect(bool(made),"large-context factory remains supported");auto&context=*made.data;std::uint64_t offset=0,ordinal=0;
+ const auto apply=[&](const auto&bytes){const auto result=context.apply(bytes,{ByteOffset{offset},ByteOffset{offset+2},RecordOrdinal{ordinal}});check(result.committed(),"large-context authored input");offset+=bytes.size()+2;++ordinal;};
+ apply(system());apply(directory());for(std::uint64_t i=1;i<=4097;++i)apply(add(i));
+ gig::TrackedResource memory;memory.fail_after(0);const auto image=context.checkpoint(&memory);expect(!image&&image.error.code==Code::record_limit,"hot vector limit enforced before any copy");expect(memory.stats().attempts==0,"oversized capture performs no allocation");expect(context.summary().active_orders==4097,"preflight cannot mutate accepted context");
 }
-int main(){try{context_tokens();reconstruction();allocation();std::cout<<"checks="<<checks<<" failures=0\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}
+}
+int main(){try{context_tokens();reconstruction();allocation();capture_preflight();std::cout<<"checks="<<checks<<" failures=0\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

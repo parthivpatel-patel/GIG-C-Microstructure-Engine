@@ -1,0 +1,139 @@
+{
+  "schema": "gig.itch.context.final_bounds.v1",
+  "baseline": "53e5892c58390d9a5bd935d7a40a452beb842497",
+  "initial_itch_milestone": "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
+  "profiles": [
+    {
+      "configuration": "native-debug",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "ecda2e896cb79765a2d33e0924e3272fa07b8090d7474a9688727a01a8332898",
+      "detailed_log_sha256": "577387e8d7c25222a32c9d6936f71edb8e83b75eb166780a987b2ab8e7d2f74a"
+    },
+    {
+      "configuration": "native-release",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "a27fdd88fb8cebfe061a876b8da503640433ed5679a297593db0ae8d3665e5f5",
+      "detailed_log_sha256": "3177e85c2e190ba75870f932e093626a1e1ac0f22a406cf04f76a001d3b79a7e"
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "passed": 150,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "8792c18532f668e9a2e59c5af3abe9c4dd6e7bbaaafe2511a73050994eea56e2",
+      "detailed_log_sha256": "f17c5ae2a70d924a14869fcba34ad0bd8353e5816b60baec12c52e38fcc0fc54"
+    },
+    {
+      "configuration": "clang-debug",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "dda418007e7b0b220af6eafb16faf099c9d645dd449e25e9f82d3a7ae7773a0e",
+      "detailed_log_sha256": "226a9fbad91fa4897c9f71dee5ad1ad7304931c3b02882c5566526f49bd5a7f9"
+    },
+    {
+      "configuration": "clang-release",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "3f0d7a75e0ce23086a2ad093f93d9a2d73058e800152f6c75b3f4d06da0f0cfa",
+      "detailed_log_sha256": "cb6d439532d9904422c4c7e16da0409b037a93f11d6bd76aae0b879b71471fc1"
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "passed": 146,
+      "failed": 0,
+      "hot_context_checks": 221,
+      "actual_restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "ctest_log_sha256": "9add36debc38a6a55f1aebe0fbb21bb284c3fb6e825f0d5da41926fd404c0a66",
+      "detailed_log_sha256": "94e726b235d3f80d9cefacdbe18896da849cbb0b2d48ed9b9428a7d4f8b74719"
+    }
+  ],
+  "new_regression": "4097accepted source orders,armed zero-allocation capture resource;reject record_limit before any attempted copy and preserve accepted owner",
+  "failing_before_log_sha256": "1edfa4e14a510ecf40fe561265c727fe8e6cedf4ae58b418e34bf07cd80e7974",
+  "source_sha256": {
+    "src/itch/context_checkpoint.cpp": "d55916984fe083352ea30a500fd5362a4c561accf6fc410e11cc6831233778d9",
+    "tests/test_itch_hot_checkpoint.cpp": "14004073b3b95fea50a0df1306553e4a038675407f45e54698b2c349d13d2e2e",
+    "terminal/stocks/inline_xbrl.py": "3208c701204f24e5a4e985e31ed3143467597a099873faef7c0ce485232563e0",
+    "terminal/stocks/test_inline_xbrl.py": "91a88e883454e3430c1b38cef08380336366258df880273cc44da7c103b30f2e"
+  },
+  "xml_affected_tests": {
+    "each_of_five_binding_environments": 48,
+    "failed": 0,
+    "skipped": 0
+  },
+  "not_claimed": [
+    "Serialized full ITCH durable loader",
+    "Seeded hot reconstructor",
+    "Provider,application,ARM64 or power-loss qualification"
+  ]
+}

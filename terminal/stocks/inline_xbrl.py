@@ -5,8 +5,9 @@ Unsupported financial semantics reject the entire instance before publication.
 """
 import re
 from decimal import Decimal
-from .xbrl_instance import X,L,I,MAX_BYTES,Node,tag,parse_xml,qname,validate_manifest,_interpret_instance,digest,XBRLError
+from .xbrl_instance import X,L,I,MAX_BYTES,MAX_FACTS,Node,tag,parse_xml,qname,validate_manifest,_interpret_instance,digest,canonical,XBRLError
 IX='http://www.xbrl.org/2013/inlineXBRL';HTML='http://www.w3.org/1999/xhtml'
+MAX_OUTPUT_BYTES=8*1024*1024
 
 def transformed(text,scale,sign):
  if type(scale)is not str or not re.fullmatch('[+-]?[0-9]{1,2}',scale)or abs(int(scale))>6 or sign not in(None,'-'):raise XBRLError('inline_numeric_transform_profile')
@@ -40,6 +41,7 @@ def _interpret_inline(root,source,concepts):
   kind=node.name.split('}',1)[1]
   if kind not in('header','resources','references','hidden','nonFraction','nonNumeric'):raise XBRLError('inline_feature_unsupported')
   if kind not in('nonFraction','nonNumeric'):continue
+  if len(facts)>=MAX_FACTS:raise XBRLError('inline_fact_budget')
   if node.children or any(k in node.attrs for k in('format','continuedAt','tupleRef','tupleID','order'))or node.attrs.get('target','')or node.attrs.get('escape','false')!='false':raise XBRLError('inline_fact_feature_unsupported')
   name=qname(node.attrs.get('name',''),node);nil=node.attrs.get(tag(I,'nil'),'false')
   attrs={k:v for k,v in node.attrs.items()if k in('contextRef','unitRef','decimals','precision','id',tag(I,'nil'))}
@@ -53,7 +55,9 @@ def _interpret_inline(root,source,concepts):
  if not resources or not facts:raise XBRLError('inline_resources_and_facts_required')
  virtual.children.extend(facts);result=_interpret_instance(virtual,source,concepts)
  result['inline_profile']={'version':'PLAIN_IX11_V1','facts':trace,'source_sha256':source['source_sha256'],'limitations':['No transform registry,continuations,tuples,named targets or nested fact markup','XHTML XML only;no permissive HTML repair','Declared concept profile,not full DTS validation']}
- result['completeness']='BOUNDED_INLINE_PROFILE_NOT_COMPLETE_TRANSFORMS_DTS_OR_HISTORY';result.pop('canonical_sha256');result['canonical_sha256']=digest(result);return result
+ result['completeness']='BOUNDED_INLINE_PROFILE_NOT_COMPLETE_TRANSFORMS_DTS_OR_HISTORY';result.pop('canonical_sha256')
+ if len(canonical(result))>MAX_OUTPUT_BYTES:raise XBRLError('inline_output_budget')
+ result['canonical_sha256']=digest(result);return result
 
 def parse_inline(raw,manifest,concepts,*,allow_observed=False):
  if type(raw)is not bytes or not 1<=len(raw)<=MAX_BYTES:raise XBRLError('xbrl_input_budget')

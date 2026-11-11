@@ -12,6 +12,8 @@ Result<Sha256Digest> context_image_identity(const ContextStateImage&i)noexcept {
 }
 Result<ContextStateImage> SourceContext::checkpoint(std::pmr::memory_resource*r)const noexcept {
  if(!r||moved_from_||summary_.finished)return Result<ContextStateImage>::failure({Code::invalid_config,ByteOffset{0},"hot.context_boundary",0,0});
+ if(directories_.size()>4096||orders_.size()>4096||matches_.size()>4096||seed_retired_.size()>4096)
+  return Result<ContextStateImage>::failure({Code::record_limit,ByteOffset{0},"hot.context_limits",4096,0});
  try {
   ContextStateImage i(manifest_,policy_,r);i.summary=summary_;i.lifecycle_stage=lifecycle_stage_;i.next_location=next_location_;i.cursor_exhausted=cursor_exhausted_;
   i.directories.assign(directories_.begin(),directories_.end());i.orders.assign(orders_.begin(),orders_.end());i.matches.assign(matches_.begin(),matches_.end());i.seed_retired.assign(seed_retired_.begin(),seed_retired_.end());
