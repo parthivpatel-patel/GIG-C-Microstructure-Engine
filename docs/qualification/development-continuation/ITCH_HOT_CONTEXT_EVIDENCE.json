@@ -1,0 +1,137 @@
+{
+  "schema": "gig.itch.hot_context.evidence.v1",
+  "baseline": "53e5892c58390d9a5bd935d7a40a452beb842497",
+  "date": "2026-11-11",
+  "scope": "Typed owned C++ accepted-boundary images;no app/provider/file deserializer",
+  "results": [
+    {
+      "configuration": "native-debug",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "937d78450cf47ba68a3de0e28328b8ffbd793cffcea053694443f241760cd503"
+    },
+    {
+      "configuration": "native-release",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "7821e40b0e221652902a90fd58d5b68639bca69f99175e78282c0a069b03978f"
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "passed": 150,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "a4810ff42fa775bfb772d449b8511bfeec14cc112db9bc7fc86611c54cf26038"
+    },
+    {
+      "configuration": "clang-debug",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "31678e198d5ee291838492baf8899884b2b54140ae7191e309d1d409ac37347c"
+    },
+    {
+      "configuration": "clang-release",
+      "passed": 149,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "56dbfb323f8a41e3b87331c8dd9c43a0fd7da4d077b1bf5d0819bb7b5883f424"
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "passed": 146,
+      "failed": 0,
+      "hot_context_assertions": 217,
+      "restore_allocation_failpoints": 46,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "log_sha256": "05247b3df81a74383728527f6d8a218b7d2cfdee5ba85313bbeff5fa442dd957"
+    }
+  ],
+  "source_sha256": {
+    "CMakeLists.txt": "b5ea484091ff272bd5e5fed7f99c5fa07c37fb3bc8762ea929bb5e7f673143a3",
+    "include/gig/replay/replay.hpp": "7c81c182c77e4f3145f272ddd8c237ec874e45e722408b443dbf3e9f998c2304",
+    "include/gig/itch/context.hpp": "8eb655516ae1443b6c6e1518d848d004550029f8e51e49be7e86a00d94fdd761",
+    "include/gig/itch/reconstruction.hpp": "e8a209960ef79577adca4e092f7d338cf68b73b430d812b784344776e660d4c5",
+    "include/gig/itch/hot_checkpoint.hpp": "39133826439e382ae554bf975c43c19cad32f60792c27bcd2efe92cf578cf00c",
+    "src/itch/context_checkpoint.cpp": "99de17ded524e4ab036538b27d831238dfc820efafd1b83c0632dbd15e030a4a",
+    "src/itch/hot_checkpoint.cpp": "52e202d706fcfb931a2906989bf7e130533674b194dbbf50dccbcea110ad83d7",
+    "src/itch/hot_identity.hpp": "0203523d10243a53228bd2872a43aae839557d04ab3608191973df8793c54102",
+    "tests/test_itch_hot_checkpoint.cpp": "b030cd642c1b1566b5bdbfe7d5b7f4c0a77fb6ff8a9724c56cb81d21a086ff64"
+  },
+  "limits": [
+    "Authored-empty reconstruction profile only;seeded hot reconstruction is explicitly unsupported",
+    "No raw-memory dump,no implicit serialized-file loader or compressor-state seek",
+    "Gzip read-ahead/partial-framer state is excluded;caller must restart at the admitted exact complete-frame offset using an authenticated decompressed source",
+    "Current native ARM64 runtime and hardware crash qualification not run"
+  ],
+  "original_development_failures": [
+    "Strict GCC rejected implicit explicit-ByteOffset default initialization;corrected without weakening warnings",
+    "Empty optional matched generic value() before has_value(),causing bad_optional_access;dispatch order corrected and full empty-optional/profile/failure cases now pass"
+  ]
+}

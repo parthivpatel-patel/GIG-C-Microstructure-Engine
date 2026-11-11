@@ -65,6 +65,8 @@ struct ReconstructionSummary {
     bool operator==(const ReconstructionSummary&) const = default;
 };
 struct SeedState;
+struct HotReconstructionState;
+struct HotReconstructionIdentity;
 class SyntheticReconstructor {
     ReconstructionConfig config_;
     SourceContext context_;
@@ -100,6 +102,10 @@ public:
     const ReconstructionSummary& summary() const noexcept {return summary_;}
     const gig::ReplayEngine* engine(std::size_t i) const noexcept {return i<config_.book_count&&engines_[i]?&*engines_[i]:nullptr;}
     std::span<const SourceReceipt> receipts() const noexcept {return receipts_;}
+    gig::Result<HotReconstructionState> hot_checkpoint(std::pmr::memory_resource* =std::pmr::get_default_resource())const noexcept;
+    static gig::Result<SyntheticReconstructor> restore_hot(const HotReconstructionState&,const HotReconstructionIdentity& trusted,
+        const ReconstructionConfig& expected,gig::Digest implementation_sha256,
+        std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 };
 // Exact checked conversions; these do not apply instrument min/max rules.
 gig::Result<gig::PriceTicks> price4_to_ticks(Price4,gig::types::UnitScale) noexcept;

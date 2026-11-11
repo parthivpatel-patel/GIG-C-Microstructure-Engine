@@ -96,6 +96,7 @@ public:
     Error reset(const MarketEvent&,const RestartPlan&) noexcept;
     Error recover(const MarketEvent&) noexcept;
     const OrderBook& book() const noexcept { return book_; }
+    const ReplayConfig& config()const noexcept{return config_;}
     std::size_t journal_size() const noexcept { return journal_.size(); }
     static constexpr std::size_t journal_record_bytes() noexcept { return sizeof(JournalRecord); }
     JournalStorageStats journal_storage() const noexcept {

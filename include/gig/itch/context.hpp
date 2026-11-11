@@ -1,5 +1,6 @@
 #pragma once
 #include "gig/itch/decoder.hpp"
+#include "gig/itch/sha256.hpp"
 #include <memory_resource>
 #include <vector>
 
@@ -77,6 +78,19 @@ struct ContextSummary {
     ContextCode finish_error{ContextCode::none};
     bool operator==(const ContextSummary&)const=default;
 };
+// Owned typed state,not a memory dump or an upstream-authentication claim.
+struct ContextStateImage {
+    std::uint32_t version{1};SourceManifest manifest;ContextPolicy policy;
+    ContextSummary summary;std::uint8_t lifecycle_stage{};Location next_location{};
+    bool cursor_exhausted{};
+    std::pmr::vector<DirectoryState> directories;
+    std::pmr::vector<OrderState> orders;
+    std::pmr::vector<MatchState> matches;
+    std::pmr::vector<OrderReference> seed_retired;
+    ContextStateImage(SourceManifest m,ContextPolicy p,std::pmr::memory_resource* r)
+        :manifest(std::move(m)),policy(p),directories(r),orders(r),matches(r),seed_retired(r){}
+};
+Result<Sha256Digest> context_image_identity(const ContextStateImage&) noexcept;
 class SourceContext;
 class SyntheticReconstructor;
 // Owned single-use semantic delta. Preparation never changes accepted context.
@@ -149,5 +163,8 @@ public:
     std::span<const MatchState> matches()const noexcept{return matches_;}
     std::span<const OrderReference> seed_retired_references()const noexcept{return seed_retired_;}
     static std::optional<std::size_t> required_bytes(const ContextPolicy&) noexcept;
+    Result<ContextStateImage> checkpoint(std::pmr::memory_resource* =std::pmr::get_default_resource())const noexcept;
+    static Result<SourceContext> restore(const ContextStateImage&,SourceManifest,ContextPolicy,Sha256Digest trusted_identity,
+        std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 };
 } // namespace gig::itch
