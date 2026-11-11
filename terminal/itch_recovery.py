@@ -13,6 +13,11 @@ class ItchFileError(ValueError):pass
 
 def save_new(path,payload,admission,*,before_publish=None,after_publish=None):
     ItchRecovery.restore(payload,admission) # Complete native admission before filesystem mutation.
+    publish_new(path,payload,before_publish=before_publish,after_publish=after_publish)
+    return admission.artifact_sha256
+
+def publish_new(path,payload,*,before_publish=None,after_publish=None):
+    # Callers must complete their own admission before this shared immutable writer.
     path=_private_parent(path)
     fd,temporary=tempfile.mkstemp(prefix='.gig-itch-',dir=path.parent);published=False
     try:
@@ -30,7 +35,6 @@ def save_new(path,payload,admission,*,before_publish=None,after_publish=None):
         if published:raise ItchFileError('itch_publication_uncertain_reopen')from None
         raise
     finally:os.unlink(temporary)
-    return admission.artifact_sha256
 
 def load(path,admission):
     path=_private_parent(path);info=path.stat()

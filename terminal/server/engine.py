@@ -32,6 +32,8 @@ class NativeSession:
 
     def _initialize(self):
         """Fresh process-local controls;restoration never opens feeds or resumes play."""
+        self._itch_selection = None
+        self.itch_session = None
         self.live_feed = None
         self.recorded_session = None
         self.mode = 'HISTORICAL_REPLAY'
@@ -50,13 +52,29 @@ class NativeSession:
         self.replay = None
 
     def checkpoint(self,implementation_sha256):
+        if self.itch_session is not None:
+            from terminal.itch_product import implementation_identity,ItchProductError
+            if implementation_sha256!=implementation_identity():raise ItchProductError('itch_product_current_code_required')
+            return self.itch_session.capture()
         from terminal.session_recovery import capture
         return capture(self,implementation_sha256)
 
     @classmethod
     def restore_checkpoint(cls,payload,expected_sha256,implementation_sha256):
+        if type(payload)is bytes:
+            from terminal.itch_product import ItchProduct,implementation_identity,ItchProductError
+            if implementation_sha256!=implementation_identity():raise ItchProductError('itch_product_current_code_required')
+            candidate=ItchProduct.restore(payload,expected_sha256)
+            session=cls.__new__(cls);session._initialize();session._itch_selection=(payload,expected_sha256);session.itch_session=candidate;session.dataset='itch-checkpoint-v1';session.position=candidate.position;session.speed=candidate.speed;return session
         from terminal.session_recovery import restore
         return restore(payload,expected_sha256,implementation_sha256,session_type=cls)
+
+    def select_itch_checkpoint(self,raw,expected_sha256):
+        from terminal.itch_product import ItchProduct
+        if self.mode!='HISTORICAL_REPLAY' or self.live_feed is not None and getattr(self.live_feed,'task',None) is not None and not self.live_feed.task.done():raise ControlError('ITCH_SESSION_CONTROL','Stop the active source before selecting a checkpoint')
+        candidate=ItchProduct.restore(raw,expected_sha256)
+        self._itch_selection=(raw,expected_sha256);self.itch_session=candidate;self.recorded_session=None;self.replay=None;self.aggregate=None;self.adapter=None
+        self.dataset='itch-checkpoint-v1';self.mode='HISTORICAL_REPLAY';self.playing=False;self.position=candidate.position;self.speed=candidate.speed
 
     def reset_aggregate(self):
         from terminal.providers.kraken import KrakenBookAdapter
@@ -69,6 +87,7 @@ class NativeSession:
 
     @property
     def source_events(self):
+        if self.itch_session is not None:return range(self.itch_session.total)
         if self.recorded_session is not None:return range(self.recorded_session.event_count)
         if self.dataset == 'kraken-authored-profile-v1':
             from terminal.providers.fixtures import EVENTS as profile_events
@@ -77,6 +96,8 @@ class NativeSession:
 
     def restart(self):
         self.playing = False
+        if self.itch_session is not None:
+            self.itch_session.seek(self.itch_session.minimum);self.position=self.itch_session.position;return
         if self.recorded_session is not None:
             self.position=0;return
         if self.dataset == 'kraken-authored-profile-v1':
@@ -91,6 +112,14 @@ class NativeSession:
             self.step()
 
     def step(self):
+        if self.itch_session is not None:
+            try:accepted=self.itch_session.step()
+            except (gig.EngineError,ValueError):
+                self.playing=False;self.itch_session.playing=False;raise
+            self.position=self.itch_session.position
+            if self.position==self.itch_session.total:self.playing=False
+            self.itch_session.playing=self.playing
+            return accepted
         if self.recorded_session is not None:
             if self.position>=self.recorded_session.event_count:self.playing=False;return False
             self.position+=1
@@ -107,12 +136,19 @@ class NativeSession:
         return True
 
     def control(self, action, value=None):
+        if self.itch_session is not None and action!='dataset':
+            from terminal.itch_product import ItchProductError
+            try:self.itch_session.control(action,value)
+            except ItchProductError as exc:raise ControlError('ITCH_SESSION_CONTROL',str(exc))from None
+            self.position=self.itch_session.position;self.speed=self.itch_session.speed;self.playing=self.itch_session.playing;return
         if action == 'mode':
             if value not in ('HISTORICAL_REPLAY', 'SIMULATION', 'LIVE'):
                 raise ControlError('INVALID_MODE', 'unknown operating mode')
             self.playing = False
             self.mode = value
         elif action == 'dataset':
+            if value=='itch-checkpoint-v1' and self._itch_selection is not None:
+                self.select_itch_checkpoint(*self._itch_selection);return
             if value not in ('terminal-authored-v2', 'kraken-authored-profile-v1'):
                 raise ControlError('DATASET_UNAVAILABLE', 'only authored native or provider-shaped fixtures may be selected')
             if value == 'kraken-authored-profile-v1' and not hasattr(gig._native, 'AggregateDepth'):
@@ -121,7 +157,7 @@ class NativeSession:
             candidate = NativeSession()
             candidate.dataset = value
             if value != 'terminal-authored-v2': candidate.restart()
-            self.recorded_session=None
+            self.itch_session=None;self.recorded_session=None
             self.dataset, self.mode, self.playing = value, 'HISTORICAL_REPLAY', False
             self.replay, self.aggregate, self.adapter = candidate.replay, candidate.aggregate, candidate.adapter
             self.position = candidate.position
@@ -165,6 +201,7 @@ class NativeSession:
             raise ControlError('UNKNOWN_ACTION', 'unknown control action')
 
     def state(self):
+        if self.itch_session is not None:return self.itch_session.view(self)
         live = self.mode == 'LIVE'
         simulation = self.mode == 'SIMULATION'
         origin = 'UNAVAILABLE' if live else 'SIMULATED' if simulation else 'HISTORICAL_SYNTHETIC'
@@ -202,7 +239,7 @@ class NativeSession:
                            'fixture_sha256': None if live else profile_sha if profile else FIXTURE_SHA256, 'generator_seed': None if live else '0',
                            'clock': None if live else 'simulation:authored-logical-clock', 'complete_initialization': not live and not profile, 'initialization_scope': 'authored subscribed L2 only' if profile else 'authored order-level empty boundary',
                            'recording_enabled': False, 'permission': 'unverified' if live else 'independently-authored'},
-            'capabilities': {'live': False, 'native_replay': True, 'aggregate_l2': hasattr(gig._native, 'AggregateDepth'),
+            'capabilities': {'itch_checkpoint_available':self._itch_selection is not None,'live': False, 'native_replay': True, 'aggregate_l2': hasattr(gig._native, 'AggregateDepth'),
                              'simulation': True, 'twap': True, 'vwap': True, 'pov': True, 'tca': True,
                              'recording': False, 'observed_lobster': False, 'observed_itch': False},
             'engine': {'native': True, **gig.native_build_info()},
@@ -284,8 +321,9 @@ class NativeSession:
             {'id':'kraken-authored-profile-v1','origin':'HISTORICAL_SYNTHETIC','status':'AVAILABLE','format':'provisional provider-shaped L2;not observed','records':5},
             {'id': 'lobster-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',
              'format': 'LOBSTER 6/20-column authored CSV', 'reason': 'Validated offline adapter; not loaded into browser replay.'},
+            {'id':'itch-checkpoint-v1','origin':'HISTORICAL_SYNTHETIC','status':'EXPLICIT_PRIVATE_CONFIGURATION','format':'gig.itch.product_session/1','reason':'Owner-pinned authored full ITCH checkpoints;no browser file paths,provider activation or raw upload.'},
             {'id': 'itch-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',
-             'format': 'BinaryFile/ITCH5.0', 'reason': 'Validated offline decoder/reconstruction; browser import not implemented.'},
+             'format': 'BinaryFile/ITCH5.0', 'reason': 'Validated offline decoder/reconstruction;durable authored sessions supported;general raw browser import unavailable.'},
             {'id': 'lobster-aapl-private', 'origin': 'HISTORICAL_OBSERVED', 'status': 'BLOCKED_PERMISSION',
              'reason': 'Third-party cloud processing not authorized; no file is opened.'},
             {'id': 'nasdaq-itch-private', 'origin': 'HISTORICAL_OBSERVED', 'status': 'BLOCKED_ACQUISITION',

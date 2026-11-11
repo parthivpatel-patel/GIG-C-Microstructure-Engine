@@ -121,7 +121,8 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     connections = {'last_mutation': None, 'last_websocket': None, 'last_browser_bootstrap': None, 'last_authenticated_websocket': None, 'last_request_proof_bootstrap': None}
     stream_tickets = StreamTickets()
     request_proofs = RequestProofs()
-    native = NativeSession()
+    from terminal.itch_product import select_product_session
+    native = select_product_session(os.environ)
     from terminal.providers.supervisor import FeedSupervisor
     feed = FeedSupervisor()
     native.live_feed = feed
@@ -825,6 +826,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         async with lock:
             action,value=data['action'],data.get('value')
             if action=='connect':
+                if native.itch_session is not None:raise ControlError('ITCH_SESSION_CONTROL','Select a non-ITCH dataset before connecting any source')
                 from terminal.providers.kraken import ProviderError
                 if value in (None,'kraken'):value={'provider':'kraken','instrument':'BTC/USD','depth':10}
                 if (type(value) is not dict or set(value)!={'provider','instrument','depth'}
@@ -945,7 +947,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                         candidate=await asyncio.to_thread(RecordedSession,l2_directory,identity,allow_observed=observed_processing_allowed())
                         async with lock:
                             await feed.close()
-                            native.recorded_session=candidate;native.dataset='recorded-l2'
+                            native.itch_session=None;native.recorded_session=candidate;native.dataset='recorded-l2'
                             native.mode='HISTORICAL_REPLAY';native.position=0;native.playing=False
                         result={'identity':identity,'records':candidate.event_count,'cache_encoded_bytes':candidate.cache_bytes}
                 except (ValueError,OSError,gig.EngineError):
@@ -1035,4 +1037,14 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     return app
 
 
-app = create_app()
+# Importing helpers must not construct an application or select a private file.
+# Uvicorn's existing terminal.server.app:app lookup explicitly requests this export.
+_application = None
+
+def __getattr__(name):
+    if name != 'app':
+        raise AttributeError(name)
+    global _application
+    if _application is None:
+        _application = create_app()
+    return _application

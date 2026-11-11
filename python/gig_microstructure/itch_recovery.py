@@ -33,6 +33,25 @@ class ItchRecovery:
         if hashlib.sha256(payload).hexdigest()!=admission.artifact_sha256:raise ValueError('itch_artifact_digest')
         owner=_checked(_native.restore_itch_checkpoint(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes)))
         result=cls.__new__(cls);result._owner=owner;result.admission=admission;return result
+    def describe(self):return _checked(self._owner.describe())
+    def book(self,index,depth=10):
+        if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')
+        return _checked(self._owner.book(str(index),str(depth)))
+    @classmethod
+    def migrate(cls,payload,admission,target_implementation_sha256):
+        # Explicitly validate old state with the current native implementation,
+        # re-encode unchanged configuration/capture/generation under the target
+        # code identity,then validate again. No unknown schema conversion or claim
+        # of historical algorithm equivalence. The source payload stays unchanged.
+        from dataclasses import replace
+        target=replace(admission,implementation_sha256=target_implementation_sha256);target.validate()
+        source=cls.restore(payload,admission)
+        raw=_checked(source._owner.rebind(target_implementation_sha256))
+        target=replace(target,artifact_sha256=hashlib.sha256(raw).hexdigest())
+        restored=cls.restore(raw,target)
+        if restored.canonical()!=source.canonical()or restored.describe()!=source.describe()or restored.status()['source_records']!=source.status()['source_records']:
+            raise ValueError('itch_migration_state_changed')
+        return raw,target
     def status(self):return _checked(self._owner.status())
     def canonical(self):return _checked(self._owner.canonical())
     def checkpoint(self):return _checked(self._owner.checkpoint())
