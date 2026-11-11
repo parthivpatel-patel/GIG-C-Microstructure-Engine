@@ -1,3 +1,11 @@
+# Current durable ITCH checkpoint — November 11, 2026
+
+Branch `development/gig-ui-redesign`; runtime `1f07e43c71e8db7377a1e16c6b88c049a6591b4f` is pushed and remote-verified. Durable version1 full ITCH/seed/Python/private-file recovery and plain/gzip prefix verification with suffix-only application are implemented offline. Empty-cursor and DTS simple-reference defects were reproduced and repaired. All6 native configurations/all8 frozen identities passed;273 guarded Python cases per5 supported binding profiles passed. No app/provider/acceptance operation was started.
+
+Full development remains partial. Next: explicit opt-in full-ITCH product-session selection using completed APIs,then remaining full XBRL semantics/integration. Preserve version1 fail-closed positions and independent trust. Read [current report](qualification/development-continuation/REPORT.md),[matrix](qualification/development-continuation/COMPLETION_MATRIX.md) and [resume checkpoint](qualification/development-continuation/PROGRESS.md). Final documentation commit is identified by Git/remote receipt.
+
+## Preserved previous checkpoints
+
 # Current recovery/session checkpoint — November11,2026
 
 Branch `development/gig-ui-redesign`;latest runtime `0c4196b2e0270dacfa07638c2c5d94f3de54cb49`,pushed/remote-verified. ITCH context/receipt/two-book typed images,actual native-session restore/private migration,L2 worker/precision and IEX shutdown fences,plain inline-XBRL and supplied DTS/presentation are implemented offline. Final6compiler profiles/all8frozen hashes passed;263guarded Python cases per5binding profiles;source-built packaging passed. No GIG app/provider/workflow/deployment was started. Full development remains partial;Kraken provisional status unchanged.

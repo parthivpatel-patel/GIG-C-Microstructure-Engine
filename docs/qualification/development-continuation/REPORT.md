@@ -1,87 +1,61 @@
-# GIG ITCH recovery and remaining-development checkpoint — November11,2026
+# GIG durable ITCH recovery development — November 11, 2026
 
-Branch:`development/gig-ui-redesign`. Starting remote53e5892c58390d9a5bd935d7a40a452beb842497 was clean and verified. Latest implementation source:`0c4196b2e0270dacfa07638c2c5d94f3de54cb49`. All source milestones below were pushed and independently checked against the remote. Final documentation closure is identified by Git rather than a self-referential commit hash.
+The clean starting branch and remote both matched `d2120bb6812d38f30c5fc529b5ddf1b179c08147`. The new runtime is `1f07e43c71e8db7377a1e16c6b88c049a6591b4f` on `development/gig-ui-redesign`. Both implementation checkpoints below were pushed and checked against the remote. The final documentation-only commit is identified by Git, not self-embedded here.
 
-## Published implementation
-
-|Commit|Verified working change|
+|Published commit|Implementation|
 |---|---|
-|`b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c`|Preserved/fixed the interrupted fingerprint writer;owned ITCH context/receipt/two-book hot images and isolated import.|
-|`56cd5c698fecfff3e31a309ee6c6a997137adc37`|Actual NativeSession hot-state integration,private immutable checkpoint files,explicit native-validated migration;L2 precision/worker/retry repairs.|
-|`5768da42f25321257047208b92f580f83be788cc`|Bounded plain inline-XBRL1.1 and supplied DTS discovery/simple presentation relationships.|
-|`20a63d90095cbd24b84215668dbae4c7c13b0d8f`|Hot context pre-copy bounds and complete inline-output/fact bounds,with regressions.|
-|`0c4196b2e0270dacfa07638c2c5d94f3de54cb49`|Bounded IEX cancellation drain,retiring-worker admission fence and late socket publication rejection.|
+|`b997b85d7640045ceb0a42029dafc5b95a4c94b3`|Versioned full typed ITCH artifact, Python/native admission and immutable files, seeded hot restoration and coordinated plain/gzip source continuation; impossible empty-cursor repair.|
+|`1f07e43c71e8db7377a1e16c6b88c049a6591b4f`|Strict DTS simple-XLink reference repair and expanded guarded offline regression cohort.|
 
-The initial native milestone was published before continuing the other packages. No surviving code was discarded or left intentionally uncommitted. Protected branches,provider permissions,trading controls and frontend design remain unchanged.
+## Completed engineering
 
-## ITCH hot-context recovery
+The durable version-1 format preserves both order-level native books, journal/cursor state, full ITCH context, directories, active/inactive and seed-retired references, matches and broken flags, lifecycle, source cursors, receipts, initialization evidence, configuration and provenance. Field encoding is deterministic and bounded; decoding rejects corruption, invalid lengths/types/tags/versions and inconsistent native/context state. Independently retained artifact/configuration/code/capture/generation evidence is required. Embedded hashes are not authentication. No automatic artifact/schema/code migration is allowed.
 
-`SourceContext::checkpoint/restore` own directories,active/inactive lifetime orders,seed-retired references,matches/broken flags,manifest,policies,lifecycle,source locations/ordinals/timestamps and resource accounting. `SyntheticReconstructor::hot_checkpoint/restore_hot` additionally own receipts,per-book derived sequences and both native replay/book images. Direct isolated restoration verifies independently retained identity,expected code/configuration,receipt adjacency and active source/native identities,side,exact price/quantity and counts. It does not reapply source records to reconstruct the book. Donor prepared tokens cannot cross into the restored context;new token guards do not enter deterministic fingerprints.
+Authored-empty and complete authored-seed hot images restore directly, without applying committed events again. Seed priority, retired references, match state and the seed recovery journal boundary survive restoration. An impossible zero-record source cursor was reproduced against the published starting implementation and now fails admission even with a recomputed typed fingerprint.
 
-The interrupted writer matched empty optionals through `value()` before `has_value()`,causing bad_optional_access. Dispatch order was repaired. Strict ByteOffset/compiler errors were corrected without weakening warnings. A later4097-order context reproduced image allocation before the declared4096-row limit;preflight now rejects before any attempted copy and preserves accepted state.
+The installed Python SDK exposes a native recovery owner with status, both canonical books, recapture and explicit complete-record continuation. Private-file operations validate before writing, fsync complete bytes, atomically publish new immutable revisions without overwriting rollback inputs, and fsync the directory. Disk-full and abrupt cross-process exit tests distinguish no publication from uncertain publication. The latter requires reopening with trusted admission; no RPO/RTO or hardware power-loss guarantee is inferred.
 
-**This is a bounded owned typed C++ image**,not a deployed durable full-ITCH file loader. Authored-empty accepted complete-record boundaries are supported. Seeded hot reconstruction,stable serialized artifact admission,Python/full-ITCH bridge,gzip/partial-framer coordination and actual source/hardware recovery remain open. Existing seeded prefix replay and gzip-boundary replay remain unchanged. See `ITCH_HOT_CONTEXT.md`,`ITCH_HOT_CONTEXT_EVIDENCE.json` and final `HOT_IMAGE_LIMITS_EVIDENCE.json`.
+Plain BinaryFile and complete single-member gzip coordination start at the independently specified source boundary, compare committed frames to retained receipts without applying them, then apply only the suffix. Seeded tails work. CRC/trailer failure discards the isolated candidate. Source mismatches, altered/missing committed frames, stale generations, gaps, partial frames, incomplete gzip, trailing members and resource exhaustion fail closed. Active-prefix version 1 explicitly rejects terminal cursors and arbitrary compressed seeks. Gzip framing/decompression is repeated from container byte zero; committed native/source transitions are not replayed.
 
-## Product-session and market-data follow-through
+DTS discovery previously accepted missing/empty/extended XLink types on a linkbaseRef and could report a usable graph. Three independently authored invalid shapes reproduced that failure. The parser now requires a simple reference. Full XBRL type/transform/relationship/accounting validation remains partial; no financial values, source receipts or historical coverage were invented.
 
-The actual NativeSession now supports explicit capture/restore APIs. Restore bypasses default20-event startup replay,restores native state/position/speed and resumes paused with fresh process-local controls. Only the authored native dataset is admitted;LIVE,SIMULATION,provider-shaped and recorded sessions are rejected. There is no new startup switch or network/file HTTP endpoint.
-
-Private revisions use complete write/file fsync followed by exclusive atomic link publication and directory fsync. Rollback input is never overwritten. Before/after publication fault tests and a real child exit79 verify admissible restart behavior within this local filesystem. Explicit migration validates the native schema/rules/configuration/canonical state before rebinding implementation/binary metadata,and retains bounded source lineage. This is not proof of equivalence of arbitrary historical code semantics or hardware power-loss durability. See `SESSION_L2_RECOVERY.md`.
-
-L2 regressions reproduced finite scientific JSON quantity rejection,concurrent2-worker admission and endless snapshot/corruption retry cycles. Exact bounded Decimal expansion,serialized ownership,retiring-worker fences,8-consecutive-failure exhaustion and stable30-second retry reset now pass fixtures. Jitter is bounded/finite. Existing crypto L2 native/source-labelled book/depth/research interfaces are retained. **Kraken remains provisional**:current official protocol/rights evidence was not independently retrieved;the known blocked host was not retried or bypassed. No real Kraken data was obtained.
-
-IEX shutdown now revokes socket publication rights before waiting,retains a cancellation-resistant worker on timeout and denies replacement. The original published close failed the deterministic regression;the repaired36-case IEX recovery/retry/checkpoint cohort passes. Permission gates,read-only destinations,subscription bounds,source accounting and execution/retention defaults are preserved. See `IEX_SHUTDOWN_REPAIR.md`.
-
-## SEC/XBRL
-
-Plain inline-XBRL1.1 admits exact bounded scale/sign values,nil and original lexical/source lineage into the existing filing/vintage pipeline. DTS discovery consumes supplied files only,verifies source digests,document kinds/import namespaces,and preserves missing references without network fetches. Simple presentation locators/order/cycles are supported;unresolved/custom/precedence/split-role semantics are not labelled usable full hierarchies. Structural closure is separate from type/accounting validation.
-
-All XML source/permission admission precedes XML processing. Entity/DTD/XInclude rules and bounded fact/complete-output limits remain enforced. Full transforms,continuations,tuples,nested fact markup,complete XML Schema/custom types,extension semantics,relationship precedence/calculation networks,complete statement assembly and read-only v2/UI integration remain missing. No missing historical periods or original receipts were fabricated. See `XBRL_NEXT_PROFILE.md`.
+See [format, trust and recovery contract](DURABLE_ITCH_RECOVERY.md). The explicit member inventory, tests and source hashes are in [current evidence](DURABLE_ITCH_EVIDENCE.json).
 
 ## Actual developer validation
 
-|Cohort/configuration|Outcome|
+|Configuration|CTest passed|
 |---|---:|
-|GCC14.2 Debug /Release /ASan+UBSan CTest|149/149 ·149/149 ·150/150|
-|Clang19.1.7 Debug /Release /native ASan+UBSan CTest|149/149 ·149/149 ·146/146|
-|New ITCH hot-context checks in **each** native profile|221passed;46actual restore allocation-failure points|
-|Eight frozen native identities in **each** of6profiles|All actually executed and matched|
-|Final guarded Python,each GCC Debug/Release/ASan+UBSan and Clang Debug/Release binding profile|263/263 in each of5profiles;0failures/errors/skips|
-|XML affected cohort|48/48 per5binding profiles|
-|Focused L2/provider +product session|62+9cases passed|
-|Focused IEX recovery/retry/checkpoint|36/36|
-|Actual Python→TypeScript market/SEC admission|8+5assertions passed|
-|Packaging patterns|3/3|
-|Source-built installed SDK consumer /native+session recovery|8/8 +28/28|
-|Current source archive|1,233members;24runtime/test entries byte-compared;no private/build/cache/DB/ZIP/native binary payload|
+|GCC 14.2 Debug|152/152|
+|GCC 14.2 Release|152/152|
+|GCC 14.2 ASan+UBSan|153/153|
+|Clang 19.1.7 Debug|152/152|
+|Clang 19.1.7 Release|152/152|
+|Clang 19.1.7 native ASan+UBSan|148/148|
 
-These are separate overlapping cohorts,not a fabricated single assertion total. Clang Python ASan remains unsupported by the repository's existing GNU/Linux-only Python harness;Clang native sanitizer and GCC Python sanitizer profiles passed. Existing live-LSan coverage is not whole-CPython exit-leak clearance.
+Each configuration executed 363 durable checks and 163 source-recovery checks, including measured sweeps over **57 decode/restore, 63 encode and 67 source/gzip restoration allocation points**, with cleanup assertions. Existing 221 typed hot-context checks and all eight frozen native identities were also executed and matched in every profile. These are overlapping cohorts, not a single invented assertion total.
 
-One focused command initially misspelled the test-class locator. A strengthened fake worker then omitted the initial CONNECTED_PENDING handshake phase,so five broad attempts and one focused attempt stalled at fixture setup. Only those task-owned test processes were terminated;their partial logs are retained and not counted as passes. The fixture phase/readiness wait was corrected,and the final263-case cohort passed in all5profiles. Original reproducible production defects and intermediate new-code failures are retained separately. Existing Starlette/httpx deprecation remains visible;no assertions or warnings were suppressed.
+The guarded Python cohort passed **273/273** in each of five supported binding configurations: GCC Debug/Release/ASan+UBSan and Clang Debug/Release. Zero final failures, errors or skips. It includes nine new real-native durable/file/cross-process cases and 49 XML cases. Binding objects are real; provider fixtures are authored. Socket bind/connect and application factories are forbidden in this cohort. Clang Python ASan remains unsupported by the existing harness; Clang native sanitizers and GCC Python sanitizers passed. Existing live-interpreter LSan coverage is not whole-CPython exit-leak clearance.
 
-Frontend source is byte-unchanged by this continuation. Its prior154-test/production-build evidence remains bound to53e5892 and was **not rerun**. No current browser/WebGL/app/HTTPS/WSS target acceptance is claimed. No new production throughput,latency,RPO/RTO or hardware SLA is claimed;the older HOT_RECOVERY_BENCHMARK remains historical source-bound evidence,not a new ITCH-context measurement.
+The clean `1f07e43` source archive contains **1,246 members**; all18 changed runtime/test entries match committed bytes. The wheel was built from that extracted archive,contains22 members,and its new recovery module matches source. Installed tests run from the extracted source passed **8 SDK consumer checks and37 native/aggregate/session/ITCH recovery cases**. No-index/no-dependency installation and private/cache/build payload exclusions passed. All six compiler/configuration fixture encodings are also byte-identical (12,834 bytes for nine authored source records). Exact receipts are recorded in `PACKAGE_CURRENT.json` and the durable evidence. No artifact was published as a release. Frontend source and dependencies were unchanged; prior frontend/build evidence remains source-bound historical evidence and was not rerun. Browser, WebGL, owner HTTPS/WSS and physical-device tests were not launched. No new production latency, throughput, recovery SLA or hardware durability claim is made.
 
-## Completion accounting and remaining work
+## Failures retained and repaired
 
-The previous49rows are preserved. The user's explicit official-contract Kraken L2 requirement is now tracked as MD07,so **50entries =49reviewed areas +1historical A18/A19 decision**. Counts:34COMPLETE /8PARTIAL /7BLOCKED /1NOT APPLICABLE. This is an explicit new requirement row,not an extra historical decision or an invented completion percentage.
+- New-code compilation initially caught a misleading-indentation diagnostic, a nonportable char range check and an incorrect CMake target name. All were repaired; strict warnings remain enabled.
+- An initial allocation test left failure injection armed while requesting a new canonical allocation. It now measures the exact restoration allocation count and sweeps those points without an unrelated diagnostic allocation.
+- An initial corruption fixture accidentally repaired the header bytes it intended to corrupt. It now preserves those corruptions while independently updating only the external expected artifact digest.
+- CTest exposed a child-process import failure from its build-directory working directory. The child now selects the repository working directory explicitly; all nine cases and all final profiles pass.
+- Published empty-cursor and DTS-reference defects have actual failing-before receipts. Intermediate failed logs are retained and are not counted as passing results.
 
-Full development remains incomplete. Next engineering packages:
+## Remaining scope and effort
 
-1. Serialize/admit the full typed ITCH image with independently trusted artifact/source identity;add seeded hot reconstruction and coordinated framer/gzip recovery. Preserve the completed typed/native APIs.
-2. Complete remaining XBRL transformation/type/relationship/statement profiles and v2 integration;preserve unknown source coverage and missing receipts.
-3. Reconcile Kraken candidate semantics against verified official documentation before changing provisional status. Do not guess current wire/CRC/update options or exchange continuity.
-4. Obtain authoritative observed cancellation/backfill semantics and the missing historical A18/A19 contract. Do not invent complete/lossless tape guarantees.
+The matrix retains **50 entries: 49 reviewed areas plus the historical A18/A19 decision**. Counts remain **34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE**. The bounded durable/seed/source requirements are now implemented; this does not silently close the stronger product/source/hardware requirement.
 
-Actual observed L3 initialization/reference,private owner IEX/SEC/browser deployment,current native ARM64,device/WCAG and target dependency/hardware qualification remain separate blocked evidence. Existing owner-reported source observations stay owner-reported. Planning ranges remain conditional:days for a tightly bounded remaining recovery codec/seed/framer package;engineer-weeks for full XBRL semantics/statement scope. No defensible whole-project completion date or production-readiness claim follows from fixture success.
+Remaining engineering includes explicit opt-in full-ITCH product/startup session selection alongside the existing authored-native NativeSession recovery, full Inline-XBRL transformations/continuations, full schema/custom-type and cross-link relationship semantics, complete financial-statement assembly and v2/UI integration. Automatic startup was not enabled. Additional schema/container profiles require explicit tested contracts; current partial/terminal-position rejections are intentional supported-profile boundaries.
 
-## Resume without launching
+Conditional planning ranges are 1–3 engineer-days for narrowly scoped product-session selection/integration and its failure matrix, and several engineer-weeks for scoped full XBRL semantics and statement integration. These are estimates, not a committed completion date. Some remaining work is engineering, not merely external access.
 
-Use the final development-branch HEAD and the source-bound matrix/evidence. Do not repeat completed recovery implementation or unrelated compiler matrices. Focus the next batch on the remaining full-ITCH codec/seed/framer contract. Developer tests only:
+External evidence remains required for actual observed L3 initialization/reference, lossless observed trade/backfill authority, current authoritative listing coverage, original A18/A19 requirements, current native ARM64, private Codespaces/browser/device/security target and hardware durability. IEX permissions/execution/retention gates were unchanged. No real IEX qualification is claimed. Kraken remains provisional: official current protocol/rights material was not obtained, known blocked documentation probes were not retried, and no wire-contract authority was invented.
 
-```bash
-ctest --test-dir <native-build> --output-on-failure -j 4
-PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/run_no_launch_suite.py
-PYTHONPATH=<native-build>/python:. <venv>/bin/python terminal/tests/check_trade_contract.py
-```
+No application/factory/server/listener, provider/account connection, deployment/workflow, trading or paid infrastructure was started. Restricted historical data was not accessed. Protected branches and GIG-only frontend branding were preserved. **Full development and production qualification are not complete.**
 
-Use the existing supported sanitizer preload/CMake harness. No application/server/provider/account/order/workflow/deployment or owner acceptance operation was performed. Current artifacts and failure receipts are in EVIDENCE.json and PACKAGE_CURRENT.json. Keep main/release/Sprint4 refs unchanged.
+Next engineering action: use the completed SDK/file layer to implement a narrowly scoped, explicitly selected full-ITCH product-session recovery policy. Do not reimplement the codec or repeat unchanged matrices. Keep provider/owner acceptance separate and preserve version-1 rejection rules.

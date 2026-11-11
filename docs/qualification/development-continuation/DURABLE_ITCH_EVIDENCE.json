@@ -1,0 +1,533 @@
+{
+  "schema": "gig.itch.durable_recovery.evidence.v1",
+  "starting_source": "d2120bb6812d38f30c5fc529b5ddf1b179c08147",
+  "tested_runtime_source": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
+  "execution_date_from_client": "2026-11-11",
+  "branch": "development/gig-ui-redesign",
+  "source_sha256": {
+    "CMakeLists.txt": {
+      "path": "CMakeLists.txt",
+      "bytes": 29783,
+      "sha256": "6d050f5d5829c2d801f8d781a325a8bb6a47b88b1547036bb0ce97375841401d"
+    },
+    "include/gig/itch/durable_checkpoint.hpp": {
+      "path": "include/gig/itch/durable_checkpoint.hpp",
+      "bytes": 1071,
+      "sha256": "d3c663ec0c7d09953332fbceb22744781146fe4bad6f8860e85015774eb68e0b"
+    },
+    "include/gig/itch/source_recovery.hpp": {
+      "path": "include/gig/itch/source_recovery.hpp",
+      "bytes": 1297,
+      "sha256": "553f364e7cf7a099c99f4ea15ac4d74f9fce74ae2a08cd554eccf729d8aa365d"
+    },
+    "python/bindings/itch_recovery.cpp": {
+      "path": "python/bindings/itch_recovery.cpp",
+      "bytes": 4080,
+      "sha256": "1196c4f3f01f8f84c1470d03ad5814362c0017ad26ca33aaa214881b3a3e582c"
+    },
+    "python/bindings/module.cpp": {
+      "path": "python/bindings/module.cpp",
+      "bytes": 8599,
+      "sha256": "2a2fa2fc2b216f76edd51a9d6c77ee16b3c291ffecb01625f7005940f7e6375e"
+    },
+    "python/gig_microstructure/itch_recovery.py": {
+      "path": "python/gig_microstructure/itch_recovery.py",
+      "bytes": 2472,
+      "sha256": "77801974fc048bdbe73f6d93a4557ccac782f472581a026f2daa671ea251d474"
+    },
+    "src/itch/hot_checkpoint.cpp": {
+      "path": "src/itch/hot_checkpoint.cpp",
+      "bytes": 10394,
+      "sha256": "1af24a0c4f4bfe32fedf4cff247ba73e484905b177f64104569a98845b9803b8"
+    },
+    "src/itch/hot_codec.cpp": {
+      "path": "src/itch/hot_codec.cpp",
+      "bytes": 15014,
+      "sha256": "fcb576364c263f98a4c8215326be3fe1b4a52d473c63becb8165c958f6bf6f7d"
+    },
+    "src/itch/hot_codec_fields.hpp": {
+      "path": "src/itch/hot_codec_fields.hpp",
+      "bytes": 12600,
+      "sha256": "3191651634df5ddf61a24f08cd615f28109e82b444282f48055c6e86e6ac7565"
+    },
+    "src/itch/source_recovery.cpp": {
+      "path": "src/itch/source_recovery.cpp",
+      "bytes": 3866,
+      "sha256": "973173ee2311fe24e0279e582147e649107eb866abe880f76b7d05942caaf470"
+    },
+    "terminal/itch_recovery.py": {
+      "path": "terminal/itch_recovery.py",
+      "bytes": 2016,
+      "sha256": "7e0fdebe52e4ab317df651c06df8697ee85c75360f062966f129141302aff6eb"
+    },
+    "terminal/stocks/test_xbrl_dts.py": {
+      "path": "terminal/stocks/test_xbrl_dts.py",
+      "bytes": 6748,
+      "sha256": "da3be28ae1a0d3d4179ec3fddc43551ef27349369897f00346aa0415142f1313"
+    },
+    "terminal/stocks/xbrl_dts.py": {
+      "path": "terminal/stocks/xbrl_dts.py",
+      "bytes": 11097,
+      "sha256": "0f501b379a84e1adfa6caa0c77f4d3010cabf1b9ae230279311e96a99ba01e4f"
+    },
+    "terminal/test_itch_durable_recovery.py": {
+      "path": "terminal/test_itch_durable_recovery.py",
+      "bytes": 6532,
+      "sha256": "dd6def8ba92245a3f424f44fea24d24a0bdf75d8da6416e3d1350b6d626e5a68"
+    },
+    "terminal/tests/run_no_launch_suite.py": {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "bytes": 2891,
+      "sha256": "fd2c0226036b5656f4cc71364a67a7142b3cc9078dab4dfd38b5fb1a219bd6d9"
+    },
+    "tests/test_itch_durable_checkpoint.cpp": {
+      "path": "tests/test_itch_durable_checkpoint.cpp",
+      "bytes": 9059,
+      "sha256": "46387b5b0d6ce53ab0246fb703f2ea81f287da6c56cc89543eaa342f0214532d"
+    },
+    "tests/test_itch_durable_python.py": {
+      "path": "tests/test_itch_durable_python.py",
+      "bytes": 765,
+      "sha256": "e1cfea59dae96e813bebe5d61d4bede1d899f159deaebb0f00ec51b4121348e1"
+    },
+    "tests/test_itch_source_recovery.cpp": {
+      "path": "tests/test_itch_source_recovery.cpp",
+      "bytes": 6383,
+      "sha256": "35262cf8357a54ab213248819d1d12b3ea32c3569b2889b19aab7f459caf5849"
+    }
+  },
+  "native_profiles": [
+    {
+      "configuration": "native-debug",
+      "ctest_passed": 152,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-native-debug.log",
+        "bytes": 1019,
+        "sha256": "45a5b0fbc1f7f162a0b82e89643fcd607db71557f0dd98bf91545532da1051f3"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-native-debug.log",
+        "bytes": 19857,
+        "sha256": "a9afaebb491ef45fd25d6f2484fe9acc7cdc9d491d6f8d4713f9d6ed25fadaa8"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/native-debug/Testing/Temporary/LastTest.log",
+        "bytes": 135799,
+        "sha256": "04017c3b7d3bf1afd59b39f2a4d46448aea2f2e8632218533212fec5e8ed4dac"
+      }
+    },
+    {
+      "configuration": "native-release",
+      "ctest_passed": 152,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-native-release.log",
+        "bytes": 2473,
+        "sha256": "fbfc45a879e21cad814fd67fb93158d9d19bbf225e7dff1274a9b469d217027d"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-native-release.log",
+        "bytes": 19861,
+        "sha256": "241013409bb6b0f0262dd1dfe4d6ea18ef0fe348e737999397dad1bea26f513c"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/native-release/Testing/Temporary/LastTest.log",
+        "bytes": 136407,
+        "sha256": "6df6b6d35062c57d20348242d5249bf7070d8d3a6f0f711e9a2eb3f23964350e"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "ctest_passed": 153,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-native-asan-ubsan.log",
+        "bytes": 2476,
+        "sha256": "c9b649aba39b8a2a19334081607bda1d370efbefdc9398d3c8efa70d484a77ce"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-native-asan-ubsan.log",
+        "bytes": 19998,
+        "sha256": "fba1463da3efe922f31d2cd4c7faa3e5637eb457851a1ec9a1495a883193b430"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/native-asan-ubsan/Testing/Temporary/LastTest.log",
+        "bytes": 139852,
+        "sha256": "d702e3f7ad4c6488b9fc9107f9a08e9131703ff5a228bd09bbbadb193cba4f42"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "ctest_passed": 152,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-clang-debug.log",
+        "bytes": 2470,
+        "sha256": "8cfa51e779e3b8845c54c7fae19882b91eb1d9d11cfde8f3580081cfd4d6d0b9"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-clang-debug.log",
+        "bytes": 19855,
+        "sha256": "8469ea71280f87474f9f702ceda673954f2bbe5d405863acd9b2dcceab48835d"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/clang-debug/Testing/Temporary/LastTest.log",
+        "bytes": 135495,
+        "sha256": "e1621159cdb31ca4e8d1ae3bfc5cc8712d16d319602ed79f53cba0735f6c205b"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "ctest_passed": 152,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-clang-release.log",
+        "bytes": 2564,
+        "sha256": "87d27ad1f96107d5d89e44c47b5cdb25318f76c61a78821c1ef399681b5b316b"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-clang-release.log",
+        "bytes": 19859,
+        "sha256": "7552eb98f192e96265ecf64ab3fa7d163af3e1bb09ed9552a205c282c735c6bd"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/clang-release/Testing/Temporary/LastTest.log",
+        "bytes": 136103,
+        "sha256": "2ca52771e7b4f515578da63f7ff3ce558d376ad52f163f97a7f4b69d85a98d60"
+      }
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "ctest_passed": 148,
+      "ctest_failed": 0,
+      "durable_checks": 363,
+      "source_checks": 163,
+      "durable_restore_allocation_failpoints": 57,
+      "durable_encode_allocation_failpoints": 63,
+      "source_restore_allocation_failpoints": 67,
+      "eight_frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "build": {
+        "path": "build/remaining-engineering/durable-final-build-clang-asan-ubsan.log",
+        "bytes": 1971,
+        "sha256": "7c669b346b8db573b0b5375944c607bf4b2ba72626833cad451efb8cddcaf7ba"
+      },
+      "ctest": {
+        "path": "build/remaining-engineering/durable-final-ctest-clang-asan-ubsan.log",
+        "bytes": 19334,
+        "sha256": "4105b3d6bfbf6a212719dff493fd1062d04b6a046f83698e16d478800dc0d6cd"
+      },
+      "detailed": {
+        "path": "build/remaining-engineering/clang-asan-ubsan/Testing/Temporary/LastTest.log",
+        "bytes": 129400,
+        "sha256": "5e8c38d7a2dc4229c4a6de84f618356265a53ae0c02690f2c78e639f26e6217d"
+      }
+    }
+  ],
+  "python_profiles": [
+    {
+      "configuration": "native-debug",
+      "tests": 273,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Guarded subset;network/app factories forbidden",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-final-no-launch-native-debug.log",
+        "bytes": 52301,
+        "sha256": "a545c9ecd99d7a47b98324d70cb8090585b6e13250b18defc0abff066de9d7eb"
+      }
+    },
+    {
+      "configuration": "native-release",
+      "tests": 273,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Guarded subset;network/app factories forbidden",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-final-no-launch-native-release.log",
+        "bytes": 51898,
+        "sha256": "7dad28228eb4bb42ac11fb2d28e726a068c6457196fe47e43bba71ecde31906b"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "tests": 273,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Guarded subset;network/app factories forbidden",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-final-no-launch-native-asan-ubsan.log",
+        "bytes": 52709,
+        "sha256": "d48a71f51e175739b4b2a1d4e91604d78b8d7e017678994ea902b1c7e4a79144"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "tests": 273,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Guarded subset;network/app factories forbidden",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-final-no-launch-clang-debug.log",
+        "bytes": 51898,
+        "sha256": "717dfe10f6da8508e0efe0e2dc9393fe9cc74780a05a378616cfe445f201c4f9"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "tests": 273,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "scope": "Guarded subset;network/app factories forbidden",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-final-no-launch-clang-release.log",
+        "bytes": 52301,
+        "sha256": "cddefc90b43fb04750761dcdbfd06dc70e99f7b827921f227103ee576241c70e"
+      }
+    }
+  ],
+  "focused_xml": {
+    "tests": 49,
+    "receipt": {
+      "path": "build/remaining-engineering/durable-xml-after.log",
+      "bytes": 148,
+      "sha256": "3d417df9aeaec729166a18c5c9767a9f256ae78f1580c278827f031d74a5cac2"
+    }
+  },
+  "published_milestones": [
+    "b997b85d7640045ceb0a42029dafc5b95a4c94b3",
+    "1f07e43c71e8db7377a1e16c6b88c049a6591b4f"
+  ],
+  "failing_before": {
+    "published_typed_cursor": {
+      "source": "d2120bb6812d38f30c5fc529b5ddf1b179c08147",
+      "method": "Compile published hot_checkpoint.cpp against current test driver;other objects unchanged",
+      "receipt": {
+        "path": "build/remaining-engineering/durable-empty-cursor-before.log",
+        "bytes": 100,
+        "sha256": "5125f2b645403e4102c4be2a37e60ecadcfde4864d9cf78c9aae70f24ba37418"
+      }
+    },
+    "DTS_bad_reference": {
+      "source": "d2120bb6812d38f30c5fc529b5ddf1b179c08147",
+      "three_invalid_reference_shapes": true,
+      "receipt": {
+        "path": "build/remaining-engineering/durable-dts-reference-before.log",
+        "bytes": 2317,
+        "sha256": "da812932494965a802c97fa4c91885d8c9715c3457976222027ad28db0c05445"
+      }
+    }
+  },
+  "intermediate_developer_failures": {
+    "initial_compile": {
+      "path": "build/remaining-engineering/durable-first-build.log",
+      "bytes": 13461,
+      "sha256": "0669e8770c639d867b773451538fdb7a10b716b343cc7dc5d9ce44d53e95f9cc"
+    },
+    "initial_binding_config": {
+      "path": "build/remaining-engineering/durable-binding-build.log",
+      "bytes": 1047,
+      "sha256": "3de4a8412b03052ddaccd755a0726a07ba75056dc5e56fb356e139c7a4d46ce9"
+    },
+    "test_fault_arming": {
+      "path": "build/remaining-engineering/durable-first-test.log",
+      "bytes": 21,
+      "sha256": "d09df23a9e4cd5eb1edfb0ffc1e9f28f28474b567fc695bca7e10699801f0d3d"
+    },
+    "test_repair_overwrote_corrupt_header": {
+      "path": "build/remaining-engineering/durable-python-first.log",
+      "bytes": 3512,
+      "sha256": "d7c12eecc9eeaea07299ba9738ff876cf57fa6987c093d1afe03763b393ee68a"
+    },
+    "CTest_child_import_cwd": {
+      "path": "build/remaining-engineering/durable-ctest-native-debug.log",
+      "bytes": 22479,
+      "sha256": "a617862eeb35e4ddd36f75a08bd4b0edbff832071043f5350658430951a40dc7"
+    },
+    "classification": "Retained intermediate failures;not counted as final passes. Fault tests now sweep measured allocation counts,header corruptions remain un-repaired,child cwd explicit."
+  },
+  "frontend": "Unchanged from baseline;not rerun or browser-verified",
+  "native_ARM64": "NOT EXECUTED",
+  "performance": "No new production latency/throughput,SLA or RPO/RTO claim",
+  "unsupported": [
+    "Automatic artifact/schema/code migration",
+    "Arbitrary mid-gzip seeks or serialized zlib internals",
+    "Partial or terminal BinaryFile cursor recovery",
+    "Observed exchange L3 completeness/authenticity without independent source evidence"
+  ],
+  "not_executed": [
+    "Application/factory/server/listener/browser",
+    "Provider/market/account/order calls",
+    "Deployment/workflow/paid resources",
+    "Restricted historical datasets"
+  ],
+  "development_complete": false,
+  "packaging": {
+    "schema": "gig.package.current_source.v2",
+    "source": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
+    "clean_source_archive": true,
+    "wheel_built_from_this_sdist": true,
+    "sdist": {
+      "path": "build/remaining-engineering/durable-clean-dist/gig_microstructure-0.1.1.tar.gz",
+      "bytes": 7912197,
+      "sha256": "99c7b5fe6b58243b9186f4b98388e608e46da96be7872c93adc7d98d343c03fe"
+    },
+    "wheel": {
+      "path": "build/remaining-engineering/durable-clean-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "bytes": 657679,
+      "sha256": "d2910e38bb16d8e2de423dee0efce745d7e74dbd4c0a6152d399ef0d89a1324a"
+    },
+    "sdist_members": 1246,
+    "wheel_members": 22,
+    "runtime_entries_compared": 18,
+    "runtime_entries": [
+      "CMakeLists.txt",
+      "include/gig/itch/durable_checkpoint.hpp",
+      "include/gig/itch/source_recovery.hpp",
+      "python/bindings/itch_recovery.cpp",
+      "python/bindings/module.cpp",
+      "python/gig_microstructure/itch_recovery.py",
+      "src/itch/hot_checkpoint.cpp",
+      "src/itch/hot_codec.cpp",
+      "src/itch/hot_codec_fields.hpp",
+      "src/itch/source_recovery.cpp",
+      "terminal/itch_recovery.py",
+      "terminal/stocks/test_xbrl_dts.py",
+      "terminal/stocks/xbrl_dts.py",
+      "terminal/test_itch_durable_recovery.py",
+      "terminal/tests/run_no_launch_suite.py",
+      "tests/test_itch_durable_checkpoint.cpp",
+      "tests/test_itch_durable_python.py",
+      "tests/test_itch_source_recovery.cpp"
+    ],
+    "installed_sdk_cases": 8,
+    "installed_recovery_cases": 37,
+    "installed_tests_use_extracted_source": true,
+    "no_index_no_dependencies": true,
+    "private_payloads": false,
+    "scope": "Clean runtime checkpoint1f07e43. Final documentation closure is later and not part of this artifact. No artifact release or publication.",
+    "build_receipt": {
+      "path": "build/remaining-engineering/durable-clean-wheel-build.log",
+      "bytes": 6015,
+      "sha256": "8fb65191b83ec9eb6f6c11ddec179961036905dc70243aae462db1086b31defa"
+    },
+    "consumer_receipt": {
+      "path": "build/remaining-engineering/durable-clean-wheel-consumer.log",
+      "bytes": 964,
+      "sha256": "2708b3e8e70c8cca991d18f3089c3841ccec5bfc9abf40d60c2ab9562a3cd144"
+    },
+    "recovery_receipt": {
+      "path": "build/remaining-engineering/durable-clean-wheel-recovery.log",
+      "bytes": 136,
+      "sha256": "60bf365f8023d0452d4191ba0f3b8239a0df0a0e6c118db965e3100fc7fa3531"
+    }
+  },
+  "cross_compiler_wire": {
+    "receipt": {
+      "path": "build/remaining-engineering/durable-cross-compiler-wire.json",
+      "bytes": 1857,
+      "sha256": "4c0a1a857745ebc43113bc58dc8ca24126994541d7cd980c10eae3b4400d1266"
+    },
+    "artifacts": 6,
+    "identical": true,
+    "authored_records": 9,
+    "bytes": 12834
+  },
+  "tools": {
+    "GCC": "14.2.0",
+    "Clang": "19.1.7",
+    "architecture": "x86_64",
+    "CMake": "cmake version 3.31.6",
+    "Python": "Python 3.12.14",
+    "sanitizers": "ASan+UBSan;GCC Python existing live-LSan CTest harness;no suppression added"
+  }
+}

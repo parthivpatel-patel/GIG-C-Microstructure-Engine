@@ -1,12 +1,12 @@
-# GIG development completion matrix — November11,2026
+# GIG development completion matrix — November 11, 2026
 
-Current runtime source `0c4196b2e0270dacfa07638c2c5d94f3de54cb49`;branch `development/gig-ui-redesign`.
+Current runtime source `1f07e43c71e8db7377a1e16c6b88c049a6591b4f`; branch `development/gig-ui-redesign`.
 
-50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.
+50 entries = 49 reviewed areas + one historical A18/A19 decision. The prior explicit Kraken MD07 row is retained; no scope row was removed.
 
-**34COMPLETE /8PARTIAL /7BLOCKED /1NOT APPLICABLE. Full development is not complete.**
+**34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE. Full development remains incomplete.**
 
-COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
+COMPLETE means the stated bounded implementation has source/test evidence; it does not mean real-provider or owner acceptance. Current recovery tests and all eight native identities were actually rerun. Frontend/browser/target evidence was not recreated.
 
 |ID|Status|Requirement|
 |---|---|---|
@@ -61,682 +61,696 @@ COMPLETE means stated bounded code contract exists and has cited automated evide
 |SCOPE01|NOT APPLICABLE|Real/paper execution,paid feeds,public deployment and redistribution|
 |SCOPE02|PARTIAL|Historical A18/A19 requirement and concentration acceptance|
 
-## CORE01 — C++20 typed order book,identity,FIFO and exact arithmetic
+## CORE01 — COMPLETE
 
-COMPLETE
+C++20 typed order book,identity,FIFO and exact arithmetic
 
-Source:`include/gig/book/order_book.hpp`,`src/book/order_book.cpp`,`include/gig/analytics/exact.hpp`
+Source: `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/analytics/exact.hpp`.
 
-Evidence:Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
+Evidence: Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
 
-Contract:Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.
+Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Disposition: Implemented bounded research contract;retain tested behavior
 
-## CORE02 — ITCH framing,decoding,context and synthetic L3 reconstruction
+## CORE02 — COMPLETE
 
-COMPLETE
+ITCH framing,decoding,context and synthetic L3 reconstruction
 
-Source:`src/itch/binary_file.cpp`,`src/itch/decoder.cpp`,`src/itch/context.cpp`,`src/itch/reconstruction.cpp`
+Source: `src/itch/binary_file.cpp`, `src/itch/decoder.cpp`, `src/itch/context.cpp`, `src/itch/reconstruction.cpp`.
 
-Evidence:Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
+Evidence: Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
 
-Contract:Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.
+Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Disposition: Implemented bounded research contract;retain tested behavior
 
-## CORE03 — Python/native integration and native-backed browser
+## CORE03 — COMPLETE
 
-COMPLETE
+Python/native integration and native-backed browser
 
-Source:`python/gig_microstructure/__init__.py`,`terminal/server/engine.py`,`terminal/server/analysis.py`
+Source: `python/gig_microstructure/__init__.py`, `terminal/server/engine.py`, `terminal/server/analysis.py`.
 
-Evidence:Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
+Evidence: Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
 
-Contract:NativeSession owns gig.Replay and calls C++ calculations;this is not a mock implementation. No native source/build input changes in this sprint.
+NativeSession owns gig.Replay and calls C++ calculations;this is not a mock implementation. No native source/build input changes in this sprint.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Disposition: Implemented bounded research contract;retain tested behavior
 
-## CORE04 — Deterministic replay,journal and recovery contracts
+## CORE04 — COMPLETE
 
-COMPLETE
+Deterministic replay,journal and recovery contracts
 
-Source:`src/replay/replay.cpp`,`terminal/server/engine.py`
+Source: `src/replay/replay.cpp`, `terminal/server/engine.py`.
 
-Evidence:Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
+Evidence: Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.
 
-Contract:Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.
+Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Disposition: Implemented bounded research contract;retain tested behavior
 
-## CORE05 — Complete observed historical Level 3 validation
+## CORE05 — BLOCKED
 
-BLOCKED
+Complete observed historical Level 3 validation
 
-Source:`include/gig/itch/reconstruction.hpp`,`terminal/stocks/historical_v2.py`
+Source: `include/gig/itch/reconstruction.hpp`, `terminal/stocks/historical_v2.py`.
 
-Evidence:Retained prior checkpoint evidence unless updated below: No new observed dataset used
+Evidence: Retained prior checkpoint evidence unless updated below: No new observed dataset used
 
-Contract:Requires independently complete initialization and order-level reference evidence. IEX L1 and five-level reference observations cannot supply it.
+Requires independently complete initialization and order-level reference evidence. IEX L1 and five-level reference observations cannot supply it.
 
-Dependency:Independently complete observed L3 initialization,source/order-level reference and lawful dataset use.
+Disposition: External source/rights/reference evidence;not fabricated or inferred
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Dependency: Independently complete observed L3 initialization,source/order-level reference and lawful dataset use.
 
-## UI01 — GIG-only branding,application shell,search,themes and navigation
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-COMPLETE
+## UI01 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/web/src/Navigation.tsx`,`terminal/web/src/workstation.ts`,`terminal/web/src/workstation.css`
+GIG-only branding,application shell,search,themes and navigation
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline frontend and workstation browser checks;prior screenshot manifest
+Source: `terminal/web/src/App.tsx`, `terminal/web/src/Navigation.tsx`, `terminal/web/src/workstation.ts`, `terminal/web/src/workstation.css`.
 
-Contract:All12 destinations have dedicated compositions;legacy atlas-* selectors/storage identifiers remain technical compatibility keys.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline frontend and workstation browser checks;prior screenshot manifest
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+All12 destinations have dedicated compositions;legacy atlas-* selectors/storage identifiers remain technical compatibility keys.
 
-## UI02 — Command Center workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI02 — COMPLETE
 
-Source:`terminal/web/src/ResearchDesk.tsx`,`terminal/web/src/WorkspaceLaunchpad.tsx`
+Command Center workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/ResearchDesk.tsx`, `terminal/web/src/WorkspaceLaunchpad.tsx`.
 
-Contract:Saved research and source-aware entry actions;no fabricated market summary.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Saved research and source-aware entry actions;no fabricated market summary.
 
-## UI03 — Securities Universe workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI03 — COMPLETE
 
-Source:`terminal/web/src/UniverseWorkspace.tsx`,`terminal/stocks/discovery.py`
+Securities Universe workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/UniverseWorkspace.tsx`, `terminal/stocks/discovery.py`.
 
-Contract:Search,filters,pagination,identity-source and coverage are present;not a claim of complete US listing coverage.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Search,filters,pagination,identity-source and coverage are present;not a claim of complete US listing coverage.
 
-## UI04 — Stock Intelligence workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI04 — COMPLETE
 
-Source:`terminal/web/src/StockIntelligence.tsx`,`terminal/web/src/FinancialWorkspace.tsx`
+Stock Intelligence workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/StockIntelligence.tsx`, `terminal/web/src/FinancialWorkspace.tsx`.
 
-Contract:Company identity,reported facts,periods,ratios,filings,source controls and theoretical tools are connected;missing values remain missing.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Company identity,reported facts,periods,ratios,filings,source controls and theoretical tools are connected;missing values remain missing.
 
-## UI05 — Live Markets workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI05 — COMPLETE
 
-Source:`terminal/web/src/LiveMarket.tsx`,`terminal/stocks/live.py`,`terminal/web/src/TradeTapePanel.tsx`
+Live Markets workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/LiveMarket.tsx`, `terminal/stocks/live.py`, `terminal/web/src/TradeTapePanel.tsx`.
 
-Contract:Shared bounded quote/trade observations,subscription controls,per-symbol health and source labels;offline verified,not live qualified. New progressive retained-tape view exposes exact reference/lineage values and unresolved outcomes;application browser interaction was not launched.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Shared bounded quote/trade observations,subscription controls,per-symbol health and source labels;offline verified,not live qualified. New progressive retained-tape view exposes exact reference/lineage values and unresolved outcomes;application browser interaction was not launched.
 
-## UI06 — Multi-Stock Comparison workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI06 — COMPLETE
 
-Source:`terminal/web/src/LiveMarket.tsx`,`terminal/web/src/HistoricalMarket.tsx`
+Multi-Stock Comparison workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/LiveMarket.tsx`, `terminal/web/src/HistoricalMarket.tsx`.
 
-Contract:Up to4 active symbols,retained quote comparisons and exact shared historical timestamps;no interpolated source data.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Up to4 active symbols,retained quote comparisons and exact shared historical timestamps;no interpolated source data.
 
-## UI07 — Order Book workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI07 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/web/src/bookPresentation.ts`
+Order Book workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/web/src/bookPresentation.ts`.
 
-Contract:Native price/quantity ladders,cumulative quantities and source status are accessible;observed IEX is not expanded into L3.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Native price/quantity ladders,cumulative quantities and source status are accessible;observed IEX is not expanded into L3.
 
-## UI08 — Market Depth workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI08 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/web/src/Landscape3D.tsx`
+Market Depth workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/web/src/Landscape3D.tsx`.
 
-Contract:Native retained depth,2D alternatives,camera controls and source restrictions;not invented depth.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Native retained depth,2D alternatives,camera controls and source restrictions;not invented depth.
 
-## UI09 — Order Flow workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI09 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/server/analysis.py`
+Order Flow workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/server/analysis.py`.
 
-Contract:Native event/imbalance/flow views retain exact metrics and provenance;coalesced snapshots are not a complete trade tape.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Native event/imbalance/flow views retain exact metrics and provenance;coalesced snapshots are not a complete trade tape.
 
-## UI10 — Historical Replay workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI10 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/server/engine.py`
+Historical Replay workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/server/engine.py`.
 
-Contract:Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.
 
-## UI11 — Execution Simulator workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI11 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`src/simulation/simulator.cpp`,`src/execution/execution.cpp`
+Execution Simulator workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `src/simulation/simulator.cpp`, `src/execution/execution.cpp`.
 
-Contract:Native scenarios,fills/costs and lifecycle remain simulated;fake-paper sandbox and disabled broker boundary are separate.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Native scenarios,fills/costs and lifecycle remain simulated;fake-paper sandbox and disabled broker boundary are separate.
 
-## UI12 — Research & Validation workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI12 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/web/src/ResearchLab.tsx`,`terminal/web/src/ResearchDiagnostics.tsx`
+Research & Validation workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/web/src/ResearchLab.tsx`, `terminal/web/src/ResearchDiagnostics.tsx`.
 
-Contract:Model scenarios,3D laboratory,validation and evidence workflows are accessible;no predictive-success claim.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Model scenarios,3D laboratory,validation and evidence workflows are accessible;no predictive-success claim.
 
-## UI13 — Operations workspace
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## UI13 — COMPLETE
 
-Source:`terminal/web/src/App.tsx`,`terminal/web/src/MarketHealth.tsx`
+Operations workspace
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
+Source: `terminal/web/src/App.tsx`, `terminal/web/src/MarketHealth.tsx`.
 
-Contract:Health,source/configuration,retention and diagnostic statuses are read-only or explicitly gated;no credentials displayed.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Health,source/configuration,retention and diagnostic statuses are read-only or explicitly gated;no credentials displayed.
 
-## VIS01 — Eight advanced research projections
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## VIS01 — COMPLETE
 
-Source:`terminal/web/src/research3d.ts`,`terminal/web/src/ResearchLab.tsx`,`terminal/web/src/ResearchScene.tsx`
+Eight advanced research projections
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline23advanced browser checks and frontend geometry tests
+Source: `terminal/web/src/research3d.ts`, `terminal/web/src/ResearchLab.tsx`, `terminal/web/src/ResearchScene.tsx`.
 
-Contract:Height,canyon,events,VWAP,flow/VPIN,wheel,dome,ribbon use declared input classes. Depth/events/signed flow unavailable without eligible source. Snapshot changes never invent executions.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline23advanced browser checks and frontend geometry tests
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Height,canyon,events,VWAP,flow/VPIN,wheel,dome,ribbon use declared input classes. Depth/events/signed flow unavailable without eligible source. Snapshot changes never invent executions.
 
-## VIS02 — Existing four L1 projections and three native/model scenes
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## VIS02 — COMPLETE
 
-Source:`terminal/web/src/QuoteCloud.tsx`,`terminal/web/src/Landscape3D.tsx`,`terminal/web/src/VolatilitySurface.tsx`,`terminal/web/src/ModelSurface.tsx`
+Existing four L1 projections and three native/model scenes
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline advanced/native browser checks;retained15-mode controlled-input evidence
+Source: `terminal/web/src/QuoteCloud.tsx`, `terminal/web/src/Landscape3D.tsx`, `terminal/web/src/VolatilitySurface.tsx`, `terminal/web/src/ModelSurface.tsx`.
 
-Contract:Four coordinated quote modes,native depth,option scenario/indicative-point and GARCH mathematical surfaces remain. Mathematical surfaces are not calibrated observed volatility.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline advanced/native browser checks;retained15-mode controlled-input evidence
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Four coordinated quote modes,native depth,option scenario/indicative-point and GARCH mathematical surfaces remain. Mathematical surfaces are not calibrated observed volatility.
 
-## VIS03 — 3D camera,orbit,pause,reset,visibility,cleanup and fallback
+Disposition: Implemented bounded research contract;retain tested behavior
 
-COMPLETE
+## VIS03 — COMPLETE
 
-Source:`terminal/web/src/cameraMotion.ts`,`terminal/web/src/ResearchScene.tsx`,`terminal/web/src/QuoteCloud.tsx`,`terminal/web/src/Landscape3D.tsx`
+3D camera,orbit,pause,reset,visibility,cleanup and fallback
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline advanced/workstation browser checks;cameraMotion unit tests
+Source: `terminal/web/src/cameraMotion.ts`, `terminal/web/src/ResearchScene.tsx`, `terminal/web/src/QuoteCloud.tsx`, `terminal/web/src/Landscape3D.tsx`.
 
-Contract:Independent controls,hidden/reduced-motion suspension,explicit empty/recovery states and GPU disposal exist. Camera orbit is not a source update.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline advanced/workstation browser checks;cameraMotion unit tests
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Independent controls,hidden/reduced-motion suspension,explicit empty/recovery states and GPU disposal exist. Camera orbit is not a source update.
 
-## VIS04 — Sustained physical GPU,mobile and independent-browser acceptance
+Disposition: Implemented bounded research contract;retain tested behavior
 
-BLOCKED
+## VIS04 — BLOCKED
 
-Source:`terminal/web/src/ResearchScene.tsx`,`terminal/web/src/OptionalBoundary.tsx`
+Sustained physical GPU,mobile and independent-browser acceptance
 
-Evidence:Retained prior checkpoint evidence unless updated below: Chromium/SwiftShader and emulated widths only
+Source: `terminal/web/src/ResearchScene.tsx`, `terminal/web/src/OptionalBoundary.tsx`.
 
-Contract:Actual owner hardware/browser sustained behavior is not established by software WebGL.
+Evidence: Retained prior checkpoint evidence unless updated below: Chromium/SwiftShader and emulated widths only
 
-Dependency:Actual target hardware/browser/GPU and permission to launch.
+Actual owner hardware/browser sustained behavior is not established by software WebGL.
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Disposition: Owner/environment qualification;not additional visualization implementation
 
-## DATA01 — Broad discovery independent of SEC/feed entitlement
+Dependency: Actual target hardware/browser/GPU and permission to launch.
 
-COMPLETE
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Source:`terminal/stocks/market_catalog.py`,`terminal/stocks/alpaca_reference.py`,`terminal/stocks/sec_identity.py`,`terminal/web/src/UniverseWorkspace.tsx`
+## DATA01 — COMPLETE
 
-Evidence:Retained prior checkpoint evidence unless updated below: Stock/catalog/SEC cohorts and historical browser identity checks
+Broad discovery independent of SEC/feed entitlement
 
-Contract:Accepted reference catalogs/SEC routing and curated fallback are separate;AAPL/APLD/CRWV have generic discovery paths without guessed CIKs.
+Source: `terminal/stocks/market_catalog.py`, `terminal/stocks/alpaca_reference.py`, `terminal/stocks/sec_identity.py`, `terminal/web/src/UniverseWorkspace.tsx`.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Evidence: Retained prior checkpoint evidence unless updated below: Stock/catalog/SEC cohorts and historical browser identity checks
 
-## DATA02 — Complete,current US-listed security universe
+Accepted reference catalogs/SEC routing and curated fallback are separate;AAPL/APLD/CRWV have generic discovery paths without guessed CIKs.
 
-PARTIAL
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Source:`terminal/stocks/directory.py`,`terminal/stocks/alpaca_reference.py`,`terminal/stocks/discovery.py`
+## DATA02 — PARTIAL
 
-Evidence:Retained prior checkpoint evidence unless updated below: Parser/catalog fixtures;no fresh authoritative import
+Complete,current US-listed security universe
 
-Contract:Existing bounded authoritative directory/asset importers are implemented. Current full listing coverage cannot be asserted without an actual authorized source import/reconciliation;SEC registrants alone are not complete US listings.
+Source: `terminal/stocks/directory.py`, `terminal/stocks/alpaca_reference.py`, `terminal/stocks/discovery.py`.
 
-New implementation:Existing bounded importers reviewed;no new importer or authoritative listing data invented.
+Evidence: Retained prior checkpoint evidence unless updated below: Parser/catalog fixtures;no fresh authoritative import
 
-Remaining:Current complete listing coverage requires an actual authorized source import and reconciliation,not SEC registrants.
+Existing bounded authoritative directory/asset importers are implemented. Current full listing coverage cannot be asserted without an actual authorized source import/reconciliation;SEC registrants alone are not complete US listings.
 
-Dependency:Configured permitted listing source/private target;source coverage and freshness evidence.
+Disposition: No missing importer was found. Actual acquisition/source coverage needs the authorized configured target;no CIK or listing contents invented.
 
-Next condition/action:Independent offline package completed;the listed missing contract/source/target requirement remains open.
+Remaining: Current complete listing coverage requires an actual authorized source import and reconciliation,not SEC registrants.
 
-Conditional estimate:0.5–1 engineer-day for bounded qualification after the source/target is available;ongoing listing completeness remains a source responsibility.
+Dependency: Configured permitted listing source/private target;source coverage and freshness evidence.
 
-## SEC01 — SEC identity admission,selected facts,ratios,filings and provenance
+Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-COMPLETE
+Conditional effort: 0.5–1 engineer-day for bounded qualification after the source/target is available;ongoing listing completeness remains a source responsibility.
 
-Source:`terminal/stocks/sec_identity.py`,`terminal/stocks/financials.py`,`terminal/stocks/ratio_history.py`,`terminal/stocks/sec.py`,`terminal/web/src/FinancialWorkspace.tsx`
+## SEC01 — COMPLETE
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline211stock/source cohort;financial browser references retained and rerun where affected
+SEC identity admission,selected facts,ratios,filings and provenance
 
-Contract:Exact reported periods,source/hash/missingness,terminal-marker reference admission,duplicates/conflicts and bounded filing pagination exist. Not a full financial-statement reconstruction.
+Source: `terminal/stocks/sec_identity.py`, `terminal/stocks/financials.py`, `terminal/stocks/ratio_history.py`, `terminal/stocks/sec.py`, `terminal/web/src/FinancialWorkspace.tsx`.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline211stock/source cohort;financial browser references retained and rerun where affected
 
-## SEC02 — Complete historical financial statements and point-in-time source history
+Exact reported periods,source/hash/missingness,terminal-marker reference admission,duplicates/conflicts and bounded filing pagination exist. Not a full financial-statement reconstruction.
 
-PARTIAL
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Source:`terminal/stocks/sec_history.py`,`terminal/web/src/secHistory.ts`,`terminal/web/src/StockIntelligence.tsx`,`terminal/stocks/statements.py`,`terminal/stocks/vintages.py`,`terminal/stocks/test_filing_vintage.py`,`terminal/web/src/AcceptanceView.tsx`,`terminal/web/src/acceptanceContract.ts`,`terminal/web/src/AcceptanceFacts.tsx`,`terminal/stocks/xbrl_instance.py`,`terminal/stocks/xbrl_collection.py`,`scripts/inspect_xbrl_instances.py`,`terminal/stocks/test_xbrl_instance.py`,`terminal/stocks/test_xbrl_collection.py`,`terminal/stocks/test_xbrl_tool.py`,`terminal/stocks/inline_xbrl.py`,`terminal/stocks/xbrl_dts.py`,`terminal/stocks/test_inline_xbrl.py`,`terminal/stocks/test_xbrl_dts.py`
+## SEC02 — PARTIAL
 
-Evidence:48authored XML cases:32instance/collection/tool,7inline,9DTS;all five binding profiles passed,including final fact/output bounds. Full263guarded cohort per5profiles;existing13cross-language assertions preserved.
+Complete historical financial statements and point-in-time source history
 
-Contract:Existing filing batches/vintage selection now admit a bounded plain inline-XBRL1.1 profile with exact scaling/sign and original lexical/source lineage. Supplied-file DTS discovery binds source hashes,document kinds/import namespaces and missing references;simple presentation locators/order/cycles are supported. Unknown transforms/types/precedence remain explicit. No external URI is fetched.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`.
 
-New implementation:Fact interpreter refactored without changing strict instance API;plain inline scale/sign/nil/source gating;pre-materialization fact/output limits;DTS schema/import/include/linkbase discovery;declared concept metadata and conservative presentation graphs;missing/custom/conflicting semantics remain unvalidated.
+Evidence: 49authored XML cases including malformed simple-XLink references;273guarded tests per5binding profiles. Original49fixture/instance/vintage/DTS behavior retained;no provider request.
 
-Remaining:Full inline transformation/continuation/tuple/nested markup support,complete XML Schema/DTS custom-type and extension validation,equivalent/prohibited arc precedence across links,calculation relationships,complete statement assembly,v2/UI integration and authentic complete historical acquisition/receipt coverage remain missing.
+Existing filing batches/vintage selection now admit a bounded plain inline-XBRL1.1 profile with exact scaling/sign and original lexical/source lineage. Supplied-file DTS discovery binds source hashes,document kinds/import namespaces and missing references;simple presentation locators/order/cycles are supported. Unknown transforms/types/precedence remain explicit. No external URI is fetched.
 
-Dependency:Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
+Disposition: Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.
 
-Next condition/action:Complete the next explicitly bounded transformation/type/relationship profile with independent fixtures,then statement/API integration. Structural closure is not schema or accounting validation.
+Remaining: Full inline transformation/continuation/tuple/nested markup support,complete XML Schema/DTS custom-type and extension validation,equivalent/prohibited arc precedence across links,calculation relationships,complete statement assembly,v2/UI integration and authentic complete historical acquisition/receipt coverage remain missing.
 
-Conditional estimate:Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements.
+Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
 
-## SEC03 — Real-provider SEC reconciliation for this delivered source
+Next action: Complete the next explicitly bounded transformation/type/relationship profile with independent fixtures,then statement/API integration. Structural closure is not schema or accounting validation.
 
-BLOCKED
+Conditional effort: Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements.
 
-Source:`terminal/stocks/qualification.py`,`scripts/qualify_sec_sources.py`
+## SEC03 — BLOCKED
 
-Evidence:Retained prior checkpoint evidence unless updated below: Existing owner observations retained separately;no request in this task
+Real-provider SEC reconciliation for this delivered source
 
-Contract:Identifying configuration and permitted target access are unavailable here;fixtures do not establish fresh provider results.
+Source: `terminal/stocks/qualification.py`, `scripts/qualify_sec_sources.py`.
 
-Dependency:Configured identifying SEC User-Agent and permitted owner target;current task forbids provider calls.
+Evidence: Retained prior checkpoint evidence unless updated below: Existing owner observations retained separately;no request in this task
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Identifying configuration and permitted target access are unavailable here;fixtures do not establish fresh provider results.
 
-## MD01 — Read-only IEX permissions,credentials and fixed destinations
+Disposition: Owner existing configured environment;no secret/contact re-entry requested
 
-COMPLETE
+Dependency: Configured identifying SEC User-Agent and permitted owner target;current task forbids provider calls.
 
-Source:`terminal/stocks/private_iex.py`,`terminal/stocks/auth.py`,`terminal/stocks/alpaca_transport.py`,`terminal/stocks/live.py`
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline211cohort;private-IEX qualification tests retained
+## MD01 — COMPLETE
 
-Contract:Explicit read-only stream gate,reviewed permission scopes,server-only credentials and fixed data hosts;real/paper execution remain independently disabled.
+Read-only IEX permissions,credentials and fixed destinations
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Source: `terminal/stocks/private_iex.py`, `terminal/stocks/auth.py`, `terminal/stocks/alpaca_transport.py`, `terminal/stocks/live.py`.
 
-## MD02 — Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline211cohort;private-IEX qualification tests retained
 
-COMPLETE
+Explicit read-only stream gate,reviewed permission scopes,server-only credentials and fixed data hosts;real/paper execution remain independently disabled.
 
-Source:`terminal/stocks/live.py`,`terminal/stocks/retry.py`,`terminal/stocks/test_reconnect_stability.py`,`terminal/server/market_events.py`,`terminal/stocks/trade_tape.py`,`terminal/stocks/test_live_recovery.py`,`terminal/stocks/test_live_recovery.py`,`terminal/web/src/marketContract.ts`
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Evidence:35 focused worker/checkpoint/retry tests;175 guarded offline cases per five environments;154 frontend checks and production build;phase/code diagnostic and stale-socket/concurrent-start regressions.
+## MD02 — COMPLETE
 
-Contract:A reproduced one-quote-per-reconnect flap could reset failure count indefinitely. Retry count now resets only after a stable subscribed interval(default30s,bounded1–300),including quiet transport liveness without inventing observations. Backoff,permissions,generation isolation and source-gap limitations remain. Concurrent commands now serialize to prevent orphan workers;retired sockets cannot publish;provider error code and actual phase are bounded and redacted rather than inferred entitlement meanings.
+Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Source: `terminal/stocks/live.py`, `terminal/stocks/retry.py`, `terminal/stocks/test_reconnect_stability.py`, `terminal/server/market_events.py`, `terminal/stocks/trade_tape.py`, `terminal/stocks/test_live_recovery.py`, `terminal/stocks/test_live_recovery.py`, `terminal/web/src/marketContract.ts`, `terminal/stocks/test_live_recovery.py`.
 
-## MD03 — Historical IEX bars,quotes,trades and explicit delayed-SIP profile
+Evidence: 36focused IEX recovery/retry/checkpoint cases and263final guarded cases per five supported binding environments. Cancellation-resistant worker timeout and late-frame rejection reproduced/fixed;no live provider. Current273guarded cases per5binding profiles passed;source/provider gates and provisional Kraken status unchanged.
 
-COMPLETE
+A reproduced one-quote-per-reconnect flap could reset failure count indefinitely. Retry count now resets only after a stable subscribed interval(default30s,bounded1–300),including quiet transport liveness without inventing observations. Backoff,permissions,generation isolation and source-gap limitations remain. Concurrent commands now serialize to prevent orphan workers;retired sockets cannot publish;provider error code and actual phase are bounded and redacted rather than inferred entitlement meanings. Bounded cancellation drain now revokes publication before await,retains a pending worker and denies replacement until drain;accepted prefix stays unchanged.
 
-Source:`terminal/stocks/alpaca_history.py`,`terminal/stocks/historical_v2.py`,`terminal/web/src/HistoricalMarket.tsx`,`terminal/web/src/HistoricalResearch.tsx`
+Disposition: Repaired and offline verified;not a lossless-capture claim
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline58focused historical tests and browser journeys
+## MD03 — COMPLETE
 
-Contract:Bounded pages,exact nanoseconds,OHLC,duplicate accounting,cache TTL and explicit SIP15-minute boundary. No automatic feed upgrade;no complete-session inference.
+Historical IEX bars,quotes,trades and explicit delayed-SIP profile
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Source: `terminal/stocks/alpaca_history.py`, `terminal/stocks/historical_v2.py`, `terminal/web/src/HistoricalMarket.tsx`, `terminal/web/src/HistoricalResearch.tsx`.
 
-## MD04 — Historical bar display and source error reporting
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline58focused historical tests and browser journeys
 
-COMPLETE
+Bounded pages,exact nanoseconds,OHLC,duplicate accounting,cache TTL and explicit SIP15-minute boundary. No automatic feed upgrade;no complete-session inference.
 
-Source:`terminal/web/src/barChart.ts`,`terminal/web/src/EquityPanels.tsx`,`terminal/stocks/alpaca_history.py`,`terminal/server/app.py`
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Evidence:Retained prior checkpoint evidence unless updated below: New7unit+4Python+10browser checks;retained failing-before logs
+## MD04 — COMPLETE
 
-Contract:This sprint fixes synthetic-as-observed chart labels,validates bounded exact OHLC before geometry,and distinguishes fixed safe failure categories without reflecting source bodies.
+Historical bar display and source error reporting
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Source: `terminal/web/src/barChart.ts`, `terminal/web/src/EquityPanels.tsx`, `terminal/stocks/alpaca_history.py`, `terminal/server/app.py`.
 
-## MD05 — Actual owner IEX live/historical qualification
+Evidence: Retained prior checkpoint evidence unless updated below: New7unit+4Python+10browser checks;retained failing-before logs
 
-BLOCKED
+This sprint fixes synthetic-as-observed chart labels,validates bounded exact OHLC before geometry,and distinguishes fixed safe failure categories without reflecting source bodies.
 
-Source:`scripts/private_iex.py`,`docs/qualification/PRIVATE_IEX_RUNBOOK.md`
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Evidence:Retained prior checkpoint evidence unless updated below: Zero provider requests in this task
+## MD05 — BLOCKED
 
-Contract:Owner-reported Support384778 covers the narrow private research use. This runtime has no configured credentials/private-owner environment. No fresh source/entitlement/freshness evidence.
+Actual owner IEX live/historical qualification
 
-Dependency:Owner-private target,credentials/authorized feed and a separately approved read-only test.
+Source: `scripts/private_iex.py`, `docs/qualification/PRIVATE_IEX_RUNBOOK.md`.
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Evidence: Retained prior checkpoint evidence unless updated below: Zero provider requests in this task
 
-## MD06 — Complete corrected exchange tape and lossless reconnect
+Owner-reported Support384778 covers the narrow private research use. This runtime has no configured credentials/private-owner environment. No fresh source/entitlement/freshness evidence.
 
-PARTIAL
+Disposition: Environment-dependent read-only qualification;do not activate credentials or gates here
 
-Source:`terminal/stocks/trade_tape.py`,`terminal/stocks/test_trade_tape.py`,`terminal/web/src/tradeTape.ts`,`terminal/web/src/TradeTapePanel.tsx`,`terminal/tests/check_trade_contract.py`
+Dependency: Owner-private target,credentials/authorized feed and a separately approved read-only test.
 
-Evidence:Existing13 ledger tests/1000oracle candidates retained;new handover-window regression and actual TypeScript admission for the handover;8cross-language market checks. Observed cancellation profile still unqualified.
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Contract:Bounded normalized reference ledger now supports exact original matching,correction chains,retirement,duplicates,capture-order replay,provenance and fail-closed totals. Explicit authored C-cancellation contract works. Observed cancellation/error action profile and complete/lossless exchange capture remain unimplemented/unqualified. Version 2 also fences local capture namespaces,so equal per-process generations cannot mix records from separate captures. This namespace is not an exchange session/sequence.
+## MD06 — PARTIAL
 
-New implementation:Supported bounded correction/authored-cancellation rules preserved;symbol-handover published-window mismatch reproduced and fixed. Capture/source lineage remains isolated.
+Complete corrected exchange tape and lossless reconnect
 
-Remaining:Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.
+Source: `terminal/stocks/trade_tape.py`, `terminal/stocks/test_trade_tape.py`, `terminal/web/src/tradeTape.ts`, `terminal/web/src/TradeTapePanel.tsx`, `terminal/tests/check_trade_contract.py`.
 
-Dependency:Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.
+Evidence: Existing13 ledger tests/1000oracle candidates retained;new handover-window regression and actual TypeScript admission for the handover;8cross-language market checks. Observed cancellation profile still unqualified.
 
-Next condition/action:Independent offline package completed;the listed missing contract/source/target requirement remains open.
+Bounded normalized reference ledger now supports exact original matching,correction chains,retirement,duplicates,capture-order replay,provenance and fail-closed totals. Explicit authored C-cancellation contract works. Observed cancellation/error action profile and complete/lossless exchange capture remain unimplemented/unqualified. Version 2 also fences local capture namespaces,so equal per-process generations cannot mix records from separate captures. This namespace is not an exchange session/sequence.
 
-Conditional estimate:1–2 engineer-days for a specified bounded observed-action profile;complete/lossless guarantees cannot be estimated or promised for a source that lacks that authority.
+Disposition: PARTIAL because working reference reconciliation now exists,not because the stronger requirement was removed. Observed action semantics and lossless/source-complete contract still need authoritative evidence and an explicit decision.
 
-## MD07 — Official-contract Kraken cryptocurrency L2 and native/product integration
+Remaining: Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.
 
-PARTIAL
+Dependency: Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.
 
-Source:`terminal/providers/kraken.py`,`terminal/providers/supervisor.py`,`terminal/providers/test_recovery_hardening.py`,`terminal/providers/test_differential.py`,`terminal/server/engine.py`,`terminal/web/src/OrderBook.tsx`,`terminal/l2_research.py`
+Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Evidence:62offline provider cases including10,000authored independent transitions;finite scientific JSON precision/CRC,one-worker concurrency,bounded retiring-worker fence,retry exhaustion and invalid jitter regressions;inside263guarded cases. No current official documentation or live payload received.
+Conditional effort: 1–2 engineer-days for a specified bounded observed-action profile;complete/lossless guarantees cannot be estimated or promised for a source that lacks that authority.
 
-Contract:Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.
+## MD07 — PARTIAL
 
-New implementation:Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.
+Official-contract Kraken cryptocurrency L2 and native/product integration
 
-Remaining:Retrieve and verify the current official WebSocketv2 book/checksum/trade/status/session contract and applicable usage evidence;reconcile candidate rules and add source-versioned fixtures. Actual later private-provider and browser qualification remain unrun. Do not change the provisional flag before evidence exists.
+Source: `terminal/providers/kraken.py`, `terminal/providers/supervisor.py`, `terminal/providers/test_recovery_hardening.py`, `terminal/providers/test_differential.py`, `terminal/server/engine.py`, `terminal/web/src/OrderBook.tsx`, `terminal/l2_research.py`.
 
-Dependency:Current official protocol/rights evidence;earlier CONNECT403 and enforced policy excluding Kraken docs/feed domains remain recorded. No blocked operation was retried and no proxy bypass attempted.
+Evidence: 62offline provider cases including10,000authored independent transitions;finite scientific JSON precision/CRC,one-worker concurrency,bounded retiring-worker fence,retry exhaustion and invalid jitter regressions;inside263guarded cases. No current official documentation or live payload received. Current273guarded cases per5binding profiles passed;source/provider gates and provisional Kraken status unchanged.
 
-Next condition/action:Obtain an authorized official specification copy or permitted documentation-only access,then implement verified source-specific differences. Continue offline contracts;never infer L3 or IEX equity depth.
+Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.
 
-Conditional estimate:1–3engineer-days for a bounded documented source-contract reconciliation/test package once authoritative material is available;live/owner qualification separate.
+Disposition: Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.
 
-## RES01 — Research configuration,calculations,results and authored exports
+Remaining: Retrieve and verify the current official WebSocketv2 book/checksum/trade/status/session contract and applicable usage evidence;reconcile candidate rules and add source-versioned fixtures. Actual later private-provider and browser qualification remain unrun. Do not change the provisional flag before evidence exists.
 
-COMPLETE
+Dependency: Current official protocol/rights evidence;earlier CONNECT403 and enforced policy excluding Kraken docs/feed domains remain recorded. No blocked operation was retried and no proxy bypass attempted.
 
-Source:`terminal/stocks/research.py`,`terminal/stocks/advanced_models.py`,`terminal/stocks/portfolio.py`,`terminal/stocks/evaluation.py`,`terminal/web/src/researchExport.ts`
+Next action: Obtain an authorized official specification copy or permitted documentation-only access,then implement verified source-specific differences. Continue offline contracts;never infer L3 or IEX equity depth.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baselinefrontend and stock cohorts;native mathematical references retained Current guarded175-case cohort passed in all five supported binding environments;no source/target acceptance implied.
+Conditional effort: 1–3engineer-days for a bounded documented source-contract reconciliation/test package once authoritative material is available;live/owner qualification separate.
 
-Contract:Bounded HMM/GARCH/Kalman diagnostics,causal strategy/walk-forward,risk/portfolio and deterministic exports exist. Native exact mathematics remain unchanged.
+## RES01 — COMPLETE
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Research configuration,calculations,results and authored exports
 
-## RES02 — Historical bar-to-research/compatible3D workflow
+Source: `terminal/stocks/research.py`, `terminal/stocks/advanced_models.py`, `terminal/stocks/portfolio.py`, `terminal/stocks/evaluation.py`, `terminal/web/src/researchExport.ts`.
 
-COMPLETE
+Evidence: Retained prior checkpoint evidence unless updated below: Baselinefrontend and stock cohorts;native mathematical references retained Current guarded175-case cohort passed in all five supported binding environments;no source/target acceptance implied.
 
-Source:`terminal/stocks/historical_research.py`,`terminal/web/src/historicalResearch.ts`,`terminal/web/src/HistoricalResearch.tsx`
+Bounded HMM/GARCH/Kalman diagnostics,causal strategy/walk-forward,risk/portfolio and deterministic exports exist. Native exact mathematics remain unchanged.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline58historical Python checks;Sprint4 browser numerical/export assertions
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Contract:Accepted revisions drive exact trailing returns,SMA,drawdown and log variation. Quotes feed quote projections;bars cannot become depth or signed events.
+## RES02 — COMPLETE
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Historical bar-to-research/compatible3D workflow
 
-## RES03 — Empirical forecasting quality,calibrated fills or alpha
+Source: `terminal/stocks/historical_research.py`, `terminal/web/src/historicalResearch.ts`, `terminal/web/src/HistoricalResearch.tsx`.
 
-BLOCKED
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline58historical Python checks;Sprint4 browser numerical/export assertions
 
-Source:`terminal/stocks/evaluation.py`,`src/simulation/simulator.cpp`
+Accepted revisions drive exact trailing returns,SMA,drawdown and log variation. Quotes feed quote projections;bars cannot become depth or signed events.
 
-Evidence:Retained prior checkpoint evidence unless updated below: No new observed evaluation dataset
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Contract:Mathematical and causal fixture agreement do not establish predictive accuracy,profitability or exchange execution fidelity.
+## RES03 — BLOCKED
 
-Dependency:Legitimate observed evaluation data and independently defined out-of-sample research protocol.
+Empirical forecasting quality,calibrated fills or alpha
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Source: `terminal/stocks/evaluation.py`, `src/simulation/simulator.cpp`.
 
-## REL01 — Bounded observation persistence,recovery,backup and corruption rejection
+Evidence: Retained prior checkpoint evidence unless updated below: No new observed evaluation dataset
 
-COMPLETE
+Mathematical and causal fixture agreement do not establish predictive accuracy,profitability or exchange execution fidelity.
 
-Source:`terminal/stocks/observation_store.py`,`terminal/stocks/history_store.py`,`terminal/stocks/history_backup.py`
+Disposition: Requires independently justified observed-data study;not software completion evidence
 
-Evidence:Existing10 persistence tests plus21new control/recovery tests inside121no-launch tests per environment;legacy/full recover() behavior preserved. Current guarded175-case cohort passed in all five supported binding environments;no source/target acceptance implied.
+Dependency: Legitimate observed evaluation data and independently defined out-of-sample research protocol.
 
-Contract:Preflight counts/bytes/types,single read snapshot,strict payloads/hash chain and private snapshots exist. Observed retention defaults off;no storage activated here.
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+## REL01 — COMPLETE
 
-## REL02 — Crash-safe hot live/L3 recovery and hardware durability guarantees
+Bounded observation persistence,recovery,backup and corruption rejection
 
-PARTIAL
+Source: `terminal/stocks/observation_store.py`, `terminal/stocks/history_store.py`, `terminal/stocks/history_backup.py`.
 
-Source:`terminal/stocks/live.py`,`terminal/stocks/live_checkpoint.py`,`terminal/stocks/observation_store.py`,`terminal/stocks/test_live_checkpoint.py`,`include/gig/itch/restart.hpp`,`include/gig/book/order_book.hpp`,`src/book/order_book.cpp`,`include/gig/replay/replay.hpp`,`src/replay/replay.cpp`,`include/gig/market_data/aggregate_depth.hpp`,`src/market_data/aggregate_depth.cpp`,`terminal/native_recovery.py`,`terminal/test_native_recovery.py`,`terminal/test_aggregate_recovery.py`,`tests/test_hot_checkpoint.cpp`,`include/gig/itch/hot_checkpoint.hpp`,`src/itch/context_checkpoint.cpp`,`src/itch/hot_checkpoint.cpp`,`src/itch/hot_identity.hpp`,`terminal/session_recovery.py`,`terminal/test_session_recovery.py`,`tests/test_itch_hot_checkpoint.cpp`
+Evidence: Existing10 persistence tests plus21new control/recovery tests inside121no-launch tests per environment;legacy/full recover() behavior preserved. Current guarded175-case cohort passed in all five supported binding environments;no source/target acceptance implied.
 
-Evidence:Six full native profiles149/149/150GCC and149/149/146Clang,221ITCH hot-context checks,46actual restore failpoints,eight actual frozen hashes each. Nine new real-native product-session/file/migration cases inside263guarded cases per5binding profiles.
+Preflight counts/bytes/types,single read snapshot,strict payloads/hash chain and private snapshots exist. Observed retention defaults off;no storage activated here.
 
-Contract:Owned typed ITCH source-context,receipt mapping and both native-book/replay images now restore isolated accepted authored-empty prefixes without source reapplication. Token ownership is fresh;active order identities/units and derived sequences agree. Explicit native product-session checkpoints restore position/speed paused,with immutable private files,canonical admission and bounded migration. No automatic application recovery or provider connection is enabled.
+Disposition: Implemented bounded research contract;retain tested behavior
 
-New implementation:Typed context/book/receipt hot capture/import;fingerprint optional-dispatch repair;pre-copy4096vector limit;physical allocation-failure tests;actual NativeSession integration;private atomic new-file publication;real process-exit-after-publish and explicit migration/rollback-input preservation.
+## REL02 — PARTIAL
 
-Remaining:Stable durable encoding/admission of the full typed ITCH image,seeded hot reconstruction,gzip/partial-framer coordination and optional application startup wiring remain missing. Product file recovery currently supports authored-native sessions,not observed/provider/recorded sources. Filesystem power-loss/owner/observed source guarantees remain unqualified.
+Crash-safe hot live/L3 recovery and hardware durability guarantees
 
-Dependency:Bounded typed-native contract now exists and is verified. Remaining work needs an explicit full source-image/migration profile,product integration tests and,for empirical claims,complete authorized source initialization plus actual target durability evidence.
+Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`.
 
-Next condition/action:Implement a versioned bounded full-ITCH image codec and seed/framer integration against the current typed images;preserve explicit independently trusted identity. Do not reimplement the completed native/session APIs or activate startup/provider paths.
+Evidence: Six full CTest profiles:152/152/153 GCC;152/152/148 Clang. Each ran363durable+163source checks,57decode/restore+63encode+67source allocation failpoints and all8frozen identities. Nine real-native Python/file/cross-process cases inside273guarded tests per5binding profiles.
 
-Conditional estimate:Planning range3–7engineer-days for a tightly scoped remaining codec/seed/framer/startup package and failure matrix after its artifact/migration profile is fixed;hardware/source qualification is separate.
+Bounded version1 deterministic full typed ITCH serialization now restores context,receipts,retired/match/lifecycle/cursor state and both native books/journals. Independently retained artifact/config/code/capture/generation admission;authored-empty and complete-seed hot profiles. Plain and complete-member gzip coordination verifies committed prefix receipts without applying them and applies only suffix events. Private immutable files survive tested local process interruption;no automatic application startup or provider activation.
 
-## SECURITY01 — Strict private Origin/Host,HTTP proof and WebSocket lifecycle
+Disposition: Bounded authored full-ITCH hot recovery and Python/private-file admission are implemented and offline verified. Full product/startup and observed/hardware qualification remain open;do not reimplement the codec.
 
-COMPLETE
+Remaining: Bounded durable full-ITCH/seed/framer/gzip contracts are implemented. Automatic application startup selection/full-ITCH product-session integration remains unwired;no provider/observed data or target power-loss acceptance. This preserves the no-launch directive and existing startup behavior;it is not full operational completion.
 
-Source:`terminal/server/app.py`,`terminal/server/request_proofs.py`,`terminal/server/stream_tickets.py`,`terminal/server/connection.py`
+Dependency: Product session selection/recovery policy and integration tests;observed initialization/source continuity and actual private-target/hardware evidence for empirical claims.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline274native/API tests;existing localTLS/forged-header tests
+Next action: Integrate an explicit opt-in,fail-closed product-session selection policy using the completed SDK/files rather than replaying committed events. Continue remaining XBRL semantics. Keep target/provider qualification separate.
 
-Contract:Exact configured origins,bounded target-bound one-use proofs,Host checks and sanitized diagnostics retained;no wildcard CORS or arbitrary forwarded-header trust.
+Conditional effort: Conditional planning range1–3engineer-days for narrowly scoped opt-in full-ITCH product-session wiring and its failure matrix;not a guarantee. Observed/source/hardware qualification depends on actual external evidence.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+## SECURITY01 — COMPLETE
 
-## SECURITY02 — Frontend budgets,errors and disabled execution safeguards
+Strict private Origin/Host,HTTP proof and WebSocket lifecycle
 
-COMPLETE
+Source: `terminal/server/app.py`, `terminal/server/request_proofs.py`, `terminal/server/stream_tickets.py`, `terminal/server/connection.py`.
 
-Source:`terminal/web/src/response.ts`,`terminal/server/app.py`,`terminal/paper/alpaca.py`,`terminal/stocks/private_iex.py`
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline274native/API tests;existing localTLS/forged-header tests
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline130frontend and211/274backend checks;prior fake-broker evidence retained
+Exact configured origins,bounded target-bound one-use proofs,Host checks and sanitized diagnostics retained;no wildcard CORS or arbitrary forwarded-header trust.
 
-Contract:Incremental2MiB read,abort/cancel,strict mutations and default-disabled independent paper/live controls. No provider/account calls or orders in this task.
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+## SECURITY02 — COMPLETE
 
-## SECURITY03 — Runtime/dependency security clearance
+Frontend budgets,errors and disabled execution safeguards
 
-PARTIAL
+Source: `terminal/web/src/response.ts`, `terminal/server/app.py`, `terminal/paper/alpaca.py`, `terminal/stocks/private_iex.py`.
 
-Source:`terminal/server/requirements.txt`,`terminal/web/package-lock.json`,`docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md`
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline130frontend and211/274backend checks;prior fake-broker evidence retained
 
-Evidence:New strict control/filing/response admission and source-bound current121/153checks;prior pinned-dependency advisory evidence retained,not target security clearance.
+Incremental2MiB read,abort/cancel,strict mutations and default-disabled independent paper/live controls. No provider/account calls or orders in this task.
 
-Contract:Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.
+Disposition: Implemented bounded research contract;retain tested behavior
 
-New implementation:Checkpoint byte/type/hash/tail admission strengthened;source validation streamed;response admission/cancellation strengthened. Dependency pins and authorization boundaries unchanged.
+## SECURITY03 — PARTIAL
 
-Remaining:Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.
+Runtime/dependency security clearance
 
-Dependency:Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
+Source: `terminal/server/requirements.txt`, `terminal/web/package-lock.json`, `docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md`.
 
-Next condition/action:Independent offline package completed;the listed missing contract/source/target requirement remains open.
+Evidence: New strict control/filing/response admission and source-bound current121/153checks;prior pinned-dependency advisory evidence retained,not target security clearance.
 
-Conditional estimate:0.5–2 engineer-days after exact target artifacts are available;future advisory clearance is time-dependent.
+Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.
 
-## OPS01 — Private startup,exact-SHA upgrade,rollback and qualification tools
+Disposition: Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.
 
-COMPLETE
+Remaining: Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.
 
-Source:`scripts/start_terminal.sh`,`scripts/qualify_private_deployment.py`,`docs/qualification/institutional-sprint-2/DEPLOYMENT_ACCEPTANCE.md`
+Dependency: Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Prior clean receipt plus baseline development checks;no owner deployment claimed
+Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Contract:Existing runbooks preserve local changes,do not reset/clean,bind source/assets and distinguish offline/edge qualification. No missing new deployment tool found.
+Conditional effort: 0.5–2 engineer-days after exact target artifacts are available;future advisory clearance is time-dependent.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+## OPS01 — COMPLETE
 
-## OPS02 — Owner-authenticated Codespaces HTTPS/WSS acceptance
+Private startup,exact-SHA upgrade,rollback and qualification tools
 
-BLOCKED
+Source: `scripts/start_terminal.sh`, `scripts/qualify_private_deployment.py`, `docs/qualification/institutional-sprint-2/DEPLOYMENT_ACCEPTANCE.md`.
 
-Source:`scripts/start_terminal.sh`,`terminal/tests/check_browser_handshake.mjs`
+Evidence: Retained prior checkpoint evidence unless updated below: Prior clean receipt plus baseline development checks;no owner deployment claimed
 
-Evidence:Retained prior checkpoint evidence unless updated below: Only local browser/forwarding fixtures available
+Existing runbooks preserve local changes,do not reset/clean,bind source/assets and distinguish offline/edge qualification. No missing new deployment tool found.
 
-Contract:No actual owner edge,cookies/credentials or private-port authentication accessed.
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Dependency:Actual owner-authenticated private Codespaces edge and authorized application startup.
+## OPS02 — BLOCKED
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+Owner-authenticated Codespaces HTTPS/WSS acceptance
 
-## OPS03 — Current-candidate genuine native ARM64 qualification
+Source: `scripts/start_terminal.sh`, `terminal/tests/check_browser_handshake.mjs`.
 
-BLOCKED
+Evidence: Retained prior checkpoint evidence unless updated below: Only local browser/forwarding fixtures available
 
-Source:`.github/workflows/native-arm64.yml`,`terminal/test_arm64_terminal_policy.py`
+No actual owner edge,cookies/credentials or private-port authentication accessed.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Manual-only/free-owner/branch policy tests;not dispatched
+Disposition: Single final owner acceptance after delivery;no intermediate manual tests requested
 
-Contract:Earlier tested SHAs do not qualify new code. Existing six-configuration workflow includes strict native/API and updated stock cohort.
+Dependency: Actual owner-authenticated private Codespaces edge and authorized application startup.
 
-Dependency:Current-candidate genuine free native ARM64 runner and owner-authorized manual execution.
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Next condition/action:Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
+## OPS03 — BLOCKED
 
-## UX01 — Readable dark/light,responsive,keyboard and reduced-motion engineering
+Current-candidate genuine native ARM64 qualification
 
-COMPLETE
+Source: `.github/workflows/native-arm64.yml`, `terminal/test_arm64_terminal_policy.py`.
 
-Source:`terminal/web/src/workstation.css`,`terminal/web/src/Navigation.tsx`,`terminal/web/src/cameraMotion.ts`
+Evidence: Retained prior checkpoint evidence unless updated below: Manual-only/free-owner/branch policy tests;not dispatched
 
-Evidence:Retained prior checkpoint evidence unless updated below: Baseline130frontend/workstation browser checks;prior5690text-contrast evidence
+Earlier tested SHAs do not qualify new code. Existing six-configuration workflow includes strict native/API and updated stock cohort.
 
-Contract:Semantic controls,focus,contained table/navigation scrolling,comfortable text and responsive canvases implemented;no new visual redesign in this sprint.
+Disposition: Owner-authorized free runner execution against exact delivered SHA;not cross-compile-as-runtime evidence
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Dependency: Current-candidate genuine free native ARM64 runner and owner-authorized manual execution.
 
-## UX02 — Full WCAG2.2AA and physical-device acceptance
+Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-PARTIAL
+## UX01 — COMPLETE
 
-Source:`terminal/web/src/BarValues.tsx`,`terminal/web/src/EquityPanels.tsx`,`terminal/web/src/HistoricalMarket.tsx`,`terminal/web/src/barValues.test.ts`,`terminal/web/src/AcceptanceFacts.tsx`,`terminal/web/src/acceptanceFacts.test.ts`
+Readable dark/light,responsive,keyboard and reduced-motion engineering
 
-Evidence:153frontend checks include2new actual acceptance-leaf SSR checks;no application,browser or physical-device launch.
+Source: `terminal/web/src/workstation.css`, `terminal/web/src/Navigation.tsx`, `terminal/web/src/cameraMotion.ts`.
 
-Contract:Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.
+Evidence: Retained prior checkpoint evidence unless updated below: Baseline130frontend/workstation browser checks;prior5690text-contrast evidence
 
-New implementation:Exact retained fact table now keyboard-scrollable with named region,scoped headers,time semantics,empty states and32-row pagination. Stale async results cannot replace the selected cutoff.
+Semantic controls,focus,contained table/navigation scrolling,comfortable text and responsive canvases implemented;no new visual redesign in this sprint.
 
-Remaining:Current real-browser,assistive-technology,device and exhaustive WCAG2.2AA qualification remain unperformed under the no-launch directive.
+Disposition: Implemented bounded research contract;retain tested behavior
 
-Dependency:Separate authorization to launch/test actual browsers and access to target devices/assistive technology.
+## UX02 — PARTIAL
 
-Next condition/action:Independent offline package completed;the listed missing contract/source/target requirement remains open.
+Full WCAG2.2AA and physical-device acceptance
 
-Conditional estimate:1–3 engineer-days for targeted acceptance and resulting confirmed repairs once browser/device tests are authorized;unknown failures cannot be estimated in advance.
+Source: `terminal/web/src/BarValues.tsx`, `terminal/web/src/EquityPanels.tsx`, `terminal/web/src/HistoricalMarket.tsx`, `terminal/web/src/barValues.test.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/web/src/acceptanceFacts.test.ts`.
 
-## CLEAN01 — Obsolete user-facing branding and safe frontend cleanup
+Evidence: 153frontend checks include2new actual acceptance-leaf SSR checks;no application,browser or physical-device launch.
 
-COMPLETE
+Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.
 
-Source:`terminal/web/index.html`,`terminal/web/src/workstation.ts`,`terminal/web/src/App.tsx`
+Disposition: Feasible text alternative implemented. Physical devices,screen readers and exhaustive WCAG2.2AA/current browser qualification remain unverified.
 
-Evidence:Retained prior checkpoint evidence unless updated below: Branding unit/browser checks and source search
+Remaining: Current real-browser,assistive-technology,device and exhaustive WCAG2.2AA qualification remain unperformed under the no-launch directive.
 
-Contract:User-facing identity is GIG. Historical reports and compatibility technical keys are preserved;unused code is not deleted merely on a name-based guess.
+Dependency: Separate authorization to launch/test actual browsers and access to target devices/assistive technology.
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-## SCOPE01 — Real/paper execution,paid feeds,public deployment and redistribution
+Conditional effort: 1–3 engineer-days for targeted acceptance and resulting confirmed repairs once browser/device tests are authorized;unknown failures cannot be estimated in advance.
 
-NOT APPLICABLE
+## CLEAN01 — COMPLETE
 
-Source:`terminal/stocks/private_iex.py`,`terminal/paper/alpaca.py`
+Obsolete user-facing branding and safe frontend cleanup
 
-Evidence:Retained prior checkpoint evidence unless updated below: Default-disabled boundary tests
+Source: `terminal/web/index.html`, `terminal/web/src/workstation.ts`, `terminal/web/src/App.tsx`.
 
-Contract:Explicitly outside this observation-only sprint. Existing fake-paper harness is not owner order authorization.
+Evidence: Retained prior checkpoint evidence unless updated below: Branding unit/browser checks and source search
 
-Next condition/action:No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+User-facing identity is GIG. Historical reports and compatibility technical keys are preserved;unused code is not deleted merely on a name-based guess.
 
-## SCOPE02 — Historical A18/A19 requirement and concentration acceptance
+Disposition: Implemented bounded research contract;retain tested behavior
 
-PARTIAL
+## SCOPE01 — NOT APPLICABLE
 
-Source:`terminal/server/concentration.py`,`docs/remediation/sprint-2/REMAINING_BLOCKERS.md`
+Real/paper execution,paid feeds,public deployment and redistribution
 
-Evidence:Retained prior checkpoint evidence unless updated below: Existing exact supplied-depth HHI tests;original69c9f48 audit read from Git
+Source: `terminal/stocks/private_iex.py`, `terminal/paper/alpaca.py`.
 
-Contract:Exact source-bound supplied-depth HHI exists. Earlier audit preserves unknown original estimator/baseline. Attempt to recover the original pasted master text in this session failed authorization/resolution;no restricted dataset was accessed.
+Evidence: Retained prior checkpoint evidence unless updated below: Default-disabled boundary tests
 
-New implementation:Historical49th decision row preserved separately from48 reviewed areas. Existing exact supplied-depth HHI unchanged.
+Explicitly outside this observation-only sprint. Existing fake-paper harness is not owner order authorization.
 
-Remaining:Original A18/A19 baseline/estimator still unknown;no retroactive completion or substitute estimator.
+Disposition: Keep disabled;no expenditure,provider/account mutation or public forwarding
 
-Dependency:Recover original requirements or approve an explicitly prospective versioned contract.
+Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
-Next condition/action:Independent offline package completed;the listed missing contract/source/target requirement remains open.
+## SCOPE02 — PARTIAL
 
-Conditional estimate:Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision.
+Historical A18/A19 requirement and concentration acceptance
 
-IEX final follow-through:36focused recovery/retry/checkpoint checks and263guarded cases per five binding profiles passed. See IEX_SHUTDOWN_REPAIR.md;all original rows and scopes remain retained.
+Source: `terminal/server/concentration.py`, `docs/remediation/sprint-2/REMAINING_BLOCKERS.md`.
+
+Evidence: Retained prior checkpoint evidence unless updated below: Existing exact supplied-depth HHI tests;original69c9f48 audit read from Git
+
+Exact source-bound supplied-depth HHI exists. Earlier audit preserves unknown original estimator/baseline. Attempt to recover the original pasted master text in this session failed authorization/resolution;no restricted dataset was accessed.
+
+Disposition: Owner decision:recover the original requirement or approve a prospective versioned baseline/HHIv1 contract. No retroactive acceptance or new estimator invented.
+
+Remaining: Original A18/A19 baseline/estimator still unknown;no retroactive completion or substitute estimator.
+
+Dependency: Recover original requirements or approve an explicitly prospective versioned contract.
+
+Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
+
+Conditional effort: Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision.
