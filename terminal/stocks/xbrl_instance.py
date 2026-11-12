@@ -91,12 +91,15 @@ def one(node,value):
  if len(values)!=1:raise XBRLError('xbrl_required_structure')
  return values[0]
 def tree(node):return {'name':node.name,'attributes':node.attrs,'namespaces':{k or'':v for k,v in node.ns},'text':node.text(),'children':[tree(n)for n in node.children]}
+def structural_text(*nodes):
+ if any(n.text().strip()for n in nodes):raise XBRLError('xbrl_structural_text_unsupported')
 
 def context(node,cik):
  entity=one(node,tag(X,'entity'));ident=one(entity,tag(X,'identifier'));wire=ident.text().strip()
  if ident.children:raise XBRLError('xbrl_identifier_structure')
  if ident.attrs.get('scheme')!='http://www.sec.gov/CIK'or not re.fullmatch('[0-9]{1,10}',wire)or wire.zfill(10)!=cik:raise XBRLError('xbrl_entity_scope')
  period=one(node,tag(X,'period'));p=period.children
+ structural_text(node,entity,period)
  if any(n.children for n in p):raise XBRLError('xbrl_period_profile')
  if len(p)==1 and p[0].name==tag(X,'instant'):span={'kind':'instant','start':None,'end':sec.date(p[0].text().strip())}
  elif len(p)==2 and {n.name for n in p}=={tag(X,'startDate'),tag(X,'endDate')}:
@@ -110,6 +113,7 @@ def context(node,cik):
  if len(segments)>1 or len(scenarios)>1:raise XBRLError('xbrl_context_container_cardinality')
  containers=[('segment',n)for n in segments]+[('scenario',n)for n in scenarios]
  for placement,container in containers:
+  structural_text(container)
   for child in container.children:
    if child.name in (tag(D,'explicitMember'),tag(D,'typedMember')):
     dimension=qname(child.attrs.get('dimension',''),child)
@@ -128,10 +132,12 @@ def context(node,cik):
  return {**core,'identifier_lexical':wire,'semantic_sha256':digest(core)}
 
 def unit(node):
+ structural_text(node)
  if children(node,tag(X,'divide')):
   d=one(node,tag(X,'divide'))
   if len(node.children)!=1 or len(d.children)!=2:raise XBRLError('xbrl_unit_structure')
   numerator=one(d,tag(X,'unitNumerator'));denominator=one(d,tag(X,'unitDenominator'));num=numerator.children;den=denominator.children
+  structural_text(d,numerator,denominator)
   if not den:raise XBRLError('xbrl_unit_profile')
  else:num=node.children;den=[]
  if not 1<=len(num)<=8 or len(den)>8 or any(n.name!=tag(X,'measure')or n.children for n in num+den):raise XBRLError('xbrl_unit_profile')

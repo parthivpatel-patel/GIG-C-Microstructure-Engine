@@ -4,7 +4,7 @@ No fetch,persistence or automatic UI-cache replacement. Original source receipts
 are carried unchanged. Full XBRL DTS/inline/presentation is deliberately outside
 this strict instance profile;hash consistency is not source authentication.
 """
-import copy
+import copy,datetime
 from . import sec
 from .financials import calculate
 from .xbrl_instance import selected_financials,canonical,digest,XBRLError
@@ -79,12 +79,16 @@ class FilingCollection:
   records=[copy.deepcopy(self._filings[a]['source'])for a in keys[offset:offset+limit]]
   return {'schema':'gig.sec.xbrl.filings.v1','records':records,'total':len(keys),'collection_sha256':identity,'next_offset':offset+len(records)if offset+len(records)<len(keys)else None,'completeness':'BOUNDED_SUPPLIED_INSTANCES_NOT_COMPLETE_HISTORY'}
  def at_acceptance_time(self,as_of):
-  cutoff=sec.acceptance_ns(as_of);groups={};excluded={'unknown_acceptance_filings':0,'after_cutoff_filings':0,'ambiguous_same_time_facts':0};coverage=[];lineage=[]
+  cutoff=sec.acceptance_ns(as_of)
+  # Calendar guards must use the same UTC instant as the nanosecond cutoff.
+  # Taking the lexical date would change eligibility for equivalent offsets.
+  cutoff_date=(datetime.datetime(1970,1,1,tzinfo=datetime.timezone.utc)+datetime.timedelta(seconds=cutoff//1000000000)).date().isoformat()
+  groups={};excluded={'unknown_acceptance_filings':0,'after_cutoff_filings':0,'ambiguous_same_time_facts':0};coverage=[];lineage=[]
   for accession,parsed in sorted(self._filings.items()):
    source=parsed['source'];accepted=source['accepted_at']
    if accepted is None:excluded['unknown_acceptance_filings']+=1;continue
    ns=sec.acceptance_ns(accepted)
-   if ns>cutoff or source['filed']>as_of[:10]:excluded['after_cutoff_filings']+=1;continue
+   if ns>cutoff or source['filed']>cutoff_date:excluded['after_cutoff_filings']+=1;continue
    financials=selected_financials(parsed);coverage.append({'accession':accession,'selected_coverage':financials['coverage'],'xbrl_coverage':financials['xbrl_coverage']});lineage.append(copy.deepcopy(source));seen=set()
    for metric,rows in financials['history'].items():
     for row in rows+financials.get('revision_history',{}).get(metric,[]):
@@ -100,5 +104,5 @@ class FilingCollection:
   for metric,rows in history.items():
    rows.sort(key=lambda r:(r['end'],r['start']or'',r['filed'],r['concept']),reverse=True);truncated[metric]=max(0,len(rows)-256);history[metric]=rows[:256]
   unresolved=[s['accession']for s in lineage if s['form'].endswith('/A')and(s['amends_accession']is None or s['amends_accession']not in self._filings)]
-  result={'schema':'gig.sec.xbrl.acceptance.v1','issuer_cik':self.cik,'origin':self.origin,'as_of':as_of,'cutoff_ns':str(cutoff),'history':history,'descriptors':calculate({'history':history,'as_of_filing_date':as_of[:10]}),'source_filings':lineage,'superseded_source_fact_ids':sorted(superseded),'unresolved_amendment_filings':unresolved,'exclusions':excluded,'selected_input_coverage':coverage,'output_truncated':truncated,'collection_sha256':self._identity(self._filings),'completeness':'BOUNDED_SUPPLIED_INSTANCES_NOT_COMPLETE_STATEMENTS_DTS_OR_HISTORY','receipt_authority':'Original supplied receipt preserved;missing is unknown,never reconstructed','selection_policy':'Latest known acceptance per expanded namespace-qualified concept/period/unit;no calendar-quarter inference or additive amendment statements'}
+  result={'schema':'gig.sec.xbrl.acceptance.v1','issuer_cik':self.cik,'origin':self.origin,'as_of':as_of,'cutoff_ns':str(cutoff),'history':history,'descriptors':calculate({'history':history,'as_of_filing_date':cutoff_date}),'source_filings':lineage,'superseded_source_fact_ids':sorted(superseded),'unresolved_amendment_filings':unresolved,'exclusions':excluded,'selected_input_coverage':coverage,'output_truncated':truncated,'collection_sha256':self._identity(self._filings),'completeness':'BOUNDED_SUPPLIED_INSTANCES_NOT_COMPLETE_STATEMENTS_DTS_OR_HISTORY','receipt_authority':'Original supplied receipt preserved;missing is unknown,never reconstructed','selection_policy':'Latest known acceptance per expanded namespace-qualified concept/period/unit;no calendar-quarter inference or additive amendment statements'}
   result['selection_sha256']=digest(result);return result

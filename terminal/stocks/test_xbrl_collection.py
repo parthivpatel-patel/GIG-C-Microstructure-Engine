@@ -58,3 +58,11 @@ class XBRLCollection(unittest.TestCase):
   self.assertEqual(x,b.at_acceptance_time(LATE));self.assertEqual(entries,before);self.assertEqual(x['history']['revenue'][0]['unit'],'USD');self.assertTrue(x['history']['revenue'][0]['source_xml_fact_ids']);self.assertIsNone(x['source_filings'][0]['received_at'])
  def test_dimensional_or_conflicting_values_do_not_leak_into_consolidated_selection(self):
   raw=xml('<g:Assets contextRef="I" unitRef="USD">100</g:Assets><g:Assets contextRef="I" unitRef="USD">200</g:Assets>');e={'raw':raw,'manifest':manifest(raw),'concepts':selected_concepts(NS)};c=collection();c.ingest_batch([e]);r=c.at_acceptance_time(LATE);self.assertEqual(r['history']['assets'],[]);self.assertEqual(r['selected_input_coverage'][0]['xbrl_coverage']['excluded']['unverified_or_conflicting'],2)
+ def test_equivalent_cutoffs_across_calendar_boundaries_have_same_eligibility(self):
+  c=collection();c.ingest_batch([entry(accepted_at='2024-02-01T01:00:00.000000001Z')])
+  utc=c.at_acceptance_time('2024-02-01T01:00:00.000000001Z');offset=c.at_acceptance_time('2024-01-31T20:00:00.000000001-05:00')
+  self.assertEqual(utc['history'],offset['history']);self.assertEqual(utc['descriptors'],offset['descriptors']);self.assertEqual(utc['exclusions'],offset['exclusions']);self.assertTrue(offset['history']['revenue'])
+ def test_future_filing_date_not_admitted_by_positive_offset_cutoff(self):
+  c=collection();c.ingest_batch([entry(filed='2024-02-02',accepted_at='2024-02-01T23:00:00Z')])
+  utc=c.at_acceptance_time('2024-02-01T23:00:00Z');offset=c.at_acceptance_time('2024-02-02T01:00:00+02:00')
+  self.assertEqual(utc['history'],offset['history']);self.assertFalse(offset['history']['revenue']);self.assertEqual(offset['exclusions']['after_cutoff_filings'],1)

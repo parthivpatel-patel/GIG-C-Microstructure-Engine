@@ -81,3 +81,9 @@ class XBRLInstance(unittest.TestCase):
   raw=xml(context_extra=segment)
   for altered in (xml(context_extra=segment+segment.replace('DeskAxis','OtherAxis')),raw.replace(b'<x:instant>2023-12-31</x:instant></x:period></x:context>',b'<x:instant>2023-12-31</x:instant></x:period><x:scenario/><x:scenario/></x:context>'),raw.replace(b'><ext:Desk>',b'>unmodeled<ext:Desk>')):
    with self.assertRaises(XBRLError):parsed(altered)
+ def test_significant_structural_context_text_cannot_become_consolidated_fact(self):
+  for raw in (xml(context_extra='<x:segment>unmodeled context qualifier</x:segment>'),xml().replace(b'<x:instant>',b'unmodeled period<x:instant>',1),xml().replace(b'<x:entity>',b'unmodeled context<x:entity>',1)):
+   with self.subTest(source_bytes=len(raw)),self.assertRaisesRegex(XBRLError,'structural_text'):parsed(raw)
+ def test_significant_unit_container_text_cannot_be_discarded(self):
+  for raw in (xml().replace(b'<x:measure>iso:USD',b'unmodeled unit<x:measure>iso:USD'),xml(unit_extra='<x:unit id="PER"><x:divide>qualifier<x:unitNumerator><x:measure>iso:USD</x:measure></x:unitNumerator><x:unitDenominator><x:measure>x:shares</x:measure></x:unitDenominator></x:divide></x:unit>')):
+   with self.assertRaisesRegex(XBRLError,'structural_text'):parsed(raw)
