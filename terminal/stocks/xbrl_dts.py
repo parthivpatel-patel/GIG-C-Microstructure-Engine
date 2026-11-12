@@ -169,6 +169,8 @@ def _discover_roots(schema_roots,supplied,metadata):
    for network in links:network['usable']=False;network['issues']=sorted(set(network['issues']+['ROLE_SPLIT_ACROSS_LINKS_UNSUPPORTED']))
  result={**metadata,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False}
  if types:result['type_declarations']=types;result['type_declaration_profile']='NAMED_NUMERIC_DERIVATION_METADATA_V2'if any('derivation'in value['declaration']for value in types.values())else'NAMED_RESTRICTION_METADATA_V1'
+ from .xbrl_relationships import effective
+ result['effective_relationships']=effective(linkbases,locators,concepts,result['documents'])
  from .xbrl_dimensions import networks
  definitions=networks(linkbases,locators)
  if definitions:result['definition']=definitions;result['definition_metadata_profile']='RESTRICTED_DEFINITION_ARCS_V1'
