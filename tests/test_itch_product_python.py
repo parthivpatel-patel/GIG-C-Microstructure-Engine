@@ -10,6 +10,6 @@ from terminal.server import app
 assert app._application is None
 app.create_app=forbidden
 suite=unittest.defaultTestLoader.loadTestsFromName('terminal.test_itch_product')
-assert suite.countTestCases()==17
+assert suite.countTestCases()==18
 result=unittest.TextTestRunner(verbosity=2).run(suite)
-raise SystemExit(0 if result.wasSuccessful()and not result.skipped and result.testsRun==17 else 1)
+raise SystemExit(0 if result.wasSuccessful()and not result.skipped and result.testsRun==18 else 1)

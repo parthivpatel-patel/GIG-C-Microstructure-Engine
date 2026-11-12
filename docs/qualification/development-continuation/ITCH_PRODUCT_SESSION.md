@@ -38,3 +38,17 @@ The product test program uses the actual NativeSession/selector,real native bind
 A new stepping test caught redundant suffix reapplication in an intermediate implementation and was repaired before publication. The old no-launch harness imported an eagerly constructed ASGI object before replacing its factory. No server/listener was started by that import,but the earlier no-factory label was too strong. The lazy export plus explicit `_application is None` assertions now make the no-construction boundary executable. Prior source-bound test receipts are preserved,not retroactively relabeled.
 
 The full XBRL context-placement repair is documented separately. Official Kraken documentation retrieval received proxy CONNECT403;no retry,feed connection or provisional-status change was made. Full XBRL schema/transform/relationship/statement coverage and actual provider,target/browser/device,ARM64 and hardware qualification remain separate open requirements.
+
+## Replay worker rejection regression
+
+The final developer pass reproduced a separate worker-lifecycle defect: a source
+frame refused after restoration raises `ItchProductError` (`ValueError`), while
+the background replay coroutine previously caught only native `EngineError`.
+The session paused correctly, but that coroutine could exit permanently. The
+bounded `NativeSession.tick()` now owns that iteration, pauses both control
+states on either classified rejection, retains the accepted checkpoint and
+publishes a bounded diagnostic. An offline test compiles the actual nested
+worker coroutine with a deterministic clock; it verifies survival, unchanged
+accepted books and explicit subsequent resume. It neither constructs an ASGI
+application nor opens a socket. Failing-before and passing-after logs are
+retained under `build/remaining-engineering/product-worker-rejection-*`.

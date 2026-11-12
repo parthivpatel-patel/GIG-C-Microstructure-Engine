@@ -144,14 +144,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         while True:
             await asyncio.sleep(0.1)
             async with lock:
-                if native.playing and native.mode == 'HISTORICAL_REPLAY':
-                    try:
-                        for _ in range(native.speed):
-                            if not native.step():
-                                break
-                    except gig.EngineError as exc:
-                        native.playing = False
-                        native.notifications.append({'code': 'NATIVE_REPLAY_REJECTED', 'message': f'{exc.code_name}: {exc.field}'})
+                native.tick()
 
     async def retention_loop():
         from terminal.l2_playback import prune_expired

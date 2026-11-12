@@ -132,3 +132,16 @@ class ItchProductTests(unittest.TestCase):
  def test_exact_source_projection_supports_nonunit_native_tick_and_share_lots(self):
   with tempfile.TemporaryDirectory()as directory:
    target=Path(directory)/'image';run=subprocess.run([str(self.fixture),'--fixture-units',str(target)],capture_output=True,text=True,check=True,timeout=30);meta=json.loads(run.stdout);a=ItchAdmission(**{k:meta[k]for k in('artifact_sha256','contract_sha256','implementation_sha256','capture','generation')});image,a=ItchRecovery.migrate(target.read_bytes(),a,implementation_identity());raw=build_bundle(image,a);s=self.session(raw);native=s.itch_session.owner.book(0)['snapshot']['data']['book'];self.assertEqual(native['bids'][0]['price_ticks'],'33');self.assertEqual(native['bids'][0]['quantity'],'10');v=s.state();self.assertEqual(v['price_scale'],'10000');self.assertEqual(v['book']['bids'][0]['price_ticks'],'99');self.assertEqual(v['book']['bids'][0]['quantity'],'100');self.assertEqual(v['metrics']['bid_depth'],{'numerator':'100','denominator':'1'});self.assertEqual(v['provenance']['native_lot_size'],{'numerator':'10','denominator':'1'});self.assertEqual(v['metrics']['spread'],{'numerator':'3','denominator':'1'});self.assertEqual(v['metrics']['midprice'],{'numerator':'201','denominator':'2'})
+
+ def test_actual_replay_worker_survives_native_rejection_without_app_construction(self):
+  import ast,asyncio,types
+  s=self.session();s.control('play');before=s.itch_session.owner.canonical();tree=ast.parse((Path(__file__).parent/'server/app.py').read_text());factory=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='create_app');worker=next(n for n in factory.body if isinstance(n,ast.AsyncFunctionDef)and n.name=='replay_loop');calls=0
+  async def clock(_):
+   nonlocal calls
+   calls+=1
+   if calls==2:raise asyncio.CancelledError()
+  namespace={'asyncio':types.SimpleNamespace(sleep=clock),'lock':asyncio.Lock(),'native':s,'gig':gig}
+  exec(compile(ast.Module(body=[worker],type_ignores=[]),'<actual-offline-replay-worker>','exec'),namespace)
+  with patch.object(ItchRecovery,'process',return_value={'committed':False,'native_code':'15'}):
+   with self.assertRaises(asyncio.CancelledError):asyncio.run(namespace['replay_loop']())
+  self.assertFalse(s.playing);self.assertEqual(s.itch_session.owner.canonical(),before);self.assertTrue(s.notifications);s.control('play');self.assertEqual(s.tick(),1)

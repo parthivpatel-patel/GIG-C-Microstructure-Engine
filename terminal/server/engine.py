@@ -135,6 +135,21 @@ class NativeSession:
         self.position += 1
         return True
 
+    def tick(self):
+        """One bounded replay-worker iteration;never lets a refused frame kill it."""
+        if not self.playing or self.mode!='HISTORICAL_REPLAY':return 0
+        accepted=0
+        try:
+            for _ in range(self.speed):
+                if not self.step():break
+                accepted+=1
+        except (gig.EngineError,ValueError) as exc:
+            self.playing=False
+            if self.itch_session is not None:self.itch_session.playing=False
+            message=f'{exc.code_name}: {exc.field}' if isinstance(exc,gig.EngineError) else 'Bounded replay source or resource admission refused;accepted checkpoint retained.'
+            self.notifications.append({'code':'NATIVE_REPLAY_REJECTED','message':message})
+        return accepted
+
     def control(self, action, value=None):
         if self.itch_session is not None and action!='dataset':
             from terminal.itch_product import ItchProductError
