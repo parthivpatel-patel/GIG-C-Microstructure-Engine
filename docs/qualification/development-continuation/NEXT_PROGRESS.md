@@ -1,17 +1,17 @@
 # Current continuation pointer
 
-Tested runtime:f7c1e0df2fb95e48f84752de51fc396daf0518f8;branch development/gig-ui-redesign.
+Tested runtime:3436ff56a3e223cad192223062c83d5a11da8282;branch development/gig-ui-redesign.
 Read ACTIVE_ENGINEERING_CHECKPOINT.md,REPORT.md,COMPLETION_MATRIX.json and
-XBRL_SOURCE_CONTINUATION_EVIDENCE.json. Final report-only SHA is obtained fromGit.
+INLINE_DRS_EVIDENCE.json. Final report-only SHA is obtained from Git/remote.
 
-Completed:bounded supplied-DTS numeric facets/export,UTC/context admission repairs,
-actual native-source SDK and immutable product revision2 continuation,empty-range
-progress and exact u64 browser provenance. Final336per5binding profiles,161frontend
-checks,35actual contract assertions and source/default wheel verification passed.
-Earlier counts and source-bound failures remain historical evidence,not current
-qualification. No application/provider/acceptance launch is authorized.
+Completed:bounded inline document sets,continued text/transforms/source attribution,
+explicit numeric simple-content V2,restricted closed-cube dimensions/defaults and
+versioned fail-closed selection guards. Final378per5binding profiles,125XML,
+161frontend and installed SDK/source checks passed. Native8identities matched in
+all6profiles. Earlier counts/source-bound failures remain historical evidence.
 
-Next:an explicit authoritative inline/DRS/relationship/statement profile with
-independent fixtures and existing v2 integration. Do not duplicate completed
-source recovery,numeric facets or private-file publication. Keep Kraken provisional;
-no repeated blocked requests. Preserve protected branches and source permissions.
+Next:effective presentation/calculation and financial-statement mapping or broader
+inline/DRS conformance,then versioned read-only company-v2/browser integration.
+Do not reimplement completed recovery/CLI/profiles. No application/provider/owner
+acceptance launch is authorized. Keep Kraken provisional and preserve protected
+branches,source permissions and disabled execution.

@@ -1,3 +1,7 @@
+Current continuation:see INLINE_DOCUMENT_SETS.md,XBRL_SIMPLE_CONTENT_V2.md and
+XBRL_DIMENSION_PROFILE.md for later explicit extensions. Historical counts below
+remain source-bound;full inline/schema/DRS/statement coverage is still PARTIAL.
+
 # Supplied inline-XBRL and DTS/presentation development profiles
 
 Historical profile evidence below is retained. Later numeric/DTS/vintage and source-recovery packages are documented in XBRL_NUMERIC_PROFILE.md and REPORT.md;the earlier48/262case counts are not current totals.

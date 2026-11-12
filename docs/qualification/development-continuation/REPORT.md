@@ -1,245 +1,205 @@
-# GIG XBRL and source-recovery development — November 12, 2026
+# GIG inline-XBRL and dimensional engineering — November 12, 2026
 
 Branch:`development/gig-ui-redesign`. Starting local/remote checkpoint was clean
-and matched **57e7bc2df3a7a11af3acc036b0231dae293bcb92**. Final tested runtime is
-**f7c1e0df2fb95e48f84752de51fc396daf0518f8**. The enclosing documentation commit
-is identified by Git/remote receipt rather than self-embedded here. Existing
-uncommitted work was preserved. Protected branches,provider permissions,UI identity
-and trading-disabled configuration were not changed.
+and matched **a2841e6e0e59c393bb26182a6b87156800e4686a**. Final tested runtime is
+**3436ff56a3e223cad192223062c83d5a11da8282**. The enclosing report-only commit is
+identified by Git/remote receipt. Existing work and protected branches were
+preserved;no reset,merge,force push or owner configuration change was used.
 
 ## Published implementation
 
-|Commit|Completed change|
+|Commit|Change|
 |---|---|
-|186d54c7dd8d8772f25f7e6072fb5fc4587f09cd|UTC-consistent filing-vintage selection and strict significant context/unit text admission.|
-|6d97e95f3ba77ab99c0000bbc594cb555fc70ab0|Opt-in supplied-taxonomy numeric value/facet corroboration and usable offline DTS export.|
-|d84578587ad99cee78f08b1ff738971070762177|Native source-recovery SDK bridge,private product revision2 lineage and immutable continuation CLI.|
-|7aea334f0171b862b055f9b3ebda46a78894dc7a|Five-state native-to-TypeScript contract and empty continuation progress repair.|
-|f7c1e0df2fb95e48f84752de51fc396daf0518f8|Full-width browser provenance and native-bound lineage validation,with real high-generation fixture.|
+|d8e1b85dd18b9458a79619132d1a53cbe9ad8085|Bounded inline document sets,continuations,transforms,ordered source lineage,atomic vintage/CLI integration.|
+|a50fc52cd5883c0252fcaba9b3fe72a7b545124e|Explicit numeric simpleContent derivation V2,retaining V1 scope.|
+|8393a082a13d15768a4ba7528defd105647de5e5|Restricted closed-hypercube/domain/default corroboration without synthesizing financial facts.|
+|afea8ab2ed460a9119dfd351f91b3fe3bb44ea63|Distinct dimensional-result schemas to prevent old-code eligibility downgrade.|
+|3436ff56a3e223cad192223062c83d5a11da8282|Fail-closed dimensional proof coverage,missing-policy and relabeling guards.|
 
-## XBRL correctness repairs
+## Inline document sets and source identity
 
-Four authored methods reproduced six failing assertions/subtests against the
-starting source. Exact acceptance filtering used UTC nanoseconds but its extra
-filing-date guard used the cutoff's lexical date prefix. Equivalent offset
-spellings crossing a calendar boundary could therefore select different facts;
-a positive offset could also admit a future filing date. The guard and descriptor
-date now derive from the same UTC instant using integer arithmetic. Original
-source acceptance/receipt values and caller as_of spelling remain preserved.
-Equivalent instants have equivalent eligibility;complete output hashes still
-identify the explicitly supplied as_of string.
+The new explicit default-target inline1.1 profile processes bounded supplied
+XHTML sets with shared contexts/units,cross-document nonNumeric continuation
+chains,ordered passive markup and exclusions. Two narrow2015numeric transformation
+subsets support exact scaling/sign conversion;the new profile bounds scale to±18.
+The original plain parser retains its strict unsupported-feature policy and±6.
+Missing/wrong-kind/shared/orphan continuations,cycles,nested facts,numeric
+continuations,named targets,escaped HTML,unknown transforms and unmodeled markup
+reject. No browser rendering,URI fetch or inferred financial value is involved.
 
-Significant unmodeled text in context/entity/period/segment/scenario or unit
-containers now rejects explicitly. Previously an opaque text-only segment could
-be discarded and leave a fact apparently consolidated. Whitespace and actual
-identifier/measure/period-leaf/typed/opaque payload text retain their existing
-contracts. No unknown context qualifier is interpreted as absent.
+All originals are permission/hash/filing-scope checked before any XML in a set is
+parsed. Output has a distinct inline_set.v1 schema and explicitly derived manifest
+hash. It does not pretend that a composite hash is an original SEC response SHA.
+Actual document URI/raw SHA,receipt/acceptance metadata and fact/node/continuation
+segments remain visible. Context/unit source locations are retained. Selected
+financials expose original input SHA sets and the derived set identity;single-source
+attribution is null where no one original contains the inputs. Aggregate receipt
+remains unknown rather than replacing per-document receipts.
 
-## Numeric taxonomy and filing-vintage integration
+The existing immutable FilingCollection and private offline inspect tool now
+accept these sets. Supplied DTS discovery traverses the exact reference union,
+binds a distinct dts_set identity and can apply numeric/dimensional profiles.
+Amendments and exact acceptance-time selection use the existing policy. Failed
+later entries leave accepted collection state unchanged. Reordered input documents
+do not invent a filing chronology;deterministic URI ordering binds the result.
 
-`NUMERIC_VALUE_FACETS_V1` is an explicit optional profile on
-`FilingCollection.ingest_dts_batch`. It resolves supported decimal/integer bases
-and named simple restrictions,checks exact lexical/range/digit facets and known
-unit forms,and preserves original document/fact/type lineage. All supported
-inherited facets apply. Decimal precision cannot round a comparison. Unsupported
-selected types,cycles,depth/resource excess,corrupt hashes and contradictions
-reject the entire candidate batch. Existing declaration-only ingestion remains
-compatible. Nil remains missing,not zero;unknown concepts remain unselected.
+A separate failing-before case proved a real context-identity defect:typed
+`A<Code/>B` and `AB<Code/>` previously collided because interleaving was lost.
+The XML representation now retains ordered text/children and opaque context trees
+record normalized content_order under **DIM_CONTEXT_ELEMENT_V3_ORDERED**. Affected
+derived context/fact hashes and parsed-artifact profile hashes intentionally change.
+Raw source hashes,numeric values and all native frozen identities remain unchanged.
+Old stored artifacts are not silently rewritten or overwritten.
 
-The existing offline CLI now accepts `gig.sec.xbrl.input_dts_batch.v1` with explicit
-supplied documents,hashes and the chosen numeric profile. It preserves permission
-admission,relative-path/symlink restrictions,bounded reads,atomic collection
-publication and exclusive private result files. No URI is fetched. This is a
-working path from supplied source/DTS through filing-vintage selection to a
-reproducible private export,not an unconnected parser demonstration.
+See INLINE_DOCUMENT_SETS.md for exact limits,source contracts and exclusions.
 
-This profile validates selected numeric values against retained supported
-restrictions. It does not validate complete XML Schema construction,complex
-content,custom type derivation,DRS/hypercube/default relationships or accounting
-meaning. `schema_type_validation` and `complete_statements` remain false.
-Presentation order still does not invent financial-statement mappings. Source
-SHA values,amendment lineage,missing receipts and original lexical values remain
-intact. See XBRL_NUMERIC_PROFILE.md and XBRL_VINTAGE_REPAIRS.md.
+## Bounded complex-type and dimensional profiles
 
-## Native/source/product recovery integration
+`NUMERIC_SIMPLE_CONTENT_V2` adds explicit named simpleContent extension/restriction
+value corroboration,including inherited supported numeric facets and units. V1
+continues to refuse these complex derivations. Complex content,mixed types,
+attribute declarations/wildcards and other schema features remain unsupported.
+This is numeric-value validation,not complete XML Schema construction/derivation
+validity. Global schema/statement flags stay false. See XBRL_SIMPLE_CONTENT_V2.md.
 
-The existing C++ `resume_hot_source` coordinator is now exposed through the Python
-SDK when `GIG_BUILD_ITCH_STREAMING=ON`. Default OFF builds preserve their existing
-dependency contract and fail explicitly if source continuation is requested;
-there is no unverified Python decoder fallback. No build option authorizes a
-provider connection,observed capture,execution or application startup.
+`EXPLICIT_CLOSED_HYPERCUBE_V1` uses supplied definition metadata to check a deliberately
+restricted case:one role/link,one direct positive closed cube,explicit declared axes,
+one domain root per axis and usable domain/member relationships. It checks required
+axes,membership,placement,closed extras and defaults;cycles (including diamond paths)
+and conflicts reject. Cached adjacency/domain analysis bounds repeated work.
 
-A separate typed `ItchSourceAdmission` supplies independently retained source
-hash,capture,generation,container and first frame/ordinal. The native coordinator
-verifies committed prefix receipts without applying them,then applies only new
-complete frames in an isolated owner. Plain BinaryFile and one complete
-CRC-verified gzip member are supported. Gaps,changed prefixes,wrong scope,
-partial/terminal frames,extra members and resource refusal reject. The returned
-SDK admission hashes the newly encoded image rather than retaining the old image
-hash. Existing native allocation-failure behavior remains unchanged.
+Open/negative/multiple-role or assignment semantics,primary inheritance,targetRole,
+precedence,unusable arcs,typed axes and broader DRS remain unsupported. Missing
+source taxonomy cannot produce validity. Defaults are reported as derived evidence;
+no dimensions/values are inserted into source contexts. Default-dependent facts
+also stay excluded from consolidated financial selection. Complete DRS/schema and
+statement flags remain false.
 
-The private `continue-source` operation requires an exhausted authored product
-continuation;it will not silently replace pending records. It creates a new
-immutable product revision2 with source/bundle/image hashes,container,capture,
-generation and source-cursor lineage. Revision1 remains compatible. Repeating an
-identical verified source with no new events returns identical bundle bytes.
-Both books restore paused;capture and explicit migration retain lineage. The
-original writer's process-interruption and private-file contracts remain in use.
-No arbitrary compressed seek or unknown native schema conversion was added.
+Dimensional results have distinct dimensional_instance.v1/dimensional_inline_set.v1
+schemas. Older selection code therefore rejects instead of ignoring the new
+eligibility policy. New selection verifies complete supported-policy coverage and
+rejects missing,empty,unknown or relabeled dimensional guards even after rehashing.
+No existing ordinary-instance contract was weakened. See XBRL_DIMENSION_PROFILE.md.
 
-Final review reproduced an actual precision defect in the new provenance
-projection. With a real native generation9007199254740993,the previous view method
-passed that integer through JSON;Node received9007199254740992. The public history
-projection now uses canonical decimal strings,with `DECIMAL_STRINGS_V1` metadata.
-Private revision2 remains integer-compatible. Every retained initial frame and
-ordinal is also compared with native configuration on restore. The regression
-uses the actual old view method and real native fixture,then validates the fixed
-JSON with Node;no application is constructed. See ITCH_SOURCE_PRODUCT.md.
+## Developer validation actually executed
 
-## Frontend integration repair
-
-The actual native-to-TypeScript check now exercises five states,including a
-source-restored revision2. It exposed an empty replayable range displayed as100%
-progress. That range now displays0%;completed nonempty continuations still show
-100%. The original assertions are retained and a new unit case covers the empty
-restored range. All12workspaces and existing visualizations remain accessible;
-this is a focused correctness change,not another redesign.
-
-## Executed developer validation
-
-|Current check|Result|
+|Cohort|Result|
 |---|---|
-|Rebuilt full GCC14.2 Release CTest|152/152 passed|
-|Focused recovery CTest:GCC Debug/Release/ASan+UBSan|6/6/6 passed|
-|Focused recovery CTest:Clang19.1 Debug/Release/ASan+UBSan|6/6/5 passed|
-|Frozen reference reruns|8/8 identities matched in each of6profiles|
-|Final optional-fixture rebuild/durable CTest|1/1 passed in each6profiles|
-|Final guarded Python:CPython3.12.14|336 each across GCC Debug,Release,sanitizers and Clang Debug,Release;1,680 outcomes;0failures/errors/skips|
-|Affected authored XBRL|83 cases,included in336 and repeated from extracted source|
-|Original product+durable+new source-product checks|38 cases;includes11new source-product cases and real u64/Node regression|
-|Frontend Node24.19 tests|161 passed;0failures/skips|
+|GCC14.2 Debug/Release/ASan+UBSan guarded bindings|378 each;zero failures/errors/skips|
+|Clang19.1 Debug/Release guarded bindings|378 each;zero failures/errors/skips|
+|Total final guarded outcomes|1,890 across5profiles|
+|Authored XBRL cohort|125cases,42more than the starting83;included in378|
+|Native focused recovery CTest|GCC6/6/6;Clang6/6/5 passed|
+|Eight frozen native references|8/8matched in each6profiles|
+|Frontend Node24.19|161passed;zero failures/skips|
 |TypeScript/Vite8.3.5 production build|Passed|
-|Actual native-to-TypeScript contract|35 assertions /5states;no browser/application|
-|Installed default SDK and extracted source|8SDK+55recovery+83XML cases;28contract assertions;actual disabled source capability verified|
-|Installed source-enabled SDK and extracted source|8SDK+66recovery+83XML cases;35contract assertions|
-|Runtime `pip check`|No broken requirements;not a security-advisory clearance|
+|Actual native-to-TypeScript contract|35assertions with source-enabled SDK;28with default SDK|
+|Installed default SDK/current extracted source|8SDK+55recovery+125XBRL cases;28contract assertions|
+|Installed source-enabled SDK/current extracted source|8SDK+66recovery+125XBRL cases;35contract assertions|
 
-These are overlapping cohorts,not a claimed unique-test sum. The full GCCRelease
-and six focused/frozen runs preceded the final public-projection repair and
-optional high-generation fixture branch. Native SDK/core/build inputs are
-byte-identical between7aea334 andf7c1e0d. The final durable test recompiled and
-passed again in all6profiles;the final336binding cohorts include the high-generation
-branch. Original native `src`/`include` algorithms are unchanged from57e7bc2.
-Earlier full six-configuration native CTest totals remain historical evidence and
-are not relabeled newly rerun.
+These cohorts overlap;they are not a claimed unique-test sum. Native/core/SDK/build
+and frontend source inputs are unchanged froma2841e6. The existing strict compiler/
+instrumented builds were checked and focused/frozen tests reran in six profiles.
+Those runs preceded final pure-Python dimensional-result guards;native inputs
+remain identical. Older full CTest matrices remain historical evidence and were
+not relabeled newly executed. No native arithmetic/reference expectation changed.
 
-The full Release detail records363 durable assertions,57restore/63encode
-allocation-failure points,163 source assertions and67source-restore failure
-points. Native GCC/Clang sanitizer checks and GNU Python-binding sanitizer
-regressions passed. The existing Python harness disables interpreter-exit leak
-checking and retains separate live-interpreter coverage;this is not complete
-CPython-shutdown leak clearance. Clang Python sanitizer runtime remains unsupported
-by the existing harness;it is not marked PASS or counted as an executed profile.
+Final378profile wall times:27.614s GCCDebug,22.239s GCCRelease,153.019s GCCsanitizer,
+24.975s ClangDebug,27.842s ClangRelease;two independent processes ran concurrently.
+These are test durations,not a throughput/latency SLA. Native GCC/Clang sanitizer
+checks passed. Pure Python is not sanitizer-instrumented. The existing GNU Python
+harness disables interpreter-exit leak checking and retains separate live-interpreter
+coverage;complete shutdown leak clearance is not claimed. Clang Python sanitizer
+runtime remains unsupported and is not counted as executed.
 
-All final guarded cohorts forbid socket bind/connect and the application factory
-and assert no ASGI application construction. No browser or visual acceptance was
-performed under the explicit no-launch directive.
+Every final guarded cohort forbids socket bind/connect and application construction.
+No ASGI factory,listener,browser or actual owner-target acceptance was run. Warnings
+including the existing optional Three/OrbitControls chunk warning remain visible.
+The unchanged initial JS is255.86kB(79.46kB gzip);deferred chunk517.06kB(128.66kB gzip).
+No physical-device,GPU or browser-responsiveness measurement is inferred.
 
-## Clean-source packaging and measured observations
+The context collision failure is retained. An intermediate DTS refactor omitted
+an edge-list initializer and existing tests failed;the initializer was restored
+without removing assertions.359/365/376/377intermediate cohorts are preserved as
+intermediate evidence,not final counts. All final outcomes,source/log digests and
+qualification exclusions are in INLINE_DRS_EVIDENCE.json. Earlier manifests remain
+in Git and XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
 
-A source archive generated from a verified Git export of f7c1e0d contains1,266
-members. All1,265tracked file contents were compared to that exact commit;
-changed runtime files were explicitly checked. Traversal,duplicate paths,unsafe
-member types,private-data/database/archive/cache/build payloads were rejected by
-the inspection. Only generated PKG-INFO is outside tracked content. Pending
-report edits remained preserved in the working tree and were not substituted for
-committed archive bytes.
+## Packaging,privacy and compatibility
 
-Both22-member wheel variants were rebuilt from the earlier clean7aea334 source
-archive. SDK/native/build inputs remain byte-identical atf7c1e0d,so those wheels
-were reused with the new extracted server/source archive. They were **not rebuilt
-from the final source archive**. PACKAGE_CURRENT.json records both source identities,
-byte-equivalence verification,artifact hashes and installed-consumer results.
-The default binary was tested without patching:its source capability is absent
-and a valid request fails explicitly. The enabled binary executes the actual
-native coordinator. No SDK wheel,raw source fixture or private data was committed.
+The clean committed source archive contains1,274members. All1,273tracked file
+contents were compared byte-for-byte to runtime3436ff5. Traversal,duplicate/unsafe
+members and private-data/database/cache/build payloads were rejected by inspection;
+only generated PKG-INFO is outside tracked source. Inputs used in tests are authored
+fixtures,not original market data or actual SEC observations.
 
-Final336-case profile wall times:31.389s GCCDebug,26.735s GCCRelease,137.438s
-GCCsanitizer,21.884s ClangDebug and18.676s ClangRelease. Two independent profile
-processes ran concurrently. The frontend initial JavaScript is255.86kB
-(79.46kB gzip);the deferred Three/OrbitControls chunk is517.06kB(128.66kB gzip).
-The existing chunk-size warning remains visible. These are test/build observations,
-not latency,throughput,memory,SLA or browser responsiveness claims.
+Both22-member SDK wheels were reused from the qualified clean7aea334 build after
+proving byte-identical native/SDK/build inputs. They were **not rebuilt from the
+new source archive**. Both installed variants were exercised against the new
+extracted source. The default SDK still explicitly refuses optional source recovery;
+the enabled SDK executes it. PACKAGE_CURRENT.json records all source identities,
+artifacts,hashes and consumer results. No raw input or SDK wheel was committed.
 
-Intermediate failures were retained:the four original XBRL regressions,the
-zero-length-range contract failure,the u64 projection failure,a new test helper
-that initially hashed a negative string input before calling the SDK,an incorrect
-dependency-cache working-directory prefix,and an inherited CXX setting naming an
-unavailable compiler. The last two were corrected with an explicit matching
-same-project dependency cache and an installed GNU compiler,without dependency
-or production-source workarounds. Warnings were not suppressed and mathematical
-assertions were not weakened. Details/receipts are in
-XBRL_SOURCE_CONTINUATION_EVIDENCE.json;all earlier source-bound manifests remain
-available in Git and PRODUCT_SESSION_EVIDENCE.json.
+Original plain XML/inline contracts,version1 numeric admission,native/Python/product
+recovery,read-only company-v2 consumers and frontend workspaces remain compatible.
+New derived schemas are explicitly opt-in and fail closed in older consumers.
+The new numeric V2 profile is not a claim that application company-v2/browser
+integration of these new XBRL artifacts is complete.
 
-## Matrix and remaining work
+## Matrix and remaining scope
 
-50rows =49reviewed areas+one historical A18/A19 decision. The old48-area set gained
-the explicit Kraken MD07 area;the historical decision is separate. Counts remain
-**34 COMPLETE /8 PARTIAL /7 BLOCKED /1 NOT APPLICABLE**. SEC02/REL02/UI10 now have
-substantially expanded implementation/evidence;no external gate was promoted.
+The matrix remains50rows =49reviewed areas+one historical A18/A19 decision. The
+original48-area set gained the explicit Kraken area;the historical decision is
+separate. Counts remain **34 COMPLETE /8 PARTIAL /7 BLOCKED /1 NOT APPLICABLE**.
+SEC02 now has working document-set/simple-content/dimensional/export profiles;
+no blocked requirement was promoted.
 
-Actual remaining engineering includes broader inline transformations/continuations,
-complex schema validation,dimension/DRS/hypercube/typed-domain/default relationships,
-effective presentation/calculation precedence,complete statement mappings and
-read-only v2 integration. Supported-source correction/losslessness and additional
-recovery positions/schema migrations require authoritative explicit contracts;
-unsupported actions still reject. These gaps are not silently declared optional
-or attributed only to missing credentials.
+Actual remaining engineering:full inline registry/named-target/tuple/escaped-HTML
+behavior;general complex content/attribute/substitution/schema construction;
+open/negative/multi-role/assignment and inherited/typed-domain DRS/effective
+relationships;presentation/calculation precedence;complete financial-statement/
+extension-taxonomy mapping;and versioned read-only company-v2/frontend integration
+of the new artifacts. Complete historical source/vintage evidence remains separate.
+These are not silently dropped or all blamed on missing credentials.
 
-Kraken remains provisional. The prior official-documentation CONNECT403 is
-preserved;the current restricted access policy is unchanged,so no repeated request
-or feed connection was attempted. Future protocol/checksum expansion needs the
-actual authoritative contract. Offline Kraken fixtures passed within336;they do
-not prove the live contract.
+Recovery was not speculatively widened. Existing plain/gzip,product,corruption,
+resource,restart and lineage contracts were rerun. Arbitrary compressed/partial/
+terminal positions,unknown schemas and unsupported observed corrections still
+fail closed until explicitly specified and tested. No exchange semantics were
+invented. IEX L1 is not treated as full depth.
 
-External gates remain complete lawful observed-L3 initialization/reference
-coverage;current permitted listing,SEC and IEX reconciliation;current-candidate
-native ARM64 runtime;owner-private Codespaces HTTPS/WSS;physical GPU/mobile and
-assistive-technology testing;target security/artifact and hardware durability
-qualification;and the unresolved historical A18/A19 contract. No secrets or
-provider permissions were changed. No accounts,orders,trading,paid resources,
-deployments or workflows were used.
+Kraken remains provisional. The prior official-documentation CONNECT403 and current
+unchanged restricted policy were retained;no repeated request or provider connection
+was made. Offline fixtures do not establish the official live contract.
 
-**Full approved development remains incomplete.** This sprint published concrete
-bounded XBRL/source/product improvements and repaired reproduced defects. The next
-bounded inline/relationship profile is a multi-day package;full XBRL fidelity is
-a multi-week engineering/conformance effort whose exact size depends on explicit
-supported specification/source coverage. External qualification timing cannot be
-inferred from fixtures. Do not initiate owner acceptance under this directive.
+External gates remain lawful complete observed L3/reference initialization,current
+provider/listing/SEC reconciliation,current-candidate native ARM64,owner-private
+Codespaces HTTPS/WSS,target devices/accessibility/security/hardware durability and
+historical A18/A19 requirements. No credentials,provider/trading gates,private-port
+visibility,paid resources or protected branches changed.
 
-## Reproduction and exact next step
+**Full engineering remains incomplete.** The next bounded work package should
+specify effective presentation/calculation and statement mapping or expand the
+inline/DRS conformance profile,then add the versioned application-v2/browser path.
+Each is a multi-day package;full XBRL/conformance and corpus coverage remains a
+multi-week undertaking with source/specification dependencies. No overnight or
+production-readiness promise follows from fixtures.
 
-Use the intended already-built binding profile on PYTHONPATH,with an absolute
-GIG_ITCH_FIXTURE path. The full336cohort requires a source-enabled SDK build
-(`GIG_BUILD_ITCH_STREAMING=ON`,existing zlib>=1.3.1);the default SDK's explicit
-unavailable-capability behavior is separately tested.
+## Reproduction and continuation
+
+Use an already-built intended binding profile on PYTHONPATH and an absolute
+GIG_ITCH_FIXTURE path. The full378cohort requires the existing source-enabled SDK
+profile;default-SDK unavailable behavior is separately qualified.
 
 ```bash
 <venv>/bin/python terminal/tests/run_no_launch_suite.py
 <venv>/bin/python terminal/tests/check_itch_product_contract.py
-<venv>/bin/python -m unittest terminal.stocks.test_xbrl_types terminal.stocks.test_xbrl_tool
+<venv>/bin/python -m unittest terminal.stocks.test_inline_set terminal.stocks.test_xbrl_dimensions
 ```
 
-GNU sanitizer preload/options follow the existing harness and manifest. These
-commands are offline developer checks,not launcher/deployment instructions.
-Private XBRL supplied-DTS and ITCH continue-source commands are documented in
-XBRL_NUMERIC_PROFILE.md and ITCH_SOURCE_PRODUCT.md. They require trusted explicit
-input hashes and grant no dataset or provider authorization.
-
-Next implementation:select the next bounded authoritative inline transformation/
-continuation or dimensional-relationship profile,add independent conformance
-fixtures and integrate its validated outputs with the existing vintage/statement
-contracts. Do not duplicate numeric facets,UTC guards,full-source SDK recovery,
-private product continuation or full-width provenance. Preserve no-launch,
-no-provider,no-trading and protected-branch restrictions.
+Existing GNU sanitizer preload/options remain as recorded in the manifests.
+The private offline inspect tool accepts the new document-set schema and explicit
+numeric/dimensional profile choices. It grants no source rights and fetches nothing.
+Do not launch GIG,servers,providers,deployment,trading,workflows or owner acceptance
+under this directive. Preserve current bounded profiles and add independent
+conformance fixtures before expanding semantic claims.

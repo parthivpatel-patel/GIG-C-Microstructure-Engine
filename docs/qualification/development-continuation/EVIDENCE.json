@@ -1,18 +1,18 @@
 {
-  "schema": "gig.development.evidence.index.v9",
-  "starting_source": "57e7bc2df3a7a11af3acc036b0231dae293bcb92",
-  "tested_application_source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
-  "current_evidence": "XBRL_SOURCE_CONTINUATION_EVIDENCE.json",
+  "schema": "gig.development.evidence.index.v10",
+  "starting_source": "a2841e6e0e59c393bb26182a6b87156800e4686a",
+  "tested_application_source": "3436ff56a3e223cad192223062c83d5a11da8282",
+  "current_evidence": "INLINE_DRS_EVIDENCE.json",
   "current_evidence_receipt": {
-    "path": "docs/qualification/development-continuation/XBRL_SOURCE_CONTINUATION_EVIDENCE.json",
-    "bytes": 53143,
-    "sha256": "9d9a9c81185132846f7b776e6f887540770bb09881062dc4bf78b0f797a20a26"
+    "path": "docs/qualification/development-continuation/INLINE_DRS_EVIDENCE.json",
+    "bytes": 47270,
+    "sha256": "ca0a45648e68305e5eb4a60a832f3e72e88e4dcf07deaab9472f8e58fadc9e68"
   },
   "previous_index": {
-    "git_object": "57e7bc2df3a7a11af3acc036b0231dae293bcb92:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "ebbefbd16eadd663bcf7290f17e1859f849395e8ed01d17750aecc4460d87d52"
+    "git_object": "a2841e6e0e59c393bb26182a6b87156800e4686a:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "eddb412d1d631d1ede9d9a6ef0ff5ce13565e905329f6a5a244db2865ec9cea5"
   },
-  "full_current_gcc_release_ctest": 152,
+  "python_cases_each_of_five": 378,
   "focused_native_passed": [
     6,
     6,
@@ -22,9 +22,9 @@
     5
   ],
   "frozen_passed_each_of_six": 8,
-  "python_cases_each_of_five": 336,
   "frontend_cases": 161,
   "native_frontend_assertions": 35,
+  "xml_cases": 125,
   "requirements": {
     "COMPLETE": 34,
     "BLOCKED": 7,
@@ -37,7 +37,7 @@
   "final_documentation_commit": "Verify Git/remote;not self-embedded",
   "packaging_receipt": {
     "path": "docs/qualification/development-continuation/PACKAGE_CURRENT.json",
-    "bytes": 6338,
-    "sha256": "5a0ad562e62be85408a41b348a9d7332e71569da97c5736fa98c5a75fd240551"
+    "bytes": 6179,
+    "sha256": "a26c707263b730e80a0ccda01d65381fbe8097d44e057557790242bb6bfb25fa"
   }
 }

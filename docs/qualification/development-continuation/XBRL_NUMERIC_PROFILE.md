@@ -87,3 +87,6 @@ no fresh official-specification download or provider qualification is claimed.
 Tests are independently authored XML/value expectations,including original
 failing-before UTC/context defects,integer limits,facets,cycles,identity,
 permission,atomicity,budgets,CLI paths and original API compatibility.
+
+The later explicit NUMERIC_SIMPLE_CONTENT_V2 profile is described separately in
+XBRL_SIMPLE_CONTENT_V2.md. It does not silently widen V1 or assert full schema validity.

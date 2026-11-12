@@ -1,35 +1,30 @@
 {
   "schema": "gig.package.current_source.v6",
-  "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+  "source": "3436ff56a3e223cad192223062c83d5a11da8282",
   "clean_source_archive": true,
   "sdist": {
-    "path": "build/remaining-engineering/xbrl2-final-sdist/gig_microstructure-0.1.1.tar.gz",
-    "bytes": 7959610,
-    "sha256": "0b5962a85c1f993a49a0294902f2baa2c9b1bd967c40e91a67a12635ff255eba"
+    "path": "build/remaining-engineering/inline-qualified-sdist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 7990293,
+    "sha256": "0362940131265a115ac43a9296d0e327c7e6350822196bb8f71bd164644ac542"
   },
-  "sdist_members": 1266,
-  "tracked_archive_files_compared": 1265,
+  "sdist_members": 1274,
+  "tracked_archive_files_compared": 1273,
   "changed_runtime_files_compared": [
-    "CMakeLists.txt",
-    "python/bindings/itch_recovery.cpp",
-    "python/gig_microstructure/itch_recovery.py",
     "scripts/inspect_xbrl_instances.py",
-    "scripts/manage_itch_session.py",
-    "terminal/itch_product.py",
-    "terminal/stocks/test_xbrl_collection.py",
+    "terminal/stocks/inline_set.py",
+    "terminal/stocks/inline_xbrl.py",
+    "terminal/stocks/test_inline_set.py",
+    "terminal/stocks/test_xbrl_dimensions.py",
     "terminal/stocks/test_xbrl_instance.py",
     "terminal/stocks/test_xbrl_tool.py",
     "terminal/stocks/test_xbrl_types.py",
+    "terminal/stocks/xbrl_binding.py",
     "terminal/stocks/xbrl_collection.py",
+    "terminal/stocks/xbrl_dimensions.py",
     "terminal/stocks/xbrl_dts.py",
     "terminal/stocks/xbrl_instance.py",
     "terminal/stocks/xbrl_types.py",
-    "terminal/test_itch_source_product.py",
-    "terminal/tests/check_itch_product_contract.py",
-    "terminal/tests/run_no_launch_suite.py",
-    "terminal/web/src/itchSession.test.ts",
-    "terminal/web/src/itchSession.ts",
-    "tests/test_itch_durable_checkpoint.cpp"
+    "terminal/tests/run_no_launch_suite.py"
   ],
   "wheel_profiles": [
     {
@@ -48,39 +43,39 @@
         {
           "name": "consumer",
           "cases": 8,
-          "seconds": 0.615,
+          "seconds": 0.616,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-default-installed-consumer.log",
+            "path": "build/remaining-engineering/inline-qualified-default-installed-consumer.log",
             "bytes": 964,
-            "sha256": "de90ee9c17adf8bd76ef8e444499cc935a639e0fd2e4d77d58f07f61205d4e0a"
+            "sha256": "2ce93577826c55e4382e0b165c7355e858e983e1e96da55b9b677038a083aad3"
           }
         },
         {
           "name": "recovery",
           "cases": 55,
-          "seconds": 8.991,
+          "seconds": 17.207,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-default-installed-recovery.log",
-            "bytes": 154,
-            "sha256": "5bc1ff4709fc3f9d39265588a881e9d9863bba6d2cf64185228924ce53d30022"
+            "path": "build/remaining-engineering/inline-qualified-default-installed-recovery.log",
+            "bytes": 155,
+            "sha256": "906bbf87943eb4dad2411446d4bc0f861216b219dd2ae1f0731c2e52728b15dd"
           }
         },
         {
           "name": "xml",
-          "cases": 83,
-          "seconds": 0.415,
+          "cases": 125,
+          "seconds": 1.183,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-default-installed-xml.log",
-            "bytes": 182,
-            "sha256": "a90b40cb5e0d8c4ebf6c26c035e9abb59db2b4bb5a3aa4e47eeda21f62df7eb9"
+            "path": "build/remaining-engineering/inline-qualified-default-installed-xml.log",
+            "bytes": 225,
+            "sha256": "645fdfa049e8d75d26d212ff0ea9f44ed90a7dfb819524f42404f1cbec086c30"
           }
         },
         {
           "name": "contract",
           "cases": null,
-          "seconds": 0.318,
+          "seconds": 0.465,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-default-installed-contract.log",
+            "path": "build/remaining-engineering/inline-qualified-default-installed-contract.log",
             "bytes": 148,
             "sha256": "49bac116ba0bd5bfa5f99e91e11ea37d222f44744b7030fec23df893dd5e8bd0"
           }
@@ -116,39 +111,39 @@
         {
           "name": "consumer",
           "cases": 8,
-          "seconds": 0.616,
+          "seconds": 1.05,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-source-installed-consumer.log",
+            "path": "build/remaining-engineering/inline-qualified-source-installed-consumer.log",
             "bytes": 964,
-            "sha256": "8aec57cb9b5412f6d1f067b462662ee1e27baaa7361b32129174e75fab29721f"
+            "sha256": "82b87591992b65fdf646672c11d1da1b0147aae850df76643e308531de0a3b48"
           }
         },
         {
           "name": "recovery",
           "cases": 66,
-          "seconds": 9.297,
+          "seconds": 9.906,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-source-installed-recovery.log",
+            "path": "build/remaining-engineering/inline-qualified-source-installed-recovery.log",
             "bytes": 165,
-            "sha256": "17e6310e2d8a2d4d6d9e534f7f45ca1b79fc33d40fbe9e73c583dd7191c4597e"
+            "sha256": "4d4dc6f2571949471f4e7dbb41f7bd9bd2adbe21a610d5c28a61ad4c1b5f666b"
           }
         },
         {
           "name": "xml",
-          "cases": 83,
-          "seconds": 0.415,
+          "cases": 125,
+          "seconds": 0.866,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-source-installed-xml.log",
-            "bytes": 182,
-            "sha256": "8aaf3e02039317a9df87613279b7bdfa82d8e215320e93969fdc8144d2533a0f"
+            "path": "build/remaining-engineering/inline-qualified-source-installed-xml.log",
+            "bytes": 225,
+            "sha256": "13574ee70269b5ee96f6d25e44b9c6773c28566fd9dd9c8f03e874498d6fcb9b"
           }
         },
         {
           "name": "contract",
           "cases": null,
-          "seconds": 0.315,
+          "seconds": 0.368,
           "receipt": {
-            "path": "build/remaining-engineering/xbrl2-final-source-installed-contract.log",
+            "path": "build/remaining-engineering/inline-qualified-source-installed-contract.log",
             "bytes": 148,
             "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
           }
@@ -173,7 +168,7 @@
   "tests_use_extracted_source": true,
   "no_index_no_dependencies": true,
   "default_disabled_capability": {
-    "path": "build/remaining-engineering/xbrl2-final-default-capability.log",
+    "path": "build/remaining-engineering/inline-qualified-default-capability.log",
     "bytes": 29,
     "sha256": "35eff951006bf94903bf42d9f0973dd34782ba8f0bf7ffce915788ad4a997cb8"
   }

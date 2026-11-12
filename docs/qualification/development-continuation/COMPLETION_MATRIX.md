@@ -1,6 +1,6 @@
 # GIG development completion matrix — November 12, 2026
 
-Tested runtime `f7c1e0df2fb95e48f84752de51fc396daf0518f8`;branch `development/gig-ui-redesign`.
+Tested runtime `3436ff56a3e223cad192223062c83d5a11da8282`;branch development/gig-ui-redesign.
 
 50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.
 
@@ -8,7 +8,7 @@ Tested runtime `f7c1e0df2fb95e48f84752de51fc396daf0518f8`;branch `development/gi
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
-Current source-bound evidence:XBRL_SOURCE_CONTINUATION_EVIDENCE.json. SEC02/REL02/UI10 have new implementation/regressions;no external qualification row was promoted.
+Current evidence:INLINE_DRS_EVIDENCE.json. SEC02 has concrete new profiles/integration;no blocked requirement was promoted.
 
 |ID|Status|Requirement|
 |---|---|---|
@@ -69,7 +69,7 @@ C++20 typed order book,identity,FIFO and exact arithmetic
 
 Source: `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/analytics/exact.hpp`.
 
-Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
+Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
 
 Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.
 
@@ -83,7 +83,7 @@ ITCH framing,decoding,context and synthetic L3 reconstruction
 
 Source: `src/itch/binary_file.cpp`, `src/itch/decoder.cpp`, `src/itch/context.cpp`, `src/itch/reconstruction.cpp`.
 
-Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
+Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
 
 Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.
 
@@ -97,7 +97,7 @@ Python/native integration and native-backed browser
 
 Source: `python/gig_microstructure/__init__.py`, `terminal/server/engine.py`, `terminal/server/analysis.py`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`.
 
-Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
+Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
 
 NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation. Optional streaming SDK now exposes the existing C++ full-source coordinator;default dependency-compatible SDK rejects that capability explicitly.
 
@@ -111,7 +111,7 @@ Deterministic replay,journal and recovery contracts
 
 Source: `src/replay/replay.cpp`, `terminal/server/engine.py`.
 
-Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
+Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
 
 Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.
 
@@ -429,19 +429,19 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Complete historical financial statements and point-in-time source history
 
-Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`.
 
-Evidence: 83authored XML cases,including4failing-before UTC/context/unit regressions,17numeric-type/facet cases and3new supplied-DTS CLI cases;included in336per5binding profiles and installed default/source-enabled wheel checks. Source-byte provenance and eight native identities preserved.
+Evidence: 125authored XBRL cases,42more than baseline83;included in378per5binding profiles and125installed/extracted-source cases perSDKvariant. Original plain-profile rejections retained. Typed mixed-content order collision reproduced/repaired under versionedV3 context semantics. Native8identities and raw source SHA unchanged.
 
-Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched. New explicit NUMERIC_VALUE_FACETS_V1 resolves supported numeric bases/simple restrictions,checks exact value/range/digit facets and known units,retains type/document/fact lineage and rejects unsupported selected types atomically. Existing CLI now accepts supplied-DTS batches. UTC-normalized filing-date guards preserve equivalent cutoff eligibility;significant structural qualifier text rejects. Global schema/statement validation remains false.
+Explicit bounded inline1.1document sets now process ordered passive XHTML text,cross-document nonNumeric continuation chains,exclusions,two narrow2015numeric transforms,shared contexts/units and exact source/receipt/fact lineage. Distinct schemas prevent derived set hashes being mistaken for originals. Optional NUMERIC_SIMPLE_CONTENT_V2 handles bounded numeric complex simple-content derivation without altering V1 admission. Explicit single-role/direct-positive/closed-hypercube dimensional corroboration handles supplied axes/domains/members/defaults with cycle checks;defaulted facts remain excluded from consolidated selection. Derived dimensional schemas/coverage guards prevent old-code or missing-policy downgrade. All pathways integrate atomic vintage batches and the existing private offline CLI;global complete schema/DRS/statements remain false.
 
-Disposition: Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.
+Disposition: The stated bounded profiles and working offline integration are implemented and verified. Full inline/DRS/schema/effective-network/statement and read-only company-v2/frontend integration remain PARTIAL;no complete financial statements or observed-source coverage claimed.
 
-Next action: Next engineering:bounded authoritative inline transformations/continuations,complex schema/DRS and dimensional relationships,effective relationship precedence/calculation/statement mapping and v2 integration. Do not repeat implemented numeric facets,DTS CLI or UTC repair.
+Next action: Next:authoritative effective presentation/calculation and statement-mapping profile or expanded inline/DRS conformance,then versioned read-only company-v2/frontend integration. Do not duplicate implemented continuations/numeric/simple-content/closed-cube profiles or bypass their scope guards.
 
 Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
 
-Remaining implementation or qualification: Full complex/custom schema construction,inline transformation/continuation/tuple profiles,DRS/hypercube/default/typed-domain relationships,presentation/calculation precedence,complete statement and v2 integration,comprehensive lawful source/vintage corpus and observed verification remain incomplete.
+Remaining implementation or qualification: Full transform registry/named-target/tuple/escaped-HTML support;open/negative/multiple-role or assignment DRS,primary inheritance,targetRole/usable/prohibition precedence,typed domains;general complex content/attributes/schema construction;effective presentation/calculation;complete statement/extension mapping and new company-v2/browser integration;legitimate broad source/vintage corpus and provider qualification.
 
 ## SEC03 — BLOCKED
 
@@ -559,7 +559,7 @@ Official-contract Kraken cryptocurrency L2 and native/product integration
 
 Source: `terminal/providers/kraken.py`, `terminal/providers/supervisor.py`, `terminal/providers/test_recovery_hardening.py`, `terminal/providers/test_differential.py`, `terminal/server/engine.py`, `terminal/web/src/OrderBook.tsx`, `terminal/l2_research.py`.
 
-Evidence: Existing offline Kraken cases remain in current336per5profiles. No fresh documentation/provider request;previous CONNECT403 and unchanged restricted policy remain explicit.
+Evidence: Existing offline Kraken fixtures remain in378per5profiles;prior documentation CONNECT403/unchanged restricted policy,no new request or feed connection. Provisional.
 
 Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.
 
@@ -637,7 +637,7 @@ Crash-safe hot live/L3 recovery and hardware durability guarantees
 
 Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`, `terminal/test_itch_source_product.py`.
 
-Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json. New11source-product tests cover actual plain/gzip C++ coordinator,CRC/prefix/generation/position/resource refusal,idempotency,revision2lineage,explicit migration and immutable separate-process CLI restart.
+Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json. Existing source-product recovery/fault/restart cases rerun unchanged;no new unsupported source contract invented.
 
 Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration.
 
