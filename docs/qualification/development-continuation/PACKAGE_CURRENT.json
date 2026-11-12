@@ -1,60 +1,67 @@
 {
-  "schema": "gig.package.current_source.v2",
-  "source": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
+  "schema": "gig.package.current_source.v3",
+  "source": "a3640d7fb59572c5179dfc49de1879f2d537763a",
   "clean_source_archive": true,
   "wheel_built_from_this_sdist": true,
   "sdist": {
-    "path": "build/remaining-engineering/durable-clean-dist/gig_microstructure-0.1.1.tar.gz",
-    "bytes": 7912197,
-    "sha256": "99c7b5fe6b58243b9186f4b98388e608e46da96be7872c93adc7d98d343c03fe"
+    "path": "build/remaining-engineering/product-final-dist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 7930131,
+    "sha256": "9be9a49bd6e4629d729c73576b9fc2622f5cfe177f95d3be49387cbbfa608aad"
   },
   "wheel": {
-    "path": "build/remaining-engineering/durable-clean-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-    "bytes": 657679,
-    "sha256": "d2910e38bb16d8e2de423dee0efce745d7e74dbd4c0a6152d399ef0d89a1324a"
+    "path": "build/remaining-engineering/product-final-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+    "bytes": 666477,
+    "sha256": "7bbc798bf0e9b285efb028cba715c313598b3a312ad2f88e8714d30d9c62575a"
   },
-  "sdist_members": 1246,
+  "sdist_members": 1256,
   "wheel_members": 22,
-  "runtime_entries_compared": 18,
+  "runtime_entries_compared": 19,
   "runtime_entries": [
-    "CMakeLists.txt",
-    "include/gig/itch/durable_checkpoint.hpp",
-    "include/gig/itch/source_recovery.hpp",
     "python/bindings/itch_recovery.cpp",
-    "python/bindings/module.cpp",
     "python/gig_microstructure/itch_recovery.py",
-    "src/itch/hot_checkpoint.cpp",
-    "src/itch/hot_codec.cpp",
-    "src/itch/hot_codec_fields.hpp",
-    "src/itch/source_recovery.cpp",
+    "scripts/manage_itch_session.py",
+    "terminal/itch_product.py",
     "terminal/itch_recovery.py",
-    "terminal/stocks/test_xbrl_dts.py",
-    "terminal/stocks/xbrl_dts.py",
-    "terminal/test_itch_durable_recovery.py",
+    "terminal/server/app.py",
+    "terminal/server/engine.py",
+    "terminal/stocks/test_xbrl_instance.py",
+    "terminal/stocks/xbrl_instance.py",
+    "terminal/test_itch_product.py",
+    "terminal/tests/check_itch_product_contract.py",
     "terminal/tests/run_no_launch_suite.py",
+    "terminal/web/package.json",
+    "terminal/web/src/App.tsx",
+    "terminal/web/src/contracts.ts",
+    "terminal/web/src/itchSession.test.ts",
+    "terminal/web/src/itchSession.ts",
     "tests/test_itch_durable_checkpoint.cpp",
-    "tests/test_itch_durable_python.py",
-    "tests/test_itch_source_recovery.cpp"
+    "tests/test_itch_product_python.py"
   ],
   "installed_sdk_cases": 8,
-  "installed_recovery_cases": 37,
+  "installed_recovery_cases": 54,
+  "installed_contract_assertions": 28,
   "installed_tests_use_extracted_source": true,
   "no_index_no_dependencies": true,
   "private_payloads": false,
-  "scope": "Clean runtime checkpoint1f07e43. Final documentation closure is later and not part of this artifact. No artifact release or publication.",
+  "scope": "Verified clean a3640d7 runtime;not a release or owner deployment. Documentation closure is separate.",
   "build_receipt": {
-    "path": "build/remaining-engineering/durable-clean-wheel-build.log",
-    "bytes": 6015,
-    "sha256": "8fb65191b83ec9eb6f6c11ddec179961036905dc70243aae462db1086b31defa"
+    "path": "build/remaining-engineering/product-final-package-build.log",
+    "bytes": 6178,
+    "sha256": "6f5614c0dcd3a5502cfad99fd9b4edf75619dc454cdc06fb2db11f69c3de7ae7"
   },
   "consumer_receipt": {
-    "path": "build/remaining-engineering/durable-clean-wheel-consumer.log",
+    "path": "build/remaining-engineering/product-final-installed-consumer.log",
     "bytes": 964,
-    "sha256": "2708b3e8e70c8cca991d18f3089c3841ccec5bfc9abf40d60c2ab9562a3cd144"
+    "sha256": "5804d58278236bc0d21cb03fa2265a4d61883451696f86b4abb90b4002df8d96"
   },
   "recovery_receipt": {
-    "path": "build/remaining-engineering/durable-clean-wheel-recovery.log",
-    "bytes": 136,
-    "sha256": "60bf365f8023d0452d4191ba0f3b8239a0df0a0e6c118db965e3100fc7fa3531"
+    "path": "build/remaining-engineering/product-final-installed-recovery.log",
+    "bytes": 153,
+    "sha256": "c7e2f0e440d64299264a3102eb171369cb52bb507fc69602da39801a0667ad7d"
+  },
+  "contract_receipt": {
+    "path": "build/remaining-engineering/product-final-installed-contract.log",
+    "bytes": 121,
+    "sha256": "f31612e5c9a6d5613722a23c21694499ea342d96337ce74bd94549ad875d31c2"
   }
 }
