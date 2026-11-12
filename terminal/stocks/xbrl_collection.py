@@ -25,9 +25,32 @@ class FilingCollection:
    if type(entry)is not dict or set(entry)!={'raw','manifest','concepts'}or type(entry['raw'])is not bytes:raise XBRLError('xbrl_batch_contract')
    size+=len(entry['raw'])
   if size>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
-  candidate=dict(self._filings);sizes={a:len(canonical(v))for a,v in candidate.items()}
+  values=[parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed)for entry in entries]
+  return self._commit_parsed(values)
+ def ingest_dts_batch(self,entries):
+  # New explicit contract;the original strict batch keys and behavior stay intact.
+  from .xbrl_dts import discover
+  from .xbrl_binding import bind_declarations
+  if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
+  total=0
   for entry in entries:
-   value=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=value['source']
+   if type(entry)is not dict or set(entry)!={'raw','manifest','concepts','instance_uri','documents'}or type(entry['raw'])is not bytes or type(entry['documents'])is not list or len(entry['documents'])>16:raise XBRLError('xbrl_dts_batch_contract')
+   total+=len(entry['raw'])
+   for doc in entry['documents']:
+    if type(doc)is not dict or type(doc.get('raw'))is not bytes:raise XBRLError('xbrl_dts_batch_contract')
+    total+=len(doc['raw'])
+  if total>MAX_BATCH_BYTES:raise XBRLError('xbrl_dts_batch_byte_budget')
+  values=[]
+  for entry in entries:
+   parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+   if source['origin']=='OBSERVED_OFFICIAL_RESPONSE'and entry['instance_uri']!=source['source_url']:raise XBRLError('dts_binding_source_uri')
+   graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=self.allow_observed,permission_reference=entry['manifest']['permission_reference'])
+   values.append(bind_declarations(parsed,graph))
+  return self._commit_parsed(values)
+ def _commit_parsed(self,values):
+  candidate=dict(self._filings);sizes={a:len(canonical(v))for a,v in candidate.items()}
+  for value in values:
+   source=value['source']
    if source['issuer_cik']!=self.cik or source['origin']!=self.origin:raise XBRLError('xbrl_collection_source_scope')
    accession=source['accession']
    if accession in candidate and candidate[accession]!=value:raise XBRLError('xbrl_accession_content_conflict')

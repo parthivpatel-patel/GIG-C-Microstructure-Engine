@@ -278,5 +278,5 @@ def selected_financials(parsed):
   for rows in collection.values():
    for row in rows:
     key=(row['concept'],row['start'],row['end'],row['unit']);ids=refs[key];row['source_xml_fact_ids']=ids;row['source_xbrl_concept']=concept_names[key];row['source_instance_sha256']=source['source_sha256'];row['source_fact_id']=digest({k:v for k,v in row.items()if k!='source_fact_id'})
- result['xbrl_coverage']={'excluded':skipped,'instance_sha256':parsed['canonical_sha256'],'completeness':parsed['completeness'],'filing_fiscal_metadata':'No fiscal-year/quarter inferred from calendar dates;reported context start/end and duration remain authoritative','original_received_at':source['received_at']}
+ result['xbrl_coverage']={'dts_corroboration':parsed.get('dts_corroboration'),'excluded':skipped,'instance_sha256':parsed['canonical_sha256'],'completeness':parsed['completeness'],'filing_fiscal_metadata':'No fiscal-year/quarter inferred from calendar dates;reported context start/end and duration remain authoritative','original_received_at':source['received_at']}
  return result
