@@ -18,3 +18,6 @@ test('Replay progress describes only the available continuation,not missing hist
  assert.equal(replayProgress(state({position:11,replay_min_position:9})),100);
  assert.equal(replayProgress(state({position:0,event_count:0})),0);
 });
+test('A restored checkpoint without a replayable suffix has an empty progress range',()=>{
+ assert.equal(replayProgress(state({position:10,event_count:10,replay_min_position:10})),0);
+});

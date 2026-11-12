@@ -20,5 +20,5 @@ export function replayMinimum(state:TerminalState):number {
 
 export function replayProgress(state:TerminalState):number {
  const minimum=replayMinimum(state);
- return state.event_count>minimum?(state.position-minimum)/(state.event_count-minimum)*100:state.event_count?100:0;
+ return state.event_count>minimum?(state.position-minimum)/(state.event_count-minimum)*100:0;
 }
