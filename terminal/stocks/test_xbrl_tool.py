@@ -68,3 +68,25 @@ class XBRLTool(unittest.TestCase):
    root=Path(directory);path,doc=self.dts_fixture(root);doc['entries'][0]['documents'][0]['sha256']='0'*64;path.write_text(json.dumps(doc));stream=io.StringIO();output=root/'never.json'
    with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(output)]),2)
    self.assertFalse(output.exists());self.assertFalse(json.loads(stream.getvalue())['raw_source_retained']);self.assertNotIn('123.4500',stream.getvalue())
+ def inline_set_fixture(self,root):
+  from .test_inline_set import batch
+  from .xbrl_types import PROFILE
+  source=batch();documents=[]
+  for index,document in enumerate(source['documents']):
+   name=str(index)+'.xhtml';(root/name).write_bytes(document['raw']);documents.append({'path':name,'uri':document['uri'],'manifest':document['manifest']})
+  taxonomy=source['taxonomy_documents'][0];(root/'taxonomy.xsd').write_bytes(taxonomy['raw']);entry={'documents':documents,'taxonomy_documents':[{'path':'taxonomy.xsd','uri':taxonomy['uri'],'sha256':taxonomy['sha256']}],'gaap_namespace':NS};value={'schema':'gig.sec.xbrl.input_inline_set_batch.v1','issuer_cik':'0000320193','origin':'HISTORICAL_SYNTHETIC','numeric_profile':PROFILE,'entries':[entry]};path=root/'batch.json';path.write_text(json.dumps(value));return path,value
+ def test_inline_document_set_cli_has_actual_vintage_and_source_attribution(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);path,value=self.inline_set_fixture(root)
+   with patch('socket.socket.connect',side_effect=AssertionError('NO_NETWORK')):summary,result=inspect(path,EARLY)
+   self.assertEqual(summary['supplied_inline_documents'],2);self.assertEqual(summary['selected_facts'],1);self.assertEqual(result['history']['revenue'][0]['value'],'1234.50');self.assertIn('source_document_set_sha256',result['history']['revenue'][0]);self.assertFalse(summary['complete_statements_or_history'])
+   stream=io.StringIO()
+   with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(root/'out.json')]),0)
+   self.assertEqual(json.loads((root/'out.json').read_text()),result);self.assertEqual((root/'out.json').stat().st_mode&0o777,0o600)
+ def test_inline_document_set_cli_rejects_paths_bad_hashes_and_no_partial_output(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);path,value=self.inline_set_fixture(root);value['entries'][0]['documents'][1]['path']='../outside.xhtml';path.write_text(json.dumps(value))
+   with self.assertRaises(ValueError):inspect(path,EARLY)
+   path,value=self.inline_set_fixture(root);value['entries'][0]['documents'][1]['manifest']['source_sha256']='0'*64;path.write_text(json.dumps(value));stream=io.StringIO()
+   with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(root/'never.json')]),2)
+   self.assertFalse((root/'never.json').exists());self.assertNotIn('1234.50',stream.getvalue())

@@ -9,8 +9,8 @@ from .xbrl_instance import X,L,I,MAX_BYTES,MAX_FACTS,Node,tag,parse_xml,qname,va
 IX='http://www.xbrl.org/2013/inlineXBRL';HTML='http://www.w3.org/1999/xhtml'
 MAX_OUTPUT_BYTES=8*1024*1024
 
-def transformed(text,scale,sign):
- if type(scale)is not str or not re.fullmatch('[+-]?[0-9]{1,2}',scale)or abs(int(scale))>6 or sign not in(None,'-'):raise XBRLError('inline_numeric_transform_profile')
+def transformed(text,scale,sign,*,max_scale=6):
+ if type(scale)is not str or not re.fullmatch('[+-]?[0-9]{1,2}',scale)or abs(int(scale))>max_scale or sign not in(None,'-'):raise XBRLError('inline_numeric_transform_profile')
  value=text.strip()
  if not re.fullmatch(r'[+-]?[0-9]+(?:\.[0-9]+)?',value)or len(value)>64:raise XBRLError('inline_plain_numeric_profile')
  number=Decimal(value);negative,digits,exponent=number.as_tuple();exponent+=int(scale)

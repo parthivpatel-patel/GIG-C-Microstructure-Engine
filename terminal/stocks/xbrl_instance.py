@@ -26,7 +26,7 @@ def identifier(v):
  return v
 @dataclass(slots=True)
 class Node:
- name:str;attrs:dict;ns:tuple;children:list=field(default_factory=list);parts:list=field(default_factory=list);length:int=0
+ name:str;attrs:dict;ns:tuple;children:list=field(default_factory=list);parts:list=field(default_factory=list);length:int=0;content:list=field(default_factory=list)
  def text(self):return ''.join(self.parts)
 
 def parse_xml(raw):
@@ -55,7 +55,7 @@ def parse_xml(raw):
   if nodes>30000 or len(stack)>=32 or len(attrs)>24 or any(len(k)>640 or len(v)>1024 for k,v in attrs.items()):raise XBRLError('xbrl_structure_budget')
   if value.startswith('http://www.w3.org/2001/XInclude}'):raise XBRLError('xbrl_xinclude_disabled')
   n=Node(name(value),{name(k):v for k,v in attrs.items()},snapshot)
-  if stack:stack[-1].children.append(n)
+  if stack:stack[-1].children.append(n);stack[-1].content.append(n)
   else:roots.append(n)
   stack.append(n)
  def text(value):
@@ -64,7 +64,7 @@ def parse_xml(raw):
   if len(stack)==1 and not value.strip():return
   n.length+=len(value)
   if n.length>16384:raise XBRLError('xbrl_text_budget')
-  n.parts.append(value)
+  n.parts.append(value);n.content.append(value)
  parser.StartNamespaceDeclHandler=namespace;parser.EndNamespaceDeclHandler=end_namespace;parser.StartElementHandler=start;parser.EndElementHandler=lambda _:stack.pop();parser.CharacterDataHandler=text
  parser.StartDoctypeDeclHandler=reject;parser.EntityDeclHandler=reject;parser.ExternalEntityRefHandler=reject;parser.ProcessingInstructionHandler=reject;parser.SetParamEntityParsing(expat.XML_PARAM_ENTITY_PARSING_NEVER)
  def declaration(version,encoding,standalone):
@@ -90,7 +90,17 @@ def one(node,value):
  values=children(node,value)
  if len(values)!=1:raise XBRLError('xbrl_required_structure')
  return values[0]
-def tree(node):return {'name':node.name,'attributes':node.attrs,'namespaces':{k or'':v for k,v in node.ns},'text':node.text(),'children':[tree(n)for n in node.children]}
+def tree(node):
+ result={'name':node.name,'attributes':node.attrs,'namespaces':{k or'':v for k,v in node.ns},'text':node.text(),'children':[tree(n)for n in node.children]}
+ if node.children and node.text():
+  order=[];index=0
+  for part in node.content:
+   if isinstance(part,str):
+    if order and type(order[-1])is str:order[-1]+=part
+    else:order.append(part)
+   else:order.append({'child':index});index+=1
+  result['content_order']=order
+ return result
 def structural_text(*nodes):
  if any(n.text().strip()for n in nodes):raise XBRLError('xbrl_structural_text_unsupported')
 
@@ -253,15 +263,19 @@ def _interpret_instance(root,source,concepts):
    conflicts.append({'semantic_key_sha256':digest(key),'source_fact_ids':[r['source_fact_id']for r in rows],'policy':'EXACT_VALUE_CONFLICT_NOT_ACCURACY_INTERVAL_INFERENCE'})
    for row in rows:row['admission']='CONFLICTED_EXACT_VALUES'
   else:duplicates+=len(rows)-1
- result={'schema':'gig.sec.xbrl.instance.v1','source':source,'concept_profile_sha256':digest(concepts),'contexts':contexts,'units':units,'facts':facts,'schema_references':schema_refs,'unsupported_nodes':unsupported,'conflicts':conflicts,'consistent_duplicate_facts':duplicates,'completeness':'BOUNDED_INSTANCE_PROFILE_NOT_COMPLETE_DTS_INLINE_PRESENTATION_OR_HISTORY','limits':{'input_bytes':MAX_BYTES,'facts':MAX_FACTS,'contexts':MAX_CONTEXTS,'units':MAX_UNITS},'context_semantic_profile':'DIM_CONTEXT_ELEMENT_V2','taxonomy_authority':'Explicit caller profile,not automatically verified DTS;unknown concepts preserved,never selected','origin':source['origin']}
+ result={'schema':'gig.sec.xbrl.instance.v1','source':source,'concept_profile_sha256':digest(concepts),'contexts':contexts,'units':units,'facts':facts,'schema_references':schema_refs,'unsupported_nodes':unsupported,'conflicts':conflicts,'consistent_duplicate_facts':duplicates,'completeness':'BOUNDED_INSTANCE_PROFILE_NOT_COMPLETE_DTS_INLINE_PRESENTATION_OR_HISTORY','limits':{'input_bytes':MAX_BYTES,'facts':MAX_FACTS,'contexts':MAX_CONTEXTS,'units':MAX_UNITS},'context_semantic_profile':'DIM_CONTEXT_ELEMENT_V3_ORDERED','taxonomy_authority':'Explicit caller profile,not automatically verified DTS;unknown concepts preserved,never selected','origin':source['origin']}
  if len(canonical(result))>8*1024*1024:raise XBRLError('xbrl_output_budget')
  result['canonical_sha256']=digest(result);return result
 
 def selected_financials(parsed):
- if type(parsed)is not dict or parsed.get('schema')!='gig.sec.xbrl.instance.v1'or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
+ if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
  core={k:v for k,v in parsed.items()if k!='canonical_sha256'}
  if digest(core)!=parsed.get('canonical_sha256'):raise XBRLError('xbrl_parsed_digest')
  source=parsed['source'];namespace={};refs={};concept_names={};skipped={'unverified_or_conflicting':0,'dimensioned_or_opaque':0,'nil':0,'unsupported_period':0,'unsupported_taxonomy_namespace':0}
+ document_set=parsed.get('document_set')if parsed['schema']=='gig.sec.xbrl.inline_set.v1'else None
+ if parsed['schema']=='gig.sec.xbrl.inline_set.v1'and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
+ if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
+ fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
  namespaces={r['concept'].split('}',1)[0]for r in parsed['facts']if r['admission']=='ADMITTED_PROFILE'and re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}[A-Za-z0-9_]+',r['concept'])}
  if len(namespaces)>1:raise XBRLError('xbrl_multiple_taxonomy_versions_for_selection')
  for row in parsed['facts']:
@@ -283,6 +297,14 @@ def selected_financials(parsed):
  for collection in (result['history'],result['revision_history']):
   for rows in collection.values():
    for row in rows:
-    key=(row['concept'],row['start'],row['end'],row['unit']);ids=refs[key];row['source_xml_fact_ids']=ids;row['source_xbrl_concept']=concept_names[key];row['source_instance_sha256']=source['source_sha256'];row['source_fact_id']=digest({k:v for k,v in row.items()if k!='source_fact_id'})
+    key=(row['concept'],row['start'],row['end'],row['unit']);ids=refs[key];row['source_xml_fact_ids']=ids;row['source_xbrl_concept']=concept_names[key];row['source_instance_sha256']=source['source_sha256']
+    if document_set is not None:
+     documents=set()
+     for id_ in ids:
+      fact=fact_lookup[id_];documents.update(s['document_sha256']for s in fact['inline_source_segments'])
+      documents.update(s['document_sha256']for s in document_set['resource_sources']if s['id']in(fact['context_ref'],fact['unit_ref']))
+     row['source_document_sha256s']=sorted(documents);row['source_document_set_sha256']=document_set['sha256'];row['source_instance_sha256']=next(iter(documents))if len(documents)==1 else None
+    row['source_fact_id']=digest({k:v for k,v in row.items()if k!='source_fact_id'})
  result['xbrl_coverage']={'dts_corroboration':parsed.get('dts_corroboration'),'excluded':skipped,'instance_sha256':parsed['canonical_sha256'],'completeness':parsed['completeness'],'filing_fiscal_metadata':'No fiscal-year/quarter inferred from calendar dates;reported context start/end and duration remain authoritative','original_received_at':source['received_at']}
+ if document_set is not None:result['xbrl_coverage']['document_set']={k:document_set[k]for k in('schema','sha256','documents','resource_sources','profile')}
  return result

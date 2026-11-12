@@ -50,6 +50,30 @@ class FilingCollection:
    bound=bind_declarations(parsed,graph)
    values.append(corroborate(bound,graph)if numeric_profile is not None else bound)
   return self._commit_parsed(values)
+ def ingest_inline_set_batch(self,entries,*,numeric_profile=None):
+  from .inline_set import parse_document_set
+  from .xbrl_dts import discover_inline_set
+  from .xbrl_binding import bind_declarations
+  from .xbrl_types import PROFILE,corroborate
+  if numeric_profile not in(None,PROFILE):raise XBRLError('xbrl_numeric_profile_unsupported')
+  if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
+  total=0
+  for entry in entries:
+   if type(entry)is not dict or set(entry)!={'documents','concepts','taxonomy_documents'}or type(entry['documents'])is not list or not 1<=len(entry['documents'])<=8 or entry['taxonomy_documents']is not None and(type(entry['taxonomy_documents'])is not list or len(entry['taxonomy_documents'])>16):raise XBRLError('xbrl_inline_set_batch_contract')
+   if numeric_profile is not None and entry['taxonomy_documents']is None:raise XBRLError('xbrl_numeric_profile_requires_dts')
+   for document in entry['documents']+(entry['taxonomy_documents']or[]):
+    if type(document)is not dict or type(document.get('raw'))is not bytes:raise XBRLError('xbrl_inline_set_batch_contract')
+    total+=len(document['raw'])
+  if total>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
+  values=[]
+  for entry in entries:
+   parsed=parse_document_set(entry['documents'],entry['concepts'],allow_observed=self.allow_observed)
+   if entry['taxonomy_documents']is not None:
+    references=[doc['manifest']['permission_reference']for doc in sorted(entry['documents'],key=lambda d:d['uri'])]
+    graph=discover_inline_set(parsed,entry['taxonomy_documents'],allow_observed=self.allow_observed,permission_references=references);parsed=bind_declarations(parsed,graph)
+    if numeric_profile is not None:parsed=corroborate(parsed,graph)
+   values.append(parsed)
+  return self._commit_parsed(values)
  def _commit_parsed(self,values):
   candidate=dict(self._filings);sizes={a:len(canonical(v))for a,v in candidate.items()}
   for value in values:

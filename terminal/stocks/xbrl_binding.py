@@ -8,9 +8,13 @@ import copy
 from .xbrl_instance import digest,canonical,XBRLError
 
 def bind_declarations(parsed,dts):
- if type(parsed)is not dict or parsed.get('schema')!='gig.sec.xbrl.instance.v1'or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256'):raise XBRLError('dts_binding_instance_identity')
- if type(dts)is not dict or dts.get('schema')!='gig.sec.xbrl.dts.v1'or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('dts_binding_graph_identity')
- if parsed['source']['source_sha256']!=dts['instance_sha256']or parsed['origin']!=dts['origin']or parsed['source']['origin']!=parsed['origin']:raise XBRLError('dts_binding_source_scope')
+ if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1')or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256'):raise XBRLError('dts_binding_instance_identity')
+ if type(dts)is not dict or dts.get('schema')not in('gig.sec.xbrl.dts.v1','gig.sec.xbrl.dts_set.v1')or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('dts_binding_graph_identity')
+ is_set=parsed['schema']=='gig.sec.xbrl.inline_set.v1'
+ if is_set:
+  if dts['schema']!='gig.sec.xbrl.dts_set.v1'or parsed['document_set']['sha256']!=dts['document_set_sha256']:raise XBRLError('dts_binding_source_scope')
+ elif dts['schema']!='gig.sec.xbrl.dts.v1'or parsed['source']['source_sha256']!=dts['instance_sha256']:raise XBRLError('dts_binding_source_scope')
+ if parsed['origin']!=dts['origin']or parsed['source']['origin']!=parsed['origin']:raise XBRLError('dts_binding_source_scope')
  selected=[];unverified=0
  for fact in parsed['facts']:
   if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):unverified+=1;continue

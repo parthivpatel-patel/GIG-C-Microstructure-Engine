@@ -87,3 +87,7 @@ class XBRLInstance(unittest.TestCase):
  def test_significant_unit_container_text_cannot_be_discarded(self):
   for raw in (xml().replace(b'<x:measure>iso:USD',b'unmodeled unit<x:measure>iso:USD'),xml(unit_extra='<x:unit id="PER"><x:divide>qualifier<x:unitNumerator><x:measure>iso:USD</x:measure></x:unitNumerator><x:unitDenominator><x:measure>x:shares</x:measure></x:unitDenominator></x:divide></x:unit>')):
    with self.assertRaisesRegex(XBRLError,'structural_text'):parsed(raw)
+ def test_opaque_typed_mixed_content_order_is_part_of_context_identity(self):
+  a=parsed(xml(context_extra='<x:segment><d:typedMember dimension="ext:DeskAxis"><ext:Desk>A<ext:Code/>B</ext:Desk></d:typedMember></x:segment>'))
+  b=parsed(xml(context_extra='<x:segment><d:typedMember dimension="ext:DeskAxis"><ext:Desk>AB<ext:Code/></ext:Desk></d:typedMember></x:segment>'))
+  self.assertNotEqual(a['contexts']['I']['semantic_sha256'],b['contexts']['I']['semantic_sha256'])

@@ -29,14 +29,7 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
  uri(instance_uri)
  if type(raw)is not bytes or not 1<=len(raw)<=2*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected_instance_sha256:raise XBRLError('dts_instance_digest_or_budget')
  if type(documents)is not list or len(documents)>16:raise XBRLError('dts_document_budget')
- supplied={};total=0
- for doc in documents:
-  if type(doc)is not dict or set(doc)!={'uri','raw','sha256'}or type(doc['raw'])is not bytes or not 1<=len(doc['raw'])<=2*1024*1024:raise XBRLError('dts_document_contract')
-  key=uri(doc['uri']);total+=len(doc['raw'])
-  if total>8*1024*1024:raise XBRLError('dts_total_byte_budget')
-  if hashlib.sha256(doc['raw']).hexdigest()!=doc['sha256']:raise XBRLError('dts_document_digest')
-  if key in supplied and supplied[key]!=doc:raise XBRLError('dts_document_conflict')
-  supplied[key]=doc
+ supplied=_supplied_documents(documents)
  root=parse_xml(raw);requests=deque();edges=[];schema_roots=[]
  for node in walk(root):
   if node.name==tag(L,'schemaRef'):
@@ -45,6 +38,23 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
    target=uri(urljoin(instance_uri,href));schema_roots.append(target);requests.append((target,0,None,'schema'))
    if len(schema_roots)>32:raise XBRLError('dts_schema_root_budget')
  if not schema_roots:raise XBRLError('dts_schema_reference_required')
+ return _discover_roots(schema_roots,supplied,{'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None})
+
+def _supplied_documents(documents):
+ if type(documents)is not list or len(documents)>16:raise XBRLError('dts_document_budget')
+ supplied={};total=0
+ for doc in documents:
+  if type(doc)is not dict or set(doc)!={'uri','raw','sha256'}or type(doc['raw'])is not bytes or not 1<=len(doc['raw'])<=2*1024*1024:raise XBRLError('dts_document_contract')
+  key=uri(doc['uri']);total+=len(doc['raw'])
+  if total>8*1024*1024:raise XBRLError('dts_total_byte_budget')
+  if hashlib.sha256(doc['raw']).hexdigest()!=doc['sha256']:raise XBRLError('dts_document_digest')
+  if key in supplied and supplied[key]!=doc:raise XBRLError('dts_document_conflict')
+  supplied[key]=doc
+ return supplied
+
+def _discover_roots(schema_roots,supplied,metadata):
+ requests=deque((target,0,None,'schema')for target in schema_roots)
+ edges=[]
  loaded={};unresolved=[];namespaces={};concepts={};locators={};linkbases=[];unsupported=[];types={}
  while requests:
   if len(edges)>4096:raise XBRLError('dts_edge_budget')
@@ -152,7 +162,22 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
   links=[n for n in networks if n['role']==role]
   if len(links)>1:
    for network in links:network['usable']=False;network['issues']=sorted(set(network['issues']+['ROLE_SPLIT_ACROSS_LINKS_UNSUPPORTED']))
- result={'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None}
+ result={**metadata,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False}
  if types:result['type_declarations']=types;result['type_declaration_profile']='NAMED_RESTRICTION_METADATA_V1'
  if len(canonical(result))>16*1024*1024:raise XBRLError('dts_output_budget')
  result['canonical_sha256']=digest(result);return result
+
+def discover_inline_set(parsed,documents,*,allow_observed=False,permission_references=None):
+ """Discover the parsed set's exact supplied reference union;never fabricate XML."""
+ if type(parsed)is not dict or parsed.get('schema')!='gig.sec.xbrl.inline_set.v1'or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256'):raise XBRLError('dts_set_identity')
+ source_set=parsed['document_set'];sources=source_set['documents'];origin=parsed['origin']
+ if source_set['sha256']!=digest(sources)or parsed['source']['source_sha256']!=source_set['sha256']:raise XBRLError('dts_set_source_scope')
+ if origin not in('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE')or type(allow_observed)is not bool:raise XBRLError('dts_origin')
+ if origin=='OBSERVED_OFFICIAL_RESPONSE':
+  if not allow_observed or type(permission_references)is not list or len(permission_references)!=len(sources):raise XBRLError('dts_observed_processing_not_approved')
+  for reference,source in zip(permission_references,sources):
+   if type(reference)is not str or not 1<=len(reference)<=256 or hashlib.sha256(reference.encode()).hexdigest()!=source['source']['permission_reference_sha256']:raise XBRLError('dts_observed_processing_not_approved')
+ roots=[uri(r['uri'])for r in source_set['schema_references']]
+ if not 1<=len(roots)<=32:raise XBRLError('dts_schema_reference_required')
+ supplied=_supplied_documents(documents)
+ return _discover_roots(roots,supplied,{'schema':'gig.sec.xbrl.dts_set.v1','origin':origin,'document_set_sha256':source_set['sha256'],'original_inline_documents':[{'uri':s['uri'],'source_sha256':s['source']['source_sha256']}for s in sources],'permission_reference_sha256s':[s['source']['permission_reference_sha256']for s in sources]})
