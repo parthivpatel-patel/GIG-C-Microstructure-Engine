@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --experimental-strip-types --test src/response.test.ts src/acceptanceContract.test.ts src/acceptanceFacts.test.ts src/acceptanceRequest.test.ts src/researchExport.test.ts src/historicalResearch.test.ts src/format.test.ts src/financial.test.ts src/marketPlot.test.ts src/marketStream.test.ts src/marketContract.test.ts src/marketDelta.test.ts src/ratioHistory.test.ts src/marketGeometry.test.ts src/modelSurface.test.ts src/directoryContract.test.ts src/historicalMarket.test.ts src/research3d.test.ts src/cameraMotion.test.ts src/tradeTape.test.ts src/tradeTapePanel.test.ts src/barValues.test.ts src/secHistory.test.ts src/barChart.test.ts src/bookPresentation.test.ts src/workstation.test.ts src/itchSession.test.ts"
+    "test": "node --experimental-strip-types --test src/response.test.ts src/acceptanceContract.test.ts src/acceptanceFacts.test.ts src/acceptanceRequest.test.ts src/researchExport.test.ts src/historicalResearch.test.ts src/format.test.ts src/financial.test.ts src/marketPlot.test.ts src/marketStream.test.ts src/marketContract.test.ts src/marketDelta.test.ts src/ratioHistory.test.ts src/marketGeometry.test.ts src/modelSurface.test.ts src/directoryContract.test.ts src/historicalMarket.test.ts src/research3d.test.ts src/cameraMotion.test.ts src/tradeTape.test.ts src/tradeTapePanel.test.ts src/barValues.test.ts src/secHistory.test.ts src/barChart.test.ts src/bookPresentation.test.ts src/workstation.test.ts src/itchSession.test.ts src/xbrlStatements.test.ts"
   },
   "dependencies": {
     "react": "19.1.1",

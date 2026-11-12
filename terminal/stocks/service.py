@@ -34,6 +34,10 @@ class StockWorkspace:
         from .alpaca_reference import AssetReference
         self.asset_reference=AssetReference(self)
         self.market_history_cache=OrderedDict();self.market_history_pending=0
+        self.xbrl_collections={}
+    def admit_xbrl_collection(self,symbol,collection):
+        from .xbrl_product import admit
+        return admit(self,symbol,collection)
     def resolve(self,ticker):
         if type(ticker) is not str:raise ValueError('invalid_symbol')
         if ticker in self.issuers:

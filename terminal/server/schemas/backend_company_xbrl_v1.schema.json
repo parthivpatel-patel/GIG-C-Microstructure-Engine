@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gig.backend.company_xbrl.v1",
+  "title": "Separate supplied-XBRL company statement extension;not companyfacts replacement",
+  "type": "object",
+  "required": ["schema","instrument","data_origin","read_only","provider_requested","statement_view","limitations","sha256"],
+  "properties": {
+    "schema": {"const":"gig.backend.company_xbrl.v1"},
+    "instrument": {"type":"object","required":["symbol","cik"],"properties":{"symbol":{"type":"string","maxLength":16},"cik":{"type":["string","null"]}}},
+    "data_origin":{"enum":["HISTORICAL_SYNTHETIC","OBSERVED_OFFICIAL_RESPONSE","UNAVAILABLE"]},
+    "read_only":{"const":true},"provider_requested":{"const":false},
+    "sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "limitations":{"type":"array","maxItems":16,"items":{"type":"string","maxLength":512}},
+    "statement_view":{"type":"object","required":["schema","issuer_cik","status","periods","source_filing","collection_sha256","sha256","complete_statements"],"properties":{"schema":{"const":"gig.sec.xbrl.statement_view.v1"},"complete_statements":{"const":false},"status":{"enum":["AVAILABLE","UNAVAILABLE","AMBIGUOUS"]},"periods":{"type":"array","maxItems":12}}}
+  },
+  "description":"Envelope schema only. Authoritative strict admission is in xbrl_product/xbrl_statements and browser validateXbrl/verifyXbrl. Hashes bind canonical content,not SEC authenticity."
+}

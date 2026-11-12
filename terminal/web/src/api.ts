@@ -64,3 +64,10 @@ export async function requestV2<T=unknown>(path:string,body?:unknown):Promise<T>
  return await decoded(await fetch(target,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:c.signal}),c.signal) as T;
  }finally{clearTimeout(timer)}
 }
+
+/** Separate cache-only supplied-XBRL view;no source acquisition or mutations. */
+export async function readXbrlStatements(symbol:string,at:string,role:string|null,form:string,signal:AbortSignal):Promise<unknown>{
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!at||at.length>40||(role!==null&&(!role||role.length>512))||!['10-K','10-Q'].includes(form))throw Error('Invalid XBRL statement query');
+ const q=new URLSearchParams({at,form});if(role!==null)q.set('role',role);
+ return readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/xbrl-statements?'+q,signal);
+}
