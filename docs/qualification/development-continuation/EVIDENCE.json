@@ -1,13 +1,17 @@
 {
-  "schema": "gig.development.continuation.evidence.v7",
-  "branch": "development/gig-ui-redesign",
-  "starting_source": "d2120bb6812d38f30c5fc529b5ddf1b179c08147",
-  "tested_runtime_source": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
-  "prior_evidence": {
-    "git_object": "d2120bb6812d38f30c5fc529b5ddf1b179c08147:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "24311a9ce1602645720310aa51586ff1b0d38f26f37c8b53d65b778a4a69349c"
+  "schema": "gig.development.evidence.index.v8",
+  "starting_source": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
+  "tested_application_source": "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
+  "current_evidence": "PRODUCT_SESSION_EVIDENCE.json",
+  "current_evidence_receipt": {
+    "path": "docs/qualification/development-continuation/PRODUCT_SESSION_EVIDENCE.json",
+    "bytes": 49291,
+    "sha256": "f7e8d5d7bc5d9954725316584f61e674e2043ca5d55a43e973ba282faa19c841"
   },
-  "current_evidence": "DURABLE_ITCH_EVIDENCE.json",
+  "previous_index": {
+    "git_object": "2eb38f4:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "50227d4db0d582a177b3447bd68f1c2327e8f055606c6fc0b71740bbde714385"
+  },
   "native_ctest_passed": [
     152,
     152,
@@ -16,8 +20,10 @@
     152,
     148
   ],
-  "python_cases_each_of_five": 273,
-  "all_eight_native_identities": "Executed and matched in each of six native profiles",
+  "python_cases_each_of_five": 301,
+  "frontend_cases": 160,
+  "native_frontend_assertions": 28,
+  "all_eight_native_identities": "Actually rerun and matched in each of six native profiles",
   "requirements": {
     "COMPLETE": 34,
     "BLOCKED": 7,
@@ -27,18 +33,10 @@
   "total_rows": 50,
   "development_complete": false,
   "no_application_or_provider_launch": true,
-  "final_documentation_commit": "Intentionally not self-embedded;verify Git/remote receipt",
-  "current_evidence_receipt": {
-    "path": "docs/qualification/development-continuation/DURABLE_ITCH_EVIDENCE.json",
-    "bytes": 23411,
-    "sha256": "175028f020248c454575a1df2465a2c63d2cae250042ca747063f93e261a2b94"
-  },
-  "packaging": {
-    "clean_source": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
-    "sdist_members": 1246,
-    "wheel_members": 22,
-    "runtime_entries_compared": 18,
-    "consumer_cases": 8,
-    "recovery_cases": 37
+  "final_documentation_commit": "Not self-embedded;verify Git/remote receipt",
+  "packaging_receipt": {
+    "path": "docs/qualification/development-continuation/PACKAGE_CURRENT.json",
+    "bytes": 4242,
+    "sha256": "187ab5ff2c5d23549a749b0907c927b7f7f1ab094bbfa6b97b5cd0900bd41da1"
   }
 }

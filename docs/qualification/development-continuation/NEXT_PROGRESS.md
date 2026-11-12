@@ -1,18 +1,11 @@
-# GIG continued development checkpoint — November 10, 2026
+# Current continuation pointer
 
-Starting remote source: `4cf522dcdfbee260409541f38a01b77b23f7db5c`;branch `development/gig-ui-redesign`. Tree initially clean. The matrix has 48 areas plus one historical A18/A19 decision row,not 49 distinct new implementation requirements.
-
-Implemented in this checkpoint: optional SQLite stream-control checkpoints atomically bound to accepted observation frames;private bounded recovery admission;legacy compatibility;intent-only explicit restart with new capture namespace and higher connection generation;source-ledger/checkpoint consistency checks;disk-fault rollback;no automatic connection or historical-to-live promotion. Existing storage permission gate remains mandatory and off by default. `GIG_ALPACA_RECOVER_CONTROL=1` additionally selects constructor-time intent restoration only;it never starts the worker.
-
-SEC repair: retained acceptance views reject conflicting same-accession filing metadata and conflicting same-ID facts,exclude fact/form/filing-date mismatches,retain amendment selection lineage and provide a reproducible selection hash. Original missing receipt timestamps remain null;complete XBRL and source-vintage claims remain open.
-
-Executed: 106 no-launch developer tests with existing Release bindings,0failures/errors/skips. Includes12new checkpoint and8new filing-vintage cases. Native source/expectations unchanged. No application,server,browser,provider,account,order,workflow or deployment started. Debug/sanitized broader validation and frontend admission/accessibility integration are next. The enclosing Git commit binds this checkpoint;do not treat this interim result as final qualification.
-
-
-Second source checkpoint: the published-history/handover derivation mismatch is reproduced and repaired. Control recovery now preserves retry exhaustion,commits failure counters before backoff,rejects unsafe counter exhaustion and fails closed on allocation faults. Corrupt checkpoints cannot be silently overwritten by later frames. Tests include abrupt subprocess exit with atomic ledger/control rollback. SEC frontend admission,abort propagation,exact cutoff arithmetic,lineage and accessible32-row pagination are integrated.
-
-Final source checks:115 no-launch Python tests each with existing Release/Debug/ASan+UBSan bindings,153 frontend checks,13 Python→TypeScript contract checks,3 packaging checks and TypeScript/production build pass. No final failures/errors/skips. No native compilation/hash rerun,application launch,provider,workflow or acceptance operation. Final matrix/resource/evidence refresh remains next. Prior106-case checkpoint and failed-before logs are retained as historical evidence,not current totals.
-
-Final recovery-memory checkpoint:control-only verification now streams the same coherent SQLite read snapshot rather than building all decoded observations. A256-record authored ledger above1MiB reproduced2,784,254B traced peak before repair;the repaired independent measurement is44,070B,with a512KiB regression ceiling. Existing recover() materialization/output remains unchanged. Final no-launch subset is116per binding environment,0failures/errors/skips. Full274-case future API/stock suite remains registered only. Final evidence/report closure is next;do not launch.
-
-Compatibility closure:the original4pure acceptance-vintage regressions are now included unchanged. Legacy accession/time-only helper calls retain their established conservative behavior;the v2 read-only API explicitly selects STRICT_FILING_METADATA_V1,and the frontend rejects legacy-profile responses. Final source cohort121per binding environment,153frontend tests,13cross-language checks and the production build pass. The earlier106/115/116counts above identify historical checkpoints,not final totals. The full API/stock registry is275;it was not executed.
+The older November10 ledger/filing checkpoints remain available in Git. The
+current tested implementation is `03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c`.
+Read ACTIVE_ENGINEERING_CHECKPOINT.md, REPORT.md, COMPLETION_MATRIX.json and
+PRODUCT_SESSION_EVIDENCE.json. Full typed ITCH product restoration, migration,
+exact source units and replay rejection recovery are implemented and verified.
+The next substantive package is bounded XBRL type/transform/statement integration,
+not another recovery-codec rewrite. No application/provider/acceptance launch is
+authorized by this continuation. Keep Kraken provisional and preserve protected
+branches. The final enclosing documentation SHA is obtained from Git/remote.

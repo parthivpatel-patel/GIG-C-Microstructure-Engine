@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v7",
+  "schema": "gig.development.completion.v8",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -14,7 +14,7 @@
         "src/book/order_book.cpp",
         "include/gig/analytics/exact.hpp"
       ],
-      "test_evidence": "Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.",
+      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
       "explanation": "Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -30,7 +30,7 @@
         "src/itch/context.cpp",
         "src/itch/reconstruction.cpp"
       ],
-      "test_evidence": "Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.",
+      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
       "explanation": "Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -45,8 +45,8 @@
         "terminal/server/engine.py",
         "terminal/server/analysis.py"
       ],
-      "test_evidence": "Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.",
-      "explanation": "NativeSession owns gig.Replay and calls C++ calculations;this is not a mock implementation. No native source/build input changes in this sprint.",
+      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
+      "explanation": "NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
       "work_class": "Implemented bounded development contract"
@@ -59,7 +59,7 @@
         "src/replay/replay.cpp",
         "terminal/server/engine.py"
       ],
-      "test_evidence": "Current six native CTest configurations passed(148/148/149 GCC;148/148/145 Clang),including eight unchanged independent frozen identities. Current175 guarded Python cases passed in five supported binding environments;SDK installed-wheel8consumer+19distinct recovery cases passed. No application or browser was launched.",
+      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
       "explanation": "Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -92,7 +92,7 @@
         "terminal/web/src/workstation.ts",
         "terminal/web/src/workstation.css"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline frontend and workstation browser checks;prior screenshot manifest",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline frontend and workstation browser checks;prior screenshot manifest Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "All12 destinations have dedicated compositions;legacy atlas-* selectors/storage identifiers remain technical compatibility keys.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -149,7 +149,7 @@
         "terminal/stocks/live.py",
         "terminal/web/src/TradeTapePanel.tsx"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "Shared bounded quote/trade observations,subscription controls,per-symbol health and source labels;offline verified,not live qualified. New progressive retained-tape view exposes exact reference/lineage values and unresolved outcomes;application browser interaction was not launched.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -191,7 +191,7 @@
         "terminal/web/src/App.tsx",
         "terminal/web/src/Landscape3D.tsx"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "Native retained depth,2D alternatives,camera controls and source restrictions;not invented depth.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -219,7 +219,7 @@
         "terminal/web/src/App.tsx",
         "terminal/server/engine.py"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -408,12 +408,14 @@
         "terminal/stocks/inline_xbrl.py",
         "terminal/stocks/xbrl_dts.py",
         "terminal/stocks/test_inline_xbrl.py",
-        "terminal/stocks/test_xbrl_dts.py"
+        "terminal/stocks/test_xbrl_dts.py",
+        "terminal/stocks/xbrl_binding.py",
+        "terminal/stocks/test_xbrl_binding.py"
       ],
-      "test_evidence": "49authored XML cases including malformed simple-XLink references;273guarded tests per5binding profiles. Original49fixture/instance/vintage/DTS behavior retained;no provider request.",
-      "explanation": "Existing filing batches/vintage selection now admit a bounded plain inline-XBRL1.1 profile with exact scaling/sign and original lexical/source lineage. Supplied-file DTS discovery binds source hashes,document kinds/import namespaces and missing references;simple presentation locators/order/cycles are supported. Unknown transforms/types/precedence remain explicit. No external URI is fetched.",
+      "test_evidence": "59authored XML tests pass,including8new DTS/vintage binding cases and2context-placement methods;included in final301per5binding profiles and59installed/extracted-source checks. Raw source hashes/native identities unchanged;affected semantic-context/fact hashes intentionally versioned DIM_CONTEXT_ELEMENT_V2.",
+      "explanation": "Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched.",
       "disposition": "Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.",
-      "action_now": "Complete the next explicitly bounded transformation/type/relationship profile with independent fixtures,then statement/API integration. Structural closure is not schema or accounting validation.",
+      "action_now": "Next engineering profile:bounded schema-type validation and authoritative inline transformation/continuation support with independent fixtures,then relationship/statement mapping and v2 integration. Complete XBRL engineering still exists;do not call it only an external blocker.",
       "work_class": "PARTIAL:bounded instance/filing-vintage infrastructure complete;full statement semantics,product integration and historical source coverage remain open",
       "completed_this_session": "DTS invalid/missing/empty/extended linkbaseRef type reproduced as falsely usable and repaired with exact simple-XLink admission. Previous bounded instance/inline/DTS/filing-vintage infrastructure preserved.",
       "remaining_implementation_or_qualification": "Full inline transformation/continuation/tuple/nested markup support,complete XML Schema/DTS custom-type and extension validation,equivalent/prohibited arc precedence across links,calculation relationships,complete statement assembly,v2/UI integration and authentic complete historical acquisition/receipt coverage remain missing.",
@@ -561,13 +563,13 @@
         "terminal/web/src/OrderBook.tsx",
         "terminal/l2_research.py"
       ],
-      "test_evidence": "62offline provider cases including10,000authored independent transitions;finite scientific JSON precision/CRC,one-worker concurrency,bounded retiring-worker fence,retry exhaustion and invalid jitter regressions;inside263guarded cases. No current official documentation or live payload received. Current273guarded cases per5binding profiles passed;source/provider gates and provisional Kraken status unchanged.",
+      "test_evidence": "Existing offline Kraken integrity/admin/differential fixtures included in final301per5profiles. Official documentation-only retrieval returned proxy CONNECT403;no retry/feed connection.",
       "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.",
       "disposition": "Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.",
       "completed_this_session": "Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.",
       "remaining_implementation_or_qualification": "Retrieve and verify the current official WebSocketv2 book/checksum/trade/status/session contract and applicable usage evidence;reconcile candidate rules and add source-versioned fixtures. Actual later private-provider and browser qualification remain unrun. Do not change the provisional flag before evidence exists.",
       "dependency": "Current official protocol/rights evidence;earlier CONNECT403 and enforced policy excluding Kraken docs/feed domains remain recorded. No blocked operation was retried and no proxy bypass attempted.",
-      "action_now": "Obtain an authorized official specification copy or permitted documentation-only access,then implement verified source-specific differences. Continue offline contracts;never infer L3 or IEX equity depth.",
+      "action_now": "Obtain permitted authoritative protocol/checksum documentation before expanding supported semantics or removing provisional status. Do not repeatedly retry a policy-blocked host.",
       "effort_estimate": "1\u20133engineer-days for a bounded documented source-contract reconciliation/test package once authoritative material is available;live/owner qualification separate.",
       "work_class": "PARTIAL candidate engineering;official-contract and observed qualification externally unverified"
     },
@@ -672,12 +674,16 @@
         "terminal/itch_recovery.py",
         "terminal/test_itch_durable_recovery.py",
         "tests/test_itch_durable_checkpoint.cpp",
-        "tests/test_itch_source_recovery.cpp"
+        "tests/test_itch_source_recovery.cpp",
+        "terminal/itch_product.py",
+        "terminal/test_itch_product.py",
+        "scripts/manage_itch_session.py",
+        "terminal/web/src/itchSession.ts"
       ],
-      "test_evidence": "Six full CTest profiles:152/152/153 GCC;152/152/148 Clang. Each ran363durable+163source checks,57decode/restore+63encode+67source allocation failpoints and all8frozen identities. Nine real-native Python/file/cross-process cases inside273guarded tests per5binding profiles.",
-      "explanation": "Bounded version1 deterministic full typed ITCH serialization now restores context,receipts,retired/match/lifecycle/cursor state and both native books/journals. Independently retained artifact/config/code/capture/generation admission;authored-empty and complete-seed hot profiles. Plain and complete-member gzip coordination verifies committed prefix receipts without applying them and applies only suffix events. Private immutable files survive tested local process interruption;no automatic application startup or provider activation.",
-      "disposition": "Bounded authored full-ITCH hot recovery and Python/private-file admission are implemented and offline verified. Full product/startup and observed/hardware qualification remain open;do not reimplement the codec.",
-      "action_now": "Integrate an explicit opt-in,fail-closed product-session selection policy using the completed SDK/files rather than replaying committed events. Continue remaining XBRL semantics. Keep target/provider qualification separate.",
+      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched. Product18tests include private immutable crash restart,cross-process,migration,candidate allocation/resource refusal,paused terminal state and actual replay-worker survival.",
+      "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim.",
+      "disposition": "Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.",
+      "action_now": "Do not duplicate codec/product integration. Any additional schema/source position migration needs an explicit supported contract and fixtures;observed/hardware guarantees require independently complete source and target fault evidence.",
       "work_class": "PARTIAL:bounded authored native/source hot recovery complete;full source/product/target scope remains open",
       "missing_implementation": [
         "Explicit product/startup policy for selecting persisted full-ITCH owners alongside existing NativeSession authored-native recovery",
@@ -686,7 +692,7 @@
       ],
       "completed_this_session": "Versioned field codec and Python native owner;checksums/external identity;full seeded hot state;57restore/63encode/67source actual PMR failure sweeps;bounded plain/gzip source/framer continuation;impossible empty-cursor repair reproduced against published source;immutable private publication,corrupt input,disk-full and actual cross-process exit/restart.",
       "remaining_implementation_or_qualification": "Bounded durable full-ITCH/seed/framer/gzip contracts are implemented. Automatic application startup selection/full-ITCH product-session integration remains unwired;no provider/observed data or target power-loss acceptance. This preserves the no-launch directive and existing startup behavior;it is not full operational completion.",
-      "dependency": "Product session selection/recovery policy and integration tests;observed initialization/source continuity and actual private-target/hardware evidence for empirical claims.",
+      "dependency": "For broader full hot-recovery claims:specified additional schema/source-position contracts,legitimate observed initialization/continuity evidence and actual target/hardware testing. Unknown migrations and partial/arbitrary compressed positions fail closed.",
       "effort_estimate": "Conditional planning range1\u20133engineer-days for narrowly scoped opt-in full-ITCH product-session wiring and its failure matrix;not a guarantee. Observed/source/hardware qualification depends on actual external evidence."
     },
     {
@@ -715,7 +721,7 @@
         "terminal/paper/alpaca.py",
         "terminal/stocks/private_iex.py"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend and211/274backend checks;prior fake-broker evidence retained",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend and211/274backend checks;prior fake-broker evidence retained Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "Incremental2MiB read,abort/cancel,strict mutations and default-disabled independent paper/live controls. No provider/account calls or orders in this task.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -798,7 +804,7 @@
         "terminal/web/src/Navigation.tsx",
         "terminal/web/src/cameraMotion.ts"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend/workstation browser checks;prior5690text-contrast evidence",
+      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline130frontend/workstation browser checks;prior5690text-contrast evidence Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
       "explanation": "Semantic controls,focus,contained table/navigation scrolling,comfortable text and responsive canvases implemented;no new visual redesign in this sprint.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -874,12 +880,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
+  "tested_application": "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "53e5892c58390d9a5bd935d7a40a452beb842497",
+  "previous_matrix_commit": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current durable native/Python/package evidence is in DURABLE_ITCH_EVIDENCE.json;prior source-bound evidence remains in Git. No app/provider/device qualification inferred.",
+  "evidence_policy": "Current product/native/Python/frontend/package evidence is PRODUCT_SESSION_EVIDENCE.json;all prior source-bound evidence remains in Git. No app/provider/device qualification inferred.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -887,9 +893,14 @@
     "20a63d90095cbd24b84215668dbae4c7c13b0d8f",
     "0c4196b2e0270dacfa07638c2c5d94f3de54cb49",
     "b997b85d7640045ceb0a42029dafc5b95a4c94b3",
-    "1f07e43c71e8db7377a1e16c6b88c049a6591b4f"
+    "1f07e43c71e8db7377a1e16c6b88c049a6591b4f",
+    "0014a19afe69679ed8eb23dc1b3a5e87e5b576be",
+    "4bff719ea6c527c1324689d521f36d21f6d09afb",
+    "a3640d7fb59572c5179dfc49de1879f2d537763a",
+    "f5c3f40375ff5dbaf6d123d29c981a127ad635b0",
+    "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c"
   ],
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "timezone": "America/New_York",
   "counts": {
     "COMPLETE": 34,
@@ -897,7 +908,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "d2120bb6812d38f30c5fc529b5ddf1b179c08147",
+  "starting_commit": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,
