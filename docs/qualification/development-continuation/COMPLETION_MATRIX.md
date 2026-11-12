@@ -1,6 +1,6 @@
 # GIG development completion matrix — November 12, 2026
 
-Tested runtime `3436ff56a3e223cad192223062c83d5a11da8282`;branch development/gig-ui-redesign.
+Tested runtime `21160c43ee3be7cf0e91e064acf9e20333636746`;branch development/gig-ui-redesign.
 
 50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.
 
@@ -8,7 +8,7 @@ Tested runtime `3436ff56a3e223cad192223062c83d5a11da8282`;branch development/gig
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
-Current evidence:INLINE_DRS_EVIDENCE.json. SEC02 has concrete new profiles/integration;no blocked requirement was promoted.
+Current evidence:EFFECTIVE_STATEMENT_EVIDENCE.json. SEC02 has concrete new effective relationships/statement/product integration;no blocked requirement was promoted.
 
 |ID|Status|Requirement|
 |---|---|---|
@@ -69,7 +69,7 @@ C++20 typed order book,identity,FIFO and exact arithmetic
 
 Source: `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/analytics/exact.hpp`.
 
-Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
+Evidence: 420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python→TypeScript XBRL cases/58assertions;35native→TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.
 
 Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.
 
@@ -83,7 +83,7 @@ ITCH framing,decoding,context and synthetic L3 reconstruction
 
 Source: `src/itch/binary_file.cpp`, `src/itch/decoder.cpp`, `src/itch/context.cpp`, `src/itch/reconstruction.cpp`.
 
-Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
+Evidence: 420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python→TypeScript XBRL cases/58assertions;35native→TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.
 
 Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.
 
@@ -97,7 +97,7 @@ Python/native integration and native-backed browser
 
 Source: `python/gig_microstructure/__init__.py`, `terminal/server/engine.py`, `terminal/server/analysis.py`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`.
 
-Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
+Evidence: 420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python→TypeScript XBRL cases/58assertions;35native→TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.
 
 NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation. Optional streaming SDK now exposes the existing C++ full-source coordinator;default dependency-compatible SDK rejects that capability explicitly.
 
@@ -111,7 +111,7 @@ Deterministic replay,journal and recovery contracts
 
 Source: `src/replay/replay.cpp`, `terminal/server/engine.py`.
 
-Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json.
+Evidence: 420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python→TypeScript XBRL cases/58assertions;35native→TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.
 
 Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.
 
@@ -429,19 +429,19 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Complete historical financial statements and point-in-time source history
 
-Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`, `terminal/stocks/xbrl_relationships.py`, `terminal/stocks/xbrl_statements.py`, `terminal/stocks/xbrl_product.py`, `terminal/stocks/test_xbrl_relationships.py`, `terminal/stocks/test_xbrl_statements.py`, `terminal/stocks/test_xbrl_product.py`, `terminal/web/src/XbrlStatements.tsx`, `terminal/web/src/xbrlStatements.ts`, `terminal/web/src/xbrlStatements.test.ts`, `terminal/server/schemas/backend_company_xbrl_v1.schema.json`, `terminal/tests/check_xbrl_statement_contract.py`.
 
-Evidence: 125authored XBRL cases,42more than baseline83;included in378per5binding profiles and125installed/extracted-source cases perSDKvariant. Original plain-profile rejections retained. Typed mixed-content order collision reproduced/repaired under versionedV3 context semantics. Native8identities and raw source SHA unchanged.
+Evidence: 167authored XBRL tests (42more than prior125),included in420per5bindings and167perinstalledSDKvariant.172frontend tests,8actual Python-product→TypeScript cases/58assertions and strict production build. Actual endpoint body tested via AST extraction without ASGI construction. Reproduced mixed-unit,impossible-calendar and final-SHA byte-bound failures retained;all repaired without weaker expectations.
 
-Explicit bounded inline1.1document sets now process ordered passive XHTML text,cross-document nonNumeric continuation chains,exclusions,two narrow2015numeric transforms,shared contexts/units and exact source/receipt/fact lineage. Distinct schemas prevent derived set hashes being mistaken for originals. Optional NUMERIC_SIMPLE_CONTENT_V2 handles bounded numeric complex simple-content derivation without altering V1 admission. Explicit single-role/direct-positive/closed-hypercube dimensional corroboration handles supplied axes/domains/members/defaults with cycle checks;defaulted facts remain excluded from consolidated selection. Derived dimensional schemas/coverage guards prevent old-code or missing-policy downgrade. All pathways integrate atomic vintage batches and the existing private offline CLI;global complete schema/DRS/statements remain false.
+Prior inline/simple-content/restricted-DRS profiles preserved. Explicit STANDARD_EFFECTIVE_ARCS_V1 now computes bounded standard presentation/calculation base sets with supported equivalence,priority/prohibition,order/preferred-label/weight provenance and cycle/conflict guards across supplied split links. Statement selection uses one exact acceptance-qualified filing/form/role with declared amendment lineage,consolidated exact-context facts,explicit missing/conflict/unit states and rational calculation diagnostics. Separate company_xbrl.v1 GET under APIv2 and private offline exports integrate Stock Intelligence without replacing companyfacts. Browser validates symbol/CIK,exact timestamps,canonical integrity and fact lineage;unsupported semantics remain visible. No full taxonomy/schema/accounting or source authentication inferred.
 
-Disposition: The stated bounded profiles and working offline integration are implemented and verified. Full inline/DRS/schema/effective-network/statement and read-only company-v2/frontend integration remain PARTIAL;no complete financial statements or observed-source coverage claimed.
+Disposition: Bounded effective relationships,selected presentation/statement and supplied-XBRL product/frontend contracts are implemented and offline verified. Automatic supplied filing/DTS source acquisition/startup admission,complete financial statements,rounding-aware calculation validation and broad taxonomy/DRS remain PARTIAL.
 
-Next action: Next:authoritative effective presentation/calculation and statement-mapping profile or expanded inline/DRS conformance,then versioned read-only company-v2/frontend integration. Do not duplicate implemented continuations/numeric/simple-content/closed-cube profiles or bypass their scope guards.
+Next action: Next bounded package:authoritative rounding/accuracy-aware calculation consistency and extension statement-mapping requirements,or expanded inline/DRS conformance. Qualify with an independently authorized supplied corpus before generalizing. Do not duplicate the now-working relationship/statement/product contracts or auto-enable sources.
 
 Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
 
-Remaining implementation or qualification: Full transform registry/named-target/tuple/escaped-HTML support;open/negative/multiple-role or assignment DRS,primary inheritance,targetRole/usable/prohibition precedence,typed domains;general complex content/attributes/schema construction;effective presentation/calculation;complete statement/extension mapping and new company-v2/browser integration;legitimate broad source/vintage corpus and provider qualification.
+Remaining implementation or qualification: Full inline registry/named-target/tuple/escaped HTML;general schema construction/complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS and effective dimensional precedence;generic/custom arcroles,labels and unsupported relationship attributes;calculation accuracy intervals;complete extension/consolidated statement mapping and source acquisition/history coverage. New product is explicit supplied-XBRL admission/private export,not automatic SEC/DTS ingestion or full browser/provider acceptance.
 
 ## SEC03 — BLOCKED
 
@@ -559,7 +559,7 @@ Official-contract Kraken cryptocurrency L2 and native/product integration
 
 Source: `terminal/providers/kraken.py`, `terminal/providers/supervisor.py`, `terminal/providers/test_recovery_hardening.py`, `terminal/providers/test_differential.py`, `terminal/server/engine.py`, `terminal/web/src/OrderBook.tsx`, `terminal/l2_research.py`.
 
-Evidence: Existing offline Kraken fixtures remain in378per5profiles;prior documentation CONNECT403/unchanged restricted policy,no new request or feed connection. Provisional.
+Evidence: Existing offline Kraken fixtures included in420per5profiles. Prior official-doc CONNECT403 and current enforced restricted policy retained;no repeated request or provider connection. Provisional.
 
 Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.
 
@@ -637,7 +637,7 @@ Crash-safe hot live/L3 recovery and hardware durability guarantees
 
 Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`, `terminal/test_itch_source_product.py`.
 
-Evidence: Current378guarded cases per5supported binding profiles;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6native profiles;161frontend tests/TSC/Vite;35native-to-TypeScript assertions;clean-source/default and enabled SDK consumers. Native/core/SDK/frontend source inputs unchanged froma2841e6;full older native matrices retained,not relabeled rerun. See INLINE_DRS_EVIDENCE.json. Existing source-product recovery/fault/restart cases rerun unchanged;no new unsupported source contract invented.
+Evidence: 420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python→TypeScript XBRL cases/58assertions;35native→TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed. Existing source-product recovery/fault/restart cases rerun;unsupported source formats/positions not invented.
 
 Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration.
 

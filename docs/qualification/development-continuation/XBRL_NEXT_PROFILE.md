@@ -1,3 +1,7 @@
+# Current implementation pointer
+
+The legacy strict presentation profile described below remains intact. New STANDARD_EFFECTIVE_ARCS_V1,statement selection and separate company/frontend integration are documented in XBRL_EFFECTIVE_RELATIONSHIPS.md,XBRL_STATEMENT_PRODUCT.md and REPORT.md. Broader taxonomy/schema/DRS/complete-statement semantics remain partial.
+
 Current continuation:see INLINE_DOCUMENT_SETS.md,XBRL_SIMPLE_CONTENT_V2.md and
 XBRL_DIMENSION_PROFILE.md for later explicit extensions. Historical counts below
 remain source-bound;full inline/schema/DRS/statement coverage is still PARTIAL.

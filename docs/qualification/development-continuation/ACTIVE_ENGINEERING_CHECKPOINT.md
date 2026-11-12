@@ -1,31 +1,29 @@
 # GIG continuation checkpoint — November 12, 2026
 
-Branch development/gig-ui-redesign. Starting checkpointa2841e6 was clean/remote-verified.
-Latest tested/pushed runtime:3436ff56a3e223cad192223062c83d5a11da8282. Enclosing final
-report SHA is obtained from Git/remote receipt.
+Branch development/gig-ui-redesign. Starting1d49ae2 was clean and remote-matched.
+Final tested/pushed runtime:21160c43ee3be7cf0e91e064acf9e20333636746. The enclosing
+final report SHA is obtained from Git/remote receipt.
 
-Published:d8e1b85 bounded inline document sets/continuations/transforms/source/CLI;
-a50fc52 explicit numeric simple-content V2;8393a08 restricted closed-cube dimensions/
-domains/defaults;afea8ab distinct derived dimensional schemas;3436ff5 policy-coverage/
-downgrade guards. Raw source SHA/native8identities preserved. Context mixed-content
-collision repaired under intentional DIM_CONTEXT_ELEMENT_V3_ORDERED derived hashes.
+Published:aec94eb standard effective relationship profile;f80a3eb acceptance-bound
+statement selection and separate company/frontend contracts;64b16ec strict calendar
+repair;96af263 reproducible Python→TypeScript checker;21160c4 final output ceilings.
+Original company.v2/statements.v2/companyfacts/SDK/native contracts preserved.
 
-Final378guarded cases per5supported binding profiles (1,890outcomes),0failures/errors/
-skips.125XBRL cases included. Native focused recovery6/6/6GCC,6/6/5Clang andall8frozen
-identities per6profiles.161frontend tests,TSC/Vite build. Default/source-enabled
-SDK variants passed current extracted-source checks:8SDK+55/66recovery+125XML and
-28/35contract assertions. Clean archive1,274members/1,273tracked contents matched.
-SDK wheels reused from byte-identical7aea334inputs,not mislabeled rebuilt. Details:
-REPORT.md,INLINE_DRS_EVIDENCE.json,PACKAGE_CURRENT.json.
+Final420guarded cases per5supported configurations (2,100outcomes);167XBRL;
+172frontend tests,TSC/Vite;8actual Python→TypeScript cases/58assertions. Focused
+native6/6/6GCC,6/6/5Clang and all8frozen identities in6profiles at f80a3eb;final
+native/SDK/build inputs identical. Clean archive1,289members/1,288tracked contents
+matched;default/source SDK8+55/66recovery+167XML+28/35native and58XBRL assertions.
+SDK wheels explicitly reused from byte-equivalent7aea334inputs. See REPORT.md,
+EFFECTIVE_STATEMENT_EVIDENCE.json and PACKAGE_CURRENT.json for exact chronology.
 
-No application/ASGI factory,server,browser,provider,account,trade,deployment,paid
-resource or workflow started. No observed data used. ARM64,target/browser/device,
-hardware and empirical qualification remain unverified. Kraken stays provisional;
-previousCONNECT403/unchanged policy is not retried. Protected branches unchanged.
+No application/server/browser/provider/account/trade/deployment/workflow/paid
+resource started. No observed data processed. No current native ARM64 or owner
+private-target/device/empirical qualification. Protected branches preserved.
 
-Matrix50 =49areas+historicalA18/A19 decision:34COMPLETE/8PARTIAL/7BLOCKED/1NA.
-Full engineering remains incomplete. Next:bounded authoritative effective
-presentation/calculation/statement or expanded inline/DRS conformance,then versioned
-company-v2/frontend artifact integration. Do not duplicate the new profiles or
-remove their guards. Unsupported recovery positions/schema/source semantics stay
-fail closed. Keep no-launch/no-provider and private observation-only restrictions.
+50rows =49areas+historicalA18/A19:34COMPLETE/8PARTIAL/7BLOCKED/1NA. Full scope remains
+incomplete. Next:accuracy-aware calculations,extension/statement mapping or bounded
+broader DRS/inline semantics;automatic authorized filing/DTS ingestion remains
+missing. Do not reimplement the now-working supplied-XBRL product controls or
+replace unknown inputs. Keep recovery unsupported cases fail-closed and Kraken
+provisional. Preserve no-launch/no-provider/private observation-only restrictions.
