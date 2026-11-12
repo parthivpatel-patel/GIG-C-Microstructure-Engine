@@ -27,10 +27,12 @@ class FilingCollection:
   if size>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
   values=[parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed)for entry in entries]
   return self._commit_parsed(values)
- def ingest_dts_batch(self,entries):
+ def ingest_dts_batch(self,entries,*,numeric_profile=None):
   # New explicit contract;the original strict batch keys and behavior stay intact.
   from .xbrl_dts import discover
   from .xbrl_binding import bind_declarations
+  from .xbrl_types import PROFILE,corroborate
+  if numeric_profile not in(None,PROFILE):raise XBRLError('xbrl_numeric_profile_unsupported')
   if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
   total=0
   for entry in entries:
@@ -45,7 +47,8 @@ class FilingCollection:
    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
    if source['origin']=='OBSERVED_OFFICIAL_RESPONSE'and entry['instance_uri']!=source['source_url']:raise XBRLError('dts_binding_source_uri')
    graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=self.allow_observed,permission_reference=entry['manifest']['permission_reference'])
-   values.append(bind_declarations(parsed,graph))
+   bound=bind_declarations(parsed,graph)
+   values.append(corroborate(bound,graph)if numeric_profile is not None else bound)
   return self._commit_parsed(values)
  def _commit_parsed(self,values):
   candidate=dict(self._filings);sizes={a:len(canonical(v))for a,v in candidate.items()}

@@ -38,3 +38,33 @@ class XBRLTool(unittest.TestCase):
    with self.assertRaises(ValueError):inspect(path,'2024-02-30T00:00:00Z')
    path.write_text('{"schema":1,"schema":2}')
    with self.assertRaises(ValueError):inspect(path,EARLY)
+ def dts_fixture(self,root):
+  from .test_xbrl_types import sample,PROFILE
+  e=sample();(root/'instance.xml').write_bytes(e['raw']);(root/'taxonomy.xsd').write_bytes(e['documents'][0]['raw'])
+  doc={'schema':'gig.sec.xbrl.input_dts_batch.v1','issuer_cik':'0000320193','origin':'HISTORICAL_SYNTHETIC','numeric_profile':PROFILE,'entries':[{'path':'instance.xml','manifest':e['manifest'],'gaap_namespace':NS,'instance_uri':e['instance_uri'],'documents':[{'path':'taxonomy.xsd','uri':e['documents'][0]['uri'],'sha256':e['documents'][0]['sha256']}]}]};path=root/'batch.json';path.write_text(json.dumps(doc));return path,doc
+ def test_dts_numeric_cli_joins_actual_supplied_documents_and_exports(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);path,doc=self.dts_fixture(root)
+   with patch('socket.socket.connect',side_effect=AssertionError('NO_NETWORK')):summary,result=inspect(path,EARLY)
+   self.assertEqual(summary['selected_facts'],1);self.assertEqual(result['history']['assets'][0]['value'],'123.4500');self.assertIn('numeric_value_validation',result['selected_input_coverage'][0]['xbrl_coverage']['dts_corroboration']);self.assertFalse(summary['provider_requested'])
+   stream=io.StringIO()
+   with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(root/'private.json')]),0)
+   self.assertEqual(json.loads((root/'private.json').read_text()),result)
+ def test_dts_cli_hash_path_symlink_and_profile_fail_closed(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);path,original=self.dts_fixture(root)
+   import copy
+   for mutation in('hash','traversal','symlink','profile'):
+    doc=copy.deepcopy(original)
+    if mutation=='hash':doc['entries'][0]['documents'][0]['sha256']='0'*64
+    elif mutation=='traversal':doc['entries'][0]['documents'][0]['path']='../taxonomy.xsd'
+    elif mutation=='symlink':
+     (root/'link.xsd').symlink_to(root/'taxonomy.xsd');doc['entries'][0]['documents'][0]['path']='link.xsd'
+    else:doc['numeric_profile']='guess'
+    path.write_text(json.dumps(doc))
+    with self.subTest(mutation=mutation),self.assertRaises(ValueError):inspect(path,EARLY)
+ def test_dts_cli_does_not_retain_partial_export_on_invalid_types(self):
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);path,doc=self.dts_fixture(root);doc['entries'][0]['documents'][0]['sha256']='0'*64;path.write_text(json.dumps(doc));stream=io.StringIO();output=root/'never.json'
+   with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(output)]),2)
+   self.assertFalse(output.exists());self.assertFalse(json.loads(stream.getvalue())['raw_source_retained']);self.assertNotIn('123.4500',stream.getvalue())

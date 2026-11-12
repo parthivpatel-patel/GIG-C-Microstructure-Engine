@@ -45,7 +45,7 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
    target=uri(urljoin(instance_uri,href));schema_roots.append(target);requests.append((target,0,None,'schema'))
    if len(schema_roots)>32:raise XBRLError('dts_schema_root_budget')
  if not schema_roots:raise XBRLError('dts_schema_reference_required')
- loaded={};unresolved=[];namespaces={};concepts={};locators={};linkbases=[];unsupported=[]
+ loaded={};unresolved=[];namespaces={};concepts={};locators={};linkbases=[];unsupported=[];types={}
  while requests:
   if len(edges)>4096:raise XBRLError('dts_edge_budget')
   key,depth,namespace,kind=requests.popleft()
@@ -75,7 +75,17 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
      if child.attrs.get(tag(XL,'type'))!='simple'or type(href)is not str or not href:raise XBRLError('dts_linkbase_reference')
      destination=uri(urljoin(key,href));edges.append({'from':key,'to':destination,'kind':'linkbase'});requests.append((destination,depth+1,None,'linkbase'))
    for element in node.children:
-    if element.name in(tag(XS,'simpleType'),tag(XS,'complexType')):unsupported.append({'uri':key,'feature':'CUSTOM_TYPE_VALIDATION_NOT_IMPLEMENTED'});continue
+    if element.name in(tag(XS,'simpleType'),tag(XS,'complexType')):
+     from .xbrl_types import declaration
+     name=element.attrs.get('name')
+     if type(name)is not str or not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',name):raise XBRLError('dts_type_identity')
+     expanded=tag(target,name);value=declaration(element)
+     if expanded in types and types[expanded]['declaration']!=value:raise XBRLError('dts_type_conflict')
+     entry=types.setdefault(expanded,{'declaration':value,'source_documents':[]})
+     if key in entry['source_documents']:raise XBRLError('dts_duplicate_type_declaration')
+     entry['source_documents'].append(key)
+     if len(types)>128:raise XBRLError('dts_type_budget')
+     unsupported.append({'uri':key,'feature':'CUSTOM_TYPE_SCHEMA_VALIDATION_NOT_PERFORMED'});continue
     if element.name!=tag(XS,'element'):continue
     name=element.attrs.get('name');identifier=element.attrs.get('id')
     if type(name)is not str or not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',name)or identifier is not None and not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',identifier):raise XBRLError('dts_element_identity')
@@ -143,5 +153,6 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
   if len(links)>1:
    for network in links:network['usable']=False;network['issues']=sorted(set(network['issues']+['ROLE_SPLIT_ACROSS_LINKS_UNSUPPORTED']))
  result={'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None}
+ if types:result['type_declarations']=types;result['type_declaration_profile']='NAMED_RESTRICTION_METADATA_V1'
  if len(canonical(result))>16*1024*1024:raise XBRLError('dts_output_budget')
  result['canonical_sha256']=digest(result);return result

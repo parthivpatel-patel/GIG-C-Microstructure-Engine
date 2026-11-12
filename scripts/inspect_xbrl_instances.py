@@ -9,17 +9,36 @@ from terminal.stocks.xbrl_collection import FilingCollection,MAX_BATCH,MAX_BATCH
 
 def inspect(batch_path,as_of,*,allow_observed=False):
  path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024))
- if set(batch)!={'schema','issuer_cik','origin','entries'}or batch['schema']!='gig.sec.xbrl.input_batch.v1'or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH:raise XBRLError('xbrl_input_batch_contract')
+ dts=batch.get('schema')=='gig.sec.xbrl.input_dts_batch.v1'
+ fields={'schema','issuer_cik','origin','entries'}|({'numeric_profile'}if dts else set())
+ if set(batch)!=fields or batch['schema']not in('gig.sec.xbrl.input_batch.v1','gig.sec.xbrl.input_dts_batch.v1')or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH:raise XBRLError('xbrl_input_batch_contract')
+ if dts:
+  from terminal.stocks.xbrl_types import PROFILE
+  if batch['numeric_profile']not in(None,PROFILE):raise XBRLError('xbrl_numeric_profile_unsupported')
  collection=FilingCollection(batch['issuer_cik'],origin=batch['origin'],allow_observed=allow_observed)
  entries=[];total=0
  for record in batch['entries']:
-  if type(record)is not dict or set(record)!={'path','manifest','gaap_namespace'}or type(record['path'])is not str or len(record['path'])>512:raise XBRLError('xbrl_input_entry_contract')
+  if type(record)is not dict or set(record)!=({'path','manifest','gaap_namespace'}|({'instance_uri','documents'}if dts else set()))or type(record['path'])is not str or len(record['path'])>512:raise XBRLError('xbrl_input_entry_contract')
   relative=Path(record['path'])
   if relative.is_absolute()or '..'in relative.parts:raise XBRLError('xbrl_input_path_scope')
   raw=read_bytes(path.parent/relative,2*1024*1024);total+=len(raw)
   if total>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
-  entries.append({'raw':raw,'manifest':record['manifest'],'concepts':selected_concepts(record['gaap_namespace'])})
- collection.ingest_batch(entries);result=collection.at_acceptance_time(as_of)
+  entry={'raw':raw,'manifest':record['manifest'],'concepts':selected_concepts(record['gaap_namespace'])}
+  if dts:
+   if type(record['documents'])is not list or len(record['documents'])>16:raise XBRLError('xbrl_input_document_budget')
+   docs=[]
+   for document in record['documents']:
+    if type(document)is not dict or set(document)!={'path','uri','sha256'}or type(document['path'])is not str or len(document['path'])>512:raise XBRLError('xbrl_input_document_contract')
+    relative=Path(document['path'])
+    if relative.is_absolute()or '..'in relative.parts:raise XBRLError('xbrl_input_path_scope')
+    data=read_bytes(path.parent/relative,min(2*1024*1024,MAX_BATCH_BYTES-total));total+=len(data)
+    if total>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
+    docs.append({'uri':document['uri'],'sha256':document['sha256'],'raw':data})
+   entry.update(instance_uri=record['instance_uri'],documents=docs)
+  entries.append(entry)
+ if dts:collection.ingest_dts_batch(entries,numeric_profile=batch['numeric_profile'])
+ else:collection.ingest_batch(entries)
+ result=collection.at_acceptance_time(as_of)
  summary={'schema':'gig.sec.xbrl.offline_summary.v1','status':'OFFLINE_PROFILE_VALIDATED','origin':collection.origin,'supplied_filings':len(entries),'source_bytes':total,'collection_sha256':result['collection_sha256'],'selection_sha256':result['selection_sha256'],'selected_facts':sum(map(len,result['history'].values())),'exclusions':result['exclusions'],'unresolved_amendment_count':len(result['unresolved_amendment_filings']),'complete_statements_or_history':False,'provider_requested':False,'raw_source_retained':False}
  return summary,result
 
