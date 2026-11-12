@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v8",
+  "schema": "gig.development.completion.v9",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -14,7 +14,7 @@
         "src/book/order_book.cpp",
         "include/gig/analytics/exact.hpp"
       ],
-      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
+      "test_evidence": "Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.",
       "explanation": "Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -30,7 +30,7 @@
         "src/itch/context.cpp",
         "src/itch/reconstruction.cpp"
       ],
-      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
+      "test_evidence": "Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.",
       "explanation": "Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -43,10 +43,12 @@
       "source": [
         "python/gig_microstructure/__init__.py",
         "terminal/server/engine.py",
-        "terminal/server/analysis.py"
+        "terminal/server/analysis.py",
+        "python/bindings/itch_recovery.cpp",
+        "python/gig_microstructure/itch_recovery.py"
       ],
-      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
-      "explanation": "NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation.",
+      "test_evidence": "Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.",
+      "explanation": "NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation. Optional streaming SDK now exposes the existing C++ full-source coordinator;default dependency-compatible SDK rejects that capability explicitly.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
       "work_class": "Implemented bounded development contract"
@@ -59,7 +61,7 @@
         "src/replay/replay.cpp",
         "terminal/server/engine.py"
       ],
-      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.",
+      "test_evidence": "Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.",
       "explanation": "Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -219,8 +221,8 @@
         "terminal/web/src/App.tsx",
         "terminal/server/engine.py"
       ],
-      "test_evidence": "Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.",
-      "explanation": "Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.",
+      "test_evidence": "161frontend tests and TSC/Vite build passed;35actual native-to-frontend assertions include revision2source restore. New regression gives zero-length restored continuation0percent;completed nonempty replay still100percent. No browser/application launched.",
+      "explanation": "Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled. Restored source revisions retain the same browser contract;zero-length continuation progress is now honest.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
       "work_class": "Implemented bounded development contract"
@@ -410,15 +412,17 @@
         "terminal/stocks/test_inline_xbrl.py",
         "terminal/stocks/test_xbrl_dts.py",
         "terminal/stocks/xbrl_binding.py",
-        "terminal/stocks/test_xbrl_binding.py"
+        "terminal/stocks/test_xbrl_binding.py",
+        "terminal/stocks/xbrl_types.py",
+        "terminal/stocks/test_xbrl_types.py"
       ],
-      "test_evidence": "59authored XML tests pass,including8new DTS/vintage binding cases and2context-placement methods;included in final301per5binding profiles and59installed/extracted-source checks. Raw source hashes/native identities unchanged;affected semantic-context/fact hashes intentionally versioned DIM_CONTEXT_ELEMENT_V2.",
-      "explanation": "Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched.",
+      "test_evidence": "83authored XML cases,including4failing-before UTC/context/unit regressions,17numeric-type/facet cases and3new supplied-DTS CLI cases;included in336per5binding profiles and installed default/source-enabled wheel checks. Source-byte provenance and eight native identities preserved.",
+      "explanation": "Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched. New explicit NUMERIC_VALUE_FACETS_V1 resolves supported numeric bases/simple restrictions,checks exact value/range/digit facets and known units,retains type/document/fact lineage and rejects unsupported selected types atomically. Existing CLI now accepts supplied-DTS batches. UTC-normalized filing-date guards preserve equivalent cutoff eligibility;significant structural qualifier text rejects. Global schema/statement validation remains false.",
       "disposition": "Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.",
-      "action_now": "Next engineering profile:bounded schema-type validation and authoritative inline transformation/continuation support with independent fixtures,then relationship/statement mapping and v2 integration. Complete XBRL engineering still exists;do not call it only an external blocker.",
+      "action_now": "Next engineering:bounded authoritative inline transformations/continuations,complex schema/DRS and dimensional relationships,effective relationship precedence/calculation/statement mapping and v2 integration. Do not repeat implemented numeric facets,DTS CLI or UTC repair.",
       "work_class": "PARTIAL:bounded instance/filing-vintage infrastructure complete;full statement semantics,product integration and historical source coverage remain open",
       "completed_this_session": "DTS invalid/missing/empty/extended linkbaseRef type reproduced as falsely usable and repaired with exact simple-XLink admission. Previous bounded instance/inline/DTS/filing-vintage infrastructure preserved.",
-      "remaining_implementation_or_qualification": "Full inline transformation/continuation/tuple/nested markup support,complete XML Schema/DTS custom-type and extension validation,equivalent/prohibited arc precedence across links,calculation relationships,complete statement assembly,v2/UI integration and authentic complete historical acquisition/receipt coverage remain missing.",
+      "remaining_implementation_or_qualification": "Full complex/custom schema construction,inline transformation/continuation/tuple profiles,DRS/hypercube/default/typed-domain relationships,presentation/calculation precedence,complete statement and v2 integration,comprehensive lawful source/vintage corpus and observed verification remain incomplete.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
@@ -563,7 +567,7 @@
         "terminal/web/src/OrderBook.tsx",
         "terminal/l2_research.py"
       ],
-      "test_evidence": "Existing offline Kraken integrity/admin/differential fixtures included in final301per5profiles. Official documentation-only retrieval returned proxy CONNECT403;no retry/feed connection.",
+      "test_evidence": "Existing offline Kraken cases remain in current336per5profiles. No fresh documentation/provider request;previous CONNECT403 and unchanged restricted policy remain explicit.",
       "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.",
       "disposition": "Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.",
       "completed_this_session": "Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.",
@@ -678,12 +682,13 @@
         "terminal/itch_product.py",
         "terminal/test_itch_product.py",
         "scripts/manage_itch_session.py",
-        "terminal/web/src/itchSession.ts"
+        "terminal/web/src/itchSession.ts",
+        "terminal/test_itch_source_product.py"
       ],
-      "test_evidence": "Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched. Product18tests include private immutable crash restart,cross-process,migration,candidate allocation/resource refusal,paused terminal state and actual replay-worker survival.",
-      "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim.",
+      "test_evidence": "Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json. New11source-product tests cover actual plain/gzip C++ coordinator,CRC/prefix/generation/position/resource refusal,idempotency,revision2lineage,explicit migration and immutable separate-process CLI restart.",
+      "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration.",
       "disposition": "Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.",
-      "action_now": "Do not duplicate codec/product integration. Any additional schema/source position migration needs an explicit supported contract and fixtures;observed/hardware guarantees require independently complete source and target fault evidence.",
+      "action_now": "Do not reimplement SDK/source/product continuation. Partial/terminal/arbitrary compressed positions and unknown native schemas remain explicitly unsupported;additional contracts need specification/fixtures. Actual observed continuity and hardware/target evidence remain unqualified.",
       "work_class": "PARTIAL:bounded authored native/source hot recovery complete;full source/product/target scope remains open",
       "missing_implementation": [
         "Explicit product/startup policy for selecting persisted full-ITCH owners alongside existing NativeSession authored-native recovery",
@@ -691,7 +696,7 @@
         "Authoritative observed L2/L3 source initialization/continuity and actual target hardware durability qualification"
       ],
       "completed_this_session": "Versioned field codec and Python native owner;checksums/external identity;full seeded hot state;57restore/63encode/67source actual PMR failure sweeps;bounded plain/gzip source/framer continuation;impossible empty-cursor repair reproduced against published source;immutable private publication,corrupt input,disk-full and actual cross-process exit/restart.",
-      "remaining_implementation_or_qualification": "Bounded durable full-ITCH/seed/framer/gzip contracts are implemented. Automatic application startup selection/full-ITCH product-session integration remains unwired;no provider/observed data or target power-loss acceptance. This preserves the no-launch directive and existing startup behavior;it is not full operational completion.",
+      "remaining_implementation_or_qualification": "Bounded authored product/source engineering implemented. Broader unsupported position/container/schema contracts need explicit specifications before expansion;observed-source losslessness and actual target/hardware guarantees remain unverified.",
       "dependency": "For broader full hot-recovery claims:specified additional schema/source-position contracts,legitimate observed initialization/continuity evidence and actual target/hardware testing. Unknown migrations and partial/arbitrary compressed positions fail closed.",
       "effort_estimate": "Conditional planning range1\u20133engineer-days for narrowly scoped opt-in full-ITCH product-session wiring and its failure matrix;not a guarantee. Observed/source/hardware qualification depends on actual external evidence."
     },
@@ -880,12 +885,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
+  "tested_application": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
+  "previous_matrix_commit": "57e7bc2df3a7a11af3acc036b0231dae293bcb92",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current product/native/Python/frontend/package evidence is PRODUCT_SESSION_EVIDENCE.json;all prior source-bound evidence remains in Git. No app/provider/device qualification inferred.",
+  "evidence_policy": "Current source-bound evidence is XBRL_SOURCE_CONTINUATION_EVIDENCE.json;prior product/durable/full-native evidence remains historical and is not relabeled rerun.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -898,7 +903,12 @@
     "4bff719ea6c527c1324689d521f36d21f6d09afb",
     "a3640d7fb59572c5179dfc49de1879f2d537763a",
     "f5c3f40375ff5dbaf6d123d29c981a127ad635b0",
-    "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c"
+    "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
+    "186d54c7dd8d8772f25f7e6072fb5fc4587f09cd",
+    "6d97e95f3ba77ab99c0000bbc594cb555fc70ab0",
+    "d84578587ad99cee78f08b1ff738971070762177",
+    "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+    "f7c1e0df2fb95e48f84752de51fc396daf0518f8"
   ],
   "date": "2026-11-12",
   "timezone": "America/New_York",
@@ -908,7 +918,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
+  "starting_commit": "57e7bc2df3a7a11af3acc036b0231dae293bcb92",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,

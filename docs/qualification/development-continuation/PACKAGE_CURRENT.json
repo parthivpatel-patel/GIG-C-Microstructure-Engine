@@ -1,111 +1,180 @@
 {
-  "schema": "gig.package.current_source.v4",
-  "source": "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
+  "schema": "gig.package.current_source.v6",
+  "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
   "clean_source_archive": true,
-  "wheel_source": "a3640d7fb59572c5179dfc49de1879f2d537763a",
-  "wheel_built_from_this_sdist": false,
-  "wheel_source_sdk_byte_equivalence_verified": true,
-  "wheel_origin": "Unchanged SDK wheel previously built from the clean a3640d7 source archive;no claim of rebuilding server-only changes into that wheel.",
   "sdist": {
-    "path": "build/remaining-engineering/product-verified-dist/gig_microstructure-0.1.1.tar.gz",
-    "bytes": 7934366,
-    "sha256": "25653707de62c449e06ac75632a8fa581bcd6ea408b9ca591bb338e926e6cd81"
+    "path": "build/remaining-engineering/xbrl2-final-sdist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 7959610,
+    "sha256": "0b5962a85c1f993a49a0294902f2baa2c9b1bd967c40e91a67a12635ff255eba"
   },
-  "wheel": {
-    "path": "build/remaining-engineering/product-final-dist/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-    "bytes": 666477,
-    "sha256": "7bbc798bf0e9b285efb028cba715c313598b3a312ad2f88e8714d30d9c62575a"
-  },
-  "sdist_members": 1259,
-  "wheel_members": 22,
-  "tracked_archive_files_compared": 1258,
-  "runtime_entries_compared": 22,
-  "runtime_entries": [
+  "sdist_members": 1266,
+  "tracked_archive_files_compared": 1265,
+  "changed_runtime_files_compared": [
+    "CMakeLists.txt",
     "python/bindings/itch_recovery.cpp",
     "python/gig_microstructure/itch_recovery.py",
+    "scripts/inspect_xbrl_instances.py",
     "scripts/manage_itch_session.py",
     "terminal/itch_product.py",
-    "terminal/itch_recovery.py",
-    "terminal/server/app.py",
-    "terminal/server/engine.py",
-    "terminal/stocks/test_xbrl_binding.py",
+    "terminal/stocks/test_xbrl_collection.py",
     "terminal/stocks/test_xbrl_instance.py",
-    "terminal/stocks/xbrl_binding.py",
+    "terminal/stocks/test_xbrl_tool.py",
+    "terminal/stocks/test_xbrl_types.py",
     "terminal/stocks/xbrl_collection.py",
+    "terminal/stocks/xbrl_dts.py",
     "terminal/stocks/xbrl_instance.py",
-    "terminal/test_itch_product.py",
+    "terminal/stocks/xbrl_types.py",
+    "terminal/test_itch_source_product.py",
     "terminal/tests/check_itch_product_contract.py",
     "terminal/tests/run_no_launch_suite.py",
-    "terminal/web/package.json",
-    "terminal/web/src/App.tsx",
-    "terminal/web/src/contracts.ts",
     "terminal/web/src/itchSession.test.ts",
     "terminal/web/src/itchSession.ts",
-    "tests/test_itch_durable_checkpoint.cpp",
-    "tests/test_itch_product_python.py"
+    "tests/test_itch_durable_checkpoint.cpp"
   ],
-  "installed_sdk_cases": 8,
-  "installed_recovery_cases": 55,
-  "installed_xbrl_cases": 59,
-  "installed_contract_assertions": 28,
-  "installed_tests_use_extracted_source": true,
-  "no_index_no_dependencies": true,
-  "private_payloads": false,
-  "scope": "Clean server/source archive and source-equivalent installed SDK;not a release or owner deployment.",
-  "build_receipt": {
-    "path": "build/remaining-engineering/product-verified-sdist.log",
-    "bytes": 150,
-    "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
-  },
-  "wheel_build_receipt": {
-    "path": "build/remaining-engineering/product-final-package-build.log",
-    "bytes": 6178,
-    "sha256": "6f5614c0dcd3a5502cfad99fd9b4edf75619dc454cdc06fb2db11f69c3de7ae7"
-  },
-  "results": [
+  "wheel_profiles": [
     {
-      "name": "consumer",
-      "tests": 8,
-      "seconds": 0.565,
-      "log": "build/remaining-engineering/product-verified-installed-consumer.log",
-      "receipt": {
-        "path": "build/remaining-engineering/product-verified-installed-consumer.log",
-        "bytes": 964,
-        "sha256": "8aec57cb9b5412f6d1f067b462662ee1e27baaa7361b32129174e75fab29721f"
+      "profile": "default",
+      "wheel": {
+        "path": "build/remaining-engineering/xbrl2-default-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+        "bytes": 666813,
+        "sha256": "08e67b5790dfe5f0afdb24c05177ab7c1b1f339693d9e1c4f90c0bd73c1c9c3d"
+      },
+      "wheel_members": 22,
+      "built_from_this_sdist": false,
+      "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+      "sdk_source_byte_equivalence_verified": true,
+      "streaming_enabled": false,
+      "tests": [
+        {
+          "name": "consumer",
+          "cases": 8,
+          "seconds": 0.615,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-default-installed-consumer.log",
+            "bytes": 964,
+            "sha256": "de90ee9c17adf8bd76ef8e444499cc935a639e0fd2e4d77d58f07f61205d4e0a"
+          }
+        },
+        {
+          "name": "recovery",
+          "cases": 55,
+          "seconds": 8.991,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-default-installed-recovery.log",
+            "bytes": 154,
+            "sha256": "5bc1ff4709fc3f9d39265588a881e9d9863bba6d2cf64185228924ce53d30022"
+          }
+        },
+        {
+          "name": "xml",
+          "cases": 83,
+          "seconds": 0.415,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-default-installed-xml.log",
+            "bytes": 182,
+            "sha256": "a90b40cb5e0d8c4ebf6c26c035e9abb59db2b4bb5a3aa4e47eeda21f62df7eb9"
+          }
+        },
+        {
+          "name": "contract",
+          "cases": null,
+          "seconds": 0.318,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-default-installed-contract.log",
+            "bytes": 148,
+            "sha256": "49bac116ba0bd5bfa5f99e91e11ea37d222f44744b7030fec23df893dd5e8bd0"
+          }
+        }
+      ],
+      "contract": {
+        "schema": "gig.itch.product_contract.v1",
+        "assertions": 28,
+        "states": 4,
+        "source_recovery_states": 0,
+        "application_started": false,
+        "browser_started": false
+      },
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-default-wheel-build.log",
+        "bytes": 1100,
+        "sha256": "07a98a5776bc788c43d047ce31e7cfbd144e34c3a4f3abe7ffe99d6c6721fed4"
       }
     },
     {
-      "name": "recovery",
-      "tests": 55,
-      "seconds": 8.746,
-      "log": "build/remaining-engineering/product-verified-installed-recovery.log",
-      "receipt": {
-        "path": "build/remaining-engineering/product-verified-installed-recovery.log",
-        "bytes": 154,
-        "sha256": "f6fd1ea9eb77c5b4e65b45cca1c2cb1bdb843f2db9a778c808df4e372df5c0cf"
-      }
-    },
-    {
-      "name": "xbrl",
-      "tests": 59,
-      "seconds": 0.315,
-      "log": "build/remaining-engineering/product-verified-installed-xbrl.log",
-      "receipt": {
-        "path": "build/remaining-engineering/product-verified-installed-xbrl.log",
-        "bytes": 158,
-        "sha256": "df9d1c882bc6360debc569a98500c638a2f74fb7004dd99f86d4fad909f29a2e"
-      }
-    },
-    {
-      "name": "contract",
-      "tests": null,
-      "seconds": 0.315,
-      "log": "build/remaining-engineering/product-verified-installed-contract.log",
-      "receipt": {
-        "path": "build/remaining-engineering/product-verified-installed-contract.log",
-        "bytes": 121,
-        "sha256": "f31612e5c9a6d5613722a23c21694499ea342d96337ce74bd94549ad875d31c2"
+      "profile": "source",
+      "wheel": {
+        "path": "build/remaining-engineering/xbrl2-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+        "bytes": 677377,
+        "sha256": "e4cb3ccc673af98b4a240e1ddba5caad525858b6da8f413d7054f074bd737b98"
+      },
+      "wheel_members": 22,
+      "built_from_this_sdist": false,
+      "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+      "sdk_source_byte_equivalence_verified": true,
+      "streaming_enabled": true,
+      "tests": [
+        {
+          "name": "consumer",
+          "cases": 8,
+          "seconds": 0.616,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-source-installed-consumer.log",
+            "bytes": 964,
+            "sha256": "8aec57cb9b5412f6d1f067b462662ee1e27baaa7361b32129174e75fab29721f"
+          }
+        },
+        {
+          "name": "recovery",
+          "cases": 66,
+          "seconds": 9.297,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-source-installed-recovery.log",
+            "bytes": 165,
+            "sha256": "17e6310e2d8a2d4d6d9e534f7f45ca1b79fc33d40fbe9e73c583dd7191c4597e"
+          }
+        },
+        {
+          "name": "xml",
+          "cases": 83,
+          "seconds": 0.415,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-source-installed-xml.log",
+            "bytes": 182,
+            "sha256": "8aaf3e02039317a9df87613279b7bdfa82d8e215320e93969fdc8144d2533a0f"
+          }
+        },
+        {
+          "name": "contract",
+          "cases": null,
+          "seconds": 0.315,
+          "receipt": {
+            "path": "build/remaining-engineering/xbrl2-final-source-installed-contract.log",
+            "bytes": 148,
+            "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+          }
+        }
+      ],
+      "contract": {
+        "schema": "gig.itch.product_contract.v1",
+        "assertions": 35,
+        "states": 5,
+        "source_recovery_states": 1,
+        "application_started": false,
+        "browser_started": false
+      },
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-source-wheel-build.log",
+        "bytes": 1100,
+        "sha256": "d139ce2fa7d2505cfe8d6cece105af14bfdf21733a180a0295361547ca9b36f0"
       }
     }
-  ]
+  ],
+  "private_payloads": false,
+  "tests_use_extracted_source": true,
+  "no_index_no_dependencies": true,
+  "default_disabled_capability": {
+    "path": "build/remaining-engineering/xbrl2-final-default-capability.log",
+    "bytes": 29,
+    "sha256": "35eff951006bf94903bf42d9f0973dd34782ba8f0bf7ffce915788ad4a997cb8"
+  }
 }

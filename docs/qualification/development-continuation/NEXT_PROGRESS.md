@@ -1,11 +1,17 @@
 # Current continuation pointer
 
-The older November10 ledger/filing checkpoints remain available in Git. The
-current tested implementation is `03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c`.
-Read ACTIVE_ENGINEERING_CHECKPOINT.md, REPORT.md, COMPLETION_MATRIX.json and
-PRODUCT_SESSION_EVIDENCE.json. Full typed ITCH product restoration, migration,
-exact source units and replay rejection recovery are implemented and verified.
-The next substantive package is bounded XBRL type/transform/statement integration,
-not another recovery-codec rewrite. No application/provider/acceptance launch is
-authorized by this continuation. Keep Kraken provisional and preserve protected
-branches. The final enclosing documentation SHA is obtained from Git/remote.
+Tested runtime:f7c1e0df2fb95e48f84752de51fc396daf0518f8;branch development/gig-ui-redesign.
+Read ACTIVE_ENGINEERING_CHECKPOINT.md,REPORT.md,COMPLETION_MATRIX.json and
+XBRL_SOURCE_CONTINUATION_EVIDENCE.json. Final report-only SHA is obtained fromGit.
+
+Completed:bounded supplied-DTS numeric facets/export,UTC/context admission repairs,
+actual native-source SDK and immutable product revision2 continuation,empty-range
+progress and exact u64 browser provenance. Final336per5binding profiles,161frontend
+checks,35actual contract assertions and source/default wheel verification passed.
+Earlier counts and source-bound failures remain historical evidence,not current
+qualification. No application/provider/acceptance launch is authorized.
+
+Next:an explicit authoritative inline/DRS/relationship/statement profile with
+independent fixtures and existing v2 integration. Do not duplicate completed
+source recovery,numeric facets or private-file publication. Keep Kraken provisional;
+no repeated blocked requests. Preserve protected branches and source permissions.

@@ -34,7 +34,7 @@ amendment lineage and exact numeric lexical values remain unchanged.
 Limits:128named types per DTS,8restriction levels,16facets per restriction,
 64-character numeric/facet lexical values,existing16documents/8MiBbatch/4096facts
 bounds. Numeric evidence has an8MiBoutput bound checked before accumulating each
-record and again after final metadata assembly. Duplicate/conflicting type
+record and again after final metadata assembly. Duplicate declarations within a supplied document and conflicting type
 identities,unsupported selected types and corrupt hashed inputs fail closed.
 
 ## Offline command-line use

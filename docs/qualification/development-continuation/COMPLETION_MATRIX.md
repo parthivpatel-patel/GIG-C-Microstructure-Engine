@@ -1,6 +1,6 @@
 # GIG development completion matrix — November 12, 2026
 
-Current tested runtime `03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c`;branch `development/gig-ui-redesign`.
+Tested runtime `f7c1e0df2fb95e48f84752de51fc396daf0518f8`;branch `development/gig-ui-redesign`.
 
 50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.
 
@@ -8,7 +8,7 @@ Current tested runtime `03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c`;branch `develo
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
-Current evidence:PRODUCT_SESSION_EVIDENCE.json. Matrix classifications are retained while REL02 and SEC02 implementation/evidence is expanded. New fixture results do not close provider,observed-source,hardware or owner-target qualification.
+Current source-bound evidence:XBRL_SOURCE_CONTINUATION_EVIDENCE.json. SEC02/REL02/UI10 have new implementation/regressions;no external qualification row was promoted.
 
 |ID|Status|Requirement|
 |---|---|---|
@@ -69,7 +69,7 @@ C++20 typed order book,identity,FIFO and exact arithmetic
 
 Source: `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/analytics/exact.hpp`.
 
-Evidence: Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.
+Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
 
 Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.
 
@@ -83,7 +83,7 @@ ITCH framing,decoding,context and synthetic L3 reconstruction
 
 Source: `src/itch/binary_file.cpp`, `src/itch/decoder.cpp`, `src/itch/context.cpp`, `src/itch/reconstruction.cpp`.
 
-Evidence: Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.
+Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
 
 Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.
 
@@ -95,11 +95,11 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Python/native integration and native-backed browser
 
-Source: `python/gig_microstructure/__init__.py`, `terminal/server/engine.py`, `terminal/server/analysis.py`.
+Source: `python/gig_microstructure/__init__.py`, `terminal/server/engine.py`, `terminal/server/analysis.py`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`.
 
-Evidence: Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.
+Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
 
-NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation.
+NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation. Optional streaming SDK now exposes the existing C++ full-source coordinator;default dependency-compatible SDK rejects that capability explicitly.
 
 Disposition: Implemented bounded research contract;retain tested behavior
 
@@ -111,7 +111,7 @@ Deterministic replay,journal and recovery contracts
 
 Source: `src/replay/replay.cpp`, `terminal/server/engine.py`.
 
-Evidence: Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched.
+Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json.
 
 Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.
 
@@ -136,8 +136,6 @@ Next action: Cannot resolve through code alone within no-launch/no-unauthorized-
 Dependency: Independently complete observed L3 initialization,source/order-level reference and lawful dataset use.
 
 Evidence to unblock: A bound initialization manifest,source/reference hashes and independently reproducible observed-order comparisons.
-
-Independent work: Existing bounded native eligibility,decoding,replay and reference infrastructure retained;no new source observations invented.
 
 ## UI01 — COMPLETE
 
@@ -271,9 +269,9 @@ Historical Replay workspace
 
 Source: `terminal/web/src/App.tsx`, `terminal/server/engine.py`.
 
-Evidence: Retained prior checkpoint evidence unless updated below: Baseline12-workspace dark/light/layout browser cohort;related native/stock journeys Current160frontend unit tests andTypeScript/Viteproduction build passed;28real native-to-TS contract assertions passed. Prior visual/browser results were not rerun under the no-launch restriction.
+Evidence: 161frontend tests and TSC/Vite build passed;35actual native-to-frontend assertions include revision2source restore. New regression gives zero-length restored continuation0percent;completed nonempty replay still100percent. No browser/application launched.
 
-Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled.
+Play,pause,step,seek,speed and dataset selection call the native research session;recorded and authored data are separately labeled. Restored source revisions retain the same browser contract;zero-length continuation progress is now honest.
 
 Disposition: Implemented bounded research contract;retain tested behavior
 
@@ -381,8 +379,6 @@ Dependency: Actual target hardware/browser/GPU and permission to launch.
 
 Evidence to unblock: Recorded current-SHA lifecycle,interaction,resource and responsive/device results across15 modes.
 
-Independent work: Current leaf markup/contract checks only;no WebGL or browser launched.
-
 ## DATA01 — COMPLETE
 
 Broad discovery independent of SEC/feed entitlement
@@ -413,6 +409,8 @@ Next action: Independent offline package completed;the listed missing contract/s
 
 Dependency: Configured permitted listing source/private target;source coverage and freshness evidence.
 
+Remaining implementation or qualification: Current complete listing coverage requires an actual authorized source import and reconciliation,not SEC registrants.
+
 ## SEC01 — COMPLETE
 
 SEC identity admission,selected facts,ratios,filings and provenance
@@ -431,17 +429,19 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Complete historical financial statements and point-in-time source history
 
-Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`.
 
-Evidence: 59authored XML tests pass,including8new DTS/vintage binding cases and2context-placement methods;included in final301per5binding profiles and59installed/extracted-source checks. Raw source hashes/native identities unchanged;affected semantic-context/fact hashes intentionally versioned DIM_CONTEXT_ELEMENT_V2.
+Evidence: 83authored XML cases,including4failing-before UTC/context/unit regressions,17numeric-type/facet cases and3new supplied-DTS CLI cases;included in336per5binding profiles and installed default/source-enabled wheel checks. Source-byte provenance and eight native identities preserved.
 
-Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched.
+Existing instance/plain-inline/DTS/presentation/vintage profiles now preserve segment/scenario placement and reject duplicate containers/mixed typed text. Explicit ingest_dts_batch joins selected facts to supplied declarations by source hash/origin/expanded QName,checks period/abstract/nillable contradictions and retains document/unsupported/type provenance atomically in acceptance-time exports. Unknown/custom types and dimensions are not silently validated. No URI fetched. New explicit NUMERIC_VALUE_FACETS_V1 resolves supported numeric bases/simple restrictions,checks exact value/range/digit facets and known units,retains type/document/fact lineage and rejects unsupported selected types atomically. Existing CLI now accepts supplied-DTS batches. UTC-normalized filing-date guards preserve equivalent cutoff eligibility;significant structural qualifier text rejects. Global schema/statement validation remains false.
 
 Disposition: Bounded instance parsing and filing-vintage research/export are implemented. Full DTS/inline/presentation/extension semantics,complete statements and original historical source coverage remain incomplete within the approved scope.
 
-Next action: Next engineering profile:bounded schema-type validation and authoritative inline transformation/continuation support with independent fixtures,then relationship/statement mapping and v2 integration. Complete XBRL engineering still exists;do not call it only an external blocker.
+Next action: Next engineering:bounded authoritative inline transformations/continuations,complex schema/DRS and dimensional relationships,effective relationship precedence/calculation/statement mapping and v2 integration. Do not repeat implemented numeric facets,DTS CLI or UTC repair.
 
 Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
+
+Remaining implementation or qualification: Full complex/custom schema construction,inline transformation/continuation/tuple profiles,DRS/hypercube/default/typed-domain relationships,presentation/calculation precedence,complete statement and v2 integration,comprehensive lawful source/vintage corpus and observed verification remain incomplete.
 
 ## SEC03 — BLOCKED
 
@@ -460,8 +460,6 @@ Next action: Cannot resolve through code alone within no-launch/no-unauthorized-
 Dependency: Configured identifying SEC User-Agent and permitted owner target;current task forbids provider calls.
 
 Evidence to unblock: Current-candidate official-source reconciliation receipts with report/source SHA,date/count/scope.
-
-Independent work: New strict retained-cache joins and independent authored source tests completed without requests.
 
 ## MD01 — COMPLETE
 
@@ -537,8 +535,6 @@ Dependency: Owner-private target,credentials/authorized feed and a separately ap
 
 Evidence to unblock: Bounded actual IEX live/historical receipts showing entitlement,source clock,freshness,venue and no trading.
 
-Independent work: Offline stream/checkpoint/subscription correctness improved;no credentials inspected or provider contacted.
-
 ## MD06 — PARTIAL
 
 Complete corrected exchange tape and lossless reconnect
@@ -555,13 +551,15 @@ Next action: Independent offline package completed;the listed missing contract/s
 
 Dependency: Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.
 
+Remaining implementation or qualification: Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.
+
 ## MD07 — PARTIAL
 
 Official-contract Kraken cryptocurrency L2 and native/product integration
 
 Source: `terminal/providers/kraken.py`, `terminal/providers/supervisor.py`, `terminal/providers/test_recovery_hardening.py`, `terminal/providers/test_differential.py`, `terminal/server/engine.py`, `terminal/web/src/OrderBook.tsx`, `terminal/l2_research.py`.
 
-Evidence: Existing offline Kraken integrity/admin/differential fixtures included in final301per5profiles. Official documentation-only retrieval returned proxy CONNECT403;no retry/feed connection.
+Evidence: Existing offline Kraken cases remain in current336per5profiles. No fresh documentation/provider request;previous CONNECT403 and unchanged restricted policy remain explicit.
 
 Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.
 
@@ -570,6 +568,8 @@ Disposition: Track the explicitly requested Kraken requirement without calling c
 Next action: Obtain permitted authoritative protocol/checksum documentation before expanding supported semantics or removing provisional status. Do not repeatedly retry a policy-blocked host.
 
 Dependency: Current official protocol/rights evidence;earlier CONNECT403 and enforced policy excluding Kraken docs/feed domains remain recorded. No blocked operation was retried and no proxy bypass attempted.
+
+Remaining implementation or qualification: Retrieve and verify the current official WebSocketv2 book/checksum/trade/status/session contract and applicable usage evidence;reconcile candidate rules and add source-versioned fixtures. Actual later private-provider and browser qualification remain unrun. Do not change the provisional flag before evidence exists.
 
 ## RES01 — COMPLETE
 
@@ -617,8 +617,6 @@ Dependency: Legitimate observed evaluation data and independently defined out-of
 
 Evidence to unblock: Versioned datasets/causal evaluation,independent comparisons and actual statistical results.
 
-Independent work: Mathematical/replay/export infrastructure retained;no forecast accuracy,alpha or calibrated fill claim.
-
 ## REL01 — COMPLETE
 
 Bounded observation persistence,recovery,backup and corruption rejection
@@ -637,17 +635,19 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Crash-safe hot live/L3 recovery and hardware durability guarantees
 
-Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`.
+Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`, `terminal/test_itch_source_product.py`.
 
-Evidence: Six native CTest profiles passed: GCC152/152/153 and Clang152/152/148;focused final binding/unit tests and all8 frozen identities passed in all6profiles. Final301guarded developer cases passed in each5supported binding profiles;installed8SDK+55recovery+59XBRL cases and28real native-to-TypeScript assertions passed. See PRODUCT_SESSION_EVIDENCE.json for chronology and distinct source identities. No app/provider/browser was launched. Product18tests include private immutable crash restart,cross-process,migration,candidate allocation/resource refusal,paused terminal state and actual replay-worker survival.
+Evidence: Current full rebuilt GCCRelease152/152;focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles.336guarded Python cases per5supported binding profiles;161frontend tests/build;35real-native-to-TypeScript assertions. Clean source and both new wheel variants verified. Earlier full native six-profile totals remain historical;see XBRL_SOURCE_CONTINUATION_EVIDENCE.json. New11source-product tests cover actual plain/gzip C++ coordinator,CRC/prefix/generation/position/resource refusal,idempotency,revision2lineage,explicit migration and immutable separate-process CLI restart.
 
-Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim.
+Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration.
 
 Disposition: Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.
 
-Next action: Do not duplicate codec/product integration. Any additional schema/source position migration needs an explicit supported contract and fixtures;observed/hardware guarantees require independently complete source and target fault evidence.
+Next action: Do not reimplement SDK/source/product continuation. Partial/terminal/arbitrary compressed positions and unknown native schemas remain explicitly unsupported;additional contracts need specification/fixtures. Actual observed continuity and hardware/target evidence remain unqualified.
 
 Dependency: For broader full hot-recovery claims:specified additional schema/source-position contracts,legitimate observed initialization/continuity evidence and actual target/hardware testing. Unknown migrations and partial/arbitrary compressed positions fail closed.
+
+Remaining implementation or qualification: Bounded authored product/source engineering implemented. Broader unsupported position/container/schema contracts need explicit specifications before expansion;observed-source losslessness and actual target/hardware guarantees remain unverified.
 
 ## SECURITY01 — COMPLETE
 
@@ -693,6 +693,8 @@ Next action: Independent offline package completed;the listed missing contract/s
 
 Dependency: Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
 
+Remaining implementation or qualification: Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.
+
 ## OPS01 — COMPLETE
 
 Private startup,exact-SHA upgrade,rollback and qualification tools
@@ -725,8 +727,6 @@ Dependency: Actual owner-authenticated private Codespaces edge and authorized ap
 
 Evidence to unblock: Exact-SHA private-authentication/Origin/Host/HTTPS/WSS acceptance with source/assets receipts.
 
-Independent work: Existing exact-SHA deployment/rollback tooling retained;no local proxy fixture represented as target authentication.
-
 ## OPS03 — BLOCKED
 
 Current-candidate genuine native ARM64 qualification
@@ -744,8 +744,6 @@ Next action: Cannot resolve through code alone within no-launch/no-unauthorized-
 Dependency: Current-candidate genuine free native ARM64 runner and owner-authorized manual execution.
 
 Evidence to unblock: Actual run IDs,tested SHA,six job conclusions,test counts and eight reference identities.
-
-Independent work: Manual workflow unchanged;no dispatch,cross-compile-as-runtime claim or paid hardware.
 
 ## UX01 — COMPLETE
 
@@ -776,6 +774,8 @@ Disposition: Feasible text alternative implemented. Physical devices,screen read
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
 Dependency: Separate authorization to launch/test actual browsers and access to target devices/assistive technology.
+
+Remaining implementation or qualification: Current real-browser,assistive-technology,device and exhaustive WCAG2.2AA qualification remain unperformed under the no-launch directive.
 
 ## CLEAN01 — COMPLETE
 
@@ -820,3 +820,5 @@ Disposition: Owner decision:recover the original requirement or approve a prospe
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
 Dependency: Recover original requirements or approve an explicitly prospective versioned contract.
+
+Remaining implementation or qualification: Original A18/A19 baseline/estimator still unknown;no retroactive completion or substitute estimator.

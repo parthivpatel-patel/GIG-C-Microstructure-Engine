@@ -1,5 +1,7 @@
 # Supplied inline-XBRL and DTS/presentation development profiles
 
+Historical profile evidence below is retained. Later numeric/DTS/vintage and source-recovery packages are documented in XBRL_NUMERIC_PROFILE.md and REPORT.md;the earlier48/262case counts are not current totals.
+
 Additive offline code:`terminal/stocks/inline_xbrl.py`,`xbrl_dts.py`. Existing strict `parse_instance` remains instance-only. FilingCollection now dispatches supplied instance/XHTML files without provider calls. All source hashes,receipts,CIKs,contexts,units,amendment/cutoff and permission requirements remain intact.
 
 ## Plain inline-XBRL1.1

@@ -20,7 +20,7 @@ Switching to the existing authored source remains available. A server-pinned ITC
 
 ## Explicit migration
 
-Only the version1 artifact/product schema is supported. `ItchRecovery.migrate` admits old trusted bytes against the current native invariants and canonical state,re-encodes the same source/config/capture/generation under the target code identity,and validates again. The product migration target is derived from the actual native binary and product/engine source files. Original source bytes remain unchanged;the new bundle records source bundle/image/implementation/binary hashes. Migration is explicit,bounded and never automatic. It does not establish equivalence of arbitrary historical algorithms or provide an unknown-schema converter.
+The native artifact remains version1. Product revision1 remains supported;revision2 adds the bounded source-recovery lineage described in ITCH_SOURCE_PRODUCT.md. `ItchRecovery.migrate` admits old trusted bytes against the current native invariants and canonical state,re-encodes the same source/config/capture/generation under the target code identity,and validates again. The product migration target is derived from the actual native binary and product/engine source files. Original source bytes remain unchanged;the new bundle records source bundle/image/implementation/binary hashes. Migration is explicit,bounded and never automatic. It does not establish equivalence of arbitrary historical algorithms or provide an unknown-schema converter.
 
 Offline operator commands are available without starting GIG:
 

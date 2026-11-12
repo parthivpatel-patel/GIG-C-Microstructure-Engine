@@ -1,29 +1,30 @@
 {
-  "schema": "gig.development.evidence.index.v8",
-  "starting_source": "6026368c74fe72ceeca8e529b8c0e7b84bad6dfb",
-  "tested_application_source": "03078f65b2d7907fd78a52bf7f25d9c8d2c74a0c",
-  "current_evidence": "PRODUCT_SESSION_EVIDENCE.json",
+  "schema": "gig.development.evidence.index.v9",
+  "starting_source": "57e7bc2df3a7a11af3acc036b0231dae293bcb92",
+  "tested_application_source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+  "current_evidence": "XBRL_SOURCE_CONTINUATION_EVIDENCE.json",
   "current_evidence_receipt": {
-    "path": "docs/qualification/development-continuation/PRODUCT_SESSION_EVIDENCE.json",
-    "bytes": 49291,
-    "sha256": "f7e8d5d7bc5d9954725316584f61e674e2043ca5d55a43e973ba282faa19c841"
+    "path": "docs/qualification/development-continuation/XBRL_SOURCE_CONTINUATION_EVIDENCE.json",
+    "bytes": 53143,
+    "sha256": "9d9a9c81185132846f7b776e6f887540770bb09881062dc4bf78b0f797a20a26"
   },
   "previous_index": {
-    "git_object": "2eb38f4:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "50227d4db0d582a177b3447bd68f1c2327e8f055606c6fc0b71740bbde714385"
+    "git_object": "57e7bc2df3a7a11af3acc036b0231dae293bcb92:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "ebbefbd16eadd663bcf7290f17e1859f849395e8ed01d17750aecc4460d87d52"
   },
-  "native_ctest_passed": [
-    152,
-    152,
-    153,
-    152,
-    152,
-    148
+  "full_current_gcc_release_ctest": 152,
+  "focused_native_passed": [
+    6,
+    6,
+    6,
+    6,
+    6,
+    5
   ],
-  "python_cases_each_of_five": 301,
-  "frontend_cases": 160,
-  "native_frontend_assertions": 28,
-  "all_eight_native_identities": "Actually rerun and matched in each of six native profiles",
+  "frozen_passed_each_of_six": 8,
+  "python_cases_each_of_five": 336,
+  "frontend_cases": 161,
+  "native_frontend_assertions": 35,
   "requirements": {
     "COMPLETE": 34,
     "BLOCKED": 7,
@@ -33,10 +34,10 @@
   "total_rows": 50,
   "development_complete": false,
   "no_application_or_provider_launch": true,
-  "final_documentation_commit": "Not self-embedded;verify Git/remote receipt",
+  "final_documentation_commit": "Verify Git/remote;not self-embedded",
   "packaging_receipt": {
     "path": "docs/qualification/development-continuation/PACKAGE_CURRENT.json",
-    "bytes": 4242,
-    "sha256": "187ab5ff2c5d23549a749b0907c927b7f7f1ab094bbfa6b97b5cd0900bd41da1"
+    "bytes": 6338,
+    "sha256": "5a0ad562e62be85408a41b348a9d7332e71569da97c5736fa98c5a75fd240551"
   }
 }

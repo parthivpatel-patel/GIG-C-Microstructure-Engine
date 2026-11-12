@@ -1,0 +1,1110 @@
+{
+  "schema": "gig.xbrl.source_continuation.evidence.v1",
+  "date": "2026-11-12",
+  "timezone": "America/New_York",
+  "starting_source": "57e7bc2df3a7a11af3acc036b0231dae293bcb92",
+  "tested_runtime_source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+  "branch": "development/gig-ui-redesign",
+  "source_sha256": {
+    "CMakeLists.txt": {
+      "path": "CMakeLists.txt",
+      "bytes": 30055,
+      "sha256": "55c6c947caa1b002127cab8c4a0566b8feb513cba3d0e59cd56647aa52347672"
+    },
+    "python/bindings/itch_recovery.cpp": {
+      "path": "python/bindings/itch_recovery.cpp",
+      "bytes": 7465,
+      "sha256": "8eda7b92c0bc2c85b3944740f61e08f0f20c312d3222dc3856d9dbb1c2825419"
+    },
+    "python/gig_microstructure/itch_recovery.py": {
+      "path": "python/gig_microstructure/itch_recovery.py",
+      "bytes": 5982,
+      "sha256": "44c40d31c5b83ac8ee44a475b048b5e585082d511cb22bb486418b189853a790"
+    },
+    "scripts/inspect_xbrl_instances.py": {
+      "path": "scripts/inspect_xbrl_instances.py",
+      "bytes": 4439,
+      "sha256": "dcd729382d0db9f2c8fced2bf3721fc313dccdcbea3dcdd1948b55f28d3783bf"
+    },
+    "scripts/manage_itch_session.py": {
+      "path": "scripts/manage_itch_session.py",
+      "bytes": 3149,
+      "sha256": "7b7b19c5f044da7413069752e5b79bca1de367f05d71345e7bb1fde361093ce3"
+    },
+    "terminal/itch_product.py": {
+      "path": "terminal/itch_product.py",
+      "bytes": 19270,
+      "sha256": "a19662559b420c5be6af1c5805e4879835d52fdb2d83495b2a177ae0e789be5b"
+    },
+    "terminal/stocks/test_xbrl_collection.py": {
+      "path": "terminal/stocks/test_xbrl_collection.py",
+      "bytes": 7042,
+      "sha256": "f69ecb84a181d271165db40698c5ccdaaf9fbf91728adcdf602616aea287f648"
+    },
+    "terminal/stocks/test_xbrl_instance.py": {
+      "path": "terminal/stocks/test_xbrl_instance.py",
+      "bytes": 11930,
+      "sha256": "edc4119f967f554869cde406913a6b5a67615313f190f8bc0d22ed261a877af6"
+    },
+    "terminal/stocks/test_xbrl_tool.py": {
+      "path": "terminal/stocks/test_xbrl_tool.py",
+      "bytes": 6030,
+      "sha256": "bef592b57930a0fd9281dd168bf4ddd2fafdc9d555b5430858fb5053335f206a"
+    },
+    "terminal/stocks/test_xbrl_types.py": {
+      "path": "terminal/stocks/test_xbrl_types.py",
+      "bytes": 7915,
+      "sha256": "adc279adb04dcb803b0068b89fa735a0736f64ba84d88faedc57dde9f3bdb647"
+    },
+    "terminal/stocks/xbrl_collection.py": {
+      "path": "terminal/stocks/xbrl_collection.py",
+      "bytes": 9183,
+      "sha256": "0b454c9e178c0f70813e468515ea6674b624c542db0e2552622d96fd1d33a2a7"
+    },
+    "terminal/stocks/xbrl_dts.py": {
+      "path": "terminal/stocks/xbrl_dts.py",
+      "bytes": 11867,
+      "sha256": "d4d4f3cc9d1699c73d6b339cf882755d11558a8366dcea6f248f75feca9fb905"
+    },
+    "terminal/stocks/xbrl_instance.py": {
+      "path": "terminal/stocks/xbrl_instance.py",
+      "bytes": 21210,
+      "sha256": "2c44e9d58eb83f9ce1cc8bdbb4cec646cc84c555f5f0cb74eb2eae10e0beda1b"
+    },
+    "terminal/stocks/xbrl_types.py": {
+      "path": "terminal/stocks/xbrl_types.py",
+      "bytes": 7239,
+      "sha256": "246d400a4203c4ce9857cbedd71541ec673b0e0ed37cf1acc446db7d97096b46"
+    },
+    "terminal/test_itch_source_product.py": {
+      "path": "terminal/test_itch_source_product.py",
+      "bytes": 10355,
+      "sha256": "47536d823748e2c8eb7ebd7b6e80b45292de55a62bcc7b9ccefe1e5cd6d8fe96"
+    },
+    "terminal/tests/check_itch_product_contract.py": {
+      "path": "terminal/tests/check_itch_product_contract.py",
+      "bytes": 5530,
+      "sha256": "e01bd785277d1b427e228d2b564e9f01471754b842ddeba70c191d54fff901e5"
+    },
+    "terminal/tests/run_no_launch_suite.py": {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "bytes": 3234,
+      "sha256": "3598358a9c1b7ac911be3468f3ef5a98cb2fdf305094495c497555bb01a1a8a8"
+    },
+    "terminal/web/src/itchSession.test.ts": {
+      "path": "terminal/web/src/itchSession.test.ts",
+      "bytes": 1959,
+      "sha256": "c4eb1e76dc9e2baf9a27268025a8b68a6516712eb090c9d3c6ec1f2fca819da6"
+    },
+    "terminal/web/src/itchSession.ts": {
+      "path": "terminal/web/src/itchSession.ts",
+      "bytes": 1199,
+      "sha256": "dfc04a1eff6efab9c2a193654346459d836647764868d8d35353c8910ab42d09"
+    },
+    "tests/test_itch_durable_checkpoint.cpp": {
+      "path": "tests/test_itch_durable_checkpoint.cpp",
+      "bytes": 10524,
+      "sha256": "f110395468f796c82c2c0de452b13a2f86dcad921f207670abc8d6534f3b626b"
+    }
+  },
+  "published_milestones": [
+    {
+      "sha": "186d54c7dd8d8772f25f7e6072fb5fc4587f09cd",
+      "title": "Correct XBRL UTC vintage guards and reject discarded structural qualifiers [skip ci]"
+    },
+    {
+      "sha": "6d97e95f3ba77ab99c0000bbc594cb555fc70ab0",
+      "title": "Add bounded supplied-taxonomy numeric facets and offline DTS export [skip ci]"
+    },
+    {
+      "sha": "d84578587ad99cee78f08b1ff738971070762177",
+      "title": "Expose bounded native source continuation through private ITCH product revisions [skip ci]"
+    },
+    {
+      "sha": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+      "title": "Verify source-restored frontend states and empty continuation progress [skip ci]"
+    },
+    {
+      "sha": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "title": "Preserve full-width source provenance in browser state and validate lineage boundaries [skip ci]"
+    }
+  ],
+  "native_profiles": [
+    {
+      "configuration": "native-release",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 23.817,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-native-release.log",
+        "bytes": 785,
+        "sha256": "9f6d226d4b4928d7bf4aaea4b450da1933060ca937326d5e2a35e14a547ed365"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-native-release.log",
+        "bytes": 1093,
+        "sha256": "65ee2c5e46a2feb2b2047c05970a6b555147242dc40cd1ca5a789ebab640953f"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-native-release.log",
+        "bytes": 1218,
+        "sha256": "b3588a30d9d4670c0a7b38e858f885df5c9c5821e37f7d99f1e6572a0f3574da"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-native-release.log",
+        "bytes": 10109,
+        "sha256": "1e1c832bc096220cb7e2c5403248cd44a18cebd4fe4bf5509e7baa346c698522"
+      }
+    },
+    {
+      "configuration": "native-debug",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 52.291,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-native-debug.log",
+        "bytes": 1785,
+        "sha256": "91413cb4ca9e555c15328bcdda8332f423127939bb122c95dcea9759d87015d6"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-native-debug.log",
+        "bytes": 1089,
+        "sha256": "e32175282258a5fae0b89ad400105acd2399d7448b9c373f1ea7151e6d30da87"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-native-debug.log",
+        "bytes": 1214,
+        "sha256": "ccecf32a1b1164fe47437903732636d541f4579ccece19de51c5d7d2c56ceac7"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-native-debug.log",
+        "bytes": 10077,
+        "sha256": "56f1e5b80c711bbccf7b119778ddf259b8e3e9d9d99fa36b13a0df3185e14b2c"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 98.802,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-native-asan-ubsan.log",
+        "bytes": 1790,
+        "sha256": "3dac499009aa630e7bb08962ef68762162153a8731efeed7bc1889edfd5d99ed"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-native-asan-ubsan.log",
+        "bytes": 1099,
+        "sha256": "f0551a40168dfeb88c051a4096ff55521446ab082e2f3ac156b7482a9d71435f"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-native-asan-ubsan.log",
+        "bytes": 1224,
+        "sha256": "51563af03669be348b68aa71b99588429ffe5afdb79325b5a227de12627071f7"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-native-asan-ubsan.log",
+        "bytes": 10157,
+        "sha256": "076cedfb0ee5cbb1cc5fd9f9c291dbd2952d8a2ec385d56920d091709fabdb40"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 56.926,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-clang-debug.log",
+        "bytes": 1784,
+        "sha256": "2bc83f710fd567307f4928db12bf47cf90847e0c2b3e1ddb8887f507d037c258"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-clang-debug.log",
+        "bytes": 1087,
+        "sha256": "915c1a7bb8072cc560b01b7115657b76ebaa655bb731f599857b9430b12ae46a"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-clang-debug.log",
+        "bytes": 1212,
+        "sha256": "454b6699fd34c0a9fc0047e788eedf7b4a96a63e6d232e84950455b9381d8ca9"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-clang-debug.log",
+        "bytes": 10061,
+        "sha256": "f177f791a0e22471514f7306065e5743546e81304db907d532c65195849522e9"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 54.666,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-clang-release.log",
+        "bytes": 1786,
+        "sha256": "353d7a80db0678a318ce78da7c1f4fe0949d0a88d8f454b9ea83466e8467f385"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-clang-release.log",
+        "bytes": 1091,
+        "sha256": "73efc7dc6937691bf55838c84f2571ac2a3eb7ce1588c9ae49995c0ea0dcece3"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-clang-release.log",
+        "bytes": 1216,
+        "sha256": "c0b2e33790541c3977808ce36269206e1e66ce2627ce16601ae87a8fabeffcfc"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-clang-release.log",
+        "bytes": 10093,
+        "sha256": "6b9c2ae51dbca7fc14468a709e0c7e646550875a4ee3c8b2c56866342574807d"
+      }
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "native_focused_passed": 5,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 49.107,
+      "build": {
+        "path": "build/remaining-engineering/xbrl2-build-clang-asan-ubsan.log",
+        "bytes": 410,
+        "sha256": "0b57c00175c435fc408311060d065758416040b0122fb6572c4915be0af97179"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/xbrl2-native-focused-clang-asan-ubsan.log",
+        "bytes": 965,
+        "sha256": "bd092773ce279e7309c62d1152a18568cbb30c144742f4a5cc16acd0df39eb56"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/xbrl2-frozen-clang-asan-ubsan.log",
+        "bytes": 1222,
+        "sha256": "a2d427f876a58da249d694c4451921c37a1d4896c6083227ee345a61afc487d5"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/xbrl2-frozen-detail-clang-asan-ubsan.log",
+        "bytes": 10141,
+        "sha256": "ee03ff758b2ce5d4c9b21c2f5d3c125b193705063e2a19db45d3223db05ca51b"
+      }
+    }
+  ],
+  "full_gcc_release": {
+    "passed": 152,
+    "failed": 0,
+    "build": {
+      "path": "build/remaining-engineering/xbrl2-release-all-build.log",
+      "bytes": 500,
+      "sha256": "1bfb7a3280e431da3ba80d626085ec0ad3b374ba1eb7be82b432ab0f45a0be42"
+    },
+    "ctest": {
+      "path": "build/remaining-engineering/xbrl2-release-full-ctest.log",
+      "bytes": 19861,
+      "sha256": "42d7ab4481aa5d9664cccc9240a5ee9ac888e1a0133d84ea4e2ed4e3490d066b"
+    },
+    "tested_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+    "detail": {
+      "path": "build/remaining-engineering/xbrl2-release-full-detail.log",
+      "bytes": 136407,
+      "sha256": "bd36154646cdad3e65d122ef347f3f5a9cdfcedc78f22a740d587c78c76ebd7f"
+    }
+  },
+  "native_scope": "Core src/include unchanged since57e7bc2. Rebuilt changed SDK/fixture and streaming PIC inputs in six profiles;focused recovery and all eight frozen references reran in each. Full rebuilt GCCRelease suite also reran. Earlier full six-profile matrix is retained historical evidence,not relabeled rerun. Final f7c1e0d changes product projection/validation and adds an optional high-generation fixture branch;SDK/core/build inputs match7aea334. The default durable test recompiled/passed again in all6profiles. Full336-per-profile Python checks include the new high-generation branch.",
+  "python_profiles": [
+    {
+      "configuration": "native-debug",
+      "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "elapsed_seconds": 31.389,
+      "log": "build/remaining-engineering/xbrl2-final-python-native-debug.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 336,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 336,
+      "receipt": {
+        "path": "build/remaining-engineering/xbrl2-final-python-native-debug.log",
+        "bytes": 63319,
+        "sha256": "6cc73e372d0e26590425472a2a5689eb2e5ceb3fa80d53adb5b3dc82ebf4e963"
+      }
+    },
+    {
+      "configuration": "native-release",
+      "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "elapsed_seconds": 26.735,
+      "log": "build/remaining-engineering/xbrl2-final-python-native-release.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 336,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 336,
+      "receipt": {
+        "path": "build/remaining-engineering/xbrl2-final-python-native-release.log",
+        "bytes": 63319,
+        "sha256": "99cb684646696fcabcb52340e89fecd7bba00581f2b4f76d6707bc96ca432b85"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "elapsed_seconds": 137.438,
+      "log": "build/remaining-engineering/xbrl2-final-python-native-asan-ubsan.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 336,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 336,
+      "receipt": {
+        "path": "build/remaining-engineering/xbrl2-final-python-native-asan-ubsan.log",
+        "bytes": 63320,
+        "sha256": "b0c634553c4d778209e1bd235a18baf3a1c8ad75bc0523a258da943d5c7b364c"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "elapsed_seconds": 21.884,
+      "log": "build/remaining-engineering/xbrl2-final-python-clang-debug.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 336,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 336,
+      "receipt": {
+        "path": "build/remaining-engineering/xbrl2-final-python-clang-debug.log",
+        "bytes": 63319,
+        "sha256": "766f4dfbe5317795e1c223b3d64e8148fbe7f301191c28543b218ed8b64637e6"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+      "elapsed_seconds": 18.676,
+      "log": "build/remaining-engineering/xbrl2-final-python-clang-release.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 336,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 336,
+      "receipt": {
+        "path": "build/remaining-engineering/xbrl2-final-python-clang-release.log",
+        "bytes": 63319,
+        "sha256": "fb806eab8c8df06b503dd6ba7cfc6ada402606d96f91a947e0ba18262cdfe297"
+      }
+    }
+  ],
+  "focused_xml": {
+    "cases": 83,
+    "receipt": {
+      "path": "build/remaining-engineering/xbrl2-profile-final.log",
+      "bytes": 182,
+      "sha256": "86b446b8c837cec43be22687851bf4b82e698d131020b1bd5f4ddf9271a96053"
+    },
+    "scope": "Authored instance/inline/DTS/binding/numeric/vintage/CLI;not full XBRL schema conformance"
+  },
+  "source_product": {
+    "new_cases": 11,
+    "combined_old_product_durable_and_new_source_cases": 38,
+    "receipt": {
+      "path": "build/remaining-engineering/xbrl2-u64-after.log",
+      "bytes": 137,
+      "sha256": "8e477fe9bf532e621addd640cf5a77ea64c5cd77c6605ae625483e88f7aba0b0"
+    }
+  },
+  "frontend": {
+    "tests": 161,
+    "failed": 0,
+    "skipped": 0,
+    "unit": {
+      "path": "build/remaining-engineering/xbrl2-frontend-tests.log",
+      "bytes": 15288,
+      "sha256": "60a9cbc4966c61776059b07c0fd12a60a45ac0f889353b25e3331f2358af3ec5"
+    },
+    "build": {
+      "path": "build/remaining-engineering/xbrl2-frontend-build.log",
+      "bytes": 2427,
+      "sha256": "485dbf144808fc31ec8eb25873588cfb74a661c8445ceed41c44b6f342d5c3c3"
+    },
+    "native_contract": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    },
+    "native_contract_receipt": {
+      "path": "build/remaining-engineering/xbrl2-u64-contract.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+    },
+    "browser_started": false,
+    "warning": "Existing optional Three/OrbitControls chunk above500kB warning retained"
+  },
+  "packaging": {
+    "schema": "gig.package.current_source.v6",
+    "source": "f7c1e0df2fb95e48f84752de51fc396daf0518f8",
+    "clean_source_archive": true,
+    "sdist": {
+      "path": "build/remaining-engineering/xbrl2-final-sdist/gig_microstructure-0.1.1.tar.gz",
+      "bytes": 7959610,
+      "sha256": "0b5962a85c1f993a49a0294902f2baa2c9b1bd967c40e91a67a12635ff255eba"
+    },
+    "sdist_members": 1266,
+    "tracked_archive_files_compared": 1265,
+    "changed_runtime_files_compared": [
+      "CMakeLists.txt",
+      "python/bindings/itch_recovery.cpp",
+      "python/gig_microstructure/itch_recovery.py",
+      "scripts/inspect_xbrl_instances.py",
+      "scripts/manage_itch_session.py",
+      "terminal/itch_product.py",
+      "terminal/stocks/test_xbrl_collection.py",
+      "terminal/stocks/test_xbrl_instance.py",
+      "terminal/stocks/test_xbrl_tool.py",
+      "terminal/stocks/test_xbrl_types.py",
+      "terminal/stocks/xbrl_collection.py",
+      "terminal/stocks/xbrl_dts.py",
+      "terminal/stocks/xbrl_instance.py",
+      "terminal/stocks/xbrl_types.py",
+      "terminal/test_itch_source_product.py",
+      "terminal/tests/check_itch_product_contract.py",
+      "terminal/tests/run_no_launch_suite.py",
+      "terminal/web/src/itchSession.test.ts",
+      "terminal/web/src/itchSession.ts",
+      "tests/test_itch_durable_checkpoint.cpp"
+    ],
+    "wheel_profiles": [
+      {
+        "profile": "default",
+        "wheel": {
+          "path": "build/remaining-engineering/xbrl2-default-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+          "bytes": 666813,
+          "sha256": "08e67b5790dfe5f0afdb24c05177ab7c1b1f339693d9e1c4f90c0bd73c1c9c3d"
+        },
+        "wheel_members": 22,
+        "built_from_this_sdist": false,
+        "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+        "sdk_source_byte_equivalence_verified": true,
+        "streaming_enabled": false,
+        "tests": [
+          {
+            "name": "consumer",
+            "cases": 8,
+            "seconds": 0.615,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-default-installed-consumer.log",
+              "bytes": 964,
+              "sha256": "de90ee9c17adf8bd76ef8e444499cc935a639e0fd2e4d77d58f07f61205d4e0a"
+            }
+          },
+          {
+            "name": "recovery",
+            "cases": 55,
+            "seconds": 8.991,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-default-installed-recovery.log",
+              "bytes": 154,
+              "sha256": "5bc1ff4709fc3f9d39265588a881e9d9863bba6d2cf64185228924ce53d30022"
+            }
+          },
+          {
+            "name": "xml",
+            "cases": 83,
+            "seconds": 0.415,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-default-installed-xml.log",
+              "bytes": 182,
+              "sha256": "a90b40cb5e0d8c4ebf6c26c035e9abb59db2b4bb5a3aa4e47eeda21f62df7eb9"
+            }
+          },
+          {
+            "name": "contract",
+            "cases": null,
+            "seconds": 0.318,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-default-installed-contract.log",
+              "bytes": 148,
+              "sha256": "49bac116ba0bd5bfa5f99e91e11ea37d222f44744b7030fec23df893dd5e8bd0"
+            }
+          }
+        ],
+        "contract": {
+          "schema": "gig.itch.product_contract.v1",
+          "assertions": 28,
+          "states": 4,
+          "source_recovery_states": 0,
+          "application_started": false,
+          "browser_started": false
+        },
+        "build": {
+          "path": "build/remaining-engineering/xbrl2-default-wheel-build.log",
+          "bytes": 1100,
+          "sha256": "07a98a5776bc788c43d047ce31e7cfbd144e34c3a4f3abe7ffe99d6c6721fed4"
+        }
+      },
+      {
+        "profile": "source",
+        "wheel": {
+          "path": "build/remaining-engineering/xbrl2-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+          "bytes": 677377,
+          "sha256": "e4cb3ccc673af98b4a240e1ddba5caad525858b6da8f413d7054f074bd737b98"
+        },
+        "wheel_members": 22,
+        "built_from_this_sdist": false,
+        "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+        "sdk_source_byte_equivalence_verified": true,
+        "streaming_enabled": true,
+        "tests": [
+          {
+            "name": "consumer",
+            "cases": 8,
+            "seconds": 0.616,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-source-installed-consumer.log",
+              "bytes": 964,
+              "sha256": "8aec57cb9b5412f6d1f067b462662ee1e27baaa7361b32129174e75fab29721f"
+            }
+          },
+          {
+            "name": "recovery",
+            "cases": 66,
+            "seconds": 9.297,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-source-installed-recovery.log",
+              "bytes": 165,
+              "sha256": "17e6310e2d8a2d4d6d9e534f7f45ca1b79fc33d40fbe9e73c583dd7191c4597e"
+            }
+          },
+          {
+            "name": "xml",
+            "cases": 83,
+            "seconds": 0.415,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-source-installed-xml.log",
+              "bytes": 182,
+              "sha256": "8aaf3e02039317a9df87613279b7bdfa82d8e215320e93969fdc8144d2533a0f"
+            }
+          },
+          {
+            "name": "contract",
+            "cases": null,
+            "seconds": 0.315,
+            "receipt": {
+              "path": "build/remaining-engineering/xbrl2-final-source-installed-contract.log",
+              "bytes": 148,
+              "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+            }
+          }
+        ],
+        "contract": {
+          "schema": "gig.itch.product_contract.v1",
+          "assertions": 35,
+          "states": 5,
+          "source_recovery_states": 1,
+          "application_started": false,
+          "browser_started": false
+        },
+        "build": {
+          "path": "build/remaining-engineering/xbrl2-source-wheel-build.log",
+          "bytes": 1100,
+          "sha256": "d139ce2fa7d2505cfe8d6cece105af14bfdf21733a180a0295361547ca9b36f0"
+        }
+      }
+    ],
+    "private_payloads": false,
+    "tests_use_extracted_source": true,
+    "no_index_no_dependencies": true,
+    "default_disabled_capability": {
+      "path": "build/remaining-engineering/xbrl2-final-default-capability.log",
+      "bytes": 29,
+      "sha256": "35eff951006bf94903bf42d9f0973dd34782ba8f0bf7ffce915788ad4a997cb8"
+    },
+    "archive_generated_from_verified_git_export": true
+  },
+  "reproduced_defects": [
+    {
+      "name": "UTC offset/calendar vintage selection and discarded significant context/unit text",
+      "new_methods": 4,
+      "original_failures_including_subtests": 6,
+      "before": {
+        "path": "build/remaining-engineering/xbrl2-before.log",
+        "bytes": 5463,
+        "sha256": "c55687ac3788e015b58641c64672466a96ba26be2252796787d625b5c515d414"
+      },
+      "after": {
+        "path": "build/remaining-engineering/xbrl2-repair-after.log",
+        "bytes": 162,
+        "sha256": "1e85e2e2e0eaaf992f795f8f9001c250fb87bc7581733be5bf2423117df198d9"
+      }
+    },
+    {
+      "name": "Zero-length restored continuation displayed100percent instead of empty progress",
+      "before": {
+        "path": "build/remaining-engineering/xbrl2-frontend-contract-before.log",
+        "bytes": 804,
+        "sha256": "fb628111fee13ff7187d238f44e630e301a9c16fe79d157bfec6e762a754db77"
+      },
+      "after": {
+        "path": "build/remaining-engineering/xbrl2-u64-contract.log",
+        "bytes": 148,
+        "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+      }
+    },
+    {
+      "name": "New source-history u64 generation rounded by the old public projection",
+      "before_python": {
+        "path": "build/remaining-engineering/xbrl2-u64-before.log",
+        "bytes": 827,
+        "sha256": "3508ed8aefa0dcf22e1cc389d5d4bbfc18db943b07ab3843831f2d599d87ccdd"
+      },
+      "before_actual_node_old_view": {
+        "path": "build/remaining-engineering/xbrl2-u64-node-before.log",
+        "bytes": 939,
+        "sha256": "352c0d370a7d3e67757bf78ddc4290a18527e558d02fa658f9030bc428735140"
+      },
+      "after": {
+        "path": "build/remaining-engineering/xbrl2-u64-after.log",
+        "bytes": 137,
+        "sha256": "8e477fe9bf532e621addd640cf5a77ea64c5cd77c6605ae625483e88f7aba0b0"
+      },
+      "scope": "Real native high-generation fixture;actual previous view method extracted from7aea334 and consumed byNode,without app construction"
+    }
+  ],
+  "intermediate_setup_failures": {
+    "source_test_helper": "First negative-type test hashed a string before reaching the SDK;test helper corrected,assertion retained",
+    "source_receipt": {
+      "path": "build/remaining-engineering/xbrl2-source-product-first.log",
+      "bytes": 3446,
+      "sha256": "b211c5a5f5b87330b1feacb5bde6411e190b319e5b6c3a78ee843be5e81c746e"
+    },
+    "wheel": "Inherited CXX named unavailable clang++;scoped installed GNU compiler selected,not a project-source fix",
+    "wheel_before": {
+      "path": "build/remaining-engineering/xbrl2-default-wheel-compiler-env-failure.log",
+      "bytes": 1770,
+      "sha256": "00ad043adeb0eea24e3d8286f27fc1f67f4b0dd1082136bf2a441a2da809be58"
+    },
+    "frontend": "Initial dependency-cache link script used an incorrect working-directory prefix;fixed using matching same-project lock/cache,no dependency changes",
+    "frontend_before": {
+      "path": "build/remaining-engineering/xbrl2-frontend-tests-setup-failed.log",
+      "bytes": 19431,
+      "sha256": "d8d60afb8b7b40341a240245f115d398909fa25dce8d11b0489b32d303d82d46"
+    }
+  },
+  "prior_evidence": {
+    "product": {
+      "path": "docs/qualification/development-continuation/PRODUCT_SESSION_EVIDENCE.json",
+      "bytes": 49291,
+      "sha256": "f7e8d5d7bc5d9954725316584f61e674e2043ca5d55a43e973ba282faa19c841"
+    },
+    "wrapper_git_object": "57e7bc2df3a7a11af3acc036b0231dae293bcb92:docs/qualification/development-continuation/EVIDENCE.json",
+    "wrapper_sha256": "ebbefbd16eadd663bcf7290f17e1859f849395e8ed01d17750aecc4460d87d52"
+  },
+  "tools": {
+    "host": "Linux x86_64",
+    "gcc": "14.2.0",
+    "clang": "19.1.7",
+    "python": "3.12.14",
+    "node": "24.19.0",
+    "vite": "8.3.5",
+    "zlib": "1.3.1"
+  },
+  "sanitizer_scope": "GCC/Clang native ASan+UBSan focused and frozen tests;GCCPython binding cohort under existing live-interpreter harness. Exit leak checking disabled under that harness;not complete CPython shutdown-leak clearance. ClangPython sanitizer runtime profile unsupported.",
+  "kraken": "No fresh request:previous official-documentation CONNECT403 remains bound in PRODUCT_SESSION_EVIDENCE.json;current restricted policy unchanged. Provisional designation retained. No feed connection.",
+  "not_executed": [
+    "Application/ASGI factory/listener or server launch",
+    "Market-provider/account connection or observed-data acquisition",
+    "Owner Codespaces/browser/device/visual acceptance",
+    "Current-candidate native ARM64 runtime or workflows",
+    "Trading,paper execution,paid infrastructure,deployment",
+    "Full XBRL schema/DRS/statement conformance or empirical observed L3 qualification"
+  ],
+  "development_complete": false,
+  "final_fixture_durable": {
+    "profiles": [
+      {
+        "profile": "native-debug",
+        "passed": 1
+      },
+      {
+        "profile": "native-release",
+        "passed": 1
+      },
+      {
+        "profile": "native-asan-ubsan",
+        "passed": 1
+      },
+      {
+        "profile": "clang-debug",
+        "passed": 1
+      },
+      {
+        "profile": "clang-release",
+        "passed": 1
+      },
+      {
+        "profile": "clang-asan-ubsan",
+        "passed": 1
+      }
+    ],
+    "receipts": [
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-native-debug.log",
+        "bytes": 527,
+        "sha256": "d69049f9bed3e78c465aa9549cb1881ba045e626fabf866873b7e5ebc30e194f"
+      },
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-native-release.log",
+        "bytes": 531,
+        "sha256": "2bebc3e630ca7494338481ecc17cfc5bc2f656a2271ba6dc21bc6b6c19043224"
+      },
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-native-asan-ubsan.log",
+        "bytes": 537,
+        "sha256": "4c56557521ef817a37a1f6712abb89004378759a8e549577f121c21e30e3c61d"
+      },
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-clang-debug.log",
+        "bytes": 525,
+        "sha256": "5c0784137e8b4337cfa8b1651449be4a64b27142d4de3c8e5babdf533017fbf0"
+      },
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-clang-release.log",
+        "bytes": 529,
+        "sha256": "77c84a9b714aa9a26c5034a34f63fa7ebb4af53fc644cf387384a890e837b407"
+      },
+      {
+        "path": "build/remaining-engineering/xbrl2-final-durable-clang-asan-ubsan.log",
+        "bytes": 651,
+        "sha256": "be9404f27ee9bdef878ded588d1fff97142232d0eb1f042717ca59de1db2623c"
+      }
+    ]
+  },
+  "runtime_dependency_check": {
+    "path": "build/remaining-engineering/xbrl2-runtime-pip-check.log",
+    "bytes": 294,
+    "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+  }
+}
