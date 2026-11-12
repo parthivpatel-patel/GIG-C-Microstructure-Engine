@@ -23,16 +23,46 @@ class ItchAdmission:
             raise ValueError('itch_capture_identity')
         if type(self.generation)is not int or not 0<=self.generation<=2**64-1:raise ValueError('itch_generation')
 
+@dataclass(frozen=True)
+class ItchSourceAdmission:
+    source_sha256:str
+    capture:str
+    generation:int
+    container:str
+    first_frame:int
+    first_ordinal:int
+    def validate(self):
+        ItchAdmission(self.source_sha256,self.source_sha256,self.source_sha256,self.capture,self.generation).validate()
+        if type(self.container)is not str or self.container not in('binary_file','single_gzip'):raise ValueError('itch_source_container')
+        if type(self.first_frame)is not int or not 0<=self.first_frame<=2**64-3 or type(self.first_ordinal)is not int or not 0<=self.first_ordinal<=2**64-1:raise ValueError('itch_source_boundary')
+
+def _validate_image(payload,admission,resource_budget_bytes):
+    if type(admission)is not ItchAdmission:raise ValueError('itch_admission_required')
+    admission.validate()
+    if type(payload)is not bytes or not 56<=len(payload)<=MAX_BYTES:raise ValueError('itch_byte_budget')
+    if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:raise ValueError('itch_resource_budget')
+    if hashlib.sha256(payload).hexdigest()!=admission.artifact_sha256:raise ValueError('itch_artifact_digest')
+
 class ItchRecovery:
     @classmethod
     def restore(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
-        if type(admission)is not ItchAdmission:raise ValueError('itch_admission_required')
-        admission.validate()
-        if type(payload)is not bytes or not 56<=len(payload)<=MAX_BYTES:raise ValueError('itch_byte_budget')
-        if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:raise ValueError('itch_resource_budget')
-        if hashlib.sha256(payload).hexdigest()!=admission.artifact_sha256:raise ValueError('itch_artifact_digest')
+        _validate_image(payload,admission,resource_budget_bytes)
         owner=_checked(_native.restore_itch_checkpoint(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes)))
         result=cls.__new__(cls);result._owner=owner;result.admission=admission;return result
+    @classmethod
+    def resume_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        _validate_image(payload,admission,resource_budget_bytes)
+        if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
+        source_admission.validate()
+        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
+        if type(source)is not bytes or len(source)>MAX_BYTES:raise ValueError('itch_source_byte_budget')
+        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
+        if not hasattr(_native,'resume_itch_source'):raise ValueError('itch_source_sdk_streaming_disabled')
+        owner=_checked(_native.resume_itch_source(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(int(source_admission.container=='single_gzip')),str(source_admission.first_frame),str(source_admission.first_ordinal)))
+        result=cls.__new__(cls);result._owner=owner
+        from dataclasses import replace
+        result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
+        return result
     def describe(self):return _checked(self._owner.describe())
     def book(self,index,depth=10):
         if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')

@@ -1,5 +1,6 @@
 #include "wire.hpp"
 #include "gig/itch/durable_checkpoint.hpp"
+#include "gig/itch/source_recovery.hpp"
 #include "gig/memory/tracked_resource.hpp"
 namespace gig::python {
 namespace {
@@ -19,6 +20,9 @@ class ItchRecovery {
  itch::SyntheticReconstructor engine_;
 public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+ ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::resume_hot_source(b,a,s,source,&memory_))){}
+#endif
  py::dict status(){return api([&](){auto context=engine_.context().checkpoint(&memory_);if(!context)bad(ErrorCode::inconsistent_state,"itch.context_capture");py::dict out;const auto&s=engine_.summary();out["source_records"]=write(s.context_committed);out["native_records"]=write(s.native_committed);out["external_records"]=write(s.external_observations);out["next_frame"]=write(context.data->next_location.frame_offset.value());out["next_ordinal"]=write(context.data->next_location.ordinal.value());out["generation"]=write(admission_.generation);out["capture"]=py::str(admission_.capture.view());out["pmr_live_bytes"]=write(memory_.stats().live_bytes);out["pmr_peak_bytes"]=write(memory_.stats().peak_bytes);return out;});}
  py::dict canonical(){return api([&](){py::list out;for(std::size_t n=0;n<engine_.config().book_count;++n){auto c=take(engine_.engine(n)->canonical());out.append(py::str(c.data(),c.size()));}return out;});}
  py::dict checkpoint(){return api([&]()->py::object{auto state=take(engine_.hot_checkpoint(&memory_));auto b=take(itch::encode_hot_checkpoint(state,admission_.capture,admission_.generation,admission_.implementation_sha256,&memory_));return py::bytes(reinterpret_cast<const char*>(b.data()),b.size());});}
@@ -31,5 +35,15 @@ public:
 void bind_itch_recovery(py::module_&m){
  py::class_<ItchRecovery>(m,"_ItchRecovery").def("describe",&ItchRecovery::describe).def("book",&ItchRecovery::book).def("rebind",&ItchRecovery::rebind).def("status",&ItchRecovery::status).def("canonical",&ItchRecovery::canonical).def("checkpoint",&ItchRecovery::checkpoint).def("process",&ItchRecovery::process);
  m.def("restore_itch_checkpoint",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget){return api([&](){auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n));});});
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+ m.def("resume_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
+  auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
+  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");
+  const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s));
+ });});
+#endif
 }
 }
