@@ -65,3 +65,17 @@ class Dimensions(unittest.TestCase):
   e=entry(None,default=True);p=parse_instance(e['raw'],e['manifest'],e['concepts']);g=discover(e['raw'],e['instance_uri'],e['manifest']['source_sha256'],e['documents']);derived=corroborate(bind_declarations(p,g),g)
   self.assertEqual(derived['schema'],'gig.sec.xbrl.dimensional_instance.v1');self.assertNotIn(derived['schema'],('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1'))
   with self.assertRaisesRegex(XBRLError,'already_applied'):corroborate(derived,g)
+ def test_derived_policy_cannot_be_dropped_or_relabeled_after_rehash(self):
+  from .xbrl_instance import parse_instance,digest,selected_financials
+  from .xbrl_dts import discover
+  from .xbrl_binding import bind_declarations
+  from .xbrl_dimensions import corroborate
+  e=entry(None,default=True);p=parse_instance(e['raw'],e['manifest'],e['concepts']);g=discover(e['raw'],e['instance_uri'],e['manifest']['source_sha256'],e['documents']);derived=corroborate(bind_declarations(p,g),g)
+  for change in('drop','empty','relabel','future'):
+   bad=copy.deepcopy(derived);bad.pop('canonical_sha256')
+   if change=='drop':bad['dts_corroboration'].pop('dimensional_validation')
+   elif change=='empty':bad['dts_corroboration']['dimensional_validation']['facts']=[]
+   elif change=='relabel':bad['schema']='gig.sec.xbrl.instance.v1'
+   else:bad['dts_corroboration']['dimensional_validation']['profile']='unreviewed'
+   bad['canonical_sha256']=digest(bad)
+   with self.subTest(change=change),self.assertRaisesRegex(XBRLError,'dimensional_result'):selected_financials(bad)

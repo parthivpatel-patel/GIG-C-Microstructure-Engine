@@ -277,7 +277,18 @@ def selected_financials(parsed):
  if is_set and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
  if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
  fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
- defaulted={r['source_fact_id']for r in(parsed.get('dts_corroboration')or{}).get('dimensional_validation',{}).get('facts',[])if r['used_defaults']}
+ dimension_proof=(parsed.get('dts_corroboration')or{}).get('dimensional_validation')
+ derived=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1')
+ defaulted=set()
+ if derived:
+  if type(dimension_proof)is not dict or dimension_proof.get('profile')!='EXPLICIT_CLOSED_HYPERCUBE_V1'or type(dimension_proof.get('facts'))is not list or len(dimension_proof['facts'])>MAX_FACTS:raise XBRLError('xbrl_dimensional_result_contract')
+  eligible=[r['source_fact_id']for r in parsed['facts']if r['admission']in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES')];seen=set()
+  for record in dimension_proof['facts']:
+   if type(record)is not dict or type(record.get('source_fact_id'))is not str or record['source_fact_id']in seen or record['source_fact_id']not in eligible or type(record.get('used_defaults'))is not dict or len(record['used_defaults'])>32:raise XBRLError('xbrl_dimensional_result_contract')
+   seen.add(record['source_fact_id'])
+   if record['used_defaults']:defaulted.add(record['source_fact_id'])
+  if seen!=set(eligible)or len(eligible)!=len(seen):raise XBRLError('xbrl_dimensional_result_contract')
+ elif dimension_proof is not None:raise XBRLError('xbrl_dimensional_result_requires_versioned_schema')
  namespaces={r['concept'].split('}',1)[0]for r in parsed['facts']if r['admission']=='ADMITTED_PROFILE'and re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}[A-Za-z0-9_]+',r['concept'])}
  if len(namespaces)>1:raise XBRLError('xbrl_multiple_taxonomy_versions_for_selection')
  for row in parsed['facts']:
