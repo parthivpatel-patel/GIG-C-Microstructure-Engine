@@ -21,7 +21,7 @@ names += ['terminal.test_itch_product','terminal.test_itch_source_product','term
 names += ['terminal.providers.test_'+name for name in ('recovery_hardening','supervisor','coinbase_supervisor','transport','kraken','integrity','kraken_admin','differential')]
 names += ['terminal.stocks.test_sec_expansion.Expansion.'+n for n in selected]
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=376
+expected=377
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'application_constructed':app._application is not None,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}

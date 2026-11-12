@@ -48,3 +48,8 @@ https://www.xbrl.org/Specification/XDT-REC-2006-09-18+Corrected-Errata-2012-01-2
 The profile is an intentionally narrow implementation,not evidence of fresh
 specification retrieval or complete conformance-corpus qualification. Complete
 DRS/effective-network validation remains PARTIAL.
+
+Dimensional results use distinct dimensional_instance.v1/dimensional_inline_set.v1
+schemas. Older selection code therefore rejects rather than ignoring the new
+default-sensitive eligibility policy. Original instance/set schemas remain
+compatible;reapplying the derived profile rejects explicitly.

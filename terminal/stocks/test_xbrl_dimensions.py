@@ -57,3 +57,11 @@ class Dimensions(unittest.TestCase):
   e=entry();raw=e['raw'].decode();resources=raw[raw.index('<x:context'):raw.index('<g:Assets')]
   page=html('<ix:nonFraction name="g:Assets" contextRef="I" unitRef="USD">1000</ix:nonFraction>',resources=True).decode();start=page.index('<x:context');end=page.index('</ix:resources>');page=page[:start]+resources+page[end:];page=page.replace('<html ','<html xmlns:d="http://xbrl.org/2006/xbrldi" ',1)
   c=FilingCollection('0000320193');c.ingest_inline_set_batch([{'documents':[doc('a.xhtml',page.encode())],'concepts':selected_concepts(NS),'taxonomy_documents':e['documents']}],dimensional_profile=PROFILE);v=c.at_acceptance_time('2024-02-02T00:00:00Z');self.assertEqual(len(proof(v)['facts']),1);self.assertFalse(v['history']['assets'])
+ def test_dimensional_eligibility_changes_require_a_distinct_derived_schema(self):
+  from .xbrl_instance import parse_instance
+  from .xbrl_dts import discover
+  from .xbrl_binding import bind_declarations
+  from .xbrl_dimensions import corroborate
+  e=entry(None,default=True);p=parse_instance(e['raw'],e['manifest'],e['concepts']);g=discover(e['raw'],e['instance_uri'],e['manifest']['source_sha256'],e['documents']);derived=corroborate(bind_declarations(p,g),g)
+  self.assertEqual(derived['schema'],'gig.sec.xbrl.dimensional_instance.v1');self.assertNotIn(derived['schema'],('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1'))
+  with self.assertRaisesRegex(XBRLError,'already_applied'):corroborate(derived,g)

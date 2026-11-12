@@ -268,12 +268,13 @@ def _interpret_instance(root,source,concepts):
  result['canonical_sha256']=digest(result);return result
 
 def selected_financials(parsed):
- if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
+ if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
  core={k:v for k,v in parsed.items()if k!='canonical_sha256'}
  if digest(core)!=parsed.get('canonical_sha256'):raise XBRLError('xbrl_parsed_digest')
  source=parsed['source'];namespace={};refs={};concept_names={};skipped={'unverified_or_conflicting':0,'dimensioned_or_opaque':0,'nil':0,'unsupported_period':0,'unsupported_taxonomy_namespace':0}
- document_set=parsed.get('document_set')if parsed['schema']=='gig.sec.xbrl.inline_set.v1'else None
- if parsed['schema']=='gig.sec.xbrl.inline_set.v1'and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
+ is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1')
+ document_set=parsed.get('document_set')if is_set else None
+ if is_set and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
  if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
  fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
  defaulted={r['source_fact_id']for r in(parsed.get('dts_corroboration')or{}).get('dimensional_validation',{}).get('facts',[])if r['used_defaults']}
