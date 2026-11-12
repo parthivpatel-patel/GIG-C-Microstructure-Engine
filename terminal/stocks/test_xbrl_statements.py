@@ -70,6 +70,10 @@ class StatementSelection(unittest.TestCase):
   with self.assertRaisesRegex(XBRLError,'input_identity'):view(c)
   with patch('terminal.stocks.xbrl_statements.MAX_CONCEPTS',2),self.assertRaisesRegex(XBRLError,'concept_budget'):view()
   with patch('terminal.stocks.xbrl_statements.MAX_OUTPUT',1),self.assertRaisesRegex(XBRLError,'output_budget'):view()
+  from .xbrl_statements import _result
+  from .xbrl_instance import canonical
+  body={'example':'bounded'}
+  with patch('terminal.stocks.xbrl_statements.MAX_OUTPUT',len(canonical(body))+1),self.assertRaisesRegex(XBRLError,'output_budget'):_result(body)
  def test_determinism_no_input_mutation_and_return_isolation(self):
   c=collection();before=copy.deepcopy(c._filings);a=view(c);b=view(c);self.assertEqual(a,b);a['periods'][0]['rows'][0]['facts'][0]['value']='999';self.assertEqual(view(c),b);self.assertEqual(c._filings,before)
  def test_original_instance_without_dts_does_not_claim_statements(self):

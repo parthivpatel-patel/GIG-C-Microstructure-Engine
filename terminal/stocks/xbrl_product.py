@@ -6,7 +6,7 @@ there is deliberately no HTTP mutation/upload route or automatic cache substitut
 import copy
 from .xbrl_collection import FilingCollection
 from .xbrl_instance import selected_financials,XBRLError,canonical,digest
-from .xbrl_statements import select
+from .xbrl_statements import select,MAX_OUTPUT
 MAX_COMPANIES=8;MAX_BYTES=16*1024*1024
 
 def admit(workspace,symbol,collection):
@@ -30,4 +30,6 @@ def company_contract(workspace,symbol,as_of,*,role=None,form='10-K'):
   if identity.get('cik')!=collection.cik:raise XBRLError('xbrl_product_identity_changed')
   statement=collection.statement_at(as_of,role=role,form=form)
  result={'schema':'gig.backend.company_xbrl.v1','instrument':identity,'data_origin':statement['origin'],'statement_view':statement,'read_only':True,'provider_requested':False,'limitations':['Supplied XBRL profile,not complete financial statements or history','No companyfacts replacement or source authentication inferred','Missing source receipt stays unknown;exact values are not browser recalculations']}
- result['sha256']=digest(result);return result
+ result['sha256']=digest(result)
+ if len(canonical(result))>MAX_OUTPUT:raise XBRLError('xbrl_product_output_budget')
+ return result

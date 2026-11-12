@@ -14,8 +14,9 @@ def _identity(value,key):
  if type(value)is not dict or digest({k:v for k,v in value.items()if k!=key})!=value.get(key):raise XBRLError('statement_input_identity')
 
 def _result(result):
- if len(canonical(result))>MAX_OUTPUT:raise XBRLError('statement_output_budget')
- result['sha256']=digest(result);return result
+ value={**result,'sha256':digest(result)}
+ if len(canonical(value))>MAX_OUTPUT:raise XBRLError('statement_output_budget')
+ return value
 
 def select(filings,issuer,origin,collection_sha,as_of,*,role=None,form='10-K'):
  if type(role)is not str and role is not None or role is not None and not 1<=len(role)<=512 or form not in('10-K','10-Q'):raise XBRLError('statement_query')

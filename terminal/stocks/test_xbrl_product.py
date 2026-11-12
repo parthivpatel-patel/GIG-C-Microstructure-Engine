@@ -19,6 +19,7 @@ class XBRLProduct(unittest.TestCase):
   w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection());before=company_contract(w,'AAPL',LATE,role=ROLE);bad=collection();bad._filings[next(iter(bad._filings))]['facts'][0]['value']='999'
   with self.assertRaises(XBRLError):w.admit_xbrl_collection('AAPL',bad)
   with patch('terminal.stocks.xbrl_product.MAX_BYTES',1),self.assertRaisesRegex(XBRLError,'memory_budget'):w.admit_xbrl_collection('AAPL',collection())
+  with patch('terminal.stocks.xbrl_product.MAX_OUTPUT',1),self.assertRaisesRegex(XBRLError,'output_budget'):company_contract(w,'AAPL',LATE,role=ROLE)
   self.assertEqual(company_contract(w,'AAPL',LATE,role=ROLE),before)
  def test_identity_change_cannot_reuse_admitted_state(self):
   w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection())

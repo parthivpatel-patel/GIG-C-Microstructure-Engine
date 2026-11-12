@@ -91,5 +91,6 @@ def effective(linkbases,locators,concepts,documents):
   if any(v>32 for v in depth.values()):g['issues'].add('RELATIONSHIP_DEPTH_UNSUPPORTED')
   g.update(arcs=arcs,suppressed=suppressed,roots=roots,issues=sorted(g['issues']));g['usable']=not g['issues'];networks.append(g)
  result={'schema':'gig.sec.xbrl.effective_relationships.v1','profile':PROFILE,'networks':networks,'input_arcs':count,'complete_taxonomy_validation':False,'scope':'Standard locator-to-concept presentation/calculation;unsupported role content invalidates whole role/kind;no label text inference'}
+ result['sha256']=digest(result)
  if len(canonical(result))>4*1024*1024:raise XBRLError('effective_output_budget')
- result['sha256']=digest(result);return result
+ return result
