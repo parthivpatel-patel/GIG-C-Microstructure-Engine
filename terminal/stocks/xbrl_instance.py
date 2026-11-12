@@ -276,13 +276,14 @@ def selected_financials(parsed):
  if parsed['schema']=='gig.sec.xbrl.inline_set.v1'and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
  if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
  fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
+ defaulted={r['source_fact_id']for r in(parsed.get('dts_corroboration')or{}).get('dimensional_validation',{}).get('facts',[])if r['used_defaults']}
  namespaces={r['concept'].split('}',1)[0]for r in parsed['facts']if r['admission']=='ADMITTED_PROFILE'and re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}[A-Za-z0-9_]+',r['concept'])}
  if len(namespaces)>1:raise XBRLError('xbrl_multiple_taxonomy_versions_for_selection')
  for row in parsed['facts']:
   if not re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}[A-Za-z0-9_]+',row['concept']):skipped['unsupported_taxonomy_namespace']+=1;continue
   if row['admission']!='ADMITTED_PROFILE':skipped['unverified_or_conflicting']+=1;continue
   context=parsed['contexts'][row['context_ref']]
-  if context['dimensions']or context['opaque_segment']:skipped['dimensioned_or_opaque']+=1;continue
+  if context['dimensions']or context['opaque_segment']or row['source_fact_id']in defaulted:skipped['dimensioned_or_opaque']+=1;continue
   if row['nil']:skipped['nil']+=1;continue
   period=context['period']
   if period['end']is None:skipped['unsupported_period']+=1;continue

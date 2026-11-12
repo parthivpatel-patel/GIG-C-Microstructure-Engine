@@ -94,3 +94,12 @@ class XBRLTool(unittest.TestCase):
   from .xbrl_types import COMPLEX_PROFILE
   with tempfile.TemporaryDirectory()as directory:
    path,value=self.inline_set_fixture(Path(directory));value['numeric_profile']=COMPLEX_PROFILE;path.write_text(json.dumps(value));summary,view=inspect(path,EARLY);proof=view['selected_input_coverage'][0]['xbrl_coverage']['dts_corroboration'];self.assertEqual(proof['numeric_value_validation']['profile'],COMPLEX_PROFILE);self.assertFalse(proof['schema_type_validation']);self.assertFalse(summary['provider_requested'])
+ def test_cli_explicit_dimensional_profile_validates_without_inventing_consolidation(self):
+  from .test_xbrl_dimensions import entry,PROFILE
+  with tempfile.TemporaryDirectory()as directory:
+   root=Path(directory);source=entry();(root/'instance.xml').write_bytes(source['raw']);documents=[]
+   for index,document in enumerate(source['documents']):
+    name=str(index)+'.xml';(root/name).write_bytes(document['raw']);documents.append({'path':name,'uri':document['uri'],'sha256':document['sha256']})
+   batch={'schema':'gig.sec.xbrl.input_dts_batch.v1','issuer_cik':'0000320193','origin':'HISTORICAL_SYNTHETIC','numeric_profile':None,'entries':[{'path':'instance.xml','manifest':source['manifest'],'gaap_namespace':NS,'instance_uri':source['instance_uri'],'documents':documents}]};path=root/'batch.json';path.write_text(json.dumps(batch));summary,view=inspect(path,EARLY,dimensional_profile=PROFILE);self.assertEqual(summary['selected_facts'],0);p=view['selected_input_coverage'][0]['xbrl_coverage']['dts_corroboration']['dimensional_validation'];self.assertEqual(p['profile'],PROFILE);self.assertFalse(p['complete_drs_validation'])
+   stream=io.StringIO()
+   with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--dimensional-profile',PROFILE]),0)

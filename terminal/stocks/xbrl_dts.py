@@ -104,6 +104,10 @@ def _discover_roots(schema_roots,supplied,metadata):
     for field in('abstract','nillable'):
      if element.attrs.get(field,'false')not in('true','false','0','1'):raise XBRLError('dts_boolean')
     concept=tag(target,name);record={'concept':concept,'type':qname(element.attrs['type'],element)if'type'in element.attrs else None,'substitution_group':qname(element.attrs['substitutionGroup'],element)if'substitutionGroup'in element.attrs else None,'period_type':period,'balance':balance,'abstract':element.attrs.get('abstract','false')in('true','1'),'nillable':element.attrs.get('nillable','false')in('true','1')}
+    typed=element.attrs.get('{http://xbrl.org/2005/xbrldt}typedDomainRef')
+    if typed is not None:
+     if not typed:raise XBRLError('dts_typed_domain_reference')
+     record['typed_domain_ref']=uri(urljoin(key,typed),fragment=True)
     if concept in concepts and concepts[concept]['declaration']!=record:raise XBRLError('dts_concept_conflict')
     entry=concepts.setdefault(concept,{'declaration':record,'source_documents':[]})
     if key in entry['source_documents']:raise XBRLError('dts_duplicate_concept_declaration')
@@ -118,6 +122,7 @@ def _discover_roots(schema_roots,supplied,metadata):
  networks=[]
  for key,root in linkbases:
   for link in root.children:
+   if link.name==tag(L,'definitionLink'):continue
    if link.name!=tag(L,'presentationLink'):unsupported.append({'uri':key,'feature':'NON_PRESENTATION_LINK_NOT_INTERPRETED'});continue
    if len(networks)>=64:raise XBRLError('dts_network_budget')
    if link.attrs.get(tag(XL,'type'))!='extended':raise XBRLError('dts_extended_link_type')
@@ -164,6 +169,9 @@ def _discover_roots(schema_roots,supplied,metadata):
    for network in links:network['usable']=False;network['issues']=sorted(set(network['issues']+['ROLE_SPLIT_ACROSS_LINKS_UNSUPPORTED']))
  result={**metadata,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False}
  if types:result['type_declarations']=types;result['type_declaration_profile']='NAMED_NUMERIC_DERIVATION_METADATA_V2'if any('derivation'in value['declaration']for value in types.values())else'NAMED_RESTRICTION_METADATA_V1'
+ from .xbrl_dimensions import networks
+ definitions=networks(linkbases,locators)
+ if definitions:result['definition']=definitions;result['definition_metadata_profile']='RESTRICTED_DEFINITION_ARCS_V1'
  if len(canonical(result))>16*1024*1024:raise XBRLError('dts_output_budget')
  result['canonical_sha256']=digest(result);return result
 
