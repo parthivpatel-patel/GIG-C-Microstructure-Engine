@@ -128,3 +128,7 @@ class ItchProductTests(unittest.TestCase):
   s=self.session();original=ItchRecovery.process
   with patch.object(ItchRecovery,'process',autospec=True,side_effect=lambda owner,*a,**kw:original(owner,*a,**kw))as process:
    s.step();s.step();self.assertEqual(process.call_count,2)
+
+ def test_exact_source_projection_supports_nonunit_native_tick_and_share_lots(self):
+  with tempfile.TemporaryDirectory()as directory:
+   target=Path(directory)/'image';run=subprocess.run([str(self.fixture),'--fixture-units',str(target)],capture_output=True,text=True,check=True,timeout=30);meta=json.loads(run.stdout);a=ItchAdmission(**{k:meta[k]for k in('artifact_sha256','contract_sha256','implementation_sha256','capture','generation')});image,a=ItchRecovery.migrate(target.read_bytes(),a,implementation_identity());raw=build_bundle(image,a);s=self.session(raw);native=s.itch_session.owner.book(0)['snapshot']['data']['book'];self.assertEqual(native['bids'][0]['price_ticks'],'33');self.assertEqual(native['bids'][0]['quantity'],'10');v=s.state();self.assertEqual(v['price_scale'],'10000');self.assertEqual(v['book']['bids'][0]['price_ticks'],'99');self.assertEqual(v['book']['bids'][0]['quantity'],'100');self.assertEqual(v['metrics']['bid_depth'],{'numerator':'100','denominator':'1'});self.assertEqual(v['provenance']['native_lot_size'],{'numerator':'10','denominator':'1'});self.assertEqual(v['metrics']['spread'],{'numerator':'3','denominator':'1'});self.assertEqual(v['metrics']['midprice'],{'numerator':'201','denominator':'2'})

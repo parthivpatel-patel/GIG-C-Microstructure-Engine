@@ -5,6 +5,7 @@ continuation. The owner pins the bundle digest outside it. Unknown schema/code o
 binary changes require explicit migration; no fallback to a different dataset.
 """
 import base64,dataclasses,hashlib,json,os,stat
+from fractions import Fraction
 from pathlib import Path
 import gig_microstructure as gig
 from gig_microstructure.itch_recovery import ItchRecovery,ItchAdmission,MAX_BYTES
@@ -84,11 +85,9 @@ class ItchProduct:
             s=probe.status();step=probe.process(payload,frame_offset=int(s['next_frame']),ordinal=int(s['next_ordinal']))
             if not step['committed']:raise ItchProductError('itch_product_tail_rejected')
         obj=cls.__new__(cls);obj.owner=owner;obj.description=description;obj.selected_book=value['selected_book'];obj.speed=value['speed'];obj.records=records;obj.offset=0;obj.playing=False;obj.base_image=image;obj.base_admission=a;obj.history=value['migration_history'];obj.minimum=int(owner.status()['source_records'])
-        # Existing browser scale contract admits only exact integral divisors.
-        for b in description['books']:
-            for unit in('tick_size','lot_size'):
-                n,d=map(int,(b['rules'][unit]['numerator'],b['rules'][unit]['denominator']))
-                if not n or d%n:raise ItchProductError('itch_product_display_unit_profile')
+        # Exact source quanta are validated by the native reconstruction binding.
+        # Present source Price(4)/shares;retain the underlying native rules/metrics.
+        if int(description['source_price_quantum'])<=0 or int(description['source_lot_size'])<=0:raise ItchProductError('itch_product_source_units')
         obj.owner.book(obj.selected_book,obj.depth);return obj
     @property
     def depth(self):return min(10,int(self.description['books'][self.selected_book]['limits']['max_snapshot_depth']))
@@ -136,7 +135,12 @@ class ItchProduct:
     def view(self,session):
         data=self.owner.book(self.selected_book,self.depth);s=self.owner.status();b=self.description['books'][self.selected_book];r=b['rules'];book=data['snapshot']['data']['book'];native=data['metrics']['data']['result']['metrics']
         metrics={k:native[v]['value']for k,v in {'spread':'spread','midprice':'midpoint','microprice':'microprice','imbalance':'depth_imbalance','top_imbalance':'top_imbalance','bid_depth':'bid_depth','ask_depth':'ask_depth'}.items()}
-        result={'schema_version':'1','mode':'HISTORICAL_REPLAY','origin':'HISTORICAL_SYNTHETIC','instrument':b['stock'].rstrip(),'provider':'authored-itch','venue':'AUTHORED','feed_type':'L3_AUTHORED','price_scale':str(int(r['tick_size']['denominator'])//int(r['tick_size']['numerator'])),'quantity_scale':str(int(r['lot_size']['denominator'])//int(r['lot_size']['numerator'])),'book':{'bids':book['bids'],'asks':book['asks']},'revision':book['revision'],'metrics':metrics,'position':self.position,'event_count':self.total,'replay_min_position':self.minimum,'playing':session.playing,'speed':session.speed,'source_timestamp_ns':None,'replay_time_ns':None,'received_at_ns':None,'feed':{'state':'REPLAYING'if session.playing else'PAUSED','reason':'Restored full authored ITCH context;complete-record continuation only. Not observed exchange data.','real_time':False,'stale':False,'sequence_complete':True,'capture_complete':False},'provenance':{'category':'HISTORICAL_SYNTHETIC','dataset':'itch-checkpoint-v1','source':self.description['source'],'source_session':self.description['session'],'capture':s['capture'],'generation':s['generation'],'fixture_sha256':self.description['fixture_sha256'],'generator_seed':self.description['generator_seed'],'complete_initialization':True,'initialization_scope':'authored complete seed'if self.description['seeded']else'authored empty boundary','clock':'ITCH intraday fields;no UTC date inferred','recording_enabled':False,'permission':'independently-authored'},'capabilities':{'native_replay':True,'simulation':False,'live':False,'observed_itch':False,'recording':False,'itch_book_selection':self.description['books'],'selected_itch_book':self.selected_book,'itch_checkpoint_available':True},'engine':{'native':True,**gig.native_build_info()},'diagnostics':{'connected_clients':session.clients,'queue_capacity':1,'queue_occupancy':0,'stream_timeouts':session.stream_timeouts,'rejected_requests':session.rejected,'native_status':s},'notifications':list(session.notifications),'simulation':None}
+        quantum=int(self.description['source_price_quantum']);lot=int(self.description['source_lot_size'])
+        book={**book,**{side:[{**row,'price_ticks':str(int(row['price_ticks'])*quantum),'quantity':str(int(row['quantity'])*lot)}for row in book[side]]for side in('bids','asks')}}
+        for name,factor in [('spread',quantum),('midprice',quantum),('microprice',quantum),('bid_depth',lot),('ask_depth',lot)]:
+            if metrics[name]is not None:
+                f=metrics[name];value=Fraction(int(f['numerator'])*factor,int(f['denominator']));metrics[name]={'numerator':str(value.numerator),'denominator':str(value.denominator)}
+        result={'schema_version':'1','mode':'HISTORICAL_REPLAY','origin':'HISTORICAL_SYNTHETIC','instrument':b['stock'].rstrip(),'provider':'authored-itch','venue':'AUTHORED','feed_type':'L3_AUTHORED','price_scale':'10000','quantity_scale':'1','book':{'bids':book['bids'],'asks':book['asks']},'revision':book['revision'],'metrics':metrics,'position':self.position,'event_count':self.total,'replay_min_position':self.minimum,'playing':session.playing,'speed':session.speed,'source_timestamp_ns':None,'replay_time_ns':None,'received_at_ns':None,'feed':{'state':'REPLAYING'if session.playing else'PAUSED','reason':'Restored full authored ITCH context;complete-record continuation only. Not observed exchange data.','real_time':False,'stale':False,'sequence_complete':True,'capture_complete':False},'provenance':{'category':'HISTORICAL_SYNTHETIC','dataset':'itch-checkpoint-v1','source':self.description['source'],'source_session':self.description['session'],'capture':s['capture'],'generation':s['generation'],'fixture_sha256':self.description['fixture_sha256'],'generator_seed':self.description['generator_seed'],'complete_initialization':True,'initialization_scope':'authored complete seed'if self.description['seeded']else'authored empty boundary','unit_projection':'ITCH Price(4)/shares;exact native-unit conversion','native_tick_size':r['tick_size'],'native_lot_size':r['lot_size'],'clock':'ITCH intraday fields;no UTC date inferred','recording_enabled':False,'permission':'independently-authored'},'capabilities':{'native_replay':True,'simulation':False,'live':False,'observed_itch':False,'recording':False,'itch_book_selection':self.description['books'],'selected_itch_book':self.selected_book,'itch_checkpoint_available':True},'engine':{'native':True,**gig.native_build_info()},'diagnostics':{'connected_clients':session.clients,'queue_capacity':1,'queue_occupancy':0,'stream_timeouts':session.stream_timeouts,'rejected_requests':session.rejected,'native_status':s},'notifications':list(session.notifications),'simulation':None}
         from terminal.server.concentration import calculate
         result['research_metrics']={'concentration':calculate(result)};return result
 
