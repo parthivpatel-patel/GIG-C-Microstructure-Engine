@@ -14,8 +14,8 @@ def inspect(batch_path,as_of,*,allow_observed=False):
  fields={'schema','issuer_cik','origin','entries'}|({'numeric_profile'}if dts else set())
  if set(batch)!=fields or batch['schema']not in('gig.sec.xbrl.input_batch.v1','gig.sec.xbrl.input_dts_batch.v1')or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH:raise XBRLError('xbrl_input_batch_contract')
  if dts:
-  from terminal.stocks.xbrl_types import PROFILE
-  if batch['numeric_profile']not in(None,PROFILE):raise XBRLError('xbrl_numeric_profile_unsupported')
+  from terminal.stocks.xbrl_types import PROFILES
+  if batch['numeric_profile']not in(None,*PROFILES):raise XBRLError('xbrl_numeric_profile_unsupported')
  collection=FilingCollection(batch['issuer_cik'],origin=batch['origin'],allow_observed=allow_observed)
  entries=[];total=0
  for record in batch['entries']:
@@ -44,8 +44,8 @@ def inspect(batch_path,as_of,*,allow_observed=False):
  return summary,result
 
 def inspect_inline_sets(path,batch,as_of,*,allow_observed=False):
- from terminal.stocks.xbrl_types import PROFILE
- if set(batch)!={'schema','issuer_cik','origin','numeric_profile','entries'}or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH or batch['numeric_profile']not in(None,PROFILE):raise XBRLError('xbrl_input_inline_set_contract')
+ from terminal.stocks.xbrl_types import PROFILES
+ if set(batch)!={'schema','issuer_cik','origin','numeric_profile','entries'}or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH or batch['numeric_profile']not in(None,*PROFILES):raise XBRLError('xbrl_input_inline_set_contract')
  collection=FilingCollection(batch['issuer_cik'],origin=batch['origin'],allow_observed=allow_observed);total=0;count=0;entries=[]
  def local(name):
   nonlocal total

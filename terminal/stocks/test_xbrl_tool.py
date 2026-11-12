@@ -90,3 +90,7 @@ class XBRLTool(unittest.TestCase):
    path,value=self.inline_set_fixture(root);value['entries'][0]['documents'][1]['manifest']['source_sha256']='0'*64;path.write_text(json.dumps(value));stream=io.StringIO()
    with contextlib.redirect_stdout(stream):self.assertEqual(main(['--batch',str(path),'--as-of',EARLY,'--output',str(root/'never.json')]),2)
    self.assertFalse((root/'never.json').exists());self.assertNotIn('1234.50',stream.getvalue())
+ def test_cli_explicit_v2_numeric_profile_remains_versioned(self):
+  from .xbrl_types import COMPLEX_PROFILE
+  with tempfile.TemporaryDirectory()as directory:
+   path,value=self.inline_set_fixture(Path(directory));value['numeric_profile']=COMPLEX_PROFILE;path.write_text(json.dumps(value));summary,view=inspect(path,EARLY);proof=view['selected_input_coverage'][0]['xbrl_coverage']['dts_corroboration'];self.assertEqual(proof['numeric_value_validation']['profile'],COMPLEX_PROFILE);self.assertFalse(proof['schema_type_validation']);self.assertFalse(summary['provider_requested'])

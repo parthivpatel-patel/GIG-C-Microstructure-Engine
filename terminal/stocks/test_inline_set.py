@@ -105,3 +105,9 @@ class InlineSet(unittest.TestCase):
   with patch('terminal.stocks.xbrl_collection.MAX_BATCH_BYTES',1),patch('terminal.stocks.inline_set.parse_document_set',side_effect=AssertionError('NO_OVER_BUDGET_PARSING'))as parser:
    with self.assertRaisesRegex(XBRLError,'byte_budget'):c.ingest_inline_set_batch([batch()])
    parser.assert_not_called()
+ def test_inline_set_accepts_explicit_simple_content_v2_without_promoting_schema_validity(self):
+  from .xbrl_types import PROFILE,COMPLEX_PROFILE
+  e=batch();document=e['taxonomy_documents'][0];raw=document['raw'].replace(b'<s:schema',('<s:schema xmlns:t="'+NS+'"').encode(),1).replace(b'type="x:monetaryItemType"',b'type="t:RevenueAmount"').replace(b'</s:schema>',b'<s:complexType name="RevenueAmount"><s:simpleContent><s:extension base="x:monetaryItemType"/></s:simpleContent></s:complexType></s:schema>');document.update(raw=raw,sha256=hashlib.sha256(raw).hexdigest())
+  c=FilingCollection('0000320193')
+  with self.assertRaisesRegex(XBRLError,'type_profile_unsupported'):c.ingest_inline_set_batch([e],numeric_profile=PROFILE)
+  self.assertEqual(c.page()['total'],0);c.ingest_inline_set_batch([e],numeric_profile=COMPLEX_PROFILE);view=c.at_acceptance_time('2024-02-02T00:00:00Z');proof=view['selected_input_coverage'][0]['xbrl_coverage']['dts_corroboration'];self.assertFalse(proof['schema_type_validation']);self.assertEqual(proof['numeric_value_validation']['profile'],COMPLEX_PROFILE)

@@ -86,3 +86,25 @@ class NumericTypes(unittest.TestCase):
  def test_numeric_whitespace_does_not_expand_xml_schema_lexical_space(self):
   self.assertTrue(result(sample(' \t123.4500\n'))['history']['assets'])
   with self.assertRaisesRegex(XBRLError,'decimal_lexical'):result(sample('\u00a0123.4500\u00a0'))
+ def test_simple_content_extension_requires_explicit_v2_profile(self):
+  from .xbrl_types import COMPLEX_PROFILE
+  types='<s:complexType name="Amount"><s:simpleContent><s:extension base="x:monetaryItemType"/></s:simpleContent></s:complexType>';e=sample(types=types)
+  with self.assertRaisesRegex(XBRLError,'type_profile_unsupported'):result(e)
+  v=result(e,profile=COMPLEX_PROFILE);self.assertEqual(v['history']['assets'][0]['value'],'123.4500');p=proof(v);self.assertEqual(p['numeric_value_validation']['profile'],COMPLEX_PROFILE);self.assertFalse(p['schema_type_validation'])
+ def test_simple_content_restriction_inherits_base_facets_and_units(self):
+  from .xbrl_types import COMPLEX_PROFILE
+  types='<s:complexType name="Base"><s:simpleContent><s:extension base="x:monetaryItemType"/></s:simpleContent></s:complexType><s:complexType name="Amount"><s:simpleContent><s:restriction base="t:Base"><s:minInclusive value="0"/><s:maxExclusive value="1000"/><s:fractionDigits value="2"/></s:restriction></s:simpleContent></s:complexType>'
+  self.assertTrue(result(sample(types=types),profile=COMPLEX_PROFILE)['history']['assets'])
+  for value in('-1','1000','1.234'):
+   with self.subTest(value=value),self.assertRaisesRegex(XBRLError,'facet_violation'):result(sample(value,types=types),profile=COMPLEX_PROFILE)
+ def test_complex_content_attributes_wildcards_and_mixed_types_remain_unsupported(self):
+  from .xbrl_types import COMPLEX_PROFILE
+  for body in('<s:complexContent><s:extension base="x:monetaryItemType"/></s:complexContent>','<s:simpleContent><s:extension base="x:monetaryItemType"><s:attribute name="extra"/></s:extension></s:simpleContent>','<s:simpleContent><s:restriction base="x:monetaryItemType"><s:anyAttribute/></s:restriction></s:simpleContent>'):
+   with self.assertRaisesRegex(XBRLError,'selected_type_unsupported'):result(sample(types='<s:complexType name="Amount">'+body+'</s:complexType>'),profile=COMPLEX_PROFILE)
+ def test_v2_complex_derivation_cycles_and_invalid_later_filing_are_atomic(self):
+  from .xbrl_types import COMPLEX_PROFILE
+  types='<s:complexType name="Amount"><s:simpleContent><s:extension base="t:Amount"/></s:simpleContent></s:complexType>'
+  with self.assertRaisesRegex(XBRLError,'type_cycle'):result(sample(types=types),profile=COMPLEX_PROFILE)
+  c=FilingCollection('0000320193');c.ingest_dts_batch([sample()],numeric_profile=COMPLEX_PROFILE);before=c.page()
+  with self.assertRaises(XBRLError):c.ingest_dts_batch([sample(types=types,accession='0000000123-24-000002')],numeric_profile=COMPLEX_PROFILE)
+  self.assertEqual(c.page(),before)

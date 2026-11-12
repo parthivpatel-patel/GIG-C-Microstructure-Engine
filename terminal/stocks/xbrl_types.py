@@ -10,6 +10,8 @@ from .xbrl_instance import X,ISO,tag,qname,digest,canonical,XBRLError
 
 XS='http://www.w3.org/2001/XMLSchema'
 PROFILE='NUMERIC_VALUE_FACETS_V1'
+COMPLEX_PROFILE='NUMERIC_SIMPLE_CONTENT_V2'
+PROFILES=(PROFILE,COMPLEX_PROFILE)
 MAX_OUTPUT_BYTES=8*1024*1024
 FACETS={'minInclusive','maxInclusive','minExclusive','maxExclusive','totalDigits','fractionDigits'}
 DECIMAL=re.compile(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)\Z')
@@ -24,14 +26,19 @@ def declaration(node):
  if node.text().strip()or set(node.attrs)-{'name','id'}:
   result['unsupported']=['TYPE_ATTRIBUTES_OR_TEXT_UNSUPPORTED'];return result
  body=[n for n in node.children if n.name!=tag(XS,'annotation')]
- if node.name!=tag(XS,'simpleType')or len(body)!=1 or body[0].name!=tag(XS,'restriction'):
-  result['unsupported']=['ONLY_NAMED_SIMPLE_RESTRICTIONS_SUPPORTED'];return result
- restriction=body[0]
+ if node.name==tag(XS,'complexType'):
+  if len(body)!=1 or body[0].name!=tag(XS,'simpleContent')or body[0].text().strip()or set(body[0].attrs)-{'id'}:result['unsupported']=['COMPLEX_CONTENT_UNSUPPORTED'];return result
+  content=[n for n in body[0].children if n.name!=tag(XS,'annotation')]
+  if len(content)!=1 or content[0].name not in(tag(XS,'extension'),tag(XS,'restriction')):result['unsupported']=['SIMPLE_CONTENT_STRUCTURE_UNSUPPORTED'];return result
+  restriction=content[0];result['derivation']='SIMPLE_CONTENT_EXTENSION'if restriction.name==tag(XS,'extension')else'SIMPLE_CONTENT_RESTRICTION'
+ elif node.name==tag(XS,'simpleType')and len(body)==1 and body[0].name==tag(XS,'restriction'):restriction=body[0]
+ else:result['unsupported']=['ONLY_NAMED_SIMPLE_RESTRICTIONS_SUPPORTED'];return result
  if restriction.text().strip()or set(restriction.attrs)-{'base','id'}or 'base'not in restriction.attrs:
   result['unsupported']=['RESTRICTION_STRUCTURE_UNSUPPORTED'];return result
  result['base']=qname(restriction.attrs['base'],restriction);seen=set()
  for n in restriction.children:
   if n.name==tag(XS,'annotation'):continue
+  if result.get('derivation')=='SIMPLE_CONTENT_EXTENSION':result['unsupported'].append('EXTENSION_ATTRIBUTES_OR_CONTENT_UNSUPPORTED');continue
   kind=n.name.removeprefix('{'+XS+'}')
   if kind not in FACETS or n.children or n.text().strip()or set(n.attrs)-{'value','id'}or kind in seen:
    result['unsupported'].append('FACET_OR_STRUCTURE_UNSUPPORTED');continue
@@ -44,7 +51,7 @@ def declaration(node):
   if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
  result['unsupported']=sorted(set(result['unsupported']));return result
 
-def _resolve(name,definitions):
+def _resolve(name,definitions,profile):
  path=[];seen=set();current=name
  while True:
   if current in seen:raise XBRLError('dts_type_cycle')
@@ -57,6 +64,7 @@ def _resolve(name,definitions):
    return current,path
   entry=definitions.get(current)
   if entry is None or entry['declaration']['unsupported']or entry['declaration']['base']is None:raise XBRLError('dts_selected_type_unsupported')
+  if 'derivation'in entry['declaration']and profile!=COMPLEX_PROFILE:raise XBRLError('dts_selected_type_profile_unsupported')
   path.append({'type':current,**entry});current=entry['declaration']['base']
 
 def _value_check(fact,base,path,units):
@@ -83,8 +91,9 @@ def _value_check(fact,base,path,units):
    invalid=total_digits>int(bound)if kind=='totalDigits'else fraction_digits>int(bound)if kind=='fractionDigits'else value<Decimal(bound)if kind=='minInclusive'else value>Decimal(bound)if kind=='maxInclusive'else value<=Decimal(bound)if kind=='minExclusive'else value>=Decimal(bound)
    if invalid:raise XBRLError('dts_type_facet_violation')
 
-def corroborate(parsed,dts):
+def corroborate(parsed,dts,*,profile=PROFILE):
  """Add an explicit selected-numeric profile after normal declaration binding."""
+ if profile not in PROFILES:raise XBRLError('xbrl_numeric_profile_unsupported')
  if type(parsed)is not dict or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256')or type(dts)is not dict or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('dts_type_input_identity')
  proof=parsed.get('dts_corroboration')
  if not proof or proof['dts_sha256']!=dts['canonical_sha256']:raise XBRLError('dts_type_binding_required')
@@ -94,12 +103,12 @@ def corroborate(parsed,dts):
   if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
   declaration=dts['concepts'][fact['concept']]['declaration'];declared=declaration['type']
   if type(declared)is not str or declaration['substitution_group']!=tag(X,'item'):raise XBRLError('dts_selected_type_or_substitution_unsupported')
-  base,path=_resolve(declared,definitions);_value_check(fact,base,path,parsed['units'])
+  base,path=_resolve(declared,definitions,profile);_value_check(fact,base,path,parsed['units'])
   record={'source_fact_id':fact['source_fact_id'],'declared_type':declared,'resolved_numeric_base':base,'restrictions':path,'value_validation':'NIL_UNAVAILABLE'if fact['nil']else'VALIDATED_BOUNDED_NUMERIC_PROFILE'}
   size+=len(canonical(record))+1
   if size>MAX_OUTPUT_BYTES:raise XBRLError('dts_type_output_budget')
   records.append(record)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256')
- result['dts_corroboration']['numeric_value_validation']={'profile':PROFILE,'facts':records,'scope':'Selected numeric values,known standard units and supported simple restriction facets only;not complete schema/DRS validation'}
+ result['dts_corroboration']['numeric_value_validation']={'profile':profile,'facts':records,'scope':'Selected numeric values,known standard units and explicitly supported numeric derivations/facets only;not complete schema/DRS validation'}
  if len(canonical(result))>MAX_OUTPUT_BYTES:raise XBRLError('dts_type_output_budget')
  result['canonical_sha256']=digest(result);return result
