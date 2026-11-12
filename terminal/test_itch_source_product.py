@@ -13,6 +13,7 @@ class SourceProduct(unittest.TestCase):
   cls.directory=tempfile.TemporaryDirectory();root=Path(cls.directory.name)
   import gig_microstructure._native as native
   fixture=Path(os.environ.get('GIG_ITCH_FIXTURE',str(Path(native.__file__).parents[2]/'gig_itch_durable_checkpoint_tests')))
+  cls.fixture=fixture
   target=root/'image';run=subprocess.run([str(fixture),'--fixture-source',str(target)],capture_output=True,text=True,check=True,timeout=30);meta=json.loads(run.stdout)
   cls.image=target.read_bytes();cls.source=Path(str(target)+'.source').read_bytes();cls.admission=ItchAdmission(**{k:meta[k]for k in('artifact_sha256','contract_sha256','implementation_sha256','capture','generation')})
   cls.source_a=ItchSourceAdmission(digest(cls.source),cls.admission.capture,cls.admission.generation,'binary_file',0,0)
@@ -56,7 +57,7 @@ class SourceProduct(unittest.TestCase):
   old=self.bundle();new=continue_source(old,digest(old),self.source,self.source_a);v=json.loads(new)
   self.assertEqual(v['version'],2);self.assertEqual(v['source_history'][0]['source_sha256'],digest(self.source));self.assertEqual(v['source_history'][0]['from_source_records'],9);self.assertEqual(v['source_history'][0]['to_source_records'],10)
   self.assertEqual(continue_source(new,digest(new),self.source,self.source_a),new)
-  s=NativeSession.restore_checkpoint(new,digest(new),implementation_identity());self.assertFalse(s.playing);self.assertEqual(s.position,10);self.assertEqual(s.state()['book']['bids'][0]['quantity'],'7');self.assertEqual(s.state()['provenance']['source_recovery_history'],v['source_history']);self.assertEqual(s.checkpoint(implementation_identity()),new)
+  s=NativeSession.restore_checkpoint(new,digest(new),implementation_identity());self.assertFalse(s.playing);self.assertEqual(s.position,10);self.assertEqual(s.state()['book']['bids'][0]['quantity'],'7');self.assertEqual(s.state()['provenance']['source_recovery_history'],[{k:str(value)if type(value)is int else value for k,value in row.items()}for row in v['source_history']]);self.assertEqual(s.checkpoint(implementation_identity()),new)
   s.control('speed',4);self.assertFalse(s.playing);s.control('book',1);self.assertEqual(s.state()['instrument'],'TWO')
  def test_pending_authored_continuation_cannot_be_silently_discarded(self):
   # Last source frame is a valid cancellation of reference103.
@@ -68,7 +69,7 @@ class SourceProduct(unittest.TestCase):
   self.assertEqual(ItchProduct.restore(old,digest(old)).position,9)
  def test_source_history_malformed_scope_cursor_and_budget_reject(self):
   old=self.bundle();new=continue_source(old,digest(old),self.source,self.source_a);v=json.loads(new)
-  for change in({'to_source_records':11},{'from_source_records':11},{'generation':18},{'capture':'other'},{'first_frame':True},{'source_sha256':'bad'}):
+  for change in({'to_source_records':11},{'from_source_records':11},{'generation':18},{'capture':'other'},{'first_frame':True},{'first_frame':1},{'first_ordinal':1},{'source_sha256':'bad'}):
    bad=copy.deepcopy(v);bad['source_history'][0].update(change);raw=encoded(bad)
    with self.subTest(change=change),self.assertRaises(ValueError):ItchProduct.restore(raw,digest(raw))
   bad=copy.deepcopy(v);bad['source_history']*=5;raw=encoded(bad)
@@ -85,3 +86,10 @@ class SourceProduct(unittest.TestCase):
    run=subprocess.run(command,capture_output=True,text=True,timeout=30);self.assertEqual(run.returncode,0,run.stdout+run.stderr);summary=json.loads(run.stdout);self.assertEqual(summary['status'],'SOURCE_CONTINUED');self.assertFalse(summary['provider_connected']);self.assertEqual(target.stat().st_mode&0o777,0o600)
    probe=subprocess.run([sys.executable,'scripts/manage_itch_session.py','inspect','--input',str(target),'--expected-sha256',summary['output_sha256']],capture_output=True,text=True,timeout=30);self.assertEqual(probe.returncode,0,probe.stderr);self.assertEqual(json.loads(probe.stdout)['source_records'],'10')
    again=subprocess.run(command,capture_output=True,text=True,timeout=30);self.assertEqual(again.returncode,1);self.assertEqual(digest(target.read_bytes()),summary['output_sha256'])
+
+ def test_real_u64_generation_survives_native_to_browser_provenance(self):
+  with tempfile.TemporaryDirectory()as directory:
+   target=Path(directory)/'image';run=subprocess.run([str(self.fixture),'--fixture-source-high',str(target)],capture_output=True,text=True,check=True,timeout=30);meta=json.loads(run.stdout);a=ItchAdmission(**{k:meta[k]for k in('artifact_sha256','contract_sha256','implementation_sha256','capture','generation')});source=Path(str(target)+'.source').read_bytes();spec=ItchSourceAdmission(digest(source),a.capture,a.generation,'binary_file',0,0);image,a=ItchRecovery.migrate(target.read_bytes(),a,implementation_identity());old=build_bundle(image,a);new=continue_source(old,digest(old),source,spec);state=NativeSession.restore_checkpoint(new,digest(new),implementation_identity()).state()
+   self.assertEqual(state['provenance']['source_recovery_history'][0]['generation'],'9007199254740993')
+   program="import assert from 'node:assert/strict';const s=JSON.parse(process.argv[1]);assert.equal(s.provenance.source_recovery_history[0].generation,'9007199254740993');console.log('EXACT_U64_BROWSER_PROVENANCE=PASS')"
+   check=subprocess.run(['node','--input-type=module','-e',program,json.dumps(state)],capture_output=True,text=True,timeout=30);self.assertEqual(check.returncode,0,check.stderr)

@@ -70,3 +70,15 @@ scope/boundary,resource refusal,optional SDK disabled mode,revision1/2 compatibi
 malformed lineage,explicit migration,immutable CLI publication and separate-process
 restoration. The original9durability and18product cases are retained unchanged.
 Native mathematical algorithms and all eight frozen identities remain mandatory.
+
+## Browser precision and lineage coherence repair
+
+Private revision2 numeric fields remain exact Python/JSON integers for backwards
+compatibility. The public state projection encodes every numeric source-history
+field as a canonical decimal string and labels `DECIMAL_STRINGS_V1`;JavaScript
+must not coerce these identifiers/cursors into floating-point numbers. A real
+native fixture with generation9007199254740993 reproduced the previous integer
+projection defect and now passes an actual Node JSON-consumer check. Restoration
+also compares every retained initial frame/ordinal with native configuration,
+rejecting a contradictory lineage even if a candidate file is rehashed. This
+changes no native arithmetic or original source bytes.
