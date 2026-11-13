@@ -197,6 +197,9 @@ class FilingIngestor:
   return raw
  def checkpoint(self):return self._image(self.plans,self.sources,self.collection)
  def restore(self,raw,expected_sha256):
+  # Synchronous admission on the owning event loop;never replace an in-flight
+  # transaction (including another workspace source sharing this rate lock).
+  if self.lock.locked():raise IngestError('sec_ingest_busy')
   if type(raw)is not bytes or len(raw)>MAX_IMAGE or hashlib.sha256(raw).hexdigest()!=expected_sha256:raise IngestError('sec_ingest_checkpoint_integrity')
   v=decode(raw)
   if set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']!='gig.sec.filing_ingestion.checkpoint.v1'or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')

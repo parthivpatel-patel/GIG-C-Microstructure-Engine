@@ -115,3 +115,18 @@ Observed checkpoint persistence additionally requires GIG_SEC_XBRL_RETENTION_APP
 No gate is written or enabled by this tool;no secrets are requested or printed.
 Failure never substitutes a fixture. Do not use --fetch until a separately
 authorized provider qualification phase;this sprint runs only --fixture/tests.
+
+## Recovery admission and command preflight regressions
+
+A deterministic suspended read reproduced restore replacing coordinator state
+while the shared source lock was held. Restore now rejects sec_ingest_busy before
+parsing or replacing anything;after cancellation/release the same checkpoint
+restores normally. The lock also protects another owner of the shared workspace
+rate boundary. This is an event-loop-owned API,not arbitrary-thread concurrency.
+Two regressions preserve the active state and original checkpoint bytes.
+
+An invalid CLI --as-of formerly reached source coordinator construction;cutoff and
+symbol syntax now validate before configuration lookup or source setup. Two more
+negative tests forbid configuration/coordinator calls. The prior 21ingestion/5CLI
+counts are historical;current counts are23ingestion,8store and7CLI tests.
+Failing-before/after evidence is in MULTI_WORKSTREAM_EVIDENCE.json.

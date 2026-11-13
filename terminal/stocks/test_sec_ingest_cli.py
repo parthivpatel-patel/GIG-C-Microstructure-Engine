@@ -23,3 +23,11 @@ class IngestCLI(unittest.TestCase):
  def test_output_collision_is_non_destructive(self):
   with tempfile.TemporaryDirectory()as directory:
    path=Path(directory)/'existing.json';path.write_text('KEEP');code,r=self.run_cli(['--fixture','--output',str(path)]);self.assertEqual(code,2);self.assertEqual(path.read_text(),'KEEP')
+
+ def test_invalid_cutoff_rejects_before_owner_configuration_or_coordinator(self):
+  with patch('terminal.stocks.sec_config.resolve',side_effect=AssertionError('NO_OWNER_CONFIG')),patch('terminal.stocks.service.StockWorkspace.create_sec_filing_ingestor',side_effect=AssertionError('NO_COORDINATOR')):
+   for cutoff in('not-a-timestamp','2024-02-31T00:00:00Z','2024-02-01'):
+    code,r=self.run_cli(['--fetch','--accession','0000000123-24-000001','--as-of',cutoff]);self.assertEqual(code,2);self.assertEqual(r['status'],'BLOCKED_OR_INVALID')
+ def test_invalid_symbol_rejects_before_owner_configuration_or_coordinator(self):
+  with patch('terminal.stocks.sec_config.resolve',side_effect=AssertionError('NO_OWNER_CONFIG')):
+   code,r=self.run_cli(['--fetch','--symbol','../AAPL','--as-of','2024-02-01T00:00:00Z']);self.assertEqual(code,2);self.assertEqual(r['status'],'BLOCKED_OR_INVALID')

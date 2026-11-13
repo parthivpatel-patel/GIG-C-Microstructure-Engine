@@ -14,6 +14,10 @@ async def qualify(args,environment=None):
  from terminal.stocks.service import StockWorkspace
  from terminal.stocks.xbrl_product import company_contract
  from terminal.verification.artifacts import write_private
+ from terminal.stocks import sec
+ from terminal.stocks.identity import symbol
+ symbol(args.symbol)
+ if args.as_of is not None:sec.acceptance_ns(args.as_of)
  store=None
  if args.fixture:
   from terminal.stocks.test_sec_filing_ingest import client,ACC,CIK

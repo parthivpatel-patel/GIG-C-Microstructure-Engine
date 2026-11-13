@@ -135,3 +135,19 @@ class SECIngestion(unittest.IsolatedAsyncioTestCase):
   async def handler(request):
    calls.append(request);return httpx.Response(200,stream=Stream(data[str(request.url)]),headers={'Content-Length':str(len(data[str(request.url)]))})
   c=FilingIngestor(CIK,transport=SECReadWire(httpx.MockTransport(handler)),permission=lambda:{'User-Agent':AGENT},enabled=True,clock=clock,sleep=clock.sleep);await c.ingest(ACC);self.assertTrue(all(r.method=='GET'and not r.content for r in calls));self.assertTrue(all(r.url.host in('www.sec.gov','data.sec.gov')for r in calls))
+
+ async def test_restore_rejects_active_transaction_without_replacing_state(self):
+  c,w,_=client();await c.ingest(ACC);raw=c.checkpoint();w.errors[META]=[Reply(META,b'never read',pause=True)];task=asyncio.create_task(c.ingest(ACC,fresh=True))
+  while not c.lock.locked():await asyncio.sleep(0)
+  try:
+   with self.assertRaisesRegex(IngestError,'sec_ingest_busy'):c.restore(raw,hashlib.sha256(raw).hexdigest())
+   self.assertEqual(c.state,'LOADING');self.assertEqual(c.checkpoint(),raw)
+  finally:
+   task.cancel()
+   with self.assertRaises(asyncio.CancelledError):await task
+  c.restore(raw,hashlib.sha256(raw).hexdigest());self.assertEqual(c.state,'PAUSED_RESTORED');self.assertEqual(c.checkpoint(),raw)
+ async def test_restore_respects_other_owner_of_shared_workspace_lock(self):
+  c,_,_=client();await c.ingest(ACC);raw=c.checkpoint()
+  async with c.lock:
+   with self.assertRaisesRegex(IngestError,'sec_ingest_busy'):c.restore(raw,hashlib.sha256(raw).hexdigest())
+   self.assertEqual(c.state,'ACCEPTED');self.assertEqual(c.checkpoint(),raw)
