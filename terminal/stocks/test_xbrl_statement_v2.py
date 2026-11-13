@@ -84,3 +84,10 @@ class VersionedRoute(unittest.IsolatedAsyncioTestCase):
   try:
    r=await call('accuracy-extension-v2');self.assertEqual(r['schema'],'gig.backend.company_xbrl.v2');self.assertEqual(extrow(r['statement_view'])['value'],'400');self.assertEqual((await call('legacy-v1'))['schema'],'gig.backend.company_xbrl.v1');self.assertEqual((await call('unknown'))['status'],422)
   finally:await gate.close()
+
+class EmbeddedScope(unittest.TestCase):
+ def test_embedded_relationship_scope_cannot_be_silently_omitted(self):
+  e=extension();d=e['documents'][-1];embedded=b'<s:annotation><s:appinfo><l:linkbase xmlns:l="http://www.xbrl.org/2003/linkbase"><l:definitionLink xmlns:xl="http://www.w3.org/1999/xlink" xl:type="extended" xl:role="https://authored.invalid/hidden-role"/></l:linkbase></s:appinfo></s:annotation>'
+  e['documents'][-1]=document('extension.xsd',d['raw'].replace(b'</s:schema>',embedded+b'</s:schema>'));c=collection(e);p=next(iter(c._filings.values()));self.assertIsNone(p['dts_corroboration']['definition_relationships_present'])
+  for profile in('legacy-v1','accuracy-extension-v2'):
+   r=c.statement_at(LATE,role=ROLE,profile=profile);self.assertEqual(r['status'],'UNAVAILABLE');self.assertEqual(r['reason'],'PRESENTATION_UNSUPPORTED');self.assertIn('EMBEDDED_LINKBASE_UNSUPPORTED',r['diagnostics'])

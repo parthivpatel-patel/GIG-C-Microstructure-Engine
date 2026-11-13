@@ -74,6 +74,7 @@ def _discover_roots(schema_roots,supplied,metadata):
    if type(target)is not str or not 1<=len(target)<=512:raise XBRLError('dts_chameleon_or_missing_namespace_unsupported')
    if namespace is not None and target!=namespace:raise XBRLError('dts_import_namespace_conflict')
    namespaces[key]=target
+   if any(child.name in(tag(L,'linkbase'),tag(L,'presentationLink'),tag(L,'calculationLink'),tag(L,'definitionLink'))for child in items):unsupported.append({'uri':key,'feature':'EMBEDDED_LINKBASE_UNSUPPORTED'})
    for child in items:
     if child.name in(tag(XS,'redefine'),tag(XS,'override')):raise XBRLError('dts_schema_redefinition_unsupported')
     if child.name in(tag(XS,'import'),tag(XS,'include')):
@@ -174,6 +175,12 @@ def _discover_roots(schema_roots,supplied,metadata):
  from .xbrl_dimensions import networks
  definitions=networks(linkbases,locators)
  if definitions:result['definition']=definitions;result['definition_metadata_profile']='RESTRICTED_DEFINITION_ARCS_V1'
+ if any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in unsupported):
+  # An omitted embedded arc could override an external relationship or add DRS.
+  # Do not publish a usable partial role while its effective scope is unknown.
+  for network in result['presentation']+result['effective_relationships']['networks']:
+   network['usable']=False;network['issues']=sorted(set(network['issues']+['EMBEDDED_LINKBASE_UNSUPPORTED']))
+  graph=result['effective_relationships'];graph['sha256']=digest({k:v for k,v in graph.items()if k!='sha256'})
  if len(canonical(result))>16*1024*1024:raise XBRLError('dts_output_budget')
  result['canonical_sha256']=digest(result);return result
 

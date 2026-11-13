@@ -52,3 +52,11 @@ Source permission/hash/path/new-only0600 export safeguards are unchanged.
 Full accounting mappings,complete statements,arbitrary DRS,full XML Schema and
 source coverage are NOT established by this profile. It is an implemented
 source-scoped research view,not automatic authorized filing/DTS acquisition.
+
+A reproduced DTS defect involved unsupported embedded linkbases in supplied schemas.
+Ignoring them could leave a usable external presentation despite omitted overriding
+or dimensional relationships. Such source scope now explicitly invalidates all
+candidate presentation/effective networks and records EMBEDDED_LINKBASE_UNSUPPORTED.
+Definition presence is unknown (null),not false. Both statement profiles therefore
+return an unavailable view until embedded semantics are implemented. The actual
+failing-before and repaired receipts are retained in the current evidence manifest.
