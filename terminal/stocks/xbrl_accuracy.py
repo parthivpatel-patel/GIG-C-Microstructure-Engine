@@ -23,6 +23,10 @@ def _read(i):
  for key in('lower','upper'):
   r=i.get(key)
   if type(r)is not dict or set(r)!={'numerator','denominator'}or type(r['numerator'])is not str or not re.fullmatch(r'-?[0-9]{1,256}',r['numerator'])or type(r['denominator'])is not str or not re.fullmatch(r'[0-9]{1,256}',r['denominator'])or int(r['denominator'])<=0:raise XBRLError('accuracy_rational_contract')
+  den=int(r['denominator']);rest=den
+  for factor in(2,5):
+   while rest%factor==0:rest//=factor
+  if rest!=1 or den>2*10**MAX_EXPONENT:raise XBRLError('accuracy_interval_grid_unsupported')
   values.append(Fraction(int(r['numerator']),int(r['denominator'])))
  if values[0]>values[1]:raise XBRLError('accuracy_interval_order')
  return tuple(values)
@@ -54,7 +58,7 @@ def duplicates(facts,*,values=None):
  results=[];numbers=set();ids=set();nil=False
  for f in facts:
   id_=f['source_fact_id']
-  if id_ in ids:raise XBRLError('accuracy_duplicate_identity')
+  if type(id_)is not str or not 1<=len(id_)<=64 or id_ in ids:raise XBRLError('accuracy_duplicate_identity')
   ids.add(id_);value=values[id_]if values is not None else f['value'];nil|=f['nil']
   if not f['nil']:numbers.add(_number(value))
   results.append({'source_fact_id':id_,**enclosure(value,f.get('decimals'),f.get('precision'),nil=f['nil'])})

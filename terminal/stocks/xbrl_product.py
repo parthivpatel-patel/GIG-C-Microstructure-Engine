@@ -21,15 +21,18 @@ def admit(workspace,symbol,collection):
  workspace.xbrl_collections=candidate
  return {'schema':'gig.company.xbrl.admission.v1','symbol':symbol,'issuer_cik':clone.cik,'collection_sha256':clone._identity(clone._filings),'origin':clone.origin,'provider_requested':False}
 
-def company_contract(workspace,symbol,as_of,*,role=None,form='10-K'):
+def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='legacy-v1'):
+ if profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
  identity=workspace.resolve(symbol);collection=workspace.xbrl_collections.get(symbol)
  if collection is None:
-  statement=select({},identity.get('cik'),'UNAVAILABLE',digest({}),as_of,role=role,form=form)
+  from .xbrl_statement_v2 import statement as v2_statement
+  statement=(select if profile=='legacy-v1'else v2_statement)({},identity.get('cik'),'UNAVAILABLE',digest({}),as_of,role=role,form=form)
   statement.pop('sha256');statement['reason']='NO_EXPLICITLY_ADMITTED_XBRL_COLLECTION';statement['sha256']=digest(statement)
  else:
   if identity.get('cik')!=collection.cik:raise XBRLError('xbrl_product_identity_changed')
-  statement=collection.statement_at(as_of,role=role,form=form)
+  statement=collection.statement_at(as_of,role=role,form=form,profile=profile)
  result={'schema':'gig.backend.company_xbrl.v1','instrument':identity,'data_origin':statement['origin'],'statement_view':statement,'read_only':True,'provider_requested':False,'limitations':['Supplied XBRL profile,not complete financial statements or history','No companyfacts replacement or source authentication inferred','Missing source receipt stays unknown;exact values are not browser recalculations']}
+ if profile=='accuracy-extension-v2':result['schema']='gig.backend.company_xbrl.v2';result['profile']=profile
  result['sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('xbrl_product_output_budget')
  return result

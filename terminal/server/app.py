@@ -674,11 +674,11 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     async def xbrl_statements_v2(request):
         from terminal.stocks.xbrl_product import company_contract
         q=request.query_params
-        if 'at'not in q or set(q)-{'at','role','form'} or len(q.multi_items())!=len(q):return error('XBRL_STATEMENT_QUERY','explicit acceptance cutoff and bounded unique role/form only',422)
+        if 'at'not in q or set(q)-{'at','role','form','profile'} or len(q.multi_items())!=len(q):return error('XBRL_STATEMENT_QUERY','explicit acceptance cutoff and bounded unique role/form only',422)
         try:
             if analysis.busy:return error('XBRL_STATEMENT_BUSY','one bounded analytical request at a time',429)
             from functools import partial
-            return await analysis.run(partial(company_contract,stocks,request.path_params['symbol'],q['at'],role=q.get('role'),form=q.get('form','10-K')))
+            return await analysis.run(partial(company_contract,stocks,request.path_params['symbol'],q['at'],role=q.get('role'),form=q.get('form','10-K'),profile=q.get('profile','legacy-v1')))
         except (ValueError,KeyError,TypeError,OverflowError):return error('XBRL_STATEMENT_UNAVAILABLE','invalid identity,cutoff or supplied XBRL contract',422)
 
     @route('/api/v2/companies/{symbol}/historical', methods=['GET'])

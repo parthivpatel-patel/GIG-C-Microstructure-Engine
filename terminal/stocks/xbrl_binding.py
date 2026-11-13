@@ -27,6 +27,8 @@ def bind_declarations(parsed,dts):
   selected.append({'source_fact_id':fact['source_fact_id'],'concept':fact['concept'],'source_documents':entry['source_documents'],'period_type':period,'declared_type':declaration['type'],'type_validation':'NOT_PERFORMED'})
  result=copy.deepcopy(parsed);result.pop('canonical_sha256')
  result['dts_corroboration']={'profile':'SELECTED_DECLARATION_CONSISTENCY_V1','dts_sha256':dts['canonical_sha256'],'documents':dts['documents'],'selected_facts':selected,'unverified_facts':unverified,'structural_closure':dts['structural_closure'],'unresolved':dts['unresolved'],'unsupported_semantics':dts['unsupported_semantics'],'schema_type_validation':False,'complete_statements':False,'accounting_mapping':'Existing explicit selected-fact profile;not derived from presentation ordering','received_at_authority':'Original supplied receipt only;missing stays unknown'}
+ result['dts_corroboration']['definition_relationships_present']=bool(dts.get('definition'))
+ if 'type_declarations'in dts:result['dts_corroboration']['type_declarations']=copy.deepcopy(dts['type_declarations'])
  if 'effective_relationships'in dts:result['dts_corroboration']['effective_relationships']=copy.deepcopy(dts['effective_relationships']);result['dts_corroboration']['concept_declarations']=copy.deepcopy(dts['concepts'])
  result['taxonomy_authority']='Supplied DTS declaration consistency plus explicit selected-fact profile;full type/DRS/accounting validation not performed'
  if len(canonical(result))>8*1024*1024:raise XBRLError('dts_binding_output_budget')

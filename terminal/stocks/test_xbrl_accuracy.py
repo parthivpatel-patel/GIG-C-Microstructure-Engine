@@ -47,6 +47,8 @@ class Accuracy(unittest.TestCase):
   with self.assertRaises(XBRLError):duplicates([f()]*9)
   with self.assertRaises(XBRLError):consistency(acc('1'),[{'concept':'a','weight':0,'accuracy':acc('1')}])
   with self.assertRaises(XBRLError):consistency(acc('1'),[])
+  from .xbrl_accuracy import _read
+  with self.assertRaisesRegex(XBRLError,'grid_unsupported'):_read({'lower_closed':True,'upper_closed':True,'lower':{'numerator':'1','denominator':'3'},'upper':{'numerator':'1','denominator':'3'}})
  def test_binary_and_decimal_rounding_context_cannot_change_the_result(self):
   expected=enclosure('0.12345678901234567890123456789','29')
   with localcontext()as ctx:

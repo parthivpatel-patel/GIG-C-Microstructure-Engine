@@ -111,7 +111,11 @@ class FilingCollection:
   if offset>len(keys):raise XBRLError('xbrl_page_offset')
   records=[copy.deepcopy(self._filings[a]['source'])for a in keys[offset:offset+limit]]
   return {'schema':'gig.sec.xbrl.filings.v1','records':records,'total':len(keys),'collection_sha256':identity,'next_offset':offset+len(records)if offset+len(records)<len(keys)else None,'completeness':'BOUNDED_SUPPLIED_INSTANCES_NOT_COMPLETE_HISTORY'}
- def statement_at(self,as_of,*,role=None,form='10-K'):
+ def statement_at(self,as_of,*,role=None,form='10-K',profile='legacy-v1'):
+  if profile=='accuracy-extension-v2':
+   from .xbrl_statement_v2 import statement
+   return statement(self._filings,self.cik,self.origin,self._identity(self._filings),as_of,role=role,form=form)
+  if profile!='legacy-v1':raise XBRLError('statement_profile_unsupported')
   from .xbrl_statements import select
   return select(self._filings,self.cik,self.origin,self._identity(self._filings),as_of,role=role,form=form)
  def at_acceptance_time(self,as_of):

@@ -7,11 +7,11 @@ from terminal.verification.artifacts import read_bytes,decode,write_private
 from terminal.stocks.xbrl_instance import selected_concepts,XBRLError
 from terminal.stocks.xbrl_collection import FilingCollection,MAX_BATCH,MAX_BATCH_BYTES
 
-def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K'):
+def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1'):
  from terminal.stocks.xbrl_dimensions import PROFILE as DIMENSIONS
  if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
  path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024))
- if batch.get('schema')=='gig.sec.xbrl.input_inline_set_batch.v1':return inspect_inline_sets(path,batch,as_of,allow_observed=allow_observed,dimensional_profile=dimensional_profile,company_symbol=company_symbol,statement_role=statement_role,statement_form=statement_form)
+ if batch.get('schema')=='gig.sec.xbrl.input_inline_set_batch.v1':return inspect_inline_sets(path,batch,as_of,allow_observed=allow_observed,dimensional_profile=dimensional_profile,company_symbol=company_symbol,statement_role=statement_role,statement_form=statement_form,statement_profile=statement_profile)
  dts=batch.get('schema')=='gig.sec.xbrl.input_dts_batch.v1'
  if dimensional_profile is not None and not dts:raise XBRLError('xbrl_dimensional_profile_requires_dts')
  fields={'schema','issuer_cik','origin','entries'}|({'numeric_profile'}if dts else set())
@@ -44,9 +44,9 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
  else:collection.ingest_batch(entries)
  result=collection.at_acceptance_time(as_of)
  summary={'schema':'gig.sec.xbrl.offline_summary.v1','status':'OFFLINE_PROFILE_VALIDATED','origin':collection.origin,'supplied_filings':len(entries),'source_bytes':total,'collection_sha256':result['collection_sha256'],'selection_sha256':result['selection_sha256'],'selected_facts':sum(map(len,result['history'].values())),'exclusions':result['exclusions'],'unresolved_amendment_count':len(result['unresolved_amendment_filings']),'complete_statements_or_history':False,'provider_requested':False,'raw_source_retained':False}
- return company_export(collection,as_of,company_symbol,statement_role,statement_form)if company_symbol is not None else(summary,result)
+ return company_export(collection,as_of,company_symbol,statement_role,statement_form,statement_profile)if company_symbol is not None else(summary,result)
 
-def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K'):
+def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1'):
  from terminal.stocks.xbrl_types import PROFILES
  if set(batch)!={'schema','issuer_cik','origin','numeric_profile','entries'}or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH or batch['numeric_profile']not in(None,*PROFILES):raise XBRLError('xbrl_input_inline_set_contract')
  collection=FilingCollection(batch['issuer_cik'],origin=batch['origin'],allow_observed=allow_observed);total=0;count=0;entries=[]
@@ -72,14 +72,14 @@ def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_prof
   entries.append({'documents':documents,'taxonomy_documents':taxonomy,'concepts':selected_concepts(entry['gaap_namespace'])})
  collection.ingest_inline_set_batch(entries,numeric_profile=batch['numeric_profile'],dimensional_profile=dimensional_profile);result=collection.at_acceptance_time(as_of)
  summary={'schema':'gig.sec.xbrl.offline_summary.v1','status':'OFFLINE_PROFILE_VALIDATED','origin':collection.origin,'supplied_filings':len(entries),'supplied_inline_documents':count,'source_bytes':total,'collection_sha256':result['collection_sha256'],'selection_sha256':result['selection_sha256'],'selected_facts':sum(map(len,result['history'].values())),'exclusions':result['exclusions'],'unresolved_amendment_count':len(result['unresolved_amendment_filings']),'complete_statements_or_history':False,'provider_requested':False,'raw_source_retained':False}
- return company_export(collection,as_of,company_symbol,statement_role,statement_form)if company_symbol is not None else(summary,result)
+ return company_export(collection,as_of,company_symbol,statement_role,statement_form,statement_profile)if company_symbol is not None else(summary,result)
 
-def company_export(collection,as_of,symbol,role,form):
+def company_export(collection,as_of,symbol,role,form,profile='legacy-v1'):
  from terminal.stocks.service import StockWorkspace
  from terminal.stocks.xbrl_product import company_contract
  workspace=StockWorkspace(environment={})
  workspace.admit_xbrl_collection(symbol,collection)
- result=company_contract(workspace,symbol,as_of,role=role,form=form)
+ result=company_contract(workspace,symbol,as_of,role=role,form=form,profile=profile)
  return {'schema':'gig.sec.xbrl.company_summary.v1','status':result['statement_view']['status'],'reason':result['statement_view']['reason'],'symbol':symbol,'issuer_cik':collection.cik,'origin':collection.origin,'sha256':result['sha256'],'provider_requested':False,'raw_source_retained':False},result
 
 def main(argv=None):
@@ -87,10 +87,11 @@ def main(argv=None):
  from terminal.stocks.xbrl_dimensions import PROFILE as DIMENSIONS
  parser.add_argument('--dimensional-profile',choices=[DIMENSIONS])
  parser.add_argument('--company-symbol');parser.add_argument('--statement-role');parser.add_argument('--statement-form',choices=['10-K','10-Q'],default='10-K')
+ parser.add_argument('--statement-profile',choices=['legacy-v1','accuracy-extension-v2'],default='legacy-v1')
  args=parser.parse_args(argv)
  if args.statement_role is not None and args.company_symbol is None:parser.error('--statement-role requires --company-symbol')
  try:
-  summary,result=inspect(args.batch,args.as_of,allow_observed=args.allow_observed,dimensional_profile=args.dimensional_profile,company_symbol=args.company_symbol,statement_role=args.statement_role,statement_form=args.statement_form)
+  summary,result=inspect(args.batch,args.as_of,allow_observed=args.allow_observed,dimensional_profile=args.dimensional_profile,company_symbol=args.company_symbol,statement_role=args.statement_role,statement_form=args.statement_form,statement_profile=args.statement_profile)
   if args.output:write_private(args.output,result)
  except (ValueError,TypeError,KeyError,OSError,MemoryError)as exc:
   reason=str(exc)if isinstance(exc,XBRLError)else'resource_exhausted'if isinstance(exc,MemoryError)else'input_contract_or_resource_failure'
