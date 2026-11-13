@@ -1,0 +1,1115 @@
+{
+  "schema": "gig.xbrl.accuracy.extension.developer_evidence.v1",
+  "date": "2026-11-13",
+  "timezone": "America/New_York",
+  "starting_source": "26432849a6a6bb0a373762b0e8829edd966f0901",
+  "recovered_remote_checkpoint": "ae0d84125f42053082f2bf96af31463abe054afc",
+  "recovery": "Preserved existing backend and partial frontend;no reset or new branch. Backend primitive had already been pushed beyond the requested starting checkpoint.",
+  "tested_runtime_source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+  "branch": "development/gig-ui-redesign",
+  "source_sha256": {
+    "scripts/inspect_xbrl_instances.py": {
+      "path": "scripts/inspect_xbrl_instances.py",
+      "bytes": 10225,
+      "sha256": "0f2cea14d8e809960d1840d02abf13c8325f1305ec7f09890ffaf27f351f88d1"
+    },
+    "terminal/server/app.py": {
+      "path": "terminal/server/app.py",
+      "bytes": 67404,
+      "sha256": "0b303943fbfdf17d3033b0af064ce3ce929b333561e89b80d549ecfa55f66305"
+    },
+    "terminal/server/schemas/backend_company_xbrl_v2.schema.json": {
+      "path": "terminal/server/schemas/backend_company_xbrl_v2.schema.json",
+      "bytes": 1497,
+      "sha256": "100ffbd9f6af613a341befa7164ca01816940017259d612c52a1236bff32882d"
+    },
+    "terminal/stocks/test_xbrl_accuracy.py": {
+      "path": "terminal/stocks/test_xbrl_accuracy.py",
+      "bytes": 5074,
+      "sha256": "42e87ef658aa801f1b6b46a91b6a4143a559c33408d759b83fb8ff70671605ad"
+    },
+    "terminal/stocks/test_xbrl_statement_v2.py": {
+      "path": "terminal/stocks/test_xbrl_statement_v2.py",
+      "bytes": 13023,
+      "sha256": "efa38e58e8b01c947d593347b88ca36fafa66239e2f25c4a0aaee9808eb93c53"
+    },
+    "terminal/stocks/xbrl_accuracy.py": {
+      "path": "terminal/stocks/xbrl_accuracy.py",
+      "bytes": 6108,
+      "sha256": "a69254a4f9f1f69256b9699cf414d5a786510057de4578e4790df0fbabc1bf9a"
+    },
+    "terminal/stocks/xbrl_binding.py": {
+      "path": "terminal/stocks/xbrl_binding.py",
+      "bytes": 3734,
+      "sha256": "575a3e36a09028677dd37448ae53e64c5d8b17ce03b39ad43670f55cf18fffea"
+    },
+    "terminal/stocks/xbrl_collection.py": {
+      "path": "terminal/stocks/xbrl_collection.py",
+      "bytes": 12171,
+      "sha256": "c68b21ced992d9ca3932b7f6894464adc463e704b277656cf37e578608937125"
+    },
+    "terminal/stocks/xbrl_dts.py": {
+      "path": "terminal/stocks/xbrl_dts.py",
+      "bytes": 15496,
+      "sha256": "f851222b4bb5d956decfc84f26e44f68b4ef7b13388530a44bfbfaf984b684a9"
+    },
+    "terminal/stocks/xbrl_product.py": {
+      "path": "terminal/stocks/xbrl_product.py",
+      "bytes": 2891,
+      "sha256": "90a21c63c70ebe8061a31aa2cb3191425a52ee30cb42df5da4bbbd8ab0e20834"
+    },
+    "terminal/stocks/xbrl_statement_v2.py": {
+      "path": "terminal/stocks/xbrl_statement_v2.py",
+      "bytes": 7854,
+      "sha256": "1c978f25aa42a3ef2d56eb1e76cfad09b2d96618304f76a7c2d62e207cd4daa9"
+    },
+    "terminal/tests/check_xbrl_accuracy_contract.py": {
+      "path": "terminal/tests/check_xbrl_accuracy_contract.py",
+      "bytes": 2520,
+      "sha256": "99ca11f718a769e6dbe0c105d7af4cc2de15268631b3850b705bd191924f3b7a"
+    },
+    "terminal/tests/run_no_launch_suite.py": {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "bytes": 3502,
+      "sha256": "710f0f04fec76c51b8ad2cc43519b664201b30f933937474cb6278c325308187"
+    },
+    "terminal/tests/xbrl-accuracy-contract.mjs": {
+      "path": "terminal/tests/xbrl-accuracy-contract.mjs",
+      "bytes": 1942,
+      "sha256": "eda5b96c30acfe9255c02a6291ca8fd03d11003b8bb874c2ff5534b440c02d09"
+    },
+    "terminal/web/package.json": {
+      "path": "terminal/web/package.json",
+      "bytes": 1369,
+      "sha256": "63bed878ca8e687e2c231df8fe879540a0ce22582ae52db7542dd62150b91c2a"
+    },
+    "terminal/web/src/XbrlStatements.tsx": {
+      "path": "terminal/web/src/XbrlStatements.tsx",
+      "bytes": 8740,
+      "sha256": "1e173c8fbbc042ce23cf27ec933d9a648c65269811d72ac498d3039927c9e38e"
+    },
+    "terminal/web/src/api.ts": {
+      "path": "terminal/web/src/api.ts",
+      "bytes": 7547,
+      "sha256": "8cb92d8fef1c381b673927063b4f6ba8a59a893588da6c8316382a771f2a5839"
+    },
+    "terminal/web/src/xbrlAccuracy.test.ts": {
+      "path": "terminal/web/src/xbrlAccuracy.test.ts",
+      "bytes": 7537,
+      "sha256": "4e4fe3827f35e0b55c3235db85f111cc36c74ab524dd049d68f642f3281de116"
+    },
+    "terminal/web/src/xbrlAccuracy.ts": {
+      "path": "terminal/web/src/xbrlAccuracy.ts",
+      "bytes": 11220,
+      "sha256": "be6b569ae13c528657ea1adfcbb33c23613ed46ed3c2f7069fbbbb10c4667192"
+    },
+    "terminal/web/src/xbrlStatementFixture.ts": {
+      "path": "terminal/web/src/xbrlStatementFixture.ts",
+      "bytes": 1597,
+      "sha256": "f853d8fcc434ea774e088b05fb8bb6b31d2c85f71e255e62660905aeb5fc7a06"
+    },
+    "terminal/web/src/xbrlStatements.test.ts": {
+      "path": "terminal/web/src/xbrlStatements.test.ts",
+      "bytes": 4196,
+      "sha256": "b4b4c6fdb6695d60b2a3072a95e657dbfbe867003f00e8e80398f00b7ba0d941"
+    },
+    "terminal/web/src/xbrlStatements.ts": {
+      "path": "terminal/web/src/xbrlStatements.ts",
+      "bytes": 8633,
+      "sha256": "83dba7971bf0ac0875e30d4e2d589a6580d2282cc33bf2573866afd2e10f49d1"
+    }
+  },
+  "published_milestones": [
+    {
+      "sha": "ae0d84125f42053082f2bf96af31463abe054afc",
+      "title": "Add exact bounded reported-accuracy enclosures and rounding compatibility tests [skip ci]"
+    },
+    {
+      "sha": "dc772ce89f4d84e4121fc2bcbf080d8ebed92f12",
+      "title": "Preserve opt-in accuracy and source-scoped extension statement backend [skip ci]"
+    },
+    {
+      "sha": "b9a5f90863c32da5f7447907658a454801cbb550",
+      "title": "Expose versioned XBRL accuracy and extension research in Stock Intelligence [skip ci]"
+    },
+    {
+      "sha": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "title": "Reject incomplete DTS scope when embedded relationships are unsupported [skip ci]"
+    },
+    {
+      "sha": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "title": "Reject silently ignored XBRL accuracy export profile requests [skip ci]"
+    }
+  ],
+  "python_profiles": [
+    {
+      "configuration": "native-debug",
+      "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "elapsed_seconds": 34.385,
+      "log": "build/remaining-engineering/accuracy-final-python-native-debug.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 457,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 457,
+      "receipt": {
+        "path": "build/remaining-engineering/accuracy-final-python-native-debug.log",
+        "bytes": 85925,
+        "sha256": "adca4567b555b0402391fe4f326924f340b8929d7f03a84e8dcae2ede7d4a55f"
+      }
+    },
+    {
+      "configuration": "native-release",
+      "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "elapsed_seconds": 29.924,
+      "log": "build/remaining-engineering/accuracy-final-python-native-release.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 457,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 457,
+      "receipt": {
+        "path": "build/remaining-engineering/accuracy-final-python-native-release.log",
+        "bytes": 85925,
+        "sha256": "97626420f9fd51f5f3b9a8e73d09378f80e3e1209cd7a8ba527c5a8ed44a20a1"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "elapsed_seconds": 146.965,
+      "log": "build/remaining-engineering/accuracy-final-python-native-asan-ubsan.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 457,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 457,
+      "receipt": {
+        "path": "build/remaining-engineering/accuracy-final-python-native-asan-ubsan.log",
+        "bytes": 87159,
+        "sha256": "f6cda2898ac05bfe83563d77a9ec9602924537fbe0d8cd4390a31fd1b3b43b98"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "elapsed_seconds": 34.913,
+      "log": "build/remaining-engineering/accuracy-final-python-clang-debug.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 457,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 457,
+      "receipt": {
+        "path": "build/remaining-engineering/accuracy-final-python-clang-debug.log",
+        "bytes": 85925,
+        "sha256": "9d84fd985b15dd4f312a16de1df244a3e951bc341cdd922e4bc2f72710f4487d"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+      "elapsed_seconds": 18.407,
+      "log": "build/remaining-engineering/accuracy-final-python-clang-release.log",
+      "app_factory_allowed": false,
+      "application_constructed": false,
+      "errors": 0,
+      "expected": 457,
+      "failures": 0,
+      "schema": "gig.no_launch.developer_tests.v1",
+      "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+      "selected_names": [
+        "terminal.stocks.test_acceptance",
+        "terminal.stocks.test_live_checkpoint",
+        "terminal.stocks.test_filing_vintage",
+        "terminal.stocks.test_observation_store",
+        "terminal.stocks.test_projection",
+        "terminal.stocks.test_trade_tape",
+        "terminal.stocks.test_live_recovery",
+        "terminal.stocks.test_sec_continuation",
+        "terminal.stocks.test_reconnect_stability",
+        "terminal.stocks.test_live_market.Semantics",
+        "terminal.stocks.test_final_qualification.AsyncReliability",
+        "terminal.stocks.test_final_qualification.RetryArithmetic",
+        "terminal.test_native_recovery",
+        "terminal.test_aggregate_recovery",
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.test_itch_product",
+        "terminal.test_itch_source_product",
+        "terminal.test_itch_durable_recovery",
+        "terminal.test_session_recovery",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.providers.test_recovery_hardening",
+        "terminal.providers.test_supervisor",
+        "terminal.providers.test_coinbase_supervisor",
+        "terminal.providers.test_transport",
+        "terminal.providers.test_kraken",
+        "terminal.providers.test_integrity",
+        "terminal.providers.test_kraken_admin",
+        "terminal.providers.test_differential",
+        "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+        "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+        "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+        "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+        "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+        "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+        "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+        "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+        "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+        "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+        "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+        "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+      ],
+      "skipped": 0,
+      "socket_attempts_allowed": false,
+      "tests": 457,
+      "receipt": {
+        "path": "build/remaining-engineering/accuracy-final-python-clang-release.log",
+        "bytes": 85925,
+        "sha256": "1d1b2abf817cb8a8261981d0c9af9a0cf57f562d4295f7a2e31e5521b8137d47"
+      }
+    }
+  ],
+  "focused_xml": {
+    "cases": 204,
+    "receipt": {
+      "path": "build/remaining-engineering/accuracy-final-source-installed-xml.log",
+      "bytes": 606,
+      "sha256": "2f13ab4ec3503946924b470af827ed9c31a1ba4630fc8800daaf278e1633ac52"
+    }
+  },
+  "native_profiles": [
+    {
+      "configuration": "native-release",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 39.806,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-native-release.log",
+        "bytes": 63,
+        "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-native-release.log",
+        "bytes": 1093,
+        "sha256": "d1ce8adf0905a96c8330756af8d0f10c71308ba227db9229925be2b55cfb70cb"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-native-release.log",
+        "bytes": 1218,
+        "sha256": "33dc5e40cc8dc51a449c5b001cc1e2b3433facccf3f9f49cf15612e21e66005e"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-native-release.log",
+        "bytes": 10109,
+        "sha256": "760a367c6b6e1adf032179978ece6bf8fd333f5fa51a999189e01d59b900e943"
+      }
+    },
+    {
+      "configuration": "native-debug",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 34.745,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-native-debug.log",
+        "bytes": 63,
+        "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-native-debug.log",
+        "bytes": 1089,
+        "sha256": "9ba8b9c606cdb48804bfaafd823b39cd1480e5607bbe2a07635e46e81856c75c"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-native-debug.log",
+        "bytes": 1214,
+        "sha256": "6abb575b1a4e4d57ed09c66025ac21cf7dbbdc1e9c6ae46570a933c361dac90d"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-native-debug.log",
+        "bytes": 10077,
+        "sha256": "188ac8f8c0bc7c9c644992d91979108c9785e2cf64462a58a60cfa4563ed9fd8"
+      }
+    },
+    {
+      "configuration": "native-asan-ubsan",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 70.344,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-native-asan-ubsan.log",
+        "bytes": 63,
+        "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-native-asan-ubsan.log",
+        "bytes": 1099,
+        "sha256": "81e217f83ac3aaef2730cfe048343b60e4fe41ffaca741119df3b640cfc1021f"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-native-asan-ubsan.log",
+        "bytes": 1224,
+        "sha256": "fdfdd87d7000a5b1a2fe9d61f08f715ee0cc059ffaad56f9753a66ca76753941"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-native-asan-ubsan.log",
+        "bytes": 10157,
+        "sha256": "59d908e84b3ea908c2cd3c1ed078fee7f7525e12968a7e1952deacbce2c1968e"
+      }
+    },
+    {
+      "configuration": "clang-debug",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 47.005,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-clang-debug.log",
+        "bytes": 63,
+        "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-clang-debug.log",
+        "bytes": 1087,
+        "sha256": "830f2439e21007967f0301875c3e9257d010c58e7e35110382b508d4df8c431e"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-clang-debug.log",
+        "bytes": 1212,
+        "sha256": "8c1fa73bf83320f63f4cd3fda783e11f6c5a14289a9a84f95b336c2377909a64"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-clang-debug.log",
+        "bytes": 10061,
+        "sha256": "0c30308a95bdca036000732ff3d73d409899d40221d330c3c60cdf725b5ce48b"
+      }
+    },
+    {
+      "configuration": "clang-release",
+      "native_focused_passed": 6,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 24.596,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-clang-release.log",
+        "bytes": 63,
+        "sha256": "c2ed93ffd93c840755c0e91392ae593b1b52de9b7aaf6c208123feaceb1dde2e"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-clang-release.log",
+        "bytes": 1091,
+        "sha256": "c5702a0cfc0765b760f8f4aecff67e874f8d36ee7c4500233558f79d3df30ac5"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-clang-release.log",
+        "bytes": 1216,
+        "sha256": "0ce84b3e2edf43715b81816733123a60c3c9c5b5f6de700cd489737dee07db4e"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-clang-release.log",
+        "bytes": 10093,
+        "sha256": "72f88ce36a95518cd8ccfe46f32104beaf534e415ba1ae2e4696b080c248a537"
+      }
+    },
+    {
+      "configuration": "clang-asan-ubsan",
+      "native_focused_passed": 5,
+      "frozen_passed": 8,
+      "frozen_hashes": {
+        "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+        "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+        "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+        "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+        "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+        "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+        "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+        "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+      },
+      "elapsed_seconds": 46.994,
+      "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+      "build": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-build-clang-asan-ubsan.log",
+        "bytes": 22,
+        "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+      },
+      "focused": {
+        "path": "build/remaining-engineering/accuracy-qualified-native-focused-clang-asan-ubsan.log",
+        "bytes": 965,
+        "sha256": "3d310ca99c77593776aeea3d5e2e1ddddffedad7627c055cb8c424db3743e153"
+      },
+      "frozen": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-clang-asan-ubsan.log",
+        "bytes": 1222,
+        "sha256": "fb430ebb35be2229b8d809b1a3778b7955410e1008d5aa625a276fe988fafe00"
+      },
+      "frozen_detail": {
+        "path": "build/remaining-engineering/accuracy-qualified-frozen-detail-clang-asan-ubsan.log",
+        "bytes": 10141,
+        "sha256": "2a403df1e1f8a822bcf3419fb56b39ec232187568c938a2b66e234a9d1dd58bb"
+      }
+    }
+  ],
+  "native_scope": "Focused recovery and all eight frozen references reran in six compiler profiles at19fe821. The final change only validates offline CLI arguments and extends an existing Python test. Final native/core/SDK/build inputs are byte-identical;no redundant native rerun after that change. Existing strict builds checked;unrelated full CTest matrices not rerun.",
+  "frontend": {
+    "tested_source": "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+    "final_frontend_inputs_byte_identical": true,
+    "tests": 184,
+    "failed": 0,
+    "skipped": 0,
+    "unit": {
+      "path": "build/remaining-engineering/accuracy-qualified-frontend-unit.log",
+      "bytes": 17353,
+      "sha256": "543aa568a8f83b9aeaed12b9a64985cadfa4eec1421c955e267987e92228da5c"
+    },
+    "build": {
+      "path": "build/remaining-engineering/accuracy-qualified-frontend-build.log",
+      "bytes": 2427,
+      "sha256": "c47c53a61d88e18532f95aee03802c856a6e1439c0d4817e0de42deebdb79104"
+    },
+    "accuracy_contract": {
+      "application_started": false,
+      "assertions": 57,
+      "cases": 10,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "accuracy_contract_receipt": {
+      "path": "build/remaining-engineering/accuracy-qualified-accuracy-contract.log",
+      "bytes": 150,
+      "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
+    },
+    "v1_contract": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "v1_contract_receipt": {
+      "path": "build/remaining-engineering/accuracy-qualified-xbrl-contract.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    "native_contract": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    },
+    "browser_or_visual_acceptance": false,
+    "warning": "Existing optional Three/OrbitControls chunk above500kB warning retained"
+  },
+  "packaging": {
+    "schema": "gig.package.current_source.v6",
+    "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+    "clean_source_archive": true,
+    "sdist": {
+      "path": "build/remaining-engineering/accuracy-final-sdist/gig_microstructure-0.1.1.tar.gz",
+      "bytes": 8050255,
+      "sha256": "b166d47c4f81f247545e72b9d4a94386ebc57f613c0ad00e0104abc71bf94e4a"
+    },
+    "sdist_members": 1302,
+    "tracked_archive_files_compared": 1301,
+    "changed_runtime_files_compared": [
+      "scripts/inspect_xbrl_instances.py",
+      "terminal/server/app.py",
+      "terminal/server/schemas/backend_company_xbrl_v2.schema.json",
+      "terminal/stocks/test_xbrl_accuracy.py",
+      "terminal/stocks/test_xbrl_statement_v2.py",
+      "terminal/stocks/xbrl_accuracy.py",
+      "terminal/stocks/xbrl_binding.py",
+      "terminal/stocks/xbrl_collection.py",
+      "terminal/stocks/xbrl_dts.py",
+      "terminal/stocks/xbrl_product.py",
+      "terminal/stocks/xbrl_statement_v2.py",
+      "terminal/tests/check_xbrl_accuracy_contract.py",
+      "terminal/tests/run_no_launch_suite.py",
+      "terminal/tests/xbrl-accuracy-contract.mjs",
+      "terminal/web/package.json",
+      "terminal/web/src/XbrlStatements.tsx",
+      "terminal/web/src/api.ts",
+      "terminal/web/src/xbrlAccuracy.test.ts",
+      "terminal/web/src/xbrlAccuracy.ts",
+      "terminal/web/src/xbrlStatementFixture.ts",
+      "terminal/web/src/xbrlStatements.test.ts",
+      "terminal/web/src/xbrlStatements.ts"
+    ],
+    "wheel_profiles": [
+      {
+        "profile": "default",
+        "wheel": {
+          "path": "build/remaining-engineering/xbrl2-default-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+          "bytes": 666813,
+          "sha256": "08e67b5790dfe5f0afdb24c05177ab7c1b1f339693d9e1c4f90c0bd73c1c9c3d"
+        },
+        "wheel_members": 22,
+        "built_from_this_sdist": false,
+        "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+        "sdk_source_byte_equivalence_verified": true,
+        "streaming_enabled": false,
+        "tests": [
+          {
+            "name": "consumer",
+            "cases": 8,
+            "seconds": 0.716,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-consumer.log",
+              "bytes": 964,
+              "sha256": "2523ac6fb314643e94a8f8b3c8b8574ededd212b3f6e97bba77e3df7bd48b174"
+            }
+          },
+          {
+            "name": "recovery",
+            "cases": 55,
+            "seconds": 9.253,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-recovery.log",
+              "bytes": 154,
+              "sha256": "b7f21c4d022bbf4bc1d3273c69c4c17feeb8629714ad679a43b4299693e485c8"
+            }
+          },
+          {
+            "name": "xml",
+            "cases": 204,
+            "seconds": 1.02,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-xml.log",
+              "bytes": 606,
+              "sha256": "aefd87650d6ce9e30fd5e37b17deea7cdffc2c3065d2f5fcd4b3cdf8609279a4"
+            }
+          },
+          {
+            "name": "contract",
+            "cases": null,
+            "seconds": 0.319,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-contract.log",
+              "bytes": 148,
+              "sha256": "49bac116ba0bd5bfa5f99e91e11ea37d222f44744b7030fec23df893dd5e8bd0"
+            }
+          },
+          {
+            "name": "xbrl-contract",
+            "cases": null,
+            "seconds": 0.315,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-xbrl-contract.log",
+              "bytes": 140,
+              "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+            }
+          },
+          {
+            "name": "accuracy-contract",
+            "cases": null,
+            "seconds": 0.467,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-default-installed-accuracy-contract.log",
+              "bytes": 150,
+              "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
+            }
+          }
+        ],
+        "contract": {
+          "schema": "gig.itch.product_contract.v1",
+          "assertions": 28,
+          "states": 4,
+          "source_recovery_states": 0,
+          "application_started": false,
+          "browser_started": false
+        },
+        "build": {
+          "path": "build/remaining-engineering/xbrl2-default-wheel-build.log",
+          "bytes": 1100,
+          "sha256": "07a98a5776bc788c43d047ce31e7cfbd144e34c3a4f3abe7ffe99d6c6721fed4"
+        }
+      },
+      {
+        "profile": "source",
+        "wheel": {
+          "path": "build/remaining-engineering/xbrl2-source-wheel/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+          "bytes": 677377,
+          "sha256": "e4cb3ccc673af98b4a240e1ddba5caad525858b6da8f413d7054f074bd737b98"
+        },
+        "wheel_members": 22,
+        "built_from_this_sdist": false,
+        "wheel_source": "7aea334f0171b862b055f9b3ebda46a78894dc7a",
+        "sdk_source_byte_equivalence_verified": true,
+        "streaming_enabled": true,
+        "tests": [
+          {
+            "name": "consumer",
+            "cases": 8,
+            "seconds": 0.566,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-consumer.log",
+              "bytes": 964,
+              "sha256": "acc3bf77c941ead5c3ce890ac30a0356f987503a9118c07ed4bab795a31c4866"
+            }
+          },
+          {
+            "name": "recovery",
+            "cases": 66,
+            "seconds": 10.308,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-recovery.log",
+              "bytes": 166,
+              "sha256": "49fe3d2b576ef5bf84175dcea33dceada526b15090eabecc02307fb966bb81dd"
+            }
+          },
+          {
+            "name": "xml",
+            "cases": 204,
+            "seconds": 1.117,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-xml.log",
+              "bytes": 606,
+              "sha256": "2f13ab4ec3503946924b470af827ed9c31a1ba4630fc8800daaf278e1633ac52"
+            }
+          },
+          {
+            "name": "contract",
+            "cases": null,
+            "seconds": 0.314,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-contract.log",
+              "bytes": 148,
+              "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+            }
+          },
+          {
+            "name": "xbrl-contract",
+            "cases": null,
+            "seconds": 0.318,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-xbrl-contract.log",
+              "bytes": 140,
+              "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+            }
+          },
+          {
+            "name": "accuracy-contract",
+            "cases": null,
+            "seconds": 0.415,
+            "receipt": {
+              "path": "build/remaining-engineering/accuracy-final-source-installed-accuracy-contract.log",
+              "bytes": 150,
+              "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
+            }
+          }
+        ],
+        "contract": {
+          "schema": "gig.itch.product_contract.v1",
+          "assertions": 35,
+          "states": 5,
+          "source_recovery_states": 1,
+          "application_started": false,
+          "browser_started": false
+        },
+        "build": {
+          "path": "build/remaining-engineering/xbrl2-source-wheel-build.log",
+          "bytes": 1100,
+          "sha256": "d139ce2fa7d2505cfe8d6cece105af14bfdf21733a180a0295361547ca9b36f0"
+        }
+      }
+    ],
+    "private_payloads": false,
+    "tests_use_extracted_source": true,
+    "no_index_no_dependencies": true,
+    "default_disabled_capability": {
+      "path": "build/remaining-engineering/accuracy-final-default-capability.log",
+      "bytes": 29,
+      "sha256": "35eff951006bf94903bf42d9f0973dd34782ba8f0bf7ffce915788ad4a997cb8"
+    }
+  },
+  "reproduced_failure": {
+    "case": "DTS discovery omitted supplied embedded relationships while exposing a usable external presentation. Affected role/effective graphs now fail closed;definition presence is unknown rather than false.",
+    "before": {
+      "path": "build/remaining-engineering/accuracy-embedded-before.log",
+      "bytes": 452,
+      "sha256": "fa27dddc68955e77fc9a694d36374876522030f2937d165a43630d9a0b7e0fb0"
+    },
+    "after": {
+      "path": "build/remaining-engineering/accuracy-embedded-after.log",
+      "bytes": 64,
+      "sha256": "437d5598bee2c971c6750ea5fff01f9fa86b84b18022e393da729d0d297ee90f"
+    },
+    "regression": {
+      "path": "build/remaining-engineering/accuracy-embedded-regressions.log",
+      "bytes": 400,
+      "sha256": "27eb80fc60de5404bf6dba40b69cf972bef760980aa0ea445847d8877a33dc3d"
+    }
+  },
+  "cli_profile_failure": {
+    "case": "Opt-in accuracy export without company identity silently returned legacy acceptance output;now explicit rejection",
+    "before": {
+      "path": "build/remaining-engineering/accuracy-cli-profile-before.log",
+      "bytes": 206,
+      "sha256": "7919947a37aca1c80867df93dcadd97e34294c0fb27eddf31df8b13c9485a399"
+    },
+    "after": {
+      "path": "build/remaining-engineering/accuracy-cli-profile-after.log",
+      "bytes": 98,
+      "sha256": "8391bb1ed84a6738deaf58d8320f433ba921cabfb9d1cef418594b0772e43e49"
+    }
+  },
+  "intermediate_compile_failure": {
+    "before": {
+      "path": "build/remaining-engineering/accuracy-frontend-build-first.log",
+      "bytes": 2434,
+      "sha256": "f73285555dd8ad4ee748ff26b4b9ba951e37aa64057724c288865290bda2062b"
+    },
+    "after": {
+      "path": "build/remaining-engineering/accuracy-qualified-frontend-build.log",
+      "bytes": 2427,
+      "sha256": "c47c53a61d88e18532f95aee03802c856a6e1439c0d4817e0de42deebdb79104"
+    },
+    "reason": "Partial resumed validator required explicit never-returning function declaration for strict TypeScript narrowing. No compiler flags or numeric assertions weakened."
+  },
+  "initial_evidence": {
+    "primitive": {
+      "path": "build/remaining-engineering/accuracy-primitive-first.log",
+      "bytes": 98,
+      "sha256": "ef34c889f52102ea59ff0c0050f1fa56ebdb9546b69f39b2e62e48b04fad47dd"
+    },
+    "backend_resume": {
+      "path": "build/remaining-engineering/accuracy-resume-backend.log",
+      "bytes": 400,
+      "sha256": "17b4a4aac45bec53dcd90249601877bd6a6f925f94708cd2aeae790cc5943583"
+    },
+    "v2_contract_initial": {
+      "path": "build/remaining-engineering/accuracy-python-ts-first.log",
+      "bytes": 150,
+      "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
+    }
+  },
+  "prior_evidence": {
+    "index_git_object": "26432849a6a6bb0a373762b0e8829edd966f0901:docs/qualification/development-continuation/EVIDENCE.json",
+    "index_sha256": "29ec24ffa7c0e08d491a5094215433d83a848db659dad9d31c77d812b78c53d5"
+  },
+  "tools": {
+    "python": "CPython3.12.14",
+    "gcc": "14.2",
+    "clang": "19.1.7",
+    "node": "24.19.0",
+    "vite": "8.3.5"
+  },
+  "sanitizer_scope": "GNU Python/native integration uses existing no-interpreter-exit-leak-check harness;pure Python not instrumented. Complete CPython shutdown leak clearance and Clang Python sanitizer runtime not claimed. Native GCC/Clang instrumented focused/frozen tests actually ran.",
+  "kraken": "Provisional. No request or provider connection;prior official-documentation CONNECT403 and enforced restricted policy retained.",
+  "not_executed": [
+    "GIG/ASGI factory/listener/server or browser launch",
+    "Provider/account request,observed-source data acquisition or new raw-data retention",
+    "Owner-private Codespaces/device/browser authentication acceptance",
+    "Current-candidate native ARM64 runtime or workflow dispatch",
+    "Trading,paper execution,deployment,paid services or infrastructure",
+    "Full XBRL/Calculations1.1 conformance corpus,source authentication or empirical accounting acceptance"
+  ],
+  "development_complete": false
+}

@@ -1,17 +1,16 @@
 # Current continuation pointer
 
-Tested runtime21160c43ee3be7cf0e91e064acf9e20333636746;branch development/gig-ui-redesign.
+Tested runtime5c77178e4ad75b47b5da3440a63b64e929b28a0f;development/gig-ui-redesign.
 Read ACTIVE_ENGINEERING_CHECKPOINT.md,REPORT.md,COMPLETION_MATRIX.json and
-EFFECTIVE_STATEMENT_EVIDENCE.json. Final report-only SHA is obtained from Git/remote.
+ACCURACY_EXTENSION_EVIDENCE.json. Final report-only SHA is obtained from Git/remote.
 
-Completed:bounded effective standard presentation/calculation relationships;
-acceptance-bound source statement selection;separate company-v2 extension and
-frontend controls/private export;calendar and final output-bound repairs. Final
-420per5bindings,167XML,172frontend,58actual XBRL contract assertions and installed
-source/default SDK checks passed. Native8identities matched in6profiles;see exact
-source/byte-equivalence chronology. No application/provider/acceptance launched.
+Completed:bounded conservative reported-accuracy enclosures;supplied-DTS numeric
+extensions mapped only to actual presentation structure;versioned company/frontend/
+private export integration;embedded-linkbase omission repaired to fail closed.
+457cases per5bindings,204XML,184frontend and actual v1/v2contract checks passed.
+All8native identities matched in6profiles;clean-source and installed consumers passed.
 
-Next:accuracy-aware calculations and source-scoped extension statement mapping,
-or restricted broader DRS/inline semantics,then automatic authorized source
-acquisition/integration. Full engineering remains incomplete. Keep Kraken
-provisional,unsupported recovery fail-closed and all protected branches unchanged.
+Next:authoritative broader rounding/duplicate,embedded/DTS/DRS or accounting/source
+integration contract. Full engineering remains incomplete. Do not repeat the new
+profile or claim provider/browser/ARM64 acceptance. No application/server/provider
+launch is authorized. Keep protected branches and all observation-only safeguards.

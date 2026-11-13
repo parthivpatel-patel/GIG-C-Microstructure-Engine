@@ -1,36 +1,35 @@
 {
   "schema": "gig.package.current_source.v6",
-  "source": "21160c43ee3be7cf0e91e064acf9e20333636746",
+  "source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
   "clean_source_archive": true,
   "sdist": {
-    "path": "build/remaining-engineering/effective-qualified-sdist/gig_microstructure-0.1.1.tar.gz",
-    "bytes": 8020196,
-    "sha256": "3029ff7f50ef5824e46114fdd231a3e9cbd35e7e99e30472c5217eb5fa3337cc"
+    "path": "build/remaining-engineering/accuracy-final-sdist/gig_microstructure-0.1.1.tar.gz",
+    "bytes": 8050255,
+    "sha256": "b166d47c4f81f247545e72b9d4a94386ebc57f613c0ad00e0104abc71bf94e4a"
   },
-  "sdist_members": 1289,
-  "tracked_archive_files_compared": 1288,
+  "sdist_members": 1302,
+  "tracked_archive_files_compared": 1301,
   "changed_runtime_files_compared": [
     "scripts/inspect_xbrl_instances.py",
     "terminal/server/app.py",
-    "terminal/server/schemas/backend_company_xbrl_v1.schema.json",
-    "terminal/stocks/service.py",
-    "terminal/stocks/test_xbrl_product.py",
-    "terminal/stocks/test_xbrl_relationships.py",
-    "terminal/stocks/test_xbrl_statements.py",
+    "terminal/server/schemas/backend_company_xbrl_v2.schema.json",
+    "terminal/stocks/test_xbrl_accuracy.py",
+    "terminal/stocks/test_xbrl_statement_v2.py",
+    "terminal/stocks/xbrl_accuracy.py",
     "terminal/stocks/xbrl_binding.py",
     "terminal/stocks/xbrl_collection.py",
     "terminal/stocks/xbrl_dts.py",
     "terminal/stocks/xbrl_product.py",
-    "terminal/stocks/xbrl_relationships.py",
-    "terminal/stocks/xbrl_statements.py",
-    "terminal/tests/check_xbrl_statement_contract.py",
+    "terminal/stocks/xbrl_statement_v2.py",
+    "terminal/tests/check_xbrl_accuracy_contract.py",
     "terminal/tests/run_no_launch_suite.py",
-    "terminal/tests/xbrl-statement-contract.mjs",
+    "terminal/tests/xbrl-accuracy-contract.mjs",
     "terminal/web/package.json",
-    "terminal/web/src/FinancialWorkspace.tsx",
     "terminal/web/src/XbrlStatements.tsx",
     "terminal/web/src/api.ts",
-    "terminal/web/src/financial.ts",
+    "terminal/web/src/xbrlAccuracy.test.ts",
+    "terminal/web/src/xbrlAccuracy.ts",
+    "terminal/web/src/xbrlStatementFixture.ts",
     "terminal/web/src/xbrlStatements.test.ts",
     "terminal/web/src/xbrlStatements.ts"
   ],
@@ -51,39 +50,39 @@
         {
           "name": "consumer",
           "cases": 8,
-          "seconds": 0.733,
+          "seconds": 0.716,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-default-installed-consumer.log",
+            "path": "build/remaining-engineering/accuracy-final-default-installed-consumer.log",
             "bytes": 964,
-            "sha256": "191cad2c039bb4d6bd7f03e573cda7cd7c20d2afd4b5d1831f8b6e4cf9f535e3"
+            "sha256": "2523ac6fb314643e94a8f8b3c8b8574ededd212b3f6e97bba77e3df7bd48b174"
           }
         },
         {
           "name": "recovery",
           "cases": 55,
-          "seconds": 15.479,
+          "seconds": 9.253,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-default-installed-recovery.log",
-            "bytes": 155,
-            "sha256": "76984ce7e8db243354c1ec4d31cd7e0033fd989492b4aac7f279a2c2a9221896"
+            "path": "build/remaining-engineering/accuracy-final-default-installed-recovery.log",
+            "bytes": 154,
+            "sha256": "b7f21c4d022bbf4bc1d3273c69c4c17feeb8629714ad679a43b4299693e485c8"
           }
         },
         {
           "name": "xml",
-          "cases": 167,
-          "seconds": 0.831,
+          "cases": 204,
+          "seconds": 1.02,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-default-installed-xml.log",
-            "bytes": 569,
-            "sha256": "92fd19a21fb71d7ebc2fae24215946bf13e8f3a3f10b0e813d5033ed6d1f1e1f"
+            "path": "build/remaining-engineering/accuracy-final-default-installed-xml.log",
+            "bytes": 606,
+            "sha256": "aefd87650d6ce9e30fd5e37b17deea7cdffc2c3065d2f5fcd4b3cdf8609279a4"
           }
         },
         {
           "name": "contract",
           "cases": null,
-          "seconds": 0.318,
+          "seconds": 0.319,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-default-installed-contract.log",
+            "path": "build/remaining-engineering/accuracy-final-default-installed-contract.log",
             "bytes": 148,
             "sha256": "49bac116ba0bd5bfa5f99e91e11ea37d222f44744b7030fec23df893dd5e8bd0"
           }
@@ -91,11 +90,21 @@
         {
           "name": "xbrl-contract",
           "cases": null,
-          "seconds": 0.468,
+          "seconds": 0.315,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-default-installed-xbrl-contract.log",
+            "path": "build/remaining-engineering/accuracy-final-default-installed-xbrl-contract.log",
             "bytes": 140,
             "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+          }
+        },
+        {
+          "name": "accuracy-contract",
+          "cases": null,
+          "seconds": 0.467,
+          "receipt": {
+            "path": "build/remaining-engineering/accuracy-final-default-installed-accuracy-contract.log",
+            "bytes": 150,
+            "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
           }
         }
       ],
@@ -129,39 +138,39 @@
         {
           "name": "consumer",
           "cases": 8,
-          "seconds": 0.617,
+          "seconds": 0.566,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-source-installed-consumer.log",
+            "path": "build/remaining-engineering/accuracy-final-source-installed-consumer.log",
             "bytes": 964,
-            "sha256": "5913775e5539d3de29ee5db2c413e435c3191ebf301f7b8f7b91789a64411308"
+            "sha256": "acc3bf77c941ead5c3ce890ac30a0356f987503a9118c07ed4bab795a31c4866"
           }
         },
         {
           "name": "recovery",
           "cases": 66,
-          "seconds": 9.996,
+          "seconds": 10.308,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-source-installed-recovery.log",
-            "bytes": 165,
-            "sha256": "a3e013fe857bce7065ef0f5601188344e779c6b7091f9fdb21e66376bea59d4a"
+            "path": "build/remaining-engineering/accuracy-final-source-installed-recovery.log",
+            "bytes": 166,
+            "sha256": "49fe3d2b576ef5bf84175dcea33dceada526b15090eabecc02307fb966bb81dd"
           }
         },
         {
           "name": "xml",
-          "cases": 167,
-          "seconds": 0.816,
+          "cases": 204,
+          "seconds": 1.117,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-source-installed-xml.log",
-            "bytes": 569,
-            "sha256": "5c63969d07de8e2921e05c0a0aba310df66fbc145ab376ff74f0119e0581e1ca"
+            "path": "build/remaining-engineering/accuracy-final-source-installed-xml.log",
+            "bytes": 606,
+            "sha256": "2f13ab4ec3503946924b470af827ed9c31a1ba4630fc8800daaf278e1633ac52"
           }
         },
         {
           "name": "contract",
           "cases": null,
-          "seconds": 0.318,
+          "seconds": 0.314,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-source-installed-contract.log",
+            "path": "build/remaining-engineering/accuracy-final-source-installed-contract.log",
             "bytes": 148,
             "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
           }
@@ -169,11 +178,21 @@
         {
           "name": "xbrl-contract",
           "cases": null,
-          "seconds": 0.315,
+          "seconds": 0.318,
           "receipt": {
-            "path": "build/remaining-engineering/effective-qualified-source-installed-xbrl-contract.log",
+            "path": "build/remaining-engineering/accuracy-final-source-installed-xbrl-contract.log",
             "bytes": 140,
             "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+          }
+        },
+        {
+          "name": "accuracy-contract",
+          "cases": null,
+          "seconds": 0.415,
+          "receipt": {
+            "path": "build/remaining-engineering/accuracy-final-source-installed-accuracy-contract.log",
+            "bytes": 150,
+            "sha256": "88c90c4a34cc2a9dba71e05a7e1205127d1f4ddb1f36ed39b9de7a35f14dcb89"
           }
         }
       ],
@@ -196,7 +215,7 @@
   "tests_use_extracted_source": true,
   "no_index_no_dependencies": true,
   "default_disabled_capability": {
-    "path": "build/remaining-engineering/effective-qualified-default-capability.log",
+    "path": "build/remaining-engineering/accuracy-final-default-capability.log",
     "bytes": 29,
     "sha256": "35eff951006bf94903bf42d9f0973dd34782ba8f0bf7ffce915788ad4a997cb8"
   }

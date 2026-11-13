@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v11",
+  "schema": "gig.development.completion.v12",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -14,7 +14,7 @@
         "src/book/order_book.cpp",
         "include/gig/analytics/exact.hpp"
       ],
-      "test_evidence": "420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python\u2192TypeScript XBRL cases/58assertions;35native\u2192TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.",
+      "test_evidence": "Final457guarded Python cases per5supported binding configurations;native focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles at19fe821,with final component input byte-equivalence verified.184frontend tests/TSC/Vite at19fe821 with unchanged final frontend inputs;10actual v2accuracy/extension Python\u2192TypeScript cases/57assertions and8v1cases/58assertions;35native\u2192TypeScript assertions;clean-source/default/source SDK consumers. Native/core/SDK/build inputs unchanged;full unrelated CTest matrix not rerun. See ACCURACY_EXTENSION_EVIDENCE.json.",
       "explanation": "Checked mutations,explicit identities and bounded native resources exist;not an exchange-equivalence or live-depth claim.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -30,7 +30,7 @@
         "src/itch/context.cpp",
         "src/itch/reconstruction.cpp"
       ],
-      "test_evidence": "420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python\u2192TypeScript XBRL cases/58assertions;35native\u2192TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.",
+      "test_evidence": "Final457guarded Python cases per5supported binding configurations;native focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles at19fe821,with final component input byte-equivalence verified.184frontend tests/TSC/Vite at19fe821 with unchanged final frontend inputs;10actual v2accuracy/extension Python\u2192TypeScript cases/57assertions and8v1cases/58assertions;35native\u2192TypeScript assertions;clean-source/default/source SDK consumers. Native/core/SDK/build inputs unchanged;full unrelated CTest matrix not rerun. See ACCURACY_EXTENSION_EVIDENCE.json.",
       "explanation": "Explicit initialization eligibility,prepared transactions and unsupported outcomes;no inferred empty historical book.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -47,7 +47,7 @@
         "python/bindings/itch_recovery.cpp",
         "python/gig_microstructure/itch_recovery.py"
       ],
-      "test_evidence": "420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python\u2192TypeScript XBRL cases/58assertions;35native\u2192TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.",
+      "test_evidence": "Final457guarded Python cases per5supported binding configurations;native focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles at19fe821,with final component input byte-equivalence verified.184frontend tests/TSC/Vite at19fe821 with unchanged final frontend inputs;10actual v2accuracy/extension Python\u2192TypeScript cases/57assertions and8v1cases/58assertions;35native\u2192TypeScript assertions;clean-source/default/source SDK consumers. Native/core/SDK/build inputs unchanged;full unrelated CTest matrix not rerun. See ACCURACY_EXTENSION_EVIDENCE.json.",
       "explanation": "NativeSession owns actual C++ replay or explicit full typed ITCH owner. Native snapshot/metric projections preserve source Price(4)/shares,including quantum3/lot10. No mock native application or new engine calculation. Optional streaming SDK now exposes the existing C++ full-source coordinator;default dependency-compatible SDK rejects that capability explicitly.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -61,7 +61,7 @@
         "src/replay/replay.cpp",
         "terminal/server/engine.py"
       ],
-      "test_evidence": "420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python\u2192TypeScript XBRL cases/58assertions;35native\u2192TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed.",
+      "test_evidence": "Final457guarded Python cases per5supported binding configurations;native focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles at19fe821,with final component input byte-equivalence verified.184frontend tests/TSC/Vite at19fe821 with unchanged final frontend inputs;10actual v2accuracy/extension Python\u2192TypeScript cases/57assertions and8v1cases/58assertions;35native\u2192TypeScript assertions;clean-source/default/source SDK consumers. Native/core/SDK/build inputs unchanged;full unrelated CTest matrix not rerun. See ACCURACY_EXTENSION_EVIDENCE.json.",
       "explanation": "Journal reservation and recovery-required state exist;authored replay and bounded snapshots remain separate from observed complete sessions.",
       "disposition": "Implemented bounded research contract;retain tested behavior",
       "action_now": "No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements",
@@ -429,15 +429,23 @@
         "terminal/web/src/xbrlStatements.ts",
         "terminal/web/src/xbrlStatements.test.ts",
         "terminal/server/schemas/backend_company_xbrl_v1.schema.json",
-        "terminal/tests/check_xbrl_statement_contract.py"
+        "terminal/tests/check_xbrl_statement_contract.py",
+        "terminal/stocks/xbrl_accuracy.py",
+        "terminal/stocks/test_xbrl_accuracy.py",
+        "terminal/stocks/xbrl_statement_v2.py",
+        "terminal/stocks/test_xbrl_statement_v2.py",
+        "terminal/web/src/xbrlAccuracy.ts",
+        "terminal/web/src/xbrlAccuracy.test.ts",
+        "terminal/tests/check_xbrl_accuracy_contract.py",
+        "terminal/server/schemas/backend_company_xbrl_v2.schema.json"
       ],
-      "test_evidence": "167authored XBRL tests (42more than prior125),included in420per5bindings and167perinstalledSDKvariant.172frontend tests,8actual Python-product\u2192TypeScript cases/58assertions and strict production build. Actual endpoint body tested via AST extraction without ASGI construction. Reproduced mixed-unit,impossible-calendar and final-SHA byte-bound failures retained;all repaired without weaker expectations.",
-      "explanation": "Prior inline/simple-content/restricted-DRS profiles preserved. Explicit STANDARD_EFFECTIVE_ARCS_V1 now computes bounded standard presentation/calculation base sets with supported equivalence,priority/prohibition,order/preferred-label/weight provenance and cycle/conflict guards across supplied split links. Statement selection uses one exact acceptance-qualified filing/form/role with declared amendment lineage,consolidated exact-context facts,explicit missing/conflict/unit states and rational calculation diagnostics. Separate company_xbrl.v1 GET under APIv2 and private offline exports integrate Stock Intelligence without replacing companyfacts. Browser validates symbol/CIK,exact timestamps,canonical integrity and fact lineage;unsupported semantics remain visible. No full taxonomy/schema/accounting or source authentication inferred.",
-      "disposition": "Bounded effective relationships,selected presentation/statement and supplied-XBRL product/frontend contracts are implemented and offline verified. Automatic supplied filing/DTS source acquisition/startup admission,complete financial statements,rounding-aware calculation validation and broad taxonomy/DRS remain PARTIAL.",
-      "action_now": "Next bounded package:authoritative rounding/accuracy-aware calculation consistency and extension statement-mapping requirements,or expanded inline/DRS conformance. Qualify with an independently authorized supplied corpus before generalizing. Do not duplicate the now-working relationship/statement/product contracts or auto-enable sources.",
+      "test_evidence": "204authored XBRL tests (37new),included in457per5binding configurations and204perinstalled SDK variant.184frontend tests;actual10v2cases/57assertions plus8v1cases/58assertions. Endpoint body and private export profiles exercised without ASGI construction. Embedded-linkbase omission reproduced and repaired;source/native frozen identities preserved.",
+      "explanation": "Opt-in accuracy-extension-v2 now derives exact bounded conservative enclosures for supported decimals/precision,handles signed-unit calculations and distinguishes disjoint,rounding-compatible,missing and unsupported outcomes. Exact residuals stay separate. Supported numeric extension declarations map to exact supplied roles,roots,incoming relationship indices and source documents;raw facts/IDs remain unchanged with distinct derived numeric records. No local-name/role similarity creates a GAAP metric. Source contexts/units,amendments and cutoff identity remain. Versioned company/view schemas,private export and Stock Intelligence profile controls expose this without changing v1 defaults. Embedded unsupported schema relationships now block candidate usable networks instead of being omitted.",
+      "disposition": "Bounded reported-accuracy enclosures and structural extension mapping/product flows are implemented and offline verified. They are not full XBRL/Calculations conformance,accounting equivalence,complete financial statements or automatic source ingestion. SEC02 remains PARTIAL.",
+      "action_now": "Next:authoritative rounding/precision boundary and duplicate semantics outside the conservative profile,explicit issuer/standard accounting mapping backed by supplied evidence,or broader embedded/DTS/DRS/inline conformance. Preserve explicit versioning and fail-closed unsupported scope.",
       "work_class": "PARTIAL:bounded instance/filing-vintage infrastructure complete;full statement semantics,product integration and historical source coverage remain open",
       "completed_this_session": "DTS invalid/missing/empty/extended linkbaseRef type reproduced as falsely usable and repaired with exact simple-XLink admission. Previous bounded instance/inline/DTS/filing-vintage infrastructure preserved.",
-      "remaining_implementation_or_qualification": "Full inline registry/named-target/tuple/escaped HTML;general schema construction/complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS and effective dimensional precedence;generic/custom arcroles,labels and unsupported relationship attributes;calculation accuracy intervals;complete extension/consolidated statement mapping and source acquisition/history coverage. New product is explicit supplied-XBRL admission/private export,not automatic SEC/DTS ingestion or full browser/provider acceptance.",
+      "remaining_implementation_or_qualification": "Finite precision at zero/noncanonical reported quantum and full rounding/tie/duplicate semantics;automatic accounting-equivalence/complete financial-statement mapping;embedded relationships (now explicitly blocked),generic/custom arcroles/labels;full inline registry/named targets/tuples/escaped HTML;general schema complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;authorized automatic filing/DTS ingestion and independent historical source/acceptance corpus. Current source-scoped extension mapping is structural,not a guessed GAAP alias.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
@@ -582,7 +590,7 @@
         "terminal/web/src/OrderBook.tsx",
         "terminal/l2_research.py"
       ],
-      "test_evidence": "Existing offline Kraken fixtures included in420per5profiles. Prior official-doc CONNECT403 and current enforced restricted policy retained;no repeated request or provider connection. Provisional.",
+      "test_evidence": "Existing offline Kraken fixtures included in457per5profiles. Official contract remains provisional;no repeated blocked documentation request or feed connection.",
       "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged.",
       "disposition": "Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.",
       "completed_this_session": "Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.",
@@ -700,7 +708,7 @@
         "terminal/web/src/itchSession.ts",
         "terminal/test_itch_source_product.py"
       ],
-      "test_evidence": "420guarded cases per5supported binding profiles at final runtime;native focused recovery6/6/6GCC and6/6/5Clang and all8frozen identities in each6profiles at f80a3eb with final native/SDK/build byte equivalence verified.172frontend tests/TSC/Vite;8actual Python\u2192TypeScript XBRL cases/58assertions;35native\u2192TypeScript assertions;clean-source/default and enabled SDK consumers. See EFFECTIVE_STATEMENT_EVIDENCE.json. No unrelated full native rerun claimed. Existing source-product recovery/fault/restart cases rerun;unsupported source formats/positions not invented.",
+      "test_evidence": "Final457guarded Python cases per5supported binding configurations;native focused recovery6/6/6GCC and6/6/5Clang plus all8frozen identities in each6profiles at19fe821,with final component input byte-equivalence verified.184frontend tests/TSC/Vite at19fe821 with unchanged final frontend inputs;10actual v2accuracy/extension Python\u2192TypeScript cases/57assertions and8v1cases/58assertions;35native\u2192TypeScript assertions;clean-source/default/source SDK consumers. Native/core/SDK/build inputs unchanged;full unrelated CTest matrix not rerun. See ACCURACY_EXTENSION_EVIDENCE.json. Existing source/native recovery contracts reran unchanged;unknown positions/schemas/source sequences remain fail-closed.",
       "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration.",
       "disposition": "Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.",
       "action_now": "Do not reimplement SDK/source/product continuation. Partial/terminal/arbitrary compressed positions and unknown native schemas remain explicitly unsupported;additional contracts need specification/fixtures. Actual observed continuity and hardware/target evidence remain unqualified.",
@@ -900,12 +908,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "21160c43ee3be7cf0e91e064acf9e20333636746",
+  "tested_application": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "1d49ae2cf5df3659d97faf248c6a210e317c1684",
+  "previous_matrix_commit": "26432849a6a6bb0a373762b0e8829edd966f0901",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current source-bound evidence:EFFECTIVE_STATEMENT_EVIDENCE.json. Full older CTest/source/provider evidence remains historical,not relabeled current execution.",
+  "evidence_policy": "Current source-bound evidence:ACCURACY_EXTENSION_EVIDENCE.json. Earlier whole matrices/provider/acceptance evidence remains historical and is not relabeled current execution.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -933,9 +941,14 @@
     "f80a3eb60b70a5a28674ebbb4533a85ab00611b7",
     "64b16ec8e333d3e2a93f476bf0a53d9933a7d635",
     "96af2638a6b7ae4d015440183d54b1a04216e0c8",
-    "21160c43ee3be7cf0e91e064acf9e20333636746"
+    "21160c43ee3be7cf0e91e064acf9e20333636746",
+    "ae0d84125f42053082f2bf96af31463abe054afc",
+    "dc772ce89f4d84e4121fc2bcbf080d8ebed92f12",
+    "b9a5f90863c32da5f7447907658a454801cbb550",
+    "19fe82112b0b8d44c399cd1cb0ac2522efc23ccf",
+    "5c77178e4ad75b47b5da3440a63b64e929b28a0f"
   ],
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "timezone": "America/New_York",
   "counts": {
     "COMPLETE": 34,
@@ -943,7 +956,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "1d49ae2cf5df3659d97faf248c6a210e317c1684",
+  "starting_commit": "26432849a6a6bb0a373762b0e8829edd966f0901",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,

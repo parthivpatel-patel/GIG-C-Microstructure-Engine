@@ -1,3 +1,7 @@
+# Current accuracy/extension pointer
+
+The opt-in accuracy-extension-v2 profile,conservative exact enclosures and structural supplied-extension mapping are now implemented. See XBRL_ACCURACY_V1.md,XBRL_ACCURACY_EXTENSION_PRODUCT.md and REPORT.md. Embedded relationships remain unsupported and now explicitly block usable partial graphs. Broader conformance/accounting/source scope remains partial.
+
 # Current implementation pointer
 
 The legacy strict presentation profile described below remains intact. New STANDARD_EFFECTIVE_ARCS_V1,statement selection and separate company/frontend integration are documented in XBRL_EFFECTIVE_RELATIONSHIPS.md,XBRL_STATEMENT_PRODUCT.md and REPORT.md. Broader taxonomy/schema/DRS/complete-statement semantics remain partial.

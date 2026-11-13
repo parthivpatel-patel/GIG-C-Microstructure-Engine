@@ -1,18 +1,18 @@
 {
-  "schema": "gig.development.evidence.index.v11",
-  "starting_source": "1d49ae2cf5df3659d97faf248c6a210e317c1684",
-  "tested_application_source": "21160c43ee3be7cf0e91e064acf9e20333636746",
-  "current_evidence": "EFFECTIVE_STATEMENT_EVIDENCE.json",
+  "schema": "gig.development.evidence.index.v12",
+  "starting_source": "26432849a6a6bb0a373762b0e8829edd966f0901",
+  "tested_application_source": "5c77178e4ad75b47b5da3440a63b64e929b28a0f",
+  "current_evidence": "ACCURACY_EXTENSION_EVIDENCE.json",
   "current_evidence_receipt": {
-    "path": "docs/qualification/development-continuation/EFFECTIVE_STATEMENT_EVIDENCE.json",
-    "bytes": 52567,
-    "sha256": "8f7d9dc726668a45389872c5775cb803954acfa3698c8f71873d6930caff443a"
+    "path": "docs/qualification/development-continuation/ACCURACY_EXTENSION_EVIDENCE.json",
+    "bytes": 54706,
+    "sha256": "876b9d823d0e32d4ff1d2be854348589daef8d275b889facc376c9198bbe836b"
   },
   "previous_index": {
-    "git_object": "1d49ae2cf5df3659d97faf248c6a210e317c1684:docs/qualification/development-continuation/EVIDENCE.json",
-    "sha256": "abc09ab185960900733c883f42bbb722e91d5257276b92ecd962fd66ab32ebde"
+    "git_object": "26432849a6a6bb0a373762b0e8829edd966f0901:docs/qualification/development-continuation/EVIDENCE.json",
+    "sha256": "29ec24ffa7c0e08d491a5094215433d83a848db659dad9d31c77d812b78c53d5"
   },
-  "python_cases_each_of_five": 420,
+  "python_cases_each_of_five": 457,
   "focused_native_passed": [
     6,
     6,
@@ -22,10 +22,11 @@
     5
   ],
   "frozen_passed_each_of_six": 8,
-  "frontend_cases": 172,
-  "python_xbrl_typescript_assertions": 58,
+  "frontend_cases": 184,
+  "v2_accuracy_contract_assertions": 57,
+  "v1_statement_contract_assertions": 58,
   "native_frontend_assertions": 35,
-  "xml_cases": 167,
+  "xml_cases": 204,
   "requirements": {
     "COMPLETE": 34,
     "BLOCKED": 7,
@@ -38,7 +39,7 @@
   "final_documentation_commit": "Verify Git/remote;not self-embedded",
   "packaging_receipt": {
     "path": "docs/qualification/development-continuation/PACKAGE_CURRENT.json",
-    "bytes": 7313,
-    "sha256": "1bbb03bd4a6e7a42ad5373d671c6bcab4c132c6165d7bb2bedf29439ff26415d"
+    "bytes": 7952,
+    "sha256": "a80006ccdb7c6a82f3e54025b45c2a5c771a23c9aec1eee169c71baac5ef24f2"
   }
 }
