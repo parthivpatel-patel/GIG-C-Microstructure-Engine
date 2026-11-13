@@ -26,7 +26,7 @@ def identifier(v):
  return v
 @dataclass(slots=True)
 class Node:
- name:str;attrs:dict;ns:tuple;children:list=field(default_factory=list);parts:list=field(default_factory=list);length:int=0;content:list=field(default_factory=list)
+ name:str;attrs:dict;ns:tuple;children:list=field(default_factory=list);parts:list=field(default_factory=list);length:int=0;content:list=field(default_factory=list);source_ordinal:int|None=None
  def text(self):return ''.join(self.parts)
 
 def parse_xml(raw):
@@ -54,7 +54,7 @@ def parse_xml(raw):
   nodes+=1
   if nodes>30000 or len(stack)>=32 or len(attrs)>24 or any(len(k)>640 or len(v)>1024 for k,v in attrs.items()):raise XBRLError('xbrl_structure_budget')
   if value.startswith('http://www.w3.org/2001/XInclude}'):raise XBRLError('xbrl_xinclude_disabled')
-  n=Node(name(value),{name(k):v for k,v in attrs.items()},snapshot)
+  n=Node(name(value),{name(k):v for k,v in attrs.items()},snapshot,source_ordinal=nodes)
   if stack:stack[-1].children.append(n);stack[-1].content.append(n)
   else:roots.append(n)
   stack.append(n)

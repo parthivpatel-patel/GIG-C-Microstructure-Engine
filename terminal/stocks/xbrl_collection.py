@@ -27,12 +27,14 @@ class FilingCollection:
   if size>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
   values=[parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed)for entry in entries]
   return self._commit_parsed(values)
- def ingest_dts_batch(self,entries,*,numeric_profile=None,dimensional_profile=None):
+ def ingest_dts_batch(self,entries,*,numeric_profile=None,dimensional_profile=None,embedded_profile=None):
   # New explicit contract;the original strict batch keys and behavior stay intact.
   from .xbrl_dts import discover
   from .xbrl_binding import bind_declarations
   from .xbrl_types import PROFILES,corroborate
   if numeric_profile not in(None,*PROFILES):raise XBRLError('xbrl_numeric_profile_unsupported')
+  from .xbrl_dts import EMBEDDED_PROFILE
+  if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
   from .xbrl_dimensions import PROFILE as DIMENSIONS,corroborate as dimensions
   if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
   if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
@@ -48,24 +50,26 @@ class FilingCollection:
   for entry in entries:
    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
    if source['origin']=='OBSERVED_OFFICIAL_RESPONSE'and entry['instance_uri']!=source['source_url']:raise XBRLError('dts_binding_source_uri')
-   graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=self.allow_observed,permission_reference=entry['manifest']['permission_reference'])
+   graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=self.allow_observed,permission_reference=entry['manifest']['permission_reference'],embedded_profile=embedded_profile)
    bound=bind_declarations(parsed,graph)
    if numeric_profile is not None:bound=corroborate(bound,graph,profile=numeric_profile)
    values.append(dimensions(bound,graph)if dimensional_profile is not None else bound)
   return self._commit_parsed(values)
- def ingest_inline_set_batch(self,entries,*,numeric_profile=None,dimensional_profile=None):
+ def ingest_inline_set_batch(self,entries,*,numeric_profile=None,dimensional_profile=None,embedded_profile=None):
   from .inline_set import parse_document_set
   from .xbrl_dts import discover_inline_set
   from .xbrl_binding import bind_declarations
   from .xbrl_types import PROFILES,corroborate
   if numeric_profile not in(None,*PROFILES):raise XBRLError('xbrl_numeric_profile_unsupported')
+  from .xbrl_dts import EMBEDDED_PROFILE
+  if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
   from .xbrl_dimensions import PROFILE as DIMENSIONS,corroborate as dimensions
   if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
   if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
   total=0
   for entry in entries:
    if type(entry)is not dict or set(entry)!={'documents','concepts','taxonomy_documents'}or type(entry['documents'])is not list or not 1<=len(entry['documents'])<=8 or entry['taxonomy_documents']is not None and(type(entry['taxonomy_documents'])is not list or len(entry['taxonomy_documents'])>16):raise XBRLError('xbrl_inline_set_batch_contract')
-   if (numeric_profile is not None or dimensional_profile is not None)and entry['taxonomy_documents']is None:raise XBRLError('xbrl_numeric_profile_requires_dts')
+   if (numeric_profile is not None or dimensional_profile is not None or embedded_profile is not None)and entry['taxonomy_documents']is None:raise XBRLError('xbrl_numeric_profile_requires_dts')
    for document in entry['documents']+(entry['taxonomy_documents']or[]):
     if type(document)is not dict or type(document.get('raw'))is not bytes:raise XBRLError('xbrl_inline_set_batch_contract')
     total+=len(document['raw'])
@@ -75,7 +79,7 @@ class FilingCollection:
    parsed=parse_document_set(entry['documents'],entry['concepts'],allow_observed=self.allow_observed)
    if entry['taxonomy_documents']is not None:
     references=[doc['manifest']['permission_reference']for doc in sorted(entry['documents'],key=lambda d:d['uri'])]
-    graph=discover_inline_set(parsed,entry['taxonomy_documents'],allow_observed=self.allow_observed,permission_references=references);parsed=bind_declarations(parsed,graph)
+    graph=discover_inline_set(parsed,entry['taxonomy_documents'],allow_observed=self.allow_observed,permission_references=references,embedded_profile=embedded_profile);parsed=bind_declarations(parsed,graph)
     if numeric_profile is not None:parsed=corroborate(parsed,graph,profile=numeric_profile)
     if dimensional_profile is not None:parsed=dimensions(parsed,graph)
    values.append(parsed)

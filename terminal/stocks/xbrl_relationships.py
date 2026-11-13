@@ -20,7 +20,7 @@ def number(value,code):
 
 def rational(value):return {'numerator':str(value.numerator),'denominator':str(value.denominator)}
 
-def effective(linkbases,locators,concepts,documents):
+def effective(linkbases,locators,concepts,documents,*,node_provenance=False):
  from .xbrl_dts import uri
  groups={};count=0;hashes={d['uri']:d['sha256']for d in documents}
  for source,root in sorted(linkbases,key=lambda v:v[0]):
@@ -61,6 +61,7 @@ def effective(linkbases,locators,concepts,documents):
      p=concepts.get(labels[before],{}).get('declaration',{}).get('balance');c=concepts.get(labels[after],{}).get('declaration',{}).get('balance')
      if p and c and (weight>0)!=(p==c):g['issues'].add('WEIGHT_BALANCE_CONFLICT')
     provenance={'source_uri':source,'source_sha256':hashes[source],'extended_link_index':li,'arc_index':ni,'priority':int(priority),'use':use,'order_lexical':a.get('order','1'),'weight_lexical':a.get('weight')}
+    if node_provenance:provenance['link_node_ordinal']=link.source_ordinal;provenance['arc_node_ordinal']=node.source_ordinal
     record={'from':labels[before],'to':labels[after],'order':rational(order),'preferred_label':preferred,'weight':rational(weight)if weight is not None else None,'provenance':provenance}
     g['records'].append(record)
  networks=[]

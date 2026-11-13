@@ -7,7 +7,7 @@ from .xbrl_instance import X,L,XL,tag,digest,canonical,XBRLError
 D='http://xbrl.org/2005/xbrldt';ARC='http://xbrl.org/int/dim/arcrole/';PROFILE='EXPLICIT_CLOSED_HYPERCUBE_V1'
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
-def networks(linkbases,locators):
+def networks(linkbases,locators,*,node_provenance=False):
  from .xbrl_dts import uri
  result=[]
  for source,root in linkbases:
@@ -36,6 +36,7 @@ def networks(linkbases,locators):
     if kind in('all','notAll')and placement not in('segment','scenario'):raise XBRLError('drs_context_element')
     if kind not in('all','notAll')and(tag(D,'closed')in a or tag(D,'contextElement')in a):issues.add('RELATIONSHIP_ATTRIBUTE_SCOPE_UNSUPPORTED')
     arcs.append({'kind':kind,'from':labels[a[tag(XL,'from')]],'to':labels[a[tag(XL,'to')]],'closed':closed in('true','1'),'context_element':placement,'source_uri':source})
+    if node_provenance:arcs[-1]['source_link_ordinal']=link.source_ordinal;arcs[-1]['source_arc_ordinal']=node.source_ordinal
     if len(arcs)>4096:raise XBRLError('drs_arc_budget')
    result.append({'role':link.attrs[tag(XL,'role')],'source_uri':source,'arcs':arcs,'issues':sorted(issues),'usable_for_restricted_profile':not issues})
  if len(result)!=1:

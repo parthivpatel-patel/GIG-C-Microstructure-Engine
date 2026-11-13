@@ -8,6 +8,7 @@ from collections import deque
 from fractions import Fraction
 from urllib.parse import urljoin,urlsplit
 from .xbrl_instance import X,L,XL,tag,parse_xml,qname,digest,canonical,XBRLError
+EMBEDDED_PROFILE='SCHEMA_APPINFO_LINKBASE_V1'
 XS='http://www.w3.org/2001/XMLSchema';PARENT='http://www.xbrl.org/2003/arcrole/parent-child'
 
 def uri(value,*,fragment=False):
@@ -23,7 +24,8 @@ def walk(root):
   if '{http://www.w3.org/XML/1998/namespace}base'in node.attrs:raise XBRLError('dts_xml_base_unsupported')
   yield node;pending.extend(reversed(node.children))
 
-def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTORICAL_SYNTHETIC',allow_observed=False,permission_reference=None):
+def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTORICAL_SYNTHETIC',allow_observed=False,permission_reference=None,embedded_profile=None):
+ if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
  if origin not in('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE')or type(allow_observed)is not bool:raise XBRLError('dts_origin')
  if origin!='HISTORICAL_SYNTHETIC'and(not allow_observed or type(permission_reference)is not str or not 1<=len(permission_reference)<=256):raise XBRLError('dts_observed_processing_not_approved')
  uri(instance_uri)
@@ -38,7 +40,7 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
    target=uri(urljoin(instance_uri,href));schema_roots.append(target);requests.append((target,0,None,'schema'))
    if len(schema_roots)>32:raise XBRLError('dts_schema_root_budget')
  if not schema_roots:raise XBRLError('dts_schema_reference_required')
- return _discover_roots(schema_roots,supplied,{'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None})
+ return _discover_roots(schema_roots,supplied,{'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None},embedded_profile=embedded_profile)
 
 def _supplied_documents(documents):
  if type(documents)is not list or len(documents)>16:raise XBRLError('dts_document_budget')
@@ -52,7 +54,9 @@ def _supplied_documents(documents):
   supplied[key]=doc
  return supplied
 
-def _discover_roots(schema_roots,supplied,metadata):
+def _discover_roots(schema_roots,supplied,metadata,*,embedded_profile=None):
+ if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
+ embedded_records=[]
  requests=deque((target,0,None,'schema')for target in schema_roots)
  edges=[]
  loaded={};unresolved=[];namespaces={};concepts={};locators={};linkbases=[];unsupported=[];types={}
@@ -74,7 +78,22 @@ def _discover_roots(schema_roots,supplied,metadata):
    if type(target)is not str or not 1<=len(target)<=512:raise XBRLError('dts_chameleon_or_missing_namespace_unsupported')
    if namespace is not None and target!=namespace:raise XBRLError('dts_import_namespace_conflict')
    namespaces[key]=target
-   if any(child.name in(tag(L,'linkbase'),tag(L,'presentationLink'),tag(L,'calculationLink'),tag(L,'definitionLink'))for child in items):unsupported.append({'uri':key,'feature':'EMBEDDED_LINKBASE_UNSUPPORTED'})
+   embedded=[]
+   for annotation in node.children:
+    if annotation.name!=tag(XS,'annotation'):continue
+    for appinfo in annotation.children:
+     if appinfo.name==tag(XS,'appinfo'):embedded.extend(n for n in appinfo.children if n.name==tag(L,'linkbase'))
+   markers=[n for n in items if n.name in(tag(L,'linkbase'),tag(L,'presentationLink'),tag(L,'calculationLink'),tag(L,'definitionLink'))]
+   if markers and embedded_profile is None:unsupported.append({'uri':key,'feature':'EMBEDDED_LINKBASE_UNSUPPORTED'})
+   elif embedded_profile is not None:
+    covered=set()
+    for container in embedded:
+     if container.attrs or container.text().strip()or any(n.name not in(tag(L,'presentationLink'),tag(L,'calculationLink'),tag(L,'definitionLink'))for n in container.children):raise XBRLError('dts_embedded_content_unsupported')
+     covered.add(id(container));covered.update(id(n)for n in container.children)
+     embedded_records.append({'uri':key,'source_sha256':doc['sha256'],'root_node_ordinal':container.source_ordinal})
+     if len(embedded_records)>32:raise XBRLError('dts_embedded_budget')
+     linkbases.append((key,container))
+    if any(id(n)not in covered for n in markers):unsupported.append({'uri':key,'feature':'EMBEDDED_LINKBASE_UNSUPPORTED'})
    for child in items:
     if child.name in(tag(XS,'redefine'),tag(XS,'override')):raise XBRLError('dts_schema_redefinition_unsupported')
     if child.name in(tag(XS,'import'),tag(XS,'include')):
@@ -171,9 +190,9 @@ def _discover_roots(schema_roots,supplied,metadata):
  result={**metadata,'schema_roots':sorted(set(schema_roots)),'documents':sorted(loaded.values(),key=lambda d:d['uri']),'discovery_edges':sorted(edges,key=lambda e:(e['from'],e['to'])),'concepts':concepts,'presentation':networks,'unresolved':unresolved,'unsupported_semantics':unsupported,'structural_closure':not unresolved,'schema_type_validation':False,'complete_statements':False,'provider_requested':False}
  if types:result['type_declarations']=types;result['type_declaration_profile']='NAMED_NUMERIC_DERIVATION_METADATA_V2'if any('derivation'in value['declaration']for value in types.values())else'NAMED_RESTRICTION_METADATA_V1'
  from .xbrl_relationships import effective
- result['effective_relationships']=effective(linkbases,locators,concepts,result['documents'])
+ result['effective_relationships']=effective(linkbases,locators,concepts,result['documents'],node_provenance=embedded_profile is not None)
  from .xbrl_dimensions import networks
- definitions=networks(linkbases,locators)
+ definitions=networks(linkbases,locators,node_provenance=embedded_profile is not None)
  if definitions:result['definition']=definitions;result['definition_metadata_profile']='RESTRICTED_DEFINITION_ARCS_V1'
  if any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in unsupported):
   # An omitted embedded arc could override an external relationship or add DRS.
@@ -181,10 +200,12 @@ def _discover_roots(schema_roots,supplied,metadata):
   for network in result['presentation']+result['effective_relationships']['networks']:
    network['usable']=False;network['issues']=sorted(set(network['issues']+['EMBEDDED_LINKBASE_UNSUPPORTED']))
   graph=result['effective_relationships'];graph['sha256']=digest({k:v for k,v in graph.items()if k!='sha256'})
+ if embedded_profile is not None:result['embedded_linkbase_profile']=embedded_profile;result['embedded_linkbases']=embedded_records
  if len(canonical(result))>16*1024*1024:raise XBRLError('dts_output_budget')
  result['canonical_sha256']=digest(result);return result
 
-def discover_inline_set(parsed,documents,*,allow_observed=False,permission_references=None):
+def discover_inline_set(parsed,documents,*,allow_observed=False,permission_references=None,embedded_profile=None):
+ if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
  """Discover the parsed set's exact supplied reference union;never fabricate XML."""
  if type(parsed)is not dict or parsed.get('schema')!='gig.sec.xbrl.inline_set.v1'or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256'):raise XBRLError('dts_set_identity')
  source_set=parsed['document_set'];sources=source_set['documents'];origin=parsed['origin']
@@ -197,4 +218,4 @@ def discover_inline_set(parsed,documents,*,allow_observed=False,permission_refer
  roots=[uri(r['uri'])for r in source_set['schema_references']]
  if not 1<=len(roots)<=32:raise XBRLError('dts_schema_reference_required')
  supplied=_supplied_documents(documents)
- return _discover_roots(roots,supplied,{'schema':'gig.sec.xbrl.dts_set.v1','origin':origin,'document_set_sha256':source_set['sha256'],'original_inline_documents':[{'uri':s['uri'],'source_sha256':s['source']['source_sha256']}for s in sources],'permission_reference_sha256s':[s['source']['permission_reference_sha256']for s in sources]})
+ return _discover_roots(roots,supplied,{'schema':'gig.sec.xbrl.dts_set.v1','origin':origin,'document_set_sha256':source_set['sha256'],'original_inline_documents':[{'uri':s['uri'],'source_sha256':s['source']['source_sha256']}for s in sources],'permission_reference_sha256s':[s['source']['permission_reference_sha256']for s in sources]},embedded_profile=embedded_profile)
