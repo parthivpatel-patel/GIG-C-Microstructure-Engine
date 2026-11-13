@@ -95,3 +95,23 @@ Actual public SEC source schemas/host behavior,large issuer responses,inline fil
 acquisition,older submissions shard scheduling,full taxonomy/schema/DRS semantics,
 broad amortized/multi-process resource behavior and target Codespaces/provider
 acceptance remain unqualified. No source/financial/accounting completeness is claimed.
+
+## Explicit developer and future-owner CLI
+
+`scripts/qualify_sec_filing_ingestion.py --fixture` runs an authored offline source
+transaction without owner configuration,provider calls or application construction.
+Its optional --output is new-only/private derived JSON. Optional --checkpoint-root
+requires an existing owner-private directory;fixture source revisions are synthetic.
+Five tests cover the default-disabled fetch gate,private output,collision safety
+and fixture identity.
+
+The separate --fetch mode is an **unexecuted future owner procedure**,not live
+qualification. It requires existing SEC identification plus explicit
+GIG_SEC_XBRL_INGEST_ENABLED and GIG_SEC_XBRL_PERMISSION_REFERENCE. A known CIK,exact
+--accession and --as-of cutoff are mandatory. --document selects an advertised XML
+instance;HTML primary documents remain unsupported. External --taxonomy-url entries
+are an exact approved official-host allowlist,not arbitrary HTTP destinations.
+Observed checkpoint persistence additionally requires GIG_SEC_XBRL_RETENTION_APPROVED.
+No gate is written or enabled by this tool;no secrets are requested or printed.
+Failure never substitutes a fixture. Do not use --fetch until a separately
+authorized provider qualification phase;this sprint runs only --fixture/tests.
