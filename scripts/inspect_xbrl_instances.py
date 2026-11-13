@@ -8,6 +8,8 @@ from terminal.stocks.xbrl_instance import selected_concepts,XBRLError
 from terminal.stocks.xbrl_collection import FilingCollection,MAX_BATCH,MAX_BATCH_BYTES
 
 def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1'):
+ if statement_profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
+ if statement_profile!='legacy-v1'and company_symbol is None:raise XBRLError('statement_profile_requires_company')
  from terminal.stocks.xbrl_dimensions import PROFILE as DIMENSIONS
  if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
  path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024))
@@ -47,6 +49,8 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
  return company_export(collection,as_of,company_symbol,statement_role,statement_form,statement_profile)if company_symbol is not None else(summary,result)
 
 def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1'):
+ if statement_profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
+ if statement_profile!='legacy-v1'and company_symbol is None:raise XBRLError('statement_profile_requires_company')
  from terminal.stocks.xbrl_types import PROFILES
  if set(batch)!={'schema','issuer_cik','origin','numeric_profile','entries'}or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH or batch['numeric_profile']not in(None,*PROFILES):raise XBRLError('xbrl_input_inline_set_contract')
  collection=FilingCollection(batch['issuer_cik'],origin=batch['origin'],allow_observed=allow_observed);total=0;count=0;entries=[]

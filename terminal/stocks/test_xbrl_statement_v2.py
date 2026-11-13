@@ -72,6 +72,8 @@ class AccuracyExtension(unittest.TestCase):
    batch={'schema':'gig.sec.xbrl.input_dts_batch.v1','issuer_cik':'0000320193','origin':'HISTORICAL_SYNTHETIC','numeric_profile':None,'entries':[{'path':'instance.xml','manifest':e['manifest'],'gaap_namespace':'http://fasb.org/us-gaap/2024','instance_uri':e['instance_uri'],'documents':docs}]};(root/'batch.json').write_text(json.dumps(batch))
    _,v=inspect(root/'batch.json',LATE,company_symbol='AAPL',statement_role=ROLE,statement_profile='accuracy-extension-v2');self.assertEqual(v['schema'],'gig.backend.company_xbrl.v2');self.assertEqual(extrow(v['statement_view'])['value'],'400')
    _,old=inspect(root/'batch.json',LATE,company_symbol='AAPL',statement_role=ROLE);self.assertEqual(old['schema'],'gig.backend.company_xbrl.v1')
+   with self.assertRaisesRegex(XBRLError,'requires_company'):inspect(root/'batch.json',LATE,statement_profile='accuracy-extension-v2')
+   with self.assertRaisesRegex(XBRLError,'profile_unsupported'):inspect(root/'batch.json',LATE,statement_profile='unknown')
 
 class VersionedRoute(unittest.IsolatedAsyncioTestCase):
  async def test_actual_route_opt_in_and_invalid_profile_without_application(self):
