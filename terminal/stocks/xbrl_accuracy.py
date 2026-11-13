@@ -81,3 +81,16 @@ def consistency(parent,terms):
   a,b=_read(t['accuracy']['interval']);a,b=(a*w,b*w)if w>0 else(b*w,a*w);lo+=a;hi+=b
   result['terms'].append({'concept':t['concept'],'weight':w,'source_fact_ids':t['accuracy']['source_fact_ids'],'weighted_interval':_record(a,b)})
  a,b=_read(parent['interval']);result.update(status='DEFINITELY_INCONSISTENT'if a>hi or b<lo else'ROUNDING_COMPATIBLE',parent_interval=_record(a,b),weighted_sum_interval=_record(lo,hi),residual_interval=_record(a-hi,b-lo));return result
+
+def duplicate_diagnostic(facts,*,values=None):
+ """Explain duplicate accuracy without resolving differing values or selecting a fact."""
+ prior=duplicates(facts,values=values);records=prior['facts'];reported=[values[f['source_fact_id']]if values is not None else f['value']for f in facts];numeric={_number(v)for v in reported if v is not None}
+ result={'profile':'DUPLICATE_ACCURACY_DIAGNOSTICS_V1','status':'ACCURACY_UNAVAILABLE','source_fact_ids':prior['source_fact_ids'],'numeric_values_equal':len(numeric)==1 if numeric else None,'intersection_interval':None,'facts':[{**r,'reported_value':v}for r,v in zip(records,reported)],'selection_policy':'Diagnostics only;differing values remain conflicting and no source fact is selected'}
+ nil=any(f['nil']for f in facts)
+ if not numeric:result['status']='NIL_ONLY';return result
+ if nil:result['status']='MIXED_NIL_CONFLICT';return result
+ if any(r['interval']is None for r in records):return result
+ bounds=[_read(r['interval'])for r in records];lo=max(v[0]for v in bounds);hi=min(v[1]for v in bounds)
+ if lo<=hi:result['intersection_interval']=_record(lo,hi)
+ result['status']='NUMERICALLY_IDENTICAL'if len(numeric)==1 else'OVERLAPPING_ACCURACY_AMBIGUOUS'if lo<=hi else'DISJOINT_ACCURACY_DUPLICATES'
+ return result

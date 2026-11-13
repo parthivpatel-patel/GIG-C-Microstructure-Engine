@@ -33,7 +33,7 @@ def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='leg
   statement=collection.statement_at(as_of,role=role,form=form,profile=profile)
  result={'schema':'gig.backend.company_xbrl.v1','instrument':identity,'data_origin':statement['origin'],'statement_view':statement,'read_only':True,'provider_requested':False,'limitations':['Supplied XBRL profile,not complete financial statements or history','No companyfacts replacement or source authentication inferred','Missing source receipt stays unknown;exact values are not browser recalculations']}
  coordinator=workspace.filing_ingestors.get(symbol)
- if coordinator is not None:result['source_ingestion']=coordinator.status()
+ if coordinator is not None:result['source_ingestion']={**coordinator.status(),'collection_sha256':coordinator.collection._identity(coordinator.collection._filings),'installed_collection_matches':collection is not None and coordinator.collection._identity(coordinator.collection._filings)==statement['collection_sha256']}
  if profile=='accuracy-extension-v2':result['schema']='gig.backend.company_xbrl.v2';result['profile']=profile
  result['sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('xbrl_product_output_budget')

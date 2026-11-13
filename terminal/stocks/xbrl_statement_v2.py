@@ -12,13 +12,13 @@ from .xbrl_instance import X,tag,canonical,digest,XBRLError
 from .xbrl_statements import select,_result
 from .xbrl_types import _resolve,_value_check,COMPLEX_PROFILE
 from .xbrl_relationships import rational
-from .xbrl_accuracy import duplicates,consistency
+from .xbrl_accuracy import duplicates,consistency,duplicate_diagnostic
 PROFILE='accuracy-extension-v2';SCHEMA='gig.sec.xbrl.statement_view.v2'
 REPORTED=('REPORTED','REPORTED_EXTENSION')
 
 def _numeric(row,p,proof):
  declaration=proof['concept_declarations'][row['concept']]['declaration'];kind='SUPPLIED_EXTENSION_DECLARATION'if not re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}.+',row['concept'])else'SUPPLIED_STANDARD_DECLARATION'
- row['numeric_facts']=[];row['mapping_diagnostics']=[];row['accuracy']=None
+ row['numeric_facts']=[];row['mapping_diagnostics']=[];row['accuracy']=None;row['duplicate_diagnostic']=None
  row['statement_mapping']={'kind':kind,'concept':row['concept'],'accounting_metric':None,'basis':'SUPPLIED_DECLARATION_AND_EFFECTIVE_PRESENTATION_ONLY','declaration_documents':[]}
  doc_map={d['uri']:d['sha256']for d in proof['documents']}
  for uri in proof['concept_declarations'][row['concept']]['source_documents']:
@@ -47,6 +47,7 @@ def _numeric(row,p,proof):
   row['numeric_facts'].append({'source_fact_id':f['source_fact_id'],'concept':f['concept'],'value':value,'declared_type':declaration['type'],'resolved_numeric_base':base,'numeric_profile':COMPLEX_PROFILE,'derived_from':'ORIGINAL_LEXICAL_FACT_PLUS_SUPPLIED_DTS','filing_accession':p['source']['accession'],'instance_sha256':p['canonical_sha256']})
  if bad_context:
   row.update(status='UNSUPPORTED_INPUT',value=None,unit=None);row['mapping_diagnostics'].append('DECLARED_PERIOD_OR_CONTEXT_UNSUPPORTED');return
+ if len(row['facts'])>1 and len(units)==1:row['duplicate_diagnostic']=duplicate_diagnostic(row['facts'],values=values)
  nums={Fraction(v)for v in values.values()if v is not None};nil=any(v is None for v in values.values())
  if len(nums)>1 or nil and nums:row.update(status='CONFLICT',value=None,unit=None);return
  if len(units)>1:row.update(status='AMBIGUOUS_UNITS',value=None,unit=None);return
