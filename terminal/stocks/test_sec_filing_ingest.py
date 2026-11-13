@@ -58,7 +58,7 @@ class SECIngestion(unittest.IsolatedAsyncioTestCase):
  async def test_directory_conflict_and_unsupported_primary_are_explicit(self):
   data=resources();idx=json.loads(data[PREFIX+'index.json']);idx['directory']['item'].append(idx['directory']['item'][0]);data[PREFIX+'index.json']=canonical(idx);c,_,_=client(data)
   with self.assertRaisesRegex(IngestError,'duplicate'):await c.ingest(ACC)
-  c,_,_=client();meta=json.loads(c.transport.resources[META]);meta['filings']['recent']['primaryDocument']=['primary.htm'];c.transport.resources[META]=canonical(meta);idx=json.loads(c.transport.resources[PREFIX+'index.json']);idx['directory']['item'][0]['name']='primary.htm';c.transport.resources[PREFIX+'index.json']=canonical(idx)
+  c,_,_=client();meta=json.loads(c.transport.resources[META]);meta['filings']['recent']['primaryDocument']=['primary.txt'];c.transport.resources[META]=canonical(meta);idx=json.loads(c.transport.resources[PREFIX+'index.json']);idx['directory']['item'][0]['name']='primary.txt';c.transport.resources[PREFIX+'index.json']=canonical(idx)
   with self.assertRaisesRegex(IngestError,'format_unsupported'):await c.ingest(ACC)
  async def test_bad_status_redirect_encoding_length_never_publishes(self):
   for response in(Reply(META,b'x',302),Reply('https://evil.invalid/',b'x'),Reply(META,b'x',headers={'content-encoding':'gzip'}),Reply(META,b'xx',headers={'content-length':'1'})):

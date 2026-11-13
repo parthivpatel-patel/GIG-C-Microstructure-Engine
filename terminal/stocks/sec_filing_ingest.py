@@ -39,6 +39,8 @@ def directory(payload,cik,accession):
   out[name]={'name':name,'size':size,'type':row.get('type')}
  return out
 
+def source_keys(plan):return [plan['metadata_key'],plan['index_key'],plan['instance_key'],*plan['document_keys']]+([plan['history_key']]if 'history_key'in plan else[])
+
 class FilingIngestor:
  def __init__(self,cik,*,transport=None,permission=None,enabled=False,origin='HISTORICAL_SYNTHETIC',allow_observed=False,permission_reference=None,taxonomy_urls=(),clock=time.monotonic,receipt_clock=clock_utc,sleep=asyncio.sleep,random_source=random.random,rate_owner=None):
   self.collection=FilingCollection(cik,origin=origin,allow_observed=allow_observed)
@@ -57,17 +59,18 @@ class FilingIngestor:
   except ValueError:raise IngestError('sec_ingest_source_permission')from None
   if type(h)is not dict or not user_agent_valid(h.get('User-Agent')):raise IngestError('sec_ingest_identification_required')
   return {'User-Agent':h['User-Agent'],'Accept-Encoding':'identity'}
- def _url(self,url,accession):
+ def _url(self,url,accession,*,submission_shard=False):
   if type(url)is not str or not 1<=len(url)<=512:raise IngestError('sec_ingest_url')
   u=urlsplit(url)
   if u.scheme!='https'or u.username or u.password or u.query or u.fragment or '%'in url or '\\'in url or any(ord(c)<33 for c in url):raise IngestError('sec_ingest_url')
   if url in self.taxonomy_urls:return url
   if url==f'https://data.sec.gov/submissions/CIK{self.cik}.json':return url
+  if submission_shard and re.fullmatch(r'https://data\.sec\.gov/submissions/CIK'+self.cik+r'-submissions-[0-9]{3}\.json',url):return url
   prefix=f'https://www.sec.gov/Archives/edgar/data/{int(self.cik)}/{accession.replace("-","")}/'
   if not url.startswith(prefix):raise IngestError('sec_ingest_reference_outside_scope')
   filename(url[len(prefix):]);return url
- async def _read(self,url,accession,stage,budget,*,fresh=False):
-  self._url(url,accession);self._headers()
+ async def _read(self,url,accession,stage,budget,*,fresh=False,submission_shard=False):
+  self._url(url,accession,submission_shard=submission_shard);self._headers()
   cached=self.cache.get(url)
   if not fresh and cached and 0<=self.clock()-cached[0]<600 and cached[1]in self.sources:
    self.metrics['cache_hits']+=1;stage[cached[1]]=self.sources[cached[1]];return cached[1]
@@ -116,13 +119,25 @@ class FilingIngestor:
  def _entries(self,plans,sources):
   entries=[]
   for plan in plans.values():
-   metadata=plan['metadata'];raw=sources[plan['instance_key']];recorded=sec.filings(decode(sources[plan['metadata_key']]['body']),self.cik,limit=1024)
+   metadata=plan['metadata'];raw=sources[plan['instance_key']];payload=decode(sources[plan['metadata_key']]['body']);recorded=sec.filings(payload,self.cik,limit=1024)
+   if 'history_key'in plan:
+    from .sec_filing_schedule import historical_rows
+    history=sources[plan['history_key']];name=history['url'].removeprefix('https://data.sec.gov/submissions/')
+    historical=historical_rows(payload,decode(history['body']),name,self.cik)
+    current={r['accession']:r for r in recorded['filings']}
+    if any(r['accession']in current and current[r['accession']]!=r for r in historical['filings']):raise IngestError('sec_schedule_contradictory_filing')
+    recorded=historical
    if metadata not in recorded['filings']:raise IngestError('sec_ingest_metadata_binding')
    prefix=f'https://www.sec.gov/Archives/edgar/data/{int(self.cik)}/{metadata["accession"].replace("-","")}/'
    if sources[plan['metadata_key']]['url']!=f'https://data.sec.gov/submissions/CIK{self.cik}.json'or sources[plan['index_key']]['url']!=prefix+'index.json':raise IngestError('sec_ingest_metadata_source_url')
    available=directory(decode(sources[plan['index_key']]['body']),self.cik,metadata['accession']);name=filename(raw['url'].rsplit('/',1)[-1])
    if name not in available or available[name]['type']!='file'or available[name]['size']!=len(raw['body'])or raw['url']!=f'https://www.sec.gov/Archives/edgar/data/{int(self.cik)}/{metadata["accession"].replace("-","")}/{name}':raise IngestError('sec_ingest_document_binding')
    manifest={'issuer_cik':self.cik,'accession':metadata['accession'],'form':metadata['form'],'filed':metadata['filed'],'accepted_at':metadata['accepted_at'],'received_at':raw['received_at'],'origin':self.origin,'source_sha256':raw['sha256'],'source_url':raw['url'],'amends_accession':plan['amends_accession'],'permission_reference':self.reference}
+   for key in plan['document_keys']:
+    resource=sources[key];self._url(resource['url'],metadata['accession'])
+    if resource['url'].startswith(prefix):
+     local=resource['url'][len(prefix):]
+     if local not in available or available[local]['type']!='file'or available[local]['size']!=len(resource['body']):raise IngestError('sec_ingest_dependency_binding')
    docs=[{'uri':sources[k]['url'],'raw':sources[k]['body'],'sha256':sources[k]['sha256']}for k in plan['document_keys']]
    entries.append({'raw':raw['body'],'manifest':manifest,'concepts':selected_concepts(plan['gaap_namespace']),'instance_uri':raw['url'],'documents':docs})
   return entries
@@ -134,11 +149,44 @@ class FilingIngestor:
    namespaces={q[1:].split('}',1)[0]for q in g['concepts']if re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}.+',q)}
    expected=next(iter(entry['concepts'])).split('}',1)[0][1:]
    if namespaces!={expected}:raise IngestError('sec_ingest_checkpoint_taxonomy_scope')
-  for i in range(0,len(entries),8):c.ingest_dts_batch(entries[i:i+8],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE)
+  for entry in entries:
+   if parse_xml(entry['raw']).name==tag(X,'xbrl'):
+    c.ingest_dts_batch([entry],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE)
+   else:
+    # A single acquired original is an explicit one-document set. Never repair
+    # HTML or discover sibling documents from arbitrary hyperlinks.
+    c.ingest_inline_set_batch([{'documents':[{'uri':entry['instance_uri'],'raw':entry['raw'],'manifest':entry['manifest']}],'concepts':entry['concepts'],'taxonomy_documents':entry['documents']}],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE)
   return c
- async def ingest(self,accession,*,document=None,amends_accession=None,fresh=False,store=None):
+ async def discover_filings(self,*,start,end,max_shards=2,max_filings=8):
+  """Explicit bounded metadata scan. Returns a plan; never executes filings.
+
+  Shards are admitted only from this transaction's issuer submissions index.
+  No discovery record is published into the accepted collection/checkpoint.
+  """
+  from .sec_filing_schedule import query,shards,schedule
+  query(start,end,max_shards,max_filings);self._headers()
+  if self.lock.locked():raise IngestError('sec_ingest_busy')
+  async with self.lock:
+   stage={};budget={'requests':0,'bytes':0}
+   async with asyncio.timeout(30):
+    key=await self._read(f'https://data.sec.gov/submissions/CIK{self.cik}.json','',stage,budget,fresh=True)
+    payload=decode(stage[key]['body']);recent=sec.filings(payload,self.cik,limit=1024)
+    advertised=shards(payload,self.cik,start,end)
+    def source(k):return {a:stage[k][a]for a in('url','sha256','received_at')}
+    groups=[(recent['filings'],source(key))];row_truncated=recent['integrity']['truncated']
+    for item in advertised[:max_shards]:
+     k=await self._read('https://data.sec.gov/submissions/'+item['name'],'',stage,budget,fresh=True,submission_shard=True)
+     columns=decode(stage[k]['body'])
+     if type(columns)is not dict or type(columns.get('form'))is not list or len(columns['form'])!=item['count']:raise IngestError('sec_schedule_shard_count_binding')
+     parsed=sec.filings({'cik':self.cik,'filings':{'recent':columns}},self.cik,limit=1024)
+     if any(not item['start']<=r['filed']<=item['end']for r in parsed['filings']):raise IngestError('sec_schedule_shard_date_binding')
+     row_truncated|=parsed['integrity']['truncated'];groups.append((parsed['filings'],source(k)))
+    rows,truncated=schedule(groups,start,end,max_filings)
+    return {'schema':'gig.sec.filing_schedule.v1','issuer_cik':self.cik,'start':start,'end':end,'entries':rows,'shards_read':min(len(advertised),max_shards),'shards_deferred':max(0,len(advertised)-max_shards),'truncated':truncated or row_truncated or len(advertised)>max_shards,'complete_history':False,'requests':budget['requests'],'response_bytes':budget['bytes'],'scope':'Explicit metadata plan only;explicit ingest requires advertised shard name and independent source revalidation'}
+ async def ingest(self,accession,*,document=None,amends_accession=None,fresh=False,store=None,metadata_shard=None):
   if type(accession)is not str or not re.fullmatch('[0-9]{10}-[0-9]{2}-[0-9]{6}',accession):raise IngestError('sec_ingest_accession')
   if document is not None:filename(document)
+  if metadata_shard is not None and(type(metadata_shard)is not str or not re.fullmatch('CIK'+self.cik+r'-submissions-[0-9]{3}\.json',metadata_shard)):raise IngestError('sec_schedule_shard_name')
   if type(fresh)is not bool:raise IngestError('sec_ingest_query')
   self._headers()
   if self.lock.locked():raise IngestError('sec_ingest_busy')
@@ -146,15 +194,23 @@ class FilingIngestor:
    self.state='LOADING';stage={};budget={'requests':0,'bytes':0}
    try:
     async with asyncio.timeout(30):
-     meta=await self._read(f'https://data.sec.gov/submissions/CIK{self.cik}.json',accession,stage,budget,fresh=fresh);rows=sec.filings(decode(stage[meta]['body']),self.cik,limit=1024)['filings'];matches=[r for r in rows if r['accession']==accession]
+     meta=await self._read(f'https://data.sec.gov/submissions/CIK{self.cik}.json',accession,stage,budget,fresh=fresh);payload=decode(stage[meta]['body']);rows=sec.filings(payload,self.cik,limit=1024)['filings'];history=None
+     if metadata_shard is not None:
+      from .sec_filing_schedule import shards,historical_rows
+      if metadata_shard not in [r['name']for r in shards(payload,self.cik,'0001-01-01','9999-12-31')]:raise IngestError('sec_schedule_shard_not_advertised')
+      history=await self._read('https://data.sec.gov/submissions/'+metadata_shard,accession,stage,budget,fresh=fresh,submission_shard=True)
+      historical=historical_rows(payload,decode(stage[history]['body']),metadata_shard,self.cik)['filings'];current={r['accession']:r for r in rows}
+      if any(r['accession']in current and current[r['accession']]!=r for r in historical):raise IngestError('sec_schedule_contradictory_filing')
+      rows=historical
+     matches=[r for r in rows if r['accession']==accession]
      if len(matches)!=1 or matches[0]['form']not in('10-K','10-K/A','10-Q','10-Q/A'):raise IngestError('sec_ingest_filing_not_advertised')
      row=matches[0];prefix=f'https://www.sec.gov/Archives/edgar/data/{int(self.cik)}/{accession.replace("-","")}/';index=await self._read(prefix+'index.json',accession,stage,budget,fresh=fresh);items=directory(decode(stage[index]['body']),self.cik,accession);name=document or row['url'].rsplit('/',1)[-1]
      if name not in items or items[name]['type']!='file'or items[name]['size']>MAX_SOURCE:raise IngestError('sec_ingest_document_not_eligible')
-     if not name.lower().endswith('.xml'):raise IngestError('sec_ingest_primary_format_unsupported')
+     if not name.lower().endswith(('.xml','.htm','.html','.xhtml')):raise IngestError('sec_ingest_primary_format_unsupported')
      instance=await self._read(prefix+name,accession,stage,budget,fresh=fresh);original=stage[instance]
      if len(original['body'])!=items[name]['size']:raise IngestError('sec_ingest_index_length')
      root=parse_xml(original['body'])
-     if root.name!=tag(X,'xbrl'):raise IngestError('sec_ingest_instance_format_unsupported')
+     if root.name not in(tag(X,'xbrl'),tag('http://www.w3.org/1999/xhtml','html')):raise IngestError('sec_ingest_instance_format_unsupported')
      docs={};graph=None
      for _ in range(17):
       graph=discover(original['body'],original['url'],original['sha256'],list(docs.values()),origin=self.origin,allow_observed=self.allow_observed,permission_reference=self.reference,embedded_profile=EMBEDDED_PROFILE)
@@ -174,8 +230,9 @@ class FilingIngestor:
      namespaces={q[1:].split('}',1)[0]for q in graph['concepts']if re.fullmatch(r'\{https?://fasb\.org/us-gaap/[0-9]{4}\}.+',q)}
      if len(namespaces)!=1:raise IngestError('sec_ingest_taxonomy_selection_ambiguous')
      doc_keys=[digest({'url':d['uri'],'sha256':d['sha256']})for d in docs.values()];plan={'metadata':row,'metadata_key':meta,'index_key':index,'instance_key':instance,'document_keys':doc_keys,'gaap_namespace':next(iter(namespaces)),'amends_accession':amends_accession}
+     if history is not None:plan['history_key']=history
      plans={**self.plans,accession:plan};sources={**self.sources,**stage}
-     used={k for p in plans.values()for k in[p['metadata_key'],p['index_key'],p['instance_key'],*p['document_keys']]}
+     used={k for p in plans.values()for k in source_keys(p)}
      sources={k:v for k,v in sources.items()if k in used}
      if len(plans)>8 or len(sources)>MAX_SOURCES or sum(len(r['body'])for r in sources.values())>MAX_TOTAL:raise IngestError('sec_ingest_retained_budget')
      # An already admitted resource URI cannot silently acquire different bytes.
@@ -191,7 +248,7 @@ class FilingIngestor:
    except BaseException as exc:
     self.state='CANCELLED'if isinstance(exc,asyncio.CancelledError)else'FAILED';self.last_error=str(exc)if isinstance(exc,IngestError)else'sec_ingest_validation_or_resource_failure';self.metrics['failed_transactions']+=1;raise
  def _image(self,plans,sources,collection):
-  core={'schema':'gig.sec.filing_ingestion.checkpoint.v1','issuer_cik':self.cik,'origin':self.origin,'permission_reference_sha256':hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None,'taxonomy_urls':sorted(self.taxonomy_urls),'plans':plans,'sources':{k:{**{a:r[a]for a in('url','sha256','received_at')},'body_base64':base64.b64encode(r['body']).decode()}for k,r in sources.items()},'collection_sha256':collection._identity(collection._filings)}
+  core={'schema':'gig.sec.filing_ingestion.checkpoint.v2'if any('history_key'in p for p in plans.values())else'gig.sec.filing_ingestion.checkpoint.v1','issuer_cik':self.cik,'origin':self.origin,'permission_reference_sha256':hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None,'taxonomy_urls':sorted(self.taxonomy_urls),'plans':plans,'sources':{k:{**{a:r[a]for a in('url','sha256','received_at')},'body_base64':base64.b64encode(r['body']).decode()}for k,r in sources.items()},'collection_sha256':collection._identity(collection._filings)}
   raw=canonical(core)
   if len(raw)>MAX_IMAGE:raise IngestError('sec_ingest_checkpoint_budget')
   return raw
@@ -202,7 +259,7 @@ class FilingIngestor:
   if self.lock.locked():raise IngestError('sec_ingest_busy')
   if type(raw)is not bytes or len(raw)>MAX_IMAGE or hashlib.sha256(raw).hexdigest()!=expected_sha256:raise IngestError('sec_ingest_checkpoint_integrity')
   v=decode(raw)
-  if set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']!='gig.sec.filing_ingestion.checkpoint.v1'or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
+  if set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']not in('gig.sec.filing_ingestion.checkpoint.v1','gig.sec.filing_ingestion.checkpoint.v2')or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
   if type(v['sources'])is not dict or len(v['sources'])>MAX_SOURCES or type(v['plans'])is not dict or len(v['plans'])>8:raise IngestError('sec_ingest_checkpoint_counts')
   sources={};total=0
   for key,r in v['sources'].items():
@@ -212,13 +269,14 @@ class FilingIngestor:
    total+=len(body)
    if len(body)>MAX_SOURCE or total>MAX_TOTAL or hashlib.sha256(body).hexdigest()!=r['sha256']or key!=digest({'url':r['url'],'sha256':r['sha256']}):raise IngestError('sec_ingest_checkpoint_source_integrity')
    sec.acceptance_ns(r['received_at']);sources[key]={k:r[k]for k in('url','sha256','received_at')};sources[key]['body']=body
+  if (v['schema']=='gig.sec.filing_ingestion.checkpoint.v2')!=any(type(p)is dict and 'history_key'in p for p in v['plans'].values()):raise IngestError('sec_ingest_checkpoint_version')
   used=set()
   for accession,plan in v['plans'].items():
-   if type(plan)is not dict or set(plan)!={'metadata','metadata_key','index_key','instance_key','document_keys','gaap_namespace','amends_accession'}or type(plan['metadata'])is not dict or plan['metadata'].get('accession')!=accession:raise IngestError('sec_ingest_checkpoint_plan')
+   if type(plan)is not dict or set(plan)not in ({'metadata','metadata_key','index_key','instance_key','document_keys','gaap_namespace','amends_accession'},{'metadata','metadata_key','index_key','instance_key','document_keys','gaap_namespace','amends_accession','history_key'})or type(plan['metadata'])is not dict or plan['metadata'].get('accession')!=accession:raise IngestError('sec_ingest_checkpoint_plan')
    if type(plan['document_keys'])is not list or len(plan['document_keys'])>16 or len(set(plan['document_keys']))!=len(plan['document_keys']):raise IngestError('sec_ingest_checkpoint_document_budget')
-   for key in[plan['metadata_key'],plan['index_key'],plan['instance_key'],*plan['document_keys']]:
+   for key in source_keys(plan):
     if type(key)is not str or key not in sources:raise IngestError('sec_ingest_checkpoint_source_reference')
-    self._url(sources[key]['url'],accession);used.add(key)
+    self._url(sources[key]['url'],accession,submission_shard=key==plan.get('history_key'));used.add(key)
   if used!=set(sources):raise IngestError('sec_ingest_checkpoint_unused_source')
   candidate=self._rebuild(v['plans'],sources)
   if candidate._identity(candidate._filings)!=v['collection_sha256']:raise IngestError('sec_ingest_checkpoint_collection')
