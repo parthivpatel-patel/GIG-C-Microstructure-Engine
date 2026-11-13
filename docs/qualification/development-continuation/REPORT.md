@@ -1,249 +1,127 @@
-# GIG multi-workstream engineering checkpoint
+# GIG fresh-executor engineering checkpoint
 
-November 13,2026 (America/New_York). Branch `development/gig-ui-redesign`.
-Starting checkpoint `ff0fcdcda7bb65a1669501fa5fe4f653a3ecb33d`.
-Final tested implementation: **7931641397878cb660f00c847cc5e38f175debc0**.
-The enclosing documentation-only delivery commit is identified by Git/remote;
-it does not change tested runtime inputs. Prior report/evidence remains available
-at the starting Git object and ACCURACY_EXTENSION_EVIDENCE.json.
+November 13, 2026 (America/New_York). Branch `development/gig-ui-redesign`.
+Recovered remote starting point: `d96acca36cd16837201d6c0503808d8236363b49`.
+Tested implementation: **63c7e94350f64411117af8a4fbcbb898f8f041f7**.
+The enclosing evidence-only commit is identified by Git/remote and does not change
+runtime inputs. Prior engineering report/evidence remains available at the starting
+commit; earlier compiler/provider/target evidence is not relabeled as current.
 
-Recovery found the first three implementation commits already pushed,plus two
-untracked CLI files and a temporary dependency symlink. The interrupted CLI log
-contained5/5passing tests. All surviving work was preserved;no branch recreation,
-reset,discard,merge,force-push or protected-branch change was used.
+## Recovery
 
-## Published implementation packages
+The attached executor executed `pwd` successfully. Runtime status identified the
+attached environment as connected/running with no failure and enforced network
+policy. It did not reproduce `failed to query executor configuration capabilities`
+or `No usable execution environment is available`. No GIG source repair was used
+to resolve infrastructure.
 
-|SHA|Working implementation|
+Existing checkout was clean on `work`, commit
+`12f3a53943dc245e36f2cbbc35b9910fb21c0718`, with two commits and only the initial
+README/workflow source. Remote HEAD was `main` at that same SHA; the requested
+remote development branch was exactly the reported d96acca checkpoint. Fetch and
+a separate `/workspace/gig-development` worktree recovered its actual source.
+The original checkout was preserved; the previously inaccessible workspace was not
+accessed, repaired, reset or discarded. No force push or protected branch change.
+
+## Delivered implementation
+
+The package contract is SEC_PRIMARY_AND_HISTORY.md. Seventeen new authored offline
+regressions accompany the following bounded extensions:
+
+- Advertised strict XHTML primary acquisition through the existing one-document
+  inline-set profile, including supported transformations, passive ordered text,
+  original raw SHA/URI/acceptance/receipt lineage and immutable refresh rejection.
+- Deterministic filing-date-range discovery with up to four advertised older shards
+  and eight returned filing candidates. Metadata response provenance, truncation and
+  deferred shards are explicit. No background task or automatic execution.
+- Explicit historical ingestion revalidates current submissions, shard name/count/
+  dates and overlapping rows, then retains both metadata originals. Version2
+  checkpoints restore this binding offline and paused; existing no-shard version1
+  inputs/outputs remain supported. Original private immutable store is reused.
+- Restore rechecks every local DTS dependency against retained directory type/size
+  advertisements. DTS references cannot authorize submissions shard requests.
+- Existing workspace installation/Company-v2/Stock Intelligence contracts consume
+  acquired inline collections. A real Python-to-TypeScript case verifies source
+  state and installed collection matching. Missing statements stay unavailable.
+
+No name similarity/presentation ordering became accounting equivalence. Native
+recovery formats and market-data provider assumptions are unchanged.
+
+## Developer verification
+
+| Cohort | Result |
 |---|---|
-|44e0eeecc348c2dd6113564a483a723bdd697a8f|Explicit schema-appinfo embedded presentation/calculation/definition linkbases with original source-node provenance.|
-|52fd5eddc210536c98c528d375006fcc12404e32|Default-disabled SEC XML filing/DTS transaction,read-only bounded wire,private immutable revisions,reparse/restart and workspace installation.|
-|45588bd2ab534ace9dc9d97def5c10adf212058a|Duplicate accuracy ambiguity,source-ingestion status and actual Python→TypeScript product integration.|
-|5e5d34f513cb9a9dd61764e8ec332e042f6384bc|Preserved explicit offline qualification CLI,independent source-processing/retention gates and CLI regressions.|
-|7931641397878cb660f00c847cc5e38f175debc0|Reproduced concurrent restore and late CLI validation failures;minimal admission repairs and four regressions.|
+| Fresh GCC14.2 Release, CPython3.12.14, optional source-enabled binding | Built with warnings as errors |
+| Guarded no-application/no-socket Python suite | 531 passed, zero errors/failures/skips, 18.938s |
+| Focused new/existing source ingestion/private store | 48 passed |
+| Native source/hot/durable/replay recovery | 6 passed |
+| Eight frozen native references | 8 passed, all baseline identities unchanged |
+| Frontend unit checks | 186 passed, zero failures/skips |
+| TypeScript and Vite production build | Passed; no server |
+| Actual Company-v2 Python→TypeScript | 12 cases, 72 assertions |
+| Existing v1 Python→TypeScript | 8 cases, 58 assertions |
+| Offline ingestion CLI | OFFLINE_FIXTURE_PASS; 5 authored requests, 4,051 bytes |
+| Packaging pattern regressions | 3 passed |
+| Installed fresh default wheel from clean sdist | 8 SDK consumer + 48 source/store checks; 12 v2 cases/72 assertions |
+| Dependency consistency | pip check passed; not vulnerability clearance |
 
-All implementation SHAs are ancestors of the verified remote branch. Exact
-changed-file hashes,commands/results,log and artifact receipts are in
-MULTI_WORKSTREAM_EVIDENCE.json and PACKAGE_CURRENT.json. Runtime changes cover
-27files;three package design documents describe their supported contracts.
+EXECUTOR_RECOVERY_EVIDENCE.json binds source files, retained logs, eight exact
+reference identities and packaging receipts. This sprint uses one fresh native
+compiler/profile; previous five-profile Python and six-profile native results
+remain historical. No new sanitizer, ARM64, browser runtime, physical-device,
+observed-source or final owner acceptance claim.
 
-## Embedded relationships and source-grounded mapping
+The first source-only test attempt found missing httpx in the existing tools venv;
+a separate local venv restored exact pinned dependencies. Early source-store tests
+ran before native linkage and failed import; final source/store and guarded cohorts
+passed with the actual rebuilt binding. Native configuration required explicit
+compiler/Ninja paths. Wheel configuration initially inherited unavailable
+`clang++ -pthread`; the build selected existing `/usr/bin/g++` explicitly. The first
+npm install could not write the inherited home cache; a workspace cache completed
+without changing dependency pins. These were dependency/build setup issues, not GIG
+source defects. Retained warnings include Starlette TestClient deprecation (no
+client started), pip home-cache permissions and the existing optional large Vite
+chunk. No assertion or security boundary was weakened.
 
-SCHEMA_APPINFO_LINKBASE_V1 explicitly processes supported linkbase containers
-inside schema/annotation/appinfo. Locators use the actual containing schema URI.
-Source SHA,root/link/arc node ordinals distinguish multiple containers in one
-source. Existing effective priority/prohibition and supported restricted explicit
-DRS processing are reused. No fabricated URI or replacement source document is
-created. Legacy profiles still classify embedded scope as unsupported rather than
-silently using partial graphs. Invalid placement,unknown root attributes/resources,
-xml:base and unsupported semantics remain rejected/unavailable.
+## Packaging
 
-13new tests include multiple roots,cross-root priority/prohibition,legacy refusal,
-relative locators,restricted closed-cube behavior,atomic rollback and private export.
-The existing source-scoped extension mapping retains namespaces,declarations,
-roles,source order,periods,contexts,units and filing lineage. No name-similarity or
-presentation-neighbor heuristic creates a GAAP alias or accounting equivalence.
+A fresh sdist was built from Git archive of the tested implementation. All 1,318
+tracked files were compared byte-for-byte; 1,319 total regular members include
+PKG-INFO. No scratch/build tree, symlink or private dataset was included. Data-only
+safe extraction supplied the fresh default SDK wheel build and installed consumer
+checks. The default wheel has 22 members. No previous wheel was substituted.
 
-## SEC acquisition,product integration and source recovery
+- Sdist SHA256: `55bc17a3b8116984b012b5a1eeda1ad4a4ee29b949e5ba65185ae0fd1f167e14`.
+- Wheel SHA256: `ae4e44be8442f9ebd661d262a907f8da46dc731e58b9ce70b9a70f26a6dd4c7a`.
 
-FilingIngestor has no default transport or startup activation. Explicit permission,
-valid identifying User-Agent,CIK,accession,processing scope and advertised file
-binding precede admission. The supported transaction reads current submissions,
-exact filing directory,plain XML instance and bounded DTS closure. Same-filing
-resources must be advertised with exact sizes. External taxonomy resources require
-an exact fixed-official-host allowlist. Redirects,unapproved hosts,cross-accession
-references,encoded/path traversal and ambiguous namespaces reject.
+The archive contains implementation documentation, not this later evidence-only
+checkpoint. Current native source-enabled coverage used the actual build-tree
+binding; installed wheel coverage uses the default optional-capability profile.
+PACKAGE_CURRENT.json points to these current receipts; previous package origins
+remain in Git at the starting checkpoint.
 
-Limits are2MiB/source,8MiB transaction/retained bodies,32source records,8filings,
-16DTS documents,24request attempts and30seconds pertransaction. Reads are bounded
-to64KiB with8second limits,1.01second request spacing and at most one bounded
-retry. Transport prefetch is separately capped64KiB;application body ceilings do
-not establish a global process-RAM or wire-byte SLA. Cache TTL600seconds preserves
-original receipt timestamps. Filing acceptance is independent of source receipt.
-Failed/canceled/unsupported transactions do not publish candidate collection state.
+## Remaining scope
 
-Private source revision storage requires separate enabled+retention approval.
-Existing owner-private0700directories and0600regular files are required;symlinks
-reject.16revision/64MiB quotas include orphan temporary files. Existing immutable
-native/source publication is reused (file fsync,exclusive publication,directory
-fsync);no C++ journal redesign. Revisions are never overwritten/pruned implicitly.
-Schema1/source/body/metadata/collection identities are revalidated before restoration.
-Unknown versions reject;restore reparses original sources and stays PAUSED_RESTORED
-without network. Independent child-process restore,disk/allocation failures,
-corruption,publication uncertainty,cancellation and idempotency are tested.
+Matrix remains **34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE**, 50 rows;
+no status was promoted. SEC02/REL02 descriptions now record demonstrated bounded
+acceptance and remove obsolete missing-primary/history claims.
 
-The workspace factory shares its source-rate lock,requires known CIKs and refuses
-replacement registration. Explicit installation admits the issuer-bound collection.
-Company-v2/Stock Intelligence can display sanitized source state,counters and whether
-the installed view matches that collection. This is observation/export-cache status,
-not a live feed or complete historical source-accounting claim. There is no new
-HTTP acquisition/mutation route. Existing v1/v2 defaults and SDK remain compatible.
+Engineering gaps: acquired multi-document inline manifests; full transformation,
+XML Schema and broader DRS semantics; complete rounding/duplicate conformance;
+source-evidenced accounting equivalence and complete statements. Historical plans
+are finite, explicitly executed and always declare incomplete history. General
+non-XML HTML repair and unlimited/background EDGAR acquisition are unsupported.
+Native recovery outside documented schema/container/cursor contracts and remaining
+market adapter guarantees require precise source specifications and offline
+fixtures; no new provider assumptions were invented. Kraken remains provisional.
 
-The CLI requires either --fixture or --fetch. Fixture mode reads no owner config.
-Future owner --fetch requires existing SEC identification plus separate explicit
-processing gates;raw checkpoint persistence needs an independent retention gate.
-No permission is enabled or written. Failures never substitute fixtures. Only
-fixture mode and blocked negative fetch tests were executed in this sprint.
+External gaps remain actual authorized SEC/market reconciliation, observed L3
+initialization/continuity, current native ARM64, owner HTTPS/WSS, devices/assistive
+technology, empirical model evaluation and target security clearance. Original
+A18/A19 acceptance evidence remains unknown. No full-development or production
+readiness declaration is made.
 
-## Duplicate accuracy and explicit non-selection
-
-DUPLICATE_ACCURACY_DIAGNOSTICS_V1 distinguishes equal values,overlapping-accuracy
-ambiguity,disjoint intervals,nil/mixed nil and unsupported accuracy. It preserves
-all source IDs,original values and exact rational enclosures. Differing reported
-values remain CONFLICT even when their accuracy enclosures overlap. No value is
-selected or manufactured;missing/nil never becomes zero. V2 rows/UI provide
-progressive diagnostic disclosure;the default v1 result stays compatible.
-Six new math/product regressions and actual cross-language contract tests cover
-these outcomes. This is a conservative bounded accuracy profile,not complete
-XBRL Calculations1.1 conformance or proof of accounting correctness.
-
-## Reproduced defects and retained failures
-
-1. A suspended authored source read showed restore replacing state while ingestion
-held the shared source lock. Restore now rejects sec_ingest_busy before parsing or
-replacement. Tests preserve LOADING/accepted bytes,cover another shared-lock owner,
-and verify normal restore after cancellation/release. The API is event-loop-owned;
-arbitrary-thread coordination is not claimed.
-2. A malformed CLI cutoff reached coordinator construction. Cutoff and symbol now
-validate before configuration lookup/source setup;negative tests prohibit both.
-3. An intermediate diagnostic-order test exposed resource-change errors being
-masked by a later filing comparison;the specific source check now runs first.
-4. A negative permissions fixture assumed mkdir(0755) defeated inherited umask077.
-It now explicitly chmods the deliberately public test directory. The required
-rejection assertion was preserved.
-
-Failing-before and passing-after receipts remain in the evidence manifest. No
-numeric assertion,compiler warning,security boundary or test was weakened.
-
-## Final developer validation
-
-|Configuration/cohort|Actual result|
-|---|---|
-|GCC Debug bindings,guarded no-launch subset|514passed;0failure/error/skip;26.681s|
-|GCC Release bindings,same subset|514passed;0failure/error/skip;27.757s|
-|GCC ASan+UBSan/native Python,same subset|514passed;0failure/error/skip;150.045s|
-|Clang Debug bindings,same subset|514passed;0failure/error/skip;30.764s|
-|Clang Release bindings,same subset|514passed;0failure/error/skip;20.065s|
-|Native GCC Debug/Release/ASan+UBSan recovery|6/6/6passed|
-|Native Clang Debug/Release/ASan+UBSan recovery|6/6/5passed|
-|Eight native frozen references,each of6compiler profiles|48passed;all8hashes unchanged|
-|Frontend unit tests|186passed;0failed/skipped|
-|TypeScript and Vite production build|Passed;no server started|
-|Actual v2Python→TypeScript product contract|11cases,65assertions passed|
-|Existing v1Python→TypeScript product contract|8cases,58assertions passed|
-|Default installed SDK from clean source|8consumer+55recovery+261XML/source tests passed;28native frontend assertions,58v1+65v2assertions|
-|Source-enabled installed SDK from clean source|8consumer+66recovery+261XML/source tests passed;35native frontend assertions,58v1+65v2assertions|
-|Offline CLI fixture|OFFLINE_FIXTURE_PASS;1filing,5authored requests,4,051bytes;no provider|
-|Offline dependency consistency|pip check:no broken requirements;not vulnerability clearance|
-
-Final Python total2,570outcomes.57new tests are13embedded,23ingestion,8store,
-6duplicate and7CLI. Their XBRL/source cohort totals261. Counts across configurations
-are repeat outcomes,not distinct test implementations. Native focused/frozen checks
-ran at5e5d34f;final native/core/SDK/build inputs are byte-identical. The final two
-repairs were Python-only and their full selected cohort reran at7931641. Earlier
-510-case/profile results at5e5d34f remain intermediate evidence,not final totals.
-
-GCC14.2,Clang19.1.7,CPython3.12.14,Node24.19.0,Vite8.3.5,x86_64Linux. Existing
-incremental CMake native/binding builds were checked;this is not a fresh full
-unrelated CTest matrix. Native GCC/Clang sanitizers ran. GNU Python/native uses the
-existing GNU ASan/libstdc++ preload with CPython interpreter-exit leak checking
-excluded. Pure Python is not sanitizer-instrumented;complete CPython shutdown leak
-clearance and Clang Python sanitizer integration are not claimed.
-
-Retained warnings:Starlette/httpx TestClient import deprecation (no client launched),
-asyncio slow-task diagnostics under instrumentation,pip cache permissions and the
-existing optional Three/OrbitControls517.06kB chunk warning. Initial JS256.34kB,
-gzip79.63kB;no browser runtime responsiveness or speed improvement is inferred.
-
-## Packaging and artifact origins
-
-A new sdist was built from clean Git archive7931641:1,315members,1,314tracked files
-byte-compared to that commit. All changed runtime files were present;no build tree,
-node_modules,symlink,private dataset,ZIP,database,credential file or compiled binary
-was admitted. Extraction used data-only safe archive rules. Final report-only
-updates are newer than this runtime archive and are not represented as packaged.
-
-Default/source SDK wheels are **reused**,not newly built from this sdist:verified
-source7aea334f0171b862b055f9b3ebda46a78894dc7a. Native/SDK/build inputs are byte-identical
-to the final runtime,installed source files were compared,and wheel hashes/member
-counts/original build logs are in PACKAGE_CURRENT.json. Both were installed offline
-without dependencies into isolated targets and exercised with this extracted source.
-The actual default binary rejects unavailable optional source-streaming capability;
-there is no patched substitute. No dependency addition/upgrade occurred.
-
-## Measured authored-source envelope
-
-A reproducible in-process fixture loop used one warm-up plus20repetitions of
-`client();await c.ingest(ACC);raw=c.checkpoint();r.restore(raw,sha256(raw))`.
-Each transaction asserts5authored requests and identical restored collection pages.
-`client`/ACC are imported from terminal.stocks.test_sec_filing_ingest. Rate time is
-virtual;wall/CPU times are real and include tracemalloc overhead. No network/disk
-performance or exchange/provider SLA is measured.
-
-Ingest median87.039ms (range84.281–94.212);restore median58.107ms
-(range53.884–60.184). Source bytes4,051;checkpoint7,828bytes. Total21loops3.115s
-wall/3.096sCPU. Python-tracked peak348,436bytes;process ru_maxrss26,488KiB.
-Concurrent compiler/test workload and tracing affect timings. This is one small
-fixture,not a sustained-memory/leak proof or an improvement-versus-baseline claim.
-The ignored measurement program SHA and full result are retained in evidence.
-
-## Remaining scope and external blockers
-
-Matrix: **34COMPLETE /8PARTIAL /7BLOCKED /1NOT APPLICABLE**,50rows.
-Earlier48reviewed areas plusA18/A19decision became49entries;the explicitly requested
-KrakenMD07added one area. Current total49reviewed areas plus1historical decision.
-No prior requirement was removed or externally blocked row promoted.
-
-Remaining engineering includes HTML/inline-primary source acquisition and older
-submissions scheduling in the new coordinator;broader inline transform/document-set,
-XML Schema and DRS semantics;full rounding/duplicate conformance;source-evidenced
-accounting-equivalence and complete statements. Existing supplied-inline APIs and
-bounded structural extension mapping must not be confused with those contracts.
-Native/source recovery remains limited to its validated cursor/container/schema
-boundaries;no new provider sequence/backfill guarantee is invented. Existing IEX/
-Kraken supervision,differential,source-store and recovery fixtures reran without
-changing their provider assumptions.
-
-Kraken remains provisional. One bounded GitHub candidate-document request returned
-404/14bytes,not a verified official book/checksum contract. Prior official-host
-CONNECT403 remains historical evidence;no market endpoint was contacted. Do not
-repeat failed candidates or remove provisional status without authoritative text.
-
-External acceptance remains blocked by the no-launch/no-provider directive and
-actual target/data evidence:authorized SEC/IEX qualification,owner-private Codespaces
-HTTPS/WSS,real browsers/devices/assistive technology,current-candidate native ARM64,
-complete observed L3 initialization/reference,empirical models and deployed runtime
-security clearance. A18/A19historical requirement evidence remains unknown.
-
-The next **bounded** source package (inline-primary manifest plus older-shard
-scheduler) is estimated2–4engineering days including offline faults/packaging,subject
-to agreeing exact supported document contracts. Broader schema/DRS/inline conformance
-and accounting equivalence require multiple scoped milestones and an independent
-corpus;the full original scope has no defensible fixed completion date yet. Provider,
-owner-target and missing historical evidence have externally determined elapsed time.
-No full-development or production-readiness declaration is made.
-
-## Reproduction and exact continuation
-
-With existing dependencies/native builds,from repository root:
-
-```
-PYTHONPATH=build/remaining-engineering/native-release/python:. python terminal/tests/run_no_launch_suite.py
-PYTHONPATH=build/remaining-engineering/native-release/python:. python terminal/tests/check_xbrl_accuracy_contract.py
-PYTHONPATH=build/remaining-engineering/native-release/python:. python terminal/tests/check_xbrl_statement_contract.py
-PYTHONPATH=build/remaining-engineering/native-release/python:. python scripts/qualify_sec_filing_ingestion.py --fixture
-cd terminal/web
-npm test
-npm run build
-```
-
-Use the intended supported Python/native binding environment;see evidence for the
-five actual environments and sanitizer preload/limitations. These commands do not
-launch GIG. Do not run --fetch,launch servers or dispatch qualification workflows
-under this sprint's restrictions. No intermediate owner testing is requested.
-
-Resume from the enclosing pushed documentation commit,read this report,
-COMPLETION_MATRIX.json,MULTI_WORKSTREAM_EVIDENCE.json and the three package documents.
-Preserve the five published implementations;do not rebuild their architecture or
-repeat the whole audit. Start the next precisely scoped source/conformance package
-with synthetic fixtures and keep unsupported cases explicit.
+All work stayed at $0 with GIG-only product branding and separation from GIG Quant
+Terminal. No GIG/application launch, server, live provider, deployment, trade or
+final owner acceptance test occurred. Dependency registries and GitHub source access
+were used for development only.

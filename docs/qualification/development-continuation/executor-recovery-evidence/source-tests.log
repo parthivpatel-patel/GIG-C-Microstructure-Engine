@@ -1,0 +1,6 @@
+..........................................Executing <Task finished name='Task-214' coro=<IngestStore.test_cross_process_restore_with_network_guard_and_disabled_transport() done, defined at /workspace/gig-development/terminal/stocks/test_sec_ingest_store.py:50> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.122 seconds
+......
+----------------------------------------------------------------------
+Ran 48 tests in 0.482s
+
+OK

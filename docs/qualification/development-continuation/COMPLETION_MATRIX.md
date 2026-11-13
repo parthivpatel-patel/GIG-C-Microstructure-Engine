@@ -1,67 +1,65 @@
-# GIG development completion matrix — November 13,2026
+# GIG development completion matrix — November 13, 2026
 
-Tested runtime `7931641397878cb660f00c847cc5e38f175debc0`;branch development/gig-ui-redesign.
-
-50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.
-
-**34 COMPLETE /8 PARTIAL /7 BLOCKED /1 NOT APPLICABLE. Full scope remains incomplete.**
+Tested implementation `63c7e94350f64411117af8a4fbcbb898f8f041f7`; branch `development/gig-ui-redesign`.
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
-Current evidence:MULTI_WORKSTREAM_EVIDENCE.json. No externally blocked requirement was promoted.
+**34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE. Full development remains incomplete.**
 
-|ID|Status|Requirement|
+Current source/package evidence: EXECUTOR_RECOVERY_EVIDENCE.json. No row status changed. Earlier evidence is retained with its original source scope.
+
+| ID | Status | Requirement |
 |---|---|---|
-|CORE01|COMPLETE|C++20 typed order book,identity,FIFO and exact arithmetic|
-|CORE02|COMPLETE|ITCH framing,decoding,context and synthetic L3 reconstruction|
-|CORE03|COMPLETE|Python/native integration and native-backed browser|
-|CORE04|COMPLETE|Deterministic replay,journal and recovery contracts|
-|CORE05|BLOCKED|Complete observed historical Level 3 validation|
-|UI01|COMPLETE|GIG-only branding,application shell,search,themes and navigation|
-|UI02|COMPLETE|Command Center workspace|
-|UI03|COMPLETE|Securities Universe workspace|
-|UI04|COMPLETE|Stock Intelligence workspace|
-|UI05|COMPLETE|Live Markets workspace|
-|UI06|COMPLETE|Multi-Stock Comparison workspace|
-|UI07|COMPLETE|Order Book workspace|
-|UI08|COMPLETE|Market Depth workspace|
-|UI09|COMPLETE|Order Flow workspace|
-|UI10|COMPLETE|Historical Replay workspace|
-|UI11|COMPLETE|Execution Simulator workspace|
-|UI12|COMPLETE|Research & Validation workspace|
-|UI13|COMPLETE|Operations workspace|
-|VIS01|COMPLETE|Eight advanced research projections|
-|VIS02|COMPLETE|Existing four L1 projections and three native/model scenes|
-|VIS03|COMPLETE|3D camera,orbit,pause,reset,visibility,cleanup and fallback|
-|VIS04|BLOCKED|Sustained physical GPU,mobile and independent-browser acceptance|
-|DATA01|COMPLETE|Broad discovery independent of SEC/feed entitlement|
-|DATA02|PARTIAL|Complete,current US-listed security universe|
-|SEC01|COMPLETE|SEC identity admission,selected facts,ratios,filings and provenance|
-|SEC02|PARTIAL|Complete historical financial statements and point-in-time source history|
-|SEC03|BLOCKED|Real-provider SEC reconciliation for this delivered source|
-|MD01|COMPLETE|Read-only IEX permissions,credentials and fixed destinations|
-|MD02|COMPLETE|Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions|
-|MD03|COMPLETE|Historical IEX bars,quotes,trades and explicit delayed-SIP profile|
-|MD04|COMPLETE|Historical bar display and source error reporting|
-|MD05|BLOCKED|Actual owner IEX live/historical qualification|
-|MD06|PARTIAL|Complete corrected exchange tape and lossless reconnect|
-|MD07|PARTIAL|Official-contract Kraken cryptocurrency L2 and native/product integration|
-|RES01|COMPLETE|Research configuration,calculations,results and authored exports|
-|RES02|COMPLETE|Historical bar-to-research/compatible3D workflow|
-|RES03|BLOCKED|Empirical forecasting quality,calibrated fills or alpha|
-|REL01|COMPLETE|Bounded observation persistence,recovery,backup and corruption rejection|
-|REL02|PARTIAL|Crash-safe hot live/L3 recovery and hardware durability guarantees|
-|SECURITY01|COMPLETE|Strict private Origin/Host,HTTP proof and WebSocket lifecycle|
-|SECURITY02|COMPLETE|Frontend budgets,errors and disabled execution safeguards|
-|SECURITY03|PARTIAL|Runtime/dependency security clearance|
-|OPS01|COMPLETE|Private startup,exact-SHA upgrade,rollback and qualification tools|
-|OPS02|BLOCKED|Owner-authenticated Codespaces HTTPS/WSS acceptance|
-|OPS03|BLOCKED|Current-candidate genuine native ARM64 qualification|
-|UX01|COMPLETE|Readable dark/light,responsive,keyboard and reduced-motion engineering|
-|UX02|PARTIAL|Full WCAG2.2AA and physical-device acceptance|
-|CLEAN01|COMPLETE|Obsolete user-facing branding and safe frontend cleanup|
-|SCOPE01|NOT APPLICABLE|Real/paper execution,paid feeds,public deployment and redistribution|
-|SCOPE02|PARTIAL|Historical A18/A19 requirement and concentration acceptance|
+| CORE01 | COMPLETE | C++20 typed order book,identity,FIFO and exact arithmetic |
+| CORE02 | COMPLETE | ITCH framing,decoding,context and synthetic L3 reconstruction |
+| CORE03 | COMPLETE | Python/native integration and native-backed browser |
+| CORE04 | COMPLETE | Deterministic replay,journal and recovery contracts |
+| CORE05 | BLOCKED | Complete observed historical Level 3 validation |
+| UI01 | COMPLETE | GIG-only branding,application shell,search,themes and navigation |
+| UI02 | COMPLETE | Command Center workspace |
+| UI03 | COMPLETE | Securities Universe workspace |
+| UI04 | COMPLETE | Stock Intelligence workspace |
+| UI05 | COMPLETE | Live Markets workspace |
+| UI06 | COMPLETE | Multi-Stock Comparison workspace |
+| UI07 | COMPLETE | Order Book workspace |
+| UI08 | COMPLETE | Market Depth workspace |
+| UI09 | COMPLETE | Order Flow workspace |
+| UI10 | COMPLETE | Historical Replay workspace |
+| UI11 | COMPLETE | Execution Simulator workspace |
+| UI12 | COMPLETE | Research & Validation workspace |
+| UI13 | COMPLETE | Operations workspace |
+| VIS01 | COMPLETE | Eight advanced research projections |
+| VIS02 | COMPLETE | Existing four L1 projections and three native/model scenes |
+| VIS03 | COMPLETE | 3D camera,orbit,pause,reset,visibility,cleanup and fallback |
+| VIS04 | BLOCKED | Sustained physical GPU,mobile and independent-browser acceptance |
+| DATA01 | COMPLETE | Broad discovery independent of SEC/feed entitlement |
+| DATA02 | PARTIAL | Complete,current US-listed security universe |
+| SEC01 | COMPLETE | SEC identity admission,selected facts,ratios,filings and provenance |
+| SEC02 | PARTIAL | Complete historical financial statements and point-in-time source history |
+| SEC03 | BLOCKED | Real-provider SEC reconciliation for this delivered source |
+| MD01 | COMPLETE | Read-only IEX permissions,credentials and fixed destinations |
+| MD02 | COMPLETE | Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions |
+| MD03 | COMPLETE | Historical IEX bars,quotes,trades and explicit delayed-SIP profile |
+| MD04 | COMPLETE | Historical bar display and source error reporting |
+| MD05 | BLOCKED | Actual owner IEX live/historical qualification |
+| MD06 | PARTIAL | Complete corrected exchange tape and lossless reconnect |
+| MD07 | PARTIAL | Official-contract Kraken cryptocurrency L2 and native/product integration |
+| RES01 | COMPLETE | Research configuration,calculations,results and authored exports |
+| RES02 | COMPLETE | Historical bar-to-research/compatible3D workflow |
+| RES03 | BLOCKED | Empirical forecasting quality,calibrated fills or alpha |
+| REL01 | COMPLETE | Bounded observation persistence,recovery,backup and corruption rejection |
+| REL02 | PARTIAL | Crash-safe hot live/L3 recovery and hardware durability guarantees |
+| SECURITY01 | COMPLETE | Strict private Origin/Host,HTTP proof and WebSocket lifecycle |
+| SECURITY02 | COMPLETE | Frontend budgets,errors and disabled execution safeguards |
+| SECURITY03 | PARTIAL | Runtime/dependency security clearance |
+| OPS01 | COMPLETE | Private startup,exact-SHA upgrade,rollback and qualification tools |
+| OPS02 | BLOCKED | Owner-authenticated Codespaces HTTPS/WSS acceptance |
+| OPS03 | BLOCKED | Current-candidate genuine native ARM64 qualification |
+| UX01 | COMPLETE | Readable dark/light,responsive,keyboard and reduced-motion engineering |
+| UX02 | PARTIAL | Full WCAG2.2AA and physical-device acceptance |
+| CLEAN01 | COMPLETE | Obsolete user-facing branding and safe frontend cleanup |
+| SCOPE01 | NOT APPLICABLE | Real/paper execution,paid feeds,public deployment and redistribution |
+| SCOPE02 | PARTIAL | Historical A18/A19 requirement and concentration acceptance |
 
 ## CORE01 — COMPLETE
 
@@ -429,19 +427,19 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Complete historical financial statements and point-in-time source history
 
-Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`, `terminal/stocks/xbrl_relationships.py`, `terminal/stocks/xbrl_statements.py`, `terminal/stocks/xbrl_product.py`, `terminal/stocks/test_xbrl_relationships.py`, `terminal/stocks/test_xbrl_statements.py`, `terminal/stocks/test_xbrl_product.py`, `terminal/web/src/XbrlStatements.tsx`, `terminal/web/src/xbrlStatements.ts`, `terminal/web/src/xbrlStatements.test.ts`, `terminal/server/schemas/backend_company_xbrl_v1.schema.json`, `terminal/tests/check_xbrl_statement_contract.py`, `terminal/stocks/xbrl_accuracy.py`, `terminal/stocks/test_xbrl_accuracy.py`, `terminal/stocks/xbrl_statement_v2.py`, `terminal/stocks/test_xbrl_statement_v2.py`, `terminal/web/src/xbrlAccuracy.ts`, `terminal/web/src/xbrlAccuracy.test.ts`, `terminal/tests/check_xbrl_accuracy_contract.py`, `terminal/server/schemas/backend_company_xbrl_v2.schema.json`, `scripts/qualify_sec_filing_ingestion.py`, `terminal/stocks/sec_filing_ingest.py`, `terminal/stocks/sec_ingest_store.py`, `terminal/stocks/sec_read_wire.py`, `terminal/stocks/service.py`, `terminal/stocks/test_sec_filing_ingest.py`, `terminal/stocks/test_sec_ingest_cli.py`, `terminal/stocks/test_sec_ingest_store.py`, `terminal/stocks/test_xbrl_duplicate_diagnostics.py`, `terminal/stocks/test_xbrl_embedded.py`, `terminal/tests/run_no_launch_suite.py`, `terminal/tests/xbrl-accuracy-contract.mjs`.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`, `terminal/stocks/xbrl_relationships.py`, `terminal/stocks/xbrl_statements.py`, `terminal/stocks/xbrl_product.py`, `terminal/stocks/test_xbrl_relationships.py`, `terminal/stocks/test_xbrl_statements.py`, `terminal/stocks/test_xbrl_product.py`, `terminal/web/src/XbrlStatements.tsx`, `terminal/web/src/xbrlStatements.ts`, `terminal/web/src/xbrlStatements.test.ts`, `terminal/server/schemas/backend_company_xbrl_v1.schema.json`, `terminal/tests/check_xbrl_statement_contract.py`, `terminal/stocks/xbrl_accuracy.py`, `terminal/stocks/test_xbrl_accuracy.py`, `terminal/stocks/xbrl_statement_v2.py`, `terminal/stocks/test_xbrl_statement_v2.py`, `terminal/web/src/xbrlAccuracy.ts`, `terminal/web/src/xbrlAccuracy.test.ts`, `terminal/tests/check_xbrl_accuracy_contract.py`, `terminal/server/schemas/backend_company_xbrl_v2.schema.json`, `scripts/qualify_sec_filing_ingestion.py`, `terminal/stocks/sec_filing_ingest.py`, `terminal/stocks/sec_ingest_store.py`, `terminal/stocks/sec_read_wire.py`, `terminal/stocks/service.py`, `terminal/stocks/test_sec_filing_ingest.py`, `terminal/stocks/test_sec_ingest_cli.py`, `terminal/stocks/test_sec_ingest_store.py`, `terminal/stocks/test_xbrl_duplicate_diagnostics.py`, `terminal/stocks/test_xbrl_embedded.py`, `terminal/tests/run_no_launch_suite.py`, `terminal/tests/xbrl-accuracy-contract.mjs`, `terminal/stocks/sec_filing_schedule.py`, `terminal/stocks/test_sec_source_expansion.py`.
 
-Evidence: 261authored XBRL/source/CLI tests perinstalled SDK variant,included in514cases per5binding configurations.57new regressions:13embedded,23source ingestion,8store,6duplicate,7CLI.186frontend tests;11actual v2cases/65assertions and8v1cases/58assertions. Concurrent restore and late cutoff-validation failures reproduced before repair;legacy defaults and native identities preserved.
+Evidence: Fresh GCC Release/source-enabled native build:531 guarded no-launch Python tests,17new source regressions included;48focused ingestion/store checks;186frontend tests,TSC/Vite;12actual v2cases/72assertions including acquired inline,8v1cases/58assertions. Eight frozen native identities and six recovery tests passed. Exact source/package receipts in EXECUTOR_RECOVERY_EVIDENCE.json;no provider or owner qualification.
 
-Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence.
+Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements.
 
-Disposition: Embedded/source acquisition/recovery/duplicate/product packages implemented and offline verified. SEC02 remains PARTIAL:the original full historical financial-statement and conformance acceptance scope is broader.
+Disposition: Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.
 
-Next action: Next bounded implementation:explicit inline-primary acquisition/document-set manifests and older-submissions shard scheduling,then source-bound fixtures and atomic admission. Broader DRS/schema/inline and accounting-equivalence contracts require precise authoritative scope and conformance fixtures;do not reimplement the completed bounded profiles.
+Next action: Next implementation milestones:explicit acquisition manifests for multiple inline documents,broader authoritative transform/schema/DRS fixtures,and source-evidenced accounting equivalence. Preserve completed bounded primary/history ingestion and product integration.
 
 Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
 
-Remaining implementation or qualification: Automatic HTML/inline-primary acquisition and older-submissions shard scheduling in the new coordinator;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;noncanonical/finite-zero precision and full Calculations1.1 rounding/duplicate conformance;source-backed accounting-equivalence mappings/complete statements;independent observed source/acceptance corpus. Current simple XML source ingestion and supplied-source inline APIs must not be described as full automatic EDGAR coverage.
+Remaining implementation or qualification: Acquisition manifests for multi-document inline sets;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;full Calculations1.1 rounding/duplicate conformance;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.
 
 ## SEC03 — BLOCKED
 
@@ -637,9 +635,9 @@ Crash-safe hot live/L3 recovery and hardware durability guarantees
 
 Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`, `terminal/test_itch_source_product.py`.
 
-Evidence: Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native→TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json.
+Evidence: Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native→TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json. Current recovery source qualification:531guarded tests,6native recovery tests and8unchanged frozen references on fresh GCC Release;see EXECUTOR_RECOVERY_EVIDENCE.json. Other compiler evidence remains prior-source evidence.
 
-Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration. This sprint also adds atomic private SEC-source revisions and lock-guarded restore without altering native checkpoint formats or claiming additional exchange cursor guarantees.
+Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration. This sprint also adds atomic private SEC-source revisions and lock-guarded restore without altering native checkpoint formats or claiming additional exchange cursor guarantees. Current primary/history package adds explicit version2 SEC metadata checkpoints with offline reparsing and current-index/shard/directory bindings;native checkpoint formats and provider cursor assumptions remain unchanged.
 
 Disposition: Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.
 

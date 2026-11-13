@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v13",
+  "schema": "gig.development.completion.v14",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -449,15 +449,17 @@
         "terminal/stocks/test_xbrl_duplicate_diagnostics.py",
         "terminal/stocks/test_xbrl_embedded.py",
         "terminal/tests/run_no_launch_suite.py",
-        "terminal/tests/xbrl-accuracy-contract.mjs"
+        "terminal/tests/xbrl-accuracy-contract.mjs",
+        "terminal/stocks/sec_filing_schedule.py",
+        "terminal/stocks/test_sec_source_expansion.py"
       ],
-      "test_evidence": "261authored XBRL/source/CLI tests perinstalled SDK variant,included in514cases per5binding configurations.57new regressions:13embedded,23source ingestion,8store,6duplicate,7CLI.186frontend tests;11actual v2cases/65assertions and8v1cases/58assertions. Concurrent restore and late cutoff-validation failures reproduced before repair;legacy defaults and native identities preserved.",
-      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence.",
-      "disposition": "Embedded/source acquisition/recovery/duplicate/product packages implemented and offline verified. SEC02 remains PARTIAL:the original full historical financial-statement and conformance acceptance scope is broader.",
-      "action_now": "Next bounded implementation:explicit inline-primary acquisition/document-set manifests and older-submissions shard scheduling,then source-bound fixtures and atomic admission. Broader DRS/schema/inline and accounting-equivalence contracts require precise authoritative scope and conformance fixtures;do not reimplement the completed bounded profiles.",
-      "work_class": "PARTIAL:bounded instance/filing-vintage infrastructure complete;full statement semantics,product integration and historical source coverage remain open",
-      "completed_this_session": "DTS invalid/missing/empty/extended linkbaseRef type reproduced as falsely usable and repaired with exact simple-XLink admission. Previous bounded instance/inline/DTS/filing-vintage infrastructure preserved.",
-      "remaining_implementation_or_qualification": "Automatic HTML/inline-primary acquisition and older-submissions shard scheduling in the new coordinator;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;noncanonical/finite-zero precision and full Calculations1.1 rounding/duplicate conformance;source-backed accounting-equivalence mappings/complete statements;independent observed source/acceptance corpus. Current simple XML source ingestion and supplied-source inline APIs must not be described as full automatic EDGAR coverage.",
+      "test_evidence": "Fresh GCC Release/source-enabled native build:531 guarded no-launch Python tests,17new source regressions included;48focused ingestion/store checks;186frontend tests,TSC/Vite;12actual v2cases/72assertions including acquired inline,8v1cases/58assertions. Eight frozen native identities and six recovery tests passed. Exact source/package receipts in EXECUTOR_RECOVERY_EVIDENCE.json;no provider or owner qualification.",
+      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements.",
+      "disposition": "Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.",
+      "action_now": "Next implementation milestones:explicit acquisition manifests for multiple inline documents,broader authoritative transform/schema/DRS fixtures,and source-evidenced accounting equivalence. Preserve completed bounded primary/history ingestion and product integration.",
+      "work_class": "PARTIAL:bounded primary/history ingestion and product contracts implemented;full statements,semantic conformance and observed historical completeness remain open",
+      "completed_this_session": "Strict acquired XHTML primary through existing inline-set parser;bounded historical discovery/planning and explicit shard ingestion;versioned immutable metadata recovery;restored DTS directory bindings;actual Company-v2 cross-language inline case. Seventeen new offline regressions.",
+      "remaining_implementation_or_qualification": "Acquisition manifests for multi-document inline sets;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;full Calculations1.1 rounding/duplicate conformance;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
@@ -720,8 +722,8 @@
         "terminal/web/src/itchSession.ts",
         "terminal/test_itch_source_product.py"
       ],
-      "test_evidence": "Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native\u2192TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json.",
-      "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration. This sprint also adds atomic private SEC-source revisions and lock-guarded restore without altering native checkpoint formats or claiming additional exchange cursor guarantees.",
+      "test_evidence": "Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native\u2192TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json. Current recovery source qualification:531guarded tests,6native recovery tests and8unchanged frozen references on fresh GCC Release;see EXECUTOR_RECOVERY_EVIDENCE.json. Other compiler evidence remains prior-source evidence.",
+      "explanation": "Full typed artifact/source restoration now integrates with explicit server-owned product selection,private immutable bundles,both native books,replay cursors,source/config/capture/generation/receipts and bounded continuation. Restore is paused;step consumes only a new event;failed candidate retains accepted owner;speed cannot revive terminal/failure state. Real source price/share units are exact. Actual background replay worker survives a classified source rejection. No unknown-schema,arbitrary-code-equivalence or observed completeness claim. The optional SDK now bridges the existing native byte0 plain/single-member-gzip coordinator into explicit private product continuation. Revision2 retains source/bundle/image hashes and cursor/capture/generation lineage;revision1 remains supported. Pending authored tails cannot be replaced silently. Repeated identical source is byte-idempotent;restoration remains paused. Public source-history counters use DECIMAL_STRINGS_V1 to preserve full u64 precision;private revision2 remains compatible and history boundaries must match native configuration. This sprint also adds atomic private SEC-source revisions and lock-guarded restore without altering native checkpoint formats or claiming additional exchange cursor guarantees. Current primary/history package adds explicit version2 SEC metadata checkpoints with offline reparsing and current-index/shard/directory bindings;native checkpoint formats and provider cursor assumptions remain unchanged.",
       "disposition": "Bounded authored version1 full-ITCH product-session engineering is implemented and offline verified. This broader row remains PARTIAL for unsupported semantic migration/recovery positions and actual observed-source/hardware guarantees;no obsolete missing product-wiring claim.",
       "action_now": "Do not reimplement SDK/source/product continuation. Partial/terminal/arbitrary compressed positions and unknown native schemas remain explicitly unsupported;additional contracts need specification/fixtures. Actual observed continuity and hardware/target evidence remain unqualified.",
       "work_class": "PARTIAL:bounded authored native/source hot recovery complete;full source/product/target scope remains open",
@@ -920,12 +922,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "7931641397878cb660f00c847cc5e38f175debc0",
+  "tested_application": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "ff0fcdcda7bb65a1669501fa5fe4f653a3ecb33d",
+  "previous_matrix_commit": "d96acca36cd16837201d6c0503808d8236363b49",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current source-bound evidence:MULTI_WORKSTREAM_EVIDENCE.json. Previous accuracy/source/whole-matrix evidence remains historical,not relabeled current acceptance.",
+  "evidence_policy": "Current bounded source/recovery evidence: EXECUTOR_RECOVERY_EVIDENCE.json. Earlier matrix evidence remains historical;no broader acceptance or status promotion.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -963,7 +965,8 @@
     "52fd5eddc210536c98c528d375006fcc12404e32",
     "45588bd2ab534ace9dc9d97def5c10adf212058a",
     "5e5d34f513cb9a9dd61764e8ec332e042f6384bc",
-    "7931641397878cb660f00c847cc5e38f175debc0"
+    "7931641397878cb660f00c847cc5e38f175debc0",
+    "63c7e94350f64411117af8a4fbcbb898f8f041f7"
   ],
   "date": "2026-11-13",
   "timezone": "America/New_York",
@@ -973,7 +976,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "ff0fcdcda7bb65a1669501fa5fe4f653a3ecb33d",
+  "starting_commit": "d96acca36cd16837201d6c0503808d8236363b49",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,

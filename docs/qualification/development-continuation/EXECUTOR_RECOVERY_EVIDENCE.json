@@ -1,0 +1,342 @@
+{
+  "schema": "gig.executor_recovery.evidence.v1",
+  "date": "2026-11-13",
+  "timezone": "America/New_York",
+  "starting_remote_commit": "d96acca36cd16837201d6c0503808d8236363b49",
+  "tested_implementation": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
+  "environment_id": "ccarenv_b64_Y2NhcmVudl9mZTg5ZmU4OThjYTg4MTkxOGE0OGU4MzMyZTljMGMxOA",
+  "executor_probe": {
+    "command": "pwd",
+    "exit_code": 0,
+    "stdout": "/workspace",
+    "status": "connected/running",
+    "failure": null
+  },
+  "original_checkout": {
+    "branch": "work",
+    "sha": "12f3a53943dc245e36f2cbbc35b9910fb21c0718",
+    "clean": true,
+    "preserved": true
+  },
+  "remote_default_before": {
+    "branch": "main",
+    "sha": "12f3a53943dc245e36f2cbbc35b9910fb21c0718"
+  },
+  "inaccessible_previous_workspace": "Not accessed or modified;its unavailable uncommitted state cannot be inspected here",
+  "native_configuration": {
+    "compiler": "GCC14.2.0",
+    "build_type": "Release",
+    "python": "3.12.14",
+    "source_enabled": true,
+    "warnings_as_errors": true,
+    "fresh_build": true,
+    "native_inputs_changed": false,
+    "sanitizers_run": false,
+    "arm64_run": false
+  },
+  "no_launch": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 531,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 531
+  },
+  "new_source_regressions": 17,
+  "focused_source_store_passed": 48,
+  "frontend_passed": 186,
+  "frontend_build_passed": true,
+  "native_recovery_passed": 6,
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "all_eight_unchanged": true,
+  "contracts": {
+    "v2": {
+      "application_started": false,
+      "assertions": 72,
+      "cases": 12,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "v1": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    }
+  },
+  "offline_cli": {
+    "checkpoint_sha256": null,
+    "collection_sha256": "dee942fa659f0b5d00e0fe71978b96d5181f51968c83d41833cbaef59984b18a",
+    "contact_disclosed": false,
+    "filings": 1,
+    "issuer_cik": "0000320193",
+    "origin": "HISTORICAL_SYNTHETIC",
+    "provider_requested": false,
+    "qualification_scope": "Bounded source admission;not full financial statements,independent source authentication or current listing/identity reconciliation",
+    "requests": 5,
+    "response_bytes": 4051,
+    "schema": "gig.sec.filing_ingestion.qualification.v1",
+    "statement_status": "AVAILABLE",
+    "status": "OFFLINE_FIXTURE_PASS",
+    "symbol": "AAPL",
+    "trading_enabled": false
+  },
+  "package_source": {
+    "source_commit": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
+    "tracked_files_verified": 1318,
+    "members": 1319,
+    "sha256": "55bc17a3b8116984b012b5a1eeda1ad4a4ee29b949e5ba65185ae0fd1f167e14",
+    "bytes": 8103611
+  },
+  "packages": [
+    {
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "bytes": 666813,
+      "sha256": "ae4e44be8442f9ebd661d262a907f8da46dc731e58b9ce70b9a70f26a6dd4c7a",
+      "built_from": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
+      "fresh_build": true,
+      "members": 22
+    },
+    {
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "bytes": 8103611,
+      "sha256": "55bc17a3b8116984b012b5a1eeda1ad4a4ee29b949e5ba65185ae0fd1f167e14",
+      "built_from": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
+      "fresh_build": true
+    }
+  ],
+  "installed_default_wheel": {
+    "consumer_passed": 8,
+    "source_store_passed": 48,
+    "v2_cases": 12,
+    "v2_assertions": 72,
+    "source": "Safely extracted,byte-checked sdist;installed target,not build-tree binding"
+  },
+  "source_files": [
+    {
+      "path": "docs/qualification/development-continuation/SEC_PRIMARY_AND_HISTORY.md",
+      "sha256": "81af10d944cb99e2b12c5a464d987a4891331fb413c57abe1a038a85a215e5e7"
+    },
+    {
+      "path": "terminal/stocks/sec_filing_ingest.py",
+      "sha256": "b8cd5979c88f67c7f2def769653cadc19cd71233737f20170cc60c876a31fb19"
+    },
+    {
+      "path": "terminal/stocks/sec_filing_schedule.py",
+      "sha256": "9febb00e23d7cd064d2844ff32451b3bff2635a29a882d48caceba0abd0eec96"
+    },
+    {
+      "path": "terminal/stocks/test_sec_filing_ingest.py",
+      "sha256": "c71f4b573c0cf1232303e00a5a470f002e7358065b33b476491b896e2f5d29f1"
+    },
+    {
+      "path": "terminal/stocks/test_sec_source_expansion.py",
+      "sha256": "93048f21847829067e88108c22494b7c2b0bbdc995ed4db04d95a893b7d0d8cc"
+    },
+    {
+      "path": "terminal/tests/check_xbrl_accuracy_contract.py",
+      "sha256": "343c6606020b66645c3f6f26524c450d7f0c706cef4517092bc4721cdb9d24d6"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "sha256": "75f5079a8c029430e171a7040f87d4b3c4679200e1f4dc6e761578f155d147aa"
+    },
+    {
+      "path": "terminal/tests/xbrl-accuracy-contract.mjs",
+      "sha256": "961b74bb9f6e5692a02c1b912c4fabba88b81c8aae6699a4eced25f425045ad9"
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/source-tests.log",
+      "bytes": 509,
+      "sha256": "d7048f8913051f7f9c0691610c3698a4f1c961b56aa92821555b17385e1ca5d5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/no-launch-final.log",
+      "bytes": 99426,
+      "sha256": "a661608a6cd14b8fd23b015a1acb27cbb5824344831f368993d9b7091717fd8a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "626f60179c52849c81b9d476f917c47a02709b843d220c1f881b9085dbee5a40"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/native-recovery.log",
+      "bytes": 960,
+      "sha256": "8ebc8da3d2cb25e1987f3e9a858cf70e28c8948d73cb1cb2117dd4edaa74daf1"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/frontend.log",
+      "bytes": 17526,
+      "sha256": "80c1363c30263edc3e0d0c06041ee5d826e659be318302e1e0da47f8fa270dfe"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/frontend-build.log",
+      "bytes": 2427,
+      "sha256": "3e020bb78265366fa55623cd40f5b9c18bc422e2b23c0889c83b31b2514741a2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/v1-contract.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/v2-contract.log",
+      "bytes": 150,
+      "sha256": "1964a83cd46793ed85d40220168fa3e52bb7346e4cac468c8f1aaf28298ee65c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/cli.log",
+      "bytes": 613,
+      "sha256": "83d83b73a064871ad273e985a959f01014ec580d0b12ee4e07e190f6a0d42e8b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/archive-check.json",
+      "bytes": 219,
+      "sha256": "d8842d7a25786941d016071ce3551f59f269ec542c48b7fa7a453e571c1edfc6"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "1d820a11c4224ae8ccf1da66517161bea5266cb1e1c6bc563eef96d78716e659"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/install.log",
+      "bytes": 468,
+      "sha256": "e71e1bdd92a4610fa9d4768fdf00112a6ef5a8f02533882dbdbb6e7d3dec392f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/installed-consumer.log",
+      "bytes": 964,
+      "sha256": "bca84993f92faeb572c6f98da7b8af97e242fe4e62848710ca0d86cce3aa41ca"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/installed-source.log",
+      "bytes": 549,
+      "sha256": "fdce8d95af3df615f0049bf3551e77b251a555db22450f9b2f06e05a63044f8c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "1964a83cd46793ed85d40220168fa3e52bb7346e4cac468c8f1aaf28298ee65c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/pip-check.log",
+      "bytes": 30,
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/configure.log",
+      "bytes": 1038,
+      "sha256": "2f6ced5d8adb8ff0dc90230fb53c30463ea1043b12fe7ba4ffc703af01384dac"
+    },
+    {
+      "path": "docs/qualification/development-continuation/executor-recovery-evidence/native-build.log",
+      "bytes": 9488,
+      "sha256": "c782d21f08bd78443df24bca7859e28d5c5a41a053c7798cdef1f28d7e56d01f"
+    }
+  ],
+  "restrictions": {
+    "application_started": false,
+    "application_servers": false,
+    "live_providers_contacted": false,
+    "deployment": false,
+    "trade": false,
+    "owner_acceptance": false,
+    "paid_development": false
+  },
+  "matrix_status_counts": {
+    "COMPLETE": 34,
+    "PARTIAL": 8,
+    "BLOCKED": 7,
+    "NOT APPLICABLE": 1
+  },
+  "scope": "One fresh native Release profile;prior cross-compiler/sanitizer/target evidence is historical. No broader semantics,complete history or accounting-equivalence acceptance inferred."
+}
