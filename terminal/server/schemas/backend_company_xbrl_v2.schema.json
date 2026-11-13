@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"gig.backend.company_xbrl.v2",
+  "title":"Opt-in source-scoped extension and reported-accuracy statement view",
+  "type":"object",
+  "required":["schema","profile","instrument","data_origin","read_only","provider_requested","statement_view","sha256"],
+  "properties":{
+    "schema":{"const":"gig.backend.company_xbrl.v2"},
+    "profile":{"const":"accuracy-extension-v2"},
+    "read_only":{"const":true},"provider_requested":{"const":false},
+    "sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},
+    "data_origin":{"enum":["HISTORICAL_SYNTHETIC","OBSERVED_OFFICIAL_RESPONSE","UNAVAILABLE"]},
+    "statement_view":{"type":"object","required":["schema","profile","source_contexts","source_units","periods","status","complete_statements","sha256"],"properties":{
+      "schema":{"const":"gig.sec.xbrl.statement_view.v2"},"profile":{"const":"accuracy-extension-v2"},
+      "complete_statements":{"const":false},"status":{"enum":["AVAILABLE","UNAVAILABLE","AMBIGUOUS"]},
+      "periods":{"type":"array","maxItems":12},"source_contexts":{"type":"object","maxProperties":512},"source_units":{"type":"object","maxProperties":128}
+    }}
+  },
+  "description":"Envelope documentation. Strict relational,numeric,source and interval checks live in xbrl_statement_v2,xbrl_accuracy and the browser xbrlAccuracy validator. No complete schema/accounting/source authentication claim. V1 remains default and rejects this distinct schema."
+}
