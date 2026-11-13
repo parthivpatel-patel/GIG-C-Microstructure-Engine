@@ -1,32 +1,25 @@
-# GIG continuation checkpoint — November 13, 2026
+# GIG preserved engineering checkpoint — November 13,2026
 
-Branch development/gig-ui-redesign. Requested baseline2643284. Recovery found
-pushedae0d841 and preserved all surviving backend/partial frontend. No reset,
-branch recreation,discard or protected-branch modification.
+Branch development/gig-ui-redesign;startingff0fcdcda7bb65a1669501fa5fe4f653a3ecb33d.
+Final tested/pushed runtime7931641397878cb660f00c847cc5e38f175debc0. Final report-only
+SHA is obtained from Git/remote. Five published packages:44e0eee embedded linkbases;
+52fd5ed source/DTS acquisition+private revisions;45588bd duplicate/source UI;
+5e5d34f preserved CLI;7931641 concurrent-restore and early-input-validation repairs.
+No reset,discard,new branch,protected merge or owner-config mutation.
 
-Final tested/pushed runtime:5c77178e4ad75b47b5da3440a63b64e929b28a0f. Enclosing final
-report-only SHA is obtained from Git/remote receipt. Published:ae0d841 exact bounded
-accuracy primitive;dc772ce opt-in backend/v2structural extension mapping;b9a5f90
-frontend profiles/intervals/provenance and actual TypeScript checker;19fe821
-reproduced embedded-linkbase omission repair (explicit unavailable,not silent absence);
-5c77178 explicit rejection of ignored CLI profile requests.
+Final514guarded cases per5bindings (2,570outcomes),0failures/errors/skips;
+261XML/source cases;186frontend/TSC/Vite;11v2cases/65assertions+8v1/58.
+Native recovery35and48frozen outcomes actually reran across6compiler profiles;
+all8hashes unchanged. Native/core/SDK/build inputs unchanged after those runs.
+Clean runtime archive1,315members/1,314tracked contents;installed default/source
+SDK consumers/recovery/XML/native contracts passed. Wheels explicitly reused from
+byte-equivalent7aea334 inputs;not newly built wheels. See REPORT.md,
+MULTI_WORKSTREAM_EVIDENCE.json and PACKAGE_CURRENT.json for receipts and limitations.
 
-Final457guarded cases per5supported configurations (2,285outcomes),0failures/errors/
-skips;204XBRL;184frontend tests/TSC/Vite;10v2cases/57assertions plus8v1cases/58assertions.
-Native focused6/6/6GCC,6/6/5Clang andall8frozen identities in6profiles ran at19fe821;
-final native/frontend inputs remain byte-identical after the CLI-only repair. Clean
-archive1,302members/1,301tracked files matched;default/source SDK8+55/66recovery+
-204XML+28/35native,58v1 and57v2assertions. SDK wheels explicitly reused from verified
-byte-equivalent7aea334inputs. See REPORT.md,ACCURACY_EXTENSION_EVIDENCE.json and
-PACKAGE_CURRENT.json for exact source/log/sanitizer/artifact scope.
-
-No application/server/browser/provider/account/trade/deployment/workflow/paid resource
-started. No observed source/owner credentials processed. Native ARM64,owner-private
-target/device,empirical/hardware qualification remain unverified.
-
-50rows =49areas+historicaldecision:34COMPLETE/8PARTIAL/7BLOCKED/1NA. Full scope remains
-incomplete. Next:authoritative rounding/duplicate semantics outside the conservative
-profile,embedded/DTS/DRS or evidence-backed accounting mapping/source integration.
-Current extension mapping is supplied structural evidence,not guessed GAAP aliases.
-Keep no-launch/no-provider/private observation-only restrictions,unsupported recovery
-fail-closed and Kraken provisional. Do not reimplement completed profile/contracts.
+34COMPLETE/8PARTIAL/7BLOCKED/1NA (49areas+1historicaldecision). Full scope incomplete.
+Next bounded engineering:inline-primary source manifest/acquisition and older SEC
+shard scheduler,or precisely scoped broader schema/DRS/inline conformance. Preserve
+structural extensions without guessed accounting aliases;Kraken stays provisional.
+Unknown native/source cursor/schema contracts stay fail-closed. No application,
+provider/account connection,server,browser,workflow,trade,deployment or paid resource
+is authorized. Owner-target,real source,ARM64/device/security qualification pending.
