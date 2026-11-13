@@ -34,7 +34,20 @@ class StockWorkspace:
         from .alpaca_reference import AssetReference
         self.asset_reference=AssetReference(self)
         self.market_history_cache=OrderedDict();self.market_history_pending=0
-        self.xbrl_collections={}
+        self.xbrl_collections={};self.filing_ingestors={}
+    def create_sec_filing_ingestor(self,symbol,*,transport=None,enabled=False,allow_observed=False,permission_reference=None,taxonomy_urls=(),receipt_clock=None,sleep=None,random_source=None):
+        from .sec_filing_ingest import FilingIngestor
+        identity=self.resolve(symbol)
+        if identity.get('cik')is None:raise AccessError('sec_issuer_identity_unavailable')
+        if symbol in self.filing_ingestors or len(self.filing_ingestors)>=8:raise AccessError('sec_ingestor_registration_budget')
+        options={k:v for k,v in {'receipt_clock':receipt_clock,'sleep':sleep,'random_source':random_source}.items()if v is not None}
+        coordinator=FilingIngestor(identity['cik'],transport=transport,permission=lambda:self.permission('sec'),enabled=enabled,origin=self.origin,allow_observed=allow_observed,permission_reference=permission_reference,taxonomy_urls=taxonomy_urls,clock=self.clock,rate_owner=self,**options)
+        self.filing_ingestors[symbol]=coordinator
+        return coordinator
+    def install_sec_filing_result(self,symbol):
+        coordinator=self.filing_ingestors.get(symbol)
+        if coordinator is None or coordinator.state not in('ACCEPTED','PAUSED_RESTORED'):raise AccessError('sec_ingestor_result_not_admitted')
+        return self.admit_xbrl_collection(symbol,coordinator.collection)
     def admit_xbrl_collection(self,symbol,collection):
         from .xbrl_product import admit
         return admit(self,symbol,collection)

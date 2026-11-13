@@ -61,3 +61,6 @@ test-results/
 
 # Independently gated future paper-provider audit state;never credentials
 .gig-paper-provider/
+
+# Explicitly approved private SEC filing/DTS ingestion revisions.
+.gig-sec-xbrl/
