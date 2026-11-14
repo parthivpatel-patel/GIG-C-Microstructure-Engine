@@ -29,7 +29,7 @@ newer state. Current schema/math restrictions remain explicit and conservative.
 Six lineage plus seven product tests cover originals/amendments,missing/future/
 unknown ancestry,same-time ambiguity,stale collection and output bounds,wrong/missing
 DTS,no older-source substitution,exact cutoff instants and deterministic identity.
-Actual Python-to-TypeScript checks cover4exports and9adversarial rejections,including
+Actual Python-to-TypeScript checks cover4exports and11adversarial rejections,including
 re-signed interval/provenance tampering and stripped amendment ancestry. Two actual
 leaf SSR tests exercise naming,read-only disclosure and unknown-issuer disablement;
 no application/server/browser is started. These checks do not establish full OIM,

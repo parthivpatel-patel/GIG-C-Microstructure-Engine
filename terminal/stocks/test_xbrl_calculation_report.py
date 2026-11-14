@@ -34,6 +34,9 @@ class ReportCalculationBinding(unittest.TestCase):
   for which in('parsed','graph'):
    a,b=copy.deepcopy((p,g));(a if which=='parsed'else b)['canonical_sha256']='0'*64
    with self.assertRaisesRegex(XBRLError,'identity'):bind_calculation_report(a,b)
+  for malformed in(None,False,12,[]):
+   bad=copy.deepcopy(g);bad['canonical_sha256']=malformed
+   with self.assertRaisesRegex(XBRLError,'dts_identity'):bind_calculation_report(p,bad)
   _,other=inputs(extension(value='399'))
   with self.assertRaisesRegex(XBRLError,'source_scope'):bind_calculation_report(p,other)
  def test_no_context_or_unit_cross_join_creates_a_sum(self):
