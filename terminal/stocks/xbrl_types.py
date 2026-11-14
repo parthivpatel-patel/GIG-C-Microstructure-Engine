@@ -13,7 +13,8 @@ PROFILE='NUMERIC_VALUE_FACETS_V1'
 COMPLEX_PROFILE='NUMERIC_SIMPLE_CONTENT_V2'
 WHITESPACE_PROFILE='NUMERIC_WHITESPACE_V3'
 ENUMERATION_PROFILE='NUMERIC_ENUMERATION_V4'
-PROFILES=(PROFILE,COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE)
+RESTRICTION_PROFILE='NUMERIC_RESTRICTION_CONSTRAINTS_V5'
+PROFILES=(PROFILE,COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE,RESTRICTION_PROFILE)
 MAX_OUTPUT_BYTES=8*1024*1024
 FACETS={'minInclusive','maxInclusive','minExclusive','maxExclusive','totalDigits','fractionDigits'}
 DECIMAL=re.compile(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)\Z')
@@ -56,14 +57,18 @@ def declaration(node):
    if n.children or n.text().strip()or set(n.attrs)-{'value','id','fixed'}or kind in seen or n.attrs.get('value')!='collapse'or n.attrs.get('fixed','false')not in('true','false','1','0'):
     result['unsupported'].append('WHITESPACE_FACET_UNSUPPORTED');continue
    seen.add(kind);result['facets'].append({'kind':kind,'value':'collapse','fixed':n.attrs.get('fixed','false')in('true','1')});continue
-  if kind not in FACETS or n.children or n.text().strip()or set(n.attrs)-{'value','id'}or kind in seen:
+  if kind not in FACETS or n.children or n.text().strip()or set(n.attrs)-({'value','id','fixed'}if kind in('totalDigits','fractionDigits')else{'value','id'})or kind in seen:
    result['unsupported'].append('FACET_OR_STRUCTURE_UNSUPPORTED');continue
   seen.add(kind);value=n.attrs.get('value')
   if type(value)is not str or len(value)>64:raise XBRLError('dts_type_facet_budget')
   if kind in('totalDigits','fractionDigits'):
    if not re.fullmatch('[0-9]{1,2}',value)or not (1 if kind=='totalDigits'else 0)<=int(value)<=64:raise XBRLError('dts_type_digit_facet')
   elif not DECIMAL.fullmatch(value):raise XBRLError('dts_type_numeric_facet')
-  result['facets'].append({'kind':kind,'value':value})
+  facet={'kind':kind,'value':value}
+  if 'fixed'in n.attrs:
+   if n.attrs['fixed']not in('true','false','1','0'):raise XBRLError('dts_type_fixed_boolean')
+   facet['fixed']=n.attrs['fixed']in('true','1')
+  result['facets'].append(facet)
   if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
  if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
  result['unsupported']=sorted(set(result['unsupported']));return result
@@ -76,14 +81,18 @@ def _resolve(name,definitions,profile):
   seen.add(current)
   if current.startswith('{'+XS+'}'):
    local=current.split('}',1)[1]
-   if local=='decimal'or local in INTEGER_BOUNDS:return current,path
+   if local=='decimal'or local in INTEGER_BOUNDS:
+    if profile==RESTRICTION_PROFILE:_restriction_constraints(current,path)
+    return current,path
   if current.startswith('{'+X+'}')and current.split('}',1)[1]in('decimalItemType','monetaryItemType','sharesItemType','pureItemType','integerItemType','nonNegativeIntegerItemType','positiveIntegerItemType'):
+   if profile==RESTRICTION_PROFILE:_restriction_constraints(current,path)
    return current,path
   entry=definitions.get(current)
   if entry is None or entry['declaration']['unsupported']or entry['declaration']['base']is None:raise XBRLError('dts_selected_type_unsupported')
-  if 'derivation'in entry['declaration']and profile not in(COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE):raise XBRLError('dts_selected_type_profile_unsupported')
-  if any(f['kind']=='whiteSpace'for f in entry['declaration']['facets'])and profile not in(WHITESPACE_PROFILE,ENUMERATION_PROFILE):raise XBRLError('dts_selected_whitespace_profile_unsupported')
-  if any(f['kind']=='enumeration'for f in entry['declaration']['facets'])and profile!=ENUMERATION_PROFILE:raise XBRLError('dts_selected_enumeration_profile_unsupported')
+  if 'derivation'in entry['declaration']and profile not in(COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE,RESTRICTION_PROFILE):raise XBRLError('dts_selected_type_profile_unsupported')
+  if any(f['kind']=='whiteSpace'for f in entry['declaration']['facets'])and profile not in(WHITESPACE_PROFILE,ENUMERATION_PROFILE,RESTRICTION_PROFILE):raise XBRLError('dts_selected_whitespace_profile_unsupported')
+  if any(f['kind']=='enumeration'for f in entry['declaration']['facets'])and profile not in(ENUMERATION_PROFILE,RESTRICTION_PROFILE):raise XBRLError('dts_selected_enumeration_profile_unsupported')
+  if any(f['kind']in('totalDigits','fractionDigits')and 'fixed'in f for f in entry['declaration']['facets'])and profile!=RESTRICTION_PROFILE:raise XBRLError('dts_selected_fixed_profile_unsupported')
   path.append({'type':current,**entry});current=entry['declaration']['base']
 
 def _numeric_lexical(lexical,base):
@@ -118,6 +127,30 @@ def _enumeration_definitions(base,path):
    lexical=facet['value'].strip(' \t\r\n');value=_numeric_lexical(lexical,base)
    _facet_checks(value,lexical,path[index+1:])
 
+def _restriction_constraints(base,path):
+ # Ancestors first: digit limits may narrow, never widen. Integer's built-in
+ # fractionDigits=0 is fixed. This remains bounded declaration corroboration.
+ local=base.split('}',1)[1].removesuffix('ItemType');integer=local in INTEGER_BOUNDS
+ digits={'fractionDigits':0}if integer else{};fixed={'fractionDigits':0}if integer else{}
+ for entry in reversed(path):
+  facets=entry['declaration']['facets'];by_kind={f['kind']:f for f in facets if f['kind']not in('enumeration','whiteSpace')}
+  if {'minInclusive','minExclusive'}<=by_kind.keys()or {'maxInclusive','maxExclusive'}<=by_kind.keys():raise XBRLError('dts_restriction_mutually_exclusive_bounds')
+  for kind in('totalDigits','fractionDigits'):
+   if kind not in by_kind:continue
+   facet=by_kind[kind];value=int(facet['value'])
+   if kind in fixed and value!=fixed[kind]:raise XBRLError('dts_restriction_fixed_digit')
+   if kind in digits and value>digits[kind]:raise XBRLError('dts_restriction_digit_widening')
+   digits[kind]=value
+   if facet.get('fixed'):fixed[kind]=value
+  if 'fractionDigits'in digits and 'totalDigits'in digits and digits['fractionDigits']>digits['totalDigits']:raise XBRLError('dts_restriction_fraction_exceeds_total')
+  for f in facets:
+   if f['kind']in('minInclusive','minExclusive','maxInclusive','maxExclusive'):_numeric_lexical(f['value'],base)
+  lower=by_kind.get('minInclusive',by_kind.get('minExclusive'));upper=by_kind.get('maxInclusive',by_kind.get('maxExclusive'))
+  if lower and upper:
+   lo=Decimal(lower['value']);hi=Decimal(upper['value'])
+   if lo>hi:raise XBRLError('dts_restriction_reversed_bounds')
+   if lo==hi and(lower['kind']=='minExclusive'or upper['kind']=='maxExclusive'):raise XBRLError('dts_restriction_empty_interval_unsupported')
+
 def _value_check(fact,base,path,units):
  _enumeration_definitions(base,path)
  if fact['nil']:return
@@ -148,5 +181,6 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   records.append(record)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256')
  result['dts_corroboration']['numeric_value_validation']={'profile':profile,'facts':records,'scope':'Selected numeric values,known standard units and explicitly supported numeric derivations/facets only;not complete schema/DRS validation'}
+ if profile==RESTRICTION_PROFILE:result['dts_corroboration']['numeric_value_validation']['restriction_definition_validation']='BOUNDED_DIGITS_FIXED_AND_LOCAL_BOUNDS_V1'
  if len(canonical(result))>MAX_OUTPUT_BYTES:raise XBRLError('dts_type_output_budget')
  result['canonical_sha256']=digest(result);return result
