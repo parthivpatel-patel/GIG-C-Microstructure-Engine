@@ -55,8 +55,9 @@ class FilingCollection:
    if numeric_profile is not None:bound=corroborate(bound,graph,profile=numeric_profile)
    values.append(dimensions(bound,graph)if dimensional_profile is not None else bound)
   return self._commit_parsed(values)
- def ingest_inline_set_batch(self,entries,*,numeric_profile=None,dimensional_profile=None,embedded_profile=None):
-  from .inline_set import parse_document_set
+ def ingest_inline_set_batch(self,entries,*,numeric_profile=None,dimensional_profile=None,embedded_profile=None,transformation_profile=None):
+  from .inline_set import parse_document_set,TRANSFORMATION_PROFILE
+  if transformation_profile not in(None,TRANSFORMATION_PROFILE):raise XBRLError('inline_set_transformation_profile_unsupported')
   from .xbrl_dts import discover_inline_set
   from .xbrl_binding import bind_declarations
   from .xbrl_types import PROFILES,corroborate
@@ -76,7 +77,7 @@ class FilingCollection:
   if total>MAX_BATCH_BYTES:raise XBRLError('xbrl_batch_byte_budget')
   values=[]
   for entry in entries:
-   parsed=parse_document_set(entry['documents'],entry['concepts'],allow_observed=self.allow_observed)
+   parsed=parse_document_set(entry['documents'],entry['concepts'],allow_observed=self.allow_observed,transformation_profile=transformation_profile)
    if entry['taxonomy_documents']is not None:
     references=[doc['manifest']['permission_reference']for doc in sorted(entry['documents'],key=lambda d:d['uri'])]
     graph=discover_inline_set(parsed,entry['taxonomy_documents'],allow_observed=self.allow_observed,permission_references=references,embedded_profile=embedded_profile);parsed=bind_declarations(parsed,graph)

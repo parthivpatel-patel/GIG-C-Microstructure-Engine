@@ -12,9 +12,32 @@ from . import sec
 
 MAX_DOCUMENTS=8;MAX_SET_BYTES=8*1024*1024;MAX_NODES=60000;MAX_VALUE=16384;MAX_CHAIN=32;MAX_OUTPUT=8*1024*1024
 TRANSFORMS='http://www.xbrl.org/inlineXBRL/transformation/2015-02-26'
+TRANSFORMATION_PROFILE='REGISTRY_2015_NUMERIC_V2'
+ZERO_DASHES=frozenset('-\u058a\u05be\u2010\u2011\u2012\u2013\u2014\u2015\ufe58\ufe63\uff0d')
 PASSIVE={'span','div','p','b','i','strong','em','small','sup','sub','br','table','thead','tbody','tfoot','tr','td','th','ul','ol','li','a'}
 
-def _numeric(text,format_name,scale,sign):
+def _registry_numeric(text,format_name):
+ # Registry3 input datatypes use XML whiteSpace collapse, not Unicode-wide strip.
+ value=re.sub('[ \t\r\n]+',' ',text).strip(' ')
+ local=format_name.removeprefix('{'+TRANSFORMS+'}')
+ if format_name==tag(TRANSFORMS,'zerodash'):
+  if value not in ZERO_DASHES:raise XBRLError('inline_set_transform_lexical_subset')
+  return '0'
+ if format_name==tag(TRANSFORMS,'numdotdecimal'):
+  pattern=r'[0-9]{1,3}(?:[, \u00a0]?[0-9]{3})*(?:\.[0-9]+)?'
+ elif format_name==tag(TRANSFORMS,'numcommadecimal'):
+  pattern=r'[0-9]{1,3}(?:[. \u00a0]?[0-9]{3})*(?:,[0-9]+)?'
+ elif format_name==tag(TRANSFORMS,'numdotdecimalin'):
+  pattern=r'(?:[0-9]+(?:\.[0-9]+)?|(?:[0-9]{1,2}[, \u00a0])?(?:[0-9]{2}[, \u00a0])*[0-9]{3}(?:\.[0-9]+)?)'
+ else:raise XBRLError('inline_set_transform_unsupported')
+ if not re.fullmatch(pattern,value):raise XBRLError('inline_set_transform_lexical_subset')
+ value=value.replace(' ','').replace('\u00a0','')
+ return value.replace('.','').replace(',','.')if local=='numcommadecimal'else value.replace(',','')
+
+def _numeric(text,format_name,scale,sign,transformation_profile=None):
+ if len(text)>MAX_VALUE:raise XBRLError('inline_set_value_budget')
+ if transformation_profile==TRANSFORMATION_PROFILE and format_name is not None:
+  return transformed(_registry_numeric(text,format_name),scale,sign,max_scale=18)
  value=text.strip(' \t\r\n')
  if format_name is not None:
   if format_name==tag(TRANSFORMS,'numdotdecimal'):
@@ -42,7 +65,8 @@ def _text(node,*,nonnumeric):
   pending.extend(reversed(part.content or part.parts))
  return ''.join(parts)
 
-def parse_document_set(documents,concepts,*,allow_observed=False):
+def parse_document_set(documents,concepts,*,allow_observed=False,transformation_profile=None):
+ if transformation_profile not in(None,TRANSFORMATION_PROFILE):raise XBRLError('inline_set_transformation_profile_unsupported')
  if type(documents)is not list or not 1<=len(documents)<=MAX_DOCUMENTS:raise XBRLError('inline_set_document_budget')
  supplied={};total=0
  # Gate every supplied original before parsing any XML in the set.
@@ -120,7 +144,7 @@ def parse_document_set(documents,concepts,*,allow_observed=False):
   if nonnumeric or nil in('true','1'):
    if any(k in node.attrs for k in('scale','sign','format')):raise XBRLError('inline_set_nonnumeric_or_nil_transform')
    value=text
-  else:value=_numeric(text,format_name,scale,sign)
+  else:value=_numeric(text,format_name,scale,sign,transformation_profile)
   attrs={k:v for k,v in node.attrs.items()if k in('contextRef','unitRef','decimals','precision','id',tag(I,'nil'))}
   virtual.children.append(Node(name,attrs,node.ns,parts=[value],length=len(value)))
   trace={'kind':kind,'expanded_concept':name,'segments':segments,'extracted_text':text,'transformed_lexical':value,'format':format_name,'scale':scale if not nonnumeric else None,'sign':sign}
@@ -134,6 +158,9 @@ def parse_document_set(documents,concepts,*,allow_observed=False):
   old=fact.pop('source_fact_id');fact['inline_source_segments']=trace['segments'];fact['source_fact_id']=digest({'document_set_sha256':set_sha,'fact':fact});mapping[old]=fact['source_fact_id']
  for conflict in result['conflicts']:conflict['source_fact_ids']=[mapping[v]for v in conflict['source_fact_ids']]
  result['document_set']={'schema':'gig.sec.xbrl.document_set.v1','sha256':set_sha,'documents':sources,'resource_sources':[{'kind':r.name,**locations[id(r)]}for r in resources],'schema_references':refs,'profile':'DEFAULT_TARGET_IX11_SET_V1','facts':traces,'receipt_authority':'Original per-document receipts retained;aggregate receipt unknown','limitations':['Narrow2015numeric transforms only','No named targets,tuples,escaped HTML,nested facts or full DTS/schema validation','No inferred source coverage or complete financial statements']}
+ if transformation_profile is not None:
+  result['document_set']['transformation_profile']=transformation_profile
+  result['document_set']['limitations'][0]='Bounded Registry3 numeric functions only;not complete registry conformance'
  result['completeness']='BOUNDED_SUPPLIED_INLINE_SET_NOT_COMPLETE_SCHEMA_DRS_STATEMENTS_OR_HISTORY'
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('inline_set_output_budget')
  result['canonical_sha256']=digest(result);return result
