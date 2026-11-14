@@ -10,7 +10,7 @@ for(const [name,packet]of rows){
  if(name==='dimensioned'){assert.equal(s.periods.length,0);assert.ok(s.source_contexts.I.dimensions.length);assertions+=2;}
  if(name==='conflict'){assert.equal(s.periods[0].rows.at(-1).status,'CONFLICT');assertions++;}
  if(name==='unavailable'){assert.equal(s.status,'UNAVAILABLE');assertions++;}
- if(name==='ingestion'||name==='inline_ingestion'||name==='multidoc_ingestion'){assert.equal(p.source_ingestion.state,'ACCEPTED');assert.equal(p.source_ingestion.installed_collection_matches,true);assert.equal(p.source_ingestion.live_stream_connected,false);assertions+=3;}
+ if(name==='ingestion'||name==='inline_ingestion'||name==='multidoc_ingestion'||name==='registry_ingestion'||name==='registry_zero_ingestion'){assert.equal(p.source_ingestion.state,'ACCEPTED');assert.equal(p.source_ingestion.installed_collection_matches,true);assert.equal(p.source_ingestion.live_stream_connected,false);assertions+=3;}
  if(name==='conflict'){assert.equal(s.periods[0].rows.at(-1).duplicate_diagnostic.status,'OVERLAPPING_ACCURACY_AMBIGUOUS');assertions++;}
  const bad=structuredClone(p);bad.statement_view.collection_sha256='f'.repeat(64);await assert.rejects(verifyAccuracyXbrl(bad,'AAPL','0000320193'));assertions++;
  await assert.rejects(verifyAccuracyXbrl(p,'MSFT','0000789019'));assertions++;

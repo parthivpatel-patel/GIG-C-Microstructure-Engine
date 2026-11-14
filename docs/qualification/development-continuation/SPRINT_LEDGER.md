@@ -12,22 +12,23 @@ Published and remote-verified:
 |Filing-vintage exports/Stock Intelligence import|5ceedad49375a9a08a6e42cfdfbdf0cfa66833ee|8Python;3actual vintages,6cross-language adversarial rejections;TSC/Vite and186frontend|
 |Offline source-lock SBOM|b1ec288f4c5c538c27a22cb88bf5a761c0e4ed30|13adversarial checks;85components/7source inputs;no vulnerability clearance|
 
-Combined guarded developer cohort:588passed,zero failures/errors/skips. Source logs:
-work/master-sprint/no-launch.log. Exact evidence will be retained in the final report.
+Combined guarded developer cohort:601passed,zero failures/errors/skips. Source logs:
+work/master-sprint/final-no-launch.log. Exact evidence will be retained in the final report.
 
-Current next package: opt-in acquisition/recovery selection of the new transform
-profile. Preserve existing v1/v2/v3 emission and default legacy behavior. A worker
-owns sec_filing_ingest.py and a new focused test/doc; inspect actual Git changes
-before resuming and do not rerun patch scripts.
+Additional published package: explicit manifest-backed acquisition transform selection,
+00720c06a09074ff2b38666680cb4348696240c7;73focused tests,13new;version4
+immutable interpretation and no-socket private child restoration. Defaults unchanged.
 
-Parallel native developer validation: GCC Debug,Clang Debug,Clang Release focused
-source/durable recovery builds in build/master-*. Logs work/master-sprint/*. Prior
-Release/native identities and new integrated runtime still need final source-bound
-receipts. Do not label previous-source results as current compiler qualification.
+GCC Debug,Clang Debug,Clang Release focused source/durable recovery:2passed each.
+GCC Release:6focused recovery and8unchanged frozen identities. GCC ASan+UBSan:2passed.
+Company-v2:15cases/93assertions;v1:8cases/58assertions;new vintage contract:3entries/
+6adversarial rejections;actual native-to-TS:35assertions. Frontend186passed/TSC/Vite.
+SBOM13tests passed. PyPI12pin advisory/wheel review found no active advisories or
+integrity errors;current npm audit reported0vulnerabilities. Scope remains bounded,
+not deployed/OS/complete dependency clearance. No application/provider operation.
 
-Next integration gate: register all new tests,run final guarded cohort,old/new
-cross-language checks,eight frozen identities,ASan/UBSan focused recovery and
-clean-source packaging/installed consumers. Final report/matrix should preserve
+Next integration gate: clean-source packaging/installed consumers and retained
+current-source evidence. Runtime tests above are complete. Final report/matrix should preserve
 all50statuses until whole-row acceptance exists. Track seven external blockers
 separately. Do not dispatch workflows,start applications/servers,connect providers,
 deploy,trade or perform owner acceptance.
