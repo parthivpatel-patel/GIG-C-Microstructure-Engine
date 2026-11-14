@@ -35,8 +35,8 @@ class FilingCollection:
   if numeric_profile not in(None,*PROFILES):raise XBRLError('xbrl_numeric_profile_unsupported')
   from .xbrl_dts import EMBEDDED_PROFILE
   if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
-  from .xbrl_dimensions import PROFILE as DIMENSIONS,corroborate as dimensions
-  if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
+  from .xbrl_dimensions import PROFILES as DIMENSIONS,corroborate as dimensions
+  if dimensional_profile not in(None,*DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
   if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
   total=0
   for entry in entries:
@@ -53,7 +53,7 @@ class FilingCollection:
    graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=self.allow_observed,permission_reference=entry['manifest']['permission_reference'],embedded_profile=embedded_profile)
    bound=bind_declarations(parsed,graph)
    if numeric_profile is not None:bound=corroborate(bound,graph,profile=numeric_profile)
-   values.append(dimensions(bound,graph)if dimensional_profile is not None else bound)
+   values.append(dimensions(bound,graph,profile=dimensional_profile)if dimensional_profile is not None else bound)
   return self._commit_parsed(values)
  def ingest_inline_set_batch(self,entries,*,numeric_profile=None,dimensional_profile=None,embedded_profile=None,transformation_profile=None):
   from .inline_set import parse_document_set,TRANSFORMATION_PROFILE
@@ -64,8 +64,8 @@ class FilingCollection:
   if numeric_profile not in(None,*PROFILES):raise XBRLError('xbrl_numeric_profile_unsupported')
   from .xbrl_dts import EMBEDDED_PROFILE
   if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
-  from .xbrl_dimensions import PROFILE as DIMENSIONS,corroborate as dimensions
-  if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
+  from .xbrl_dimensions import PROFILES as DIMENSIONS,corroborate as dimensions
+  if dimensional_profile not in(None,*DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
   if type(entries)is not list or not 1<=len(entries)<=MAX_BATCH:raise XBRLError('xbrl_batch_budget')
   total=0
   for entry in entries:
@@ -82,7 +82,7 @@ class FilingCollection:
     references=[doc['manifest']['permission_reference']for doc in sorted(entry['documents'],key=lambda d:d['uri'])]
     graph=discover_inline_set(parsed,entry['taxonomy_documents'],allow_observed=self.allow_observed,permission_references=references,embedded_profile=embedded_profile);parsed=bind_declarations(parsed,graph)
     if numeric_profile is not None:parsed=corroborate(parsed,graph,profile=numeric_profile)
-    if dimensional_profile is not None:parsed=dimensions(parsed,graph)
+    if dimensional_profile is not None:parsed=dimensions(parsed,graph,profile=dimensional_profile)
    values.append(parsed)
   return self._commit_parsed(values)
  def _commit_parsed(self,values):

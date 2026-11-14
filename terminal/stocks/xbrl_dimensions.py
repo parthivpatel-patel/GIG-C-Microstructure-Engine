@@ -1,10 +1,12 @@
-"""Explicit single-role closed-hypercube corroboration,not complete DRS validity."""
+"""Explicit single-role direct-hypercube corroboration,not complete DRS validity."""
 import copy
 import re
 from collections import deque
 from urllib.parse import urljoin
 from .xbrl_instance import X,L,XL,tag,digest,canonical,XBRLError
 D='http://xbrl.org/2005/xbrldt';ARC='http://xbrl.org/int/dim/arcrole/';PROFILE='EXPLICIT_CLOSED_HYPERCUBE_V1'
+OPEN_PROFILE='DIRECT_EXPLICIT_HYPERCUBE_V2'
+PROFILES=(PROFILE,OPEN_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -43,10 +45,12 @@ def networks(linkbases,locators,*,node_provenance=False):
   for network in result:network['usable_for_restricted_profile']=False;network['issues'].append('MULTIPLE_DEFINITION_LINKS_UNSUPPORTED')
  return result
 
-def corroborate(parsed,dts):
+def corroborate(parsed,dts,*,profile=PROFILE):
+ if profile not in PROFILES:raise XBRLError('drs_profile_unsupported')
  if type(parsed)is not dict or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256')or type(dts)is not dict or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('drs_input_identity')
  if parsed.get('dts_corroboration',{}).get('dts_sha256')!=dts['canonical_sha256']:raise XBRLError('drs_binding_required')
  schemas={'gig.sec.xbrl.instance.v1':'gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.inline_set.v1':'gig.sec.xbrl.dimensional_inline_set.v1'}
+ if profile==OPEN_PROFILE:schemas={key:value[:-1]+'2'for key,value in schemas.items()}
  if parsed.get('schema')not in schemas:raise XBRLError('drs_derived_schema_unsupported_or_already_applied')
  nets=dts.get('definition',[])
  if not dts['structural_closure']or len(nets)!=1 or not nets[0]['usable_for_restricted_profile']:raise XBRLError('drs_profile_unsupported')
@@ -88,16 +92,21 @@ def corroborate(parsed,dts):
  for fact in parsed['facts']:
   if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
   assignments=[a for a in arcs if a['kind']=='all'and a['from']==fact['concept']]
-  if len(assignments)!=1 or not assignments[0]['closed']:raise XBRLError('drs_direct_closed_assignment_required')
+  if len(assignments)!=1 or profile==PROFILE and not assignments[0]['closed']:raise XBRLError('drs_direct_closed_assignment_required')
   assignment=assignments[0];cube=assignment['to'];declaration(fact['concept'],tag(X,'item'));declaration(cube,tag(D,'hypercubeItem'))
   axes=targets('hypercube-dimension',cube)
   if not axes or len(axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
   context=parsed['contexts'][fact['context_ref']]
   if context['opaque_segment']or any(d['kind']!='explicit'or d['context_element']!=assignment['context_element']for d in context['dimensions']):raise XBRLError('drs_context_profile_unsupported')
   given={d['dimension']:d['member']for d in context['dimensions']}
-  if set(given)-set(axes):raise XBRLError('drs_closed_extra_dimension')
+  extras=set(given)-set(axes)
+  if extras and assignment['closed']:raise XBRLError('drs_closed_extra_dimension')
+  # Open does not waive this conservative profile's requirement for a supplied,
+  # usable explicit declaration/domain for every additional reported dimension.
+  check_axes=sorted(set(axes)|extras)if profile==OPEN_PROFILE else axes
+  if len(check_axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
   defaults={}
-  for axis in axes:
+  for axis in check_axes:
    members,default=domain(axis)
    if axis in given:
     if given[axis]not in members:raise XBRLError('drs_member_outside_domain')
@@ -105,8 +114,11 @@ def corroborate(parsed,dts):
    elif default:defaults[axis]=default[0]
    else:raise XBRLError('drs_required_dimension_missing')
   record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'hypercube':cube,'context_element':assignment['context_element'],'used_defaults':defaults,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'};size+=len(canonical(record))+1
+  if profile==OPEN_PROFILE:
+   record.update(closed=assignment['closed'],extra_dimensions=sorted(extras));size+=len(canonical({'closed':record['closed'],'extra_dimensions':record['extra_dimensions']}))
   if size>8*1024*1024:raise XBRLError('drs_output_budget')
   records.append(record)
- result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']=schemas[parsed['schema']];result['dts_corroboration']['dimensional_validation']={'profile':PROFILE,'facts':records,'complete_drs_validation':False,'scope':'Single direct positive closed hypercube,one role,explicit dimensions and supplied domains/defaults only;no context/fact synthesis'}
+ result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']=schemas[parsed['schema']];result['dts_corroboration']['dimensional_validation']={'profile':profile,'facts':records,'complete_drs_validation':False,'scope':'Single direct positive closed hypercube,one role,explicit dimensions and supplied domains/defaults only;no context/fact synthesis'}
+ if profile==OPEN_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='Single direct positive open/closed hypercube,one role,supplied usable explicit dimensions/domains/defaults;open additional dimensions independently validated;no context/fact synthesis'
  if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
  result['canonical_sha256']=digest(result);return result
