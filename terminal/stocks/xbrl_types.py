@@ -11,7 +11,8 @@ from .xbrl_instance import X,ISO,tag,qname,digest,canonical,XBRLError
 XS='http://www.w3.org/2001/XMLSchema'
 PROFILE='NUMERIC_VALUE_FACETS_V1'
 COMPLEX_PROFILE='NUMERIC_SIMPLE_CONTENT_V2'
-PROFILES=(PROFILE,COMPLEX_PROFILE)
+WHITESPACE_PROFILE='NUMERIC_WHITESPACE_V3'
+PROFILES=(PROFILE,COMPLEX_PROFILE,WHITESPACE_PROFILE)
 MAX_OUTPUT_BYTES=8*1024*1024
 FACETS={'minInclusive','maxInclusive','minExclusive','maxExclusive','totalDigits','fractionDigits'}
 DECIMAL=re.compile(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)\Z')
@@ -40,6 +41,10 @@ def declaration(node):
   if n.name==tag(XS,'annotation'):continue
   if result.get('derivation')=='SIMPLE_CONTENT_EXTENSION':result['unsupported'].append('EXTENSION_ATTRIBUTES_OR_CONTENT_UNSUPPORTED');continue
   kind=n.name.removeprefix('{'+XS+'}')
+  if kind=='whiteSpace':
+   if n.children or n.text().strip()or set(n.attrs)-{'value','id','fixed'}or kind in seen or n.attrs.get('value')!='collapse'or n.attrs.get('fixed','false')not in('true','false','1','0'):
+    result['unsupported'].append('WHITESPACE_FACET_UNSUPPORTED');continue
+   seen.add(kind);result['facets'].append({'kind':kind,'value':'collapse','fixed':n.attrs.get('fixed','false')in('true','1')});continue
   if kind not in FACETS or n.children or n.text().strip()or set(n.attrs)-{'value','id'}or kind in seen:
    result['unsupported'].append('FACET_OR_STRUCTURE_UNSUPPORTED');continue
   seen.add(kind);value=n.attrs.get('value')
@@ -64,7 +69,8 @@ def _resolve(name,definitions,profile):
    return current,path
   entry=definitions.get(current)
   if entry is None or entry['declaration']['unsupported']or entry['declaration']['base']is None:raise XBRLError('dts_selected_type_unsupported')
-  if 'derivation'in entry['declaration']and profile!=COMPLEX_PROFILE:raise XBRLError('dts_selected_type_profile_unsupported')
+  if 'derivation'in entry['declaration']and profile not in(COMPLEX_PROFILE,WHITESPACE_PROFILE):raise XBRLError('dts_selected_type_profile_unsupported')
+  if any(f['kind']=='whiteSpace'for f in entry['declaration']['facets'])and profile!=WHITESPACE_PROFILE:raise XBRLError('dts_selected_whitespace_profile_unsupported')
   path.append({'type':current,**entry});current=entry['declaration']['base']
 
 def _value_check(fact,base,path,units):
@@ -88,6 +94,7 @@ def _value_check(fact,base,path,units):
  for entry in path:
   for f in entry['declaration']['facets']:
    kind=f['kind'];bound=f['value']
+   if kind=='whiteSpace':continue # Numeric lexical grammar rejects internal spaces after collapse.
    invalid=total_digits>int(bound)if kind=='totalDigits'else fraction_digits>int(bound)if kind=='fractionDigits'else value<Decimal(bound)if kind=='minInclusive'else value>Decimal(bound)if kind=='maxInclusive'else value<=Decimal(bound)if kind=='minExclusive'else value>=Decimal(bound)
    if invalid:raise XBRLError('dts_type_facet_violation')
 
