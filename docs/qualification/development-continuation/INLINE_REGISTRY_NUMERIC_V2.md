@@ -4,7 +4,8 @@
 and `FilingCollection.ingest_inline_set_batch(..., transformation_profile=...)`
 add an explicit numeric registry profile. The default supplied-set parser, plain
 inline parser, collection defaults and automatic acquisition profile stay unchanged.
-Automatic ingestion/checkpoint configuration does not yet select this new profile.
+Explicit manifest-backed acquisition can select it via transformation_profile; see
+SEC_TRANSFORMATION_PROFILE.md. Automatic/default acquisition stays unchanged.
 
 Authority reviewed November 13, 2026 (America/New_York): XBRL International,
 Transformation Rules Registry3, Recommendation26 February2015, input datatype and
