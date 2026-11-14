@@ -1,29 +1,29 @@
 {
-  "schema": "gig.package.current.v5",
-  "tested_source": "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29",
-  "evidence": "NOV14_SPRINT_EVIDENCE.json",
+  "schema": "gig.package.current.v6",
+  "tested_source": "1434ad4cca0cffa31bb7d5986ee27a75ae081aa5",
+  "evidence": "REPORT_BINDING_EVIDENCE.json",
   "archive": {
-    "source": "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29",
-    "members": 1444,
-    "tracked_files": 1443,
-    "bytes": 8320368,
-    "sha256": "b94d9aaceac77f97639d249f195384f7e4c259ea8e499f14c9da9b1adc26b083"
+    "source": "1434ad4cca0cffa31bb7d5986ee27a75ae081aa5",
+    "members": 1495,
+    "tracked_files": 1494,
+    "bytes": 8399260,
+    "sha256": "44285746f38a016a5e4c490b36263285df68a94c0485335ecdf3d4ef5bf5b12d"
   },
   "artifacts": [
     {
       "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-      "source": "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29",
+      "source": "1434ad4cca0cffa31bb7d5986ee27a75ae081aa5",
       "fresh_build": true,
       "bytes": 666813,
-      "sha256": "ce1158d69ae8c1daabb96143630c6091346c5ed6ba7824e65928a07d8701c2b6"
+      "sha256": "bd7c33d3070b78dda9adf9b04bef06a0a3a8aa488399cbcc1adfcd09596f7291"
     },
     {
       "name": "gig_microstructure-0.1.1.tar.gz",
-      "source": "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29",
+      "source": "1434ad4cca0cffa31bb7d5986ee27a75ae081aa5",
       "fresh_build": true,
-      "bytes": 8320368,
-      "sha256": "b94d9aaceac77f97639d249f195384f7e4c259ea8e499f14c9da9b1adc26b083"
+      "bytes": 8399260,
+      "sha256": "44285746f38a016a5e4c490b36263285df68a94c0485335ecdf3d4ef5bf5b12d"
     }
   ],
-  "note": "Fresh sdist/default wheel from clean byte-checked source. Later evidence-only reports are outside the archive."
+  "note": "Fresh sdist and default wheel from clean byte-checked source. Later evidence-only reports are outside the archive."
 }

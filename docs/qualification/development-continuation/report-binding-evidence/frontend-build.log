@@ -1,0 +1,17 @@
+
+> gig-institutional-terminal@0.1.0 build
+> tsc -b && vite build
+
+src/XbrlStatements.tsx(22,1108): error TS2552: Cannot find name 'symbol'. Did you mean 'Symbol'?
+src/XbrlStatements.tsx(22,1121): error TS2304: Cannot find name 'cik'.
+src/xbrlCalculationReport.ts(12,64): error TS2345: Argument of type 'I | null' is not assignable to parameter of type 'I'.
+  Type 'null' is not assignable to type 'I'.
+src/xbrlCalculationReport.ts(23,188): error TS2345: Argument of type 'I | null' is not assignable to parameter of type 'I'.
+  Type 'null' is not assignable to type 'I'.
+src/xbrlCalculationReport.ts(24,267): error TS2345: Argument of type 'I | null' is not assignable to parameter of type 'I'.
+  Type 'null' is not assignable to type 'I'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
