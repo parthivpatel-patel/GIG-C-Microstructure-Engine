@@ -1,6 +1,7 @@
 """Provisional Kraken-v2 shaped profile, independently authored fixtures only.
 
-Current official docs/terms access is blocked. This implementation is NOT a verified
+Official book/checksum documentation is partially reviewed; full protocol/terms
+qualification remains open. This implementation is NOT a verified
 live protocol claim. Native callback owns financial state; cache here is bounded
 wire-decimal text solely for candidate checksum validation. No inferred order IDs.
 """
@@ -148,12 +149,14 @@ class KrakenBookAdapter:
     }
 
     def __init__(self, apply_native: Callable, *, symbol='BTC/USD', price_scale=100,
-                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC'):
+                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC', ordered_updates=False):
         if (type(depth) is not int or depth != 10 or type(price_scale) is not int or
                 type(quantity_scale) is not int or not 1 <= price_scale <= 10**9 or
                 not 1 <= quantity_scale <= 10**9 or type(stale_ns) is not int or
                 not 1 <= stale_ns <= 60_000_000_000 or symbol not in ('BTC/USD', 'ETH/USD')):
             raise ProviderError('configuration')
+        if type(ordered_updates)is not bool:raise ProviderError('configuration')
+        self.ordered_updates=ordered_updates
         if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('origin')
         self.origin=origin
         self.apply_native = apply_native
@@ -268,7 +271,7 @@ class KrakenBookAdapter:
             seen = set()
             for item in levels:
                 price, qty, pt, qt = self._level(item)
-                if price in seen:
+                if price in seen and (snapshot or not self.ordered_updates):
                     raise ProviderError('duplicate_level')
                 seen.add(price)
                 if snapshot and qty == '0':
