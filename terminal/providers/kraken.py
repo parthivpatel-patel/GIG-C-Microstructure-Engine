@@ -17,6 +17,7 @@ import re
 import zlib
 from typing import Callable, AsyncIterator
 
+BOOK_SESSION_PROFILE = 'BOOK_SESSION_V1'
 MAX_PAYLOAD = 65536
 UINT64_MAX = 2**64 - 1
 PRICE_MAX = 2**63 - 1
@@ -149,7 +150,8 @@ class KrakenBookAdapter:
     }
 
     def __init__(self, apply_native: Callable, *, symbol='BTC/USD', price_scale=100,
-                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC', ordered_updates=False):
+                 quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC', ordered_updates=False,
+                 book_session_profile=None, book_request_id=None):
         if (type(depth) is not int or depth != 10 or type(price_scale) is not int or
                 type(quantity_scale) is not int or not 1 <= price_scale <= 10**9 or
                 not 1 <= quantity_scale <= 10**9 or type(stale_ns) is not int or
@@ -157,6 +159,13 @@ class KrakenBookAdapter:
             raise ProviderError('configuration')
         if type(ordered_updates)is not bool:raise ProviderError('configuration')
         self.ordered_updates=ordered_updates
+        if book_session_profile not in(None,BOOK_SESSION_PROFILE):raise ProviderError('book_session_profile')
+        if book_session_profile is None:
+            if book_request_id is not None:raise ProviderError('book_session_profile')
+        elif type(book_request_id)is not int or not 0<=book_request_id<=UINT64_MAX:
+            raise ProviderError('book_request_id')
+        self.book_session_profile=book_session_profile;self.book_request_id=book_request_id
+        self._book_generation=0;self._book_acknowledged=False
         if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('origin')
         self.origin=origin
         self.apply_native = apply_native
@@ -174,13 +183,24 @@ class KrakenBookAdapter:
         self.backoff_attempt = 0
         self.last_trade_snapshot = False
 
+    def book_subscription_request(self):
+        # Pure request construction;never opens a socket or changes permissions.
+        result={'method':'subscribe','params':{'channel':'book','symbol':[self.symbol],'depth':self.depth,'snapshot':True}}
+        if self.book_session_profile is not None:result['req_id']=self.book_request_id+self._book_generation
+        return result
+
     def connect(self):
+        if self.book_session_profile is not None:
+            generation=self._book_generation+1
+            if self.book_request_id+generation>UINT64_MAX:raise ProviderError('book_request_id_exhausted')
+            self._book_generation=generation;self._book_acknowledged=False
         self.state, self.reason = 'CONNECTING', 'awaiting_subscription'
         self.bids, self.asks = {}, {}
         self.last_digest, self.last_receive_ns, self.last_book_receive_ns = None, None, None
         self.trades.clear(); self.trade_ids.clear()
 
     def disconnected(self):
+        self._book_acknowledged=False
         self.state, self.reason = 'DISCONNECTED', 'transport_closed'
         self.bids, self.asks = {}, {}
         self.last_digest, self.last_receive_ns, self.last_book_receive_ns = None, None, None
@@ -211,12 +231,14 @@ class KrakenBookAdapter:
 
     def feed(self, raw: str, now_ns: int) -> dict:
         if type(now_ns) is not int or now_ns < 0 or (self.last_receive_ns is not None and now_ns < self.last_receive_ns):
+            if self.book_session_profile is not None:self._book_acknowledged=False
             self.rejected+=1
             self.state, self.reason = 'GAP_DETECTED', 'receive_clock_regression'
             raise ProviderError('receive_clock_regression')
         try:
             return self._feed(raw, now_ns)
         except (ProviderError, MemoryError):
+            if self.book_session_profile is not None:self._book_acknowledged=False
             self.rejected += 1
             self.state, self.reason = 'GAP_DETECTED', 'invalid_or_uncommitted_payload'
             raise
@@ -229,6 +251,7 @@ class KrakenBookAdapter:
             result = payload.get('result')
             if type(result) is not dict or result.get('channel') not in ('book', 'trade') or result.get('symbol') != self.symbol:
                 raise ProviderError('subscription_identity')
+            if result['channel']=='book' and self.book_session_profile is not None:return self._book_ack(payload,result,now_ns)
             if result['channel']=='book' and self.state not in ('LIVE','STALE'):
                 self.state, self.reason = 'SYNCHRONIZING', 'awaiting_valid_snapshot'
             return {'kind': 'acknowledgment', 'source_sequence': None}
@@ -242,6 +265,9 @@ class KrakenBookAdapter:
             return self._trade(payload, now_ns)
         if payload.get('channel') != 'book' or payload.get('type') not in ('snapshot', 'update'):
             raise ProviderError('unsupported_message')
+        if self.book_session_profile is not None:
+            if set(payload)!={'channel','type','data'}:raise ProviderError('book_envelope_fields')
+            if not self._book_acknowledged:raise ProviderError('book_acknowledgment_required')
         if type(payload.get('data')) is not list or len(payload['data']) != 1:
             raise ProviderError('one_symbol_batch_required')
         data = payload['data'][0]
@@ -317,6 +343,26 @@ class KrakenBookAdapter:
         self.state, self.reason = 'LIVE', 'authored_profile_validated_not_live_connectivity'
         self.backoff_attempt = 0
         self.snapshots, self.updates = next_snapshots, next_updates
+        return receipt
+
+    def _book_ack(self,payload,result,now_ns):
+        # Official response fields plus a deliberately restricted local negotiation.
+        if self.state not in('CONNECTING','SYNCHRONIZING','LIVE','STALE'):raise ProviderError('book_session_not_connecting')
+        if set(payload)-{'method','success','result','req_id','time_in','time_out'}:raise ProviderError('book_ack_fields')
+        if set(result)-{'channel','symbol','depth','snapshot','warnings'}or not {'channel','symbol','depth','snapshot'}<=set(result):raise ProviderError('book_ack_fields')
+        depth=bounded_integer(result['depth'],1000,'book_ack_depth')
+        if depth!=self.depth or result['snapshot']is not True:raise ProviderError('book_ack_options')
+        request=bounded_integer(payload.get('req_id'),UINT64_MAX,'book_ack_request_id')
+        if request!=self.book_request_id+self._book_generation:raise ProviderError('book_ack_request_id')
+        warnings=result.get('warnings',[])
+        if type(warnings)is not list or len(warnings)>16 or any(type(w)is not str or len(w)>256 or any(ord(c)<32 for c in w)for w in warnings):raise ProviderError('book_ack_warnings')
+        times={name:timestamp_ns(payload[name])for name in('time_in','time_out')if name in payload}
+        if set(times)=={'time_in','time_out'}and int(times['time_out'])<int(times['time_in']):raise ProviderError('book_ack_time_order')
+        receipt={'kind':'acknowledgment','source_sequence':None,'book_session_profile':self.book_session_profile,
+                 'request_id':str(request),'depth':depth,'snapshot':True,'warnings':list(warnings),
+                 'local_generation':str(self._book_generation),'source_times_ns':times}
+        self._book_acknowledged=True;self.last_receive_ns=now_ns
+        if self.state not in('LIVE','STALE'):self.state,self.reason='SYNCHRONIZING','awaiting_valid_snapshot'
         return receipt
 
     def _status(self,payload):
