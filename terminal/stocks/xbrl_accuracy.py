@@ -94,3 +94,118 @@ def duplicate_diagnostic(facts,*,values=None):
  if lo<=hi:result['intersection_interval']=_record(lo,hi)
  result['status']='NUMERICALLY_IDENTICAL'if len(numeric)==1 else'OVERLAPPING_ACCURACY_AMBIGUOUS'if lo<=hi else'DISJOINT_ACCURACY_DUPLICATES'
  return result
+
+# Additive calculation-only contract. Legacy enclosures/duplicate APIs above stay
+# conservative and unchanged. Callers must bind one OIM-compatible data point
+# (concept,entity,period,unit,dimensions) before supplying its source facts.
+CALCULATION_PROFILE='EXACT_CALCULATION_INTERVALS_V2'
+ROUNDING_MODES=('round-to-nearest','truncation')
+
+def _mode(value):
+ if type(value)is not str or value not in ROUNDING_MODES:raise XBRLError('calculation_rounding_mode')
+ return value
+
+def _interval(lo,hi,lc=True,uc=True):
+ return {'lower':rational(lo),'upper':rational(hi),'lower_closed':lc,'upper_closed':uc}
+
+def _read_calculation(value):
+ if type(value)is not dict or set(value)!={'lower','upper','lower_closed','upper_closed'}or type(value['lower_closed'])is not bool or type(value['upper_closed'])is not bool:raise XBRLError('calculation_interval_contract')
+ bounds=[]
+ for key in('lower','upper'):
+  r=value[key]
+  if type(r)is not dict or set(r)!={'numerator','denominator'}or type(r['numerator'])is not str or not re.fullmatch(r'-?[0-9]{1,512}',r['numerator'])or type(r['denominator'])is not str or not re.fullmatch(r'[0-9]{1,256}',r['denominator']):raise XBRLError('calculation_rational_contract')
+  den=int(r['denominator'])
+  if den<=0 or den>2*10**(MAX_EXPONENT+12):raise XBRLError('calculation_rational_budget')
+  rest=den
+  for factor in(2,5):
+   while rest%factor==0:rest//=factor
+  if rest!=1:raise XBRLError('calculation_interval_grid_unsupported')
+  bounds.append(Fraction(int(r['numerator']),den))
+ lo,hi=bounds;lc=value['lower_closed'];uc=value['upper_closed']
+ if lo>hi or lo==hi and not(lc and uc):raise XBRLError('calculation_empty_interval')
+ return lo,hi,lc,uc
+
+def _intersection(intervals):
+ lo=max(i[0]for i in intervals);hi=min(i[1]for i in intervals)
+ lc=all(i[2]for i in intervals if i[0]==lo);uc=all(i[3]for i in intervals if i[1]==hi)
+ return None if lo>hi or lo==hi and not(lc and uc)else(lo,hi,lc,uc)
+
+def calculation_enclosure(value,decimals=None,*,rounding_mode='round-to-nearest',nil=False):
+ """Exact rounded/truncated fact interval;not full report/OIM conformance."""
+ mode=_mode(rounding_mode);base=enclosure(value,decimals,nil=nil)
+ result={'profile':CALCULATION_PROFILE,'rounding_mode':mode,'status':base['status'],'reason':base['reason'],'reported_value':value,'declared_decimals':decimals,'effective_decimals':base['effective_decimals'],'interval':base['interval']}
+ if base['reason']=='NONCANONICAL_REPORTED_ACCURACY_UNSUPPORTED':
+  result.update(status='EXCESS_DIGITS',reason='DIGITS_IN_EXCESS_OF_DECLARED_PRECISION',error_code='calc11e:excessDigits');return result
+ if base['interval']is None or base['status']=='EXACT'or mode=='round-to-nearest':return result
+ v=_number(value);quantum=_power(-base['effective_decimals'])
+ result['interval']=_interval(v,v+quantum,True,False)if v>0 else _interval(v-quantum,v,False,True)if v<0 else _interval(-quantum,quantum,False,False)
+ return result
+
+def calculation_duplicates(facts,*,values=None,rounding_mode='round-to-nearest'):
+ """Intersect pre-bound data-point intervals;never select a reported value.
+
+ Differing original values remain visible. A compatible intersection is only a
+ calculation constraint,not an alias,financial fact or accounting reconciliation.
+ """
+ mode=_mode(rounding_mode)
+ if type(facts)is not list or not 1<=len(facts)<=8:raise XBRLError('calculation_duplicate_budget')
+ ids=set();numbers=set();results=[];nil=[]
+ for f in facts:
+  if type(f)is not dict or type(f.get('source_fact_id'))is not str or not 1<=len(f['source_fact_id'])<=64 or f['source_fact_id']in ids or type(f.get('nil'))is not bool:raise XBRLError('calculation_duplicate_identity')
+  id_=f['source_fact_id'];ids.add(id_)
+  if values is not None and(type(values)is not dict or id_ not in values):raise XBRLError('calculation_duplicate_values')
+  value=values[id_]if values is not None else f.get('value');nil.append(f['nil'])
+  r=calculation_enclosure(value,f.get('decimals'),rounding_mode=mode,nil=f['nil'])
+  if f.get('precision')is not None:r.update(status='UNAVAILABLE',reason='PRECISION_ATTRIBUTE_OUTSIDE_CALCULATION_PROFILE',interval=None)
+  if not f['nil']:numbers.add(_number(value))
+  results.append({'source_fact_id':id_,**r})
+ result={'profile':CALCULATION_PROFILE,'rounding_mode':mode,'status':'UNAVAILABLE','reason':None,'source_fact_ids':sorted(ids),'facts':results,'numeric_values_equal':len(numbers)==1 if numbers else None,'selected_reported_value':None,'interval':None,'policy':'Input facts must already bind one compatible data point;interval constraints never select or rewrite reported values'}
+ if any(r['status']=='EXCESS_DIGITS'for r in results):result.update(reason='DIGITS_IN_EXCESS_OF_DECLARED_PRECISION',error_code='calc11e:excessDigits');return result
+ if any(nil):result['reason']='NIL_ONLY'if all(nil)else'MIXED_NIL_CONFLICT';return result
+ if any(r['interval']is None for r in results):result['reason']='ACCURACY_UNAVAILABLE';return result
+ common=_intersection([_read_calculation(r['interval'])for r in results])
+ if common is None:
+  result.update(status='INCONSISTENT_DUPLICATES',reason='DISJOINT_FACT_VALUE_INTERVALS',error_code='oime:disallowedDuplicateFacts'if mode=='round-to-nearest'else'calc11e:disallowedDuplicateFactsUsingTruncation');return result
+ result.update(status='INTERVAL_COMPATIBLE',interval=_interval(*common));return result
+
+def calculation_consistency(parent,terms,*,rounding_mode='round-to-nearest'):
+ """Calculation arithmetic over pre-bound source intervals;no aspect inference."""
+ from .xbrl_relationships import number
+ mode=_mode(rounding_mode)
+ if type(terms)is not list or not 1<=len(terms)<=MAX_TERMS:raise XBRLError('calculation_term_budget')
+ concepts=set()
+ for t in terms:
+  if type(t)is not dict or type(t.get('concept'))is not str or not 1<=len(t['concept'])<=512:raise XBRLError('calculation_term_contract')
+  if t['concept']in concepts:raise XBRLError('calculation_duplicate_contributing_concept')
+  concepts.add(t['concept'])
+ result={'profile':CALCULATION_PROFILE,'rounding_mode':mode,'status':'INCOMPLETE','reason':None,'parent_interval':None,'weighted_sum_interval':None,'residual_interval':None,'terms':[],'source_fact_ids':[],'selected_reported_value':None,'policy':'Caller binds source-compatible concept/entity/period/unit/dimensions and effective arcs;no missing zeros,aggregation or reported-fact selection'}
+ proofs=[parent]+[t.get('accuracy')if type(t)is dict else None for t in terms]
+ if any(p is None for p in proofs):result['reason']='MISSING_OR_INELIGIBLE_FACT';return result
+ for p in proofs:
+  if type(p)is not dict or p.get('profile')!=CALCULATION_PROFILE or p.get('rounding_mode')!=mode:raise XBRLError('calculation_accuracy_profile_or_mode')
+  if type(p.get('source_fact_ids'))is not list or not 1<=len(p['source_fact_ids'])<=8 or any(type(i)is not str or not 1<=len(i)<=64 for i in p['source_fact_ids']):raise XBRLError('calculation_source_identity')
+  if len(set(p['source_fact_ids']))!=len(p['source_fact_ids']):raise XBRLError('calculation_source_identity')
+  if p.get('selected_reported_value')is not None or p.get('status')not in('INTERVAL_COMPATIBLE','UNAVAILABLE','INCONSISTENT_DUPLICATES')or (p.get('interval')is not None)!=(p['status']=='INTERVAL_COMPATIBLE'):raise XBRLError('calculation_accuracy_proof_contract')
+  result['source_fact_ids'].extend(p['source_fact_ids'])
+ result['source_fact_ids']=sorted(set(result['source_fact_ids']))
+ if any(p.get('interval')is None for p in proofs):
+  result.update(status='UNSUPPORTED_ACCURACY',reason='SOURCE_ACCURACY_OR_DUPLICATES_UNAVAILABLE')
+  codes=[p.get('error_code')for p in proofs if p.get('error_code')]
+  if codes:result['source_error_codes']=sorted(set(codes))
+  return result
+ lo=hi=Fraction(0);lc=uc=True
+ for term in terms:
+  if type(term.get('concept'))is not str or not 1<=len(term['concept'])<=512:raise XBRLError('calculation_concept_identity')
+  w=term.get('weight')
+  if type(w)is int:w=str(w)
+  w=number(w,'calculation_weight_contract')
+  if not w:raise XBRLError('calculation_zero_weight')
+  a,b,ac,bc=_read_calculation(term['accuracy']['interval'])
+  if w<0:a,b,ac,bc=b*w,a*w,bc,ac
+  else:a*=w;b*=w
+  lo+=a;hi+=b;lc&=ac;uc&=bc
+  result['terms'].append({'concept':term['concept'],'weight':rational(w),'source_fact_ids':term['accuracy']['source_fact_ids'],'weighted_interval':_interval(a,b,ac,bc)})
+ a,b,ac,bc=_read_calculation(parent['interval']);overlap=_intersection([(a,b,ac,bc),(lo,hi,lc,uc)])
+ result.update(status='CALCULATION_COMPATIBLE'if overlap is not None else'DEFINITELY_INCONSISTENT',parent_interval=_interval(a,b,ac,bc),weighted_sum_interval=_interval(lo,hi,lc,uc),residual_interval=_interval(a-hi,b-lo,ac and uc,bc and lc))
+ if overlap is None:result['error_code']='calc11e:inconsistentCalculationUsingRounding'if mode=='round-to-nearest'else'calc11e:inconsistentCalculationUsingTruncation'
+ return result
