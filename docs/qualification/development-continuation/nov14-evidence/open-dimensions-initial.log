@@ -1,0 +1,30 @@
+..E.........F.
+======================================================================
+ERROR: test_collection_integration_and_atomic_later_refusal (terminal.stocks.test_xbrl_open_dimensions.OpenDimensions.test_collection_integration_and_atomic_later_refusal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_open_dimensions.py", line 75, in test_collection_integration_and_atomic_later_refusal
+    c=FilingCollection('0000320193');c.ingest_dts_batch([opened()],dimensional_profile=OPEN_PROFILE);before=c.page();value=c.at_acceptance_time('2024-02-02T00:00:00Z')
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 39, in ingest_dts_batch
+    if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_dimensional_profile_unsupported
+
+======================================================================
+FAIL: test_v2_dimensional_proof_cannot_be_silently_relabeled_or_stripped (terminal.stocks.test_xbrl_open_dimensions.OpenDimensions.test_v2_dimensional_proof_cannot_be_silently_relabeled_or_stripped)
+----------------------------------------------------------------------
+terminal.stocks.xbrl_instance.XBRLError: xbrl_parsed_contract
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_open_dimensions.py", line 88, in test_v2_dimensional_proof_cannot_be_silently_relabeled_or_stripped
+    with self.assertRaisesRegex(XBRLError,'dimensional_result'):selected_financials(bad)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "dimensional_result" does not match "xbrl_parsed_contract"
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.052s
+
+FAILED (failures=1, errors=1)

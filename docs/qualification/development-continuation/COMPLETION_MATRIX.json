@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v16",
+  "schema": "gig.development.completion.v17",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -460,15 +460,18 @@
         "terminal/stocks/xbrl_vintages.py",
         "terminal/stocks/test_xbrl_vintages.py",
         "terminal/stocks/test_sec_transform_profile.py",
-        "terminal/web/src/xbrlVintages.ts"
+        "terminal/web/src/xbrlVintages.ts",
+        "terminal/stocks/test_xbrl_restriction_constraints.py",
+        "terminal/stocks/test_xbrl_open_dimensions.py",
+        "terminal/stocks/test_xbrl_calculation_intervals.py"
       ],
-      "test_evidence": "601guarded Python tests passed;60new tests across five packages (13SBOM separate);186frontend/TSC/Vite;15Company-v2cases/93assertions,8v1cases/58assertions;3vintages/6adversarial rejections;35actual native-to-TSassertions. 8frozen identities unchanged;GCC Release6focused andGCCDebug/ClangDebug/ClangRelease/GCCASan+UBSan2each. Fresh source/package and installed receipts:MASTER_SPRINT_EVIDENCE.json.",
-      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling.",
+      "test_evidence": "659guarded no-launch Python tests;186frontend/TSC/Vite;53schema,41DRS,62accuracy focused checks;15v2cases/93assertions,8v1cases/58assertions,3vintages/6rejections,35native-to-TSassertions. 8unchanged frozen native identities;GCC Release6andGCCDebug/ClangDebug/ClangRelease/GCCASan+UBSan2focused tests each. Fresh clean-source/default SDK:8consumer+401selectedsource checks. Exact receipts:NOV14_SPRINT_EVIDENCE.json.",
+      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling. Opt-in direct positive explicit open/closed hypercubeV2 now validates required and supplied extra dimensions/domains/defaults without consolidating dimensioned facts. Numeric restriction constraintsV5 validate fixed/inherited digits and local bound definitions,including nil. Additive exact calculation intervalV2 supports rounding/truncation endpoint arithmetic and duplicate constraints without fact selection;report/OIM aspect binding remains caller responsibility.",
       "disposition": "Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.",
-      "action_now": "Next bounded source contracts:broader typed/open DRS and schema derivation,full calculations/rounding semantics and source-evidenced accounting equivalence. Preserve explicit registry/enumeration profiles and vintage export. No complete-statement acceptance inferred.",
+      "action_now": "Next precise milestones:typed/inherited/negative/multi-role DRS,general schema derivation constraints,report-level calculation binding and source-evidenced accounting equivalence/complete statements. Preserve supported direct-open/digit/interval profiles and legacy defaults.",
       "work_class": "PARTIAL:bounded primary/history ingestion and product contracts implemented;full statements,semantic conformance and observed historical completeness remain open",
-      "completed_this_session": "12registry,14enumeration,8vintage and13acquisition-profile regressions;actual source-bound UI/Company-v2 export/import;legacy defaults and v1/v2/v3 remain compatible.",
-      "remaining_implementation_or_qualification": "Multi-document acquisition is implemented for the explicit default-target subset;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;full Calculations1.1 rounding/duplicate conformance;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.",
+      "completed_this_session": "12numeric restriction,16DRS and19exact interval regressions;current collection/selection and legacy identity compatibility verified.",
+      "remaining_implementation_or_qualification": "Multi-document acquisition is implemented for the explicit default-target subset;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;negative/multi-role/inherited/typed-domain and general DRS beyond the direct positive explicit open/closed subset;report-level OIM/aspect/network binding and full Calculations1.1 conformance beyond the bounded exact interval helpers;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
@@ -612,15 +615,16 @@
         "terminal/server/engine.py",
         "terminal/web/src/OrderBook.tsx",
         "terminal/l2_research.py",
-        "terminal/providers/test_kraken_ordered.py"
+        "terminal/providers/test_kraken_ordered.py",
+        "terminal/providers/test_kraken_book_session.py"
       ],
-      "test_evidence": "Official book/checksum documentation retrieved through web documentation tool;5new ordered-update fixtures and26targeted Kraken checks passed,included in554guarded tests. No provider request;Kraken still provisional.",
-      "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged. Partial official book/checksum review now supports opt-in ordered repeated-price updates with final checksum/native atomicity;defaults remain compatible. Full protocol/options/trade/status/session/usage reconciliation remains unverified.",
+      "test_evidence": "11new offline book-session fixtures,60focused Kraken/admin/recovery/differential/supervisor checks,inside659guarded tests. Exact request/generation/options/ack/freshness and rollback behavior verified;no feed/provider request. NOV14_SPRINT_EVIDENCE.json.",
+      "explanation": "Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged. Partial official book/checksum review now supports opt-in ordered repeated-price updates with final checksum/native atomicity;defaults remain compatible. Full protocol/options/trade/status/session/usage reconciliation remains unverified. New opt-in BOOK_SESSION_V1 requires explicit matching depth10/snapshot/request-generation acknowledgment before book admission,validates bounded optional metadata,and fences reconnect/stale-ack/rejection recovery. A pure request builder opens no transport. Defaults and ordered updates remain compatible.",
       "disposition": "Track the explicitly requested Kraken requirement without calling candidate fixtures an official verified adapter. No observed display,retention or connectivity is activated.",
       "completed_this_session": "Reproduced finite Decimal/scientific JSON rejection and concurrent2-worker/retry-cycle defects;fixed bounded exact conversion,serialization,cancel drain/re-admission fences,stable delivery retry reset and bounded jitter validation.",
-      "remaining_implementation_or_qualification": "Complete official depth/options/trade/status/session and usage reconciliation,source-versioned fixtures and later authorized observed-provider/product acceptance. Ordered-update subset alone is not complete official-adapter acceptance.",
+      "remaining_implementation_or_qualification": "Broader official depth/options/trade/status/full-session/usage reconciliation and actual authorized observed qualification. Local book negotiation and ordered updates are implemented but do not establish exchange sequence,backfill/losslessness or a fully verified live adapter.",
       "dependency": "Official book/checksum subset is readable through documentation tools;complete protocol and usage reconciliation plus actual authorized source qualification remain outstanding. Historical executor-host403 is not claimed as a current documentation-tool block.",
-      "action_now": "Continue source-versioned reconciliation of remaining protocol/options/trade/status/session/usage contracts;keep provisional status and no provider activation.",
+      "action_now": "Keep provisional status;continue source-specified remaining depth/trade/status/usage contracts and later independent provider/target qualification.",
       "effort_estimate": "1\u20133engineer-days for a bounded documented source-contract reconciliation/test package once authoritative material is available;live/owner qualification separate.",
       "work_class": "PARTIAL candidate engineering;official-contract and observed qualification externally unverified"
     },
@@ -933,12 +937,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+  "tested_application": "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "2edef0115f1d2a3f33ccabce87f5ad1505b07005",
+  "previous_matrix_commit": "a0ca1964175cae01c329510d651224b898a6fb77",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current bounded evidence:MASTER_SPRINT_EVIDENCE.json. Historical evidence retains source scope;no row status promoted.",
+  "evidence_policy": "Current bounded evidence:NOV14_SPRINT_EVIDENCE.json. Earlier evidence retains original source/date/configuration scope;no status promoted.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -987,9 +991,14 @@
     "b1ec288f4c5c538c27a22cb88bf5a761c0e4ed30",
     "d0ca6a64a2be28869249162f109d2eccd8cbc7e9",
     "00720c06a09074ff2b38666680cb4348696240c7",
-    "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4"
+    "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+    "a4cd92bbd5467f91f4a2b86b62c1304bdc82b32b",
+    "c42f35bae54ca01d3dc90b53faee010e038083b2",
+    "a4182a5f37eecd41999c896d24935549b6f5346a",
+    "9951eccbf36555f4ca19eb679ca2b716b4360ae7",
+    "3ac8e8eb46ed70310cae2a9fd8d1f34f21a57a29"
   ],
-  "date": "2026-11-13",
+  "date": "2026-11-14",
   "timezone": "America/New_York",
   "counts": {
     "COMPLETE": 34,
@@ -997,7 +1006,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "2edef0115f1d2a3f33ccabce87f5ad1505b07005",
+  "starting_commit": "a0ca1964175cae01c329510d651224b898a6fb77",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,
