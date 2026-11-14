@@ -6,7 +6,8 @@ from urllib.parse import urljoin
 from .xbrl_instance import X,L,XL,tag,digest,canonical,XBRLError
 D='http://xbrl.org/2005/xbrldt';ARC='http://xbrl.org/int/dim/arcrole/';PROFILE='EXPLICIT_CLOSED_HYPERCUBE_V1'
 OPEN_PROFILE='DIRECT_EXPLICIT_HYPERCUBE_V2'
-PROFILES=(PROFILE,OPEN_PROFILE)
+INHERITED_PROFILE='INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -50,13 +51,19 @@ def corroborate(parsed,dts,*,profile=PROFILE):
  if type(parsed)is not dict or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256')or type(dts)is not dict or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('drs_input_identity')
  if parsed.get('dts_corroboration',{}).get('dts_sha256')!=dts['canonical_sha256']:raise XBRLError('drs_binding_required')
  schemas={'gig.sec.xbrl.instance.v1':'gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.inline_set.v1':'gig.sec.xbrl.dimensional_inline_set.v1'}
- if profile==OPEN_PROFILE:schemas={key:value[:-1]+'2'for key,value in schemas.items()}
+ if profile in(OPEN_PROFILE,INHERITED_PROFILE):schemas={key:value[:-1]+('3'if profile==INHERITED_PROFILE else'2')for key,value in schemas.items()}
  if parsed.get('schema')not in schemas:raise XBRLError('drs_derived_schema_unsupported_or_already_applied')
  nets=dts.get('definition',[])
  if not dts['structural_closure']or len(nets)!=1 or not nets[0]['usable_for_restricted_profile']:raise XBRLError('drs_profile_unsupported')
  arcs=nets[0]['arcs'];concepts=dts['concepts'];adj={};domains={}
  if any(a['kind']=='notAll'for a in arcs):raise XBRLError('drs_not_all_unsupported')
- if len([a for a in arcs if a['kind']=='all'])!=1:raise XBRLError('drs_single_positive_assignment_required')
+ positive=[a for a in arcs if a['kind']=='all']
+ if profile!=INHERITED_PROFILE and len(positive)!=1:raise XBRLError('drs_single_positive_assignment_required')
+ if profile==INHERITED_PROFILE:
+  if not 1<=len(positive)<=64:raise XBRLError('drs_positive_assignment_budget')
+  keys=[(a['from'],a['to'])for a in positive]
+  if len(keys)!=len(set(keys)):raise XBRLError('drs_duplicate_positive_assignment')
+  positive=sorted(positive,key=lambda a:(a['from'],a['to'],a['context_element'],a['closed']))
  for arc in arcs:adj.setdefault((arc['kind'],arc['from']),set()).add(arc['to'])
  def declaration(name,group):
   value=concepts.get(name,{}).get('declaration',{})
@@ -88,12 +95,35 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   default=targets('dimension-default',axis)
   if len(default)>1 or default and default[0]not in members:raise XBRLError('drs_default_conflict_or_domain')
   domains[axis]=(members,default);return domains[axis]
- records=[];size=len(canonical(parsed))
- for fact in parsed['facts']:
-  if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
-  assignments=[a for a in arcs if a['kind']=='all'and a['from']==fact['concept']]
-  if len(assignments)!=1 or profile==PROFILE and not assignments[0]['closed']:raise XBRLError('drs_direct_closed_assignment_required')
-  assignment=assignments[0];cube=assignment['to'];declaration(fact['concept'],tag(X,'item'));declaration(cube,tag(D,'hypercubeItem'))
+ parents={};ancestor_cache={}
+ if profile==INHERITED_PROFILE:
+  for arc in arcs:
+   if arc['kind']=='domain-member':parents.setdefault(arc['to'],set()).add(arc['from'])
+ def ancestors(concept):
+  if concept in ancestor_cache:return ancestor_cache[concept]
+  found=set();pending=deque([concept])
+  while pending:
+   node=pending.popleft()
+   if node in found:continue
+   declaration(node,tag(X,'item'));found.add(node)
+   if len(found)>2048:raise XBRLError('drs_primary_item_budget')
+   pending.extend(sorted(parents.get(node,())))
+  # Directed cycles are invalid, but converging inheritance paths are legal.
+  degree={node:0 for node in found};children={node:set()for node in found};depth={node:0 for node in found}
+  for child in found:
+   for parent in parents.get(child,()):
+    degree[child]+=1;children[parent].add(child)
+  pending=deque(sorted(node for node in found if degree[node]==0));visited=0
+  while pending:
+   parent=pending.popleft();visited+=1
+   if depth[parent]>=32:raise XBRLError('drs_primary_item_depth')
+   for child in sorted(children[parent]):
+    degree[child]-=1;depth[child]=max(depth[child],depth[parent]+1)
+    if degree[child]==0:pending.append(child)
+  if visited!=len(found):raise XBRLError('drs_primary_item_cycle')
+  ancestor_cache[concept]=found;return found
+ def validate_assignment(fact,assignment):
+  cube=assignment['to'];declaration(fact['concept'],tag(X,'item'));declaration(assignment['from'],tag(X,'item'));declaration(cube,tag(D,'hypercubeItem'))
   axes=targets('hypercube-dimension',cube)
   if not axes or len(axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
   context=parsed['contexts'][fact['context_ref']]
@@ -101,24 +131,46 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   given={d['dimension']:d['member']for d in context['dimensions']}
   extras=set(given)-set(axes)
   if extras and assignment['closed']:raise XBRLError('drs_closed_extra_dimension')
-  # Open does not waive this conservative profile's requirement for a supplied,
-  # usable explicit declaration/domain for every additional reported dimension.
-  check_axes=sorted(set(axes)|extras)if profile==OPEN_PROFILE else axes
+  check_axes=sorted(set(axes)|extras)if profile in(OPEN_PROFILE,INHERITED_PROFILE)else axes
   if len(check_axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
   defaults={}
   for axis in check_axes:
    members,default=domain(axis)
+   if profile==INHERITED_PROFILE and assignment['from']in members:raise XBRLError('drs_primary_item_polymorphism')
    if axis in given:
     if given[axis]not in members:raise XBRLError('drs_member_outside_domain')
     if default and given[axis]==default[0]:raise XBRLError('drs_explicit_default_member')
    elif default:defaults[axis]=default[0]
    else:raise XBRLError('drs_required_dimension_missing')
-  record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'hypercube':cube,'context_element':assignment['context_element'],'used_defaults':defaults,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'};size+=len(canonical(record))+1
-  if profile==OPEN_PROFILE:
-   record.update(closed=assignment['closed'],extra_dimensions=sorted(extras));size+=len(canonical({'closed':record['closed'],'extra_dimensions':record['extra_dimensions']}))
+  return cube,defaults,extras,set(check_axes)
+ records=[];size=len(canonical(parsed))
+ for fact in parsed['facts']:
+  if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
+  if profile==INHERITED_PROFILE:
+   sources=ancestors(fact['concept']);assignments=[a for a in positive if a['from']in sources]
+   if not assignments:raise XBRLError('drs_positive_assignment_required')
+   if len(assignments)>16:raise XBRLError('drs_fact_assignment_budget')
+   if len({a['context_element']for a in assignments})!=1:raise XBRLError('drs_mixed_context_assignments_unsupported')
+   details=[];aggregate={};all_axes=set()
+   for assignment in assignments:
+    cube,defaults,extras,axes=validate_assignment(fact,assignment);all_axes.update(axes)
+    if len(all_axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
+    for axis,member in defaults.items():
+     if axis in aggregate and aggregate[axis]!=member:raise XBRLError('drs_default_conflict_or_domain')
+     aggregate[axis]=member
+    details.append({'primary_item':assignment['from'],'hypercube':cube,'context_element':assignment['context_element'],'closed':assignment['closed'],'used_defaults':defaults,'extra_dimensions':sorted(extras),'inherited':assignment['from']!=fact['concept']})
+   record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'context_element':assignments[0]['context_element'],'used_defaults':aggregate,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT','assignments':details}
+  else:
+   assignments=[a for a in arcs if a['kind']=='all'and a['from']==fact['concept']]
+   if len(assignments)!=1 or profile==PROFILE and not assignments[0]['closed']:raise XBRLError('drs_direct_closed_assignment_required')
+   assignment=assignments[0];cube,defaults,extras,_=validate_assignment(fact,assignment)
+   record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'hypercube':cube,'context_element':assignment['context_element'],'used_defaults':defaults,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'}
+   if profile==OPEN_PROFILE:record.update(closed=assignment['closed'],extra_dimensions=sorted(extras))
+  size+=len(canonical(record))+1
   if size>8*1024*1024:raise XBRLError('drs_output_budget')
   records.append(record)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']=schemas[parsed['schema']];result['dts_corroboration']['dimensional_validation']={'profile':profile,'facts':records,'complete_drs_validation':False,'scope':'Single direct positive closed hypercube,one role,explicit dimensions and supplied domains/defaults only;no context/fact synthesis'}
  if profile==OPEN_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='Single direct positive open/closed hypercube,one role,supplied usable explicit dimensions/domains/defaults;open additional dimensions independently validated;no context/fact synthesis'
+ if profile==INHERITED_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='One role,positive direct/transitively inherited explicit hypercubes with conjunctive validity;supplied usable domains/defaults only;no negative/typed/cross-role semantics or context/fact synthesis'
  if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
  result['canonical_sha256']=digest(result);return result
