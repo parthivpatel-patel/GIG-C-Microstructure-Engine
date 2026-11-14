@@ -1,0 +1,10 @@
+Executing <Task pending name='Task-2' coro=<MultiDocument.test_cancel_and_restore_lock_preserve_accepted_state() running at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:85> wait_for=<Future pending cb=[Task.task_wakeup()] created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:448> cb=[_run_until_complete_cb() at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:181] created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.107 seconds
+...Executing <Task finished name='Task-18' coro=<MultiDocument.test_eight_documents_are_accepted_and_advertised_total_is_bounded() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:109> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.228 seconds
+.Executing <Task finished name='Task-23' coro=<MultiDocument.test_manifest_order_preserved_but_canonical_set_values_do_not_change() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:26> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.184 seconds
+..Executing <Task finished name='Task-33' coro=<MultiDocument.test_primary_binding_and_manifest_removal_cannot_replace_collection() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:64> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.114 seconds
+.Executing <Task finished name='Task-38' coro=<MultiDocument.test_private_revision_child_process_restore_with_sockets_forbidden() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:90> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 1.211 seconds
+.....
+----------------------------------------------------------------------
+Ran 12 tests in 2.435s
+
+OK

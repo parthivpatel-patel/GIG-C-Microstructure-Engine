@@ -1,38 +1,27 @@
 {
-  "schema": "gig.package.current.v2",
-  "tested_source": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
-  "current_evidence": "EXECUTOR_RECOVERY_EVIDENCE.json",
-  "source_archive": {
-    "source_commit": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
-    "tracked_files_verified": 1318,
-    "members": 1319,
-    "sha256": "55bc17a3b8116984b012b5a1eeda1ad4a4ee29b949e5ba65185ae0fd1f167e14",
-    "bytes": 8103611
-  },
+  "schema": "gig.package.current.v3",
+  "tested_runtime": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+  "evidence": "CONTINUATION_EVIDENCE.json",
   "artifacts": [
     {
-      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-      "bytes": 666813,
-      "sha256": "ae4e44be8442f9ebd661d262a907f8da46dc731e58b9ce70b9a70f26a6dd4c7a",
-      "built_from": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
-      "fresh_build": true,
-      "members": 22
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+      "bytes": 8142134,
+      "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721"
     },
     {
-      "name": "gig_microstructure-0.1.1.tar.gz",
-      "bytes": 8103611,
-      "sha256": "55bc17a3b8116984b012b5a1eeda1ad4a4ee29b949e5ba65185ae0fd1f167e14",
-      "built_from": "63c7e94350f64411117af8a4fbcbb898f8f041f7",
-      "fresh_build": true
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "source": "349f1293d852ec3892a4d53d089de94dc9e856a6",
+      "bytes": 666813,
+      "sha256": "e638e9997c6d1b06b1408f79cf0fbbff6894a8cce3ff1c85a3f15887b9a7ed12"
     }
   ],
-  "installed_checks": {
-    "consumer_passed": 8,
-    "source_store_passed": 48,
-    "v2_cases": 12,
-    "v2_assertions": 72,
-    "source": "Safely extracted,byte-checked sdist;installed target,not build-tree binding"
+  "archive": {
+    "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+    "members": 1347,
+    "tracked_files": 1346,
+    "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721",
+    "sdk_inputs_unchanged_from_wheel_source": "349f1293d852ec3892a4d53d089de94dc9e856a6"
   },
-  "previous_package_receipt_commit": "d96acca36cd16837201d6c0503808d8236363b49",
-  "limitations": "Fresh default wheel and sdist;source-enabled native main cohort uses fresh build tree. No new ARM64/sanitizer/multi-compiler packaging qualification."
+  "wheel_note": "Freshly built at349f129;final efabe0f SDK/native/build inputs byte-identical. Final-source installed tests use the fresh wheel. Report-only evidence is newer than the archive."
 }

@@ -1,0 +1,6 @@
+.......Executing <Task finished name='Task-38' coro=<MultiDocument.test_private_revision_child_process_restore_with_sockets_forbidden() done, defined at /workspace/gig-development/work/accelerated/final-extracted/gig_microstructure-0.1.1/terminal/stocks/test_sec_multidoc.py:90> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.215 seconds
+..........................................................................................................
+----------------------------------------------------------------------
+Ran 113 tests in 4.252s
+
+OK

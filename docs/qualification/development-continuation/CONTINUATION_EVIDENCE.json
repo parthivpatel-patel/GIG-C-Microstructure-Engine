@@ -1,0 +1,331 @@
+{
+  "schema": "gig.accelerated.continuation.evidence.v1",
+  "starting_commit": "c7d6a023ba54910cca0c0909fb1ac59abc8ce8d1",
+  "tested_runtime": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+  "implementation_commits": [
+    "3233222fb00cf11b17989b8da898378f7ffec9c8",
+    "349f1293d852ec3892a4d53d089de94dc9e856a6",
+    "efabe0f26504e5f418f5929e5ae19a4554b8ec60"
+  ],
+  "no_launch": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 554,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 554
+  },
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "native_recovery": 6,
+  "native_asan_ubsan_recovery": 2,
+  "native_inputs_unchanged": true,
+  "frontend_tests": 186,
+  "v2": {
+    "application_started": false,
+    "assertions": 79,
+    "cases": 13,
+    "provider_requested": false,
+    "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+  },
+  "v1": {
+    "application_started": false,
+    "assertions": 58,
+    "cases": 8,
+    "provider_requested": false,
+    "schema": "gig.company_xbrl.offline_contract.v1"
+  },
+  "archive": {
+    "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+    "members": 1347,
+    "tracked_files": 1346,
+    "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721",
+    "sdk_inputs_unchanged_from_wheel_source": "349f1293d852ec3892a4d53d089de94dc9e856a6"
+  },
+  "packages": [
+    {
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+      "bytes": 8142134,
+      "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721"
+    },
+    {
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "source": "349f1293d852ec3892a4d53d089de94dc9e856a6",
+      "bytes": 666813,
+      "sha256": "e638e9997c6d1b06b1408f79cf0fbbff6894a8cce3ff1c85a3f15887b9a7ed12"
+    }
+  ],
+  "new_tests": {
+    "multidocument": 12,
+    "numeric_whitespace": 6,
+    "ordered_kraken": 5
+  },
+  "source_files": [
+    {
+      "path": "docs/qualification/development-continuation/KRAKEN_ORDERED_UPDATES.md",
+      "sha256": "51a90d770fb675ebcbafd2a061c6db01b62981b9513176c21c25c1a4553d34fe"
+    },
+    {
+      "path": "docs/qualification/development-continuation/MULTIDOCUMENT_ACQUISITION.md",
+      "sha256": "d4d01b5e449debce2b2ce6f44e0f6e2cd883935b9b57e78f5f1198ca0dd33cee"
+    },
+    {
+      "path": "docs/qualification/development-continuation/NUMERIC_WHITESPACE.md",
+      "sha256": "26a4865640cbbdeb61e4f21f8aa2b7b180be97fa0a86b0ce8f14af3d66ed66b8"
+    },
+    {
+      "path": "terminal/providers/kraken.py",
+      "sha256": "282c62548e435d1903e3a213914c5f745fcb02a82788de87ae9ca9a525fb45af"
+    },
+    {
+      "path": "terminal/providers/test_kraken_ordered.py",
+      "sha256": "ab319cd7f8f92499242172f4ef125c82f55d27b6076113b547b2aa1a613db7b9"
+    },
+    {
+      "path": "terminal/stocks/sec_filing_ingest.py",
+      "sha256": "ae9eea66de2195fc932bbc7c45205909a7624a19b78d067dbd725f1ee08ff650"
+    },
+    {
+      "path": "terminal/stocks/sec_inline_manifest.py",
+      "sha256": "43c2221a9777b25d0ad185c9284b76d9524c9712ccb688576b69cd18f7ae5926"
+    },
+    {
+      "path": "terminal/stocks/test_sec_multidoc.py",
+      "sha256": "3a856a7075669d042c7fd63d1a9de5c3b080eba0470c9a89f989c2d1630119a7"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_whitespace.py",
+      "sha256": "da030a11952e9dc4f67de3a1c82aa507c49b46acc7eb190c0c02d80b63b2deed"
+    },
+    {
+      "path": "terminal/stocks/xbrl_types.py",
+      "sha256": "19a0288a2444d5d5b687baafde2ad36e639c8860b8ae4f877fbe2de97d2b1f52"
+    },
+    {
+      "path": "terminal/tests/check_xbrl_accuracy_contract.py",
+      "sha256": "ae3f0a3e4f0018446b5efc52a3983377b17747bc8ddfc992bd8aca371ba35b02"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "sha256": "4fd303b6960b84d5e63b71e5e278251f9e615422270dcdcf67a35a8dd3f1bf01"
+    },
+    {
+      "path": "terminal/tests/xbrl-accuracy-contract.mjs",
+      "sha256": "81d2d971e6b749b3519c727f1d0945663e8122c856dcac27708d8ef0222012ae"
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/multidoc-baseline.log",
+      "bytes": 509,
+      "sha256": "4898b9065ac1981d9f2a4ddae6303f078ba839f7d985c400daafcf9954105cd4"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/multidoc.log",
+      "bytes": 6416,
+      "sha256": "d8a8750e4d7898724fac56876afb018a10ef1e220515d0abb98f5ea42365cb50"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/multidoc-final.log",
+      "bytes": 2167,
+      "sha256": "1c6382badce526ea9a280697f5d0c9907df6bdd2faa50be4ce5eed40d9a0fab0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/focused.log",
+      "bytes": 536,
+      "sha256": "857305bfac124ed6a1dfa48e071d62e10ae00203e0474b3f91a905e10f1a340b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/broad-final.log",
+      "bytes": 102381,
+      "sha256": "1acc836ff26b4cd8d1d1aac9d530a2e5d288ba991dabf0045c84f9b00bd2581a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/whitespace.log",
+      "bytes": 126,
+      "sha256": "662853b88d188aabbfef2d9339178ba32fc7143a0b3e11d5617cbdaa0e30d6a5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/final-549.log",
+      "bytes": 103473,
+      "sha256": "6f4ada35a0cf1199e3eebf13fe4da4ceb0a8c4518fa0c44e3f6527128017cbce"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/kraken-ordered.log",
+      "bytes": 125,
+      "sha256": "cc9a35303f57b0369b2e88a4c61310dd22599d0a196cc2ff2820e130d8753e22"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/final-554.log",
+      "bytes": 104394,
+      "sha256": "9670871db4eceea3c02fabb6450c07868d30ff1222ecac184ae430b3879fe026"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/frontend.log",
+      "bytes": 17537,
+      "sha256": "a47651813079059ac58818572031cae2d30c9e136f491617133ee78d52521b5d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/frontend-build.log",
+      "bytes": 2427,
+      "sha256": "d43cd96d37c7d7f6788440be70ffa37371a45c01756fe500ca50bba56c8155b9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "0b315cfcd3c34edfdf8925d9c0c1e70f55e80ad9af6817083d4441f76299a85d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/native-recovery.log",
+      "bytes": 960,
+      "sha256": "974831ae60a5078bbc0d36d0c1cf7c284359c966b9bf5a69928b2f7344e90856"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/sanitizer-configure.log",
+      "bytes": 673,
+      "sha256": "5e81f6aef931c15049fb7e1de923be258394c2d21db84090f9f9afb481ce4429"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/sanitizer-build.log",
+      "bytes": 2602,
+      "sha256": "5a1b8239866a9faec59727032fae13f5517456ba468c40d33ba4bf80d3674aeb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/sanitizer.log",
+      "bytes": 461,
+      "sha256": "7446420be95cfa58e4e9bbadd630c808af6a74edb057e422a5aec8114e81fa4e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/v1.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/v2-final.log",
+      "bytes": 150,
+      "sha256": "967cfd266310aced3a7165c9fa06a58b4669110c906251588f3d6777559b11ae"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/final-sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "100bc4e63e2ae6810d705ee1b6812d7be6707e83b9648780e5b4692116ea4af5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/final-archive.json",
+      "bytes": 271,
+      "sha256": "8ac2589ec10f90df3dc972ec4cc9e01aa1aefd64479e7228bde251db5d2cf40a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/archive.json",
+      "bytes": 183,
+      "sha256": "f5bd7bcd8622420275d9fc3ccf31cd6b16de50cebbe474e18844f8e1116d2ad2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/installed-consumer.log",
+      "bytes": 964,
+      "sha256": "24c457ff69e114d3269e5559f11cc3fce6909f32fcdf4fd363bcd45d7308f3d6"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/installed-source.log",
+      "bytes": 628,
+      "sha256": "d27facc3ce93e99291ae9292407d1242dc7255ad20bbe9a28691df71f4a9c84d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/accelerated-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "967cfd266310aced3a7165c9fa06a58b4669110c906251588f3d6777559b11ae"
+    }
+  ],
+  "scope": "No application/server/provider/deployment/trading/owner acceptance;Kraken remains provisional. One GCC Release/native binding plus two focused GCC ASan+UBSan tests;not cross-compiler or target qualification.",
+  "installed_default_wheel": {
+    "sdk_consumers": 8,
+    "final_source_integration": 113,
+    "v2_cases": 13,
+    "v2_assertions": 79,
+    "fresh_wheel_source": "349f1293d852ec3892a4d53d089de94dc9e856a6",
+    "final_sdist_source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+    "sdk_inputs_byte_equivalent": true
+  }
+}

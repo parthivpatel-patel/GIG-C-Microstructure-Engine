@@ -1,0 +1,80 @@
+* Getting build dependencies for wheel...
+* Building wheel...
+*** scikit-build-core 0.11.6 using CMake 3.31.6 (wheel)
+*** Configuring CMake...
+loading initial cache file /tmp/tmpbcsaonmy/build/CMakeInit.txt
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python3: /workspace/gig-development/work/venv/bin/python (found suitable version "3.12.14", minimum required is "3.9") found components: Interpreter Development.Module
+-- Performing Test HAS_FLTO
+-- Performing Test HAS_FLTO - Success
+-- Found pybind11: /workspace/gig-development/work/venv/lib/python3.12/site-packages/pybind11/include (found version "2.13.6")
+-- Configuring done (0.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/tmpbcsaonmy/build
+*** Building project with Ninja...
+[0/2] Re-checking globbed directories...
+[1/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/market_data/aggregate_depth.cpp.o
+[2/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/events/validation.cpp.o
+[3/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/book/order_book.cpp.o
+[4/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/replay/replay.cpp.o
+[5/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/replay/canonical.cpp.o
+[6/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/analytics/book_metrics.cpp.o
+[7/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/analytics/flow_metrics.cpp.o
+[8/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/simulation/simulator.cpp.o
+[9/38] Building CXX object CMakeFiles/gig_microstructure.dir/src/execution/execution.cpp.o
+[10/38] Linking CXX static library libgig_microstructure.a
+[11/38] Building CXX object CMakeFiles/gig_itch.dir/src/itch/binary_file.cpp.o
+[12/38] Building CXX object CMakeFiles/gig_itch.dir/src/itch/decoder.cpp.o
+[13/38] Linking CXX static library libgig_itch.a
+[14/38] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/context.cpp.o
+[15/38] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/context_checkpoint.cpp.o
+[16/38] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/sha256.cpp.o
+[17/38] Linking CXX static library libgig_itch_context.a
+[18/38] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/reconstruction.cpp.o
+[19/38] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/seed.cpp.o
+[20/38] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/restart.cpp.o
+[21/38] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/hot_checkpoint.cpp.o
+[22/38] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/hot_codec.cpp.o
+[23/38] Linking CXX static library libgig_itch_reconstruction.a
+[24/38] Building CXX object CMakeFiles/gig_itch_input_adapter.dir/src/itch/input_adapter.cpp.o
+[25/38] Linking CXX static library libgig_itch_input_adapter.a
+[26/38] Building CXX object CMakeFiles/gig_lobster.dir/src/lobster/adapter.cpp.o
+[27/38] Building CXX object CMakeFiles/gig_lobster.dir/src/lobster/reconstruction.cpp.o
+[28/38] Linking CXX static library libgig_lobster.a
+[29/38] Building CXX object CMakeFiles/gig_lobster_validate.dir/examples/lobster_validate.cpp.o
+[30/38] Linking CXX executable gig_lobster_validate
+[31/38] Building CXX object CMakeFiles/gig_engine_demo.dir/src/main.cpp.o
+[32/38] Linking CXX executable gig_engine_demo
+[33/38] Building CXX object CMakeFiles/_native.dir/python/bindings/module.cpp.o
+[34/38] Building CXX object CMakeFiles/_native.dir/python/bindings/depth.cpp.o
+[35/38] Building CXX object CMakeFiles/_native.dir/python/bindings/wire.cpp.o
+[36/38] Building CXX object CMakeFiles/_native.dir/python/bindings/schemas.cpp.o
+[37/38] Building CXX object CMakeFiles/_native.dir/python/bindings/itch_recovery.cpp.o
+[38/38] Linking CXX shared module python/gig_microstructure/_native.cpython-312-x86_64-linux-gnu.so
+*** Installing project into wheel...
+-- Install configuration: "Release"
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/_native.cpython-312-x86_64-linux-gnu.so
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/instrument_rules-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/flow_quote-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/replay_config-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/flow_config-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.execution_schedule-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.simulation_output-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/cost_config-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.event-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/simulation_config-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/flow_trade-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/plan_config-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.run_manifest-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.book_snapshot-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/schemas/gig.metric_result-v1.schema.json
+-- Installing: /tmp/tmpbcsaonmy/wheel/platlib/gig_microstructure/THIRD_PARTY_NOTICES.md
+*** Making wheel...
+*** Created gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl
+Successfully built gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl

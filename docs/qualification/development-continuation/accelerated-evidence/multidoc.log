@@ -1,0 +1,78 @@
+F.Task exception was never retrieved
+future: <Task finished name='Task-3' coro=<FilingIngestor.ingest() done, defined at /workspace/gig-development/terminal/stocks/sec_filing_ingest.py:211> exception=IngestError('sec_ingest_content_length') created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:420>
+source_traceback: Object created at (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/__main__.py", line 18, in <module>
+    main(module=None)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/main.py", line 105, in __init__
+    self.runTests()
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/main.py", line 281, in runTests
+    self.result = testRunner.run(self.test)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/runner.py", line 240, in run
+    test(result)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 84, in __call__
+    return self.run(*args, **kwds)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/suite.py", line 122, in run
+    test(result)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/case.py", line 690, in __call__
+    return self.run(*args, **kwds)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/async_case.py", line 132, in run
+    return super().run(result)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/case.py", line 634, in run
+    self._callTestMethod(testMethod)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/async_case.py", line 91, in _callTestMethod
+    if self._callMaybeAsync(method) is not None:
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/unittest/async_case.py", line 113, in _callMaybeAsync
+    return self._asyncioRunner.run(
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 1991, in _run_once
+    handle._run()
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/workspace/gig-development/terminal/stocks/test_sec_multidoc.py", line 85, in test_cancel_and_restore_lock_preserve_accepted_state
+    task=asyncio.create_task(c.ingest(ACC,inline_manifest=m,fresh=True));await asyncio.sleep(.001)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py", line 420, in create_task
+    task = loop.create_task(coro)
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/sec_filing_ingest.py", line 251, in ingest
+    key=instance if d['name']==name else await self._read(prefix+d['name'],accession,stage,budget,fresh=fresh)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/sec_filing_ingest.py", line 98, in _read
+    if not re.fullmatch('[0-9]{1,10}',length)or not 0<int(length)<=MAX_SOURCE:raise IngestError('sec_ingest_content_length')
+                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.sec_filing_ingest.IngestError: sec_ingest_content_length
+....Executing <Task finished name='Task-33' coro=<MultiDocument.test_private_revision_child_process_restore_with_sockets_forbidden() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:90> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.274 seconds
+.....
+======================================================================
+FAIL: test_cancel_and_restore_lock_preserve_accepted_state (terminal.stocks.test_sec_multidoc.MultiDocument.test_cancel_and_restore_lock_preserve_accepted_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_sec_multidoc.py", line 86, in test_cancel_and_restore_lock_preserve_accepted_state
+    with self.assertRaisesRegex(IngestError,'busy'):c.restore(before,hashlib.sha256(before).hexdigest())
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: IngestError not raised
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.389s
+
+FAILED (failures=1)

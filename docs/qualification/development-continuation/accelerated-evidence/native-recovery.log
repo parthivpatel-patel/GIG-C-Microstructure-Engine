@@ -1,0 +1,18 @@
+Internal ctest changing into directory: /workspace/gig-development/build/recovery-release
+Test project /workspace/gig-development/build/recovery-release
+    Start  40: itch.source_hot_recovery
+1/6 Test  #40: itch.source_hot_recovery ................   Passed    0.03 sec
+    Start  41: itch.durable_checkpoint
+2/6 Test  #41: itch.durable_checkpoint .................   Passed    0.04 sec
+    Start  42: itch.hot_context_checkpoint
+3/6 Test  #42: itch.hot_context_checkpoint .............   Passed    0.03 sec
+    Start  43: itch.reconstruction_checkpoint
+4/6 Test  #43: itch.reconstruction_checkpoint ..........   Passed    0.02 sec
+    Start  46: itch.reconstruction_recovery_boundary
+5/6 Test  #46: itch.reconstruction_recovery_boundary ...   Passed    0.00 sec
+    Start 103: replay.hot_checkpoint
+6/6 Test #103: replay.hot_checkpoint ...................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Total Test time (real) =   0.13 sec

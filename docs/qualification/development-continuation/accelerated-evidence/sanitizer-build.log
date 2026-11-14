@@ -1,0 +1,31 @@
+[1/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/market_data/aggregate_depth.cpp.o
+[2/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/events/validation.cpp.o
+[3/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/book/order_book.cpp.o
+[4/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/replay/canonical.cpp.o
+[5/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/replay/replay.cpp.o
+[6/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/analytics/book_metrics.cpp.o
+[7/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/analytics/flow_metrics.cpp.o
+[8/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/simulation/simulator.cpp.o
+[9/31] Building CXX object CMakeFiles/gig_itch.dir/src/itch/binary_file.cpp.o
+[10/31] Building CXX object CMakeFiles/gig_itch.dir/src/itch/decoder.cpp.o
+[11/31] Linking CXX static library libgig_itch.a
+[12/31] Building CXX object CMakeFiles/gig_microstructure.dir/src/execution/execution.cpp.o
+[13/31] Linking CXX static library libgig_microstructure.a
+[14/31] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/context.cpp.o
+[15/31] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/sha256.cpp.o
+[16/31] Building CXX object CMakeFiles/gig_itch_context.dir/src/itch/context_checkpoint.cpp.o
+[17/31] Linking CXX static library libgig_itch_context.a
+[18/31] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/reconstruction.cpp.o
+[19/31] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/seed.cpp.o
+[20/31] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/restart.cpp.o
+[21/31] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/hot_checkpoint.cpp.o
+[22/31] Building CXX object CMakeFiles/gig_itch_streaming.dir/src/itch/gzip.cpp.o
+[23/31] Building CXX object CMakeFiles/gig_itch_streaming.dir/src/itch/streaming.cpp.o
+[24/31] Building CXX object CMakeFiles/gig_itch_streaming.dir/src/itch/source_recovery.cpp.o
+[25/31] Building CXX object CMakeFiles/gig_itch_reconstruction.dir/src/itch/hot_codec.cpp.o
+[26/31] Linking CXX static library libgig_itch_reconstruction.a
+[27/31] Linking CXX static library libgig_itch_streaming.a
+[28/31] Building CXX object CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o
+[29/31] Linking CXX executable gig_itch_source_recovery_tests
+[30/31] Building CXX object CMakeFiles/gig_itch_durable_checkpoint_tests.dir/tests/test_itch_durable_checkpoint.cpp.o
+[31/31] Linking CXX executable gig_itch_durable_checkpoint_tests

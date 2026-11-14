@@ -1,0 +1,10 @@
+Internal ctest changing into directory: /workspace/gig-development/build/accelerated-sanitizer
+Test project /workspace/gig-development/build/accelerated-sanitizer
+    Start 40: itch.source_hot_recovery
+1/2 Test #40: itch.source_hot_recovery .........   Passed    0.61 sec
+    Start 41: itch.durable_checkpoint
+2/2 Test #41: itch.durable_checkpoint ..........   Passed    0.83 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   1.44 sec

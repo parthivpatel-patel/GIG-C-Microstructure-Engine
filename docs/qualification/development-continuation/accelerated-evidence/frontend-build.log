@@ -1,0 +1,43 @@
+
+> gig-institutional-terminal@0.1.0 build
+> tsc -b && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 98 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.49 kB │ gzip:   0.33 kB
+dist/.vite/manifest.json                      4.79 kB │ gzip:   0.83 kB
+dist/assets/ResearchLab-D0vzy70c.css          2.78 kB │ gzip:   0.88 kB
+dist/assets/index-CvmgOqK7.css               96.49 kB │ gzip:  15.74 kB
+dist/assets/directoryContract-BVrwTy34.js     2.32 kB │ gzip:   0.88 kB
+dist/assets/MarketHealth-DTJoPlQ5.js          2.52 kB │ gzip:   1.08 kB
+dist/assets/VolatilitySurface-D37wN_uc.js     3.92 kB │ gzip:   1.94 kB
+dist/assets/ResearchDesk-DP0g3xVr.js          4.94 kB │ gzip:   1.92 kB
+dist/assets/ResearchScene-Db8updCo.js         5.59 kB │ gzip:   2.50 kB
+dist/assets/Landscape3D-DpMgCG8D.js           7.48 kB │ gzip:   3.14 kB
+dist/assets/ModelSurface-B7Mo5XMd.js          7.54 kB │ gzip:   3.24 kB
+dist/assets/PaperSandbox-Dp3oU-4f.js          8.03 kB │ gzip:   2.95 kB
+dist/assets/UniverseWorkspace-BBRKKypo.js     8.17 kB │ gzip:   2.98 kB
+dist/assets/PaperProvider-BlgFcbVL.js         8.49 kB │ gzip:   3.15 kB
+dist/assets/QuoteCloud-CUNEBSC0.js           10.47 kB │ gzip:   4.43 kB
+dist/assets/marketContract-g3e4K9Id.js       10.69 kB │ gzip:   3.62 kB
+dist/assets/HistoricalResearch-8XIExYA2.js   21.58 kB │ gzip:   7.22 kB
+dist/assets/ResearchLab-DyBDVZCw.js          28.97 kB │ gzip:  11.02 kB
+dist/assets/LiveMarket-DYRM_hG7.js           40.01 kB │ gzip:  12.52 kB
+dist/assets/StockIntelligence-CLfGadnB.js   115.25 kB │ gzip:  31.93 kB
+dist/assets/index-BhjeNcuY.js               256.34 kB │ gzip:  79.63 kB
+dist/assets/OrbitControls-Ca-wyGoH.js       517.06 kB │ gzip: 128.66 kB
+
+✓ built in 949ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
