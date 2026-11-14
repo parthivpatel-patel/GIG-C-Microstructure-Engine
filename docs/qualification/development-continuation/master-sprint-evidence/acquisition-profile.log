@@ -1,0 +1,7 @@
+...........Executing <Task finished name='Task-57' coro=<AcquiredTransformProfile.test_private_cross_process_v4_restore_forbids_sockets() done, defined at /workspace/gig-development/terminal/stocks/test_sec_transform_profile.py:66> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.263 seconds
+.........Executing <Task finished name='Task-103' coro=<MultiDocument.test_private_revision_child_process_restore_with_sockets_forbidden() done, defined at /workspace/gig-development/terminal/stocks/test_sec_multidoc.py:90> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.224 seconds
+.....................................................
+----------------------------------------------------------------------
+Ran 73 tests in 1.236s
+
+OK

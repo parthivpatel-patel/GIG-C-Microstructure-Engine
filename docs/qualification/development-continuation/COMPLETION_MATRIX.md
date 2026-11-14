@@ -1,12 +1,12 @@
 # GIG development completion matrix — November 13, 2026
 
-Tested implementation `efabe0f26504e5f418f5929e5ae19a4554b8ec60`; branch `development/gig-ui-redesign`.
+Tested implementation `fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4`; branch `development/gig-ui-redesign`.
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
 **34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE. Full development remains incomplete.**
 
-Current source/package evidence: CONTINUATION_EVIDENCE.json. No row status changed. Earlier evidence is retained with its original source scope.
+Current source/package evidence: MASTER_SPRINT_EVIDENCE.json. No row status changed. Earlier evidence is retained with its original source scope.
 
 | ID | Status | Requirement |
 |---|---|---|
@@ -427,13 +427,13 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Complete historical financial statements and point-in-time source history
 
-Evidence: 554guarded tests passed,23new regressions across3packages;186frontend;13v2cases/79assertions and8v1cases/58assertions;8frozen identities unchanged,6native recovery and2GCC ASan+UBSan recovery passed. Clean-source package/installed receipts:CONTINUATION_EVIDENCE.json.
+Evidence: 601guarded Python tests passed;60new tests across five packages (13SBOM separate);186frontend/TSC/Vite;15Company-v2cases/93assertions,8v1cases/58assertions;3vintages/6adversarial rejections;35actual native-to-TSassertions. 8frozen identities unchanged;GCC Release6focused andGCCDebug/ClangDebug/ClangRelease/GCCASan+UBSan2each. Fresh source/package and installed receipts:MASTER_SPRINT_EVIDENCE.json.
 
-Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them.
+Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling.
 
 Disposition: Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.
 
-Next action: Broader authoritative transform/schema/DRS/calculation fixtures and source-backed accounting equivalence;complete financial statements and observed history remain open. Preserve completed manifest and selected-numeric profiles.
+Next action: Next bounded source contracts:broader typed/open DRS and schema derivation,full calculations/rounding semantics and source-evidenced accounting equivalence. Preserve explicit registry/enumeration profiles and vintage export. No complete-statement acceptance inferred.
 
 Remaining implementation or qualification: Multi-document acquisition is implemented for the explicit default-target subset;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;full Calculations1.1 rounding/duplicate conformance;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.
 
@@ -673,19 +673,17 @@ Next action: No additional faithfully specified code repair identified after thi
 
 Runtime/dependency security clearance
 
-Source: `terminal/server/requirements.txt`, `terminal/web/package-lock.json`, `docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md`.
+Evidence: 13adversarial inventory tests;deterministic CycloneDX85components/7source inputs. Version-specific PyPI12pin/wheel review:0active advisories,0integrity errors,0unavailable metadata. Current npm full/production audits report0vulnerabilities. Exact query/source/hash scope retained inMASTER_SPRINT_EVIDENCE.json;not full installed/transitive/OS/target clearance.
 
-Evidence: Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native→TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json. Offline pip check reports no broken requirements;no advisory/target security clearance inferred. New wire fixed-host/redirect/SSRF bounds and independently gated private-source persistence tested.
-
-Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.
+Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories. Deterministic bounded offline inventory now binds exact Python/npm declarations,source bytes,artifact identity/SRI and exclusive private output. Registry advisory results are current snapshots for covered inputs only;no dependency pins were upgraded.
 
 Disposition: Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Dependency: Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
+Remaining implementation or qualification: Actual target OS/deployed/full installed dependency/native artifact and private edge clearance;source-lock SBOM and bounded advisory snapshots do not establish complete reachability or vulnerability absence.
 
-Remaining implementation or qualification: Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.
+Dependency: Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
 
 ## OPS01 — COMPLETE
 

@@ -1,0 +1,9 @@
+................................................................................................................................................................................................................................................................................................................Executing <Task finished name='Task-256' coro=<MultiDocument.test_private_revision_child_process_restore_with_sockets_forbidden() done, defined at /workspace/gig-development/work/master-sprint/extracted/gig_microstructure-0.1.1/terminal/stocks/test_sec_multidoc.py:90> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.203 seconds
+................Executing <Task finished name='Task-336' coro=<AcquiredTransformProfile.test_private_cross_process_v4_restore_forbids_sockets() done, defined at /workspace/gig-development/work/master-sprint/extracted/gig_microstructure-0.1.1/terminal/stocks/test_sec_transform_profile.py:66> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.188 seconds
+.......................
+----------------------------------------------------------------------
+Ran 343 tests in 2.260s
+
+OK
+{"issuer_cik": "0000320193", "origin": "HISTORICAL_SYNTHETIC", "provider_requested": false, "raw_source_retained": false, "reason": null, "schema": "gig.sec.xbrl.company_summary.v1", "sha256": "5f1190670e8b91ad7422c6cafb9cb984db165c29e12fc29f2f9139ccb5e4f5fe", "status": "AVAILABLE", "symbol": "AAPL"}
+{"tests": 343, "failures": 0, "errors": 0, "skips": 0, "installed_binding": true}

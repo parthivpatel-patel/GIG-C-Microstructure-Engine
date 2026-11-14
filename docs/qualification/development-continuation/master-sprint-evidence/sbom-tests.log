@@ -1,0 +1,18 @@
+test_declared_pin_and_lock_flags_cannot_use_implicit_coercion (__main__.OfflineSBOM.test_declared_pin_and_lock_flags_cannot_use_implicit_coercion) ... ok
+test_deterministic_relocation_and_source_bound_purls (__main__.OfflineSBOM.test_deterministic_relocation_and_source_bound_purls) ... ok
+test_duplicate_json_keys_and_future_lock_version_reject (__main__.OfflineSBOM.test_duplicate_json_keys_and_future_lock_version_reject) ... ok
+test_exact_python_pins_and_duplicate_normalized_names_reject (__main__.OfflineSBOM.test_exact_python_pins_and_duplicate_normalized_names_reject) ... ok
+test_inputs_cannot_follow_symlinks_or_exceed_budget (__main__.OfflineSBOM.test_inputs_cannot_follow_symlinks_or_exceed_budget) ... ok
+test_invalid_integrity_registry_and_artifact_identity_reject (__main__.OfflineSBOM.test_invalid_integrity_registry_and_artifact_identity_reject) ... ok
+test_npm_root_and_direct_package_binding_reject_missing_or_changed_lock (__main__.OfflineSBOM.test_npm_root_and_direct_package_binding_reject_missing_or_changed_lock) ... ok
+test_original_input_bytes_change_identity_even_without_pin_change (__main__.OfflineSBOM.test_original_input_bytes_change_identity_even_without_pin_change) ... ok
+test_output_budget_is_enforced_without_writing (__main__.OfflineSBOM.test_output_budget_is_enforced_without_writing) ... ok
+test_output_exclusive_private_and_symlink_refusal (__main__.OfflineSBOM.test_output_exclusive_private_and_symlink_refusal) ... ok
+test_pyproject_identity_must_remain_valid_bom_text (__main__.OfflineSBOM.test_pyproject_identity_must_remain_valid_bom_text) ... ok
+test_strict_revision_and_component_budget (__main__.OfflineSBOM.test_strict_revision_and_component_budget) ... ok
+test_workspace_links_path_traversal_and_aliases_reject (__main__.OfflineSBOM.test_workspace_links_path_traversal_and_aliases_reject) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.202s
+
+OK

@@ -1,0 +1,546 @@
+{
+  "schema": "gig.master_sprint.evidence.v1",
+  "session_date": "2026-11-13",
+  "timezone": "America/New_York",
+  "engineering_target": "2026-11-20",
+  "starting_commit": "2edef0115f1d2a3f33ccabce87f5ad1505b07005",
+  "tested_runtime": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+  "verified_checkpoints": [
+    "18211f710261b3ea1bc3e50130258d3c0869fa6d",
+    "503fcad158ae1e6e5d43c5e3c1b52c92dc7ccb2c",
+    "5ceedad49375a9a08a6e42cfdfbdf0cfa66833ee",
+    "b1ec288f4c5c538c27a22cb88bf5a761c0e4ed30",
+    "d0ca6a64a2be28869249162f109d2eccd8cbc7e9",
+    "00720c06a09074ff2b38666680cb4348696240c7",
+    "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4"
+  ],
+  "no_launch": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 601,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 601
+  },
+  "new_tests": {
+    "registry": 12,
+    "enumeration": 14,
+    "vintages": 8,
+    "source_sbom": 13,
+    "acquired_profile": 13
+  },
+  "native_profiles": [
+    {
+      "configuration": "GCC Release",
+      "focused_recovery_passed": 6,
+      "frozen_passed": 8,
+      "scope": "Source-enabled binding for guarded Python;native frozen and recovery"
+    },
+    {
+      "configuration": "GCC Debug",
+      "source_durable_passed": 2,
+      "scope": "Focused native contracts only"
+    },
+    {
+      "configuration": "Clang Debug",
+      "source_durable_passed": 2,
+      "scope": "Focused native contracts only"
+    },
+    {
+      "configuration": "Clang Release",
+      "source_durable_passed": 2,
+      "scope": "Focused native contracts only"
+    },
+    {
+      "configuration": "GCC Debug ASan+UBSan",
+      "source_durable_passed": 2,
+      "scope": "Focused native contracts only"
+    }
+  ],
+  "native_inputs_unchanged": true,
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "frontend_tests": 186,
+  "contracts": {
+    "v1": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "v2": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "vintages": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "native": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    }
+  },
+  "package_archive": {
+    "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+    "members": 1389,
+    "tracked_files": 1388,
+    "bytes": 8230515,
+    "sha256": "c0073717a8f5b4368d7bc402291d7a8825a456e123fbcf7eeafe88158b4b0ce4"
+  },
+  "packages": [
+    {
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "bytes": 666813,
+      "sha256": "0562ace8d47af36ca5c0e1b42626fa4bae31a921158850aabc30c1414a45e3ba",
+      "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+      "fresh_build": true
+    },
+    {
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "bytes": 8230515,
+      "sha256": "c0073717a8f5b4368d7bc402291d7a8825a456e123fbcf7eeafe88158b4b0ce4",
+      "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+      "fresh_build": true
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/registry.log",
+      "bytes": 153,
+      "sha256": "6273952d97a3c0d69d78c06823cef19ab0c76b89048f92b0093103ff05d53f74"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/enum-final.log",
+      "bytes": 140,
+      "sha256": "5b37d2c3ae99b6411a522abac445f5f6e94ecd5b6dcfefc761a7db9beac0bbe2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/enumeration-focused.log",
+      "bytes": 140,
+      "sha256": "b9d493db885220c7e2b065e2691c10dbc4a40aeabe746a93c35beee26ef2c4bc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/enumeration-regression.log",
+      "bytes": 534,
+      "sha256": "4f0d2ff698ba9aad4de568df6d1d07d29e9b3f6e05ca30612dde0464edc2397e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/enumeration-fixture-failure.log",
+      "bytes": 887,
+      "sha256": "721c87dc6a13783e1b1beacc2425115ca0f22f91a14d7e27de26d4483937aa8e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/vintages-final.log",
+      "bytes": 106,
+      "sha256": "07f64c4c97051d4151797dbf46f7947a08cceebdf11a0ff79c613781e6ac6b44"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/vintage-contract-final.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/sbom-tests.log",
+      "bytes": 1945,
+      "sha256": "c715ae5c35010c3859cfad5455472f40342438bf11c5be40c7365e88fe94cfea"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/sbom-generation.log",
+      "bytes": 68,
+      "sha256": "fafde11f0744730aaeebd0b96250f68156d21edfb235fa386dffd36c144972f7"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/acquisition-profile.log",
+      "bytes": 894,
+      "sha256": "b3ac285d4ebd622e464fc49a279defdebd903560f760dcdf4f09abedc43ccc91"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/no-launch.log",
+      "bytes": 110869,
+      "sha256": "a046707d668cf5f7304ecb8574996af59c77e47c967944be19ad2f12f40c4c26"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/final-no-launch.log",
+      "bytes": 113537,
+      "sha256": "7092d77c4a21d26f230a9e724a1d0565af3a1fe28b4090fb02d424ce26cf66ee"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/v1.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/final-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/final-vintage-contract.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/native-product.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/frontend.log",
+      "bytes": 17535,
+      "sha256": "0c7ff88694c6a49c18e430e5a6824d7d8763d907fd5b9bebb7029d1ac1b3b138"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/frontend-build.log",
+      "bytes": 2427,
+      "sha256": "82daf3cf16d47d0b9fdda5f222468cbfc70a9fa30580c7e090814d38571a08b2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "5777457ee547d23f5ea1163f59a5a928ea5f07fed304872fbf4ea379373c2328"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/release-recovery.log",
+      "bytes": 960,
+      "sha256": "c339f88c77067b072cac7d3bf54501efb97bd6c1413e98c44d0f558f4872bb56"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/sanitizer.log",
+      "bytes": 461,
+      "sha256": "b60701f42cfd24927f45b3f3dd12790397085973bc449eb541221d7e810a04b1"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/gcc-debug-configure.log",
+      "bytes": 668,
+      "sha256": "3d1a2ba70679e0effb3a83a035ea61878be08c297f07815a83bbdd13179f4809"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/gcc-debug-build.log",
+      "bytes": 2602,
+      "sha256": "d7459ca14206dfbcb8703e4f7c25c9e9d9b5138d3932538dac5bdbba241796bf"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/gcc-debug-tests.log",
+      "bytes": 451,
+      "sha256": "45a320823be1bf5c2659ebad635dbd7f325bd68f9f2d9b7fb8df3cf811d28414"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-debug-configure.log",
+      "bytes": 704,
+      "sha256": "8862b48431ff6a503bacae6d3bf902a43b880b36a42cf83c0642f493f7b4e957"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-debug-build.log",
+      "bytes": 2602,
+      "sha256": "d7459ca14206dfbcb8703e4f7c25c9e9d9b5138d3932538dac5bdbba241796bf"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-debug-tests.log",
+      "bytes": 455,
+      "sha256": "73b6e470e8adaa1b202c4ba4148e983fad1d076dd3e3788f91d7ff37d93e8836"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-release-configure.log",
+      "bytes": 706,
+      "sha256": "b7c6c6e191fafe58875bda9ab79819a71c8778608cb59dbb6fa80956cab0a760"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-release-build.log",
+      "bytes": 2602,
+      "sha256": "d7459ca14206dfbcb8703e4f7c25c9e9d9b5138d3932538dac5bdbba241796bf"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/clang-release-tests.log",
+      "bytes": 459,
+      "sha256": "0399a4df7b53d3ca8475f201a02f5fd6664d78f2bdfdf82bd71832bb88590050"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/arm64-policy.log",
+      "bytes": 101,
+      "sha256": "921b60a7fd52e978fbb551cacd29df2d6708879400278e1fcc70fceeb0c6f8e0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/npm-audit.json",
+      "bytes": 361,
+      "sha256": "39e71aed32e61be66d68e677a24d7d3ed2749ebb24bf2be24b2764dcc1877cb9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/npm-audit-all.json",
+      "bytes": 361,
+      "sha256": "39e71aed32e61be66d68e677a24d7d3ed2749ebb24bf2be24b2764dcc1877cb9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/pypi-review.json",
+      "bytes": 10119,
+      "sha256": "b4b7a44d287554b461f950a3da89cda35d3ca91492ab4afdb067b97e3f6afae1"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/pypi-review.log",
+      "bytes": 101,
+      "sha256": "60981ec3701c20eb4e19a77b08027ce30daefe1785b61f916a1bfcbbe4ed925e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/archive.json",
+      "bytes": 203,
+      "sha256": "1973790960c14508e341cd6fd6a3d3da6b17f7dfcc3556ae9cacd532b24f2d84"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "a872753113c68ce44cf7ef870dae72b1596b97d4af5a8bd7af51f8855bb51654"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/installed-consumer.log",
+      "bytes": 964,
+      "sha256": "727ca503d5c08ff63b082de4d6db7c78cdddeaffd0730c4089885af3bc9412b5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/installed-source.log",
+      "bytes": 1658,
+      "sha256": "c75dbd6bacbfa4ae182508d868eb80f6175e8f99f24653e167fe0652f0b23890"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/installed-vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/master-sprint-evidence/source-sbom.cdx.json",
+      "bytes": 47016,
+      "sha256": "bb5f3e0c980735d68ea6385334d70988a1637a9055acac5febbfa2b74ba11e33"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "docs/qualification/development-continuation/INLINE_REGISTRY_NUMERIC_V2.md",
+      "sha256": "4c8adca72aa5660955cdbddad3d90644e7006434ce4f858d7c6ebb58c96198da"
+    },
+    {
+      "path": "docs/qualification/development-continuation/NUMERIC_ENUMERATION.md",
+      "sha256": "b46a7a6c14486bd30ae0ab8870445c4b4d41ca84f45c05febe4e12f5affb040f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/OFFLINE_SOURCE_SBOM.md",
+      "sha256": "f29d99c0d9cb93b38a9aa0cf65828fc33ac9160246b9acf881564d869f2c8ccb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SEC_TRANSFORMATION_PROFILE.md",
+      "sha256": "9a0910ae905d99c1915a9e2ce399e960ca538d2b34e149d27ef5e29ab80a902c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SPRINT_LEDGER.md",
+      "sha256": "74c0fb90973c53395928ba4d9681e5e5f74f097bd9c00af0b32be79c30863d81"
+    },
+    {
+      "path": "docs/qualification/development-continuation/STATEMENT_VINTAGES.md",
+      "sha256": "504362755b460b407650a8e6016a2fde528e99fca3a4b58b46eb43eb47efc20d"
+    },
+    {
+      "path": "scripts/build_offline_sbom.py",
+      "sha256": "dd83be7213a6c141d9cbb2461195d232c3109095d317eef31e71463764a43dc4"
+    },
+    {
+      "path": "terminal/stocks/inline_set.py",
+      "sha256": "b1b6e32c70fd6f1fbe508af0dfaf04af85d6ca40a3084ff5bcfc585c44a24b2f"
+    },
+    {
+      "path": "terminal/stocks/sec_filing_ingest.py",
+      "sha256": "8cfd2ec27b0f3c5663bf875ecdd4cbf80995bf12f773865fcba21e8749d7426e"
+    },
+    {
+      "path": "terminal/stocks/test_inline_registry_numeric.py",
+      "sha256": "73c599258a4f3b5fd11c790732bcf994c34e928bbe7cff704d78d5acf77b5c23"
+    },
+    {
+      "path": "terminal/stocks/test_sec_transform_profile.py",
+      "sha256": "f3fbddb105ff6ac0bfcd41969bf6eb895ba2049659288771629683de0d3ac9e8"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_enumeration.py",
+      "sha256": "491a4917d0dc84a309e77107f5a7a8c14598bd823febe1cc54956843e93c4962"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_vintages.py",
+      "sha256": "9de2ab4970bc57a18c7108b16a23cd251d8ad1001d5416693863d52b1723047f"
+    },
+    {
+      "path": "terminal/stocks/xbrl_collection.py",
+      "sha256": "5b53409416832746301b43f7a951a9c663d1bd0df98290597de58ab5c0b86260"
+    },
+    {
+      "path": "terminal/stocks/xbrl_types.py",
+      "sha256": "3306dfb5488fef4d02c6992039be0d353411b13005b863b70477023407a34355"
+    },
+    {
+      "path": "terminal/stocks/xbrl_vintages.py",
+      "sha256": "f44791e78f74873adee6810ff03d1775616472e54053644a3c151de4c8126a6c"
+    },
+    {
+      "path": "terminal/tests/check_xbrl_accuracy_contract.py",
+      "sha256": "9fe28979a8d839c2005ff70a21f183cfd54882fe1387397ef13e94026519b06c"
+    },
+    {
+      "path": "terminal/tests/check_xbrl_vintage_contract.py",
+      "sha256": "b291f388555f791b7a294479b1361077810d200160e8d50c7c32b0a4ee34e185"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "sha256": "145dc8b03afc43194f2958d82e95a31c6d3d1c36b40ccad268fdcccf12714e09"
+    },
+    {
+      "path": "terminal/tests/xbrl-accuracy-contract.mjs",
+      "sha256": "296c4090828386a9970bcdd2556840f64deb415fd652b17decc2baf2a7d95b86"
+    },
+    {
+      "path": "terminal/tests/xbrl-vintage-contract.mjs",
+      "sha256": "c2b8f268e2a3f0bbad67ced0d7991ec643aedbd3d1a4a9c2f8d1384a6063f12b"
+    },
+    {
+      "path": "terminal/web/src/XbrlStatements.tsx",
+      "sha256": "19072bd2534a14774a12e2f49a759de59141c5d6c2895eb093d35ad18ca39001"
+    },
+    {
+      "path": "terminal/web/src/xbrlVintages.ts",
+      "sha256": "fdbd9ab79fba97ddda534d60aacdee1a58c8fffc2dc5c40bb357c6c487c8c2bc"
+    },
+    {
+      "path": "tests/test_offline_sbom.py",
+      "sha256": "faa4ca48aa73ec0b5c2f749307b6a66c4a6e36878ed60377ced1b9417bfbbdc6"
+    }
+  ],
+  "matrix_statuses_unchanged": true,
+  "scope": "Offline developer acceptance;documentation and dependency registries/advisories only. No GIG/server/provider/account/deploy/trade/owner acceptance. Native focus counts are not full CTest or genuine ARM64 clearance.",
+  "installed_default_wheel": {
+    "consumer_tests": 8,
+    "source_tests": 343,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "v2_cases": 15,
+    "v2_assertions": 93,
+    "vintage_entries": 3,
+    "vintage_adversarial_rejections": 6
+  },
+  "advisory_scope": {
+    "pypi_review_code_sha": "d0ca6a64a2be28869249162f109d2eccd8cbc7e9",
+    "covered_dependency_inputs_unchanged": true,
+    "pypi_packages": 12,
+    "active_advisory_packages": [],
+    "integrity_errors": [],
+    "unavailable_metadata": [],
+    "npm_reported_total": 0,
+    "target_clearance": false
+  }
+}

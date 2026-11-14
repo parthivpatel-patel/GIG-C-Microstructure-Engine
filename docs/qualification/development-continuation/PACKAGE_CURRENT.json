@@ -1,27 +1,29 @@
 {
-  "schema": "gig.package.current.v3",
-  "tested_runtime": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
-  "evidence": "CONTINUATION_EVIDENCE.json",
+  "schema": "gig.package.current.v4",
+  "tested_source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+  "evidence": "MASTER_SPRINT_EVIDENCE.json",
   "artifacts": [
     {
-      "name": "gig_microstructure-0.1.1.tar.gz",
-      "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
-      "bytes": 8142134,
-      "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721"
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "bytes": 666813,
+      "sha256": "0562ace8d47af36ca5c0e1b42626fa4bae31a921158850aabc30c1414a45e3ba",
+      "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+      "fresh_build": true
     },
     {
-      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-      "source": "349f1293d852ec3892a4d53d089de94dc9e856a6",
-      "bytes": 666813,
-      "sha256": "e638e9997c6d1b06b1408f79cf0fbbff6894a8cce3ff1c85a3f15887b9a7ed12"
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "bytes": 8230515,
+      "sha256": "c0073717a8f5b4368d7bc402291d7a8825a456e123fbcf7eeafe88158b4b0ce4",
+      "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+      "fresh_build": true
     }
   ],
   "archive": {
-    "source": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
-    "members": 1347,
-    "tracked_files": 1346,
-    "sha256": "b32fbcdd83607bcc63584b1954c63fe2490e96dc52cee0b1686389d5b1c36721",
-    "sdk_inputs_unchanged_from_wheel_source": "349f1293d852ec3892a4d53d089de94dc9e856a6"
+    "source": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
+    "members": 1389,
+    "tracked_files": 1388,
+    "bytes": 8230515,
+    "sha256": "c0073717a8f5b4368d7bc402291d7a8825a456e123fbcf7eeafe88158b4b0ce4"
   },
-  "wheel_note": "Freshly built at349f129;final efabe0f SDK/native/build inputs byte-identical. Final-source installed tests use the fresh wheel. Report-only evidence is newer than the archive."
+  "note": "Fresh sdist and default wheel from byte-checked clean source;later evidence-only docs are outside this runtime archive."
 }

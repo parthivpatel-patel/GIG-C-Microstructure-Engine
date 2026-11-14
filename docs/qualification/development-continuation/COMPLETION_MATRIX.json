@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v15",
+  "schema": "gig.development.completion.v16",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -454,14 +454,20 @@
         "terminal/stocks/test_sec_source_expansion.py",
         "terminal/stocks/sec_inline_manifest.py",
         "terminal/stocks/test_sec_multidoc.py",
-        "terminal/stocks/test_xbrl_whitespace.py"
+        "terminal/stocks/test_xbrl_whitespace.py",
+        "terminal/stocks/test_inline_registry_numeric.py",
+        "terminal/stocks/test_xbrl_enumeration.py",
+        "terminal/stocks/xbrl_vintages.py",
+        "terminal/stocks/test_xbrl_vintages.py",
+        "terminal/stocks/test_sec_transform_profile.py",
+        "terminal/web/src/xbrlVintages.ts"
       ],
-      "test_evidence": "554guarded tests passed,23new regressions across3packages;186frontend;13v2cases/79assertions and8v1cases/58assertions;8frozen identities unchanged,6native recovery and2GCC ASan+UBSan recovery passed. Clean-source package/installed receipts:CONTINUATION_EVIDENCE.json.",
-      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them.",
+      "test_evidence": "601guarded Python tests passed;60new tests across five packages (13SBOM separate);186frontend/TSC/Vite;15Company-v2cases/93assertions,8v1cases/58assertions;3vintages/6adversarial rejections;35actual native-to-TSassertions. 8frozen identities unchanged;GCC Release6focused andGCCDebug/ClangDebug/ClangRelease/GCCASan+UBSan2each. Fresh source/package and installed receipts:MASTER_SPRINT_EVIDENCE.json.",
+      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling.",
       "disposition": "Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.",
-      "action_now": "Broader authoritative transform/schema/DRS/calculation fixtures and source-backed accounting equivalence;complete financial statements and observed history remain open. Preserve completed manifest and selected-numeric profiles.",
+      "action_now": "Next bounded source contracts:broader typed/open DRS and schema derivation,full calculations/rounding semantics and source-evidenced accounting equivalence. Preserve explicit registry/enumeration profiles and vintage export. No complete-statement acceptance inferred.",
       "work_class": "PARTIAL:bounded primary/history ingestion and product contracts implemented;full statements,semantic conformance and observed historical completeness remain open",
-      "completed_this_session": "Multi-document acquisition/recovery/product contract;opt-in numeric whitespace schema corroboration. Manifest list order remains authored;parser canonical URI order does not replace text/continuation ordering.",
+      "completed_this_session": "12registry,14enumeration,8vintage and13acquisition-profile regressions;actual source-bound UI/Company-v2 export/import;legacy defaults and v1/v2/v3 remain compatible.",
       "remaining_implementation_or_qualification": "Multi-document acquisition is implemented for the explicit default-target subset;permissive non-XML HTML remains unsupported;generic linkbases/custom arcroles/labels and embedded roleRef/arcroleRef;full inline transformations/named targets/tuples/escaped HTML;general complex content/attributes/substitution;broader open/negative/multi-role/inherited/typed-domain DRS;full Calculations1.1 rounding/duplicate conformance;source-backed accounting equivalence and complete statements;independent observed acceptance corpus and complete history. Historical plans are bounded and explicitly executed,without a background scheduler or automatic full-EDGAR coverage.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
@@ -779,15 +785,17 @@
       "source": [
         "terminal/server/requirements.txt",
         "terminal/web/package-lock.json",
-        "docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md"
+        "docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md",
+        "scripts/build_offline_sbom.py",
+        "tests/test_offline_sbom.py"
       ],
-      "test_evidence": "Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native\u2192TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json. Offline pip check reports no broken requirements;no advisory/target security clearance inferred. New wire fixed-host/redirect/SSRF bounds and independently gated private-source persistence tested.",
-      "explanation": "Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories.",
+      "test_evidence": "13adversarial inventory tests;deterministic CycloneDX85components/7source inputs. Version-specific PyPI12pin/wheel review:0active advisories,0integrity errors,0unavailable metadata. Current npm full/production audits report0vulnerabilities. Exact query/source/hash scope retained inMASTER_SPRINT_EVIDENCE.json;not full installed/transitive/OS/target clearance.",
+      "explanation": "Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories. Deterministic bounded offline inventory now binds exact Python/npm declarations,source bytes,artifact identity/SRI and exclusive private output. Registry advisory results are current snapshots for covered inputs only;no dependency pins were upgraded.",
       "disposition": "Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.",
       "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
       "work_class": "Target/source or exhaustive qualification incomplete;not an identified broken code path",
       "completed_this_session": "Checkpoint byte/type/hash/tail admission strengthened;source validation streamed;response admission/cancellation strengthened. Dependency pins and authorization boundaries unchanged.",
-      "remaining_implementation_or_qualification": "Owner-target OS,full deployed/transitive artifact and private-edge clearance remain pending. Prior advisory metadata remains source-bound prior evidence.",
+      "remaining_implementation_or_qualification": "Actual target OS/deployed/full installed dependency/native artifact and private edge clearance;source-lock SBOM and bounded advisory snapshots do not establish complete reachability or vulnerability absence.",
       "dependency": "Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.",
       "effort_estimate": "0.5\u20132 engineer-days after exact target artifacts are available;future advisory clearance is time-dependent."
     },
@@ -925,12 +933,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+  "tested_application": "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "c7d6a023ba54910cca0c0909fb1ac59abc8ce8d1",
+  "previous_matrix_commit": "2edef0115f1d2a3f33ccabce87f5ad1505b07005",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current bounded evidence:CONTINUATION_EVIDENCE.json. Earlier evidence keeps its original source scope;no row status promoted.",
+  "evidence_policy": "Current bounded evidence:MASTER_SPRINT_EVIDENCE.json. Historical evidence retains source scope;no row status promoted.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -972,7 +980,14 @@
     "63c7e94350f64411117af8a4fbcbb898f8f041f7",
     "3233222fb00cf11b17989b8da898378f7ffec9c8",
     "349f1293d852ec3892a4d53d089de94dc9e856a6",
-    "efabe0f26504e5f418f5929e5ae19a4554b8ec60"
+    "efabe0f26504e5f418f5929e5ae19a4554b8ec60",
+    "18211f710261b3ea1bc3e50130258d3c0869fa6d",
+    "503fcad158ae1e6e5d43c5e3c1b52c92dc7ccb2c",
+    "5ceedad49375a9a08a6e42cfdfbdf0cfa66833ee",
+    "b1ec288f4c5c538c27a22cb88bf5a761c0e4ed30",
+    "d0ca6a64a2be28869249162f109d2eccd8cbc7e9",
+    "00720c06a09074ff2b38666680cb4348696240c7",
+    "fed0aba25fb877e6a8b7bb32ee5e10b82a960ce4"
   ],
   "date": "2026-11-13",
   "timezone": "America/New_York",
@@ -982,7 +997,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "c7d6a023ba54910cca0c0909fb1ac59abc8ce8d1",
+  "starting_commit": "2edef0115f1d2a3f33ccabce87f5ad1505b07005",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,

@@ -1,0 +1,14 @@
+E........................................
+======================================================================
+ERROR: test_conflicting_reported_members_are_not_silently_selected (terminal.stocks.test_xbrl_enumeration.NumericEnumeration.test_conflicting_reported_members_are_not_silently_selected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_enumeration.py", line 72, in test_conflicting_reported_members_are_not_silently_selected
+    self.assertEqual(v['selected_input_coverage'][0]['xbrl_coverage']['excluded']['conflicted'],2)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'conflicted'
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.253s
+
+FAILED (errors=1)
