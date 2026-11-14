@@ -12,7 +12,8 @@ XS='http://www.w3.org/2001/XMLSchema'
 PROFILE='NUMERIC_VALUE_FACETS_V1'
 COMPLEX_PROFILE='NUMERIC_SIMPLE_CONTENT_V2'
 WHITESPACE_PROFILE='NUMERIC_WHITESPACE_V3'
-PROFILES=(PROFILE,COMPLEX_PROFILE,WHITESPACE_PROFILE)
+ENUMERATION_PROFILE='NUMERIC_ENUMERATION_V4'
+PROFILES=(PROFILE,COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE)
 MAX_OUTPUT_BYTES=8*1024*1024
 FACETS={'minInclusive','maxInclusive','minExclusive','maxExclusive','totalDigits','fractionDigits'}
 DECIMAL=re.compile(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)\Z')
@@ -41,6 +42,16 @@ def declaration(node):
   if n.name==tag(XS,'annotation'):continue
   if result.get('derivation')=='SIMPLE_CONTENT_EXTENSION':result['unsupported'].append('EXTENSION_ATTRIBUTES_OR_CONTENT_UNSUPPORTED');continue
   kind=n.name.removeprefix('{'+XS+'}')
+  if kind=='enumeration':
+   # Multiple enumeration elements represent one value-space set. Keep each
+   # source lexical, including value-equivalent alternatives, in source order.
+   if n.children or n.text().strip()or set(n.attrs)-{'value','id'}:
+    result['unsupported'].append('ENUMERATION_FACET_STRUCTURE_UNSUPPORTED');continue
+   value=n.attrs.get('value')
+   if type(value)is not str or len(value)>64 or not DECIMAL.fullmatch(value.strip(' \t\r\n')):raise XBRLError('dts_type_enumeration_lexical')
+   result['facets'].append({'kind':kind,'value':value})
+   if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
+   continue
   if kind=='whiteSpace':
    if n.children or n.text().strip()or set(n.attrs)-{'value','id','fixed'}or kind in seen or n.attrs.get('value')!='collapse'or n.attrs.get('fixed','false')not in('true','false','1','0'):
     result['unsupported'].append('WHITESPACE_FACET_UNSUPPORTED');continue
@@ -54,6 +65,7 @@ def declaration(node):
   elif not DECIMAL.fullmatch(value):raise XBRLError('dts_type_numeric_facet')
   result['facets'].append({'kind':kind,'value':value})
   if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
+ if len(result['facets'])>16:raise XBRLError('dts_type_facet_budget')
  result['unsupported']=sorted(set(result['unsupported']));return result
 
 def _resolve(name,definitions,profile):
@@ -69,34 +81,53 @@ def _resolve(name,definitions,profile):
    return current,path
   entry=definitions.get(current)
   if entry is None or entry['declaration']['unsupported']or entry['declaration']['base']is None:raise XBRLError('dts_selected_type_unsupported')
-  if 'derivation'in entry['declaration']and profile not in(COMPLEX_PROFILE,WHITESPACE_PROFILE):raise XBRLError('dts_selected_type_profile_unsupported')
-  if any(f['kind']=='whiteSpace'for f in entry['declaration']['facets'])and profile!=WHITESPACE_PROFILE:raise XBRLError('dts_selected_whitespace_profile_unsupported')
+  if 'derivation'in entry['declaration']and profile not in(COMPLEX_PROFILE,WHITESPACE_PROFILE,ENUMERATION_PROFILE):raise XBRLError('dts_selected_type_profile_unsupported')
+  if any(f['kind']=='whiteSpace'for f in entry['declaration']['facets'])and profile not in(WHITESPACE_PROFILE,ENUMERATION_PROFILE):raise XBRLError('dts_selected_whitespace_profile_unsupported')
+  if any(f['kind']=='enumeration'for f in entry['declaration']['facets'])and profile!=ENUMERATION_PROFILE:raise XBRLError('dts_selected_enumeration_profile_unsupported')
   path.append({'type':current,**entry});current=entry['declaration']['base']
 
-def _value_check(fact,base,path,units):
- if fact['nil']:return
- lexical=fact['lexical_value'].strip(' \t\r\n')
+def _numeric_lexical(lexical,base):
  if len(lexical)>64 or not DECIMAL.fullmatch(lexical):raise XBRLError('dts_type_decimal_lexical')
  value=Decimal(lexical);local=base.split('}',1)[1]
  integer=local.removesuffix('ItemType')if base.startswith('{'+X+'}')else local
- # xs:integer lexical space does not admit a decimal point, even a zero fraction.
+ # xs:integer lexical space does not admit a decimal point, even zero fraction.
  if integer in INTEGER_BOUNDS:
   if not re.fullmatch('[+-]?[0-9]+',lexical):raise XBRLError('dts_type_integer_lexical')
   lower,upper=INTEGER_BOUNDS[integer]
   if lower is not None and value<lower or upper is not None and value>upper:raise XBRLError('dts_type_integer_range')
+ return value
+
+def _facet_checks(value,lexical,path):
+ unsigned=lexical.lstrip('+-');whole,_,fraction=unsigned.partition('.');fraction=fraction.rstrip('0')
+ total_digits=max(1,len((whole.lstrip('0')+fraction).lstrip('0')));fraction_digits=len(fraction)
+ for entry in path:
+  facets=entry['declaration']['facets'];values=[Decimal(f['value'].strip(' \t\r\n'))for f in facets if f['kind']=='enumeration']
+  if values and value not in values:raise XBRLError('dts_type_enumeration_violation')
+  for f in facets:
+   kind=f['kind'];bound=f['value']
+   if kind in('whiteSpace','enumeration'):continue
+   invalid=total_digits>int(bound)if kind=='totalDigits'else fraction_digits>int(bound)if kind=='fractionDigits'else value<Decimal(bound)if kind=='minInclusive'else value>Decimal(bound)if kind=='maxInclusive'else value<=Decimal(bound)if kind=='minExclusive'else value>=Decimal(bound)
+   if invalid:raise XBRLError('dts_type_facet_violation')
+
+def _enumeration_definitions(base,path):
+ # Every listed member must be valid for its immediate base, even when no
+ # reported fact uses that member (or the selected fact is nil).
+ for index,entry in enumerate(path):
+  for facet in entry['declaration']['facets']:
+   if facet['kind']!='enumeration':continue
+   lexical=facet['value'].strip(' \t\r\n');value=_numeric_lexical(lexical,base)
+   _facet_checks(value,lexical,path[index+1:])
+
+def _value_check(fact,base,path,units):
+ _enumeration_definitions(base,path)
+ if fact['nil']:return
+ lexical=fact['lexical_value'].strip(' \t\r\n');value=_numeric_lexical(lexical,base);local=base.split('}',1)[1]
  unit=units[fact['unit_ref']]
  if base==tag(X,'monetaryItemType'):
   if unit['denominator']or len(unit['numerator'])!=1 or not re.fullmatch(re.escape('{'+ISO+'}')+'[A-Z]{3}',unit['numerator'][0]):raise XBRLError('dts_type_monetary_unit')
  elif base in(tag(X,'sharesItemType'),tag(X,'pureItemType')):
   if unit['denominator']or unit['numerator']!=[tag(X,'shares'if local=='sharesItemType'else'pure')]:raise XBRLError('dts_type_unit')
- unsigned=lexical.lstrip('+-');whole,_,fraction=unsigned.partition('.');fraction=fraction.rstrip('0')
- total_digits=max(1,len((whole.lstrip('0')+fraction).lstrip('0')));fraction_digits=len(fraction)
- for entry in path:
-  for f in entry['declaration']['facets']:
-   kind=f['kind'];bound=f['value']
-   if kind=='whiteSpace':continue # Numeric lexical grammar rejects internal spaces after collapse.
-   invalid=total_digits>int(bound)if kind=='totalDigits'else fraction_digits>int(bound)if kind=='fractionDigits'else value<Decimal(bound)if kind=='minInclusive'else value>Decimal(bound)if kind=='maxInclusive'else value<=Decimal(bound)if kind=='minExclusive'else value>=Decimal(bound)
-   if invalid:raise XBRLError('dts_type_facet_violation')
+ _facet_checks(value,lexical,path)
 
 def corroborate(parsed,dts,*,profile=PROFILE):
  """Add an explicit selected-numeric profile after normal declaration binding."""
