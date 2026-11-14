@@ -46,3 +46,22 @@ fresh sdist1,389members/1,388tracked files;fresh wheel;8installed consumers,
 Current receipts/report:MASTER_SPRINT_EVIDENCE.json andREPORT.md. No active worker or
 background execution remains. Next source contracts and external evidence are listed
 inBLOCKERS_AND_REMAINING_ENGINEERING.md. All50requirement statuses preserved.
+
+## November14 resumed checkpoint
+
+Starting clean remote:a0ca1964175cae01c329510d651224b898a6fb77. Prior five packages
+preserved;runtime skill/status and Git/fetch checks succeeded. Published increments:
+
+|Package|Verified remote implementation SHA|Focused acceptance|
+|---|---|---|
+|Numeric restriction constraintsV5|a4cd92bbd5467f91f4a2b86b62c1304bdc82b32b|53schema checks;12new|
+|Direct open/closed explicit DRSV2|c42f35bae54ca01d3dc90b53faee010e038083b2|41focused/76related;16new;legacy artifacts unchanged|
+|Exact calculation intervalsV2|a4182a5f37eecd41999c896d24935549b6f5346a|62focused;19new;no fact selection|
+|Kraken book sessionV1|9951eccbf36555f4ca19eb679ca2b716b4360ae7|60focused;11new;provisional/defaults preserved|
+
+Combined guarded suite:659passed,0failures/errors/skips. Frontend186/TSC/Vite and
+v1/v2/vintage/native cross-language contracts pass. No app/provider/owner acceptance.
+Current developer logs:work/nov14/. Next integration gate:clean-source packaging,
+installed consumers and retained evidence/matrix update. Before resuming after an
+interruption,inspect actual status and logs;never rerun patch scripts or discard
+uncommitted source. Seven external blockers and50statuses remain unchanged.
