@@ -2,10 +2,12 @@
 
 Hashes establish identity consistency,not independent source authentication. This
 separate API requires original bytes and explicit parse choices;legacy binders and
-source permissions/defaults are unchanged. Inline sets require a future contract.
+source permissions/defaults are unchanged. A separate explicit API audits inline sets.
 """
 from .xbrl_instance import parse_instance,validate_manifest,digest,canonical,XBRLError
-from .xbrl_dts import discover,uri,EMBEDDED_PROFILE,_supplied_documents
+from .xbrl_dts import discover,discover_inline_set,uri,EMBEDDED_PROFILE,_supplied_documents
+from .inline_set import parse_document_set,TRANSFORMATION_PROFILE
+from .sec_inline_manifest import normalize as normalize_inline_manifest
 PROFILE='ORIGINAL_PLAIN_DTS_SOURCE_AUDIT_V1'
 SCHEMA='gig.sec.xbrl.dts_source_audit.v1'
 MAX_INSTANCE=2*1024*1024;MAX_INPUT=8*1024*1024;MAX_GRAPH=16*1024*1024;MAX_PARSED=8*1024*1024;MAX_OUTPUT=1024*1024
@@ -52,4 +54,69 @@ def audit_dts_sources(parsed,dts,instance_raw,documents,*,manifest,concepts,inst
  result={'schema':SCHEMA,'profile':PROFILE,'status':'VERIFIED_ORIGINAL_SOURCE_RECONSTRUCTION','instance_uri':instance_uri,'source_sha256':source['source_sha256'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'embedded_profile':embedded_profile,'origin':source['origin'],'source_fact_ids':[f['source_fact_id']for f in parsed['facts']],'source_context_sha256s':{key:v['semantic_sha256']for key,v in sorted(parsed['contexts'].items())},'source_unit_sha256s':{key:v['semantic_sha256']for key,v in sorted(parsed['units'].items())},'documents':[{'uri':u,'sha256':originals[u]}for u in sorted(originals)],'provider_requested':False,'independent_source_authentication':False,'limitations':['Plain original pre-binding artifact only;explicit manifest/concepts/URI/profile required','Source bytes are caller supplied;hash agreement is not independent provider authentication','Reconstruction preserves supported/unsupported DTS diagnostics;not complete schema/DRS/calculation conformance']}
  result['sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('dts_audit_output_budget')
+ return result
+
+
+INLINE_PROFILE='ORIGINAL_INLINE_SET_DTS_SOURCE_AUDIT_V1'
+INLINE_SCHEMA='gig.sec.xbrl.inline_dts_source_audit.v1'
+
+def audit_inline_dts_sources(parsed,dts,inline_documents,taxonomy_documents,*,concepts,acquisition_manifest=None,expected_acquisition_manifest_sha256=None,transformation_profile=None,allow_observed=False,embedded_profile=None):
+ """Reconstruct an original inline set/DTS using explicitly supplied originals.
+
+ All original processing grants,identities,receipts and parse choices are gated
+ before XML. Optional acquisition intent additionally requires its accepted digest;
+ the original parsed set itself does not retain authored acquisition-list order.
+ """
+ if type(inline_documents)is not list or not 1<=len(inline_documents)<=8:raise XBRLError('inline_audit_document_budget')
+ if transformation_profile not in(None,TRANSFORMATION_PROFILE):raise XBRLError('inline_audit_transformation_profile')
+ if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('inline_audit_embedded_profile')
+ supplied={};authored=[];total=0
+ # No XML parser is called until every original's approval and identity passes.
+ for entry in inline_documents:
+  if type(entry)is not dict or set(entry)!={'uri','raw','manifest'}or type(entry['raw'])is not bytes or not 1<=len(entry['raw'])<=MAX_INSTANCE:raise XBRLError('inline_audit_original_contract')
+  key=uri(entry['uri'])
+  if key in supplied:raise XBRLError('inline_audit_duplicate_original_uri')
+  source=validate_manifest(entry['raw'],entry['manifest'],allow_observed)
+  if source['source_url']is not None and key!=source['source_url']:raise XBRLError('inline_audit_original_uri_scope')
+  supplied[key]={'entry':entry,'source':source};authored.append(key);total+=len(entry['raw'])
+  if total>MAX_INPUT:raise XBRLError('inline_audit_input_budget')
+ if type(taxonomy_documents)is not list or not 1<=len(taxonomy_documents)<=16:raise XBRLError('inline_audit_taxonomy_document_budget')
+ taxonomies=_supplied_documents(taxonomy_documents)
+ if len(taxonomies)!=len(taxonomy_documents):raise XBRLError('inline_audit_duplicate_taxonomy_uri')
+ if set(taxonomies)&set(supplied):raise XBRLError('inline_audit_original_taxonomy_overlap')
+ if total+sum(len(d['raw'])for d in taxonomy_documents)>MAX_INPUT:raise XBRLError('inline_audit_input_budget')
+ ordered=sorted(supplied);sources=[{'uri':key,'source':supplied[key]['source']}for key in ordered];first=sources[0]['source']
+ def filing_identity(s):
+  from . import sec
+  return(s['issuer_cik'],s['accession'],s['form'],s['filed'],None if s['accepted_at']is None else sec.acceptance_ns(s['accepted_at']),s['amends_accession'],s['origin'])
+ if any(filing_identity(s['source'])!=filing_identity(first)for s in sources):raise XBRLError('inline_audit_filing_scope')
+ acquisition_sha=None
+ if acquisition_manifest is not None:
+  normalized=normalize_inline_manifest(acquisition_manifest,first['issuer_cik'],first['accession']);acquisition_sha=digest(normalized)
+  if type(expected_acquisition_manifest_sha256)is not str or expected_acquisition_manifest_sha256!=acquisition_sha:raise XBRLError('inline_audit_acquisition_identity')
+  names=[key.rsplit('/',1)[-1]for key in authored]
+  if names!=[d['name']for d in normalized['documents']]:raise XBRLError('inline_audit_acquisition_order_or_members')
+  primary=[key for key in authored if key.rsplit('/',1)[-1]==normalized['primary_document']]
+  if len(primary)!=1:raise XBRLError('inline_audit_acquisition_primary')
+  prefix=primary[0].rsplit('/',1)[0]+'/'
+  for row,key in zip(normalized['documents'],authored):
+   if key!=prefix+row['name']or supplied[key]['source']['source_sha256']!=row['sha256']:raise XBRLError('inline_audit_acquisition_source_binding')
+ elif expected_acquisition_manifest_sha256 is not None:raise XBRLError('inline_audit_acquisition_manifest_required')
+ _identity(parsed,MAX_PARSED);_identity(dts,MAX_GRAPH)
+ if parsed.get('schema')!='gig.sec.xbrl.inline_set.v1'or dts.get('schema')!='gig.sec.xbrl.dts_set.v1':raise XBRLError('inline_audit_original_set_artifact_required')
+ ds=parsed.get('document_set')
+ if type(ds)is not dict or ds.get('schema')!='gig.sec.xbrl.document_set.v1'or canonical(ds.get('documents'))!=canonical(sources)or ds.get('sha256')!=digest(sources):raise XBRLError('inline_audit_original_metadata_scope')
+ if ('transformation_profile'in ds)!=(transformation_profile is not None)or ds.get('transformation_profile')!=transformation_profile:raise XBRLError('inline_audit_transformation_profile_scope')
+ if parsed.get('origin')!=first['origin']or parsed.get('source',{}).get('source_sha256')!=ds['sha256']or dts.get('origin')!=first['origin']:raise XBRLError('inline_audit_origin_scope')
+ original=parse_document_set(inline_documents,concepts,allow_observed=allow_observed,transformation_profile=transformation_profile)
+ if canonical(original)!=canonical(parsed):raise XBRLError('inline_audit_original_parsed_mismatch')
+ references=[supplied[key]['entry']['manifest']['permission_reference']for key in ordered]
+ reconstructed=discover_inline_set(original,taxonomy_documents,allow_observed=allow_observed,permission_references=references,embedded_profile=embedded_profile)
+ if reconstructed['structural_closure']is not True or reconstructed['unresolved']:raise XBRLError('inline_audit_original_closure_required')
+ originals={d['uri']:d['sha256']for d in reconstructed['documents']}
+ if set(originals)!=set(taxonomies)or any(originals[u]!=taxonomies[u]['sha256']for u in originals):raise XBRLError('inline_audit_original_document_coverage')
+ if canonical(reconstructed)!=canonical(dts):raise XBRLError('inline_audit_reconstructed_graph_mismatch')
+ result={'schema':INLINE_SCHEMA,'profile':INLINE_PROFILE,'status':'VERIFIED_ORIGINAL_SOURCE_RECONSTRUCTION','origin':first['origin'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'document_set_sha256':ds['sha256'],'transformation_profile':transformation_profile,'embedded_profile':embedded_profile,'acquisition_manifest_sha256':acquisition_sha,'supplied_document_order':authored,'parsed_document_order':ordered,'inline_documents':[{'uri':s['uri'],'source_sha256':s['source']['source_sha256'],'received_at':s['source']['received_at'],'accepted_at':s['source']['accepted_at'],'permission_reference_sha256':s['source']['permission_reference_sha256']}for s in sources],'source_fact_ids':[f['source_fact_id']for f in original['facts']],'source_context_sha256s':{key:v['semantic_sha256']for key,v in sorted(original['contexts'].items())},'source_unit_sha256s':{key:v['semantic_sha256']for key,v in sorted(original['units'].items())},'taxonomy_documents':[{'uri':u,'sha256':originals[u]}for u in sorted(originals)],'provider_requested':False,'independent_source_authentication':False,'limitations':['Original pre-binding default-target inline-set reconstruction only;explicit concepts/original manifests/profiles required','Supplied order is audit input;accepted acquisition order requires its separately retained expected digest','No source contact/raw text returned;caller-supplied originals do not independently authenticate issuer sources','Supported passive text/continuations/transforms only;not complete inline/schema/DRS/accounting conformance']}
+ result['sha256']=digest(result)
+ if len(canonical(result))>MAX_OUTPUT:raise XBRLError('inline_audit_output_budget')
  return result

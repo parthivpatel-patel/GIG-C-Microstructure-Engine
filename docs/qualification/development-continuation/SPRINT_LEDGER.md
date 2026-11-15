@@ -205,3 +205,11 @@ defaults cannot silently become consolidated facts. Contract:NEGATIVE_ONLY_EXPLI
 Logs:work/nov15/drs-final.log,work/negative-only-drs/. Independent original-inlineaudit
 and original-source accounting relationships/products are in progress. Preservepending
 agentfiles and commitbypaths. No app/server/provider/deployment/trading/owner acceptance.
+
+Negative-only DRS remote-verified:f8da7cc72bf142263be7dfa5e40b83704a4ad384.
+Original inline DTS audit:22new/91focused checks pass;3plain audit receipts unchanged.
+Everyoriginal manifest/permission/hash/receipt and explicittransformationprofile is
+validated beforeXML. Reconstructedcontinuations/parsedset/DTSclosure must match.
+Optional acquisitionintent requires independently retained expectedmanifestdigest;
+authored acquisitionorder remains distinct from canonical parsedURIorder. Contract:
+ORIGINAL_INLINE_DTS_SOURCE_AUDIT.md. No sourceauthentication or defaultactivation claim.
