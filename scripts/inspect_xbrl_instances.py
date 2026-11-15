@@ -14,7 +14,7 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
  if statement_profile!='legacy-v1'and company_symbol is None:raise XBRLError('statement_profile_requires_company')
  from terminal.stocks.xbrl_dimensions import PROFILE as DIMENSIONS
  if dimensional_profile not in(None,DIMENSIONS):raise XBRLError('xbrl_dimensional_profile_unsupported')
- path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024))
+ path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024),numeric_policy='exact-integer')
  if batch.get('schema')=='gig.sec.xbrl.input_inline_set_batch.v1':return inspect_inline_sets(path,batch,as_of,allow_observed=allow_observed,dimensional_profile=dimensional_profile,company_symbol=company_symbol,statement_role=statement_role,statement_form=statement_form,statement_profile=statement_profile,embedded_profile=embedded_profile)
  dts=batch.get('schema')=='gig.sec.xbrl.input_dts_batch.v1'
  if (dimensional_profile is not None or embedded_profile is not None)and not dts:raise XBRLError('xbrl_dimensional_profile_requires_dts')

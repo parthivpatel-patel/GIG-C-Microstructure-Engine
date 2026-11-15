@@ -40,7 +40,28 @@ def read_bytes(path,limit=1024*1024):
     except OSError:raise EvidenceError('artifact_read_failed')from None
 
 
-def decode(raw):
+def _exact_integer(value):
+    # Parse the original JSON numeric token, never a rounded binary float.
+    if len(value)>128:raise EvidenceError('json_number_budget')
+    match=re.fullmatch(r'(-?)([0-9]+)(?:\.([0-9]+))?(?:[eE]([+-]?[0-9]+))?',value)
+    if match is None:raise EvidenceError('invalid_json_number')
+    exponent=int(match[4] or '0')
+    if not -128<=exponent<=128:raise EvidenceError('json_number_budget')
+    fraction=match[3] or '';coefficient=int(match[2]+fraction)
+    if match[1] and coefficient==0:raise EvidenceError('negative_zero_json')
+    scale=exponent-len(fraction)
+    if scale>=0:result=coefficient*10**scale
+    else:
+        result,remainder=divmod(coefficient,10**(-scale))
+        if remainder:raise EvidenceError('inexact_json_number')
+    if len(str(result))>128:raise EvidenceError('json_number_budget')
+    return -result if match[1] else result
+
+
+def decode(raw,*,numeric_policy='finite-float'):
+    # Default evidence readers retain their historical finite-float behavior.
+    # Source-sensitive metadata callers opt into exact integer token admission.
+    if numeric_policy not in('finite-float','exact-integer'):raise EvidenceError('json_numeric_policy')
     def pairs(rows):
         out={}
         for key,value in rows:
@@ -49,7 +70,8 @@ def decode(raw):
         return out
     def constant(_):raise EvidenceError('nonfinite_json')
     try:
-        value=json.loads(raw.decode('utf-8'),object_pairs_hook=pairs,parse_constant=constant)
+        options={'parse_int':_exact_integer,'parse_float':_exact_integer}if numeric_policy=='exact-integer'else{}
+        value=json.loads(raw.decode('utf-8'),object_pairs_hook=pairs,parse_constant=constant,**options)
         # Bound nested metadata before any recursive client interpretation.
         pending=[(value,0)];nodes=0
         while pending:

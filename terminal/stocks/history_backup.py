@@ -1,5 +1,6 @@
 """Owner-private bounded SQLite backup/restore. No caller file paths,overwrite or network."""
 import hashlib,json,os,sqlite3,tempfile,time,shutil,stat,math
+from terminal.verification.artifacts import decode
 from pathlib import Path
 from .history_store import MAX_PAYLOAD,MAX_SNAPSHOTS,RETENTION_SECONDS,verify
 
@@ -28,7 +29,7 @@ def _validate(db,store):
     rows=db.execute('SELECT revision,symbol,timeframe,created,payload FROM snapshots').fetchall()
     for revision,symbol,timeframe,created,raw in rows:
         if type(raw) is not bytes or hashlib.sha256(raw).hexdigest()!=revision:raise ValueError('history_backup_revision')
-        core=verify(json.loads(raw))
+        core=verify(decode(raw))
         if (symbol,timeframe)!=(core['symbol'],core['timeframe']) or type(created) not in (int,float) or not math.isfinite(created) or not 0<=created<=store.clock()+1:raise ValueError('history_backup_index_metadata')
         if core['source']['origin']!='HISTORICAL_SYNTHETIC' and not store.allow_observed:raise ValueError('history_observed_retention_not_approved')
     return len(rows)
@@ -74,7 +75,7 @@ def restore(store):
         source_path=store.path.parent/'history.backup.sqlite3';manifest=store.path.parent/'history.backup.json'
         _private(source_path);_private(manifest)
         if manifest.stat().st_size>4096:raise ValueError('history_backup_manifest_budget')
-        record=json.loads(manifest.read_bytes());raw=source_path.read_bytes()
+        record=decode(manifest.read_bytes());raw=source_path.read_bytes()
         if record.get('schema')!='gig.history.backup.v1' or record.get('sha256')!=hashlib.sha256(raw).hexdigest() or record.get('bytes')!=len(raw):raise ValueError('history_backup_digest')
         stage=_staging(store)
         try:

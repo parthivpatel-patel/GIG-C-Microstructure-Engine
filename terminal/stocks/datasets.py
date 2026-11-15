@@ -1,5 +1,6 @@
 """Exact interval-aligned private revision analysis. No rows exported or currencies inferred."""
 from fractions import Fraction
+from terminal.verification.artifacts import decode
 import hashlib,json
 from .portfolio import analyze
 from .history_store import verify,MAX_PAYLOAD,RETENTION_SECONDS
@@ -16,7 +17,7 @@ def analyze_revisions(store,selections,weights):
             if row is None or row[0]<store.clock()-RETENTION_SECONDS:raise ValueError('dataset_revision_missing')
             raw=row[1]
             if type(raw) is not bytes or len(raw)>MAX_PAYLOAD or hashlib.sha256(raw).hexdigest()!=revision:raise ValueError('dataset_revision_integrity')
-            core=verify(json.loads(raw))
+            core=verify(decode(raw))
             if core['source']['origin']!='HISTORICAL_SYNTHETIC' and not store.allow_observed:raise ValueError('dataset_retention_permission')
             cores[alias]=core
     if len({(c['timeframe'],c['source']['adjustment'],c['source']['origin'],c['source']['price_unit']) for c in cores.values()})!=1:raise ValueError('dataset_incompatible_sources')

@@ -1,5 +1,6 @@
 """Opt-in private SQLite snapshots:bounded immutable revisions,not an exchange archive."""
 import hashlib,json,os,re,sqlite3,stat,time,threading
+from terminal.verification.artifacts import decode
 from pathlib import Path
 from contextlib import contextmanager
 from .history import HistorySource,normalize
@@ -92,7 +93,7 @@ class HistoryStore:
         if row is None or row[0]<self.clock()-RETENTION_SECONDS:raise ValueError('history_revision_missing_or_expired')
         raw=row[1]
         if type(raw) is not bytes or len(raw)>MAX_PAYLOAD or hashlib.sha256(raw).hexdigest()!=revision:raise ValueError('history_storage_digest')
-        value=json.loads(raw);verify(value)
+        value=decode(raw);verify(value)
         if value['source']['origin']!='HISTORICAL_SYNTHETIC' and not self.allow_observed:raise ValueError('history_observed_retention_not_approved')
         return value
     def list(self):

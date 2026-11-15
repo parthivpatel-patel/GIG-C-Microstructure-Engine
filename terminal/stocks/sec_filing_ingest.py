@@ -14,7 +14,9 @@ from .xbrl_instance import X,L,tag,parse_xml,digest,canonical,selected_concepts,
 from .xbrl_dts import discover,EMBEDDED_PROFILE
 from .xbrl_collection import FilingCollection
 from .xbrl_types import COMPLEX_PROFILE
-from terminal.verification.artifacts import decode,read_bytes
+from terminal.verification.artifacts import decode as _decode_artifact,read_bytes
+
+def decode(raw):return _decode_artifact(raw,numeric_policy='exact-integer')
 MAX_SOURCE=2*1024*1024;MAX_TOTAL=8*1024*1024;MAX_SOURCES=32;MAX_REQUESTS=24;MAX_IMAGE=12*1024*1024
 
 class IngestError(ValueError):pass
@@ -154,9 +156,9 @@ class FilingIngestor:
     history=sources[plan['history_key']];name=history['url'].removeprefix('https://data.sec.gov/submissions/')
     historical=historical_rows(payload,decode(history['body']),name,self.cik)
     current={r['accession']:r for r in recorded['filings']}
-    if any(r['accession']in current and current[r['accession']]!=r for r in historical['filings']):raise IngestError('sec_schedule_contradictory_filing')
+    if any(r['accession']in current and canonical(current[r['accession']])!=canonical(r) for r in historical['filings']):raise IngestError('sec_schedule_contradictory_filing')
     recorded=historical
-   if metadata not in recorded['filings']:raise IngestError('sec_ingest_metadata_binding')
+   if not any(canonical(metadata)==canonical(row)for row in recorded['filings']):raise IngestError('sec_ingest_metadata_binding')
    prefix=f'https://www.sec.gov/Archives/edgar/data/{int(self.cik)}/{metadata["accession"].replace("-","")}/'
    if sources[plan['metadata_key']]['url']!=f'https://data.sec.gov/submissions/CIK{self.cik}.json'or sources[plan['index_key']]['url']!=prefix+'index.json':raise IngestError('sec_ingest_metadata_source_url')
    available=directory(decode(sources[plan['index_key']]['body']),self.cik,metadata['accession']);name=filename(raw['url'].rsplit('/',1)[-1])
@@ -241,7 +243,7 @@ class FilingIngestor:
       if metadata_shard not in [r['name']for r in shards(payload,self.cik,'0001-01-01','9999-12-31')]:raise IngestError('sec_schedule_shard_not_advertised')
       history=await self._read('https://data.sec.gov/submissions/'+metadata_shard,accession,stage,budget,fresh=fresh,submission_shard=True)
       historical=historical_rows(payload,decode(stage[history]['body']),metadata_shard,self.cik)['filings'];current={r['accession']:r for r in rows}
-      if any(r['accession']in current and current[r['accession']]!=r for r in historical):raise IngestError('sec_schedule_contradictory_filing')
+      if any(r['accession']in current and canonical(current[r['accession']])!=canonical(r) for r in historical):raise IngestError('sec_schedule_contradictory_filing')
       rows=historical
      matches=[r for r in rows if r['accession']==accession]
      if len(matches)!=1 or matches[0]['form']not in('10-K','10-K/A','10-Q','10-Q/A'):raise IngestError('sec_ingest_filing_not_advertised')
@@ -296,7 +298,7 @@ class FilingIngestor:
      if any(r['url']in admitted and admitted[r['url']]!=r['sha256']for r in stage.values()):raise IngestError('sec_ingest_immutable_source_changed')
      previous=self.plans.get(accession)
      if previous is not None and previous.get('inline_manifest')!=plan.get('inline_manifest'):raise IngestError('sec_inline_manifest_immutable')
-     if previous is not None and any(previous[k]!=plan[k]for k in('metadata','instance_key','gaap_namespace','amends_accession')):raise IngestError('sec_ingest_immutable_filing_changed')
+     if previous is not None and any(canonical(previous[k])!=canonical(plan[k])for k in('metadata','instance_key','gaap_namespace','amends_accession')):raise IngestError('sec_ingest_immutable_filing_changed')
      if previous is not None and set(previous['document_keys'])!=set(plan['document_keys']):raise IngestError('sec_ingest_immutable_filing_changed')
      candidate=self._rebuild(plans,sources)
      if store is not None:store.save(self._image(plans,sources,candidate))

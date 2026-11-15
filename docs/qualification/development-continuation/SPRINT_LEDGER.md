@@ -152,3 +152,13 @@ and6actual exports/23adversarial rejections pass (work/import-recovery/).
 Parallel continuation:Python exact metadata+historical duplicate readers,original
 DTS source audit,and actual three-role/vintage TypeScript consumer contract.
 Keep pending agent source changes separate;no app/server/provider action.
+
+Signed-zero/extended ingress remote-verified:db6b5d7a1add8b2d60d0a60db8d6dfb3021e21ac.
+Python ingress continuation:15new checks;82root/87agent focused checks pass.
+SEC/XBRL manifest readers now opt into exact original numeric-token validation;
+provider Decimal/default evidence float behavior stays explicit. Source checkpoint
+false/0 metadata alias reproduced and fixed by canonicalJSON comparisons. Four
+history revision/backup readers now reject duplicate decodedkeys even with matching
+supplied rawhashes. Contract+inventory:PYTHON_SOURCE_JSON_INGRESS.md. No default
+provider activation or accounting interpretation change. Source audit and actual
+three-role consumer contracts independently verified and queued next.
