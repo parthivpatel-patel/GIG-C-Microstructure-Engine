@@ -103,3 +103,15 @@ remain34COMPLETE/8PARTIAL/7BLOCKED/1N/A. No app/provider access or active backgr
 Next queue:negative/cross-role/typed-hypercube DRS;dimensioned OIM calculations;
 source-evidenced equivalence/statement fixtures;official provider/recovery contracts.
 Inspect actual Git status and latest receipts before resuming;never rerun patches blindly.
+
+## Statement reconstruction continuation from f87db9a
+
+Clean worktree/fetch and exact remote f87db9a5eea196c606b2dcbe8720c0b2def98b50
+verified before implementation. First package: explicit three-role statement sets
+and independent acceptance vintages.16new/78focused Python checks pass;original
+source/period/unit/conflict/missing/amendment semantics retained. Role designations
+are caller metadata,never inferred accounting equivalence or statement completeness.
+Contract:STATEMENT_SET_V1.md;developer log:work/statement-sprint/statements-final.log.
+Parallel packages:negative DRS V4,explicit dimensional calculation binding,and strict
+offline JSON ingress. Preserve all uncommitted agent work;commit packages by paths.
+All50statuses/seven external blockers remain unchanged;no app/provider operation.
