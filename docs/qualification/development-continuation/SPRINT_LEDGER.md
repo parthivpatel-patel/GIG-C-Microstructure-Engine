@@ -162,3 +162,13 @@ history revision/backup readers now reject duplicate decodedkeys even with match
 supplied rawhashes. Contract+inventory:PYTHON_SOURCE_JSON_INGRESS.md. No default
 provider activation or accounting interpretation change. Source audit and actual
 three-role consumer contracts independently verified and queued next.
+
+Python ingress remote-verified:6d5c454a501cce39901e7556ffa8579223f186c2.
+Original DTS audit continuation:23new/76root/92agent related Python checks pass.
+Explicit original instance+schema/linkbase bodies,manifest,concept profile and URI
+are reparsed;exact original parsed and full closure/graph identities must match.
+Canonical-rehashed declaration/default/relationship metadata retaining originalbody
+hashes now has an independent original-byte audit;legacy artifact-only APIs remain
+compatible. Plain pre-binding originals only;processing approval precedes XML.
+Contract:ORIGINAL_DTS_SOURCE_AUDIT.md. No independent authentication or full standards
+conformance is inferred;inline audit remains a precisely documented future contract.
