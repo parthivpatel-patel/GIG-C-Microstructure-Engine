@@ -132,3 +132,12 @@ diagnostics. Exact periods/units/member values must bind;all sourceIDs remain.
 Only existing admitted selected-fact participants;extensions/typed/negative/cross-role
 calculation semantics remain unsupported. Contract:EXPLICIT_DIMENSIONAL_CALCULATIONS.md.
 No default/legacy calculation change,accounting equivalence or provider activation.
+
+Dimensional calculations remote-verified:5fbd78fb2240042f44773ffd9425944ccf082a30.
+Fourth package:strict private offline JSON ingress. Six actual authored exports
+reproduced duplicate/escaped-key ambiguity;12adversarial admissions now reject.
+Lexical numeric checks use exact bounded BigInt arithmetic before Number conversion;
+fractional tokens cannot round into admitted integer metadata.196frontend checks,
+TSC/Vite and783guarded Python checks pass. Current focused GCC/Clang/sanitizer tests
+and all8frozen identities pass. No dependency pins/defaults/workspaces changed.
+Next gate:clean-source packaging,installed consumers,retained evidence and matrix.
