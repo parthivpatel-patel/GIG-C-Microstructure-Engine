@@ -234,3 +234,13 @@ fail-closed checks+2regressions repair it. Context-mismatchfixture nowuses valid
 instant while retainingmissing assertions. Contracts:SOURCE_ACCOUNTING_STATEMENTS.md,
 SOURCE_ACCOUNTING_RELATIONSHIPS.md. Typed/cross-role/generalV-equality and complete
 GAAPstatements remain open;legacy/default APIs and allrequirementsstatuses unchanged.
+
+FinalNovember15 integratedsource remote-verified:1ab1e17e1cfadc0e3d702bb18f9e65eb15057633.
+908guarded Python/197frontend/TSC/Vite and allcross-language contracts pass.14focused
+native checks acrossGCC/Clang/sanitizers and8frozen identities pass;native/core/SDK/
+buildinputs unchanged. Fresh clean-source sdist1625members/1624trackedfiles andfresh
+defaultwheel verified;8installed consumers+650source regressions and6installed
+cross-language contracts pass. Receipts:NOV15_FINAL_SPRINT_EVIDENCE.json. All8PARTIAL
+criteria individuallyreviewed;34COMPLETE/8PARTIAL/7BLOCKED/1N/A unchanged. Nextqueue in
+REPORT.md andNOV15_PARTIAL_ACCEPTANCE_REVIEW.md. No app/server/provider/trading/deploy/
+paid/owneracceptance;no backgroundexecution or activeagents remain afterdelivery.

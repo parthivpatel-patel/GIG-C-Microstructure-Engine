@@ -1,6 +1,6 @@
 # Remaining acceptance and November 20 target
 
-Reviewed November14,2026 (America/New_York), against the50-row matrix and existing
+Reviewed November15,2026 (America/New_York), against the50-row matrix and existing
 source/qualification tools. November20 remains the engineering target. The current
 checkpoint is incomplete; it does not establish a defensible completion date for
 all broader contracts or authorize any external acceptance action.
@@ -10,7 +10,7 @@ all broader contracts or authorize any external acceptance action.
 |ID|Engineering still open after this sprint|Dependency and minimum defensible next effort|Consequence of deferral|
 |---|---|---|---|
 |DATA02|Bounded adapters already exist; actual current complete listing reconciliation is not present.|Authorized authoritative import and comparison;at least one source-bound reconciliation cycle. Source freshness cannot be manufactured offline.|Universe remains bounded/source-labelled rather than complete current US listings.|
-|SEC02|Complete source-evidenced statements/accounting relationships;general schema/typed/cross-role/negative-only/effective DRS;full inline/OIM/calculation semantics. Three-role source views,one-role negative DRS,positive explicit dimensional calculations and original plain-DTS audit are implemented bounded subsets.|Select exact authoritative mapping/conformance contracts and legitimate independent corpus;multiple engineering/validation milestones,not solely external access. No defensible fixed elapsed estimate before that scope/corpus.|Complete GAAP statements,full history and general standards conformity remain unclaimed.|
+|SEC02|Complete statements/accounting reconstruction beyond supported direct source assertions;typed/cross-role/effective DRS;full schema/inline/OIM/calculation semantics. One-role negative-only V5,original-inline audit and source essence/required-element statement products are now demonstrated subsets.|Select remaining precise conformance/issuer statement contracts and independent corpus;multiple engineering/verification units. Source role labels and hashes cannot establish general GAAP completeness or issuer authenticity.|General statement/history/conformance claims stay incomplete;no inferred alias or missing-value filling.|
 |MD06|Observed IEX cancellation/error mapping and exchange-complete recovery authority.|Authoritative source action/sequence/backfill contract first;then one bounded mapping-and-fault-fixture package. Losslessness is not estimable without source authority.|Authored cancellation/correction ledger stays available;no observed tape-completeness claim.|
 |MD07|Broader official depth/options/trade/status/session/usage reconciliation beyond the new opt-in book negotiation and observed qualification.|At least a source-versioned contract/fixture reconciliation package;actual provider acceptance requires separate authorization. Existing ordered-update subset stays provisional.|Kraken remains provisional and no provider activation occurs.|
 |REL02|Additional partial/terminal/native-schema/compressed source-position contracts and hardware durability acceptance.|Specify each new source boundary/schema first,then native/codec/failure/cross-process tests. Arbitrary compressed offsets and hardware guarantees cannot be estimated from current fixtures.|Existing bounded paused continuation remains intact;unsupported positions/migrations reject.|
@@ -45,15 +45,15 @@ is introduced. N/A scope remains N/A.
 
 ## Next execution queue
 
-Preserve all previous packages plus eight source/consumer checkpoints in
-STATEMENT_RECOVERY_EVIDENCE.json. Next milestones:source-evidenced complete-statement
-criteria and accounting relationships;OIM/calculation binding beyond positive admitted
-explicit contexts;typed/cross-role/negative-only/effective DRS;original-byte inline
-audit;remaining official Kraken/IEX and exact native recovery contracts. New semantics
-must retain opt-in versioning,resource limits,unsupported diagnostics and source
-provenance. Existing private JSON readers are inventoried in PYTHON_SOURCE_JSON_INGRESS.md;
-public HTTP/SSE/localStorage contracts are separate,not universally migrated.
-Never restart completed acquisition,recovery,statement,import,UI or SDK packages.
+Preserve all prior packages and four November15 source checkpoints. Current evidence:
+NOV15_FINAL_SPRINT_EVIDENCE.json. Exact8PARTIAL criteria and minimum next units:
+NOV15_PARTIAL_ACCEPTANCE_REVIEW.md. Next work:typed/cross-role/effective DRS;general
+OIM/calculation and rounding-V-equality;broader original-source issuer statement
+reconstruction;normal product integration of new explicit accounting/inline audit
+APIs;remaining official Kraken/IEX and precisely specified native recovery contracts.
+All changes retain opt-in versions,resource limits,unsupported diagnostics,source
+provenance and legacy defaults. Do not restart completed acquisition,JSON integrity,
+source-audit,DRS,statement,UI or SDK packages.
 
 Current evidence does not support a full-engineering-complete or production-ready
 claim by the target date. The deadline has not been silently extended. Report actual

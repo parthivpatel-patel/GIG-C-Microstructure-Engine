@@ -1,5 +1,5 @@
 {
-  "schema": "gig.development.completion.v19",
+  "schema": "gig.development.completion.v20",
   "baseline": "e0d5741dcef172b9d7cd30754221429479f67192",
   "branch": "development/gig-ui-redesign",
   "scope": "Private single-user bounded observation/research implementation;not full institutional operational qualification",
@@ -485,15 +485,22 @@
         "terminal/stocks/test_xbrl_dts_source_audit.py",
         "terminal/stocks/test_statement_set_source_acceptance.py",
         "terminal/tests/check_statement_set_contract.py",
-        "terminal/stocks/test_python_json_ingress.py"
+        "terminal/stocks/test_python_json_ingress.py",
+        "terminal/stocks/xbrl_accounting_relationships.py",
+        "terminal/stocks/xbrl_accounting_statements.py",
+        "terminal/stocks/test_xbrl_accounting_relationships.py",
+        "terminal/stocks/test_xbrl_accounting_statements.py",
+        "terminal/stocks/test_xbrl_negative_only_dimensions.py",
+        "terminal/stocks/test_inline_dts_source_audit.py",
+        "terminal/tests/check_accounting_statements_contract.py"
       ],
-      "test_evidence": "827guarded Python/197frontend/TSC/Vite;78statement-set,98negative-DRS,103dimensional-calculation,82Python-ingress,76source-audit,22statement-consumer focused root cohorts passed (overlapping). Statement consumer:5sets/4cutoffs/23v2packets/1018assertions/7rejections;private JSON:6exports/23rejections. Existingv1/v2/vintage/calculation/native contracts passed;8frozen identities unchanged. Fresh installed SDK:8consumers+569source regressions and all installed financial contracts. STATEMENT_RECOVERY_EVIDENCE.json.",
-      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling. Opt-in direct positive explicit open/closed hypercubeV2 now validates required and supplied extra dimensions/domains/defaults without consolidating dimensioned facts. Numeric restriction constraintsV5 validate fixed/inherited digits and local bound definitions,including nil. Additive exact calculation intervalV2 supports rounding/truncation endpoint arithmetic and duplicate constraints without fact selection;The new explicit report binder revalidates original source/DTS,entity/context/period/unit identities and effective single-role signed-unit networks for supported undimensioned data points. It retains all duplicates and missing contributions. Positive explicit DRSV3 adds inherited/conjunctive multiple hypercubes in one role;legacy defaults and identity remain. Independent typed scalar-domain diagnostics bind original schemas and primitive/restricted values without financial promotion or general typed DRS. Acceptance-selected calculation exports require matching full DTS and resolved supplied amendment ancestry;offline Stock Intelligence admission independently validates provenance and exact arithmetic. General OIM/DRS/report conformance remains unsupported. Explicit three-role statement sets now reconstruct all supplied rows from one acceptance-selected filing and independent cutoffs;caller role labels are not GAAP classification. Negative explicit inherited DRSV4 validates exclusions after cube well-formedness;positive defaults alone aggregate. New positive explicit dimensional calculation report independently revalidates V3 DRS/global defaults and original source aspects. Original plain-instance/DTS audit independently reconstructs exact artifacts from original bytes. Python/TypeScript private import metadata now rejects duplicate/lexical/type aliases;historical source revisions reject ambiguous JSON. Full statement completeness and accounting equivalence remain unclaimed.",
+      "test_evidence": "908guarded Python/197frontend/TSC/Vite;106DRS,91inline-audit,56accounting-relationship and59accounting-product focused root checks pass (overlap). New accounting7actual exports/224assertions/7tamper rejections;existing statement/vintage/calculation/import/native contracts pass. All8frozen identities unchanged;14focused native checks across5configs. Fresh clean-source SDK8consumers+650source regressions and6installed cross-language contracts pass. NOV15_FINAL_SPRINT_EVIDENCE.json.",
+      "explanation": "Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling. Opt-in direct positive explicit open/closed hypercubeV2 now validates required and supplied extra dimensions/domains/defaults without consolidating dimensioned facts. Numeric restriction constraintsV5 validate fixed/inherited digits and local bound definitions,including nil. Additive exact calculation intervalV2 supports rounding/truncation endpoint arithmetic and duplicate constraints without fact selection;The new explicit report binder revalidates original source/DTS,entity/context/period/unit identities and effective single-role signed-unit networks for supported undimensioned data points. It retains all duplicates and missing contributions. Positive explicit DRSV3 adds inherited/conjunctive multiple hypercubes in one role;legacy defaults and identity remain. Independent typed scalar-domain diagnostics bind original schemas and primitive/restricted values without financial promotion or general typed DRS. Acceptance-selected calculation exports require matching full DTS and resolved supplied amendment ancestry;offline Stock Intelligence admission independently validates provenance and exact arithmetic. General OIM/DRS/report conformance remains unsupported. Explicit three-role statement sets now reconstruct all supplied rows from one acceptance-selected filing and independent cutoffs;caller role labels are not GAAP classification. Negative explicit inherited DRSV4 validates exclusions after cube well-formedness;positive defaults alone aggregate. New positive explicit dimensional calculation report independently revalidates V3 DRS/global defaults and original source aspects. Original plain-instance/DTS audit independently reconstructs exact artifacts from original bytes. Python/TypeScript private import metadata now rejects duplicate/lexical/type aliases;historical source revisions reject ambiguous JSON. Full statement completeness and accounting equivalence remain unclaimed. November15 adds original-source standard essence-alias/requires-element extraction with exact declaration/effective relationship/provenance checks and conservative source-value diagnostics;three-role accounting statement/vintage APIs classify supported/conflicting/missing/unsupported rows without inferred GAAP metrics or fact filling. Negative-only explicit DRSV5 independently validates global contexts/defaults;original inline audit reconstructs continuations,profiles,receipts and pinned acquisition intent. General conformance/complete statements and real issuer authenticity remain unclaimed.",
       "disposition": "Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.",
-      "action_now": "Next precise milestones:source-evidenced accounting-equivalence/complete-statement criteria;complex typed/cross-role/negative-only DRS;dimensioned OIM calculation semantics beyond existing selected facts;inline original-byte source audit and product integration. Preserve all supported profiles and source/default identities.",
+      "action_now": "Next:typed/cross-role/effective DRS;general OIM/calculations and full rounding V-equality;broader original-source issuer accounting/statement completeness;product integration of new explicit reports;independent legitimate source corpus. Preserve existing profiles and no inferred GAAP aliases.",
       "work_class": "PARTIAL:bounded primary/history ingestion and product contracts implemented;full statements,semantic conformance and observed historical completeness remain open",
-      "completed_this_session": "103new Python tests and9new frontend tests;three source-designated statement kinds/vintages,negative DRS,explicit dimensional calculation binding,strict JSON boundaries,original-DTS audit and actual existing-v2 consumer acceptance. No full requirement promotion.",
-      "remaining_implementation_or_qualification": "General schema/complex content/attributes/substitution and full inline transformations/targets/tuples/escaped HTML;negative-only/typed/cross-role/precedence/general DRS beyond explicit one-role V4;full OIM/Calculations1.1 including source extensions,negative/typed contexts and arbitrary weights/networks;source-evidenced accounting equivalence and complete financial statement criteria;original-byte inline audit;independent observed acceptance corpus and complete history. Supplied three-role labels,ancestry and source reconstruction are narrower contracts;no automatic full-EDGAR coverage or source authentication.",
+      "completed_this_session": "81new Python regressions:22negative-only DRS,22inline audit,19accounting relationships and18accounting product/history. Rootfixed invalid abstract/period equality claims.8legacyDRS artifacts and3plain audit receipts unchanged;new7-export TypeScript contract passed.",
+      "remaining_implementation_or_qualification": "General schema/complex content/attributes/substitution and full inline transformations/targets/tuples/escaped HTML;typed/cross-role/precedence/general DRS beyond explicit one-role V5;full OIM/Calculations1.1 including source extensions,negative/typed contexts and arbitrary networks/weights;full rounding-based essence V-equality,general taxonomy relationships and complete financial-statement criteria;original-inline audit/product integration beyond supported default-target profiles;independent observed corpus and complete history. Supported source essence assertions/classifications do not create companyfacts metric aliases or authenticate issuers.",
       "dependency": "Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.",
       "effort_estimate": "Several engineer-weeks for scoped full transformation/DTS/extension/relationship and statement-integration coverage;original receipts and complete historical input coverage remain external evidence requirements."
     },
@@ -817,9 +824,11 @@
         "terminal/web/src/offlineJson.ts",
         "terminal/verification/artifacts.py",
         "terminal/stocks/test_python_json_ingress.py",
-        "terminal/stocks/test_history_json_ingress.py"
+        "terminal/stocks/test_history_json_ingress.py",
+        "terminal/stocks/xbrl_accounting_relationships.py",
+        "terminal/stocks/xbrl_dts_source_audit.py"
       ],
-      "test_evidence": "15new Python ingress and9frontend parser tests;6actual exports/23adversarial ingress rejections;source checkpoint boolean alias and matching-hash history duplicates repaired.197frontend/827guarded tests pass. Current source-lock SBOM85components/7inputhashes;13SBOM/3packaging checks and pip check pass. No new advisory scan or installed/deployed/native/OS clearance. STATEMENT_RECOVERY_EVIDENCE.json.",
+      "test_evidence": "908guarded Python/197frontend tests;original inline source/profile/acquisition audit and abstract/period-invalid equality rejection added. Fresh source-lock SBOM85components/7inputs;13SBOM/3package tests and pip check pass. No new advisory scan,target OS/native/deployed/edge clearance. NOV15_FINAL_SPRINT_EVIDENCE.json.",
       "explanation": "Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories. Deterministic bounded offline inventory now binds exact Python/npm declarations,source bytes,artifact identity/SRI and exclusive private output. Registry advisory results are current snapshots for covered inputs only;no dependency pins were upgraded.",
       "disposition": "Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.",
       "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
@@ -907,7 +916,7 @@
         "terminal/web/src/SourceCalculations.tsx",
         "terminal/web/src/sourceCalculations.test.ts"
       ],
-      "test_evidence": "197frontend tests/TSC/Vite pass,including private import controls/SSR and9strict parsing checks;no application/browser/device/assistive-technology launch. STATEMENT_RECOVERY_EVIDENCE.json.",
+      "test_evidence": "197frontend tests/TSC/Vite passed at the November15 source checkpoint;existing file-control/SSR,source disclosure and strict parsing contracts preserved. No application/browser/device/assistive-technology launch. NOV15_FINAL_SPRINT_EVIDENCE.json.",
       "explanation": "Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.",
       "disposition": "Feasible text alternative implemented. Physical devices,screen readers and exhaustive WCAG2.2AA/current browser qualification remain unverified.",
       "action_now": "Independent offline package completed;the listed missing contract/source/target requirement remains open.",
@@ -965,12 +974,12 @@
       "effort_estimate": "Cannot estimate historical acceptance closure before the missing contract is resolved;writing a prospective contract is a distinct owner decision."
     }
   ],
-  "tested_application": "4db5be177a69983cfed68b268561cdf8f67472da",
+  "tested_application": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
   "row_count_scope": "50entries =previous49entries +explicitly requested Kraken official-L2 requirement MD07;49reviewed areas +1historical A18/A19 decision. No previous row removed.",
-  "previous_matrix_commit": "f87db9a5eea196c606b2dcbe8720c0b2def98b50",
+  "previous_matrix_commit": "db0d4dd0aa133fcd8d48c54255a0d4c3170885cb",
   "current_report": "REPORT.md",
   "launch_policy": "Application launch/deployment,application browser and final acceptance NOT STARTED;prohibited in this sprint",
-  "evidence_policy": "Current bounded evidence:STATEMENT_RECOVERY_EVIDENCE.json. Earlier evidence retains its own source/date/configuration;no status promoted.",
+  "evidence_policy": "Current bounded evidence:NOV15_FINAL_SPRINT_EVIDENCE.json;all8PARTIAL criteria reviewed inNOV15_PARTIAL_ACCEPTANCE_REVIEW.md. Earlier receipts retain source/date/configuration;no status promoted.",
   "implementation_checkpoints": [
     "b2e05dc5b65f9127a9ecf9f1064bf5af1b38e68c",
     "56cd5c698fecfff3e31a309ee6c6a997137adc37",
@@ -1037,9 +1046,13 @@
     "db6b5d7a1add8b2d60d0a60db8d6dfb3021e21ac",
     "6d5c454a501cce39901e7556ffa8579223f186c2",
     "bb09af8fd869f86b37571f253173a108d7c017d5",
-    "4db5be177a69983cfed68b268561cdf8f67472da"
+    "4db5be177a69983cfed68b268561cdf8f67472da",
+    "f8da7cc72bf142263be7dfa5e40b83704a4ad384",
+    "c458226042abf98acefb508b19320c8f27b984b9",
+    "e334aba39177f85527679cfd9f38149f8708012c",
+    "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633"
   ],
-  "date": "2026-11-14",
+  "date": "2026-11-15",
   "timezone": "America/New_York",
   "counts": {
     "COMPLETE": 34,
@@ -1047,7 +1060,7 @@
     "PARTIAL": 8,
     "NOT APPLICABLE": 1
   },
-  "starting_commit": "f87db9a5eea196c606b2dcbe8720c0b2def98b50",
+  "starting_commit": "db0d4dd0aa133fcd8d48c54255a0d4c3170885cb",
   "reviewed_area_count": 49,
   "historical_decision_rows": 1,
   "total_rows": 50,

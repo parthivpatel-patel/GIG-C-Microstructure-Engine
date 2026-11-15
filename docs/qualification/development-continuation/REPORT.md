@@ -1,182 +1,171 @@
-# GIG statement reconstruction and import-integrity checkpoint
+# GIG November15 source-accounting,DRS and inline-audit checkpoint
 
-November14,2026 (America/New_York). Engineering target:November20,2026.
+November15,2026 (America/New_York). Engineering target:November20,2026.
 Branch:`development/gig-ui-redesign`. Starting verified remote:
-`f87db9a5eea196c606b2dcbe8720c0b2def98b50`.
-Recovery checkpoint:`d24175eed9ec319eeb0d865bb01200d8b3d11bb7`.
-Integrated tested source:**4db5be177a69983cfed68b268561cdf8f67472da**.
-The enclosing evidence-only commit changes no runtime input. Current receipts:
-[STATEMENT_RECOVERY_EVIDENCE.json](STATEMENT_RECOVERY_EVIDENCE.json);
-reproduction:[STATEMENT_RECOVERY_REPRODUCTION.md](STATEMENT_RECOVERY_REPRODUCTION.md).
-Earlier reports/receipts retain their original source/date/configuration in Git.
+`db0d4dd0aa133fcd8d48c54255a0d4c3170885cb`.
+Integrated tested source:**1ab1e17e1cfadc0e3d702bb18f9e65eb15057633**.
+Current receipts:[NOV15_FINAL_SPRINT_EVIDENCE.json](NOV15_FINAL_SPRINT_EVIDENCE.json).
+Commands:[NOV15_FINAL_REPRODUCTION.md](NOV15_FINAL_REPRODUCTION.md).
+The enclosing evidence-only commit changes no runtime input;earlier reports/receipts
+retain their original source/date/configuration in Git. Later evidence documents
+and the partial-criteria review are outside the tested source packages.
 
-The executor ran commands successfully. Actual branch,status,fetch/remote identity,
-ledger,matrix,source contracts and latest report/evidence were inspected before edits.
-The recovery request arrived while final packaging was pending. Its observed remote
-matched d24175e;the five-line uncommitted import-contract clarification was preserved,
-reviewed and committed. Existing statement-sprint files/logs and partial d24175e sdist
-were retained;fresh final packaging used a separate directory. No reset,discard,
-remote restore,force push,project restart or blind patch rerun occurred. Independent
-agents worked in coordinated files;root reviewed,reran focused tests and published each
-package. All earlier packages,default behavior,twelve workspaces and native identities
-remain. No application/server/browser/provider/deployment/trading/paid resource or
-final owner acceptance action occurred.
+The executor successfully executed commands. Clean branch/status,fetch/remote identity,
+latest report,evidence,ledger,matrix and blockers were inspected before edits. All
+published packages and original source identities were preserved. No reset,discard,
+force push,remote restore,project restart or JSON-integrity reimplementation occurred.
+Independent agents implemented separate DRS,inline audit and accounting-extraction
+files;root reviewed,wired the product,added source-validity repairs and reran checks
+before each verified push. No application/server/provider/deployment/trading/paid
+resource or final owner acceptance action occurred. Public normative specifications
+were reviewed using documentation tools;executor direct HTTP's403 was not treated
+as an unavailable executor or repaired through GIG source changes.
 
-## Published source checkpoints
+## Published implementation checkpoints
 
-Each implementation was committed,pushed and checked against the authorized remote
-branch before proceeding. The tested final source contains all eight checkpoints:
-
-|Package|Verified implementation SHA|Focused acceptance|
+|Package|Verified remote implementation SHA|Demonstrated acceptance|
 |---|---|---|
-|Explicit three-role statement sets and independent vintages|0486062dca1e2be332bd767b34fa1836d9798ec9|16new/78root Python|
-|Inherited negative explicit DRS V4|20e211184b476083ba544f90701cdb10270c7730|22new/71focused/98related;6legacy artifact identities|
-|Positive explicit dimensional calculation binding|5fbd78fb2240042f44773ffd9425944ccf082a30|21new/103root Python|
-|Bounded duplicate-aware exact private JSON imports|d24175eed9ec319eeb0d865bb01200d8b3d11bb7|8newfrontend;196frontend/TSC/Vite before signed-zero extension|
-|Signed-zero metadata and expanded adversarial ingress|db6b5d7a1add8b2d60d0a60db8d6dfb3021e21ac|9parser/197frontend;6exports/23rejections|
-|Exact Python source metadata and historical duplicate readers|6d5c454a501cce39901e7556ffa8579223f186c2|15new/82root/87agent Python;actual false/0 source-alias repair|
-|Original-byte parsed/DTS source reconstruction audit|bb09af8fd869f86b37571f253173a108d7c017d5|23new/76root/92agent Python|
-|Existing-v2 statement consumer and guarded integration|4db5be177a69983cfed68b268561cdf8f67472da|6new/22focused Python;5sets/4cutoffs/23v2packets/1018assertions/7rejections|
+|Negative-only explicit DRS V5|f8da7cc72bf142263be7dfa5e40b83704a4ad384|22new/106focused/97related Python;8legacy artifacts exact|
+|Original inline set/DTS/acquisition audit|c458226042abf98acefb508b19320c8f27b984b9|22new/91focused Python;3plain audit receipts exact|
+|Original-source essence/required-element relationships|e334aba39177f85527679cfd9f38149f8708012c|17initial new/54focused;19new/56focused after root repairs|
+|Source-accounting statements/history and integrated guard|1ab1e17e1cfadc0e3d702bb18f9e65eb15057633|18product/59related Python;7actual exports/224assertions/7rejections;908guarded|
 
-Focused cohorts overlap and are not added to the guarded total. Contracts and their
-source specifications:STATEMENT_SET_V1.md,NEGATIVE_EXPLICIT_DRS.md,
-EXPLICIT_DIMENSIONAL_CALCULATIONS.md,STRICT_OFFLINE_JSON_IMPORTS.md,
-PYTHON_SOURCE_JSON_INGRESS.md,ORIGINAL_DTS_SOURCE_AUDIT.md and
-STATEMENT_SET_CONSUMER_ACCEPTANCE.md.103new Python and9new frontend checks were added
-relative to f87db9a;44Python and1frontend were added after recovery checkpoint d24175e.
+All four packages were committed,pushed and checked against the authorized remote
+before proceeding.81new Python regressions are explicitly registered in the guarded
+suite. Focused cohorts overlap and are not added to the guarded total. Contracts:
+NEGATIVE_ONLY_EXPLICIT_DRS.md,ORIGINAL_INLINE_DTS_SOURCE_AUDIT.md,
+SOURCE_ACCOUNTING_RELATIONSHIPS.md and SOURCE_ACCOUNTING_STATEMENTS.md.
 
-## Implemented boundaries
+## Source-evidenced accounting milestone
 
-Statement sets designate separate balance-sheet,income-statement and cash-flow
-presentation roles supplied explicitly per accession. Designations are caller labels,
-not inferred GAAP classification or equivalence. Exact latest acceptance/form-family
-selection and all supplied amendment ancestry are required. Original source facts,
-expanded concepts,periods,units,missing/nil/zero/conflicting rows and DTS relationships
-remain visible;no old filing supplies a missing cell. Comparative periods stay
-separate. Each authored historical cutoff gets an independent whole-source view;
-SOURCE_CHANGED does not infer an accounting restatement. Original admission identity
-and freshly corroborated child identity are distinct and explicitly linked.
-All available source views still say complete_statements=false and complete_history=false.
+The new extractor requires original instance/taxonomy/linkbase bytes and independently
+reconstructs the exact parsed artifact and full DTS closure before interpreting any
+accounting relationship. Only supported standard direct-item essence-alias and
+requires-element definition content is admitted;unknown/custom/XDT definition scope
+rejects. Effective priority/prohibition,order and full original arc URI/SHA/node
+provenance remain. The corrected XBRL2.1 normative sections3.5.3.9.7.4,5.2.6.2.2 and
+5.2.6.2.4 were independently reviewed. Order is non-exempt under arc equivalence.
 
-DRS V4 adds inherited all/notAll conjunction in one role with at least one positive
-assignment. Negative cube declarations/domains are validated before a restricted
-contextual failure can satisfy an exclusion. Unsupported semantics,cycles,corrupted
-defaults,global invalid contexts and resource errors never count as exclusions.
-Valid negative cubes reject the candidate. Positive defaults alone aggregate into
-fact proof. V1/V2/V3 identities remain exact. Negative-only,typed,targetRole switching,
-precedence/prohibition and general DRS remain unsupported.
+Essence declarations require exact supported named type/period and compatible present
+balance. Source facts retain original IDs,lexical values,unit/context/identifier
+identities,duplicates,nil,missing counterparts and conflicts. Requires-element uses
+global occurrence semantics without inventing context/unit matching or target facts.
+Finite-accuracy reported agreement is explicitly distinct from supported exact
+INF equality;full rounding-based XBRL V-Equality is not claimed. No GAAP metric alias,
+representative conflicting fact,relationship chain or optional missing-value inference
+is introduced.
 
-The separate dimensional calculation API recomputes positive V3 DRS against original
-source/DTS and independently checks global defaults. Reported OIM dimensions omit
-default members;effective/default values are separate derived diagnostics. Exact
-entity,period,unit and explicit member aspects bind signed-unit effective calculations
-without changing original source IDs. Duplicate intervals and missing contributions
-remain explicit. Only already admitted/conflicted participants are supported;source
-extensions,unadmitted foreign-unit facts,typed/negative/cross-role calculations and
-full OIM/Calculations1.1 are not claimed. Legacy calculation API/defaults are unchanged.
+The accounting product reconstructs separately designated balance-sheet,income-statement
+and cash-flow source roles at exact acceptance cutoffs. Type,periodType,balance and
+source declaration/relationship receipts classify rows;caller role labels are not
+inferred GAAP classifications. The same original facts/contexts/units/source must match
+the admitted collection. Original audited and admitted corroborated identities remain
+separate and explicitly bound. Every row is SUPPORTED,CONFLICTING,MISSING or UNSUPPORTED;
+allfour outcomes are tested in one source fixture. Missing aliases or required rows
+stay missing. A conflicting source relationship suppresses the projected value while
+preserving both original reported quantities.
 
-Private TypeScript JSON ingress rejects duplicate decoded keys,including escaped
-aliases,invalid UTF8 and bounded resource excess before semantic admission. Numeric
-metadata is validated from original coefficient/exponent tokens with exact BigInt
-arithmetic before Number conversion. Fractions rounded to safe integers,unsafe
-magnitudes,underflow and negative-zero metadata reject. Exact financial strings,
-including signed zero,are preserved. Existing legacy/v2/vintage/calculation exports
-remain admitted;invalid calendar periods/acceptance,cutoff/sourcehash mismatches and
-re-signed source/context/unit/calculation corruption are tested.
+Exact interval calculations bind entity identifier lexical spelling,context,period,
+unit and supported undimensioned source aspects through the explicit calculation
+network. Missing/incompatible terms remain INCOMPLETE;no balancing value is generated.
+Whole latest-source selection,complete supplied amendment ancestry and independent
+historical cutoffs prevent older filings from filling current cells. Source changes
+do not infer restatements. Company-v1/v2/vintage,selected financials and SDK defaults
+remain compatible;there is no new HTTP route or automatic browser/source activation.
+The new report has a bounded offline TypeScript test consumer,not a new public
+browser import mode. Authored taxonomies/issuer relationships are synthetic engineering
+fixtures;actual issuer authentication and complete observed statements remain unverified.
 
-Python SEC/XBRL manifest readers opt into exact integer-token parsing while preserving
-large integer metadata. Existing Decimal provider observations and default finite-float
-evidence semantics are retained. Canonical JSON comparisons fix the reproduced
-checkpoint false/0 equality alias. Four private history revision/backup readers now
-reject duplicate keys even when raw bytes match a caller-supplied hash. Legitimate
-fractional retention clocks and ordinary restoration remain compatible. The named
-boundary inventory distinguishes file/source imports from public HTTP/SSE/localStorage
-and generated-data readers;it does not claim a universal JSON policy or target clearance.
+Root review reproduced two invalid-source cases that initially could claim equality:
+abstract facts and finite contexts contradicting declared periodType. They now reject
+before equality assessment,with two new regressions. A prior context-mismatch fixture
+used an invalid duration;it now uses a valid different instant while retaining its
+original missing-counterpart assertions. Original-source claim strength was increased,
+not hidden through relaxed tests.
 
-The additive plain-original DTS audit requires explicit original bytes,manifest,
-concept profile and URI. It reparses original instance identities and reconstructs
-exact full dependency closure/graph,detecting canonical-rehashed metadata that disagrees
-with the original bodies. Processing approval precedes XML. No source contact/raw text
-is returned. Inline/derived artifacts are outside this audit profile. Hash integrity
-and caller-supplied originals do not independently authenticate issuers. Legacy
-artifact-only binders remain compatible with their documented narrower trust scope.
+## DRS and original inline source auditing
 
-## Current developer verification
+V5 supports one-role,inherited negative-only explicit hypercube conjunction. Every
+reported axis/member/default and every global default is validated independently
+before a well-formed cube's contextual invalidity may satisfy an exclusion. Schema,
+unsupported,resource,cycle and globally invalid context failures remain fatal. Implicit
+defaults remain separate source proof and cannot silently enter consolidated financial
+selection. Positive/mixed profiles remain separate;typed,cross-role,precedence and
+general XDT/OIM semantics are still unsupported. Eight V1–V4artifacts/canonical identities
+match db0d4dd exactly.
 
-|Check|Actual result|
+The separate inline audit checks every original manifest,processing approval,raw hash,
+URI,receipt and immutable transformation choice before XML. It reparses supported
+multi-document continuations and source traces,then reconstructs exact original parsed
+set and DTS/reference closure from all original bodies. Acquisition intent requires
+its independently retained expected manifest digest;self-hashing a supplied replacement
+cannot attest the old authored order. Supplied/acquisition order and canonical parsed
+URI order are distinct in the receipt. Plain/derived substitutes,changed profiles,
+missing/extra/corrupt originals and ambiguous identities reject. Three complete plain
+audit receipts match the previous implementation exactly. No source hash is treated
+as independent issuer authentication;no new transform/target/HTML semantic scope is
+implied by successful reconstruction.
+
+## Current verification and packaging
+
+|Check|Current result|
 |---|---|
-|Guarded Python subset|827passed;0failures/errors/skips;app factory and socket bind/connect prohibited|
+|Guarded Python subset|908passed;0failures/errors/skips;app factory and socket bind/connect prohibited|
 |Frontend|197passed;0failed/skipped;TypeScript/Vite production build passed|
-|Statement source consumer|5sets,4history entries,23actual v2child packets,1018assertions,7re-signed rejections|
-|Private JSON ingress|6actual legacy/v2/vintage/calculation exports;23adversarial rejections|
-|Existing financial contracts|v1:8cases/58assertions;v2:15/93;vintages:3entries/6rejections;calculation:4exports/11rejections|
-|Native-to-TypeScript|35assertions,5states,1source recovery path|
+|New accounting source consumer|7actual exports;224assertions;7tamper rejections|
+|Existing source-statement consumer|5sets/4cutoffs/23v2packets;1018assertions;7re-signed rejections|
+|Existing financial contracts|v1:8cases/58assertions;v2:15/93;vintages:3/6rejections;calculation:4/11rejections;JSON ingress:6/23rejections|
+|Native-to-TypeScript|35assertions,5states,1source-recovery path|
 |GCC Release native recovery|6passed|
 |GCC Debug,Clang Debug,Clang Release,GCC ASan+UBSan|2focused recovery checks passed in each configuration|
 |Frozen native references|All8exact canonical identities unchanged|
-|Clean-source package|1559members/1558tracked files individually byte-checked;fresh sdist and default wheel|
-|Fresh installed default SDK|8independent consumers+569source regressions passed;installed accuracy/vintage/calculation/ingress/statement contracts passed|
-|Package/dependency checks|3package-pattern tests,13SBOM tests and pip check passed;source-lock SBOM85components/7input hashes|
+|Clean-source packaging|1625members/1624tracked files individually byte-checked;fresh sdist/default wheel|
+|Fresh installed default SDK|8consumer tests+650source regressions passed;6installed cross-language contracts passed|
+|Package/dependency checks|3package-pattern tests,13SBOM tests,pip check passed;source-lock SBOM85components/7input hashes|
 
-Native focused checks were run during this active continuation before the recovery
-request,using existing byte-equivalent compiler/sanitizer builds. Every native/core/
-SDK/build input is byte-identical through final tested source4db5be1. This is not a
-fresh full compiler matrix or Python sanitizer instrumentation. The default wheel was
-separately freshly compiled from the verified extracted source. ARM64,physical GPU,
-browser/assistive technology,actual providers,OS/edge security and owner acceptance
-remain unqualified. No new advisory scan was performed. The source-lock inventory is
-not installed reachability,vulnerability clearance or license/target acceptance.
-Exact package/log/source hashes are retained in the evidence;later evidence-only
-documentation is outside those artifacts. Two-build bit-for-bit reproducibility was
-not established. Vite's existing large-chunk advisory remains;no cosmetic rewrite
-or warning suppression was introduced.
+Native/core/SDK/build inputs are byte-identical to the starting checkpoint. Current
+focused native runs reused those existing compiler/sanitizer builds;this is not a
+fresh full compiler matrix or Python instrumentation. The default wheel was freshly
+compiled from the verified extracted clean-source sdist. Exact source/log/package
+hashes are in the evidence. Two-build bit-for-bit reproducibility was not established.
+No new advisory scan,target OS/native/deployed/edge clearance,actual provider/device/
+ARM64/browser/assistive-technology or owner acceptance is implied. Source-lock inventory
+is not installed reachability or vulnerability absence. Vite retains its existing
+large-chunk advisory;no warning suppression or cosmetic rewrite was introduced.
 
-Initial developer failures are retained separately:statement fixtures reused contextD
-and byte-identical source graphs,then were corrected while retaining assertions;
-regex null narrowing was repaired before the final successful TypeScript build;
-ctest initially was absent from PATH and was rerun using its actual installed path
-without GIG source changes;the audit resource fixture was corrected to exceed16
-instead of first hitting duplicateURI. Statement control-harness bounds apply per
-real private packet;the larger combined synthetic fixture has a separate2MiB test
-bound. Production limits and meaningful assertions were not weakened. Final current
-verification has no known failing test;the full historical application/target matrix
-was not run under the no-launch restriction.
+Initial fixture issues and the actual equality-validity reproduction are retained
+or documented with their repairs. Production assertions and resource limits were not
+weakened. Final current verification has no known failing test;the full historical
+application/target qualification matrix was not run under the no-launch directive.
 
-## Status and precise continuation
+## Acceptance and continuation
 
-**34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE.** No requirement promoted.
-SEC02 now has demonstrated source-structure,DRS,calculation,ingress and original-byte
-subset evidence;complete financial statements/accounting equivalence/general conformance
-remain open. SECURITY03 gains concrete import/recovery integrity repairs,not target
-security clearance. All twelve workspaces,GIG-only branding,private observation-only
-operation and strict$0 scope remain. Kraken stays provisional;no additional protocol
-or native recovery behavior was invented in this continuation.
+The matrix remains **34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE**.
+Every partial criterion was separately reviewed against source and exact retained
+acceptance contracts:[NOV15_PARTIAL_ACCEPTANCE_REVIEW.md](NOV15_PARTIAL_ACCEPTANCE_REVIEW.md).
+No row was promoted. SEC02 gained source-accounting,negative-only DRS and inline-original
+subset acceptance;complete financial statements/history and general conformance remain
+open. No new broken generic prerequisite was demonstrated for the other partial rows.
+Original A18/A19 criteria remain unavailable;SCOPE01N/A is unchanged.
 
-Seven external blockers remain:CORE05 observed historical L3/reference completeness;
-VIS04 physical GPU/mobile/browser;SEC03 permitted actual SEC reconciliation;MD05 entitled
-actual IEX qualification;RES03 observed out-of-sample research;OPS02 owner-authenticated
-HTTPS/WSS;OPS03 genuine native ARM64. Their exact receipts/prerequisite tools remain in
-BLOCKERS_AND_REMAINING_ENGINEERING.md. Original A18/A19 scope evidence is unavailable;
-NOT APPLICABLE is unchanged. Simulations do not close any external row.
+Seven blockers remain CORE05(observed L3/reference completeness),VIS04(physicalGPU/mobile/
+browser),SEC03(actual SEC reconciliation),MD05(actual entitled IEX),RES03(empirical
+out-of-sample research),OPS02(owner-authenticated HTTPS/WSS) andOPS03(genuine native
+ARM64). Existing tools and exact required receipts remain in the blocker register.
+No simulation closes those rows. Kraken remains provisional;no new market protocol
+or native position/migration semantics were invented during this continuation.
 
-Next active-session queue:
+Next queue:typed/cross-role/effective DRS;general dimensional/default/calculation and
+rounding-V-equality semantics;broader legitimate issuer accounting/statement criteria;
+normal SDK/frontend integration of new explicit reports;remaining officially specified
+Kraken/IEX and exact native recovery contracts. Retain bounded versions,missing/conflict
+states,source provenance,all12workspaces,GIG-only branding,observation-only defaults,
+$0scope and all8native identities. Resume from actualstatus/current receipts,never by
+restarting completed packages or rerunning patches blindly.
 
-1. Select source-evidenced complete-statement criteria and authoritative taxonomy/
-   issuer accounting relationships. Add mappings only with exact relationship,
-   type/period/unit/conflict evidence;never infer equivalence from labels or values.
-2. Extend OIM/calculation semantics beyond admitted positive explicit contexts using
-   independent dimensional/default/network contracts and original source audit evidence.
-3. Specify typed/cross-role/negative-only DRS and effective precedence;retain bounded
-   diagnostics and all legacy identities. Add original-byte inline audit separately.
-4. Reconcile remaining official Kraken/IEX contracts and precisely specified native
-   partial/terminal/compressed-source recovery boundaries before new transitions.
-5. Continue concrete offline security/accessibility gaps,retaining source/device/owner
-   qualification blockers and original scope requirements.
-
-November20 remains the engineering target;full completion is not claimed. Broader
-conformance/statements require multiple scoped engineering milestones plus a legitimate
-independent corpus. External qualification needs actual sources/targets and separate
-authorization. Remaining effort cannot be defensibly fixed before contracts/corpus
-are selected;deferral leaves those broader statements/operational claims incomplete.
-No deadline extension or background execution is implied. Resume from actual Git
-status and current receipts,never by rerunning patches or discarding pending work.
+November20 remains the engineering target;full engineering completion is not claimed.
+Remaining broad conformance/statement work needs multiple scoped implementation and
+independent-corpus milestones. Exact target/source evidence is required for external
+qualification. A defensible fixed elapsed estimate is unavailable before those inputs
+and criteria are selected;deferral leaves the corresponding claims incomplete. No
+deadline extension or background execution beyond this session is implied.

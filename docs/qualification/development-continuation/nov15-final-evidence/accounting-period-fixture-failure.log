@@ -1,0 +1,26 @@
+..................................E.......................
+======================================================================
+ERROR: test_unit_and_context_mismatches_do_not_cross_join (terminal.stocks.test_xbrl_accounting_relationships.AccountingRelationships.test_unit_and_context_mismatches_do_not_cross_join)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_accounting_relationships.py", line 59, in test_unit_and_context_mismatches_do_not_cross_join
+    r=report(facts=facts);self.assertEqual([c['status']for c in r['networks'][0]['arcs'][0]['checks']],['MISSING_COUNTERPART','MISSING_COUNTERPART'])
+      ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_accounting_relationships.py", line 25, in report
+    p,g,raw,docs,options=fixture(*args,**kwargs);return extract_accounting_relationships(p,g,raw,docs,**options)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_accounting_relationships.py", line 137, in extract_accounting_relationships
+    arc={k:winners[0][k]for k in('from','to','order')};arc.update(priority=highest,provenance=provenance);arc['declaration_constraints']=_declarations(arc,dts['concepts'],group['kind']);arc['checks']=_checks(parsed,dts,arc,group['kind']);check_count+=len(arc['checks'])
+                                                                                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_accounting_relationships.py", line 68, in _checks
+    member,reason=_member(fact,parsed,dts);record[side].append(member)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_accounting_relationships.py", line 37, in _member
+    if declaration['period_type']!=context['period']['kind']:raise XBRLError('accounting_declared_period_conflict')
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: accounting_declared_period_conflict
+
+----------------------------------------------------------------------
+Ran 58 tests in 1.001s
+
+FAILED (errors=1)

@@ -1,28 +1,28 @@
 {
-  "schema": "gig.package.current.v7",
-  "tested_source": "4db5be177a69983cfed68b268561cdf8f67472da",
-  "evidence": "STATEMENT_RECOVERY_EVIDENCE.json",
+  "schema": "gig.package.current.v8",
+  "tested_source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+  "evidence": "NOV15_FINAL_SPRINT_EVIDENCE.json",
   "archive": {
-    "source": "4db5be177a69983cfed68b268561cdf8f67472da",
-    "members": 1559,
-    "tracked_files": 1558,
-    "bytes": 8512923,
-    "sha256": "8de7086680a2b2e615c0ed6f6003c28f9625681950f674467356da7fe22ec32e"
+    "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+    "members": 1625,
+    "tracked_files": 1624,
+    "bytes": 8626763,
+    "sha256": "4f347255984ae6fe105048a74319358c911929c4e3f349125eba33236f0845a5"
   },
   "artifacts": [
     {
       "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
-      "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+      "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
       "fresh_build": true,
       "bytes": 666813,
-      "sha256": "90fca80e8cbc6f3bbcf8e55484e77030c2c06c32b1aacfc09bb2a9eab9df82f3"
+      "sha256": "055ec35dc76de77ed736c632f6f60d5cbd7008f860528dc68555b9bb8f762579"
     },
     {
       "name": "gig_microstructure-0.1.1.tar.gz",
-      "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+      "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
       "fresh_build": true,
-      "bytes": 8512923,
-      "sha256": "8de7086680a2b2e615c0ed6f6003c28f9625681950f674467356da7fe22ec32e"
+      "bytes": 8626763,
+      "sha256": "4f347255984ae6fe105048a74319358c911929c4e3f349125eba33236f0845a5"
     }
   ],
   "note": "Fresh clean-source sdist and default wheel. Later evidence-only documentation is outside the artifacts;no two-build bit-for-bit reproducibility claim."

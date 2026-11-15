@@ -1,0 +1,630 @@
+{
+  "schema": "gig.nov15.final_sprint.evidence.v1",
+  "date": "2026-11-15",
+  "timezone": "America/New_York",
+  "engineering_target": "2026-11-20",
+  "starting_commit": "db0d4dd0aa133fcd8d48c54255a0d4c3170885cb",
+  "tested_runtime": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+  "verified_checkpoints": [
+    "f8da7cc72bf142263be7dfa5e40b83704a4ad384",
+    "c458226042abf98acefb508b19320c8f27b984b9",
+    "e334aba39177f85527679cfd9f38149f8708012c",
+    "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633"
+  ],
+  "no_launch": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 908,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_open_dimensions",
+      "terminal.stocks.test_xbrl_restriction_constraints",
+      "terminal.stocks.test_xbrl_calculation_intervals",
+      "terminal.stocks.test_xbrl_calculation_report",
+      "terminal.stocks.test_xbrl_calculation_product",
+      "terminal.stocks.test_xbrl_lineage",
+      "terminal.stocks.test_xbrl_typed_dimensions",
+      "terminal.stocks.test_xbrl_inherited_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.stocks.test_xbrl_statement_set",
+      "terminal.stocks.test_xbrl_negative_dimensions",
+      "terminal.stocks.test_xbrl_dimensional_calculation",
+      "terminal.stocks.test_python_json_ingress",
+      "terminal.stocks.test_history_json_ingress",
+      "terminal.stocks.test_xbrl_dts_source_audit",
+      "terminal.stocks.test_statement_set_source_acceptance",
+      "terminal.stocks.test_xbrl_negative_only_dimensions",
+      "terminal.stocks.test_inline_dts_source_audit",
+      "terminal.stocks.test_xbrl_accounting_relationships",
+      "terminal.stocks.test_xbrl_accounting_statements",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_kraken_book_session",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 908
+  },
+  "new_python_tests": 81,
+  "frontend_tests": {
+    "tests": 197,
+    "failures": 0,
+    "skipped": 0,
+    "typescript": "PASS",
+    "vite": "PASS",
+    "browser_started": false
+  },
+  "contracts": {
+    "v1": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "v2": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "vintages": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "calculation-contract": {
+      "schema": "gig.calculation_report.contract.v1",
+      "cases": 4,
+      "adversarial_rejections": 11,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "ingress-contract": {
+      "schema": "gig.offline_json_ingress.contract.v1",
+      "cases": 6,
+      "ambiguous_previously_accepted": 6,
+      "adversarial_rejections": 23,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "statement-consumer": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    },
+    "accounting-contract": {
+      "schema": "gig.accounting_statement.offline_contract.v1",
+      "cases": 7,
+      "assertions": 224,
+      "adversarial_rejections": 7,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "native-product": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    }
+  },
+  "native_inputs_unchanged": true,
+  "native_builds": "Current focused checks against existing byte-equivalent GCC/Clang/sanitizer builds,not a fresh full compiler matrix or Python instrumentation. Fresh default wheel separately compiled from verified extracted source.",
+  "native_focused": {
+    "GCC Release": 6,
+    "GCC Debug": 2,
+    "Clang Debug": 2,
+    "Clang Release": 2,
+    "GCC ASan+UBSan": 2
+  },
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "installed_default_sdk": {
+    "consumers": 8,
+    "source_regressions": {
+      "application_started": false,
+      "errors": 0,
+      "failures": 0,
+      "provider_requested": false,
+      "schema": "gig.installed_source_regressions.v1",
+      "sdk": "/workspace/gig-development/work/nov15/installed/gig_microstructure/__init__.py",
+      "skipped": 0,
+      "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+      "tests": 650
+    },
+    "contracts": {
+      "installed-v2": {
+        "application_started": false,
+        "assertions": 93,
+        "cases": 15,
+        "provider_requested": false,
+        "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+      },
+      "installed-vintages": {
+        "schema": "gig.xbrl.vintage_contract.v1",
+        "entries": 3,
+        "adversarial_rejections": 6,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-calculation": {
+        "schema": "gig.calculation_report.contract.v1",
+        "cases": 4,
+        "adversarial_rejections": 11,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-ingress": {
+        "schema": "gig.offline_json_ingress.contract.v1",
+        "cases": 6,
+        "ambiguous_previously_accepted": 6,
+        "adversarial_rejections": 23,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-statements": {
+        "adversarial_rejections": 7,
+        "application_started": false,
+        "assertions": 1018,
+        "fixture_bytes": 796426,
+        "history_entries": 4,
+        "provider_requested": false,
+        "schema": "gig.statement_set.offline_consumer_contract.v1",
+        "sets": 5,
+        "verified_children": 23
+      },
+      "installed-accounting": {
+        "schema": "gig.accounting_statement.offline_contract.v1",
+        "cases": 7,
+        "assertions": 224,
+        "adversarial_rejections": 7,
+        "provider_requested": false,
+        "application_started": false
+      }
+    }
+  },
+  "package_archive": {
+    "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+    "members": 1625,
+    "tracked_files": 1624,
+    "bytes": 8626763,
+    "sha256": "4f347255984ae6fe105048a74319358c911929c4e3f349125eba33236f0845a5"
+  },
+  "packages": [
+    {
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+      "fresh_build": true,
+      "bytes": 666813,
+      "sha256": "055ec35dc76de77ed736c632f6f60d5cbd7008f860528dc68555b9bb8f762579"
+    },
+    {
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "source": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+      "fresh_build": true,
+      "bytes": 8626763,
+      "sha256": "4f347255984ae6fe105048a74319358c911929c4e3f349125eba33236f0845a5"
+    }
+  ],
+  "security": {
+    "source_lock_components": 85,
+    "source_input_hashes": 7,
+    "sbom_tests": 13,
+    "package_pattern_tests": 3,
+    "pip_check": "PASS",
+    "new_advisory_scan": false,
+    "target_clearance": false
+  },
+  "authority_review": {
+    "source": "https://www.xbrl.org/specification/xbrl-2.1/rec-2003-12-31/xbrl-2.1-rec-2003-12-31+corrected-errata-2013-02-20.html",
+    "sections": [
+      "3.5.3.9.7.4",
+      "5.2.6.2.2",
+      "5.2.6.2.4"
+    ],
+    "method": "Documentation tool independently opened normative corrected specification;executor direct HTTP had tunnel403. No provider or application access.",
+    "result": "Order is non-exempt;essence item type/period/present balance and required-element occurrence semantics verified. No value inference implemented."
+  },
+  "source_files": [
+    {
+      "path": "docs/qualification/development-continuation/NEGATIVE_ONLY_EXPLICIT_DRS.md",
+      "sha256": "95a36e074c32006df6071567e97237729ca2e6006bc21468b6bfdc153fde3521"
+    },
+    {
+      "path": "docs/qualification/development-continuation/ORIGINAL_INLINE_DTS_SOURCE_AUDIT.md",
+      "sha256": "ff9d5d9117d9c426c3253982252b72bb0123b2fb9a40d19fbf79069deca8e576"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SOURCE_ACCOUNTING_RELATIONSHIPS.md",
+      "sha256": "6edeea15a2dbfe7b61fde39bb0ad14bc1828e1972633d81fef79ed86c08506a0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SOURCE_ACCOUNTING_STATEMENTS.md",
+      "sha256": "d270c09c1e5287ff0746920fd5c158f9c60571d2647396b563c4a3f7903dc994"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SPRINT_LEDGER.md",
+      "sha256": "1a1c19a264670c3127135eb58ee52aa155327e6afca5e077851805cd4c6dc521"
+    },
+    {
+      "path": "terminal/stocks/test_inline_dts_source_audit.py",
+      "sha256": "32f42dabc46bd78aacd0d2f47e390a83fa3d368ec546fb6267d3e8145fc16491"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_accounting_relationships.py",
+      "sha256": "b504ee05fa1a8adbd6007a4d133b69272b7a0a3f0a93fd98c58e158bf014c500"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_accounting_statements.py",
+      "sha256": "c2b920c0d31e8a581be03a27929856b62da27bc86b20613815a326820679f853"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_negative_only_dimensions.py",
+      "sha256": "7085cc4a283c9c50c7c1a1897813701730dd0674614b0fb148a94885161d2ede"
+    },
+    {
+      "path": "terminal/stocks/xbrl_accounting_relationships.py",
+      "sha256": "54649eb4a18b8ad371c0fccb9cbf00342cb8bc89b924e3c4f93bdf44be11aabb"
+    },
+    {
+      "path": "terminal/stocks/xbrl_accounting_statements.py",
+      "sha256": "aca8348106a4ce3ac94fbbba78996421b5c2e2dd421d741c59c94ce69b8bd574"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dimensions.py",
+      "sha256": "f75c0fdb2eb0ba49d755f4901e5de423af095377c184be6a7bc791c6535d630d"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dts_source_audit.py",
+      "sha256": "3e691e6dcf4e03c21a4738fa5317fb57c330fd4d8b4029577081b5efcea176be"
+    },
+    {
+      "path": "terminal/stocks/xbrl_instance.py",
+      "sha256": "db091c54e5d002cb790dd1c974ade8f4bfe76e6da28bfd96dec402a90aa3a597"
+    },
+    {
+      "path": "terminal/tests/accounting-statements-contract.mjs",
+      "sha256": "82f574fde854fb6cde29ceb066b2fe929e50c72de1359c2edb02df7266b85ee3"
+    },
+    {
+      "path": "terminal/tests/check_accounting_statements_contract.py",
+      "sha256": "46129eb287ce284e17d4e7c48fdbf45c91c665ca59cfce9b4f10070a6c8f84f5"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "sha256": "419566bf7e32874f8c940546938fc8aa156b3321c44fa4ae2fe2dc7c824d506c"
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/drs-final.log",
+      "bytes": 206,
+      "sha256": "b880b1ac4d25f12cefe224173cf39ef3abc6f6daec576f4b36c0ffce955c44c0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/inline-final.log",
+      "bytes": 912,
+      "sha256": "aa63ddd96682e9dee12e380242bffb575e98a766ec74194902c07caf0229ef41"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/accounting-relationships-final-current.log",
+      "bytes": 155,
+      "sha256": "8d313a4484e3d9b31231a8d999d27009e5b38e60946371db2b7a7b40f98f9d7b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/accounting-product-final.log",
+      "bytes": 158,
+      "sha256": "4f3128a80ee406b72ab2aad5db61a1b6027f7b97351edd02b9a822f7f6a8acb2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/accounting-contract.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/accounting-declaration-before.log",
+      "bytes": 202,
+      "sha256": "d6cf75d3f3140e24c3ee09e06a1079b1931dacb04f383ac57a53869916afa9b9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/accounting-period-fixture-failure.log",
+      "bytes": 2477,
+      "sha256": "3d882efbb7d12dbfca3d19d9da608cf6895dedc85ea1ed1c6068182d1864369b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/no-launch.log",
+      "bytes": 177368,
+      "sha256": "08a9edb504088a37972907cf58723cf6c3eb0bf67e2462dc1ccd2b4f6a523d6e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/frontend.log",
+      "bytes": 18757,
+      "sha256": "ce7043778a0f967bc8549eee9b2c9d574eb22a8445dc506bb1a5d80dd1ab6711"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/frontend-build.log",
+      "bytes": 2428,
+      "sha256": "f622057aae8d272aee6bbc37b4ef4aefa2afb9637df15fee07e463bb83743e33"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-release.log",
+      "bytes": 960,
+      "sha256": "2e3a800c932896629ce6b0a67f4c5d0de63c242c481f3f83a6c711bec615ec78"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-gcc-debug.log",
+      "bytes": 451,
+      "sha256": "84944b96134950aeed84f5f7a1968107f0cbb5963dadd1dc3ae785512a37c1f0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-clang-debug.log",
+      "bytes": 455,
+      "sha256": "2581cf14259c7843bc8b4635a06317e590774e75683eebd021fdc39e72fcf4c2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-clang-release.log",
+      "bytes": 459,
+      "sha256": "be557d66813abadab2c09f052adf71707d9fb71c51ae691d8c77dbcca0f5d528"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-sanitizer.log",
+      "bytes": 461,
+      "sha256": "d2ab855ed04a39ee1fa78d85971dd7dde09d31343622730ef9fe4b02fc4bdf75"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "a688b66d606aa6b5865d377e530822f28907d0930f4f8a9494141b7682e8e6fb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/native-product.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/v1.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/calculation-contract.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/ingress-contract.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/statement-consumer.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/archive.json",
+      "bytes": 203,
+      "sha256": "061381a73419f6d97cf4629aa5d459f741af1d81df81db2b9359aeb3f89f67a2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "d2e192e66f0b3b0a2824243d1fee21272c30183f756142718d8964fe02e85fed"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/install.log",
+      "bytes": 449,
+      "sha256": "479e20f9c81e7fc5d7d5ebccdcade188b6d9ea9dcba4e4f5563520e722a35085"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-consumer.log",
+      "bytes": 964,
+      "sha256": "2b96b6c125b786532a90178529695bb84e7995fd112b2ff9f3ff577f02add653"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-source.log",
+      "bytes": 127255,
+      "sha256": "718c1db7cbcc0da0b861d73e455f6abb6d797ca56215b5ed3b49db94128237c5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-calculation.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-ingress.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-statements.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/installed-accounting.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "edb4e2159c923ea45a32656078835cdf531c3d7b414c670dd786978875cb0678"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/sbom-tests.log",
+      "bytes": 1945,
+      "sha256": "cb99f608adf3ac2fb75d3e5e0a7f44d49a9df46d56d1bc922d02ccefee46a942"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/sbom-generation.log",
+      "bytes": 68,
+      "sha256": "fafde11f0744730aaeebd0b96250f68156d21edfb235fa386dffd36c144972f7"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/source-sbom.cdx.json",
+      "bytes": 47016,
+      "sha256": "ed19416fd38b6a10e2837e7c302c9ec02536fc6b264db6f66d46ad30993e0da2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/legacy-eight-drs-identities.log",
+      "bytes": 135,
+      "sha256": "ce9477af14df1ff7d546a38f5648b677d325e756a5ad26e96d3c637b5d297009"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov15-final-evidence/plain-audit-legacy-identity.log",
+      "bytes": 287,
+      "sha256": "487261ba13f8dfc029221da25dd437a6d4a2f54cf9b9bd7daf5a24b2b95dae70"
+    }
+  ],
+  "resolved_findings": [
+    "Abstract and finite-period-invalid source facts previously could claim supported essence equality;root reproduction retained,source checks now reject with2regressions.",
+    "Negative-only DRS validates global context/defaults independently before exclusion;legacy V1-V4 identities retained.",
+    "Original inline audit requires retained expected acquisition manifest digest and immutable transformation profile;authored intent order remains distinct from parsed canonical URI order."
+  ],
+  "resolved_test_fixture_failures": [
+    "The original context-mismatch fixture used a declaration-invalid duration context;replaced with a valid different instant while retaining no-cross-join assertions. Invalid periods now have separate rejection tests.",
+    "Inline fixture tuple augmented-assignment and accounting rational-string assertions corrected without relaxing runtime behavior or source assertions."
+  ],
+  "remaining_current_test_failures": 0,
+  "matrix_statuses_unchanged": {
+    "COMPLETE": 34,
+    "PARTIAL": 8,
+    "BLOCKED": 7,
+    "NOT APPLICABLE": 1
+  },
+  "partial_acceptance_review": "NOV15_PARTIAL_ACCEPTANCE_REVIEW.md",
+  "remaining_limits": [
+    "Original source assertions/classifications are bounded;no inferred GAAP metric aliases,missing values,complete statements/history or independent issuer authentication.",
+    "Negative-only V5 supports one role and explicit contexts;typed,cross-role,effective precedence remain unsupported.",
+    "Accounting checks support direct standard essence/require relationships;full rounding V-equality,general definition roles/tuples,dimensional statement reconstruction remain open.",
+    "New accounting product uses external plain originals;inline auditing is a separate API,not automatic product/HTTP activation.",
+    "Full OIM/calculation standards beyond retained supported profiles remain open.",
+    "Fresh source packages exclude later evidence-only documentation;no two-build bit-for-bit reproducibility claim."
+  ],
+  "restrictions": {
+    "application_started": false,
+    "server_started": false,
+    "live_provider_requested": false,
+    "deployment": false,
+    "trading": false,
+    "owner_acceptance": false,
+    "spend_usd": 0
+  },
+  "legacy_plain_audit_receipts_unchanged": 3
+}
