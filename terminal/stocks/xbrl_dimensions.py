@@ -7,7 +7,8 @@ from .xbrl_instance import X,L,XL,tag,digest,canonical,XBRLError
 D='http://xbrl.org/2005/xbrldt';ARC='http://xbrl.org/int/dim/arcrole/';PROFILE='EXPLICIT_CLOSED_HYPERCUBE_V1'
 OPEN_PROFILE='DIRECT_EXPLICIT_HYPERCUBE_V2'
 INHERITED_PROFILE='INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'
-PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE)
+NEGATIVE_PROFILE='INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -51,19 +52,20 @@ def corroborate(parsed,dts,*,profile=PROFILE):
  if type(parsed)is not dict or digest({k:v for k,v in parsed.items()if k!='canonical_sha256'})!=parsed.get('canonical_sha256')or type(dts)is not dict or digest({k:v for k,v in dts.items()if k!='canonical_sha256'})!=dts.get('canonical_sha256'):raise XBRLError('drs_input_identity')
  if parsed.get('dts_corroboration',{}).get('dts_sha256')!=dts['canonical_sha256']:raise XBRLError('drs_binding_required')
  schemas={'gig.sec.xbrl.instance.v1':'gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.inline_set.v1':'gig.sec.xbrl.dimensional_inline_set.v1'}
- if profile in(OPEN_PROFILE,INHERITED_PROFILE):schemas={key:value[:-1]+('3'if profile==INHERITED_PROFILE else'2')for key,value in schemas.items()}
+ if profile in(OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE):schemas={key:value[:-1]+('4'if profile==NEGATIVE_PROFILE else'3'if profile==INHERITED_PROFILE else'2')for key,value in schemas.items()}
  if parsed.get('schema')not in schemas:raise XBRLError('drs_derived_schema_unsupported_or_already_applied')
  nets=dts.get('definition',[])
  if not dts['structural_closure']or len(nets)!=1 or not nets[0]['usable_for_restricted_profile']:raise XBRLError('drs_profile_unsupported')
  arcs=nets[0]['arcs'];concepts=dts['concepts'];adj={};domains={}
- if any(a['kind']=='notAll'for a in arcs):raise XBRLError('drs_not_all_unsupported')
- positive=[a for a in arcs if a['kind']=='all']
- if profile!=INHERITED_PROFILE and len(positive)!=1:raise XBRLError('drs_single_positive_assignment_required')
- if profile==INHERITED_PROFILE:
+ if profile!=NEGATIVE_PROFILE and any(a['kind']=='notAll'for a in arcs):raise XBRLError('drs_not_all_unsupported')
+ positive=[a for a in arcs if a['kind']=='all'or profile==NEGATIVE_PROFILE and a['kind']=='notAll']
+ if profile not in(INHERITED_PROFILE,NEGATIVE_PROFILE)and len(positive)!=1:raise XBRLError('drs_single_positive_assignment_required')
+ if profile in(INHERITED_PROFILE,NEGATIVE_PROFILE):
   if not 1<=len(positive)<=64:raise XBRLError('drs_positive_assignment_budget')
-  keys=[(a['from'],a['to'])for a in positive]
+  keys=[(a['from'],a['to'],a['kind'])for a in positive]
   if len(keys)!=len(set(keys)):raise XBRLError('drs_duplicate_positive_assignment')
   positive=sorted(positive,key=lambda a:(a['from'],a['to'],a['context_element'],a['closed']))
+  if profile==NEGATIVE_PROFILE:positive=sorted(positive,key=lambda a:(a['kind']!='all',a['from'],a['to'],a['context_element'],a['closed']))
  for arc in arcs:adj.setdefault((arc['kind'],arc['from']),set()).add(arc['to'])
  def declaration(name,group):
   value=concepts.get(name,{}).get('declaration',{})
@@ -96,7 +98,7 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   if len(default)>1 or default and default[0]not in members:raise XBRLError('drs_default_conflict_or_domain')
   domains[axis]=(members,default);return domains[axis]
  parents={};ancestor_cache={}
- if profile==INHERITED_PROFILE:
+ if profile in(INHERITED_PROFILE,NEGATIVE_PROFILE):
   for arc in arcs:
    if arc['kind']=='domain-member':parents.setdefault(arc['to'],set()).add(arc['from'])
  def ancestors(concept):
@@ -122,6 +124,18 @@ def corroborate(parsed,dts,*,profile=PROFILE):
     if degree[child]==0:pending.append(child)
   if visited!=len(found):raise XBRLError('drs_primary_item_cycle')
   ancestor_cache[concept]=found;return found
+ def negative_shape(fact,assignment):
+  cube=assignment['to'];declaration(fact['concept'],tag(X,'item'));declaration(assignment['from'],tag(X,'item'));declaration(cube,tag(D,'hypercubeItem'))
+  axes=targets('hypercube-dimension',cube)
+  if not axes or len(axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
+  for axis in axes:
+   members,_=domain(axis)
+   if assignment['from']in members:raise XBRLError('drs_primary_item_polymorphism')
+  context=parsed['contexts'][fact['context_ref']]
+  if context['opaque_segment']or any(d['kind']!='explicit'or d['context_element']!=assignment['context_element']for d in context['dimensions']):raise XBRLError('drs_context_profile_unsupported')
+  given={d['dimension']for d in context['dimensions']};extras=given-set(axes)
+  if len(set(axes)|extras)>32:raise XBRLError('drs_dimension_budget_or_missing')
+  return cube,extras,set(axes)|extras
  def validate_assignment(fact,assignment):
   cube=assignment['to'];declaration(fact['concept'],tag(X,'item'));declaration(assignment['from'],tag(X,'item'));declaration(cube,tag(D,'hypercubeItem'))
   axes=targets('hypercube-dimension',cube)
@@ -131,12 +145,12 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   given={d['dimension']:d['member']for d in context['dimensions']}
   extras=set(given)-set(axes)
   if extras and assignment['closed']:raise XBRLError('drs_closed_extra_dimension')
-  check_axes=sorted(set(axes)|extras)if profile in(OPEN_PROFILE,INHERITED_PROFILE)else axes
+  check_axes=sorted(set(axes)|extras)if profile in(OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE)else axes
   if len(check_axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
   defaults={}
   for axis in check_axes:
    members,default=domain(axis)
-   if profile==INHERITED_PROFILE and assignment['from']in members:raise XBRLError('drs_primary_item_polymorphism')
+   if profile in(INHERITED_PROFILE,NEGATIVE_PROFILE)and assignment['from']in members:raise XBRLError('drs_primary_item_polymorphism')
    if axis in given:
     if given[axis]not in members:raise XBRLError('drs_member_outside_domain')
     if default and given[axis]==default[0]:raise XBRLError('drs_explicit_default_member')
@@ -146,19 +160,33 @@ def corroborate(parsed,dts,*,profile=PROFILE):
  records=[];size=len(canonical(parsed))
  for fact in parsed['facts']:
   if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
-  if profile==INHERITED_PROFILE:
+  if profile in(INHERITED_PROFILE,NEGATIVE_PROFILE):
    sources=ancestors(fact['concept']);assignments=[a for a in positive if a['from']in sources]
-   if not assignments:raise XBRLError('drs_positive_assignment_required')
+   if not assignments or profile==NEGATIVE_PROFILE and not any(a['kind']=='all'for a in assignments):raise XBRLError('drs_positive_assignment_required')
    if len(assignments)>16:raise XBRLError('drs_fact_assignment_budget')
    if len({a['context_element']for a in assignments})!=1:raise XBRLError('drs_mixed_context_assignments_unsupported')
    details=[];aggregate={};all_axes=set()
    for assignment in assignments:
-    cube,defaults,extras,axes=validate_assignment(fact,assignment);all_axes.update(axes)
+    failure=None
+    if profile==NEGATIVE_PROFILE and assignment['kind']=='notAll':
+     cube,extras,axes=negative_shape(fact,assignment)
+     try:validate_assignment(fact,assignment)
+     except XBRLError as exc:
+      # Only evaluated context invalidity negates a well-formed supported cube.
+      # Resource, declaration, schema/domain, default and unsupported errors reject.
+      if str(exc)not in('drs_closed_extra_dimension','drs_member_outside_domain','drs_required_dimension_missing'):raise
+      failure=str(exc)
+     if failure is None:raise XBRLError('drs_negative_hypercube_satisfied')
+     defaults={} # Negative evaluation never supplies defaults to the reported fact.
+    else:cube,defaults,extras,axes=validate_assignment(fact,assignment)
+    all_axes.update(axes)
     if len(all_axes)>32:raise XBRLError('drs_dimension_budget_or_missing')
     for axis,member in defaults.items():
      if axis in aggregate and aggregate[axis]!=member:raise XBRLError('drs_default_conflict_or_domain')
      aggregate[axis]=member
-    details.append({'primary_item':assignment['from'],'hypercube':cube,'context_element':assignment['context_element'],'closed':assignment['closed'],'used_defaults':defaults,'extra_dimensions':sorted(extras),'inherited':assignment['from']!=fact['concept']})
+    detail={'primary_item':assignment['from'],'hypercube':cube,'context_element':assignment['context_element'],'closed':assignment['closed'],'used_defaults':defaults,'extra_dimensions':sorted(extras),'inherited':assignment['from']!=fact['concept']}
+    if profile==NEGATIVE_PROFILE:detail.update(kind=assignment['kind'],hypercube_valid=failure is None,failure_reason=failure)
+    details.append(detail)
    record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'context_element':assignments[0]['context_element'],'used_defaults':aggregate,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT','assignments':details}
   else:
    assignments=[a for a in arcs if a['kind']=='all'and a['from']==fact['concept']]
@@ -171,6 +199,7 @@ def corroborate(parsed,dts,*,profile=PROFILE):
   records.append(record)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']=schemas[parsed['schema']];result['dts_corroboration']['dimensional_validation']={'profile':profile,'facts':records,'complete_drs_validation':False,'scope':'Single direct positive closed hypercube,one role,explicit dimensions and supplied domains/defaults only;no context/fact synthesis'}
  if profile==OPEN_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='Single direct positive open/closed hypercube,one role,supplied usable explicit dimensions/domains/defaults;open additional dimensions independently validated;no context/fact synthesis'
- if profile==INHERITED_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='One role,positive direct/transitively inherited explicit hypercubes with conjunctive validity;supplied usable domains/defaults only;no negative/typed/cross-role semantics or context/fact synthesis'
+ if profile in(INHERITED_PROFILE,NEGATIVE_PROFILE):result['dts_corroboration']['dimensional_validation']['scope']='One role,positive direct/transitively inherited explicit hypercubes with conjunctive validity;supplied usable domains/defaults only;no negative/typed/cross-role semantics or context/fact synthesis'
+ if profile==NEGATIVE_PROFILE:result['dts_corroboration']['dimensional_validation']['scope']='One role,inherited explicit positive/negative hypercube conjunction;negative cubes prevalidated before contextual exclusion;positive defaults only;no negative-only,typed/cross-role semantics or context/fact synthesis'
  if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
  result['canonical_sha256']=digest(result);return result

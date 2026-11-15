@@ -268,43 +268,48 @@ def _interpret_instance(root,source,concepts):
  result['canonical_sha256']=digest(result);return result
 
 def selected_financials(parsed):
- if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
+ if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
  core={k:v for k,v in parsed.items()if k!='canonical_sha256'}
  if digest(core)!=parsed.get('canonical_sha256'):raise XBRLError('xbrl_parsed_digest')
  source=parsed['source'];namespace={};refs={};concept_names={};skipped={'unverified_or_conflicting':0,'dimensioned_or_opaque':0,'nil':0,'unsupported_period':0,'unsupported_taxonomy_namespace':0}
- is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_inline_set.v3')
+ is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_inline_set.v4')
  document_set=parsed.get('document_set')if is_set else None
  if is_set and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
  if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
  fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
  dimension_proof=(parsed.get('dts_corroboration')or{}).get('dimensional_validation')
- derived=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3')
+ derived=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4')
  dimensional_v2=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2')
  dimensional_v3=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3')
+ dimensional_v4=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4')
  defaulted=set()
  if derived:
-  if type(dimension_proof)is not dict or dimension_proof.get('profile')!=('INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'if dimensional_v3 else'DIRECT_EXPLICIT_HYPERCUBE_V2'if dimensional_v2 else'EXPLICIT_CLOSED_HYPERCUBE_V1')or type(dimension_proof.get('facts'))is not list or len(dimension_proof['facts'])>MAX_FACTS:raise XBRLError('xbrl_dimensional_result_contract')
-  if (dimensional_v2 or dimensional_v3)and dimension_proof.get('complete_drs_validation')is not False:raise XBRLError('xbrl_dimensional_result_contract')
+  if type(dimension_proof)is not dict or dimension_proof.get('profile')!=('INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4'if dimensional_v4 else'INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'if dimensional_v3 else'DIRECT_EXPLICIT_HYPERCUBE_V2'if dimensional_v2 else'EXPLICIT_CLOSED_HYPERCUBE_V1')or type(dimension_proof.get('facts'))is not list or len(dimension_proof['facts'])>MAX_FACTS:raise XBRLError('xbrl_dimensional_result_contract')
+  if (dimensional_v2 or dimensional_v3 or dimensional_v4)and dimension_proof.get('complete_drs_validation')is not False:raise XBRLError('xbrl_dimensional_result_contract')
   eligible=[r['source_fact_id']for r in parsed['facts']if r['admission']in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES')];seen=set()
   for record in dimension_proof['facts']:
    if type(record)is not dict or type(record.get('source_fact_id'))is not str or record['source_fact_id']in seen or record['source_fact_id']not in eligible or type(record.get('used_defaults'))is not dict or len(record['used_defaults'])>32:raise XBRLError('xbrl_dimensional_result_contract')
    if dimensional_v2:
     extras=record.get('extra_dimensions')
     if record.get('status')!='VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'or type(record.get('closed'))is not bool or type(extras)is not list or len(extras)>32 or any(type(v)is not str or not re.fullmatch(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}',v)for v in extras)or extras!=sorted(set(extras))or record['closed']and extras:raise XBRLError('xbrl_dimensional_result_contract')
-   if dimensional_v3:
+   if dimensional_v3 or dimensional_v4:
     qn=lambda v:type(v)is str and re.fullmatch(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}',v)is not None
     required={'source_fact_id','role','context_element','used_defaults','status','assignments'};assignments=record.get('assignments')
     if set(record)!=required or record['status']!='VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'or type(record['role'])is not str or not 1<=len(record['role'])<=512 or record['context_element']not in('segment','scenario')or type(assignments)is not list or not 1<=len(assignments)<=16:raise XBRLError('xbrl_dimensional_result_contract')
     aggregate={};pairs=set()
     for a in assignments:
      fields={'primary_item','hypercube','context_element','closed','used_defaults','extra_dimensions','inherited'}
+     if dimensional_v4:fields|={'kind','hypercube_valid','failure_reason'}
      if type(a)is not dict or set(a)!=fields or not qn(a['primary_item'])or not qn(a['hypercube'])or a['context_element']!=record['context_element']or type(a['closed'])is not bool or type(a['inherited'])is not bool or a['inherited']!=(a['primary_item']!=fact_lookup[record['source_fact_id']]['concept'])or type(a['used_defaults'])is not dict or len(a['used_defaults'])>32 or any(not qn(k)or not qn(v)for k,v in a['used_defaults'].items()):raise XBRLError('xbrl_dimensional_result_contract')
-     extras=a['extra_dimensions'];pair=(a['primary_item'],a['hypercube'])
-     if pair in pairs or type(extras)is not list or len(extras)>32 or any(not qn(v)for v in extras)or extras!=sorted(set(extras))or a['closed']and extras:raise XBRLError('xbrl_dimensional_result_contract')
+     negative=dimensional_v4 and a['kind']=='notAll'
+     if dimensional_v4 and(a['kind']not in('all','notAll')or type(a['hypercube_valid'])is not bool or (negative and(a['hypercube_valid']or a['used_defaults']or a['failure_reason']not in('drs_closed_extra_dimension','drs_member_outside_domain','drs_required_dimension_missing')))or(not negative and(not a['hypercube_valid']or a['failure_reason']is not None))):raise XBRLError('xbrl_dimensional_result_contract')
+     extras=a['extra_dimensions'];pair=(a['primary_item'],a['hypercube'],a['kind'])if dimensional_v4 else(a['primary_item'],a['hypercube'])
+     if pair in pairs or type(extras)is not list or len(extras)>32 or any(not qn(v)for v in extras)or extras!=sorted(set(extras))or not negative and a['closed']and extras or negative and a['failure_reason']=='drs_closed_extra_dimension'and(not a['closed']or not extras):raise XBRLError('xbrl_dimensional_result_contract')
      pairs.add(pair)
      for k,v in a['used_defaults'].items():
       if k in aggregate and aggregate[k]!=v:raise XBRLError('xbrl_dimensional_result_contract')
       aggregate[k]=v
+    if dimensional_v4 and not any(a['kind']=='all'for a in assignments):raise XBRLError('xbrl_dimensional_result_contract')
     if aggregate!=record['used_defaults']:raise XBRLError('xbrl_dimensional_result_contract')
    seen.add(record['source_fact_id'])
    if record['used_defaults']:defaulted.add(record['source_fact_id'])

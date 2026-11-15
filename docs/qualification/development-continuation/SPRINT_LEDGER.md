@@ -115,3 +115,11 @@ Contract:STATEMENT_SET_V1.md;developer log:work/statement-sprint/statements-fina
 Parallel packages:negative DRS V4,explicit dimensional calculation binding,and strict
 offline JSON ingress. Preserve all uncommitted agent work;commit packages by paths.
 All50statuses/seven external blockers remain unchanged;no app/provider operation.
+
+Statement package remote-verified:0486062dca1e2be332bd767b34fa1836d9798ec9.
+Second package:negative explicit inherited DRS V4,22new/71focused/98related
+Python checks pass. Six V1/V2/V3 artifacts match the prior implementation exactly.
+V4 source/assignment/proof selection is strict;positive defaults alone aggregate.
+Contract:NEGATIVE_EXPLICIT_DRS.md;logs:work/statement-sprint/negative-*.log and
+work/negative-drs/. Cross-role/typed/negative-only/precedence remain unsupported.
+No matrix promotion or provider/application action.
