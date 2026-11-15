@@ -11,6 +11,9 @@ function exactIntegerToken(token:string):void{
  const fraction=parts[3]||'',scale=exponent-BigInt(fraction.length);let integer=BigInt(parts[2]+fraction);
  if(scale>=0n)integer*=10n**scale;
  else{const divisor=10n**(-scale);if(integer%divisor!==0n)fail();integer/=divisor}
+ // Numeric metadata cannot retain a minus sign on zero after canonical JSON.
+ // Reported financial quantities are strings and keep their original spelling.
+ if(parts[1]&&integer===0n)fail();
  if(parts[1])integer=-integer;
  if(integer < -9007199254740991n||integer>9007199254740991n)fail();
 }

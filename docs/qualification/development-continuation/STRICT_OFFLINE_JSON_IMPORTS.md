@@ -13,7 +13,11 @@ any object depth, including escaped aliases; legal equal names in separate objec
 remain independent. It also rejects unsafe/fractional/nonfinite JSON number values,
 which cannot represent the integer metadata contract of these private exports.
 Reported financial decimals, exact rational components and other exact quantities
-remain strings and are unchanged. The helper does not interpret financial semantics,
+remain strings and are unchanged. Review also exposed a precision trap in the first
+integer guard: Number conversion can round a fractional lexical such as
+1.0000000000000001 or9007199254740991.1 to a safe integer, and underflow can become
+zero. The final guard checks the original bounded coefficient/exponent with BigInt
+before any Number conversion; regressions retain these exact rejected forms. The helper does not interpret financial semantics,
 validate source identity, rewrite keys, normalize text or replace the existing
 statement/calculation/vintage validators.
 
@@ -58,3 +62,13 @@ This closes a demonstrated ambiguous-JSON admission defect. It does not establis
 source authentication, standards completeness, vulnerability clearance, complete
 statements, exhaustive WCAG or physical assistive-technology acceptance. No dependency
 version or permission is changed.
+
+Recovery continuation also rejects numeric negative-zero metadata (-0,-0.0,-0e12):
+its sign cannot survive canonical JSON integer interpretation. Reported financial
+strings such as "-0.00" are preserved byte-for-byte as strings. Nine focused parser
+checks and the six-export ingress contract now retain23adversarial rejections,
+including invalid calendar periods/acceptance,cutoff/sourcehash mismatches and exact
+lexical fractional,unsafe,underflow and signed-zero metadata cases. Existing valid
+legacy statement,vintage and calculation exports remain admitted. Dimensional
+artifacts are separately validated in the Python dimensional-report corpus;the
+existing browser has no new dimensional-report import mode.

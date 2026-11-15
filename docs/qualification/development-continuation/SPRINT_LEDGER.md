@@ -141,3 +141,14 @@ fractional tokens cannot round into admitted integer metadata.196frontend checks
 TSC/Vite and783guarded Python checks pass. Current focused GCC/Clang/sanitizer tests
 and all8frozen identities pass. No dependency pins/defaults/workspaces changed.
 Next gate:clean-source packaging,installed consumers,retained evidence and matrix.
+
+## Import-integrity recovery from d24175e
+
+Exact branch/remote d24175eed9ec319eeb0d865bb01200d8b3d11bb7 verified;only pending
+STRICT_OFFLINE_JSON_IMPORTS.md clarification preserved. No patches rerun or changes
+discarded. Numeric signed-zero metadata now explicitly rejects while reported
+financial strings preserve their signs.9focused parser/197frontend checks,TSC/Vite,
+and6actual exports/23adversarial rejections pass (work/import-recovery/).
+Parallel continuation:Python exact metadata+historical duplicate readers,original
+DTS source audit,and actual three-role/vintage TypeScript consumer contract.
+Keep pending agent source changes separate;no app/server/provider action.

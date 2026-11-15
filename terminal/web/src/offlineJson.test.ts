@@ -21,6 +21,10 @@ test('UTF-8 bytes, depth, node count and decoded string limits reject before obj
  for(const raw of[' '.repeat(MAX_OFFLINE_BYTES+1),'"'+'é'.repeat(140000)+'"','['.repeat(34)+'0'+']'.repeat(34),'['+Array(40001).fill('0').join(',')+']','"'+'a'.repeat(16385)+'"','"'+'\\u0061'.repeat(16385)+'"'])assert.throws(()=>parseOfflineJson(raw));
  assert.equal((parseOfflineJson('"'+'\\u0061'.repeat(16384)+'"') as string).length,16384);
 });
+test('numeric negative zero is ambiguous metadata while financial source strings keep their sign',()=>{
+ for(const token of['-0','-0.0','-0e12','-0.000e-128'])assert.throws(()=>parseOfflineJson('{"index":'+token+'}'));
+ assert.deepEqual(parseOfflineJson('{"index":0,"reported":"-0","lexical":"-0.00","exponent":"-0e12"}'),{index:0,reported:'-0',lexical:'-0.00',exponent:'-0e12'});
+});
 test('prototype-shaped keys remain data without prototype assignment or inherited-key collisions',()=>{
  const result=parseOfflineJson('{"__proto__":{"source":1},"constructor":2,"toString":3}')as Record<string,unknown>;
  assert.equal(Object.prototype.hasOwnProperty.call(result,'__proto__'),true);assert.equal(Object.getPrototypeOf(result),Object.prototype);assert.equal(({}as {source?:number}).source,undefined);assert.throws(()=>parseOfflineJson('{"__proto__":1,"__proto__":2}'));
