@@ -123,3 +123,12 @@ V4 source/assignment/proof selection is strict;positive defaults alone aggregate
 Contract:NEGATIVE_EXPLICIT_DRS.md;logs:work/statement-sprint/negative-*.log and
 work/negative-drs/. Cross-role/typed/negative-only/precedence remain unsupported.
 No matrix promotion or provider/application action.
+
+Negative DRS remote-verified:20e211184b476083ba544f90701cdb10270c7730.
+Third package:positive explicit dimensional calculation report,21new/103focused
+Python checks pass. Source DRS is recomputed;global defaults independently validated;
+reported OIMdimensions omit default members,which remain separate effective-aspect
+diagnostics. Exact periods/units/member values must bind;all sourceIDs remain.
+Only existing admitted selected-fact participants;extensions/typed/negative/cross-role
+calculation semantics remain unsupported. Contract:EXPLICIT_DIMENSIONAL_CALCULATIONS.md.
+No default/legacy calculation change,accounting equivalence or provider activation.
