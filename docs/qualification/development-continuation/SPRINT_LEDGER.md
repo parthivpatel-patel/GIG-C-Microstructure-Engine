@@ -172,3 +172,15 @@ hashes now has an independent original-byte audit;legacy artifact-only APIs rema
 compatible. Plain pre-binding originals only;processing approval precedes XML.
 Contract:ORIGINAL_DTS_SOURCE_AUDIT.md. No independent authentication or full standards
 conformance is inferred;inline audit remains a precisely documented future contract.
+
+Original DTS audit remote-verified:bb09af8fd869f86b37571f253173a108d7c017d5.
+Statement consumer continuation:6new/22focused Python checks;5actual statementsets,
+4historical cutoffs,23v2childpackets,1,018assertions and7re-signed tamper rejections
+pass. Existing TypeScript v2consumer reused through test-time wrappers only;no new
+public/browser packet schema. Original admission vs rebuilt childidentity is checked
+explicitly. Allthree designated views preserve sources,missing/conflicting cells,
+role/DTS receipts and amendment ancestry. Contract:STATEMENT_SET_CONSUMER_ACCEPTANCE.md.
+Guarded integration:827Python passed,0failures/errors/skips;197frontend/TSC/Vite and
+6export/23negative ingress checks pass. Allnew tests registered explicitly. Next gate:
+fresh clean-source packages/installed consumers and retained evidence/matrix;no
+application/server/provider access or complete-statement/accounting-equivalence claim.
