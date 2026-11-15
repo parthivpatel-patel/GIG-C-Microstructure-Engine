@@ -213,3 +213,12 @@ validated beforeXML. Reconstructedcontinuations/parsedset/DTSclosure must match.
 Optional acquisitionintent requires independently retained expectedmanifestdigest;
 authored acquisitionorder remains distinct from canonical parsedURIorder. Contract:
 ORIGINAL_INLINE_DTS_SOURCE_AUDIT.md. No sourceauthentication or defaultactivation claim.
+
+Inline audit remote-verified:c458226042abf98acefb508b19320c8f27b984b9.
+Original-source accounting relationships:17new/54focused checks pass. Normative
+XBRL2.1 sections3.5.3.9.7.4,5.2.6.2.2 and5.2.6.2.4 independently reviewed through
+documentationtools;executor directHTTP403 did not block document review. Standard
+source essence-alias/requires-element arcs bind original bytes,exact namedtype/
+period/presentbalance,effectivepriority/prohibition and provenance. Originalfact
+checks preserve units,lexicalentitycontext,missing/nil/duplicate/conflicting facts.
+No GAAPalias or optional essence-value inference. Contract:SOURCE_ACCOUNTING_RELATIONSHIPS.md.
