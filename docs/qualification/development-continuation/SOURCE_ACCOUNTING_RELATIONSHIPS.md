@@ -87,3 +87,10 @@ This source-authored concept correspondence can support a separately explicit
 statement classification, but does not invent a GAAP metric alias, infer missing
 reported amounts, establish independent source authentication, prove complete
 schema/DRS/accounting conformance or create a complete financial statement.
+
+Root integration review added two source-validity regressions: actual abstract facts
+and finite contexts that contradict declared periodType reject before any equality
+claim;missing item periodType also rejects.19relationship checks now cover these
+cases. The context-mismatch fixture uses two valid different instant periods while
+retaining its original no-cross-join assertions. Full source validation/conformance
+outside the stated original-byte and supported semantic scope remains unclaimed.

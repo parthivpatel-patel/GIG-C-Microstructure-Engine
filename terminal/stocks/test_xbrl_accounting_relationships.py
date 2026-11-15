@@ -26,6 +26,13 @@ def report(*args,**kwargs):
 def check(r):return r['networks'][0]['arcs'][0]['checks'][0]
 
 class AccountingRelationships(unittest.TestCase):
+ def test_invalid_declared_period_cannot_claim_equal_source_values(self):
+  p,g,raw,docs,options=fixture();raw=raw.replace(b'contextRef="I"',b'contextRef="D"');options['manifest']['source_sha256']=hashlib.sha256(raw).hexdigest();p=parse_filing(raw,options['manifest'],options['concepts']);g=discover(raw,options['instance_uri'],hashlib.sha256(raw).hexdigest(),docs)
+  with self.assertRaisesRegex(XBRLError,'declared_period_conflict'):extract_accounting_relationships(p,g,raw,docs,**options)
+ def test_abstract_source_facts_and_undeclared_period_are_not_equivalent(self):
+  for mode,code in [('abstract','abstract_fact'),('period','alias_period_required')]:
+   p,g,raw,docs,options=fixture();docs[0]['raw']=docs[0]['raw'].replace(b'substitutionGroup="x:item"',b'abstract="true" substitutionGroup="x:item"')if mode=='abstract'else docs[0]['raw'].replace(b'x:periodType="instant"',b'');docs[0]['sha256']=hashlib.sha256(docs[0]['raw']).hexdigest();g=discover(raw,options['instance_uri'],hashlib.sha256(raw).hexdigest(),docs)
+   with self.subTest(mode=mode),self.assertRaisesRegex(XBRLError,code):extract_accounting_relationships(p,g,raw,docs,**options)
  def test_exact_sources_constraints_fact_ids_and_no_input_mutation(self):
   p,g,raw,docs,options=fixture();before=copy.deepcopy((p,g,docs,options));r=extract_accounting_relationships(p,g,raw,docs,**options);a=r['networks'][0]['arcs'][0]
   self.assertEqual(r['status'],'AVAILABLE');self.assertTrue(r['complete_definition_scope']);self.assertEqual(a['from'],'{'+NS+'}Assets');self.assertEqual(a['to'],'{'+NS+'}AliasAssets');self.assertEqual(check(r)['status'],'SUPPORTED_EQUAL');self.assertTrue(check(r)['standards_value_equality_established']);self.assertEqual(check(r)['source_fact_ids'],[f['source_fact_id']for f in p['facts']]);self.assertEqual(a['provenance'][0]['source_sha256'],docs[-1]['sha256']);self.assertEqual(r['source_audit']['status'],'VERIFIED_ORIGINAL_SOURCE_RECONSTRUCTION');self.assertFalse(r['gaap_aliases_inferred']);self.assertFalse(r['facts_inferred']);self.assertIsNone(r['selected_reported_value']);self.assertEqual(r['sha256'],digest({k:v for k,v in r.items()if k!='sha256'}));self.assertEqual((p,g,docs,options),before)
@@ -48,7 +55,7 @@ class AccountingRelationships(unittest.TestCase):
  def test_differing_reported_values_retain_both_without_rounding_inference(self):
   c=check(report(right='1001'));self.assertEqual(c['status'],'CONFLICTING_REPORTED_VALUES');self.assertEqual(c['essence_facts'][0]['reported_value'],'1000');self.assertEqual(c['alias_facts'][0]['reported_value'],'1001');self.assertFalse(c['standards_value_equality_established'])
  def test_unit_and_context_mismatches_do_not_cross_join(self):
-  facts='<g:Assets contextRef="I" unitRef="USD">1000</g:Assets><g:AliasAssets contextRef="D" unitRef="USD">1000</g:AliasAssets>'
+  facts='<x:context id="OLD"><x:entity><x:identifier scheme="http://www.sec.gov/CIK">0000320193</x:identifier></x:entity><x:period><x:instant>2022-12-31</x:instant></x:period></x:context><g:Assets contextRef="I" unitRef="USD">1000</g:Assets><g:AliasAssets contextRef="OLD" unitRef="USD">1000</g:AliasAssets>'
   r=report(facts=facts);self.assertEqual([c['status']for c in r['networks'][0]['arcs'][0]['checks']],['MISSING_COUNTERPART','MISSING_COUNTERPART'])
   p,g,raw,docs,options=fixture();raw=raw.replace(b'</x:xbrl>',b'<x:unit id="EUR"><x:measure>iso:EUR</x:measure></x:unit></x:xbrl>').replace(b'<g:AliasAssets contextRef="I" unitRef="USD"',b'<g:AliasAssets contextRef="I" unitRef="EUR"');options['manifest']=manifest(raw);p=parse_filing(raw,options['manifest'],options['concepts']);g=discover(raw,options['instance_uri'],hashlib.sha256(raw).hexdigest(),docs)
   c=check(extract_accounting_relationships(p,g,raw,docs,**options));self.assertEqual(c['status'],'UNSUPPORTED_ASPECTS');self.assertIn('UNIT_SEMANTIC_CONFLICT',c['reason'])

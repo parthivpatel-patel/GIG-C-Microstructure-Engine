@@ -222,3 +222,15 @@ source essence-alias/requires-element arcs bind original bytes,exact namedtype/
 period/presentbalance,effectivepriority/prohibition and provenance. Originalfact
 checks preserve units,lexicalentitycontext,missing/nil/duplicate/conflicting facts.
 No GAAPalias or optional essence-value inference. Contract:SOURCE_ACCOUNTING_RELATIONSHIPS.md.
+
+Accounting relationships remote-verified:e334aba39177f85527679cfd9f38149f8708012c.
+Original-source accounting statement reconstruction:18product+19relationship tests;
+59focused root checks and908guarded Python tests pass.7actual exports/224TypeScript
+assertions/7tamper rejections pass. Allthree source-designated views preserve exact
+source classification,entity/context/period/unit,missing/conflicting/unsupported rows,
+calculation intervals and independent amendment vintages. No targetfact is filled
+from an alias. Rootreview reproduced invalid abstract/period facts claiming equality;
+fail-closed checks+2regressions repair it. Context-mismatchfixture nowuses validother
+instant while retainingmissing assertions. Contracts:SOURCE_ACCOUNTING_STATEMENTS.md,
+SOURCE_ACCOUNTING_RELATIONSHIPS.md. Typed/cross-role/generalV-equality and complete
+GAAPstatements remain open;legacy/default APIs and allrequirementsstatuses unchanged.

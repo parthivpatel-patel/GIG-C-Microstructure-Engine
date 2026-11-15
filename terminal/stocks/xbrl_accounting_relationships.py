@@ -24,6 +24,7 @@ def _declarations(arc,concepts,kind):
  if kind=='essence-alias':
   if a['type']is None or b['type']is None:raise XBRLError('accounting_alias_named_type_required')
   if a['type']!=b['type']:raise XBRLError('accounting_alias_type_conflict')
+  if a['period_type']not in('instant','duration')or b['period_type']not in('instant','duration'):raise XBRLError('accounting_alias_period_required')
   if a['period_type']!=b['period_type']:raise XBRLError('accounting_alias_period_conflict')
   if a['balance']is not None and b['balance']is not None and a['balance']!=b['balance']:raise XBRLError('accounting_alias_balance_conflict')
  return {'status':'SUPPORTED_DECLARATIONS','type':a['type']if kind=='essence-alias'else None,'period_type':a['period_type']if kind=='essence-alias'else None,'from_declaration':copy.deepcopy(a),'to_declaration':copy.deepcopy(b),'from_sources':list(concepts[arc['from']]['source_documents']),'to_sources':list(concepts[arc['to']]['source_documents'])}
@@ -31,6 +32,9 @@ def _declarations(arc,concepts,kind):
 def _facts(parsed,concept):return [f for f in parsed['facts']if f['concept']==concept]
 
 def _member(fact,parsed,dts):
+ declaration=dts['concepts'][fact['concept']]['declaration'];context=parsed['contexts'][fact['context_ref']]
+ if declaration['abstract']:raise XBRLError('accounting_abstract_fact')
+ if context['period']['kind']!='forever'and declaration['period_type']!=context['period']['kind']:raise XBRLError('accounting_declared_period_conflict')
  result={key:fact[key]for key in('source_fact_id','context_ref','context_sha256','unit_ref','unit_sha256','lexical_value','decimals','precision','nil')};result['reported_value']=None
  if fact['nil']:
   if not dts['concepts'][fact['concept']]['declaration']['nillable']:raise XBRLError('accounting_nil_not_declared')
