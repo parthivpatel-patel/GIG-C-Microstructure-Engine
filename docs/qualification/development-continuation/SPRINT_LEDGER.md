@@ -184,3 +184,13 @@ Guarded integration:827Python passed,0failures/errors/skips;197frontend/TSC/Vite
 6export/23negative ingress checks pass. Allnew tests registered explicitly. Next gate:
 fresh clean-source packages/installed consumers and retained evidence/matrix;no
 application/server/provider access or complete-statement/accounting-equivalence claim.
+
+Final integrated source remote-verified:4db5be177a69983cfed68b268561cdf8f67472da.
+Fresh sdist1559members/1558tracked files byte-checked;fresh default wheel compiled.
+8installed consumers+569source regressions and installed financial/ingress/statement
+contracts pass.827guarded/197frontend,all8frozen identities unchanged. Current evidence:
+STATEMENT_RECOVERY_EVIDENCE.json;source/package hashes are explicit. Matrix remains
+34COMPLETE/8PARTIAL/7BLOCKED/1N/A;no requirement promotion. Full report/reproduction
+and next queue retained. No app/server/provider/paid/deployment/trading/owner acceptance.
+No active agent/background execution remains. On resume inspect actualstatus,current
+remote and receipts;preserve interrupted work rather than rerunning patch scripts.

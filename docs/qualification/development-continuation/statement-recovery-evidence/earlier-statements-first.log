@@ -1,0 +1,400 @@
+test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable (terminal.stocks.test_xbrl_statement_set.StatementSet.test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable) ... ERROR
+test_conflicting_duplicates_are_not_selected (terminal.stocks.test_xbrl_statement_set.StatementSet.test_conflicting_duplicates_are_not_selected) ... ERROR
+test_corrupted_source_context_or_arc_provenance_rejects (terminal.stocks.test_xbrl_statement_set.StatementSet.test_corrupted_source_context_or_arc_provenance_rejects) ... ERROR
+test_cutoff_original_and_amendment_are_whole_independent_sources (terminal.stocks.test_xbrl_statement_set.StatementSet.test_cutoff_original_and_amendment_are_whole_independent_sources) ... ERROR
+test_determinism_isolation_and_legacy_defaults (terminal.stocks.test_xbrl_statement_set.StatementSet.test_determinism_isolation_and_legacy_defaults) ... ERROR
+test_historical_comparative_is_separate_and_does_not_fill_missing_rows (terminal.stocks.test_xbrl_statement_set.StatementSet.test_historical_comparative_is_separate_and_does_not_fill_missing_rows) ... ERROR
+test_history_exact_order_transitions_and_no_cross_vintage_fill (terminal.stocks.test_xbrl_statement_set.StatementSet.test_history_exact_order_transitions_and_no_cross_vintage_fill) ... ERROR
+test_invalid_query_and_stale_collection_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_invalid_query_and_stale_collection_reject) ... ERROR
+test_missing_latest_graph_or_bindings_never_substitutes_old_source (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_latest_graph_or_bindings_never_substitutes_old_source) ... ERROR
+test_missing_role_partial_and_explicit_undesignated_stays_missing (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_role_partial_and_explicit_undesignated_stays_missing) ... ERROR
+test_nil_missing_and_zero_are_distinct (terminal.stocks.test_xbrl_statement_set.StatementSet.test_nil_missing_and_zero_are_distinct) ... ERROR
+test_output_and_period_budgets_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_output_and_period_budgets_reject) ... FAIL
+test_periods_units_and_original_numeric_source_ids_remain_bound (terminal.stocks.test_xbrl_statement_set.StatementSet.test_periods_units_and_original_numeric_source_ids_remain_bound) ... ERROR
+test_three_source_roles_preserve_exact_values_and_signed_relationships (terminal.stocks.test_xbrl_statement_set.StatementSet.test_three_source_roles_preserve_exact_values_and_signed_relationships) ... ERROR
+test_unit_conflict_stays_ambiguous (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unit_conflict_stays_ambiguous) ... ERROR
+test_unknown_or_future_acceptance_is_not_admitted (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unknown_or_future_acceptance_is_not_admitted) ... ERROR
+
+======================================================================
+ERROR: test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable (terminal.stocks.test_xbrl_statement_set.StatementSet.test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 68, in test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable
+    w,g,r=prepared(authored(),authored(accession=B));self.assertEqual(export(w,g,r)['reason'],'AMBIGUOUS_LATEST_FILING')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_conflicting_duplicates_are_not_selected (terminal.stocks.test_xbrl_statement_set.StatementSet.test_conflicting_duplicates_are_not_selected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 52, in test_conflicting_duplicates_are_not_selected
+    w,g,r=prepared(authored(extra='<ext:IncomeTotal contextRef="D" unitRef="USD" decimals="0">101</ext:IncomeTotal>'));row=export(w,g,r)['statements'][KINDS[1]]['view']['periods'][0]['rows'][0];self.assertEqual(row['status'],'CONFLICT');self.assertIsNone(row['value']);self.assertEqual(len(row['facts']),2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_corrupted_source_context_or_arc_provenance_rejects (terminal.stocks.test_xbrl_statement_set.StatementSet.test_corrupted_source_context_or_arc_provenance_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 81, in test_corrupted_source_context_or_arc_provenance_rejects
+    w,g,r=prepared();bad=copy.deepcopy(g);bad[A]['effective_relationships']['networks'][0]['arcs'][0]['provenance'][0]['source_sha256']='0'*64
+          ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_cutoff_original_and_amendment_are_whole_independent_sources (terminal.stocks.test_xbrl_statement_set.StatementSet.test_cutoff_original_and_amendment_are_whole_independent_sources)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 60, in test_cutoff_original_and_amendment_are_whole_independent_sources
+    w,g,r=prepared(authored(),authored(income='99',accession=B,form='10-K/A',filed='2024-02-10',accepted_at=LATE,amends_accession=A));old=export(w,g,r,at=EARLY);new=export(w,g,r);self.assertEqual(old['source_filing']['accession'],A);self.assertEqual(new['source_filing']['accession'],B);self.assertEqual(new['statements'][KINDS[1]]['view']['periods'][0]['rows'][0]['value'],'99');self.assertEqual(len(new['lineage']['sources']),2)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_determinism_isolation_and_legacy_defaults (terminal.stocks.test_xbrl_statement_set.StatementSet.test_determinism_isolation_and_legacy_defaults)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 89, in test_determinism_isolation_and_legacy_defaults
+    w,g,r=prepared();before=copy.deepcopy(w.xbrl_collections['AAPL']._filings);legacy=w.xbrl_collections['AAPL'].statement_at(LATE,role=ROLE);a=export(w,g,r);self.assertEqual(a,export(w,g,r));a['source_filing']['form']='bad';self.assertEqual(before,w.xbrl_collections['AAPL']._filings);self.assertEqual(legacy,w.xbrl_collections['AAPL'].statement_at(LATE,role=ROLE))
+          ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_historical_comparative_is_separate_and_does_not_fill_missing_rows (terminal.stocks.test_xbrl_statement_set.StatementSet.test_historical_comparative_is_separate_and_does_not_fill_missing_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 50, in test_historical_comparative_is_separate_and_does_not_fill_missing_rows
+    w,g,r=prepared(authored(extra=ctx+'<ext:RevenueReported contextRef="OLD" unitRef="USD" decimals="0">125</ext:RevenueReported>'));periods=export(w,g,r)['statements'][KINDS[1]]['view']['periods'];self.assertEqual(len(periods),2);self.assertEqual([row['status']for row in periods[1]['rows']],['MISSING','REPORTED_EXTENSION','MISSING']);self.assertEqual(periods[1]['rows'][1]['value'],'125')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_history_exact_order_transitions_and_no_cross_vintage_fill (terminal.stocks.test_xbrl_statement_set.StatementSet.test_history_exact_order_transitions_and_no_cross_vintage_fill)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 91, in test_history_exact_order_transitions_and_no_cross_vintage_fill
+    w,g,r=prepared(authored(),authored(income='99',accession=B,form='10-K/A',filed='2024-02-10',accepted_at=LATE,amends_accession=A));h=company_statement_history(w,'AAPL',['2024-01-01T00:00:00Z',EARLY,LATE],g,r);self.assertEqual([row['transition']for row in h['entries']],['UNAVAILABLE','FIRST_AVAILABLE','SOURCE_CHANGED']);self.assertFalse(h['complete_history']);self.assertEqual(h['entries'][2]['previous_accession'],A)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_invalid_query_and_stale_collection_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_invalid_query_and_stale_collection_reject)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 74, in test_invalid_query_and_stale_collection_reject
+    w,g,r=prepared()
+          ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_missing_latest_graph_or_bindings_never_substitutes_old_source (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_latest_graph_or_bindings_never_substitutes_old_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 62, in test_missing_latest_graph_or_bindings_never_substitutes_old_source
+    w,g,r=prepared(authored(),authored(accession=B,filed='2024-02-10',accepted_at=LATE))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_missing_role_partial_and_explicit_undesignated_stays_missing (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_role_partial_and_explicit_undesignated_stays_missing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 66, in test_missing_role_partial_and_explicit_undesignated_stays_missing
+    w,g,r=prepared();r[A]['income_statement']=ROLE+'/unknown';r[A]['cash_flow_statement']=None;packet=export(w,g,r);self.assertEqual(packet['status'],'PARTIAL');self.assertEqual(packet['statements']['income_statement']['reason'],'ROLE_NOT_IN_LATEST_FILING');self.assertEqual(packet['statements']['cash_flow_statement']['reason'],'ROLE_NOT_DESIGNATED')
+          ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_nil_missing_and_zero_are_distinct (terminal.stocks.test_xbrl_statement_set.StatementSet.test_nil_missing_and_zero_are_distinct)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 54, in test_nil_missing_and_zero_are_distinct
+    e=authored(income='0');w,g,r=prepared(e);self.assertEqual(export(w,g,r)['statements'][KINDS[1]]['view']['periods'][0]['rows'][0]['value'],'0')
+                                 ^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_periods_units_and_original_numeric_source_ids_remain_bound (terminal.stocks.test_xbrl_statement_set.StatementSet.test_periods_units_and_original_numeric_source_ids_remain_bound)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 46, in test_periods_units_and_original_numeric_source_ids_remain_bound
+    r=export();balance=r['statements'][KINDS[0]]['view']['periods'][0];income=r['statements'][KINDS[1]]['view']['periods'][0]
+      ^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 36, in export
+    if w is None:w,g,r=prepared()
+                       ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_three_source_roles_preserve_exact_values_and_signed_relationships (terminal.stocks.test_xbrl_statement_set.StatementSet.test_three_source_roles_preserve_exact_values_and_signed_relationships)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 41, in test_three_source_roles_preserve_exact_values_and_signed_relationships
+    r=export();self.assertEqual(r['status'],'AVAILABLE');self.assertFalse(r['complete_statements']);self.assertFalse(r['provider_requested'])
+      ^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 36, in export
+    if w is None:w,g,r=prepared()
+                       ^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_unit_conflict_stays_ambiguous (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unit_conflict_stays_ambiguous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 58, in test_unit_conflict_stays_ambiguous
+    w,g,r=prepared(authored(extra=extra));row=export(w,g,r)['statements'][KINDS[1]]['view']['periods'][0]['rows'][0];self.assertEqual(row['status'],'AMBIGUOUS_UNITS');self.assertIsNone(row['value'])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+ERROR: test_unknown_or_future_acceptance_is_not_admitted (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unknown_or_future_acceptance_is_not_admitted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 72, in test_unknown_or_future_acceptance_is_not_admitted
+    w,g,r=prepared(entry);self.assertEqual(export(w,g,r)['status'],'UNAVAILABLE')
+          ^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 32, in prepared
+    entries=entries or(authored(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
+                                                                                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statements.py", line 25, in collection
+    c=FilingCollection('0000320193');c.ingest_dts_batch(list(entries)or[entry()]);return c
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_collection.py", line 51, in ingest_dts_batch
+    parsed=parse_filing(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=self.allow_observed);source=parsed['source']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/inline_xbrl.py", line 69, in parse_filing
+    return _interpret_instance(root,source,concepts)if root.name==tag(X,'xbrl')else _interpret_inline(root,source,concepts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/gig-development/terminal/stocks/xbrl_instance.py", line 211, in _interpret_instance
+    if key in ids:raise XBRLError('xbrl_duplicate_id')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+======================================================================
+FAIL: test_output_and_period_budgets_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_output_and_period_budgets_reject)
+----------------------------------------------------------------------
+terminal.stocks.xbrl_instance.XBRLError: xbrl_duplicate_id
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 86, in test_output_and_period_budgets_reject
+    with patch('terminal.stocks.xbrl_statement_set.MAX_OUTPUT',1),self.assertRaisesRegex(XBRLError,'output_budget'):export()
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "output_budget" does not match "xbrl_duplicate_id"
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.034s
+
+FAILED (failures=1, errors=15)

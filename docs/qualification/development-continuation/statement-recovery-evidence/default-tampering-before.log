@@ -1,0 +1,1 @@
+Reproduced:legacy supplied-artifact binder self-consistency accepts rehashed changed default without raw-body reconstruction;new explicit original-source audit rejects it. No legacy API changed.

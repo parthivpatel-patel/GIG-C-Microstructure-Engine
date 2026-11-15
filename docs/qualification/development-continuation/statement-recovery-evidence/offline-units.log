@@ -1,0 +1,17 @@
+✔ bounded financial-export JSON preserves actual reported strings, safe metadata and authored arrays (3.448386ms)
+✔ duplicate decoded member names reject at root and inside unrelated nested branches (0.809225ms)
+✔ JSON grammar rejects malformed escapes, literals, containers, numbers and trailing input (0.917927ms)
+✔ numeric overflow, fractional metadata and integer precision loss cannot silently rehash as other values (0.781027ms)
+✔ UTF-8 bytes, depth, node count and decoded string limits reject before object construction (60.511036ms)
+✔ numeric negative zero is ambiguous metadata while financial source strings keep their sign (0.494854ms)
+✔ prototype-shaped keys remain data without prototype assignment or inherited-key collisions (0.257026ms)
+✔ file reader validates original UTF-8 and exact byte size rather than accepting replacement characters (1.101322ms)
+✔ abort before and during bounded file read prevents parsing stale bytes (1.659131ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 221.809594

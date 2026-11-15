@@ -1,0 +1,29 @@
+{
+  "scope": "Reproduced prior Number-based admission, before exact lexical validation",
+  "cases": [
+    {
+      "token": "1.0000000000000001",
+      "prior_condition": true,
+      "prior_decoded": 1,
+      "required_admission": false
+    },
+    {
+      "token": "9007199254740991.1",
+      "prior_condition": true,
+      "prior_decoded": 9007199254740991,
+      "required_admission": false
+    },
+    {
+      "token": "-9007199254740991.1",
+      "prior_condition": true,
+      "prior_decoded": -9007199254740991,
+      "required_admission": false
+    },
+    {
+      "token": "1e-999",
+      "prior_condition": true,
+      "prior_decoded": 0,
+      "required_admission": false
+    }
+  ]
+}

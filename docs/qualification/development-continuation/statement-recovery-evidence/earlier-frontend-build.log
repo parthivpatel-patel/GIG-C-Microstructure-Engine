@@ -1,0 +1,14 @@
+
+> gig-institutional-terminal@0.1.0 build
+> tsc -b && vite build
+
+src/offlineJson.ts(10,24): error TS18047: 'parts' is possibly 'null'.
+src/offlineJson.ts(11,17): error TS18047: 'parts' is possibly 'null'.
+src/offlineJson.ts(11,88): error TS18047: 'parts' is possibly 'null'.
+src/offlineJson.ts(14,5): error TS18047: 'parts' is possibly 'null'.
+src/offlineJson.ts(40,89): error TS18047: 'match' is possibly 'null'.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

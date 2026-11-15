@@ -1,0 +1,8 @@
+/workspace/gig-development/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+........................................Executing <Task finished name='Task-154' coro=<IngestStore.test_cross_process_restore_with_network_guard_and_disabled_transport() done, defined at /workspace/gig-development/terminal/stocks/test_sec_ingest_store.py:50> result=None created at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:100> took 0.125 seconds
+...............................................
+----------------------------------------------------------------------
+Ran 87 tests in 2.768s
+
+OK

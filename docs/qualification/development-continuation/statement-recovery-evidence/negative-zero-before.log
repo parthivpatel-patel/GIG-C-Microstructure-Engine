@@ -1,0 +1,3 @@
+{"token":"-0","accepted":true,"negative_zero":true}
+{"token":"-0.0","accepted":true,"negative_zero":true}
+{"token":"-0e12","accepted":true,"negative_zero":true}

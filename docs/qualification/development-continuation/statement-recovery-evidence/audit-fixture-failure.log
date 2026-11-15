@@ -1,0 +1,18 @@
+..........F.........
+======================================================================
+FAIL: test_original_byte_and_artifact_output_limits_are_enforced (terminal.stocks.test_xbrl_dts_source_audit.DTSSourceAudit.test_original_byte_and_artifact_output_limits_are_enforced)
+----------------------------------------------------------------------
+terminal.stocks.xbrl_instance.XBRLError: dts_audit_duplicate_original_uri
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_dts_source_audit.py", line 119, in test_original_byte_and_artifact_output_limits_are_enforced
+    with self.assertRaisesRegex(XBRLError,'document_budget'):audit(bad,p,g)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "document_budget" does not match "dts_audit_duplicate_original_uri"
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.159s
+
+FAILED (failures=1)

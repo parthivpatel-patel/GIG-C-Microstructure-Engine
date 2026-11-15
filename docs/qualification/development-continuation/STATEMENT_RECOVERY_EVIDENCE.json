@@ -1,0 +1,727 @@
+{
+  "schema": "gig.statement_recovery.sprint.evidence.v1",
+  "date": "2026-11-14",
+  "timezone": "America/New_York",
+  "engineering_target": "2026-11-20",
+  "starting_commit": "f87db9a5eea196c606b2dcbe8720c0b2def98b50",
+  "recovery_checkpoint": "d24175eed9ec319eeb0d865bb01200d8b3d11bb7",
+  "tested_runtime": "4db5be177a69983cfed68b268561cdf8f67472da",
+  "verified_checkpoints": [
+    "0486062dca1e2be332bd767b34fa1836d9798ec9",
+    "20e211184b476083ba544f90701cdb10270c7730",
+    "5fbd78fb2240042f44773ffd9425944ccf082a30",
+    "d24175eed9ec319eeb0d865bb01200d8b3d11bb7",
+    "db6b5d7a1add8b2d60d0a60db8d6dfb3021e21ac",
+    "6d5c454a501cce39901e7556ffa8579223f186c2",
+    "bb09af8fd869f86b37571f253173a108d7c017d5",
+    "4db5be177a69983cfed68b268561cdf8f67472da"
+  ],
+  "no_launch": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 827,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_open_dimensions",
+      "terminal.stocks.test_xbrl_restriction_constraints",
+      "terminal.stocks.test_xbrl_calculation_intervals",
+      "terminal.stocks.test_xbrl_calculation_report",
+      "terminal.stocks.test_xbrl_calculation_product",
+      "terminal.stocks.test_xbrl_lineage",
+      "terminal.stocks.test_xbrl_typed_dimensions",
+      "terminal.stocks.test_xbrl_inherited_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.stocks.test_xbrl_statement_set",
+      "terminal.stocks.test_xbrl_negative_dimensions",
+      "terminal.stocks.test_xbrl_dimensional_calculation",
+      "terminal.stocks.test_python_json_ingress",
+      "terminal.stocks.test_history_json_ingress",
+      "terminal.stocks.test_xbrl_dts_source_audit",
+      "terminal.stocks.test_statement_set_source_acceptance",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_kraken_book_session",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 827
+  },
+  "new_python_tests": 103,
+  "new_python_tests_after_recovery": 44,
+  "new_frontend_tests": 9,
+  "frontend_tests": {
+    "tests": 197,
+    "failures": 0,
+    "skipped": 0,
+    "typescript": "PASS",
+    "vite": "PASS",
+    "browser_started": false
+  },
+  "contracts": {
+    "v1": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "v2": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "vintages": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "calculation-contract": {
+      "schema": "gig.calculation_report.contract.v1",
+      "cases": 4,
+      "adversarial_rejections": 11,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "ingress-contract-final": {
+      "schema": "gig.offline_json_ingress.contract.v1",
+      "cases": 6,
+      "ambiguous_previously_accepted": 6,
+      "adversarial_rejections": 23,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "statement-consumer-final": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    }
+  },
+  "native_inputs_unchanged": true,
+  "native_builds": "Focused current-session checks used existing byte-equivalent GCC/Clang/sanitizer builds before the import-recovery request;all native/core/SDK/build inputs remain byte-identical through the tested final source. Not a new full compiler matrix or Python instrumentation. Fresh default wheel separately compiled from verified clean source.",
+  "native_focused": {
+    "GCC Release": 6,
+    "GCC Debug": 2,
+    "Clang Debug": 2,
+    "Clang Release": 2,
+    "GCC ASan+UBSan": 2
+  },
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "installed_default_sdk": {
+    "consumers": 8,
+    "source_regressions": {
+      "application_started": false,
+      "errors": 0,
+      "failures": 0,
+      "provider_requested": false,
+      "schema": "gig.installed_source_regressions.v1",
+      "sdk": "/workspace/gig-development/work/import-recovery/installed/gig_microstructure/__init__.py",
+      "skipped": 0,
+      "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+      "tests": 569
+    },
+    "contracts": {
+      "installed-v2": {
+        "application_started": false,
+        "assertions": 93,
+        "cases": 15,
+        "provider_requested": false,
+        "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+      },
+      "installed-vintages": {
+        "schema": "gig.xbrl.vintage_contract.v1",
+        "entries": 3,
+        "adversarial_rejections": 6,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-calculation": {
+        "schema": "gig.calculation_report.contract.v1",
+        "cases": 4,
+        "adversarial_rejections": 11,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-ingress": {
+        "schema": "gig.offline_json_ingress.contract.v1",
+        "cases": 6,
+        "ambiguous_previously_accepted": 6,
+        "adversarial_rejections": 23,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "installed-statements": {
+        "adversarial_rejections": 7,
+        "application_started": false,
+        "assertions": 1018,
+        "fixture_bytes": 796426,
+        "history_entries": 4,
+        "provider_requested": false,
+        "schema": "gig.statement_set.offline_consumer_contract.v1",
+        "sets": 5,
+        "verified_children": 23
+      }
+    }
+  },
+  "package_archive": {
+    "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+    "members": 1559,
+    "tracked_files": 1558,
+    "bytes": 8512923,
+    "sha256": "8de7086680a2b2e615c0ed6f6003c28f9625681950f674467356da7fe22ec32e"
+  },
+  "packages": [
+    {
+      "name": "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl",
+      "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+      "fresh_build": true,
+      "bytes": 666813,
+      "sha256": "90fca80e8cbc6f3bbcf8e55484e77030c2c06c32b1aacfc09bb2a9eab9df82f3"
+    },
+    {
+      "name": "gig_microstructure-0.1.1.tar.gz",
+      "source": "4db5be177a69983cfed68b268561cdf8f67472da",
+      "fresh_build": true,
+      "bytes": 8512923,
+      "sha256": "8de7086680a2b2e615c0ed6f6003c28f9625681950f674467356da7fe22ec32e"
+    }
+  ],
+  "security": {
+    "source_lock_components": 85,
+    "source_input_hashes": 7,
+    "source_sbom_tests": 13,
+    "package_pattern_tests": 3,
+    "pip_check": "PASS",
+    "new_advisory_scan": false,
+    "target_clearance": false
+  },
+  "source_files": [
+    {
+      "path": "docs/qualification/development-continuation/EXPLICIT_DIMENSIONAL_CALCULATIONS.md",
+      "sha256": "d938c8df8955f385e7051ec67b0e0576df7a0c104bdaa1ce9ff1cc1127b440ed"
+    },
+    {
+      "path": "docs/qualification/development-continuation/NEGATIVE_EXPLICIT_DRS.md",
+      "sha256": "4b6dc0845e5c5aeacfe59199d77bc0db14580fb8e2ce79af5d740b97c6cd3eeb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/ORIGINAL_DTS_SOURCE_AUDIT.md",
+      "sha256": "58b770896a9532ac914a50e16ca0caf8e4f0deb88240089a233ac904d47bd3a6"
+    },
+    {
+      "path": "docs/qualification/development-continuation/PYTHON_SOURCE_JSON_INGRESS.md",
+      "sha256": "81157f00e240e0fbcd4f5d1fa45ce9fb264f8d20f8b31195ca05291b330d8352"
+    },
+    {
+      "path": "docs/qualification/development-continuation/SPRINT_LEDGER.md",
+      "sha256": "11b1e7752415cc1ecd44b8e90054db66f39689c1b7a8d885d9c9a3fa77d50bde"
+    },
+    {
+      "path": "docs/qualification/development-continuation/STATEMENT_SET_CONSUMER_ACCEPTANCE.md",
+      "sha256": "78c94ae3ff563baeb164338b69a3c5f572529f0f54066f9d706264d167f147d0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/STATEMENT_SET_V1.md",
+      "sha256": "38bb1871eaa41dd2dbae2e65a6f56b4328d3a0c763bf12f979c9a15b5d662394"
+    },
+    {
+      "path": "docs/qualification/development-continuation/STRICT_OFFLINE_JSON_IMPORTS.md",
+      "sha256": "b7d60016667bb245abaa43386234248990d035f384a6097f033b3d8558cd29a8"
+    },
+    {
+      "path": "scripts/inspect_xbrl_instances.py",
+      "sha256": "aba0c9f9307db4527073184dc2aa1201a8b0a7d1e4c7f0902a844d1fd58c25a2"
+    },
+    {
+      "path": "terminal/stocks/datasets.py",
+      "sha256": "68a9d71f742b505541b086e447ce8f095163d891ec812269f4f1e0c552f1ff90"
+    },
+    {
+      "path": "terminal/stocks/history_backup.py",
+      "sha256": "62afd2bcd170d6c1bb703b5bd974fc4afb7256ce72bd85236de200cc98bae207"
+    },
+    {
+      "path": "terminal/stocks/history_store.py",
+      "sha256": "2db3bed4686ca7b082501bac8157469d24b29dde93c15abb1ac6fcb259ccbe21"
+    },
+    {
+      "path": "terminal/stocks/sec_filing_ingest.py",
+      "sha256": "f07617a55d43f757bb33bfba95825f6e97a8fe85dcb651c44107c12069540e8b"
+    },
+    {
+      "path": "terminal/stocks/test_history_json_ingress.py",
+      "sha256": "e84accddd9eddcb52c7fcb049d3e17d48255e82b17ba8a978d857cc1cb3af621"
+    },
+    {
+      "path": "terminal/stocks/test_python_json_ingress.py",
+      "sha256": "3b849d0bdacad770edbaf4305d918b81c5d8516726483ccaf1c86ff3f7d1dabb"
+    },
+    {
+      "path": "terminal/stocks/test_statement_set_source_acceptance.py",
+      "sha256": "f70e9f5f3ec1663363da7cf94208f8ce9c92a55290bdb2363e4cefe0dc420f31"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_dimensional_calculation.py",
+      "sha256": "de71f685a8426ad956591058977270643d14cc22f5015442fc04a007d350d5a1"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_dts_source_audit.py",
+      "sha256": "c3e649d78f1459c35e81fbc99d3b6e9a74063503531542f3bb4614e9378f2183"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_negative_dimensions.py",
+      "sha256": "f061cf309c40674610dac5e36ff40e12b433b524fdb7aad214833f612420312e"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_statement_set.py",
+      "sha256": "6507407e850c4966437a76f9dd4390812234e60817fe49f35550aae56b65a4fd"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dimensional_calculation.py",
+      "sha256": "83d8c5e4b4684c69af8ada5d54df87896877c0250bc779795b0c7057b884bf82"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dimensions.py",
+      "sha256": "f234e13d113cc446047ab86946232193b131ee8484285143b0ab6bdf831512b5"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dts_source_audit.py",
+      "sha256": "0d69ffe9e9a1b26a9ceb2360fedb7a7338816284b4a06d895c1a1de2ba6d7788"
+    },
+    {
+      "path": "terminal/stocks/xbrl_instance.py",
+      "sha256": "8135cd0e9b29a619bbcd3e83a259efea1a5bc95fdeb88b490b53835727959131"
+    },
+    {
+      "path": "terminal/stocks/xbrl_statement_set.py",
+      "sha256": "7c34377be5632fc2e960832a15d38c8b0bc13e75c18d7cb8b84a65a322aa1c12"
+    },
+    {
+      "path": "terminal/tests/check_offline_import_contract.py",
+      "sha256": "e283327e65136fef846a3c77075b9825e3e95b9b73c14dc38ab110f6c90e88e8"
+    },
+    {
+      "path": "terminal/tests/check_statement_set_contract.py",
+      "sha256": "2d402fb384db8bca01febdee5d3663a5336b9f4e9ad98db487e82e35134cb470"
+    },
+    {
+      "path": "terminal/tests/offline-import-contract.mjs",
+      "sha256": "49b08ee06d68c2ce2233b10c18184eb8cfc2aba6e8d7cc3840704c04af5a9471"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "sha256": "fd374960e3db4f3c7f10c2cb753f950aa2f1174332b850f020c6a26700a537b2"
+    },
+    {
+      "path": "terminal/tests/statement-set-contract.mjs",
+      "sha256": "e30f411193f379fdf88ade719ece97b5a18b8e3d37dc39bbfc9ddbcc50745f22"
+    },
+    {
+      "path": "terminal/verification/artifacts.py",
+      "sha256": "fd0df5448d89f0270686d11f8ec301a29719d066746c356d24f400b88b927624"
+    },
+    {
+      "path": "terminal/web/package.json",
+      "sha256": "3cd40c19b41527a44ce63396350021694aaae71ea262d7c2242d3ee79a196f9c"
+    },
+    {
+      "path": "terminal/web/src/SourceCalculations.tsx",
+      "sha256": "de9a09039fb3aaecfa2de7b4ca6f0be251868bbcb6c2e23080f8ea6aa9e04176"
+    },
+    {
+      "path": "terminal/web/src/XbrlStatements.tsx",
+      "sha256": "4d08a3e45e4181fd7991afe3315ca38b586efdd2b4d29c077724ea0d30bcd5fe"
+    },
+    {
+      "path": "terminal/web/src/offlineJson.test.ts",
+      "sha256": "852d4aa92e127f268a4ff21c104f83156a7469434bdbef0f51ac78cf24aec586"
+    },
+    {
+      "path": "terminal/web/src/offlineJson.ts",
+      "sha256": "938752984481b9f4a995a1c64b00f3bfd61f273f8eb1679846337876b19da6a1"
+    }
+  ],
+  "logs": [
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/negative-zero-before.log",
+      "bytes": 161,
+      "sha256": "1a6fcd460bd67c62ffb6959c2db84c98d550ebc86c51c1ea7228e60815429870"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/offline-units.log",
+      "bytes": 1090,
+      "sha256": "56f07b5ab0108e85aae3891638fc3df37fe6fbbc47d0aef8d876a87f4260994c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/ingress-contract-final.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/frontend.log",
+      "bytes": 18751,
+      "sha256": "8dfd38ac90887940d346194bbe186faab2e9728eb07a851d4e08c883eb3978e2"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/frontend-build.log",
+      "bytes": 2428,
+      "sha256": "d415e1ee0bda337dcbc01da9c174f5bb9430c073094d062495694d580dcc561e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/python-ingress.log",
+      "bytes": 904,
+      "sha256": "199c0614dd47ff8679b5167764ed90a469f6834fbfb2bf330db9b6f9a60ff5e5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/source-audit.log",
+      "bytes": 175,
+      "sha256": "3e017458a308b52eef45d0442bc0705286047a8414b024124908e4b1c799f188"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/statement-source.log",
+      "bytes": 121,
+      "sha256": "bbd06cc8c26f833ddbe2e7f1181cb21247d555967ef8466c28d649af35b5ed18"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/statement-consumer-final.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/no-launch.log",
+      "bytes": 159681,
+      "sha256": "1c11e471128b117f81853a51ab1a2c57de3e242709e21c317cbaf8ca0b2a5605"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/v1.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/calculation-contract.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/archive.json",
+      "bytes": 203,
+      "sha256": "1e383a181f3b95fc2adb92b0a6888b746f092dc46aa61bbc1ed79b8f18ccebea"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "9f6a142ceee23a2ea995224e857942722a8a9cc7e6d7ff72d5c05f8af2f84d1f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/install.log",
+      "bytes": 459,
+      "sha256": "d30d4462de425df0e19168af8b93b9533d9de212722d1ed5e41620df517c31a0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-consumer.log",
+      "bytes": 964,
+      "sha256": "e6de5814dc4989cbcd5f4280ece863cb867b779dd3e8ff590d80217a38564bcb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-source.log",
+      "bytes": 109805,
+      "sha256": "3dd0c3e6186c0fa5800429fa8d479176b3d9b02499c73c4b6919d9e1b2654825"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-calculation.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-ingress.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/installed-statements.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "edb4e2159c923ea45a32656078835cdf531c3d7b414c670dd786978875cb0678"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/sbom-tests.log",
+      "bytes": 1945,
+      "sha256": "a8a3f6d47c2cba85a7b4e75c3d8b905011cb5f58ba58909ba269e2c38b72e2a3"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/sbom-generation.log",
+      "bytes": 68,
+      "sha256": "fafde11f0744730aaeebd0b96250f68156d21edfb235fa386dffd36c144972f7"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-statements-first.log",
+      "bytes": 38443,
+      "sha256": "a91163ece417f57dfc5d4c848726d36cdafda62013794f70f854e030d67388a3"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-statements-second.log",
+      "bytes": 3550,
+      "sha256": "5e22f6d4de5e184b4d0a47bb083c393dee132ace92c74bd1b9f94b1d48d1980d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-statements-final.log",
+      "bytes": 479,
+      "sha256": "a98821df7427660d4230584946d57f1e7c692887ca89cae6df8088ea055637f6"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-negative-final.log",
+      "bytes": 170,
+      "sha256": "73ae30c1e438c3698c12b1753a5c3a18b8a6b69b50093d59a0fbcbb562013325"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-negative-related.log",
+      "bytes": 197,
+      "sha256": "e057eb702dee91369cea11212e5172027c84f921e82b1afb68e0c64e6167a7e8"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-dimensional-final.log",
+      "bytes": 203,
+      "sha256": "8d57ab74a644c62b372633c82f893f13ff32b175f55b21808ae31f57b9c9d3b0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-frontend-build.log",
+      "bytes": 623,
+      "sha256": "97ecdc04d9e2334e41e668a320b1482b1147bb79c943104848ef57d503eb5771"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-frontend-build-final.log",
+      "bytes": 2428,
+      "sha256": "0227a2e91423aec1a46db6e582be1ab56683f8c345cb586b9195bbbe4a85486d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-release.log",
+      "bytes": 960,
+      "sha256": "dae89fc6c86444605eae02eec267d3380b3945952c755551705fbcfa71d71e0b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-gcc-debug.log",
+      "bytes": 451,
+      "sha256": "30b1344b6ff8685d4259d12e75fd9922bad9996c233f0fd9c1e8dc7427b3a031"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-clang-debug.log",
+      "bytes": 455,
+      "sha256": "5f3432d2f9e02b367635db2866f793d58f971a9ebcd30235cea50590c8f3d8a5"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-clang-release.log",
+      "bytes": 459,
+      "sha256": "53a054bfadecf0d19d904ade5d70962048e53cfde5ecc53b1cb7cb58746452c1"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-sanitizer.log",
+      "bytes": 461,
+      "sha256": "153e1848a608e8ea6ead0588da7bcea3019a0c412725e231b0ea507aae8d7e4a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-frozen.log",
+      "bytes": 7565,
+      "sha256": "697ee7a2c3c58091ffae0ae02bebb64d15c8a6eb98e9b393784a2b13025c5809"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-product.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/earlier-native-release-path-failure.log",
+      "bytes": 44,
+      "sha256": "0db1bd379fb7f4e5f83d8c2d495879fafbf78160495346494f31cdd73d8f10a0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/legacy-six-identities.log",
+      "bytes": 118,
+      "sha256": "85dc34169d157edafbd344f1e0f152146bcf5085ad7433ecab4265b6403de422"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/metadata-alias-before.json",
+      "bytes": 142,
+      "sha256": "52fc4982b858edc0d05536553ed198c459dc232f31c938a5961bccac131a081e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/python-ingress-agent.log",
+      "bytes": 767,
+      "sha256": "c730e2d48459930c442dc17283fca6804167bf5439563ababc308e96c4dd982c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/number-admission-before.json",
+      "bytes": 691,
+      "sha256": "9c65ed548725f43aed396869a784b33f3760321c3d98106ed18ed1f488210420"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/default-tampering-before.log",
+      "bytes": 195,
+      "sha256": "40517f9eab7f3c73b132518ea9ee69e5ac385abcc15a080d181934439feb9e1e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/audit-fixture-failure.log",
+      "bytes": 1018,
+      "sha256": "748d01d4f3c93020dc8a743714031ca7bda3c622fc64fb9e6c810518084dc98f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/statement-recovery-evidence/source-sbom.cdx.json",
+      "bytes": 47016,
+      "sha256": "5eefe7903c39e66cff52dd47e58ad091cb97831de338f8ed39d82dffce4f4921"
+    }
+  ],
+  "resolved_findings": [
+    "Duplicate/escaped JSON keys and exact lexical numeric aliases reject before private import interpretation;financial strings remain unchanged.",
+    "Numeric signed-zero metadata rejects;canonical source metadata comparison distinguishes boolean false from integer zero.",
+    "Historical JSON revision/backup duplicates reject despite caller-matching byte hashes;legitimate fractional clock values remain supported.",
+    "Explicit original-byte DTS audit rejects canonical-rehashed metadata that disagrees with original bodies;artifact-only binders retain their documented trust scope."
+  ],
+  "resolved_developer_failures": [
+    "Statement fixtures originally reused context D and byte-identical filing graphs;fixtures corrected without relaxing source/identity assertions.",
+    "Initial numeric-regex TypeScript null narrowing repaired with an explicit never-returning function before final passing build.",
+    "Native ctest was initially absent from PATH;absolute existing tool path used successfully,no GIG source repair.",
+    "Source-audit fixture hit duplicate URI before intended document count;fixture changed to exceed16 while keeping exact resource assertion.",
+    "Statement consumer harness bound is applied per actual private packet;combined synthetic control fixture has a separate2MiB harness cap."
+  ],
+  "remaining_current_test_failures": 0,
+  "matrix_statuses_unchanged": {
+    "COMPLETE": 34,
+    "PARTIAL": 8,
+    "BLOCKED": 7,
+    "NOT APPLICABLE": 1
+  },
+  "remaining_limits": [
+    "Role designations are explicit caller labels;no inferred GAAP classification,equivalence,full statements or complete history.",
+    "Calculation V3 explicit-dimensional subset supports existing admitted/conflicted facts only;typed,negative,cross-role and arbitrary-weight calculation binding remain unsupported.",
+    "Negative DRS V4 remains one-role/explicit/positive-conjunction;negative-only,typed,targetRole and precedence remain unsupported.",
+    "Original raw DTS audit covers plain pre-binding artifacts only;no inline audit or implicit activation.",
+    "Public HTTP/SSE/localStorage JSON readers retain their separate contracts;the inventory does not claim repository-wide identical numeric semantics.",
+    "Fresh packages name the tested runtime source;later evidence-only documentation is outside those artifacts."
+  ],
+  "restrictions": {
+    "application_started": false,
+    "server_started": false,
+    "live_provider_requested": false,
+    "deployment": false,
+    "trading": false,
+    "owner_acceptance": false,
+    "spend_usd": 0
+  }
+}

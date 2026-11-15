@@ -1,0 +1,30 @@
+test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable (terminal.stocks.test_xbrl_statement_set.StatementSet.test_ambiguous_latest_and_unresolved_ancestry_stay_unavailable) ... ok
+test_conflicting_duplicates_are_not_selected (terminal.stocks.test_xbrl_statement_set.StatementSet.test_conflicting_duplicates_are_not_selected) ... ok
+test_corrupted_source_context_or_arc_provenance_rejects (terminal.stocks.test_xbrl_statement_set.StatementSet.test_corrupted_source_context_or_arc_provenance_rejects) ... ok
+test_cutoff_original_and_amendment_are_whole_independent_sources (terminal.stocks.test_xbrl_statement_set.StatementSet.test_cutoff_original_and_amendment_are_whole_independent_sources) ... ok
+test_determinism_isolation_and_legacy_defaults (terminal.stocks.test_xbrl_statement_set.StatementSet.test_determinism_isolation_and_legacy_defaults) ... ok
+test_historical_comparative_is_separate_and_does_not_fill_missing_rows (terminal.stocks.test_xbrl_statement_set.StatementSet.test_historical_comparative_is_separate_and_does_not_fill_missing_rows) ... ok
+test_history_exact_order_transitions_and_no_cross_vintage_fill (terminal.stocks.test_xbrl_statement_set.StatementSet.test_history_exact_order_transitions_and_no_cross_vintage_fill) ... ok
+test_invalid_query_and_stale_collection_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_invalid_query_and_stale_collection_reject) ... ok
+test_missing_latest_graph_or_bindings_never_substitutes_old_source (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_latest_graph_or_bindings_never_substitutes_old_source) ... FAIL
+test_missing_role_partial_and_explicit_undesignated_stays_missing (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_role_partial_and_explicit_undesignated_stays_missing) ... ok
+test_nil_missing_and_zero_are_distinct (terminal.stocks.test_xbrl_statement_set.StatementSet.test_nil_missing_and_zero_are_distinct) ... ok
+test_output_and_period_budgets_reject (terminal.stocks.test_xbrl_statement_set.StatementSet.test_output_and_period_budgets_reject) ... ok
+test_periods_units_and_original_numeric_source_ids_remain_bound (terminal.stocks.test_xbrl_statement_set.StatementSet.test_periods_units_and_original_numeric_source_ids_remain_bound) ... ok
+test_three_source_roles_preserve_exact_values_and_signed_relationships (terminal.stocks.test_xbrl_statement_set.StatementSet.test_three_source_roles_preserve_exact_values_and_signed_relationships) ... ok
+test_unit_conflict_stays_ambiguous (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unit_conflict_stays_ambiguous) ... ok
+test_unknown_or_future_acceptance_is_not_admitted (terminal.stocks.test_xbrl_statement_set.StatementSet.test_unknown_or_future_acceptance_is_not_admitted) ... ok
+
+======================================================================
+FAIL: test_missing_latest_graph_or_bindings_never_substitutes_old_source (terminal.stocks.test_xbrl_statement_set.StatementSet.test_missing_latest_graph_or_bindings_never_substitutes_old_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_statement_set.py", line 64, in test_missing_latest_graph_or_bindings_never_substitutes_old_source
+    with self.assertRaises(XBRLError):export(w,{B:g[A]},r)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: XBRLError not raised
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.414s
+
+FAILED (failures=1)
