@@ -18,6 +18,7 @@ import zlib
 from typing import Callable, AsyncIterator
 
 BOOK_SESSION_PROFILE = 'BOOK_SESSION_V1'
+BOOK_DEPTH_SESSION_PROFILE = 'BOOK_SESSION_DEPTH_V2'
 MAX_PAYLOAD = 65536
 UINT64_MAX = 2**64 - 1
 PRICE_MAX = 2**63 - 1
@@ -152,14 +153,16 @@ class KrakenBookAdapter:
     def __init__(self, apply_native: Callable, *, symbol='BTC/USD', price_scale=100,
                  quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC', ordered_updates=False,
                  book_session_profile=None, book_request_id=None):
-        if (type(depth) is not int or depth != 10 or type(price_scale) is not int or
+        supported_depths=(10,25,100) if book_session_profile==BOOK_DEPTH_SESSION_PROFILE else (10,)
+        if (type(depth) is not int or depth not in supported_depths or type(price_scale) is not int or
                 type(quantity_scale) is not int or not 1 <= price_scale <= 10**9 or
                 not 1 <= quantity_scale <= 10**9 or type(stale_ns) is not int or
                 not 1 <= stale_ns <= 60_000_000_000 or symbol not in ('BTC/USD', 'ETH/USD')):
             raise ProviderError('configuration')
         if type(ordered_updates)is not bool:raise ProviderError('configuration')
         self.ordered_updates=ordered_updates
-        if book_session_profile not in(None,BOOK_SESSION_PROFILE):raise ProviderError('book_session_profile')
+        if book_session_profile not in(None,BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE):raise ProviderError('book_session_profile')
+        if book_session_profile==BOOK_DEPTH_SESSION_PROFILE and not ordered_updates:raise ProviderError('book_depth_ordered_updates_required')
         if book_session_profile is None:
             if book_request_id is not None:raise ProviderError('book_session_profile')
         elif type(book_request_id)is not int or not 0<=book_request_id<=UINT64_MAX:
@@ -307,7 +310,8 @@ class KrakenBookAdapter:
                 else:
                     cache[price] = (pt, qt)
                 converted.append({'price_ticks': price, 'quantity': qty})
-            # Candidate profile retains subscribed top10 only; no deeper completeness claim.
+            # Retain only subscribed depth after all wire-ordered absolute updates.
+            # The official CRC remains top ten even for the opt-in deeper profile.
             retained = sorted(cache, key=int, reverse=side == 'bids')[:self.depth]
             cache_copy = {k: cache[k] for k in retained}
             cache.clear(); cache.update(cache_copy)
@@ -333,6 +337,10 @@ class KrakenBookAdapter:
                    'source_timestamp_ns': source_ns, 'source_sequence': None,
                    'receive_monotonic_ns': str(now_ns), 'origin': self.origin,
                    'integration_profile': 'unverified_kraken_v2_authored_v1'}
+        if self.book_session_profile==BOOK_DEPTH_SESSION_PROFILE:
+            receipt.update(book_session_profile=self.book_session_profile,subscribed_depth=self.depth,
+                           checksum_depth=10,checksum_scope='top_10_per_side_only',
+                           retained_levels={'bids':len(candidate[0]),'asks':len(candidate[1])})
         next_snapshots, next_updates = self.snapshots + int(snapshot), self.updates + int(not snapshot)
         try:
             self.apply_native(snapshot=snapshot, bids=changes[0], asks=changes[1], sequence=None)

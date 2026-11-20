@@ -244,3 +244,17 @@ cross-language contracts pass. Receipts:NOV15_FINAL_SPRINT_EVIDENCE.json. All8PA
 criteria individuallyreviewed;34COMPLETE/8PARTIAL/7BLOCKED/1N/A unchanged. Nextqueue in
 REPORT.md andNOV15_PARTIAL_ACCEPTANCE_REVIEW.md. No app/server/provider/trading/deploy/
 paid/owneracceptance;no backgroundexecution or activeagents remain afterdelivery.
+
+## November20 interrupted product/DRS/market recovery
+
+Attached executor ready;actualbranch/status/worktrees/fetch andremote
+f7813d71a079ba7efdf234db7efa424e6eebbf20 verified. Alluncommitted files andevidence
+preserved;original /workspace/GIG-C-Microstructure-Engine worktree untouched. No reset,
+discard,forcepush or blindpatch rerun. UI immutable-profile allowlist and2TypeScript
+annotations repaired;24actualgenerated-export SSR/guard tests andTSC/Vite pass.
+Kraken BOOK_SESSION_DEPTH_V2 recovered/reviewedagainstofficial publicdocs: optindepths
+25/100,orderedupdates required,top10CRCscopeexplicit;defaults10andprovisionalstatus
+unchanged.14new/80provider-native checks pass,including200changesPERSIDE inoneatomic
+native transaction. Contract:KRAKEN_DEPTH_SESSION.md;log:work/nov20-delivery/kraken.log.
+TypedV6 andUI/sourceadmission remainpending;commitonly verified packagepaths.
+No app/server/liveprovider/deployment/trading/spend/owneracceptance.
