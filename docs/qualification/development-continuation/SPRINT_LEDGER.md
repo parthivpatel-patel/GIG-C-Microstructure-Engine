@@ -272,3 +272,20 @@ No native source/default change. Full DRS/provider/owner acceptance unclaimed.
 Contract and continuation limits: TYPED_HYPERCUBE_V6.md. Requirement statuses unchanged.
 Kraken preceding package remote verified d9954196b711bfe94d4914d40f964343f9a06011.
 UI original-source admission/integration and broad qualification remain next.
+
+### November20 recovered original-source product integration
+
+TypedV6 remote verified8e467a5d35d6456b09370c18a2d892329383b2bc. Recovered UI allowlist
+and both TS annotations, completed bounded private original-source envelopes and
+pre-XML inline receipt/intent checks, mounted exact issuer-keyed imports in existing
+Financial/Stock Intelligence XBRL flow. Original contexts/units/full graph support
+independent exact row/equality/calculation admission; no values or GAAP aliases
+inferred. Re-signed contradictory facts, duplicate/dropped rows/calculations/periods,
+lineage/cutoff/source and profile/order corruptions reject.
+Focused12Python+148frontend checks pass; integrated967guarded Python,345frontend,
+TSC/Vite and9cross-language scripts pass (cohorts overlap). Native14focused across
+5reused byte-equivalent configs,8frozen hashes and8SDKconsumers pass.
+SOURCE_ACCOUNTING_OFFLINE_UI.md records contracts and browser/source confidence
+limits. Whole requirement statuses unchanged. Next: fresh clean-source packages,
+isolated installed-wheel consumers/contracts, final hashed receipts/report/matrix.
+No application/server/liveprovider/owner acceptance/deployment/trading/spend.
