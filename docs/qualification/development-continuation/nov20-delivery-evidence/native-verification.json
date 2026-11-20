@@ -1,0 +1,38 @@
+{
+  "application_started": false,
+  "build_scope": "Reused existing byte-equivalent builds; current focused checks, not fresh full compiler qualification or Python sanitizer instrumentation.",
+  "failures": 0,
+  "focused_tests": {
+    "native-clang-debug.log": 2,
+    "native-clang-release.log": 2,
+    "native-gcc-debug.log": 2,
+    "native-release.log": 6,
+    "native-sanitizer.log": 2
+  },
+  "frozen_hashes": {
+    "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+    "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+    "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+    "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+    "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+    "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+    "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+    "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+  },
+  "frozen_tests": 8,
+  "logs": {
+    "frozen.log": "3ce24ac9c1b31db9e9056be67c126d0c29f295ad0c7d067a5e117f06990c4de6",
+    "native-clang-debug.log": "4b9ef6398f14e92997f263e44ee7f56185f0b077c596d21d31c94bc59692b8e0",
+    "native-clang-release.log": "3a5a0c99b59345da037e5ba2a3f24539e0e2c6c6c3eb69e04093a5c58cd88673",
+    "native-consumer.log": "a4489da186ef8d2c1ae77e7c7fe57d9bb68c84723b25c3f3d51d3fadd47e0a30",
+    "native-gcc-debug.log": "e4b370f4a550b04278cd343a5ec9906e107989d64b332fb8835af70a8ed9ff5e",
+    "native-release.log": "0c827834e1639777c88e4edbace20897e40a0e4a124270ea7ecac69508aceefb",
+    "native-sanitizer.log": "099c758c9789adc816aad450ca030bb7d17a223485fc04dddf6c550ca5298a53"
+  },
+  "native_inputs_unchanged_from": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+  "provider_requested": false,
+  "schema": "gig.nov20.native_focused.v1",
+  "sdk_consumers": 8,
+  "skipped": 0,
+  "source_head_at_verification": "8e467a5d35d6456b09370c18a2d892329383b2bc"
+}

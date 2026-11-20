@@ -1,12 +1,12 @@
-# GIG development completion matrix — November 15, 2026
+# GIG development completion matrix — November 20, 2026
 
-Tested implementation `1ab1e17e1cfadc0e3d702bb18f9e65eb15057633`; branch `development/gig-ui-redesign`.
+Tested implementation `9be1c0d8293444e517af67fe2a57fd1be599277c`; branch `development/gig-ui-redesign`.
 
 COMPLETE means stated bounded code contract exists and has cited automated evidence,not actual provider or owner acceptance. PARTIAL/NOT IMPLEMENTED remain explicit;blocked external evidence is not relabeled a missing UI feature.
 
-**34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE. Full development remains incomplete.**
+**34 COMPLETE / 8 PARTIAL / 7 BLOCKED / 1 NOT APPLICABLE. Engineering remains incomplete on the November20 target date.**
 
-Current source/package evidence: NOV15_FINAL_SPRINT_EVIDENCE.json;all8PARTIAL rows reviewed inNOV15_PARTIAL_ACCEPTANCE_REVIEW.md. No row status changed. Earlier evidence is retained with its original source scope.
+Current receipts: [NOV20_DELIVERY_EVIDENCE.json](NOV20_DELIVERY_EVIDENCE.json). All eight partial requirements: [NOV20_PARTIAL_ACCEPTANCE_REVIEW.md](NOV20_PARTIAL_ACCEPTANCE_REVIEW.md). No status or acceptance criterion changed. Earlier receipts keep their original scope.
 
 | ID | Status | Requirement |
 |---|---|---|
@@ -75,6 +75,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## CORE02 — COMPLETE
 
 ITCH framing,decoding,context and synthetic L3 reconstruction
@@ -88,6 +89,7 @@ Explicit initialization eligibility,prepared transactions and unsupported outcom
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## CORE03 — COMPLETE
 
@@ -103,6 +105,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## CORE04 — COMPLETE
 
 Deterministic replay,journal and recovery contracts
@@ -116,6 +119,7 @@ Journal reservation and recovery-required state exist;authored replay and bounde
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## CORE05 — BLOCKED
 
@@ -131,9 +135,6 @@ Disposition: External source/rights/reference evidence;not fabricated or inferre
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Independently complete observed L3 initialization,source/order-level reference and lawful dataset use.
-
-Evidence to unblock: A bound initialization manifest,source/reference hashes and independently reproducible observed-order comparisons.
 
 ## UI01 — COMPLETE
 
@@ -149,6 +150,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI02 — COMPLETE
 
 Command Center workspace
@@ -162,6 +164,7 @@ Saved research and source-aware entry actions;no fabricated market summary.
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI03 — COMPLETE
 
@@ -177,6 +180,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI04 — COMPLETE
 
 Stock Intelligence workspace
@@ -190,6 +194,7 @@ Company identity,reported facts,periods,ratios,filings,source controls and theor
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI05 — COMPLETE
 
@@ -205,6 +210,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI06 — COMPLETE
 
 Multi-Stock Comparison workspace
@@ -218,6 +224,7 @@ Up to4 active symbols,retained quote comparisons and exact shared historical tim
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI07 — COMPLETE
 
@@ -233,6 +240,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI08 — COMPLETE
 
 Market Depth workspace
@@ -246,6 +254,7 @@ Native retained depth,2D alternatives,camera controls and source restrictions;no
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI09 — COMPLETE
 
@@ -261,6 +270,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI10 — COMPLETE
 
 Historical Replay workspace
@@ -274,6 +284,7 @@ Play,pause,step,seek,speed and dataset selection call the native research sessio
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI11 — COMPLETE
 
@@ -289,6 +300,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UI12 — COMPLETE
 
 Research & Validation workspace
@@ -302,6 +314,7 @@ Model scenarios,3D laboratory,validation and evidence workflows are accessible;n
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## UI13 — COMPLETE
 
@@ -317,6 +330,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## VIS01 — COMPLETE
 
 Eight advanced research projections
@@ -330,6 +344,7 @@ Height,canyon,events,VWAP,flow/VPIN,wheel,dome,ribbon use declared input classes
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## VIS02 — COMPLETE
 
@@ -345,6 +360,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## VIS03 — COMPLETE
 
 3D camera,orbit,pause,reset,visibility,cleanup and fallback
@@ -358,6 +374,7 @@ Independent controls,hidden/reduced-motion suspension,explicit empty/recovery st
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## VIS04 — BLOCKED
 
@@ -373,9 +390,6 @@ Disposition: Owner/environment qualification;not additional visualization implem
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Actual target hardware/browser/GPU and permission to launch.
-
-Evidence to unblock: Recorded current-SHA lifecycle,interaction,resource and responsive/device results across15 modes.
 
 ## DATA01 — COMPLETE
 
@@ -391,6 +405,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## DATA02 — PARTIAL
 
 Complete,current US-listed security universe
@@ -405,9 +420,6 @@ Disposition: No missing importer was found. Actual acquisition/source coverage n
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Dependency: Configured permitted listing source/private target;source coverage and freshness evidence.
-
-Remaining implementation or qualification: Current complete listing coverage requires an actual authorized source import and reconciliation,not SEC registrants.
 
 ## SEC01 — COMPLETE
 
@@ -423,23 +435,21 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## SEC02 — PARTIAL
 
 Complete historical financial statements and point-in-time source history
 
-Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`, `terminal/stocks/xbrl_relationships.py`, `terminal/stocks/xbrl_statements.py`, `terminal/stocks/xbrl_product.py`, `terminal/stocks/test_xbrl_relationships.py`, `terminal/stocks/test_xbrl_statements.py`, `terminal/stocks/test_xbrl_product.py`, `terminal/web/src/XbrlStatements.tsx`, `terminal/web/src/xbrlStatements.ts`, `terminal/web/src/xbrlStatements.test.ts`, `terminal/server/schemas/backend_company_xbrl_v1.schema.json`, `terminal/tests/check_xbrl_statement_contract.py`, `terminal/stocks/xbrl_accuracy.py`, `terminal/stocks/test_xbrl_accuracy.py`, `terminal/stocks/xbrl_statement_v2.py`, `terminal/stocks/test_xbrl_statement_v2.py`, `terminal/web/src/xbrlAccuracy.ts`, `terminal/web/src/xbrlAccuracy.test.ts`, `terminal/tests/check_xbrl_accuracy_contract.py`, `terminal/server/schemas/backend_company_xbrl_v2.schema.json`, `scripts/qualify_sec_filing_ingestion.py`, `terminal/stocks/sec_filing_ingest.py`, `terminal/stocks/sec_ingest_store.py`, `terminal/stocks/sec_read_wire.py`, `terminal/stocks/service.py`, `terminal/stocks/test_sec_filing_ingest.py`, `terminal/stocks/test_sec_ingest_cli.py`, `terminal/stocks/test_sec_ingest_store.py`, `terminal/stocks/test_xbrl_duplicate_diagnostics.py`, `terminal/stocks/test_xbrl_embedded.py`, `terminal/tests/run_no_launch_suite.py`, `terminal/tests/xbrl-accuracy-contract.mjs`, `terminal/stocks/sec_filing_schedule.py`, `terminal/stocks/test_sec_source_expansion.py`, `terminal/stocks/sec_inline_manifest.py`, `terminal/stocks/test_sec_multidoc.py`, `terminal/stocks/test_xbrl_whitespace.py`, `terminal/stocks/test_inline_registry_numeric.py`, `terminal/stocks/test_xbrl_enumeration.py`, `terminal/stocks/xbrl_vintages.py`, `terminal/stocks/test_xbrl_vintages.py`, `terminal/stocks/test_sec_transform_profile.py`, `terminal/web/src/xbrlVintages.ts`, `terminal/stocks/test_xbrl_restriction_constraints.py`, `terminal/stocks/test_xbrl_open_dimensions.py`, `terminal/stocks/test_xbrl_calculation_intervals.py`, `terminal/stocks/xbrl_calculation_report.py`, `terminal/stocks/xbrl_calculation_product.py`, `terminal/stocks/xbrl_lineage.py`, `terminal/stocks/xbrl_typed_dimensions.py`, `terminal/stocks/test_xbrl_inherited_dimensions.py`, `terminal/stocks/test_xbrl_calculation_report.py`, `terminal/stocks/test_xbrl_calculation_product.py`, `terminal/stocks/test_xbrl_lineage.py`, `terminal/stocks/test_xbrl_typed_dimensions.py`, `terminal/web/src/SourceCalculations.tsx`, `terminal/web/src/xbrlCalculationReport.ts`, `terminal/tests/check_xbrl_calculation_report_contract.py`, `terminal/stocks/xbrl_statement_set.py`, `terminal/stocks/test_xbrl_statement_set.py`, `terminal/stocks/xbrl_dimensional_calculation.py`, `terminal/stocks/test_xbrl_dimensional_calculation.py`, `terminal/stocks/test_xbrl_negative_dimensions.py`, `terminal/stocks/xbrl_dts_source_audit.py`, `terminal/stocks/test_xbrl_dts_source_audit.py`, `terminal/stocks/test_statement_set_source_acceptance.py`, `terminal/tests/check_statement_set_contract.py`, `terminal/stocks/test_python_json_ingress.py`, `terminal/stocks/xbrl_accounting_relationships.py`, `terminal/stocks/xbrl_accounting_statements.py`, `terminal/stocks/test_xbrl_accounting_relationships.py`, `terminal/stocks/test_xbrl_accounting_statements.py`, `terminal/stocks/test_xbrl_negative_only_dimensions.py`, `terminal/stocks/test_inline_dts_source_audit.py`, `terminal/tests/check_accounting_statements_contract.py`.
+Source: `terminal/stocks/sec_history.py`, `terminal/web/src/secHistory.ts`, `terminal/web/src/StockIntelligence.tsx`, `terminal/stocks/statements.py`, `terminal/stocks/vintages.py`, `terminal/stocks/test_filing_vintage.py`, `terminal/web/src/AcceptanceView.tsx`, `terminal/web/src/acceptanceContract.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/stocks/xbrl_instance.py`, `terminal/stocks/xbrl_collection.py`, `scripts/inspect_xbrl_instances.py`, `terminal/stocks/test_xbrl_instance.py`, `terminal/stocks/test_xbrl_collection.py`, `terminal/stocks/test_xbrl_tool.py`, `terminal/stocks/inline_xbrl.py`, `terminal/stocks/xbrl_dts.py`, `terminal/stocks/test_inline_xbrl.py`, `terminal/stocks/test_xbrl_dts.py`, `terminal/stocks/xbrl_binding.py`, `terminal/stocks/test_xbrl_binding.py`, `terminal/stocks/xbrl_types.py`, `terminal/stocks/test_xbrl_types.py`, `terminal/stocks/inline_set.py`, `terminal/stocks/test_inline_set.py`, `terminal/stocks/xbrl_dimensions.py`, `terminal/stocks/test_xbrl_dimensions.py`, `terminal/stocks/xbrl_relationships.py`, `terminal/stocks/xbrl_statements.py`, `terminal/stocks/xbrl_product.py`, `terminal/stocks/test_xbrl_relationships.py`, `terminal/stocks/test_xbrl_statements.py`, `terminal/stocks/test_xbrl_product.py`, `terminal/web/src/XbrlStatements.tsx`, `terminal/web/src/xbrlStatements.ts`, `terminal/web/src/xbrlStatements.test.ts`, `terminal/server/schemas/backend_company_xbrl_v1.schema.json`, `terminal/tests/check_xbrl_statement_contract.py`, `terminal/stocks/xbrl_accuracy.py`, `terminal/stocks/test_xbrl_accuracy.py`, `terminal/stocks/xbrl_statement_v2.py`, `terminal/stocks/test_xbrl_statement_v2.py`, `terminal/web/src/xbrlAccuracy.ts`, `terminal/web/src/xbrlAccuracy.test.ts`, `terminal/tests/check_xbrl_accuracy_contract.py`, `terminal/server/schemas/backend_company_xbrl_v2.schema.json`, `scripts/qualify_sec_filing_ingestion.py`, `terminal/stocks/sec_filing_ingest.py`, `terminal/stocks/sec_ingest_store.py`, `terminal/stocks/sec_read_wire.py`, `terminal/stocks/service.py`, `terminal/stocks/test_sec_filing_ingest.py`, `terminal/stocks/test_sec_ingest_cli.py`, `terminal/stocks/test_sec_ingest_store.py`, `terminal/stocks/test_xbrl_duplicate_diagnostics.py`, `terminal/stocks/test_xbrl_embedded.py`, `terminal/tests/run_no_launch_suite.py`, `terminal/tests/xbrl-accuracy-contract.mjs`, `terminal/stocks/sec_filing_schedule.py`, `terminal/stocks/test_sec_source_expansion.py`, `terminal/stocks/sec_inline_manifest.py`, `terminal/stocks/test_sec_multidoc.py`, `terminal/stocks/test_xbrl_whitespace.py`, `terminal/stocks/test_inline_registry_numeric.py`, `terminal/stocks/test_xbrl_enumeration.py`, `terminal/stocks/xbrl_vintages.py`, `terminal/stocks/test_xbrl_vintages.py`, `terminal/stocks/test_sec_transform_profile.py`, `terminal/web/src/xbrlVintages.ts`, `terminal/stocks/test_xbrl_restriction_constraints.py`, `terminal/stocks/test_xbrl_open_dimensions.py`, `terminal/stocks/test_xbrl_calculation_intervals.py`, `terminal/stocks/xbrl_calculation_report.py`, `terminal/stocks/xbrl_calculation_product.py`, `terminal/stocks/xbrl_lineage.py`, `terminal/stocks/xbrl_typed_dimensions.py`, `terminal/stocks/test_xbrl_inherited_dimensions.py`, `terminal/stocks/test_xbrl_calculation_report.py`, `terminal/stocks/test_xbrl_calculation_product.py`, `terminal/stocks/test_xbrl_lineage.py`, `terminal/stocks/test_xbrl_typed_dimensions.py`, `terminal/web/src/SourceCalculations.tsx`, `terminal/web/src/xbrlCalculationReport.ts`, `terminal/tests/check_xbrl_calculation_report_contract.py`, `terminal/stocks/xbrl_statement_set.py`, `terminal/stocks/test_xbrl_statement_set.py`, `terminal/stocks/xbrl_dimensional_calculation.py`, `terminal/stocks/test_xbrl_dimensional_calculation.py`, `terminal/stocks/test_xbrl_negative_dimensions.py`, `terminal/stocks/xbrl_dts_source_audit.py`, `terminal/stocks/test_xbrl_dts_source_audit.py`, `terminal/stocks/test_statement_set_source_acceptance.py`, `terminal/tests/check_statement_set_contract.py`, `terminal/stocks/test_python_json_ingress.py`, `terminal/stocks/xbrl_accounting_relationships.py`, `terminal/stocks/xbrl_accounting_statements.py`, `terminal/stocks/test_xbrl_accounting_relationships.py`, `terminal/stocks/test_xbrl_accounting_statements.py`, `terminal/stocks/test_xbrl_negative_only_dimensions.py`, `terminal/stocks/test_inline_dts_source_audit.py`, `terminal/tests/check_accounting_statements_contract.py`, `terminal/stocks/test_xbrl_typed_hypercubes.py`, `terminal/stocks/financial_intelligence_product.py`, `terminal/stocks/test_financial_intelligence_product.py`, `terminal/web/src/SourceAccounting.tsx`, `terminal/web/src/financialSourceContract.ts`, `terminal/web/src/sourceAccountingChecks.ts`, `terminal/web/src/sourceAccounting.test.ts`, `terminal/web/src/financialSourceContract.test.ts`, `terminal/web/src/sourceAccountingChecks.test.ts`, `terminal/tests/source_accounting_ui_fixtures.py`, `terminal/tests/source_accounting_checks_fixtures.py`.
 
-Evidence: 908guarded Python/197frontend/TSC/Vite;106DRS,91inline-audit,56accounting-relationship and59accounting-product focused root checks pass (overlap). New accounting7actual exports/224assertions/7tamper rejections;existing statement/vintage/calculation/import/native contracts pass. All8frozen identities unchanged;14focused native checks across5configs. Fresh clean-source SDK8consumers+650source regressions and6installed cross-language contracts pass. NOV15_FINAL_SPRINT_EVIDENCE.json.
+Evidence: November20:967guarded Python/345frontend/TSC/Vite/9cross-language scripts pass. New33typed-DRS,14Kraken and12private-product backend regressions explicitly registered;148new frontend checks include28actualPython exports/57re-signed semantic forgeries. Native14focused across5reused byte-equivalent builds,all8frozen identities and8SDKconsumers pass. Fresh source/default-wheel results and hashes:NOV20_DELIVERY_EVIDENCE.json. Earlier qualification scope retained separately.
 
 Opt-in SCHEMA_APPINFO_LINKBASE_V1 reuses bounded effective presentation/calculation/definition and restricted DRS processing with original containing URI/SHA/node ordinals and cross-root precedence. Default legacy embedded scope remains unavailable. Explicit default-disabled SEC plain-XML filing coordinator binds submissions/index/advertised source,DTS closure,permissions,budgets,retry/rate/cancellation and immutable source receipts. Optional private immutable revisions and reparsing restore are separately retention-gated,shared-lock-protected and offline/cross-process tested. Workspace factory,explicit installation and company-v2 source status/private CLI complete the bounded path without startup/network activation. Duplicate diagnostics explain exact/overlap/disjoint/unavailable accuracy while differing values remain CONFLICT;no arbitrary fact promotion. Source-scoped extensions remain structural mappings,not accounting equivalence. Advertised XHTML primaries now enter the existing one-document inline-set profile with exact transformations and original document lineage. Bounded current/older metadata discovery creates deterministic source-bound plans;explicit historical ingest revalidates current advertisements,counts,dates and duplicate conflicts. Version2 checkpoints retain both metadata sources;version1 remains readable/emitted for existing no-shard collections. Restore also rechecks local DTS directory advertisements. Explicit multi-document acquisition now binds caller manifest intent,authored manifest ordering,all advertised original SHA/URI/size/type,reference union,continuations and immutable version3 recovery. NUMERIC_WHITESPACE_V3 adds opt-in numeric collapse declarations;legacy profiles reject them. New explicit Registry3 numeric subset, numeric enumeration value-space constraints and acquired version4 interpretation recovery are offline verified. New independent acceptance-vintage export and Stock Intelligence file selection retain original/amendment/missing/ambiguous source states without cross-filing filling. Opt-in direct positive explicit open/closed hypercubeV2 now validates required and supplied extra dimensions/domains/defaults without consolidating dimensioned facts. Numeric restriction constraintsV5 validate fixed/inherited digits and local bound definitions,including nil. Additive exact calculation intervalV2 supports rounding/truncation endpoint arithmetic and duplicate constraints without fact selection;The new explicit report binder revalidates original source/DTS,entity/context/period/unit identities and effective single-role signed-unit networks for supported undimensioned data points. It retains all duplicates and missing contributions. Positive explicit DRSV3 adds inherited/conjunctive multiple hypercubes in one role;legacy defaults and identity remain. Independent typed scalar-domain diagnostics bind original schemas and primitive/restricted values without financial promotion or general typed DRS. Acceptance-selected calculation exports require matching full DTS and resolved supplied amendment ancestry;offline Stock Intelligence admission independently validates provenance and exact arithmetic. General OIM/DRS/report conformance remains unsupported. Explicit three-role statement sets now reconstruct all supplied rows from one acceptance-selected filing and independent cutoffs;caller role labels are not GAAP classification. Negative explicit inherited DRSV4 validates exclusions after cube well-formedness;positive defaults alone aggregate. New positive explicit dimensional calculation report independently revalidates V3 DRS/global defaults and original source aspects. Original plain-instance/DTS audit independently reconstructs exact artifacts from original bytes. Python/TypeScript private import metadata now rejects duplicate/lexical/type aliases;historical source revisions reject ambiguous JSON. Full statement completeness and accounting equivalence remain unclaimed. November15 adds original-source standard essence-alias/requires-element extraction with exact declaration/effective relationship/provenance checks and conservative source-value diagnostics;three-role accounting statement/vintage APIs classify supported/conflicting/missing/unsupported rows without inferred GAAP metrics or fact filling. Negative-only explicit DRSV5 independently validates global contexts/defaults;original inline audit reconstructs continuations,profiles,receipts and pinned acquisition intent. General conformance/complete statements and real issuer authenticity remain unclaimed.
 
 Disposition: Bounded primary/history/source-validation/product integration packages implemented and offline verified. SEC02 remains PARTIAL for the broader original historical financial-statement and conformance scope.
 
-Next action: Next:typed/cross-role/effective DRS;general OIM/calculations and full rounding V-equality;broader original-source issuer accounting/statement completeness;product integration of new explicit reports;independent legitimate source corpus. Preserve existing profiles and no inferred GAAP aliases.
+Next action: Preserve published bounded V1-V6 and product contracts;select one independently specified next conformance or issuer statement-completeness milestone. Do not repeat completed private UI integration.
 
-Dependency: Choose a bounded full-statement/DTS/inline fidelity and extension profile;retain legitimately authorized instance/taxonomy/presentation originals with acceptance/receipt evidence. Much remaining work is engineering,not solely external access.
-
-Remaining implementation or qualification: General schema/complex content/attributes/substitution and full inline transformations/targets/tuples/escaped HTML;typed/cross-role/precedence/general DRS beyond explicit one-role V5;full OIM/Calculations1.1 including source extensions,negative/typed contexts and arbitrary networks/weights;full rounding-based essence V-equality,general taxonomy relationships and complete financial-statement criteria;original-inline audit/product integration beyond supported default-target profiles;independent observed corpus and complete history. Supported source essence assertions/classifications do not create companyfacts metric aliases or authenticate issuers.
 
 ## SEC03 — BLOCKED
 
@@ -455,9 +465,6 @@ Disposition: Owner existing configured environment;no secret/contact re-entry re
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Configured identifying SEC User-Agent and permitted owner target;current task forbids provider calls.
-
-Evidence to unblock: Current-candidate official-source reconciliation receipts with report/source SHA,date/count/scope.
 
 ## MD01 — COMPLETE
 
@@ -473,6 +480,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## MD02 — COMPLETE
 
 Live quote/trade infrastructure,ordering,dedup,reconnect,subscriptions
@@ -486,6 +494,7 @@ A reproduced one-quote-per-reconnect flap could reset failure count indefinitely
 Disposition: Repaired and offline verified;not a lossless-capture claim
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## MD03 — COMPLETE
 
@@ -501,6 +510,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## MD04 — COMPLETE
 
 Historical bar display and source error reporting
@@ -514,6 +524,7 @@ This sprint fixes synthetic-as-observed chart labels,validates bounded exact OHL
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## MD05 — BLOCKED
 
@@ -529,9 +540,6 @@ Disposition: Environment-dependent read-only qualification;do not activate crede
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Owner-private target,credentials/authorized feed and a separately approved read-only test.
-
-Evidence to unblock: Bounded actual IEX live/historical receipts showing entitlement,source clock,freshness,venue and no trading.
 
 ## MD06 — PARTIAL
 
@@ -547,15 +555,14 @@ Disposition: PARTIAL because working reference reconciliation now exists,not bec
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Dependency: Authoritative action semantics and source completeness/backfill contract;no guessed C/E actions or missing trades.
-
-Remaining implementation or qualification: Authoritative observed cancellation/error mapping and complete/lossless source-tape recovery are still absent. Current IEX profile has no independently complete exchange sequence/backfill proof.
 
 ## MD07 — PARTIAL
 
 Official-contract Kraken cryptocurrency L2 and native/product integration
 
-Evidence: 11new offline book-session fixtures,60focused Kraken/admin/recovery/differential/supervisor checks,inside659guarded tests. Exact request/generation/options/ack/freshness and rollback behavior verified;no feed/provider request. NOV14_SPRINT_EVIDENCE.json.
+Source: `terminal/providers/kraken.py`, `terminal/providers/supervisor.py`, `terminal/providers/test_recovery_hardening.py`, `terminal/providers/test_differential.py`, `terminal/server/engine.py`, `terminal/web/src/OrderBook.tsx`, `terminal/l2_research.py`, `terminal/providers/test_kraken_ordered.py`, `terminal/providers/test_kraken_book_session.py`, `terminal/providers/test_kraken_depth_session.py`, `docs/qualification/development-continuation/KRAKEN_DEPTH_SESSION.md`.
+
+Evidence: November20:14new/80combined offline provider/native tests pass;opt-in depth25/100 ordered session profile,top-tenCRC scope and atomic200updatesPERSIDE native projection verified. Legacy depth10/defaults retained. NOV20_DELIVERY_EVIDENCE.json;no observed provider qualification.
 
 Existing provisional snapshot/absolute-update/top10CRC and native L2 projection are retained. Exact finite JSON scientific-number conversion and physical worker/retry recovery were repaired. Existing source-labelled native book/depth/research views remain connected. Official schema/options/checksum/session semantics and legal source qualification are not independently verified;provisional status is unchanged. Partial official book/checksum review now supports opt-in ordered repeated-price updates with final checksum/native atomicity;defaults remain compatible. Full protocol/options/trade/status/session/usage reconciliation remains unverified. New opt-in BOOK_SESSION_V1 requires explicit matching depth10/snapshot/request-generation acknowledgment before book admission,validates bounded optional metadata,and fences reconnect/stale-ack/rejection recovery. A pure request builder opens no transport. Defaults and ordered updates remain compatible.
 
@@ -563,9 +570,6 @@ Disposition: Track the explicitly requested Kraken requirement without calling c
 
 Next action: Keep provisional status;continue source-specified remaining depth/trade/status/usage contracts and later independent provider/target qualification.
 
-Remaining implementation or qualification: Broader official depth/options/trade/status/full-session/usage reconciliation and actual authorized observed qualification. Local book negotiation and ordered updates are implemented but do not establish exchange sequence,backfill/losslessness or a fully verified live adapter.
-
-Dependency: Official book/checksum subset is readable through documentation tools;complete protocol and usage reconciliation plus actual authorized source qualification remain outstanding. Historical executor-host403 is not claimed as a current documentation-tool block.
 
 ## RES01 — COMPLETE
 
@@ -581,6 +585,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## RES02 — COMPLETE
 
 Historical bar-to-research/compatible3D workflow
@@ -594,6 +599,7 @@ Accepted revisions drive exact trailing returns,SMA,drawdown and log variation. 
 Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
+
 
 ## RES03 — BLOCKED
 
@@ -609,9 +615,6 @@ Disposition: Requires independently justified observed-data study;not software c
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Legitimate observed evaluation data and independently defined out-of-sample research protocol.
-
-Evidence to unblock: Versioned datasets/causal evaluation,independent comparisons and actual statistical results.
 
 ## REL01 — COMPLETE
 
@@ -627,9 +630,12 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## REL02 — PARTIAL
 
 Crash-safe hot live/L3 recovery and hardware durability guarantees
+
+Source: `terminal/stocks/live.py`, `terminal/stocks/live_checkpoint.py`, `terminal/stocks/observation_store.py`, `terminal/stocks/test_live_checkpoint.py`, `include/gig/itch/restart.hpp`, `include/gig/book/order_book.hpp`, `src/book/order_book.cpp`, `include/gig/replay/replay.hpp`, `src/replay/replay.cpp`, `include/gig/market_data/aggregate_depth.hpp`, `src/market_data/aggregate_depth.cpp`, `terminal/native_recovery.py`, `terminal/test_native_recovery.py`, `terminal/test_aggregate_recovery.py`, `tests/test_hot_checkpoint.cpp`, `include/gig/itch/hot_checkpoint.hpp`, `src/itch/context_checkpoint.cpp`, `src/itch/hot_checkpoint.cpp`, `src/itch/hot_identity.hpp`, `terminal/session_recovery.py`, `terminal/test_session_recovery.py`, `tests/test_itch_hot_checkpoint.cpp`, `include/gig/itch/durable_checkpoint.hpp`, `src/itch/hot_codec.cpp`, `src/itch/hot_codec_fields.hpp`, `include/gig/itch/source_recovery.hpp`, `src/itch/source_recovery.cpp`, `python/bindings/itch_recovery.cpp`, `python/gig_microstructure/itch_recovery.py`, `terminal/itch_recovery.py`, `terminal/test_itch_durable_recovery.py`, `tests/test_itch_durable_checkpoint.cpp`, `tests/test_itch_source_recovery.cpp`, `terminal/itch_product.py`, `terminal/test_itch_product.py`, `scripts/manage_itch_session.py`, `terminal/web/src/itchSession.ts`, `terminal/test_itch_source_product.py`.
 
 Evidence: Final514guarded Python cases per5supported native-binding configurations (2,570outcomes),0failures/errors/skips;native recovery35and all8frozen identities in6profiles (48outcomes) actually reran at5e5d34f with final native/core/SDK/build byte-equivalence verified.186frontend tests/TSC/Vite;actual11v2cases/65assertions,8v1cases/58assertions;35native→TypeScript assertions. Clean-source/default/source installed consumers passed;wheels explicitly reused from byte-equivalent7aea334 inputs. See MULTI_WORKSTREAM_EVIDENCE.json. Current recovery source qualification:531guarded tests,6native recovery tests and8unchanged frozen references on fresh GCC Release;see EXECUTOR_RECOVERY_EVIDENCE.json. Other compiler evidence remains prior-source evidence.
 
@@ -639,9 +645,6 @@ Disposition: Bounded authored version1 full-ITCH product-session engineering is 
 
 Next action: Do not reimplement SDK/source/product continuation. Partial/terminal/arbitrary compressed positions and unknown native schemas remain explicitly unsupported;additional contracts need specification/fixtures. Actual observed continuity and hardware/target evidence remain unqualified.
 
-Remaining implementation or qualification: Bounded authored product/source engineering implemented. Broader unsupported position/container/schema contracts need explicit specifications before expansion;observed-source losslessness and actual target/hardware guarantees remain unverified.
-
-Dependency: For broader full hot-recovery claims:specified additional schema/source-position contracts,legitimate observed initialization/continuity evidence and actual target/hardware testing. Unknown migrations and partial/arbitrary compressed positions fail closed.
 
 ## SECURITY01 — COMPLETE
 
@@ -657,6 +660,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## SECURITY02 — COMPLETE
 
 Frontend budgets,errors and disabled execution safeguards
@@ -671,23 +675,21 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## SECURITY03 — PARTIAL
 
 Runtime/dependency security clearance
 
-Source: `terminal/server/requirements.txt`, `terminal/web/package-lock.json`, `docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md`, `scripts/build_offline_sbom.py`, `tests/test_offline_sbom.py`, `terminal/web/src/offlineJson.ts`, `terminal/verification/artifacts.py`, `terminal/stocks/test_python_json_ingress.py`, `terminal/stocks/test_history_json_ingress.py`.
+Source: `terminal/server/requirements.txt`, `terminal/web/package-lock.json`, `docs/qualification/institutional-sprint-2/DEPENDENCY_ARTIFACT_QUALIFICATION.md`, `scripts/build_offline_sbom.py`, `tests/test_offline_sbom.py`, `terminal/web/src/offlineJson.ts`, `terminal/verification/artifacts.py`, `terminal/stocks/test_python_json_ingress.py`, `terminal/stocks/test_history_json_ingress.py`, `terminal/stocks/xbrl_accounting_relationships.py`, `terminal/stocks/xbrl_dts_source_audit.py`, `terminal/stocks/financial_intelligence_product.py`, `terminal/web/src/financialSourceContract.ts`, `terminal/web/src/sourceAccountingChecks.ts`.
 
-Evidence: 908guarded Python/197frontend tests;original inline source/profile/acquisition audit and abstract/period-invalid equality rejection added. Fresh source-lock SBOM85components/7inputs;13SBOM/3package tests and pip check pass. No new advisory scan,target OS/native/deployed/edge clearance. NOV15_FINAL_SPRINT_EVIDENCE.json.
+Evidence: November20:967guarded Python/345frontend and strict source/equality/calculation/lineage/JSON-admission checks pass. Fresh source-lock SBOM85components/7inputs;13SBOM/3source-package-pattern tests and pip check pass. Fresh clean-source packages audited separately. No new advisory scan,target OS/native/deployed/edge security clearance. NOV20_DELIVERY_EVIDENCE.json.
 
-Current public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories. Deterministic bounded offline inventory now binds exact Python/npm declarations,source bytes,artifact identity/SRI and exclusive private output. Registry advisory results are current snapshots for covered inputs only;no dependency pins were upgraded.
+At an earlier cited checkpoint, public advisory metadata was obtained without market/account access. Runtime dependency pins were not changed. This does not clear target OS,all optional/transitive deployment artifacts,private edge or future advisories. Deterministic bounded offline inventory now binds exact Python/npm declarations,source bytes,artifact identity/SRI and exclusive private output. Registry advisory results are current snapshots for covered inputs only;no dependency pins were upgraded.
 
 Disposition: Repository-level advisory review completed;target-specific OS/artifact/security clearance still required.
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Dependency: Actual deployment artifacts/runtime/OS and private-edge environment;no production clearance from fixtures.
-
-Remaining implementation or qualification: Actual target OS/deployed/full installed dependency/native artifact and private edge clearance;source-lock SBOM and bounded advisory snapshots do not establish complete reachability or vulnerability absence.
 
 ## OPS01 — COMPLETE
 
@@ -703,6 +705,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## OPS02 — BLOCKED
 
 Owner-authenticated Codespaces HTTPS/WSS acceptance
@@ -717,9 +720,6 @@ Disposition: Single final owner acceptance after delivery;no intermediate manual
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Actual owner-authenticated private Codespaces edge and authorized application startup.
-
-Evidence to unblock: Exact-SHA private-authentication/Origin/Host/HTTPS/WSS acceptance with source/assets receipts.
 
 ## OPS03 — BLOCKED
 
@@ -735,9 +735,6 @@ Disposition: Owner-authorized free runner execution against exact delivered SHA;
 
 Next action: Cannot resolve through code alone within no-launch/no-unauthorized-access/no-paid-resource constraints
 
-Dependency: Current-candidate genuine free native ARM64 runner and owner-authorized manual execution.
-
-Evidence to unblock: Actual run IDs,tested SHA,six job conclusions,test counts and eight reference identities.
 
 ## UX01 — COMPLETE
 
@@ -753,13 +750,14 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## UX02 — PARTIAL
 
 Full WCAG2.2AA and physical-device acceptance
 
-Source: `terminal/web/src/BarValues.tsx`, `terminal/web/src/EquityPanels.tsx`, `terminal/web/src/HistoricalMarket.tsx`, `terminal/web/src/barValues.test.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/web/src/acceptanceFacts.test.ts`, `terminal/web/src/SourceCalculations.tsx`, `terminal/web/src/sourceCalculations.test.ts`.
+Source: `terminal/web/src/BarValues.tsx`, `terminal/web/src/EquityPanels.tsx`, `terminal/web/src/HistoricalMarket.tsx`, `terminal/web/src/barValues.test.ts`, `terminal/web/src/AcceptanceFacts.tsx`, `terminal/web/src/acceptanceFacts.test.ts`, `terminal/web/src/SourceCalculations.tsx`, `terminal/web/src/sourceCalculations.test.ts`, `terminal/web/src/SourceAccounting.tsx`, `terminal/web/src/sourceImportGuard.ts`, `terminal/web/src/sourceAccounting.test.ts`.
 
-Evidence: 197frontend tests/TSC/Vite passed at the November15 source checkpoint;existing file-control/SSR,source disclosure and strict parsing contracts preserved. No application/browser/device/assistive-technology launch. NOV15_FINAL_SPRINT_EVIDENCE.json.
+Evidence: November20:345frontend tests/TSC/Vite pass,including24actual React SSR/import lifecycle checks. New private controls have native names/loading/error announcements,exact source tables with captions/scoped headers and named keyboard-scroll regions. No application/browser/device/assistive-technology launch. NOV20_DELIVERY_EVIDENCE.json.
 
 Exact-value keyboard-readable bar tables now supplement hover-only candles in company/archive views;calendar-history reuses its existing table. Source caption,scoped headers,nanoseconds,units and zero volume are preserved. Native dialog,skip link and existing keyboard controls already existed and were preserved.
 
@@ -767,9 +765,6 @@ Disposition: Feasible text alternative implemented. Physical devices,screen read
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
 
-Dependency: Separate authorization to launch/test actual browsers and access to target devices/assistive technology.
-
-Remaining implementation or qualification: Current real-browser,assistive-technology,device and exhaustive WCAG2.2AA qualification remain unperformed under the no-launch directive.
 
 ## CLEAN01 — COMPLETE
 
@@ -785,6 +780,7 @@ Disposition: Implemented bounded research contract;retain tested behavior
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## SCOPE01 — NOT APPLICABLE
 
 Real/paper execution,paid feeds,public deployment and redistribution
@@ -799,6 +795,7 @@ Disposition: Keep disabled;no expenditure,provider/account mutation or public fo
 
 Next action: No additional faithfully specified code repair identified after this continuation;see remaining source/target/contract requirements
 
+
 ## SCOPE02 — PARTIAL
 
 Historical A18/A19 requirement and concentration acceptance
@@ -807,12 +804,8 @@ Source: `terminal/server/concentration.py`, `docs/remediation/sprint-2/REMAINING
 
 Evidence: Retained prior checkpoint evidence unless updated below: Existing exact supplied-depth HHI tests;original69c9f48 audit read from Git
 
-Exact source-bound supplied-depth HHI exists. Earlier audit preserves unknown original estimator/baseline. Attempt to recover the original pasted master text in this session failed authorization/resolution;no restricted dataset was accessed.
+Exact source-bound supplied-depth HHI exists. Earlier audit preserves the unknown original estimator/baseline;prior unsuccessful requirement-recovery attempts remain historical evidence. The retained original A18/A19 acceptance text was not recovered in this review. No substitute estimator,restricted dataset or retrospective acceptance was introduced.
 
 Disposition: Owner decision:recover the original requirement or approve a prospective versioned baseline/HHIv1 contract. No retroactive acceptance or new estimator invented.
 
 Next action: Independent offline package completed;the listed missing contract/source/target requirement remains open.
-
-Dependency: Recover original requirements or approve an explicitly prospective versioned contract.
-
-Remaining implementation or qualification: Original A18/A19 baseline/estimator still unknown;no retroactive completion or substitute estimator.

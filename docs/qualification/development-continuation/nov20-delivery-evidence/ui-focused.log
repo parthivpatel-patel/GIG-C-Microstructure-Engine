@@ -1,0 +1,32 @@
+✔ actual offline panel names both file controls and leaves financial data absent until admission (8.178576ms)
+✔ unknown CIK disables both local admission controls with an announced explanation (0.868147ms)
+✔ actual import feedback announces progress and escaped validation errors (1.251782ms)
+✔ a second import invalidates only its own in-flight channel (0.218514ms)
+✔ changed symbol or CIK rejects late reads and stale event callbacks on both channels (0.441036ms)
+✔ unmount invalidation prevents delayed installation while an effect replay can begin again (0.138962ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: reported (94.102543ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: exact (41.110958ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: conflicting (43.462587ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: missing (36.11742ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: unsupported (50.867031ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: before_acceptance (1.810519ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: original_vintage (30.906602ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: amended_vintage (28.973303ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: partial (40.584223ms)
+✔ actual backend source-accounting export renders only after strict semantic admission: no_collection (1.941745ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: legacy (5.752391ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: missing_originals (4.990112ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: transformed (3.806093ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: without_acquisition (3.214415ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: permission_receipts (5.064917ms)
+✔ actual backend original-inline receipt preserves source/profile/order disclosures: no_collection (1.760454ms)
+✔ actual local-file path rejects ambiguous bytes, oversized files, absent identity and cancellation (22.96785ms)
+✔ the UI admission boundary refuses cross-symbol and cross-CIK packets (2.457511ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1508.707335

@@ -1,0 +1,11 @@
+{
+  "schema": "gig.installed_source_accounting_fixtures.v1",
+  "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+  "file": "installed-source-accounting-fixtures.json",
+  "bytes": 552005,
+  "sha256": "bbac1eb2afa1422f1693ad4063fbf8698d021562709cf18f2759717b0836a31f",
+  "accounting": 10,
+  "inline": 6,
+  "application_started": false,
+  "provider_requested": false
+}

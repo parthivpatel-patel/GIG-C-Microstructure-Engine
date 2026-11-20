@@ -1,0 +1,904 @@
+{
+  "schema": "gig.nov20.delivery.evidence.v1",
+  "date": "2026-11-20",
+  "timezone": "America/New_York",
+  "engineering_target": "2026-11-20",
+  "engineering_complete": false,
+  "branch": "development/gig-ui-redesign",
+  "starting_verified_remote": "f7813d71a079ba7efdf234db7efa424e6eebbf20",
+  "tested_source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+  "verified_remote_source_checkpoint": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+  "evidence_commit": "Enclosing documentation-only commit;resolve actual remote HEAD from Git. Runtime and clean-source packages are bound to tested_source.",
+  "verified_implementation_checkpoints": {
+    "Kraken bounded depth session": "d9954196b711bfe94d4914d40f964343f9a06011",
+    "Original-DTS typed hypercubes": "8e467a5d35d6456b09370c18a2d892329383b2bc",
+    "Strict offline financial intelligence integration": "9be1c0d8293444e517af67fe2a57fd1be599277c"
+  },
+  "recovery": {
+    "original_worktree_preserved": true,
+    "uncommitted_work_preserved": true,
+    "destructive_reset_or_force_push": false,
+    "workspace_recycled": false
+  },
+  "no_launch_python": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 967,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_open_dimensions",
+      "terminal.stocks.test_xbrl_restriction_constraints",
+      "terminal.stocks.test_xbrl_calculation_intervals",
+      "terminal.stocks.test_xbrl_calculation_report",
+      "terminal.stocks.test_xbrl_calculation_product",
+      "terminal.stocks.test_xbrl_lineage",
+      "terminal.stocks.test_xbrl_typed_dimensions",
+      "terminal.stocks.test_xbrl_inherited_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.stocks.test_xbrl_statement_set",
+      "terminal.stocks.test_xbrl_negative_dimensions",
+      "terminal.stocks.test_xbrl_dimensional_calculation",
+      "terminal.stocks.test_python_json_ingress",
+      "terminal.stocks.test_history_json_ingress",
+      "terminal.stocks.test_xbrl_dts_source_audit",
+      "terminal.stocks.test_statement_set_source_acceptance",
+      "terminal.stocks.test_xbrl_negative_only_dimensions",
+      "terminal.stocks.test_inline_dts_source_audit",
+      "terminal.stocks.test_xbrl_accounting_relationships",
+      "terminal.stocks.test_xbrl_accounting_statements",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_kraken_book_session",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls",
+      "terminal.stocks.test_xbrl_typed_hypercubes",
+      "terminal.providers.test_kraken_depth_session",
+      "terminal.stocks.test_financial_intelligence_product"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 967
+  },
+  "new_registered_python_tests": 59,
+  "frontend": {
+    "tests": 345,
+    "passed": 345,
+    "failed": 0,
+    "skipped": 0,
+    "typescript": "PASS",
+    "vite_production_build": "PASS",
+    "new_tests": 148,
+    "new_source_admission": {
+      "full_validator": 92,
+      "actual_python_exports": 28,
+      "re_signed_semantic_forgeries": 57,
+      "lexical_json": 6,
+      "seal_idempotency": 1,
+      "relationship_checker": 32,
+      "actual_react_ssr_and_import_lifetimes": 24
+    },
+    "browser_started": false
+  },
+  "cross_language": {
+    "accounting_statements-contract.log": {
+      "schema": "gig.accounting_statement.offline_contract.v1",
+      "cases": 7,
+      "assertions": 224,
+      "adversarial_rejections": 7,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "itch_product-contract.log": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    },
+    "offline_import-contract.log": {
+      "schema": "gig.offline_json_ingress.contract.v1",
+      "cases": 6,
+      "ambiguous_previously_accepted": 6,
+      "adversarial_rejections": 23,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "statement_set-contract.log": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    },
+    "trade-contract.log": {
+      "schema": "gig.filing.cross_language.v1",
+      "passed": 5,
+      "failed": 0,
+      "scope": "Authored SEC normalization and actual retained-vintage output to TypeScript admission;no app or provider"
+    },
+    "xbrl_accuracy-contract.log": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "xbrl_calculation_report-contract.log": {
+      "schema": "gig.calculation_report.contract.v1",
+      "cases": 4,
+      "adversarial_rejections": 11,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "xbrl_statement-contract.log": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "xbrl_vintage-contract.log": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    }
+  },
+  "native": {
+    "application_started": false,
+    "build_scope": "Reused existing byte-equivalent builds; current focused checks, not fresh full compiler qualification or Python sanitizer instrumentation.",
+    "failures": 0,
+    "focused_tests": {
+      "native-clang-debug.log": 2,
+      "native-clang-release.log": 2,
+      "native-gcc-debug.log": 2,
+      "native-release.log": 6,
+      "native-sanitizer.log": 2
+    },
+    "frozen_hashes": {
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520"
+    },
+    "frozen_tests": 8,
+    "logs": {
+      "frozen.log": "3ce24ac9c1b31db9e9056be67c126d0c29f295ad0c7d067a5e117f06990c4de6",
+      "native-clang-debug.log": "4b9ef6398f14e92997f263e44ee7f56185f0b077c596d21d31c94bc59692b8e0",
+      "native-clang-release.log": "3a5a0c99b59345da037e5ba2a3f24539e0e2c6c6c3eb69e04093a5c58cd88673",
+      "native-consumer.log": "a4489da186ef8d2c1ae77e7c7fe57d9bb68c84723b25c3f3d51d3fadd47e0a30",
+      "native-gcc-debug.log": "e4b370f4a550b04278cd343a5ec9906e107989d64b332fb8835af70a8ed9ff5e",
+      "native-release.log": "0c827834e1639777c88e4edbace20897e40a0e4a124270ea7ecac69508aceefb",
+      "native-sanitizer.log": "099c758c9789adc816aad450ca030bb7d17a223485fc04dddf6c550ca5298a53"
+    },
+    "native_inputs_unchanged_from": "1ab1e17e1cfadc0e3d702bb18f9e65eb15057633",
+    "provider_requested": false,
+    "schema": "gig.nov20.native_focused.v1",
+    "sdk_consumers": 8,
+    "skipped": 0,
+    "source_head_at_verification": "8e467a5d35d6456b09370c18a2d892329383b2bc"
+  },
+  "clean_source_packaging": {
+    "application_started": false,
+    "archive": {
+      "bytes": 8761532,
+      "members": 1686,
+      "sha256": "0e1e6685fd3a5eaee26ad0061c77754b9412f34328863c18cc0f526979592924",
+      "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+      "tracked_files": 1685
+    },
+    "fresh_wheel_scope": "Default GCC compilation from verified clean extracted sdist; no full compiler matrix claim.",
+    "installed_consumers": {
+      "application_started": false,
+      "errors": 0,
+      "failures": 0,
+      "provider_requested": false,
+      "schema": "gig.installed_consumers.v1",
+      "sdk": "/workspace/gig-development/work/nov20-delivery/installed/gig_microstructure/__init__.py",
+      "skipped": 0,
+      "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+      "tests": 8
+    },
+    "installed_contracts": {
+      "installed-accounting": {
+        "adversarial_rejections": 7,
+        "application_started": false,
+        "assertions": 224,
+        "cases": 7,
+        "provider_requested": false,
+        "schema": "gig.accounting_statement.offline_contract.v1"
+      },
+      "installed-calculation": {
+        "adversarial_rejections": 11,
+        "application_started": false,
+        "cases": 4,
+        "provider_requested": false,
+        "schema": "gig.calculation_report.contract.v1"
+      },
+      "installed-ingress": {
+        "adversarial_rejections": 23,
+        "ambiguous_previously_accepted": 6,
+        "application_started": false,
+        "cases": 6,
+        "provider_requested": false,
+        "schema": "gig.offline_json_ingress.contract.v1"
+      },
+      "installed-statements": {
+        "adversarial_rejections": 7,
+        "application_started": false,
+        "assertions": 1018,
+        "fixture_bytes": 796426,
+        "history_entries": 4,
+        "provider_requested": false,
+        "schema": "gig.statement_set.offline_consumer_contract.v1",
+        "sets": 5,
+        "verified_children": 23
+      },
+      "installed-v2": {
+        "application_started": false,
+        "assertions": 93,
+        "cases": 15,
+        "provider_requested": false,
+        "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+      },
+      "installed-vintages": {
+        "adversarial_rejections": 6,
+        "application_started": false,
+        "entries": 3,
+        "provider_requested": false,
+        "schema": "gig.xbrl.vintage_contract.v1"
+      }
+    },
+    "installed_source": {
+      "application_started": false,
+      "errors": 0,
+      "failures": 0,
+      "provider_requested": false,
+      "schema": "gig.installed_source_regressions.v1",
+      "sdk": "/workspace/gig-development/work/nov20-delivery/installed/gig_microstructure/__init__.py",
+      "selected_names": [
+        "terminal.stocks.test_xbrl_instance",
+        "terminal.stocks.test_xbrl_collection",
+        "terminal.stocks.test_xbrl_tool",
+        "terminal.stocks.test_inline_xbrl",
+        "terminal.stocks.test_inline_set",
+        "terminal.stocks.test_inline_registry_numeric",
+        "terminal.stocks.test_xbrl_dts",
+        "terminal.stocks.test_xbrl_binding",
+        "terminal.stocks.test_xbrl_types",
+        "terminal.stocks.test_xbrl_enumeration",
+        "terminal.stocks.test_xbrl_vintages",
+        "terminal.stocks.test_xbrl_whitespace",
+        "terminal.stocks.test_xbrl_dimensions",
+        "terminal.stocks.test_xbrl_open_dimensions",
+        "terminal.stocks.test_xbrl_restriction_constraints",
+        "terminal.stocks.test_xbrl_calculation_intervals",
+        "terminal.stocks.test_xbrl_calculation_report",
+        "terminal.stocks.test_xbrl_calculation_product",
+        "terminal.stocks.test_xbrl_lineage",
+        "terminal.stocks.test_xbrl_typed_dimensions",
+        "terminal.stocks.test_xbrl_inherited_dimensions",
+        "terminal.stocks.test_xbrl_relationships",
+        "terminal.stocks.test_xbrl_statements",
+        "terminal.stocks.test_xbrl_product",
+        "terminal.stocks.test_xbrl_accuracy",
+        "terminal.stocks.test_xbrl_statement_v2",
+        "terminal.stocks.test_xbrl_embedded",
+        "terminal.stocks.test_sec_filing_ingest",
+        "terminal.stocks.test_sec_source_expansion",
+        "terminal.stocks.test_sec_multidoc",
+        "terminal.stocks.test_sec_transform_profile",
+        "terminal.stocks.test_sec_ingest_store",
+        "terminal.stocks.test_xbrl_duplicate_diagnostics",
+        "terminal.stocks.test_sec_ingest_cli",
+        "terminal.stocks.test_xbrl_statement_set",
+        "terminal.stocks.test_xbrl_negative_dimensions",
+        "terminal.stocks.test_xbrl_dimensional_calculation",
+        "terminal.stocks.test_python_json_ingress",
+        "terminal.stocks.test_history_json_ingress",
+        "terminal.stocks.test_xbrl_dts_source_audit",
+        "terminal.stocks.test_statement_set_source_acceptance",
+        "terminal.stocks.test_xbrl_negative_only_dimensions",
+        "terminal.stocks.test_inline_dts_source_audit",
+        "terminal.stocks.test_xbrl_accounting_relationships",
+        "terminal.stocks.test_xbrl_accounting_statements",
+        "terminal.providers.test_kraken_book_session",
+        "terminal.stocks.test_xbrl_typed_hypercubes",
+        "terminal.providers.test_kraken_depth_session",
+        "terminal.stocks.test_financial_intelligence_product"
+      ],
+      "skipped": 0,
+      "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+      "tests": 709
+    },
+    "installed_ui": {
+      "cancelled": 0,
+      "fail": 0,
+      "pass": 148,
+      "skipped": 0,
+      "tests": 148,
+      "todo": 0
+    },
+    "javascript_scope": "Existing locked JS dependencies linked into extracted source after full archive byte validation; no JS reinstall or browser launch. Actual Python exports came from extracted source with fresh installed SDK.",
+    "logs": {
+      "check-sdist.log": "3214c42253772d5979adbb48f97b1eb1f84e785b61a1f9da809110f6bb1da28d",
+      "install.log": "37ec715e5788f5977fbe6e81cf124c76e062d06f1417af0ebf45267033b712ef",
+      "installed-accounting.log": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f",
+      "installed-calculation.log": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736",
+      "installed-consumer.log": "3751cd53157476331a2d4593acb1488e7b1c1fb75664c7aa5921a0e787599056",
+      "installed-ingress.log": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b",
+      "installed-source-ui.log": "2d3b6df7a683d326c12b1ded33c62cd608a2a6e4b3b010d2a529ca91b4473be3",
+      "installed-source.log": "9d2ca2b006ea7577100a39891f9f787995837cd0b86a1d4caf05f9542ad84381",
+      "installed-statements.log": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a",
+      "installed-v2.log": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f",
+      "installed-vintages.log": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979",
+      "package-source.log": "5c0ba86c6a6348ce29eb4cd7d1a768f81f57f6ca99a4ad1739a597576d75f01b",
+      "sdist.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+      "wheel.log": "5901638dae516aafd25b8b352c500682e4b3cac60ef0979584cdd141196cb9d0"
+    },
+    "packages": {
+      "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+        "bytes": 666813,
+        "sha256": "dc762b66c172dddd01999ad3354a0454717b7a2f6976bbe49c9fc7c009f7bba6"
+      },
+      "gig_microstructure-0.1.1.tar.gz": {
+        "bytes": 8761532,
+        "sha256": "0e1e6685fd3a5eaee26ad0061c77754b9412f34328863c18cc0f526979592924"
+      }
+    },
+    "provider_requested": false,
+    "schema": "gig.nov20.clean_source_packaging.v1",
+    "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+    "spend_usd": 0
+  },
+  "extra_installed_socket_and_app_guard": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "failures": 0,
+    "schema": "gig.installed_source_guarded.v1",
+    "sdk": "/workspace/gig-development/work/nov20-delivery/installed/gig_microstructure/__init__.py",
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+    "tests": 709
+  },
+  "source_exports": {
+    "receipt": {
+      "schema": "gig.installed_source_accounting_fixtures.v1",
+      "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+      "file": "installed-source-accounting-fixtures.json",
+      "bytes": 552005,
+      "sha256": "bbac1eb2afa1422f1693ad4063fbf8698d021562709cf18f2759717b0836a31f",
+      "accounting": 10,
+      "inline": 6,
+      "application_started": false,
+      "provider_requested": false
+    },
+    "scope": "Authored offline fixture bytes and generated actual backend envelopes;observed-origin permission paths are fixtures,not real observed source/authentication evidence."
+  },
+  "security": {
+    "source_lock_components": 85,
+    "source_inputs": 7,
+    "sbom_tests": 13,
+    "source_package_pattern_tests": 3,
+    "pip_check": "PASS",
+    "dependency_pins_changed": false,
+    "fresh_advisory_scan": false,
+    "target_clearance": false
+  },
+  "matrix": {
+    "counts": {
+      "COMPLETE": 34,
+      "BLOCKED": 7,
+      "PARTIAL": 8,
+      "NOT APPLICABLE": 1
+    },
+    "row_count": 50,
+    "status_changes": 0,
+    "all_eight_partial_review": "NOV20_PARTIAL_ACCEPTANCE_REVIEW.md",
+    "external_blockers": [
+      "CORE05",
+      "VIS04",
+      "SEC03",
+      "MD05",
+      "RES03",
+      "OPS02",
+      "OPS03"
+    ],
+    "scope01": "NOT APPLICABLE"
+  },
+  "closed_bounded_subcriteria": [
+    "Direct closed single-role mixed scalar-typed/explicit hypercube corroboration and retained proof admission with original DTS reconstruction",
+    "Opt-in Kraken depth25/100 ordered updates,top10 CRC disclosure and bounded atomic native projection",
+    "Actual private Python-to-TypeScript-to-React financial statement/accounting/inline source evidence flow,strict receipt and semantic admission,issuer lifecycle and accessibility states"
+  ],
+  "repaired_findings": [
+    "Interrupted inline transformation allowlist now uses existing REGISTRY_2015_NUMERIC_V2;two TypeScript annotations restored",
+    "Browser now independently derives reported accounting equality,declaration constraints,numeric rows and complete row/period/calculation coverage;re-signed contradictions cannot become supported facts",
+    "Inline processing permission,receipt/profile,URI,taxonomy and acquisition-intent checks occur before XML",
+    "Typed V6 collection integration and exact retained scalar/member/source proof checks recovered without modifying legacy V1-V5 artifact identities"
+  ],
+  "resolved_verification_findings": [
+    "Initial cohort registration was placed after suite construction;new modules now load before exact967count assertion",
+    "An initial private validator used mode instead of existing rounding_mode;actual generated exports exposed it and the field binding was repaired",
+    "Six initial re-signed forgeries exposed missing row/calculation/role/inline metadata checks;all57final variants reject",
+    "Backend coordinator test stub lacked retained status/collection fields;fixture repaired without weakening production checks",
+    "Two verification commands used incorrect working-directory/test paths;correct no-launch/frontend/source-package checks were rerun successfully"
+  ],
+  "remaining_test_failures": 0,
+  "warnings": [
+    "Vite emits existing greater-than500kB chunk warning;build passes and warning was not suppressed",
+    "Current test dependencies emit Starlette httpx deprecation warning;no dependency upgrade or clearance inferred",
+    "Native multi-compiler/sanitizer checks use existing byte-equivalent builds;fresh wheel is default GCC only,not a new full compiler/Python sanitizer matrix",
+    "Installed JS tests use existing locked dependencies linked after archive byte verification;no fresh JS reinstall,physical-browser or assistive-technology acceptance",
+    "No two-build byte-identical package reproducibility claim;hashes bind this actual build"
+  ],
+  "source_files": [
+    {
+      "path": "terminal/providers/kraken.py",
+      "bytes": 25028,
+      "sha256": "578661663592a11d0f758fc5d0bbd14638626f3b026496ddd9c071aaf6b0ca8c"
+    },
+    {
+      "path": "terminal/providers/test_kraken_depth_session.py",
+      "bytes": 12760,
+      "sha256": "7627fca358139333603ac2d893b6a46b757db3b9558d5de8bb2ad15b6e19c5f8"
+    },
+    {
+      "path": "terminal/stocks/financial_intelligence_product.py",
+      "bytes": 9708,
+      "sha256": "03988cc9dca842edcd565550de956c33649aa10d526168f894efdd822c3c9c22"
+    },
+    {
+      "path": "terminal/stocks/test_financial_intelligence_product.py",
+      "bytes": 10066,
+      "sha256": "2983d40c458887f7c585e33f2c7ab8e25ec7adb83e144202e063b6bab9e25008"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_typed_hypercubes.py",
+      "bytes": 27908,
+      "sha256": "bf43d6d6ec0726c557139699c5d5d2518b331c707120d8d5ce72963e8a80ffc3"
+    },
+    {
+      "path": "terminal/stocks/xbrl_collection.py",
+      "bytes": 13250,
+      "sha256": "4e204057b1fb77c58da34a220244d6f17285ee77e9a99de3911cdc6bc56a6153"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dimensions.py",
+      "bytes": 27008,
+      "sha256": "be7d2edd054d36fd63a648907e8cb36cb4f92ee6460488b2289924ca653504a3"
+    },
+    {
+      "path": "terminal/stocks/xbrl_instance.py",
+      "bytes": 35448,
+      "sha256": "6760b87df9c64640f63ed54eb88b397d67cfde22843ef2ad55013bc24102c01a"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "bytes": 5187,
+      "sha256": "fabc7b846df789a48a3f1c375da8e29fea38c142303ffcd3318818b3edbe1417"
+    },
+    {
+      "path": "terminal/tests/source_accounting_checks_fixtures.py",
+      "bytes": 4135,
+      "sha256": "8162c1d9d218cda6f553aeb1e76d02339ef9fd7ea8da725c776a886ada32b58c"
+    },
+    {
+      "path": "terminal/tests/source_accounting_ui_fixtures.py",
+      "bytes": 3562,
+      "sha256": "62c2ffea481d79254984609e695dbd4ec1c36c8c48889d2e489bd0d4746241a5"
+    },
+    {
+      "path": "terminal/web/package.json",
+      "bytes": 1524,
+      "sha256": "a22cd4312686ed217c58f3145d75e42e5fc2e3fa226532643919b7e9ecb4dc8a"
+    },
+    {
+      "path": "terminal/web/src/SourceAccounting.tsx",
+      "bytes": 15415,
+      "sha256": "408c74d3fbd5bf7db372c5b1d41861e3b48ca73b414aab0944a603b25bd8f92e"
+    },
+    {
+      "path": "terminal/web/src/XbrlStatements.tsx",
+      "bytes": 11696,
+      "sha256": "5a9b66b703743bd6c1378508fcfcc0a6f63b445c005fa7293c6200368ac29a79"
+    },
+    {
+      "path": "terminal/web/src/financialSourceContract.test.ts",
+      "bytes": 12831,
+      "sha256": "b9877527af2fdd7accb7b2f783ea8b90f81ff04ffe24a65cb02b9ff0605fbbde"
+    },
+    {
+      "path": "terminal/web/src/financialSourceContract.ts",
+      "bytes": 33450,
+      "sha256": "de36730d356e0d69ac8a7a94f502db8bfbd7b640c467960660612ffc50770be8"
+    },
+    {
+      "path": "terminal/web/src/sourceAccounting.test.ts",
+      "bytes": 10603,
+      "sha256": "4e45d76761830313d032de967002a537736aec48d219c4d613c0345e4c4de555"
+    },
+    {
+      "path": "terminal/web/src/sourceAccountingChecks.test.ts",
+      "bytes": 4743,
+      "sha256": "31cc0e0e3ce2ce2da5bd2717d2650a017b1080e5fda8cc4a36af03a4627f069b"
+    },
+    {
+      "path": "terminal/web/src/sourceAccountingChecks.ts",
+      "bytes": 11510,
+      "sha256": "08beb5b7df919b7414fe9b383b68f6f84f2573ba59296ffa20c4b2d39345a1a2"
+    },
+    {
+      "path": "terminal/web/src/sourceImportGuard.ts",
+      "bytes": 985,
+      "sha256": "6a738a61568c297b3f894dcf74e145e335966a98b282dad6676f05248a027fa2"
+    }
+  ],
+  "retained_receipts": [
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/accounting_statements-contract.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/archive.json",
+      "bytes": 203,
+      "sha256": "e41c971834c0fcadbc656cb20805e4a56365d9f724091727942895d3a51b5ff9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/check-sdist.log",
+      "bytes": 191,
+      "sha256": "3214c42253772d5979adbb48f97b1eb1f84e785b61a1f9da809110f6bb1da28d"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/check-sdist.py",
+      "bytes": 1431,
+      "sha256": "cfe800b96e42b5c2e46c459392d22dd8dba6f875c8ae840ab432e21884bba517"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/frontend-build.log",
+      "bytes": 2428,
+      "sha256": "fe55e113dde58dae78b46d701ff3d5cd5075d1826e6f52472fff4585d5f3a569"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/frontend.log",
+      "bytes": 32717,
+      "sha256": "6d095e2cf4f6f3b8537f5454346b093df088a79abdb1b72d345eaa6a81710701"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "3ce24ac9c1b31db9e9056be67c126d0c29f295ad0c7d067a5e117f06990c4de6"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/install.log",
+      "bytes": 458,
+      "sha256": "37ec715e5788f5977fbe6e81cf124c76e062d06f1417af0ebf45267033b712ef"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-accounting.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-calculation.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-consumer.log",
+      "bytes": 1294,
+      "sha256": "3751cd53157476331a2d4593acb1488e7b1c1fb75664c7aa5921a0e787599056"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-ingress.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-source-accounting-fixtures-receipt.json",
+      "bytes": 370,
+      "sha256": "34114eba4315c5d4af75e3a42a430c42bb872075ce89381f0ed06e9aa3b50b6c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-source-accounting-fixtures.json",
+      "bytes": 552005,
+      "sha256": "bbac1eb2afa1422f1693ad4063fbf8698d021562709cf18f2759717b0836a31f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-source-guarded.log",
+      "bytes": 139728,
+      "sha256": "9bf5655821236a8837ee1e0dc937736df74bf2342af034da7522ad76918fd0bd"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-source-ui.log",
+      "bytes": 13992,
+      "sha256": "2d3b6df7a683d326c12b1ded33c62cd608a2a6e4b3b010d2a529ca91b4473be3"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-source.log",
+      "bytes": 142284,
+      "sha256": "9d2ca2b006ea7577100a39891f9f787995837cd0b86a1d4caf05f9542ad84381"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-statements.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/installed-vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/itch_product-contract.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/kraken-cohort.txt",
+      "bytes": 490,
+      "sha256": "b92e6f89ea3d3d32e46eefe09e6cdc82ec737e5be80a426aa422849f1c018617"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/kraken.log",
+      "bytes": 12899,
+      "sha256": "04f14a512276e2886a6340be22023373b3094857dbbdf23e153581d06a15ecaa"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-clang-debug.log",
+      "bytes": 455,
+      "sha256": "4b9ef6398f14e92997f263e44ee7f56185f0b077c596d21d31c94bc59692b8e0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-clang-release.log",
+      "bytes": 459,
+      "sha256": "3a5a0c99b59345da037e5ba2a3f24539e0e2c6c6c3eb69e04093a5c58cd88673"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-consumer.log",
+      "bytes": 964,
+      "sha256": "a4489da186ef8d2c1ae77e7c7fe57d9bb68c84723b25c3f3d51d3fadd47e0a30"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-gcc-debug.log",
+      "bytes": 451,
+      "sha256": "e4b370f4a550b04278cd343a5ec9906e107989d64b332fb8835af70a8ed9ff5e"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-release.log",
+      "bytes": 960,
+      "sha256": "0c827834e1639777c88e4edbace20897e40a0e4a124270ea7ecac69508aceefb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-sanitizer.log",
+      "bytes": 461,
+      "sha256": "099c758c9789adc816aad450ca030bb7d17a223485fc04dddf6c550ca5298a53"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/native-verification.json",
+      "bytes": 2175,
+      "sha256": "2df1e34b905fb0f250b6f9b3abdda84e342eb90350171930c8256924baac5ccb"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/offline_import-contract.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "2c37d50a88147ca2ebd5197d74ee37d462dab650d793512e849814c28d5a38f0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/package-source.log",
+      "bytes": 206,
+      "sha256": "5c0ba86c6a6348ce29eb4cd7d1a768f81f57f6ca99a4ad1739a597576d75f01b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/package-source.py",
+      "bytes": 943,
+      "sha256": "163f88cfe95f9e8662b95d2f2d47e34322e40e585a881b6466e0ba41537cf526"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/packaging-verification.json",
+      "bytes": 7323,
+      "sha256": "54c1123683c7e4691ffd16969c60b25bc37ae2010a46587282f62a1597846092"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/python-guarded.log",
+      "bytes": 189903,
+      "sha256": "474b139301b65cdc5bb22638a38b09c46763032e6482b909a539df77dc541a42"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/reproduce-installed-source.py",
+      "bytes": 1451,
+      "sha256": "943c38acef31cac1b1bf7aedee95213929d2b6d943d9503105e5d81f478270c3"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/runtime-sha.txt",
+      "bytes": 41,
+      "sha256": "7f6fbc5eda3b2d88c6b10c0cec948558d080b196cba5321e576ca68025826f60"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/sbom-generation.log",
+      "bytes": 68,
+      "sha256": "fafde11f0744730aaeebd0b96250f68156d21edfb235fa386dffd36c144972f7"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/sbom-tests.log",
+      "bytes": 1945,
+      "sha256": "377c97a9b0471920f8844743c88886376619dfcc4cffd62111699ddeec2d4eb4"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/source-sbom.cdx.json",
+      "bytes": 47016,
+      "sha256": "9a5ca937610a65b68cee65b2b49a772794db03f94cbc0f2696d991e3e04e4cbc"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/statement_set-contract.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/trade-contract.log",
+      "bytes": 559,
+      "sha256": "8001aaa10f7eb6657821dbf4a0c0fec28c27bd7d5119ae62b15345bc87af0d36"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/typed-drs.log",
+      "bytes": 6913,
+      "sha256": "906a9e1abcc74239d7c925a198eced58972673fa8699cdfa91ed71394d64c76b"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/ui-focused.log",
+      "bytes": 2750,
+      "sha256": "8debc55d7a44305aea662a4fd063b2fd3cad315805628fcfc24b1b38a179da08"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/wheel.log",
+      "bytes": 6047,
+      "sha256": "5901638dae516aafd25b8b352c500682e4b3cac60ef0979584cdd141196cb9d0"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/xbrl_accuracy-contract.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/xbrl_calculation_report-contract.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/xbrl_statement-contract.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/xbrl_vintage-contract.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/typed-delivery-related.log",
+      "bytes": 52639,
+      "sha256": "16d3927a2b8261a4cbddf89f17c548fe99fc877a8eff4ca71faaecf9e5ab91e9"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov20-delivery-evidence/typed-delivery-legacy-identities.log",
+      "bytes": 2892,
+      "sha256": "a4ceff6aa6b7f826bfd9e877bb5c2642facce74042cfaeb425367b97efeceaf6"
+    }
+  ],
+  "restrictions": {
+    "application_started": false,
+    "server_started": false,
+    "live_provider_access": false,
+    "deployment": false,
+    "trading": false,
+    "owner_acceptance": false,
+    "spend_usd": 0,
+    "frozen_native_identities_preserved": 8,
+    "workspaces_preserved": 12,
+    "GIG_only": true
+  },
+  "next_queue": [
+    "One authoritative cross-role/effective/complex-typed DRS or dimensional/OIM semantic slice",
+    "One issuer/taxonomy corpus-bound statement completeness/accounting milestone without inferred missing values",
+    "One official Kraken trade/status/session/larger-depth or authoritative IEX source-action/backfill contract",
+    "One precisely specified native source-position/schema recovery extension",
+    "Exact independently authorized evidence for7externalblockers,all8partialcriteria and originalA18/A19 contract"
+  ]
+}

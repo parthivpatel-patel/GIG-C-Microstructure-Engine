@@ -1,0 +1,10 @@
+terminal.providers.test_kraken_depth_session.DepthSession
+terminal.providers.test_kraken.ProviderContracts
+terminal.providers.test_kraken_ordered.OrderedUpdates
+terminal.providers.test_kraken_admin.Admin
+terminal.providers.test_kraken_book_session.BookSession
+terminal.providers.test_differential.Differential
+terminal.providers.test_supervisor.Supervisor
+terminal.test_aggregate_recovery.AggregateRecovery
+terminal.test_l2_capture.CaptureTests
+terminal.tests.test_native_depth.NativeDepth

@@ -289,3 +289,30 @@ SOURCE_ACCOUNTING_OFFLINE_UI.md records contracts and browser/source confidence
 limits. Whole requirement statuses unchanged. Next: fresh clean-source packages,
 isolated installed-wheel consumers/contracts, final hashed receipts/report/matrix.
 No application/server/liveprovider/owner acceptance/deployment/trading/spend.
+
+### November20 final integrated source and package delivery
+
+Final tested runtime and verified implementation remote:
+9be1c0d8293444e517af67fe2a57fd1be599277c. Earlier recovered checkpoints:
+Kraken d9954196b711bfe94d4914d40f964343f9a06011;typedDRS
+8e467a5d35d6456b09370c18a2d892329383b2bc. All published before proceeding.
+967guardedPython,345frontend,TSC/Vite,9cross-language scripts,14nativefocused across
+5existing byte-equivalent configs,8frozen hashes and8buildtreeSDKconsumers pass.
+Fresh safe sdist1685trackedfiles+PKGINFO and defaultGCCwheel compiled/installed;
+8isolatedSDKconsumers,709source regressions,6contracts and148extractedsourceUItests
+pass. Additional709run explicitly forbids both sockets andappfactory. No failures
+or skips. Native identities/defaults/12workspaces preserved.
+Source/evidence hashes+54retainedreceipts:NOV20_DELIVERY_EVIDENCE.json and
+nov20-delivery-evidence/. ActualauthoredPythonexports retained;no realproviderdata.
+NOV20_DELIVERY_REPRODUCTION.md includes portable source/package/installed checks.
+Matrix reviewed individually:34COMPLETE/8PARTIAL/7BLOCKED/1N-A,0statuschanges.
+Engineering remains INCOMPLETE on November20 target date;no silentextension.
+Nextactivequeue:one source-specified cross-role/effective/complex-typed DRS/OIM
+slice;one issuer-corpus statement completeness milestone;one officialKraken/IEX
+protocol orprecise nativeposition/schema contract. External prerequisitesand
+minimum nextunits:NOV20_PARTIAL_ACCEPTANCE_REVIEW.md andblockerregister.
+Do not repeat recovered imports,V6scalarcubes,depth25/100 orpriorJSON/acquisition.
+Originalworktree,allinterruptedsourceandpriorpackages preserved. Final enclosing
+commit is evidence/docs only;resolve its remoteSHA fromGit,not testedsource labels.
+No application/server/provider/deployment/trading/paidresource/owneracceptance.
+No active background work is promised beyond this session.

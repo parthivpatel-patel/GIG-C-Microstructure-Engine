@@ -1,0 +1,173 @@
+{
+  "application_started": false,
+  "archive": {
+    "bytes": 8761532,
+    "members": 1686,
+    "sha256": "0e1e6685fd3a5eaee26ad0061c77754b9412f34328863c18cc0f526979592924",
+    "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+    "tracked_files": 1685
+  },
+  "fresh_wheel_scope": "Default GCC compilation from verified clean extracted sdist; no full compiler matrix claim.",
+  "installed_consumers": {
+    "application_started": false,
+    "errors": 0,
+    "failures": 0,
+    "provider_requested": false,
+    "schema": "gig.installed_consumers.v1",
+    "sdk": "/workspace/gig-development/work/nov20-delivery/installed/gig_microstructure/__init__.py",
+    "skipped": 0,
+    "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+    "tests": 8
+  },
+  "installed_contracts": {
+    "installed-accounting": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 224,
+      "cases": 7,
+      "provider_requested": false,
+      "schema": "gig.accounting_statement.offline_contract.v1"
+    },
+    "installed-calculation": {
+      "adversarial_rejections": 11,
+      "application_started": false,
+      "cases": 4,
+      "provider_requested": false,
+      "schema": "gig.calculation_report.contract.v1"
+    },
+    "installed-ingress": {
+      "adversarial_rejections": 23,
+      "ambiguous_previously_accepted": 6,
+      "application_started": false,
+      "cases": 6,
+      "provider_requested": false,
+      "schema": "gig.offline_json_ingress.contract.v1"
+    },
+    "installed-statements": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    },
+    "installed-v2": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "installed-vintages": {
+      "adversarial_rejections": 6,
+      "application_started": false,
+      "entries": 3,
+      "provider_requested": false,
+      "schema": "gig.xbrl.vintage_contract.v1"
+    }
+  },
+  "installed_source": {
+    "application_started": false,
+    "errors": 0,
+    "failures": 0,
+    "provider_requested": false,
+    "schema": "gig.installed_source_regressions.v1",
+    "sdk": "/workspace/gig-development/work/nov20-delivery/installed/gig_microstructure/__init__.py",
+    "selected_names": [
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_open_dimensions",
+      "terminal.stocks.test_xbrl_restriction_constraints",
+      "terminal.stocks.test_xbrl_calculation_intervals",
+      "terminal.stocks.test_xbrl_calculation_report",
+      "terminal.stocks.test_xbrl_calculation_product",
+      "terminal.stocks.test_xbrl_lineage",
+      "terminal.stocks.test_xbrl_typed_dimensions",
+      "terminal.stocks.test_xbrl_inherited_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.stocks.test_xbrl_statement_set",
+      "terminal.stocks.test_xbrl_negative_dimensions",
+      "terminal.stocks.test_xbrl_dimensional_calculation",
+      "terminal.stocks.test_python_json_ingress",
+      "terminal.stocks.test_history_json_ingress",
+      "terminal.stocks.test_xbrl_dts_source_audit",
+      "terminal.stocks.test_statement_set_source_acceptance",
+      "terminal.stocks.test_xbrl_negative_only_dimensions",
+      "terminal.stocks.test_inline_dts_source_audit",
+      "terminal.stocks.test_xbrl_accounting_relationships",
+      "terminal.stocks.test_xbrl_accounting_statements",
+      "terminal.providers.test_kraken_book_session",
+      "terminal.stocks.test_xbrl_typed_hypercubes",
+      "terminal.providers.test_kraken_depth_session",
+      "terminal.stocks.test_financial_intelligence_product"
+    ],
+    "skipped": 0,
+    "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+    "tests": 709
+  },
+  "installed_ui": {
+    "cancelled": 0,
+    "fail": 0,
+    "pass": 148,
+    "skipped": 0,
+    "tests": 148,
+    "todo": 0
+  },
+  "javascript_scope": "Existing locked JS dependencies linked into extracted source after full archive byte validation; no JS reinstall or browser launch. Actual Python exports came from extracted source with fresh installed SDK.",
+  "logs": {
+    "check-sdist.log": "3214c42253772d5979adbb48f97b1eb1f84e785b61a1f9da809110f6bb1da28d",
+    "install.log": "37ec715e5788f5977fbe6e81cf124c76e062d06f1417af0ebf45267033b712ef",
+    "installed-accounting.log": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f",
+    "installed-calculation.log": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736",
+    "installed-consumer.log": "3751cd53157476331a2d4593acb1488e7b1c1fb75664c7aa5921a0e787599056",
+    "installed-ingress.log": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b",
+    "installed-source-ui.log": "2d3b6df7a683d326c12b1ded33c62cd608a2a6e4b3b010d2a529ca91b4473be3",
+    "installed-source.log": "9d2ca2b006ea7577100a39891f9f787995837cd0b86a1d4caf05f9542ad84381",
+    "installed-statements.log": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a",
+    "installed-v2.log": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f",
+    "installed-vintages.log": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979",
+    "package-source.log": "5c0ba86c6a6348ce29eb4cd7d1a768f81f57f6ca99a4ad1739a597576d75f01b",
+    "sdist.log": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+    "wheel.log": "5901638dae516aafd25b8b352c500682e4b3cac60ef0979584cdd141196cb9d0"
+  },
+  "packages": {
+    "gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+      "bytes": 666813,
+      "sha256": "dc762b66c172dddd01999ad3354a0454717b7a2f6976bbe49c9fc7c009f7bba6"
+    },
+    "gig_microstructure-0.1.1.tar.gz": {
+      "bytes": 8761532,
+      "sha256": "0e1e6685fd3a5eaee26ad0061c77754b9412f34328863c18cc0f526979592924"
+    }
+  },
+  "provider_requested": false,
+  "schema": "gig.nov20.clean_source_packaging.v1",
+  "source": "9be1c0d8293444e517af67fe2a57fd1be599277c",
+  "spend_usd": 0
+}
