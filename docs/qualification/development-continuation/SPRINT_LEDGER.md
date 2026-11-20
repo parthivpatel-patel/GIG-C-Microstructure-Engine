@@ -258,3 +258,17 @@ unchanged.14new/80provider-native checks pass,including200changesPERSIDE inoneat
 native transaction. Contract:KRAKEN_DEPTH_SESSION.md;log:work/nov20-delivery/kraken.log.
 TypedV6 andUI/sourceadmission remainpending;commitonly verified packagepaths.
 No app/server/liveprovider/deployment/trading/spend/owneracceptance.
+
+### November20 recovered typed-DRS checkpoint
+
+DIRECT_CLOSED_TYPED_HYPERCUBE_V6 adds explicit opt-in direct, single-role, positive
+closed mixed scalar-typed/explicit cubes. Original DTS bodies are permission/hash
+checked and reconstructed; producer rejects unsupported interpretations. Collection
+batch atomicity and retained V6 proof admission are covered; typed facts never
+become consolidated financial metrics. Focused33 tests independently rerun and pass
+(work/nov20-delivery/typed-drs.log); related259 tests pass in recovered agent log.
+Ten V1-V5 artifacts/selected outputs canonical-identical to f7813d7 baseline.
+No native source/default change. Full DRS/provider/owner acceptance unclaimed.
+Contract and continuation limits: TYPED_HYPERCUBE_V6.md. Requirement statuses unchanged.
+Kraken preceding package remote verified d9954196b711bfe94d4914d40f964343f9a06011.
+UI original-source admission/integration and broad qualification remain next.
