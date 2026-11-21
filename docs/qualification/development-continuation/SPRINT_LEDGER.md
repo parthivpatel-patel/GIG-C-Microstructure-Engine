@@ -434,3 +434,16 @@ Next:source-specifiedDRSV8,statementvintagecomparison,Kraken/nativecoordinator,
 passiveELFclosure andkeyboard/search fixes;thenintegrated/packagequalification.
 No reset/discard/forcepush,application/server/provider/deploy/trade/spend.
 November20targetwasnotfullymet;Nov21continuationdoesnotsilentlyextendacceptance.
+
+### Opt-in Kraken joint native session
+
+Nativecapsule remoteverified406f88f80a3f7ad802be30981983813add93d6c3.
+NewKrakenSessionCoordinator reusesbookdepth/publictrade-statuscontracts onrawframes
+underonecurrentcapturetoken/statusconnection;bothACKs andrequestedsnapshots gate
+financialeligibility. CandidatePython/native owners publishatomically viaexisting
+privateAggregatecheckpoint/restore; badCRC/lateframe/native/receipt failures fence
+views withoutpublishingpartialstate. DistinctL2/trade/sourcehash/clock scopesremain.
+32focusedrootrerun and141guardedprovider/native tests pass;capacity/1bytearena,
+revisionpreservation,200changes/side,stale/copiedtokens andactualnative tested.
+Contract:KRAKEN_NATIVE_JOINT_SESSION.md. Noexistingadapter/default/nativeformat change.
+MD07staysPARTIAL fortransportauthenticity,remainingprotocol andrealqualification.
