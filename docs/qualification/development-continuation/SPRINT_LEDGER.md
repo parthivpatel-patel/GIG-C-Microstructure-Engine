@@ -316,3 +316,20 @@ Originalworktree,allinterruptedsourceandpriorpackages preserved. Final enclosing
 commit is evidence/docs only;resolve its remoteSHA fromGit,not testedsource labels.
 No application/server/provider/deployment/trading/paidresource/owneracceptance.
 No active background work is promised beyond this session.
+
+## November20 100percent-directive interrupted package recovery
+
+Protectedremote7cd99d4afd98f58330732ecfc0fd0b3303c49a3b preserved. Executorworks;
+branch/status/staged/unstaged/untracked files/worktrees/logs inspected,remote fetched.
+Recovered nativecomplete-source extension,Krakenpublicsession andlocalinventory
+script. No appliedcross-role edits existed; newV7work isolated fromlegacyprofiles.
+Originalworktree untouched;no reset/discard/forcepush/blindpatch.
+
+Kraken standalone TRADE_STATUS_SESSION_V1 recovered/finished:29focused and86related
+provider tests pass;root independently reran29. Publicofficialtrade/statusdocs
+reviewed, nofeedaccess. Exactraw/callerhashauthority, generationnegotiation,50trade
+snapshot,wireorder/256dedup/conflicts,status/maintenancevalidation andfences.
+Existingbookadapter/defaults/native unchanged;book/nativecoupling andrealprovider
+qualification remain explicit gaps. Contract:KRAKEN_TRADE_STATUS_SESSION.md.
+Native/SDKcompletion,typedV7,localinventory/authority evidence remainpending.
+All50statusesunchanged. Noapplication/server/providerconnection/deployment/trade/spend.
