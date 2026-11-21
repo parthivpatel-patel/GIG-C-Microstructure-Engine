@@ -1,0 +1,635 @@
+{
+  "schema": "gig.nov21.engineering.authored_comparison_variants.v1",
+  "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "full_generated_file": {
+    "name": "installed-comparison-exports.log",
+    "bytes": 4785906,
+    "sha256": "bb9fd0ffe9329cb8f30cb8efa526f1108e07cbf593ffb88938b3ec7ff0c74ffb",
+    "retained_in_work": true
+  },
+  "variants": [
+    {
+      "name": "changed",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "d9d804a7f6b63c1aceb139eaef248735cfa105e96eea5d7c18f58a5517f648c6",
+      "collection_sha256": "dcc48eff96f4e16a4d26242b21b4f57b4808a95319216aff8083f62cc6dec28c",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d76a15cfc8d535640fc35fd000efa05e42d97670496c0c8656fae42ba9c72f79",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "cb07874ad42463cd62e75370fe06696cc7a9a9028967af8b51a6a04b96a7f909",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "2972ec2e656675d94c1f54f9ef67eee41d57ac8863aedcce304c146d2fcd734d",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_CHANGED": 2,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 8
+      }
+    },
+    {
+      "name": "unchanged",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "ab7495dc79708901f6fffab7c91ccf536697b047c3a80b437b83e982c93af7c7",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "2cb548e1017a22306a438a76567cca16cefa3f30ecc8e31d91e553cf50612437",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 10
+      }
+    },
+    {
+      "name": "missing",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "47c4a8fef6d0c36a5d2f4068bc4719f042ca8a14e799b658f46582335a581dde",
+      "collection_sha256": "9d1a381664fee77bcd1037e10b002ec553da760c3c1ff8fdd98ac59009f972e3",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "a2eed2ed1ac9cfd711fa1fc44ec5faec7b0f5f47702d4ba846bfa6593fde0027",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "defb182418170eb3e575811cc94176e03fd55af63db8931357851980fec8d057",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "7744de6f598a3a9f5d2c46713b795f39ac4d95e3ad0f6ca2ec541c98b2b92f4c",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "CURRENT_SOURCE_ROW_MISSING": 1,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 9
+      }
+    },
+    {
+      "name": "conflict",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "51d3f842a3e9b83883d4048430708f5060f0f8ee5d3ab5fad85ff6f0f3e97341",
+      "collection_sha256": "1011231397ae330ac579753d4664918eba29ee8526f95392012d26ea00ecf729",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "0030fe5e92a5638ad901f56b22221d992509fb9fcbe249004ff97c8cf5f3bceb",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "6c6f39664bf4595da863b66549bcb697c7a4e6d5bda3b094d0b3cf23670e481a",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "fd1a8fba219ee11b48198704f32dcbca3fd4fd1c79f18e1ce631218fbea2a39d",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "CONFLICTING_SOURCE_ROW": 1,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 9
+      }
+    },
+    {
+      "name": "unit",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "f32431e9e4313885e0fced7d85357e59c8a4a83d59969b2bf4caca6ab971f586",
+      "collection_sha256": "71a07a2a0325d25d6ae32a9e6a86b2d52c339ea8fda4477ba4dabc4bf65bfedb",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "6fc9a64b916982ff8a6f7e6f45b36b5db0f922026818276b33c65d87e823fe4c",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "599985899685ccdc0057e86e4ecc6ba93e1a6bc0dced7996b567e883c90928eb",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "f4ae1b369a89085e16ce5b3d8326da5231a559345246702036efce75155c959e",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "INCOMPATIBLE_SOURCE_UNIT": 10
+      }
+    },
+    {
+      "name": "context",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "6f5ede0cbf033e10bb38cbfe8c78ee432289972e60908d005727da53245ff83a",
+      "collection_sha256": "89e17846086fdb61be34340268f7acdb813ff04e4be413bca31dbfcf6b6f1d4d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "8955cca552d2d547472e9c2be9faf66ca909af548587a3aa58577c8e9cd7c428",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "180e49b9d5d48d4f4317d037db428eb38dd30a22548d6f349f318153610f1823",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "4408d4aea932fd5bc5012a5d72a13f10cb0f89ea63a56038d7d7f55f5c2a1ee2",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "INCOMPATIBLE_SOURCE_CONTEXT": 10
+      }
+    },
+    {
+      "name": "calculation",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "47a21b69cf7efe13065b67a426e5d8a3480465dc90aed8af3fb4f7a560d4f932",
+      "collection_sha256": "3b39a942ce75007f344350b11c0f52cd04b09fa80ff59580d30655a6f325f90c",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "a3ad2a6d83a6af8c0135c2b9dbeb990f0ea0b1b174ee5b1fbaa78e6ea4a864cb",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "d8966c20305677c908b1213cb540705debc5eab10b2b1747b35b4e4cda94c570",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "3321bd7db0847c0be26c93044f0146b49e45ce7c7bf314f226c8ad649cc402c7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "CALCULATION_INCONSISTENT": 3,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 7
+      }
+    },
+    {
+      "name": "unavailable",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "bb958f2356f09e6f57f7a3c4b9b50b90337829db8a2b518378882285328c498f",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-01-01T00:00:00Z",
+          "cutoff_ns": "1704067200000000000",
+          "source_packet_sha256": "8c8e8e79e42df2259095d1af9e00583f59cf6a6701094e9c1d1fb210cf381d85",
+          "accession": null,
+          "original_source_sha256": null,
+          "source_origin": null
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "2cb548e1017a22306a438a76567cca16cefa3f30ecc8e31d91e553cf50612437",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 2,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 10
+      }
+    },
+    {
+      "name": "single",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "8aceea871fa5cd54f587d65c4ae39b75a3fb6b8eec27b38c224d27fb7f33fdf7",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 0,
+      "row_status_counts": {}
+    },
+    {
+      "name": "same_filing",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "bb00319c750954504b02aed27f62febb266897cddfd5286cfb75f7beef36c2bf",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-05T00:00:00Z",
+          "cutoff_ns": "1707091200000000000",
+          "source_packet_sha256": "be5d61d4eba5cc5d25ac30c6b95be11a8c0880c6378a761f36b1581302b355dc",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 10
+      }
+    },
+    {
+      "name": "declaration",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "a6cc9e4f32162643b0ca323d52eb829a58e0aa7665af966ec33dee59b44f1ad3",
+      "collection_sha256": "3eb23848e8e5012401147e30ad04076fb4fada6d39f6eb919aa54dc5c5b4f3be",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "f23ff3cc040d809e54bdb37af3c2f9b0f85c76e5c5c0e4682dfae2fe0026cca0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "10c257b20c7ac291bd2f145578b1c5d10f4050b53645eb76fa45883f8031c739",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 9,
+        "SOURCE_DECLARATION_CHANGED": 1
+      }
+    },
+    {
+      "name": "relationship",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "db369d629c38f5a9d94a29a7c915346b817cf1ffec8f97ba5158b26b8591231d",
+      "collection_sha256": "5feaa59df6ee7ff398318eda77364f00918125489226132336fcd2a39ddcbf2a",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "5702cf74a66ba0ee23018f5d12272791a22baef7574d1ca592ff2ae1cbfde801",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "ffa09a36128357dd54b19bea8143de4db5f43acb998c16543e4ec30c4312185e",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "ACCOUNTING_RELATIONSHIP_CHANGED": 2,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 8
+      }
+    },
+    {
+      "name": "requires",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "232c1ce0733ca4b065eb1120ad72a919638924bd91e64f283914bf88f3e15506",
+      "collection_sha256": "e476b5a8da2f6150415e46b6af1b601f1bb16ff87fe1dfd5fd3fea27a8f20dd4",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "233cd2ebf6c2250452b00503dc3f80097d3c6ec46af1ea875e29568c5a927901",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "62aa4efb35da64d1bf72938cf772e719b6a46cbec8e967cb6aebf1855c85c2bf",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "e80a547aaa612002ff252efe7862bd694b356ed519bd3d04cc89810ee1ec06ab",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "ACCOUNTING_REQUIREMENT_UNSATISFIED": 1,
+        "CURRENT_SOURCE_ROW_MISSING": 1,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 8
+      }
+    },
+    {
+      "name": "unavailable_role",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "82e1cec2576a0b50e0e2b2d1116796fa440afa5352d42c12bd714584129734b5",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "73a7d757435dd8df9dee3eb5db121011b95f2e46b0a2c1247f0925e5803a44a9",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 7
+      }
+    },
+    {
+      "name": "changed_role",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "212198fe2c82fccff732f5706694f20e7c2836418cdb6db7ce8e0f5029e90030",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "cda7314160f93a7baf188b77a1c565e26d25fe69525ea8880e2f5c21ff4bed9f",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 6,
+        "ROLE_BINDING_CHANGED": 4
+      }
+    },
+    {
+      "name": "ambiguous_aspects",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "274e46e2e6a90e28c2ffd105c59021d021fd58329ebb15054adfc47f8735a131",
+      "collection_sha256": "5f323174e8b44f87a75188492fe428e914797824c1edf08a4bb515cea6be3f3e",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "4db805b08c9b6a955d7e8afbf79cd1593e3d4d8fd075ae85d10017c6b89513ad",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "5d9db23195fdd27c58e35ea7a3be653e40727404276bcc2306165a361381dd74",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "362fe28a61e57b74622d22ca2e7602b629927dc489c071f313d5fc9e6a3edd4b",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "AMBIGUOUS_SOURCE_ASPECTS": 1,
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 9
+      }
+    },
+    {
+      "name": "type_path",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "28fdf49f310e45d6fc481bb3658fc9e2a90ca286d6a3e81f70df397f49614757",
+      "collection_sha256": "c2958f195b2bcf1b4d36130bf5108cb5a2192d88c591a016f52a907d3a74aaf1",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "bb68c4970349b1841ef471b5e750c48db7ce28eaa6110227bdfe1002eb329ed7",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "6be56d06a73c8254dc25d5cb5669d3f232edcb4968efa7f09927c3991b0bced9",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 1,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 9,
+        "SOURCE_DECLARATION_CHANGED": 1
+      }
+    },
+    {
+      "name": "eight_cutoffs",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "a4c0b3353e0b7050674dadea08437d67cd5b7a6e201ea4b144235be7dcfc263c",
+      "collection_sha256": "16c79615ab4fe19ea762508385472cbad947b8d191a76fafef423f732140095b",
+      "cutoffs": [
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "9d9287cfa1a1829aebeffee84cc92604a2c200dc2d6b16e2f3dddb085054e9f0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000002Z",
+          "cutoff_ns": "1706788800000000002",
+          "source_packet_sha256": "e84ec51a02e4314e4f885aa4269672a0f6d88bee51e8eacd91191a8b245ebda0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000003Z",
+          "cutoff_ns": "1706788800000000003",
+          "source_packet_sha256": "a699d4dc5be6a4c82ebee3a731df50993fd8930e2492105297757552b01a38cf",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000004Z",
+          "cutoff_ns": "1706788800000000004",
+          "source_packet_sha256": "2511682591c387684562c857ebf9277e20642a9202d94440b29ae82060112bd3",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000005Z",
+          "cutoff_ns": "1706788800000000005",
+          "source_packet_sha256": "73c4bcc2835f87b521a7bb1d95cb664edc35f67a003e035f689f8e0dafaabe06",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000006Z",
+          "cutoff_ns": "1706788800000000006",
+          "source_packet_sha256": "d1d09ab9eba329d2ba7275a24300a12a8a23384bd92d8a589b540639fa4bb8fc",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000007Z",
+          "cutoff_ns": "1706788800000000007",
+          "source_packet_sha256": "cbb9b57f7047adef0ab8efa3a0895f3f141b2a5a6e5053ee2680b35179431f46",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000008Z",
+          "cutoff_ns": "1706788800000000008",
+          "source_packet_sha256": "76f38384f4e14ccc8590a8bb02278529207403c9cf3863b00140867a4bf9c4ee",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        }
+      ],
+      "adjacent_comparisons": 7,
+      "row_status_counts": {
+        "REPORTED_NUMERIC_VALUE_UNCHANGED": 70
+      }
+    },
+    {
+      "name": "missing_latest_originals",
+      "schema": "gig.backend.statement_vintage_comparison.v1",
+      "profile": "ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1",
+      "sha256": "ea4717d99f7217633ec841a4544559050fa13cdc407349bf52d4fadb5a24896e",
+      "collection_sha256": "29ac0d35a49e209605802a97107acecfade8fc9c61d729201dae4ac6d996cb1d",
+      "cutoffs": [
+        {
+          "as_of": "2024-01-01T00:00:00Z",
+          "cutoff_ns": "1704067200000000000",
+          "source_packet_sha256": "8c8e8e79e42df2259095d1af9e00583f59cf6a6701094e9c1d1fb210cf381d85",
+          "accession": null,
+          "original_source_sha256": null,
+          "source_origin": null
+        },
+        {
+          "as_of": "2024-02-01T12:00:00.000000001Z",
+          "cutoff_ns": "1706788800000000001",
+          "source_packet_sha256": "d5443600af7911e7d6bebdcf18f4065df8ec0c7842314c2d9c132e175271b5a0",
+          "accession": "0000000123-24-000001",
+          "original_source_sha256": "abd5a6a86eed35fb099bd107ae4fd3fa6481c0f6184ba9dce35eb8933faf9bd7",
+          "source_origin": "HISTORICAL_SYNTHETIC"
+        },
+        {
+          "as_of": "2024-02-10T12:00:00Z",
+          "cutoff_ns": "1707566400000000000",
+          "source_packet_sha256": "102fa150c428e7069f99f7e1684872543937e408cc770cbf06ce14b264e1b951",
+          "accession": "0000000123-24-000002",
+          "original_source_sha256": null,
+          "source_origin": null
+        }
+      ],
+      "adjacent_comparisons": 2,
+      "row_status_counts": {}
+    }
+  ],
+  "example": {
+    "name": "authored-changed-comparison.json",
+    "bytes": 221306,
+    "sha256": "41da1465d5476f66a264ea70e29b6e9ce51bfb3a226336676baef69cda3f90f7",
+    "packet_sha256": "d9d804a7f6b63c1aceb139eaef248735cfa105e96eea5d7c18f58a5517f648c6"
+  },
+  "source_origin": "HISTORICAL_SYNTHETIC",
+  "provider_requested": false,
+  "independent_issuer_authentication": false
+}

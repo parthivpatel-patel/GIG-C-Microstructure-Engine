@@ -1,0 +1,149 @@
+{
+  "schema": "gig.actual_comparison_exports.receipt.v1",
+  "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "variants": [
+    {
+      "name": "changed",
+      "packet_sha256": "d9d804a7f6b63c1aceb139eaef248735cfa105e96eea5d7c18f58a5517f648c6",
+      "canonical_bytes": 221305,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "unchanged",
+      "packet_sha256": "ab7495dc79708901f6fffab7c91ccf536697b047c3a80b437b83e982c93af7c7",
+      "canonical_bytes": 221309,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "missing",
+      "packet_sha256": "47c4a8fef6d0c36a5d2f4068bc4719f042ca8a14e799b658f46582335a581dde",
+      "canonical_bytes": 217715,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "conflict",
+      "packet_sha256": "51d3f842a3e9b83883d4048430708f5060f0f8ee5d3ab5fad85ff6f0f3e97341",
+      "canonical_bytes": 221216,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "unit",
+      "packet_sha256": "f32431e9e4313885e0fced7d85357e59c8a4a83d59969b2bf4caca6ab971f586",
+      "canonical_bytes": 221288,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "context",
+      "packet_sha256": "6f5ede0cbf033e10bb38cbfe8c78ee432289972e60908d005727da53245ff83a",
+      "canonical_bytes": 221201,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "calculation",
+      "packet_sha256": "47a21b69cf7efe13065b67a426e5d8a3480465dc90aed8af3fb4f7a560d4f932",
+      "canonical_bytes": 221548,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "unavailable",
+      "packet_sha256": "bb958f2356f09e6f57f7a3c4b9b50b90337829db8a2b518378882285328c498f",
+      "canonical_bytes": 224511,
+      "entries": 3,
+      "comparisons": 2
+    },
+    {
+      "name": "single",
+      "packet_sha256": "8aceea871fa5cd54f587d65c4ae39b75a3fb6b8eec27b38c224d27fb7f33fdf7",
+      "canonical_bytes": 68743,
+      "entries": 1,
+      "comparisons": 0
+    },
+    {
+      "name": "same_filing",
+      "packet_sha256": "bb00319c750954504b02aed27f62febb266897cddfd5286cfb75f7beef36c2bf",
+      "canonical_bytes": 220692,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "declaration",
+      "packet_sha256": "a6cc9e4f32162643b0ca323d52eb829a58e0aa7665af966ec33dee59b44f1ad3",
+      "canonical_bytes": 221310,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "relationship",
+      "packet_sha256": "db369d629c38f5a9d94a29a7c915346b817cf1ffec8f97ba5158b26b8591231d",
+      "canonical_bytes": 221311,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "requires",
+      "packet_sha256": "232c1ce0733ca4b065eb1120ad72a919638924bd91e64f283914bf88f3e15506",
+      "canonical_bytes": 219856,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "unavailable_role",
+      "packet_sha256": "82e1cec2576a0b50e0e2b2d1116796fa440afa5352d42c12bd714584129734b5",
+      "canonical_bytes": 186567,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "changed_role",
+      "packet_sha256": "212198fe2c82fccff732f5706694f20e7c2836418cdb6db7ce8e0f5029e90030",
+      "canonical_bytes": 218396,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "ambiguous_aspects",
+      "packet_sha256": "274e46e2e6a90e28c2ffd105c59021d021fd58329ebb15054adfc47f8735a131",
+      "canonical_bytes": 226532,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "type_path",
+      "packet_sha256": "28fdf49f310e45d6fc481bb3658fc9e2a90ca286d6a3e81f70df397f49614757",
+      "canonical_bytes": 222266,
+      "entries": 2,
+      "comparisons": 1
+    },
+    {
+      "name": "eight_cutoffs",
+      "packet_sha256": "a4c0b3353e0b7050674dadea08437d67cd5b7a6e201ea4b144235be7dcfc263c",
+      "canonical_bytes": 1132602,
+      "entries": 8,
+      "comparisons": 7
+    },
+    {
+      "name": "missing_latest_originals",
+      "packet_sha256": "ea4717d99f7217633ec841a4544559050fa13cdc407349bf52d4fadb5a24896e",
+      "canonical_bytes": 77219,
+      "entries": 3,
+      "comparisons": 2
+    }
+  ],
+  "raw_export_log": {
+    "path": "work/nov21-engineering-packaging/installed-comparison-exports.log",
+    "bytes": 4785906,
+    "sha256": "bb9fd0ffe9329cb8f30cb8efa526f1108e07cbf593ffb88938b3ec7ff0c74ffb",
+    "preserved_in_workspace": true,
+    "retained_in_git": false,
+    "reason": "4.8 MB deterministic duplicate fixture output;generator and all variant identities retained,plus one actual packet"
+  },
+  "source_origin": "HISTORICAL_SYNTHETIC",
+  "independent_issuer_authentication": false
+}

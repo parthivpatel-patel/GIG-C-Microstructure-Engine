@@ -1,0 +1,55 @@
+{
+  "schema": "gig.frozen_native_log_verification.v1",
+  "tested_implementation": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "configuration": "Clang 19.1.7 Debug; existing CMake cache; selective 81-action build, not clean rebuild; GIG_BUILD_PYTHON=OFF; streaming=ON; warnings_as_errors=ON",
+  "full_ctest_count": 149,
+  "passed_markers": 148,
+  "last_test_log": "work/nov21-engineering-continuation/clang-debug-LastTest.log",
+  "last_test_sha256": "2f56ac7d0100c37c33cd72cccb0d1f30326cc7dfdce2ba16e9325b836eac49d5",
+  "frozen_identity_count": 8,
+  "frozen_identities": {
+    "itch.validation_demo_reference": {
+      "expected": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "observed": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "passed": true
+    },
+    "itch.independent_reference": {
+      "expected": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "observed": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "passed": true
+    },
+    "itch.context_reference": {
+      "expected": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "observed": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "passed": true
+    },
+    "itch.streaming_reference": {
+      "expected": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "observed": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "passed": true
+    },
+    "itch.l3_reference": {
+      "expected": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "observed": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "passed": true
+    },
+    "itch.auction_reference": {
+      "expected": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "observed": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "passed": true
+    },
+    "itch.admin_reference": {
+      "expected": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "observed": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "passed": true
+    },
+    "itch.hy_reference": {
+      "expected": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "observed": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af",
+      "passed": true
+    }
+  },
+  "pass_reason_markers": 1,
+  "successful_test_sections": 149,
+  "ctest_exit_code": 0
+}

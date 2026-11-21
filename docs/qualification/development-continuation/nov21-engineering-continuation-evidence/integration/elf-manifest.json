@@ -1,0 +1,159 @@
+{
+  "artifacts": [
+    {
+      "id": "sdk",
+      "path": "build/recovery-release/python/gig_microstructure/_native.cpython-312-x86_64-linux-gnu.so",
+      "root": "workspace",
+      "sha256": "448a10f1ea81701c2a8287e5d6cf95d8fd7db2fb0aff0a423ff46780f270665e"
+    },
+    {
+      "id": "completion-capsule",
+      "path": "build/recovery-release/gig_itch_completion_capsule_tests",
+      "root": "workspace",
+      "sha256": "84556864aba66cc951243944f050cc68f780b32113beac1b1cb8fc95b086d11b"
+    },
+    {
+      "id": "zlib",
+      "path": "libz.so.1.3.1",
+      "root": "systemlib",
+      "sha256": "85590dd58edf5445e18bc7193e5ebc01ac5841f1ae187e97705a662e90c6421e"
+    },
+    {
+      "id": "cxx-runtime",
+      "path": "libstdc++.so.6.0.33",
+      "root": "systemlib",
+      "sha256": "972bb2a18b71140dab0240f8a1f68ab3fb1d56bcd4c4f824a91b70888faf5a00"
+    },
+    {
+      "id": "math",
+      "path": "libm.so.6",
+      "root": "systemlib",
+      "sha256": "6d567d53e895273ca14a1f9dc164fc6c8d39aed2f60aa46a733c2784228915f3"
+    },
+    {
+      "id": "gcc-runtime",
+      "path": "libgcc_s.so.1",
+      "root": "systemlib",
+      "sha256": "30c61ab012a4241bed033725a09b61f5fdd3bb7df95ee852d0b096520524c7af"
+    },
+    {
+      "id": "c-runtime",
+      "path": "libc.so.6",
+      "root": "systemlib",
+      "sha256": "9792e3cbb541c8f44c7acf5f14f4022ea62998ecc787d326bed4d8b6547dfd92"
+    },
+    {
+      "id": "loader",
+      "path": "ld-linux-x86-64.so.2",
+      "root": "systemlib",
+      "sha256": "c8438e4fde1934e61c88311633f00949ff645d5c04cdb8671fa3d78164d2f307"
+    }
+  ],
+  "bindings": [
+    {
+      "needed": "libz.so.1",
+      "requester": "sdk",
+      "target": "zlib"
+    },
+    {
+      "needed": "libstdc++.so.6",
+      "requester": "sdk",
+      "target": "cxx-runtime"
+    },
+    {
+      "needed": "libm.so.6",
+      "requester": "sdk",
+      "target": "math"
+    },
+    {
+      "needed": "libgcc_s.so.1",
+      "requester": "sdk",
+      "target": "gcc-runtime"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "sdk",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "libz.so.1",
+      "requester": "completion-capsule",
+      "target": "zlib"
+    },
+    {
+      "needed": "libstdc++.so.6",
+      "requester": "completion-capsule",
+      "target": "cxx-runtime"
+    },
+    {
+      "needed": "libgcc_s.so.1",
+      "requester": "completion-capsule",
+      "target": "gcc-runtime"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "completion-capsule",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "zlib",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "libm.so.6",
+      "requester": "cxx-runtime",
+      "target": "math"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "cxx-runtime",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "ld-linux-x86-64.so.2",
+      "requester": "cxx-runtime",
+      "target": "loader"
+    },
+    {
+      "needed": "libgcc_s.so.1",
+      "requester": "cxx-runtime",
+      "target": "gcc-runtime"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "math",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "ld-linux-x86-64.so.2",
+      "requester": "math",
+      "target": "loader"
+    },
+    {
+      "needed": "libc.so.6",
+      "requester": "gcc-runtime",
+      "target": "c-runtime"
+    },
+    {
+      "needed": "ld-linux-x86-64.so.2",
+      "requester": "gcc-runtime",
+      "target": "loader"
+    },
+    {
+      "needed": "ld-linux-x86-64.so.2",
+      "requester": "c-runtime",
+      "target": "loader"
+    }
+  ],
+  "root_artifacts": [
+    "sdk",
+    "completion-capsule"
+  ],
+  "roots": {
+    "systemlib": "/usr/lib/x86_64-linux-gnu",
+    "workspace": "/workspace/gig-development"
+  },
+  "schema": "gig.security.elf_dependency_manifest.v1",
+  "source_commit_label": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0"
+}

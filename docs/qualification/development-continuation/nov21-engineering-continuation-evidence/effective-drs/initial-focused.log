@@ -1,0 +1,30 @@
+...F...............F..........
+======================================================================
+FAIL: test_collection_original_dts_path_applies_v9_and_stays_immutable (terminal.stocks.test_xbrl_effective_cross_role.EffectiveCrossRole.test_collection_original_dts_path_applies_v9_and_stays_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_effective_cross_role.py", line 109, in test_collection_original_dts_path_applies_v9_and_stays_immutable
+    e=add_link(fixture(),edge(attrs='xd:targetRole="'+ROLES[4]+'" priority="2"'));before=copy.deepcopy(e);c=FilingCollection('0000320193');c.ingest_dts_batch([e],dimensional_profile=EFFECTIVE_CROSS_ROLE_PROFILE);out=next(iter(c._filings.values()));self.assertEqual(out['schema'],'gig.sec.xbrl.dimensional_instance.v9');self.assertEqual(e,before);self.assertFalse(selected_financials(out)['history']['assets']);self.assertEqual(c.at_acceptance_time('2024-02-02T00:00:00Z')['schema'],'gig.backend.company.v2')
+                                                                                                                                                                                                                                                                                                                                                                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'gig.sec.xbrl.acceptance.v1' != 'gig.backend.company.v2'
+- gig.sec.xbrl.acceptance.v1
++ gig.backend.company.v2
+
+
+======================================================================
+FAIL: test_observed_input_requires_approval_and_retained_permission (terminal.stocks.test_xbrl_effective_cross_role.EffectiveCrossRole.test_observed_input_requires_approval_and_retained_permission)
+----------------------------------------------------------------------
+terminal.stocks.xbrl_instance.XBRLError: xbrl_observed_source_url_required
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/gig-development/terminal/stocks/test_xbrl_effective_cross_role.py", line 118, in test_observed_input_requires_approval_and_retained_permission
+    with self.assertRaisesRegex(XBRLError,'not_approved'):derive(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "not_approved" does not match "xbrl_observed_source_url_required"
+
+----------------------------------------------------------------------
+Ran 30 tests in 1.193s
+
+FAILED (failures=2)

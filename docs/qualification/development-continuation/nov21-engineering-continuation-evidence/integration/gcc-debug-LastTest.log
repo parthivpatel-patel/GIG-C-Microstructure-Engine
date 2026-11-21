@@ -1,0 +1,2483 @@
+Start testing: Nov 21 18:20 EST
+----------------------------------------------------------
+42/149 Testing: itch.durable_checkpoint
+42/149 Test: itch.durable_checkpoint
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_durable_checkpoint_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.durable_checkpoint" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+durable_restore_failpoints=57
+durable_encode_failpoints=63
+checks=363 failures=0
+<end of output>
+Test time =   0.76 sec
+----------------------------------------------------------
+Test Passed.
+"itch.durable_checkpoint" end time: Nov 21 18:20 EST
+"itch.durable_checkpoint" time elapsed: 00:00:00
+----------------------------------------------------------
+
+41/149 Testing: itch.completed_source_capsule
+41/149 Test: itch.completed_source_capsule
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_completion_capsule_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.completed_source_capsule" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+capsule_container=binary_file restore_failpoints=57 encode_failpoints=58
+capsule_container=single_gzip restore_failpoints=61 encode_failpoints=62
+checks=535 failures=0
+<end of output>
+Test time =   1.67 sec
+----------------------------------------------------------
+Test Passed.
+"itch.completed_source_capsule" end time: Nov 21 18:20 EST
+"itch.completed_source_capsule" time elapsed: 00:00:01
+----------------------------------------------------------
+
+40/149 Testing: itch.source_hot_recovery
+40/149 Test: itch.source_hot_recovery
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_source_recovery_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.source_hot_recovery" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+source_restore_failpoints=67
+complete_source_failpoints=66
+checks=331 failures=0
+<end of output>
+Test time =   1.23 sec
+----------------------------------------------------------
+Test Passed.
+"itch.source_hot_recovery" end time: Nov 21 18:20 EST
+"itch.source_hot_recovery" time elapsed: 00:00:01
+----------------------------------------------------------
+
+2/149 Testing: itch.query_failure_atomicity
+2/149 Test: itch.query_failure_atomicity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_query_failure_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.query_failure_atomicity" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+checkpoint_allocation_sites=22 depth_allocation_sites=2 pmr_peak_bytes=429375 live_bytes_after_destroy=0
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"itch.query_failure_atomicity" end time: Nov 21 18:20 EST
+"itch.query_failure_atomicity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/149 Testing: itch.validation_demo_reference
+3/149 Test: itch.validation_demo_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_validation_demo.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_validation_demo"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.validation_demo_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+PASS: P1I independent end-to-end scenarios=4 repeated_runs=4 negative_controls=0 cli_controls=10 canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520
+<end of output>
+Test time =   0.43 sec
+----------------------------------------------------------
+Test Passed.
+"itch.validation_demo_reference" end time: Nov 21 18:20 EST
+"itch.validation_demo_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/149 Testing: itch.validation_demo_negative_controls
+4/149 Test: itch.validation_demo_negative_controls
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_validation_demo.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_validation_demo" "--negative-controls"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.validation_demo_negative_controls" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+PASS: P1I independent end-to-end scenarios=4 repeated_runs=4 negative_controls=17 cli_controls=10 canonical_sha256=4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520
+<end of output>
+Test time =   0.66 sec
+----------------------------------------------------------
+Test Passed.
+"itch.validation_demo_negative_controls" end time: Nov 21 18:20 EST
+"itch.validation_demo_negative_controls" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/149 Testing: itch.framer_basic
+5/149 Test: itch.framer_basic
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_binary_file_tests" "basic"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.framer_basic" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+BinaryFile basic passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.framer_basic" end time: Nov 21 18:20 EST
+"itch.framer_basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/149 Testing: itch.framer_errors
+6/149 Test: itch.framer_errors
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_binary_file_tests" "errors"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.framer_errors" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+BinaryFile errors passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.framer_errors" end time: Nov 21 18:20 EST
+"itch.framer_errors" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/149 Testing: itch.framer_limits
+7/149 Test: itch.framer_limits
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_binary_file_tests" "limits"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.framer_limits" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+BinaryFile limits passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.framer_limits" end time: Nov 21 18:20 EST
+"itch.framer_limits" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/149 Testing: itch.framer_allocation
+8/149 Test: itch.framer_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_binary_file_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.framer_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+BinaryFile allocation passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.framer_allocation" end time: Nov 21 18:20 EST
+"itch.framer_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/149 Testing: itch.framer_properties
+9/149 Test: itch.framer_properties
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_binary_file_tests" "properties"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.framer_properties" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+BinaryFile properties passed
+<end of output>
+Test time =   0.22 sec
+----------------------------------------------------------
+Test Passed.
+"itch.framer_properties" end time: Nov 21 18:20 EST
+"itch.framer_properties" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/149 Testing: itch.decoder_contracts
+10/149 Test: itch.decoder_contracts
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_decoder_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.decoder_contracts" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+sizeof DecodedRecord=304 Header=16 Message=48
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.decoder_contracts" end time: Nov 21 18:20 EST
+"itch.decoder_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/149 Testing: itch.independent_reference
+11/149 Test: itch.independent_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_reference_driver"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.independent_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+PASS independent ITCH oracle: 10000 cases; seed=1729; canonical_sha256=142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e
+coverage: valid=1585; framing=412; enum_sweep=1024; numeric=17; negative=398; adversarial=6564; no external data
+<end of output>
+Test time =   1.36 sec
+----------------------------------------------------------
+Test Passed.
+"itch.independent_reference" end time: Nov 21 18:20 EST
+"itch.independent_reference" time elapsed: 00:00:01
+----------------------------------------------------------
+
+12/149 Testing: itch.oracle_negative_control
+12/149 Test: itch.oracle_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_reference_driver" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.oracle_negative_control" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+REJECTED wrong-endian: first divergence row=0 label=control-A field=4 expected='6618611909121' actual='1108152157446'
+REJECTED wrong-field-offset: first divergence row=0 label=control-A field=5 expected='144964032628459586' actual='72623859790382856'
+REJECTED wrong-quantity: first divergence row=0 label=control-A field=7 expected='16909061' actual='16909060'
+REJECTED wrong-row-alignment: first divergence row=0 label=control-A field=1 expected='69' actual='65'
+PASS T05 oracle negative controls: 4/4 rejected; correct baseline accepted
+<end of output>
+Test time =   0.29 sec
+----------------------------------------------------------
+Test Passed.
+"itch.oracle_negative_control" end time: Nov 21 18:20 EST
+"itch.oracle_negative_control" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/149 Testing: itch.context_lifecycle
+13/149 Test: itch.context_lifecycle
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "lifecycle"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_lifecycle" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context lifecycle passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_lifecycle" end time: Nov 21 18:20 EST
+"itch.context_lifecycle" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/149 Testing: itch.context_identity
+14/149 Test: itch.context_identity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "identity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_identity" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context identity passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_identity" end time: Nov 21 18:20 EST
+"itch.context_identity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/149 Testing: itch.context_observations
+15/149 Test: itch.context_observations
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "observations"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_observations" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context observations passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_observations" end time: Nov 21 18:20 EST
+"itch.context_observations" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/149 Testing: itch.context_policies
+16/149 Test: itch.context_policies
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "policies"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_policies" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context policies passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_policies" end time: Nov 21 18:20 EST
+"itch.context_policies" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/149 Testing: itch.context_limits
+17/149 Test: itch.context_limits
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "limits"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_limits" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context limits passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_limits" end time: Nov 21 18:20 EST
+"itch.context_limits" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/149 Testing: itch.context_allocation
+18/149 Test: itch.context_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context allocation passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_allocation" end time: Nov 21 18:20 EST
+"itch.context_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/149 Testing: itch.context_numeric
+19/149 Test: itch.context_numeric
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "numeric"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_numeric" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context numeric passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_numeric" end time: Nov 21 18:20 EST
+"itch.context_numeric" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/149 Testing: itch.context_provenance
+20/149 Test: itch.context_provenance
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_tests" "provenance"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_provenance" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+context provenance passed; OrderState=56 MatchState=16 NormalizedRecord=1064
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_provenance" end time: Nov 21 18:20 EST
+"itch.context_provenance" time elapsed: 00:00:00
+----------------------------------------------------------
+
+1/149 Testing: evidence.integrity_contracts
+1/149 Test: evidence.integrity_contracts
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/tests/test_validation_evidence.py"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"evidence.integrity_contracts" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+...............................................
+----------------------------------------------------------------------
+Ran 47 tests in 7.398s
+
+OK
+<end of output>
+Test time =   7.74 sec
+----------------------------------------------------------
+Test Passed.
+"evidence.integrity_contracts" end time: Nov 21 18:20 EST
+"evidence.integrity_contracts" time elapsed: 00:00:07
+----------------------------------------------------------
+
+21/149 Testing: itch.context_reference
+21/149 Test: itch.context_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_context_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_reference_driver"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+PASS context independent oracle: sessions=515 events=12104 randomized_mutations=10000 seed=5255494 canonical_sha256=58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e
+<end of output>
+Test time =   4.41 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_reference" end time: Nov 21 18:20 EST
+"itch.context_reference" time elapsed: 00:00:04
+----------------------------------------------------------
+
+22/149 Testing: itch.context_oracle_negative_control
+22/149 Test: itch.context_oracle_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_context_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_reference_driver" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_oracle_negative_control" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+REJECTED wrong-remaining-after-execution first divergence event=5
+REJECTED accept-retired-reference-reuse first divergence event=11
+REJECTED broken-trade-restores-liquidity first divergence event=9
+REJECTED wrong-event-alignment first divergence event=4
+PASS context oracle negative controls: 4/4 rejected; correct baseline accepted
+<end of output>
+Test time =   0.24 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_oracle_negative_control" end time: Nov 21 18:20 EST
+"itch.context_oracle_negative_control" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/149 Testing: itch.auction_streaming
+23/149 Test: itch.auction_streaming
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_streaming_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_streaming" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+auction_streaming_allocation_fault_sites=33 authored_records=22 native_records=7 external_observations=15
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_streaming" end time: Nov 21 18:20 EST
+"itch.auction_streaming" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/149 Testing: itch.admin_streaming
+25/149 Test: itch.admin_streaming
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_streaming_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_streaming" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+admin_streaming_allocation_fault_sites=33 authored_records=23 native_records=7 external_observations=16
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_streaming" end time: Nov 21 18:20 EST
+"itch.admin_streaming" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/149 Testing: itch.hy_streaming
+26/149 Test: itch.hy_streaming
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_streaming_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_streaming" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+hy_streaming_allocation_fault_sites=33 authored_records=21 native_records=7 external_observations=14
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_streaming" end time: Nov 21 18:20 EST
+"itch.hy_streaming" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/149 Testing: itch.streaming_basic
+27/149 Test: itch.streaming_basic
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "basic"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_basic" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming basic passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_basic" end time: Nov 21 18:20 EST
+"itch.streaming_basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/149 Testing: itch.auction_stream_faults
+24/149 Test: itch.auction_stream_faults
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_streaming_tests" "faults"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_stream_faults" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+auction_fault_variants=10 fragmentation_schedules=20 independently_checked_prefix_counts=true
+exhaustive_gzip_prefixes=699 fragment_schedules=2097 independent_native_external_receipt_oracle=true
+<end of output>
+Test time =   4.45 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_stream_faults" end time: Nov 21 18:20 EST
+"itch.auction_stream_faults" time elapsed: 00:00:04
+----------------------------------------------------------
+
+29/149 Testing: itch.streaming_corruption
+29/149 Test: itch.streaming_corruption
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "corruption"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_corruption" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming corruption passed
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_corruption" end time: Nov 21 18:20 EST
+"itch.streaming_corruption" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/149 Testing: itch.streaming_semantics
+30/149 Test: itch.streaming_semantics
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "semantics"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_semantics" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming semantics passed
+<end of output>
+Test time =   0.26 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_semantics" end time: Nov 21 18:20 EST
+"itch.streaming_semantics" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/149 Testing: itch.streaming_budgets
+31/149 Test: itch.streaming_budgets
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "budgets"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_budgets" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming budgets passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_budgets" end time: Nov 21 18:20 EST
+"itch.streaming_budgets" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/149 Testing: itch.streaming_allocation
+32/149 Test: itch.streaming_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming_allocation_sites create=10 feed=23
+streaming allocation passed
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_allocation" end time: Nov 21 18:20 EST
+"itch.streaming_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+33/149 Testing: itch.streaming_restart
+33/149 Test: itch.streaming_restart
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "restart"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_restart" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming restart passed
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_restart" end time: Nov 21 18:20 EST
+"itch.streaming_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/149 Testing: itch.streaming_fragments
+28/149 Test: itch.streaming_fragments
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_tests" "fragments"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_fragments" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+streaming_fragment_and_cut_schedules=2119 source_bytes=507 compressed_bytes=530
+streaming fragments passed
+<end of output>
+Test time =   6.69 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_fragments" end time: Nov 21 18:20 EST
+"itch.streaming_fragments" time elapsed: 00:00:06
+----------------------------------------------------------
+
+35/149 Testing: itch.streaming_oracle_negative_control
+35/149 Test: itch.streaming_oracle_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_streaming_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_reference_driver" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_oracle_negative_control" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+negative_controls=6 rejected=6
+fixture_python_zlib_runtime=1.3.2
+streaming_fixtures=1 framed_source_records_across_fixtures=20 accepted_source_records_across_fixtures=20 categories={"valid":1} canonical_sha256=1dc0bbd419fd011aa2c98a15275f81c8a527dfc1e7a08d022c712b23263144a4
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_oracle_negative_control" end time: Nov 21 18:20 EST
+"itch.streaming_oracle_negative_control" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/149 Testing: itch.gzip_valid
+36/149 Test: itch.gzip_valid
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_gzip_tests" "valid"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.gzip_valid" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+gzip valid checks=13225 passed
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_valid" end time: Nov 21 18:20 EST
+"itch.gzip_valid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+34/149 Testing: itch.streaming_reference
+34/149 Test: itch.streaming_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_streaming_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_streaming_reference_driver"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.streaming_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+fixture_python_zlib_runtime=1.3.2
+streaming_fixtures=475 framed_source_records_across_fixtures=3993 accepted_source_records_across_fixtures=3989 categories={"bounded":205,"compressed_limit":1,"corrupt":12,"decompressed_limit":1,"expansion_limit":1,"framing":5,"header_limit":1,"identity":2,"semantic":4,"trailing":2,"truncated":205,"valid":36} canonical_sha256=be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5
+<end of output>
+Test time =   5.67 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_reference" end time: Nov 21 18:20 EST
+"itch.streaming_reference" time elapsed: 00:00:05
+----------------------------------------------------------
+
+38/149 Testing: itch.gzip_limits
+38/149 Test: itch.gzip_limits
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_gzip_tests" "limits"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.gzip_limits" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+gzip limits checks=2528 passed
+<end of output>
+Test time =   0.19 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_limits" end time: Nov 21 18:20 EST
+"itch.gzip_limits" time elapsed: 00:00:00
+----------------------------------------------------------
+
+39/149 Testing: itch.gzip_allocation
+39/149 Test: itch.gzip_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_gzip_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.gzip_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+gzip_reached_allocation_sites=4
+gzip allocation checks=168 passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_allocation" end time: Nov 21 18:20 EST
+"itch.gzip_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+43/149 Testing: itch.hot_context_checkpoint
+43/149 Test: itch.hot_context_checkpoint
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hot_checkpoint_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hot_context_checkpoint" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+hot_itch_restore_allocation_failpoints=46
+checks=221 failures=0
+<end of output>
+Test time =   1.08 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hot_context_checkpoint" end time: Nov 21 18:20 EST
+"itch.hot_context_checkpoint" time elapsed: 00:00:01
+----------------------------------------------------------
+
+44/149 Testing: itch.reconstruction_checkpoint
+44/149 Test: itch.reconstruction_checkpoint
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_restart_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_checkpoint" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+restart_allocation_failpoints=32
+SHA256 known vectors/padding and authenticated prefix restart tests passed
+<end of output>
+Test time =   0.40 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_checkpoint" end time: Nov 21 18:20 EST
+"itch.reconstruction_checkpoint" time elapsed: 00:00:00
+----------------------------------------------------------
+
+45/149 Testing: itch.reconstruction_sha256_reference
+45/149 Test: itch.reconstruction_sha256_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_sha256_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_restart_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_sha256_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+hashlib independent cases=139 canonical_sha256=99988a9776beb88a1d443916f248edbb980ae89b07cd367fd0e75dacc88d8d93
+<end of output>
+Test time =   0.31 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_sha256_reference" end time: Nov 21 18:20 EST
+"itch.reconstruction_sha256_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+37/149 Testing: itch.gzip_errors
+37/149 Test: itch.gzip_errors
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_gzip_tests" "errors"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.gzip_errors" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+gzip errors checks=162170 passed
+<end of output>
+Test time =   6.45 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_errors" end time: Nov 21 18:20 EST
+"itch.gzip_errors" time elapsed: 00:00:06
+----------------------------------------------------------
+
+47/149 Testing: itch.reconstruction_recovery_boundary
+47/149 Test: itch.reconstruction_recovery_boundary
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_framing_tests" "recovery_boundary"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_recovery_boundary" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+native_snapshot_exact64=passed over65=atomic_rejection adapter_complete_seed=unsupported
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_recovery_boundary" end time: Nov 21 18:20 EST
+"itch.reconstruction_recovery_boundary" time elapsed: 00:00:00
+----------------------------------------------------------
+
+48/149 Testing: itch.reconstruction_initialization
+48/149 Test: itch.reconstruction_initialization
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "initialization"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_initialization" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+seed_factory allocation_failure_positions=24 cleanup_live_bytes=0
+reconstruction initialization passed
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_initialization" end time: Nov 21 18:20 EST
+"itch.reconstruction_initialization" time elapsed: 00:00:00
+----------------------------------------------------------
+
+49/149 Testing: itch.reconstruction_golden
+49/149 Test: itch.reconstruction_golden
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "golden"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_golden" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction golden passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_golden" end time: Nov 21 18:20 EST
+"itch.reconstruction_golden" time elapsed: 00:00:00
+----------------------------------------------------------
+
+50/149 Testing: itch.reconstruction_observations
+50/149 Test: itch.reconstruction_observations
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "observations"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_observations" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction observations passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_observations" end time: Nov 21 18:20 EST
+"itch.reconstruction_observations" time elapsed: 00:00:00
+----------------------------------------------------------
+
+51/149 Testing: itch.reconstruction_multisymbol
+51/149 Test: itch.reconstruction_multisymbol
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "multisymbol"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_multisymbol" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction multisymbol passed
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_multisymbol" end time: Nov 21 18:20 EST
+"itch.reconstruction_multisymbol" time elapsed: 00:00:00
+----------------------------------------------------------
+
+52/149 Testing: itch.reconstruction_numeric
+52/149 Test: itch.reconstruction_numeric
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "numeric"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_numeric" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction numeric passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_numeric" end time: Nov 21 18:20 EST
+"itch.reconstruction_numeric" time elapsed: 00:00:00
+----------------------------------------------------------
+
+53/149 Testing: itch.reconstruction_atomicity
+53/149 Test: itch.reconstruction_atomicity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "atomicity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_atomicity" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction atomicity passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_atomicity" end time: Nov 21 18:20 EST
+"itch.reconstruction_atomicity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+54/149 Testing: itch.reconstruction_allocation
+54/149 Test: itch.reconstruction_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+allocation_sites direct_native_first_add=5 create=6 native_add=6 native_replace=5; armed_noalloc_native_E_X_external=3
+reconstruction allocation passed
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_allocation" end time: Nov 21 18:20 EST
+"itch.reconstruction_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+55/149 Testing: itch.reconstruction_budgets
+55/149 Test: itch.reconstruction_budgets
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "budgets"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_budgets" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction budgets passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_budgets" end time: Nov 21 18:20 EST
+"itch.reconstruction_budgets" time elapsed: 00:00:00
+----------------------------------------------------------
+
+56/149 Testing: itch.reconstruction_restart
+56/149 Test: itch.reconstruction_restart
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_tests" "restart"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_restart" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+reconstruction restart passed
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_restart" end time: Nov 21 18:20 EST
+"itch.reconstruction_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+46/149 Testing: itch.reconstruction_framing
+46/149 Test: itch.reconstruction_framing
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_reconstruction_framing_tests" "framing"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_framing" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+framing source_bytes=507 source_records=18 fragment_cut_schedules=2027 trailing_controls=1
+<end of output>
+Test time =   2.42 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_framing" end time: Nov 21 18:20 EST
+"itch.reconstruction_framing" time elapsed: 00:00:02
+----------------------------------------------------------
+
+58/149 Testing: itch.reconstruction_demo
+58/149 Test: itch.reconstruction_demo
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/run_synthetic_l3_demo.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_l3_reference_driver"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.reconstruction_demo" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+SYNTHETIC ONLY; authored empty start; fixture SHA256=4acea8683fc2f669451c5585e78a799c142f1cc4a3676a810de96f35f179ba81
+source=0 type=S outcome=external context=1 native=0 external=1
+source=1 type=R outcome=external context=2 native=0 external=2
+source=2 type=R outcome=external context=3 native=0 external=3
+source=3 type=A outcome=native context=4 native=1 external=3
+source=4 type=A outcome=native context=5 native=2 external=3
+source=5 type=A outcome=native context=6 native=3 external=3
+source=6 type=E outcome=native context=7 native=4 external=3
+source=7 type=X outcome=native context=8 native=5 external=3
+source=8 type=D outcome=native context=9 native=6 external=3
+source=9 type=U outcome=native context=10 native=7 external=3
+source=10 type=P outcome=external context=11 native=7 external=4
+source=11 type=Q outcome=external context=12 native=7 external=5
+source=12 type=B outcome=external context=13 native=7 external=6
+book=1 journal=6 revision=6 remaining=15
+  orders [id,side_ascii,ticks,lots,FIFO_ticket]=[[103, 66, 101, 15, 2]]
+  bids [ticks,lots,orders]=[[101, 15, 1]] asks=[]
+  ledger [added,cancelled,executed,discarded,recovered,replacement_in,replacement_out,total_in,total_out]=[30, 10, 4, 0, 0, 15, 16, 45, 30]
+book=2 journal=1 revision=1 remaining=20
+  orders [id,side_ascii,ticks,lots,FIFO_ticket]=[[201, 83, 200, 20, 0]]
+  bids [ticks,lots,orders]=[] asks=[[200, 20, 1]]
+  ledger [added,cancelled,executed,discarded,recovered,replacement_in,replacement_out,total_in,total_out]=[20, 0, 0, 0, 0, 0, 0, 20, 0]
+Independent every-event comparison passed. Source/session is an incomplete bounded synthetic prefix; no observed-market validation.
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_demo" end time: Nov 21 18:20 EST
+"itch.reconstruction_demo" time elapsed: 00:00:00
+----------------------------------------------------------
+
+59/149 Testing: itch.l3_oracle_negative_control
+59/149 Test: itch.l3_oracle_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_l3_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_l3_reference_driver" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.l3_oracle_negative_control" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+negative_controls=6 rejected=6
+sessions=32 source_candidates=186 rejected_candidates=25 seed=5255495 canonical_sha256=9b6eef506c280ffe84dba8dd64ee1761b372b5d5a68ea7c924a9393ea1a668e0
+<end of output>
+Test time =   0.63 sec
+----------------------------------------------------------
+Test Passed.
+"itch.l3_oracle_negative_control" end time: Nov 21 18:20 EST
+"itch.l3_oracle_negative_control" time elapsed: 00:00:00
+----------------------------------------------------------
+
+60/149 Testing: market_data.aggregate_depth
+60/149 Test: market_data.aggregate_depth
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_aggregate_depth_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"market_data.aggregate_depth" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+aggregate-depth:10000 independent transitions;2 injected failures;2 successful sweeps;exact metrics/sequence/atomicity/budgets pass
+<end of output>
+Test time =   0.64 sec
+----------------------------------------------------------
+Test Passed.
+"market_data.aggregate_depth" end time: Nov 21 18:20 EST
+"market_data.aggregate_depth" time elapsed: 00:00:00
+----------------------------------------------------------
+
+61/149 Testing: observed.readiness_contracts
+61/149 Test: observed.readiness_contracts
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/tests/test_observed_readiness.py" "/workspace/gig-development/build/master-gcc-debug/gig_lobster_tests" "/workspace/gig-development/build/master-gcc-debug/gig_lobster_validate"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"observed.readiness_contracts" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+lobster unknown-initialization/native subset/reference effect/allocation controls passed
+lobster authored parser/resource/atomicity checks passed
+{"canonical_sha256": "aa92cb56fa402ba4ee1c7aae0f1d4fb479839f3b08c85d7b728a1ceea4a8e3e8", "cases": 82, "observed_processed": false, "scope": "authored independent LOBSTER parser"}
+{"canonical_sha256": "9f3e7d3776c248cdf4636614a0385eb4a5cb2a43b0fd8fb74274971c178703ff", "full_l3_complete": false, "observed_processed": false, "scenarios": 12, "scope": "independent authored known-subset and observable reference effects", "source_rows": 32}
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.224s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.315s
+
+OK
+<end of output>
+Test time =   1.74 sec
+----------------------------------------------------------
+Test Passed.
+"observed.readiness_contracts" end time: Nov 21 18:20 EST
+"observed.readiness_contracts" time elapsed: 00:00:01
+----------------------------------------------------------
+
+62/149 Testing: itch.auction_wire
+62/149 Test: itch.auction_wire
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "wire"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_wire" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_wire" end time: Nov 21 18:20 EST
+"itch.auction_wire" time elapsed: 00:00:00
+----------------------------------------------------------
+
+63/149 Testing: itch.auction_context
+63/149 Test: itch.auction_context
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "context"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_context" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_context" end time: Nov 21 18:20 EST
+"itch.auction_context" time elapsed: 00:00:00
+----------------------------------------------------------
+
+64/149 Testing: itch.auction_integration
+64/149 Test: itch.auction_integration
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "integration"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_integration" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_integration" end time: Nov 21 18:20 EST
+"itch.auction_integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+65/149 Testing: itch.auction_allocation
+65/149 Test: itch.auction_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_allocation" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+auction_context_allocation_sites=3 observation_allocations=0 sizeof_message=48 sizeof_record=304
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_allocation" end time: Nov 21 18:20 EST
+"itch.auction_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+66/149 Testing: itch.auction_restart
+66/149 Test: itch.auction_restart
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "restart"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_restart" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_restart" end time: Nov 21 18:20 EST
+"itch.auction_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+67/149 Testing: itch.auction_reference
+67/149 Test: itch.auction_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_auction_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+AUCTION independent wire_cases=40129 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6
+<end of output>
+Test time =   6.13 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_reference" end time: Nov 21 18:21 EST
+"itch.auction_reference" time elapsed: 00:00:06
+----------------------------------------------------------
+
+68/149 Testing: itch.auction_reference_negative_control
+68/149 Test: itch.auction_reference_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_auction_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_auction_tests" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.auction_reference_negative_control" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+AUCTION independent wire_cases=40129 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=True canonical_sha256=76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6
+<end of output>
+Test time =   4.46 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_reference_negative_control" end time: Nov 21 18:21 EST
+"itch.auction_reference_negative_control" time elapsed: 00:00:04
+----------------------------------------------------------
+
+69/149 Testing: itch.admin_wire
+69/149 Test: itch.admin_wire
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "wire"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_wire" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_wire" end time: Nov 21 18:21 EST
+"itch.admin_wire" time elapsed: 00:00:00
+----------------------------------------------------------
+
+70/149 Testing: itch.admin_context
+70/149 Test: itch.admin_context
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "context"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_context" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_context" end time: Nov 21 18:21 EST
+"itch.admin_context" time elapsed: 00:00:00
+----------------------------------------------------------
+
+71/149 Testing: itch.admin_integration
+71/149 Test: itch.admin_integration
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "integration"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_integration" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_integration" end time: Nov 21 18:21 EST
+"itch.admin_integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+72/149 Testing: itch.admin_allocation
+72/149 Test: itch.admin_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_allocation" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+admin_context_allocation_sites=3 observation_allocations=0 sizeof_message=48 sizeof_record=304
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_allocation" end time: Nov 21 18:21 EST
+"itch.admin_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+73/149 Testing: itch.admin_restart
+73/149 Test: itch.admin_restart
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "restart"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_restart" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_restart" end time: Nov 21 18:21 EST
+"itch.admin_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+74/149 Testing: itch.admin_reference
+74/149 Test: itch.admin_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_admin_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+ADMIN independent wire_cases=25233 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=False canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03
+<end of output>
+Test time =   1.78 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_reference" end time: Nov 21 18:21 EST
+"itch.admin_reference" time elapsed: 00:00:01
+----------------------------------------------------------
+
+75/149 Testing: itch.admin_reference_negative_control
+75/149 Test: itch.admin_reference_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_admin_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_admin_tests" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.admin_reference_negative_control" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+ADMIN independent wire_cases=25233 numerical_candidates=10000 seed=731991 context_candidates=16960 sessions=320 negative_control=True canonical_sha256=87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03
+<end of output>
+Test time =   2.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_reference_negative_control" end time: Nov 21 18:21 EST
+"itch.admin_reference_negative_control" time elapsed: 00:00:02
+----------------------------------------------------------
+
+76/149 Testing: itch.hy_wire
+76/149 Test: itch.hy_wire
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "wire"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_wire" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_wire" end time: Nov 21 18:21 EST
+"itch.hy_wire" time elapsed: 00:00:00
+----------------------------------------------------------
+
+77/149 Testing: itch.hy_context
+77/149 Test: itch.hy_context
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "context"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_context" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_context" end time: Nov 21 18:21 EST
+"itch.hy_context" time elapsed: 00:00:00
+----------------------------------------------------------
+
+78/149 Testing: itch.hy_fragments
+78/149 Test: itch.hy_fragments
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "fragments"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_fragments" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_fragments" end time: Nov 21 18:21 EST
+"itch.hy_fragments" time elapsed: 00:00:00
+----------------------------------------------------------
+
+79/149 Testing: itch.hy_integration
+79/149 Test: itch.hy_integration
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "integration"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_integration" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_integration" end time: Nov 21 18:21 EST
+"itch.hy_integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+80/149 Testing: itch.hy_allocation
+80/149 Test: itch.hy_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_allocation" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+hy_creation_allocation_fault_sites=3 observation_allocations=0
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_allocation" end time: Nov 21 18:21 EST
+"itch.hy_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+81/149 Testing: itch.hy_restart
+81/149 Test: itch.hy_restart
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "restart"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_restart" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_restart" end time: Nov 21 18:21 EST
+"itch.hy_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+82/149 Testing: itch.hy_reference
+82/149 Test: itch.hy_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_hy_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+HY independent synthetic oracle decode_cases=8002 context_candidates=16000 sessions=320 seed=917717 negative_control=False canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af
+<end of output>
+Test time =   1.53 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_reference" end time: Nov 21 18:21 EST
+"itch.hy_reference" time elapsed: 00:00:01
+----------------------------------------------------------
+
+83/149 Testing: itch.hy_reference_negative_control
+83/149 Test: itch.hy_reference_negative_control
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_hy_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_hy_tests" "--negative-control"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.hy_reference_negative_control" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+HY independent synthetic oracle decode_cases=8002 context_candidates=16000 sessions=320 seed=917717 negative_control=True canonical_sha256=ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af
+<end of output>
+Test time =   2.51 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_reference_negative_control" end time: Nov 21 18:21 EST
+"itch.hy_reference_negative_control" time elapsed: 00:00:02
+----------------------------------------------------------
+
+84/149 Testing: itch.context_prepare
+84/149 Test: itch.context_prepare
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_itch_context_prepare_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.context_prepare" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+prepared context guards/ownership/allocation tests passed; token_bytes=1496
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.context_prepare" end time: Nov 21 18:21 EST
+"itch.context_prepare" time elapsed: 00:00:00
+----------------------------------------------------------
+
+85/149 Testing: execution.schedules
+85/149 Test: execution.schedules
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_execution_tests" "schedules"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"execution.schedules" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: schedules, 24 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"execution.schedules" end time: Nov 21 18:21 EST
+"execution.schedules" time elapsed: 00:00:00
+----------------------------------------------------------
+
+86/149 Testing: execution.costs
+86/149 Test: execution.costs
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_execution_tests" "costs"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"execution.costs" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: costs, 9 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"execution.costs" end time: Nov 21 18:21 EST
+"execution.costs" time elapsed: 00:00:00
+----------------------------------------------------------
+
+87/149 Testing: execution.integration
+87/149 Test: execution.integration
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_execution_tests" "integration"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"execution.integration" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+schedule fault positions=6
+integration fault positions=44
+PASS: integration, 101 checks
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"execution.integration" end time: Nov 21 18:21 EST
+"execution.integration" time elapsed: 00:00:00
+----------------------------------------------------------
+
+88/149 Testing: execution.cost_limits
+88/149 Test: execution.cost_limits
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_execution_tests" "cost_limits"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"execution.cost_limits" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: cost_limits, 26 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"execution.cost_limits" end time: Nov 21 18:21 EST
+"execution.cost_limits" time elapsed: 00:00:00
+----------------------------------------------------------
+
+89/149 Testing: execution.independent_reference
+89/149 Test: execution.independent_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_execution_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_execution_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"execution.independent_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: 5129 independent Fraction/integer arithmetic, apportionment, participation and cost cases; seed 6011
+<end of output>
+Test time =   0.86 sec
+----------------------------------------------------------
+Test Passed.
+"execution.independent_reference" end time: Nov 21 18:21 EST
+"execution.independent_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+90/149 Testing: simulation.basic
+90/149 Test: simulation.basic
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests" "basic"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.basic" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: basic, 6 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.basic" end time: Nov 21 18:21 EST
+"simulation.basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+91/149 Testing: simulation.tif
+91/149 Test: simulation.tif
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests" "tif"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.tif" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: tif, 8 checks
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.tif" end time: Nov 21 18:21 EST
+"simulation.tif" time elapsed: 00:00:00
+----------------------------------------------------------
+
+92/149 Testing: simulation.latency
+92/149 Test: simulation.latency
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests" "latency"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.latency" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: latency, 13 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.latency" end time: Nov 21 18:21 EST
+"simulation.latency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+93/149 Testing: simulation.faults
+93/149 Test: simulation.faults
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests" "faults"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.faults" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+real allocation failure positions=29
+PASS: faults, 96 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.faults" end time: Nov 21 18:21 EST
+"simulation.faults" time elapsed: 00:00:00
+----------------------------------------------------------
+
+94/149 Testing: simulation.reports
+94/149 Test: simulation.reports
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests" "reports"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.reports" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: reports, 14 checks
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.reports" end time: Nov 21 18:21 EST
+"simulation.reports" time elapsed: 00:00:00
+----------------------------------------------------------
+
+95/149 Testing: simulation.independent_reference
+95/149 Test: simulation.independent_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_simulation_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_simulation_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"simulation.independent_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: 1000 independent synthetic matching/cancel/client-report states; seeds 5,42,1729,2027
+<end of output>
+Test time =   2.15 sec
+----------------------------------------------------------
+Test Passed.
+"simulation.independent_reference" end time: Nov 21 18:21 EST
+"simulation.independent_reference" time elapsed: 00:00:02
+----------------------------------------------------------
+
+96/149 Testing: analytics.flow_contracts
+96/149 Test: analytics.flow_contracts
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_flow_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"analytics.flow_contracts" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: OFI, quote lag/tick signing, horizons, clock/order/gap/reset/age/sampling boundaries and exact hand references
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.flow_contracts" end time: Nov 21 18:21 EST
+"analytics.flow_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+97/149 Testing: analytics.flow_reference
+97/149 Test: analytics.flow_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_flow_metrics.py" "/workspace/gig-development/build/master-gcc-debug/gig_flow_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"analytics.flow_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: 2000 independent Fraction flow cases, seed 4099
+<end of output>
+Test time =   0.70 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.flow_reference" end time: Nov 21 18:21 EST
+"analytics.flow_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+98/149 Testing: analytics.book_contracts
+98/149 Test: analytics.book_contracts
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_metrics_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"analytics.book_contracts" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: hand calculations, missing states, malformed snapshots, exact boundaries, provenance and nonmutation
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.book_contracts" end time: Nov 21 18:21 EST
+"analytics.book_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+99/149 Testing: analytics.book_reference
+99/149 Test: analytics.book_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_book_metrics.py" "/workspace/gig-development/build/master-gcc-debug/gig_book_metrics_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"analytics.book_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: 2650 independent Fraction book metric cases, seed 3071
+<end of output>
+Test time =   0.89 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.book_reference" end time: Nov 21 18:21 EST
+"analytics.book_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+100/149 Testing: numeric.contracts
+100/149 Test: numeric.contracts
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_numeric_tests" "contracts"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"numeric.contracts" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+numeric contracts: 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"numeric.contracts" end time: Nov 21 18:21 EST
+"numeric.contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+101/149 Testing: numeric.independent_reference
+101/149 Test: numeric.independent_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_numeric_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_numeric_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"numeric.independent_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: 10624 independent integer/Fraction reference cases (seed 1729)
+<end of output>
+Test time =   0.31 sec
+----------------------------------------------------------
+Test Passed.
+"numeric.independent_reference" end time: Nov 21 18:21 EST
+"numeric.independent_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+102/149 Testing: benchmark.fixture_reference
+102/149 Test: benchmark.fixture_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_workload_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_workload_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"benchmark.fixture_reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS:16 fixture cases,4 seeds, counts1/16/512/2048; explicit fixed-width quantity-then-price reference
+<end of output>
+Test time =   3.59 sec
+----------------------------------------------------------
+Test Passed.
+"benchmark.fixture_reference" end time: Nov 21 18:21 EST
+"benchmark.fixture_reference" time elapsed: 00:00:03
+----------------------------------------------------------
+
+103/149 Testing: benchmark.compiler_metadata
+103/149 Test: benchmark.compiler_metadata
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/tests/test_benchmark_metadata.py"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"benchmark.compiler_metadata" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+test_missing_metadata_rejects_without_ambient_fallback (__main__.SelectedCompilerTests.test_missing_metadata_rejects_without_ambient_fallback) ... ok
+test_uses_selected_cache_compiler_with_spaces (__main__.SelectedCompilerTests.test_uses_selected_cache_compiler_with_spaces) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.016s
+
+OK
+<end of output>
+Test time =   0.33 sec
+----------------------------------------------------------
+Test Passed.
+"benchmark.compiler_metadata" end time: Nov 21 18:21 EST
+"benchmark.compiler_metadata" time elapsed: 00:00:00
+----------------------------------------------------------
+
+104/149 Testing: replay.hot_checkpoint
+104/149 Test: replay.hot_checkpoint
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_hot_checkpoint_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.hot_checkpoint" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+checks=98 failures=0
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"replay.hot_checkpoint" end time: Nov 21 18:21 EST
+"replay.hot_checkpoint" time elapsed: 00:00:00
+----------------------------------------------------------
+
+105/149 Testing: replay.config
+105/149 Test: replay.config
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "config"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.config" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+config: 8 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.config" end time: Nov 21 18:21 EST
+"replay.config" time elapsed: 00:00:00
+----------------------------------------------------------
+
+106/149 Testing: replay.continuity
+106/149 Test: replay.continuity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "continuity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.continuity" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+continuity: 5 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.continuity" end time: Nov 21 18:21 EST
+"replay.continuity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+107/149 Testing: replay.gaps
+107/149 Test: replay.gaps
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "gaps"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.gaps" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+gaps: 13 checks, 0 failures
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"replay.gaps" end time: Nov 21 18:21 EST
+"replay.gaps" time elapsed: 00:00:00
+----------------------------------------------------------
+
+108/149 Testing: replay.subevents
+108/149 Test: replay.subevents
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "subevents"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.subevents" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+subevents: 14 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.subevents" end time: Nov 21 18:21 EST
+"replay.subevents" time elapsed: 00:00:00
+----------------------------------------------------------
+
+109/149 Testing: replay.multistream
+109/149 Test: replay.multistream
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "multistream"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.multistream" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+multistream: 19 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.multistream" end time: Nov 21 18:21 EST
+"replay.multistream" time elapsed: 00:00:00
+----------------------------------------------------------
+
+110/149 Testing: replay.filtering
+110/149 Test: replay.filtering
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "filtering"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.filtering" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+filtering: 9 checks, 0 failures
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"replay.filtering" end time: Nov 21 18:21 EST
+"replay.filtering" time elapsed: 00:00:00
+----------------------------------------------------------
+
+111/149 Testing: replay.reset
+111/149 Test: replay.reset
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "reset"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.reset" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+reset: 11 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.reset" end time: Nov 21 18:21 EST
+"replay.reset" time elapsed: 00:00:00
+----------------------------------------------------------
+
+112/149 Testing: replay.recovery
+112/149 Test: replay.recovery
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "recovery"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.recovery" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+recovery: 13 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.recovery" end time: Nov 21 18:21 EST
+"replay.recovery" time elapsed: 00:00:00
+----------------------------------------------------------
+
+113/149 Testing: replay.atomicity
+113/149 Test: replay.atomicity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "atomicity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.atomicity" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+replay allocation failure sites=32
+atomicity: 124 checks, 0 failures
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"replay.atomicity" end time: Nov 21 18:21 EST
+"replay.atomicity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+114/149 Testing: replay.canonical
+114/149 Test: replay.canonical
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "canonical"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.canonical" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+canonical: 7 checks, 0 failures
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"replay.canonical" end time: Nov 21 18:21 EST
+"replay.canonical" time elapsed: 00:00:00
+----------------------------------------------------------
+
+115/149 Testing: replay.batch
+115/149 Test: replay.batch
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_replay_tests" "batch"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.batch" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+batch: 2 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.batch" end time: Nov 21 18:21 EST
+"replay.batch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+116/149 Testing: book.basic
+116/149 Test: book.basic
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "basic"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.basic" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+basic: 24 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"book.basic" end time: Nov 21 18:21 EST
+"book.basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+117/149 Testing: book.cancel_execute
+117/149 Test: book.cancel_execute
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "cancel_execute"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.cancel_execute" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+cancel_execute: 19 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"book.cancel_execute" end time: Nov 21 18:21 EST
+"book.cancel_execute" time elapsed: 00:00:00
+----------------------------------------------------------
+
+118/149 Testing: book.replace
+118/149 Test: book.replace
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "replace"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.replace" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+replace: 14 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"book.replace" end time: Nov 21 18:21 EST
+"book.replace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+119/149 Testing: book.boundaries
+119/149 Test: book.boundaries
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "boundaries"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.boundaries" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+boundaries: 18 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"book.boundaries" end time: Nov 21 18:21 EST
+"book.boundaries" time elapsed: 00:00:00
+----------------------------------------------------------
+
+120/149 Testing: book.recovery
+120/149 Test: book.recovery
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "recovery"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.recovery" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+recovery: 10 checks, 0 failures
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"book.recovery" end time: Nov 21 18:21 EST
+"book.recovery" time elapsed: 00:00:00
+----------------------------------------------------------
+
+121/149 Testing: book.allocations
+121/149 Test: book.allocations
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "allocations"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.allocations" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+allocation failure sites exercised=35
+allocations: 178 checks, 0 failures
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"book.allocations" end time: Nov 21 18:21 EST
+"book.allocations" time elapsed: 00:00:00
+----------------------------------------------------------
+
+122/149 Testing: book.reference
+122/149 Test: book.reference
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_book_tests" "reference"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"book.reference" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+reference operations=20000, seeds=1,42,1729,999
+reference: 1318396 checks, 0 failures
+<end of output>
+Test time =   9.51 sec
+----------------------------------------------------------
+Test Passed.
+"book.reference" end time: Nov 21 18:21 EST
+"book.reference" time elapsed: 00:00:09
+----------------------------------------------------------
+
+123/149 Testing: event.add
+123/149 Test: event.add
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "add"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.add" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+add: 516 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"event.add" end time: Nov 21 18:21 EST
+"event.add" time elapsed: 00:00:00
+----------------------------------------------------------
+
+124/149 Testing: event.cancel
+124/149 Test: event.cancel
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "cancel"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.cancel" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+cancel: 8 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.cancel" end time: Nov 21 18:21 EST
+"event.cancel" time elapsed: 00:00:00
+----------------------------------------------------------
+
+125/149 Testing: event.replace
+125/149 Test: event.replace
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "replace"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.replace" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+replace: 12 checks, 0 failures
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"event.replace" end time: Nov 21 18:21 EST
+"event.replace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+126/149 Testing: event.trade
+126/149 Test: event.trade
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "trade"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.trade" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+trade: 16 checks, 0 failures
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"event.trade" end time: Nov 21 18:21 EST
+"event.trade" time elapsed: 00:00:00
+----------------------------------------------------------
+
+127/149 Testing: event.quote
+127/149 Test: event.quote
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "quote"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.quote" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+quote: 16 checks, 0 failures
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"event.quote" end time: Nov 21 18:21 EST
+"event.quote" time elapsed: 00:00:00
+----------------------------------------------------------
+
+128/149 Testing: event.reset
+128/149 Test: event.reset
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "reset"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.reset" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+reset: 18 checks, 0 failures
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"event.reset" end time: Nov 21 18:21 EST
+"event.reset" time elapsed: 00:00:00
+----------------------------------------------------------
+
+129/149 Testing: event.session
+129/149 Test: event.session
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "session"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.session" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+session: 14 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.session" end time: Nov 21 18:21 EST
+"event.session" time elapsed: 00:00:00
+----------------------------------------------------------
+
+130/149 Testing: event.snapshot
+130/149 Test: event.snapshot
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "snapshot"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.snapshot" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+snapshot: 55 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.snapshot" end time: Nov 21 18:21 EST
+"event.snapshot" time elapsed: 00:00:00
+----------------------------------------------------------
+
+131/149 Testing: event.metadata
+131/149 Test: event.metadata
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "metadata"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.metadata" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+metadata: 39 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.metadata" end time: Nov 21 18:21 EST
+"event.metadata" time elapsed: 00:00:00
+----------------------------------------------------------
+
+132/149 Testing: event.timestamps
+132/149 Test: event.timestamps
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "timestamps"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.timestamps" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+timestamps: 15 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.timestamps" end time: Nov 21 18:21 EST
+"event.timestamps" time elapsed: 00:00:00
+----------------------------------------------------------
+
+133/149 Testing: event.provenance
+133/149 Test: event.provenance
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_event_tests" "provenance"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"event.provenance" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+owned MarketEvent bytes=12208
+provenance: 46 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"event.provenance" end time: Nov 21 18:21 EST
+"event.provenance" time elapsed: 00:00:00
+----------------------------------------------------------
+
+134/149 Testing: types.valid_buy
+134/149 Test: types.valid_buy
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "valid_buy"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.valid_buy" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: valid_buy
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"types.valid_buy" end time: Nov 21 18:21 EST
+"types.valid_buy" time elapsed: 00:00:00
+----------------------------------------------------------
+
+135/149 Testing: types.valid_sell
+135/149 Test: types.valid_sell
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "valid_sell"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.valid_sell" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: valid_sell
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.valid_sell" end time: Nov 21 18:21 EST
+"types.valid_sell" time elapsed: 00:00:00
+----------------------------------------------------------
+
+136/149 Testing: types.zero_id
+136/149 Test: types.zero_id
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "zero_id"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.zero_id" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: zero_id
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"types.zero_id" end time: Nov 21 18:21 EST
+"types.zero_id" time elapsed: 00:00:00
+----------------------------------------------------------
+
+137/149 Testing: types.zero_price
+137/149 Test: types.zero_price
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "zero_price"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.zero_price" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: zero_price
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.zero_price" end time: Nov 21 18:21 EST
+"types.zero_price" time elapsed: 00:00:00
+----------------------------------------------------------
+
+138/149 Testing: types.negative_price
+138/149 Test: types.negative_price
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "negative_price"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.negative_price" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: negative_price
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.negative_price" end time: Nov 21 18:21 EST
+"types.negative_price" time elapsed: 00:00:00
+----------------------------------------------------------
+
+139/149 Testing: types.zero_quantity
+139/149 Test: types.zero_quantity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "zero_quantity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.zero_quantity" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: zero_quantity
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.zero_quantity" end time: Nov 21 18:21 EST
+"types.zero_quantity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+140/149 Testing: types.zero_based_sequence
+140/149 Test: types.zero_based_sequence
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "zero_based_sequence"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.zero_based_sequence" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: zero_based_sequence
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"types.zero_based_sequence" end time: Nov 21 18:21 EST
+"types.zero_based_sequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+141/149 Testing: types.max_price
+141/149 Test: types.max_price
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "max_price"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.max_price" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: max_price
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"types.max_price" end time: Nov 21 18:21 EST
+"types.max_price" time elapsed: 00:00:00
+----------------------------------------------------------
+
+142/149 Testing: types.max_quantity
+142/149 Test: types.max_quantity
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "max_quantity"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.max_quantity" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: max_quantity
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.max_quantity" end time: Nov 21 18:21 EST
+"types.max_quantity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+143/149 Testing: types.max_id
+143/149 Test: types.max_id
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "max_id"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.max_id" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: max_id
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"types.max_id" end time: Nov 21 18:21 EST
+"types.max_id" time elapsed: 00:00:00
+----------------------------------------------------------
+
+144/149 Testing: types.max_sequence
+144/149 Test: types.max_sequence
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "max_sequence"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"types.max_sequence" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+PASS: max_sequence
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"types.max_sequence" end time: Nov 21 18:21 EST
+"types.max_sequence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+145/149 Testing: harness.failure_is_nonzero
+145/149 Test: harness.failure_is_nonzero
+Command: "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake" "-DPROGRAM=/workspace/gig-development/build/master-gcc-debug/gig_engine_tests" "-DARGUMENTS=deliberate_failure" "-DEXPECTED=FAIL: deliberate_failure" "-P" "/workspace/gig-development/cmake/ExpectFailure.cmake"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"harness.failure_is_nonzero" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+-- Verified expected exit 1: FAIL: deliberate_failure
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"harness.failure_is_nonzero" end time: Nov 21 18:21 EST
+"harness.failure_is_nonzero" time elapsed: 00:00:00
+----------------------------------------------------------
+
+146/149 Testing: demo.smoke
+146/149 Test: demo.smoke
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_engine_demo"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"demo.smoke" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+GIG C++ Microstructure Engine: Phase 2 deterministic replay ready
+SYNTHETIC fixture: orders=2 remaining_lots=30 journal_records=11
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[Phase 2 deterministic replay ready]
+"demo.smoke" end time: Nov 21 18:21 EST
+"demo.smoke" time elapsed: 00:00:00
+----------------------------------------------------------
+
+147/149 Testing: replay.journal_model
+147/149 Test: replay.journal_model
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_journal_storage_tests" "model"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.journal_model" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+journal_churn_cycles=32 accepted_events=4128 peak_pmr=4727264 allocations=35552 deallocations=35552
+<end of output>
+Test time =   0.88 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_model" end time: Nov 21 18:21 EST
+"replay.journal_model" time elapsed: 00:00:00
+----------------------------------------------------------
+
+148/149 Testing: replay.journal_allocation
+148/149 Test: replay.journal_allocation
+Command: "/workspace/gig-development/build/master-gcc-debug/gig_journal_storage_tests" "allocation"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.journal_allocation" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+reset allocation failure sites=16
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_allocation" end time: Nov 21 18:21 EST
+"replay.journal_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+149/149 Testing: replay.journal_preoptimization_equivalence
+149/149 Test: replay.journal_preoptimization_equivalence
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_journal_storage.py" "trace" "/workspace/gig-development/build/master-gcc-debug/gig_journal_storage_tests"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"replay.journal_preoptimization_equivalence" start time: Nov 21 18:21 EST
+Output:
+----------------------------------------------------------
+{"independent_state_model": "separately executed by model mode", "pre_optimization_equivalent": true, "prefixes": 128, "trace_sha256": "52e4a35f05f279891d10f25453196bfbd8fb38f5a0448224e681b70304e37fc8"}
+<end of output>
+Test time =   1.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_preoptimization_equivalence" end time: Nov 21 18:21 EST
+"replay.journal_preoptimization_equivalence" time elapsed: 00:00:01
+----------------------------------------------------------
+
+57/149 Testing: itch.l3_reference
+57/149 Test: itch.l3_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_itch_l3_reference.py" "/workspace/gig-development/build/master-gcc-debug/gig_itch_l3_reference_driver"
+Directory: /workspace/gig-development/build/master-gcc-debug
+"itch.l3_reference" start time: Nov 21 18:20 EST
+Output:
+----------------------------------------------------------
+{"candidates": 2228, "canonical_sha256": "d33e05d6a6143aec86a2b04ab6d6629ee071ee7164f93dd7a1adc9e7c26d0807", "observed_validated": false, "scope": "synthetic independent model versus byte-adapter/native engine", "seed": 5255495, "sessions": 164}
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.025s
+
+OK
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.050s
+
+OK
+............
+----------------------------------------------------------------------
+Ran 12 tests in 0.391s
+
+OK
+sessions=10032 source_candidates=65186 rejected_candidates=10025 seed=5255495 canonical_sha256=bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991
+{"candidates": 476, "canonical_sha256": "d0e09ee827dc2631bbc856fa2c64dc3ae0f63c383ec88e00d2b1e6a11ae6e66c", "negative_controls": 3, "scope": "synthetic readiness supplement, not observed validation", "sessions": 67}
+{"canonical_sha256": "4618d9b3c94d34535001c8f9e6a2a54cfd5708ac72b58116425b0cf0c996d4b1", "event_prefixes": 330, "failures": 0, "negative_controls": 3, "observed_validated": false, "schedules": 152, "scope": "independent authored seeded L3, not observed", "seed": 1397048644}
+<end of output>
+Test time =  99.40 sec
+----------------------------------------------------------
+Test Passed.
+"itch.l3_reference" end time: Nov 21 18:22 EST
+"itch.l3_reference" time elapsed: 00:01:39
+----------------------------------------------------------
+
+End testing: Nov 21 18:22 EST

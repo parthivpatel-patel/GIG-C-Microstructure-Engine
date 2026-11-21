@@ -1,0 +1,22 @@
+CHECK terminal/tests/check_xbrl_statement_contract.py
+{"application_started": false, "assertions": 58, "cases": 8, "provider_requested": false, "schema": "gig.company_xbrl.offline_contract.v1"}
+CHECK terminal/tests/check_xbrl_accuracy_contract.py
+{"application_started": false, "assertions": 93, "cases": 15, "provider_requested": false, "schema": "gig.company_xbrl.offline_accuracy_contract.v1"}
+CHECK terminal/tests/check_xbrl_vintage_contract.py
+{"schema":"gig.xbrl.vintage_contract.v1","entries":3,"adversarial_rejections":6,"provider_requested":false,"application_started":false}
+CHECK terminal/tests/check_xbrl_calculation_report_contract.py
+{"schema":"gig.calculation_report.contract.v1","cases":4,"adversarial_rejections":11,"provider_requested":false,"application_started":false}
+CHECK terminal/tests/check_offline_import_contract.py
+{"schema":"gig.offline_json_ingress.contract.v1","cases":6,"ambiguous_previously_accepted":6,"adversarial_rejections":23,"provider_requested":false,"application_started":false}
+CHECK terminal/tests/check_statement_set_contract.py
+{"adversarial_rejections": 7, "application_started": false, "assertions": 1018, "fixture_bytes": 796426, "history_entries": 4, "provider_requested": false, "schema": "gig.statement_set.offline_consumer_contract.v1", "sets": 5, "verified_children": 23}
+CHECK terminal/tests/check_accounting_statements_contract.py
+{"schema":"gig.accounting_statement.offline_contract.v1","cases":7,"assertions":224,"adversarial_rejections":7,"provider_requested":false,"application_started":false}
+CHECK terminal/tests/check_itch_product_contract.py
+{"schema":"gig.itch.product_contract.v1","assertions":35,"states":5,"source_recovery_states":1,"application_started":false,"browser_started":false}
+CHECK terminal/tests/check_trade_contract.py
+/workspace/gig-development/terminal/stocks/test_repair.py:6: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+  from starlette.testclient import TestClient
+{"schema":"gig.trade.cross_language.v1","passed":8,"failed":0,"scope":"Authored packets,actual normalized view,TypeScript admission;no application or provider"}
+{"schema":"gig.filing.cross_language.v1","passed":5,"failed":0,"scope":"Authored SEC normalization and actual retained-vintage output to TypeScript admission;no app or provider"}
+NINE_CONTRACTS_PASS

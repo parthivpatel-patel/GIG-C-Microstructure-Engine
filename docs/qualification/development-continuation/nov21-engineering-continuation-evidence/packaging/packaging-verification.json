@@ -1,0 +1,364 @@
+{
+  "schema": "gig.nov21.engineering.clean_source_packaging.v1",
+  "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "archive": {
+    "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+    "members": 1949,
+    "tracked_files": 1948,
+    "bytes": 9579267,
+    "sha256": "7e57ebd1e6019d508adace6b5dd29e26286e028a4fd78bf9cb1443f996efe9a5"
+  },
+  "profiles": {
+    "default": {
+      "sdk": {
+        "app_factory_allowed": false,
+        "application_constructed": false,
+        "errors": 0,
+        "expected": 8,
+        "failures": 0,
+        "fixture": null,
+        "mode": "sdk",
+        "schema": "gig.nov21.engineering.installed_checks.v1",
+        "sdk": "/workspace/gig-development/work/nov21-engineering-packaging/installed-default/gig_microstructure/__init__.py",
+        "selected_names": [
+          "test_python"
+        ],
+        "skipped": 0,
+        "socket_attempts_allowed": false,
+        "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+        "tests": 8
+      },
+      "source": {
+        "app_factory_allowed": false,
+        "application_constructed": false,
+        "errors": 0,
+        "expected": 932,
+        "failures": 0,
+        "fixture": null,
+        "mode": "source",
+        "schema": "gig.nov21.engineering.installed_checks.v1",
+        "sdk": "/workspace/gig-development/work/nov21-engineering-packaging/installed-default/gig_microstructure/__init__.py",
+        "selected_names": [
+          "terminal.stocks.test_xbrl_instance",
+          "terminal.stocks.test_xbrl_collection",
+          "terminal.stocks.test_xbrl_tool",
+          "terminal.stocks.test_inline_xbrl",
+          "terminal.stocks.test_inline_set",
+          "terminal.stocks.test_inline_registry_numeric",
+          "terminal.stocks.test_xbrl_dts",
+          "terminal.stocks.test_xbrl_binding",
+          "terminal.stocks.test_xbrl_types",
+          "terminal.stocks.test_xbrl_enumeration",
+          "terminal.stocks.test_xbrl_vintages",
+          "terminal.stocks.test_xbrl_whitespace",
+          "terminal.stocks.test_xbrl_dimensions",
+          "terminal.stocks.test_xbrl_open_dimensions",
+          "terminal.stocks.test_xbrl_restriction_constraints",
+          "terminal.stocks.test_xbrl_calculation_intervals",
+          "terminal.stocks.test_xbrl_calculation_report",
+          "terminal.stocks.test_xbrl_calculation_product",
+          "terminal.stocks.test_xbrl_lineage",
+          "terminal.stocks.test_xbrl_typed_dimensions",
+          "terminal.stocks.test_xbrl_inherited_dimensions",
+          "terminal.stocks.test_xbrl_relationships",
+          "terminal.stocks.test_xbrl_statements",
+          "terminal.stocks.test_xbrl_product",
+          "terminal.stocks.test_xbrl_accuracy",
+          "terminal.stocks.test_xbrl_statement_v2",
+          "terminal.stocks.test_xbrl_embedded",
+          "terminal.stocks.test_sec_filing_ingest",
+          "terminal.stocks.test_sec_source_expansion",
+          "terminal.stocks.test_sec_multidoc",
+          "terminal.stocks.test_sec_transform_profile",
+          "terminal.stocks.test_sec_ingest_store",
+          "terminal.stocks.test_xbrl_duplicate_diagnostics",
+          "terminal.stocks.test_sec_ingest_cli",
+          "terminal.stocks.test_xbrl_statement_set",
+          "terminal.stocks.test_xbrl_negative_dimensions",
+          "terminal.stocks.test_xbrl_dimensional_calculation",
+          "terminal.stocks.test_python_json_ingress",
+          "terminal.stocks.test_history_json_ingress",
+          "terminal.stocks.test_xbrl_dts_source_audit",
+          "terminal.stocks.test_statement_set_source_acceptance",
+          "terminal.stocks.test_xbrl_negative_only_dimensions",
+          "terminal.stocks.test_inline_dts_source_audit",
+          "terminal.stocks.test_xbrl_accounting_relationships",
+          "terminal.stocks.test_xbrl_accounting_statements",
+          "terminal.providers.test_kraken_book_session",
+          "terminal.stocks.test_xbrl_typed_hypercubes",
+          "terminal.providers.test_kraken_depth_session",
+          "terminal.stocks.test_financial_intelligence_product",
+          "terminal.stocks.test_xbrl_cross_role",
+          "terminal.providers.test_kraken_public_session",
+          "terminal.providers.test_kraken_coordinator",
+          "terminal.stocks.test_xbrl_inherited_cross_role",
+          "terminal.stocks.test_xbrl_statement_comparison",
+          "terminal.providers.test_supervisor_joint",
+          "terminal.stocks.test_xbrl_effective_cross_role"
+        ],
+        "skipped": 0,
+        "socket_attempts_allowed": false,
+        "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+        "tests": 932
+      }
+    },
+    "streaming": {
+      "sdk": {
+        "app_factory_allowed": false,
+        "application_constructed": false,
+        "errors": 0,
+        "expected": 8,
+        "failures": 0,
+        "fixture": null,
+        "mode": "sdk",
+        "schema": "gig.nov21.engineering.installed_checks.v1",
+        "sdk": "/workspace/gig-development/work/nov21-engineering-packaging/installed-streaming/gig_microstructure/__init__.py",
+        "selected_names": [
+          "test_python"
+        ],
+        "skipped": 0,
+        "socket_attempts_allowed": false,
+        "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+        "tests": 8
+      },
+      "source": {
+        "app_factory_allowed": false,
+        "application_constructed": false,
+        "errors": 0,
+        "expected": 33,
+        "failures": 0,
+        "fixture": "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests",
+        "mode": "streaming",
+        "schema": "gig.nov21.engineering.installed_checks.v1",
+        "sdk": "/workspace/gig-development/work/nov21-engineering-packaging/installed-streaming/gig_microstructure/__init__.py",
+        "selected_names": [
+          "terminal.test_itch_completion_capsule",
+          "terminal.test_itch_source_completion",
+          "terminal.test_itch_source_product"
+        ],
+        "skipped": 0,
+        "socket_attempts_allowed": false,
+        "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+        "tests": 33
+      }
+    }
+  },
+  "authored_fixture_generator": {
+    "path": "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests",
+    "bytes": 526184,
+    "sha256": "c4d03841745eb9456d47c337fcdb0e95db6183fab26c316943c096a0bee42a6f"
+  },
+  "installed_comparison_exports": {
+    "variants": 19,
+    "names": [
+      "changed",
+      "unchanged",
+      "missing",
+      "conflict",
+      "unit",
+      "context",
+      "calculation",
+      "unavailable",
+      "single",
+      "same_filing",
+      "declaration",
+      "relationship",
+      "requires",
+      "unavailable_role",
+      "changed_role",
+      "ambiguous_aspects",
+      "type_path",
+      "eight_cutoffs",
+      "missing_latest_originals"
+    ],
+    "file": {
+      "bytes": 4785906,
+      "sha256": "bb9fd0ffe9329cb8f30cb8efa526f1108e07cbf593ffb88938b3ec7ff0c74ffb"
+    },
+    "source_origin": "HISTORICAL_SYNTHETIC",
+    "independent_issuer_authentication": false
+  },
+  "installed_contracts": {
+    "v2": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "vintages": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "calculation": {
+      "schema": "gig.calculation_report.contract.v1",
+      "cases": 4,
+      "adversarial_rejections": 11,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "ingress": {
+      "schema": "gig.offline_json_ingress.contract.v1",
+      "cases": 6,
+      "ambiguous_previously_accepted": 6,
+      "adversarial_rejections": 23,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "statements": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    },
+    "accounting": {
+      "schema": "gig.accounting_statement.offline_contract.v1",
+      "cases": 7,
+      "assertions": 224,
+      "adversarial_rejections": 7,
+      "provider_requested": false,
+      "application_started": false
+    }
+  },
+  "installed_ui": {
+    "tests": 219,
+    "passed": 219,
+    "failed": 0,
+    "skipped": 0,
+    "source_accounting": 148,
+    "accessibility": 28,
+    "statement_comparison": 43
+  },
+  "packages": {
+    "default/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+      "bytes": 668560,
+      "sha256": "1ddb29f6221d9c75e95df986eb5293c96dad861d9b75c09f6a0c49b941b16146"
+    },
+    "gig_microstructure-0.1.1.tar.gz": {
+      "bytes": 9579267,
+      "sha256": "7e57ebd1e6019d508adace6b5dd29e26286e028a4fd78bf9cb1443f996efe9a5"
+    },
+    "streaming/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+      "bytes": 684434,
+      "sha256": "ef428729d3b96c0e8fb453fa4fdd5dc36e6deff1e524baca4b02f7934099c15d"
+    }
+  },
+  "logs": {
+    "default-install.log": {
+      "bytes": 479,
+      "sha256": "e2dd6c088801a53aba88e7ab921d5b47c99c18359f926c19571ea6cac6ae37e5"
+    },
+    "default-sdk.log": {
+      "bytes": 1451,
+      "sha256": "d2778513ed7361b51ab8af0b6c81b7d3e07c4a7d14e50dac0a229033861f55a6"
+    },
+    "default-source.log": {
+      "bytes": 186770,
+      "sha256": "4db8bb2afad39cf47fdb2c2537f3b1eb1667578fd40b77dd7b63bcb3a55a1415"
+    },
+    "default-wheel.log": {
+      "bytes": 6047,
+      "sha256": "b1f9dab8381a2a012122d4bb7ff5d3903fb9ed8f73d297dc33742ea172c23f01"
+    },
+    "installed-accounting.log": {
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+    },
+    "installed-calculation.log": {
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+    },
+    "installed-comparison-exports.log": {
+      "bytes": 4785906,
+      "sha256": "bb9fd0ffe9329cb8f30cb8efa526f1108e07cbf593ffb88938b3ec7ff0c74ffb"
+    },
+    "installed-frontend-build.log": {
+      "bytes": 2220,
+      "sha256": "3068c75f9fe077a0ad13d7f39251c291550502dc77f3af876a6502e602cc67e2"
+    },
+    "installed-ingress.log": {
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+    },
+    "installed-source-ui.log": {
+      "bytes": 20555,
+      "sha256": "b11c005962addbafa0c67f1fb4c28e7f55da4f6949331d8f7bdfcae7b430534e"
+    },
+    "installed-statements.log": {
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+    },
+    "installed-v2.log": {
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+    },
+    "installed-vintages.log": {
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+    },
+    "package-source.log": {
+      "bytes": 212,
+      "sha256": "be892014c8a496ca14e724c882a9849c37735cc50d8828049ca0f2acfea4c726"
+    },
+    "sdist.log": {
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+    },
+    "streaming-install.log": {
+      "bytes": 481,
+      "sha256": "046fea49c04f152b22af42069cf04c11fc0726c90dbf2c6bb2f94ab712c551a5"
+    },
+    "streaming-sdk.log": {
+      "bytes": 1453,
+      "sha256": "0ba1edfe1acb93fb1339421194234c8e709224ae1c11772a4378883cd44ed6c3"
+    },
+    "streaming-source.log": {
+      "bytes": 6883,
+      "sha256": "81f42076c80bae9c5931e9d1fb836bc41d09f0f81b66a8761386438806993431"
+    },
+    "streaming-wheel.log": {
+      "bytes": 6735,
+      "sha256": "626cbe7ed8ada4bb77d2089ce538122dceab86a36de5dba8763cb770b6ce152a"
+    },
+    "verification-progress.log": {
+      "bytes": 1271,
+      "sha256": "55fba49039a6fff4c8f54eae671e03aa0ffbf0c4241d945dd588f43c2c670e9a"
+    }
+  },
+  "scope": "Fresh default and streaming GCC wheels from byte-verified source; isolated SDK and extracted-source checks. Existing locked JavaScript dependencies linked only after archive verification. External explicitly hashed fixture generates authored input only,never substitutes SDK. No full compiler-wheel matrix/browser/provider/target qualification.",
+  "guard_log": {
+    "path": "/workspace/gig-development/work/nov21-engineering-continuation/guarded-python.log",
+    "bytes": 238276,
+    "sha256": "5f1d28e340589b8a2df612c126f26966b4561edd4ae1f6343ccae7a99e7c17a9"
+  },
+  "independent_new_cohorts": {
+    "kraken_consumer": 14,
+    "effective_cross_role_v9": 45
+  },
+  "application_started": false,
+  "provider_requested": false,
+  "spend_usd": 0,
+  "progress_stream_sealed_after_exit": true,
+  "verification_helpers": {
+    "package-and-verify.py": {
+      "bytes": 11817,
+      "sha256": "d4f5b9c0895fad96bfaa0510b40e961b4a0e20236c50f4f880a8febf6eff216b"
+    },
+    "installed-checks.py": {
+      "bytes": 2389,
+      "sha256": "bf4f5b5b8c9e5da7fc03c3194711237a4cf21be7dcd5b16eeb7ae755a71824bc"
+    },
+    "seal-packaging-evidence.py": {
+      "bytes": 2116,
+      "sha256": "6e6508f3284e48e20841feecec535de61609eba5fdadcbd3edb41264f566180a"
+    }
+  }
+}

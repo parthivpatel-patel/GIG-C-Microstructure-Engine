@@ -1,0 +1,135 @@
+{
+  "schema": "gig.native_cached_configuration_checks.v1",
+  "tested_implementation": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "native_source_changes": false,
+  "clean_compiler_rebuild": false,
+  "scope": "Offline native test CLI and independent oracle programs; no app factory, application server, provider connection or target hardware qualification",
+  "clang_debug": {
+    "build_directory": "build/master-clang-debug",
+    "compiler": "Debian clang 19.1.7 (3+b1), /workspace/gig-clang/root/usr/bin/clang++-19",
+    "config": {
+      "CMAKE_BUILD_TYPE": "Debug",
+      "GIG_BUILD_PYTHON": false,
+      "GIG_BUILD_ITCH_STREAMING": true,
+      "GIG_WARNINGS_AS_ERRORS": true,
+      "GIG_ENABLE_ASAN": false,
+      "GIG_ENABLE_UBSAN": false
+    },
+    "reused_existing_cache": true,
+    "incremental_build_actions": 81,
+    "build_exit_code": 0,
+    "build_command": "/workspace/gig-tools/bin/cmake --build build/master-clang-debug -j 1",
+    "test_command": "/workspace/gig-tools/bin/ctest --test-dir build/master-clang-debug --output-on-failure -j 1",
+    "tests_passed": 149,
+    "tests_failed": 0,
+    "ctest_exit_code": 0,
+    "elapsed_seconds": 58.77,
+    "python_extension_tests_not_registered": [
+      "python.export_contracts",
+      "python.itch_durable_recovery",
+      "python.research_interface",
+      "python.schema_compatibility"
+    ],
+    "frozen_identities_passed": 8,
+    "frozen_receipt": "work/nov21-engineering-continuation/clang-debug-frozen-eight.json",
+    "success_marker_note": "148 literal Test Passed. sections plus one Test Pass Reason: section for demo.smoke, whose required regex Phase 2 deterministic replay ready matched. This is a normal positive PASS_REGULAR_EXPRESSION property, not WILL_FAIL or a negative control. Full CTest summary and process exit code report149/149 pass.",
+    "demo_smoke_success_property": "PASS_REGULAR_EXPRESSION=Phase 2 deterministic replay ready"
+  },
+  "sanitizer": {
+    "build_directory": "build/accelerated-sanitizer",
+    "compiler": "g++ Debian 14.2.0-19, /usr/bin/g++",
+    "config": {
+      "CMAKE_BUILD_TYPE": "Debug",
+      "GIG_BUILD_PYTHON": false,
+      "GIG_BUILD_ITCH_STREAMING": true,
+      "GIG_WARNINGS_AS_ERRORS": true,
+      "GIG_ENABLE_ASAN": true,
+      "GIG_ENABLE_UBSAN": true
+    },
+    "instrumentation_flags": "-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=all",
+    "reused_existing_cache": true,
+    "incremental_build_actions": 81,
+    "build_exit_code": 0,
+    "build_command": "/workspace/gig-tools/bin/cmake --build build/accelerated-sanitizer -j 1",
+    "test_command": "ASAN_OPTIONS=detect_leaks=1:halt_on_error=1 UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1 /workspace/gig-tools/bin/ctest --test-dir build/accelerated-sanitizer --output-on-failure -j 1 -R '^(itch\\.(source_hot_recovery|completed_source_capsule|durable_checkpoint|hot_context_checkpoint|reconstruction_checkpoint|reconstruction_recovery_boundary|.*restart|gzip_.*)|replay\\..*|book\\..*|market_data\\.aggregate_depth|analytics\\.book_.*)$'",
+    "test_regex": "^(itch\\.(source_hot_recovery|completed_source_capsule|durable_checkpoint|hot_context_checkpoint|reconstruction_checkpoint|reconstruction_recovery_boundary|.*restart|gzip_.*)|replay\\..*|book\\..*|market_data\\.aggregate_depth|analytics\\.book_.*)$",
+    "tests_passed": 40,
+    "tests_failed": 0,
+    "ctest_exit_code": 0,
+    "elapsed_seconds": 43.6,
+    "asan_ubsan_error_reports": 0,
+    "scope": "Targeted native gzip, source recovery/capsule, checkpoint/restart, aggregate depth, book analytics, replay/journal and book tests",
+    "selected_test_names": [
+      "itch.streaming_restart",
+      "itch.gzip_valid",
+      "itch.gzip_errors",
+      "itch.gzip_limits",
+      "itch.gzip_allocation",
+      "itch.source_hot_recovery",
+      "itch.completed_source_capsule",
+      "itch.durable_checkpoint",
+      "itch.hot_context_checkpoint",
+      "itch.reconstruction_checkpoint",
+      "itch.reconstruction_recovery_boundary",
+      "itch.reconstruction_restart",
+      "market_data.aggregate_depth",
+      "itch.auction_restart",
+      "itch.admin_restart",
+      "itch.hy_restart",
+      "analytics.book_contracts",
+      "analytics.book_reference",
+      "replay.hot_checkpoint",
+      "replay.config",
+      "replay.continuity",
+      "replay.gaps",
+      "replay.subevents",
+      "replay.multistream",
+      "replay.filtering",
+      "replay.reset",
+      "replay.recovery",
+      "replay.atomicity",
+      "replay.canonical",
+      "replay.batch",
+      "book.basic",
+      "book.cancel_execute",
+      "book.replace",
+      "book.boundaries",
+      "book.recovery",
+      "book.allocations",
+      "book.reference",
+      "replay.journal_model",
+      "replay.journal_allocation",
+      "replay.journal_preoptimization_equivalence"
+    ]
+  },
+  "logs": {
+    "work/nov21-engineering-continuation/clang-debug-build.log": {
+      "bytes": 6194,
+      "sha256": "3c018f9ac646d858d5a29f6b6ee88ef300fa6f67b62727f52aff2bba76c87a5d"
+    },
+    "work/nov21-engineering-continuation/clang-debug-tests.log": {
+      "bytes": 19344,
+      "sha256": "35473971429ad6c168961ba19aa6745f23089df405442c477a76f33c6db66713"
+    },
+    "work/nov21-engineering-continuation/clang-debug-LastTest.log": {
+      "bytes": 110878,
+      "sha256": "2f56ac7d0100c37c33cd72cccb0d1f30326cc7dfdce2ba16e9325b836eac49d5"
+    },
+    "work/nov21-engineering-continuation/sanitizer-build.log": {
+      "bytes": 6194,
+      "sha256": "3c018f9ac646d858d5a29f6b6ee88ef300fa6f67b62727f52aff2bba76c87a5d"
+    },
+    "work/nov21-engineering-continuation/sanitizer-tests.log": {
+      "bytes": 5148,
+      "sha256": "30191ad50bd54f879d9306d30dfcabe91bb6ec50e53f123fe1313e469ba8ae2f"
+    },
+    "work/nov21-engineering-continuation/sanitizer-LastTest.log": {
+      "bytes": 27225,
+      "sha256": "dd2a937a6dd0de6e6cde133c1f131ce87636fc1f1d11411654421ee7b66f0874"
+    },
+    "work/nov21-engineering-continuation/clang-debug-frozen-eight.json": {
+      "bytes": 2524,
+      "sha256": "e84357cce90a0a5d824bc7d3c6b48365855ffe7f6cdae62f19d608fdc6f71ed1"
+    }
+  }
+}

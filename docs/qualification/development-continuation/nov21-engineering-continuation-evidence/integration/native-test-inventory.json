@@ -1,0 +1,3899 @@
+{
+  "backtraceGraph" : 
+  {
+    "commands" : 
+    [
+      "add_test"
+    ],
+    "files" : 
+    [
+      "/workspace/gig-development/CMakeLists.txt"
+    ],
+    "nodes" : 
+    [
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 138,
+        "parent" : 0
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 145,
+        "parent" : 2
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 146,
+        "parent" : 4
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 148,
+        "parent" : 6
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 155,
+        "parent" : 8
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 155,
+        "parent" : 10
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 155,
+        "parent" : 12
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 155,
+        "parent" : 14
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 155,
+        "parent" : 16
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 160,
+        "parent" : 18
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 164,
+        "parent" : 20
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 166,
+        "parent" : 22
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 24
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 26
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 28
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 30
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 32
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 34
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 36
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 172,
+        "parent" : 38
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 177,
+        "parent" : 40
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 179,
+        "parent" : 42
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 185,
+        "parent" : 44
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 186,
+        "parent" : 46
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 190,
+        "parent" : 48
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 194,
+        "parent" : 50
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 52
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 54
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 56
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 58
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 60
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 62
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 199,
+        "parent" : 64
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 204,
+        "parent" : 66
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 206,
+        "parent" : 68
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 212,
+        "parent" : 70
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 212,
+        "parent" : 72
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 212,
+        "parent" : 74
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 212,
+        "parent" : 76
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 219,
+        "parent" : 78
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 223,
+        "parent" : 80
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 228,
+        "parent" : 82
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 232,
+        "parent" : 84
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 236,
+        "parent" : 86
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 237,
+        "parent" : 88
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 244,
+        "parent" : 90
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 244,
+        "parent" : 92
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 94
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 96
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 98
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 100
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 102
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 104
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 106
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 108
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 110
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 255,
+        "parent" : 112
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 257,
+        "parent" : 114
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 259,
+        "parent" : 116
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 264,
+        "parent" : 118
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 268,
+        "parent" : 120
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 122
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 124
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 126
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 128
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 130
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 277,
+        "parent" : 132
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 279,
+        "parent" : 134
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 286,
+        "parent" : 136
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 286,
+        "parent" : 138
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 286,
+        "parent" : 140
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 286,
+        "parent" : 142
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 286,
+        "parent" : 144
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 288,
+        "parent" : 146
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 290,
+        "parent" : 148
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 150
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 152
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 154
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 156
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 158
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 297,
+        "parent" : 160
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 299,
+        "parent" : 162
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 301,
+        "parent" : 164
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 306,
+        "parent" : 166
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 312,
+        "parent" : 168
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 312,
+        "parent" : 170
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 312,
+        "parent" : 172
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 312,
+        "parent" : 174
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 314,
+        "parent" : 176
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 320,
+        "parent" : 178
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 320,
+        "parent" : 180
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 320,
+        "parent" : 182
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 320,
+        "parent" : 184
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 320,
+        "parent" : 186
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 322,
+        "parent" : 188
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 327,
+        "parent" : 190
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 328,
+        "parent" : 192
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 333,
+        "parent" : 194
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 334,
+        "parent" : 196
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 338,
+        "parent" : 198
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 339,
+        "parent" : 200
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 345,
+        "parent" : 202
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 347,
+        "parent" : 204
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 353,
+        "parent" : 206
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 208
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 210
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 212
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 214
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 216
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 218
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 220
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 222
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 224
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 226
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 359,
+        "parent" : 228
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 230
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 232
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 234
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 236
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 238
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 240
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 366,
+        "parent" : 242
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 244
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 246
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 248
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 250
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 252
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 254
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 256
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 258
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 260
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 262
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 373,
+        "parent" : 264
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 266
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 268
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 270
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 272
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 274
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 276
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 278
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 280
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 282
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 284
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 380,
+        "parent" : 286
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 382,
+        "parent" : 288
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 385,
+        "parent" : 290
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 454,
+        "parent" : 292
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 455,
+        "parent" : 294
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 456,
+        "parent" : 296
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 457,
+        "parent" : 298
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 467,
+        "parent" : 300
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 467,
+        "parent" : 302
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 469,
+        "parent" : 304
+      }
+    ]
+  },
+  "kind" : "ctestInfo",
+  "tests" : 
+  [
+    {
+      "backtrace" : 1,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_validation_evidence.py"
+      ],
+      "name" : "evidence.integrity_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 3,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_query_failure_tests"
+      ],
+      "name" : "itch.query_failure_atomicity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 5,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_validation_demo.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_validation_demo"
+      ],
+      "name" : "itch.validation_demo_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 7,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_validation_demo.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_validation_demo",
+        "--negative-controls"
+      ],
+      "name" : "itch.validation_demo_negative_controls",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 9,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_binary_file_tests",
+        "basic"
+      ],
+      "name" : "itch.framer_basic",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 11,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_binary_file_tests",
+        "errors"
+      ],
+      "name" : "itch.framer_errors",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 13,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_binary_file_tests",
+        "limits"
+      ],
+      "name" : "itch.framer_limits",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 15,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_binary_file_tests",
+        "allocation"
+      ],
+      "name" : "itch.framer_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 17,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_binary_file_tests",
+        "properties"
+      ],
+      "name" : "itch.framer_properties",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 19,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_decoder_tests"
+      ],
+      "name" : "itch.decoder_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 21,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_reference_driver"
+      ],
+      "name" : "itch.independent_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 23,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_reference_driver",
+        "--negative-control"
+      ],
+      "name" : "itch.oracle_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 25,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "lifecycle"
+      ],
+      "name" : "itch.context_lifecycle",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 27,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "identity"
+      ],
+      "name" : "itch.context_identity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 29,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "observations"
+      ],
+      "name" : "itch.context_observations",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 31,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "policies"
+      ],
+      "name" : "itch.context_policies",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 33,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "limits"
+      ],
+      "name" : "itch.context_limits",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 35,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "allocation"
+      ],
+      "name" : "itch.context_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 37,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "numeric"
+      ],
+      "name" : "itch.context_numeric",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 39,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_tests",
+        "provenance"
+      ],
+      "name" : "itch.context_provenance",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 41,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_context_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_reference_driver"
+      ],
+      "name" : "itch.context_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 43,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_context_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_reference_driver",
+        "--negative-control"
+      ],
+      "name" : "itch.context_oracle_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 45,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_streaming_tests"
+      ],
+      "name" : "itch.auction_streaming",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 47,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_streaming_tests",
+        "faults"
+      ],
+      "name" : "itch.auction_stream_faults",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 49,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_streaming_tests"
+      ],
+      "name" : "itch.admin_streaming",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 51,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_streaming_tests"
+      ],
+      "name" : "itch.hy_streaming",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 53,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "basic"
+      ],
+      "name" : "itch.streaming_basic",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 55,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "fragments"
+      ],
+      "name" : "itch.streaming_fragments",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 57,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "corruption"
+      ],
+      "name" : "itch.streaming_corruption",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 59,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "semantics"
+      ],
+      "name" : "itch.streaming_semantics",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 61,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "budgets"
+      ],
+      "name" : "itch.streaming_budgets",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 63,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "allocation"
+      ],
+      "name" : "itch.streaming_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 65,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_tests",
+        "restart"
+      ],
+      "name" : "itch.streaming_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 67,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_streaming_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_reference_driver"
+      ],
+      "name" : "itch.streaming_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 69,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_streaming_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_streaming_reference_driver",
+        "--negative-control"
+      ],
+      "name" : "itch.streaming_oracle_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 71,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_gzip_tests",
+        "valid"
+      ],
+      "name" : "itch.gzip_valid",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 73,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_gzip_tests",
+        "errors"
+      ],
+      "name" : "itch.gzip_errors",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 75,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_gzip_tests",
+        "limits"
+      ],
+      "name" : "itch.gzip_limits",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 77,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_gzip_tests",
+        "allocation"
+      ],
+      "name" : "itch.gzip_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 79,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_source_recovery_tests"
+      ],
+      "name" : "itch.source_hot_recovery",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 81,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_completion_capsule_tests"
+      ],
+      "name" : "itch.completed_source_capsule",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 83,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests"
+      ],
+      "name" : "itch.durable_checkpoint",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 85,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hot_checkpoint_tests"
+      ],
+      "name" : "itch.hot_context_checkpoint",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 87,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_restart_tests"
+      ],
+      "name" : "itch.reconstruction_checkpoint",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 89,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_sha256_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_restart_tests"
+      ],
+      "name" : "itch.reconstruction_sha256_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 91,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_framing_tests",
+        "framing"
+      ],
+      "name" : "itch.reconstruction_framing",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 93,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_framing_tests",
+        "recovery_boundary"
+      ],
+      "name" : "itch.reconstruction_recovery_boundary",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 95,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "initialization"
+      ],
+      "name" : "itch.reconstruction_initialization",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 97,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "golden"
+      ],
+      "name" : "itch.reconstruction_golden",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 99,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "observations"
+      ],
+      "name" : "itch.reconstruction_observations",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 101,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "multisymbol"
+      ],
+      "name" : "itch.reconstruction_multisymbol",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 103,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "numeric"
+      ],
+      "name" : "itch.reconstruction_numeric",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 105,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "atomicity"
+      ],
+      "name" : "itch.reconstruction_atomicity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 107,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "allocation"
+      ],
+      "name" : "itch.reconstruction_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 109,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "budgets"
+      ],
+      "name" : "itch.reconstruction_budgets",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 111,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_reconstruction_tests",
+        "restart"
+      ],
+      "name" : "itch.reconstruction_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 113,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_l3_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_l3_reference_driver"
+      ],
+      "name" : "itch.l3_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 115,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/run_synthetic_l3_demo.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_l3_reference_driver"
+      ],
+      "name" : "itch.reconstruction_demo",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 117,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_l3_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_l3_reference_driver",
+        "--negative-control"
+      ],
+      "name" : "itch.l3_oracle_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 119,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_aggregate_depth_tests"
+      ],
+      "name" : "market_data.aggregate_depth",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 121,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_observed_readiness.py",
+        "/workspace/gig-development/build/recovery-release/gig_lobster_tests",
+        "/workspace/gig-development/build/recovery-release/gig_lobster_validate"
+      ],
+      "name" : "observed.readiness_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 123,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "wire"
+      ],
+      "name" : "itch.auction_wire",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 125,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "context"
+      ],
+      "name" : "itch.auction_context",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 127,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "integration"
+      ],
+      "name" : "itch.auction_integration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 129,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "allocation"
+      ],
+      "name" : "itch.auction_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 131,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "restart"
+      ],
+      "name" : "itch.auction_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 133,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_auction_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests"
+      ],
+      "name" : "itch.auction_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 135,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_auction_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_auction_tests",
+        "--negative-control"
+      ],
+      "name" : "itch.auction_reference_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 137,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "wire"
+      ],
+      "name" : "itch.admin_wire",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 139,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "context"
+      ],
+      "name" : "itch.admin_context",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 141,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "integration"
+      ],
+      "name" : "itch.admin_integration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 143,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "allocation"
+      ],
+      "name" : "itch.admin_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 145,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "restart"
+      ],
+      "name" : "itch.admin_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 147,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_admin_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests"
+      ],
+      "name" : "itch.admin_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 149,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_admin_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_admin_tests",
+        "--negative-control"
+      ],
+      "name" : "itch.admin_reference_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 151,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "wire"
+      ],
+      "name" : "itch.hy_wire",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 153,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "context"
+      ],
+      "name" : "itch.hy_context",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 155,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "fragments"
+      ],
+      "name" : "itch.hy_fragments",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 157,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "integration"
+      ],
+      "name" : "itch.hy_integration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 159,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "allocation"
+      ],
+      "name" : "itch.hy_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 161,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "restart"
+      ],
+      "name" : "itch.hy_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 163,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_hy_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests"
+      ],
+      "name" : "itch.hy_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 165,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_itch_hy_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_hy_tests",
+        "--negative-control"
+      ],
+      "name" : "itch.hy_reference_negative_control",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 167,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_itch_context_prepare_tests"
+      ],
+      "name" : "itch.context_prepare",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 169,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_execution_tests",
+        "schedules"
+      ],
+      "name" : "execution.schedules",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 171,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_execution_tests",
+        "costs"
+      ],
+      "name" : "execution.costs",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 173,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_execution_tests",
+        "integration"
+      ],
+      "name" : "execution.integration",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 175,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_execution_tests",
+        "cost_limits"
+      ],
+      "name" : "execution.cost_limits",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 177,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_execution_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_execution_tests"
+      ],
+      "name" : "execution.independent_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 179,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests",
+        "basic"
+      ],
+      "name" : "simulation.basic",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 181,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests",
+        "tif"
+      ],
+      "name" : "simulation.tif",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 183,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests",
+        "latency"
+      ],
+      "name" : "simulation.latency",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 185,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests",
+        "faults"
+      ],
+      "name" : "simulation.faults",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 187,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests",
+        "reports"
+      ],
+      "name" : "simulation.reports",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 189,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_simulation_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_simulation_tests"
+      ],
+      "name" : "simulation.independent_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 191,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_flow_tests"
+      ],
+      "name" : "analytics.flow_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 193,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_flow_metrics.py",
+        "/workspace/gig-development/build/recovery-release/gig_flow_tests"
+      ],
+      "name" : "analytics.flow_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 195,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_metrics_tests"
+      ],
+      "name" : "analytics.book_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 197,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_book_metrics.py",
+        "/workspace/gig-development/build/recovery-release/gig_book_metrics_tests"
+      ],
+      "name" : "analytics.book_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 199,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_numeric_tests",
+        "contracts"
+      ],
+      "name" : "numeric.contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 201,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_numeric_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_numeric_tests"
+      ],
+      "name" : "numeric.independent_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 203,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_workload_reference.py",
+        "/workspace/gig-development/build/recovery-release/gig_workload_tests"
+      ],
+      "name" : "benchmark.fixture_reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 205,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_benchmark_metadata.py"
+      ],
+      "name" : "benchmark.compiler_metadata",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 207,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_hot_checkpoint_tests"
+      ],
+      "name" : "replay.hot_checkpoint",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 209,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "config"
+      ],
+      "name" : "replay.config",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 211,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "continuity"
+      ],
+      "name" : "replay.continuity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 213,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "gaps"
+      ],
+      "name" : "replay.gaps",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 215,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "subevents"
+      ],
+      "name" : "replay.subevents",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 217,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "multistream"
+      ],
+      "name" : "replay.multistream",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 219,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "filtering"
+      ],
+      "name" : "replay.filtering",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 221,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "reset"
+      ],
+      "name" : "replay.reset",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 223,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "recovery"
+      ],
+      "name" : "replay.recovery",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 225,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "atomicity"
+      ],
+      "name" : "replay.atomicity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 227,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "canonical"
+      ],
+      "name" : "replay.canonical",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 229,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_replay_tests",
+        "batch"
+      ],
+      "name" : "replay.batch",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 231,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "basic"
+      ],
+      "name" : "book.basic",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 233,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "cancel_execute"
+      ],
+      "name" : "book.cancel_execute",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 235,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "replace"
+      ],
+      "name" : "book.replace",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 237,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "boundaries"
+      ],
+      "name" : "book.boundaries",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 239,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "recovery"
+      ],
+      "name" : "book.recovery",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 241,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "allocations"
+      ],
+      "name" : "book.allocations",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 243,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_book_tests",
+        "reference"
+      ],
+      "name" : "book.reference",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 245,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "add"
+      ],
+      "name" : "event.add",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 247,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "cancel"
+      ],
+      "name" : "event.cancel",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 249,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "replace"
+      ],
+      "name" : "event.replace",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 251,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "trade"
+      ],
+      "name" : "event.trade",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 253,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "quote"
+      ],
+      "name" : "event.quote",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 255,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "reset"
+      ],
+      "name" : "event.reset",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 257,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "session"
+      ],
+      "name" : "event.session",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 259,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "snapshot"
+      ],
+      "name" : "event.snapshot",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 261,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "metadata"
+      ],
+      "name" : "event.metadata",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 263,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "timestamps"
+      ],
+      "name" : "event.timestamps",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 265,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_event_tests",
+        "provenance"
+      ],
+      "name" : "event.provenance",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 267,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "valid_buy"
+      ],
+      "name" : "types.valid_buy",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 269,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "valid_sell"
+      ],
+      "name" : "types.valid_sell",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 271,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "zero_id"
+      ],
+      "name" : "types.zero_id",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 273,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "zero_price"
+      ],
+      "name" : "types.zero_price",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 275,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "negative_price"
+      ],
+      "name" : "types.negative_price",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 277,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "zero_quantity"
+      ],
+      "name" : "types.zero_quantity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 279,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "zero_based_sequence"
+      ],
+      "name" : "types.zero_based_sequence",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 281,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "max_price"
+      ],
+      "name" : "types.max_price",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 283,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "max_quantity"
+      ],
+      "name" : "types.max_quantity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 285,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "max_id"
+      ],
+      "name" : "types.max_id",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 287,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "max_sequence"
+      ],
+      "name" : "types.max_sequence",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 289,
+      "command" : 
+      [
+        "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-DPROGRAM=/workspace/gig-development/build/recovery-release/gig_engine_tests",
+        "-DARGUMENTS=deliberate_failure",
+        "-DEXPECTED=FAIL: deliberate_failure",
+        "-P",
+        "/workspace/gig-development/cmake/ExpectFailure.cmake"
+      ],
+      "name" : "harness.failure_is_nonzero",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 291,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_engine_demo"
+      ],
+      "name" : "demo.smoke",
+      "properties" : 
+      [
+        {
+          "name" : "PASS_REGULAR_EXPRESSION",
+          "value" : 
+          [
+            "Phase 2 deterministic replay ready"
+          ]
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 293,
+      "command" : 
+      [
+        "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-E",
+        "env",
+        "PYTHONPATH=/workspace/gig-development/build/recovery-release/python",
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_itch_durable_python.py",
+        "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests"
+      ],
+      "name" : "python.itch_durable_recovery",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 295,
+      "command" : 
+      [
+        "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-E",
+        "env",
+        "PYTHONPATH=/workspace/gig-development/build/recovery-release/python",
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_python.py"
+      ],
+      "name" : "python.research_interface",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 297,
+      "command" : 
+      [
+        "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-E",
+        "env",
+        "PYTHONPATH=/workspace/gig-development/build/recovery-release/python",
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/tests/test_export_contracts.py"
+      ],
+      "name" : "python.export_contracts",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 299,
+      "command" : 
+      [
+        "/workspace/gig-tools/lib/python3.12/site-packages/cmake/data/bin/cmake",
+        "-E",
+        "env",
+        "PYTHONPATH=/workspace/gig-development/build/recovery-release/python",
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/generate_schemas.py",
+        "--check"
+      ],
+      "name" : "python.schema_compatibility",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 301,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_journal_storage_tests",
+        "model"
+      ],
+      "name" : "replay.journal_model",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 303,
+      "command" : 
+      [
+        "/workspace/gig-development/build/recovery-release/gig_journal_storage_tests",
+        "allocation"
+      ],
+      "name" : "replay.journal_allocation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    },
+    {
+      "backtrace" : 305,
+      "command" : 
+      [
+        "/workspace/gig-development/work/venv/bin/python",
+        "/workspace/gig-development/scripts/check_journal_storage.py",
+        "trace",
+        "/workspace/gig-development/build/recovery-release/gig_journal_storage_tests"
+      ],
+      "name" : "replay.journal_preoptimization_equivalence",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/workspace/gig-development/build/recovery-release"
+        }
+      ]
+    }
+  ],
+  "version" : 
+  {
+    "major" : 1,
+    "minor" : 0
+  }
+}

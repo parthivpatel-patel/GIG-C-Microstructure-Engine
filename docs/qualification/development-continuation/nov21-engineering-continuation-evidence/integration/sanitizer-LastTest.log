@@ -1,0 +1,652 @@
+Start testing: Nov 21 18:24 EST
+----------------------------------------------------------
+33/149 Testing: itch.streaming_restart
+33/149 Test: itch.streaming_restart
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_streaming_tests" "restart"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.streaming_restart" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+streaming restart passed
+<end of output>
+Test time =   0.20 sec
+----------------------------------------------------------
+Test Passed.
+"itch.streaming_restart" end time: Nov 21 18:24 EST
+"itch.streaming_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/149 Testing: itch.gzip_valid
+36/149 Test: itch.gzip_valid
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_gzip_tests" "valid"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.gzip_valid" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+gzip valid checks=13225 passed
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_valid" end time: Nov 21 18:24 EST
+"itch.gzip_valid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+37/149 Testing: itch.gzip_errors
+37/149 Test: itch.gzip_errors
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_gzip_tests" "errors"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.gzip_errors" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+gzip errors checks=162170 passed
+<end of output>
+Test time =   9.62 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_errors" end time: Nov 21 18:24 EST
+"itch.gzip_errors" time elapsed: 00:00:09
+----------------------------------------------------------
+
+38/149 Testing: itch.gzip_limits
+38/149 Test: itch.gzip_limits
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_gzip_tests" "limits"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.gzip_limits" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+gzip limits checks=2528 passed
+<end of output>
+Test time =   0.17 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_limits" end time: Nov 21 18:24 EST
+"itch.gzip_limits" time elapsed: 00:00:00
+----------------------------------------------------------
+
+39/149 Testing: itch.gzip_allocation
+39/149 Test: itch.gzip_allocation
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_gzip_tests" "allocation"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.gzip_allocation" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+gzip_reached_allocation_sites=4
+gzip allocation checks=168 passed
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"itch.gzip_allocation" end time: Nov 21 18:24 EST
+"itch.gzip_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+40/149 Testing: itch.source_hot_recovery
+40/149 Test: itch.source_hot_recovery
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_source_recovery_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.source_hot_recovery" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+source_restore_failpoints=67
+complete_source_failpoints=66
+checks=331 failures=0
+<end of output>
+Test time =   2.09 sec
+----------------------------------------------------------
+Test Passed.
+"itch.source_hot_recovery" end time: Nov 21 18:24 EST
+"itch.source_hot_recovery" time elapsed: 00:00:02
+----------------------------------------------------------
+
+41/149 Testing: itch.completed_source_capsule
+41/149 Test: itch.completed_source_capsule
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_completion_capsule_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.completed_source_capsule" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+capsule_container=binary_file restore_failpoints=57 encode_failpoints=58
+capsule_container=single_gzip restore_failpoints=61 encode_failpoints=62
+checks=535 failures=0
+<end of output>
+Test time =   3.02 sec
+----------------------------------------------------------
+Test Passed.
+"itch.completed_source_capsule" end time: Nov 21 18:24 EST
+"itch.completed_source_capsule" time elapsed: 00:00:03
+----------------------------------------------------------
+
+42/149 Testing: itch.durable_checkpoint
+42/149 Test: itch.durable_checkpoint
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_durable_checkpoint_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.durable_checkpoint" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+durable_restore_failpoints=57
+durable_encode_failpoints=63
+checks=363 failures=0
+<end of output>
+Test time =   1.66 sec
+----------------------------------------------------------
+Test Passed.
+"itch.durable_checkpoint" end time: Nov 21 18:24 EST
+"itch.durable_checkpoint" time elapsed: 00:00:01
+----------------------------------------------------------
+
+43/149 Testing: itch.hot_context_checkpoint
+43/149 Test: itch.hot_context_checkpoint
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_hot_checkpoint_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.hot_context_checkpoint" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+hot_itch_restore_allocation_failpoints=46
+checks=221 failures=0
+<end of output>
+Test time =   1.92 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hot_context_checkpoint" end time: Nov 21 18:24 EST
+"itch.hot_context_checkpoint" time elapsed: 00:00:01
+----------------------------------------------------------
+
+44/149 Testing: itch.reconstruction_checkpoint
+44/149 Test: itch.reconstruction_checkpoint
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_restart_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.reconstruction_checkpoint" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+restart_allocation_failpoints=32
+SHA256 known vectors/padding and authenticated prefix restart tests passed
+<end of output>
+Test time =   0.32 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_checkpoint" end time: Nov 21 18:24 EST
+"itch.reconstruction_checkpoint" time elapsed: 00:00:00
+----------------------------------------------------------
+
+47/149 Testing: itch.reconstruction_recovery_boundary
+47/149 Test: itch.reconstruction_recovery_boundary
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_reconstruction_framing_tests" "recovery_boundary"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.reconstruction_recovery_boundary" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+native_snapshot_exact64=passed over65=atomic_rejection adapter_complete_seed=unsupported
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_recovery_boundary" end time: Nov 21 18:24 EST
+"itch.reconstruction_recovery_boundary" time elapsed: 00:00:00
+----------------------------------------------------------
+
+56/149 Testing: itch.reconstruction_restart
+56/149 Test: itch.reconstruction_restart
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_reconstruction_tests" "restart"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.reconstruction_restart" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+reconstruction restart passed
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"itch.reconstruction_restart" end time: Nov 21 18:24 EST
+"itch.reconstruction_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+60/149 Testing: market_data.aggregate_depth
+60/149 Test: market_data.aggregate_depth
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_aggregate_depth_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"market_data.aggregate_depth" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+aggregate-depth:10000 independent transitions;2 injected failures;2 successful sweeps;exact metrics/sequence/atomicity/budgets pass
+<end of output>
+Test time =   1.37 sec
+----------------------------------------------------------
+Test Passed.
+"market_data.aggregate_depth" end time: Nov 21 18:24 EST
+"market_data.aggregate_depth" time elapsed: 00:00:01
+----------------------------------------------------------
+
+66/149 Testing: itch.auction_restart
+66/149 Test: itch.auction_restart
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_auction_tests" "restart"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.auction_restart" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"itch.auction_restart" end time: Nov 21 18:24 EST
+"itch.auction_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+73/149 Testing: itch.admin_restart
+73/149 Test: itch.admin_restart
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_admin_tests" "restart"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.admin_restart" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.08 sec
+----------------------------------------------------------
+Test Passed.
+"itch.admin_restart" end time: Nov 21 18:24 EST
+"itch.admin_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+81/149 Testing: itch.hy_restart
+81/149 Test: itch.hy_restart
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_itch_hy_tests" "restart"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"itch.hy_restart" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"itch.hy_restart" end time: Nov 21 18:24 EST
+"itch.hy_restart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+98/149 Testing: analytics.book_contracts
+98/149 Test: analytics.book_contracts
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_metrics_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"analytics.book_contracts" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+PASS: hand calculations, missing states, malformed snapshots, exact boundaries, provenance and nonmutation
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.book_contracts" end time: Nov 21 18:24 EST
+"analytics.book_contracts" time elapsed: 00:00:00
+----------------------------------------------------------
+
+99/149 Testing: analytics.book_reference
+99/149 Test: analytics.book_reference
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_book_metrics.py" "/workspace/gig-development/build/accelerated-sanitizer/gig_book_metrics_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"analytics.book_reference" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+PASS: 2650 independent Fraction book metric cases, seed 3071
+<end of output>
+Test time =   0.70 sec
+----------------------------------------------------------
+Test Passed.
+"analytics.book_reference" end time: Nov 21 18:24 EST
+"analytics.book_reference" time elapsed: 00:00:00
+----------------------------------------------------------
+
+104/149 Testing: replay.hot_checkpoint
+104/149 Test: replay.hot_checkpoint
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_hot_checkpoint_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.hot_checkpoint" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+checks=98 failures=0
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"replay.hot_checkpoint" end time: Nov 21 18:24 EST
+"replay.hot_checkpoint" time elapsed: 00:00:00
+----------------------------------------------------------
+
+105/149 Testing: replay.config
+105/149 Test: replay.config
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "config"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.config" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+config: 8 checks, 0 failures
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"replay.config" end time: Nov 21 18:24 EST
+"replay.config" time elapsed: 00:00:00
+----------------------------------------------------------
+
+106/149 Testing: replay.continuity
+106/149 Test: replay.continuity
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "continuity"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.continuity" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+continuity: 5 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.continuity" end time: Nov 21 18:24 EST
+"replay.continuity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+107/149 Testing: replay.gaps
+107/149 Test: replay.gaps
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "gaps"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.gaps" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+gaps: 13 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.gaps" end time: Nov 21 18:24 EST
+"replay.gaps" time elapsed: 00:00:00
+----------------------------------------------------------
+
+108/149 Testing: replay.subevents
+108/149 Test: replay.subevents
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "subevents"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.subevents" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+subevents: 14 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.subevents" end time: Nov 21 18:24 EST
+"replay.subevents" time elapsed: 00:00:00
+----------------------------------------------------------
+
+109/149 Testing: replay.multistream
+109/149 Test: replay.multistream
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "multistream"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.multistream" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+multistream: 19 checks, 0 failures
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"replay.multistream" end time: Nov 21 18:24 EST
+"replay.multistream" time elapsed: 00:00:00
+----------------------------------------------------------
+
+110/149 Testing: replay.filtering
+110/149 Test: replay.filtering
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "filtering"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.filtering" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+filtering: 9 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.filtering" end time: Nov 21 18:24 EST
+"replay.filtering" time elapsed: 00:00:00
+----------------------------------------------------------
+
+111/149 Testing: replay.reset
+111/149 Test: replay.reset
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "reset"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.reset" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+reset: 11 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.reset" end time: Nov 21 18:24 EST
+"replay.reset" time elapsed: 00:00:00
+----------------------------------------------------------
+
+112/149 Testing: replay.recovery
+112/149 Test: replay.recovery
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "recovery"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.recovery" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+recovery: 13 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"replay.recovery" end time: Nov 21 18:24 EST
+"replay.recovery" time elapsed: 00:00:00
+----------------------------------------------------------
+
+113/149 Testing: replay.atomicity
+113/149 Test: replay.atomicity
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "atomicity"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.atomicity" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+replay allocation failure sites=32
+atomicity: 124 checks, 0 failures
+<end of output>
+Test time =   0.14 sec
+----------------------------------------------------------
+Test Passed.
+"replay.atomicity" end time: Nov 21 18:24 EST
+"replay.atomicity" time elapsed: 00:00:00
+----------------------------------------------------------
+
+114/149 Testing: replay.canonical
+114/149 Test: replay.canonical
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "canonical"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.canonical" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+canonical: 7 checks, 0 failures
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"replay.canonical" end time: Nov 21 18:24 EST
+"replay.canonical" time elapsed: 00:00:00
+----------------------------------------------------------
+
+115/149 Testing: replay.batch
+115/149 Test: replay.batch
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_replay_tests" "batch"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.batch" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+batch: 2 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"replay.batch" end time: Nov 21 18:24 EST
+"replay.batch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+116/149 Testing: book.basic
+116/149 Test: book.basic
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "basic"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.basic" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+basic: 24 checks, 0 failures
+<end of output>
+Test time =   0.05 sec
+----------------------------------------------------------
+Test Passed.
+"book.basic" end time: Nov 21 18:24 EST
+"book.basic" time elapsed: 00:00:00
+----------------------------------------------------------
+
+117/149 Testing: book.cancel_execute
+117/149 Test: book.cancel_execute
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "cancel_execute"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.cancel_execute" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+cancel_execute: 19 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"book.cancel_execute" end time: Nov 21 18:24 EST
+"book.cancel_execute" time elapsed: 00:00:00
+----------------------------------------------------------
+
+118/149 Testing: book.replace
+118/149 Test: book.replace
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "replace"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.replace" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+replace: 14 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"book.replace" end time: Nov 21 18:24 EST
+"book.replace" time elapsed: 00:00:00
+----------------------------------------------------------
+
+119/149 Testing: book.boundaries
+119/149 Test: book.boundaries
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "boundaries"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.boundaries" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+boundaries: 18 checks, 0 failures
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"book.boundaries" end time: Nov 21 18:24 EST
+"book.boundaries" time elapsed: 00:00:00
+----------------------------------------------------------
+
+120/149 Testing: book.recovery
+120/149 Test: book.recovery
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "recovery"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.recovery" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+recovery: 10 checks, 0 failures
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"book.recovery" end time: Nov 21 18:24 EST
+"book.recovery" time elapsed: 00:00:00
+----------------------------------------------------------
+
+121/149 Testing: book.allocations
+121/149 Test: book.allocations
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "allocations"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.allocations" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+allocation failure sites exercised=35
+allocations: 178 checks, 0 failures
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"book.allocations" end time: Nov 21 18:24 EST
+"book.allocations" time elapsed: 00:00:00
+----------------------------------------------------------
+
+122/149 Testing: book.reference
+122/149 Test: book.reference
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_book_tests" "reference"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"book.reference" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+reference operations=20000, seeds=1,42,1729,999
+reference: 1318396 checks, 0 failures
+<end of output>
+Test time =  18.52 sec
+----------------------------------------------------------
+Test Passed.
+"book.reference" end time: Nov 21 18:24 EST
+"book.reference" time elapsed: 00:00:18
+----------------------------------------------------------
+
+147/149 Testing: replay.journal_model
+147/149 Test: replay.journal_model
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_journal_storage_tests" "model"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.journal_model" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+journal_churn_cycles=32 accepted_events=4128 peak_pmr=4727264 allocations=35552 deallocations=35552
+<end of output>
+Test time =   1.46 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_model" end time: Nov 21 18:24 EST
+"replay.journal_model" time elapsed: 00:00:01
+----------------------------------------------------------
+
+148/149 Testing: replay.journal_allocation
+148/149 Test: replay.journal_allocation
+Command: "/workspace/gig-development/build/accelerated-sanitizer/gig_journal_storage_tests" "allocation"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.journal_allocation" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+reset allocation failure sites=16
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_allocation" end time: Nov 21 18:24 EST
+"replay.journal_allocation" time elapsed: 00:00:00
+----------------------------------------------------------
+
+149/149 Testing: replay.journal_preoptimization_equivalence
+149/149 Test: replay.journal_preoptimization_equivalence
+Command: "/workspace/gig-development/work/venv/bin/python" "/workspace/gig-development/scripts/check_journal_storage.py" "trace" "/workspace/gig-development/build/accelerated-sanitizer/gig_journal_storage_tests"
+Directory: /workspace/gig-development/build/accelerated-sanitizer
+"replay.journal_preoptimization_equivalence" start time: Nov 21 18:24 EST
+Output:
+----------------------------------------------------------
+{"independent_state_model": "separately executed by model mode", "pre_optimization_equivalent": true, "prefixes": 128, "trace_sha256": "52e4a35f05f279891d10f25453196bfbd8fb38f5a0448224e681b70304e37fc8"}
+<end of output>
+Test time =   1.28 sec
+----------------------------------------------------------
+Test Passed.
+"replay.journal_preoptimization_equivalence" end time: Nov 21 18:24 EST
+"replay.journal_preoptimization_equivalence" time elapsed: 00:00:01
+----------------------------------------------------------
+
+End testing: Nov 21 18:24 EST

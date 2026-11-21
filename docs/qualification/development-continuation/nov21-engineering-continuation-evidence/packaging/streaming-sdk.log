@@ -1,0 +1,14 @@
+test_every_event_and_provenance_roundtrip (test_python.InterfaceTests.test_every_event_and_provenance_roundtrip) ... ok
+test_exact_boundaries_and_strict_input (test_python.InterfaceTests.test_exact_boundaries_and_strict_input) ... ok
+test_flow_and_costs (test_python.InterfaceTests.test_flow_and_costs) ... ok
+test_manifest_export_integrity_and_failure (test_python.InterfaceTests.test_manifest_export_integrity_and_failure) ... ok
+test_random_fraction_numeric_reference (test_python.InterfaceTests.test_random_fraction_numeric_reference) ... ok
+test_replay_ownership_atomicity_and_recovery (test_python.InterfaceTests.test_replay_ownership_atomicity_and_recovery) ... ok
+test_simulation_and_execution (test_python.InterfaceTests.test_simulation_and_execution) ... ok
+test_source_archive_provenance_is_explicit (test_python.InterfaceTests.test_source_archive_provenance_is_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.435s
+
+OK
+{"app_factory_allowed": false, "application_constructed": false, "errors": 0, "expected": 8, "failures": 0, "fixture": null, "mode": "sdk", "schema": "gig.nov21.engineering.installed_checks.v1", "sdk": "/workspace/gig-development/work/nov21-engineering-packaging/installed-streaming/gig_microstructure/__init__.py", "selected_names": ["test_python"], "skipped": 0, "socket_attempts_allowed": false, "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0", "tests": 8}

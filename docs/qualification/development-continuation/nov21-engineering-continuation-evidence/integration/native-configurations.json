@@ -1,0 +1,86 @@
+{
+  "schema": "gig.native.continuation.configuration.v1",
+  "source": "3cbe7b32089c86a3899b3808b6fdebbad9e817d0",
+  "profiles": {
+    "GCC Release": {
+      "build_directory": "build/recovery-release",
+      "existing_cache": true,
+      "tests": 153,
+      "configuration": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:STRING": "/usr/bin/g++",
+        "GIG_BUILD_ITCH_STREAMING:BOOL": "ON",
+        "GIG_BUILD_PYTHON:BOOL": "ON",
+        "GIG_ENABLE_ASAN:BOOL": "OFF",
+        "GIG_ENABLE_UBSAN:BOOL": "OFF",
+        "GIG_WARNINGS_AS_ERRORS:BOOL": "ON"
+      },
+      "all_frozen_eight_checked": true,
+      "scope": "Full registered native/SDK CTest cohort; Python extension tests only in GCC Release"
+    },
+    "GCC Debug": {
+      "build_directory": "build/master-gcc-debug",
+      "existing_cache": true,
+      "tests": 149,
+      "configuration": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:STRING": "/usr/bin/g++",
+        "GIG_BUILD_ITCH_STREAMING:BOOL": "ON",
+        "GIG_BUILD_PYTHON:BOOL": "OFF",
+        "GIG_ENABLE_ASAN:BOOL": "OFF",
+        "GIG_ENABLE_UBSAN:BOOL": "OFF",
+        "GIG_WARNINGS_AS_ERRORS:BOOL": "ON"
+      },
+      "all_frozen_eight_checked": true,
+      "scope": "Full registered native/SDK CTest cohort; Python extension tests only in GCC Release"
+    },
+    "Clang Release": {
+      "build_directory": "build/master-clang-release",
+      "existing_cache": true,
+      "tests": 149,
+      "configuration": {
+        "CMAKE_BUILD_TYPE:STRING": "Release",
+        "CMAKE_CXX_COMPILER:STRING": "/workspace/gig-clang/root/usr/bin/clang++-19",
+        "GIG_BUILD_ITCH_STREAMING:BOOL": "ON",
+        "GIG_BUILD_PYTHON:BOOL": "OFF",
+        "GIG_ENABLE_ASAN:BOOL": "OFF",
+        "GIG_ENABLE_UBSAN:BOOL": "OFF",
+        "GIG_WARNINGS_AS_ERRORS:BOOL": "ON"
+      },
+      "all_frozen_eight_checked": true,
+      "scope": "Full registered native/SDK CTest cohort; Python extension tests only in GCC Release"
+    },
+    "Clang Debug": {
+      "build_directory": "build/master-clang-debug",
+      "existing_cache": true,
+      "tests": 149,
+      "configuration": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:STRING": "/workspace/gig-clang/root/usr/bin/clang++-19",
+        "GIG_BUILD_ITCH_STREAMING:BOOL": "ON",
+        "GIG_BUILD_PYTHON:BOOL": "OFF",
+        "GIG_ENABLE_ASAN:BOOL": "OFF",
+        "GIG_ENABLE_UBSAN:BOOL": "OFF",
+        "GIG_WARNINGS_AS_ERRORS:BOOL": "ON"
+      },
+      "all_frozen_eight_checked": true,
+      "scope": "Full registered native/SDK CTest cohort; Python extension tests only in GCC Release"
+    },
+    "GCC ASan+UBSan": {
+      "build_directory": "build/accelerated-sanitizer",
+      "existing_cache": true,
+      "tests": 40,
+      "configuration": {
+        "CMAKE_BUILD_TYPE:STRING": "Debug",
+        "CMAKE_CXX_COMPILER:STRING": "/usr/bin/g++",
+        "GIG_BUILD_ITCH_STREAMING:BOOL": "ON",
+        "GIG_BUILD_PYTHON:BOOL": "OFF",
+        "GIG_ENABLE_ASAN:BOOL": "ON",
+        "GIG_ENABLE_UBSAN:BOOL": "ON",
+        "GIG_WARNINGS_AS_ERRORS:BOOL": "ON"
+      },
+      "all_frozen_eight_checked": false,
+      "scope": "Targeted recovery/journal/book/aggregate/streaming tests"
+    }
+  }
+}

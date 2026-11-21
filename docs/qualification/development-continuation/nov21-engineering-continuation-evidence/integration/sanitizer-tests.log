@@ -1,0 +1,86 @@
+Internal ctest changing into directory: /workspace/gig-development/build/accelerated-sanitizer
+Test project /workspace/gig-development/build/accelerated-sanitizer
+      Start  33: itch.streaming_restart
+ 1/40 Test  #33: itch.streaming_restart .......................   Passed    0.20 sec
+      Start  36: itch.gzip_valid
+ 2/40 Test  #36: itch.gzip_valid ..............................   Passed    0.10 sec
+      Start  37: itch.gzip_errors
+ 3/40 Test  #37: itch.gzip_errors .............................   Passed    9.62 sec
+      Start  38: itch.gzip_limits
+ 4/40 Test  #38: itch.gzip_limits .............................   Passed    0.17 sec
+      Start  39: itch.gzip_allocation
+ 5/40 Test  #39: itch.gzip_allocation .........................   Passed    0.03 sec
+      Start  40: itch.source_hot_recovery
+ 6/40 Test  #40: itch.source_hot_recovery .....................   Passed    2.09 sec
+      Start  41: itch.completed_source_capsule
+ 7/40 Test  #41: itch.completed_source_capsule ................   Passed    3.02 sec
+      Start  42: itch.durable_checkpoint
+ 8/40 Test  #42: itch.durable_checkpoint ......................   Passed    1.66 sec
+      Start  43: itch.hot_context_checkpoint
+ 9/40 Test  #43: itch.hot_context_checkpoint ..................   Passed    1.92 sec
+      Start  44: itch.reconstruction_checkpoint
+10/40 Test  #44: itch.reconstruction_checkpoint ...............   Passed    0.32 sec
+      Start  47: itch.reconstruction_recovery_boundary
+11/40 Test  #47: itch.reconstruction_recovery_boundary ........   Passed    0.06 sec
+      Start  56: itch.reconstruction_restart
+12/40 Test  #56: itch.reconstruction_restart ..................   Passed    0.04 sec
+      Start  60: market_data.aggregate_depth
+13/40 Test  #60: market_data.aggregate_depth ..................   Passed    1.37 sec
+      Start  66: itch.auction_restart
+14/40 Test  #66: itch.auction_restart .........................   Passed    0.10 sec
+      Start  73: itch.admin_restart
+15/40 Test  #73: itch.admin_restart ...........................   Passed    0.08 sec
+      Start  81: itch.hy_restart
+16/40 Test  #81: itch.hy_restart ..............................   Passed    0.03 sec
+      Start  98: analytics.book_contracts
+17/40 Test  #98: analytics.book_contracts .....................   Passed    0.02 sec
+      Start  99: analytics.book_reference
+18/40 Test  #99: analytics.book_reference .....................   Passed    0.70 sec
+      Start 104: replay.hot_checkpoint
+19/40 Test #104: replay.hot_checkpoint ........................   Passed    0.09 sec
+      Start 105: replay.config
+20/40 Test #105: replay.config ................................   Passed    0.05 sec
+      Start 106: replay.continuity
+21/40 Test #106: replay.continuity ............................   Passed    0.02 sec
+      Start 107: replay.gaps
+22/40 Test #107: replay.gaps ..................................   Passed    0.02 sec
+      Start 108: replay.subevents
+23/40 Test #108: replay.subevents .............................   Passed    0.02 sec
+      Start 109: replay.multistream
+24/40 Test #109: replay.multistream ...........................   Passed    0.06 sec
+      Start 110: replay.filtering
+25/40 Test #110: replay.filtering .............................   Passed    0.02 sec
+      Start 111: replay.reset
+26/40 Test #111: replay.reset .................................   Passed    0.02 sec
+      Start 112: replay.recovery
+27/40 Test #112: replay.recovery ..............................   Passed    0.02 sec
+      Start 113: replay.atomicity
+28/40 Test #113: replay.atomicity .............................   Passed    0.14 sec
+      Start 114: replay.canonical
+29/40 Test #114: replay.canonical .............................   Passed    0.03 sec
+      Start 115: replay.batch
+30/40 Test #115: replay.batch .................................   Passed    0.01 sec
+      Start 116: book.basic
+31/40 Test #116: book.basic ...................................   Passed    0.05 sec
+      Start 117: book.cancel_execute
+32/40 Test #117: book.cancel_execute ..........................   Passed    0.02 sec
+      Start 118: book.replace
+33/40 Test #118: book.replace .................................   Passed    0.02 sec
+      Start 119: book.boundaries
+34/40 Test #119: book.boundaries ..............................   Passed    0.02 sec
+      Start 120: book.recovery
+35/40 Test #120: book.recovery ................................   Passed    0.01 sec
+      Start 121: book.allocations
+36/40 Test #121: book.allocations .............................   Passed    0.09 sec
+      Start 122: book.reference
+37/40 Test #122: book.reference ...............................   Passed   18.52 sec
+      Start 147: replay.journal_model
+38/40 Test #147: replay.journal_model .........................   Passed    1.46 sec
+      Start 148: replay.journal_allocation
+39/40 Test #148: replay.journal_allocation ....................   Passed    0.10 sec
+      Start 149: replay.journal_preoptimization_equivalence
+40/40 Test #149: replay.journal_preoptimization_equivalence ...   Passed    1.28 sec
+
+100% tests passed, 0 tests failed out of 40
+
+Total Test time (real) =  43.60 sec

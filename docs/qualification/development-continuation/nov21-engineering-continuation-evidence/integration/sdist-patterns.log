@@ -1,0 +1,8 @@
+test_current_patterns_preserve_sources_and_exclude_private_outputs (test_sdist_patterns.SourceDistributionPatterns.test_current_patterns_preserve_sources_and_exclude_private_outputs) ... ok
+test_negative_control_recursive_override_leaks_cache (test_sdist_patterns.SourceDistributionPatterns.test_negative_control_recursive_override_leaks_cache) ... ok
+test_negative_control_unanchored_basename_leaks (test_sdist_patterns.SourceDistributionPatterns.test_negative_control_unanchored_basename_leaks) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.008s
+
+OK
