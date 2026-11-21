@@ -36,6 +36,18 @@ class ItchSourceAdmission:
         if type(self.container)is not str or self.container not in('binary_file','single_gzip'):raise ValueError('itch_source_container')
         if type(self.first_frame)is not int or not 0<=self.first_frame<=2**64-3 or type(self.first_ordinal)is not int or not 0<=self.first_ordinal<=2**64-1:raise ValueError('itch_source_boundary')
 
+@dataclass(frozen=True)
+class ItchCompletionAdmission:
+    """Independently retain this evidence;the capsule never supplies its own trust."""
+    capsule_sha256:str
+    checkpoint:ItchAdmission
+    source:ItchSourceAdmission
+    def validate(self):
+        if type(self.capsule_sha256)is not str or not re.fullmatch('[0-9a-f]{64}',self.capsule_sha256):raise ValueError('itch_capsule_digest_required')
+        if type(self.checkpoint)is not ItchAdmission or type(self.source)is not ItchSourceAdmission:raise ValueError('itch_capsule_admission')
+        self.checkpoint.validate();self.source.validate()
+        if(self.source.capture,self.source.generation)!=(self.checkpoint.capture,self.checkpoint.generation):raise ValueError('itch_source_scope')
+
 def _validate_image(payload,admission,resource_budget_bytes):
     if type(admission)is not ItchAdmission:raise ValueError('itch_admission_required')
     admission.validate()
@@ -76,6 +88,29 @@ class ItchRecovery:
         owner=_checked(_native.complete_itch_source(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(int(source_admission.container=='single_gzip')),str(source_admission.first_frame),str(source_admission.first_ordinal)))
         result=ItchSourceCompletion.__new__(ItchSourceCompletion);result._owner=owner;result.original_admission=admission;result.source_admission=source_admission
         if result.status()['finished']is not True or result.status()['input_complete']is not True:raise ValueError('itch_source_incomplete')
+        return result
+    @classmethod
+    def create_completion_capsule(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        _validate_image(payload,admission,resource_budget_bytes)
+        if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
+        source_admission.validate()
+        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
+        if type(source)is not bytes or len(source)>MAX_BYTES or len(payload)+len(source)+24>MAX_BYTES:raise ValueError('itch_capsule_byte_budget')
+        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
+        if not hasattr(_native,'encode_itch_completion_capsule'):raise ValueError('itch_source_sdk_streaming_disabled')
+        raw=_checked(_native.encode_itch_completion_capsule(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(int(source_admission.container=='single_gzip')),str(source_admission.first_frame),str(source_admission.first_ordinal)))
+        return raw,ItchCompletionAdmission(hashlib.sha256(raw).hexdigest(),admission,source_admission)
+    @classmethod
+    def restore_completion_capsule(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
+        if type(admission)is not ItchCompletionAdmission:raise ValueError('itch_capsule_admission')
+        admission.validate()
+        if type(payload)is not bytes or not 82<=len(payload)<=MAX_BYTES:raise ValueError('itch_capsule_byte_budget')
+        if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:raise ValueError('itch_resource_budget')
+        if hashlib.sha256(payload).hexdigest()!=admission.capsule_sha256:raise ValueError('itch_capsule_digest')
+        if not hasattr(_native,'restore_itch_completion_capsule'):raise ValueError('itch_source_sdk_streaming_disabled')
+        a=admission.checkpoint;s=admission.source
+        owner=_checked(_native.restore_itch_completion_capsule(payload,admission.capsule_sha256,a.artifact_sha256,a.contract_sha256,a.implementation_sha256,a.capture,str(a.generation),str(resource_budget_bytes),s.source_sha256,str(int(s.container=='single_gzip')),str(s.first_frame),str(s.first_ordinal)))
+        result=ItchSourceCompletion.__new__(ItchSourceCompletion);result._owner=owner;result.original_admission=a;result.source_admission=s
         return result
     def describe(self):return _checked(self._owner.describe())
     def book(self,index,depth=10):

@@ -418,3 +418,19 @@ statements;source-boundKrakenbook/nativecoupling;precisepartial/finishedimage/sc
 recovery;targetadvisory/physical/ARM64qualificationwithspecificownerpermission.
 Finalenclosingcommit evidence/docsonly,notnewruntime;resolveexactremoteSHAfromGit.
 No application/server/providers/deploy/trade/spend/owneracceptance/backgroundpromise.
+
+## November21 continued engineering — completed-source capsule
+
+Actualbranch/worktrees/status/fetch verified cleanremote6e9713d6a4584569b7c4268a15a01146e4dd0162.
+Independent DRS,statement,Kraken,security/accessibility streams ownseparatefiles.
+New nativecompleted-source replaycapsule preservesactivev1format/defaults.
+Externalcapsule+checkpoint/source admissions authenticatewholeboundedcapsule before
+allocation;originalsreplayfrombytezero intoreadonlyfinishedowner,notopaquev1migration.
+535nativeassertions;plainrestore57/encode58 andgziprestore61/encode62 PMRfailpoints
+pass in5freshcompiler/sanitizer targetbuilds. FullReleaseCTest153 and8frozen hashes
+pass;11newSDK/33combinedcases includeactualchildrestore. Contract:
+COMPLETED_SOURCE_CAPSULE.md. REL02remainsPARTIAL;no provider/hardwaredurabilityclaim.
+Next:source-specifiedDRSV8,statementvintagecomparison,Kraken/nativecoordinator,
+passiveELFclosure andkeyboard/search fixes;thenintegrated/packagequalification.
+No reset/discard/forcepush,application/server/provider/deploy/trade/spend.
+November20targetwasnotfullymet;Nov21continuationdoesnotsilentlyextendacceptance.

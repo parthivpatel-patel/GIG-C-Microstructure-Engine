@@ -1,6 +1,7 @@
 #include "wire.hpp"
 #include "gig/itch/durable_checkpoint.hpp"
 #include "gig/itch/source_recovery.hpp"
+#include "gig/itch/completion_capsule.hpp"
 #include "gig/memory/tracked_resource.hpp"
 namespace gig::python {
 namespace {
@@ -22,6 +23,9 @@ public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source,bool complete=false):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(complete?itch::resume_complete_source(b,a,s,source,&memory_):itch::resume_hot_source(b,a,s,source,&memory_))){}
+#endif
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+ ItchRecovery(std::span<const std::byte>b,const itch::CompletionCapsuleAdmission&a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a.checkpoint),engine_(take(itch::restore_completion_capsule(b,a,&memory_))){}
 #endif
  py::dict status(){return api([&](){auto context=engine_.context().checkpoint(&memory_);if(!context)bad(ErrorCode::inconsistent_state,"itch.context_capture");py::dict out;const auto&s=engine_.summary();out["source_records"]=write(s.context_committed);out["native_records"]=write(s.native_committed);out["external_records"]=write(s.external_observations);out["next_frame"]=write(context.data->next_location.frame_offset.value());out["next_ordinal"]=write(context.data->next_location.ordinal.value());out["generation"]=write(admission_.generation);out["capture"]=py::str(admission_.capture.view());out["pmr_live_bytes"]=write(memory_.stats().live_bytes);out["pmr_peak_bytes"]=write(memory_.stats().peak_bytes);return out;});}
  py::dict completion(){return api([&](){const auto&s=engine_.summary();const auto&c=engine_.context().summary();py::dict out;out["source_records"]=write(s.context_committed);out["native_records"]=write(s.native_committed);out["external_records"]=write(s.external_observations);out["finished"]=s.finished;out["input_complete"]=s.input_complete;out["session_incomplete"]=c.session_incomplete;return out;});}
@@ -52,6 +56,21 @@ void bind_itch_recovery(py::module_&m){
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s,true));
+ });});
+ m.def("encode_itch_completion_capsule",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
+  const auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
+  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  itch::SourceRecoveryAdmission spec{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  TrackedResource memory(std::pmr::get_default_resource(),n);const auto result=take(itch::encode_completion_capsule(blob(bytes,itch::durable_max_bytes),a,blob(source,32U*1024U*1024U),spec,&memory));
+  return py::bytes(reinterpret_cast<const char*>(result.data()),result.size());
+ });});
+ m.def("restore_itch_completion_capsule",[](py::handle bytes,py::handle capsule_hash,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
+  const auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
+  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  itch::SourceRecoveryAdmission spec{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::completion_capsule_max_bytes),itch::CompletionCapsuleAdmission{digest(capsule_hash),a,spec},n));
  });});
 #endif
 }
