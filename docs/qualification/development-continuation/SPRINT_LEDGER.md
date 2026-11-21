@@ -347,3 +347,18 @@ Contract:COMPLETE_SOURCE_RECOVERY.md. REL02staysPARTIAL forpartialframes,finishe
 serialization,unknownschemas/arbitrarycompressedseek andhardware/observed evidence.
 Pending:typedV7,localinstalled/native/OSinventory,authoritychecklists andfullguarded
 integration/cleanpackaging. Noapplication/server/provider/deploy/trade/spend.
+
+### Passive installed/native/OS inventory prerequisite
+
+New boundedstdlib localartifact tool recoveredfrominterruptedsource;syntax repaired
+and35adversarialtests pass independently. Actualcurrentexecutor receipt enumerates
+24Python distributions/2151RECORD artifacts,2explicitnativeELFs and1437dpkg package
+records withOSidentity andexactsource hashes. Noimports/executables/networkscan.
+Recordself-consistency isnotpublisherauthentication;commit iscallerlabel,notbuild
+attestation. AdvisoryNOT_RUN;kernel/ELFclosure/OSpackagefileintegrity/privateedge
+clearance remainexcluded. SECURITY03staysPARTIAL.
+Contract:LOCAL_ARTIFACT_INVENTORY.md;script:inventory_local_artifacts.py.
+Actualcombinedreceipt:work/security-local-recovery/local-inventory-combined.json;
+finalreceiptwillretainbytes/hash. Nativeprecedingremoteverified
+eb83f8a5086d606b5f5177d30aefde0e14650a0f;fullReleaseCTest152pass.
+Next:cross-roleV7,exactoriginalauthority/freeoptions andguarded/packageintegration.
