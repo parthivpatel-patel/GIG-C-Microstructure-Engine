@@ -479,3 +479,17 @@ orunderlyingexact-value inference. ExistingAPI/default/UIadmission unchanged.
 retainedunderwork/nov21-statement-comparison withSHAreceipt. Limits4096rows/4MiB,
 originalenvelopesstill256KiB. Contract:SOURCE_STATEMENT_VINTAGE_COMPARISON.md.
 SEC02staysPARTIAL fororiginalcorpus/history/fullconformanceacceptance.
+
+### Passive explicit ELF dependency closure
+
+Statementcomparison remoteverifiedd2a888b61b994427e426bca3a8fe7278d1dc193a.
+Recovered ELFneeded/SONAME graph package reviewed, sourcepreserved and35focused
+tests independentlypass. Exact8namedartifacts/19bindings/0unresolved checked
+passively;originalactualmanifest andoutput hashes retained. No loadersearch/ldd/
+binaryexecution/environment-resolution oradvisoryscan. Root-sensitive/control
+pathgap fixedbeforefile-read;newregression addedwithoutrelaxingvalidgraph.
+Script inventory_elf_dependencies.py andcontract ELF_DEPENDENCY_BINDINGS.md bound
+ELF32/64,endian/dynamic/program/stringtable metadata andexplicit architecture/
+SONAME bindings;cycles/unresolved/unsupportedsemantics stayexplicit. SECURITY03
+staysPARTIAL foractualruntime/deployedclosure,version/reachability/advisory/edge
+acceptance. Newreceipts:work/nov21-elf-recovery/.
