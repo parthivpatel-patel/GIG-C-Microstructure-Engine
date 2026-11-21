@@ -1,4 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
+import {StatementComparison} from './StatementComparison';
 import {readOfflineJson,MAX_OFFLINE_BYTES} from './offlineJson';
 import {verifySourceAccounting,verifyInlineAudit} from './financialSourceContract';
 import type {SourceAccountingPacket,InlineAuditPacket} from './financialSourceContract';
@@ -45,6 +46,7 @@ export function SourceAccounting({symbol,cik}:{symbol:string;cik:string|null}){
    <SourceImportFeedback kind="inline" busy={inline.busy} error={inline.error}/>
    {inline.packet?.schema==='gig.backend.company_inline_source_audit.v1'&&inline.packet.instrument.symbol===symbol&&inline.packet.instrument.cik===cik&&<InlineAuditView packet={inline.packet}/>}
   </section>
+  <StatementComparison symbol={symbol} cik={cik}/>
  </section>;
 }
 

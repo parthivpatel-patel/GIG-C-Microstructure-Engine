@@ -18,8 +18,9 @@ function exactIntegerToken(token:string):void{
  if(integer < -9007199254740991n||integer>9007199254740991n)fail();
 }
 
-export function parseOfflineJson(text:string):unknown{
- if(typeof text!=='string'||!text.length||text.length>MAX_OFFLINE_BYTES||new TextEncoder().encode(text).byteLength>MAX_OFFLINE_BYTES)fail();
+export function parseBoundedOfflineJson(text:string,maxBytes:number,maxNodes:number,maxDepth=MAX_DEPTH):unknown{
+ if(!Number.isSafeInteger(maxBytes)||maxBytes<1||maxBytes>4*1024*1024||!Number.isSafeInteger(maxNodes)||maxNodes<1||maxNodes>320000||!Number.isSafeInteger(maxDepth)||maxDepth<1||maxDepth>36)fail();
+ if(typeof text!=='string'||!text.length||text.length>maxBytes||new TextEncoder().encode(text).byteLength>maxBytes)fail();
  let pos=0,nodes=0;
  const whitespace=()=>{while(pos<text.length&&' \t\r\n'.includes(text[pos]))pos++};
  const string=():string=>{
@@ -32,10 +33,10 @@ export function parseOfflineJson(text:string):unknown{
  };
  const number=/-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?/y;
  const value=(depth:number):void=>{
-  if(depth>MAX_DEPTH||++nodes>MAX_NODES)fail();whitespace();const c=text[pos];
+  if(depth>maxDepth||++nodes>maxNodes)fail();whitespace();const c=text[pos];
   if(c==='{'){
    pos++;whitespace();if(text[pos]==='}'){pos++;return}const keys=new Set<string>();
-   while(true){whitespace();if(++nodes>MAX_NODES)fail();const key=string();if(keys.has(key))fail();keys.add(key);whitespace();if(text[pos++]!==':')fail();value(depth+1);whitespace();const next=text[pos++];if(next==='}')return;if(next!==',')fail()}
+   while(true){whitespace();if(++nodes>maxNodes)fail();const key=string();if(keys.has(key))fail();keys.add(key);whitespace();if(text[pos++]!==':')fail();value(depth+1);whitespace();const next=text[pos++];if(next==='}')return;if(next!==',')fail()}
   }
   if(c==='['){pos++;whitespace();if(text[pos]===']'){pos++;return}while(true){value(depth+1);whitespace();const next=text[pos++];if(next===']')return;if(next!==',')fail()}}
   if(c==='"'){string();return}
@@ -46,14 +47,19 @@ export function parseOfflineJson(text:string):unknown{
  return JSON.parse(text) as unknown;
 }
 
-export async function readOfflineJson(file:Pick<Blob,'size'|'arrayBuffer'>,signal?:AbortSignal):Promise<unknown>{
- if(!Number.isSafeInteger(file.size)||file.size<1||file.size>MAX_OFFLINE_BYTES)fail();
+export function parseOfflineJson(text:string):unknown{return parseBoundedOfflineJson(text,MAX_OFFLINE_BYTES,MAX_NODES)}
+
+export async function readBoundedOfflineJson(file:Pick<Blob,'size'|'arrayBuffer'>,maxBytes:number,maxNodes:number,maxDepth=MAX_DEPTH,signal?:AbortSignal):Promise<unknown>{
+ if(!Number.isSafeInteger(maxBytes)||maxBytes<1||maxBytes>4*1024*1024)fail();
+ if(!Number.isSafeInteger(file.size)||file.size<1||file.size>maxBytes)fail();
  if(signal?.aborted)throw new DOMException('Offline import aborted','AbortError');
  // Browser Blob.size bounds this retained buffer. No claim about arbitrary JS
  // object implementations or global browser memory/prefetch behavior is made.
  const buffer=await file.arrayBuffer();
  if(signal?.aborted)throw new DOMException('Offline import aborted','AbortError');
- if(!(buffer instanceof ArrayBuffer)||buffer.byteLength!==file.size||buffer.byteLength>MAX_OFFLINE_BYTES)fail();
+ if(!(buffer instanceof ArrayBuffer)||buffer.byteLength!==file.size||buffer.byteLength>maxBytes)fail();
  let text:string;try{text=new TextDecoder('utf-8',{fatal:true}).decode(buffer)}catch{return fail()}
- return parseOfflineJson(text);
+ return parseBoundedOfflineJson(text,maxBytes,maxNodes,maxDepth);
 }
+
+export async function readOfflineJson(file:Pick<Blob,'size'|'arrayBuffer'>,signal?:AbortSignal):Promise<unknown>{return readBoundedOfflineJson(file,MAX_OFFLINE_BYTES,MAX_NODES,MAX_DEPTH,signal)}

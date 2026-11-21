@@ -96,9 +96,28 @@ incrementally and indexes selected source calculation membership instead of repe
 walking every taxonomy arc for every row. Resource excess yields no result. All
 inputs/collection state remain unchanged; returned nested data is detached.
 
-This new export is not implicitly admitted by existing 256 KiB source-accounting UI
-controls. A future UI/import integration requires its own strict schema, byte and
-semantic admission. Existing Company-v1/v2/vintage/history and Financial Intelligence
+The shared Financial/Stock Intelligence source panel now mounts a separate accessible
+comparison import. Its dedicated 4 MiB reader preserves the existing 256 KiB controls
+and rejects duplicate keys and inexact numeric metadata before Number conversion.
+Every nested source-accounting packet passes the existing strict validator. The new
+TypeScript consumer independently reconstructs adjacent source selection, row order,
+roles, exact values, aspect/type/accounting compatibility, calculation attachments,
+lineage and all status/provenance claims before checking the aggregate digest.
+Re-signing a forged derived artifact does not authorize it. Issuer/request/unmount
+guards reject stale asynchronous results; errors, busy and unavailable states are
+announced. The table retains exact cutoff nanoseconds, source origin, row/packet/
+source hashes, units and fact receipts, and explicitly disclaims restatement,
+underlying-value equality, full history and independent issuer authentication.
+
+`terminal/tests/statement_comparison_ui_fixtures.py` generates 19 actual backend
+variants, including eight cutoffs, unavailable originals, changed source roles,
+restriction paths, units, entities, required elements and conflicting calculations.
+The registered frontend test exercises Python export → strict TypeScript admission
+→ actual React table, adversarial re-signed changes and asynchronous lifetime
+protection. Root independently ran 191 focused frontend tests and 28 backend tests;
+TypeScript/Vite passed, with the existing large-chunk advisory. Logs are retained in
+`work/nov21-engineering-continuation/`. These are offline developer checks, not
+physical-browser, assistive-technology or owner acceptance. Existing Company-v1/v2/vintage/history and Financial Intelligence
 packet defaults and legacy artifact identities remain untouched. This package adds
 historical consistency diagnostics; it does not close SEC02's complete observed
 history, full conformance or corpus-backed statement-completeness criterion.

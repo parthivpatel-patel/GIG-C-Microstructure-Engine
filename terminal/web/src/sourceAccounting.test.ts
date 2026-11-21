@@ -9,19 +9,22 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {createSourceImportGuard} from './sourceImportGuard.ts';
 import {parseOfflineJson} from './offlineJson.ts';
 import {verifySourceAccounting,verifyInlineAudit} from './financialSourceContract.ts';
+const comparisonSource=new URL('./StatementComparison.tsx',import.meta.url);
+const comparisonJs=ts.transpileModule(readFileSync(comparisonSource,'utf8'),{compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+const comparisonModule='data:text/javascript;base64,'+Buffer.from(comparisonJs.replace(/from (["'])([^"']+)\1/g,(_,_q:string,name:string)=>`from ${JSON.stringify(import.meta.resolve(name.startsWith('.')&&!name.endsWith('.ts')?name+'.ts':name))}`)).toString('base64');
 const source=new URL('./SourceAccounting.tsx',import.meta.url);
 const jsx=ts.transpileModule(readFileSync(source,'utf8'),{compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
-const compiled=jsx.replace(/from (["'])([^"']+)\1/g,(_,_q:string,name:string)=>`from ${JSON.stringify(import.meta.resolve(name.startsWith('.')&&!name.endsWith('.ts')?name+'.ts':name))}`);
+const compiled=jsx.replace(/from (["'])([^"']+)\1/g,(_,_q:string,name:string)=>`from ${JSON.stringify(name==='./StatementComparison'?comparisonModule:import.meta.resolve(name.startsWith('.')&&!name.endsWith('.ts')?name+'.ts':name))}`);
 const {SourceAccounting,SourceAccountingView,InlineAuditView,SourceImportFeedback,readSourceEvidence}=await import('data:text/javascript;base64,'+Buffer.from(compiled).toString('base64'));
 const generated=JSON.parse(execFileSync(process.env.GIG_TEST_PYTHON||'python3',[fileURLToPath(new URL('../../tests/source_accounting_ui_fixtures.py',import.meta.url))],{encoding:'utf8',timeout:30000,maxBuffer:4*1024*1024})) as {accounting:[string,unknown][];inline:[string,unknown][]};
 
-test('actual offline panel names both file controls and leaves financial data absent until admission',()=>{
+test('actual offline panel names all three file controls and leaves financial data absent until admission',()=>{
  const html=renderToStaticMarkup(createElement(SourceAccounting,{symbol:'AAPL',cik:'0000320193'}));
  assert.match(html,/aria-label="Original-source accounting and inline audit"/);assert.match(html,/Open source-accounting export/);assert.match(html,/Open original-inline audit export/);
- assert.equal((html.match(/type="file"/g)||[]).length,2);assert.equal((html.match(/aria-busy="false"/g)||[]).length,2);assert.match(html,/256 KiB/);assert.match(html,/read only and make no provider request/);assert.match(html,/Missing and conflicting values remain unavailable/);assert.doesNotMatch(html,/<table|type="submit"|href="https?:/);
+ assert.equal((html.match(/type="file"/g)||[]).length,3);assert.equal((html.match(/aria-busy="false"/g)||[]).length,3);assert.match(html,/256 KiB/);assert.match(html,/read only and make no provider request/);assert.match(html,/Missing and conflicting values remain unavailable/);assert.doesNotMatch(html,/<table|type="submit"|href="https?:/);
 });
-test('unknown CIK disables both local admission controls with an announced explanation',()=>{
- const html=renderToStaticMarkup(createElement(SourceAccounting,{symbol:'UNKNOWN',cik:null}));assert.equal((html.match(/disabled=""/g)||[]).length,2);assert.match(html,/role="status">An exact SEC issuer identity/);assert.doesNotMatch(html,/<table/);
+test('unknown CIK disables all local admission controls with an announced explanation',()=>{
+ const html=renderToStaticMarkup(createElement(SourceAccounting,{symbol:'UNKNOWN',cik:null}));assert.equal((html.match(/disabled=""/g)||[]).length,3);assert.match(html,/role="status">An exact SEC issuer identity/);assert.doesNotMatch(html,/<table/);
 });
 test('actual import feedback announces progress and escaped validation errors',()=>{
  for(const kind of ['accounting','inline']){
