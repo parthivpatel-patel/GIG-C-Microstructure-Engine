@@ -63,6 +63,20 @@ class ItchRecovery:
         from dataclasses import replace
         result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
         return result
+    @classmethod
+    def complete_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        """Verify and finish one complete supplied container; no terminal V1 image."""
+        _validate_image(payload,admission,resource_budget_bytes)
+        if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
+        source_admission.validate()
+        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
+        if type(source)is not bytes or len(source)>MAX_BYTES:raise ValueError('itch_source_byte_budget')
+        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
+        if not hasattr(_native,'complete_itch_source'):raise ValueError('itch_source_sdk_streaming_disabled')
+        owner=_checked(_native.complete_itch_source(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(int(source_admission.container=='single_gzip')),str(source_admission.first_frame),str(source_admission.first_ordinal)))
+        result=ItchSourceCompletion.__new__(ItchSourceCompletion);result._owner=owner;result.original_admission=admission;result.source_admission=source_admission
+        if result.status()['finished']is not True or result.status()['input_complete']is not True:raise ValueError('itch_source_incomplete')
+        return result
     def describe(self):return _checked(self._owner.describe())
     def book(self,index,depth=10):
         if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')
@@ -89,3 +103,16 @@ class ItchRecovery:
         for v in(frame_offset,ordinal):
             if type(v)is not int or not 0<=v<=2**64-1:raise ValueError('itch_source_position')
         return _checked(self._owner.process(payload,str(frame_offset),str(ordinal)))
+
+class ItchSourceCompletion:
+    """Read-only completed reconstruction. Original checkpoint metadata stays separate.
+
+    Supplied source/container completion is not independent exchange completeness.
+    Finished-owner checkpoint serialization and further processing remain unsupported.
+    """
+    def status(self):return _checked(self._owner.completion())
+    def describe(self):return _checked(self._owner.describe())
+    def canonical(self):return _checked(self._owner.canonical())
+    def book(self,index,depth=10):
+        if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')
+        return _checked(self._owner.book(str(index),str(depth)))

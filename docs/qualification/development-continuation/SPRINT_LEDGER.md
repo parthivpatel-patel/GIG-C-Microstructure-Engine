@@ -333,3 +333,17 @@ Existingbookadapter/defaults/native unchanged;book/nativecoupling andrealprovide
 qualification remain explicit gaps. Contract:KRAKEN_TRADE_STATUS_SESSION.md.
 Native/SDKcompletion,typedV7,localinventory/authority evidence remainpending.
 All50statusesunchanged. Noapplication/server/providerconnection/deployment/trade/spend.
+
+### Verified-container terminal native/SDK recovery
+
+Krakenpublicsession remote independentlyverified8673e6bddcc982fd8a86252b8bd6ce231acec693.
+Recovered nativeextension now has explicit resume_complete_source plain/sole-gzip
+terminator+EOF/trailer validation andsealedread-only SDKowner;originalv1codec and
+resume_hot_source defaults unchanged. 11newSDK+11existing sourceproduct tests pass,
+includingreal childprocess restore. Native331assertions/66completionPMRfailpoints
+pass across freshlyrebuilt GCC/Clang Debug/Release andASan+UBSan source-recovery
+targets. All8freshlyrelinked frozen hashes match protectedbaseline.
+Contract:COMPLETE_SOURCE_RECOVERY.md. REL02staysPARTIAL forpartialframes,finishedimage
+serialization,unknownschemas/arbitrarycompressedseek andhardware/observed evidence.
+Pending:typedV7,localinstalled/native/OSinventory,authoritychecklists andfullguarded
+integration/cleanpackaging. Noapplication/server/provider/deploy/trade/spend.

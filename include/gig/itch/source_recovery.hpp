@@ -22,4 +22,14 @@ struct SourceRecoveryAdmission {
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
     std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+// Explicit complete-source profile. The durable input remains an accepted active
+// Version1 boundary; replay validates its committed prefix without applying it.
+// Require the BinaryFile zero-length terminator at exact EOF and,for gzip,the
+// verified complete single-member trailer before sealing the isolated candidate.
+// Completion is a supplied-container fact,not observed exchange completeness.
+// The returned owner is finished;further process/hot_checkpoint calls fail. This
+// does not introduce terminal-image serialization or migrate Version1 images.
+gig::Result<SyntheticReconstructor> resume_complete_source(std::span<const std::byte> checkpoint,
+    const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
+    std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 }

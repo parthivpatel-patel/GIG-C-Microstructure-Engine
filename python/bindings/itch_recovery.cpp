@@ -21,9 +21,10 @@ class ItchRecovery {
 public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
- ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::resume_hot_source(b,a,s,source,&memory_))){}
+ ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source,bool complete=false):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(complete?itch::resume_complete_source(b,a,s,source,&memory_):itch::resume_hot_source(b,a,s,source,&memory_))){}
 #endif
  py::dict status(){return api([&](){auto context=engine_.context().checkpoint(&memory_);if(!context)bad(ErrorCode::inconsistent_state,"itch.context_capture");py::dict out;const auto&s=engine_.summary();out["source_records"]=write(s.context_committed);out["native_records"]=write(s.native_committed);out["external_records"]=write(s.external_observations);out["next_frame"]=write(context.data->next_location.frame_offset.value());out["next_ordinal"]=write(context.data->next_location.ordinal.value());out["generation"]=write(admission_.generation);out["capture"]=py::str(admission_.capture.view());out["pmr_live_bytes"]=write(memory_.stats().live_bytes);out["pmr_peak_bytes"]=write(memory_.stats().peak_bytes);return out;});}
+ py::dict completion(){return api([&](){const auto&s=engine_.summary();const auto&c=engine_.context().summary();py::dict out;out["source_records"]=write(s.context_committed);out["native_records"]=write(s.native_committed);out["external_records"]=write(s.external_observations);out["finished"]=s.finished;out["input_complete"]=s.input_complete;out["session_incomplete"]=c.session_incomplete;return out;});}
  py::dict canonical(){return api([&](){py::list out;for(std::size_t n=0;n<engine_.config().book_count;++n){auto c=take(engine_.engine(n)->canonical());out.append(py::str(c.data(),c.size()));}return out;});}
  py::dict checkpoint(){return api([&]()->py::object{auto state=take(engine_.hot_checkpoint(&memory_));auto b=take(itch::encode_hot_checkpoint(state,admission_.capture,admission_.generation,admission_.implementation_sha256,&memory_));return py::bytes(reinterpret_cast<const char*>(b.data()),b.size());});}
  py::dict describe(){return api([&](){const auto&c=engine_.config();py::dict out;out["source"]=py::str(c.source.source.view());out["session"]=py::str(c.source.session.view());out["run_id"]=py::str(c.run_id.view());out["seeded"]=c.seed_sha256.has_value();out["fixture_sha256"]=py::str(c.initialization.fixture_sha256.view());out["generator_seed"]=write(c.initialization.seed);out["source_price_quantum"]=write(c.context_policy.price_quantum);out["source_lot_size"]=write(c.context_policy.lot_size);out["initial_frame"]=write(c.context_policy.first_location.frame_offset.value());out["initial_ordinal"]=write(c.context_policy.first_location.ordinal.value());py::list books;for(std::size_t n=0;n<c.book_count;++n){const auto&b=*c.bindings[n];py::dict row;row["index"]=write(n);row["stock"]=py::str(b.stock.view());row["locate"]=write(b.locate.value());row["rules"]=write(b.rules);row["limits"]=write(b.limits);books.append(row);}out["books"]=books;return out;});}
@@ -33,7 +34,7 @@ public:
 };
 }
 void bind_itch_recovery(py::module_&m){
- py::class_<ItchRecovery>(m,"_ItchRecovery").def("describe",&ItchRecovery::describe).def("book",&ItchRecovery::book).def("rebind",&ItchRecovery::rebind).def("status",&ItchRecovery::status).def("canonical",&ItchRecovery::canonical).def("checkpoint",&ItchRecovery::checkpoint).def("process",&ItchRecovery::process);
+ py::class_<ItchRecovery>(m,"_ItchRecovery").def("describe",&ItchRecovery::describe).def("book",&ItchRecovery::book).def("rebind",&ItchRecovery::rebind).def("status",&ItchRecovery::status).def("completion",&ItchRecovery::completion).def("canonical",&ItchRecovery::canonical).def("checkpoint",&ItchRecovery::checkpoint).def("process",&ItchRecovery::process);
  m.def("restore_itch_checkpoint",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget){return api([&](){auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n));});});
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  m.def("resume_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
@@ -43,6 +44,14 @@ void bind_itch_recovery(py::module_&m){
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s));
+ });});
+ m.def("complete_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
+  auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
+  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");
+  const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s,true));
  });});
 #endif
 }

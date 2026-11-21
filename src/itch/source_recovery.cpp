@@ -1,6 +1,7 @@
 #include "gig/itch/source_recovery.hpp"
 namespace gig::itch {
-gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
+namespace {
+gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete)noexcept {
  using R=gig::Result<SyntheticReconstructor>;
  const auto bad=[](gig::ErrorCode c,std::string_view f){return R::failure(c,f);};
  if(!r||source.size()>32U*1024U*1024U||a.gzip.max_decompressed_bytes>32U*1024U*1024U||a.gzip.max_compressed_bytes>32U*1024U*1024U||a.framing.max_records>4096||a.framing.max_stream_bytes>32U*1024U*1024U)return bad(gig::ErrorCode::capacity,"source_recovery.budget");
@@ -12,7 +13,7 @@ gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte>
  const auto prefix_count=engine.receipts().size();std::size_t seen=0;gig::Error error{};
  const auto consume=[&](std::span<const std::byte>b){
   while(!b.empty()&&!error){auto frame=framer.data->feed(b);if(frame.error||!frame.consumed){error={gig::ErrorCode::malformed,"source_recovery.framing"};break;}b=b.subspan(frame.consumed);
-   if(frame.status==FrameStatus::terminal){error={gig::ErrorCode::unsupported,"source_recovery.terminal_position"};break;}
+   if(frame.status==FrameStatus::terminal&&!complete){error={gig::ErrorCode::unsupported,"source_recovery.terminal_position"};break;}
    if(frame.frame){if(seen<prefix_count){const auto&receipt=engine.receipts()[seen];auto decoded=decode(frame.frame->payload,frame.frame->location,receipt.source.provenance,engine.config().context_policy.decode_profile);
      if(!decoded||*decoded.data!=receipt.source){error={gig::ErrorCode::identity_mismatch,"source_recovery.committed_prefix"};break;}}
     else {auto step=engine.process(frame.frame->payload,frame.frame->location,engine.config().source.provenance);if(!step.committed){error=step.native_error?step.native_error:gig::Error{gig::ErrorCode::recovery_required,"source_recovery.continuation"};break;}}
@@ -28,8 +29,16 @@ gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte>
    if(!error){auto finish=gzip.data->finish(EndKind::source_eof);if(finish.error||!finish.member_verified||!finish.complete)return bad(gig::ErrorCode::malformed,"source_recovery.gzip_truncated");}}
  }
  if(error)return bad(error.code,error.field);
- const auto finish=framer.data->finish(EndKind::bounded_prefix);
- if(finish.error||finish.residual_bytes||seen<prefix_count)return bad(gig::ErrorCode::malformed,"source_recovery.incomplete_prefix");
+ const auto finish=framer.data->finish(complete?EndKind::source_eof:EndKind::bounded_prefix);
+ if(finish.error||finish.residual_bytes||seen<prefix_count||(complete&&!finish.session_complete))return bad(gig::ErrorCode::malformed,"source_recovery.incomplete_prefix");
+ if(complete){const auto summary=engine.finish(ContextEnd::declared_source_complete);if(!summary.finished||!summary.input_complete)return bad(gig::ErrorCode::recovery_required,"source_recovery.incomplete_context");}
  return candidate;
+}
+}
+gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
+ return resume_source(bytes,trusted,source,a,r,false);
+}
+gig::Result<SyntheticReconstructor> resume_complete_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
+ return resume_source(bytes,trusted,source,a,r,true);
 }
 }
