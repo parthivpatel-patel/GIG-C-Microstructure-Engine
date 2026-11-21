@@ -12,7 +12,8 @@ NEGATIVE_ONLY_PROFILE='NEGATIVE_ONLY_EXPLICIT_HYPERCUBES_V5'
 TYPED_PROFILE='DIRECT_CLOSED_TYPED_HYPERCUBE_V6'
 CROSS_ROLE_PROFILE='ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7'
 INHERITED_CROSS_ROLE_PROFILE='ORIGINAL_DTS_INHERITED_CLOSED_EXPLICIT_V8'
-PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE)
+EFFECTIVE_CROSS_ROLE_PROFILE='ORIGINAL_DTS_EFFECTIVE_CLOSED_EXPLICIT_V9'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -53,6 +54,9 @@ def networks(linkbases,locators,*,node_provenance=False):
 
 def corroborate(parsed,dts,*,profile=PROFILE,documents=None,allow_observed=False,instance_uri=None):
  if profile not in PROFILES:raise XBRLError('drs_profile_unsupported')
+ if profile==EFFECTIVE_CROSS_ROLE_PROFILE:
+  from .xbrl_effective_cross_role import corroborate_effective_cross_role
+  return corroborate_effective_cross_role(parsed,dts,documents,allow_observed,instance_uri)
  if profile==INHERITED_CROSS_ROLE_PROFILE:
   from .xbrl_inherited_cross_role import corroborate_inherited_cross_role
   return corroborate_inherited_cross_role(parsed,dts,documents,allow_observed,instance_uri)
