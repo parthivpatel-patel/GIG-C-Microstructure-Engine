@@ -25,8 +25,9 @@ names += ['terminal.providers.test_kraken_ordered','terminal.providers.test_krak
 names += ['terminal.providers.test_'+name for name in ('recovery_hardening','supervisor','coinbase_supervisor','transport','kraken','integrity','kraken_admin','differential')]
 names += ['terminal.stocks.test_sec_expansion.Expansion.'+n for n in selected]
 names += ['terminal.stocks.test_xbrl_typed_hypercubes','terminal.providers.test_kraken_depth_session','terminal.stocks.test_financial_intelligence_product']
+names += ['terminal.stocks.test_xbrl_cross_role','terminal.providers.test_kraken_public_session','terminal.test_itch_source_completion']
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=967
+expected=1042
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'application_constructed':app._application is not None,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}
