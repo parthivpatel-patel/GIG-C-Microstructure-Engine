@@ -1,0 +1,36 @@
+✔ global search is a named collapsed combobox with persistent polite status and keyboard instructions (10.004649ms)
+✔ actual populated search markup links one listbox and exact named options to its combobox (1.581975ms)
+✔ each concurrently rendered search owns distinct popup and instruction identities (2.610034ms)
+✔ one result and empty/error responses have correctly escaped live announcements without phantom options (2.704019ms)
+✔ query and result labels cannot become HTML or change option identities (1.601137ms)
+✔ arrow entry and wrap selection follows only the admitted current result count (0.690553ms)
+✔ Enter chooses only a valid active result; untouched Enter remains normal form submission (0.218039ms)
+✔ Escape dismisses an open result set without supplying a replacement query (0.10061ms)
+✔ Tab, text editing and native Home/End navigation remain unhandled (0.948841ms)
+✔ input-method composition and modifier keys never choose or dismiss a result (0.668253ms)
+✔ no results or invalid result counts cannot activate a phantom result (0.50251ms)
+✔ changed query, replacement labels or reordered results invalidate the old active descendant (0.477455ms)
+✔ successive popup actions preserve one DOM input focus contract and never infer a company (0.196321ms)
+✔ real order-book markup exposes exact integer values in native keyboard disclosures without hover titles (37.924519ms)
+✔ book table scroll regions are named, rows keep native table semantics and no inert row tab stops remain (2.271642ms)
+✔ raw disclosures retain accepted ordering, ask identity, origin, scales and displayed-only cumulative scope (3.219746ms)
+✔ empty bid or ask books do not manufacture an exact level or numeric result (1.408522ms)
+✔ compact and expanded book disclosure counts respect existing visible depth bounds (22.870177ms)
+✔ replacing the same query admits only the latest result when old success arrives last (0.338303ms)
+✔ query change rejects late success and captured stale search handlers before loading (0.159296ms)
+✔ late source errors cannot replace the current query feedback (0.328109ms)
+✔ selection or Escape dismissal invalidates in-flight work and preselection same-query handlers (0.2369ms)
+✔ unmount blocks pending success, errors and old handlers without launching new work (0.135104ms)
+✔ effect cleanup/replay accepts current handlers without resurrecting old requests (0.221302ms)
+✔ current asynchronous or synchronous failures remain announced only for their current request (0.329024ms)
+✔ query mutation is immediate before a React rerender and cannot mutate captured ticket identity (0.11956ms)
+✔ actual selection admission refuses captured callbacks after query, dismissal, prior selection or unmount (0.141239ms)
+✔ same-query replacement invalidates old rendered option callbacks before rerender (0.083144ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1173.996393

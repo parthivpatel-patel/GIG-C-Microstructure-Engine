@@ -1,0 +1,1 @@
+{"advisory_analysis": "NOT_RUN", "artifacts": 8, "edges": 19, "inventory_sha256": "d34156ca2f4689ce34be9dd63e9da030c4bbf7022fe8a94cad355fa3256309b1", "status": "EXPLICIT_DT_NEEDED_BINDINGS_VERIFIED", "target_qualified": false, "unresolved": 0}

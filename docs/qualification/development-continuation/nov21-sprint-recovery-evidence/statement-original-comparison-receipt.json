@@ -1,0 +1,12 @@
+{
+  "schema": "gig.statement_vintage_comparison.authored_receipt.v1",
+  "path": "work/nov21-statement-comparison/original-comparison.json",
+  "bytes": 221305,
+  "sha256": "a35d2105151a6e45bbe5c8106a5b1bde82fbabae368ed5426626ed5bca3e96e7",
+  "packet_sha256": "d9d804a7f6b63c1aceb139eaef248735cfa105e96eea5d7c18f58a5517f648c6",
+  "source_envelopes": 2,
+  "comparisons": 1,
+  "provider_requested": false,
+  "application_started": false,
+  "fixture_origin": "HISTORICAL_SYNTHETIC"
+}

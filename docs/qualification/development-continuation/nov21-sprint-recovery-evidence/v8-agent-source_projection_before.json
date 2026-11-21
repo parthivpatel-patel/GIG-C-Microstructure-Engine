@@ -1,0 +1,14 @@
+[
+  {
+    "case": "duplicate_arc_node",
+    "pre_repair_consumer": "ACCEPTED_IMPOSSIBLE_NODE_BINDING"
+  },
+  {
+    "case": "conflicting_link_role",
+    "pre_repair_consumer": "ACCEPTED_IMPOSSIBLE_NODE_BINDING"
+  },
+  {
+    "case": "conflicting_role_type_node",
+    "pre_repair_consumer": "ACCEPTED_IMPOSSIBLE_NODE_BINDING"
+  }
+]

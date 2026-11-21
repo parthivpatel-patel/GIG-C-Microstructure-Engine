@@ -1,0 +1,68 @@
+{
+  "schema": "gig.accessibility.recovered_checks.v1",
+  "focused": 28,
+  "frontend_tests_executed": 345,
+  "frontend_failed": 0,
+  "frontend_skipped": 0,
+  "expected_integrated_after_registration": 373,
+  "typescript": "PASS via actual tsc -b/Vite build",
+  "vite": "PASS",
+  "application_started": false,
+  "browser_started": false,
+  "provider_requested": false,
+  "scope": "Actual React leaf SSR and actual keyboard/request/selection helpers used by App;no physical DOM/AT qualification",
+  "repair_findings": [
+    "Recovered App already guarded query-context selection;request replacement still needed a distinct rendered-selection revision",
+    "Separate selection revision rejects stale same-query options while close/activate retains current selection and invalidates pending async tickets",
+    "Recovered verification.json represented initial18tests, currentfocused28includes8asyncand2selectioncases",
+    "Initial new test assertions narrowed picked to never[] under Node assertion typings;identical snapshot assertions restore typechecking without weakening semantics"
+  ],
+  "logs": {
+    "focused.log": {
+      "bytes": 3001,
+      "sha256": "b723bee902f54c9b31dbbde858eb55ceed6c920adc0632dddd20c8ec3dd74ead"
+    },
+    "build.log": {
+      "bytes": 2428,
+      "sha256": "840087513f850c59de1b24de5fd70639917035fdaec78b494761310564824ede"
+    },
+    "frontend.log": {
+      "bytes": 32724,
+      "sha256": "9bba4ba577303b6dcd3d1688ac6fcb4cbb06a6edf78ce0505bfec0244439d676"
+    }
+  },
+  "owned_files": {
+    "terminal/web/src/App.tsx": {
+      "bytes": 38928,
+      "sha256": "59046175e00a1d59b89c64f36aeb6bd73439d7feb6b63f4a199e0457df631ca7"
+    },
+    "terminal/web/src/TerminalHeader.tsx": {
+      "bytes": 5261,
+      "sha256": "ca215c5fa54a058ce8fdc5cc735f6c83e27263e2fb10b8422244ba89088147bb"
+    },
+    "terminal/web/src/OrderBook.tsx": {
+      "bytes": 3190,
+      "sha256": "646281aaa3e22bf7875506f2c322fa0722de136a2edbef4d5263a94326564b3e"
+    },
+    "terminal/web/src/workstation.css": {
+      "bytes": 47767,
+      "sha256": "f53ef3b80908ab7fe9bae6ce465c37c04589d810f1c12856b6446e879150eb27"
+    },
+    "terminal/web/src/searchKeyboard.ts": {
+      "bytes": 1494,
+      "sha256": "509d48357cf5ea91b8baf0abcb441ac5da5020dc7f19f6af47e13e5484212b69"
+    },
+    "terminal/web/src/searchRequestGuard.ts": {
+      "bytes": 1985,
+      "sha256": "50ca4cfd8d9a6c97e673844adbd9d7fc1f036a7141424e3ab2b3a3f666da3a3b"
+    },
+    "terminal/web/src/accessibilityNavigation.test.ts": {
+      "bytes": 17722,
+      "sha256": "35fe304e7b32865cded67dc15a1d0f38464f95ce59adcbd27c6cd8f280d9d783"
+    },
+    "docs/qualification/development-continuation/KEYBOARD_SEARCH_AND_EXACT_BOOK_ACCESSIBILITY.md": {
+      "bytes": 9081,
+      "sha256": "35f78d6e7642fc022f6d042f3271e8a16177cfd50f266b547a414f54b56aa39c"
+    }
+  }
+}

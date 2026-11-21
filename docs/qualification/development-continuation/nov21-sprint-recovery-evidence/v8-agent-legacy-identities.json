@@ -1,0 +1,90 @@
+{
+  "baseline": "6e9713d6a4584569b7c4268a15a01146e4dd0162",
+  "comparisons": 14,
+  "identities": [
+    {
+      "artifact_sha256": "55eb901731335672f2404ab14398df7b6d1e2cbdc89a46fdc4c4190dd9d970a0",
+      "profile": "EXPLICIT_CLOSED_HYPERCUBE_V1",
+      "selected_sha256": "de744700ff47d735f8ea30c3944244f1c59ed0a24cd90f094a9a245f25054d15",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "a466020788a5a1cb5fd3291dde638585c434f18da3ccb4780536f9541270dc7b",
+      "profile": "EXPLICIT_CLOSED_HYPERCUBE_V1",
+      "selected_sha256": "be8e83416fa3e0e2796846e2920bacdae890d5e5d91dbdea6dd5433c9d641194",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "eb159d33a05b17c21816a1537976840e4e0cf9efaf1896f4f871265bf96e1915",
+      "profile": "DIRECT_EXPLICIT_HYPERCUBE_V2",
+      "selected_sha256": "615479b175526f5e5cb8054036be83734b3fe4fa0d75991810df98e62a4af1fb",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "5ea0c37e8a551663b791204b32b2837abbdfaa82d820aa4c695beb8772d61504",
+      "profile": "DIRECT_EXPLICIT_HYPERCUBE_V2",
+      "selected_sha256": "98772d87b35d937d3db05c736a59684a20676303ca9a38b4e4d08673135a4334",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "ea2882c2a88807ec7a8d100cba3d1c41f16290fc79e37fdc3e65e888b44f8886",
+      "profile": "INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3",
+      "selected_sha256": "c4d8fd112feed3d775159076eef71dc0efc69e51fa7f433cea6477dbd3b40c2c",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "a47e659a03bec7f6a5c30ba9eab7dfc7c42ebaa201cdbf2b5cc922a091c38160",
+      "profile": "INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3",
+      "selected_sha256": "63b4846993a417eef9c61e665705c02a78297985a6e4408841c40bfd18ad91b3",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "f108c7ac864c16e76674d1262f108a576e333e580936336800eed5283c0a9cc4",
+      "profile": "INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4",
+      "selected_sha256": "fc7cd527c107c701e6859027ecaf0981572e50da8d2d83e78328e3568941fee5",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "f5afdb0f25af1de811c95374835fbefa447dbf35b630c12964b4635093f2aa89",
+      "profile": "INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4",
+      "selected_sha256": "ff6e207ff50d5b4f5f77ca48da9db29caf99508fa7522d35b889f53cd12c9b34",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "6224fdc20227e6b3d8c28a150e0504a0abf20c341146bab352ce369677a091a3",
+      "profile": "NEGATIVE_ONLY_EXPLICIT_HYPERCUBES_V5",
+      "selected_sha256": "a058a18b5862312a54f2ff826ecd25f4e9aef89109b4395616d836f6133e4888",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "ebaa2ffa4341c4a67a880a04a6ca40e2847cfa3819e3c6849e37f7ff610da0ed",
+      "profile": "NEGATIVE_ONLY_EXPLICIT_HYPERCUBES_V5",
+      "selected_sha256": "c8aec49e47d33368edd750239b4606660d49de238221f51a388bd5b2c2e250a8",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "ae634207db19b78376f900d468cb2f48d3990bda32ba1002677e989e8e6461d8",
+      "profile": "DIRECT_CLOSED_TYPED_HYPERCUBE_V6",
+      "selected_sha256": "166e7bc6084ce6932d02e825a4eb01cc464344b2d40b4e523205f0585f165b46",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "484447515d4e5989338202408e730ac103d4f11bf992dfb07b73ba9457cf0bae",
+      "profile": "DIRECT_CLOSED_TYPED_HYPERCUBE_V6",
+      "selected_sha256": "b9ab1fc834384185b9e80972cc7d0022cd077d5b37c27757a3795abc19475cf9",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "5ba7d3910d8da5517e7f7644c5f349945102d24cd451e9fa38e91b15d1d78ba2",
+      "profile": "ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7",
+      "selected_sha256": "da5577b907e0e83ce6ec2d4a9bdd6017fdd839f349e8e5e2c35ae4ce22bd2b47",
+      "unchanged": true
+    },
+    {
+      "artifact_sha256": "4c977ed580a12cd9def03e329d52af7fe157251f76ace07723d20225ceda339a",
+      "profile": "ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7",
+      "selected_sha256": "ee6011ad3785267cdbae8a4a7f78914639152fba2aa0551d331faeae2a823814",
+      "unchanged": true
+    }
+  ]
+}

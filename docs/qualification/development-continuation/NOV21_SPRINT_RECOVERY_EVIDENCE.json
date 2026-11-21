@@ -1,0 +1,1293 @@
+{
+  "schema": "gig.nov21.sprint_recovery.evidence.v1",
+  "date": "2026-11-21",
+  "timezone": "America/New_York",
+  "original_engineering_target": "2026-11-20",
+  "target_fully_met": false,
+  "engineering_complete": false,
+  "branch": "development/gig-ui-redesign",
+  "protected_nov20_delivery_baseline": "7cd99d4afd98f58330732ecfc0fd0b3303c49a3b",
+  "preceding_full_delivery": "6e9713d6a4584569b7c4268a15a01146e4dd0162",
+  "starting_verified_remote": "67ab987c9a7e6fc5e9c4fd24dab3fbfea2e09c0e",
+  "tested_integrated_source": "ec255121d070f80e7e92d958f223bf0701baa806",
+  "verified_runtime_remote": "ec255121d070f80e7e92d958f223bf0701baa806",
+  "enclosing_delivery_commit": "Documentation/evidence only;resolve exact final remote SHA from Git. Tested runtime/source packages remain bound to tested_integrated_source.",
+  "verified_checkpoints": {
+    "Completed-source capsule": "406f88f80a3f7ad802be30981983813add93d6c3",
+    "Kraken native coordinator": "67ab987c9a7e6fc5e9c4fd24dab3fbfea2e09c0e",
+    "Inherited multi-cube DRS V8": "84ef815c02d7bb7e776fd572e7195a90f7e6c262",
+    "Source-vintage statement comparison": "d2a888b61b994427e426bca3a8fe7278d1dc193a",
+    "Passive ELF dependency bindings": "abe226763c156eecc428d474aa89a61cca48f6d8",
+    "Keyboard/search accessibility": "3a132770470b2c984f9f70f38b03c3c5cb2f0182",
+    "Integrated guarded source": "ec255121d070f80e7e92d958f223bf0701baa806"
+  },
+  "recovery": {
+    "original_workspace_preserved": true,
+    "uncommitted_work_and_logs_preserved": true,
+    "previously_published_two_packages_preserved": true,
+    "reset_discard_or_force_push": false
+  },
+  "no_launch_python": {
+    "app_factory_allowed": false,
+    "application_constructed": false,
+    "errors": 0,
+    "expected": 1153,
+    "failures": 0,
+    "schema": "gig.no_launch.developer_tests.v1",
+    "scope": "Explicit developer subset;not full API,browser,provider or final acceptance",
+    "selected_names": [
+      "terminal.stocks.test_acceptance",
+      "terminal.stocks.test_live_checkpoint",
+      "terminal.stocks.test_filing_vintage",
+      "terminal.stocks.test_observation_store",
+      "terminal.stocks.test_projection",
+      "terminal.stocks.test_trade_tape",
+      "terminal.stocks.test_live_recovery",
+      "terminal.stocks.test_sec_continuation",
+      "terminal.stocks.test_reconnect_stability",
+      "terminal.stocks.test_live_market.Semantics",
+      "terminal.stocks.test_final_qualification.AsyncReliability",
+      "terminal.stocks.test_final_qualification.RetryArithmetic",
+      "terminal.test_native_recovery",
+      "terminal.test_aggregate_recovery",
+      "terminal.stocks.test_xbrl_instance",
+      "terminal.stocks.test_xbrl_collection",
+      "terminal.stocks.test_xbrl_tool",
+      "terminal.test_itch_product",
+      "terminal.test_itch_source_product",
+      "terminal.test_itch_durable_recovery",
+      "terminal.test_session_recovery",
+      "terminal.stocks.test_inline_xbrl",
+      "terminal.stocks.test_inline_set",
+      "terminal.stocks.test_inline_registry_numeric",
+      "terminal.stocks.test_xbrl_dts",
+      "terminal.stocks.test_xbrl_binding",
+      "terminal.stocks.test_xbrl_types",
+      "terminal.stocks.test_xbrl_enumeration",
+      "terminal.stocks.test_xbrl_vintages",
+      "terminal.stocks.test_xbrl_whitespace",
+      "terminal.stocks.test_xbrl_dimensions",
+      "terminal.stocks.test_xbrl_open_dimensions",
+      "terminal.stocks.test_xbrl_restriction_constraints",
+      "terminal.stocks.test_xbrl_calculation_intervals",
+      "terminal.stocks.test_xbrl_calculation_report",
+      "terminal.stocks.test_xbrl_calculation_product",
+      "terminal.stocks.test_xbrl_lineage",
+      "terminal.stocks.test_xbrl_typed_dimensions",
+      "terminal.stocks.test_xbrl_inherited_dimensions",
+      "terminal.stocks.test_xbrl_relationships",
+      "terminal.stocks.test_xbrl_statements",
+      "terminal.stocks.test_xbrl_product",
+      "terminal.stocks.test_xbrl_accuracy",
+      "terminal.stocks.test_xbrl_statement_v2",
+      "terminal.stocks.test_xbrl_embedded",
+      "terminal.stocks.test_sec_filing_ingest",
+      "terminal.stocks.test_sec_source_expansion",
+      "terminal.stocks.test_sec_multidoc",
+      "terminal.stocks.test_sec_transform_profile",
+      "terminal.stocks.test_sec_ingest_store",
+      "terminal.stocks.test_xbrl_duplicate_diagnostics",
+      "terminal.stocks.test_sec_ingest_cli",
+      "terminal.stocks.test_xbrl_statement_set",
+      "terminal.stocks.test_xbrl_negative_dimensions",
+      "terminal.stocks.test_xbrl_dimensional_calculation",
+      "terminal.stocks.test_python_json_ingress",
+      "terminal.stocks.test_history_json_ingress",
+      "terminal.stocks.test_xbrl_dts_source_audit",
+      "terminal.stocks.test_statement_set_source_acceptance",
+      "terminal.stocks.test_xbrl_negative_only_dimensions",
+      "terminal.stocks.test_inline_dts_source_audit",
+      "terminal.stocks.test_xbrl_accounting_relationships",
+      "terminal.stocks.test_xbrl_accounting_statements",
+      "terminal.providers.test_kraken_ordered",
+      "terminal.providers.test_kraken_book_session",
+      "terminal.providers.test_recovery_hardening",
+      "terminal.providers.test_supervisor",
+      "terminal.providers.test_coinbase_supervisor",
+      "terminal.providers.test_transport",
+      "terminal.providers.test_kraken",
+      "terminal.providers.test_integrity",
+      "terminal.providers.test_kraken_admin",
+      "terminal.providers.test_differential",
+      "terminal.stocks.test_sec_expansion.Expansion.test_acceptance_parser_cannot_accept_a_value_the_pit_filter_cannot_read",
+      "terminal.stocks.test_sec_expansion.Expansion.test_advertised_history_is_bounded_fixed_host_and_overlap_deduplicated",
+      "terminal.stocks.test_sec_expansion.Expansion.test_amendment_cutoffs_preserve_original_then_explicit_restatement",
+      "terminal.stocks.test_sec_expansion.Expansion.test_authorized_directory_promotes_only_exact_source_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_bad_directory_and_conflicting_cached_identity_do_not_publish",
+      "terminal.stocks.test_sec_expansion.Expansion.test_codespaces_new_sec_targets_still_require_one_use_endpoint_bound_proof",
+      "terminal.stocks.test_sec_expansion.Expansion.test_conflicting_overlap_is_not_silently_overwritten",
+      "terminal.stocks.test_sec_expansion.Expansion.test_expanded_filings_budget_and_default_compatibility",
+      "terminal.stocks.test_sec_expansion.Expansion.test_failed_shard_keeps_entire_accepted_financial_cache",
+      "terminal.stocks.test_sec_expansion.Expansion.test_qualification_tool_resolves_non_seed_exact_identity_and_preserves_fixture_provenance",
+      "terminal.stocks.test_sec_expansion.Expansion.test_removed_cached_issuer_cannot_leave_financials_with_null_identity",
+      "terminal.stocks.test_sec_expansion.Expansion.test_shard_urls_counts_dates_and_request_limits_are_not_user_authority",
+      "terminal.stocks.test_sec_expansion.Expansion.test_unconfigured_directory_never_requests_and_keeps_nulls",
+      "terminal.stocks.test_xbrl_typed_hypercubes",
+      "terminal.providers.test_kraken_depth_session",
+      "terminal.stocks.test_financial_intelligence_product",
+      "terminal.stocks.test_xbrl_cross_role",
+      "terminal.providers.test_kraken_public_session",
+      "terminal.test_itch_source_completion",
+      "terminal.stocks.test_xbrl_inherited_cross_role",
+      "terminal.stocks.test_xbrl_statement_comparison",
+      "terminal.providers.test_kraken_coordinator",
+      "terminal.test_itch_completion_capsule"
+    ],
+    "skipped": 0,
+    "socket_attempts_allowed": false,
+    "tests": 1153
+  },
+  "new_registered_python_cases": 111,
+  "frontend": {
+    "tests": 373,
+    "passed": 373,
+    "failed": 0,
+    "skipped": 0,
+    "new_accessibility_cases": 28,
+    "typescript": "PASS",
+    "vite": "PASS",
+    "browser_started": false
+  },
+  "cross_language": {
+    "accounting_statements-contract.log": {
+      "schema": "gig.accounting_statement.offline_contract.v1",
+      "cases": 7,
+      "assertions": 224,
+      "adversarial_rejections": 7,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "itch_product-contract.log": {
+      "schema": "gig.itch.product_contract.v1",
+      "assertions": 35,
+      "states": 5,
+      "source_recovery_states": 1,
+      "application_started": false,
+      "browser_started": false
+    },
+    "offline_import-contract.log": {
+      "schema": "gig.offline_json_ingress.contract.v1",
+      "cases": 6,
+      "ambiguous_previously_accepted": 6,
+      "adversarial_rejections": 23,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "statement_set-contract.log": {
+      "adversarial_rejections": 7,
+      "application_started": false,
+      "assertions": 1018,
+      "fixture_bytes": 796426,
+      "history_entries": 4,
+      "provider_requested": false,
+      "schema": "gig.statement_set.offline_consumer_contract.v1",
+      "sets": 5,
+      "verified_children": 23
+    },
+    "trade-contract.log": {
+      "schema": "gig.filing.cross_language.v1",
+      "passed": 5,
+      "failed": 0,
+      "scope": "Authored SEC normalization and actual retained-vintage output to TypeScript admission;no app or provider"
+    },
+    "xbrl_accuracy-contract.log": {
+      "application_started": false,
+      "assertions": 93,
+      "cases": 15,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+    },
+    "xbrl_calculation_report-contract.log": {
+      "schema": "gig.calculation_report.contract.v1",
+      "cases": 4,
+      "adversarial_rejections": 11,
+      "provider_requested": false,
+      "application_started": false
+    },
+    "xbrl_statement-contract.log": {
+      "application_started": false,
+      "assertions": 58,
+      "cases": 8,
+      "provider_requested": false,
+      "schema": "gig.company_xbrl.offline_contract.v1"
+    },
+    "xbrl_vintage-contract.log": {
+      "schema": "gig.xbrl.vintage_contract.v1",
+      "entries": 3,
+      "adversarial_rejections": 6,
+      "provider_requested": false,
+      "application_started": false
+    }
+  },
+  "native": {
+    "gcc_release_ctest": 153,
+    "gcc_release_failed": 0,
+    "additional_configurations": {
+      "GCC Debug": 2,
+      "Clang Debug": 2,
+      "Clang Release": 2,
+      "GCC ASan+UBSan": 2
+    },
+    "capsule_assertions": 535,
+    "capsule_pmr_failure_positions": {
+      "plain_restore": 57,
+      "plain_encode": 58,
+      "gzip_restore": 61,
+      "gzip_encode": 62
+    },
+    "source_recovery_assertions": 331,
+    "frozen_hashes": {
+      "itch.validation_demo_reference": "4ebdd734b5f11e368be1525f95a93070893ec14e9caafb161583807c88d23520",
+      "itch.independent_reference": "142217bb7c7a51dbcbc7d54108247d7bec62575cf036293425b40cd205061b3e",
+      "itch.context_reference": "58d6a2f6fd574bc8041676964307ac606422dcebba780bc10166b3019b99476e",
+      "itch.streaming_reference": "be5d6f5a15fa1dc77560e0a815b8397a605eab369fa66f44df12e5ed9b04a4d5",
+      "itch.l3_reference": "bb16d4ba9e400ee8f2bc40707de5aa89d0b0955819b4f1f45ca2cdf82cac7991",
+      "itch.auction_reference": "76ad62693c22631e4be0842f44029d779211451a395e8538d70450ae7015ebc6",
+      "itch.admin_reference": "87556148fdc43cb7d3c073aa5a5fa9a0b9a6368c15a5182edb72bced17957d03",
+      "itch.hy_reference": "ad982777da3595d8fb608755a4986e68a19c3ab2721ec1e1e084f1945f0412af"
+    },
+    "scope": "Current Release153 andfouradditional2target checks;native/build/SDKcapsuleinputs byte-identical to verified406f88f. Existing compatible builds reused whereunchanged;notfullfreshhistoricalmatrix orPython sanitizer instrumentation."
+  },
+  "focused_packages": {
+    "inherited_drs_v8": 40,
+    "related_drs": 294,
+    "unchanged_v1_v7_artifacts": 14,
+    "statement_comparison": 28,
+    "related_statement": 80,
+    "kraken_coordinator": 32,
+    "related_kraken_guarded": 141,
+    "capsule_sdk": 11,
+    "combined_sdk_recovery": 33,
+    "elf_dependency": 35,
+    "local_inventory": 35,
+    "accessibility": 28
+  },
+  "clean_source_packaging": {
+    "schema": "gig.nov21.recovery.clean_source_packaging.v1",
+    "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+    "archive": {
+      "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+      "members": 1857,
+      "tracked_files": 1856,
+      "bytes": 9359268,
+      "sha256": "7a47c69d2d2fbb2a245b0bdd36a09f209745cae4fd0f30d64c76e4472822d41b"
+    },
+    "profiles": {
+      "default": {
+        "sdk": {
+          "app_factory_allowed": false,
+          "application_constructed": false,
+          "errors": 0,
+          "expected": 8,
+          "failures": 0,
+          "fixture": null,
+          "mode": "sdk",
+          "schema": "gig.nov21.recovery.installed_checks.v1",
+          "sdk": "/workspace/gig-development/work/nov21-recovery-packaging/installed-default/gig_microstructure/__init__.py",
+          "selected_names": [
+            "test_python"
+          ],
+          "skipped": 0,
+          "socket_attempts_allowed": false,
+          "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+          "tests": 8
+        },
+        "source": {
+          "app_factory_allowed": false,
+          "application_constructed": false,
+          "errors": 0,
+          "expected": 873,
+          "failures": 0,
+          "fixture": null,
+          "mode": "source",
+          "schema": "gig.nov21.recovery.installed_checks.v1",
+          "sdk": "/workspace/gig-development/work/nov21-recovery-packaging/installed-default/gig_microstructure/__init__.py",
+          "selected_names": [
+            "terminal.stocks.test_xbrl_instance",
+            "terminal.stocks.test_xbrl_collection",
+            "terminal.stocks.test_xbrl_tool",
+            "terminal.stocks.test_inline_xbrl",
+            "terminal.stocks.test_inline_set",
+            "terminal.stocks.test_inline_registry_numeric",
+            "terminal.stocks.test_xbrl_dts",
+            "terminal.stocks.test_xbrl_binding",
+            "terminal.stocks.test_xbrl_types",
+            "terminal.stocks.test_xbrl_enumeration",
+            "terminal.stocks.test_xbrl_vintages",
+            "terminal.stocks.test_xbrl_whitespace",
+            "terminal.stocks.test_xbrl_dimensions",
+            "terminal.stocks.test_xbrl_open_dimensions",
+            "terminal.stocks.test_xbrl_restriction_constraints",
+            "terminal.stocks.test_xbrl_calculation_intervals",
+            "terminal.stocks.test_xbrl_calculation_report",
+            "terminal.stocks.test_xbrl_calculation_product",
+            "terminal.stocks.test_xbrl_lineage",
+            "terminal.stocks.test_xbrl_typed_dimensions",
+            "terminal.stocks.test_xbrl_inherited_dimensions",
+            "terminal.stocks.test_xbrl_relationships",
+            "terminal.stocks.test_xbrl_statements",
+            "terminal.stocks.test_xbrl_product",
+            "terminal.stocks.test_xbrl_accuracy",
+            "terminal.stocks.test_xbrl_statement_v2",
+            "terminal.stocks.test_xbrl_embedded",
+            "terminal.stocks.test_sec_filing_ingest",
+            "terminal.stocks.test_sec_source_expansion",
+            "terminal.stocks.test_sec_multidoc",
+            "terminal.stocks.test_sec_transform_profile",
+            "terminal.stocks.test_sec_ingest_store",
+            "terminal.stocks.test_xbrl_duplicate_diagnostics",
+            "terminal.stocks.test_sec_ingest_cli",
+            "terminal.stocks.test_xbrl_statement_set",
+            "terminal.stocks.test_xbrl_negative_dimensions",
+            "terminal.stocks.test_xbrl_dimensional_calculation",
+            "terminal.stocks.test_python_json_ingress",
+            "terminal.stocks.test_history_json_ingress",
+            "terminal.stocks.test_xbrl_dts_source_audit",
+            "terminal.stocks.test_statement_set_source_acceptance",
+            "terminal.stocks.test_xbrl_negative_only_dimensions",
+            "terminal.stocks.test_inline_dts_source_audit",
+            "terminal.stocks.test_xbrl_accounting_relationships",
+            "terminal.stocks.test_xbrl_accounting_statements",
+            "terminal.providers.test_kraken_book_session",
+            "terminal.stocks.test_xbrl_typed_hypercubes",
+            "terminal.providers.test_kraken_depth_session",
+            "terminal.stocks.test_financial_intelligence_product",
+            "terminal.stocks.test_xbrl_cross_role",
+            "terminal.providers.test_kraken_public_session",
+            "terminal.providers.test_kraken_coordinator",
+            "terminal.stocks.test_xbrl_inherited_cross_role",
+            "terminal.stocks.test_xbrl_statement_comparison"
+          ],
+          "skipped": 0,
+          "socket_attempts_allowed": false,
+          "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+          "tests": 873
+        }
+      },
+      "streaming": {
+        "sdk": {
+          "app_factory_allowed": false,
+          "application_constructed": false,
+          "errors": 0,
+          "expected": 8,
+          "failures": 0,
+          "fixture": null,
+          "mode": "sdk",
+          "schema": "gig.nov21.recovery.installed_checks.v1",
+          "sdk": "/workspace/gig-development/work/nov21-recovery-packaging/installed-streaming/gig_microstructure/__init__.py",
+          "selected_names": [
+            "test_python"
+          ],
+          "skipped": 0,
+          "socket_attempts_allowed": false,
+          "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+          "tests": 8
+        },
+        "source": {
+          "app_factory_allowed": false,
+          "application_constructed": false,
+          "errors": 0,
+          "expected": 33,
+          "failures": 0,
+          "fixture": "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests",
+          "mode": "streaming",
+          "schema": "gig.nov21.recovery.installed_checks.v1",
+          "sdk": "/workspace/gig-development/work/nov21-recovery-packaging/installed-streaming/gig_microstructure/__init__.py",
+          "selected_names": [
+            "terminal.test_itch_completion_capsule",
+            "terminal.test_itch_source_completion",
+            "terminal.test_itch_source_product"
+          ],
+          "skipped": 0,
+          "socket_attempts_allowed": false,
+          "source": "ec255121d070f80e7e92d958f223bf0701baa806",
+          "tests": 33
+        }
+      }
+    },
+    "authored_fixture_generator": {
+      "path": "/workspace/gig-development/build/recovery-release/gig_itch_durable_checkpoint_tests",
+      "bytes": 526184,
+      "sha256": "c4d03841745eb9456d47c337fcdb0e95db6183fab26c316943c096a0bee42a6f"
+    },
+    "installed_contracts": {
+      "v2": {
+        "application_started": false,
+        "assertions": 93,
+        "cases": 15,
+        "provider_requested": false,
+        "schema": "gig.company_xbrl.offline_accuracy_contract.v1"
+      },
+      "vintages": {
+        "schema": "gig.xbrl.vintage_contract.v1",
+        "entries": 3,
+        "adversarial_rejections": 6,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "calculation": {
+        "schema": "gig.calculation_report.contract.v1",
+        "cases": 4,
+        "adversarial_rejections": 11,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "ingress": {
+        "schema": "gig.offline_json_ingress.contract.v1",
+        "cases": 6,
+        "ambiguous_previously_accepted": 6,
+        "adversarial_rejections": 23,
+        "provider_requested": false,
+        "application_started": false
+      },
+      "statements": {
+        "adversarial_rejections": 7,
+        "application_started": false,
+        "assertions": 1018,
+        "fixture_bytes": 796426,
+        "history_entries": 4,
+        "provider_requested": false,
+        "schema": "gig.statement_set.offline_consumer_contract.v1",
+        "sets": 5,
+        "verified_children": 23
+      },
+      "accounting": {
+        "schema": "gig.accounting_statement.offline_contract.v1",
+        "cases": 7,
+        "assertions": 224,
+        "adversarial_rejections": 7,
+        "provider_requested": false,
+        "application_started": false
+      }
+    },
+    "installed_ui": {
+      "tests": 176,
+      "passed": 176,
+      "failed": 0,
+      "skipped": 0,
+      "source_accounting": 148,
+      "accessibility": 28
+    },
+    "packages": {
+      "default/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+        "bytes": 668560,
+        "sha256": "f9c3766f2d72b0e01070cb4cffd058cbcab71bea09f0df86347519aa29a84570"
+      },
+      "gig_microstructure-0.1.1.tar.gz": {
+        "bytes": 9359268,
+        "sha256": "7a47c69d2d2fbb2a245b0bdd36a09f209745cae4fd0f30d64c76e4472822d41b"
+      },
+      "streaming/gig_microstructure-0.1.1-cp312-cp312-linux_x86_64.whl": {
+        "bytes": 684434,
+        "sha256": "6d8ec5d2c58fb53b2ad9d2d9d1dec9e45fddaf0bf23c96ccd2305fcf6fa27cb8"
+      }
+    },
+    "logs": {
+      "default-install.log": {
+        "bytes": 476,
+        "sha256": "ad4d072046a20488c68fc2df276f5db6b0491fa06a783f9a682bb1a0cd06c0d3"
+      },
+      "default-sdk.log": {
+        "bytes": 1445,
+        "sha256": "d823d4da69f2a549aff452474d4c9ece547f8f19f856eff9943bf584ef94ba4f"
+      },
+      "default-source.log": {
+        "bytes": 174240,
+        "sha256": "11111dd8b2953b9ca1c88704c020a58f3de73dca11062f8291222debbbb062d8"
+      },
+      "default-wheel.log": {
+        "bytes": 6047,
+        "sha256": "65d3a04f4786aafe68e81f77b1b8e399921fd9388c5f1ce313475bbebec8544d"
+      },
+      "installed-accounting.log": {
+        "bytes": 167,
+        "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f"
+      },
+      "installed-calculation.log": {
+        "bytes": 141,
+        "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736"
+      },
+      "installed-ingress.log": {
+        "bytes": 177,
+        "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b"
+      },
+      "installed-source-ui.log": {
+        "bytes": 16877,
+        "sha256": "ce7127d20f6b07580b15c4b21f25b338c190dfbe3b97db655c431f2e29575462"
+      },
+      "installed-statements.log": {
+        "bytes": 252,
+        "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a"
+      },
+      "installed-v2.log": {
+        "bytes": 150,
+        "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f"
+      },
+      "installed-vintages.log": {
+        "bytes": 136,
+        "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979"
+      },
+      "package-source.log": {
+        "bytes": 212,
+        "sha256": "91a0bf5d7db868eb51cc5a1f21e127ec4abdfd48aa1c29ea810e45b26fbb45ef"
+      },
+      "sdist.log": {
+        "bytes": 150,
+        "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc"
+      },
+      "streaming-install.log": {
+        "bytes": 478,
+        "sha256": "c4bc01be32ef1b63226e40e6aa8717441c7f4223239a1433c30787819db9b6c8"
+      },
+      "streaming-sdk.log": {
+        "bytes": 1447,
+        "sha256": "e5d5da036e62b154f4b87819f6354c1569a10ea3defbca40a9cc9bdddfee7141"
+      },
+      "streaming-source.log": {
+        "bytes": 6877,
+        "sha256": "aa097d03d40e279172c9cd0a15076a804b2a4197abcdab61cef0af4059b90388"
+      },
+      "streaming-wheel.log": {
+        "bytes": 6735,
+        "sha256": "0f9e0eb492af8af71eb4cb7b06d5166a86da716ab2012fea71825ed20322666a"
+      },
+      "verification-progress.log": {
+        "bytes": 1148,
+        "sha256": "6035861ccf9a061400e8c229f2763c15591a325f176dcdeb157b79353d55290d"
+      }
+    },
+    "scope": "Fresh default and streaming GCC wheels from byte-verified source; isolated SDK and extracted-source checks. Existing locked JavaScript dependencies linked only after archive verification. External explicitly hashed fixture generates authored input only,never substitutes SDK. No full compiler-wheel matrix/browser/provider/target qualification.",
+    "application_started": false,
+    "provider_requested": false,
+    "spend_usd": 0,
+    "progress_stream_sealed_after_exit": true
+  },
+  "elf_dependency_snapshot": {
+    "artifacts": 8,
+    "edges": 19,
+    "unresolved": 0,
+    "status": "EXPLICIT_DT_NEEDED_BINDINGS_VERIFIED",
+    "inventory_sha256": "d34156ca2f4689ce34be9dd63e9da030c4bbf7022fe8a94cad355fa3256309b1",
+    "manifest_sha256": "13ace3d4b8b6fdf237c4cbbf7e38fb1606542a5b0d691469a0ba5bd2c055e552",
+    "snapshot_source_commit_label": "406f88f80a3f7ad802be30981983813add93d6c3",
+    "named_artifact_hashes_currently_rechecked": true,
+    "runtime_loader_resolution_verified": false,
+    "advisory_analysis": "NOT_RUN",
+    "target_qualified": false,
+    "authority": "Explicit original-byte needed/SONAME/header bindings;caller label and binding intent are not loader/build/publisher attestations"
+  },
+  "authored_statement_export": {
+    "schema": "gig.statement_vintage_comparison.authored_receipt.v1",
+    "path": "work/nov21-statement-comparison/original-comparison.json",
+    "bytes": 221305,
+    "sha256": "a35d2105151a6e45bbe5c8106a5b1bde82fbabae368ed5426626ed5bca3e96e7",
+    "packet_sha256": "d9d804a7f6b63c1aceb139eaef248735cfa105e96eea5d7c18f58a5517f648c6",
+    "source_envelopes": 2,
+    "comparisons": 1,
+    "provider_requested": false,
+    "application_started": false,
+    "fixture_origin": "HISTORICAL_SYNTHETIC"
+  },
+  "security": {
+    "source_lock_components": 85,
+    "source_lock_inputs": 7,
+    "sbom_tests": 13,
+    "source_pattern_tests": 3,
+    "pip_check": "PASS",
+    "dependency_pins_upgraded": false,
+    "fresh_advisory_scan": false,
+    "target_clearance": false
+  },
+  "acceptance": {
+    "matrix_rows": 50,
+    "matrix_counts": {
+      "COMPLETE": 34,
+      "BLOCKED": 7,
+      "PARTIAL": 8,
+      "NOT APPLICABLE": 1
+    },
+    "status_changes": 0,
+    "closed_whole_requirements": [],
+    "closed_bounded_subcriteria": [
+      "Original-DTS inherited positive closed multi-cube conjunction with retained-proof consistency",
+      "Adjacent original-source statement vintage comparison without missing-value filling",
+      "Atomic source-bound joint Kraken native session fencing",
+      "Separate persisted completed-source replay capsule with unchanged active-v1 format",
+      "Passive explicitly supplied ELF needed bindings and sensitive-root rejection",
+      "Keyboard/exact-value disclosures and latest query/request/rendered-selection admission"
+    ],
+    "external_blockers": [
+      "CORE05",
+      "VIS04",
+      "SEC03",
+      "MD05",
+      "RES03",
+      "OPS02",
+      "OPS03"
+    ],
+    "scope01": "NOT APPLICABLE under currentowner scope;unavailable historical master remains explicit",
+    "original_authority_review": "ORIGINAL_ACCEPTANCE_AUTHORITY.md",
+    "full_original_h08_recovered": false
+  },
+  "repaired_findings": [
+    "Recovered ELF roots allowed sensitive/control components though artifactpaths refusedthem;rootpre-read guard andnewregression nowpass",
+    "Recovered stale-search requestguard lacked distinctrenderedselection admission acrosssame-queryreplacement;newselection revision/helperactuallyusedApp nowrejectsoldoptioncallbacks",
+    "Stale recovered UXverification18count corrected to28focused/373registered;initialtypingdiagnostic retained withoutweakening assertions",
+    "ExistingV8consumer hardening rejects impossible source-node claims andall14legacy artifacts remainunchanged"
+  ],
+  "remaining_final_test_failures": 0,
+  "warnings": [
+    "ExistingVitegreater-than500kBchunk warning andStarlette/httpxdeprecationremainvisible",
+    "Fivecompiler scopes are focused nativechecks on exactcompatibleinputs,notfullfreshmatrix/Pythoninstrumentation",
+    "FreshdefaultandstreamingGCCwheels only;no two-build byte-identicalreproducibility claim",
+    "ExistinglockedJSdependencies linked onlyafterarchivebyteverification;noJSreinstall/browser/devicequalification",
+    "ELF graph closure isnotactualruntime loader/version/dlopen/advisory/edgeclearance",
+    "New statement-comparison artifact remains separate from old256KiB UIadmission;futurestrictproductintegration isopen"
+  ],
+  "runtime_files": [
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 30418,
+      "sha256": "9c7e72e979f0bfdd5a677e729ea06be9fa0f1d19e30815dfb2599c05e4f79e92"
+    },
+    {
+      "path": "include/gig/itch/completion_capsule.hpp",
+      "bytes": 1042,
+      "sha256": "cf5e05f2c491afc2340d0ab42b6012ed196752af9f02263a5014f4fdcc7945c2"
+    },
+    {
+      "path": "python/bindings/itch_recovery.cpp",
+      "bytes": 11899,
+      "sha256": "b85a3b2b16bcf922355d5fae2fd2486f861bd3462ddd81422dfb5f75fb124ecb"
+    },
+    {
+      "path": "python/gig_microstructure/itch_recovery.py",
+      "bytes": 11673,
+      "sha256": "bf109924e24bc451c5b046228c83037b75ab76fe3a988c88c32f907026137c58"
+    },
+    {
+      "path": "scripts/inventory_elf_dependencies.py",
+      "bytes": 14807,
+      "sha256": "95bf51cf24a2b9b43112919d173689bd438cb4d01d32a6930c74d9d493fa9fdd"
+    },
+    {
+      "path": "src/itch/completion_capsule.cpp",
+      "bytes": 2827,
+      "sha256": "0e43dc517dae250d8fc494cea2958eba37cadfb20dfdce680e3baf78b21db6b7"
+    },
+    {
+      "path": "terminal/providers/kraken_coordinator.py",
+      "bytes": 13502,
+      "sha256": "c73934b9b91378afa6e5ba8731f3a42441703de60a636602b3026b03af7e8efd"
+    },
+    {
+      "path": "terminal/providers/test_kraken_coordinator.py",
+      "bytes": 18765,
+      "sha256": "89bdae91bfdba931b569dd399edcf094f219552fbd5af787b0b18c17088707a6"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_inherited_cross_role.py",
+      "bytes": 26178,
+      "sha256": "93272bb98506961711f524c5d484438b7698497642294b8df7d5ed918aa8cbd4"
+    },
+    {
+      "path": "terminal/stocks/test_xbrl_statement_comparison.py",
+      "bytes": 18197,
+      "sha256": "93fd6783973ab71fdf5bf5fc1a5020080811006ea80a6086b5a01f62306fbc59"
+    },
+    {
+      "path": "terminal/stocks/xbrl_collection.py",
+      "bytes": 13446,
+      "sha256": "49c8cb7e4eed2d3c1c841e4f96aa08fe98b77bee554d2d1616d856b1a11a76ae"
+    },
+    {
+      "path": "terminal/stocks/xbrl_dimensions.py",
+      "bytes": 27571,
+      "sha256": "e43847cebbcd51d7bd96691be1142835347351c4fa2382b2d405ad83ab784500"
+    },
+    {
+      "path": "terminal/stocks/xbrl_inherited_cross_role.py",
+      "bytes": 15185,
+      "sha256": "cc5ea08c3b87783d3664a5f7463098a1445711fd269e2a4fb4e8df7f291dd73e"
+    },
+    {
+      "path": "terminal/stocks/xbrl_instance.py",
+      "bytes": 36515,
+      "sha256": "fb369f98d61e40f9347f2308664c93ef7f9c386935ae829be9818e4049e6dd64"
+    },
+    {
+      "path": "terminal/stocks/xbrl_statement_comparison.py",
+      "bytes": 11501,
+      "sha256": "d83189681e41f29ebf0766abaab4e18d23bde0c7c1bbc47b295920d1a7446d44"
+    },
+    {
+      "path": "terminal/test_itch_completion_capsule.py",
+      "bytes": 7564,
+      "sha256": "087b3175d08631d470e395e5e67334b7b84bac60428bb3f5f9aad4d1723b6b5c"
+    },
+    {
+      "path": "terminal/tests/run_no_launch_suite.py",
+      "bytes": 5519,
+      "sha256": "d6e7f6676a767c378ef5a5d6d5dfaec8125f1e82b2a548eb8ff16ca25ad80b16"
+    },
+    {
+      "path": "terminal/web/package.json",
+      "bytes": 1560,
+      "sha256": "8522cb44c5c2794ae4e12ab9d8bb63babbf7be8494718fcfbd9d4e1bfff9eb60"
+    },
+    {
+      "path": "terminal/web/src/App.tsx",
+      "bytes": 38928,
+      "sha256": "59046175e00a1d59b89c64f36aeb6bd73439d7feb6b63f4a199e0457df631ca7"
+    },
+    {
+      "path": "terminal/web/src/OrderBook.tsx",
+      "bytes": 3190,
+      "sha256": "646281aaa3e22bf7875506f2c322fa0722de136a2edbef4d5263a94326564b3e"
+    },
+    {
+      "path": "terminal/web/src/TerminalHeader.tsx",
+      "bytes": 5261,
+      "sha256": "ca215c5fa54a058ce8fdc5cc735f6c83e27263e2fb10b8422244ba89088147bb"
+    },
+    {
+      "path": "terminal/web/src/accessibilityNavigation.test.ts",
+      "bytes": 17722,
+      "sha256": "35fe304e7b32865cded67dc15a1d0f38464f95ce59adcbd27c6cd8f280d9d783"
+    },
+    {
+      "path": "terminal/web/src/searchKeyboard.ts",
+      "bytes": 1494,
+      "sha256": "509d48357cf5ea91b8baf0abcb441ac5da5020dc7f19f6af47e13e5484212b69"
+    },
+    {
+      "path": "terminal/web/src/searchRequestGuard.ts",
+      "bytes": 1985,
+      "sha256": "50ca4cfd8d9a6c97e673844adbd9d7fc1f036a7141424e3ab2b3a3f666da3a3b"
+    },
+    {
+      "path": "terminal/web/src/workstation.css",
+      "bytes": 47767,
+      "sha256": "f53ef3b80908ab7fe9bae6ce465c37c04589d810f1c12856b6446e879150eb27"
+    },
+    {
+      "path": "tests/test_elf_dependency_inventory.py",
+      "bytes": 18509,
+      "sha256": "53c20d91d4bc395da4cf379d0bde6eb0a6db760f3105292ed219be5a74af9ba3"
+    },
+    {
+      "path": "tests/test_itch_completion_capsule.cpp",
+      "bytes": 5617,
+      "sha256": "b29528b406e9713654b0489a2e37c97ba629a817c7d423c7f01541a775140a03"
+    }
+  ],
+  "retained_receipts": [
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/accelerated-sanitizer-build.log",
+      "bytes": 60,
+      "sha256": "5157e3078af0ed4ded4d01b39a8ed3af898115cdb9c7471ea113f5161d1e252f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/accelerated-sanitizer-tests.log",
+      "bytes": 467,
+      "sha256": "ec5f76ded7191792b28968a04a261db04da6752f1810f9e26e126ef90ee9cce0",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/accessibility-independent.log",
+      "bytes": 3003,
+      "sha256": "7ceaaf5db2bf3e9bed53b39e0ba09266edb1894876ddffd43ea05ededd8a3772",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/accounting_statements-contract.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-independent.log",
+      "bytes": 6331,
+      "sha256": "57425d30049c705d84e171b7ddd35ca7b27a98ca6a9bde46052e60ce80d91620",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-tests.log",
+      "bytes": 6331,
+      "sha256": "dd9ef55d4eabcc159cf2cb2c1be2dee4fba0a645c4b428ac9ab3963759a28e5d",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/frontend-build.log",
+      "bytes": 2428,
+      "sha256": "ff73a6176ec9a639d92f64fa3a8f4e4952bb400d32ed8b0f5ca864a8df3172b4",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/frontend.log",
+      "bytes": 35646,
+      "sha256": "597d9f33d6209d573240394a6955a2a5450d9352534bc5a0e14e424467d3a0a5",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/frozen.log",
+      "bytes": 7565,
+      "sha256": "8aafe24e2511ecab5f6fd52987c062b4918232d06a6fad4637afe3129ac00503",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/itch_product-contract.log",
+      "bytes": 148,
+      "sha256": "f88b39bd720cd6cf77441ff2cee93a557d97275897b1895358caf593db7d5b3c",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/local-inventory-tests.log",
+      "bytes": 5787,
+      "sha256": "99ff26feb6576e73c84999360fc3d2cd638a9a41585edd9adeca2fd3f6b39022",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-clang-debug-build.log",
+      "bytes": 60,
+      "sha256": "5157e3078af0ed4ded4d01b39a8ed3af898115cdb9c7471ea113f5161d1e252f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-clang-debug-tests.log",
+      "bytes": 461,
+      "sha256": "bad244714b25e19e29d63aa379ecbea835b4b8f94ab9c53c7e27c7c4e7c6ef4a",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-clang-release-build.log",
+      "bytes": 60,
+      "sha256": "5157e3078af0ed4ded4d01b39a8ed3af898115cdb9c7471ea113f5161d1e252f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-clang-release-tests.log",
+      "bytes": 465,
+      "sha256": "0f52cd83d027863b566dcc8e5f6f606f2fc61f2bc463ae0db3e88ebaa41de88d",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-gcc-debug-build.log",
+      "bytes": 60,
+      "sha256": "5157e3078af0ed4ded4d01b39a8ed3af898115cdb9c7471ea113f5161d1e252f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/master-gcc-debug-tests.log",
+      "bytes": 457,
+      "sha256": "29278ed626c63cac0ae15a12994ed5ac4c7c95114236cb04893a4722e84d92c8",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/native-release-all.log",
+      "bytes": 19871,
+      "sha256": "a86f7082b82ae9c8e2814b5b68be2c170a7d53e7fc8bd7ddb252ec9da830cfa9",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/offline_import-contract.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-patterns.log",
+      "bytes": 101,
+      "sha256": "372ee57a30b8a8b17bb056a0814266786a922da7dcf4139f4f9a2457745d6424",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/pip-check.log",
+      "bytes": 294,
+      "sha256": "35bb3d1e4d1d0091788acae77c6d707f1dfb81d2384e34fd54a205f9497ce313",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/published-packages.log",
+      "bytes": 12744,
+      "sha256": "d60c21c4728f2d23f51b51267230541a459ecb9ed2e7dcbf116906c0a252b561",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/python-guarded.log",
+      "bytes": 226629,
+      "sha256": "6ba0a7fd9037fc66dc9055d143fa549182906caee4a27539ffdb2d8029e493ed",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/sbom-generation.log",
+      "bytes": 68,
+      "sha256": "fafde11f0744730aaeebd0b96250f68156d21edfb235fa386dffd36c144972f7",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/sbom-tests.log",
+      "bytes": 1945,
+      "sha256": "f55260258102e9840f192264afafba10051e7820641393c49a83df6405c705d6",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/source-sbom.cdx.json",
+      "bytes": 47016,
+      "sha256": "c930b5518183dbb6bc1a6fc4c3046d209d20b848bae4866ffbd15ae1e5993842",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statement_set-contract.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statements-focused.log",
+      "bytes": 6087,
+      "sha256": "4c21a668eeb896f413ccabd03b5dff0d7598e91406e24e2f8a581f8630ac7283",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/trade-contract.log",
+      "bytes": 559,
+      "sha256": "8001aaa10f7eb6657821dbf4a0c0fec28c27bd7d5119ae62b15345bc87af0d36",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-focused.log",
+      "bytes": 8125,
+      "sha256": "dda97940140046fe4a7a060d34e488b94d5fb57c9a2fc3485cba9951d12853cc",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/xbrl_accuracy-contract.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/xbrl_calculation_report-contract.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/xbrl_statement-contract.log",
+      "bytes": 140,
+      "sha256": "d056d52d1706753ec15ab2c131cbb90bb14467411c0c9f3fcb583a02fa910b2c",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/xbrl_vintage-contract.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-default-install.log",
+      "bytes": 476,
+      "sha256": "ad4d072046a20488c68fc2df276f5db6b0491fa06a783f9a682bb1a0cd06c0d3",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-default-sdk.log",
+      "bytes": 1445,
+      "sha256": "d823d4da69f2a549aff452474d4c9ece547f8f19f856eff9943bf584ef94ba4f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-default-source.log",
+      "bytes": 174240,
+      "sha256": "11111dd8b2953b9ca1c88704c020a58f3de73dca11062f8291222debbbb062d8",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-default-wheel.log",
+      "bytes": 6047,
+      "sha256": "65d3a04f4786aafe68e81f77b1b8e399921fd9388c5f1ce313475bbebec8544d",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-accounting.log",
+      "bytes": 167,
+      "sha256": "469dafde160c427cebfc6332705964944b7b1289e419c87e8324b10e08b4ba5f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-calculation.log",
+      "bytes": 141,
+      "sha256": "369bb4a6f7b64989a28833d4f9b0e9306a0c3be8406fbe029f9d5240f70a8736",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-ingress.log",
+      "bytes": 177,
+      "sha256": "13037dbde89c9149f29a53c9960f691a7f83467cbffb0ece63e4e4ebceedff4b",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-source-ui.log",
+      "bytes": 16877,
+      "sha256": "ce7127d20f6b07580b15c4b21f25b338c190dfbe3b97db655c431f2e29575462",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-statements.log",
+      "bytes": 252,
+      "sha256": "b4e5a685ee278cad1670019191c7c9c6c75fdd02b9185b2fd62ce2168e65ea2a",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-v2.log",
+      "bytes": 150,
+      "sha256": "c730165d497f472e414d003400ae827ad1f8ec0d58a61cbec0e01ca6b12c045f",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-vintages.log",
+      "bytes": 136,
+      "sha256": "302906e37384baf453e5bc3269f63131817a2c710672e948cd40849671b0a979",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-package-source.log",
+      "bytes": 212,
+      "sha256": "91a0bf5d7db868eb51cc5a1f21e127ec4abdfd48aa1c29ea810e45b26fbb45ef",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-sdist.log",
+      "bytes": 150,
+      "sha256": "5187c09463dca38e30567373d25514e363c411eceb6d27603b7fd4a3a892d2dc",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-streaming-install.log",
+      "bytes": 478,
+      "sha256": "c4bc01be32ef1b63226e40e6aa8717441c7f4223239a1433c30787819db9b6c8",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-streaming-sdk.log",
+      "bytes": 1447,
+      "sha256": "e5d5da036e62b154f4b87819f6354c1569a10ea3defbca40a9cc9bdddfee7141",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-streaming-source.log",
+      "bytes": 6877,
+      "sha256": "aa097d03d40e279172c9cd0a15076a804b2a4197abcdab61cef0af4059b90388",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-streaming-wheel.log",
+      "bytes": 6735,
+      "sha256": "0f9e0eb492af8af71eb4cb7b06d5166a86da716ab2012fea71825ed20322666a",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-verification-progress.log",
+      "bytes": 1148,
+      "sha256": "6035861ccf9a061400e8c229f2763c15591a325f176dcdeb157b79353d55290d",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-packaging-verification.json",
+      "bytes": 11400,
+      "sha256": "1edabf2882e29613811f724e6eac120544d4ecf3fc0520593eb7ac0577f3565a",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-configuration.json",
+      "bytes": 9036,
+      "sha256": "9337eaca4545787ee283ebeb3549a19ecae2d759287a310dbfd916fad694b483",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-archive.json",
+      "bytes": 203,
+      "sha256": "7789367412841fb4988b17eea5c62b6fdbfab7bba77a3935cdbd33427183d59d",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-package-and-verify.py",
+      "bytes": 9958,
+      "sha256": "13a00832bf3b76f39b33aab8eb4da2a6525dab4696b9a80c8cf7c58b7127d836",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-installed-checks.py",
+      "bytes": 2238,
+      "sha256": "fe6b6af95ae395f037e4dcc42c3b9923806d91ea5956d46d1ea78ba372934e52",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/package-seal-packaging-evidence.py",
+      "bytes": 1639,
+      "sha256": "b14c936fc757229ac2d8fa6c09eea15fec43ef06d79b3350a2c3093a2564fa96",
+      "scope": "Current completed offline developer verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-actual-closure.json",
+      "bytes": 17363,
+      "sha256": "1464f3d4905481cba4231f881852a216b2287e33851dc713b95d55b46f215bc9",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-actual-closure.log",
+      "bytes": 244,
+      "sha256": "f69945584f4278ff8505c7f8636ab71565416937584b00962a93390d0934092b",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-actual-manifest.json",
+      "bytes": 2834,
+      "sha256": "13ace3d4b8b6fdf237c4cbbf7e38fb1606542a5b0d691469a0ba5bd2c055e552",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-recovered-elf-source.txt",
+      "bytes": 14640,
+      "sha256": "58dfe68e2146885ac542db7f0afea8e1b79281f40ea16a7de9756e2a816cc089",
+      "scope": "Recovered package verification;initial diagnostics retain their original scope"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-tests-final.log",
+      "bytes": 5596,
+      "sha256": "2301453c06884020dd48ec108bbfa61e4a0e3b6c7ebb4e60d94e154c052181aa",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/elf-verification.json",
+      "bytes": 1980,
+      "sha256": "8c137b0e100d9229939bc8f40be07b7e9bafa00e5ad493d85600e5579a5fd14a",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/ux-build-first.log",
+      "bytes": 674,
+      "sha256": "883075edc82adf55d2809d596bbc3263150f44f212a42e257c125cdd61f2aaa7",
+      "scope": "Recovered package verification;initial diagnostics retain their original scope"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/ux-build.log",
+      "bytes": 2428,
+      "sha256": "840087513f850c59de1b24de5fd70639917035fdaec78b494761310564824ede",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/ux-focused.log",
+      "bytes": 3001,
+      "sha256": "b723bee902f54c9b31dbbde858eb55ceed6c920adc0632dddd20c8ec3dd74ead",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/ux-frontend.log",
+      "bytes": 32724,
+      "sha256": "9bba4ba577303b6dcd3d1688ac6fcb4cbb06a6edf78ce0505bfec0244439d676",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/ux-verification.json",
+      "bytes": 2827,
+      "sha256": "62249ba8aea4e1572f1d239e91318dc4800b0ab8e2910c6e890bd48a78ba0542",
+      "scope": "Current completed offline package verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-agent-focused.log",
+      "bytes": 8125,
+      "sha256": "7474eb42cac928993ce973df7d91e67a06dd0c80e340bda8a0a4e43e0d790b11",
+      "scope": "Current V8/legacy identity verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-agent-related.log",
+      "bytes": 58553,
+      "sha256": "d948e420f969e6200c9efb3f139d71cd1ed0b641ff24b456568da1c0475592f9",
+      "scope": "Current V8/legacy identity verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-agent-legacy-identities.json",
+      "bytes": 4016,
+      "sha256": "98fd1083cd75dc3d1b3f7e0b89c2bd6e9d629d3da3adac4fe0d2ed6e519e9b17",
+      "scope": "Current V8/legacy identity verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-agent-source_projection_before.json",
+      "bytes": 329,
+      "sha256": "1420173d18536e75f42ea3b1e026f589d45d3f2c78469eaa81aa3666a6293407",
+      "scope": "Initial invalid-proof reproduction only"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/v8-agent-legacy-artifacts.py",
+      "bytes": 2097,
+      "sha256": "2068a6decdaf8140ca1e50e1e04d6b6c74a1e994af3076655b2afac72b870bef",
+      "scope": "Current V8/legacy identity verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statement-focused-final.log",
+      "bytes": 6087,
+      "sha256": "0fd2c4531c9c7c54924a88da297d4e628f9f3902bfd3b96f413b486794345c24",
+      "scope": "Current statement comparison verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statement-related-final.log",
+      "bytes": 16339,
+      "sha256": "a30956179325eab7e0199fad475cd29dbea5e1a5f4fe4518246d9dbb35d80912",
+      "scope": "Current statement comparison verification"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statement-original-comparison.json",
+      "bytes": 221305,
+      "sha256": "a35d2105151a6e45bbe5c8106a5b1bde82fbabae368ed5426626ed5bca3e96e7",
+      "scope": "Actual authored original-source example,not observed provider data"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/statement-original-comparison-receipt.json",
+      "bytes": 479,
+      "sha256": "c8ab835b320bf2d6840d888a7ce624fb8c9e89d2aaf944447c36636433312388",
+      "scope": "Actual authored original-source example,not observed provider data"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/published-capsule-native-final.log",
+      "bytes": 1405,
+      "sha256": "2f997100438d49119c3bbfe95d15f586a3c1490e6f1177ed504f0b5bf1291ab1",
+      "scope": "Previously published406f88f package tests;native/SDKinputs independently byte-identical to current source"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/published-capsule-sdk-first.log",
+      "bytes": 6226,
+      "sha256": "18f48d5d5ba75d0b3f55bb9a8b7463176bdf67c430492e18196b72595ca8d724",
+      "scope": "Previously published406f88f package tests;native/SDKinputs independently byte-identical to current source"
+    },
+    {
+      "path": "docs/qualification/development-continuation/nov21-sprint-recovery-evidence/published-kraken-regressions.log",
+      "bytes": 25669,
+      "sha256": "2ba880edd336b66774388fed05d2ce67fd63b670628df5aca35d59bb3b7fb6e8",
+      "scope": "Previously published67ab987 coordinator cohort;current fullguard repeats these cases"
+    }
+  ],
+  "restrictions": {
+    "application_started": false,
+    "server_started": false,
+    "live_provider_connected": false,
+    "deployment": false,
+    "trading": false,
+    "spend_usd": 0,
+    "owner_acceptance": false,
+    "frozen_native_identities_preserved": 8,
+    "workspaces_preserved": 12,
+    "GIG_only": true,
+    "separate_from_GIG_Quant_Terminal": true
+  },
+  "next_queue": [
+    "Strict bounded UI/product admission for original-source vintage comparison andcorpus-backed completeness criteria",
+    "Remaining effective/complex typed/general cross-base DRS/schema/OIM/calculation semantics",
+    "Kraken product/transport ownership andremainingofficialprotocol/IEXsource-action authority",
+    "Precise partial-frame/opaque terminal/schema recovery contracts",
+    "Exactdeployed runtime/advisory/remediation plusphysical/ARM64/providerqualification with specificauthority",
+    "RecoveroriginalH08/A18/A19text/oracle;preservecurrentNAscope"
+  ]
+}

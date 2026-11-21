@@ -1,0 +1,29 @@
+Internal ctest changing into directory: /workspace/gig-development/build/recovery-release
+UpdateCTestConfiguration  from :/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Parse Config file:/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Parse Config file:/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Test project /workspace/gig-development/build/recovery-release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 41
+    Start 41: itch.completed_source_capsule
+
+41: Test command: /workspace/gig-development/build/recovery-release/gig_itch_completion_capsule_tests
+41: Working Directory: /workspace/gig-development/build/recovery-release
+41: Test timeout computed to be: 1500
+41: capsule_container=binary_file restore_failpoints=57 encode_failpoints=58
+41: capsule_container=single_gzip restore_failpoints=61 encode_failpoints=62
+41: checks=535 failures=0
+1/1 Test #41: itch.completed_source_capsule ....   Passed    0.12 sec
+
+The following tests passed:
+	itch.completed_source_capsule
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.12 sec
