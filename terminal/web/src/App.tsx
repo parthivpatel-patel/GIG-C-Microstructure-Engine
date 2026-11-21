@@ -2,6 +2,7 @@ import {itchBookChoices,replayMinimum,replayProgress} from './itchSession';
 import { ConcentrationPanel } from './ConcentrationPanel';
 import { Navigation } from './Navigation';
 import { TerminalHeader } from './TerminalHeader';
+import {createSearchRequestGuard,runSearchRequest,runSearchSelection} from './searchRequestGuard';
 import { OrderBook } from './OrderBook';
 import { WorkspaceLaunchpad } from './WorkspaceLaunchpad';
 import { WorkspaceHeading } from './WorkspaceHeading';
@@ -57,7 +58,15 @@ export default function App() {
         revision: number;
     }>({ symbol: 'AAPL', revision: 0 });
     const [bootstrapErrors, setBootstrapErrors] = useState<string[]>([]);
-    const openCompany = (s: string) => { setStockSymbol(s); setStockSelectionRevision(v => v + 1); setSection('Stock Intelligence'); };
+    const searchGuard=useRef<ReturnType<typeof createSearchRequestGuard>|null>(null);
+    const searchLifetime=searchGuard.current??=createSearchRequestGuard(globalQuery),searchContext=searchLifetime.context();
+    useEffect(()=>{searchLifetime.activate();return()=>searchLifetime.close()},[searchLifetime]);
+    const changeSearchQuery=(value:string)=>{if(!searchLifetime.matchesContext(searchContext))return;searchLifetime.changeQuery(value);setGlobalQuery(value);setSearchResults([]);setSearchMessage('')};
+    const searchCompanies=()=>void runSearchRequest(searchLifetime,searchContext,query=>{
+        setSearchResults([]);setSearchMessage('');
+        return request<{results:{symbol:string;company_name:string}[]}>('/stocks/search?q='+encodeURIComponent(query));
+    },value=>{setSearchResults(value.results);setSearchMessage(value.results.length?'':'No matches in the configured market directory.')},failure=>setError(failure instanceof Error?failure.message:'Company search unavailable.'));
+    const openCompany = (s: string) => { searchLifetime.invalidate();setSearchResults([]);setSearchMessage('');setStockSymbol(s); setStockSelectionRevision(v => v + 1); setSection('Stock Intelligence'); };
     const help = useRef<HTMLDialogElement>(null);
     useEffect(() => { document.documentElement.dataset.theme = theme; try {
         localStorage.setItem('gig.atlas.theme', theme);
@@ -181,14 +190,7 @@ export default function App() {
     return <div className={"terminal-shell atlas-shell gig-workstation" + (navCollapsed ? " atlas-nav-collapsed" : "")}><dialog ref={help} className="atlas-dialog" aria-labelledby="atlas-help-title"><h2 id="atlas-help-title">Research with explicit evidence</h2><p>Stock Intelligence separates reported financial facts, cached source responses and theoretical models. Missing values remain unavailable. Synthetic replay and simulated fills are labelled; they do not establish observed-market accuracy.</p><p>Keep your Codespaces port private. Provider configuration does not grant data rights. No live order submission is supported.</p><form method="dialog"><button>Close help</button></form></dialog><a className="atlas-skip" href="#workspace-main">Skip to workspace</a>
   <Navigation selected={section} onSelect={setSection}/>
   <main id="workspace-main" tabIndex={-1}>
-   <TerminalHeader section={section} collapsed={navCollapsed} onCollapse={() => setNavCollapsed(v => !v)} theme={theme} onTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} onHelp={() => help.current?.showModal()} transport={transport} query={globalQuery} message={searchMessage} results={searchResults} onQuery={value => { setGlobalQuery(value); setSearchResults([]); setSearchMessage(''); }} onSelect={symbol => { openCompany(symbol); setSearchResults([]); }} onSearch={() => void request<{
-            results: {
-                symbol: string;
-                company_name: string;
-            }[];
-        }>('/stocks/search?q=' + encodeURIComponent(globalQuery))
-            .then(value => { setSearchResults(value.results); setSearchMessage(value.results.length ? '' : 'No matches in the configured market directory.'); })
-            .catch(e => setError(e.message))}/>
+   <TerminalHeader section={section} collapsed={navCollapsed} onCollapse={() => setNavCollapsed(v => !v)} theme={theme} onTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} onHelp={() => help.current?.showModal()} transport={transport} query={globalQuery} message={searchMessage} results={searchResults} onQuery={changeSearchQuery} onSelect={symbol => runSearchSelection(searchLifetime,searchContext,symbol,openCompany)} onSearch={searchCompanies}/>
    <div className="page-content"><WorkspaceHeading section={section} onNavigate={setSection}>{equityWorkspace || section === 'Command Center' ? <span className="private-badge">EQUITY RESEARCH · OBSERVATION-ONLY</span> : <label className="mode-selector">OPERATING MODE<select aria-label="Operating mode" value={state?.mode || 'HISTORICAL_REPLAY'} onChange={e => void control('mode', e.target.value)} disabled={busy || !state || equityWorkspace}>{Object.entries(modeNames).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>}</WorkspaceHeading>
    {!equityWorkspace && section !== 'Command Center' && <div className="source-strip"><div className="instrument"><span className="instrument-icon">{live ? '₿' : 'Σ'}</span><div><b>{state?.instrument || 'Awaiting engine'}</b><span>{state?.provider || 'UNAVAILABLE'} / {state?.venue || 'declared source scope'}</span></div></div><div className="source-mode"><span className={'origin ' + (live ? 'live-origin' : 'synthetic-origin')} data-testid="origin-label">{state?.origin || 'UNAVAILABLE'}</span><span className="muted">{bookTitle}</span></div><div className="feed-status"><Status value={state?.feed.state || 'DISCONNECTED'}/><span className="muted">{state?.feed.reason || 'Waiting for backend state'}</span></div></div>}
    {bootstrapErrors.length > 0 && <aside className="notice" role="alert" aria-label="Startup source diagnostics"><strong>Source metadata unavailable</strong>{bootstrapErrors.map(message => <p key={message}>{message}</p>)}<button onClick={() => setBootstrapErrors([])}>Dismiss startup diagnostics</button></aside>}

@@ -493,3 +493,17 @@ ELF32/64,endian/dynamic/program/stringtable metadata andexplicit architecture/
 SONAME bindings;cycles/unresolved/unsupportedsemantics stayexplicit. SECURITY03
 staysPARTIAL foractualruntime/deployedclosure,version/reachability/advisory/edge
 acceptance. Newreceipts:work/nov21-elf-recovery/.
+
+### Keyboard/exact-book accessibility and search race recovery
+
+ELFclosure remoteverifiedabe226763c156eecc428d474aa89a61cca48f6d8. Recovered search
+combobox/listbox keyboard/livefeedback andnativeexact-bookdisclosures completed.
+Appnowuses testedquery/request/selection admission guards: late successes/errors
+andoldrenderedoptions cannotreplace/select afterquerychange,replacement,dismissal,
+selection orunmount;StrictModeeffectreplay doesn'trevive pendingtickets orbreak
+currentoptions. Existingtransporttimeout/API/defaults/design/workspaces unchanged.
+28focused tests andregistered373frontend tests/TSC/Vite pass,0failures/skips.
+Original18-test receipt preserved;newwork/nov21-search-recovery bindsactual28 and
+retainsinitialtesttypingdiagnostic. Physicalbrowser/AT/WCAGacceptance unperformed;
+precisecurrent-control procedure inKEYBOARD_SEARCH_AND_EXACT_BOOK_ACCESSIBILITY.md.
+UX02staysPARTIAL. No application/server/browser/provider/deploy/trade/spend.

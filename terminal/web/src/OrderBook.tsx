@@ -10,13 +10,12 @@ export function OrderBook({state,expanded=false,compact=false}:{state:TerminalSt
  const quantities=String(state.quantity_scale||'1');
  const ladder=(rows:typeof bids,side:'bid'|'ask')=><div className={'ladder-side '+side}>
   <div className="ladder-title"><span><i className={'dot '+side}/>{side==='bid'?'Bids':'Asks'}</span><span>{rows.length} levels</span></div>
-  <div className="ladder-scroll" tabIndex={0} aria-label={side+' price ladder'}>
+  <div className="ladder-scroll" role="region" tabIndex={0} aria-label={side+' price ladder'}>
    <table className="book-table"><caption className="sr-only">{side==='bid'?'Bid':'Ask'} prices,size and cumulative displayed quantity</caption>
     <thead><tr><th scope="col">Price</th><th scope="col">Size</th><th scope="col">Cumulative</th></tr></thead>
-    <tbody>{rows.map(row=><tr key={row.price_ticks} className={'book-row '+side} tabIndex={0}
-     title={`Exact ${side} price ticks ${row.price_ticks}; quantity ${row.quantity}; cumulative ${row.cumulative}`}
+    <tbody>{rows.map(row=><tr key={row.price_ticks} className={'book-row '+side}
      style={{'--row-depth':`${chartRatio(BigInt(row.quantity),maximum)*100}%`} as CSSProperties}>
-     <th scope="row">{price(row.price_ticks,state.price_scale)}</th>
+     <th scope="row">{price(row.price_ticks,state.price_scale)}<details className="book-exact-values"><summary aria-label={`Inspect exact ${side} level at ${row.price_ticks} price ticks`}>Exact level values</summary><dl><dt>Price ticks</dt><dd>{row.price_ticks}</dd><dt>Quantity integer</dt><dd>{row.quantity}</dd><dt>Displayed cumulative quantity</dt><dd>{row.cumulative}</dd></dl></details></th>
      <td>{price(row.quantity,quantities)}</td><td>{price(row.cumulative,quantities)}</td>
     </tr>)}</tbody>
    </table>
