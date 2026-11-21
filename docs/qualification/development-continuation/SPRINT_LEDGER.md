@@ -362,3 +362,17 @@ Actualcombinedreceipt:work/security-local-recovery/local-inventory-combined.json
 finalreceiptwillretainbytes/hash. Nativeprecedingremoteverified
 eb83f8a5086d606b5f5177d30aefde0e14650a0f;fullReleaseCTest152pass.
 Next:cross-roleV7,exactoriginalauthority/freeoptions andguarded/packageintegration.
+
+### Original-DTS cross-role explicit V7
+
+Localinventory remoteverifiedf0d19f8e187cb361da738e4861602b25a25ce098.
+ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7 addsboundedroleREPLACEMENT traversal,
+actualsame-linkbase roleRef→schema annotation/appinfo roleType/usedOn binding,
+globaldefaults,closedexplicitcontexts andstrictretainedproofreconstruction.
+OriginalDTSbodies/permissions/identities required;no rawXMLauthfromhash alone.
+35focusedindependentlyrerun/259related pass;12V1-V6artifact+selectedoutputs identical
+toprotectedbaseline7cd99d4. ReviewfixedmalformedroleTypelocation/declarationordering
+andconsumercontexttypes. No typed/inherited/negative/effectiveprecedencegeneralization
+orconsolidatedpromotion. SEC02staysPARTIAL. Contract:CROSS_ROLE_CLOSED_EXPLICIT_V7.md.
+Next:registernew35DRS+29protocol+11SDKtests;fullguard/frontend/contracts,cleansource
+default+streamingwheel tests;finalsource/evidence/checklist/matrix.
