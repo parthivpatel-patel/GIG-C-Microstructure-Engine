@@ -424,14 +424,34 @@ class KrakenBookAdapter:
         return receipt
 
 
-async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='BTC/USD') -> AsyncIterator[str]:
+def transport_subscriptions(symbol, subscriptions=None):
+    """Bounded subscription intent only; no permission or provider qualification."""
+    if symbol not in ('BTC/USD', 'ETH/USD'):raise ProviderError('configuration')
+    if subscriptions is None:
+        return [{'method':'subscribe','params':{'channel':'book','symbol':[symbol],'depth':10,'snapshot':True}},
+                {'method':'subscribe','params':{'channel':'trade','symbol':[symbol],'snapshot':False}}]
+    if type(subscriptions)is not list or len(subscriptions)!=2:raise ProviderError('transport_subscriptions')
+    from copy import deepcopy
+    result=deepcopy(subscriptions)
+    for request,channel in zip(result,('book','trade')):
+        if type(request)is not dict or set(request)!={'method','params','req_id'}:raise ProviderError('transport_subscriptions')
+        params=request['params'];required={'channel','symbol','snapshot'}|({'depth'}if channel=='book'else set())
+        if request['method']!='subscribe' or type(params)is not dict or set(params)!=required:raise ProviderError('transport_subscriptions')
+        if params['channel']!=channel or params['symbol']!=[symbol] or type(params['snapshot'])is not bool:raise ProviderError('transport_subscriptions')
+        if channel=='book' and (params['snapshot']is not True or type(params['depth'])is not int or params['depth']not in(10,25,100)):raise ProviderError('transport_subscriptions')
+        if type(request['req_id'])is not int or not 0<=request['req_id']<=UINT64_MAX:raise ProviderError('transport_subscriptions')
+    if result[0]['req_id']==result[1]['req_id']:raise ProviderError('transport_subscriptions')
+    return result
+
+
+async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='BTC/USD', subscriptions=None) -> AsyncIterator[str]:
     """Explicit future opt-in transport; NEVER invoked by synthetic/default startup.
 
     Requires reviewed current protocol and legal evidence. Retains no market payload.
     No retries beyond caller-controlled lifecycle. ws client honors inherited proxy.
     """
     permission.require_live()
-    if symbol not in ('BTC/USD', 'ETH/USD'):raise ProviderError('configuration')
+    requests=transport_subscriptions(symbol,subscriptions)
     import websockets.asyncio.client
     class FixedEndpoint(websockets.asyncio.client.connect):
         def process_redirect(self,error):
@@ -440,8 +460,7 @@ async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='
     async with FixedEndpoint(
             'wss://ws.kraken.com/v2', max_size=MAX_PAYLOAD, max_queue=4,
             open_timeout=10, close_timeout=3, ping_interval=20, ping_timeout=10) as ws:
-        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'book', 'symbol': [symbol], 'depth': 10, 'snapshot': True}}))
-        await ws.send(json.dumps({'method': 'subscribe', 'params': {'channel': 'trade', 'symbol': [symbol], 'snapshot': False}}))
+        for request in requests:await ws.send(json.dumps(request))
         while not stop.is_set():
             try:
                 raw = await asyncio.wait_for(ws.recv(), timeout=1)

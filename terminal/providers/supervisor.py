@@ -45,8 +45,29 @@ class FeedSupervisor:
         self.exchange_ns=None;self.kind=None;self.epoch=0;self.depth=10
         self.price_scale=100000000;self.quantity_scale=100000000
         self.permission=None;self.pending=False;self.capture=None
+        self.session_profile=None;self.coordinator=None;self.capture_token=None
+        self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
+
+    def require_recording_profile(self):
+        # The legacy recording loader replays a different normalization contract.
+        # Joint receipts must never be written under that legacy manifest profile.
+        if self.session_profile is not None or self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE') is not None:
+            raise ProviderError('provider_recording_profile_unavailable')
 
     def _new_book(self):
+        if self.session_profile is not None:
+            from .kraken_coordinator import KrakenSessionCoordinator
+            if self.coordinator is None:
+                self.coordinator=KrakenSessionCoordinator(profile=self.session_profile,
+                    symbol=self.symbol,price_scale=self.price_scale,quantity_scale=self.quantity_scale,
+                    origin='LIVE_OBSERVED' if self.observed_transport else 'HISTORICAL_SYNTHETIC')
+            self.aggregate=None;self.adapter=self.coordinator._book
+            self.capture_token=None;self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
+            self.exchange_ns=self.received_at_ns=None
+            from terminal.l2_research import ResearchWindow
+            self.research=ResearchWindow(aggressor_side_confirmed=self.environment.get('GIG_LIVE_AGGRESSOR_SIDE_REVIEWED')=='1')
+            self.research_cache=None;self.research_cache_until=0
+            return
         aggregate=gig._native.AggregateDepth(32 if self.provider=='kraken' else 256,1048576)
         def apply(**event):
             return gig._checked((aggregate.snapshot if event['snapshot'] else aggregate.update)(
@@ -73,6 +94,8 @@ class FeedSupervisor:
         old=self.retired
         if old and not old.done():old.cancel()
         self.state,self.reason='DISCONNECTED','operator_disconnected'
+        if self.coordinator:self.coordinator.disconnected()
+        self.capture_token=None
         if self.adapter:self.adapter.disconnected()
         self.received_at_ns=self.exchange_ns=None
         return old
@@ -118,6 +141,12 @@ class FeedSupervisor:
             self.state,self.reason='ERROR','permission_or_current_protocol_unverified'
             raise
         self.symbol,self.permission=symbol,permission
+        from .kraken_coordinator import PROFILE as JOINT_PROFILE
+        profile=self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE') if provider=='kraken' else None
+        if profile not in(None,JOINT_PROFILE):
+            self.state,self.reason='ERROR','coordinator_profile';raise ProviderError(self.reason)
+        self.session_profile=profile;self.coordinator=None;self.capture_token=None;self.coordinated_receipt=None;self.joint_sources={}
+        if profile is not None:self.capture=None
         self.reconnects=self.messages=self.failures=self.consecutive_failures=0
         self._new_book();self.stop_event=asyncio.Event()
         self.state,self.reason='CONNECTING','awaiting_provider'
@@ -132,7 +161,12 @@ class FeedSupervisor:
                 self._new_book()
                 self.state,self.reason='SYNCHRONIZING','fresh_snapshot_required'
                 deadline=self.clock()+15_000_000_000;stable_since=None
-                stream=self.transport(self.permission,stop=self.stop_event,symbol=self.symbol)
+                token=None;options={}
+                if self.coordinator:
+                    token=self.coordinator.connect(f'kraken:{epoch}:{self.reconnects}')
+                    self.capture_token=token;self.adapter=self.coordinator._book
+                    options['subscriptions']=self.coordinator.subscription_requests(token)
+                stream=self.transport(self.permission,stop=self.stop_event,symbol=self.symbol,**options)
                 try:
                     async with asyncio.timeout(15):
                         # Includes connection establishment; subsequent receives each have a budget.
@@ -142,25 +176,46 @@ class FeedSupervisor:
                         self.pending=False
                         if self.messages>=1_000_000_000:raise ProviderError('session_record_budget')
                         now=self.clock();unix=str(self.wall_clock())
-                        receipt=self.adapter.feed(raw,now)
-                        observed=receipt
+                        if self.coordinator:
+                            receipt=self.coordinator.feed(raw,now,token=token)
+                            self.coordinated_receipt=receipt
+                            self.adapter=self.coordinator._book;self.aggregate=self.coordinator._native
+                            joint=self.coordinator.view(now)
+                            observed=receipt['source_receipt']
+                            kind=observed['kind']
+                            source_channel=('book' if kind in ('snapshot','update') else 'trade' if kind=='trades' else
+                                ('book_subscription' if 'book_session_profile' in observed else 'trade_subscription') if kind=='acknowledgment' else kind)
+                            self.joint_sources[source_channel]={key:receipt[key] for key in ('sha256','source_sha256','capture','local_generation','connection_id','receive_monotonic_ns','kind','origin')}
+                            if joint['reconnect_required']:raise ProviderError('coordinated_session_reconnect_required')
+                            if kind in ('snapshot','update'):
+                                self.received_at_ns=unix;self.exchange_ns=observed.get('source_timestamp_ns')
+                            if joint['book_eligible']:
+                                self.state='LIVE_VERIFIED' if self.observed_transport else 'TESTED_WITH_FIXTURES'
+                                self.reason='provisional_joint_L2_and_trade_not_full_market_or_L3'
+                            if not joint['book_eligible'] and now>deadline:raise ProviderError('snapshot_deadline')
+                            if joint['book_eligible'] and observed['kind']=='snapshot':self.joint_research_ready=True
+                        else:
+                            receipt=self.adapter.feed(raw,now)
+                            observed=receipt
                         if self.provider=='coinbase':
                             from .coinbase_transport import research_receipt
                             observed=research_receipt(receipt)
-                        if observed['kind'] in ('snapshot','update','trades'):
-                            research_event={**observed,'historical_snapshot':self.adapter.last_trade_snapshot} if self.provider=='kraken' and observed['kind']=='trades' else observed
+                        if observed['kind'] in ('snapshot','update','trades') and (not self.coordinator or joint['book_eligible'] and self.joint_research_ready):
+                            historical=observed.get('type')=='snapshot' if self.coordinator else getattr(self.adapter,'last_trade_snapshot',False)
+                            research_event={**observed,'historical_snapshot':historical} if self.provider=='kraken' and observed['kind']=='trades' else observed
                             state=gig._checked(self.aggregate.state()) if observed['kind']!='trades' else None
                             if state is not None:state={**state,'bids':state['bids'][:self.depth],'asks':state['asks'][:self.depth]}
                             self.research.observe(research_event,state,now,self.messages+1)
                         if self.capture is not None and self.capture.state in ('RECORDING','FINALIZING'):
+                            self.require_recording_profile()
                             self.capture.offer(raw,now,unix,receipt)
                         self.messages+=1;self.kind=receipt['kind']
                         if self.messages%64==0:await asyncio.sleep(0)
-                        if receipt['kind'] in ('snapshot','update'):
+                        if receipt['kind'] in ('snapshot','update') and (not self.coordinator or joint['book_eligible']):
                             self.received_at_ns=unix
-                            self.exchange_ns=receipt.get('source_timestamp_ns')
+                            self.exchange_ns=(observed if self.coordinator else receipt).get('source_timestamp_ns')
                             self.state='LIVE_VERIFIED' if self.observed_transport else 'TESTED_WITH_FIXTURES'
-                            self.reason='validated_subscribed_L2_not_full_market_or_L3'
+                            self.reason='provisional_joint_L2_and_trade_not_full_market_or_L3' if self.coordinator else 'validated_subscribed_L2_not_full_market_or_L3'
                             if stable_since is None:stable_since=now
                             elif now-stable_since>=30_000_000_000:attempt=0;self.consecutive_failures=0
                         if self.adapter.state not in ('LIVE','CANDIDATE_READY') and self.clock()>deadline:
@@ -173,6 +228,8 @@ class FeedSupervisor:
                     # Invalidate before fallible/awaiting close; no trusted publication window.
                     if epoch==self.epoch:
                         self.state,self.reason='RESYNCING','stream_ended_snapshot_required'
+                        if self.coordinator:self.coordinator.disconnected()
+                        self.capture_token=None
                         if self.capture is not None:await self.capture.abort('source_interrupted')
                     # Explicit generator closure closes socket even on parsing/native rejection.
                     if hasattr(stream,'aclose'):await stream.aclose()
@@ -203,19 +260,31 @@ class FeedSupervisor:
     def view(self):
         now=self.clock()
         trusted=self.state in ('LIVE_VERIFIED','TESTED_WITH_FIXTURES')
-        if trusted:
+        joint=None
+        if self.coordinator:
+            try:joint=self.coordinator.view(now)
+            except ProviderError as error:
+                self.state,self.reason='ERROR',error.code;trusted=False
+            if joint is not None and not joint['book_eligible']:
+                if trusted:
+                    self.state='STALE' if joint['reason']=='coordinator_book_stale' else 'RESYNCING'
+                    self.reason=joint['reason']
+                trusted=False
+        elif trusted:
             status=self.adapter.status(now)
             if status['state'] not in ('LIVE','CANDIDATE_READY'):
                 self.state='STALE' if status['state']=='STALE' else 'RESYNCING'
                 self.reason=status['reason'];trusted=False
-        native=gig._checked(self.aggregate.state()) if trusted else None
+        native=(joint['book'] if self.coordinator else gig._checked(self.aggregate.state())) if trusted else None
         origin=('LIVE_OBSERVED' if self.observed_transport else 'HISTORICAL_SYNTHETIC') if native else 'UNAVAILABLE'
         metrics={name:None for name in ('spread','midprice','microprice','imbalance','bid_depth','ask_depth')}
         if native:
             for target,source in [('spread','spread'),('midprice','midpoint'),('microprice','microprice'),('imbalance','depth_imbalance'),('bid_depth','bid_depth'),('ask_depth','ask_depth')]:
                 metrics[target]=native['metrics'][source]
         research={'status':'UNAVAILABLE','reason':'untrusted_or_stale_source'}
-        if native:
+        if native and self.coordinator and not self.joint_research_ready:
+            research['reason']='awaiting_jointly_eligible_book_snapshot'
+        if native and (not self.coordinator or self.joint_research_ready):
             if self.research_cache is None or now>=self.research_cache_until:
                 self.research_cache=self.research.view(now)
                 self.research_cache['methodology']['depth_scope']='top '+str(self.depth)+' displayed levels per side;native depth totals may cover more admitted levels'
@@ -234,19 +303,21 @@ class FeedSupervisor:
                 'depth':self.depth,'native_depth_counts':{s:len(native[s]) if native else 0 for s in ('bids','asks')},'last_kind':self.kind,'pending_receive':self.pending,
                 'snapshots':self.adapter.snapshots if self.adapter else 0,
                 'updates':self.adapter.updates if self.adapter else 0,
-                'trade_window_count':len(self.adapter.trades) if trusted else 0,
+                'trade_window_count':len(self.coordinator._public.trades if self.coordinator else self.adapter.trades) if trusted else 0,
+                'joint_session':None if joint is None else {key:value for key,value in joint.items() if key!='book'},
                 'integrity':'candidate_CRC32_scoped_no_exchange_sequence' if self.provider=='kraken' else 'ordered_capture_no_documented_L2_sequence_or_checksum_proof','protocol_review':'operator_attested' if self.permission else 'unverified'},
             'native_core_status':({'scope':self.provider+'_L2','initialized':native['initialized'],'revision':native['revision'],'sequence':native['sequence'],'pmr_live_bytes':native['pmr_live_bytes'],'pmr_peak_bytes':native['pmr_peak_bytes']} if native else {'scope':self.provider+'_L2','published':False,'state':self.state}),
             'research':research,
             'recording':self.capture.status() if self.capture else {'state':'DISABLED'},
-            'flow':{'trades':list(self.adapter.trades) if trusted else [],'classification':'provider_reported_side_not_inferred_cancellations'},
+            'flow':{'trades':([dict(t) for t in self.coordinator._public.trades] if self.coordinator else list(self.adapter.trades)) if trusted else [],'classification':'provider_reported_side_not_inferred_cancellations'},
             'provenance':{'category':origin,'dataset':None,'complete_initialization':False,
                 'initialization_scope':'subscribed aggregate L2 only','recording_enabled':self.capture is not None and self.capture.state=='RECORDING',
                 'clock':'receive:monotonic_ns;wall:unix_ns;exchange:optional_RFC3339',
                 'native_metrics_scope':'all admitted native levels;display is top '+str(self.depth),
-                'profile':'provisional_kraken_v2' if self.provider=='kraken' else 'provisional_coinbase_exchange','permission':'operator_attested' if self.permission else 'unverified',
+                'profile':self.session_profile or ('provisional_kraken_v2' if self.provider=='kraken' else 'provisional_coinbase_exchange'),'permission':'operator_attested' if self.permission else 'unverified',
+                'joint_source_receipts':{key:dict(value) for key,value in self.joint_sources.items()},
                 'source_sequence':None,'session_segment':f'{self.provider}:{self.epoch}:{self.reconnects}',
                 'session_segment_scope':'local_capture_boundary_not_exchange_session_or_sequence','redistribution_permitted':False},
             'capabilities':{'live':self.observed_transport and self.permission is not None,'aggregate_l2':True,
-                'native_replay':True,'simulation':True,'recording':bool(self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
+                'native_replay':True,'simulation':True,'recording':bool(self.session_profile is None and self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
                 'observed_itch':False,'order_ids':False,'fifo':False}}

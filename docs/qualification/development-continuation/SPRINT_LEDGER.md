@@ -546,3 +546,7 @@ Nov21continuedworkisnotdeadlineextension. Finalenclosingcommitdoc/evidenceonly;
 resolveexactdeliveryremoteSHAfromGit. Originalworkspace/interruptedsource/logs
 preserved,noreset/discard/forcepush. Noapp/server/provider/deploy/trade/spend/
 owneracceptance orbackgroundpromise.
+
+### November 21 — supervised joint Kraken consumer
+
+Recovered baseline c45e198 was clean; no unpublished agent files were present. Integrated the opt-in joint coordinator into actual transport subscription intent, FeedSupervisor, native book/research/flow and terminal views. Legacy defaults/permissions remain. Joint recording rejects before writer allocation because no compatible versioned replay format exists. Root independently ran 143 focused tests with socket/app-factory guards (14 new integration tests), all passing; log `work/nov21-engineering-continuation/kraken-focused.log`. Registered those 14 in the guarded cohort (1,167 expected). MD07 remains PARTIAL; no provider qualification occurred. Next: financial comparison consumer and effective original-source DRS.

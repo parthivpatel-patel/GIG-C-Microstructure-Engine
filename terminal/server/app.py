@@ -923,6 +923,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                 import uuid
                 try:
                     if feed.provider!='kraken':raise ValueError('provider_recording_profile_unavailable')
+                    feed.require_recording_profile()
                     permission=configured_permission(os.environ);permission.require_live()
                     if os.environ.get('GIG_LIVE_RECORDING_ENABLED')!='1' or not permission.recording_approved:
                         raise ValueError('retention_permission_required')
@@ -933,6 +934,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                     try:
                         async with lock:
                             await feed.start(feed.symbol)  # Fresh observed source snapshot, never an invented seed.
+                            feed.require_recording_profile()
                             feed.capture=capture
                     except BaseException:await capture.abort('startup_failed');raise
                     return {'schema_version':'1','recording':capture.status()}
