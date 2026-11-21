@@ -465,3 +465,17 @@ Contract:INHERITED_CROSS_ROLE_CLOSED_EXPLICIT_V8.md. SEC02staysPARTIAL.
 Nextpublishsourcevintagecomparison,ELFclosureandsearch/accessibility;thenfull
 guarded/frontend/native/SDK/contracts/cleanpackageverification.
 No application/server/provider/deploy/trade/spend/owneracceptance.
+
+### Source-vintage statement comparison
+
+InheritedDRS remoteverified84ef815 (exactSHA recorded byremotecheck). Newbounded
+company_statement_vintage_comparison reconstructs originalsourceaccounting at1..8
+exactcutoffs, freezescollection/instrument andcomparesadjacentsuppliedviews only.
+Exactconcept/period/entitylexical/unit/declaration/restriction/role/relationship
+gates keepmissing/conflicting/unsupported/incompatible/calculation-inconsistent
+rows explicit;unavailablevintages areneverskipped. Noaliases,valuefill,restatement
+orunderlyingexact-value inference. ExistingAPI/default/UIadmission unchanged.
+28focusedrootrerun and80related tests pass;actualtwo-envelope authoredexport
+retainedunderwork/nov21-statement-comparison withSHAreceipt. Limits4096rows/4MiB,
+originalenvelopesstill256KiB. Contract:SOURCE_STATEMENT_VINTAGE_COMPARISON.md.
+SEC02staysPARTIAL fororiginalcorpus/history/fullconformanceacceptance.
