@@ -447,3 +447,21 @@ views withoutpublishingpartialstate. DistinctL2/trade/sourcehash/clock scopesrem
 revisionpreservation,200changes/side,stale/copiedtokens andactualnative tested.
 Contract:KRAKEN_NATIVE_JOINT_SESSION.md. Noexistingadapter/default/nativeformat change.
 MD07staysPARTIAL fortransportauthenticity,remainingprotocol andrealqualification.
+
+## November21 interrupted sprint recovery — inherited multi-cube DRS
+
+Recovered actual cleanremote67ab987c9a7e6fc5e9c4fd24dab3fbfea2e09c0e without reset or
+discard. Published nativecapsule406f88f80a3f7ad802be30981983813add93d6c3 andKraken
+coordinator preserved;65combinedtests rerunpass. Existingworktrees/interrupted
+source/logs inspected beforeedits;originalworktree untouched.
+
+Original-DTS inherited closed explicit V8 now independently40focused tests pass,
+with294related and14V1-V7artifact+selected identities unchanged. Supports direct
+andtransitive positive-cubeconjunction withinonepreservedoriginalbaserole plus
+V7consecutivecross-role cube/domain paths. Retainedproofrejects impossiblearc/link/
+roleType nodebindings, rehashedtampering andresource/cycle violations. Defaults
+andV1-V7 unchanged;generalcross-base/typed/negative/precedence remainunsupported.
+Contract:INHERITED_CROSS_ROLE_CLOSED_EXPLICIT_V8.md. SEC02staysPARTIAL.
+Nextpublishsourcevintagecomparison,ELFclosureandsearch/accessibility;thenfull
+guarded/frontend/native/SDK/contracts/cleanpackageverification.
+No application/server/provider/deploy/trade/spend/owneracceptance.
