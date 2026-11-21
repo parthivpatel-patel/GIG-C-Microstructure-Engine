@@ -1,0 +1,3 @@
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o
+[2/2] Linking CXX executable gig_itch_source_recovery_tests

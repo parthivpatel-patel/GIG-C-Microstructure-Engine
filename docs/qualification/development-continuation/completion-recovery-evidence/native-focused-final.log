@@ -1,0 +1,29 @@
+Internal ctest changing into directory: /workspace/gig-development/build/recovery-release
+UpdateCTestConfiguration  from :/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Parse Config file:/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Parse Config file:/workspace/gig-development/build/recovery-release/DartConfiguration.tcl
+Test project /workspace/gig-development/build/recovery-release
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 40
+    Start 40: itch.source_hot_recovery
+
+40: Test command: /workspace/gig-development/build/recovery-release/gig_itch_source_recovery_tests
+40: Working Directory: /workspace/gig-development/build/recovery-release
+40: Test timeout computed to be: 1500
+40: source_restore_failpoints=67
+40: complete_source_failpoints=66
+40: checks=331 failures=0
+1/1 Test #40: itch.source_hot_recovery .........   Passed    0.03 sec
+
+The following tests passed:
+	itch.source_hot_recovery
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.03 sec

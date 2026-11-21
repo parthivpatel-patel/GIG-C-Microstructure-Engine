@@ -1,0 +1,11 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Found Python3: /workspace/gig-development/work/venv/bin/python (found suitable version "3.12.14", minimum required is "3.8") found components: Interpreter
+-- Found Python3: /workspace/gig-development/work/venv/bin/python (found suitable version "3.12.14", minimum required is "3.9") found components: Interpreter Development.Module
+-- Found pybind11: /workspace/gig-development/work/venv/lib/python3.12/site-packages/pybind11/include (found version "2.13.6")
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /workspace/gig-development/build/recovery-release
+[0/2] Re-checking globbed directories...
+[1/2] Building CXX object CMakeFiles/_native.dir/python/bindings/itch_recovery.cpp.o
+[2/2] Linking CXX shared module python/gig_microstructure/_native.cpython-312-x86_64-linux-gnu.so

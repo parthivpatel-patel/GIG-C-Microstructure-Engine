@@ -1,0 +1,11 @@
+[0/2] Re-checking globbed directories...
+[1/4] Building CXX object CMakeFiles/gig_itch_streaming.dir/src/itch/source_recovery.cpp.o
+[2/4] Linking CXX static library libgig_itch_streaming.a
+[3/4] Building CXX object CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o
+FAILED: CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o 
+/usr/bin/g++  -I/workspace/gig-development/include -O3 -DNDEBUG -std=c++20 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -Werror -MD -MT CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o -MF CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o.d -o CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o -c /workspace/gig-development/tests/test_itch_source_recovery.cpp
+/workspace/gig-development/tests/test_itch_source_recovery.cpp: In function ‘void {anonymous}::completed_sources()’:
+/workspace/gig-development/tests/test_itch_source_recovery.cpp:43:8: error: inconsistent deduction for ‘auto’: ‘const std::__cxx11::basic_string<char>’ and then ‘const std::array<std::byte, 32>’
+   43 |  const auto prior=state(h.reconstruction),identity=sha256(checkpoint);auto all=prefix;all.push_back(reduce('E',101,2,71));all.push_back(replace(101,103,8));
+      |        ^~~~
+ninja: build stopped: subcommand failed.

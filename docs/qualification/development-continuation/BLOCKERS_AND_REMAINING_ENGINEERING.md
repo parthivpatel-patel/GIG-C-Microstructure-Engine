@@ -10,11 +10,11 @@ all broader contracts or authorize any external acceptance action.
 |ID|Engineering still open after this sprint|Dependency and minimum defensible next effort|Consequence of deferral|
 |---|---|---|---|
 |DATA02|Bounded adapters already exist; actual current complete listing reconciliation is not present.|Authorized authoritative import and comparison;at least one source-bound reconciliation cycle. Source freshness cannot be manufactured offline.|Universe remains bounded/source-labelled rather than complete current US listings.|
-|SEC02|Complete statements/accounting reconstruction beyond supported direct source assertions;complex-typed/cross-role/effective DRS;full schema/inline/OIM/calculation semantics. One-role negative-only V5, direct closed scalar-typed V6, original-inline audit and source-accounting statements with private Python-to-TS-to-UI imports are demonstrated subsets.|Select remaining precise conformance/issuer statement contracts and independent corpus;multiple engineering/verification units. Source role labels and hashes cannot establish general GAAP completeness or issuer authenticity.|General statement/history/conformance claims stay incomplete;no inferred alias or missing-value filling.|
+|SEC02|Complete statements/accounting reconstruction beyond supported direct source assertions;complex-typed/inherited and effective cross-role DRS;full schema/inline/OIM/calculation semantics. One-role negative-only V5, direct closed scalar-typed V6, original-DTS closed explicit cross-role V7, original-inline audit and source-accounting statements with private Python-to-TS-to-UI imports are demonstrated subsets.|Select remaining precise conformance/issuer statement contracts and independent corpus;multiple engineering/verification units. Source role labels and hashes cannot establish general GAAP completeness or issuer authenticity.|General statement/history/conformance claims stay incomplete;no inferred alias or missing-value filling.|
 |MD06|Observed IEX cancellation/error mapping and exchange-complete recovery authority.|Authoritative source action/sequence/backfill contract first;then one bounded mapping-and-fault-fixture package. Losslessness is not estimable without source authority.|Authored cancellation/correction ledger stays available;no observed tape-completeness claim.|
-|MD07|Broader official depth500/1000/options/trade/status/session/usage reconciliation beyond opt-in depth10/25/100 negotiation; observed qualification remains absent.|At least a source-versioned contract/fixture reconciliation package;actual provider acceptance requires separate authorization. Existing ordered-update subset stays provisional.|Kraken remains provisional and no provider activation occurs.|
-|REL02|Additional partial/terminal/native-schema/compressed source-position contracts and hardware durability acceptance.|Specify each new source boundary/schema first,then native/codec/failure/cross-process tests. Arbitrary compressed offsets and hardware guarantees cannot be estimated from current fixtures.|Existing bounded paused continuation remains intact;unsupported positions/migrations reject.|
-|SECURITY03|Actual installed/deployed/native/OS/edge security inventory and clearance.|Exact owner-target artifacts and advisory scope;at least inventory/scanning plus remediation/retest cycle. No target exists in this session.|New source-lock SBOM and bounded advisory snapshots remain developer evidence only.|
+|MD07|Broader official depth500/1000/options/full-session/usage reconciliation and book/native coupling for standalone trade/status profile; opt-in depth10/25/100 and bounded trade/status parsing now exist. Observed qualification remains absent.|At least a source-versioned contract/fixture reconciliation package;actual provider acceptance requires separate authorization. Existing ordered-update subset stays provisional.|Kraken remains provisional and no provider activation occurs.|
+|REL02|Additional partial-frame/serialized finished-image/native-schema/compressed source-position contracts and hardware durability acceptance. Verified-container terminal plain/sole-gzip continuation and read-only SDK completion now exist.|Specify each new source boundary/schema first,then native/codec/failure/cross-process tests. Arbitrary compressed offsets and hardware guarantees cannot be estimated from current fixtures.|Existing bounded paused continuation remains intact;unsupported positions/migrations reject.|
+|SECURITY03|Actual installed/deployed/native/OS/edge security inventory and clearance.|Exact owner-target artifacts and advisory scope;at least inventory/scanning plus remediation/retest cycle. No target exists in this session.|Source-lock SBOM, passive local installed/native/OS inventory and earlier advisory snapshots remain bounded developer evidence only.|
 |UX02|Actual browser/device/assistive-technology and exhaustive WCAG acceptance.|Authorized target/browser/device session,then findings/repairs/retest;unknown failures prevent a defensible fixed engineering estimate.|Code-level tables/labels/keyboard alternatives remain;physical-device acceptance unverified.|
 |SCOPE02|Original A18/A19 acceptance criteria/estimator baseline remains unknown.|Recover exact historical source or make an explicit prospective owner decision;no implementation estimate before that decision.|Existing HHI implementation cannot retroactively close historical requirements.|
 
@@ -45,25 +45,42 @@ is introduced. N/A scope remains N/A.
 
 ## Next execution queue
 
-Preserve all prior packages, the four November15 checkpoints and the three recovered
-November20 packages. Tested source:9be1c0d8293444e517af67fe2a57fd1be599277c; current
-receipts:NOV20_DELIVERY_EVIDENCE.json. All8PARTIAL criteria/minimum next units are in
-NOV20_PARTIAL_ACCEPTANCE_REVIEW.md. Preserve private UI imports, V6 typed proof and
-Kraken depth25/100; do not repeat completed acquisition, strict JSON, original-byte
-audit, existing statements or bounded recovery wiring.
+Preserve protected baseline7cd99d4afd98f58330732ecfc0fd0b3303c49a3b and all prior
+packages. Recovered integration source9e6218e5387cd8baaf5e5c950718ee48ab266753 contains
+four independently published packages: standalone Kraken trade/status, native/SDK
+verified-container completion, passive local artifact inventory and original-DTS
+cross-role explicit V7. Current source-bound receipts:COMPLETION_RECOVERY_EVIDENCE.json.
+All16non-COMPLETE row authority/checklists:ORIGINAL_ACCEPTANCE_AUTHORITY.md;
+legitimate free options and exact use/allowance gates:FREE_QUALIFICATION_OPTIONS.md.
 
-1. Select one authoritative cross-role/effective/complex-typed DRS or dimensional/OIM
-   contract. Preserve current explicit unsupported results and V1-V6 identities.
-2. Bind one issuer/taxonomy corpus to exact statement-completeness criteria; extend
-   accounting only with that evidence. Retain absent/conflicting values and vintages.
-3. Select one official Kraken trade/status/session/larger-depth or authoritative IEX
-   action/backfill contract. No invented exchange sequencing or tape completeness.
-4. Specify one additional native replay/source position or schema contract before
-   changing recovery admission. No arbitrary compressed seek or guessed migration.
-5. Obtain the exact external evidence listed above through separately authorized
-   qualification; preserve all7BLOCKED statuses and N/A scope until it exists.
+1. Recover authoritative H08 master/A18-A19 text and estimator oracle. The recovered
+   immutable176-row audit/sourcecatalog is not the missing raw master. Preserve
+   SCOPE02 PARTIAL and current-scope SCOPE01 N/A without universal historical claims.
+2. Choose one remaining original specification-backed general schema/effective or
+   complex/inherited/typed cross-role DRS/OIM calculation milestone. V1-V7 artifacts
+   and supported defaults must remain exact; no full conformance claim from subsets.
+3. Bind a permitted issuer/taxonomy corpus to original complete-statement/history
+   acceptance criteria. Current source-accounting rows/lineage are bounded; no values
+   or GAAP aliases may be synthesized to fill missing or contradictory evidence.
+4. Complete source-bound book/native fencing integration for the new standalone
+   Kraken public profile and remaining documented options/session/larger-depth scope.
+   IEX observed cancellation/sequence/backfill needs exact authoritative source scope.
+5. Specify one additional partial-frame/finished-image/schema native recovery
+   contract. Current terminal supplied-container completion is not finished durable
+   image serialization, arbitrary compressed seeking or hardware durability.
+6. Complete exact target installed/native/OS/edge/advisory/reachability clearance and
+   findings-specific security repairs. Passive local inventory is a prerequisite,
+   not a vulnerability scan, package-file verification or private-edge acceptance.
+7. Obtain separately authorized original data/targets/physical devices and verified
+   no-charge nativeARM64 allowance. Execute existing scoped qualification procedures
+   only with those specific authorizations and collect actual candidate-bound evidence.
 
-Engineering is incomplete on the November20 target date. Remaining work is bounded
-by unavailable contracts/corpora/targets and multiple semantic implementation units;
-no whole-project additional-effort estimate is defensible before those inputs exist.
-No silent deadline extension, production-ready claim or background execution.
+Exact missing external evidence remains in the seven-blocker table above. For ARM64,
+the existing manual workflow supports the development branch; owner must verify
+actual included compute/storage and no-charge limits before setting its explicit
+free_usage_verified gate. Public free runners do not authorize exposing private code.
+
+Engineering remains incomplete on the November20 target date. Multiple semantic
+implementation units and unavailable original contracts/corpora/targets prevent a
+defensible fixed effort estimate to100percent. No silent deadline extension,
+production-ready claim or background execution. All50statuses remain unchanged.

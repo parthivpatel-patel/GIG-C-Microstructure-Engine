@@ -1,0 +1,9 @@
+[0/2] Re-checking globbed directories...
+[1/8] Linking CXX executable gig_itch_validation_demo
+[2/8] Linking CXX executable gig_itch_query_failure_tests
+[3/8] Linking CXX executable gig_itch_auction_streaming_tests
+[4/8] Linking CXX executable gig_itch_admin_streaming_tests
+[5/8] Linking CXX executable gig_itch_hy_streaming_tests
+[6/8] Linking CXX executable gig_itch_streaming_tests
+[7/8] Linking CXX executable gig_itch_gzip_tests
+[8/8] Linking CXX executable gig_itch_streaming_reference_driver

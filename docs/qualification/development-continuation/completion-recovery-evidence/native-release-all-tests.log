@@ -1,0 +1,310 @@
+Internal ctest changing into directory: /workspace/gig-development/build/recovery-release
+Test project /workspace/gig-development/build/recovery-release
+        Start   1: evidence.integrity_contracts
+  1/152 Test   #1: evidence.integrity_contracts .................   Passed    1.45 sec
+        Start   2: itch.query_failure_atomicity
+  2/152 Test   #2: itch.query_failure_atomicity .................   Passed    0.00 sec
+        Start   3: itch.validation_demo_reference
+  3/152 Test   #3: itch.validation_demo_reference ...............   Passed    0.09 sec
+        Start   4: itch.validation_demo_negative_controls
+  4/152 Test   #4: itch.validation_demo_negative_controls .......   Passed    0.10 sec
+        Start   5: itch.framer_basic
+  5/152 Test   #5: itch.framer_basic ............................   Passed    0.00 sec
+        Start   6: itch.framer_errors
+  6/152 Test   #6: itch.framer_errors ...........................   Passed    0.00 sec
+        Start   7: itch.framer_limits
+  7/152 Test   #7: itch.framer_limits ...........................   Passed    0.00 sec
+        Start   8: itch.framer_allocation
+  8/152 Test   #8: itch.framer_allocation .......................   Passed    0.00 sec
+        Start   9: itch.framer_properties
+  9/152 Test   #9: itch.framer_properties .......................   Passed    0.01 sec
+        Start  10: itch.decoder_contracts
+ 10/152 Test  #10: itch.decoder_contracts .......................   Passed    0.00 sec
+        Start  11: itch.independent_reference
+ 11/152 Test  #11: itch.independent_reference ...................   Passed    0.14 sec
+        Start  12: itch.oracle_negative_control
+ 12/152 Test  #12: itch.oracle_negative_control .................   Passed    0.03 sec
+        Start  13: itch.context_lifecycle
+ 13/152 Test  #13: itch.context_lifecycle .......................   Passed    0.00 sec
+        Start  14: itch.context_identity
+ 14/152 Test  #14: itch.context_identity ........................   Passed    0.00 sec
+        Start  15: itch.context_observations
+ 15/152 Test  #15: itch.context_observations ....................   Passed    0.00 sec
+        Start  16: itch.context_policies
+ 16/152 Test  #16: itch.context_policies ........................   Passed    0.00 sec
+        Start  17: itch.context_limits
+ 17/152 Test  #17: itch.context_limits ..........................   Passed    0.00 sec
+        Start  18: itch.context_allocation
+ 18/152 Test  #18: itch.context_allocation ......................   Passed    0.00 sec
+        Start  19: itch.context_numeric
+ 19/152 Test  #19: itch.context_numeric .........................   Passed    0.00 sec
+        Start  20: itch.context_provenance
+ 20/152 Test  #20: itch.context_provenance ......................   Passed    0.00 sec
+        Start  21: itch.context_reference
+ 21/152 Test  #21: itch.context_reference .......................   Passed    0.48 sec
+        Start  22: itch.context_oracle_negative_control
+ 22/152 Test  #22: itch.context_oracle_negative_control .........   Passed    0.04 sec
+        Start  23: itch.auction_streaming
+ 23/152 Test  #23: itch.auction_streaming .......................   Passed    0.01 sec
+        Start  24: itch.auction_stream_faults
+ 24/152 Test  #24: itch.auction_stream_faults ...................   Passed    0.17 sec
+        Start  25: itch.admin_streaming
+ 25/152 Test  #25: itch.admin_streaming .........................   Passed    0.01 sec
+        Start  26: itch.hy_streaming
+ 26/152 Test  #26: itch.hy_streaming ............................   Passed    0.01 sec
+        Start  27: itch.streaming_basic
+ 27/152 Test  #27: itch.streaming_basic .........................   Passed    0.00 sec
+        Start  28: itch.streaming_fragments
+ 28/152 Test  #28: itch.streaming_fragments .....................   Passed    0.29 sec
+        Start  29: itch.streaming_corruption
+ 29/152 Test  #29: itch.streaming_corruption ....................   Passed    0.00 sec
+        Start  30: itch.streaming_semantics
+ 30/152 Test  #30: itch.streaming_semantics .....................   Passed    0.01 sec
+        Start  31: itch.streaming_budgets
+ 31/152 Test  #31: itch.streaming_budgets .......................   Passed    0.00 sec
+        Start  32: itch.streaming_allocation
+ 32/152 Test  #32: itch.streaming_allocation ....................   Passed    0.01 sec
+        Start  33: itch.streaming_restart
+ 33/152 Test  #33: itch.streaming_restart .......................   Passed    0.01 sec
+        Start  34: itch.streaming_reference
+ 34/152 Test  #34: itch.streaming_reference .....................   Passed    0.61 sec
+        Start  35: itch.streaming_oracle_negative_control
+ 35/152 Test  #35: itch.streaming_oracle_negative_control .......   Passed    0.05 sec
+        Start  36: itch.gzip_valid
+ 36/152 Test  #36: itch.gzip_valid ..............................   Passed    0.00 sec
+        Start  37: itch.gzip_errors
+ 37/152 Test  #37: itch.gzip_errors .............................   Passed    0.01 sec
+        Start  38: itch.gzip_limits
+ 38/152 Test  #38: itch.gzip_limits .............................   Passed    0.00 sec
+        Start  39: itch.gzip_allocation
+ 39/152 Test  #39: itch.gzip_allocation .........................   Passed    0.00 sec
+        Start  40: itch.source_hot_recovery
+ 40/152 Test  #40: itch.source_hot_recovery .....................   Passed    0.03 sec
+        Start  41: itch.durable_checkpoint
+ 41/152 Test  #41: itch.durable_checkpoint ......................   Passed    0.03 sec
+        Start  42: itch.hot_context_checkpoint
+ 42/152 Test  #42: itch.hot_context_checkpoint ..................   Passed    0.02 sec
+        Start  43: itch.reconstruction_checkpoint
+ 43/152 Test  #43: itch.reconstruction_checkpoint ...............   Passed    0.01 sec
+        Start  44: itch.reconstruction_sha256_reference
+ 44/152 Test  #44: itch.reconstruction_sha256_reference .........   Passed    0.05 sec
+        Start  45: itch.reconstruction_framing
+ 45/152 Test  #45: itch.reconstruction_framing ..................   Passed    0.11 sec
+        Start  46: itch.reconstruction_recovery_boundary
+ 46/152 Test  #46: itch.reconstruction_recovery_boundary ........   Passed    0.00 sec
+        Start  47: itch.reconstruction_initialization
+ 47/152 Test  #47: itch.reconstruction_initialization ...........   Passed    0.01 sec
+        Start  48: itch.reconstruction_golden
+ 48/152 Test  #48: itch.reconstruction_golden ...................   Passed    0.00 sec
+        Start  49: itch.reconstruction_observations
+ 49/152 Test  #49: itch.reconstruction_observations .............   Passed    0.00 sec
+        Start  50: itch.reconstruction_multisymbol
+ 50/152 Test  #50: itch.reconstruction_multisymbol ..............   Passed    0.00 sec
+        Start  51: itch.reconstruction_numeric
+ 51/152 Test  #51: itch.reconstruction_numeric ..................   Passed    0.00 sec
+        Start  52: itch.reconstruction_atomicity
+ 52/152 Test  #52: itch.reconstruction_atomicity ................   Passed    0.00 sec
+        Start  53: itch.reconstruction_allocation
+ 53/152 Test  #53: itch.reconstruction_allocation ...............   Passed    0.00 sec
+        Start  54: itch.reconstruction_budgets
+ 54/152 Test  #54: itch.reconstruction_budgets ..................   Passed    0.00 sec
+        Start  55: itch.reconstruction_restart
+ 55/152 Test  #55: itch.reconstruction_restart ..................   Passed    0.00 sec
+        Start  56: itch.l3_reference
+ 56/152 Test  #56: itch.l3_reference ............................   Passed   19.06 sec
+        Start  57: itch.reconstruction_demo
+ 57/152 Test  #57: itch.reconstruction_demo .....................   Passed    0.04 sec
+        Start  58: itch.l3_oracle_negative_control
+ 58/152 Test  #58: itch.l3_oracle_negative_control ..............   Passed    0.08 sec
+        Start  59: market_data.aggregate_depth
+ 59/152 Test  #59: market_data.aggregate_depth ..................   Passed    0.02 sec
+        Start  60: observed.readiness_contracts
+ 60/152 Test  #60: observed.readiness_contracts .................   Passed    0.39 sec
+        Start  61: itch.auction_wire
+ 61/152 Test  #61: itch.auction_wire ............................   Passed    0.00 sec
+        Start  62: itch.auction_context
+ 62/152 Test  #62: itch.auction_context .........................   Passed    0.00 sec
+        Start  63: itch.auction_integration
+ 63/152 Test  #63: itch.auction_integration .....................   Passed    0.00 sec
+        Start  64: itch.auction_allocation
+ 64/152 Test  #64: itch.auction_allocation ......................   Passed    0.00 sec
+        Start  65: itch.auction_restart
+ 65/152 Test  #65: itch.auction_restart .........................   Passed    0.00 sec
+        Start  66: itch.auction_reference
+ 66/152 Test  #66: itch.auction_reference .......................   Passed    0.72 sec
+        Start  67: itch.auction_reference_negative_control
+ 67/152 Test  #67: itch.auction_reference_negative_control ......   Passed    0.68 sec
+        Start  68: itch.admin_wire
+ 68/152 Test  #68: itch.admin_wire ..............................   Passed    0.00 sec
+        Start  69: itch.admin_context
+ 69/152 Test  #69: itch.admin_context ...........................   Passed    0.00 sec
+        Start  70: itch.admin_integration
+ 70/152 Test  #70: itch.admin_integration .......................   Passed    0.00 sec
+        Start  71: itch.admin_allocation
+ 71/152 Test  #71: itch.admin_allocation ........................   Passed    0.00 sec
+        Start  72: itch.admin_restart
+ 72/152 Test  #72: itch.admin_restart ...........................   Passed    0.00 sec
+        Start  73: itch.admin_reference
+ 73/152 Test  #73: itch.admin_reference .........................   Passed    0.37 sec
+        Start  74: itch.admin_reference_negative_control
+ 74/152 Test  #74: itch.admin_reference_negative_control ........   Passed    0.38 sec
+        Start  75: itch.hy_wire
+ 75/152 Test  #75: itch.hy_wire .................................   Passed    0.00 sec
+        Start  76: itch.hy_context
+ 76/152 Test  #76: itch.hy_context ..............................   Passed    0.00 sec
+        Start  77: itch.hy_fragments
+ 77/152 Test  #77: itch.hy_fragments ............................   Passed    0.00 sec
+        Start  78: itch.hy_integration
+ 78/152 Test  #78: itch.hy_integration ..........................   Passed    0.00 sec
+        Start  79: itch.hy_allocation
+ 79/152 Test  #79: itch.hy_allocation ...........................   Passed    0.00 sec
+        Start  80: itch.hy_restart
+ 80/152 Test  #80: itch.hy_restart ..............................   Passed    0.00 sec
+        Start  81: itch.hy_reference
+ 81/152 Test  #81: itch.hy_reference ............................   Passed    0.28 sec
+        Start  82: itch.hy_reference_negative_control
+ 82/152 Test  #82: itch.hy_reference_negative_control ...........   Passed    0.38 sec
+        Start  83: itch.context_prepare
+ 83/152 Test  #83: itch.context_prepare .........................   Passed    0.00 sec
+        Start  84: execution.schedules
+ 84/152 Test  #84: execution.schedules ..........................   Passed    0.00 sec
+        Start  85: execution.costs
+ 85/152 Test  #85: execution.costs ..............................   Passed    0.00 sec
+        Start  86: execution.integration
+ 86/152 Test  #86: execution.integration ........................   Passed    0.00 sec
+        Start  87: execution.cost_limits
+ 87/152 Test  #87: execution.cost_limits ........................   Passed    0.00 sec
+        Start  88: execution.independent_reference
+ 88/152 Test  #88: execution.independent_reference ..............   Passed    0.12 sec
+        Start  89: simulation.basic
+ 89/152 Test  #89: simulation.basic .............................   Passed    0.00 sec
+        Start  90: simulation.tif
+ 90/152 Test  #90: simulation.tif ...............................   Passed    0.00 sec
+        Start  91: simulation.latency
+ 91/152 Test  #91: simulation.latency ...........................   Passed    0.00 sec
+        Start  92: simulation.faults
+ 92/152 Test  #92: simulation.faults ............................   Passed    0.00 sec
+        Start  93: simulation.reports
+ 93/152 Test  #93: simulation.reports ...........................   Passed    0.00 sec
+        Start  94: simulation.independent_reference
+ 94/152 Test  #94: simulation.independent_reference .............   Passed    0.22 sec
+        Start  95: analytics.flow_contracts
+ 95/152 Test  #95: analytics.flow_contracts .....................   Passed    0.00 sec
+        Start  96: analytics.flow_reference
+ 96/152 Test  #96: analytics.flow_reference .....................   Passed    0.09 sec
+        Start  97: analytics.book_contracts
+ 97/152 Test  #97: analytics.book_contracts .....................   Passed    0.00 sec
+        Start  98: analytics.book_reference
+ 98/152 Test  #98: analytics.book_reference .....................   Passed    0.08 sec
+        Start  99: numeric.contracts
+ 99/152 Test  #99: numeric.contracts ............................   Passed    0.00 sec
+        Start 100: numeric.independent_reference
+100/152 Test #100: numeric.independent_reference ................   Passed    0.07 sec
+        Start 101: benchmark.fixture_reference
+101/152 Test #101: benchmark.fixture_reference ..................   Passed    0.83 sec
+        Start 102: benchmark.compiler_metadata
+102/152 Test #102: benchmark.compiler_metadata ..................   Passed    0.10 sec
+        Start 103: replay.hot_checkpoint
+103/152 Test #103: replay.hot_checkpoint ........................   Passed    0.00 sec
+        Start 104: replay.config
+104/152 Test #104: replay.config ................................   Passed    0.00 sec
+        Start 105: replay.continuity
+105/152 Test #105: replay.continuity ............................   Passed    0.00 sec
+        Start 106: replay.gaps
+106/152 Test #106: replay.gaps ..................................   Passed    0.00 sec
+        Start 107: replay.subevents
+107/152 Test #107: replay.subevents .............................   Passed    0.00 sec
+        Start 108: replay.multistream
+108/152 Test #108: replay.multistream ...........................   Passed    0.00 sec
+        Start 109: replay.filtering
+109/152 Test #109: replay.filtering .............................   Passed    0.00 sec
+        Start 110: replay.reset
+110/152 Test #110: replay.reset .................................   Passed    0.00 sec
+        Start 111: replay.recovery
+111/152 Test #111: replay.recovery ..............................   Passed    0.00 sec
+        Start 112: replay.atomicity
+112/152 Test #112: replay.atomicity .............................   Passed    0.00 sec
+        Start 113: replay.canonical
+113/152 Test #113: replay.canonical .............................   Passed    0.00 sec
+        Start 114: replay.batch
+114/152 Test #114: replay.batch .................................   Passed    0.00 sec
+        Start 115: book.basic
+115/152 Test #115: book.basic ...................................   Passed    0.00 sec
+        Start 116: book.cancel_execute
+116/152 Test #116: book.cancel_execute ..........................   Passed    0.00 sec
+        Start 117: book.replace
+117/152 Test #117: book.replace .................................   Passed    0.00 sec
+        Start 118: book.boundaries
+118/152 Test #118: book.boundaries ..............................   Passed    0.00 sec
+        Start 119: book.recovery
+119/152 Test #119: book.recovery ................................   Passed    0.00 sec
+        Start 120: book.allocations
+120/152 Test #120: book.allocations .............................   Passed    0.00 sec
+        Start 121: book.reference
+121/152 Test #121: book.reference ...............................   Passed    0.07 sec
+        Start 122: event.add
+122/152 Test #122: event.add ....................................   Passed    0.00 sec
+        Start 123: event.cancel
+123/152 Test #123: event.cancel .................................   Passed    0.00 sec
+        Start 124: event.replace
+124/152 Test #124: event.replace ................................   Passed    0.00 sec
+        Start 125: event.trade
+125/152 Test #125: event.trade ..................................   Passed    0.00 sec
+        Start 126: event.quote
+126/152 Test #126: event.quote ..................................   Passed    0.00 sec
+        Start 127: event.reset
+127/152 Test #127: event.reset ..................................   Passed    0.00 sec
+        Start 128: event.session
+128/152 Test #128: event.session ................................   Passed    0.00 sec
+        Start 129: event.snapshot
+129/152 Test #129: event.snapshot ...............................   Passed    0.00 sec
+        Start 130: event.metadata
+130/152 Test #130: event.metadata ...............................   Passed    0.00 sec
+        Start 131: event.timestamps
+131/152 Test #131: event.timestamps .............................   Passed    0.00 sec
+        Start 132: event.provenance
+132/152 Test #132: event.provenance .............................   Passed    0.00 sec
+        Start 133: types.valid_buy
+133/152 Test #133: types.valid_buy ..............................   Passed    0.00 sec
+        Start 134: types.valid_sell
+134/152 Test #134: types.valid_sell .............................   Passed    0.00 sec
+        Start 135: types.zero_id
+135/152 Test #135: types.zero_id ................................   Passed    0.00 sec
+        Start 136: types.zero_price
+136/152 Test #136: types.zero_price .............................   Passed    0.00 sec
+        Start 137: types.negative_price
+137/152 Test #137: types.negative_price .........................   Passed    0.00 sec
+        Start 138: types.zero_quantity
+138/152 Test #138: types.zero_quantity ..........................   Passed    0.00 sec
+        Start 139: types.zero_based_sequence
+139/152 Test #139: types.zero_based_sequence ....................   Passed    0.00 sec
+        Start 140: types.max_price
+140/152 Test #140: types.max_price ..............................   Passed    0.00 sec
+        Start 141: types.max_quantity
+141/152 Test #141: types.max_quantity ...........................   Passed    0.00 sec
+        Start 142: types.max_id
+142/152 Test #142: types.max_id .................................   Passed    0.00 sec
+        Start 143: types.max_sequence
+143/152 Test #143: types.max_sequence ...........................   Passed    0.00 sec
+        Start 144: harness.failure_is_nonzero
+144/152 Test #144: harness.failure_is_nonzero ...................   Passed    0.01 sec
+        Start 145: demo.smoke
+145/152 Test #145: demo.smoke ...................................   Passed    0.00 sec
+        Start 146: python.itch_durable_recovery
+146/152 Test #146: python.itch_durable_recovery .................   Passed    0.19 sec
+        Start 147: python.research_interface
+147/152 Test #147: python.research_interface ....................   Passed    0.64 sec
+        Start 148: python.export_contracts
+148/152 Test #148: python.export_contracts ......................   Passed    0.41 sec
+        Start 149: python.schema_compatibility
+149/152 Test #149: python.schema_compatibility ..................   Passed    0.10 sec
+        Start 150: replay.journal_model
+150/152 Test #150: replay.journal_model .........................   Passed    0.06 sec
+        Start 151: replay.journal_allocation
+151/152 Test #151: replay.journal_allocation ....................   Passed    0.00 sec
+        Start 152: replay.journal_preoptimization_equivalence
+152/152 Test #152: replay.journal_preoptimization_equivalence ...   Passed    0.05 sec
+
+100% tests passed, 0 tests failed out of 152
+
+Total Test time (real) =  29.47 sec

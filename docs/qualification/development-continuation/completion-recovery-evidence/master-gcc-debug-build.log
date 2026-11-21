@@ -1,0 +1,4 @@
+[1/4] Building CXX object CMakeFiles/gig_itch_source_recovery_tests.dir/tests/test_itch_source_recovery.cpp.o
+[2/4] Building CXX object CMakeFiles/gig_itch_streaming.dir/src/itch/source_recovery.cpp.o
+[3/4] Linking CXX static library libgig_itch_streaming.a
+[4/4] Linking CXX executable gig_itch_source_recovery_tests
