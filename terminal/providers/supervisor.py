@@ -48,10 +48,22 @@ class FeedSupervisor:
         self.session_profile=None;self.coordinator=None;self.capture_token=None
         self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
 
-    def require_recording_profile(self):
-        # The legacy recording loader replays a different normalization contract.
-        # Joint receipts must never be written under that legacy manifest profile.
-        if self.session_profile is not None or self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE') is not None:
+    def recording_writer_type(self):
+        """Select a versioned writer before allocation; never reuse legacy receipts."""
+        from terminal.l2_recording import L2Writer
+        from terminal.kraken_joint_recording import JointL2Writer
+        from .kraken_coordinator import PROFILE as JOINT_PROFILE
+        profile=self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')
+        if self.provider!='kraken' or profile not in(None,JOINT_PROFILE):raise ProviderError('provider_recording_profile_unavailable')
+        return JointL2Writer if profile==JOINT_PROFILE else L2Writer
+
+    def require_recording_profile(self,capture=None):
+        from terminal.kraken_joint_recording import JointL2Writer
+        joint=isinstance(getattr(capture,'writer',None),JointL2Writer)
+        if self.session_profile is not None:
+            from .kraken_coordinator import PROFILE as JOINT_PROFILE
+            if self.session_profile!=JOINT_PROFILE or not joint:raise ProviderError('provider_recording_profile_unavailable')
+        elif joint or self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')is not None:
             raise ProviderError('provider_recording_profile_unavailable')
 
     def _new_book(self):
@@ -207,7 +219,7 @@ class FeedSupervisor:
                             if state is not None:state={**state,'bids':state['bids'][:self.depth],'asks':state['asks'][:self.depth]}
                             self.research.observe(research_event,state,now,self.messages+1)
                         if self.capture is not None and self.capture.state in ('RECORDING','FINALIZING'):
-                            self.require_recording_profile()
+                            self.require_recording_profile(self.capture)
                             self.capture.offer(raw,now,unix,receipt)
                         self.messages+=1;self.kind=receipt['kind']
                         if self.messages%64==0:await asyncio.sleep(0)
@@ -319,5 +331,5 @@ class FeedSupervisor:
                 'source_sequence':None,'session_segment':f'{self.provider}:{self.epoch}:{self.reconnects}',
                 'session_segment_scope':'local_capture_boundary_not_exchange_session_or_sequence','redistribution_permitted':False},
             'capabilities':{'live':self.observed_transport and self.permission is not None,'aggregate_l2':True,
-                'native_replay':True,'simulation':True,'recording':bool(self.session_profile is None and self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
+                'native_replay':True,'simulation':True,'recording':bool(self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
                 'observed_itch':False,'order_ids':False,'fifo':False}}

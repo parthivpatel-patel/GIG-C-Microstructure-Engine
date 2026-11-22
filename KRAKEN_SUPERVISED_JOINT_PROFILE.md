@@ -32,11 +32,14 @@ fresh native book and requires fresh status, acknowledgments and snapshot.
 Injected offline transports retain `HISTORICAL_SYNTHETIC` origin; the existing
 terminal LIVE consumer suppresses their financial book, metrics, flow and research.
 
-Legacy L2 recording is explicitly unavailable for the joint profile: its replay
-normalization contract does not admit coordinated receipts. The recording route
-checks the selected/configured profile before allocating a writer and again
-after restarting the source. The supervisor also rejects any recording offer
-under the joint profile. No new recording/replay format is implied.
+Legacy L2 recording remains incompatible with joint receipts. The recording route
+now selects the separate `ORIGINAL_RAW_JOINT_SESSION_RECORDING_V1` writer before
+allocation and verifies its profile again after restarting the source. The existing
+joint opt-in, protocol/processing and separate retention gates remain required.
+The version-aware playback consumer rederives all raw frames/native prefixes; no
+joint data is admitted by the legacy reader. The bounded format and publication
+uncertainty policy are specified in
+`docs/qualification/development-continuation/KRAKEN_JOINT_RECORDING_V1.md`.
 
 This bounded integration uses depth 10 and preserves the provisional status,
 top-ten checksum scope and no-sequence/no-backfill/no-complete-history claims.

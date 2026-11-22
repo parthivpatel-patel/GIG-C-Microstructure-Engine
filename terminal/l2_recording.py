@@ -19,6 +19,7 @@ MAX_BYTES=2*1024*1024
 MAX_AGE=86400
 SCHEMA='gig.terminal.l2_log.v1'
 SCHEMA2='gig.terminal.l2_log.v2'
+JOINT_SCHEMA='gig.terminal.kraken_joint_log.v1'
 
 def recording_object(raw):
     try:return decode_object(raw)
@@ -56,7 +57,7 @@ class L2Writer:
         self.created=int(clock())
         if not 0<=self.created<=2**63-1:raise ValueError('recording_clock')
         self.retention=retention_seconds;self.count=self.size=0;self.previous=None
-        self.digest=hashlib.sha256();self.closed=False
+        self.digest=hashlib.sha256();self.closed=False;self._published=False
         self.stage=Path(tempfile.mkdtemp(prefix='.pending-l2-',dir=root))
         try:
             fd=os.open(self.stage/'pending.json',os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
@@ -91,23 +92,30 @@ class L2Writer:
         if self.clock()>self.created+self.retention:
             self.abort();raise ValueError('recording_expired')
         if reason not in ('operator_stopped','fixture_complete','record_budget','disconnected'):raise ValueError('recording_end_reason')
+        manifest=self._manifest(reason)
+        try:
+            self.stream.flush();os.fsync(self.stream.fileno())
+            self._validate_finish(manifest)
+            self.stream.close()
+            fd=os.open(self.stage/'manifest.json',os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
+            with os.fdopen(fd,'wb') as stream:stream.write(canonical(manifest));stream.flush();os.fsync(stream.fileno())
+            if self.target.exists():raise ValueError('recording_exists')
+            (self.stage/'pending.json').unlink()
+            sync_directory(self.stage)
+            self.stage.rename(self.target);self._published=True;self.closed=True
+            sync_directory(self.target.parent)
+            return manifest
+        except BaseException:self.abort();raise
+    def _validate_finish(self,manifest):
+        pass
+    def _manifest(self,reason):
         manifest={'schema':SCHEMA if self.version==1 else SCHEMA2,'identity':self.identity,'origin':self.origin,'provider':'kraken',
             'profile':'provisional_kraken_v2','symbol':self.symbol,'records':self.count,'bytes':self.size,
             'sha256':self.digest.hexdigest(),'complete':True,'created_unix_seconds':self.created,
             'retention_seconds':self.retention,'price_scale':100000000,'quantity_scale':100000000,
             'initialization':'first_valid_subscribed_L2_snapshot_required_not_L3'}
         if self.version==2:manifest.update(venue='Kraken',interval_end_reason=reason,market_session_complete=False)
-        try:
-            self.stream.flush();os.fsync(self.stream.fileno());self.stream.close()
-            fd=os.open(self.stage/'manifest.json',os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
-            with os.fdopen(fd,'wb') as stream:stream.write(canonical(manifest));stream.flush();os.fsync(stream.fileno())
-            if self.target.exists():raise ValueError('recording_exists')
-            (self.stage/'pending.json').unlink()
-            sync_directory(self.stage)
-            self.stage.rename(self.target);self.closed=True
-            sync_directory(self.target.parent)
-            return manifest
-        except BaseException:self.abort();raise
+        return manifest
     def abort(self):
         if not self.closed:
             self.closed=True;self.stream.close();shutil.rmtree(self.stage,ignore_errors=True)
@@ -124,6 +132,9 @@ def load_l2(directory,identity,*,clock=time.time):
         content.append(value)
     m=recording_object(content[0])
     if type(m) is not dict:raise ValueError('recording_manifest')
+    if m.get('schema')==JOINT_SCHEMA:
+        from .kraken_joint_recording import validate_log,joint_object
+        return validate_log(identity,joint_object(content[0]),content[1],clock=clock)
     if (m.get('schema') not in (SCHEMA,SCHEMA2) or m.get('identity')!=identity or m.get('complete') is not True
             or m.get('origin') not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED') or m.get('provider')!='kraken'
             or m.get('profile')!='provisional_kraken_v2' or m.get('symbol') not in ('BTC/USD','ETH/USD')
@@ -159,6 +170,9 @@ def load_l2(directory,identity,*,clock=time.time):
 
 def replay_l2(manifest,rows,position=None):
     """Fresh native state at every seek. No source order, timestamp or L3 inference."""
+    if manifest.get('schema')==JOINT_SCHEMA:
+        from .kraken_joint_recording import replay_joint
+        return replay_joint(manifest,rows,position)
     import gig_microstructure as gig
     from .providers.kraken import KrakenBookAdapter
     if position is None:position=len(rows)

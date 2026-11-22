@@ -923,35 +923,38 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                 import uuid
                 try:
                     if feed.provider!='kraken':raise ValueError('provider_recording_profile_unavailable')
-                    feed.require_recording_profile()
+                    writer_type=feed.recording_writer_type()
                     permission=configured_permission(os.environ);permission.require_live()
                     if os.environ.get('GIG_LIVE_RECORDING_ENABLED')!='1' or not permission.recording_approved:
                         raise ValueError('retention_permission_required')
                     if feed.state!='LIVE_VERIFIED' or native.mode!='LIVE':raise ValueError('verified_production_feed_required')
                     if feed.capture and not feed.capture.task.done():raise ValueError('capture_busy')
                     capture=await Capture.create(l2_directory,'capture-'+uuid.uuid4().hex,enabled=True,
-                        origin='LIVE_OBSERVED',permission=permission,symbol=feed.symbol,version=2)
+                        origin='LIVE_OBSERVED',permission=permission,symbol=feed.symbol,version=2,writer_type=writer_type)
                     try:
                         async with lock:
                             await feed.start(feed.symbol)  # Fresh observed source snapshot, never an invented seed.
-                            feed.require_recording_profile()
+                            feed.require_recording_profile(capture)
                             feed.capture=capture
                     except BaseException:await capture.abort('startup_failed');raise
                     return {'schema_version':'1','recording':capture.status()}
                 except (ValueError,OSError,ProviderError):return error('RECORDING_REFUSED','Verified production source and separate retention approval required',409)
-        if data.get('action') in ('save_l2_fixture','load_l2','delete_l2'):
+        if data.get('action') in ('save_l2_fixture','save_joint_l2_fixture','load_l2','delete_l2'):
             if set(data)-{'action','identity'}:raise ControlError('INVALID_RECORDING','Only recording identity is accepted; no paths')
             identity=data.get('identity','authored-l2-v2')
             if work_lock.locked():return error('BUSY','One recording operation may run at a time',409)
             async with work_lock:
-                from terminal.l2_playback import save_fixture,RecordedSession,delete_session
+                from terminal.l2_playback import save_fixture,open_recorded_session,delete_session
                 try:
                     if data['action']=='save_l2_fixture':
                         result=await asyncio.to_thread(save_fixture,l2_directory,identity)
+                    elif data['action']=='save_joint_l2_fixture':
+                        from terminal.kraken_joint_recording import save_joint_fixture
+                        result=await asyncio.to_thread(save_joint_fixture,l2_directory,identity)
                     elif data['action']=='delete_l2':
                         result={'deleted':await asyncio.to_thread(delete_session,l2_directory,identity)}
                     else:
-                        candidate=await asyncio.to_thread(RecordedSession,l2_directory,identity,allow_observed=observed_processing_allowed())
+                        candidate=await asyncio.to_thread(open_recorded_session,l2_directory,identity,allow_observed=observed_processing_allowed())
                         async with lock:
                             await feed.close()
                             native.itch_session=None;native.recorded_session=candidate;native.dataset='recorded-l2'

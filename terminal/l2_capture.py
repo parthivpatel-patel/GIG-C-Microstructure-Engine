@@ -11,7 +11,11 @@ class Capture:
         self.task=asyncio.create_task(self._write(),name='gig-one-bounded-recorder')
     @classmethod
     async def create(cls,*args,**kwargs):
-        writer=await asyncio.to_thread(L2Writer,*args,**kwargs)
+        writer_type=kwargs.pop('writer_type',L2Writer)
+        if writer_type is not L2Writer:
+            from .kraken_joint_recording import JointL2Writer
+            if writer_type is not JointL2Writer:raise ValueError('recording_writer_profile')
+        writer=await asyncio.to_thread(writer_type,*args,**kwargs)
         return cls(writer)
     def offer(self,raw,now,unix,receipt):
         if self.writer.clock()>self.writer.created+self.writer.retention:
@@ -45,8 +49,8 @@ class Capture:
                     if not self.saw_snapshot:raise ValueError('recording_snapshot_missing')
                     self.manifest=await asyncio.to_thread(self.writer.finish,'record_budget')
                     self.state='COMPLETE';return
-        except Exception:
-            self.state='ERROR';self.reason=self.reason or 'recording_write_or_finalize_failed'
+        except Exception as error:
+            self.state='ERROR';self.reason=self.reason or getattr(error,'code',None) or 'recording_write_or_finalize_failed'
         finally:
             if self.state!='COMPLETE':await asyncio.to_thread(self.writer.abort)
             while not self.queue.empty():self.queue.get_nowait()
