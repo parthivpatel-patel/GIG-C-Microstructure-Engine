@@ -112,6 +112,28 @@ class ItchRecovery:
         owner=_checked(_native.restore_itch_completion_capsule(payload,admission.capsule_sha256,a.artifact_sha256,a.contract_sha256,a.implementation_sha256,a.capture,str(a.generation),str(resource_budget_bytes),s.source_sha256,str(int(s.container=='single_gzip')),str(s.first_frame),str(s.first_ordinal)))
         result=ItchSourceCompletion.__new__(ItchSourceCompletion);result._owner=owner;result.original_admission=a;result.source_admission=s
         return result
+    @classmethod
+    def persist_completion_capsule_file(cls,path,payload,admission,*,resource_budget_bytes=128*1024*1024):
+        """POSIX create-only publication after full independent native admission.
+
+        No trust metadata is persisted or inferred from the destination. Returned
+        fsync flags record completed syscalls, not physical hardware durability.
+        """
+        cls.restore_completion_capsule(payload,admission,resource_budget_bytes=resource_budget_bytes)
+        from .itch_capsule_store import _persist_verified_capsule
+        return _persist_verified_capsule(path,payload,admission.capsule_sha256)
+    @classmethod
+    def restore_completion_capsule_file(cls,path,admission,*,resource_budget_bytes=128*1024*1024):
+        """Read bounded pinned-directory bytes, then revalidate native/source trust."""
+        if type(admission)is not ItchCompletionAdmission:raise ValueError('itch_capsule_admission')
+        admission.validate()
+        if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:raise ValueError('itch_resource_budget')
+        if not hasattr(_native,'restore_itch_completion_capsule'):raise ValueError('itch_source_sdk_streaming_disabled')
+        from .itch_capsule_store import _read_capsule
+        payload,receipt=_read_capsule(path,admission.capsule_sha256)
+        result=cls.restore_completion_capsule(payload,admission,resource_budget_bytes=resource_budget_bytes)
+        result.persistence_receipt=receipt
+        return result
     def describe(self):return _checked(self._owner.describe())
     def book(self,index,depth=10):
         if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')

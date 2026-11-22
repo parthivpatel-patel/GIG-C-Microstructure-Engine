@@ -28,8 +28,9 @@ names += ['terminal.stocks.test_xbrl_typed_hypercubes','terminal.providers.test_
 names += ['terminal.stocks.test_xbrl_cross_role','terminal.providers.test_kraken_public_session','terminal.test_itch_source_completion']
 names += ['terminal.stocks.test_xbrl_inherited_cross_role','terminal.stocks.test_xbrl_statement_comparison','terminal.providers.test_kraken_coordinator','terminal.test_itch_completion_capsule']
 names += ['terminal.providers.test_supervisor_joint','terminal.stocks.test_xbrl_effective_cross_role']
+names += ['terminal.test_itch_capsule_persistence']
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=1212
+expected=1248
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'application_constructed':app._application is not None,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}
