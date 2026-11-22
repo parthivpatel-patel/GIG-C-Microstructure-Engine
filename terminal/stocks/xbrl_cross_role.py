@@ -32,7 +32,8 @@ def _originals(parsed,dts,documents,allow_observed,instance_uri):
  if dts.get('embedded_linkbase_profile')is not None or any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in dts['unsupported_semantics']):raise XBRLError('drs_cross_embedded_unsupported')
  return _typed_original_graph(parsed,dts,documents,instance_uri)
 
-def _read(parsed,dts,supplied,*,effective=False):
+def _read(parsed,dts,supplied,*,effective=False,negative=False):
+ assignment_kinds=('all','notAll')if negative else('all',);kinds_allowed=KINDS|{'notAll'}if negative else KINDS
  roots={key:parse_xml(doc['raw'])for key,doc in sorted(supplied.items())};kinds={d['uri']:d['kind']for d in dts['documents']};locators={};role_types={};role_uris=set()
  for key,root in roots.items():
   if kinds[key]!='schema':continue
@@ -89,15 +90,15 @@ def _read(parsed,dts,supplied,*,effective=False):
     if node.name==tag(L,'loc'):continue
     a=node.attrs;kind=a.get(tag(XL,'arcrole'),'').removeprefix(ARC)
     allowed={tag(XL,k)for k in('type','from','to','arcrole')}|{'order','priority','use'}|{tag(D,k)for k in('closed','contextElement','targetRole','usable')}
-    if node.name!=tag(L,'definitionArc')or node.children or node.text().strip()or a.get(tag(XL,'type'))!='arc'or kind not in KINDS or not a.get(tag(XL,'arcrole'),'').startswith(ARC)or a.get(tag(XL,'from'))not in labels or a.get(tag(XL,'to'))not in labels:raise XBRLError('drs_cross_arc_structure_or_unsupported')
+    if node.name!=tag(L,'definitionArc')or node.children or node.text().strip()or a.get(tag(XL,'type'))!='arc'or kind not in kinds_allowed or not a.get(tag(XL,'arcrole'),'').startswith(ARC)or a.get(tag(XL,'from'))not in labels or a.get(tag(XL,'to'))not in labels:raise XBRLError('drs_cross_arc_structure_or_unsupported')
     if set(a)-allowed or a.get(tag(D,'usable'),'true')not in('true','1'):raise XBRLError('drs_cross_precedence_or_unusable_unsupported')
     if effective:
      if not re.fullmatch('[+-]?[0-9]{1,6}',a.get('priority','0'))or a.get('use','optional')not in('optional','prohibited'):raise XBRLError('drs_effective_priority_or_use')
     elif a.get('priority','0')!='0'or a.get('use','optional')!='optional':raise XBRLError('drs_cross_precedence_or_unusable_unsupported')
     if not re.fullmatch('[+-]?[0-9]{1,24}(?:\\.[0-9]{1,12})?',a.get('order','1')):raise XBRLError('drs_cross_order')
     placement=a.get(tag(D,'contextElement'));closed=a.get(tag(D,'closed'),'false');target=a.get(tag(D,'targetRole'))
-    if closed not in('true','false','0','1')or kind=='all'and placement not in('segment','scenario'):raise XBRLError('drs_cross_assignment_attributes')
-    if kind!='all'and(tag(D,'closed')in a or tag(D,'contextElement')in a)or kind not in('dimension-domain','domain-member')and tag(D,'usable')in a or kind=='dimension-default'and target is not None:raise XBRLError('drs_cross_attribute_scope_unsupported')
+    if closed not in('true','false','0','1')or kind in assignment_kinds and placement not in('segment','scenario'):raise XBRLError('drs_cross_assignment_attributes')
+    if kind not in assignment_kinds and(tag(D,'closed')in a or tag(D,'contextElement')in a)or kind not in('dimension-domain','domain-member')and tag(D,'usable')in a or kind=='dimension-default'and target is not None:raise XBRLError('drs_cross_attribute_scope_unsupported')
     if target is not None:
      _role(target)
      if target!=STANDARD and target not in declared:raise XBRLError('drs_cross_target_role_not_resolved')

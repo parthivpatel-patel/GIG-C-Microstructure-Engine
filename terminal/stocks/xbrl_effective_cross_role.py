@@ -54,7 +54,8 @@ def _endpoint_sources(arcs,concepts,schemas):
 def _project(a):return {k:a[k]for k in BASE_FIELDS}
 
 
-def _effective(arcs):
+def _effective(arcs,*,negative=False):
+ assignment_kinds=('all','notAll')if negative else('all',)
  if type(arcs)is not list or not 1<=len(arcs)<=4096:raise XBRLError('drs_effective_arc_budget')
  groups={};xpath_orders={};label_pairs=set();labels={}
  for i,a in enumerate(arcs):
@@ -73,7 +74,7 @@ def _effective(arcs):
   if type(attrs)is not dict or set(attrs)-{tag(D,k)for k in('closed','contextElement','targetRole','usable')}or any(type(v)is not str for v in attrs.values()):raise XBRLError('drs_effective_attribute_contract')
   closed=attrs.get(tag(D,'closed'),'false');usable=attrs.get(tag(D,'usable'),'true')
   if closed not in('true','false','0','1')or usable not in('true','1')or a['closed']!=(closed in('true','1'))or a['context_element']!=attrs.get(tag(D,'contextElement'))or a['target_role']!=attrs.get(tag(D,'targetRole')):raise XBRLError('drs_effective_attribute_binding')
-  if a['kind']!='all'and any(tag(D,k)in attrs for k in('closed','contextElement'))or a['kind']not in('dimension-domain','domain-member')and tag(D,'usable')in attrs:raise XBRLError('drs_effective_attribute_scope')
+  if a['kind']not in assignment_kinds and any(tag(D,k)in attrs for k in('closed','contextElement'))or a['kind']not in('dimension-domain','domain-member')and tag(D,'usable')in attrs:raise XBRLError('drs_effective_attribute_scope')
   # order is a declared default on arcType. Dimensional attributes are validated
   # through its lax wildcard: absent global attributes are not injected into the
   # PSVI attribute-use set. Preserve their authored presence, even if their DRS

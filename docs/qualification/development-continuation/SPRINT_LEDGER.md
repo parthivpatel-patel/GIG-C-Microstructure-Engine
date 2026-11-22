@@ -574,3 +574,7 @@ Capsule checkpoint remotely verified as `5602be60a20436dd07c7e14d90b302e624bddd8
 ### November 22 — inherited numeric restrictions recovered
 
 Joint recording checkpoint remotely verified as `923e3ecab3f34a6f3d878c455c9be8cbf1da1726`. Added opt-in numeric V6 through real original/inline filing, CLI and company-v2 consumers. Independent review repaired repeated-exclusive facet semantics and retained fact/value/context/unit/declaration bindings; malformed or re-signed contradictions reject. Fixed shared returned-coverage ownership for legacy/new profiles without changing serialized values.53 focused tests pass; numeric-only instance hunks staged independently from preserved V10 changes. Registered guard count1,354; broader source conformance/statement completeness remains open.
+
+### November 22 — mixed original-source DRS recovered
+
+Numeric-only checkpoint independently verified as `84a60f59f14ae805fab70c43cef9bf272b0ac56b` after128 tests against its isolated staged tree. Added V10 effective positive/negative closed explicit conjunction with preserved original source receipts, bounded inheritance/cross-role paths and independent retained-result validation. Typed/open/negative-only/alternative-base cases explicitly reject; source/unsupported/resource errors never count as successful negation.44 new cases,217 root guarded numeric/V7–V10 cases and22 unchanged V1–V9 identity pairs pass. Registered final guarded cohort1,398. Next: broad integrated regression, compiler/sanitizer/frozen identity and fresh source/wheel verification; no requirement promotion.

@@ -150,8 +150,9 @@ def corroborate_inherited_cross_role(parsed,dts,documents,allow_observed,instanc
  result['canonical_sha256']=digest(result);return result
 
 
-def _validate_receipts(parsed,p):
- """V8 versioned retained-source checks; original role XML remains producer-only."""
+def _validate_receipts(parsed,p,*,negative=False):
+ """Versioned retained-source checks; original role XML remains producer-only."""
+ assignment_kinds=('all','notAll')if negative else('all',);kinds_allowed=KINDS|{'notAll'}if negative else KINDS
  fail=lambda:XBRLError('xbrl_dimensional_result_contract')
  docs=parsed['dts_corroboration']['documents'];concepts=parsed['dts_corroboration'].get('concept_declarations',{})
  if type(docs)is not list or not 1<=len(docs)<=16 or type(concepts)is not dict or not 1<=len(concepts)<=2048 or any(type(d)is not dict or type(d.get('uri'))is not str or d.get('kind')not in('schema','linkbase')or type(d.get('sha256'))is not str or not SHA.fullmatch(d['sha256'])for d in docs):raise fail()
@@ -176,7 +177,7 @@ def _validate_receipts(parsed,p):
  for a in arcs:
   if type(a)is not dict or set(a)!={'kind','from','to','role','target_role','context_element','closed','source_uri','source_sha256','link_node_ordinal','arc_node_ordinal'}or any(type(a[k])is not str for k in('source_uri','source_sha256','role','kind','from','to'))or a['target_role']is not None and type(a['target_role'])is not str:raise fail()
   source=sources.get(a['source_uri']);_role(a['role'])
-  if source is None or source['kind']!='linkbase'or source['sha256']!=a['source_sha256']or a['kind']not in KINDS or a['from']not in concepts or a['to']not in concepts or type(a['closed'])is not bool or a['kind']=='all'and a['context_element']not in('segment','scenario')or a['kind']!='all'and(a['closed']or a['context_element']is not None)or any(type(a[k])is not int or not 1<=a[k]<=50000 for k in('link_node_ordinal','arc_node_ordinal'))or a['link_node_ordinal']>=a['arc_node_ordinal']:raise fail()
+  if source is None or source['kind']!='linkbase'or source['sha256']!=a['source_sha256']or a['kind']not in kinds_allowed or a['from']not in concepts or a['to']not in concepts or type(a['closed'])is not bool or a['kind']in assignment_kinds and a['context_element']not in('segment','scenario')or a['kind']not in assignment_kinds and(a['closed']or a['context_element']is not None)or any(type(a[k])is not int or not 1<=a[k]<=50000 for k in('link_node_ordinal','arc_node_ordinal'))or a['link_node_ordinal']>=a['arc_node_ordinal']:raise fail()
   arc_key=(a['source_uri'],a['arc_node_ordinal']);link_key=(a['source_uri'],a['link_node_ordinal'])
   if arc_key in arc_nodes or link_key in link_roles and link_roles[link_key]!=a['role']:raise fail()
   arc_nodes.add(arc_key);link_roles[link_key]=a['role']
