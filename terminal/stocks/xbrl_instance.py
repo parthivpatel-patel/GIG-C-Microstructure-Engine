@@ -314,6 +314,11 @@ def selected_financials(parsed):
  if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_instance.v5','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_instance.v6','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_instance.v7','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
  core={k:v for k,v in parsed.items()if k!='canonical_sha256'}
  if digest(core)!=parsed.get('canonical_sha256'):raise XBRLError('xbrl_parsed_digest')
+ retained_proof=parsed.get('dts_corroboration')
+ numeric_proof=retained_proof.get('numeric_value_validation')if type(retained_proof)is dict else None
+ if 'numeric_interpretation_profile'in parsed or type(numeric_proof)is dict and numeric_proof.get('profile')=='NUMERIC_BOUND_RESTRICTIONS_V6':
+  from .xbrl_types import validate_bound_numeric_result
+  validate_bound_numeric_result(parsed)
  source=parsed['source'];namespace={};refs={};concept_names={};skipped={'unverified_or_conflicting':0,'dimensioned_or_opaque':0,'nil':0,'unsupported_period':0,'unsupported_taxonomy_namespace':0}
  is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_inline_set.v9')
  document_set=parsed.get('document_set')if is_set else None
@@ -413,4 +418,6 @@ def selected_financials(parsed):
     row['source_fact_id']=digest({k:v for k,v in row.items()if k!='source_fact_id'})
  result['xbrl_coverage']={'dts_corroboration':parsed.get('dts_corroboration'),'excluded':skipped,'instance_sha256':parsed['canonical_sha256'],'completeness':parsed['completeness'],'filing_fiscal_metadata':'No fiscal-year/quarter inferred from calendar dates;reported context start/end and duration remain authoritative','original_received_at':source['received_at']}
  if document_set is not None:result['xbrl_coverage']['document_set']={k:document_set[k]for k in('schema','sha256','documents','resource_sources','profile')}
+ # Returned coverage must not expose mutable admitted source/proof ownership.
+ result['xbrl_coverage']=copy.deepcopy(result['xbrl_coverage'])
  return result
