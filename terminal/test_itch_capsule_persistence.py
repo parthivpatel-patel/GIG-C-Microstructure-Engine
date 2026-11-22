@@ -248,3 +248,26 @@ else:
  def test_preexisting_syscall_tracing_does_not_invent_platform_unsupported(self):
   script="import os;original=os.link;os.link=lambda *a,**k:original(*a,**k);from gig_microstructure.itch_capsule_store import _platform;_platform();print('POSIX_CAPABILITIES_RETAINED')"
   result=subprocess.run([sys.executable,'-c',script],env=os.environ.copy(),capture_output=True,text=True,timeout=30,check=True);self.assertEqual(result.stdout.strip(),'POSIX_CAPABILITIES_RETAINED')
+ def test_legacy_interrupt_without_add_note_preserves_primary_and_cleanup(self):
+  class LegacyInterrupt(KeyboardInterrupt):
+   @property
+   def add_note(self):raise AttributeError('add_note is unavailable')
+  primary=LegacyInterrupt('operator stop');cleanup=OSError(errno.EACCES,'cleanup')
+  with self.assertRaises(LegacyInterrupt)as raised:store._raise(primary,[cleanup],published=True,file_synced=True)
+  self.assertIs(raised.exception,primary);self.assertEqual(primary.itch_capsule_cleanup_errors,(cleanup,));self.assertTrue(primary.itch_capsule_published);self.assertTrue(primary.itch_capsule_file_fsync_completed);self.assertFalse(primary.itch_capsule_directory_fsync_completed);self.assertTrue(primary.itch_capsule_durability_uncertain)
+ def test_modern_interrupt_notes_and_publication_diagnostics_are_retained(self):
+  primary=SystemExit(7);cleanup=OSError(errno.EIO,'cleanup')
+  with self.assertRaises(SystemExit)as raised:store._raise(primary,[cleanup],published=True,file_synced=True,directory_synced=True)
+  self.assertIs(raised.exception,primary);self.assertEqual(primary.code,7);self.assertEqual(primary.itch_capsule_cleanup_errors,(cleanup,));self.assertFalse(primary.itch_capsule_durability_uncertain)
+  if callable(getattr(primary,'add_note',None)):self.assertTrue(any('Capsule cleanup failures'in n for n in primary.__notes__))
+ def test_fallible_diagnostic_hook_never_masks_original_interrupt(self):
+  class FallibleInterrupt(GeneratorExit):
+   def add_note(self,_text):raise RuntimeError('diagnostic hook failure')
+  primary=FallibleInterrupt('generator closed');cleanup=OSError(errno.EIO,'cleanup')
+  with self.assertRaises(FallibleInterrupt)as raised:store._raise(primary,[cleanup])
+  self.assertIs(raised.exception,primary);self.assertEqual(primary.itch_capsule_cleanup_errors,(cleanup,));self.assertFalse(primary.itch_capsule_published)
+ def test_actual_write_interrupt_keeps_cleanup_error_without_add_note(self):
+  class LegacyInterrupt(KeyboardInterrupt):add_note=None
+  raw,a=self.capsule();primary=LegacyInterrupt('stop write')
+  with patch.object(store.os,'write',side_effect=primary),patch.object(store.os,'unlink',side_effect=OSError(errno.EACCES,'cleanup')),self.assertRaises(LegacyInterrupt)as raised:self.publish(raw,a)
+  self.assertIs(raised.exception,primary);self.assertFalse(primary.itch_capsule_published);self.assertIsInstance(primary.itch_capsule_cleanup_errors[0],OSError);self.assertFalse(self.path.exists())

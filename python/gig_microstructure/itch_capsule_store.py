@@ -107,7 +107,20 @@ def _receipt(leaf,expected,info,*,action,file_synced=False,directory_synced=Fals
 
 def _raise(primary,cleanup,*,published=False,file_synced=False,directory_synced=False):
     if isinstance(primary,(KeyboardInterrupt,SystemExit,GeneratorExit)):
-        if cleanup:primary.add_note('Capsule cleanup failures: '+','.join(type(e).__name__ for e in cleanup))
+        # add_note is Python3.11+. Keep primary interruption and explicit cleanup/
+        # publication diagnostics on supported Python3.9/3.10 as well. Even a
+        # custom exception's diagnostic setter must not replace that interruption.
+        for key,value in (('cleanup_errors',tuple(cleanup)),('published',published),
+                          ('file_fsync_completed',file_synced),
+                          ('directory_fsync_completed',directory_synced),
+                          ('durability_uncertain',published and not directory_synced)):
+            try:setattr(primary,'itch_capsule_'+key,value)
+            except BaseException:pass
+        if cleanup:
+            try:
+                note=getattr(primary,'add_note',None)
+                if callable(note):note('Capsule cleanup failures: '+','.join(type(e).__name__ for e in cleanup))
+            except BaseException:pass
         raise primary
     error=ItchCapsulePersistenceError(primary,cleanup,published=published,file_synced=file_synced,directory_synced=directory_synced)
     if primary is None:raise error

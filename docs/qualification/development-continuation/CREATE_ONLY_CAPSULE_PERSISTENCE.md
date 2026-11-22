@@ -31,3 +31,12 @@ concurrent publishers and actual subprocess exits before/after atomic publicatio
 SDK source/build copies were hash-compared. No C++ source or binary format changed;
 REL02 remains PARTIAL. Evidence: `work/engineering-next/capsule-persistence-*.log`
 and `capsule-persistence-metadata.json`.
+
+The interruption path also supports the package's Python3.9/3.10 contract:
+`BaseException.add_note` is optional and diagnostic failures never replace the
+primary KeyboardInterrupt/SystemExit/GeneratorExit. Explicit prefixed cleanup,
+publication and fsync metadata remains attached even without exception notes.
+Four additional regression cases emulate unavailable/fallible diagnostic hooks
+and exercise the actual interrupted-write cleanup path;40 focused/73 guarded
+combined recovery cases pass on Python3.12. This is not an actual3.9/3.10 runtime
+qualification claim.
