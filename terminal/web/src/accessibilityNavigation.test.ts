@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
-import {createElement} from 'react';
+import {Children,createElement,isValidElement,type ReactNode} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {searchKeyboard,searchSignature,activeSearchIndex,searchResultId} from './searchKeyboard.ts';
 import type {TerminalState} from './contracts.ts';
@@ -156,4 +156,42 @@ test('same-query replacement invalidates old rendered option callbacks before re
  const gate=createSearchRequestGuard('tech'),picked:string[]=[];gate.begin(gate.context());const oldRendered=gate.context();
  gate.begin(oldRendered);runSearchSelection(gate,oldRendered,'AAPL',s=>picked.push(s));assert.deepEqual([...picked],[]);
  const current=gate.context();gate.close();runSearchSelection(gate,current,'AAPL',s=>picked.push(s));assert.deepEqual([...picked],[]);gate.activate();runSearchSelection(gate,current,'MSFT',s=>{picked.push(s);gate.invalidate()});runSearchSelection(gate,current,'AAPL',s=>picked.push(s));assert.deepEqual([...picked],['MSFT']);
+});
+
+const {DepthChart}=await leaf('./DepthChart.tsx');
+function depthMarkup(value:TerminalState){
+ const figure=DepthChart({state:value});
+ // Render the content handed to the native disclosure separately, without opening a browser.
+ const disclosure=Children.toArray(figure.props.children).find(child=>isValidElement(child)&&typeof child.type==='function');
+ assert.ok(isValidElement<{children:ReactNode}>(disclosure));
+ return {closed:renderToStaticMarkup(figure),expanded:renderToStaticMarkup(disclosure.props.children)};
+}
+test('cumulative depth disclosure retains the exact supplied price, level size, side and cumulative quantity',()=>{
+ const value=state(),before=structuredClone(value);
+ const {closed,expanded}=depthMarkup(value);
+ assert.deepEqual(value,before);
+ assert.match(closed,/<details><summary>Exact cumulative depth by rank<\/summary><\/details>/);
+ assert.doesNotMatch(closed,/<table/);
+ assert.match(closed,/<title>Bid rank 2 · price .*exact cumulative quantity 36893488147419103230 \/ scale 1000000000<\/title>/);
+ assert.match(expanded,/role="region" tabindex="0" aria-label="Exact cumulative depth"/);
+ assert.match(expanded,/<caption>AUTHORED · HISTORICAL_SYNTHETIC · price scale 1000000000 · quantity scale 1000000000<\/caption>/);
+ assert.equal((expanded.match(/scope="col"/g)||[]).length,4);
+ assert.match(expanded,/<th scope="row">Bid 2<\/th><td>2<\/td><td>18446744073709551615<\/td><td>36893488147419103230<\/td>/);
+ assert.match(expanded,/<th scope="row">Ask 1<\/th><td>4<\/td><td>5<\/td><td>5<\/td>/);
+});
+test('every plotted rank has a table row even beyond the compact ladder, and a missing side adds no rows',()=>{
+ const value=state();
+ value.book={bids:[],asks:Array.from({length:256},(_,i)=>({price_ticks:String(i+1),quantity:'2'}))};
+ const {closed,expanded}=depthMarkup(value);
+ assert.equal((closed.match(/<circle /g)||[]).length,256);
+ assert.equal((expanded.match(/scope="row"/g)||[]).length,256);
+ assert.match(expanded,/<th scope="row">Ask 256<\/th><td>256<\/td><td>2<\/td><td>512<\/td>/);
+ assert.doesNotMatch(expanded,/Bid [0-9]/);
+});
+test('empty depth charts retain unavailable feedback without offering a vacant disclosure',()=>{
+ const value=state();value.book={bids:[],asks:[]};
+ for(const state of [value,undefined]){
+  const html=renderToStaticMarkup(createElement(DepthChart,{state}));
+  assert.match(html,/No depth available/);assert.doesNotMatch(html,/<details|<svg|<table/);
+ }
 });
