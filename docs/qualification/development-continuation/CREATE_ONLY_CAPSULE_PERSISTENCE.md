@@ -40,3 +40,12 @@ Four additional regression cases emulate unavailable/fallible diagnostic hooks
 and exercise the actual interrupted-write cleanup path;40 focused/73 guarded
 combined recovery cases pass on Python3.12. This is not an actual3.9/3.10 runtime
 qualification claim.
+
+If the atomic link raises after taking effect, the SDK compares the destination
+and staging device/inode through the open directory descriptor. The original
+error is propagated even when publication is confirmed. A failed lookup carries
+`publication_unknown=True` and `durability_uncertain=True` on persistence errors
+(or the corresponding `itch_capsule_` attributes on interrupts). A separate
+publisher's inode cannot confirm this operation's publication. Successful cleanup
+directory fsync is recorded for confirmed publication, including an interruption
+after the staging name was already removed.

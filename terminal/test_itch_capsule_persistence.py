@@ -271,3 +271,75 @@ else:
   raw,a=self.capsule();primary=LegacyInterrupt('stop write')
   with patch.object(store.os,'write',side_effect=primary),patch.object(store.os,'unlink',side_effect=OSError(errno.EACCES,'cleanup')),self.assertRaises(LegacyInterrupt)as raised:self.publish(raw,a)
   self.assertIs(raised.exception,primary);self.assertFalse(primary.itch_capsule_published);self.assertIsInstance(primary.itch_capsule_cleanup_errors[0],OSError);self.assertFalse(self.path.exists())
+ def test_interrupt_after_successful_link_reports_published_and_restorable(self):
+  raw,a=self.capsule();link=os.link;interrupt=KeyboardInterrupt()
+  def link_and_interrupt(*args,**kwargs):
+   link(*args,**kwargs)
+   raise interrupt
+  with patch.object(store.os,'link',side_effect=link_and_interrupt),self.assertRaises(KeyboardInterrupt)as caught:self.publish(raw,a)
+  self.assertIs(caught.exception,interrupt)
+  self.assertTrue(interrupt.itch_capsule_published)
+  self.assertFalse(interrupt.itch_capsule_publication_unknown)
+  self.assertTrue(interrupt.itch_capsule_directory_fsync_completed)
+  self.assertFalse(interrupt.itch_capsule_durability_uncertain)
+  self.assertEqual(list(self.path.parent.iterdir()),[self.path])
+  self.assertEqual(self.read(a).canonical(),ItchRecovery.restore_completion_capsule(raw,a).canonical())
+ def test_link_error_then_failed_directory_sync_retains_both_failures(self):
+  raw,a=self.capsule(True);link=os.link;sync=os.fsync
+  error=OSError(errno.EIO,'link result lost');cleanup=OSError(errno.EIO,'directory sync failed')
+  def ambiguous(*args,**kwargs):
+   link(*args,**kwargs)
+   raise error
+  def fail_directory(fd):
+   if stat.S_ISDIR(os.fstat(fd).st_mode):raise cleanup
+   return sync(fd)
+  with patch.object(store.os,'link',side_effect=ambiguous),patch.object(store.os,'fsync',side_effect=fail_directory),self.assertRaises(store.ItchCapsulePersistenceError)as caught:self.publish(raw,a)
+  failure=caught.exception
+  self.assertIs(failure.primary_error,error)
+  self.assertEqual(failure.cleanup_errors,(cleanup,))
+  self.assertTrue(failure.published)
+  self.assertFalse(failure.publication_unknown)
+  self.assertTrue(failure.durability_uncertain)
+  self.assertFalse(failure.directory_fsync_completed)
+  self.assertTrue(self.read(a).status()['finished'])
+ def test_inconclusive_link_probe_preserves_uncertainty_and_destination(self):
+  raw,a=self.capsule();link=os.link;lstat=os.stat
+  primary=OSError(errno.EIO,'link result lost');probe=OSError(errno.EACCES,'lookup unavailable')
+  def ambiguous(*args,**kwargs):
+   link(*args,**kwargs)
+   raise primary
+  def blocked(path,*args,**kwargs):
+   if path==self.path.name:raise probe
+   return lstat(path,*args,**kwargs)
+  with patch.object(store.os,'link',side_effect=ambiguous),patch.object(store.os,'stat',side_effect=blocked),self.assertRaises(store.ItchCapsulePersistenceError)as caught:self.publish(raw,a)
+  failure=caught.exception
+  self.assertIs(failure.primary_error,primary)
+  self.assertEqual(failure.cleanup_errors,(probe,))
+  self.assertTrue(failure.publication_unknown)
+  self.assertFalse(failure.published)
+  self.assertTrue(failure.durability_uncertain)
+  self.assertEqual(failure.code,'itch_capsule_publication_uncertain')
+  self.assertEqual(list(self.path.parent.iterdir()),[self.path])
+  self.assertTrue(self.read(a).status()['finished'])
+ def test_existing_identical_bytes_do_not_establish_publication_by_loser(self):
+  raw,a=self.capsule();self.publish(raw,a)
+  before=self.path.stat()
+  with self.assertRaises(store.ItchCapsulePersistenceError)as caught:self.publish(raw,a)
+  failure=caught.exception
+  self.assertIsInstance(failure.primary_error,FileExistsError)
+  self.assertFalse(failure.published)
+  self.assertFalse(failure.publication_unknown)
+  self.assertFalse(failure.durability_uncertain)
+  self.assertTrue(os.path.samestat(before,self.path.stat()))
+ def test_interrupt_after_staging_unlink_still_syncs_published_directory(self):
+  raw,a=self.capsule();unlink=os.unlink;interrupt=SystemExit(91)
+  def unlink_and_interrupt(*args,**kwargs):
+   unlink(*args,**kwargs)
+   raise interrupt
+  with patch.object(store.os,'unlink',side_effect=unlink_and_interrupt),self.assertRaises(SystemExit)as caught:self.publish(raw,a)
+  self.assertIs(caught.exception,interrupt)
+  self.assertTrue(interrupt.itch_capsule_published)
+  self.assertTrue(interrupt.itch_capsule_directory_fsync_completed)
+  self.assertFalse(interrupt.itch_capsule_durability_uncertain)
+  self.assertEqual(interrupt.itch_capsule_cleanup_errors,())
+  self.assertEqual(self.path.read_bytes(),raw)

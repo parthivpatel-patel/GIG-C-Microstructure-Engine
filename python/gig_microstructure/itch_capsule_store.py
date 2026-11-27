@@ -35,13 +35,14 @@ class ItchCapsulePersistenceError(RuntimeError):
     published/directory_fsync_completed; an exception is not proof of absence.
     Primary and cleanup failures are retained separately instead of masking one.
     """
-    def __init__(self,primary_error,cleanup_errors,*,published=False,file_synced=False,directory_synced=False):
+    def __init__(self,primary_error,cleanup_errors,*,published=False,publication_unknown=False,file_synced=False,directory_synced=False):
         self.primary_error=primary_error
         self.cleanup_errors=tuple(cleanup_errors)
         self.published=published
+        self.publication_unknown=publication_unknown
         self.file_fsync_completed=file_synced
         self.directory_fsync_completed=directory_synced
-        self.durability_uncertain=published and not directory_synced
+        self.durability_uncertain=publication_unknown or (published and not directory_synced)
         self.code='itch_capsule_publication_uncertain'if self.durability_uncertain else'itch_capsule_store_failed'
         super().__init__(self.code)
 
@@ -105,15 +106,15 @@ def _receipt(leaf,expected,info,*,action,file_synced=False,directory_synced=Fals
     return ItchCapsuleFileReceipt(PROFILE,leaf,expected,info.st_size,info.st_dev,info.st_ino,info.st_nlink,file_synced,directory_synced,action)
 
 
-def _raise(primary,cleanup,*,published=False,file_synced=False,directory_synced=False):
+def _raise(primary,cleanup,*,published=False,publication_unknown=False,file_synced=False,directory_synced=False):
     if isinstance(primary,(KeyboardInterrupt,SystemExit,GeneratorExit)):
         # add_note is Python3.11+. Keep primary interruption and explicit cleanup/
         # publication diagnostics on supported Python3.9/3.10 as well. Even a
         # custom exception's diagnostic setter must not replace that interruption.
         for key,value in (('cleanup_errors',tuple(cleanup)),('published',published),
-                          ('file_fsync_completed',file_synced),
+                          ('publication_unknown',publication_unknown),('file_fsync_completed',file_synced),
                           ('directory_fsync_completed',directory_synced),
-                          ('durability_uncertain',published and not directory_synced)):
+                          ('durability_uncertain',publication_unknown or (published and not directory_synced))):
             try:setattr(primary,'itch_capsule_'+key,value)
             except BaseException:pass
         if cleanup:
@@ -122,7 +123,7 @@ def _raise(primary,cleanup,*,published=False,file_synced=False,directory_synced=
                 if callable(note):note('Capsule cleanup failures: '+','.join(type(e).__name__ for e in cleanup))
             except BaseException:pass
         raise primary
-    error=ItchCapsulePersistenceError(primary,cleanup,published=published,file_synced=file_synced,directory_synced=directory_synced)
+    error=ItchCapsulePersistenceError(primary,cleanup,published=published,publication_unknown=publication_unknown,file_synced=file_synced,directory_synced=directory_synced)
     if primary is None:raise error
     raise error from primary
 
@@ -135,6 +136,8 @@ def _persist_verified_capsule(path,payload,expected):
     """
     if type(payload)is not bytes or not 82<=len(payload)<=MAX_CAPSULE_BYTES or type(expected)is not str or not re.fullmatch('[0-9a-f]{64}',expected)or hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('itch_capsule_verified_bytes_required')
     directory,leaf=_parent(path);fd=None;stage=None;created=False;original=None;published=False;file_synced=False;directory_synced=False;primary=None;cleanup=[];receipt=None
+    link_attempted=False
+    publication_unknown=False
     try:
         for _ in range(8):
             name='.gig-capsule-'+secrets.token_hex(16)+'.pending'
@@ -158,6 +161,7 @@ def _persist_verified_capsule(path,payload,expected):
         _,verified=_read_verified(fd,expected,collect=False)
         if(verified.st_dev,verified.st_ino)!=(original.st_dev,original.st_ino)or verified.st_nlink!=1:raise ValueError('itch_capsule_staging_identity')
         closing=fd;fd=None;os.close(closing)
+        link_attempted=True
         os.link(stage,leaf,src_dir_fd=directory,dst_dir_fd=directory,follow_symlinks=False);published=True
         final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final)
         if(final.st_dev,final.st_ino)!=(original.st_dev,original.st_ino):raise ValueError('itch_capsule_publication_identity')
@@ -168,19 +172,33 @@ def _persist_verified_capsule(path,payload,expected):
         receipt=_receipt(leaf,expected,final,action='PUBLISHED_CREATE_ONLY',file_synced=True,directory_synced=True)
     except BaseException as error:primary=error
     finally:
+        if link_attempted and not published:
+            # A signal or filesystem error can arrive after the link took effect.
+            # Compare the public entry before dropping our private inode link.
+            try:
+                named=os.stat(leaf,dir_fd=directory,follow_symlinks=False)
+                published=os.path.samestat(original,named)
+            except FileNotFoundError:
+                pass
+            except BaseException as error:
+                publication_unknown=True
+                cleanup.append(error)
         if fd is not None:
             try:os.close(fd)
             except BaseException as error:cleanup.append(error)
         if created:
             try:
-                info=os.stat(stage,dir_fd=directory,follow_symlinks=False)
-                if original is None or(info.st_dev,info.st_ino)!=(original.st_dev,original.st_ino):raise ValueError('itch_capsule_staging_replaced')
-                os.unlink(stage,dir_fd=directory)
+                try:info=os.stat(stage,dir_fd=directory,follow_symlinks=False)
+                except FileNotFoundError:info=None  # unlink may already have completed
+                if info is not None:
+                    if original is None or not os.path.samestat(info,original):raise ValueError('itch_capsule_staging_replaced')
+                    os.unlink(stage,dir_fd=directory)
                 os.fsync(directory)
+                directory_synced=published
             except BaseException as error:cleanup.append(error)
         try:os.close(directory)
         except BaseException as error:cleanup.append(error)
-    if primary is not None or cleanup:_raise(primary,cleanup,published=published,file_synced=file_synced,directory_synced=directory_synced)
+    if primary is not None or cleanup:_raise(primary,cleanup,published=published,publication_unknown=publication_unknown,file_synced=file_synced,directory_synced=directory_synced)
     return receipt
 
 
