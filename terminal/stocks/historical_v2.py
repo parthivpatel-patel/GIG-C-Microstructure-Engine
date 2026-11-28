@@ -145,15 +145,20 @@ class HistoricalClient:
                 self.permission.require(v['feed'])
                 return json.loads(canonical(v))
         raise WireError('history_accepted_revision_unavailable_or_expired')
-    async def _fetch(self,url,query):
+    async def _fetch(self,url,query,transport,permission):
+        def require_current():
+            if self.transport is not transport or self.permission!=permission:
+                raise WireError('history_source_configuration_changed')
+            permission.require(query['feed'])
         for attempt in range(3):
             now=self.monotonic()
             if self.last_request is not None:
                 if now<self.last_request:raise WireError('history_clock_regression')
                 await self.sleep(max(0,1.01-(now-self.last_request)))
-            self.permission.require(query['feed']);validate_query(query,self.now_ns())
+            require_current();validate_query(query,self.now_ns())
             self.last_request=self.monotonic()
-            response=await self.transport.send('GET',url)
+            response=await transport.send('GET',url)
+            require_current()
             try:return decode(response)
             except WireError as e:
                 if e.status!=429 or attempt==2:raise
@@ -175,7 +180,8 @@ class HistoricalClient:
 
     async def _acquire(self,query,*,scope=None,after_revision=None):
         now_ns=self.now_ns();q=validate_query(query,now_ns);self.permission.require(q['feed'])
-        if self.transport is None:raise WireError('history_provider_transport_disabled')
+        transport,permission=self.transport,self.permission
+        if transport is None:raise WireError('history_provider_transport_disabled')
         self.identity(q['symbol'])
         if scope is not None and (q['feed']!='iex' or q['kind'] not in ('quotes','trades')):
             raise WireError('iex_backfill_continuation_query')
@@ -188,7 +194,7 @@ class HistoricalClient:
                 cursor_key=(scope,after_revision)
                 saved=self.backfill_cursors.get(cursor_key) if after_revision is not None else None
                 if after_revision is not None and (saved is None or saved['query_sha256']!=key or
-                    saved['permission']!=self.permission or saved['transport'] is not self.transport):
+                    saved['permission']!=permission or saved['transport'] is not transport):
                     raise WireError('iex_backfill_continuation_unavailable')
                 records=[];receipts=[];duplicates=0
                 seen_tokens=set(saved['seen_tokens']) if saved else set()
@@ -198,15 +204,16 @@ class HistoricalClient:
                 token=saved['token'] if saved else None
                 consumed=saved['pages'] if saved else 0
                 limit=min(q['max_pages'],MAX_BACKFILL_PAGES-consumed) if scope is not None else q['max_pages']
+                start,end=ns(q['start']),ns(q['end'])
                 for page in range(limit):
                     # Delay is checked again before every request;never change feed.
                     self.permission.require(q['feed']);validate_query(q,self.now_ns())
                     # Alpaca's wire end is inclusive. Keep the public query half-open.
-                    params={'symbols':q['symbol'],'start':q['start'],'end':utc(ns(q['end'])-1),'feed':q['feed'],'limit':64,'sort':'asc'}
+                    params={'symbols':q['symbol'],'start':q['start'],'end':utc(end-1),'feed':q['feed'],'limit':64,'sort':'asc'}
                     if q['kind']=='bars':params.update(timeframe=q['timeframe'],adjustment=q['adjustment'])
                     if token:params['page_token']=token
                     url=BASE+q['kind']+'?'+urlencode(params);validate_plan('GET',url)
-                    payload,digest=await self._fetch(url,q)
+                    payload,digest=await self._fetch(url,q,transport,permission)
                     if type(payload)is not dict or type(payload.get(q['kind']))is not dict or set(payload[q['kind']])-{q['symbol']} or type(payload[q['kind']].get(q['symbol'],[]))is not list or len(payload[q['kind']].get(q['symbol'],[]))>64:raise WireError('history_page_identity_or_budget')
                     rows=payload[q['kind']].get(q['symbol'],[])
                     for raw in rows:
@@ -218,7 +225,7 @@ class HistoricalClient:
                             annotations={} if q['kind']=='bars' else metadata(raw)
                             if q['kind']!='bars':r['scope']='Historical '+q['feed'].upper()+' requested source;not a real-time/depth or corrected-tape claim'
                         except (ValueError,TypeError,KeyError,OverflowError):raise WireError('history_row_schema') from None
-                        if not ns(q['start'])<=exact<ns(q['end']):raise WireError('history_record_outside_interval')
+                        if not start<=exact<end:raise WireError('history_record_outside_interval')
                         digest_row=hashlib.sha256(canonical({**r,'annotations':annotations})).hexdigest()
                         if q['kind']=='trades' and 'i' in annotations:
                             trade_key=(annotations.get('x'),annotations['i'],exact)
@@ -234,7 +241,7 @@ class HistoricalClient:
                     if token in (None,''):break
                     if type(token)is not str or not 1<=len(token)<=512 or any(not 32<ord(c)<127 for c in token) or token in seen_tokens or not rows:raise WireError('history_cursor_loop_or_no_progress')
                     seen_tokens.add(token)
-                origin='HISTORICAL_SYNTHETIC' if type(self.transport)is FixtureWire else 'OBSERVED_OFFICIAL_RESPONSE'
+                origin='HISTORICAL_SYNTHETIC' if type(transport)is FixtureWire else 'OBSERVED_OFFICIAL_RESPONSE'
                 result={'schema':'gig.alpaca.history.v2','query':q,'symbol':q['symbol'],'kind':q['kind'],'feed':q['feed'],'origin':origin,'records':records,'record_count':len(records),'duplicate_records_removed':duplicates,'deduplication_policy':'Identical normalized records collapsed;source receipts retain physical counts;not an exactly-once tape','source_records':receipts,'received_at':receipts[-1]['received_at'],'has_more':token not in (None,''),'complete_history':False,'freshness':'HISTORICAL_NOT_LIVE','adjustment':q['adjustment'],'instrument':self.identity(q['symbol']),'session':self.schedule.at(q['symbol'],records[-1]['timestamp'] if records else None),'clock_window':market_window(records[-1]['timestamp']) if records else None,'coverage':'IEX venue-limited observations' if q['feed']=='iex' else 'Historical SIP requested with minimum900second delay;not real-time entitlement','cache_policy':'16in-process queries,60secondTTL,explicit deletion;no disk retention enabled','limitations':['No full-session/holiday/halt completeness inferred.','Raw prices may contain split/dividend jumps;provider adjustment selection is disclosed,not independently verified.','Quote sizes retain provider units;no depth,queue or aggressor direction inferred.','Source symbols do not independently prove historical security identity.']}
                 result['canonical_sha256']=hashlib.sha256(canonical(result)).hexdigest()
                 if len(canonical(result))>512*1024:raise WireError('history_result_budget')
@@ -249,7 +256,7 @@ class HistoricalClient:
                     if result['has_more'] and count<MAX_BACKFILL_PAGES:
                         continuation=result['canonical_sha256']
                         self.backfill_cursors[scope,continuation]={
-                            'created':self.monotonic(),'query_sha256':key,'permission':self.permission,'transport':self.transport,
+                            'created':self.monotonic(),'query_sha256':key,'permission':permission,'transport':transport,
                             'pages':count,'seen_tokens':seen_tokens,'seen':seen,'trade_ids':trade_ids,'prior':prior,'token':token}
                         while len(self.backfill_cursors)>MAX_BACKFILL_CURSORS:self.backfill_cursors.popitem(last=False)
                     continuation={'after_revision':after_revision,'next_revision':continuation,

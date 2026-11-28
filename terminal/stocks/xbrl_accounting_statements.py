@@ -147,7 +147,7 @@ def _accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,*,for
  if result['lineage']['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED';return _finish(result),None,None
  if accession not in source_inputs or accession not in role_bindings:result['reason']='SELECTED_ORIGINALS_OR_ROLE_BINDINGS_NOT_SUPPLIED';return _finish(result),None,None
  entry=source_inputs[accession];stored=collection._filings[accession]
- if stored.get('schema')=='gig.sec.xbrl.inline_set.v1':
+ if 'document_set'in stored:
   coordinator=getattr(workspace,'filing_ingestors',{}).get(symbol)
   has_plan=coordinator is not None and accession in coordinator.plans
   planned_identity=coordinator.plans[accession].get('inline_manifest_sha256')if has_plan else None
