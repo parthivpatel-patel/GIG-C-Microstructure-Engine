@@ -68,6 +68,27 @@ export function partialSourceTail(state:TerminalState):PartialSourceTail|null {
  };
 }
 
+type DecodedPrefix={decoded_bytes:string;decoded_sha256:string};
+export function decodedItchPrefix(state:TerminalState):DecodedPrefix|null {
+ const lineage=state.provenance.source_recovery_history;
+ if(!Array.isArray(lineage)||!lineage.length)return null;
+ const row=lineage[lineage.length-1] as Record<string,unknown>|null;
+ if(!row||row.source_profile!=='COMPLETE_FRAMES_DECODED_PREFIX_V1')return null;
+ const hash=(v:unknown):v is string=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
+ const count=(v:unknown):v is string=>typeof v==='string'&&/^(0|[1-9][0-9]{0,19})$/.test(v);
+ if(state.mode!=='HISTORICAL_REPLAY'||state.origin!=='HISTORICAL_SYNTHETIC'||
+    state.provenance.dataset!=='itch-checkpoint-v1'||lineage.length>4||
+    state.provenance.source_recovery_history_encoding!=='DECIMAL_STRINGS_V1'||
+    row.capture!==state.provenance.capture||row.generation!==state.provenance.generation||
+    !['binary_file','single_gzip','gzip_members'].includes(String(row.container))||
+    !count(row.decoded_bytes)||BigInt(row.decoded_bytes)>33554432n||
+    !count(row.from_source_records)||!count(row.to_source_records)||
+    BigInt(row.from_source_records)>BigInt(row.to_source_records)||BigInt(row.to_source_records)>BigInt(state.position)||
+    !hash(row.source_sha256)||!hash(row.decoded_sha256)||
+    row.container==='binary_file'&&row.source_sha256!==row.decoded_sha256)throw Error('Invalid decoded ITCH source receipt');
+ return {decoded_bytes:row.decoded_bytes,decoded_sha256:row.decoded_sha256};
+}
+
 type CompletedSource={
  capsule_sha256:string;
  source_sha256:string;

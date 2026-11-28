@@ -1,5 +1,5 @@
 import {NativeQuoteFlow} from './NativeQuoteFlow';
-import {completedItchSource,itchBookChoices,partialSourceTail,replayMinimum,replayProgress} from './itchSession';
+import {completedItchSource,decodedItchPrefix,itchBookChoices,partialSourceTail,replayMinimum,replayProgress} from './itchSession';
 import { ConcentrationPanel } from './ConcentrationPanel';
 import { Navigation } from './Navigation';
 import { TerminalHeader } from './TerminalHeader';
@@ -258,7 +258,10 @@ function Panel({ title, eyebrow, children }: {
 }) { return <section className="panel"><header className="panel-header"><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2></div></header><div className="panel-content">{children}</div></section>; }
 function PartialItchBoundary({state}:{state:TerminalState}){
     const tail=partialSourceTail(state);
-    if(!tail)return null;
+    const prefix=decodedItchPrefix(state);
+    if(!tail)return prefix&&<details className="source-controls"><summary>Recovered ITCH source prefix</summary>
+      <dl><dt>Decoded bytes</dt><dd>{prefix.decoded_bytes}</dd><dt>Decoded SHA-256</dt><dd><code>{prefix.decoded_sha256}</code></dd></dl>
+    </details>;
     return <details className="source-controls"><summary>Unfinished ITCH source frame</summary>
       <p>The replay contains whole, accepted frames. The unfinished frame awaits more source bytes.</p>
       <dl>
