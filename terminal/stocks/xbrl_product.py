@@ -42,8 +42,8 @@ def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='leg
    retained=value.get('dts_corroboration',{})
    proof=retained.get('dimensional_validation')
    if proof is not None:
-    from .xbrl_dimensions import ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE
-    if proof['profile'] in (ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE):
+    from .xbrl_dimensions import ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE,PRIMARY_TARGET_ROLE_PROFILE
+    if proof['profile'] in (ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE,PRIMARY_TARGET_ROLE_PROFILE):
      rows=proof['facts']
      result['dimensional_admission']={
       'profile':proof['profile'],'accession':source['accession'],'selected_instance_sha256':value['canonical_sha256'],
