@@ -4,7 +4,7 @@ from itertools import islice
 import time
 from pathlib import Path
 import gig_microstructure as gig
-from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2,bounded_entries,recording_object
+from .l2_recording import load_l2,MAX_RECORDS,SCHEMA,SCHEMA2,JOINT_SCHEMAS,bounded_entries,recording_object
 from .recording import canonical,root_path,safe_id
 from .providers.kraken import KrakenBookAdapter
 from .verification.artifacts import read_bytes
@@ -18,9 +18,9 @@ def metadata(directory,identity):
     if path.is_symlink():raise ValueError('recording_path')
     raw=read_bytes(path,8192)
     m=recording_object(raw)
-    from .kraken_joint_recording import SCHEMA as JOINT_SCHEMA,joint_object
-    if type(m)is dict and m.get('schema')==JOINT_SCHEMA:m=joint_object(raw)
-    if type(m) is not dict or m.get('schema') not in (SCHEMA,SCHEMA2,JOINT_SCHEMA) or m.get('identity')!=identity or m.get('complete') is not True:
+    from .kraken_joint_recording import joint_object
+    if type(m)is dict and m.get('schema') in JOINT_SCHEMAS:m=joint_object(raw)
+    if type(m) is not dict or m.get('schema') not in (SCHEMA,SCHEMA2,*JOINT_SCHEMAS) or m.get('identity')!=identity or m.get('complete') is not True:
         raise ValueError('recording_manifest')
     return m
 
@@ -39,8 +39,7 @@ def discover(directory,*,allow_observed=False):
                 'instrument':m.get('symbol'),'venue':'Kraken','records':m.get('records'),'sha256':m.get('sha256'),
                 'status':'AVAILABLE' if origin=='HISTORICAL_SYNTHETIC' or allow_observed else 'BLOCKED_PERMISSION',
                 'market_session_complete':False}
-            from .kraken_joint_recording import SCHEMA as JOINT_SCHEMA
-            if m['schema']==JOINT_SCHEMA:item['recording_profile']=m['profile']
+            if m['schema'] in JOINT_SCHEMAS:item['recording_profile']=m['profile']
             result.append(item)
         except (ValueError,OSError):
             rejected.append({'identity':path.name if path.name.isascii() and len(path.name)<=48 else '<invalid>','reason':'invalid_or_unreadable_manifest'})
@@ -52,8 +51,7 @@ class RecordedSession:
     def __init__(self,directory,identity,*,allow_observed=False):
         m=metadata(directory,identity)
         if m.get('origin')=='LIVE_OBSERVED' and not allow_observed:raise ValueError('observed_processing_permission_required')
-        from .kraken_joint_recording import SCHEMA as JOINT_SCHEMA
-        if m.get('schema')==JOINT_SCHEMA:raise ValueError('recording_joint_consumer_required')
+        if m.get('schema') in JOINT_SCHEMAS:raise ValueError('recording_joint_consumer_required')
         manifest,rows=load_l2(directory,identity)
         if not 0<len(rows)<=MAX_RECORDS:raise ValueError('empty_recording')
         book=gig._native.AggregateDepth(32,1048576)
@@ -174,6 +172,6 @@ def prune_expired(directory,*,now=None,active_stage=None):
 def open_recorded_session(directory,identity,*,allow_observed=False):
     """Version-aware production consumer; legacy RecordedSession stays unchanged."""
     m=metadata(directory,identity)
-    from .kraken_joint_recording import SCHEMA as JOINT_SCHEMA,JointRecordedSession
-    if m['schema']==JOINT_SCHEMA:return JointRecordedSession(directory,identity,allow_observed=allow_observed,expected_manifest=m)
+    from .kraken_joint_recording import JointRecordedSession
+    if m['schema'] in JOINT_SCHEMAS:return JointRecordedSession(directory,identity,allow_observed=allow_observed,expected_manifest=m)
     return RecordedSession(directory,identity,allow_observed=allow_observed)

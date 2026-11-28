@@ -1,19 +1,22 @@
 """Versioned finite Kraken joint capture; exact supplied raw bytes, not a market tape.
 
-Only the supervisor's fixed depth10/configuration and a fresh single generation are
-supported. Original receipts are rederived before atomic publication and playback.
+The supervisor's admitted depth and a fresh single generation are bound to each
+log. Original receipts are rederived before atomic publication and playback.
 No live transport, exchange sequence, backfill or issuer/provider authentication.
 """
 import copy,hashlib,re,time
 from pathlib import Path
-from .l2_recording import L2Writer,MAX_RECORDS,MAX_BYTES,MAX_AGE,optional_ns,JOINT_SCHEMA
+from .l2_recording import L2Writer,MAX_RECORDS,MAX_BYTES,MAX_AGE,optional_ns,JOINT_SCHEMA,JOINT_DEPTH_SCHEMA,JOINT_SCHEMAS
 from .recording import canonical,root_path,safe_id
 from .verification.artifacts import read_bytes,decode as decode_metadata
-from .providers.kraken import BOOK_SESSION_PROFILE,decode
+from .providers.kraken import (BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,BOOK_LARGE_DEPTH_PROFILE,
+ LARGE_DEPTHS,LARGE_BOOK_PAYLOAD,MAX_PAYLOAD,_decode_frame)
 from .providers.kraken_coordinator import KrakenSessionCoordinator,PROFILE as JOINT_PROFILE
 
 SCHEMA=JOINT_SCHEMA
 PROFILE='ORIGINAL_RAW_JOINT_SESSION_RECORDING_V1'
+DEPTH_PROFILE='ORIGINAL_RAW_JOINT_DEPTH_SESSION_RECORDING_V2'
+RECORDING_DEPTHS=(10,25,100,*LARGE_DEPTHS)
 MAX_CACHE_BYTES=8*1024*1024
 SHA=re.compile('[0-9a-f]{64}')
 INITIALIZATION='fresh_joint_status_book_trade_ack_and_L2_snapshot_required_not_L3'
@@ -36,39 +39,51 @@ def joint_object(raw):
 def _sha(value):return hashlib.sha256(canonical(value)).hexdigest()
 
 
-def _coordinator(symbol,origin):
- return KrakenSessionCoordinator(profile=JOINT_PROFILE,symbol=symbol,depth=10,
-  book_profile=BOOK_SESSION_PROFILE,price_scale=100000000,quantity_scale=100000000,
-  origin=origin)
+def _coordinator(symbol,origin,depth=10):
+ if type(depth)is not int or depth not in RECORDING_DEPTHS:raise ValueError('recording_joint_depth')
+ book_profile=BOOK_LARGE_DEPTH_PROFILE if depth in LARGE_DEPTHS else BOOK_DEPTH_SESSION_PROFILE if depth!=10 else BOOK_SESSION_PROFILE
+ return KrakenSessionCoordinator(profile=JOINT_PROFILE,symbol=symbol,depth=depth,
+  book_profile=book_profile,price_scale=100000000,quantity_scale=100000000,
+  origin=origin,native_capacity=max(256,2*depth))
 
 
-def _session(capture,symbol,origin):
- c=_coordinator(symbol,origin);token=c.connect(capture)
+def _session(capture,symbol,origin,depth=10):
+ c=_coordinator(symbol,origin,depth);token=c.connect(capture)
  return c,token,{'profile':JOINT_PROFILE,'capture':capture,'local_generation':'1',
-  'book_session_profile':BOOK_SESSION_PROFILE,'depth':10,'trade_snapshot':False,
+  'book_session_profile':c._book.book_session_profile,'depth':depth,'trade_snapshot':False,
   'stale_ns':'10000000000','book_request_base':100,'trade_request_base':200,
-  'native_capacity':256,'native_budget':1048576,'subscriptions':c.subscription_requests(token)}
+  'native_capacity':c.native_capacity,'native_budget':c.native_budget,'subscriptions':c.subscription_requests(token)}
 
 
 class JointL2Writer(L2Writer):
  """No native owner persists across asynchronous filesystem worker invocations."""
  def __init__(self,*args,**kwargs):
   if kwargs.pop('version',2)!=2:raise ValueError('recording_joint_version')
+  self.recording_depth=kwargs.pop('depth',10)
+  if type(self.recording_depth)is not int or self.recording_depth not in RECORDING_DEPTHS:raise ValueError('recording_joint_depth')
   self.joint_session=None
   super().__init__(*args,version=2,**kwargs)
+ def _decode_source(self,raw):
+  return _decode_frame(raw,LARGE_BOOK_PAYLOAD if self.recording_depth in LARGE_DEPTHS else MAX_PAYLOAD)
  def append(self,raw,receive_ns,*,receive_unix_ns=None,normalized=None):
   try:
    if type(normalized)is not dict or normalized.get('profile')!=JOINT_PROFILE or normalized.get('local_generation')!='1'or normalized.get('origin')!=self.origin or normalized.get('symbol')!=self.symbol:raise ValueError('recording_joint_receipt')
    if normalized.get('source_sha256')!=hashlib.sha256(raw.encode('utf-8')).hexdigest()or normalized.get('receive_monotonic_ns')!=str(receive_ns):raise ValueError('recording_joint_source_binding')
    capture=normalized.get('capture')
    if self.joint_session is None:
-    _,_,self.joint_session=_session(capture,self.symbol,self.origin)
+    _,_,self.joint_session=_session(capture,self.symbol,self.origin,self.recording_depth)
    elif self.joint_session['capture']!=capture:raise ValueError('recording_joint_generation_changed')
+   if normalized.get('subscribed_depth')!=self.recording_depth or normalized.get('book_session_profile')!=self.joint_session['book_session_profile']:raise ValueError('recording_joint_depth')
+   if self.recording_depth!=10:
+    receipt_hash=normalized.get('sha256')
+    if type(receipt_hash)is not str or not SHA.fullmatch(receipt_hash)or _sha({k:v for k,v in normalized.items()if k!='sha256'})!=receipt_hash:raise ValueError('recording_joint_receipt')
+    normalized={'sha256':receipt_hash}
    super().append(raw,receive_ns,receive_unix_ns=receive_unix_ns,normalized=normalized)
   except BaseException:self.abort();raise
  def _manifest(self,reason):
   if self.joint_session is None:raise ValueError('recording_joint_initialization_missing')
-  m=super()._manifest(reason);m.update(schema=SCHEMA,profile=PROFILE,initialization=INITIALIZATION,
+  schema,profile=(SCHEMA,PROFILE)if self.recording_depth==10 else(JOINT_DEPTH_SCHEMA,DEPTH_PROFILE)
+  m=super()._manifest(reason);m.update(schema=schema,profile=profile,initialization=INITIALIZATION,
    joint_session=copy.deepcopy(self.joint_session),source_sequence=None,gap_detection=False,
    complete_initialization=False,independent_source_authentication=False)
   m['manifest_sha256']=_sha(m);return m
@@ -91,7 +106,7 @@ def _manifest(identity,m,clock):
   'complete','created_unix_seconds','retention_seconds','price_scale','quantity_scale',
   'initialization','venue','interval_end_reason','market_session_complete','joint_session',
   'source_sequence','gap_detection','complete_initialization','independent_source_authentication','manifest_sha256'}
- if type(m)is not dict or set(m)!=keys or m['schema']!=SCHEMA or m['identity']!=safe_id(identity)or m['profile']!=PROFILE or m['provider']!='kraken'or m['venue']!='Kraken'or m['origin']not in('HISTORICAL_SYNTHETIC','LIVE_OBSERVED')or m['symbol']not in('BTC/USD','ETH/USD')or m['complete']is not True:raise ValueError('recording_joint_manifest')
+ if type(m)is not dict or set(m)!=keys or m['schema']not in JOINT_SCHEMAS or m['identity']!=safe_id(identity)or m['profile']!=(PROFILE if m['schema']==SCHEMA else DEPTH_PROFILE) or m['provider']!='kraken'or m['venue']!='Kraken'or m['origin']not in('HISTORICAL_SYNTHETIC','LIVE_OBSERVED')or m['symbol']not in('BTC/USD','ETH/USD')or m['complete']is not True:raise ValueError('recording_joint_manifest')
  if m['initialization']!=INITIALIZATION or any(m[k]is not False for k in('market_session_complete','gap_detection','complete_initialization','independent_source_authentication'))or m['source_sequence']is not None:raise ValueError('recording_joint_false_completeness')
  if any(type(m[k])is not int or m[k]!=100000000 for k in('price_scale','quantity_scale'))or m['interval_end_reason']not in('operator_stopped','fixture_complete','record_budget','disconnected'):raise ValueError('recording_joint_manifest')
  for key,minimum,maximum in(('records',1,MAX_RECORDS),('bytes',1,MAX_BYTES),('created_unix_seconds',0,2**63-1),('retention_seconds',1,MAX_AGE)):
@@ -101,7 +116,9 @@ def _manifest(identity,m,clock):
  if now<m['created_unix_seconds']or now>m['created_unix_seconds']+m['retention_seconds']:raise ValueError('recording_expired')
  session=m['joint_session']
  if type(session)is not dict:raise ValueError('recording_joint_session')
- c,token,expected=_session(session.get('capture'),m['symbol'],m['origin'])
+ depth=session.get('depth')
+ if (m['schema']==SCHEMA)!=(depth==10):raise ValueError('recording_joint_depth')
+ c,token,expected=_session(session.get('capture'),m['symbol'],m['origin'],depth)
  if canonical(session)!=canonical(expected):raise ValueError('recording_joint_session')
  return c,token
 
@@ -118,23 +135,27 @@ def validate_log(identity,manifest,body,*,clock=time.time,include_frames=False):
   ns=row['receive_monotonic_ns'];optional_ns(ns);optional_ns(row['receive_unix_ns'])
   if ns is None or previous is not None and int(ns)<previous:raise ValueError('recording_receive_clock')
   if type(row['normalized'])is not dict or len(canonical(row['normalized']))>65536:raise ValueError('recording_normalized')
-  decode(row['raw']);previous=int(ns);rows.append(row)
+  if manifest['schema']==JOINT_DEPTH_SCHEMA:
+   witness=row['normalized']
+   if set(witness)!={'sha256'}or type(witness['sha256'])is not str or not SHA.fullmatch(witness['sha256']):raise ValueError('recording_joint_receipt')
+  previous=int(ns);rows.append(row)
   if len(rows)>MAX_RECORDS:raise ValueError('recording_budget')
  if len(rows)!=manifest['records']:raise ValueError('recording_count')
- frames,size=_derive_frames(c,token,rows)
+ frames,size=_derive_frames(c,token,rows,digest_receipts=manifest['schema']==JOINT_DEPTH_SCHEMA)
  if not frames[-1]['eligible']:raise ValueError('recording_joint_initialization_or_fence')
  if include_frames:return manifest,rows,frames,size
  return manifest,rows
 
 
-def _derive_frames(c,token,rows):
+def _derive_frames(c,token,rows,*,digest_receipts=False):
  from .l2_research import ResearchWindow
  research=ResearchWindow();frames=[];size=0;research_ready=False;last_exchange=None;last_book_receive=None;sources={}
  for position in range(len(rows)+1):
   row=rows[position-1]if position else None;receipt=None;now=int(row['receive_monotonic_ns'])if row else 0
   if row:
    receipt=c.feed(row['raw'],now,token=token)
-   if canonical(receipt)!=canonical(row['normalized']):raise ValueError('recording_joint_normalization_mismatch')
+   expected={'sha256':receipt['sha256']}if digest_receipts else receipt
+   if canonical(expected)!=canonical(row['normalized']):raise ValueError('recording_joint_normalization_mismatch')
    observed=receipt['source_receipt'];kind=observed['kind']
    channel='book'if kind in('snapshot','update')else'trade'if kind=='trades'else('book_subscription'if'book_session_profile'in observed else'trade_subscription')if kind=='acknowledgment'else kind
    sources[channel]={k:receipt[k]for k in('sha256','source_sha256','capture','local_generation','connection_id','receive_monotonic_ns','kind','origin')}
@@ -199,7 +220,9 @@ class JointRecordedSession:
   metrics={k:None for k in('spread','midprice','microprice','imbalance','bid_depth','ask_depth')}
   if native:
    for k,s in(('spread','spread'),('midprice','midpoint'),('microprice','microprice'),('imbalance','depth_imbalance'),('bid_depth','bid_depth'),('ask_depth','ask_depth')):metrics[k]=native['metrics'][s]
+  depth=self.manifest['joint_session']['depth']
   return {'mode':'HISTORICAL_REPLAY','origin':origin if native else'UNAVAILABLE','dataset':'recorded-l2',
+   'subscribed_depth':depth,'checksum_depth':10,'checksum_scope':'top_10_per_side_only',
    'provider':'kraken-recorded','venue':'Kraken','instrument':self.manifest['symbol'],'feed_type':'L2_AGGREGATE',
    'price_scale':str(self.manifest['price_scale']),'quantity_scale':str(self.manifest['quantity_scale']),
    'position':0 if expired else position,'event_count':0 if expired else self.total_records,
@@ -211,7 +234,7 @@ class JointRecordedSession:
     'reason':'recording_retention_expired'if expired else'Exact raw joint-session prefix;not live or complete L3',
     'real_time':False,'stale':False,'capture_complete':not expired,'market_session_complete':False,'sequence_complete':False},
    'provenance':{'category':origin if native else'UNAVAILABLE','recording_origin':origin,'dataset':self.identity,
-    'profile':PROFILE,'recording_sha256':self.manifest['sha256'],'manifest_sha256':self.manifest['manifest_sha256'],
+    'profile':self.manifest['profile'],'recording_sha256':self.manifest['sha256'],'manifest_sha256':self.manifest['manifest_sha256'],
     'session_segment':self.identity,'complete_initialization':False,'initialization_scope':'subscribed aggregate L2 only',
     'exchange_sequence':None,'recording_enabled':False,'independent_source_authentication':False,
     'playback':'immutable joint-native-validated prefix cache','native_validated_prefixes':len(self.frames),

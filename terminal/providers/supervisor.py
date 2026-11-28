@@ -65,7 +65,7 @@ class FeedSupervisor:
         from .kraken_coordinator import PROFILE as JOINT_PROFILE
         profile=self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')
         if self.provider!='kraken' or profile not in(None,JOINT_PROFILE):raise ProviderError('provider_recording_profile_unavailable')
-        if self.subscribed_depth != 10 or self._configured_joint_depth(profile) != 10:
+        if self.session_profile != profile or self.subscribed_depth != self._configured_joint_depth(profile):
             raise ProviderError('provider_recording_profile_unavailable')
         return JointL2Writer if profile==JOINT_PROFILE else L2Writer
 
@@ -74,7 +74,7 @@ class FeedSupervisor:
         joint=isinstance(getattr(capture,'writer',None),JointL2Writer)
         if self.session_profile is not None:
             from .kraken_coordinator import PROFILE as JOINT_PROFILE
-            if self.session_profile!=JOINT_PROFILE or not joint or self.subscribed_depth != 10:raise ProviderError('provider_recording_profile_unavailable')
+            if self.session_profile!=JOINT_PROFILE or not joint or self.subscribed_depth != capture.writer.recording_depth:raise ProviderError('provider_recording_profile_unavailable')
         elif joint or self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')is not None:
             raise ProviderError('provider_recording_profile_unavailable')
 

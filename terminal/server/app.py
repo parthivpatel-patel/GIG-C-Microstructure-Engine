@@ -944,8 +944,9 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                         raise ValueError('retention_permission_required')
                     if feed.state!='LIVE_VERIFIED' or native.mode!='LIVE':raise ValueError('verified_production_feed_required')
                     if feed.capture and not feed.capture.task.done():raise ValueError('capture_busy')
+                    capture_options={'depth':feed.subscribed_depth} if feed.session_profile else {}
                     capture=await Capture.create(l2_directory,'capture-'+uuid.uuid4().hex,enabled=True,
-                        origin='LIVE_OBSERVED',permission=permission,symbol=feed.symbol,version=2,writer_type=writer_type)
+                        origin='LIVE_OBSERVED',permission=permission,symbol=feed.symbol,version=2,writer_type=writer_type,**capture_options)
                     try:
                         async with lock:
                             await feed.start(feed.symbol)  # Fresh observed source snapshot, never an invented seed.

@@ -20,6 +20,8 @@ MAX_AGE=86400
 SCHEMA='gig.terminal.l2_log.v1'
 SCHEMA2='gig.terminal.l2_log.v2'
 JOINT_SCHEMA='gig.terminal.kraken_joint_log.v1'
+JOINT_DEPTH_SCHEMA='gig.terminal.kraken_joint_log.v2'
+JOINT_SCHEMAS=(JOINT_SCHEMA,JOINT_DEPTH_SCHEMA)
 
 def recording_object(raw):
     try:return decode_object(raw)
@@ -71,7 +73,7 @@ class L2Writer:
     def append(self,raw,receive_ns,*,receive_unix_ns=None,normalized=None):
         if self.closed:raise ValueError('recording_closed')
         try:
-            decode(raw)  # Preserve exact source string, but reject malformed/unbounded JSON.
+            self._decode_source(raw)
             if type(receive_ns) is not int or not 0<=receive_ns<=2**63-1 or (self.previous is not None and receive_ns<self.previous):
                 raise ValueError('recording_receive_clock')
             value={'ordinal':self.count,'receive_monotonic_ns':str(receive_ns),'raw':raw}
@@ -87,6 +89,8 @@ class L2Writer:
             self.digest.update(row);self.count+=1;self.size+=len(row);self.previous=receive_ns
         except BaseException:
             self.abort();raise
+    def _decode_source(self,raw):
+        return decode(raw)
     def finish(self,reason='operator_stopped'):
         if self.closed:raise ValueError('recording_closed')
         if self.clock()>self.created+self.retention:
@@ -132,7 +136,7 @@ def load_l2(directory,identity,*,clock=time.time):
         content.append(value)
     m=recording_object(content[0])
     if type(m) is not dict:raise ValueError('recording_manifest')
-    if m.get('schema')==JOINT_SCHEMA:
+    if m.get('schema') in JOINT_SCHEMAS:
         from .kraken_joint_recording import validate_log,joint_object
         return validate_log(identity,joint_object(content[0]),content[1],clock=clock)
     if (m.get('schema') not in (SCHEMA,SCHEMA2) or m.get('identity')!=identity or m.get('complete') is not True
@@ -170,7 +174,7 @@ def load_l2(directory,identity,*,clock=time.time):
 
 def replay_l2(manifest,rows,position=None):
     """Fresh native state at every seek. No source order, timestamp or L3 inference."""
-    if manifest.get('schema')==JOINT_SCHEMA:
+    if manifest.get('schema') in JOINT_SCHEMAS:
         from .kraken_joint_recording import replay_joint
         return replay_joint(manifest,rows,position)
     import gig_microstructure as gig
