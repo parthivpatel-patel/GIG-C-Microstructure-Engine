@@ -30,9 +30,11 @@ gig::ErrorCode gzip_code(GzipCode code) noexcept {
  }
 }
 
-gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete)noexcept {
+gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete,PartialBinaryTail* partial=nullptr)noexcept {
  using R=gig::Result<SyntheticReconstructor>;
  const auto bad=[](gig::ErrorCode c,std::string_view f){return R::failure(c,f);};
+ if(partial && a.container!=RecoveryContainer::binary_file)
+  return bad(gig::ErrorCode::unsupported,"source_recovery.partial_binary_container");
  if(!r||source.size()>32U*1024U*1024U||a.gzip.max_decompressed_bytes>32U*1024U*1024U||a.gzip.max_compressed_bytes>32U*1024U*1024U||a.framing.max_records>4096||a.framing.max_stream_bytes>32U*1024U*1024U)return bad(gig::ErrorCode::capacity,"source_recovery.budget");
  if(a.capture!=trusted.capture||a.generation!=trusted.generation||sha256(source)!=a.source_sha256)return bad(gig::ErrorCode::identity_mismatch,"source_recovery.capture_generation_digest");
  if(a.container!=RecoveryContainer::binary_file&&a.container!=RecoveryContainer::single_gzip)return bad(gig::ErrorCode::unsupported,"source_recovery.container");
@@ -59,13 +61,33 @@ gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> byt
  }
  if(error)return bad(error.code,error.field);
  const auto finish=framer.data->finish(complete?EndKind::source_eof:EndKind::bounded_prefix);
- if(finish.error||finish.residual_bytes||seen<prefix_count||(complete&&!finish.session_complete))return bad(gig::ErrorCode::malformed,"source_recovery.incomplete_prefix");
+ if(finish.error||(!partial&&finish.residual_bytes)||seen<prefix_count||(complete&&!finish.session_complete))return bad(gig::ErrorCode::malformed,"source_recovery.incomplete_prefix");
+ if(partial){
+  if(finish.residual_bytes==0||finish.residual_bytes>source.size())
+   return bad(gig::ErrorCode::malformed,"source_recovery.partial_binary_tail_required");
+  const auto residual=static_cast<std::size_t>(finish.residual_bytes);
+  const auto offset=source.size()-residual;
+  const auto cursor=engine.context().next_location();
+  const auto boundary=framer.data->position().value()-finish.residual_bytes;
+  if(cursor.frame_offset.value()!=boundary)
+   return bad(gig::ErrorCode::inconsistent_state,"source_recovery.partial_binary_boundary");
+  *partial={cursor,offset,residual,sha256(source.subspan(offset))};
+ }
  if(complete){const auto summary=engine.finish(ContextEnd::declared_source_complete);if(!summary.finished||!summary.input_complete)return bad(gig::ErrorCode::recovery_required,"source_recovery.incomplete_context");}
  return candidate;
 }
 }
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
  return resume_source(bytes,trusted,source,a,r,false);
+}
+gig::Result<PartialBinaryRecovery> resume_partial_binary_source(
+    std::span<const std::byte> bytes,const DurableAdmission& trusted,std::span<const std::byte> source,
+    const SourceRecoveryAdmission& admission,std::pmr::memory_resource* resource) noexcept {
+ using R=gig::Result<PartialBinaryRecovery>;
+ PartialBinaryTail tail{};
+ auto owner=resume_source(bytes,trusted,source,admission,resource,false,&tail);
+ if(!owner)return R::failure(owner.error.code,owner.error.field,owner.error.index);
+ return R::success({std::move(*owner.data),tail});
 }
 gig::Result<SyntheticReconstructor> resume_complete_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
  return resume_source(bytes,trusted,source,a,r,true);

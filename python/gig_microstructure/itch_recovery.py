@@ -5,7 +5,7 @@ A digest inside the checkpoint is not authentication. Automatic schema/code or
 capture-generation migration is intentionally unsupported.
 """
 import hashlib,re
-from dataclasses import dataclass
+from dataclasses import dataclass,replace
 from . import _native,_checked
 
 MAX_BYTES=32*1024*1024
@@ -55,6 +55,15 @@ def _validate_image(payload,admission,resource_budget_bytes):
     if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:raise ValueError('itch_resource_budget')
     if hashlib.sha256(payload).hexdigest()!=admission.artifact_sha256:raise ValueError('itch_artifact_digest')
 
+@dataclass(frozen=True)
+class ItchPartialBinaryTail:
+    source_sha256:str
+    source_offset:int
+    residual_bytes:int
+    next_frame:int
+    next_ordinal:int
+    residual_sha256:str
+
 class ItchRecovery:
     @classmethod
     def restore(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
@@ -72,9 +81,31 @@ class ItchRecovery:
         if not hasattr(_native,'resume_itch_source'):raise ValueError('itch_source_sdk_streaming_disabled')
         owner=_checked(_native.resume_itch_source(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(int(source_admission.container=='single_gzip')),str(source_admission.first_frame),str(source_admission.first_ordinal)))
         result=cls.__new__(cls);result._owner=owner
-        from dataclasses import replace
         result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
         return result
+    @classmethod
+    def resume_partial_binary_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        """Resume whole BinaryFile frames and return a receipt for the unfinished frame."""
+        _validate_image(payload,admission,resource_budget_bytes)
+        if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
+        source_admission.validate()
+        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
+        if source_admission.container!='binary_file':raise ValueError('itch_partial_source_requires_binary_file')
+        if type(source)is not bytes or len(source)>MAX_BYTES:raise ValueError('itch_source_byte_budget')
+        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
+        resume=getattr(_native,'resume_itch_partial_binary_source',None)
+        if resume is None:raise ValueError('itch_source_sdk_streaming_disabled')
+        owner,receipt=_checked(resume(payload,admission.artifact_sha256,admission.contract_sha256,
+            admission.implementation_sha256,admission.capture,str(admission.generation),
+            str(resource_budget_bytes),source,source_admission.source_sha256,
+            str(source_admission.first_frame),str(source_admission.first_ordinal)))
+        result=cls.__new__(cls)
+        result._owner=owner
+        result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
+        tail=ItchPartialBinaryTail(source_admission.source_sha256,int(receipt['source_offset']),
+            int(receipt['residual_bytes']),int(receipt['next_frame']),int(receipt['next_ordinal']),
+            receipt['residual_sha256'])
+        return result,tail
     @classmethod
     def complete_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
         """Verify and finish one complete supplied container; no terminal V1 image."""
@@ -144,7 +175,6 @@ class ItchRecovery:
         # re-encode unchanged configuration/capture/generation under the target
         # code identity,then validate again. No unknown schema conversion or claim
         # of historical algorithm equivalence. The source payload stays unchanged.
-        from dataclasses import replace
         target=replace(admission,implementation_sha256=target_implementation_sha256);target.validate()
         source=cls.restore(payload,admission)
         raw=_checked(source._owner.rebind(target_implementation_sha256))

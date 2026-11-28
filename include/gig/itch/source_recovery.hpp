@@ -22,6 +22,22 @@ struct SourceRecoveryAdmission {
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
     std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+struct PartialBinaryTail {
+    Location next_location;
+    std::size_t source_offset;  // Relative to the supplied container, not the source's absolute cursor.
+    std::size_t residual_bytes;
+    Sha256Digest residual_sha256;
+};
+struct PartialBinaryRecovery {
+    SyntheticReconstructor owner;
+    PartialBinaryTail tail;
+};
+// Explicit partial BinaryFile admission. Commit only verified whole frames. The
+// unfinished frame remains with the caller at tail.source_offset and must be
+// completed before process() can advance the returned active owner.
+gig::Result<PartialBinaryRecovery> resume_partial_binary_source(std::span<const std::byte> checkpoint,
+    const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
+    std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 // Explicit complete-source profile. The durable input remains an accepted active
 // Version1 boundary; replay validates its committed prefix without applying it.
 // Require the BinaryFile zero-length terminator at exact EOF and,for gzip,the

@@ -15,6 +15,15 @@ itch::Sha256Digest digest(py::handle h){auto s=text(h,64);if(s.size()!=64)bad(Er
  for(std::size_t n=0;n<32;++n){auto a=nibble(s[n*2]),b=nibble(s[n*2+1]);if(a<0||b<0)bad(ErrorCode::malformed,"itch.digest");out[n]=static_cast<std::byte>(a*16+b);}return out;
 }
 itch::SourceIdentity capture_id(py::handle h){auto v=itch::SourceIdentity::make(text(h,128));if(!v)bad(ErrorCode::malformed,"itch.capture_identity");return *v.data;}
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+itch::SyntheticReconstructor partial_binary_owner(std::span<const std::byte> checkpoint,
+    const itch::DurableAdmission& admission,std::span<const std::byte> source,
+    const itch::SourceRecoveryAdmission& spec,itch::PartialBinaryTail& tail,TrackedResource& memory){
+ auto result=take(itch::resume_partial_binary_source(checkpoint,admission,source,spec,&memory));
+ tail=result.tail;
+ return std::move(result.owner);
+}
+#endif
 class ItchRecovery {
  TrackedResource memory_;
  itch::DurableAdmission admission_;
@@ -23,6 +32,11 @@ public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source,bool complete=false):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(complete?itch::resume_complete_source(b,a,s,source,&memory_):itch::resume_hot_source(b,a,s,source,&memory_))){}
+ ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission admission,std::size_t budget,
+              std::span<const std::byte> source,const itch::SourceRecoveryAdmission& spec,
+              itch::PartialBinaryTail& tail)
+ :memory_(std::pmr::get_default_resource(),budget),admission_(admission),
+  engine_(partial_binary_owner(b,admission,source,spec,tail,memory_)) {}
 #endif
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  ItchRecovery(std::span<const std::byte>b,const itch::CompletionCapsuleAdmission&a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a.checkpoint),engine_(take(itch::restore_completion_capsule(b,a,&memory_))){}
@@ -74,6 +88,30 @@ void bind_itch_recovery(py::module_&m){
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s));
+ });});
+ m.def("resume_itch_partial_binary_source",[](py::handle bytes,py::handle artifact,py::handle contract,
+       py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,
+       py::handle source_hash,py::handle frame,py::handle ordinal){return api([&](){
+  const auto limit=read<std::size_t>(budget);
+  if(limit==0||limit>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  const itch::DurableAdmission admission{digest(artifact),digest(contract),read<Digest>(code),
+      capture_id(capture),read<std::uint64_t>(generation)};
+  const auto offset=read<std::uint64_t>(frame);
+  if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  const itch::SourceRecoveryAdmission spec{itch::RecoveryContainer::binary_file,digest(source_hash),
+      admission.capture,admission.generation,
+      {itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  itch::PartialBinaryTail tail{};
+  auto owner=std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),admission,limit,
+      blob(source,32U*1024U*1024U),spec,tail);
+  const auto hash=itch::hex_digest(tail.residual_sha256);
+  py::dict receipt;
+  receipt["source_offset"]=write(tail.source_offset);
+  receipt["residual_bytes"]=write(tail.residual_bytes);
+  receipt["next_frame"]=write(tail.next_location.frame_offset.value());
+  receipt["next_ordinal"]=write(tail.next_location.ordinal.value());
+  receipt["residual_sha256"]=py::str(hash.data(),hash.size());
+  return py::make_tuple(py::cast(std::move(owner)),receipt);
  });});
  m.def("complete_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
   auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
