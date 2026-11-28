@@ -1,7 +1,10 @@
 """Read-only Historical Replay view of an explicitly pinned completed ITCH source."""
 import dataclasses
+import os
+from pathlib import Path
 from gig_microstructure.itch_recovery import ItchAdmission,ItchCompletionAdmission,ItchRecovery,ItchSourceAdmission
-from terminal.itch_product import ItchProduct,ItchProductError,digest,read_private
+from terminal.itch_product import ItchProduct,ItchProductError,digest,read_private,encoded
+from terminal.itch_recovery import publish_new
 from terminal.verification.artifacts import decode
 
 DATASET='itch-completed-v1'
@@ -72,3 +75,24 @@ def load_completed(capsule_path,admission_path,expected_admission_sha256):
     admission.validate()
     owner=ItchRecovery.restore_completion_capsule_file(capsule_path,admission)
     return ItchCompletedProduct(owner,admission)
+
+
+def publish_completed(capsule_path,capsule,admission,*,admission_path=None):
+    payload=dataclasses.asdict(admission)
+    raw=encoded(payload)
+    receipt={'capsule_sha256':admission.capsule_sha256,'admission_sha256':digest(raw),'admission':payload}
+    target=Path(capsule_path).absolute()
+    sidecar=Path(admission_path).absolute() if admission_path is not None else None
+    if sidecar is not None and (sidecar==target or sidecar.exists() or sidecar.is_symlink()):
+        raise ItchProductError('itch_completed_source_admission_output_exists')
+    capsule_file=ItchRecovery.persist_completion_capsule_file(os.fspath(target),capsule,admission)
+    receipt['capsule_file']=dataclasses.asdict(capsule_file)
+    receipt['admission_published']=False
+    if sidecar is not None:
+        try:publish_new(sidecar,raw)
+        except (ValueError,OSError,RuntimeError):
+            receipt['status']='CAPSULE_PUBLISHED_ADMISSION_OUTPUT_UNAVAILABLE'
+            return receipt
+        receipt['admission_published']=True
+    receipt['status']='COMPLETED_SOURCE_PUBLISHED'
+    return receipt

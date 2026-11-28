@@ -228,15 +228,13 @@ def _decompressed_prefix_digest(source,length):
     return sha.hexdigest()
 
 
-def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial=False):
-    product=ItchProduct.restore(raw,expected_sha256)
+def _admit_source_successor(product,source,source_admission):
     if product.position!=product.total:raise ItchProductError('itch_product_pending_continuation')
     if type(source) is not bytes or len(source)>MAX_BYTES or type(source_admission) is not ItchSourceAdmission:
         raise ItchProductError('itch_product_source_admission')
     source_admission.validate()
     if digest(source)!=source_admission.source_sha256:
         raise ItchProductError('itch_product_source_digest')
-    profile=PARTIAL_GZIP_PROFILE if source_admission.container=='single_gzip' else PARTIAL_BINARY_PROFILE
     if product.source_history and product.source_history[-1].get('source_profile') in PARTIAL_PROFILES:
         prior=product.source_history[-1]
         if prior['source_profile']==PARTIAL_GZIP_PROFILE:
@@ -251,6 +249,20 @@ def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial
             actual=digest(memoryview(source)[:length]) if len(source)>=length else None
         if actual!=expected:
             raise ItchProductError('itch_product_partial_source_prefix_changed')
+
+
+def complete_product_source(raw,expected_sha256,source,source_admission):
+    product=ItchProduct.restore(raw,expected_sha256)
+    _admit_source_successor(product,source,source_admission)
+    image=product.owner.checkpoint()
+    admission=dataclasses.replace(product.owner.admission,artifact_sha256=digest(image))
+    return ItchRecovery.create_completion_capsule(image,admission,source,source_admission)
+
+
+def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial=False):
+    product=ItchProduct.restore(raw,expected_sha256)
+    _admit_source_successor(product,source,source_admission)
+    profile=PARTIAL_GZIP_PROFILE if source_admission.container=='single_gzip' else PARTIAL_BINARY_PROFILE
     image=product.owner.checkpoint();a=dataclasses.replace(product.owner.admission,artifact_sha256=digest(image))
     if partial:
         resume=ItchRecovery.resume_partial_gzip_source if profile==PARTIAL_GZIP_PROFILE else ItchRecovery.resume_partial_binary_source
