@@ -322,15 +322,20 @@ class NativeSession:
         result['research_metrics']={'concentration':calculate(result)}
         return result
 
-    def simulation(self, algorithm, quantity='100', slices=5):
+    def simulation(self, algorithm, quantity='100', slices=5, side='buy'):
         if self.mode != 'SIMULATION':
             raise ControlError('MODE_RESTRICTION', 'simulation requires Simulation mode')
         if algorithm not in ('TWAP', 'VWAP', 'POV'):
             raise ControlError('INVALID_ALGORITHM', 'algorithm must be TWAP, VWAP or POV')
+        if type(side) is not str or side not in ('buy', 'sell'):
+            raise ControlError('INVALID_SIMULATION_SIDE', 'side must be buy or sell')
         quantity = exact_quantity(quantity)
         if type(slices) is not int or not 1 <= slices <= 16 or slices > int(quantity):
             raise ControlError('INVALID_SLICES', 'slices must be between 1 and 16 and no greater than quantity')
         config = plan_config(quantity, slices)
+        is_sell = side == 'sell'
+        if is_sell:
+            config.update(side='1', limit='9897', assumptions_id='authored-sell-limit-liquidity-v1')
         if algorithm == 'TWAP':
             schedule = gig.twap(config)
         elif algorithm == 'VWAP':
@@ -340,7 +345,8 @@ class NativeSession:
             observations = [{'available_at': str(i * 1_000_000_000 // slices), 'lots': str(int(quantity) * 10),
                              'source_artifact': 'authored-volume-v1', 'ordinal': str(i + 1)} for i in range(slices)]
             schedule = gig.pov(config, observations, '1', '10')
-        liquidity = [{'id': '1', 'side': '1', 'limit': '9903', 'quantity': quantity,
+        liquidity = [{'id': '1', 'side': '0' if is_sell else '1',
+                      'limit': '9899' if is_sell else '9903', 'quantity': quantity,
                       'tif': '0', 'post_only': False}]
         run = gig.simulate_plan(schedule, sim_config(), liquidity, '1000000005')
         simulation = run.simulation.to_dict()
@@ -354,13 +360,15 @@ class NativeSession:
                                'decision_benchmark': benchmark(9901, decision_time),
                                'fee_ticks_per_lot': {'numerator': '0', 'denominator': '1'}})
         costs = gig.transaction_costs({'run_id': 'terminal-tca-v1', 'simulation_run_id': 'terminal-simulation-v1',
-            'rules': rules(), 'side': '0', 'target': quantity, 'arrival': benchmark(9901),
+            'rules': rules(), 'side': config['side'], 'target': quantity, 'arrival': benchmark(9901),
             'terminal': benchmark(9901, '1000000005'), 'as_of': '1000000005'}, cost_fills).to_dict()
         result = {'schema_version': '1', 'origin': 'SIMULATED', 'algorithm': algorithm,
                   'plan': plan, 'simulation': simulation, 'costs': costs,
                   'provenance': {'category': 'SIMULATED', 'scenario': 'authored-fixed-liquidity-v1',
                     'seed': '1729', 'provider': 'authored', 'benchmark': 'authored-benchmark-v1',
                     'assumptions': 'No observed market data; zero fees; fixed supplied liquidity; execution-report delay 5 logical ns.'}}
+        if is_sell:
+            result['provenance']['scenario'] = 'authored-fixed-sell-liquidity-v1'
         canonical = json.dumps(result, sort_keys=True, separators=(',', ':'))
         result['sha256'] = hashlib.sha256(canonical.encode()).hexdigest()
         self.last_simulation = result
