@@ -167,7 +167,10 @@ class LiveIEX:
         pending=dict(self.pending) if self.pending else None
         candidate=(self.phase,dict(self.latest),list(self.seen),self.receipts,self.duplicates,self.last_data,list(self.history),self.out_of_order,self.evicted)
         phase,latest,seen,count,dups,last,history,late_count,evicted=candidate;out=[];received=self.clock();wall_ns=int(self.wall()*10**9)
-        for row in unpack(raw):
+        rows=unpack(raw)
+        import msgpack
+        frame_sha256=hashlib.sha256(raw).hexdigest()
+        for row in rows:
             t=row.get('T')
             if t=='error':
                 code=str(row['code'])if type(row.get('code'))is int else None
@@ -215,14 +218,17 @@ class LiveIEX:
                     value=row[name]
                     if value is not None and (type(value) is not list or len(value)>32 or any(type(v) is not str or not 1<=len(v)<=16 or any(ord(ch)<32 or ord(ch)>126 for ch in v) for v in value)):raise ProtocolError('invalid_conditions')
                     conditions[name]=value
-                import msgpack
+                # Keep accepted receipt identity unchanged. Deduplication uses
+                # deterministic map-key order so a provider reordering fields
+                # cannot repeat an otherwise identical trade or correction.
+                dedup_key=hashlib.sha256(msgpack.packb(dict(sorted(row.items())))).hexdigest()
+                if dedup_key in seen:dups+=1;continue
+                seen=(seen+[dedup_key])[-256:]
                 identity=hashlib.sha256(msgpack.packb(row)).hexdigest()
-                if identity in seen:dups+=1;continue
-                seen=(seen+[identity])[-256:]
                 if count>=2**53-2:raise ProtocolError('receipt_exhausted')
                 count+=1;last=received
                 previous=latest.get(ticker+':'+kind);late=bool(previous and ns<int(previous['source_timestamp_ns']));late_count+=int(late)
-                event={'source_session_id':self.source_session_id,'instrument_metadata':self.workspace.market_identity(ticker),'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':hashlib.sha256(raw).hexdigest(),'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
+                event={'source_session_id':self.source_session_id,'instrument_metadata':self.workspace.market_identity(ticker),'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':frame_sha256,'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
                 if not late:latest[ticker+':'+kind]=event
                 history.append(event)
                 if len(history)>256:history.pop(0);evicted+=1

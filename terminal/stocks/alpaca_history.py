@@ -93,6 +93,10 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
     lower = start+'T00:00:00Z'
     upper = str(datetime.date.fromisoformat(end)+datetime.timedelta(days=1))+'T00:00:00Z'
     lo, hi = int(timestamp_ns(lower)), int(timestamp_ns(upper))
+    from .historical_v2 import utc
+    # Alpaca receives inclusive bounds. The public receipt retains the
+    # half-open calendar interval used to admit normalized observations.
+    inclusive_end = utc(hi - 1)
     rows, receipts, seen_tokens, identities = [], [], set(), set()
     token = None
     prior = None
@@ -108,7 +112,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
         for page in range(max_pages):
             await asyncio.sleep(max(0,1.01-(workspace.clock()-workspace.last_request)))
             specific_permission()
-            params = {'symbols':symbol,'start':lower,'end':upper,'feed':'iex','limit':64,'sort':'asc'}
+            params = {'symbols':symbol,'start':lower,'end':inclusive_end,'feed':'iex','limit':64,'sort':'asc'}
             if kind == 'bars':
                 params.update(timeframe=timeframe,adjustment='raw')
             if token:
