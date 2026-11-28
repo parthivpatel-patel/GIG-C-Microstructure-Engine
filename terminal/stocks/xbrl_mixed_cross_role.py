@@ -46,8 +46,10 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False):
   key=(axis,source_role)
   if key in domain_cache:return domain_cache[key]
   roots=by.get((source_role,'dimension-domain',axis),[])
-  if len(roots)!=1:raise XBRLError('drs_mixed_cross_single_domain_required')
-  root=roots[0];members=set();completed=set();count=0
+  if cross_primary:
+   if not 1<=len(roots)<=16:raise XBRLError('drs_primary_dimension_domain_root_budget')
+  elif len(roots)!=1:raise XBRLError('drs_mixed_cross_single_domain_required')
+  members=set();completed=set();count=0
   def visit(current,member,path,depth):
    nonlocal count,domain_states
    if member in path:raise XBRLError('drs_mixed_cross_domain_cycle')
@@ -60,7 +62,8 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False):
    members.add(member)
    for child in by.get((current,'domain-member',member),[]):visit(next_role(child),child['to'],path|{member},depth+1)
    completed.add(state)
-  visit(next_role(root),root['to'],set(),0);default=defaults.get(axis)
+  for root in roots:visit(next_role(root),root['to'],set(),0)
+  default=defaults.get(axis)
   if default is not None and default not in members:raise XBRLError('drs_mixed_cross_default_outside_selected_domain')
   domain_cache[key]=(members,default);return domain_cache[key]
  def shape(a):
