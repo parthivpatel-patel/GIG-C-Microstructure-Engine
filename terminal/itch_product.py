@@ -8,7 +8,7 @@ import base64,dataclasses,hashlib,json,os,stat
 from fractions import Fraction
 from pathlib import Path
 import gig_microstructure as gig
-from gig_microstructure.itch_recovery import ItchRecovery,ItchAdmission,MAX_BYTES
+from gig_microstructure.itch_recovery import ItchRecovery,ItchAdmission,ItchSourceAdmission,MAX_BYTES
 from terminal.native_recovery import native_binary_identity
 from terminal.verification.artifacts import read_bytes,decode
 from terminal.session_recovery import _private_parent
