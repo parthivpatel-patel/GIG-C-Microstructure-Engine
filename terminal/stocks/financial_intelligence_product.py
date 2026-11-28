@@ -20,7 +20,7 @@ def company_source_accounting(workspace,symbol,as_of,source_inputs,role_bindings
 
 def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected_collection_sha256=None):
  if type(originals)is not dict or len(originals)>32:raise XBRLError('financial_intelligence_original_mapping')
- view=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view'];collection=workspace.xbrl_collections.get(symbol);identity=view['collection_sha256']
+ view=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view'];collection=workspace.visible_xbrl_collection(symbol);identity=view['collection_sha256']
  if expected_collection_sha256 is not None and expected_collection_sha256!=identity:raise XBRLError('financial_intelligence_stale_collection')
  result={'schema':'gig.backend.company_inline_source_audit.v1','instrument':copy.deepcopy(workspace.resolve(symbol)),'as_of':as_of,'cutoff_ns':view['cutoff_ns'],'form_family':form,'collection_sha256':identity,'status':'UNAVAILABLE','reason':view['reason'],'lineage':None,'admitted_parsed_sha256':None,'parsed_sha256':None,'dts_sha256':None,'receipt':None,'source_confidence':copy.deepcopy(CONFIDENCE),'read_only':True,'provider_requested':False}
  source=view['source_filing']

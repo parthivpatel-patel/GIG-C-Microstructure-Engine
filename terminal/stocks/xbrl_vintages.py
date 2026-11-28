@@ -13,7 +13,7 @@ def company_vintages(workspace,symbol,cutoffs,*,role=None,form='10-K',expected_c
  instants=[sec.acceptance_ns(at)for at in cutoffs]
  if any(b<=a for a,b in zip(instants,instants[1:])):raise XBRLError('vintage_cutoff_order')
  if role is not None and(type(role)is not str or not 1<=len(role)<=512)or form not in('10-K','10-Q'):raise XBRLError('vintage_query')
- identity=workspace.resolve(symbol);collection=workspace.xbrl_collections.get(symbol)
+ identity=workspace.resolve(symbol);collection=workspace.visible_xbrl_collection(symbol)
  collection_sha=digest({})if collection is None else collection._identity(collection._filings)
  if expected_collection_sha256 is not None and expected_collection_sha256!=collection_sha:raise XBRLError('vintage_stale_collection')
  entries=[];previous=None;size=0

@@ -19,7 +19,7 @@ def company_calculation_contract(workspace,symbol,as_of,dts_graphs,*,role=None,f
  if rounding_mode not in('round-to-nearest','truncation')or role is not None and(type(role)is not str or not 1<=len(role)<=512):raise XBRLError('calculation_product_query')
  # The existing selector is the authority for nanosecond cutoff/form/issuer and
  # same-time ambiguity. Presentation role is deliberately not calculation scope.
- selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2');view=selected['statement_view'];collection=workspace.xbrl_collections.get(symbol);identity=view['collection_sha256']
+ selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2');view=selected['statement_view'];collection=workspace.visible_xbrl_collection(symbol);identity=view['collection_sha256']
  if expected_collection_sha256 is not None and expected_collection_sha256!=identity:raise XBRLError('calculation_product_stale_collection')
  result={'schema':'gig.backend.company_calculations.v1','instrument':copy.deepcopy(selected['instrument']),'as_of':as_of,'cutoff_ns':view['cutoff_ns'],'form_family':form,'role':role,'rounding_mode':rounding_mode,'collection_sha256':identity,'status':'UNAVAILABLE','reason':view['reason'],'lineage':None,'report':None,'complete_statements':False,'read_only':True,'provider_requested':False,'policy':'Independent latest acceptance-qualified filing and exact supplied DTS;no cross-filing filling,accounting aliases or ambiguous network selection'}
  if dimensional_profile is not None:

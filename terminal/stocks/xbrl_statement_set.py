@@ -74,7 +74,7 @@ def company_statement_set(workspace,symbol,as_of,dts_graphs,role_bindings,*,form
  """
  _inputs(dts_graphs,role_bindings)
  selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view']
- collection=workspace.xbrl_collections.get(symbol);collection_sha=selected['collection_sha256']
+ collection=workspace.visible_xbrl_collection(symbol);collection_sha=selected['collection_sha256']
  if expected_collection_sha256 is not None and expected_collection_sha256!=collection_sha:raise XBRLError('statement_set_stale_collection')
  result={'schema':SCHEMA,'instrument':copy.deepcopy(workspace.resolve(symbol)),'as_of':as_of,'cutoff_ns':selected['cutoff_ns'],'form_family':form,'collection_sha256':collection_sha,'status':'UNAVAILABLE','reason':selected['reason'],'source_filing':copy.deepcopy(selected['source_filing']),'parsed_sha256':None,'dts_sha256':None,'role_bindings_sha256':None,'lineage':None,'statements':{},'read_only':True,'provider_requested':False,'complete_statements':False,'complete_history':False,'designation_policy':'Explicit caller role designations,not inferred statement classification or accounting equivalence','selection_policy':'One latest acceptance-qualified filing;all supplied amendment ancestors required;no cross-filing filling','limitations':['Presentation and declaration evidence establishes source structure,not complete GAAP statements','No inferred GAAP aliases,accounting equivalence,restatement status or missing financial values','Dimensioned/default-dependent/opaque contexts remain outside consolidated statement rows']}
  if selected['status']=='AMBIGUOUS':result['reason']='AMBIGUOUS_LATEST_FILING';return _finish(result)

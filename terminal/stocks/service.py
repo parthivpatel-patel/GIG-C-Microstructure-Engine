@@ -34,7 +34,7 @@ class StockWorkspace:
         from .alpaca_reference import AssetReference
         self.asset_reference=AssetReference(self)
         self.market_history_cache=OrderedDict();self.market_history_pending=0
-        self.xbrl_collections={};self.filing_ingestors={}
+        self.xbrl_collections={};self.filing_ingestors={};self._managed_sec_filings={}
     def create_sec_filing_ingestor(self,symbol,*,transport=None,enabled=False,allow_observed=False,permission_reference=None,taxonomy_urls=(),receipt_clock=None,sleep=None,random_source=None):
         from .sec_filing_ingest import FilingIngestor
         identity=self.resolve(symbol)
@@ -91,7 +91,22 @@ class StockWorkspace:
         coordinator=self.create_sec_filing_ingestor(symbol,transport=SECReadWire(),enabled=True,
             allow_observed=True,permission_reference=reference,taxonomy_urls=urls)
         coordinator.permission=permission
+        self._managed_sec_filings[symbol]=coordinator
         return coordinator
+
+    def visible_filing_ingestor(self,symbol):
+        coordinator=self.filing_ingestors.get(symbol)
+        if coordinator is not None and self._managed_sec_filings.get(symbol) is coordinator:
+            try:
+                if self._sec_filing_permission()!=coordinator.reference:return None
+            except AccessError:return None
+        return coordinator
+
+    def visible_xbrl_collection(self,symbol):
+        collection=self.xbrl_collections.get(symbol)
+        if collection is not None and collection.origin=='OBSERVED_OFFICIAL_RESPONSE':
+            if symbol in self._managed_sec_filings and self.visible_filing_ingestor(symbol) is None:return None
+        return collection
 
     def install_sec_filing_result(self,symbol):
         coordinator=self.filing_ingestors.get(symbol)

@@ -1,7 +1,7 @@
 """Explicit server-owned supplied-XBRL product adapter. No provider or file reads.
 
 Admission is an internal operation for an already authorized source collection;
-there is deliberately no HTTP mutation/upload route or automatic cache substitute.
+source acquisition is separately gated and no cache substitute is automatic.
 """
 import copy
 from .xbrl_collection import FilingCollection
@@ -23,7 +23,7 @@ def admit(workspace,symbol,collection):
 
 def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='legacy-v1'):
  if profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
- identity=workspace.resolve(symbol);collection=workspace.xbrl_collections.get(symbol)
+ identity=workspace.resolve(symbol);collection=workspace.visible_xbrl_collection(symbol)
  if collection is None:
   from .xbrl_statement_v2 import statement as v2_statement
   statement=(select if profile=='legacy-v1'else v2_statement)({},identity.get('cik'),'UNAVAILABLE',digest({}),as_of,role=role,form=form)
@@ -32,7 +32,7 @@ def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='leg
   if identity.get('cik')!=collection.cik:raise XBRLError('xbrl_product_identity_changed')
   statement=collection.statement_at(as_of,role=role,form=form,profile=profile)
  result={'schema':'gig.backend.company_xbrl.v1','instrument':identity,'data_origin':statement['origin'],'statement_view':statement,'read_only':True,'provider_requested':False,'limitations':['Supplied XBRL profile,not complete financial statements or history','No companyfacts replacement or source authentication inferred','Missing source receipt stays unknown;exact values are not browser recalculations']}
- coordinator=workspace.filing_ingestors.get(symbol)
+ coordinator=workspace.visible_filing_ingestor(symbol)
  if coordinator is not None:result['source_ingestion']={**coordinator.status(),'collection_sha256':coordinator.collection._identity(coordinator.collection._filings),'installed_collection_matches':collection is not None and coordinator.collection._identity(coordinator.collection._filings)==statement['collection_sha256']}
  if profile=='accuracy-extension-v2':
   result['schema']='gig.backend.company_xbrl.v2';result['profile']=profile
