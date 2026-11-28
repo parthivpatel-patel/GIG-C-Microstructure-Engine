@@ -84,7 +84,12 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
    for key in ('documents','concept_declarations','type_declarations'):
     if canonical(retained.get(key,{}))!=canonical(expected.get(key,{})):raise XBRLError('dimcalc_numeric_retained_graph_mismatch')
  if dts.get('structural_closure')is not True or dts.get('unresolved'):raise XBRLError('dimcalc_dependency_closure')
- if type(dts.get('unsupported_semantics'))is not list or any(u.get('feature')!='NON_PRESENTATION_LINK_NOT_INTERPRETED'for u in dts['unsupported_semantics']):raise XBRLError('dimcalc_unknown_source_semantics')
+ allowed_metadata={'NON_PRESENTATION_LINK_NOT_INTERPRETED'}
+ if numeric_profile==BOUNDS_PROFILE:
+  # Each participating declared type is resolved and checked below. The
+  # discovery-only marker is still reported by the original graph.
+  allowed_metadata.add('CUSTOM_TYPE_SCHEMA_VALIDATION_NOT_PERFORMED')
+ if type(dts.get('unsupported_semantics'))is not list or any(type(u)is not dict or u.get('feature')not in allowed_metadata for u in dts['unsupported_semantics']):raise XBRLError('dimcalc_unknown_source_semantics')
  documents=dts.get('documents')
  if type(documents)is not list or not 1<=len(documents)<=16:raise XBRLError('dimcalc_document_budget')
  docmap={}
