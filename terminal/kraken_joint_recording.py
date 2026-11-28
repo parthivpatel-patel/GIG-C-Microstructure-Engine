@@ -150,6 +150,10 @@ def validate_log(identity,manifest,body,*,clock=time.time,include_frames=False):
 def _derive_frames(c,token,rows,*,digest_receipts=False):
  from .l2_research import ResearchWindow
  research=ResearchWindow();frames=[];size=0;research_ready=False;last_exchange=None;last_book_receive=None;sources={}
+ last_book_clock=None;last_book_position=None
+ display_depth=10
+ def displayed_book(native):
+  return {side:native[side][:display_depth]for side in ('bids','asks')}
  for position in range(len(rows)+1):
   row=rows[position-1]if position else None;receipt=None;now=int(row['receive_monotonic_ns'])if row else 0
   if row:
@@ -161,17 +165,24 @@ def _derive_frames(c,token,rows,*,digest_receipts=False):
    sources[channel]={k:receipt[k]for k in('sha256','source_sha256','capture','local_generation','connection_id','receive_monotonic_ns','kind','origin')}
    if kind in('snapshot','update'):
     last_exchange=observed.get('source_timestamp_ns');last_book_receive=row['receive_unix_ns']
+    last_book_clock,last_book_position=now,position
   joint=c.view(now);eligible=joint['book_eligible'];native=joint.pop('book')
   if receipt and eligible:
-   observed=receipt['source_receipt'];kind=observed['kind']
-   if kind=='snapshot':research_ready=True
-   if research_ready and kind in('snapshot','update','trades'):
-    event={**observed,'historical_snapshot':observed.get('type')=='snapshot'}if kind=='trades'else observed
-    research.observe(event,native if kind!='trades'else None,now,position)
+   seeded=not research_ready
+   if seeded:
+    research.observe({'kind':'snapshot'},displayed_book(native),last_book_clock,last_book_position)
+    research_ready=True
+   if kind=='trades':
+    research.observe({**observed,'historical_snapshot':observed.get('type')=='snapshot'},None,now,position)
+   elif not seeded and kind in('snapshot','update'):
+    research.observe(observed,displayed_book(native),now,position)
+  analytics=research.view(now)if eligible and research_ready else{'status':'UNAVAILABLE','reason':'awaiting_jointly_eligible_book_snapshot'}
+  if 'methodology'in analytics:
+   analytics['methodology']['depth_scope']='top 10 displayed levels per side;native depth totals cover all admitted levels'
   frame={'native':native,'eligible':eligible,'joint_session':joint,'last_event':receipt,
    'source_timestamp_ns':last_exchange,'received_at_ns':last_book_receive,
    'replay_time_ns':str(now-int(rows[0]['receive_monotonic_ns']))if row else'0',
-   'research':research.view(now)if eligible and research_ready else{'status':'UNAVAILABLE','reason':'awaiting_jointly_eligible_book_snapshot'},
+   'research':analytics,
    'trades':copy.deepcopy(list(c._public.trades))if eligible else[],
    'source_receipts':copy.deepcopy(sources)}
   size+=len(canonical(frame))
