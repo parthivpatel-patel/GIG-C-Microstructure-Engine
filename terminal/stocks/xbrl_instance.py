@@ -351,10 +351,10 @@ def selected_financials(parsed):
   if version in (11,12,14,15):
    from .xbrl_typed_bounds import validate_typed_bound_result
    validate_typed_bound_result(parsed)
-  if version in (10,13,16,17,18,19):
+  if version in (10,13,16,17,18,19,20):
    from .xbrl_mixed_cross_role import validate_mixed_cross_role_result
    validate_mixed_cross_role_result(parsed,alternative=version>=13,cross_primary=version>=16,
-                                    open_cubes=version>=17,allow_unusable=version>=18,allow_negative_only=version>=19)
+                                    open_cubes=version>=17,allow_unusable=version>=18,allow_negative_only=version>=19,typed=version==20)
   if (version==9):
    from .xbrl_effective_cross_role import validate_effective_cross_role_result
    validate_effective_cross_role_result(parsed)

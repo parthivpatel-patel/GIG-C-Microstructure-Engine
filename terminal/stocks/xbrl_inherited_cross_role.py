@@ -15,9 +15,9 @@ MAX_DOMAIN_STATES=32768;MAX_PRIMARY_STATES=32768
 SHA=re.compile('[0-9a-f]{64}');QN=re.compile(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}')
 
 
-def _declaration(concepts,name,group):
+def _declaration(concepts,name,group,*,typed_axis=False):
  entry=concepts.get(name);decl=entry.get('declaration')if type(entry)is dict else None
- if type(name)is not str or not QN.fullmatch(name)or type(decl)is not dict or decl.get('substitution_group')!=group or decl.get('typed_domain_ref')is not None or group in(tag(D,'dimensionItem'),tag(D,'hypercubeItem'))and decl.get('abstract')is not True:raise XBRLError('drs_inherited_cross_declaration_unsupported')
+ if type(name)is not str or not QN.fullmatch(name)or type(decl)is not dict or decl.get('substitution_group')!=group or not typed_axis and decl.get('typed_domain_ref')is not None or group in(tag(D,'dimensionItem'),tag(D,'hypercubeItem'))and decl.get('abstract')is not True:raise XBRLError('drs_inherited_cross_declaration_unsupported')
  return decl
 
 

@@ -68,7 +68,7 @@ def _declarations(concepts,types,schemas):
   if len(entry['source_documents'])!=1 or schemas.get(entry['source_documents'][0])!=name.split('}',1)[0][1:]:raise XBRLError('drs_typed_bound_declaration_namespace_or_source')
 
 
-def _validate_receipts(parsed,p):
+def _validate_scalar_receipts(parsed,p):
  proof,concepts,types=_bound_sources(parsed);schemas=_validate_schema_sources(p['schema_sources'],proof['documents']);_declarations(concepts,types,schemas)
  docs={d['uri']:d for d in proof['documents']};type_kinds={};nodes=set()
  receipts=p['type_sources']
@@ -92,6 +92,11 @@ def _validate_receipts(parsed,p):
   if canonical(decl)!=canonical(r['declaration'])or decl['abstract']or decl['type']!=domain['type']or decl['substitution_group']is not None or decl['period_type']is not None or decl['balance']is not None or 'typed_domain_ref'in decl:raise XBRLError('drs_typed_bound_domain_receipt')
   domains[ref]=domain;nodes.add(key);ids.add((source,domain['schema_id']))
  if receipts!=sorted(receipts,key=lambda r:r['domain']['typed_domain_ref']):raise XBRLError('drs_typed_bound_domain_receipt')
+ return proof,concepts,types,type_kinds,domains,docs
+
+
+def _validate_receipts(parsed,p):
+ proof,concepts,types,type_kinds,domains,docs=_validate_scalar_receipts(parsed,p)
  nets=p['definition']
  if type(nets)is not list or len(nets)!=1:raise XBRLError('drs_typed_bound_definition_receipt')
  net=nets[0]
@@ -181,7 +186,7 @@ def _diagnostics(parsed,dts,type_kinds,domains,scalar_profile):
  issuer=parsed['source']['issuer_cik'];seen=set();selected=[];members={};used_domains=set();count=0
  if type(issuer)is not str or not re.fullmatch('[0-9]{10}',issuer)or int(issuer)==0:raise XBRLError('drs_typed_bound_source')
  if type(parsed['source'].get('source_sha256'))is not str or not SHA.fullmatch(parsed['source']['source_sha256']):raise XBRLError('drs_typed_bound_source')
- is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14','gig.sec.xbrl.dimensional_inline_set.v15')
+ is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14','gig.sec.xbrl.dimensional_inline_set.v15','gig.sec.xbrl.dimensional_inline_set.v20')
  original={**parsed,'schema':'gig.sec.xbrl.inline_set.v1'if is_set else'gig.sec.xbrl.instance.v1'}
  from .xbrl_instance import MAX_UNITS, _reported_numeric_value, _validate_fact_accuracy, selected_concepts
  units=parsed['units']
