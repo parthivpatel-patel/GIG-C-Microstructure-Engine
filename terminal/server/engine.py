@@ -33,6 +33,7 @@ class NativeSession:
     def _initialize(self):
         """Fresh process-local controls;restoration never opens feeds or resumes play."""
         self._itch_selection = None
+        self._itch_completion = None
         self.itch_session = None
         self.live_feed = None
         self.recorded_session = None
@@ -75,6 +76,16 @@ class NativeSession:
         candidate=ItchProduct.restore(raw,expected_sha256)
         self._itch_selection=(raw,expected_sha256);self.itch_session=candidate;self.recorded_session=None;self.replay=None;self.aggregate=None;self.adapter=None
         self.dataset='itch-checkpoint-v1';self.mode='HISTORICAL_REPLAY';self.playing=False;self.position=candidate.position;self.speed=candidate.speed
+
+    def select_itch_completion(self):
+        from terminal.itch_completed_product import DATASET
+        if self._itch_completion is None:
+            raise ControlError('DATASET_UNAVAILABLE','An independently pinned completed ITCH source is required')
+        if self.mode!='HISTORICAL_REPLAY' or self.live_feed is not None and getattr(self.live_feed,'task',None) is not None and not self.live_feed.task.done():
+            raise ControlError('ITCH_SESSION_CONTROL','Stop the active source before selecting a completed source')
+        candidate=self._itch_completion
+        self.itch_session=candidate;self.recorded_session=None;self.replay=None;self.aggregate=None;self.adapter=None
+        self.dataset=DATASET;self.playing=False;self.position=candidate.position;self.speed=candidate.speed
 
     def reset_aggregate(self):
         from terminal.providers.kraken import KrakenBookAdapter
@@ -162,6 +173,8 @@ class NativeSession:
             self.playing = False
             self.mode = value
         elif action == 'dataset':
+            if value=='itch-completed-v1':
+                self.select_itch_completion();return
             if value=='itch-checkpoint-v1' and self._itch_selection is not None:
                 self.select_itch_checkpoint(*self._itch_selection);return
             if value not in ('terminal-authored-v2', 'kraken-authored-profile-v1'):
@@ -254,7 +267,7 @@ class NativeSession:
                            'fixture_sha256': None if live else profile_sha if profile else FIXTURE_SHA256, 'generator_seed': None if live else '0',
                            'clock': None if live else 'simulation:authored-logical-clock', 'complete_initialization': not live and not profile, 'initialization_scope': 'authored subscribed L2 only' if profile else 'authored order-level empty boundary',
                            'recording_enabled': False, 'permission': 'unverified' if live else 'independently-authored'},
-            'capabilities': {'itch_checkpoint_available':self._itch_selection is not None,'live': False, 'native_replay': True, 'aggregate_l2': hasattr(gig._native, 'AggregateDepth'),
+            'capabilities': {'itch_checkpoint_available':self._itch_selection is not None,'itch_completion_available':self._itch_completion is not None,'live': False, 'native_replay': True, 'aggregate_l2': hasattr(gig._native, 'AggregateDepth'),
                              'simulation': True, 'twap': True, 'vwap': True, 'pov': True, 'tca': True,
                              'recording': False, 'observed_lobster': False, 'observed_itch': False},
             'engine': {'native': True, **gig.native_build_info()},
@@ -337,6 +350,7 @@ class NativeSession:
             {'id': 'lobster-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',
              'format': 'LOBSTER 6/20-column authored CSV', 'reason': 'Validated offline adapter; not loaded into browser replay.'},
             {'id':'itch-checkpoint-v1','origin':'HISTORICAL_SYNTHETIC','status':'EXPLICIT_PRIVATE_CONFIGURATION','format':'gig.itch.product_session/1','reason':'Owner-pinned authored full ITCH checkpoints;no browser file paths,provider activation or raw upload.'},
+            {'id':'itch-completed-v1','origin':'HISTORICAL_SYNTHETIC','status':'EXPLICIT_PRIVATE_CONFIGURATION','format':'GIGSCAP1','reason':'Independently pinned authored ITCH source at its read-only terminal boundary.'},
             {'id': 'itch-authored-fixtures', 'origin': 'HISTORICAL_SYNTHETIC', 'status': 'CLI_AVAILABLE',
              'format': 'BinaryFile/ITCH5.0', 'reason': 'Validated offline decoder/reconstruction;durable authored sessions supported;general raw browser import unavailable.'},
             {'id': 'lobster-aapl-private', 'origin': 'HISTORICAL_OBSERVED', 'status': 'BLOCKED_PERMISSION',

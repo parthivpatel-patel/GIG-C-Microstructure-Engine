@@ -181,8 +181,9 @@ class ItchProduct:
             if type(value)is not int or value not in(1,2,4,8):raise ItchProductError('itch_product_speed')
             self.speed=value
         else:raise ItchProductError('itch_product_control_restricted')
+    def _view_status(self):return self.owner.status()
     def view(self,session):
-        data=self.owner.book(self.selected_book,self.depth);s=self.owner.status();b=self.description['books'][self.selected_book];r=b['rules'];book=data['snapshot']['data']['book'];native=data['metrics']['data']['result']['metrics']
+        data=self.owner.book(self.selected_book,self.depth);s=self._view_status();b=self.description['books'][self.selected_book];r=b['rules'];book=data['snapshot']['data']['book'];native=data['metrics']['data']['result']['metrics']
         metrics={k:native[v]['value']for k,v in {'spread':'spread','midprice':'midpoint','microprice':'microprice','imbalance':'depth_imbalance','top_imbalance':'top_imbalance','bid_depth':'bid_depth','ask_depth':'ask_depth'}.items()}
         quantum=int(self.description['source_price_quantum']);lot=int(self.description['source_lot_size'])
         book={**book,**{side:[{**row,'price_ticks':str(int(row['price_ticks'])*quantum),'quantity':str(int(row['quantity'])*lot)}for row in book[side]]for side in('bids','asks')}}
@@ -292,10 +293,19 @@ def load(path,expected_sha256):return ItchProduct.restore(read_private(path),exp
 def select_product_session(environment):
     from terminal.server.engine import NativeSession
     kind=environment.get('GIG_TERMINAL_SESSION','authored')
-    if kind not in('authored','itch'):raise ItchProductError('itch_product_session_kind')
+    if kind not in('authored','itch','itch-completed'):raise ItchProductError('itch_product_session_kind')
+    live_keys=('GIG_ITCH_SESSION_PATH','GIG_ITCH_SESSION_SHA256')
+    completed_keys=('GIG_ITCH_COMPLETION_CAPSULE_PATH','GIG_ITCH_COMPLETION_ADMISSION_PATH','GIG_ITCH_COMPLETION_ADMISSION_SHA256')
+    if kind!='itch-completed' and any(environment.get(k)for k in completed_keys):raise ItchProductError('itch_product_explicit_selection_required')
+    if kind!='itch' and any(environment.get(k)for k in live_keys):raise ItchProductError('itch_product_explicit_selection_required')
     if kind=='authored':
-        if any(environment.get(k)for k in('GIG_ITCH_SESSION_PATH','GIG_ITCH_SESSION_SHA256')):raise ItchProductError('itch_product_explicit_selection_required')
         return NativeSession()
+    if kind=='itch-completed':
+        from terminal.itch_completed_product import load_completed
+        candidate=load_completed(*(environment.get(k)for k in completed_keys))
+        session=NativeSession.__new__(NativeSession);session._initialize();session._itch_completion=candidate
+        session.select_itch_completion()
+        return session
     path=environment.get('GIG_ITCH_SESSION_PATH');expected=environment.get('GIG_ITCH_SESSION_SHA256')
     if type(path)is not str or not path or type(expected)is not str or len(expected)!=64:raise ItchProductError('itch_product_pinned_configuration_required')
     return NativeSession.restore_checkpoint(read_private(path),expected,implementation_identity())
