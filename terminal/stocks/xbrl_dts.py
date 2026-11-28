@@ -32,12 +32,15 @@ def discover(raw,instance_uri,expected_instance_sha256,documents,*,origin='HISTO
  if type(raw)is not bytes or not 1<=len(raw)<=2*1024*1024 or hashlib.sha256(raw).hexdigest()!=expected_instance_sha256:raise XBRLError('dts_instance_digest_or_budget')
  if type(documents)is not list or len(documents)>16:raise XBRLError('dts_document_budget')
  supplied=_supplied_documents(documents)
- root=parse_xml(raw);requests=deque();edges=[];schema_roots=[]
+ root=parse_xml(raw);schema_roots=[]
+ if root.name!=tag(X,'xbrl'):raise XBRLError('dts_original_instance_root')
+ direct={id(node)for node in root.children}
  for node in walk(root):
   if node.name==tag(L,'schemaRef'):
+   if id(node)not in direct:raise XBRLError('dts_schema_reference_location')
    href=node.attrs.get(tag(XL,'href'))
    if node.attrs.get(tag(XL,'type'))!='simple'or type(href)is not str or not href:raise XBRLError('dts_schema_reference')
-   target=uri(urljoin(instance_uri,href));schema_roots.append(target);requests.append((target,0,None,'schema'))
+   target=uri(urljoin(instance_uri,href));schema_roots.append(target)
    if len(schema_roots)>32:raise XBRLError('dts_schema_root_budget')
  if not schema_roots:raise XBRLError('dts_schema_reference_required')
  return _discover_roots(schema_roots,supplied,{'schema':'gig.sec.xbrl.dts.v1','origin':origin,'instance_sha256':expected_instance_sha256,'permission_reference_sha256':hashlib.sha256(permission_reference.encode()).hexdigest()if type(permission_reference)is str else None},embedded_profile=embedded_profile)
@@ -94,12 +97,25 @@ def _discover_roots(schema_roots,supplied,metadata,*,embedded_profile=None):
      if len(embedded_records)>32:raise XBRLError('dts_embedded_budget')
      linkbases.append((key,container))
     if any(id(n)not in covered for n in markers):unsupported.append({'uri':key,'feature':'EMBEDDED_LINKBASE_UNSUPPORTED'})
+   direct={id(child)for child in node.children}
    for child in items:
     if child.name in(tag(XS,'redefine'),tag(XS,'override')):raise XBRLError('dts_schema_redefinition_unsupported')
     if child.name in(tag(XS,'import'),tag(XS,'include')):
-     path=child.attrs.get('schemaLocation');expected=target if child.name==tag(XS,'include')else child.attrs.get('namespace')
-     if path is None:unresolved.append({'namespace':expected,'reason':'IMPORT_LOCATION_NOT_DECLARED'});continue
-     destination=uri(urljoin(key,path));edges.append({'from':key,'to':destination,'kind':'include'if child.name==tag(XS,'include')else'import','namespace':expected});requests.append((destination,depth+1,expected,'schema'))
+     if id(child)not in direct:raise XBRLError('dts_schema_dependency_location')
+     include=child.name==tag(XS,'include')
+     allowed={'id','schemaLocation'}if include else{'id','schemaLocation','namespace'}
+     if set(child.attrs)-allowed or child.text().strip()or any(n.name!=tag(XS,'annotation')for n in child.children)or len(child.children)>1:
+      raise XBRLError('dts_schema_dependency_structure')
+     path=child.attrs.get('schemaLocation');expected=target if include else child.attrs.get('namespace')
+     if not include and expected==target:raise XBRLError('dts_import_same_namespace')
+     if path is None:
+      if include:raise XBRLError('dts_include_location_required')
+      unresolved.append({'namespace':expected,'reason':'IMPORT_LOCATION_NOT_DECLARED'});continue
+     if not path:raise XBRLError('dts_schema_dependency_location')
+     if not include and expected is None:
+      unresolved.append({'uri':uri(urljoin(key,path)),'reason':'NO_NAMESPACE_IMPORT_UNSUPPORTED'});continue
+     if not 1<=len(expected)<=512:raise XBRLError('dts_schema_dependency_namespace')
+     destination=uri(urljoin(key,path));edges.append({'from':key,'to':destination,'kind':'include'if include else'import','namespace':expected});requests.append((destination,depth+1,expected,'schema'))
     if child.name==tag(L,'linkbaseRef'):
      href=child.attrs.get(tag(XL,'href'))
      if child.attrs.get(tag(XL,'type'))!='simple'or type(href)is not str or not href:raise XBRLError('dts_linkbase_reference')
