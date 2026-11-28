@@ -54,7 +54,7 @@ def _endpoint_sources(arcs,concepts,schemas):
 def _project(a):return {k:a[k]for k in BASE_FIELDS}
 
 
-def _effective(arcs,*,negative=False):
+def _effective(arcs,*,negative=False,allow_unusable=False):
  assignment_kinds=('all','notAll')if negative else('all',)
  if type(arcs)is not list or not 1<=len(arcs)<=4096:raise XBRLError('drs_effective_arc_budget')
  groups={};xpath_orders={};label_pairs=set();labels={}
@@ -73,7 +73,7 @@ def _effective(arcs,*,negative=False):
   attrs=a['dimensional_attributes']
   if type(attrs)is not dict or set(attrs)-{tag(D,k)for k in('closed','contextElement','targetRole','usable')}or any(type(v)is not str for v in attrs.values()):raise XBRLError('drs_effective_attribute_contract')
   closed=attrs.get(tag(D,'closed'),'false');usable=attrs.get(tag(D,'usable'),'true')
-  if closed not in('true','false','0','1')or usable not in('true','1')or a['closed']!=(closed in('true','1'))or a['context_element']!=attrs.get(tag(D,'contextElement'))or a['target_role']!=attrs.get(tag(D,'targetRole')):raise XBRLError('drs_effective_attribute_binding')
+  if closed not in('true','false','0','1')or usable not in(('true','1','false','0')if allow_unusable else('true','1'))or a['closed']!=(closed in('true','1'))or a['context_element']!=attrs.get(tag(D,'contextElement'))or a['target_role']!=attrs.get(tag(D,'targetRole')):raise XBRLError('drs_effective_attribute_binding')
   if a['kind']not in assignment_kinds and any(tag(D,k)in attrs for k in('closed','contextElement'))or a['kind']not in('dimension-domain','domain-member')and tag(D,'usable')in attrs:raise XBRLError('drs_effective_attribute_scope')
   # order is a declared default on arcType. Dimensional attributes are validated
   # through its lax wildcard: absent global attributes are not injected into the
@@ -92,7 +92,11 @@ def _effective(arcs,*,negative=False):
   priority=max(arcs[i]['priority']for i in indexes);winners=[i for i in indexes if arcs[i]['priority']==priority]
   prohibited=any(arcs[i]['use']=='prohibited'for i in winners);chosen=None if prohibited else winners[0]
   resolution.append({'equivalence_sha256':digest(key.decode()),'arc_indexes':indexes,'max_priority':priority,'effective_arc_index':chosen,'status':'PROHIBITED_AT_MAX_PRIORITY'if prohibited else'EFFECTIVE'})
-  if chosen is not None:effective.append(_project(arcs[chosen]))
+  if chosen is not None:
+   source=arcs[chosen];projected=_project(source)
+   if allow_unusable and source['kind'] in ('dimension-domain','domain-member'):
+    projected['usable']=source['dimensional_attributes'].get(tag(D,'usable'),'true')in('true','1')
+   effective.append(projected)
  return effective,resolution
 
 

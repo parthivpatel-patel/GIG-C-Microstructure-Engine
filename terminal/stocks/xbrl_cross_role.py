@@ -37,7 +37,7 @@ def _originals(parsed,dts,documents,allow_observed,instance_uri):
  if dts.get('embedded_linkbase_profile')is not None or any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in dts['unsupported_semantics']):raise XBRLError('drs_cross_embedded_unsupported')
  return _typed_original_graph(parsed,dts,documents,instance_uri)
 
-def _read(parsed,dts,supplied,*,effective=False,negative=False):
+def _read(parsed,dts,supplied,*,effective=False,negative=False,allow_unusable=False):
  assignment_kinds=('all','notAll')if negative else('all',);kinds_allowed=KINDS|{'notAll'}if negative else KINDS
  roots={key:parse_xml(doc['raw'])for key,doc in sorted(supplied.items())};kinds={d['uri']:d['kind']for d in dts['documents']};locators={};role_types={};role_uris=set();dimensional_arcrole_types={}
  for key,root in roots.items():
@@ -132,7 +132,7 @@ def _read(parsed,dts,supplied,*,effective=False,negative=False):
     if node.name!=tag(L,'definitionArc')or node.children or node.text().strip()or a.get(tag(XL,'type'))!='arc'or a.get(tag(XL,'from'))not in labels or a.get(tag(XL,'to'))not in labels:raise XBRLError('drs_cross_arc_structure_or_unsupported')
     if arcrole in OTHER_DEFINITION_ARCROLES:continue
     if kind not in kinds_allowed or not arcrole.startswith(ARC):raise XBRLError('drs_cross_arc_structure_or_unsupported')
-    if set(a)-allowed or a.get(tag(D,'usable'),'true')not in('true','1'):raise XBRLError('drs_cross_precedence_or_unusable_unsupported')
+    if set(a)-allowed or a.get(tag(D,'usable'),'true')not in(('true','1','false','0')if allow_unusable else('true','1')):raise XBRLError('drs_cross_precedence_or_unusable_unsupported')
     if effective:
      if not re.fullmatch('[+-]?[0-9]{1,6}',a.get('priority','0'))or a.get('use','optional')not in('optional','prohibited'):raise XBRLError('drs_effective_priority_or_use')
     elif a.get('priority','0')!='0'or a.get('use','optional')!='optional':raise XBRLError('drs_cross_precedence_or_unusable_unsupported')

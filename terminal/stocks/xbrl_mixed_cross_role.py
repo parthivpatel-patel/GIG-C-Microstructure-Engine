@@ -17,11 +17,13 @@ PRIMARY_TARGET_ROLE_PROFILE='ORIGINAL_DTS_PRIMARY_TARGET_ROLE_EXPLICIT_V16'
 PRIMARY_TARGET_ROLE_SCOPE='Original-DTS closed explicit alternatives with bounded consecutive primary domain-member targetRole traversal;effective positive/negative conjunctions and at least one valid applicable base;no typed,open,negative-only or ambiguous primary role paths'
 OPEN_CROSS_ROLE_PROFILE='ORIGINAL_DTS_OPEN_EXPLICIT_V17'
 OPEN_CROSS_ROLE_SCOPE='Original-DTS effective open and closed explicit base alternatives;consecutive primary and dimensional targetRole paths;reported extras require a supplied usable domain;each applicable role has a positive assignment;no typed,negative-only or source-fact inference'
+USABLE_DOMAIN_PROFILE='ORIGINAL_DTS_EXPLICIT_DOMAIN_USABILITY_V18'
+USABLE_DOMAIN_SCOPE=OPEN_CROSS_ROLE_SCOPE+';unusable members are excluded while descendant paths stay traversable;conflicting usability or unusable primary paths reject'
 MAX_OUTPUT=8*1024*1024;MAX_ASSIGNMENTS=64;MAX_FACT_ASSIGNMENTS=16
 MAX_DOMAIN_STATES=32768;MAX_PRIMARY_STATES=32768
 
 
-def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_cubes=False):
+def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_cubes=False,allow_unusable=False):
  """Evaluate the supported conjunction without changing any reported source fact."""
  if type(arcs)is not list or not 1<=len(arcs)<=4096:raise XBRLError('drs_mixed_cross_arc_budget')
  by={};seen=set();defaults={};parents={}
@@ -47,7 +49,7 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_c
  def domain(axis,source_role,*,require_default_in_domain=True):
   key=(axis,source_role)
   def checked(result):
-   members,default=result
+   members,default,_=result
    if require_default_in_domain and default is not None and default not in members:
     raise XBRLError('drs_mixed_cross_default_outside_selected_domain')
    return result
@@ -56,29 +58,33 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_c
   if cross_primary:
    if not 1<=len(roots)<=16:raise XBRLError('drs_primary_dimension_domain_root_budget')
   elif len(roots)!=1:raise XBRLError('drs_mixed_cross_single_domain_required')
-  members=set();completed=set();count=0
-  def visit(current,member,path,depth):
+  members=set();completed=set();count=0;usability={}
+  def visit(current,member,path,depth,usable):
    nonlocal count,domain_states
    if member in path:raise XBRLError('drs_mixed_cross_domain_cycle')
    if depth>=32:raise XBRLError('drs_mixed_cross_domain_depth')
    state=(current,member)
+   prior=usability.setdefault(member,usable)
+   if prior!=usable:raise XBRLError('drs_domain_member_usability_ambiguous')
    if state in completed:return
    count+=1;domain_states+=1
    if domain_states>MAX_DOMAIN_STATES:raise XBRLError('drs_mixed_cross_total_domain_state_budget')
    if count>2048:raise XBRLError('drs_mixed_cross_member_budget')
    members.add(member)
-   for child in by.get((current,'domain-member',member),[]):visit(next_role(child),child['to'],path|{member},depth+1)
+   for child in by.get((current,'domain-member',member),[]):
+    visit(next_role(child),child['to'],path|{member},depth+1,child.get('usable',True))
    completed.add(state)
-  for root in roots:visit(next_role(root),root['to'],set(),0)
+  for root in roots:visit(next_role(root),root['to'],set(),0,root.get('usable',True))
   default=defaults.get(axis)
-  domain_cache[key]=(members,default);return checked(domain_cache[key])
+  usable_members={member for member in members if usability[member]}
+  domain_cache[key]=(usable_members,default,members);return checked(domain_cache[key])
  def shape(a):
   key=(a['from'],a['to'],next_role(a))
   if key in shape_cache:return shape_cache[key]
   axes=by.get((next_role(a),'hypercube-dimension',a['to']),[])
   if not 1<=len(axes)<=32 or len({v['to']for v in axes})!=len(axes):raise XBRLError('drs_mixed_cross_dimension_budget_or_missing')
   result={axis['to']:domain(axis['to'],next_role(axis))for axis in axes}
-  if any(a['from']in members for members,_ in result.values()):raise XBRLError('drs_mixed_cross_primary_item_polymorphism')
+  if any(a['from']in members for _,_,members in result.values()):raise XBRLError('drs_mixed_cross_primary_item_polymorphism')
   shape_cache[key]=result;return result
  # Every supplied assignment's supported cube shape must be well formed, even
  # when a particular selected fact does not inherit that assignment.
@@ -130,6 +136,7 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_c
    outgoing=by.get((role,'domain-member',concept),[])
    edges[concept]=set()
    for relation in outgoing:
+    if relation.get('usable')is False:raise XBRLError('drs_unusable_primary_inheritance_unsupported')
     child=relation['to']
     edges[concept].add(child)
     incoming.setdefault(child,set()).add(concept)
@@ -182,13 +189,13 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_c
    domains=shape(a);all_axes.update(domains)
    if len(all_axes)>32:raise XBRLError('drs_mixed_cross_combined_dimension_budget')
    extras=sorted(set(reported)-set(domains))
-   if any(fact['concept']in members for members,_ in domains.values()):raise XBRLError('drs_mixed_cross_primary_item_polymorphism')
+   if any(fact['concept']in members for _,_,members in domains.values()):raise XBRLError('drs_mixed_cross_primary_item_polymorphism')
    if open_cubes and not a['closed']:
     for axis in extras:
      if not any(reported[axis] in domain(axis,r,require_default_in_domain=False)[0]for r in sorted(extra_roles.get(axis,()))):
       raise XBRLError('drs_open_extra_dimension_without_supplied_domain')
    used={};failure='drs_mixed_cross_closed_extra_dimension'if extras and a['closed']else None
-   for axis,(members,default)in sorted(domains.items()):
+   for axis,(members,default,_)in sorted(domains.items()):
     if axis in reported:
      if reported[axis]not in members and failure is None:failure='drs_mixed_cross_member_outside_domain'
     elif default is not None:used[axis]=default
@@ -255,14 +262,15 @@ def _records(parsed,concepts,arcs,*,alternative=False,cross_primary=False,open_c
  return records
 
 
-def corroborate_mixed_cross_role(parsed,dts,documents,allow_observed,instance_uri,*,alternative=False,cross_primary=False,open_cubes=False):
+def corroborate_mixed_cross_role(parsed,dts,documents,allow_observed,instance_uri,*,alternative=False,cross_primary=False,open_cubes=False,allow_unusable=False):
  supplied=_originals(parsed,dts,documents,allow_observed,instance_uri)
  schema_sources=_schema_sources(supplied,dts['documents']);schemas=_validate_schema_sources(schema_sources,dts['documents'])
- arcs,refs=_read(parsed,dts,supplied,effective=True,negative=True);_endpoint_sources(arcs,dts['concepts'],schemas);effective,resolution=_effective(arcs,negative=True)
- records=_records(parsed,dts['concepts'],effective,alternative=alternative,cross_primary=cross_primary,open_cubes=open_cubes)
+ arcs,refs=_read(parsed,dts,supplied,effective=True,negative=True,allow_unusable=allow_unusable);_endpoint_sources(arcs,dts['concepts'],schemas);effective,resolution=_effective(arcs,negative=True,allow_unusable=allow_unusable)
+ records=_records(parsed,dts['concepts'],effective,alternative=alternative,cross_primary=cross_primary,open_cubes=open_cubes,allow_unusable=allow_unusable)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256')
  form='inline_set' if parsed['schema']=='gig.sec.xbrl.inline_set.v1' else 'instance'
- if open_cubes:version,profile,scope=17,OPEN_CROSS_ROLE_PROFILE,OPEN_CROSS_ROLE_SCOPE
+ if allow_unusable:version,profile,scope=18,USABLE_DOMAIN_PROFILE,USABLE_DOMAIN_SCOPE
+ elif open_cubes:version,profile,scope=17,OPEN_CROSS_ROLE_PROFILE,OPEN_CROSS_ROLE_SCOPE
  elif cross_primary:version,profile,scope=16,PRIMARY_TARGET_ROLE_PROFILE,PRIMARY_TARGET_ROLE_SCOPE
  elif alternative:version,profile,scope=13,ALTERNATIVE_PROFILE,ALTERNATIVE_SCOPE
  else:version,profile,scope=10,PROFILE,SCOPE
@@ -272,19 +280,20 @@ def corroborate_mixed_cross_role(parsed,dts,documents,allow_observed,instance_ur
  result['canonical_sha256']=digest(result);return result
 
 
-def validate_mixed_cross_role_result(parsed,*,alternative=False,cross_primary=False,open_cubes=False):
+def validate_mixed_cross_role_result(parsed,*,alternative=False,cross_primary=False,open_cubes=False,allow_unusable=False):
  fail=lambda:XBRLError('xbrl_dimensional_result_contract')
  try:
   p=parsed['dts_corroboration']['dimensional_validation']
-  if open_cubes:profile,scope=OPEN_CROSS_ROLE_PROFILE,OPEN_CROSS_ROLE_SCOPE
+  if allow_unusable:profile,scope=USABLE_DOMAIN_PROFILE,USABLE_DOMAIN_SCOPE
+  elif open_cubes:profile,scope=OPEN_CROSS_ROLE_PROFILE,OPEN_CROSS_ROLE_SCOPE
   elif cross_primary:profile,scope=PRIMARY_TARGET_ROLE_PROFILE,PRIMARY_TARGET_ROLE_SCOPE
   elif alternative:profile,scope=ALTERNATIVE_PROFILE,ALTERNATIVE_SCOPE
   else:profile,scope=PROFILE,SCOPE
   if type(p)is not dict or set(p)!={'profile','facts','relationships','role_references','schema_sources','effective_relationships','resolution','complete_drs_validation','scope'}or p['profile']!=profile or p['scope']!=scope or p['complete_drs_validation']is not False or len(canonical(parsed))>MAX_OUTPUT:raise fail()
-  effective,resolution=_effective(p['relationships'],negative=True)
+  effective,resolution=_effective(p['relationships'],negative=True,allow_unusable=allow_unusable)
   receipts={'relationships':[_project(a)for a in p['relationships']],'role_references':p['role_references']}
   concepts,_=_validate_receipts(parsed,receipts,negative=True)
   schemas=_validate_schema_sources(p['schema_sources'],parsed['dts_corroboration']['documents']);_endpoint_sources(p['relationships'],concepts,schemas)
   if p['relationships']!=sorted(p['relationships'],key=lambda a:(a['source_uri'],a['arc_node_ordinal'])):raise fail()
-  if canonical(effective)!=canonical(p['effective_relationships'])or canonical(resolution)!=canonical(p['resolution'])or canonical(_records(parsed,concepts,effective,alternative=alternative,cross_primary=cross_primary,open_cubes=open_cubes))!=canonical(p['facts']):raise fail()
+  if canonical(effective)!=canonical(p['effective_relationships'])or canonical(resolution)!=canonical(p['resolution'])or canonical(_records(parsed,concepts,effective,alternative=alternative,cross_primary=cross_primary,open_cubes=open_cubes,allow_unusable=allow_unusable))!=canonical(p['facts']):raise fail()
  except (XBRLError,KeyError,TypeError,ValueError,OverflowError):raise fail()from None
