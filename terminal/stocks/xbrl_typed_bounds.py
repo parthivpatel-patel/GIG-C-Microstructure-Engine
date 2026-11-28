@@ -17,10 +17,13 @@ QNAME_NIL_DRS_PROFILE='DIRECT_CLOSED_TYPED_QNAME_NIL_HYPERCUBE_V12'
 QNAME_NIL_SCOPE=SCOPE+';direct xs:QName expansion and declared nillable scalar elements'
 TEMPORAL_DRS_PROFILE='DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'
 TEMPORAL_SCOPE=QNAME_NIL_SCOPE+';bounded direct XML Schema date,time,dateTime and whitespace-derived string lexicals'
+OPEN_DRS_PROFILE='DIRECT_OPEN_TYPED_HYPERCUBE_V15'
+OPEN_SCOPE='One original-DTS direct positive open typed+explicit hypercube;required axes and reported extra dimensions revalidated against supplied declarations and domains;no dimension promotion,typed equality,negative,inheritance or source authentication'
 SCALAR_BY_DRS_PROFILE={
  PROFILE:(SCALAR_PROFILE,11,SCOPE),
  QNAME_NIL_DRS_PROFILE:(QNAME_NIL_PROFILE,12,QNAME_NIL_SCOPE),
  TEMPORAL_DRS_PROFILE:(TEMPORAL_PROFILE,14,TEMPORAL_SCOPE),
+ OPEN_DRS_PROFILE:(TEMPORAL_PROFILE,15,OPEN_SCOPE),
 }
 MAX_OUTPUT=8*1024*1024
 D='http://xbrl.org/2005/xbrldt'
@@ -178,7 +181,7 @@ def _diagnostics(parsed,dts,type_kinds,domains,scalar_profile):
  issuer=parsed['source']['issuer_cik'];seen=set();selected=[];members={};used_domains=set();count=0
  if type(issuer)is not str or not re.fullmatch('[0-9]{10}',issuer)or int(issuer)==0:raise XBRLError('drs_typed_bound_source')
  if type(parsed['source'].get('source_sha256'))is not str or not SHA.fullmatch(parsed['source']['source_sha256']):raise XBRLError('drs_typed_bound_source')
- is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14')
+ is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14','gig.sec.xbrl.dimensional_inline_set.v15')
  original={**parsed,'schema':'gig.sec.xbrl.inline_set.v1'if is_set else'gig.sec.xbrl.instance.v1'}
  from .xbrl_instance import MAX_UNITS, _reported_numeric_value, _validate_fact_accuracy, selected_concepts
  units=parsed['units']
@@ -254,7 +257,7 @@ def corroborate_typed_bounds(parsed,dts,documents,allow_observed,instance_uri,*,
  p['source_declarations_sha256']=_fingerprint(parsed['dts_corroboration'],p)
  graph,kinds,domain_map,docs=_validate_receipts(parsed,p)
  checked=_diagnostics(parsed,graph,kinds,domain_map,scalar_profile)
- p['facts']=_typed_records(parsed,graph,checked,docs)
+ p['facts']=_typed_records(parsed,graph,checked,docs,open_cube=profile==OPEN_DRS_PROFILE)
  result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']=f'gig.sec.xbrl.dimensional_inline_set.v{version}' if parsed['schema']=='gig.sec.xbrl.inline_set.v1' else f'gig.sec.xbrl.dimensional_instance.v{version}';result['dts_corroboration']['dimensional_validation']=p
  result['canonical_sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('drs_typed_bound_output_budget')
@@ -266,11 +269,11 @@ def validate_typed_bound_result(parsed):
  from .xbrl_dimensions import _typed_records
  try:
   version=parsed['schema'].rsplit('.',1)[1]
-  profiles={'v11':PROFILE,'v12':QNAME_NIL_DRS_PROFILE,'v14':TEMPORAL_DRS_PROFILE}
+  profiles={'v11':PROFILE,'v12':QNAME_NIL_DRS_PROFILE,'v14':TEMPORAL_DRS_PROFILE,'v15':OPEN_DRS_PROFILE}
   profile=profiles[version]
   scalar_profile,_,scope=SCALAR_BY_DRS_PROFILE[profile]
   p=parsed['dts_corroboration']['dimensional_validation']
   if type(p)is not dict or set(p)!={'profile','facts','schema_sources','type_sources','domain_sources','definition','complete_drs_validation','scope','source_declarations_sha256'}or p['profile']!=profile or p['scope']!=scope or p['complete_drs_validation']is not False or type(p['facts'])is not list or len(p['facts'])>MAX_FACTS or len(canonical(parsed))>MAX_OUTPUT:raise XBRLError('drs_typed_bound_result_contract')
   graph,kinds,domains,docs=_validate_receipts(parsed,p);diagnostics=_diagnostics(parsed,graph,kinds,domains,scalar_profile)
-  if canonical(_typed_records(parsed,graph,diagnostics,docs))!=canonical(p['facts']):raise XBRLError('drs_typed_bound_result_contract')
+  if canonical(_typed_records(parsed,graph,diagnostics,docs,open_cube=profile==OPEN_DRS_PROFILE))!=canonical(p['facts']):raise XBRLError('drs_typed_bound_result_contract')
  except (XBRLError,KeyError,TypeError,ValueError,ArithmeticError,AttributeError):raise XBRLError('xbrl_dimensional_result_contract')from None

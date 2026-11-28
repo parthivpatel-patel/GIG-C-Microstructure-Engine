@@ -18,7 +18,8 @@ TYPED_BOUND_PROFILE='DIRECT_CLOSED_TYPED_BOUND_HYPERCUBE_V11'
 TYPED_QNAME_NIL_PROFILE='DIRECT_CLOSED_TYPED_QNAME_NIL_HYPERCUBE_V12'
 ALTERNATIVE_CROSS_ROLE_PROFILE='ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13'
 TYPED_TEMPORAL_PROFILE='DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'
-PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE,TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE,ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE)
+TYPED_OPEN_PROFILE='DIRECT_OPEN_TYPED_HYPERCUBE_V15'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE,TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE,ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -59,7 +60,7 @@ def networks(linkbases,locators,*,node_provenance=False):
 
 def corroborate(parsed,dts,*,profile=PROFILE,documents=None,allow_observed=False,instance_uri=None):
  if profile not in PROFILES:raise XBRLError('drs_profile_unsupported')
- if profile in (TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE,TYPED_TEMPORAL_PROFILE):
+ if profile in (TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE,TYPED_TEMPORAL_PROFILE,TYPED_OPEN_PROFILE):
   from .xbrl_typed_bounds import corroborate_typed_bounds
   return corroborate_typed_bounds(parsed,dts,documents,allow_observed,instance_uri,profile=profile)
  if profile in(MIXED_CROSS_ROLE_PROFILE,ALTERNATIVE_CROSS_ROLE_PROFILE):
@@ -245,6 +246,9 @@ def corroborate(parsed,dts,*,profile=PROFILE,documents=None,allow_observed=False
    assignment=assignments[0];cube,defaults,extras,_=validate_assignment(fact,assignment)
    record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'hypercube':cube,'context_element':assignment['context_element'],'used_defaults':defaults,'status':'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'}
    if profile==OPEN_PROFILE:record.update(closed=assignment['closed'],extra_dimensions=sorted(extras))
+  if open_cube:
+   record.update(status='VALIDATED_RESTRICTED_OPEN_TYPED_CONTEXT',closed=False,extra_dimensions=sorted(extras))
+   typed.sort(key=lambda member:member['dimension'])
   size+=len(canonical(record))+1
   if size>8*1024*1024:raise XBRLError('drs_output_budget')
   records.append(record)
@@ -292,14 +296,15 @@ def _corroborate_typed(parsed,dts,documents,allow_observed,instance_uri):
  if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
  result['canonical_sha256']=digest(result);return result
 
-def _typed_records(parsed,dts,diagnostics,supplied):
- """Evaluate the preserved direct positive closed typed+explicit cube subset."""
+def _typed_records(parsed,dts,diagnostics,supplied,*,open_cube=False):
+ """Evaluate one direct positive typed and explicit dimensional assignment."""
  nets=dts.get('definition',[])
  if len(nets)!=1 or not nets[0]['usable_for_restricted_profile']or any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in dts['unsupported_semantics']):raise XBRLError('drs_profile_unsupported')
  arcs=nets[0]['arcs'];concepts=dts['concepts'];adj={};domains={}
  if any(a['kind']=='notAll'for a in arcs):raise XBRLError('drs_not_all_unsupported')
  assignments=[a for a in arcs if a['kind']=='all']
- if len(assignments)!=1 or not assignments[0]['closed']:raise XBRLError('drs_direct_closed_assignment_required')
+ assignment_error='drs_direct_open_assignment_required' if open_cube else 'drs_direct_closed_assignment_required'
+ if len(assignments)!=1 or assignments[0]['closed']==open_cube:raise XBRLError(assignment_error)
  assignment=assignments[0];cube=assignment['to']
  for arc in arcs:adj.setdefault((arc['kind'],arc['from']),set()).add(arc['to'])
  def targets(kind,name):return sorted(adj.get((kind,name),()))
@@ -345,21 +350,26 @@ def _typed_records(parsed,dts,diagnostics,supplied):
  checked={row['context_id']:{m['dimension']:m for m in row['typed_members']}for row in diagnostics['contexts']};records=[];size=len(canonical(parsed))
  for fact in parsed['facts']:
   if fact['admission']not in('ADMITTED_PROFILE','CONFLICTED_EXACT_VALUES'):continue
-  if fact['concept']!=assignment['from']:raise XBRLError('drs_direct_closed_assignment_required')
+  if fact['concept']!=assignment['from']:raise XBRLError(assignment_error)
   context=parsed['contexts'][fact['context_ref']];placement=assignment['context_element']
   if context['opaque_segment']or any(d['context_element']!=placement for d in context['dimensions']):raise XBRLError('drs_context_profile_unsupported')
   reported={d['dimension']:d for d in context['dimensions']}
   if len(reported)!=len(context['dimensions']):raise XBRLError('drs_duplicate_reported_dimension')
-  if set(reported)-set(axes):raise XBRLError('drs_closed_extra_dimension')
+  extras=set(reported)-set(axes)
+  if extras and not open_cube:raise XBRLError('drs_closed_extra_dimension')
   defaults={};typed=[]
+  def add_typed(axis,member):
+   if member['kind']!='typed':raise XBRLError('drs_typed_reported_kind')
+   row=checked.get(fact['context_ref'],{}).get(axis)
+   if row is None or row['status']!='VALIDATED_SUPPORTED_TYPED_SCALAR':raise XBRLError('drs_typed_scalar_semantics_unsupported')
+   domain_row=row['domain']
+   typed.append({'dimension':axis,'member_tree_sha256':row['member_tree_sha256'],'typed_domain_ref':domain_row['typed_domain_ref'],
+                'domain_source_sha256':supplied[domain_row['schema_uri']]['sha256'],'scalar_validation':copy.deepcopy(row['scalar_validation'])})
   for axis in axes:
    member=reported.get(axis)
    if axis in typed_axes:
     if member is None:raise XBRLError('drs_required_dimension_missing')
-    if member['kind']!='typed':raise XBRLError('drs_typed_reported_kind')
-    row=checked.get(fact['context_ref'],{}).get(axis)
-    if row is None or row['status']!='VALIDATED_SUPPORTED_TYPED_SCALAR':raise XBRLError('drs_typed_scalar_semantics_unsupported')
-    domain_row=row['domain'];typed.append({'dimension':axis,'member_tree_sha256':row['member_tree_sha256'],'typed_domain_ref':domain_row['typed_domain_ref'],'domain_source_sha256':supplied[domain_row['schema_uri']]['sha256'],'scalar_validation':copy.deepcopy(row['scalar_validation'])})
+    add_typed(axis,member)
    else:
     members,default=domain(axis)
     if member is None:
@@ -369,6 +379,17 @@ def _typed_records(parsed,dts,diagnostics,supplied):
      if member['kind']!='explicit':raise XBRLError('drs_explicit_reported_kind')
      if member['member']not in members:raise XBRLError('drs_member_outside_domain')
      if default and member['member']==default[0]:raise XBRLError('drs_explicit_default_member')
+  for axis in sorted(extras):
+   member=reported[axis]
+   decl=declaration(axis,tag(D,'dimensionItem'),typed=True)
+   if decl.get('typed_domain_ref') is not None:
+    if targets('dimension-domain',axis) or targets('dimension-default',axis):raise XBRLError('drs_typed_explicit_relationship')
+    add_typed(axis,member)
+   else:
+    members,default=domain(axis)
+    if member['kind']!='explicit':raise XBRLError('drs_explicit_reported_kind')
+    if member['member']not in members:raise XBRLError('drs_member_outside_domain')
+    if default and member['member']==default[0]:raise XBRLError('drs_explicit_default_member')
   record={'source_fact_id':fact['source_fact_id'],'role':nets[0]['role'],'hypercube':cube,'context_element':placement,'used_defaults':defaults,'typed_dimensions':typed,'status':'VALIDATED_RESTRICTED_TYPED_CONTEXT'}
   size+=len(canonical(record))+1
   if size>8*1024*1024:raise XBRLError('drs_output_budget')

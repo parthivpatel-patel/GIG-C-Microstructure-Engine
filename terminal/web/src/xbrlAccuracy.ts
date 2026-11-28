@@ -10,7 +10,7 @@ export type DuplicateDiagnostic={profile:'DUPLICATE_ACCURACY_DIAGNOSTICS_V1';sta
 export type AccuracyRow=Omit<XbrlRow,'status'>&{status:XbrlRow['status']|'REPORTED_EXTENSION';statement_mapping:Mapping;duplicate_diagnostic?:DuplicateDiagnostic|null;accuracy:RowAccuracy|null;mapping_diagnostics:string[];numeric_facts:{source_fact_id:string;concept:string;value:string|null;declared_type:string;resolved_numeric_base:string;numeric_profile:string;derived_from:string;filing_accession:string;instance_sha256:string}[]};
 export type AccuracyCheck={parent?:string;status:string;issues?:string[];accuracy_validation:null|{profile:string;status:string;reason:string|null;parent_interval:Interval|null;weighted_sum_interval:Interval|null;residual_interval:Interval|null;terms:{concept:string;weight:number;source_fact_ids:string[];weighted_interval:Interval}[]};exact_diagnostic:null|{status:string;reported:Rational;weighted_sum:Rational;residual:Rational}};
 type DimensionalAdmission={
- profile:'ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13'|'DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14';
+ profile:'ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13'|'DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'|'DIRECT_OPEN_TYPED_HYPERCUBE_V15';
  accession:string;selected_instance_sha256:string;dts_sha256:string;proof_sha256:string;
  admitted_fact_count:number;valid_role_assignments:number;complete_drs_validation:false;dimensional_values_promoted:false;
 };
@@ -32,7 +32,7 @@ export function validateAccuracyXbrl(raw:unknown,symbol:string,cik:string|null):
  if(!p||p.schema!=='gig.backend.company_xbrl.v2'||p.profile!=='accuracy-extension-v2'||!s||s.schema!=='gig.sec.xbrl.statement_view.v2'||s.profile!==p.profile||!s.source_contexts||typeof s.source_contexts!=='object'||Array.isArray(s.source_contexts)||Object.keys(s.source_contexts).length>512||!s.source_units||typeof s.source_units!=='object'||Array.isArray(s.source_units)||Object.keys(s.source_units).length>128||!Array.isArray(s.periods)||s.periods.length>12)bad();
  const dimensional=p.dimensional_admission;
  if(dimensional!==undefined){
-  if(!dimensional||!['ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13','DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'].includes(dimensional.profile)||
+  if(!dimensional||!['ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13','DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14','DIRECT_OPEN_TYPED_HYPERCUBE_V15'].includes(dimensional.profile)||
      dimensional.accession!==s.source_filing?.accession||dimensional.selected_instance_sha256!==s.selected_instance_sha256||
      !hash(dimensional.selected_instance_sha256)||!hash(dimensional.dts_sha256)||!hash(dimensional.proof_sha256)||
      !Number.isSafeInteger(dimensional.admitted_fact_count)||dimensional.admitted_fact_count<0||dimensional.admitted_fact_count>4096||
