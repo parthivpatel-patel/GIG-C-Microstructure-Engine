@@ -9,27 +9,32 @@ export function IexBackfill({capture,generation}:{capture:string;generation:numb
  const [message,setMessage]=useState('');
  const [busy,setBusy]=useState(false);
  const [failed,setFailed]=useState(false);
- const serial=useRef(0);
- useEffect(()=>{serial.current++;setGaps([]);setPage(null);setBusy(false);setFailed(false);setMessage('');return()=>{serial.current++}},[capture,generation]);
+ const active=useRef<AbortController|null>(null);
+ useEffect(()=>{
+  setGaps([]);setPage(null);setBusy(false);setFailed(false);setMessage('');
+  return()=>active.current?.abort();
+ },[capture,generation]);
 
  async function load(gap?:Gap,more=false){
   const previous=more?page?.continuation:undefined;
   const after=previous?.next_revision??null;
   if(more&&(!gap||!previous||!after))return;
-  const id=++serial.current;
+  active.current?.abort();
+  const controller=new AbortController();active.current=controller;
+  const {signal}=controller;
   setBusy(true);if(!more)setPage(null);setMessage('');setFailed(false);
   try{
    if(gap){
-    const response=await request('/stocks/live-backfill',{gap_id:gap.gap_id,max_pages:4,...(after?{after_revision:after}:{})},30000);
+    const response=await request('/stocks/live-backfill',{gap_id:gap.gap_id,max_pages:4,...(after?{after_revision:after}:{})},30000,signal);
     const report=backfillPage(response,gap,4,after,previous?.pages_seen??0);
-    if(id===serial.current)setPage({...report,gap});
+    if(!signal.aborted)setPage({...report,gap});
    }else{
-    const candidates=backfillCandidates(await request('/stocks/live-backfill'),capture,generation);
-    if(id===serial.current){setGaps(candidates);if(!candidates.length)setMessage('No gap is bounded by retained observations.')}
+    const candidates=backfillCandidates(await request('/stocks/live-backfill',undefined,10000,signal),capture,generation);
+    if(!signal.aborted){setGaps(candidates);if(!candidates.length)setMessage('No gap is bounded by retained observations.')}
    }
   }catch{
-   if(id===serial.current){setFailed(true);setMessage('Historical backfill unavailable. Check source permissions or refresh the retained gaps.')}
-  }finally{if(id===serial.current)setBusy(false)}
+   if(!signal.aborted){setFailed(true);setMessage('Historical backfill unavailable. Check source permissions or refresh the retained gaps.')}
+  }finally{if(active.current===controller){active.current=null;if(!signal.aborted)setBusy(false)}}
  }
  const history=page?.history;
 

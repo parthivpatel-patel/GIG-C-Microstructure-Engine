@@ -1,7 +1,11 @@
 import {validateState} from './contracts';import type {TerminalState} from './contracts';
 import {decoded} from './response';
 import {parseOfflineJson} from './offlineJson';
-export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=10000):Promise<T>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),Math.min(30000,Math.max(1000,timeoutMs)));try{
+export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=10000,signal?:AbortSignal):Promise<T>{
+ const controller=new AbortController(),cancel=()=>controller.abort();
+ const timer=setTimeout(cancel,Math.min(30000,Math.max(1000,timeoutMs)));
+ signal?.addEventListener('abort',cancel,{once:true});if(signal?.aborted)cancel();
+ try{
  const headers:Record<string,string>={'Content-Type':'application/json'};
  if(body!==undefined){
   // Same-origin custom-header read;cross-origin callers cannot pass its preflight.
@@ -10,7 +14,7 @@ export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=100
   headers['X-GIG-Request-Proof']=capability.proof;
  }
  return await decoded(await fetch('/api/v1'+path,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:controller.signal}),controller.signal) as T;
- }finally{clearTimeout(timer)}}
+ }finally{clearTimeout(timer);signal?.removeEventListener('abort',cancel)}}
 export async function getState():Promise<TerminalState>{return validateState(await request('/state'))}
 /** Cache-only v2 reads; caller cannot provide an arbitrary host or mutation. */
 export async function readCompanyV2(symbol:string,filings=false,offset=0,form?:string):Promise<unknown>{

@@ -85,7 +85,7 @@ async def backfill(live, historical, gap_id, max_pages=4, *, after_revision=None
         raise WireError('iex_backfill_gap_identity')
     if type(max_pages) is not int or not 1 <= max_pages <= 4:
         raise WireError('iex_backfill_page_budget')
-    live.require()
+    keys=live.require()
     reference=live.permission_reference()
     gap = next((item for item in gaps(live) if item['gap_id'] == gap_id), None)
     if gap is None:
@@ -103,8 +103,7 @@ async def backfill(live, historical, gap_id, max_pages=4, *, after_revision=None
         if after_revision is not None:
             raise WireError('iex_backfill_continuation_unavailable')
         history, continuation = await historical.acquire(query), None
-    live.require()
-    if live.permission_reference()!=reference:
+    if live.require()!=keys or live.permission_reference()!=reference:
         raise WireError('iex_backfill_permission_changed')
     if not any(item == gap for item in gaps(live)):
         raise WireError('iex_backfill_gap_changed')
