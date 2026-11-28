@@ -9,6 +9,18 @@ MAX_GAP_NS = 2 * 86400 * 10**9
 KINDS = {'quote': 'quotes', 'trade': 'trades'}
 
 
+def retain_anchor(anchors, event, channel):
+    if event['out_of_order'] or channel not in KINDS.values() or event['kind'] not in KINDS:
+        return
+    key = event['symbol'], channel
+    point = {name: event[name] for name in
+             ('timestamp', 'receipt_index', 'origin', 'source_session_id', 'generation')}
+    previous, first, last = anchors.get(key, (None, None, None))
+    if last is None or last['generation'] != point['generation']:
+        previous, first = last, point
+    anchors[key] = previous, first, point
+
+
 def gaps(live):
     if live.phase != 'SUBSCRIBED' or live.pending:
         return []
@@ -27,6 +39,21 @@ def gaps(live):
             previous[key] = row
         elif row['generation'] == live.generation:
             current.setdefault(key, row)
+
+    # Endpoints outlive the display ring. Keep only two local generations per
+    # active symbol/channel and derive the same gap identity before and after eviction.
+    for key, (before, first, last) in live.backfill_anchors.items():
+        if key[0] not in live.symbols or key[1] not in live.channels:
+            continue
+        if last['generation'] == live.generation:
+            current[key] = first
+        elif last['generation'] < live.generation:
+            before = last
+        if before is not None and before['generation'] < live.generation:
+            other = previous.get(key)
+            if other is None or (before['generation'], before['receipt_index']) >= (other['generation'], other['receipt_index']):
+                previous[key] = before
+
 
     result = []
     for (symbol, kind), left in sorted(previous.items()):

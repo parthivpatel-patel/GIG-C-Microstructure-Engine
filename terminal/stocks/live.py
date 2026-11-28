@@ -101,6 +101,7 @@ class LiveIEX:
         self.capture_id=self.source_session_id if self.store else None
         self.restored_control=None
         self.restored_backfill_endpoints={}
+        self.backfill_anchors={}
         if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
     def control(self,*,symbols=None,channels=None,generation=None,receipt=None,phase=None,pending=None):
         pending=self.pending if pending is None else pending
@@ -171,6 +172,8 @@ class LiveIEX:
         candidate=(self.phase,dict(self.latest),list(self.seen),self.receipts,self.duplicates,self.last_data,list(self.history),self.out_of_order,self.evicted)
         phase,latest,seen,count,dups,last,history,late_count,evicted=candidate;out=[];received=self.clock();wall_ns=int(self.wall()*10**9)
         rows=unpack(raw)
+        anchors=dict(self.backfill_anchors)
+        from .iex_backfill import retain_anchor
         import msgpack
         frame_sha256=hashlib.sha256(raw).hexdigest()
         for row in rows:
@@ -197,6 +200,8 @@ class LiveIEX:
                     if phase!='SUBSCRIBE_SENT':raise ProtocolError('subscription_mismatch')
                     validate_subscription(row,channels,symbols)
                     phase='SUBSCRIBED'
+                if pending is None:
+                    anchors={key:points for key,points in anchors.items() if key[0] in symbols and key[1] in channels}
             elif t in ('q','t','b','c','x'):
                 if phase!='SUBSCRIBED' or row.get('S') not in symbols:raise ProtocolError('unsubscribed_observation')
                 source_time=stamp(row.get('t'));ns=int(timestamp_ns(source_time))
@@ -233,6 +238,7 @@ class LiveIEX:
                 previous=latest.get(ticker+':'+kind);late=bool(previous and ns<int(previous['source_timestamp_ns']));late_count+=int(late)
                 event={'source_session_id':self.source_session_id,'instrument_metadata':self.workspace.market_identity(ticker),'provider':'alpaca','feed':'iex','symbol':ticker,'kind':kind,'timestamp':source_time,'source_timestamp_ns':str(ns),'source_sha256':frame_sha256,'identity_sha256':identity,'receipt_index':count,'generation':generation,'out_of_order':late,'received_at':datetime.datetime.fromtimestamp(self.wall(),datetime.timezone.utc).isoformat(),'exchange_codes':{k:reference(row[k]) for k in ('x','bx','ax') if k in row},'conditions':conditions,'tape_code':reference(row['z']) if 'z' in row else None,'trade_id':reference(row['i']) if t=='t' and 'i' in row else None,'clock_quality':'SOURCE_AHEAD_WITHIN_TOLERANCE' if ns>wall_ns else 'UNSYNCHRONIZED_SOURCE_RECEIVE_CLOCKS','origin':'HISTORICAL_SYNTHETIC' if self.connector else 'OBSERVED_OFFICIAL_RESPONSE','source_age_at_receipt_ns':str(max(0,wall_ns-ns)),'received_monotonic':received,'data':data,'numeric_policy':'MessagePack binary64 uses shortest roundtrip decimal;wire hex retained;not exact exchange ticks','wire_binary64':{k:v.hex() for k,v in row.items() if type(v) is float},'scope':'Single-venue IEX only;not SIP/NBBO/depth;no native book mutation','size_unit':'provider_reported_unverified_no_lot_conversion'}
                 if not late:latest[ticker+':'+kind]=event
+                retain_anchor(anchors,event,channel)
                 history.append(event)
                 if len(history)>256:history.pop(0);evicted+=1
                 out.append(event)
@@ -245,6 +251,7 @@ class LiveIEX:
             try:self.store.save_control(self.control(symbols=symbols,channels=channels,generation=generation,receipt=count,phase=phase,pending=pending or {}))
             except (ValueError,OSError):raise ProtocolError('observation_storage_rejected_frame') from None
         self.phase,self.latest,self.seen,self.receipts,self.duplicates,self.last_data,self.history,self.out_of_order,self.evicted,self.symbols,self.channels,self.generation,self.pending=prepared
+        self.backfill_anchors=anchors
         return out
     def view(self):
         from .live_metrics import metrics
