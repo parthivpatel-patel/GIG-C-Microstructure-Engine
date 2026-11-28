@@ -15,7 +15,7 @@ export function TerminalHeader(p:Props){
  return <header className="topbar gig-topbar">
   <div className="workspace-location"><button className="atlas-navigation-toggle" aria-label="Toggle workspace navigation" aria-controls="atlas-sections" aria-expanded={!p.collapsed} onClick={p.onCollapse}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="16" height="14" rx="2"/><path d="M7 3v14"/></svg><span>{p.collapsed?'Show navigation':'Compact navigation'}</span></button><span className="breadcrumb">GIG <span>/</span> <b>{p.section}</b></span></div>
   <form className="atlas-global-search" role="search" aria-label="Global security search" onBlur={e=>{
-   if(!(e.relatedTarget instanceof Node)||!e.currentTarget.contains(e.relatedTarget)){
+   if(e.relatedTarget instanceof Node&&!e.currentTarget.contains(e.relatedTarget)){
     clearActive();p.onQuery(p.query);
    }
   }} onSubmit={e=>{e.preventDefault();clearActive();p.onSearch()}}>
