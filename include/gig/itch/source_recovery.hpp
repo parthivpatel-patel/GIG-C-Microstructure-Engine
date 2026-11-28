@@ -38,6 +38,23 @@ struct PartialBinaryRecovery {
 gig::Result<PartialBinaryRecovery> resume_partial_binary_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
     std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+struct PartialGzipTail {
+    Location next_location;
+    std::size_t decompressed_offset;
+    std::size_t residual_bytes;
+    Sha256Digest residual_sha256;
+    Sha256Digest decompressed_sha256;
+};
+struct PartialGzipRecovery {
+    SyntheticReconstructor owner;
+    PartialGzipTail tail;
+};
+// Admit a complete single gzip member whose decompressed BinaryFile stops inside
+// a frame. Every compressed byte and the gzip trailer must verify. The returned
+// boundary is in the decompressed stream and grants no compressed seek position.
+gig::Result<PartialGzipRecovery> resume_partial_gzip_source(std::span<const std::byte> checkpoint,
+    const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
+    std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 // Explicit complete-source profile. The durable input remains an accepted active
 // Version1 boundary; replay validates its committed prefix without applying it.
 // Require the BinaryFile zero-length terminator at exact EOF and,for gzip,the

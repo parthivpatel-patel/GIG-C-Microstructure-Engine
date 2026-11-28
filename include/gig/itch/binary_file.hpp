@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <memory>
 #include <memory_resource>
 #include <span>
@@ -50,5 +51,11 @@ public:
     std::size_t allocated_payload_bytes() const noexcept { return buffer_?limits_.buffer_bytes:0; }
     bool terminated() const noexcept { return terminal_; }
     std::uint64_t residual_bytes() const noexcept { return prefix_size_+payload_size_; }
+    // Borrowed byte ranges, in wire order, until the next feed or move.
+    std::array<std::span<const std::byte>,2> residual_parts() const noexcept {
+        if(!buffer_)return {};
+        return {std::span<const std::byte>(prefix_.data(),prefix_size_),
+                std::span<const std::byte>(buffer_.get(),payload_size_)};
+    }
 };
 } // namespace gig::itch
