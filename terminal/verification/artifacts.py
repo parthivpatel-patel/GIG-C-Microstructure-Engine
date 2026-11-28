@@ -78,7 +78,12 @@ def decode(raw,*,numeric_policy='finite-float'):
             item,depth=pending.pop();nodes+=1
             if depth>24 or nodes>20000:raise EvidenceError('json_structure_budget')
             if type(item)is float and not math.isfinite(item):raise EvidenceError('nonfinite_json')
-            if type(item)is dict:pending.extend((v,depth+1)for v in item.values())
+            if type(item)is str:
+                item.encode('utf-8')  # Escaped unpaired surrogate code points are not Unicode text.
+            if type(item)is dict:
+                for key,value in item.items():
+                    key.encode('utf-8')
+                    pending.append((value,depth+1))
             elif type(item)is list:pending.extend((v,depth+1)for v in item)
         if type(value)is not dict:raise EvidenceError('expected_json_object')
         return value

@@ -89,20 +89,12 @@ async def bounded_json(request):
                 data.extend(chunk)
     except asyncio.TimeoutError:
         raise ControlError('BODY_TIMEOUT', 'request body deadline exceeded') from None
-    def pairs(items):
-        result = {}
-        for key, value in items:
-            if key in result:
-                raise ValueError('duplicate key')
-            result[key] = value
-        return result
+    from terminal.verification.artifacts import decode,EvidenceError
     try:
-        value = json.loads(data, object_pairs_hook=pairs, parse_constant=lambda _: (_ for _ in ()).throw(ValueError('constant')))
-    except (ValueError, UnicodeError, RecursionError):
-        raise ControlError('INVALID_JSON', 'invalid JSON document') from None
-    if type(value) is not dict:
-        raise ControlError('INVALID_JSON', 'JSON object required')
-    return value
+        return decode(data)
+    except EvidenceError as exc:
+        message='JSON object required' if exc.code=='expected_json_object' else 'invalid JSON document'
+        raise ControlError('INVALID_JSON',message)from None
 
 
 def json_endpoint(function):
