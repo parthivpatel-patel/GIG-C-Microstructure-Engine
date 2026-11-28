@@ -37,7 +37,7 @@ def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected
  return _finish(result)
 
 
-def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None,*,expected_collection_sha256,previous_as_of=None):
+def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None,*,expected_collection_sha256,previous_as_of=None,calculation_role=None,calculation_profile=None):
  """Analyze the same authorized bytes that produced the installed collection."""
  from .sec import acceptance_ns
  collection=workspace.visible_xbrl_collection(symbol)
@@ -60,6 +60,32 @@ def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=Non
    if accession not in recipes:
     candidate=coordinator.original_recipe(accession,inline_required=action=='inline')
     if candidate is not None:recipes[accession]=candidate
+ if action=='calculation':
+  from .xbrl_calculation_product import company_calculation_contract
+  from .xbrl_calculation_report import WEIGHTED_PROFILE
+  from .xbrl_dimensions import OPEN_CROSS_ROLE_PROFILE
+  from .xbrl_dts import discover,discover_inline_set
+  if calculation_profile not in ('exact','decimal-weights','effective-explicit'):
+   raise XBRLError('financial_intelligence_calculation_profile')
+  graphs={};originals={}
+  for accession,entry in recipes.items():
+   parsed=collection._filings[accession]
+   if 'taxonomy_documents'in entry:
+    documents=entry['taxonomy_documents'];instance_uri=None
+    references=[v['manifest']['permission_reference']for v in sorted(entry['documents'],key=lambda d:d['uri'])]
+    graph=discover_inline_set(parsed,documents,allow_observed=collection.allow_observed,
+                             permission_references=references,embedded_profile=entry['embedded_profile'])
+   else:
+    documents=entry['documents'];instance_uri=entry['instance_uri'];source=entry['manifest']
+    graph=discover(entry['raw'],instance_uri,source['source_sha256'],documents,origin=source['origin'],
+                   allow_observed=collection.allow_observed,permission_reference=source['permission_reference'],
+                   embedded_profile=entry['embedded_profile'])
+   graphs[accession]=graph;originals[accession]={'documents':documents,'instance_uri':instance_uri}
+  return company_calculation_contract(workspace,symbol,as_of,graphs,role=calculation_role,form=form,
+      expected_collection_sha256=expected_collection_sha256,
+      dimensional_profile=OPEN_CROSS_ROLE_PROFILE if calculation_profile=='effective-explicit' else None,
+      weight_profile=WEIGHTED_PROFILE if calculation_profile=='decimal-weights' else None,
+      dts_originals=originals if calculation_profile=='effective-explicit' else None)
  if action=='inline':
   return company_inline_audit(workspace,symbol,as_of,recipes,form=form,
                              expected_collection_sha256=expected_collection_sha256)

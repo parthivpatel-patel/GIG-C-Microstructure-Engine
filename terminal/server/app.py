@@ -767,7 +767,8 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         required={'symbol','as_of','form','action','collection_sha256'}
         if action in ('accounting','comparison'):required.add('roles')
         if action=='comparison':required.add('previous_as_of')
-        if action not in ('accounting','inline','comparison') or set(value)!=required:
+        if action=='calculation':required.update(('calculation_role','calculation_profile'))
+        if action not in ('accounting','inline','comparison','calculation') or set(value)!=required:
             return error('SEC_FILING_ANALYSIS_QUERY','explicit cutoff, filing family and analysis selection required',422)
         if analysis.busy:return error('XBRL_STATEMENT_BUSY','one bounded analytical request at a time',429)
         try:
@@ -780,7 +781,8 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             collection=stocks.visible_xbrl_collection(symbol)
             packet=await analysis.run(partial(admitted_filing_analysis,stocks,symbol,value['as_of'],
                                              value['form'],action,value.get('roles'),expected_collection_sha256=digest,
-                                             previous_as_of=value.get('previous_as_of')))
+                                             previous_as_of=value.get('previous_as_of'),calculation_role=value.get('calculation_role'),
+                                             calculation_profile=value.get('calculation_profile')))
             if not stocks.sec_filing_readiness(symbol)['ready'] or stocks.visible_xbrl_collection(symbol) is not collection:
                 return error('SEC_FILING_ANALYSIS_UNAVAILABLE','source or authorization changed during analysis',409)
             if len(canonical(packet))>2*1024*1024:
