@@ -14,7 +14,8 @@ from .xbrl_lineage import filing_lineage
 from .xbrl_statement_set import KINDS,ACCESSION
 from .xbrl_types import RESTRICTION_PROFILE,_resolve,_value_check
 from .xbrl_accuracy import calculation_duplicates,calculation_consistency
-from .xbrl_accounting_relationships import extract_accounting_relationships
+from .xbrl_accounting_relationships import extract_accounting_relationships,_extract
+from .xbrl_dts_source_audit import reconstruct_admitted_inline
 
 MAX_OUTPUT=1024*1024;MAX_PERIODS=12;MAX_CONCEPTS=128
 
@@ -145,7 +146,23 @@ def _accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,*,for
  accession=source['accession'];result['lineage']=filing_lineage(collection,accession,as_of)
  if result['lineage']['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED';return _finish(result),None,None
  if accession not in source_inputs or accession not in role_bindings:result['reason']='SELECTED_ORIGINALS_OR_ROLE_BINDINGS_NOT_SUPPLIED';return _finish(result),None,None
- entry=source_inputs[accession]
+ entry=source_inputs[accession];stored=collection._filings[accession]
+ if stored.get('schema')=='gig.sec.xbrl.inline_set.v1':
+  coordinator=getattr(workspace,'filing_ingestors',{}).get(symbol)
+  has_plan=coordinator is not None and accession in coordinator.plans
+  planned_identity=coordinator.plans[accession].get('inline_manifest_sha256')if has_plan else None
+  parsed,graph,audit=reconstruct_admitted_inline(entry,stored,allow_observed=collection.allow_observed,
+      planned_identity=planned_identity,has_plan=has_plan)
+  relations=_extract(parsed,graph,entry['taxonomy_documents'],audit,embedded_profile=entry['embedded_profile'])
+ else:
+  parsed,graph,relations=_plain_sources(entry,stored,source,allow_observed=collection.allow_observed)
+ if relations.get('complete_definition_scope')is not True:raise XBRLError('accounting_statement_definition_scope')
+ result.update(accounting_report=relations,original_parsed_sha256=parsed['canonical_sha256'],admitted_parsed_sha256=stored['canonical_sha256'],dts_sha256=graph['canonical_sha256'])
+ for kind in KINDS:result['statements'][kind]=_section(parsed,graph,relations,role_bindings[accession][kind])
+ available=sum(v['status']=='AVAILABLE'for v in result['statements'].values());result.update(status='AVAILABLE'if available==3 else'PARTIAL'if available else'UNAVAILABLE',reason=None if available==3 else'SOME_SOURCE_VIEWS_UNAVAILABLE')
+ return _finish(result),parsed,graph
+
+def _plain_sources(entry,stored,source,*,allow_observed):
  required={'raw','manifest','concepts','instance_uri','documents'}
  if type(entry)is not dict or not required<=entry.keys()<=required|{'embedded_profile'}:
   raise XBRLError('accounting_statement_original_recipe')
@@ -154,8 +171,7 @@ def _accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,*,for
  if type(entry['raw'])is not bytes or len(entry['raw'])>2*1024*1024 or type(entry['documents'])is not list or len(entry['documents'])>16:raise XBRLError('accounting_statement_original_budget')
  if any(type(d)is not dict or type(d.get('raw'))is not bytes for d in entry['documents'])or len(entry['raw'])+sum(len(d['raw'])for d in entry['documents'])>8*1024*1024:raise XBRLError('accounting_statement_original_budget')
  # Compare immutable source and grant receipts before interpreting supplied XML.
- stored=collection._filings[accession]
- receipt=validate_manifest(entry['raw'],entry['manifest'],collection.allow_observed)
+ receipt=validate_manifest(entry['raw'],entry['manifest'],allow_observed)
  if canonical(receipt)!=canonical(source):raise XBRLError('accounting_statement_admitted_source_mismatch')
  instance_uri=uri(entry['instance_uri'])
  if source['source_url'] is not None and instance_uri!=source['source_url']:
@@ -166,18 +182,14 @@ def _accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,*,for
   retained=stored['dts_corroboration']['documents']
   if {r['uri']:r['sha256'] for r in retained}!={key:r['sha256'] for key,r in supplied.items()}:
    raise XBRLError('accounting_statement_admitted_dts_mismatch')
- parsed=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=collection.allow_observed)
+ parsed=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=allow_observed)
  if parsed['concept_profile_sha256']!=stored['concept_profile_sha256']:
   raise XBRLError('accounting_statement_admitted_concept_profile_mismatch')
  if canonical(parsed['source'])!=canonical(source)or any(canonical(parsed[k])!=canonical(stored[k])for k in('facts','contexts','units')):raise XBRLError('accounting_statement_admitted_source_mismatch')
- graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=collection.allow_observed,permission_reference=entry['manifest']['permission_reference'],embedded_profile=embedded)
+ graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=allow_observed,permission_reference=entry['manifest']['permission_reference'],embedded_profile=embedded)
  if 'dts_corroboration'in stored and stored['dts_corroboration']['dts_sha256']!=graph['canonical_sha256']:raise XBRLError('accounting_statement_admitted_dts_mismatch')
- relations=extract_accounting_relationships(parsed,graph,entry['raw'],entry['documents'],manifest=entry['manifest'],concepts=entry['concepts'],instance_uri=instance_uri,allow_observed=collection.allow_observed,embedded_profile=embedded)
- if relations.get('complete_definition_scope')is not True:raise XBRLError('accounting_statement_definition_scope')
- result.update(accounting_report=relations,original_parsed_sha256=parsed['canonical_sha256'],admitted_parsed_sha256=stored['canonical_sha256'],dts_sha256=graph['canonical_sha256'])
- for kind in KINDS:result['statements'][kind]=_section(parsed,graph,relations,role_bindings[accession][kind])
- available=sum(v['status']=='AVAILABLE'for v in result['statements'].values());result.update(status='AVAILABLE'if available==3 else'PARTIAL'if available else'UNAVAILABLE',reason=None if available==3 else'SOME_SOURCE_VIEWS_UNAVAILABLE')
- return _finish(result),parsed,graph
+ relations=extract_accounting_relationships(parsed,graph,entry['raw'],entry['documents'],manifest=entry['manifest'],concepts=entry['concepts'],instance_uri=instance_uri,allow_observed=allow_observed,embedded_profile=embedded)
+ return parsed,graph,relations
 
 def company_accounting_history(workspace,symbol,cutoffs,source_inputs,role_bindings,*,form='10-K',expected_collection_sha256=None):
  if type(cutoffs)is not list or not 1<=len(cutoffs)<=8:raise XBRLError('accounting_history_cutoff_budget')

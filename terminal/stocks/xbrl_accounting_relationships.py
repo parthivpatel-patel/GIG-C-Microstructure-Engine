@@ -10,6 +10,8 @@ from .xbrl_relationships import number,rational
 from .xbrl_types import _resolve,_value_check,RESTRICTION_PROFILE
 
 PROFILE='SOURCE_ACCOUNTING_RELATIONSHIPS_V1';SCHEMA='gig.sec.xbrl.accounting_relationships.v1'
+INLINE_PROFILE='SOURCE_INLINE_ACCOUNTING_RELATIONSHIPS_V2'
+INLINE_SCHEMA='gig.sec.xbrl.accounting_relationships.v2'
 ESSENCE='http://www.xbrl.org/2003/arcrole/essence-alias'
 REQUIRES='http://www.xbrl.org/2003/arcrole/requires-element'
 MAX_ARCS=4096;MAX_NETWORKS=64;MAX_CHECKS=4096;MAX_OUTPUT=4*1024*1024
@@ -95,6 +97,10 @@ def _checks(parsed,dts,arc,kind):
 def extract_accounting_relationships(parsed,dts,instance_raw,documents,*,manifest,concepts,instance_uri,allow_observed=False,embedded_profile=None,profile=PROFILE):
  if profile!=PROFILE:raise XBRLError('accounting_relationship_profile_unsupported')
  audit=audit_dts_sources(parsed,dts,instance_raw,documents,manifest=manifest,concepts=concepts,instance_uri=instance_uri,allow_observed=allow_observed,embedded_profile=embedded_profile)
+ return _extract(parsed,dts,documents,audit,embedded_profile=embedded_profile)
+
+def _extract(parsed,dts,documents,audit,*,embedded_profile=None):
+ inline=parsed['schema']=='gig.sec.xbrl.inline_set.v1'
  if parsed['unsupported_nodes']:raise XBRLError('accounting_instance_unsupported_nodes')
  supplied=_supplied_documents(documents);groups={};locators={};bases=[];count=0
  for key,doc in sorted(supplied.items()):
@@ -160,6 +166,7 @@ def extract_accounting_relationships(parsed,dts,instance_raw,documents,*,manifes
      if degree[target]==0:pending.append(target)
    if seen!=len(degree):raise XBRLError('accounting_essence_directed_cycle')
   group.update(usable=True,issues=[],arcs=arcs,suppressed=suppressed);networks.append(group)
- result={'schema':SCHEMA,'profile':PROFILE,'status':'AVAILABLE','source_filing':copy.deepcopy(parsed['source']),'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_audit':audit,'complete_definition_scope':True,'networks':networks,'input_arcs':count,'selected_reported_value':None,'gaap_aliases_inferred':False,'facts_inferred':False,'provider_requested':False,'complete_taxonomy_validation':False,'scope':'Original plain-source direct-item essence-alias/requires-element only;exact reported-value diagnostics,no optional value inference,no accounting metric alias or full rounding-V-equality claim'}
+ result={'schema':INLINE_SCHEMA if inline else SCHEMA,'profile':INLINE_PROFILE if inline else PROFILE,'status':'AVAILABLE','source_filing':copy.deepcopy(parsed['source']),'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_audit':audit,'complete_definition_scope':True,'networks':networks,'input_arcs':count,'selected_reported_value':None,'gaap_aliases_inferred':False,'facts_inferred':False,'provider_requested':False,'complete_taxonomy_validation':False,'scope':'Original plain-source direct-item essence-alias/requires-element only;exact reported-value diagnostics,no optional value inference,no accounting metric alias or full rounding-V-equality claim'}
+ if inline:result['scope']='Original inline-set direct-item essence-alias/requires-element only;exact reported-value diagnostics,no optional value inference,no accounting metric alias or full rounding-V-equality claim'
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('accounting_relationship_output_budget')
  result['sha256']=digest(result);return result
