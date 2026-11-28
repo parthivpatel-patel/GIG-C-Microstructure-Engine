@@ -58,7 +58,7 @@ export async function readCompanyAvailability(symbol:string,signal:AbortSignal):
 
 /** Explicit v2 market/paper paths;credentials and provider destinations are server-owned. */
 export async function requestV2<T=unknown>(path:string,body?:unknown,signal?:AbortSignal):Promise<T>{
- if(!['/market/history','/market/history/readiness','/market/history/cache','/market/research','/paper/status','/paper/control'].includes(path))throw Error('Invalid versioned research endpoint');
+ if(!['/sec-filings/acquire','/market/history','/market/history/readiness','/market/history/cache','/market/research','/paper/status','/paper/control'].includes(path))throw Error('Invalid versioned research endpoint');
  const target='/api/v2'+path,c=new AbortController(),cancel=()=>c.abort(),timer=setTimeout(cancel,30000);
  signal?.addEventListener('abort',cancel,{once:true});
  if(signal?.aborted)cancel();
@@ -66,6 +66,11 @@ export async function requestV2<T=unknown>(path:string,body?:unknown,signal?:Abo
  if(body!==undefined){const proof=await decoded(await fetch('/api/v1/request-proof',{headers:{'X-GIG-Bootstrap':'same-origin-v1','X-GIG-Browser-Origin':location.origin,'X-GIG-Target':target},signal:c.signal}),c.signal);if(!/^[A-Za-z0-9_-]{43}$/.test(proof.proof))throw Error('Invalid research request proof');headers['X-GIG-Request-Proof']=proof.proof}
  return await decoded(await fetch(target,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:c.signal}),c.signal) as T;
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',cancel)}
+}
+
+export async function readSecFilingReadiness(symbol:string,signal:AbortSignal):Promise<unknown>{
+ if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol))throw Error('Invalid issuer');
+ return readBoundedFinancial('/api/v2/sec-filings/readiness?symbol='+encodeURIComponent(symbol),signal,parseOfflineJson);
 }
 
 /** Separate cache-only supplied-XBRL view;no source acquisition or mutations. */
