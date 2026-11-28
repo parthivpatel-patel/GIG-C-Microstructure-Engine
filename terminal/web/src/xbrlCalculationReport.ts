@@ -7,16 +7,24 @@ type Axis={dimension:string;member:string};
 type SourceDocument={uri:string;sha256:string};
 type DefaultSource={member:string;role:string;arc_index:number;source_uri:string;source_sha256:string};
 type Binding={aspect_sha256?:string;source_context_sha256s?:string[];parent:string;aspects:{issuer_cik:string;context_sha256?:string;unit_sha256:string;period:{kind:string;start:string|null;end:string};dimensions:Axis[];effective_dimension_values?:Axis[];unit:{numerator:string[];denominator:string[];semantic_sha256:string}};data_points:Record<string,Point>;missing_concepts:string[];calculation:Check;relationship_provenance:unknown[]};
-export type CalculationPacket={schema:string;weight_profile?:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;weight_profile?:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string;drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];implicit_default_dimensions?:Record<string,string>;numeric_type_provenance?:{base_type:string;derivation_path:string[];documents:SourceDocument[]}}>;selected_reported_value:null};sha256:string};
+export type CalculationPacket={schema:string;weight_profile?:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;weight_profile?:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string|null;definition_roles?:string[];drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];drs_validation?:unknown;implicit_default_dimensions?:Record<string,string>;numeric_type_provenance?:{base_type:string;derivation_path:string[];documents:SourceDocument[]}}>;selected_reported_value:null};sha256:string};
 function fail():never{throw Error('Invalid source-bound calculation report')}const hash=(v:unknown)=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);const ids=(a:unknown):a is string[]=>Array.isArray(a)&&a.length<=8&&new Set(a).size===a.length&&a.every(hash);
 const DIMENSIONS='INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3';
+const EFFECTIVE_ROLE_DIMENSIONS='ORIGINAL_DTS_OPEN_EXPLICIT_V17';
 const BOUNDS='NUMERIC_BOUND_RESTRICTIONS_V6';
 const DECIMAL_WEIGHTS='SOURCE_BOUND_DECIMAL_WEIGHT_CALCULATIONS_V2';
 const qname=(value:unknown):value is string=>typeof value==='string'&&/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(value);
-function defaultDimensions(report:NonNullable<CalculationPacket['report']>){
+function defaultDimensions(report:NonNullable<CalculationPacket['report']>,effectiveRoles=false){
  const defaults=report.global_default_dimensions, sources=report.default_provenance, documents=report.definition_documents;
  if(!defaults||Array.isArray(defaults)||!sources||Array.isArray(sources)||!Array.isArray(documents)||!documents.length||documents.length>128||
-    !hash(report.drs_proof_sha256)||!hash(report.definition_sha256)||typeof report.definition_role!=='string'||!report.definition_role)fail();
+    !hash(report.drs_proof_sha256)||!hash(report.definition_sha256))fail();
+ if(effectiveRoles){
+  const roles=report.definition_roles;
+  if(report.definition_role!==null||!Array.isArray(roles)||!roles.length||roles.length>8||
+     roles.some(role=>typeof role!=='string'||!role||role.length>512)||
+     JSON.stringify(roles)!==JSON.stringify([...new Set(roles)].sort())||
+     Object.keys(defaults).length||Object.keys(sources).length)fail();
+ }else if(typeof report.definition_role!=='string'||!report.definition_role||report.definition_roles!==undefined)fail();
  const docHashes=new Map<string,string>();
  for(const d of documents){
   if(!d||typeof d.uri!=='string'||!d.uri||!hash(d.sha256)||docHashes.has(d.uri))fail();
@@ -55,25 +63,26 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
  const pending:[unknown,number][]=[[raw,0]];let nodes=0;while(pending.length){const [v,d]=pending.pop()!;if(++nodes>40000||d>32)fail();if(typeof v==='string'&&v.length>16384)fail();if(v&&typeof v==='object')for(const x of Object.values(v))pending.push([x,d+1])}
  const p=raw as CalculationPacket;
  const decimalDimensional=p?.schema==='gig.backend.company_dimensional_calculations.v2';
- const dimensional=decimalDimensional||p?.schema==='gig.backend.company_dimensional_calculations.v1';
- const reweighted=decimalDimensional||p?.schema==='gig.backend.company_weighted_calculations.v1';
+ const effectiveRoles=p?.schema==='gig.backend.company_dimensional_calculations.v3';
+ const dimensional=effectiveRoles||decimalDimensional||p?.schema==='gig.backend.company_dimensional_calculations.v1';
+ const reweighted=decimalDimensional||effectiveRoles&&p.weight_profile===DECIMAL_WEIGHTS||p?.schema==='gig.backend.company_weighted_calculations.v1';
  if(!p||(!dimensional&&!reweighted&&p.schema!=='gig.backend.company_calculations.v1')||p.instrument?.symbol!==symbol||p.instrument.cik!==cik||p.read_only!==true||p.provider_requested!==false||p.complete_statements!==false||!hash(p.collection_sha256)||!['AVAILABLE','UNAVAILABLE'].includes(p.status)||!['10-K','10-Q'].includes(p.form_family)||!['round-to-nearest','truncation'].includes(p.rounding_mode)||acceptanceNanoseconds(p.as_of).toString()!==p.cutoff_ns)fail();await verifyXbrlDigest(p as unknown as Record<string,unknown>);
  if(p.weight_profile!==(reweighted?DECIMAL_WEIGHTS:undefined))fail();
- if(dimensional&&(p.dimensional_profile!==DIMENSIONS||p.numeric_profile!==null&&p.numeric_profile!==BOUNDS))fail();
+ if(dimensional&&(p.dimensional_profile!==(effectiveRoles?EFFECTIVE_ROLE_DIMENSIONS:DIMENSIONS)||p.numeric_profile!==null&&p.numeric_profile!==BOUNDS))fail();
  const l=p.lineage;if(l){await verifyXbrlDigest(l as unknown as Record<string,unknown>);if(l.issuer_cik!==cik||l.collection_sha256!==p.collection_sha256||l.as_of!==p.as_of||l.cutoff_ns!==p.cutoff_ns||l.complete_history!==false||!['SUPPLIED_CHAIN_RESOLVED','UNRESOLVED'].includes(l.status)||!Array.isArray(l.sources)||l.sources.length>32)fail();for(const s of l.sources)if(!hash(s.parsed_sha256)||!hash(s.source.source_sha256)||!/^[0-9]{10}-[0-9]{2}-[0-9]{6}$/.test(s.source.accession)||s.source.issuer_cik!==cik||acceptanceNanoseconds(s.source.accepted_at)>BigInt(p.cutoff_ns))fail()}
  const r=p.report;if(!r){if(p.status!=='UNAVAILABLE')fail();return p}
  await verifyXbrlDigest(r as unknown as Record<string,unknown>);if(!l||l.status!=='SUPPLIED_CHAIN_RESOLVED'||!l.sources.length||!hash(r.parsed_sha256)||!hash(r.source_filing.source_sha256)||r.role!==p.role||r.rounding_mode!==p.rounding_mode||r.status!==p.status||r.selected_reported_value!==null||!hash(r.dts_sha256)||!hash(r.relationships_sha256)||r.parsed_sha256!==l.sources[0]?.parsed_sha256||r.source_filing.accession!==l.sources[0]?.source.accession||r.source_filing.source_sha256!==l.sources[0]?.source.source_sha256||r.source_filing.issuer_cik!==cik||r.source_filing.accepted_at!==l.sources[0]?.source.accepted_at||!Array.isArray(r.bindings)||r.bindings.length>128||!r.fact_provenance||Object.keys(r.fact_provenance).length>4096)fail();
  const bounded=dimensional&&p.numeric_profile===BOUNDS;
  if(dimensional){
-  if(r.dimensional_profile!==DIMENSIONS||r.numeric_profile!==(bounded?BOUNDS:undefined)||
-     r.weight_profile!==(decimalDimensional?DECIMAL_WEIGHTS:undefined)||
-     r.schema!==(decimalDimensional?'gig.sec.xbrl.dimensional_calculation_report.v3':
+  if(r.dimensional_profile!==(effectiveRoles?EFFECTIVE_ROLE_DIMENSIONS:DIMENSIONS)||r.numeric_profile!==(bounded?BOUNDS:undefined)||
+     r.weight_profile!==((decimalDimensional||effectiveRoles)&&reweighted?DECIMAL_WEIGHTS:undefined)||
+     r.schema!==(effectiveRoles?'gig.sec.xbrl.dimensional_calculation_report.v4':decimalDimensional?'gig.sec.xbrl.dimensional_calculation_report.v3':
                  bounded?'gig.sec.xbrl.dimensional_calculation_report.v2':'gig.sec.xbrl.dimensional_calculation_report.v1')||
-     r.profile!==(decimalDimensional?'POSITIVE_EXPLICIT_DIMENSIONAL_DECIMAL_WEIGHT_CALCULATIONS_V3':
+     r.profile!==(effectiveRoles?'SOURCE_BOUND_EFFECTIVE_ROLE_EXPLICIT_CALCULATIONS_V4':decimalDimensional?'POSITIVE_EXPLICIT_DIMENSIONAL_DECIMAL_WEIGHT_CALCULATIONS_V3':
                   bounded?'POSITIVE_EXPLICIT_DIMENSIONAL_BOUND_NUMERIC_CALCULATIONS_V2':'POSITIVE_EXPLICIT_DIMENSIONAL_CALCULATIONS_V1'))fail();
  }else if(r.schema!==(reweighted?'gig.sec.xbrl.calculation_report.v2':'gig.sec.xbrl.calculation_report.v1')||
           r.profile!==(reweighted?DECIMAL_WEIGHTS:'SOURCE_BOUND_CALCULATIONS_V1'))fail();
- const defaults=dimensional?defaultDimensions(r):null;
+ const defaults=dimensional?defaultDimensions(r,effectiveRoles):null;
  const sourceKeys=new Set<string>();for(let i=0;i<l.sources.length;i++){const current=l.sources[i].source,next=l.sources[i+1]?.source;if(sourceKeys.has(current.accession)||current.form.replace(/\/A$/,'')!==p.form_family)fail();sourceKeys.add(current.accession);if(next){if(!current.form.endsWith('/A')||current.amends_accession!==next.accession||acceptanceNanoseconds(next.accepted_at)>acceptanceNanoseconds(current.accepted_at))fail()}else if(current.form.endsWith('/A')||current.amends_accession!==null)fail()}
  for(const [id,f]of Object.entries(r.fact_provenance)){if(!hash(id)||typeof f.concept!=='string'||!/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(f.concept)||!Array.isArray(f.declaration_documents)||f.declaration_documents.length>16||!f.declaration_documents.length||f.declaration_documents.some(d=>typeof d.uri!=='string'||!hash(d.sha256)))fail()}
  const bindingKeys=new Set<string>();
@@ -114,6 +123,23 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
     const sourceAxes=axisValues(f.reported_dimensions), implicit=f.implicit_default_dimensions;
     if(sourceAxes.size!==reported.size||[...sourceAxes].some(([axis,member])=>reported.get(axis)!==member)||
        Object.keys(implicit).length!==expectedImplicit.length||expectedImplicit.some(([axis,member])=>implicit[axis]!==member))fail();
+    if(effectiveRoles){
+     const proof=f.drs_validation as {source_fact_id:string;context_element:string;status:string;global_defaults:object;used_defaults:object;
+      alternatives:{role:string;valid:boolean;failure_reasons:string[];assignments:{kind:string;context_element:string;hypercube_valid:boolean}[]}[]};
+     if(!proof||proof.source_fact_id!==id||proof.status!=='VALIDATED_RESTRICTED_ALTERNATIVE_CROSS_ROLE_CONTEXT'||
+        !['segment','scenario'].includes(proof.context_element)||!proof.global_defaults||!proof.used_defaults||
+        Object.keys(proof.global_defaults).length||Object.keys(proof.used_defaults).length||
+        !Array.isArray(proof.alternatives)||!proof.alternatives.length||proof.alternatives.length>8||
+        !proof.alternatives.some(row=>row.valid===true)||new Set(proof.alternatives.map(row=>row.role)).size!==proof.alternatives.length)fail();
+     for(const row of proof.alternatives){
+      if(!r.definition_roles?.includes(row.role)||typeof row.valid!=='boolean'||!Array.isArray(row.failure_reasons)||
+         !Array.isArray(row.assignments)||!row.assignments.length||row.assignments.length>16||
+         !row.assignments.some(arc=>arc.kind==='all')||row.valid!==(row.failure_reasons.length===0)||
+         row.assignments.some(arc=>!['all','notAll'].includes(arc.kind)||arc.context_element!==proof.context_element||
+          typeof arc.hypercube_valid!=='boolean')||
+         row.valid!==row.assignments.every(arc=>arc.hypercube_valid===(arc.kind==='all')))fail();
+     }
+    }
     if(bounded){
      const numeric=f.numeric_type_provenance;
      if(!numeric||!qname(numeric.base_type)||!Array.isArray(numeric.derivation_path)||numeric.derivation_path.length>8||

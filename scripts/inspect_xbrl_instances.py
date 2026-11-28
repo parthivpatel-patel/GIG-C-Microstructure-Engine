@@ -6,8 +6,8 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from terminal.verification.artifacts import read_bytes,decode,write_private
 from terminal.stocks.xbrl_instance import selected_concepts,XBRLError
 from terminal.stocks.xbrl_collection import FilingCollection,MAX_BATCH,MAX_BATCH_BYTES
-from terminal.stocks.xbrl_dimensions import INHERITED_PROFILE,PROFILES as DIMENSIONAL_PROFILES
-from terminal.stocks.xbrl_dimensional_calculation import PROFILE as DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE
+from terminal.stocks.xbrl_dimensions import INHERITED_PROFILE,OPEN_CROSS_ROLE_PROFILE,PROFILES as DIMENSIONAL_PROFILES
+from terminal.stocks.xbrl_dimensional_calculation import PROFILE as DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE,EFFECTIVE_ROLE_CALCULATIONS
 from terminal.stocks.xbrl_types import BOUNDS_PROFILE
 from terminal.stocks.xbrl_calculation_report import WEIGHTED_PROFILE
 from terminal.stocks.inline_set import TRANSFORMATION_PROFILE
@@ -18,7 +18,7 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
  if statement_profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
  if statement_profile!='legacy-v1'and company_symbol is None:raise XBRLError('statement_profile_requires_company')
  if dimensional_profile not in(None,*DIMENSIONAL_PROFILES):raise XBRLError('xbrl_dimensional_profile_unsupported')
- if calculation_profile not in(None,DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE):
+ if calculation_profile not in(None,DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE,EFFECTIVE_ROLE_CALCULATIONS):
   raise XBRLError('xbrl_calculation_export_profile')
  if calculation_profile is not None and (company_symbol is None or dimensional_profile is not None or statement_role is not None):
   raise XBRLError('xbrl_calculation_export_requires_company_and_original_artifact')
@@ -148,12 +148,14 @@ def calculation_export(collection,entries,as_of,symbol,form,profile,role,embedde
  workspace.admit_xbrl_collection(symbol,collection)
  selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')
  source=selected['statement_view']['source_filing']
- graphs={}
+ graphs={};originals={}
  if source is not None and selected['statement_view']['status']!='AMBIGUOUS':
   accession=source['accession']
   for entry in entries:
    manifest=entry['documents'][0]['manifest'] if inline else entry['manifest']
    if manifest['accession']!=accession:continue
+   originals[accession]={'documents':entry['taxonomy_documents'] if inline else entry['documents'],
+                         'instance_uri':None if inline else entry['instance_uri']}
    if inline:
     if entry['taxonomy_documents'] is None:break
     references=[doc['manifest']['permission_reference'] for doc in sorted(entry['documents'], key=lambda doc:doc['uri'])]
@@ -165,9 +167,11 @@ def calculation_export(collection,entries,as_of,symbol,form,profile,role,embedde
         permission_reference=manifest['permission_reference'],embedded_profile=embedded_profile)
    break
  result=company_calculation_contract(workspace,symbol,as_of,graphs,role=role,form=form,
-     dimensional_profile=INHERITED_PROFILE if profile!=WEIGHTED_PROFILE else None,
+     dimensional_profile=(OPEN_CROSS_ROLE_PROFILE if profile==EFFECTIVE_ROLE_CALCULATIONS
+                          else INHERITED_PROFILE if profile!=WEIGHTED_PROFILE else None),
      numeric_profile=BOUNDS_PROFILE if profile==BOUND_NUMERIC_PROFILE else None,
-     weight_profile=WEIGHTED_PROFILE if profile in (WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE) else None)
+     weight_profile=WEIGHTED_PROFILE if profile in (WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE) else None,
+     dts_originals=originals if profile==EFFECTIVE_ROLE_CALCULATIONS else None)
  summary={'schema':'gig.sec.xbrl.company_calculation_summary.v1','status':result['status'],
           'reason':result['reason'],'symbol':symbol,'issuer_cik':collection.cik,'sha256':result['sha256'],
           'provider_requested':False,'raw_source_retained':False}
@@ -186,7 +190,7 @@ def main(argv=None):
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--batch',required=True);parser.add_argument('--as-of',required=True);parser.add_argument('--output');parser.add_argument('--allow-observed',action='store_true',help='Only for a separately authorized private supplied copy;does not fetch or grant rights')
  parser.add_argument('--dimensional-profile',choices=DIMENSIONAL_PROFILES)
  parser.add_argument('--inline-transformation-profile',choices=[TRANSFORMATION_PROFILE])
- parser.add_argument('--calculation-profile',choices=[DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE])
+ parser.add_argument('--calculation-profile',choices=[DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE,WEIGHTED_PROFILE,WEIGHTED_DIMENSIONAL_PROFILE,EFFECTIVE_ROLE_CALCULATIONS])
  parser.add_argument('--calculation-role')
  parser.add_argument('--accounting-roles',help='Local JSON mapping from filing accessions to explicit statement and accounting roles')
  parser.add_argument('--compare-at',action='append',default=[],help='Additional increasing acceptance cutoff for an adjacent statement comparison')

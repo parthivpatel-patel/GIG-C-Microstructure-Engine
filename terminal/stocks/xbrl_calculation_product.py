@@ -6,15 +6,18 @@ from .xbrl_calculation_report import bind_calculation_report,WEIGHTED_PROFILE
 from .xbrl_instance import digest,canonical,XBRLError
 MAX_OUTPUT=256*1024
 
-def company_calculation_contract(workspace,symbol,as_of,dts_graphs,*,role=None,form='10-K',rounding_mode='round-to-nearest',expected_collection_sha256=None,dimensional_profile=None,numeric_profile=None,weight_profile=None):
- from .xbrl_dimensions import INHERITED_PROFILE
+def company_calculation_contract(workspace,symbol,as_of,dts_graphs,*,role=None,form='10-K',rounding_mode='round-to-nearest',expected_collection_sha256=None,dimensional_profile=None,numeric_profile=None,weight_profile=None,dts_originals=None):
+ from .xbrl_dimensions import INHERITED_PROFILE,OPEN_CROSS_ROLE_PROFILE
  from .xbrl_types import BOUNDS_PROFILE
  if weight_profile not in(None,WEIGHTED_PROFILE):
   raise XBRLError('calculation_product_weight_scope')
- if dimensional_profile not in (None,INHERITED_PROFILE) or numeric_profile not in (None,BOUNDS_PROFILE):
+ if dimensional_profile not in (None,INHERITED_PROFILE,OPEN_CROSS_ROLE_PROFILE) or numeric_profile not in (None,BOUNDS_PROFILE):
   raise XBRLError('calculation_product_profile')
  if numeric_profile is not None and dimensional_profile is None:
   raise XBRLError('calculation_product_numeric_scope')
+ effective_roles=dimensional_profile==OPEN_CROSS_ROLE_PROFILE
+ if effective_roles and (type(dts_originals)is not dict or len(dts_originals)>32):
+  raise XBRLError('calculation_product_original_document_mapping')
  if type(dts_graphs)is not dict or len(dts_graphs)>32:raise XBRLError('calculation_product_graph_budget')
  if rounding_mode not in('round-to-nearest','truncation')or role is not None and(type(role)is not str or not 1<=len(role)<=512):raise XBRLError('calculation_product_query')
  # The existing selector is the authority for nanosecond cutoff/form/issuer and
@@ -24,16 +27,18 @@ def company_calculation_contract(workspace,symbol,as_of,dts_graphs,*,role=None,f
  result={'schema':'gig.backend.company_calculations.v1','instrument':copy.deepcopy(selected['instrument']),'as_of':as_of,'cutoff_ns':view['cutoff_ns'],'form_family':form,'role':role,'rounding_mode':rounding_mode,'collection_sha256':identity,'status':'UNAVAILABLE','reason':view['reason'],'lineage':None,'report':None,'complete_statements':False,'read_only':True,'provider_requested':False,'policy':'Independent latest acceptance-qualified filing and exact supplied DTS;no cross-filing filling,accounting aliases or ambiguous network selection'}
  if dimensional_profile is not None:
   result.update(schema='gig.backend.company_dimensional_calculations.v1',
-                dimensional_profile=dimensional_profile,numeric_profile=numeric_profile,weight_profile=weight_profile)
+                dimensional_profile=dimensional_profile,numeric_profile=numeric_profile,weight_profile=weight_profile,**original)
  if weight_profile is not None:
   result.update(schema=('gig.backend.company_dimensional_calculations.v2' if dimensional_profile is not None
                        else 'gig.backend.company_weighted_calculations.v1'),weight_profile=weight_profile)
+ if effective_roles:result['schema']='gig.backend.company_dimensional_calculations.v3'
  source=view['source_filing']
  if view['status']=='AMBIGUOUS':result['reason']='AMBIGUOUS_LATEST_FILING'
  elif source is not None and collection is not None:
   lineage=filing_lineage(collection,source['accession'],as_of);result['lineage']=lineage
   if lineage['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED'
   elif source['accession']not in dts_graphs:result['reason']='ORIGINAL_DTS_NOT_SUPPLIED'
+  elif effective_roles and source['accession'] not in dts_originals:result['reason']='ORIGINAL_DTS_DOCUMENTS_NOT_SUPPLIED'
   else:
    parsed=collection._filings[source['accession']]
    dts=dts_graphs[source['accession']]
@@ -41,8 +46,15 @@ def company_calculation_contract(workspace,symbol,as_of,dts_graphs,*,role=None,f
     report=bind_calculation_report(parsed,dts,role=role,rounding_mode=rounding_mode,weight_profile=weight_profile)
    else:
     from .xbrl_dimensional_calculation import bind_dimensional_calculation_report
+    original={}
+    if effective_roles:
+     original=dts_originals[source['accession']]
+     if type(original)is not dict or set(original)!={'documents','instance_uri'}:
+      raise XBRLError('calculation_product_document_recipe')
+     original={'original_documents':original['documents'],'instance_uri':original['instance_uri'],
+               'allow_observed':collection.allow_observed}
     report=bind_dimensional_calculation_report(parsed,dts,role=role,rounding_mode=rounding_mode,
-        dimensional_profile=dimensional_profile,numeric_profile=numeric_profile,weight_profile=weight_profile)
+        dimensional_profile=dimensional_profile,numeric_profile=numeric_profile,weight_profile=weight_profile,**original)
    result.update(status=report['status'],reason=report['reason'],role=report['role'],report=report)
  result['sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('calculation_product_output_budget')

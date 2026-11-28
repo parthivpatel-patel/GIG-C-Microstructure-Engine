@@ -9,7 +9,7 @@ from decimal import Decimal,InvalidOperation
 from . import sec
 from .xbrl_instance import X,L,tag,digest,canonical,XBRLError
 from .xbrl_binding import bind_declarations
-from .xbrl_dimensions import D,INHERITED_PROFILE,corroborate
+from .xbrl_dimensions import D,INHERITED_PROFILE,OPEN_CROSS_ROLE_PROFILE,corroborate
 from .xbrl_accuracy import ROUNDING_MODES,calculation_duplicates,calculation_consistency
 from .xbrl_relationships import PROFILE as REL_PROFILE,SUM
 from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE,_bound_sources,_resolve,_value_check
@@ -21,6 +21,8 @@ BOUND_NUMERIC_PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_BOUND_NUMERIC_CALCULATIONS_
 BOUND_NUMERIC_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v2'
 WEIGHTED_DIMENSIONAL_PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_DECIMAL_WEIGHT_CALCULATIONS_V3'
 WEIGHTED_DIMENSIONAL_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v3'
+EFFECTIVE_ROLE_CALCULATIONS='SOURCE_BOUND_EFFECTIVE_ROLE_EXPLICIT_CALCULATIONS_V4'
+EFFECTIVE_ROLE_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v4'
 MAX_OUTPUT=4*1024*1024;MAX_BINDINGS=128
 QNAME=re.compile(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}\Z')
 
@@ -69,11 +71,12 @@ def _global_defaults(dts,docmap):
   if default not in members:raise XBRLError('dimcalc_default_outside_domain')
  return defaults,sources
 
-def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE,numeric_profile=None,weight_profile=None):
+def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE,numeric_profile=None,weight_profile=None,original_documents=None,instance_uri=None,allow_observed=False):
  if weight_profile not in (None,WEIGHTED_PROFILE):raise XBRLError('dimcalc_weight_profile_unsupported')
  weighted=weight_profile==WEIGHTED_PROFILE
  if numeric_profile not in (None,BOUNDS_PROFILE):raise XBRLError('dimcalc_numeric_profile_unsupported')
- if dimensional_profile!=INHERITED_PROFILE:raise XBRLError('dimcalc_profile_unsupported')
+ effective_roles=dimensional_profile==OPEN_CROSS_ROLE_PROFILE
+ if dimensional_profile not in (INHERITED_PROFILE,OPEN_CROSS_ROLE_PROFILE):raise XBRLError('dimcalc_profile_unsupported')
  if type(rounding_mode)is not str or rounding_mode not in ROUNDING_MODES:raise XBRLError('dimcalc_rounding_mode')
  if role is not None and(type(role)is not str or not 1<=len(role)<=512):raise XBRLError('dimcalc_role')
  _identity(parsed,'canonical_sha256','dimcalc_parsed_identity');_identity(dts,'canonical_sha256','dimcalc_dts_identity')
@@ -112,9 +115,25 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
    if (None if s['accepted_at']is None else sec.acceptance_ns(s['accepted_at']))!=(None if source['accepted_at']is None else sec.acceptance_ns(source['accepted_at'])):raise XBRLError('dimcalc_inline_identity')
    uris.add(uri);expected.append({'uri':uri,'source_sha256':s['source_sha256']})
   if expected!=dts.get('original_inline_documents'):raise XBRLError('dimcalc_inline_identity')
- defaults,default_sources=_global_defaults(dts,docmap)
- # Recompute complete positive assignment proof from original source identities.
- derived=corroborate(bound,dts,profile=INHERITED_PROFILE);drs=derived['dts_corroboration']['dimensional_validation'];records={r['source_fact_id']:r for r in drs['facts']}
+ if effective_roles:
+  derived=corroborate(bound,dts,profile=dimensional_profile,documents=original_documents,
+                      allow_observed=allow_observed,instance_uri=instance_uri)
+  drs=derived['dts_corroboration']['dimensional_validation']
+  arcs=drs['effective_relationships']
+  if any(a['kind']=='dimension-default' for a in arcs):raise XBRLError('dimcalc_effective_global_defaults_unsupported')
+  defaults,default_sources={},{}
+  roles=sorted({a['role']for a in arcs if a['kind']in ('all','notAll')})
+  definition={'roles':roles,'relationships':arcs}
+  definition_role=None
+  definition_documents={a['source_uri']for a in arcs}
+ else:
+  defaults,default_sources=_global_defaults(dts,docmap)
+  derived=corroborate(bound,dts,profile=dimensional_profile)
+  drs=derived['dts_corroboration']['dimensional_validation']
+  definition=dts['definition']
+  definition_role=definition[0]['role']
+  definition_documents={a['source_uri']for a in definition[0]['arcs']}
+ records={r['source_fact_id']:r for r in drs['facts']}
  if len(records)!=len(drs['facts']):raise XBRLError('dimcalc_drs_duplicate_fact')
  rels=dts.get('effective_relationships');_identity(rels,'sha256','dimcalc_relationship_identity')
  if rels.get('profile')!=REL_PROFILE or type(rels.get('networks'))is not list or len(rels['networks'])>64:raise XBRLError('dimcalc_relationship_profile')
@@ -151,7 +170,8 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
   if context is None or context['semantic_sha256']!=fact['context_sha256']or(fact['unit_ref']is not None and(unit is None or unit['semantic_sha256']!=fact['unit_sha256'])):raise XBRLError('dimcalc_fact_aspect_identity')
   if fact['concept']not in participants:continue
   r=records.get(fact['source_fact_id'])
-  if r is None or r['status']!='VALIDATED_RESTRICTED_EXPLICIT_CONTEXT':raise XBRLError('dimcalc_participant_drs_proof_required')
+  expected_status='VALIDATED_RESTRICTED_ALTERNATIVE_CROSS_ROLE_CONTEXT' if effective_roles else 'VALIDATED_RESTRICTED_EXPLICIT_CONTEXT'
+  if r is None or r['status']!=expected_status:raise XBRLError('dimcalc_participant_drs_proof_required')
   if unit is None:raise XBRLError('dimcalc_participant_unit_required')
   placements.add(r['context_element'])
   if len(placements)>1:raise XBRLError('dimcalc_mixed_context_placement')
@@ -183,11 +203,14 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
     'documents':[{'uri':uri,'sha256':docmap[uri]}for uri in dependencies]}
   lineage[fact['source_fact_id']]=record;footprint+=len(canonical(record))
   if footprint>MAX_OUTPUT:raise XBRLError('dimcalc_output_budget')
- result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':'NO_SUPPORTED_PARENT_DATA_POINTS','rounding_mode':rounding_mode,'dimensional_profile':INHERITED_PROFILE,'role':net['role'],'definition_role':dts['definition'][0]['role'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'drs_proof_sha256':digest(drs),'definition_sha256':digest(dts['definition']),'source_filing':copy.deepcopy(source),'global_default_dimensions':defaults,'default_provenance':default_sources,'definition_documents':[{'uri':u,'sha256':docmap[u]}for u in sorted({a['source_uri']for a in dts['definition'][0]['arcs']})],'fact_provenance':lineage,'bindings':[],'selected_reported_value':None,'limitations':['Positive inherited/conjunctive explicit DRS V3 only;no typed,negative,opaque,forever,cross-role or mixed context placement','Global defaults are derived calculation aspects only;original source contexts and facts are unchanged','Not complete OIM/XDT/Calc1.1 conformance,independent source authentication or accounting equivalence']}
+ result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':'NO_SUPPORTED_PARENT_DATA_POINTS','rounding_mode':rounding_mode,'dimensional_profile':dimensional_profile,'role':net['role'],'definition_role':definition_role,'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'drs_proof_sha256':digest(drs),'definition_sha256':digest(definition),'source_filing':copy.deepcopy(source),'global_default_dimensions':defaults,'default_provenance':default_sources,'definition_documents':[{'uri':u,'sha256':docmap[u]}for u in sorted(definition_documents)],'fact_provenance':lineage,'bindings':[],'selected_reported_value':None,'limitations':['Positive inherited/conjunctive explicit DRS V3 only;no typed,negative,opaque,forever,cross-role or mixed context placement','Global defaults are derived calculation aspects only;original source contexts and facts are unchanged','Not complete OIM/XDT/Calc1.1 conformance,independent source authentication or accounting equivalence']}
  if numeric_profile==BOUNDS_PROFILE:
   result.update(schema=BOUND_NUMERIC_SCHEMA,profile=BOUND_NUMERIC_PROFILE,numeric_profile=numeric_profile)
  if weighted:
   result.update(schema=WEIGHTED_DIMENSIONAL_SCHEMA,profile=WEIGHTED_DIMENSIONAL_PROFILE,weight_profile=weight_profile)
+ if effective_roles:
+  result.update(schema=EFFECTIVE_ROLE_SCHEMA,profile=EFFECTIVE_ROLE_CALCULATIONS,definition_roles=roles)
+  result['limitations'][0]='Original-source effective explicit open/closed role proof;global defaults,typed dimensions and mixed context placement are outside this profile'
  for parent,arcs in sorted(parents.items()):
   for (concept,key),rows in sorted(groups.items()):
    if concept!=parent:continue
