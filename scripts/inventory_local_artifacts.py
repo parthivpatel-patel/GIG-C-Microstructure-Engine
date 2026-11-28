@@ -109,7 +109,7 @@ def select_os_release(preferred=Path('/etc/os-release'),vendor=Path('/usr/lib/os
   return vendor
  return None
 
-def dpkg_status(reader,path):
+def dpkg_status(reader,path,*,multi_arch=None):
  """Read a bounded passive status database, retaining exact identity/status fields."""
  raw=reader.read(path,MAX_OS_DATABASE)
  try:lines=raw.decode('utf-8').splitlines()
@@ -126,6 +126,7 @@ def dpkg_status(reader,path):
   if len(tokens)!=3 or tokens[0]not in('unknown','install','hold','deinstall','purge')or tokens[1]not in('ok','reinstreq')or tokens[2]not in('not-installed','config-files','half-installed','unpacked','half-configured','triggers-awaited','triggers-pending','installed'):raise InventoryError('inventory_dpkg_status')
   identity=(name,architecture)
   if identity in identities:raise InventoryError('inventory_duplicate_os_package')
+  if multi_arch is not None:multi_arch[identity]=fields.get('multi-arch','no')
   identities.add(identity);packages.append({'package':name,'version':version,'architecture':architecture,'status':status,'selection':tokens[0],'error_flag':tokens[1],'installation_state':tokens[2],'source_stanza':len(packages)+1})
   fields={};current=None;stanza_bytes=0
  for line in lines:
@@ -148,7 +149,7 @@ def dpkg_status(reader,path):
  if not packages:raise InventoryError('inventory_dpkg_empty')
  return {'schema':'gig.security.dpkg_status_inventory.v1','source':str(path),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'records':len(packages),'installed_state_records':sum(p['installation_state']=='installed'for p in packages),'installed_ok_records':sum(p['installation_state']=='installed'and p['error_flag']=='ok'for p in packages),'packages':sorted(packages,key=lambda p:(p['package'],p['architecture'])),'scope':'Exact Package,Version,Architecture,Status from this supplied dpkg status database; source stanza retained; not every machine or package manager','package_file_integrity':'NOT_VERIFIED','vendor_advisory_match':'NOT_RUN'}
 
-def build(root,venv,site_packages,native_artifacts,source_commit,*,os_release_path=None,dpkg_status_path=None):
+def build(root,venv,site_packages,native_artifacts,source_commit,*,os_release_path=None,dpkg_status_path=None,dpkg_file_request=None):
  root=Path(root).absolute();no_links(root)
  if not root.is_dir()or type(source_commit)is not str or not re.fullmatch('[0-9a-f]{40}',source_commit):raise InventoryError('inventory_root_or_revision')
  env=inside(root/relative(venv),root);site=inside(root/relative(site_packages),env)
@@ -198,10 +199,18 @@ def build(root,venv,site_packages,native_artifacts,source_commit,*,os_release_pa
   seen.add(name);data=reader.read(path);natives.append({'path':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'header':elf(data),'software_version':None,'version_authority':'Not independently encoded by an ELF header;no version inferred from filename','dynamic_dependencies':'NOT_RESOLVED_OR_EXECUTED'})
  release_path=approved_system_or_fixture(os_release_path,root,(Path('/etc/os-release'),Path('/usr/lib/os-release')))if os_release_path is not None else None
  status_path=approved_system_or_fixture(dpkg_status_path,root,(Path('/var/lib/dpkg/status'),))if dpkg_status_path is not None else None
- system_packages=dpkg_status(reader,status_path)if status_path is not None else None
+ multi_arch={}if dpkg_file_request is not None else None
+ system_packages=dpkg_status(reader,status_path,multi_arch=multi_arch)if status_path is not None else None
  release=os_release(reader,release_path)if release_path is not None else None
  if release is not None and system_packages is not None:release['package_database_inventory']='INCLUDED_DPKG_STATUS_ONLY'
  result={'schema':'gig.security.local_artifact_inventory.v1','profile':'PASSIVE_RECORDED_ARTIFACTS_DPKG_V1','source_commit_label':source_commit,'scope':'CURRENT_LOCAL_EXECUTOR_ONLY','target_environment_qualified':False,'python_runtime':{'version':sys.version,'implementation':sys.implementation.name,'cache_tag':sys.implementation.cache_tag,'executable_artifact_hashed':False},'python_scope':{'venv':venv,'site_packages':site_packages,'distributions':len(distributions),'unique_recorded_artifacts':len(all_paths),'records_without_declared_digest':unhashed,'unrecorded_site_files':'NOT_SCANNED','stdlib_interpreter_and_system_libraries':'NOT_INCLUDED'},'python_distributions':distributions,'explicit_native_artifacts':natives,'os_release':release,'os_packages':system_packages,'advisories':{'status':'NOT_RUN','retained_source_supplied':False,'vulnerability_absence_established':False},'coverage_gaps':['No deployed target or private edge evidence','No unrecorded-file,OS package-file integrity,ELF dependency closure or kernel inventory','RECORD verification is self-consistency,not registry or publisher authentication','No vulnerability database supplied or matched;no security clearance','No concurrent hostile namespace replacement guarantee'],'provider_requested':False}
+ if dpkg_file_request is not None:
+  if __package__:from .inventory_dpkg_files import verify,MAX_REQUEST
+  else:from inventory_dpkg_files import verify,MAX_REQUEST
+  request_path=inside(root/relative(dpkg_file_request),root)
+  result['dpkg_file_integrity']=verify(reader,reader.read(request_path,MAX_REQUEST),status_path,system_packages,multi_arch)
+  system_packages['package_file_integrity']='VERIFIED_EXPLICIT_SELECTION_ONLY'
+  result['coverage_gaps'][1]='No unrecorded-file,unselected OS package-file integrity,ELF dependency closure or kernel inventory'
  result['sha256']=hashlib.sha256(canonical(result)).hexdigest()
  if len(canonical(result))>MAX_OUTPUT:raise InventoryError('inventory_output_budget')
  return result
@@ -212,8 +221,8 @@ def write_new(path,data):
  with os.fdopen(fd,'wb')as stream:stream.write(data)
 
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--root',type=Path,required=True);parser.add_argument('--venv',required=True);parser.add_argument('--site-packages',required=True);parser.add_argument('--native-artifact',action='append',default=[]);parser.add_argument('--source-commit',required=True);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--root',type=Path,required=True);parser.add_argument('--venv',required=True);parser.add_argument('--site-packages',required=True);parser.add_argument('--native-artifact',action='append',default=[]);parser.add_argument('--source-commit',required=True);parser.add_argument('--dpkg-file-request',help='Root-relative selection of installed files and exact status/control source hashes');parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
  # Fixed passive OS sources only. The normal etc-to-vendor alias is validated.
  release=select_os_release();status_path=Path('/var/lib/dpkg/status');status_path=status_path if status_path.exists()or status_path.is_symlink()else None
- result=build(args.root,args.venv,args.site_packages,args.native_artifact,args.source_commit,os_release_path=release,dpkg_status_path=status_path);write_new(args.output,canonical(result));print(json.dumps({'distributions':result['python_scope']['distributions'],'artifacts':result['python_scope']['unique_recorded_artifacts'],'native_artifacts':len(result['explicit_native_artifacts']),'os_package_records':result['os_packages']['records']if result['os_packages']is not None else None,'os_installed_ok':result['os_packages']['installed_ok_records']if result['os_packages']is not None else None,'inventory_sha256':result['sha256'],'advisory_scan':'NOT_RUN','target_qualified':False},sort_keys=True))
+ result=build(args.root,args.venv,args.site_packages,args.native_artifact,args.source_commit,os_release_path=release,dpkg_status_path=status_path,dpkg_file_request=args.dpkg_file_request);write_new(args.output,canonical(result));print(json.dumps({'distributions':result['python_scope']['distributions'],'artifacts':result['python_scope']['unique_recorded_artifacts'],'native_artifacts':len(result['explicit_native_artifacts']),'os_package_records':result['os_packages']['records']if result['os_packages']is not None else None,'os_installed_ok':result['os_packages']['installed_ok_records']if result['os_packages']is not None else None,'inventory_sha256':result['sha256'],'advisory_scan':'NOT_RUN','target_qualified':False},sort_keys=True))
 if __name__=='__main__':main()

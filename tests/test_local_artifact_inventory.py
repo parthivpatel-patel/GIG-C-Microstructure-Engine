@@ -23,6 +23,65 @@ class LocalArtifacts(unittest.TestCase):
   out=io.StringIO(newline='');csv.writer(out,lineterminator='\n').writerows(self.rows);(self.info/'RECORD').write_text(out.getvalue())
  def build(self,**kw):
   return inv.build(self.root,'env','env/lib/site-packages',kw.pop('native',['native.so']),SHA,**kw)
+ def dpkg_selection(self):
+  payload=b'authored installed executable'
+  target=self.root/'usr/bin/demo';target.parent.mkdir(parents=True);target.write_bytes(payload)
+  status=self.root/'var/lib/dpkg/status';info=status.parent/'info';info.mkdir(parents=True)
+  status.write_text('Package: demo\nVersion: 1.2.3\nArchitecture: amd64\n'
+                    'Status: install ok installed\nMulti-Arch: same\n')
+  sums=info/'demo:amd64.md5sums'
+  recorded=hashlib.md5(payload,usedforsecurity=False).hexdigest()
+  sums.write_text(f'{recorded}  usr/bin/demo\n')
+  request={'schema':'gig.security.selected_dpkg_files.v1',
+           'status_sha256':hashlib.sha256(status.read_bytes()).hexdigest(),
+           'packages':[{'package':'demo','architecture':'amd64','version':'1.2.3',
+                        'md5sums_sha256':hashlib.sha256(sums.read_bytes()).hexdigest(),
+                        'files':['usr/bin/demo']}]}
+  return status,sums,target,request
+
+ def test_selected_dpkg_file_binds_status_control_and_observed_bytes(self):
+  status,sums,target,request=self.dpkg_selection()
+  (self.root/'selected.json').write_text(json.dumps(request))
+  result=self.build(dpkg_status_path=status,dpkg_file_request='selected.json')
+  selected=result['dpkg_file_integrity']
+  package=selected['packages'][0]
+  self.assertEqual(selected['files_checked'],1)
+  self.assertEqual(package['md5sums_sha256'],request['packages'][0]['md5sums_sha256'])
+  self.assertEqual(package['files'][0]['observed_sha256'],hashlib.sha256(target.read_bytes()).hexdigest())
+  self.assertEqual(package['md5sums_path'],'var/lib/dpkg/info/demo:amd64.md5sums')
+  self.assertEqual(result['os_packages']['package_file_integrity'],'VERIFIED_EXPLICIT_SELECTION_ONLY')
+  self.assertFalse(selected['publisher_authenticated'])
+  self.assertNotIn('dpkg_file_integrity',self.build(dpkg_status_path=status))
+
+ def test_selected_dpkg_file_rejects_byte_substitution_and_symlink(self):
+  status,sums,target,request=self.dpkg_selection()
+  path=self.root/'selected.json';path.write_text(json.dumps(request))
+  native=target.read_bytes()
+  target.write_bytes(b'changed')
+  with self.assertRaisesRegex(inv.InventoryError,'file_digest_mismatch'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+  target.unlink();target.symlink_to(self.native)
+  with self.assertRaisesRegex(inv.InventoryError,'inventory_symlink'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+  target.unlink();target.write_bytes(native)
+  sums.write_bytes(sums.read_bytes()+b'\n')
+  with self.assertRaisesRegex(inv.InventoryError,'md5sums_digest_mismatch'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+  status.write_bytes(status.read_bytes()+b'\n')
+  with self.assertRaisesRegex(inv.InventoryError,'status_digest_mismatch'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+
+ def test_selected_dpkg_request_rejects_duplicate_keys_and_unlisted_files(self):
+  status,_,_,request=self.dpkg_selection()
+  path=self.root/'selected.json'
+  path.write_text(json.dumps(request)[:-1]+',"packages":[]}')
+  with self.assertRaisesRegex(inv.InventoryError,'duplicate_key'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+  request['packages'][0]['files']=['usr/bin/other']
+  path.write_text(json.dumps(request))
+  with self.assertRaisesRegex(inv.InventoryError,'file_unlisted'):
+   self.build(dpkg_status_path=status,dpkg_file_request=path.name)
+
  def test_exact_installed_identity_receipts_and_explicit_coverage(self):
   with patch.object(socket.socket,'connect',side_effect=AssertionError('NO_NETWORK')),patch.object(socket.socket,'bind',side_effect=AssertionError('NO_SERVER')):p=self.build(os_release_path=self.release)
   self.assertEqual(p['python_distributions'][0]['name'],'demo-pkg');self.assertEqual(p['python_distributions'][0]['declared_name'],'Demo_Pkg');self.assertEqual(p['python_distributions'][0]['version'],'1.2.3');self.assertEqual(p['python_scope']['unique_recorded_artifacts'],3);self.assertEqual(p['python_scope']['records_without_declared_digest'],1)
