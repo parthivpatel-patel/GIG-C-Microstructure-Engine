@@ -44,6 +44,55 @@ class StockWorkspace:
         coordinator=FilingIngestor(identity['cik'],transport=transport,permission=lambda:self.permission('sec'),enabled=enabled,origin=self.origin,allow_observed=allow_observed,permission_reference=permission_reference,taxonomy_urls=taxonomy_urls,clock=self.clock,rate_owner=self,**options)
         self.filing_ingestors[symbol]=coordinator
         return coordinator
+    def _sec_filing_permission(self):
+        from .sec_config import enabled
+        if not enabled(self.environment.get('GIG_SEC_XBRL_INGEST_ENABLED')):
+            raise AccessError('sec_xbrl_ingestion_gate_required')
+        reference=self.environment.get('GIG_SEC_XBRL_PERMISSION_REFERENCE')
+        if (type(reference) is not str or not 1<=len(reference)<=256
+                or any(ord(c)<32 or ord(c)==127 for c in reference)):
+            raise AccessError('sec_xbrl_processing_reference_required')
+        self.permission('sec')
+        return reference
+
+    def sec_filing_readiness(self,symbol):
+        issuer=self.resolve(symbol)
+        try:
+            if self.origin!='OBSERVED_OFFICIAL_RESPONSE' or not issuer.get('cik'):
+                raise AccessError('sec_issuer_identity_unavailable')
+            reference=self._sec_filing_permission()
+            incumbent=self.filing_ingestors.get(symbol)
+            if incumbent is not None and incumbent.reference!=reference:
+                raise AccessError('sec_xbrl_processing_reference_changed')
+        except AccessError as exc:
+            return {'schema':'gig.sec.filing_acquisition.readiness.v1','ready':False,
+                    'symbol':symbol,'cik':issuer.get('cik'),'reason':str(exc)}
+        return {'schema':'gig.sec.filing_acquisition.readiness.v1','ready':True,
+                'symbol':symbol,'cik':issuer['cik'],'reason':None}
+
+    def authorized_sec_filing_ingestor(self,symbol):
+        from .sec_read_wire import SECReadWire
+        readiness=self.sec_filing_readiness(symbol)
+        if not readiness['ready']:raise AccessError(readiness['reason'])
+        known=self.filing_ingestors.get(symbol)
+        if known is not None:
+            if not isinstance(known.transport,SECReadWire) or known.cik!=readiness['cik']:
+                raise AccessError('sec_xbrl_coordinator_scope_changed')
+            return known
+        reference=self._sec_filing_permission()
+        configured=self.environment.get('GIG_SEC_XBRL_TAXONOMY_URLS','')
+        if type(configured) is not str or len(configured)>16384:
+            raise AccessError('sec_xbrl_taxonomy_allowlist')
+        urls=tuple(value.strip() for value in configured.split(',')) if configured else ()
+        def permission():
+            if self._sec_filing_permission()!=reference:
+                raise AccessError('sec_xbrl_processing_reference_changed')
+            return self.permission('sec')
+        coordinator=self.create_sec_filing_ingestor(symbol,transport=SECReadWire(),enabled=True,
+            allow_observed=True,permission_reference=reference,taxonomy_urls=urls)
+        coordinator.permission=permission
+        return coordinator
+
     def install_sec_filing_result(self,symbol):
         coordinator=self.filing_ingestors.get(symbol)
         if coordinator is None or coordinator.state not in('ACCEPTED','PAUSED_RESTORED'):raise AccessError('sec_ingestor_result_not_admitted')

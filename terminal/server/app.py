@@ -712,6 +712,50 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             return await analysis.run(partial(company_contract,stocks,request.path_params['symbol'],q['at'],role=q.get('role'),form=q.get('form','10-K'),profile=q.get('profile','legacy-v1')))
         except (ValueError,KeyError,TypeError,OverflowError):return error('XBRL_STATEMENT_UNAVAILABLE','invalid identity,cutoff or supplied XBRL contract',422)
 
+    @route('/api/v2/sec-filings/readiness', methods=['GET'])
+    @json_endpoint
+    async def sec_filing_readiness(request: Request):
+        q=request.query_params
+        if set(q)!={'symbol'} or len(q.multi_items())!=1:
+            return error('SEC_FILING_QUERY','expected one explicit security symbol',422)
+        try:
+            return stocks.sec_filing_readiness(q['symbol'])
+        except (ValueError,KeyError):
+            return error('SEC_FILING_QUERY','unknown security identity',422)
+
+    @route('/api/v2/sec-filings/acquire', methods=['POST'])
+    @json_endpoint
+    async def sec_filing_acquire(request: Request):
+        from terminal.stocks.sec_filing_ingest import IngestError
+        value=await bounded_json(request)
+        action=value.get('action')
+        if action=='discover':
+            required={'action','symbol','start','end'}
+            optional={'max_shards','max_filings'}
+        elif action=='ingest':
+            required={'action','symbol','accession'}
+            optional={'document','amends_accession','metadata_shard','inline_manifest','transformation_profile'}
+        else:
+            return error('SEC_FILING_QUERY','expected explicit discovery or filing acquisition',422)
+        if not required<=value.keys()<=required|optional:
+            return error('SEC_FILING_QUERY','unexpected or missing filing acquisition fields',422)
+        try:
+            symbol=value['symbol']
+            coordinator=stocks.authorized_sec_filing_ingestor(symbol)
+            options={key:value[key] for key in optional if key in value}
+            if action=='discover':
+                return await coordinator.discover_filings(start=value['start'],end=value['end'],**options)
+            receipt=await coordinator.ingest(value['accession'],**options)
+            # Installation is explicit and rechecks the same observed processing grant.
+            if stocks.authorized_sec_filing_ingestor(symbol) is not coordinator:
+                raise IngestError('sec_xbrl_coordinator_scope_changed')
+            stocks.install_sec_filing_result(symbol)
+            return {**receipt,'installed':True,'accession':value['accession']}
+        except IngestError as exc:
+            return error('SEC_FILING_REJECTED',str(exc),429 if str(exc)=='sec_ingest_busy' else 422)
+        except (ValueError,TypeError,KeyError,OverflowError,TimeoutError):
+            return error('SEC_FILING_UNAVAILABLE','filing identity, source or processing authorization unavailable',422)
+
     @route('/api/v2/companies/{symbol}/historical', methods=['GET'])
     @json_endpoint
     async def historical_v2(request):
