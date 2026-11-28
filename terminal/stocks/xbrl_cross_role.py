@@ -6,6 +6,11 @@ from .xbrl_dts import XS,uri,walk
 D='http://xbrl.org/2005/xbrldt';ARC='http://xbrl.org/int/dim/arcrole/'
 PROFILE='ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7';STANDARD='http://www.xbrl.org/2003/role/link'
 KINDS={'all','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
+OTHER_LINKS={tag(L,k) for k in ('presentationLink','calculationLink','labelLink','referenceLink')}
+OTHER_DEFINITION_ARCROLES={
+ 'http://www.xbrl.org/2003/arcrole/essence-alias',
+ 'http://www.xbrl.org/2003/arcrole/requires-element',
+}
 MAX_OUTPUT=8*1024*1024
 
 def _role(value):
@@ -55,23 +60,30 @@ def _read(parsed,dts,supplied,*,effective=False,negative=False):
      if c.name==tag(L,'usedOn'):
       if c.attrs or c.children:raise XBRLError('drs_cross_used_on')
       used.append(qname(c.text().strip(),c))
-    if tag(L,'definitionLink')not in used or len(used)!=len(set(used)):raise XBRLError('drs_cross_role_used_on')
-    if id_ is not None:role_types[key+'#'+id_]=(role,node.source_ordinal)
+    definition_used=tag(L,'definitionLink')in used
+    if not used or len(used)!=len(set(used)) or not definition_used and not set(used)<=OTHER_LINKS:raise XBRLError('drs_cross_role_used_on')
+    if id_ is not None:role_types[key+'#'+id_]=(role,node.source_ordinal,definition_used)
   for node in root.children:
    if node.name==tag(XS,'element')and node.attrs.get('id')is not None:locators[key+'#'+node.attrs['id']]=tag(root.attrs['targetNamespace'],node.attrs['name'])
  arcs=[];refs=[];links=0
  for key,root in roots.items():
   if kinds[key]!='linkbase':continue
-  declared={}
+  declared={};all_roles=set()
   for child in root.children:
    if child.name!=tag(L,'roleRef'):continue
    if set(child.attrs)!={'roleURI',tag(XL,'type'),tag(XL,'href')}or child.attrs[tag(XL,'type')]!='simple'or child.children or child.text().strip():raise XBRLError('drs_cross_role_ref_structure')
    role=_role(child.attrs['roleURI']);target=uri(urljoin(key,child.attrs[tag(XL,'href')]),fragment=True);schema,id_=urldefrag(target)
-   if role in declared or schema not in supplied or kinds[schema]!='schema'or not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',id_)or target not in role_types or role_types[target][0]!=role:raise XBRLError('drs_cross_role_not_resolved')
+   if role in all_roles or schema not in supplied or kinds[schema]!='schema'or not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',id_)or target not in role_types or role_types[target][0]!=role:raise XBRLError('drs_cross_role_not_resolved')
+   all_roles.add(role)
+   if len(all_roles)>128:raise XBRLError('drs_cross_role_ref_budget')
+   if not role_types[target][2]:continue
    declared[role]=target;refs.append({'source_uri':key,'source_sha256':supplied[key]['sha256'],'role':role,'role_type_uri':target,'schema_sha256':supplied[schema]['sha256'],'role_type_node_ordinal':role_types[target][1]})
    if len(refs)>128:raise XBRLError('drs_cross_role_ref_budget')
   for link in root.children:
    if link.name==tag(L,'roleRef'):continue
+   if link.name in OTHER_LINKS:
+    if link.attrs.get(tag(XL,'type'))!='extended':raise XBRLError('drs_cross_non_definition_link')
+    continue
    if link.name!=tag(L,'definitionLink'):raise XBRLError('drs_cross_linkbase_content_unsupported')
    links+=1
    if links>64:raise XBRLError('drs_cross_network_budget')
@@ -88,9 +100,11 @@ def _read(parsed,dts,supplied,*,effective=False,negative=False):
     labels[label]=concept
    for node in link.children:
     if node.name==tag(L,'loc'):continue
-    a=node.attrs;kind=a.get(tag(XL,'arcrole'),'').removeprefix(ARC)
+    a=node.attrs;arcrole=a.get(tag(XL,'arcrole'),'');kind=arcrole.removeprefix(ARC)
     allowed={tag(XL,k)for k in('type','from','to','arcrole')}|{'order','priority','use'}|{tag(D,k)for k in('closed','contextElement','targetRole','usable')}
-    if node.name!=tag(L,'definitionArc')or node.children or node.text().strip()or a.get(tag(XL,'type'))!='arc'or kind not in kinds_allowed or not a.get(tag(XL,'arcrole'),'').startswith(ARC)or a.get(tag(XL,'from'))not in labels or a.get(tag(XL,'to'))not in labels:raise XBRLError('drs_cross_arc_structure_or_unsupported')
+    if node.name!=tag(L,'definitionArc')or node.children or node.text().strip()or a.get(tag(XL,'type'))!='arc'or a.get(tag(XL,'from'))not in labels or a.get(tag(XL,'to'))not in labels:raise XBRLError('drs_cross_arc_structure_or_unsupported')
+    if arcrole in OTHER_DEFINITION_ARCROLES:continue
+    if kind not in kinds_allowed or not arcrole.startswith(ARC):raise XBRLError('drs_cross_arc_structure_or_unsupported')
     if set(a)-allowed or a.get(tag(D,'usable'),'true')not in('true','1'):raise XBRLError('drs_cross_precedence_or_unusable_unsupported')
     if effective:
      if not re.fullmatch('[+-]?[0-9]{1,6}',a.get('priority','0'))or a.get('use','optional')not in('optional','prohibited'):raise XBRLError('drs_effective_priority_or_use')
