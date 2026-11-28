@@ -101,6 +101,26 @@ class Backfill(unittest.IsolatedAsyncioTestCase):
             with self.assertRaisesRegex(WireError, 'gap_unavailable'):
                 await backfill(current, historical(wire), gap['gap_id'])
 
+    async def test_intent_only_restart_preserves_the_verified_old_observation_boundary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = ObservationStore(directory, clock=lambda: 100.)
+            previous = fixture_live(store)
+            previous.process(msgpack.packb([quote('2024-01-02T14:30:00.000000001Z')]))
+            interrupted = fixture_live(store)
+            interrupted.restore_control()
+            interrupted.generation += 1
+            interrupted.persist_control()  # A new intent with no accepted source frame.
+            current = fixture_live(store)
+            restored = current.restore_control()
+            self.assertEqual(restored['previous_accepted_receipt'], 0)
+            self.assertEqual(restored['observation_boundary']['capture'], previous.source_session_id)
+            current.generation += 1
+            current.phase = 'SUBSCRIBED'
+            current.process(msgpack.packb([quote('2024-01-02T14:30:00.000000003Z')]))
+            gap, = gaps(current)
+            self.assertEqual(gap['previous_capture'], previous.source_session_id)
+            self.assertEqual(gap['previous_receipt'], 1)
+
     async def test_generation_change_during_acquisition_rejects_result(self):
         live = observations()
         gap, = gaps(live)

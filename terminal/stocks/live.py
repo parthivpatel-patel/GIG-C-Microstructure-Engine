@@ -126,7 +126,7 @@ class LiveIEX:
             symbol,kind=event.get('symbol'),event.get('kind')
             if (type(symbol) is not str or symbol not in control['symbols'] or
                 type(kind) is not str or KINDS.get(kind) not in control['channels'] or
-                event.get('source_session_id')!=control['source_session_id'] or
+                event.get('source_session_id')!=value['capture'] or
                 event.get('out_of_order') is not False or
                 type(event.get('generation')) is not int or not 0<=event['generation']<=control['generation'] or
                 type(event.get('timestamp')) is not str or len(event['timestamp'])>40):

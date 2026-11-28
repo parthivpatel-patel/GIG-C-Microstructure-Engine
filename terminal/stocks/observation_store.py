@@ -176,10 +176,9 @@ class ObservationStore:
    db.execute('BEGIN')
    envelope=live_checkpoint.read(db,self._metadata(db))
    def visit_capture(value):
-    control=envelope['control']
-    if (value['capture']==control['source_session_id'] and
-        value['event']['receipt_index']<=control['accepted_receipt']):
-     visit(control,value)
+    if (value['capture']==envelope['capture'] and
+        value['event']['receipt_index']<=int(envelope['receipt'])):
+     visit(envelope['control'],value)
    self._recover_rows(db,materialize=False,visit=visit_capture if envelope and visit is not None else None)
    return envelope
  def _recover_rows(self,db,*,materialize=True,visit=None):
