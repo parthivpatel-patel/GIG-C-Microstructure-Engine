@@ -21,20 +21,31 @@ def read_bytes(path,limit=1024*1024):
     path=Path(path).absolute()
     if any(p.is_symlink()for p in (path,*path.parents)):raise EvidenceError('artifact_symlink')
     try:
-        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+        flags=os.O_RDONLY|os.O_NOFOLLOW|os.O_DIRECTORY
+        directory=os.open(path.anchor,flags)
+        try:
+            for component in path.parts[1:-1]:
+                child=os.open(component,flags,dir_fd=directory)
+                old=directory
+                directory=child
+                os.close(old)
+            fd=os.open(path.name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=directory)
+        finally:
+            os.close(directory)
         try:
             before=os.fstat(fd)
             if not stat.S_ISREG(before.st_mode):raise EvidenceError('artifact_not_regular')
             if before.st_size>limit:raise EvidenceError('artifact_byte_budget')
-            parts=[];remaining=before.st_size
-            while remaining:
-                block=os.read(fd,min(65536,remaining))
+            data=bytearray(before.st_size)
+            written=0
+            while written<before.st_size:
+                block=os.read(fd,min(65536,before.st_size-written))
                 if not block:raise EvidenceError('artifact_changed')
-                parts.append(block);remaining-=len(block)
+                data[written:written+len(block)]=block
+                written+=len(block)
             after=os.fstat(fd)
-            if (before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_size,after.st_mtime_ns,after.st_ctime_ns):
-                raise EvidenceError('artifact_changed')
-            return b''.join(parts)
+            if (before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_size,after.st_mtime_ns,after.st_ctime_ns):raise EvidenceError('artifact_changed')
+            return bytes(data)
         finally:os.close(fd)
     except EvidenceError:raise
     except OSError:raise EvidenceError('artifact_read_failed')from None
