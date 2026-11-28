@@ -1,4 +1,5 @@
 #include "wire.hpp"
+#include <algorithm>
 #include "gig/itch/durable_checkpoint.hpp"
 #include "gig/itch/source_recovery.hpp"
 #include "gig/itch/completion_capsule.hpp"
@@ -105,7 +106,8 @@ public:
   const auto receipts=engine_.receipts();
   const auto scan=std::min(receipts.size(),std::size_t{256});
   py::list rows;
-  for(std::size_t offset=0;offset<scan&&rows.size()<count;++offset){
+  std::size_t accepted=0;
+  for(std::size_t offset=0;offset<scan&&accepted<count;++offset){
    const auto& receipt=receipts[receipts.size()-offset-1];
    const auto& record=receipt.source;
    const bool unassigned_break=record.type=='B'&&record.header.stock_locate.value()==0;
@@ -142,7 +144,7 @@ public:
    row["printable"]=character(printable);row["reported_side"]=character(side);row["cross_type"]=character(cross);
    row["book_attribution"]=unassigned_break?"SESSION_UNASSIGNED":"SELECTED_LOCATE";
    row["native_book_committed"]=receipt.disposition==itch::SourceDisposition::native_committed;
-   rows.append(std::move(row));
+   rows.append(std::move(row));++accepted;
   }
   py::dict out;out["rows"]=std::move(rows);out["scanned_records"]=write(scan);
   out["source_records"]=write(receipts.size());out["selected_locate"]=write(locate.value());
