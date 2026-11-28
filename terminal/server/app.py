@@ -756,6 +756,31 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         except (ValueError,TypeError,KeyError,OverflowError,TimeoutError):
             return error('SEC_FILING_UNAVAILABLE','filing identity, source or processing authorization unavailable',422)
 
+    @route('/api/v2/sec-filings/analyze', methods=['POST'])
+    @json_endpoint
+    async def sec_filing_analyze(request: Request):
+        from functools import partial
+        from terminal.stocks.financial_intelligence_product import admitted_filing_analysis
+        value=await bounded_json(request)
+        action=value.get('action')
+        required={'symbol','as_of','form','action'}
+        if action=='accounting':required.add('roles')
+        if action not in ('accounting','inline') or set(value)!=required:
+            return error('SEC_FILING_ANALYSIS_QUERY','explicit cutoff, filing family and analysis selection required',422)
+        if analysis.busy:return error('XBRL_STATEMENT_BUSY','one bounded analytical request at a time',429)
+        try:
+            symbol=value['symbol']
+            if not stocks.sec_filing_readiness(symbol)['ready']:
+                return error('SEC_FILING_ANALYSIS_UNAVAILABLE','private SEC processing is unavailable',422)
+            collection=stocks.visible_xbrl_collection(symbol)
+            packet=await analysis.run(partial(admitted_filing_analysis,stocks,symbol,value['as_of'],
+                                             value['form'],action,value.get('roles')))
+            if not stocks.sec_filing_readiness(symbol)['ready'] or stocks.visible_xbrl_collection(symbol) is not collection:
+                return error('SEC_FILING_ANALYSIS_UNAVAILABLE','source or authorization changed during analysis',409)
+            return packet
+        except (ValueError,TypeError,KeyError,OverflowError):
+            return error('SEC_FILING_ANALYSIS_UNAVAILABLE','accepted originals or exact report relationships unavailable',422)
+
     @route('/api/v2/companies/{symbol}/historical', methods=['GET'])
     @json_endpoint
     async def historical_v2(request):

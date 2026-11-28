@@ -183,6 +183,18 @@ class FilingIngestor:
    if 'transformation_profile'in plan:entry['transformation_profile']=plan['transformation_profile']
    entries.append(entry)
   return entries
+ def original_recipe(self,accession,*,inline_required=False):
+  plan=self.plans.get(accession)
+  if plan is None:return None
+  entry=self._entries({accession:plan},self.sources)[0]
+  if 'inline_documents'in entry:
+   return {'documents':entry['inline_documents'],'concepts':entry['concepts'],
+           'taxonomy_documents':entry['documents'],'transformation_profile':entry.get('transformation_profile'),
+           'embedded_profile':EMBEDDED_PROFILE,'acquisition_manifest':copy.deepcopy(plan.get('inline_manifest')),
+           'expected_acquisition_manifest_sha256':plan.get('inline_manifest_sha256')}
+  if inline_required:return None
+  return {**entry,'embedded_profile':EMBEDDED_PROFILE}
+
  def _rebuild(self,plans,sources):
   c=FilingCollection(self.cik,origin=self.origin,allow_observed=self.allow_observed);entries=self._entries(plans,sources)
   for entry in entries:

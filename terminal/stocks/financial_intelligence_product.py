@@ -1,4 +1,4 @@
-"""Explicit private financial-intelligence exports; no route or source activation."""
+"""Explicit private financial-intelligence analysis of supplied or admitted originals."""
 import copy
 from .xbrl_instance import canonical,digest,XBRLError
 from .xbrl_accounting_statements import _accounting_sources
@@ -29,9 +29,34 @@ def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected
  accession=source['accession'];result['lineage']=filing_lineage(collection,accession,as_of)
  if result['lineage']['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED';return _finish(result)
  if accession not in originals:result['reason']='SELECTED_INLINE_ORIGINALS_NOT_SUPPLIED';return _finish(result)
- stored=collection._filings[accession];coordinator=workspace.filing_ingestors.get(symbol)
+ stored=collection._filings[accession];coordinator=workspace.visible_filing_ingestor(symbol)
  has_plan=coordinator is not None and accession in coordinator.plans
  planned_identity=coordinator.plans[accession].get('inline_manifest_sha256')if has_plan else None
  parsed,graph,receipt=reconstruct_admitted_inline(originals[accession],stored,allow_observed=collection.allow_observed,planned_identity=planned_identity,has_plan=has_plan)
  result.update(status='AVAILABLE',reason=None,admitted_parsed_sha256=stored['canonical_sha256'],parsed_sha256=parsed['canonical_sha256'],dts_sha256=graph['canonical_sha256'],receipt=receipt)
  return _finish(result)
+
+
+def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None):
+ """Analyze the same authorized bytes that produced the installed collection."""
+ collection=workspace.visible_xbrl_collection(symbol)
+ coordinator=workspace.visible_filing_ingestor(symbol)
+ if collection is None or coordinator is None:
+  raise XBRLError('financial_intelligence_admitted_source_required')
+ selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view']
+ source=selected['source_filing']
+ identity=selected['collection_sha256']
+ recipes={}
+ if source is not None and selected['status']!='AMBIGUOUS':
+  accession=source['accession']
+  candidate=coordinator.original_recipe(accession,inline_required=action=='inline')
+  if candidate is not None:
+   recipes[accession]=candidate
+ if action=='inline':
+  return company_inline_audit(workspace,symbol,as_of,recipes,form=form,
+                             expected_collection_sha256=identity)
+ if action=='accounting':
+  roles={accession:role_binding for accession in recipes}
+  return company_source_accounting(workspace,symbol,as_of,recipes,roles,form=form,
+                                   expected_collection_sha256=identity)
+ raise XBRLError('financial_intelligence_action')
