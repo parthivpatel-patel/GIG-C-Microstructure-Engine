@@ -80,14 +80,14 @@ class KrakenSessionCoordinator:
   self._native=None;self._native_image=None;self._native_source=None;self._eligible=False
   self._reconnect_required=True;self._reason='transport_closed'
  def subscription_requests(self,token):
+  self._current(token)
   try:
-   self._current(token)
    if self._reconnect_required:raise ProviderError('coordinator_reconnect_required')
    return [self._book.book_subscription_request(),self._public.subscription_request()]
   except (ProviderError,MemoryError):self._fence('request_rejected');raise
  def trade_unsubscription_request(self,token):
+  self._current(token)
   try:
-   self._current(token)
    if self._reconnect_required:raise ProviderError('coordinator_reconnect_required')
    public=copy.deepcopy(self._public);request=public.unsubscription_request()
   except (ProviderError,MemoryError):self._fence('request_rejected');raise
@@ -119,8 +119,10 @@ class KrakenSessionCoordinator:
    'provider_requested':False,'independent_source_authentication':False,'full_protocol_qualified':False}
   result['sha256']=_digest(result);return result
  def feed(self,raw,now_ns,*,token):
+  # Frames rejected at the capture boundary must leave the active generation intact.
+  self._current(token)
   try:
-   self._current(token);self._clock(now_ns)
+   self._clock(now_ns)
    if type(raw)is not str or len(raw)>self._book.frame_limit:raise ProviderError('payload_limit')
    try:body=raw.encode('utf-8')
    except UnicodeError as exc:raise ProviderError('malformed_json')from exc

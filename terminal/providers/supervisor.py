@@ -294,6 +294,8 @@ class FeedSupervisor:
                     if epoch==self.epoch:
                         if self.reason!='provider_permission_changed':
                             self.state,self.reason='RESYNCING','stream_ended_snapshot_required'
+                        self.received_at_ns=self.exchange_ns=None
+                        self.joint_sources={}
                         if self.coordinator:self.coordinator.disconnected()
                         self.capture_token=None
                         if self.capture is not None:await self.capture.abort('source_interrupted')
