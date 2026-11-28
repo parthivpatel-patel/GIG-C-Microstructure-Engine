@@ -96,7 +96,7 @@ Result<FlowMetrics> calculate_flow(std::span<const FlowQuote> quotes,std::span<c
             const FlowQuote* previous=nullptr;
             for(const auto& q:quotes) {
                 if(q.timestamp.value()>start) {
-                    if(!previous || !midpoint(previous) || !midpoint(&q) || static_cast<Wide>(q.timestamp.value())-previous->timestamp.value()>age)valid=false;
+                    if(!previous || !previous->bid || !previous->ask || !q.bid || !q.ask || static_cast<Wide>(q.timestamp.value())-previous->timestamp.value()>age)valid=false;
                     else {
                         if(q.bid->price_ticks>=previous->bid->price_ticks)ofi+=static_cast<Wide>(q.bid->quantity.value());
                         if(q.bid->price_ticks<=previous->bid->price_ticks)ofi-=static_cast<Wide>(previous->bid->quantity.value());
