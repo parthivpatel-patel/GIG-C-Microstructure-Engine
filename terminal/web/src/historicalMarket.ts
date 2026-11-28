@@ -2,11 +2,18 @@ import type {Bar} from './EquityPanels';
 export type HistoryRow=Partial<Bar>&{timestamp:string;source_timestamp_ns:string;source_record_sha256:string;duplicate_record:boolean;bid?:string;ask?:string;bid_size?:string;ask_size?:string;price?:string;size?:string};
 export type MarketHistory={schema:string;symbol:string;kind:'bars'|'quotes'|'trades';timeframe:string|null;provider:string;feed:string;origin:string;freshness:string;availability:string;records:HistoryRow[];record_count:number;pages:number;has_more:boolean;complete_market_history:false;received_at:string;requested_interval:{start:string;exclusive_end:string};source_records:{url:string;sha256:string;page:number;records:number;received_at:string}[];scope:string;cache_status:string};
 /** Same UTC nanosecond boundary as the native/provider adapter;Date is not the source clock. */
-export function historyNanoseconds(value:unknown):bigint{
+export function historyNanoseconds(value:unknown,allowSourceOffset=false):bigint{
  if(typeof value!=='string')throw Error('Historical timestamp rejected');
- const m=/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,9}))?Z$/.exec(value),ms=m?Date.parse(m[1]+'Z'):NaN;
- if(!m||!Number.isFinite(ms)||new Date(ms).toISOString().slice(0,19)!==m[1])throw Error('Historical timestamp rejected');
- const ns=BigInt(ms)*1000000n+BigInt((m[2]||'').padEnd(9,'0')||'0');
+ const m=/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})(?:\.(\d{1,9}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+ const local=m?Date.parse(m[1]+'Z'):NaN;
+ if(!m||!Number.isFinite(local)||new Date(local).toISOString().slice(0,19)!==m[1])throw Error('Historical timestamp rejected');
+ let offset=0;
+ if(m[3]!=='Z'){
+  const hours=Number(m[3].slice(1,3)),minutes=Number(m[3].slice(4,6));
+  if(!allowSourceOffset||hours>23||minutes>59||m[3]==='-00:00')throw Error('Historical source offset rejected');
+  offset=(hours*60+minutes)*(m[3][0]==='-'?-1:1);
+ }
+ const ns=BigInt(local-offset*60000)*1000000n+BigInt((m[2]||'').padEnd(9,'0')||'0');
  if(ns<0n||ns>9223372036854775807n)throw Error('Historical clock boundary rejected');return ns;
 }
 export function historicalAmount(value:unknown):bigint{
