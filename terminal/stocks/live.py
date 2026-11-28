@@ -53,6 +53,24 @@ def amount(v,positive=False):
         return repr(v)
     return decimal(v,positive)
 
+def validate_subscription(row, channels, symbols):
+    """Validate the complete v2 acknowledgement, including automatic trade channels."""
+    requested = set(channels)
+    accepted = set(symbols)
+    automatic = {'corrections', 'cancelErrors'}
+    # Older acknowledgements can omit these lists. When an automatic list is
+    # present it must exactly match the acknowledged trade subscription.
+    for channel in requested | (automatic & row.keys()):
+        expected = accepted if channel in requested or 'trades' in requested else set()
+        entries = row.get(channel)
+        if (type(entries) is not list or len(entries) != len(expected)
+                or any(type(symbol) is not str for symbol in entries) or set(entries) != expected):
+            raise ProtocolError('subscription_mismatch')
+    if any(value != [] for channel, value in row.items()
+           if channel not in requested | automatic | {'T'}):
+        raise ProtocolError('subscription_mismatch')
+
+
 class LiveIEX:
     def __init__(self,workspace,*,connector=None,clock=time.monotonic,wall=time.time,store=None,retry_budget=5,random_source=random.random,stable_seconds=30,shutdown_seconds=3.):
         if type(retry_budget) is not int or not 1<=retry_budget<=5:raise ValueError('live_retry_budget')
@@ -142,7 +160,7 @@ class LiveIEX:
                 if pending and pending['step'] in ('UNSUBSCRIBE_SENT','SUBSCRIBE_SENT'):
                     expected=() if pending['step']=='UNSUBSCRIBE_SENT' else pending['symbols']
                     expected_channels=channels if pending['step']=='UNSUBSCRIBE_SENT' else pending['channels']
-                    if any(type(row.get(k)) is not list or any(type(s) is not str for s in row[k]) or len(row[k])!=len(expected) or set(row[k])!=set(expected) for k in expected_channels) or any(v for k,v in row.items() if k not in ('T',*expected_channels)):raise ProtocolError('subscription_mismatch')
+                    validate_subscription(row,expected_channels,expected)
                     if pending['step']=='UNSUBSCRIBE_SENT':pending['step']='SUBSCRIBE_READY';symbols=();channels=()
                     else:
                         if generation>=2**53-2:raise ProtocolError('generation_exhausted')
@@ -150,7 +168,8 @@ class LiveIEX:
                         latest={};pending=None
                     phase='SUBSCRIBED'
                 else:
-                    if phase!='SUBSCRIBE_SENT' or any(type(row.get(k)) is not list or len(row[k])!=len(symbols) or any(type(s) is not str for s in row[k]) or set(row[k])!=set(symbols) for k in channels) or any(v for k,v in row.items() if k not in ('T',*channels)):raise ProtocolError('subscription_mismatch')
+                    if phase!='SUBSCRIBE_SENT':raise ProtocolError('subscription_mismatch')
+                    validate_subscription(row,channels,symbols)
                     phase='SUBSCRIBED'
             elif t in ('q','t','b','c','x'):
                 if phase!='SUBSCRIBED' or row.get('S') not in symbols:raise ProtocolError('unsubscribed_observation')

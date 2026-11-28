@@ -6,6 +6,34 @@ from .live import LiveIEX
 from .identity import instrument
 
 class Semantics(unittest.TestCase):
+ def test_authoritative_trade_acknowledgement_survives_initial_and_replacement_subscriptions(self):
+  c=client();c.symbols=('AAPL',);c.phase='SUBSCRIBE_SENT'
+  ack={'T':'subscription','trades':['AAPL'],'quotes':['AAPL'],'bars':[],
+       'updatedBars':[],'dailyBars':[],'statuses':[],'lulds':[],
+       'corrections':['AAPL'],'cancelErrors':['AAPL']}
+  c.process(packet(ack));self.assertEqual(c.phase,'SUBSCRIBED')
+  c.process(packet(quote()))
+  c.pending={'step':'UNSUBSCRIBE_SENT','symbols':('NVDA',),'channels':('quotes','trades')}
+  c.process(packet({key:[] for key in ack if key!='T'}|{'T':'subscription'}))
+  self.assertEqual(c.pending['step'],'SUBSCRIBE_READY')
+  c.pending['step']='SUBSCRIBE_SENT'
+  replacement={key:['NVDA'] if value==['AAPL'] else value for key,value in ack.items()}
+  c.process(packet(replacement))
+  self.assertEqual(c.symbols,('NVDA',))
+  self.assertIsNone(c.pending)
+  self.assertEqual(c.latest,{})
+
+ def test_wrong_automatic_trade_lists_reject_entire_frame(self):
+  for channel,entries in [('corrections',['MSFT']),('cancelErrors',['AAPL','AAPL']),
+                           ('corrections','AAPL'),('statuses',['AAPL'])]:
+   with self.subTest(channel=channel,entries=entries):
+    c=client();c.symbols=('AAPL',);c.phase='SUBSCRIBE_SENT'
+    ack={'T':'subscription','quotes':['AAPL'],'trades':['AAPL'],
+         'corrections':['AAPL'],'cancelErrors':['AAPL'],channel:entries}
+    with self.assertRaisesRegex(ValueError,'subscription_mismatch'):
+     c.process(packet(ack,quote()))
+    self.assertEqual(c.phase,'SUBSCRIBE_SENT')
+    self.assertEqual(c.receipts,0)
  def test_ten_target_symbols_are_curated_not_claimed_fresh(self):
   for s in ['AAPL','MSFT','NVDA','TSLA','AMZN','GOOGL','META','AMD','JPM','SPY']:self.assertIn('curated',instrument(s)['identity_source'])
  def test_out_of_order_is_retained_without_latest_price_rollback(self):

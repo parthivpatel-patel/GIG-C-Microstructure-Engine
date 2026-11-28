@@ -34,7 +34,7 @@ names += ['terminal.stocks.test_xbrl_bound_restrictions']
 names += ['terminal.stocks.test_xbrl_mixed_cross_role']
 names += ['terminal.stocks.test_xbrl_typed_bounds','terminal.providers.test_kraken_large_depth']
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=1442
+expected=1444
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'application_constructed':app._application is not None,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}
