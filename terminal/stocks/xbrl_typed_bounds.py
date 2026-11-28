@@ -186,7 +186,7 @@ def _diagnostics(parsed,dts,type_kinds,domains,scalar_profile):
  issuer=parsed['source']['issuer_cik'];seen=set();selected=[];members={};used_domains=set();count=0
  if type(issuer)is not str or not re.fullmatch('[0-9]{10}',issuer)or int(issuer)==0:raise XBRLError('drs_typed_bound_source')
  if type(parsed['source'].get('source_sha256'))is not str or not SHA.fullmatch(parsed['source']['source_sha256']):raise XBRLError('drs_typed_bound_source')
- is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14','gig.sec.xbrl.dimensional_inline_set.v15','gig.sec.xbrl.dimensional_inline_set.v20')
+ is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14','gig.sec.xbrl.dimensional_inline_set.v15','gig.sec.xbrl.dimensional_inline_set.v20','gig.sec.xbrl.dimensional_inline_set.v21')
  original={**parsed,'schema':'gig.sec.xbrl.inline_set.v1'if is_set else'gig.sec.xbrl.instance.v1'}
  from .xbrl_instance import MAX_UNITS, _reported_numeric_value, _validate_fact_accuracy, selected_concepts
  units=parsed['units']
