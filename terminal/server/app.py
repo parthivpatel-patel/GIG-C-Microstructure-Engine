@@ -763,7 +763,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         from terminal.stocks.financial_intelligence_product import admitted_filing_analysis
         value=await bounded_json(request)
         action=value.get('action')
-        required={'symbol','as_of','form','action'}
+        required={'symbol','as_of','form','action','collection_sha256'}
         if action=='accounting':required.add('roles')
         if action not in ('accounting','inline') or set(value)!=required:
             return error('SEC_FILING_ANALYSIS_QUERY','explicit cutoff, filing family and analysis selection required',422)
@@ -772,9 +772,12 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             symbol=value['symbol']
             if not stocks.sec_filing_readiness(symbol)['ready']:
                 return error('SEC_FILING_ANALYSIS_UNAVAILABLE','private SEC processing is unavailable',422)
+            digest=value['collection_sha256']
+            if type(digest)is not str or not re.fullmatch('[0-9a-f]{64}',digest):
+                return error('SEC_FILING_ANALYSIS_QUERY','exact accepted collection identity required',422)
             collection=stocks.visible_xbrl_collection(symbol)
             packet=await analysis.run(partial(admitted_filing_analysis,stocks,symbol,value['as_of'],
-                                             value['form'],action,value.get('roles')))
+                                             value['form'],action,value.get('roles'),expected_collection_sha256=digest))
             if not stocks.sec_filing_readiness(symbol)['ready'] or stocks.visible_xbrl_collection(symbol) is not collection:
                 return error('SEC_FILING_ANALYSIS_UNAVAILABLE','source or authorization changed during analysis',409)
             return packet

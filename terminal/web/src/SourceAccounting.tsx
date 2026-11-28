@@ -1,4 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
+import {requestV2} from './api';
 import {StatementComparison} from './StatementComparison';
 import {readOfflineJson,MAX_OFFLINE_BYTES} from './offlineJson';
 import {verifySourceAccounting,verifyInlineAudit} from './financialSourceContract';
@@ -48,6 +49,70 @@ export function SourceAccounting({symbol,cik}:{symbol:string;cik:string|null}){
   </section>
   <StatementComparison symbol={symbol} cik={cik}/>
  </section>;
+}
+
+const statementKinds=[['balance_sheet','Balance sheet'],['income_statement','Income statement'],['cash_flow_statement','Cash flow statement']] as const;
+type RoleBinding={presentation_role:string;accounting_role:string};
+type KindKey=typeof statementKinds[number][0];
+
+export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presentationRoles}:{
+ symbol:string;cik:string;asOf:string;form:string;collection:string;presentationRoles:string[];
+}){
+ const [roles,setRoles]=useState<Partial<Record<KindKey,RoleBinding>>>({});
+ const [packet,setPacket]=useState<Packet|null>(null),[pending,setPending]=useState<Kind|null>(null);
+ const [error,setError]=useState('');
+ const active=useRef<AbortController|null>(null);
+ useEffect(()=>()=>active.current?.abort(),[]);
+ function update(kind:KindKey,field:keyof RoleBinding,value:string){
+  setRoles(current=>{
+   const row=current[kind]??{presentation_role:'',accounting_role:''};
+   return {...current,[kind]:{...row,[field]:value}};
+  });
+ }
+ async function run(action:Kind){
+  active.current?.abort();
+  const controller=new AbortController();active.current=controller;
+  const {signal}=controller;
+  setPending(action);setPacket(null);setError('');
+  try{
+   const bindings=Object.fromEntries(statementKinds.map(([kind])=>[kind,{
+    presentation_role:roles[kind]?.presentation_role||null,accounting_role:roles[kind]?.accounting_role||null,
+   }]));
+   const raw=await requestV2('/sec-filings/analyze',{
+    symbol,as_of:asOf,form,action,collection_sha256:collection,...(action==='accounting'?{roles:bindings}:{}),
+   },signal);
+   const result=await (action==='accounting'?verifySourceAccounting(raw,symbol,cik):verifyInlineAudit(raw,symbol,cik));
+   if(!signal.aborted){
+    if(result.as_of!==asOf||result.collection_sha256!==collection)throw Error('Filing analysis selection changed');
+    setPacket(result);
+   }
+  }catch{
+   if(!signal.aborted)setError('Accepted SEC source analysis unavailable for this filing selection.');
+  }finally{
+   if(active.current===controller){active.current=null;if(!signal.aborted)setPending(null)}
+  }
+ }
+ return <details aria-busy={pending!==null}>
+  <summary>Analyze installed SEC originals</summary>
+  <p>Accepted filing cutoff <time dateTime={asOf}>{asOf}</time>. Analysis uses the current private cache.</p>
+  <form onSubmit={e=>{e.preventDefault();void run('accounting')}}>
+   {statementKinds.map(([key,label])=><fieldset key={key} disabled={pending!==null}>
+    <legend>{label}</legend>
+    <label>Presentation role<select value={roles[key]?.presentation_role??''}
+     onChange={e=>update(key,'presentation_role',e.target.value)}>
+     <option value="">Unassigned</option>{presentationRoles.map(role=><option key={role} value={role}>{role}</option>)}
+    </select></label>
+    <label>Exact accounting relationship role (optional)<input value={roles[key]?.accounting_role??''} maxLength={512}
+     onChange={e=>update(key,'accounting_role',e.target.value)}/></label>
+   </fieldset>)}
+   <button disabled={pending!==null||!Object.values(roles).some(row=>row.presentation_role)}>Analyze statement roles</button>
+  </form>
+  <button disabled={pending!==null} onClick={()=>void run('inline')}>Analyze original inline source</button>
+  {pending&&<SourceImportFeedback kind={pending} busy error=""/>}
+  {error&&<p role="alert">{error}</p>}
+  {packet?.schema==='gig.backend.company_source_accounting.v1'&&<SourceAccountingView packet={packet}/>}
+  {packet?.schema==='gig.backend.company_inline_source_audit.v1'&&<InlineAuditView packet={packet}/>}
+ </details>;
 }
 
 export function SourceImportFeedback({kind,busy,error}:{kind:Kind;busy:boolean;error:string}){return <>{busy&&<p role="status">{kind==='accounting'?'Validating original-source accounting bindings…':'Validating inline-set receipts and source identities…'}</p>}{error&&<p role="alert">{error}</p>}</>}

@@ -37,7 +37,7 @@ def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected
  return _finish(result)
 
 
-def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None):
+def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None,*,expected_collection_sha256):
  """Analyze the same authorized bytes that produced the installed collection."""
  collection=workspace.visible_xbrl_collection(symbol)
  coordinator=workspace.visible_filing_ingestor(symbol)
@@ -46,6 +46,7 @@ def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=Non
  selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view']
  source=selected['source_filing']
  identity=selected['collection_sha256']
+ if identity!=expected_collection_sha256:raise XBRLError('financial_intelligence_stale_collection')
  recipes={}
  if source is not None and selected['status']!='AMBIGUOUS':
   accession=source['accession']

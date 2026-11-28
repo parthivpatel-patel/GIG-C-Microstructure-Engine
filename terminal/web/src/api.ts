@@ -58,7 +58,7 @@ export async function readCompanyAvailability(symbol:string,signal:AbortSignal):
 
 /** Explicit v2 market/paper paths;credentials and provider destinations are server-owned. */
 export async function requestV2<T=unknown>(path:string,body?:unknown,signal?:AbortSignal):Promise<T>{
- if(!['/sec-filings/acquire','/market/history','/market/history/readiness','/market/history/cache','/market/research','/paper/status','/paper/control'].includes(path))throw Error('Invalid versioned research endpoint');
+ if(!['/sec-filings/acquire','/sec-filings/analyze','/market/history','/market/history/readiness','/market/history/cache','/market/research','/paper/status','/paper/control'].includes(path))throw Error('Invalid versioned research endpoint');
  const target='/api/v2'+path,c=new AbortController(),cancel=()=>c.abort(),timer=setTimeout(cancel,30000);
  signal?.addEventListener('abort',cancel,{once:true});
  if(signal?.aborted)cancel();
