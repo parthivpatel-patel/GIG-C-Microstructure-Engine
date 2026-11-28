@@ -101,6 +101,17 @@ class Semantics(unittest.TestCase):
   v=c.view();self.assertEqual(v['metrics']['AAPL']['valid_ordered_quotes'],0);self.assertEqual(v['history'][0]['state'],'UNAVAILABLE')
  def test_binary64_roundtrip_precision_is_not_silently_rounded_or_rejected(self):
   c=client();ready(c);q=quote();q['bp']=100.01+.01;c.process(packet(q));self.assertEqual(c.view()['observations'][0]['data']['bid'],repr(q['bp']))
+ def test_adjacent_midprices_keep_nonzero_realized_volatility_in_both_directions(self):
+  low=math.nextafter(1e15,0.)
+  high=1e15
+  expected=math.log1p(float((Fraction(repr(high))-Fraction(repr(low)))/Fraction(repr(low))))
+  for first,second in ((low,high),(high,low)):
+   c=client();ready(c);c.wall=lambda:1704205802.
+   q=quote();q.update(bp=first,ap=first);c.process(packet(q))
+   q=quote();q.update(t='2024-01-02T14:30:01Z',bp=second,ap=second);c.process(packet(q))
+   observed=c.view()['metrics']['AAPL']['realized_log_mid_volatility']
+   self.assertGreater(observed,0)
+   self.assertTrue(math.isclose(observed,expected,rel_tol=1e-15))
  def test_extreme_binary64_mid_variation_does_not_overflow_float_conversion(self):
   import math
   c=client();ready(c);q=quote();q['bp']=5e-324;q['ap']=5e-324;c.process(packet(q));q=quote();q['t']='2024-01-02T14:30:01Z';q['bp']=1e15;q['ap']=1e15;c.wall=lambda:1704205802.;c.process(packet(q));self.assertTrue(math.isfinite(c.view()['metrics']['AAPL']['realized_log_mid_volatility']))

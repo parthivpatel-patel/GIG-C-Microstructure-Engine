@@ -2,6 +2,15 @@
 from fractions import Fraction
 import math
 
+def _log_mid_distance(left, right):
+    """Absolute log return without cancelling adjacent prices or overflowing ratios."""
+    lower, upper = sorted((left, right))
+    ratio = upper / lower
+    if ratio < 2:
+        return math.log1p(float(ratio - 1))
+    return math.log(ratio.numerator) - math.log(ratio.denominator)
+
+
 def metrics(history,symbol,generation):
     rows=[r for r in history if r['symbol']==symbol and r['generation']==generation]
     quotes=[r for r in rows if r['kind']=='quote' and not r['out_of_order'] and Fraction(r['data']['bid'])>0 and Fraction(r['data']['ask'])>=Fraction(r['data']['bid'])]
@@ -15,7 +24,7 @@ def metrics(history,symbol,generation):
     if quotes:
         q=quotes[-1]['data'];bid,ask,bs,az=map(Fraction,(q['bid'],q['ask'],q['bid_size'],q['ask_size']));mid=(bid+ask)/2
         mids=[(Fraction(r['data']['bid'])+Fraction(r['data']['ask']))/2 for r in quotes]
-        value.update(quote_metric_source_ns=quotes[-1]['source_timestamp_ns'],spread=wire(ask-bid),midprice=wire(mid),relative_spread=wire((ask-bid)/mid),best_quote_size_imbalance=wire((bs-az)/(bs+az)) if bs+az else None,retained_mid_change=wire(mid-mids[0]),retained_mid_return=wire(mid/mids[0]-1),realized_log_mid_volatility=math.sqrt(sum((math.log(b.numerator)-math.log(b.denominator)-math.log(a.numerator)+math.log(a.denominator))**2 for a,b in zip(mids,mids[1:]))) if len(mids)>1 else None)
+        value.update(quote_metric_source_ns=quotes[-1]['source_timestamp_ns'],spread=wire(ask-bid),midprice=wire(mid),relative_spread=wire((ask-bid)/mid),best_quote_size_imbalance=wire((bs-az)/(bs+az)) if bs+az else None,retained_mid_change=wire(mid-mids[0]),retained_mid_return=wire(mid/mids[0]-1),realized_log_mid_volatility=math.sqrt(sum(_log_mid_distance(a,b)**2 for a,b in zip(mids,mids[1:]))) if len(mids)>1 else None)
     else:value.update(quote_metric_source_ns=None,spread=None,midprice=None,relative_spread=None,best_quote_size_imbalance=None,retained_mid_change=None,retained_mid_return=None,realized_log_mid_volatility=None)
     value['observed_trade_size_sum']=wire(sum((Fraction(r['data']['size']) for r in trades),Fraction())) if trades and not corrected else None
     value['trade_price_change']=wire(Fraction(trades[-1]['data']['price'])-Fraction(trades[0]['data']['price'])) if trades and not corrected else None
