@@ -86,6 +86,26 @@ class LargeDepth(unittest.TestCase):
         self.assertEqual(receipt['native_event']['bids'], [{'price_ticks': '150100', 'quantity': '900100000'}])
         self.assertEqual(receipt['native_book_source_sha256'], hashlib.sha256(new.encode()).hexdigest())
 
+    def test_update_row_budget_is_separate_from_retained_depth(self):
+        depth = 500
+        coordinator, token = negotiated(depth)
+        bids, asks = levels(depth)
+        coordinator.feed(wire(bids, asks), 3, token=token)
+        price = bids[0][0]
+        ordered = [(price, '0'), (price, '3')] * depth
+        final = ([(price, '3')] + bids[1:], asks)
+        receipt = coordinator.feed(wire(ordered, [], kind='update', final=final), 4, token=token)
+        self.assertEqual(receipt['native_event']['bids'],
+                         [{'price_ticks': '200000', 'quantity': '300000000'}])
+        self.assertEqual(receipt['source_receipt']['retained_levels'], dict(bids=depth, asks=depth))
+        self.assertEqual(coordinator.view(4)['book']['revision'], '2')
+        before = copy.deepcopy(coordinator._native_image)
+        oversized = wire(ordered + [(price, '3')], [], kind='update', final=final)
+        with self.assertRaisesRegex(ProviderError, 'update_budget'):
+            coordinator.feed(oversized, 5, token=token)
+        self.assertEqual(coordinator._native_image, before)
+        self.assertIsNone(coordinator.view(5)['book'])
+
     def test_over_budget_or_bad_crc_fences_without_partial_native_publication(self):
         bids, asks = levels(500)
         valid = wire(bids, asks)

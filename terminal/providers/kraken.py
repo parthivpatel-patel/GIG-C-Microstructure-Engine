@@ -183,7 +183,10 @@ class KrakenBookAdapter:
         elif type(book_request_id)is not int or not 0<=book_request_id<=UINT64_MAX:
             raise ProviderError('book_request_id')
         self.frame_limit = LARGE_BOOK_PAYLOAD if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else MAX_PAYLOAD
-        self.levels_per_message = depth if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else 100
+        self.snapshot_rows_per_side = depth if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else 100
+        # The subscription depth caps retained prices. An incremental frame
+        # can update the same price repeatedly before retention and CRC checks.
+        self.update_rows_per_side = 2 * depth if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else 100
         self.book_session_profile=book_session_profile;self.book_request_id=book_request_id
         self._book_generation=0;self._book_acknowledged=False
         if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('origin')
@@ -306,9 +309,10 @@ class KrakenBookAdapter:
             self.duplicates += 1
             return {'kind': 'duplicate', 'source_sequence': None}
         candidate = [{}, {}] if snapshot else [self.bids.copy(), self.asks.copy()]
+        row_limit = self.snapshot_rows_per_side if snapshot else self.update_rows_per_side
         for cache, side in zip(candidate, ('bids', 'asks')):
             levels = data[side]
-            if type(levels) is not list or len(levels) > self.levels_per_message:
+            if type(levels) is not list or len(levels) > row_limit:
                 raise ProviderError('update_budget')
             if snapshot and len(levels) > self.depth:
                 raise ProviderError('snapshot_depth')
