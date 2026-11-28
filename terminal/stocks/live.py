@@ -106,6 +106,7 @@ class LiveIEX:
         self.backfill_anchors={}
         self.trade_history=[]
         self._observation_permission_reference=None
+        self._socket_permission=None
         if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
     def control(self,*,symbols=None,channels=None,generation=None,receipt=None,phase=None,pending=None):
         pending=self.pending if pending is None else pending
@@ -196,6 +197,9 @@ class LiveIEX:
             self.history=[];self.trade_history=[];self.seen=[];self.latest={}
             self.backfill_anchors={};self.restored_backfill_endpoints={}
         self._observation_permission_reference=reference
+
+    def _socket_scope_current(self,keys):
+        return self._socket_permission==(self.permission_reference(),keys)
 
     def process(self,raw,*,socket_owner=None):
         if self.connector is None and (socket_owner is None or self._observation_permission_reference is None):
@@ -312,13 +316,18 @@ class LiveIEX:
             row['receive_age_seconds']=age
             row['state']='UNAVAILABLE' if self.phase!='SUBSCRIBED' or event['symbol'] not in self.symbols or event['generation']!=self.generation else 'STALE' if max(int(age*10**9),source_age)>(120_000_000_000 if event['kind']=='bar' else 30_000_000_000) else 'SIMULATED' if self.connector else 'LIVE'
             return row
-        try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
-        except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
+        try:
+            keys=self.require()
+            ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
+        except ValueError as exc:
+            keys=None
+            ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
         retention=self.retention_current()
         durable=self.store.cached if retention else {'enabled':False,'reason':'retention_permission_changed' if self.store else self.store_reason}
         allowed=(ready['ready'] and self.current_observation_scope()) or self.connector is not None
         observations=self.history if allowed else ()
-        rows=[present(e) for e in self.latest.values()]if allowed else []
+        live_eligible=allowed and (self.connector is not None or self._socket_scope_current(keys))
+        rows=[present(e) for e in self.latest.values()]if live_eligible else []
         history=[present(e) for e in observations if e['symbol'] in self.symbols]
         trade_rows=[e for e in self.trade_history if e['symbol'] in self.symbols and e['generation']==self.generation]if allowed else []
         adjusted={e['symbol']for e in trade_rows if e['kind']in('correction','cancel')}
@@ -326,12 +335,15 @@ class LiveIEX:
     async def start(self,symbols,channels=None):
         async with self.command_lock:return await self._start(symbols,channels)
     async def _start(self,symbols,channels=None):
-        self.require()
+        keys=self.require()
         if type(symbols) is not list or not 1<=len(symbols)<=self.symbol_limit() or len(set(symbols))!=len(symbols):raise ValueError('live_symbol_budget')
         for s in symbols:self.workspace.market_identity(s)
         channels=('quotes','trades') if channels is None else channels
         if type(channels) not in (list,tuple) or not channels or len(channels)>3 or any(c not in ('quotes','trades','bars') for c in channels) or len(set(channels))!=len(channels) or not any(c in channels for c in ('quotes','trades')):raise ValueError('live_channel_budget')
         selected=tuple(sorted(symbols));chosen=tuple(sorted(channels))
+        if self.task and not self.task.done() and self.socket is not None and not self._socket_scope_current(keys):
+            # A scope change requires a fresh socket and authorization handshake.
+            await self._close()
         if self.pending and not(self.task and self.task.done() and self.phase=='DISCONNECTED'):raise ValueError('subscription_update_pending')
         if self.task and not self.task.done() and self.symbols==selected and tuple(sorted(self.channels))==chosen:return
         if self.task and not self.task.done() and self.phase=='SUBSCRIBED' and self.socket:
@@ -351,7 +363,7 @@ class LiveIEX:
         self.stop_event.set()
         # Revoke publication before awaiting possibly uncooperative transport
         # cleanup. Keep the task reference on timeout;start cannot orphan it.
-        self.socket=None;self.pending=None;self.phase='DISCONNECTED';self.state='FAILED';self.reason='worker_stopping'
+        self.socket=None;self._socket_permission=None;self.pending=None;self.phase='DISCONNECTED';self.state='FAILED';self.reason='worker_stopping'
         if self.task:
             if not self.task.done():
                 self.task.cancel()
@@ -386,7 +398,7 @@ class LiveIEX:
                     self.generation+=1;self.phase='CONNECTED_PENDING';self.latest={};self.state='CONNECTING';self.last_data=None
                     self.persist_control()
                     async with connector(ENDPOINT,additional_headers={'Content-Type':'application/msgpack'},open_timeout=10,close_timeout=3,ping_interval=20,ping_timeout=10,max_size=32768,max_queue=4) as ws:
-                        self.socket=ws;self.connection_count+=1
+                        self.socket=ws;self._socket_permission=(reference,dict(keys));self.connection_count+=1
                         subscribed_at=None
                         while not self.stop_event.is_set():
                             try:raw=await asyncio.wait_for(ws.recv(),15 if self.phase!='SUBSCRIBED' or self.pending else 30)
@@ -431,6 +443,7 @@ class LiveIEX:
                 except Exception:
                     # WebSocket closure/handshake failures never log exception text or keys.
                     self.phase='DISCONNECTED';self.state='BACKOFF';self.failures+=1;self.reason='transport_closed'
+                self.socket=None;self._socket_permission=None
                 try:self.persist_control()
                 except MemoryError:self.state='FAILED';self.reason='resource_exhausted';return
                 except ProtocolError:self.state='FAILED';self.reason='recovery_checkpoint_rejected';return
@@ -442,7 +455,7 @@ class LiveIEX:
         except asyncio.CancelledError:
             self.state='STOPPED' if self.stop_event.is_set() else 'RECOVERY_REQUIRED';self.reason='owner_stop' if self.stop_event.is_set() else 'worker_interrupted';raise
         finally:
-            self.socket=None;self.phase='DISCONNECTED'
+            self.socket=None;self._socket_permission=None;self.phase='DISCONNECTED'
             if self.stop_event.is_set():self.state='STOPPED';self.reason='owner_stop'
             try:self.persist_control()
             except MemoryError:self.state='FAILED';self.reason='resource_exhausted'
