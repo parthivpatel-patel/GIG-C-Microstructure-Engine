@@ -2,7 +2,7 @@
 import {verifyXbrlDigest} from './xbrlStatements.ts';import {acceptanceNanoseconds} from './acceptanceContract.ts';
 type R={numerator:string;denominator:string};type I={lower:R;upper:R;lower_closed:boolean;upper_closed:boolean};
 type Point={profile:string;rounding_mode:string;status:string;interval:I|null;source_fact_ids:string[];selected_reported_value:null};
-type Check={status:string;parent_interval:I|null;weighted_sum_interval:I|null;residual_interval:I|null;terms:{concept:string;weight:R;source_fact_ids:string[];weighted_interval:I}[]};
+type Check={status:string;source_fact_ids:string[];selected_reported_value:null;parent_interval:I|null;weighted_sum_interval:I|null;residual_interval:I|null;terms:{concept:string;weight:R;source_fact_ids:string[];weighted_interval:I}[]};
 type Axis={dimension:string;member:string};
 type SourceDocument={uri:string;sha256:string};
 type DefaultSource={member:string;role:string;arc_index:number;source_uri:string;source_sha256:string};
@@ -76,7 +76,8 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
  const defaults=dimensional?defaultDimensions(r):null;
  const sourceKeys=new Set<string>();for(let i=0;i<l.sources.length;i++){const current=l.sources[i].source,next=l.sources[i+1]?.source;if(sourceKeys.has(current.accession)||current.form.replace(/\/A$/,'')!==p.form_family)fail();sourceKeys.add(current.accession);if(next){if(!current.form.endsWith('/A')||current.amends_accession!==next.accession||acceptanceNanoseconds(next.accepted_at)>acceptanceNanoseconds(current.accepted_at))fail()}else if(current.form.endsWith('/A')||current.amends_accession!==null)fail()}
  for(const [id,f]of Object.entries(r.fact_provenance)){if(!hash(id)||typeof f.concept!=='string'||!/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(f.concept)||!Array.isArray(f.declaration_documents)||f.declaration_documents.length>16||!f.declaration_documents.length||f.declaration_documents.some(d=>typeof d.uri!=='string'||!hash(d.sha256)))fail()}
- for(const b of r.bindings){if(!b||typeof b.parent!=='string'||b.aspects?.issuer_cik!==cik||!hash(b.aspects.unit_sha256)||!Array.isArray(b.aspects.dimensions)||(!dimensional&&b.aspects.dimensions.length>0)||!Array.isArray(b.missing_concepts)||b.missing_concepts.length>128||!b.data_points||Object.keys(b.data_points).length>129||!Array.isArray(b.relationship_provenance)||b.relationship_provenance.length>128)fail();
+ const bindingKeys=new Set<string>();
+ for(const b of r.bindings){if(!b||!qname(b.parent)||b.aspects?.issuer_cik!==cik||!hash(b.aspects.unit_sha256)||!Array.isArray(b.aspects.dimensions)||(!dimensional&&b.aspects.dimensions.length>0)||!Array.isArray(b.missing_concepts)||b.missing_concepts.length>128||!b.data_points||Object.keys(b.data_points).length>129||!Array.isArray(b.relationship_provenance)||b.relationship_provenance.length>128)fail();
   const per=b.aspects.period;const date=(v:unknown):v is string=>typeof v==='string'&&/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(v)&&Number(v.slice(0,4))>=1&&Number.isFinite(Date.parse(v))&&new Date(v).toISOString().startsWith(v);if(!per||!date(per.end)||!(per.kind==='instant'&&per.start===null||per.kind==='duration'&&date(per.start)&&per.start<=per.end))fail();
   const reported=axisValues(b.aspects.dimensions);
   const sourceContexts=new Set<string>();
@@ -94,6 +95,13 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
    if(!hash(b.aspects.context_sha256))fail();
    await verifyXbrlDigest({issuer_cik:cik,period:per,dimensions:[],opaque_segment:[],sha256:b.aspects.context_sha256});
   }
+  const bindingKey=JSON.stringify([b.parent,b.aspect_sha256??b.aspects.context_sha256,b.aspects.unit_sha256]);
+  if(bindingKeys.has(bindingKey))fail();
+  bindingKeys.add(bindingKey);
+  const pointNames=Object.keys(b.data_points),missing=new Set(b.missing_concepts);
+  if(!Object.hasOwn(b.data_points,b.parent)||!b.relationship_provenance.length||
+     missing.size!==b.missing_concepts.length||b.missing_concepts.some(c=>!qname(c)||Object.hasOwn(b.data_points,c))||
+     pointNames.length-1+missing.size!==b.relationship_provenance.length)fail();
   const u=b.aspects.unit;if(!u||!Array.isArray(u.numerator)||!u.numerator.length||u.numerator.length>8||!Array.isArray(u.denominator)||u.denominator.length>8||u.semantic_sha256!==b.aspects.unit_sha256||[...u.numerator,...u.denominator].some(v=>typeof v!=='string'||!/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(v)))fail();await verifyXbrlDigest({numerator:u.numerator,denominator:u.denominator,sha256:b.aspects.unit_sha256});
   for(const [concept,a]of Object.entries(b.data_points)){if(a.profile!=='EXACT_CALCULATION_INTERVALS_V2'||a.rounding_mode!==p.rounding_mode||a.selected_reported_value!==null||!['INTERVAL_COMPATIBLE','UNAVAILABLE','INCONSISTENT_DUPLICATES'].includes(a.status)||(a.interval!==null)!==(a.status==='INTERVAL_COMPATIBLE')||!ids(a.source_fact_ids)||!a.source_fact_ids.length||a.source_fact_ids.some(id=>r.fact_provenance[id]?.concept!==concept))fail();if(a.interval)interval(a.interval)}
   if(defaults){
@@ -135,10 +143,18 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
     relationshipWeights.push(weight);
    }
   }
-  const c=b.calculation;if(!c||!['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT','INCOMPLETE','UNSUPPORTED_ACCURACY'].includes(c.status)||!Array.isArray(c.terms)||c.terms.length>128)fail();
-  if(['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT'].includes(c.status)){const parent=b.data_points[b.parent]?.interval;if(!parent||b.missing_concepts.length||reweighted&&relationshipWeights.length!==c.terms.length)fail();const a=interval(parent);same(c.parent_interval,a);let lo:Q=[0n,1n],hi:Q=[0n,1n],lc=true,uc=true;const concepts=new Set<string>();
+  const c=b.calculation;
+  if(!c||!['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT','INCOMPLETE','UNSUPPORTED_ACCURACY'].includes(c.status)||
+     !Array.isArray(c.terms)||c.terms.length>128||c.selected_reported_value!==null)fail();
+  const points=Object.values(b.data_points);
+  const allIDs=[...new Set(points.flatMap(point=>point.source_fact_ids))].sort();
+  const unavailable=points.some(point=>point.interval===null);
+  if((c.status==='INCOMPLETE')!==Boolean(missing.size)||
+     !missing.size&&(c.status==='UNSUPPORTED_ACCURACY')!==unavailable||
+     JSON.stringify(c.source_fact_ids)!==JSON.stringify(missing.size?[]:allIDs))fail();
+  if(['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT'].includes(c.status)){const parent=b.data_points[b.parent]?.interval;if(!parent||b.missing_concepts.length||b.relationship_provenance.length!==c.terms.length||reweighted&&relationshipWeights.length!==c.terms.length)fail();const a=interval(parent);same(c.parent_interval,a);let lo:Q=[0n,1n],hi:Q=[0n,1n],lc=true,uc=true;const concepts=new Set<string>();
    for(const [i,t] of c.terms.entries()){
-    if(concepts.has(t.concept))fail();concepts.add(t.concept);
+    if(t.concept===b.parent||concepts.has(t.concept))fail();concepts.add(t.concept);
     const point=b.data_points[t.concept];
     if(!point?.interval||!ids(t.source_fact_ids)||JSON.stringify(t.source_fact_ids)!==JSON.stringify(point.source_fact_ids))fail();
     const v=interval(point.interval),w=q(t.weight);
@@ -149,7 +165,7 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
    }
 
    same(c.weighted_sum_interval,[lo,hi,lc,uc]);same(c.residual_interval,[add(a[0],[-hi[0],hi[1]]),add(a[1],[-lo[0],lo[1]]),a[2]&&uc,a[3]&&lc]);const lower=cmp(a[0],lo)>0n?a[0]:lo,upper=cmp(a[1],hi)<0n?a[1]:hi;const closedLower=(!eq(lower,a[0])||a[2])&&(!eq(lower,lo)||lc),closedUpper=(!eq(upper,a[1])||a[3])&&(!eq(upper,hi)||uc);const compatible=cmp(lower,upper)<0n||eq(lower,upper)&&closedLower&&closedUpper;if(compatible!==(c.status==='CALCULATION_COMPATIBLE'))fail();
-  }else if(c.parent_interval!==null||c.weighted_sum_interval!==null||c.residual_interval!==null)fail();
+  }else if(c.terms.length||c.parent_interval!==null||c.weighted_sum_interval!==null||c.residual_interval!==null)fail();
  }
  return p;
 }
