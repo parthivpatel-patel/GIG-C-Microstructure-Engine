@@ -12,11 +12,13 @@ from .xbrl_binding import bind_declarations
 from .xbrl_dimensions import D,INHERITED_PROFILE,corroborate
 from .xbrl_accuracy import ROUNDING_MODES,calculation_duplicates,calculation_consistency
 from .xbrl_relationships import PROFILE as REL_PROFILE,SUM
-from .xbrl_types import COMPLEX_PROFILE,_resolve,_value_check
+from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE,_resolve,_value_check
 from .xbrl_calculation_report import _identity,_source_fact,_context,HEX
 
 PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_CALCULATIONS_V1'
 SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v1'
+BOUND_NUMERIC_PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_BOUND_NUMERIC_CALCULATIONS_V2'
+BOUND_NUMERIC_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v2'
 MAX_OUTPUT=4*1024*1024;MAX_BINDINGS=128
 QNAME=re.compile(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}\Z')
 
@@ -65,7 +67,8 @@ def _global_defaults(dts,docmap):
   if default not in members:raise XBRLError('dimcalc_default_outside_domain')
  return defaults,sources
 
-def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE):
+def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE,numeric_profile=None):
+ if numeric_profile not in (None,BOUNDS_PROFILE):raise XBRLError('dimcalc_numeric_profile_unsupported')
  if dimensional_profile!=INHERITED_PROFILE:raise XBRLError('dimcalc_profile_unsupported')
  if type(rounding_mode)is not str or rounding_mode not in ROUNDING_MODES:raise XBRLError('dimcalc_rounding_mode')
  if role is not None and(type(role)is not str or not 1<=len(role)<=512):raise XBRLError('dimcalc_role')
@@ -145,7 +148,7 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
   decl=_declaration(dts,fact['concept'],tag(X,'item'))
   if decl['abstract']or decl['period_type']!=context['period']['kind']or(fact['nil']and not decl['nillable']):raise XBRLError('dimcalc_numeric_declaration_scope')
   try:
-   base,path=_resolve(decl['type'],dts.get('type_declarations',{}),COMPLEX_PROFILE);value=None if fact['nil']else sec.exact(Decimal(fact['lexical_value'].strip(' \t\r\n')));_value_check({**fact,'value':value},base,path,units)
+   base,path=_resolve(decl['type'],dts.get('type_declarations',{}),numeric_profile or COMPLEX_PROFILE);value=None if fact['nil']else sec.exact(Decimal(fact['lexical_value'].strip(' \t\r\n')));_value_check({**fact,'value':value},base,path,units)
   except (XBRLError,ValueError,InvalidOperation):raise XBRLError('dimcalc_numeric_type_or_value_unsupported')from None
   aspect={'issuer_cik':issuer,'period':copy.deepcopy(context['period']),'dimensions':[{'dimension':k,'member':v}for k,v in sorted(reported.items())],'effective_dimension_values':[{'dimension':k,'member':v}for k,v in sorted(normalized.items())],'unit_sha256':unit['semantic_sha256'],'unit':copy.deepcopy(unit)};key=digest(aspect);aspects[key]=aspect;rows=groups.setdefault((fact['concept'],key),[]);rows.append({**fact,'value':value})
   if len(rows)>8:raise XBRLError('dimcalc_duplicate_budget')
@@ -155,6 +158,8 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
   record={'concept':fact['concept'],'context_ref':fact['context_ref'],'source_context_sha256':context['semantic_sha256'],'unit_ref':fact['unit_ref'],'source_unit_sha256':unit['semantic_sha256'],'reported_dimensions':copy.deepcopy(context['dimensions']),'implicit_default_dimensions':implicit,'aspect_sha256':key,'reported_lexical_value':fact['lexical_value'],'reported_numeric_value':value,'raw_fact_value':fact['value'],'drs_validation':copy.deepcopy(r),'declaration_documents':[{'uri':u,'sha256':docmap[u]}for u in declsources],'inline_source_segments':copy.deepcopy(fact.get('inline_source_segments'))};lineage[fact['source_fact_id']]=record;footprint+=len(canonical(record))
   if footprint>MAX_OUTPUT:raise XBRLError('dimcalc_output_budget')
  result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':'NO_SUPPORTED_PARENT_DATA_POINTS','rounding_mode':rounding_mode,'dimensional_profile':INHERITED_PROFILE,'role':net['role'],'definition_role':dts['definition'][0]['role'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'drs_proof_sha256':digest(drs),'definition_sha256':digest(dts['definition']),'source_filing':copy.deepcopy(source),'global_default_dimensions':defaults,'default_provenance':default_sources,'definition_documents':[{'uri':u,'sha256':docmap[u]}for u in sorted({a['source_uri']for a in dts['definition'][0]['arcs']})],'fact_provenance':lineage,'bindings':[],'selected_reported_value':None,'limitations':['Positive inherited/conjunctive explicit DRS V3 only;no typed,negative,opaque,forever,cross-role or mixed context placement','Global defaults are derived calculation aspects only;original source contexts and facts are unchanged','Not complete OIM/XDT/Calc1.1 conformance,independent source authentication or accounting equivalence']}
+ if numeric_profile==BOUNDS_PROFILE:
+  result.update(schema=BOUND_NUMERIC_SCHEMA,profile=BOUND_NUMERIC_PROFILE,numeric_profile=numeric_profile)
  for parent,arcs in sorted(parents.items()):
   for (concept,key),rows in sorted(groups.items()):
    if concept!=parent:continue
