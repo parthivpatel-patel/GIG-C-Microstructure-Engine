@@ -35,6 +35,18 @@ int main(int argc,char** argv){try{
     // Equal-time quote with later journal prefix is unavailable at the trade decision.
     altered=q;altered[1].timestamp=number<EventTimestamp>(5);t[0].price=number<PriceTicks>(101);
     check(take(calculate_flow(altered,t,config(),number<EventTimestamp>(10))).trades()[0].sign==TradeSign::unknown);
+    // Several equal-time quotes straddle the trade's exclusive journal bound.
+    const std::array<FlowQuote,5> tied{
+        quote(0,1,100,102),quote(5,2,101,103),quote(5,3,102,104),
+        quote(5,4,104,106),quote(5,5,105,107)};
+    const std::array<FlowTrade,1> tied_trade{trade(5,4,105)};
+    auto immediate=config();immediate.horizon=number<Duration>(0);
+    const auto causal=take(calculate_flow(tied,tied_trade,immediate,number<EventTimestamp>(10)));
+    check(causal.trades()[0].sign==TradeSign::buy);
+    check(value(causal.trades()[0].effective_spread)=="4/1");
+    check(value(causal.trades()[0].realized_spread)=="4/1");
+    check(value(causal.trades()[0].price_impact)=="0/1");
+    check(value(causal.summary().window_return)=="5/101");
     std::array<FlowTrade,3> ticks{trade(3,2,100),trade(5,3,101),trade(6,4,101)};std::array<FlowQuote,1> fixed{q[0]};auto signed_ticks=take(calculate_flow(fixed,ticks,config(),number<EventTimestamp>(10)));check(signed_ticks.trades()[1].sign==TradeSign::buy && signed_ticks.trades()[2].sign==TradeSign::buy);
     for(std::size_t position=0;position<2;++position){TrackedResource memory;memory.fail_after(position);auto failed=calculate_flow(q,t,config(),number<EventTimestamp>(10),&memory);check(!failed && failed.error.code==ErrorCode::resource_exhausted && memory.stats().live_bytes==0);}
     check(!calculate_flow(q,t,config(),number<EventTimestamp>(10),nullptr));

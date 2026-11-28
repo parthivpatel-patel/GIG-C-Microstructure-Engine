@@ -1,5 +1,7 @@
 #include "gig/analytics/flow_metrics.hpp"
+#include <algorithm>
 #include <cmath>
+#include <iterator>
 namespace gig::analytics {
 namespace {
 using exact::Fraction;using exact::Wide;
@@ -12,12 +14,21 @@ std::optional<Fraction> midpoint(const FlowQuote* q) {
     return (Fraction(q->bid->price_ticks.value())+Fraction(q->ask->price_ticks.value()))/Fraction(2);
 }
 const FlowQuote* quote_at(std::span<const FlowQuote> quotes,Wide time,Wide max_age,std::optional<std::size_t> prefix={}) {
-    const FlowQuote* found=nullptr;
-    for (const auto& q:quotes) {
-        if (static_cast<Wide>(q.timestamp.value())<=time && (!prefix || q.source.journal_prefix<*prefix)) found=&q;
-        if (static_cast<Wide>(q.timestamp.value())>time) break;
+    // Validation establishes monotonic time and strictly increasing journal
+    // prefixes. Apply the exclusive causal bound before the inclusive time bound.
+    if(quotes.empty())return nullptr;
+    auto end=quotes.end();
+    if(prefix) {
+        end=std::lower_bound(quotes.begin(),end,*prefix,[](const FlowQuote& quote,std::size_t limit) {
+            return quote.source.journal_prefix<limit;
+        });
     }
-    return found && time-static_cast<Wide>(found->timestamp.value())<=max_age?found:nullptr;
+    const auto after=std::upper_bound(quotes.begin(),end,time,[](Wide limit,const FlowQuote& quote) {
+        return limit<static_cast<Wide>(quote.timestamp.value());
+    });
+    if(after==quotes.begin())return nullptr;
+    const auto& found=*std::prev(after);
+    return time-static_cast<Wide>(found.timestamp.value())<=max_age?&found:nullptr;
 }
 bool same_scope(const SnapshotReference& a,const SnapshotReference& b) {
     return a.run_id==b.run_id && a.rules==b.rules && a.session==b.session;
