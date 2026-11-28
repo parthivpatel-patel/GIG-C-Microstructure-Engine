@@ -54,6 +54,7 @@ class NativeSourceRecovery:
         try:
             info=os.fstat(fd)
             if not stat.S_ISREG(info.st_mode)or info.st_nlink!=1 or info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:raise RecoveryError('checkpoint_private_file')
+            self.database_identity=info.st_dev,info.st_ino
         finally:os.close(fd)
         with self._connect()as db:
             db.execute('BEGIN')
@@ -66,11 +67,20 @@ class NativeSourceRecovery:
             self._publish(state,native,initial=True)
         else:
             state,digest=saved;native=self._restore(state);self._state=state;self._native=native;self._digest=digest
+    def _check_location(self):
+        info=self.path.lstat()
+        if (info.st_dev,info.st_ino)!=self.database_identity or not stat.S_ISREG(info.st_mode)or info.st_nlink!=1 or info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:
+            raise RecoveryError('checkpoint_file_identity_changed')
+        if info.st_size>16*1024*1024:raise RecoveryError('checkpoint_disk_budget')
+
     @contextmanager
     def _connect(self):
-        if self.path.stat().st_size>16*1024*1024:raise RecoveryError('checkpoint_disk_budget')
-        db=sqlite3.connect(self.path,timeout=2)
+        self._check_location()
+        try:db=sqlite3.connect(self.path.as_uri()+'?mode=rw',uri=True,timeout=2)
+        except sqlite3.Error:raise RecoveryError('checkpoint_storage_failure')from None
         try:
+            self._check_location()
+            db.execute('PRAGMA trusted_schema=OFF')
             if db.execute('PRAGMA page_size').fetchone()[0]!=4096:raise RecoveryError('checkpoint_page_size')
             db.execute('PRAGMA journal_mode=DELETE');db.execute('PRAGMA synchronous=FULL');db.execute('PRAGMA secure_delete=ON');db.execute('PRAGMA max_page_count=4096')
             yield db
@@ -133,6 +143,7 @@ class NativeSourceRecovery:
                 if self.before_commit:self.before_commit()
                 stage='commit';db.commit();stage='published'
                 if self.after_commit:self.after_commit()
+                self._check_location()
             except BaseException as exc:
                 if stage in ('commit','published'):self.uncertain=True;self.local_reason='checkpoint_publication_uncertain'
                 elif isinstance(exc,RecoveryError)and str(exc)=='checkpoint_stale_writer':self.uncertain=True;self.local_reason='stale_checkpoint_owner'
