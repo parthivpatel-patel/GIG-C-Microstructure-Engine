@@ -47,9 +47,9 @@ export async function boundedText(response:Response,signal?:AbortSignal,limit=MA
  }
 }
 
-export async function decoded(response:Response,signal?:AbortSignal):Promise<any>{
+export async function decoded(response:Response,signal?:AbortSignal,parse:(text:string)=>unknown=JSON.parse):Promise<any>{
  const text=await boundedText(response,signal);let value;
- try{value=JSON.parse(text);}catch{throw Error(`API returned non-JSON response (${response.status})`);}
+ try{value=response.ok?parse(text):JSON.parse(text);}catch{throw Error(`API returned non-JSON response (${response.status})`);}
  if(!response.ok){
   const reason=value?.detail?.message||value?.error?.message||value?.detail;
   throw Error(typeof reason==='string'&&reason.length<=240?reason:`API error ${response.status}`);

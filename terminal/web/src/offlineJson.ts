@@ -25,7 +25,14 @@ export function parseBoundedOfflineJson(text:string,maxBytes:number,maxNodes:num
  const whitespace=()=>{while(pos<text.length&&' \t\r\n'.includes(text[pos]))pos++};
  const string=():string=>{
   if(text[pos]!== '"')fail();const start=pos++;let length=0;
-  while(pos<text.length){const c=text[pos++];if(c==='"')return JSON.parse(text.slice(start,pos)) as string;
+  while(pos<text.length){const c=text[pos++];if(c==='"'){
+    const decoded=JSON.parse(text.slice(start,pos)) as string;
+    for(const point of decoded){
+     const scalar=point.codePointAt(0)!;
+     if(scalar>=0xd800&&scalar<=0xdfff)fail();
+    }
+    return decoded;
+   }
    if(c.charCodeAt(0)<32)fail();
    if(c==='\\'){const escape=text[pos++];if(escape==='u'){if(!/^[0-9a-fA-F]{4}$/.test(text.slice(pos,pos+4)))fail();pos+=4}else if(!escape||!'"\\/bfnrt'.includes(escape))fail()}
    if(++length>MAX_STRING)fail();
@@ -58,7 +65,7 @@ export async function readBoundedOfflineJson(file:Pick<Blob,'size'|'arrayBuffer'
  const buffer=await file.arrayBuffer();
  if(signal?.aborted)throw new DOMException('Offline import aborted','AbortError');
  if(!(buffer instanceof ArrayBuffer)||buffer.byteLength!==file.size||buffer.byteLength>maxBytes)fail();
- let text:string;try{text=new TextDecoder('utf-8',{fatal:true}).decode(buffer)}catch{return fail()}
+ let text:string;try{text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(buffer)}catch{return fail()}
  return parseBoundedOfflineJson(text,maxBytes,maxNodes,maxDepth);
 }
 

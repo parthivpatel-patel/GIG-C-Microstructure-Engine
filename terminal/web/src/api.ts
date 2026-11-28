@@ -1,5 +1,6 @@
 import {validateState} from './contracts';import type {TerminalState} from './contracts';
 import {decoded} from './response';
+import {parseOfflineJson} from './offlineJson';
 export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=10000):Promise<T>{const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),Math.min(30000,Math.max(1000,timeoutMs)));try{
  const headers:Record<string,string>={'Content-Type':'application/json'};
  if(body!==undefined){
@@ -43,9 +44,9 @@ export async function readStatements(symbol:string,statement:string,period:strin
  if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!['income','balance','cash'].includes(statement)||!['annual','quarter','ytd','all'].includes(period))throw Error('Invalid statements query');
  return await readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/statements?statement='+statement+'&period='+period,signal);
 }
-async function readBoundedFinancial(path:string,signal:AbortSignal):Promise<unknown>{
+async function readBoundedFinancial(path:string,signal:AbortSignal,parse?:(text:string)=>unknown):Promise<unknown>{
  const c=new AbortController(),cancel=()=>c.abort();signal.addEventListener('abort',cancel,{once:true});if(signal.aborted)c.abort();const timer=setTimeout(cancel,10000);
- try{return await decoded(await fetch(path,{signal:c.signal}),c.signal)}finally{clearTimeout(timer);signal.removeEventListener('abort',cancel)}
+ try{return await decoded(await fetch(path,{signal:c.signal}),c.signal,parse)}finally{clearTimeout(timer);signal.removeEventListener('abort',cancel)}
 }
 
 export async function readSecurities(query:string,offset:number,signal:AbortSignal,filters:Record<string,string>={}):Promise<unknown>{
@@ -70,5 +71,5 @@ export async function readXbrlStatements(symbol:string,at:string,role:string|nul
  if(!['legacy-v1','accuracy-extension-v2'].includes(profile))throw Error('Invalid XBRL profile');
  if(!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(symbol)||!at||at.length>40||(role!==null&&(!role||role.length>512))||!['10-K','10-Q'].includes(form))throw Error('Invalid XBRL statement query');
  const q=new URLSearchParams({at,form,...(profile==='legacy-v1'?{}:{profile})});if(role!==null)q.set('role',role);
- return readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/xbrl-statements?'+q,signal);
+ return readBoundedFinancial('/api/v2/companies/'+encodeURIComponent(symbol)+'/xbrl-statements?'+q,signal,parseOfflineJson);
 }
