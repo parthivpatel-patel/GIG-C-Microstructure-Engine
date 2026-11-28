@@ -14,6 +14,7 @@ from .xbrl_lineage import filing_lineage
 from .xbrl_statement_set import KINDS,ACCESSION
 from .xbrl_types import BOUNDS_PROFILE,_resolve,_value_check
 from .xbrl_accuracy import calculation_duplicates,calculation_consistency
+from .xbrl_calculation_report import _original_decimal_weight,WEIGHTED_PROFILE
 from .xbrl_accounting_relationships import extract_accounting_relationships,_extract
 from .xbrl_dts_source_audit import reconstruct_admitted_inline
 
@@ -106,7 +107,13 @@ def _section(parsed,graph,relations,binding):
   rows,points=_rows(order,period,facts_by_period[period],parsed,graph,accounting,ctx_by_sha,document_hashes);checks=[]
   for cn in graph['effective_relationships']['networks']:
    if cn['kind']!='calculation'or cn['role']!=role:continue
-   if not cn['usable']:checks.append({'status':'UNSUPPORTED','issues':copy.deepcopy(cn['issues'])});continue
+   weighted=not cn['usable'] and cn['issues']==['WEIGHT_OUTSIDE_SIGNED_UNIT_PROFILE']
+   if weighted:
+    try:
+     for arc in cn['arcs']:_original_decimal_weight(arc,graph['concepts'])
+    except XBRLError:
+     weighted=False
+   if not cn['usable'] and not weighted:checks.append({'status':'UNSUPPORTED','issues':copy.deepcopy(cn['issues'])});continue
    parents={}
    for arc in cn['arcs']:parents.setdefault(arc['from'],[]).append(arc)
    for parent,arcs in sorted(parents.items()):
@@ -115,9 +122,13 @@ def _section(parsed,graph,relations,binding):
     for context,unit,identifier in aspects:
      parent_facts=points.get((parent,context,unit,identifier));terms=[]
      for arc in arcs:
-      fs=points.get((arc['to'],context,unit,identifier));terms.append({'concept':arc['to'],'weight':int(arc['weight']['numerator']),'accuracy':calculation_duplicates(fs)if fs else None})
+      fs=points.get((arc['to'],context,unit,identifier))
+      weight=arc['provenance'][0]['weight_lexical'] if weighted else int(arc['weight']['numerator'])
+      terms.append({'concept':arc['to'],'weight':weight,'accuracy':calculation_duplicates(fs)if fs else None})
      check=calculation_consistency(calculation_duplicates(parent_facts)if parent_facts else None,terms)
-     checks.append({'parent':parent,'context_sha256':context,'identifier_lexical':identifier,'unit_sha256':unit,'calculation':check,'relationship_provenance':[copy.deepcopy(a['provenance'])for a in arcs]})
+     row={'parent':parent,'context_sha256':context,'identifier_lexical':identifier,'unit_sha256':unit,'calculation':check,'relationship_provenance':[copy.deepcopy(a['provenance'])for a in arcs]}
+     if weighted:row['weight_profile']=WEIGHTED_PROFILE
+     checks.append(row)
      if len(checks)>128:raise XBRLError('accounting_statement_calculation_budget')
   result['periods'].append({'start':period[0],'end':period[1],'rows':rows,'calculations':checks})
  result.update(status='AVAILABLE'if facts_by_period else'UNAVAILABLE',reason=None if facts_by_period else'NO_SOURCE_PERIODS',relationships=copy.deepcopy(net['arcs']))
