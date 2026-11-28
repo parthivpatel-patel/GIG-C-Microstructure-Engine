@@ -7,7 +7,7 @@ from .xbrl_instance import X,L,XL,tag,parse_xml,canonical,digest,XBRLError
 from .xbrl_dts import uri,EMBEDDED_PROFILE,_supplied_documents
 from .xbrl_dts_source_audit import audit_dts_sources
 from .xbrl_relationships import number,rational
-from .xbrl_types import _resolve,_value_check,RESTRICTION_PROFILE
+from .xbrl_types import _resolve,_value_check,BOUNDS_PROFILE
 
 PROFILE='SOURCE_ACCOUNTING_RELATIONSHIPS_V1';SCHEMA='gig.sec.xbrl.accounting_relationships.v1'
 INLINE_PROFILE='SOURCE_INLINE_ACCOUNTING_RELATIONSHIPS_V2'
@@ -44,6 +44,8 @@ def _member(fact,parsed,dts):
  typ=dts['concepts'][fact['concept']]['declaration']['type']
  if typ==tag(X,'stringItemType'):
   if fact['unit_ref']is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
+  if fact['decimals'] is not None or fact['precision'] is not None:
+   return result,'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED'
   result['reported_value']=fact['lexical_value'];result['value_kind']='string';return result,None
  if typ==tag(X,'booleanItemType'):
   if fact['unit_ref'] is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
@@ -53,7 +55,7 @@ def _member(fact,parsed,dts):
   if lexical not in ('true','false','1','0'):return result,'BOOLEAN_LEXICAL_UNSUPPORTED'
   result.update(reported_value='true' if lexical in ('true','1') else 'false',value_kind='boolean')
   return result,None
- try:base,path=_resolve(typ,dts.get('type_declarations',{}),RESTRICTION_PROFILE)
+ try:base,path=_resolve(typ,dts.get('type_declarations',{}),BOUNDS_PROFILE)
  except XBRLError as exc:
   if 'unsupported'in str(exc):return result,'ITEM_TYPE_VALUE_SEMANTICS_UNSUPPORTED'
   raise

@@ -38,7 +38,7 @@ function resolve(type:string|null,g:Graph):Resolved|null{
   if(type.startsWith('{'+XS+'}')){
    const local=type.slice(XS.length+2);
    if(local==='decimal')return {base:type,kind:'decimal',bounds:null,facets};
-   if(integerBounds[local])return {base:type,kind:'integer',bounds:integerBounds[local],facets};
+   if(Object.hasOwn(integerBounds,local))return {base:type,kind:'integer',bounds:integerBounds[local],facets};
   }
   if(type.startsWith('{'+X+'}')){
    const local=type.slice(X.length+2);
@@ -83,6 +83,10 @@ function checkFacets(value:Numeric,facets:Facet[][]):void{
 }
 function checkRestrictionDefinitions(resolved:Resolved):void{
  const digits=new Map<string,number>(),fixed=new Map<string,number>();
+ type Bound={value:Numeric;inclusive:boolean};
+ const limits=resolved.bounds;
+ let lower:Bound|undefined=limits&&limits[0]!==null?{value:numeric(String(limits[0])),inclusive:true}:undefined;
+ let upper:Bound|undefined=limits&&limits[1]!==null?{value:numeric(String(limits[1])),inclusive:true}:undefined;
  if(resolved.bounds){digits.set('fractionDigits',0);fixed.set('fractionDigits',0);}
  for(const [index,group] of resolved.facets.entries()){
   const byKind=new Map(group.map(facet=>[facet.kind,facet]));
@@ -97,12 +101,23 @@ function checkRestrictionDefinitions(resolved:Resolved):void{
    if(facet.fixed===true)fixed.set(key,limit);
   }
   if((digits.get('fractionDigits')??0)>(digits.get('totalDigits')??Infinity))bad();
-  const lower=byKind.get('minInclusive')??byKind.get('minExclusive');
-  const upper=byKind.get('maxInclusive')??byKind.get('maxExclusive');
-  const lo=lower&&baseNumeric(lower.value,resolved),hi=upper&&baseNumeric(upper.value,resolved);
-  if(lo&&hi){
-   const order=compare(lo,hi);
-   if(order>0n||(order===0n&&(lower!.kind==='minExclusive'||upper!.kind==='maxExclusive')))bad();
+  const lowerFacet=byKind.get('minInclusive')??byKind.get('minExclusive');
+  const upperFacet=byKind.get('maxInclusive')??byKind.get('maxExclusive');
+  function narrowed(facet:Facet,parent:Bound|undefined,minimum:boolean):Bound{
+   const value=baseNumeric(facet.value,resolved),inclusive=facet.kind.endsWith('Inclusive');
+   const order=parent?compare(value,parent.value):0n;
+   if(parent&&((minimum?order<0n:order>0n)||order===0n&&inclusive&&!parent.inclusive))bad();
+   if(!parent||inclusive||parent.inclusive||order!==0n){
+    checkFacets(value,resolved.facets.slice(0,index));
+   }
+   return {value,inclusive};
+  }
+  if(lowerFacet)lower=narrowed(lowerFacet,lower,true);
+  if(upperFacet)upper=narrowed(upperFacet,upper,false);
+  if(lower&&upper){
+   const order=compare(lower.value,upper.value);
+   if(order>0n||order===0n&&!(lower.inclusive&&upper.inclusive))bad();
+   if(limits&&lower.value.coefficient+(lower.inclusive?0n:1n)>upper.value.coefficient-(upper.inclusive?0n:1n))bad();
   }
   for(const facet of group)if(facet.kind==='enumeration'){
    checkFacets(baseNumeric(facet.value,resolved),resolved.facets.slice(0,index));
@@ -122,6 +137,7 @@ function member(f:SourceFact,s:Source,g:Graph):{record:RecordValue;reason:string
  if(f.nil){if(!decl.nillable)bad();return {record,reason:'NIL_PARTICIPANT',valueKey:null,exact:true}}
  if(decl.type===`{${X}}stringItemType`){
   if(f.unit_ref!==null)return {record,reason:'NONNUMERIC_UNIT_UNSUPPORTED',valueKey:null,exact:true};
+  if(f.decimals!==null||f.precision!==null)return {record,reason:'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED',valueKey:null,exact:true};
   record.reported_value=f.lexical_value;record.value_kind='string';return {record,reason:null,valueKey:'string:'+f.lexical_value,exact:true};
  }
  if(decl.type===`{${X}}booleanItemType`){

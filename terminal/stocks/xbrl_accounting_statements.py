@@ -12,7 +12,7 @@ from .xbrl_dts import EMBEDDED_PROFILE,_supplied_documents,discover,uri
 from .xbrl_product import company_contract
 from .xbrl_lineage import filing_lineage
 from .xbrl_statement_set import KINDS,ACCESSION
-from .xbrl_types import RESTRICTION_PROFILE,_resolve,_value_check
+from .xbrl_types import BOUNDS_PROFILE,_resolve,_value_check
 from .xbrl_accuracy import calculation_duplicates,calculation_consistency
 from .xbrl_accounting_relationships import extract_accounting_relationships,_extract
 from .xbrl_dts_source_audit import reconstruct_admitted_inline
@@ -29,7 +29,7 @@ def _number(fact,parsed,graph):
  if decl['abstract']or decl['substitution_group']!=tag(X,'item')or decl['period_type']!=ctx['period']['kind']or ctx['dimensions']or ctx['opaque_segment']or ctx['period']['end']is None or fact['unit_ref']is None:raise XBRLError('accounting_statement_numeric_scope')
  if fact['nil']and not decl['nillable']:raise XBRLError('accounting_statement_nil_not_declared')
  if decl['type'] is None:raise XBRLError('accounting_statement_missing_declared_type')
- base,path=_resolve(decl['type'],graph.get('type_declarations',{}),RESTRICTION_PROFILE)
+ base,path=_resolve(decl['type'],graph.get('type_declarations',{}),BOUNDS_PROFILE)
  lexical=fact['lexical_value'].strip(' \t\r\n')
  if not fact['nil']and(len(lexical)>64 or not re.fullmatch(r'[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)',lexical)):raise XBRLError('accounting_statement_numeric_lexical')
  value=None if fact['nil']else sec.exact(Decimal(lexical));_value_check({**fact,'value':value},base,path,parsed['units'])
