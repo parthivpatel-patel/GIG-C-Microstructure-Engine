@@ -27,6 +27,8 @@ MAX_NS=2**63-1
 DAY_NS=86400*10**9
 BAR_DAYS={'1Day':366,'1Hour':31,'1Min':7}
 ADJUSTMENTS=('raw','split','dividend','all')
+MAX_BACKFILL_PAGES=32
+MAX_BACKFILL_CURSORS=8
 
 def ns(value):
     # RFC3339 with explicit offset;exact nanoseconds retained independently of datetime.
@@ -114,7 +116,7 @@ class HistoricalClient:
         self.now_ns=clock_ns or (time.time_ns if clock is time.time else lambda:int(Decimal(str(clock()))*10**9))
         self.identity=identity or (lambda s:{'symbol':s,'identity_authority':'REQUESTED_IDENTIFIER_NOT_LISTING_VERIFICATION'})
         self.schedule=schedule or SessionSchedule()
-        self.lock=asyncio.Lock();self.cache=OrderedDict();self.last_request=None;self.failures=0
+        self.lock=asyncio.Lock();self.cache=OrderedDict();self.backfill_cursors=OrderedDict();self.last_request=None;self.failures=0
     def readiness(self):
         self.prune()
         feeds=[];reasons=[]
@@ -126,10 +128,14 @@ class HistoricalClient:
         now=self.monotonic()
         for key,(accepted,_) in list(self.cache.items()):
             if not 0<=now-accepted<60:del self.cache[key]
+        for key,state in list(self.backfill_cursors.items()):
+            if not 0<=now-state['created']<60:del self.backfill_cursors[key]
     def delete(self,identity=None):
         if identity is not None and (type(identity)is not str or not re.fullmatch('[0-9a-f]{64}',identity)):raise WireError('history_cache_identity')
         keys=[k for k,(_,v) in self.cache.items() if identity is None or v['canonical_sha256']==identity]
         for k in keys:del self.cache[k]
+        for k in list(self.backfill_cursors):
+            if identity is None or k[1]==identity:del self.backfill_cursors[k]
         return {'deleted':len(keys),'scope':'in_process_only_no_provider_request'}
     def accepted(self,identity):
         if type(identity)is not str or not re.fullmatch('[0-9a-f]{64}',identity):raise WireError('history_accepted_revision_identity')
@@ -157,16 +163,42 @@ class HistoricalClient:
                                             ceiling=5,random_source=self.random_source))
         raise WireError('history_retry_budget')
     async def acquire(self,query):
+        result,_=await self._acquire(query)
+        return result
+
+    async def acquire_backfill(self,query,gap_id,after_revision=None):
+        """Continue one admitted gap by a local receipt, keeping wire tokens private."""
+        if (type(gap_id)is not str or not re.fullmatch('[0-9a-f]{64}',gap_id) or
+            after_revision is not None and (type(after_revision)is not str or not re.fullmatch('[0-9a-f]{64}',after_revision))):
+            raise WireError('iex_backfill_continuation_identity')
+        return await self._acquire(query,scope=gap_id,after_revision=after_revision)
+
+    async def _acquire(self,query,*,scope=None,after_revision=None):
         now_ns=self.now_ns();q=validate_query(query,now_ns);self.permission.require(q['feed'])
         if self.transport is None:raise WireError('history_provider_transport_disabled')
         self.identity(q['symbol'])
+        if scope is not None and (q['feed']!='iex' or q['kind'] not in ('quotes','trades')):
+            raise WireError('iex_backfill_continuation_query')
         if self.lock.locked():raise WireError('history_busy')
         self.prune();key=hashlib.sha256(canonical(q)).hexdigest()
-        if key in self.cache:return {**json.loads(canonical(self.cache[key][1])),'cache_status':'ACCEPTED_MEMORY_REFERENCE'}
+        if scope is None and key in self.cache:
+            return {**json.loads(canonical(self.cache[key][1])),'cache_status':'ACCEPTED_MEMORY_REFERENCE'},None
         async with self.lock:
             async with asyncio.timeout(30):
-                records=[];receipts=[];seen_tokens=set();seen={};trade_ids={};prior=None;token=None;duplicates=0
-                for page in range(q['max_pages']):
+                cursor_key=(scope,after_revision)
+                saved=self.backfill_cursors.get(cursor_key) if after_revision is not None else None
+                if after_revision is not None and (saved is None or saved['query_sha256']!=key or
+                    saved['permission']!=self.permission or saved['transport'] is not self.transport):
+                    raise WireError('iex_backfill_continuation_unavailable')
+                records=[];receipts=[];duplicates=0
+                seen_tokens=set(saved['seen_tokens']) if saved else set()
+                seen=set(saved['seen']) if saved else set()
+                trade_ids=dict(saved['trade_ids']) if saved else {}
+                prior=saved['prior'] if saved else None
+                token=saved['token'] if saved else None
+                consumed=saved['pages'] if saved else 0
+                limit=min(q['max_pages'],MAX_BACKFILL_PAGES-consumed) if scope is not None else q['max_pages']
+                for page in range(limit):
                     # Delay is checked again before every request;never change feed.
                     self.permission.require(q['feed']);validate_query(q,self.now_ns())
                     # Alpaca's wire end is inclusive. Keep the public query half-open.
@@ -194,7 +226,7 @@ class HistoricalClient:
                             trade_ids[trade_key]=digest_row
                         if digest_row in seen:duplicates+=1;continue
                         if prior is not None and (exact<prior or q['kind']=='bars' and exact==prior):raise WireError('history_out_of_order_or_conflicting_bar')
-                        prior=exact;seen[digest_row]=True
+                        prior=exact;seen.add(digest_row)
                         records.append({**r,'timestamp':utc(exact),'source_timestamp_ns':str(exact),'source_record_sha256':digest_row,'source_timestamp_text':raw['t'],'record_hash_scope':'normalized_observation_and_supported_annotations','wire_metadata':annotations})
                     receipt_time=utc(self.now_ns())
                     receipts.append({'endpoint':BASE+q['kind'],'page':page+1,'records':len(rows),'sha256':digest,'received_at':receipt_time})
@@ -206,6 +238,20 @@ class HistoricalClient:
                 result={'schema':'gig.alpaca.history.v2','query':q,'symbol':q['symbol'],'kind':q['kind'],'feed':q['feed'],'origin':origin,'records':records,'record_count':len(records),'duplicate_records_removed':duplicates,'deduplication_policy':'Identical normalized records collapsed;source receipts retain physical counts;not an exactly-once tape','source_records':receipts,'received_at':receipts[-1]['received_at'],'has_more':token not in (None,''),'complete_history':False,'freshness':'HISTORICAL_NOT_LIVE','adjustment':q['adjustment'],'instrument':self.identity(q['symbol']),'session':self.schedule.at(q['symbol'],records[-1]['timestamp'] if records else None),'clock_window':market_window(records[-1]['timestamp']) if records else None,'coverage':'IEX venue-limited observations' if q['feed']=='iex' else 'Historical SIP requested with minimum900second delay;not real-time entitlement','cache_policy':'16in-process queries,60secondTTL,explicit deletion;no disk retention enabled','limitations':['No full-session/holiday/halt completeness inferred.','Raw prices may contain split/dividend jumps;provider adjustment selection is disclosed,not independently verified.','Quote sizes retain provider units;no depth,queue or aggressor direction inferred.','Source symbols do not independently prove historical security identity.']}
                 result['canonical_sha256']=hashlib.sha256(canonical(result)).hexdigest()
                 if len(canonical(result))>512*1024:raise WireError('history_result_budget')
-                self.cache[key]=(self.monotonic(),result)
-                while len(self.cache)>16:self.cache.popitem(last=False)
-                return json.loads(canonical(result))
+                materialized=json.loads(canonical(result))
+                continuation=None
+                if scope is None:
+                    self.cache[key]=(self.monotonic(),result)
+                    while len(self.cache)>16:self.cache.popitem(last=False)
+                else:
+                    count=consumed+len(receipts)
+                    if after_revision is not None:self.backfill_cursors.pop(cursor_key,None)
+                    if result['has_more'] and count<MAX_BACKFILL_PAGES:
+                        continuation=result['canonical_sha256']
+                        self.backfill_cursors[scope,continuation]={
+                            'created':self.monotonic(),'query_sha256':key,'permission':self.permission,'transport':self.transport,
+                            'pages':count,'seen_tokens':seen_tokens,'seen':seen,'trade_ids':trade_ids,'prior':prior,'token':token}
+                        while len(self.backfill_cursors)>MAX_BACKFILL_CURSORS:self.backfill_cursors.popitem(last=False)
+                    continuation={'after_revision':after_revision,'next_revision':continuation,
+                                  'pages_seen':count,'page_limit':MAX_BACKFILL_PAGES}
+                return materialized,continuation

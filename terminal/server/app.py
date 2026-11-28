@@ -589,9 +589,10 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             if request.query_params:return error('IEX_BACKFILL_QUERY','no query parameters accepted',422)
             return {'schema':'gig.iex.backfill_candidates.v1','gaps':gaps(stock_live)}
         data=await bounded_json(request)
-        if not {'gap_id'}<=set(data)<= {'gap_id','max_pages'}:
+        if not {'gap_id'}<=set(data)<= {'gap_id','max_pages','after_revision'}:
             return error('IEX_BACKFILL_QUERY','retained gap identity and optional page limit required',422)
-        try:return await backfill(stock_live,historical,data['gap_id'],data.get('max_pages',4))
+        try:return await backfill(stock_live,historical,data['gap_id'],data.get('max_pages',4),
+                                  after_revision=data.get('after_revision'))
         except WireError as exc:return error('IEX_BACKFILL_REJECTED',exc.code,422)
         except (ValueError,TypeError,TimeoutError):return error('IEX_BACKFILL_REJECTED','iex_backfill_unavailable',422)
 

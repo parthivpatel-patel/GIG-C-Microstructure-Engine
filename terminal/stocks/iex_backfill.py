@@ -80,7 +80,7 @@ def gaps(live):
     return result
 
 
-async def backfill(live, historical, gap_id, max_pages=4):
+async def backfill(live, historical, gap_id, max_pages=4, *, after_revision=None):
     if type(gap_id) is not str or not re.fullmatch('[0-9a-f]{64}', gap_id):
         raise WireError('iex_backfill_gap_identity')
     if type(max_pages) is not int or not 1 <= max_pages <= 4:
@@ -96,15 +96,23 @@ async def backfill(live, historical, gap_id, max_pages=4):
 
     query = {key: gap[key] for key in ('symbol', 'kind', 'start', 'end')}
     query.update(feed='iex', timeframe='1Day', adjustment='raw', max_pages=max_pages)
-    history = await historical.acquire(query)
+    if hasattr(historical, 'acquire_backfill'):
+        history, continuation = await historical.acquire_backfill(query, gap_id, after_revision)
+    else:
+        if after_revision is not None:
+            raise WireError('iex_backfill_continuation_unavailable')
+        history, continuation = await historical.acquire(query), None
     live.require()
     if not any(item == gap for item in gaps(live)):
         raise WireError('iex_backfill_gap_changed')
     if history['origin'] != gap['origin'] or history['query'] != query:
         raise WireError('iex_backfill_source_mismatch')
 
-    return {
+    result = {
         'schema': 'gig.iex.backfill.v1', 'gap': gap, 'history': history,
         'coverage': 'BOUNDED_PREFIX' if history['has_more'] else 'SOURCE_RESPONSE_EXHAUSTED',
         'observation_loss': 'UNKNOWN_NO_EXCHANGE_SEQUENCE', 'merged_into_live': False,
     }
+    if continuation is not None:
+        result['continuation'] = continuation
+    return result
