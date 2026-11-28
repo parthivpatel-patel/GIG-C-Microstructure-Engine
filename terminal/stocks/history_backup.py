@@ -1,8 +1,10 @@
 """Owner-private bounded SQLite backup/restore. No caller file paths,overwrite or network."""
 import hashlib,json,os,sqlite3,tempfile,time,shutil,stat,math
-from terminal.verification.artifacts import decode
+from terminal.verification.artifacts import decode,read_bytes
 from pathlib import Path
 from .history_store import MAX_PAYLOAD,MAX_SNAPSHOTS,RETENTION_SECONDS,verify
+
+MAX_BACKUP_BYTES=32*1024*1024
 
 
 def _sync_directory(path):
@@ -13,7 +15,7 @@ def _sync_directory(path):
 
 def _private(path):
     s=path.lstat()
-    if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or s.st_mode&0o077 or s.st_size>32*1024*1024:raise ValueError('history_backup_private_file')
+    if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or s.st_mode&0o077 or s.st_size>MAX_BACKUP_BYTES:raise ValueError('history_backup_private_file')
 
 
 def _copy(source,target):
@@ -24,7 +26,9 @@ def _copy(source,target):
 
 
 def _validate(db,store):
-    if db.execute('PRAGMA page_size').fetchone()!=(4096,) or db.execute('PRAGMA quick_check').fetchone()!=('ok',) or db.execute('PRAGMA user_version').fetchone()!=(1,) or db.execute('PRAGMA application_id').fetchone()!=(1195984712,):raise ValueError('history_backup_database')
+    db.execute('PRAGMA trusted_schema=OFF')
+    if (db.execute('PRAGMA page_size').fetchone()!=(4096,) or not 1<=db.execute('PRAGMA page_count').fetchone()[0]<=8192 or
+        db.execute('PRAGMA quick_check').fetchone()!=('ok',) or db.execute('PRAGMA user_version').fetchone()!=(1,) or db.execute('PRAGMA application_id').fetchone()!=(1195984712,)):raise ValueError('history_backup_database')
     if db.execute('SELECT count(*) FROM snapshots').fetchone()[0]>MAX_SNAPSHOTS or db.execute('SELECT count(*) FROM snapshots WHERE length(payload)>?',(MAX_PAYLOAD,)).fetchone()[0]:raise ValueError('history_backup_payload_budget')
     rows=db.execute('SELECT revision,symbol,timeframe,created,payload FROM snapshots').fetchall()
     for revision,symbol,timeframe,created,raw in rows:
@@ -74,20 +78,32 @@ def restore(store):
     with store.lock:
         source_path=store.path.parent/'history.backup.sqlite3';manifest=store.path.parent/'history.backup.json'
         _private(source_path);_private(manifest)
-        if manifest.stat().st_size>4096:raise ValueError('history_backup_manifest_budget')
-        record=decode(manifest.read_bytes());raw=source_path.read_bytes()
-        if record.get('schema')!='gig.history.backup.v1' or record.get('sha256')!=hashlib.sha256(raw).hexdigest() or record.get('bytes')!=len(raw):raise ValueError('history_backup_digest')
+        record=decode(read_bytes(manifest,4096),numeric_policy='exact-integer')
+        if (set(record)!={'schema','sha256','bytes','revisions','database_version'} or
+            record['schema']!='gig.history.backup.v1' or record['database_version']!=1 or
+            type(record['bytes'])is not int or not 1<=record['bytes']<=MAX_BACKUP_BYTES or
+            type(record['revisions'])is not int or not 0<=record['revisions']<=MAX_SNAPSHOTS):
+            raise ValueError('history_backup_manifest')
+        raw=read_bytes(source_path,MAX_BACKUP_BYTES)
+        if record['sha256']!=hashlib.sha256(raw).hexdigest() or record['bytes']!=len(raw):
+            raise ValueError('history_backup_digest')
         stage=_staging(store)
         try:
-            original=sqlite3.connect(source_path.as_uri()+'?mode=ro',uri=True);candidate=sqlite3.connect(stage)
+            # SQLite opens only the private copy of the bytes whose hash passed.
+            # Reopening the original pathname after hashing could parse another revision.
+            fd=os.open(stage,os.O_WRONLY|os.O_NOFOLLOW)
+            with os.fdopen(fd,'wb') as stream:
+                if stream.write(raw)!=len(raw):raise OSError('history_backup_short_copy')
+            candidate=sqlite3.connect(stage)
             try:
-                _validate(original,store);_copy(original,candidate)
-                candidate.execute('PRAGMA secure_delete=ON');candidate.execute('DELETE FROM snapshots WHERE created<?',(store.clock()-RETENTION_SECONDS,));candidate.commit()
+                if _validate(candidate,store)!=record['revisions']:raise ValueError('history_backup_revision_count')
+                candidate.execute('PRAGMA secure_delete=ON')
+                candidate.execute('DELETE FROM snapshots WHERE created<?',(store.clock()-RETENTION_SECONDS,))
+                candidate.commit()
                 count=_validate(candidate,store)
-                # SQLite backup publication uses its destination write transaction;
-                # no path replacement of a live database/connection is performed.
+                # Backup publication uses SQLite's destination write transaction.
                 with store.connect() as destination:_copy(candidate,destination)
-            finally:original.close();candidate.close()
+            finally:candidate.close()
             return {'schema':'gig.history.restore.v1','restored_revisions':count,'source_backup_sha256':record['sha256'],'policy':'expired rows excluded;observed retention gates rechecked'}
         finally:
             if stage.exists():stage.unlink()
