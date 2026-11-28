@@ -25,7 +25,7 @@ def gaps(live):
     if live.phase != 'SUBSCRIBED' or live.pending or not live.current_observation_scope():
         return []
     previous, current = {}, {}
-    if live.store and live.restored_backfill_endpoints:
+    if live.retention_current() and live.restored_backfill_endpoints:
         now = live.store.clock()
         previous.update((key, row) for key, row in live.restored_backfill_endpoints.items()
                         if row['expires_seconds'] > now and row['generation'] < live.generation
