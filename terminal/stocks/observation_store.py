@@ -40,6 +40,8 @@ class ObservationStore:
     db.execute('PRAGMA user_version=1')
     db.execute('PRAGMA application_id=1195984719');initialized=True
    elif (version,app)!=(1,1195984719):raise ValueError('observation_schema')
+   opened_token=self._write_token(db,self._metadata(db))
+  self.writer_token=opened_token
   if initialized:
    try:sync_private_parent(self.path,self.directory_identity)
    except (OSError,ValueError,NotImplementedError):raise ValueError('observation_directory_sync_failed')from None
@@ -106,6 +108,18 @@ class ObservationStore:
    if not re.fullmatch('[0-9a-f]{32}',meta['capture']) or not re.fullmatch('[1-9][0-9]{0,18}',meta['receipt']) or int(meta['receipt'])>2**63-1:
     raise ValueError('observation_metadata_contract')
   return meta
+ @staticmethod
+ def _write_token(db,meta):
+  from . import live_checkpoint
+  control=live_checkpoint.read(db,meta)
+  return (meta['anchor'],meta['tail'],meta.get('capture'),meta.get('receipt'),
+          None if control is None else control['checkpoint_sha256'])
+ def _writer(self,db):
+  meta=self._metadata(db)
+  if self._write_token(db,meta)!=self.writer_token:
+   raise ValueError('observation_stale_writer')
+  return meta
+
  def _payload(self,raw,capture,receipt,created,expires):
   if type(raw)is not bytes or not 1<=len(raw)<=MAX_RECORD_BYTES:raise ValueError('observation_record_budget')
   value=decode(raw)
@@ -147,12 +161,13 @@ class ObservationStore:
   with self.lock:
    with self.connect() as db:
     db.execute('BEGIN IMMEDIATE')
-    meta=self._metadata(db)
+    meta=self._writer(db)
     last=db.execute('SELECT digest FROM records ORDER BY ordinal DESC LIMIT 1').fetchone()
     if (last[0] if last else meta['anchor'])!=meta['tail']:raise ValueError('observation_truncated_tail')
     self.trim(db)
     new_cached=self._summary(db)
-   self.cached=new_cached
+    token=self._write_token(db,self._metadata(db))
+   self.cached=new_cached;self.writer_token=token
  def append(self,capture,events,*,control=None):
   if type(capture) is not str or not re.fullmatch('[0-9a-f]{32}',capture) or not 1<=len(events)<=128:raise ValueError('observation_batch')
   rows=[];prior=None
@@ -165,9 +180,7 @@ class ObservationStore:
    rows.append((receipt,created,raw))
   with self.lock:
    with self.connect() as db:
-    db.execute('BEGIN IMMEDIATE');meta=self._metadata(db)
-    from . import live_checkpoint
-    live_checkpoint.read(db,meta)
+    db.execute('BEGIN IMMEDIATE');meta=self._writer(db)
     if meta.get('capture')==capture:
      if rows[0][0]!=int(meta['receipt'])+1:raise ValueError('observation_receipt_order')
     elif db.execute('SELECT 1 FROM records WHERE capture=? LIMIT 1',(capture,)).fetchone():raise ValueError('observation_retired_capture')
@@ -179,17 +192,22 @@ class ObservationStore:
     from . import live_checkpoint
     if control is not None:live_checkpoint.write(db,control,self._metadata(db))
     elif live_checkpoint.exists(db):db.execute('DELETE FROM live_checkpoint')
+    token=self._write_token(db,self._metadata(db))
     if self.before_commit:self.before_commit()
-   self.cached=new_cached
+   self.cached=new_cached;self.writer_token=token
  def recover(self):
   with self.connect() as db:
    db.execute('BEGIN')
    return self._recover_rows(db)
  def save_control(self,control):
   from . import live_checkpoint
-  with self.connect() as db:
-   db.execute('BEGIN IMMEDIATE');meta=self._metadata(db);live_checkpoint.read(db,meta);live_checkpoint.write(db,control,meta)
-   if self.before_commit:self.before_commit()
+  with self.lock:
+   with self.connect() as db:
+    db.execute('BEGIN IMMEDIATE');meta=self._writer(db)
+    live_checkpoint.write(db,control,meta)
+    token=self._write_token(db,meta)
+    if self.before_commit:self.before_commit()
+   self.writer_token=token
  def recover_control(self,*,visit=None):
   from . import live_checkpoint
   with self.connect() as db:
