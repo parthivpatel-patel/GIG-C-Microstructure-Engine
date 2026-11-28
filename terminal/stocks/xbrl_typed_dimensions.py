@@ -10,6 +10,7 @@ from .xbrl_dts import _supplied_documents,uri
 from .xbrl_types import XS,RESTRICTION_PROFILE,declaration,_resolve,_numeric_lexical,_facet_checks,_enumeration_definitions
 
 D='http://xbrl.org/2005/xbrldt';PROFILE='TYPED_DOMAIN_SCALAR_V1'
+BOUNDS_PROFILE='TYPED_DOMAIN_SCALAR_V2'
 MAX_RECORDS=4096;MAX_OUTPUT=8*1024*1024;MAX_TEXT=4096
 
 def _identity(value):
@@ -69,9 +70,12 @@ def _domain(axis,dts,elements,schema_uris):
  if decl['type']is None:return None,'TYPED_DOMAIN_ANONYMOUS_TYPE_UNSUPPORTED'
  return {'concept':concept,'type':decl['type'],'schema_uri':key,'schema_id':node.attrs['id'],'typed_domain_ref':reference},None
 
-def _scalar(member,domain,dts,types):
+def _scalar(member,domain,dts,types,*,profile=PROFILE):
  if type(member)is not dict or set(member)-{'name','attributes','namespaces','text','children','content_order'}or not {'name','attributes','namespaces','text','children'}<=set(member):raise XBRLError('typed_member_tree_contract')
  if type(member['name'])is not str or type(member['attributes'])is not dict or type(member['namespaces'])is not dict or type(member['text'])is not str or type(member['children'])is not list:raise XBRLError('typed_member_tree_contract')
+ if profile==BOUNDS_PROFILE:
+  namespaces=member['namespaces']
+  if len(namespaces)>32 or any(type(k)is not str or k and not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',k)or type(v)is not str or len(v)>512 for k,v in namespaces.items())or 'content_order'in member and not member['children']:raise XBRLError('typed_member_tree_contract')
  if member['name']!=domain['concept']:raise XBRLError('typed_domain_element_mismatch')
  if member['children']:return 'TYPED_DOMAIN_COMPLEX_CONTENT_UNSUPPORTED',None
  if member['attributes']:return 'TYPED_DOMAIN_ATTRIBUTES_OR_NIL_UNSUPPORTED',None
@@ -83,17 +87,24 @@ def _scalar(member,domain,dts,types):
  if declared==tag(XS,'boolean'):
   if lexical not in('true','false','1','0'):raise XBRLError('typed_boolean_lexical')
   return None,{'resolved_type':declared,'validation':'BOOLEAN_LEXICAL_VALIDATED'}
- try:base,path=_resolve(declared,dts.get('type_declarations',{}),RESTRICTION_PROFILE)
+ numeric_profile=RESTRICTION_PROFILE
+ if profile==BOUNDS_PROFILE:
+  from .xbrl_types import BOUNDS_PROFILE as numeric_profile
+ try:base,path=_resolve(declared,dts.get('type_declarations',{}),numeric_profile)
  except XBRLError as exc:
   if 'unsupported'in str(exc):return 'TYPED_DOMAIN_TYPE_UNSUPPORTED',None
   raise
  if not base.startswith('{'+XS+'}')or any(kind!=tag(XS,'simpleType')for row in path for kind in types.get(row['type'],[])):return 'TYPED_DOMAIN_NUMERIC_COMPLEX_OR_ITEM_TYPE_UNSUPPORTED',None
  _enumeration_definitions(base,path);value=_numeric_lexical(lexical,base);_facet_checks(value,lexical,path)
- return None,{'resolved_type':base,'validation':'NUMERIC_SCALAR_VALIDATED','numeric_profile':RESTRICTION_PROFILE,'restriction_types':[row['type']for row in path]}
+ result={'resolved_type':base,'validation':'NUMERIC_SCALAR_VALIDATED','numeric_profile':numeric_profile,'restriction_types':[row['type']for row in path]}
+ if profile==BOUNDS_PROFILE:
+  from .xbrl_types import _bound_restrictions
+  result.update(declared_type=declared,restrictions=path,effective_bounds=_bound_restrictions(base,path))
+ return None,result
 
 def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=False):
  """Return separate typed-scalar diagnostics;do not mutate or accept a filing."""
- if profile!=PROFILE:raise XBRLError('typed_profile_unsupported')
+ if profile not in(PROFILE,BOUNDS_PROFILE):raise XBRLError('typed_profile_unsupported')
  if not _identity(parsed)or not _identity(dts):raise XBRLError('typed_input_identity')
  origin=parsed.get('origin')
  if type(allow_observed)is not bool or origin not in('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE')or dts.get('origin')!=origin or type(parsed.get('source'))is not dict or parsed['source'].get('origin')!=origin:raise XBRLError('typed_origin_scope')
@@ -111,7 +122,18 @@ def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=F
  if parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1'):raise XBRLError('typed_input_schema_unsupported')
  contexts=parsed.get('contexts');facts=parsed.get('facts')
  if type(contexts)is not dict or len(contexts)>MAX_CONTEXTS or type(facts)is not list or len(facts)>MAX_FACTS:raise XBRLError('typed_input_counts')
- elements,types,sources=_sources(dts,documents);used={key:[]for key in contexts};fact_ids=set()
+ if profile==BOUNDS_PROFILE:
+  from .xbrl_types import _bound_sources
+  proof,_,_=_bound_sources(parsed)
+  for key,expected in(('documents',dts['documents']),('concept_declarations',dts['concepts']),('type_declarations',dts.get('type_declarations',{}))):
+   if canonical(proof.get(key,{}))!=canonical(expected):raise XBRLError('typed_bound_retained_graph_mismatch')
+ elements,types,sources=_sources(dts,documents)
+ if profile==BOUNDS_PROFILE:
+  from .xbrl_typed_bounds import _declarations
+  from .xbrl_effective_cross_role import _schema_sources,_validate_schema_sources
+  schemas=_schema_sources(_supplied_documents(documents),dts['documents'])
+  _declarations(dts['concepts'],dts.get('type_declarations',{}),_validate_schema_sources(schemas,dts['documents']))
+ used={key:[]for key in contexts};fact_ids=set()
  for fact in facts:
   if type(fact)is not dict or fact.get('context_ref')not in contexts or type(fact.get('source_fact_id'))is not str:raise XBRLError('typed_fact_context_binding')
   if fact['source_fact_id']in fact_ids:raise XBRLError('typed_duplicate_source_fact_id')
@@ -132,13 +154,13 @@ def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=F
    domain,reason=_domain(dimension.get('dimension'),dts,elements,{row['uri']for row in sources})
    record={'dimension':dimension['dimension'],'context_element':dimension['context_element'],'member_tree_sha256':digest(dimension['member'])}
    if domain is not None:
-    record['domain']=domain;reason,validation=_scalar(dimension['member'],domain,dts,types)
+    record['domain']=domain;reason,validation=_scalar(dimension['member'],domain,dts,types,profile=profile)
     if reason is None:record['scalar_validation']=validation
    record['status']='UNSUPPORTED'if reason else'VALIDATED_SUPPORTED_TYPED_SCALAR'
    if reason:record['reason']=reason;unsupported+=1
    members.append(record);size+=len(canonical(record))
    if size>MAX_OUTPUT:raise XBRLError('typed_output_budget')
   if members:output.append({'context_id':context_id,'context_semantic_sha256':context['semantic_sha256'],'source_fact_ids':list(used[context_id]),'typed_members':members})
- result={'schema':'gig.sec.xbrl.typed_context_diagnostics.v1','profile':PROFILE,'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_schemas':sources,'contexts':output,'typed_member_count':count,'unsupported_member_count':unsupported,'status':'UNSUPPORTED_TYPED_DOMAIN_SEMANTICS'if unsupported else'VALIDATED_SUPPORTED_TYPED_SCALARS'if count else'NO_TYPED_MEMBERS','complete_drs_validation':False,'financial_admission_changed':False,'provider_requested':False,'scope':'Supplied original schema and typed scalar validation only;no hypercube validity,typed equality,context normalization,fact selection or financial promotion'}
+ result={'schema':'gig.sec.xbrl.typed_context_diagnostics.v2'if profile==BOUNDS_PROFILE else'gig.sec.xbrl.typed_context_diagnostics.v1','profile':profile,'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_schemas':sources,'contexts':output,'typed_member_count':count,'unsupported_member_count':unsupported,'status':'UNSUPPORTED_TYPED_DOMAIN_SEMANTICS'if unsupported else'VALIDATED_SUPPORTED_TYPED_SCALARS'if count else'NO_TYPED_MEMBERS','complete_drs_validation':False,'financial_admission_changed':False,'provider_requested':False,'scope':'Supplied original schema and typed scalar validation only;no hypercube validity,typed equality,context normalization,fact selection or financial promotion'}
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('typed_output_budget')
  result['sha256']=digest(result);return result

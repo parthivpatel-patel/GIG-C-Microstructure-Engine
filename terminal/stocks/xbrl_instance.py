@@ -192,6 +192,18 @@ def parse_instance(raw,manifest,concepts,*,allow_observed=False):
  source=validate_manifest(raw,manifest,allow_observed)
  return _interpret_instance(parse_xml(raw),source,concepts)
 
+def _reported_numeric_value(lexical):
+    text = lexical.strip()
+    if not re.fullmatch(r'[+-]?[0-9]+(?:\.[0-9]+)?', text):
+        raise XBRLError('xbrl_numeric_profile')
+    return sec.exact(Decimal(text))
+
+
+def _validate_fact_accuracy(decimals, precision):
+    if decimals is not None and precision is not None:raise XBRLError('xbrl_precision_conflict')
+    if decimals is not None and not re.fullmatch(r'INF|-?(?:0|[1-9][0-9]{0,2})',decimals):raise XBRLError('xbrl_decimals')
+    if precision is not None and not re.fullmatch(r'INF|[1-9][0-9]{0,2}',precision):raise XBRLError('xbrl_precision')
+
 def _interpret_instance(root,source,concepts):
  if type(concepts)is not dict or len(concepts)>512:raise XBRLError('xbrl_concept_budget')
  for key,spec in concepts.items():
@@ -241,14 +253,11 @@ def _interpret_instance(root,source,concepts):
   nil=nil in ('true','1');lexical=node.text();spec=concepts.get(node.name);admission='UNVERIFIED_CONCEPT';value=None;nil_status='NIL_REPORTED_UNAVAILABLE'if nil else None
   if nil and lexical.strip():raise XBRLError('xbrl_nil_with_value')
   decimals=node.attrs.get('decimals');precision=node.attrs.get('precision')
-  if decimals is not None and precision is not None:raise XBRLError('xbrl_precision_conflict')
-  if decimals is not None and not re.fullmatch(r'INF|-?(?:0|[1-9][0-9]{0,2})',decimals):raise XBRLError('xbrl_decimals')
-  if precision is not None and not re.fullmatch(r'INF|[1-9][0-9]{0,2}',precision):raise XBRLError('xbrl_precision')
+  _validate_fact_accuracy(decimals,precision)
   if spec:
    if unit_ref is None:raise XBRLError('xbrl_numeric_unit_required')
    if not nil:
-    if not re.fullmatch(r'[+-]?[0-9]+(?:\.[0-9]+)?',lexical.strip()):raise XBRLError('xbrl_numeric_profile')
-    value=sec.exact(Decimal(lexical.strip()))
+    value=_reported_numeric_value(lexical)
    u=units[unit_ref]
    admission='ADMITTED_PROFILE'if ctx['period']['kind']==spec['period_type']and u['numerator']==sorted(spec['numerator'])and u['denominator']==sorted(spec['denominator'])else'PERIOD_OR_UNIT_MISMATCH'
   core={'ordinal':ordinal,'concept':node.name,'context_ref':ref,'context_sha256':ctx['semantic_sha256'],'unit_ref':unit_ref,'unit_sha256':units[unit_ref]['semantic_sha256']if unit_ref else None,'lexical_value':lexical,'value':value,'nil':nil,'nil_status':nil_status,'decimals':decimals,'precision':precision,'attributes':node.attrs,'admission':admission,'metric':spec['metric']if spec else None,'local_name':spec['local_name']if spec else None}
@@ -311,7 +320,7 @@ def _typed_dimensional_record(parsed,record,fact):
  if axes!=sorted(typed):raise fail()
 
 def selected_financials(parsed):
- if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_instance.v5','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_instance.v6','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_instance.v7','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_instance.v10','gig.sec.xbrl.dimensional_inline_set.v10')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
+ if type(parsed)is not dict or parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_instance.v5','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_instance.v6','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_instance.v7','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_instance.v10','gig.sec.xbrl.dimensional_inline_set.v10','gig.sec.xbrl.dimensional_instance.v11','gig.sec.xbrl.dimensional_inline_set.v11')or type(parsed.get('facts'))is not list or len(parsed['facts'])>MAX_FACTS or type(parsed.get('contexts'))is not dict or len(parsed['contexts'])>MAX_CONTEXTS:raise XBRLError('xbrl_parsed_contract')
  core={k:v for k,v in parsed.items()if k!='canonical_sha256'}
  if digest(core)!=parsed.get('canonical_sha256'):raise XBRLError('xbrl_parsed_digest')
  retained_proof=parsed.get('dts_corroboration')
@@ -320,13 +329,13 @@ def selected_financials(parsed):
   from .xbrl_types import validate_bound_numeric_result
   validate_bound_numeric_result(parsed)
  source=parsed['source'];namespace={};refs={};concept_names={};skipped={'unverified_or_conflicting':0,'dimensioned_or_opaque':0,'nil':0,'unsupported_period':0,'unsupported_taxonomy_namespace':0}
- is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_inline_set.v10')
+ is_set=parsed['schema']in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_inline_set.v10','gig.sec.xbrl.dimensional_inline_set.v11')
  document_set=parsed.get('document_set')if is_set else None
  if is_set and type(document_set)is not dict:raise XBRLError('xbrl_document_set_identity')
  if document_set is not None and(document_set.get('sha256')!=digest(document_set['documents'])or source.get('source_hash_kind')!='DERIVED_DOCUMENT_SET_MANIFEST_V1'or source['source_sha256']!=document_set['sha256']):raise XBRLError('xbrl_document_set_identity')
  fact_lookup={r['source_fact_id']:r for r in parsed['facts']}
  dimension_proof=(parsed.get('dts_corroboration')or{}).get('dimensional_validation')
- derived=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_instance.v5','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_instance.v6','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_instance.v7','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_instance.v10','gig.sec.xbrl.dimensional_inline_set.v10')
+ derived=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v1','gig.sec.xbrl.dimensional_inline_set.v1','gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2','gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3','gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4','gig.sec.xbrl.dimensional_instance.v5','gig.sec.xbrl.dimensional_inline_set.v5','gig.sec.xbrl.dimensional_instance.v6','gig.sec.xbrl.dimensional_inline_set.v6','gig.sec.xbrl.dimensional_instance.v7','gig.sec.xbrl.dimensional_inline_set.v7','gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8','gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9','gig.sec.xbrl.dimensional_instance.v10','gig.sec.xbrl.dimensional_inline_set.v10','gig.sec.xbrl.dimensional_instance.v11','gig.sec.xbrl.dimensional_inline_set.v11')
  dimensional_v2=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v2','gig.sec.xbrl.dimensional_inline_set.v2')
  dimensional_v3=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v3','gig.sec.xbrl.dimensional_inline_set.v3')
  dimensional_v4=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v4','gig.sec.xbrl.dimensional_inline_set.v4')
@@ -336,10 +345,14 @@ def selected_financials(parsed):
  dimensional_v8=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v8','gig.sec.xbrl.dimensional_inline_set.v8')
  dimensional_v9=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v9','gig.sec.xbrl.dimensional_inline_set.v9')
  dimensional_v10=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v10','gig.sec.xbrl.dimensional_inline_set.v10')
+ dimensional_v11=parsed['schema']in('gig.sec.xbrl.dimensional_instance.v11','gig.sec.xbrl.dimensional_inline_set.v11')
  defaulted=set()
  if derived:
-  if type(dimension_proof)is not dict or dimension_proof.get('profile')!=('ORIGINAL_DTS_MIXED_CLOSED_EXPLICIT_V10'if dimensional_v10 else'ORIGINAL_DTS_EFFECTIVE_CLOSED_EXPLICIT_V9'if dimensional_v9 else'ORIGINAL_DTS_INHERITED_CLOSED_EXPLICIT_V8'if dimensional_v8 else'ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7'if dimensional_v7 else'DIRECT_CLOSED_TYPED_HYPERCUBE_V6'if dimensional_v6 else'NEGATIVE_ONLY_EXPLICIT_HYPERCUBES_V5'if dimensional_v5 else'INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4'if dimensional_v4 else'INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'if dimensional_v3 else'DIRECT_EXPLICIT_HYPERCUBE_V2'if dimensional_v2 else'EXPLICIT_CLOSED_HYPERCUBE_V1')or type(dimension_proof.get('facts'))is not list or len(dimension_proof['facts'])>MAX_FACTS:raise XBRLError('xbrl_dimensional_result_contract')
-  if (dimensional_v2 or dimensional_v3 or dimensional_v4 or dimensional_v5 or dimensional_v6 or dimensional_v7 or dimensional_v8 or dimensional_v9 or dimensional_v10)and dimension_proof.get('complete_drs_validation')is not False:raise XBRLError('xbrl_dimensional_result_contract')
+  if type(dimension_proof)is not dict or dimension_proof.get('profile')!=('DIRECT_CLOSED_TYPED_BOUND_HYPERCUBE_V11'if dimensional_v11 else'ORIGINAL_DTS_MIXED_CLOSED_EXPLICIT_V10'if dimensional_v10 else'ORIGINAL_DTS_EFFECTIVE_CLOSED_EXPLICIT_V9'if dimensional_v9 else'ORIGINAL_DTS_INHERITED_CLOSED_EXPLICIT_V8'if dimensional_v8 else'ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7'if dimensional_v7 else'DIRECT_CLOSED_TYPED_HYPERCUBE_V6'if dimensional_v6 else'NEGATIVE_ONLY_EXPLICIT_HYPERCUBES_V5'if dimensional_v5 else'INHERITED_EXPLICIT_NEGATIVE_HYPERCUBES_V4'if dimensional_v4 else'INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3'if dimensional_v3 else'DIRECT_EXPLICIT_HYPERCUBE_V2'if dimensional_v2 else'EXPLICIT_CLOSED_HYPERCUBE_V1')or type(dimension_proof.get('facts'))is not list or len(dimension_proof['facts'])>MAX_FACTS:raise XBRLError('xbrl_dimensional_result_contract')
+  if (dimensional_v2 or dimensional_v3 or dimensional_v4 or dimensional_v5 or dimensional_v6 or dimensional_v7 or dimensional_v8 or dimensional_v9 or dimensional_v10 or dimensional_v11)and dimension_proof.get('complete_drs_validation')is not False:raise XBRLError('xbrl_dimensional_result_contract')
+  if dimensional_v11:
+   from .xbrl_typed_bounds import validate_typed_bound_result
+   validate_typed_bound_result(parsed)
   if dimensional_v10:
    from .xbrl_mixed_cross_role import validate_mixed_cross_role_result
    validate_mixed_cross_role_result(parsed)

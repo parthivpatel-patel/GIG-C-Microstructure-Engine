@@ -14,7 +14,8 @@ CROSS_ROLE_PROFILE='ORIGINAL_DTS_CROSS_ROLE_CLOSED_EXPLICIT_V7'
 INHERITED_CROSS_ROLE_PROFILE='ORIGINAL_DTS_INHERITED_CLOSED_EXPLICIT_V8'
 EFFECTIVE_CROSS_ROLE_PROFILE='ORIGINAL_DTS_EFFECTIVE_CLOSED_EXPLICIT_V9'
 MIXED_CROSS_ROLE_PROFILE='ORIGINAL_DTS_MIXED_CLOSED_EXPLICIT_V10'
-PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE)
+TYPED_BOUND_PROFILE='DIRECT_CLOSED_TYPED_BOUND_HYPERCUBE_V11'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE,TYPED_BOUND_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -55,6 +56,9 @@ def networks(linkbases,locators,*,node_provenance=False):
 
 def corroborate(parsed,dts,*,profile=PROFILE,documents=None,allow_observed=False,instance_uri=None):
  if profile not in PROFILES:raise XBRLError('drs_profile_unsupported')
+ if profile==TYPED_BOUND_PROFILE:
+  from .xbrl_typed_bounds import corroborate_typed_bounds
+  return corroborate_typed_bounds(parsed,dts,documents,allow_observed,instance_uri)
  if profile==MIXED_CROSS_ROLE_PROFILE:
   from .xbrl_mixed_cross_role import corroborate_mixed_cross_role
   return corroborate_mixed_cross_role(parsed,dts,documents,allow_observed,instance_uri)
@@ -278,6 +282,14 @@ def _corroborate_typed(parsed,dts,documents,allow_observed,instance_uri):
  diagnostics=check_typed_contexts(parsed,dts,documents,allow_observed=allow_observed)
  supplied=_typed_original_graph(parsed,dts,documents,instance_uri)
  if diagnostics['unsupported_member_count']:raise XBRLError('drs_typed_scalar_semantics_unsupported')
+ records=_typed_records(parsed,dts,diagnostics,supplied)
+ result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']='gig.sec.xbrl.dimensional_inline_set.v6'if parsed['schema']=='gig.sec.xbrl.inline_set.v1'else'gig.sec.xbrl.dimensional_instance.v6'
+ result['dts_corroboration']['dimensional_validation']={'profile':TYPED_PROFILE,'facts':records,'typed_context_diagnostics_sha256':diagnostics['sha256'],'complete_drs_validation':False,'scope':'One direct positive closed hypercube,one role,original-DTS-bound supported typed scalars plus explicit domains/defaults;no typed equality,context/fact synthesis or financial promotion'}
+ if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
+ result['canonical_sha256']=digest(result);return result
+
+def _typed_records(parsed,dts,diagnostics,supplied):
+ """Evaluate the preserved direct positive closed typed+explicit cube subset."""
  nets=dts.get('definition',[])
  if len(nets)!=1 or not nets[0]['usable_for_restricted_profile']or any(u['feature']=='EMBEDDED_LINKBASE_UNSUPPORTED'for u in dts['unsupported_semantics']):raise XBRLError('drs_profile_unsupported')
  arcs=nets[0]['arcs'];concepts=dts['concepts'];adj={};domains={}
@@ -357,7 +369,4 @@ def _corroborate_typed(parsed,dts,documents,allow_observed,instance_uri):
   size+=len(canonical(record))+1
   if size>8*1024*1024:raise XBRLError('drs_output_budget')
   records.append(record)
- result=copy.deepcopy(parsed);result.pop('canonical_sha256');result['schema']='gig.sec.xbrl.dimensional_inline_set.v6'if parsed['schema']=='gig.sec.xbrl.inline_set.v1'else'gig.sec.xbrl.dimensional_instance.v6'
- result['dts_corroboration']['dimensional_validation']={'profile':TYPED_PROFILE,'facts':records,'typed_context_diagnostics_sha256':diagnostics['sha256'],'complete_drs_validation':False,'scope':'One direct positive closed hypercube,one role,original-DTS-bound supported typed scalars plus explicit domains/defaults;no typed equality,context/fact synthesis or financial promotion'}
- if len(canonical(result))>8*1024*1024:raise XBRLError('drs_output_budget')
- result['canonical_sha256']=digest(result);return result
+ return records
