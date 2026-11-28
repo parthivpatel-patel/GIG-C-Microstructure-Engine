@@ -15,11 +15,9 @@ Result<Metrics> calculate(std::span<const Level>bids,std::span<const Level>asks)
         if(bq!=0||aq!=0)m.depth_imbalance=Fraction::ratio(bq-aq,exact::checked_add(bq,aq));
         if(!bids.empty()&&!asks.empty()) {
             const auto b=static_cast<Wide>(bids.front().price_ticks),a=static_cast<Wide>(asks.front().price_ticks);
-            const auto btop=static_cast<Wide>(bids.front().quantity),atop=static_cast<Wide>(asks.front().quantity);
             m.spread=Fraction::whole(a-b);m.midpoint=Fraction::ratio(a+b,2);
-            // Reduce the quantity weight before multiplication; equal very large
-            // sizes must not overflow an avoidable unreduced weighted sum.
-            m.microprice=Fraction::whole(b)+Fraction::whole(a-b)*Fraction::ratio(btop,exact::checked_add(btop,atop));
+            m.microprice=exact::weighted_ticks(asks.front().price_ticks,bids.front().quantity,
+                                              bids.front().price_ticks,asks.front().quantity);
             m.locked=a==b;m.crossed=a<b;
         }
         return Result<Metrics>::success(std::move(m));

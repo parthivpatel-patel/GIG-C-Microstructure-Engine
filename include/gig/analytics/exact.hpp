@@ -62,4 +62,29 @@ public:
         return a*ratio(b.n_<0?-b.d_:b.d_,magnitude(b.n_));
     }
 };
+// Accumulate signed tick products in unsigned magnitude, then reduce before
+// enforcing the public signed fraction capacity. Each product is below 2^127.
+inline Fraction weighted_ticks(std::int64_t first,std::uint64_t first_weight,
+                               std::int64_t second,std::uint64_t second_weight) {
+    const auto product=[](std::int64_t ticks,std::uint64_t weight) {
+        const auto wide=static_cast<Wide>(ticks);
+        return static_cast<Unsigned>(wide<0?-wide:wide)*weight;
+    };
+    const auto first_magnitude=product(first,first_weight);
+    const auto second_magnitude=product(second,second_weight);
+    const bool first_negative=first<0,second_negative=second<0;
+    const bool same_sign=first_negative==second_negative;
+    const bool negative=same_sign?first_negative:
+        (first_magnitude>=second_magnitude?first_negative:second_negative);
+    const auto magnitude=same_sign?first_magnitude+second_magnitude:
+        (first_magnitude>=second_magnitude?first_magnitude-second_magnitude:second_magnitude-first_magnitude);
+    const auto denominator=static_cast<Unsigned>(first_weight)+second_weight;
+    if(!denominator)throw ArithmeticFailure{ErrorCode::invalid_range};
+    auto gcd=magnitude,remainder=denominator;
+    while(remainder){const auto next=gcd%remainder;gcd=remainder;remainder=next;}
+    const auto reduced=magnitude/gcd;
+    if(reduced>static_cast<Unsigned>(maximum))throw ArithmeticFailure{ErrorCode::overflow};
+    const auto numerator=static_cast<Wide>(reduced);
+    return Fraction::ratio(negative?-numerator:numerator,static_cast<Wide>(denominator/gcd));
+}
 } // namespace gig::exact

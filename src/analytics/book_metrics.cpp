@@ -30,7 +30,8 @@ Result<BookMetrics> calculate(const ReplaySnapshot& snapshot,std::size_t depth) 
             const auto bid=Fraction(b.bids.front().price_ticks.value()),ask=Fraction(b.asks.front().price_ticks.value());
             const auto bq=Fraction::whole(b.bids.front().quantity.value()),aq=Fraction::whole(b.asks.front().quantity.value());
             set(BookMetric::spread,Metric::known(ask-bid));set(BookMetric::midpoint,Metric::known((ask+bid)/Fraction(2)));
-            set(BookMetric::microprice,Metric::known((ask*bq+bid*aq)/(bq+aq)));
+            set(BookMetric::microprice,Metric::known(exact::weighted_ticks(b.asks.front().price_ticks.value(),b.bids.front().quantity.value(),
+                                                        b.bids.front().price_ticks.value(),b.asks.front().quantity.value())));
             set(BookMetric::top_imbalance,Metric::known((bq-aq)/(bq+aq)));
         }
         Wide bid_sum=0,ask_sum=0;
