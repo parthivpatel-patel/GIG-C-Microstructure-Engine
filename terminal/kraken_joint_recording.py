@@ -123,7 +123,7 @@ def _manifest(identity,m,clock):
  return c,token
 
 
-def validate_log(identity,manifest,body,*,clock=time.time,include_frames=False):
+def validate_log(identity,manifest,body,*,clock=time.time,include_frames=False,projection=False,position=None):
  c,token=_manifest(identity,manifest,clock)
  if type(body)is not bytes or len(body)!=manifest['bytes']or hashlib.sha256(body).hexdigest()!=manifest['sha256']:raise ValueError('recording_digest')
  if not body.endswith(b'\n'):raise ValueError('recording_truncated')
@@ -141,13 +141,16 @@ def validate_log(identity,manifest,body,*,clock=time.time,include_frames=False):
   previous=int(ns);rows.append(row)
   if len(rows)>MAX_RECORDS:raise ValueError('recording_budget')
  if len(rows)!=manifest['records']:raise ValueError('recording_count')
- frames,size=_derive_frames(c,token,rows,digest_receipts=manifest['schema']==JOINT_DEPTH_SCHEMA)
- if not frames[-1]['eligible']:raise ValueError('recording_joint_initialization_or_fence')
+ deep=manifest['schema']==JOINT_DEPTH_SCHEMA
+ retain=include_frames or not deep
+ frames,size,eligible=_derive_frames(c,token,rows,digest_receipts=deep,
+    retain=retain,projection=deep and projection,requested_position=position)
+ if not eligible:raise ValueError('recording_joint_initialization_or_fence')
  if include_frames:return manifest,rows,frames,size
  return manifest,rows
 
 
-def _derive_frames(c,token,rows,*,digest_receipts=False):
+def _derive_frames(c,token,rows,*,digest_receipts=False,retain=True,projection=False,requested_position=None):
  from .l2_research import ResearchWindow
  research=ResearchWindow();frames=[];size=0;research_ready=False;last_exchange=None;last_book_receive=None;sources={}
  last_book_clock=None;last_book_position=None
@@ -176,19 +179,27 @@ def _derive_frames(c,token,rows,*,digest_receipts=False):
     research.observe({**observed,'historical_snapshot':observed.get('type')=='snapshot'},None,now,position)
    elif not seeded and kind in('snapshot','update'):
     research.observe(observed,displayed_book(native),now,position)
+  if not retain or requested_position is not None and position!=requested_position:continue
   analytics=research.view(now)if eligible and research_ready else{'status':'UNAVAILABLE','reason':'awaiting_jointly_eligible_book_snapshot'}
   if 'methodology'in analytics:
    analytics['methodology']['depth_scope']='top 10 displayed levels per side;native depth totals cover all admitted levels'
+  trades=list(c._public.trades)if eligible else[]
+  if projection:
+   if native is not None:
+    native={**native,**displayed_book(native),'level_counts':{side:len(native[side])for side in ('bids','asks')}}
+   if receipt is not None:
+    receipt={key:receipt[key]for key in ('sha256','source_sha256','source_frame_bytes','capture','local_generation','connection_id','receive_monotonic_ns','kind','origin')}
+   trades=trades[-16:]
   frame={'native':native,'eligible':eligible,'joint_session':joint,'last_event':receipt,
    'source_timestamp_ns':last_exchange,'received_at_ns':last_book_receive,
    'replay_time_ns':str(now-int(rows[0]['receive_monotonic_ns']))if row else'0',
    'research':analytics,
-   'trades':copy.deepcopy(list(c._public.trades))if eligible else[],
+   'trades':copy.deepcopy(trades),
    'source_receipts':copy.deepcopy(sources)}
   size+=len(canonical(frame))
   if size>MAX_CACHE_BYTES:raise ValueError('recording_prefix_cache_budget')
   frames.append(frame)
- return frames,size
+ return frames,size,eligible
 
 
 def replay_joint(manifest,rows,position=None):
@@ -196,8 +207,8 @@ def replay_joint(manifest,rows,position=None):
  if position is None:position=len(rows)
  if type(position)is not int or not 0<=position<=len(rows):raise ValueError('replay_position')
  body=b''.join(canonical(row)+b'\n'for row in rows)
- _,_,frames,_=validate_log(manifest.get('identity'),manifest,body,include_frames=True)
- frame=copy.deepcopy(frames[position])
+ _,_,frames,_=validate_log(manifest.get('identity'),manifest,body,include_frames=True,position=position)
+ frame=copy.deepcopy(frames[0])
  return {'schema':'gig.kraken.joint_replay.v1','mode':'HISTORICAL_REPLAY',
   'origin':'HISTORICAL_OBSERVED'if manifest['origin']=='LIVE_OBSERVED'else'HISTORICAL_SYNTHETIC',
   'position':position,'event_count':len(rows),'source_sha256':manifest['sha256'],
@@ -213,7 +224,7 @@ class JointRecordedSession:
   if m.get('origin')=='LIVE_OBSERVED'and not allow_observed:raise ValueError('observed_processing_permission_required')
   target=root_path(directory)/safe_id(identity);path=target/'events.jsonl'
   if target.is_symlink()or path.is_symlink():raise ValueError('recording_path')
-  manifest,rows,frames,size=validate_log(identity,m,read_bytes(path,MAX_BYTES),include_frames=True)
+  manifest,rows,frames,size=validate_log(identity,m,read_bytes(path,MAX_BYTES),include_frames=True,projection=True)
   self.manifest=copy.deepcopy(manifest);self.frames=frames;self.cache_bytes=size
   self.identity=identity;self.total_records=len(rows);self.expired=False
  def check_expiry(self):
@@ -240,7 +251,8 @@ class JointRecordedSession:
    'playing':playing if not expired else False,'speed':speed,'book':{k:native[k][:10]if native else[]for k in('bids','asks')},
    'revision':native['revision']if native else'0','metrics':metrics,**(frame or{}),
    'research':frame['research']if frame else{'status':'UNAVAILABLE','reason':'recording_retention_expired'},
-   'flow':{'trades':frame['trades']if frame else[],'classification':'provider_reported_side_not_inferred_cancellations'},
+   'flow':{'trades':frame['trades']if frame else[],'classification':'provider_reported_side_not_inferred_cancellations',
+          'display_limit':16 if self.manifest['schema']==JOINT_DEPTH_SCHEMA else 256},
    'feed':{'state':'ERROR'if expired else'HISTORICAL_REPLAY'if native else'SYNCHRONIZING',
     'reason':'recording_retention_expired'if expired else'Exact raw joint-session prefix;not live or complete L3',
     'real_time':False,'stale':False,'capture_complete':not expired,
