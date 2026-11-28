@@ -11,7 +11,7 @@ std::vector<market_data::Level> levels(py::handle h){
 }
 py::object fraction(const std::optional<exact::Fraction>& f){if(!f)return py::none();py::dict d;d["numerator"]=exact::decimal(f->numerator());d["denominator"]=exact::decimal(f->denominator());return d;}
 class NativeAggregate {
-    TrackedResource memory_;market_data::AggregateDepth book_;
+    TrackedResource memory_;market_data::AggregateDepth book_;std::size_t budget_;
     py::dict value(){
         py::dict out;auto side=[](std::span<const market_data::Level> values){py::list rows;for(auto l:values){py::dict d;d["price_ticks"]=write(l.price_ticks);d["quantity"]=write(l.quantity);rows.append(d);}return rows;};
         out["bids"]=side(book_.bids());out["asks"]=side(book_.asks());out["revision"]=write(book_.revision());out["sequence"]=write(book_.sequence());out["initialized"]=book_.initialized();
@@ -19,10 +19,15 @@ class NativeAggregate {
         out["metrics"]=metrics;out["locked"]=m.locked;out["crossed"]=m.crossed;out["pmr_live_bytes"]=write(memory_.stats().live_bytes);out["pmr_peak_bytes"]=write(memory_.stats().peak_bytes);return out;
     }
 public:
-    NativeAggregate(std::size_t n,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),book_(n,&memory_){if(budget>67108864)throw std::invalid_argument("aggregate.memory_budget");}
+    NativeAggregate(std::size_t n,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),book_(n,&memory_),budget_(budget){if(budget>67108864)throw std::invalid_argument("aggregate.memory_budget");}
     NativeAggregate(const market_data::AggregateStateImage& image,std::size_t n,std::size_t budget):NativeAggregate(n,budget){book_=take(market_data::AggregateDepth::restore(image,n,&memory_));}
     py::dict snapshot(py::handle b,py::handle a,py::handle seq){return mutate([&](){auto bids=levels(b),asks=levels(a);return book_.snapshot(bids,asks,read<std::optional<std::uint64_t>>(seq));});}
     py::dict update(py::handle b,py::handle a,py::handle seq){return mutate([&](){auto bids=levels(b),asks=levels(a);return book_.update(bids,asks,read<std::optional<std::uint64_t>>(seq));});}
+    py::dict fork(){return api([&](){
+        auto image=take(book_.checkpoint());
+        // Construct the isolated destination before the caller stages its update.
+        return py::cast(std::make_unique<NativeAggregate>(image,image.max_levels,budget_));
+    });}
     py::dict state(){return api([&](){return value();});}
     py::dict checkpoint(){return api([&](){auto image=take(book_.checkpoint(&memory_));py::dict out;
         auto side=[](const auto& rows){py::list out;for(const auto l:rows){py::dict d;d["price_ticks"]=write(l.price_ticks);d["quantity"]=write(l.quantity);out.append(d);}return out;};
@@ -34,7 +39,7 @@ void bind_depth(py::module_&m){py::class_<NativeAggregate>(m,"AggregateDepth")
     .def(py::init<std::size_t,std::size_t>(),py::arg("max_levels")=1024,py::arg("budget")=1048576)
     .def("snapshot",&NativeAggregate::snapshot,py::arg("bids"),py::arg("asks"),py::arg("sequence")=py::none())
     .def("update",&NativeAggregate::update,py::arg("bids"),py::arg("asks"),py::arg("sequence")=py::none())
-    .def("state",&NativeAggregate::state).def("checkpoint",&NativeAggregate::checkpoint);
+    .def("fork",&NativeAggregate::fork).def("state",&NativeAggregate::state).def("checkpoint",&NativeAggregate::checkpoint);
     m.def("restore_aggregate",[](py::handle value,py::handle expected,py::handle budget){return api([&](){
         const auto d=object(value,{"version","max_levels","sequence","revision","initialized","bids","asks"});
         if(!PyBool_Check(d["initialized"].ptr()))bad(ErrorCode::malformed,"aggregate.initialized");

@@ -253,21 +253,25 @@ class KrakenBookAdapter:
         return price, qty, pt, qt
 
     def feed(self, raw: str, now_ns: int) -> dict:
+        return self._admit_frame(raw, now_ns)
+
+    def _admit_frame(self, raw, now_ns, *, payload=None, source_sha256=None):
         if type(now_ns) is not int or now_ns < 0 or (self.last_receive_ns is not None and now_ns < self.last_receive_ns):
             if self.book_session_profile is not None:self._book_acknowledged=False
             self.rejected+=1
             self.state, self.reason = 'GAP_DETECTED', 'receive_clock_regression'
             raise ProviderError('receive_clock_regression')
         try:
-            return self._feed(raw, now_ns)
+            return self._feed(raw, now_ns, payload=payload, source_sha256=source_sha256)
         except (ProviderError, MemoryError):
             if self.book_session_profile is not None:self._book_acknowledged=False
             self.rejected += 1
             self.state, self.reason = 'GAP_DETECTED', 'invalid_or_uncommitted_payload'
             raise
 
-    def _feed(self, raw: str, now_ns: int) -> dict:
-        payload = _decode_frame(raw, self.frame_limit)
+    def _feed(self, raw: str, now_ns: int, *, payload=None, source_sha256=None) -> dict:
+        if payload is None:
+            payload = _decode_frame(raw, self.frame_limit)
         if payload.get('method') == 'subscribe':
             if payload.get('success') is not True:
                 raise ProviderError('subscription_rejected')
@@ -304,7 +308,7 @@ class KrakenBookAdapter:
         source_time = data.get('timestamp')
         source_ns = None if source_time is None else timestamp_ns(source_time)
         wire_checksum = bounded_integer(data['checksum'], 2**32-1, 'checksum_field')
-        digest = hashlib.sha256(raw.encode()).hexdigest()
+        digest = source_sha256 if source_sha256 is not None else hashlib.sha256(raw.encode()).hexdigest()
         if digest == self.last_digest and self.state == 'LIVE':
             self.duplicates += 1
             return {'kind': 'duplicate', 'source_sequence': None}

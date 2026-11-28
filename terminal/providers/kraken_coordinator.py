@@ -10,7 +10,7 @@ import json
 import re
 import gig_microstructure as gig
 from .kraken import (BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,BOOK_LARGE_DEPTH_PROFILE,KrakenBookAdapter,
-                     ProviderError,_decode_frame,bounded_integer,UINT64_MAX)
+                     ProviderError,_decode_frame,bounded_integer,MAX_PAYLOAD,UINT64_MAX)
 from .kraken_public_session import KrakenPublicSession,PROFILE as PUBLIC_PROFILE
 
 PROFILE='NATIVE_JOINT_SESSION_V1'
@@ -50,7 +50,7 @@ class KrakenSessionCoordinator:
   self._public=KrakenPublicSession(symbol=symbol,price_scale=price_scale,
    quantity_scale=quantity_scale,request_id=trade_request_id,snapshot=trade_snapshot,origin=origin)
   self.symbol=symbol;self.origin=origin;self.native_capacity=native_capacity;self.native_budget=native_budget
-  self._generation=0;self._token=None;self._last_clock=None;self._native=None;self._native_image=None
+  self._generation=0;self._token=None;self._last_clock=None;self._native=None;self._native_image=None;self._native_image_sha256=None
   self._native_source=None;self._last_receipt_sha256=None;self._eligible=False;self._reconnect_required=False;self._reason='not_connected'
  def _fence(self,reason):
   self._eligible=False;self._reconnect_required=True;self._reason=reason
@@ -72,12 +72,12 @@ class KrakenSessionCoordinator:
    token=KrakenSessionToken(capture,generation,self.symbol)
   except (ProviderError,MemoryError):self._fence('connect_rejected');raise
   self._book=book;self._public=public;self._generation=generation;self._token=token
-  self._last_clock=None;self._native=None;self._native_image=None;self._native_source=None
+  self._last_clock=None;self._native=None;self._native_image=None;self._native_image_sha256=None;self._native_source=None
   self._last_receipt_sha256=None;self._eligible=False;self._reconnect_required=False;self._reason='awaiting_status_and_subscriptions'
   return token
  def disconnected(self):
   self._book.disconnected();self._public.disconnected();self._token=None
-  self._native=None;self._native_image=None;self._native_source=None;self._eligible=False
+  self._native=None;self._native_image=None;self._native_image_sha256=None;self._native_source=None;self._eligible=False
   self._reconnect_required=True;self._reason='transport_closed'
  def subscription_requests(self,token):
   self._current(token)
@@ -96,12 +96,13 @@ class KrakenSessionCoordinator:
  def _native_candidate(self,event):
   try:
    if self._native_image is None:native=gig._native.AggregateDepth(self.native_capacity,self.native_budget)
+   elif hasattr(self._native,'fork'):native=gig._checked(self._native.fork())
    else:native=gig._checked(gig._native.restore_aggregate(self._native_image,str(self.native_capacity),str(self.native_budget)))
    gig._checked((native.snapshot if event['snapshot']else native.update)(event['bids'],event['asks'],event['sequence']))
    image=gig._checked(native.checkpoint())
    return native,image
   except (gig.EngineError,ValueError,RuntimeError,MemoryError)as exc:raise ProviderError('coordinator_native_rejected')from exc
- def _make_receipt(self,source_receipt,source,token,now_ns,public,book,image,event,eligible,reconnect,source_size):
+ def _make_receipt(self,source_receipt,source,token,now_ns,public,book,image,image_sha256,event,eligible,reconnect,source_size):
   result={'schema':'gig.kraken.coordinated_session.v1','profile':PROFILE,'symbol':self.symbol,
    'capture':token.capture,'local_generation':str(token.generation),'connection_id':public.connection_id,
    'receive_monotonic_ns':str(now_ns),'source_sha256':source,'source_hash_basis':'HASHED_RAW_FRAME','source_frame_bytes':source_size,
@@ -110,7 +111,7 @@ class KrakenSessionCoordinator:
    'stale_detection':'LOCAL_GENERATION_AND_BOOK_RECEIVE_DEADLINE_ONLY','subscribed_depth':book.depth,
    'checksum_depth':10,'checksum_scope':'top_10_per_side_only',
    'kind':source_receipt['kind'],'source_receipt':copy.deepcopy(source_receipt),
-   'native_event':copy.deepcopy(event),'native_book_sha256':None if image is None else _digest(image),
+   'native_event':copy.deepcopy(event),'native_book_sha256':image_sha256,
    'native_book_revision':None if image is None else image['revision'],
    'native_book_source_sha256':source if event is not None else self._native_source,
    'book_eligible':eligible,'reconnect_required':reconnect,'book_level':'L2',
@@ -134,20 +135,27 @@ class KrakenSessionCoordinator:
     if events:raise ProviderError('coordinator_multiple_native_events')
     events.append(copy.deepcopy(event))
    book.apply_native=stage
+   def accept_public():
+    if len(body)>MAX_PAYLOAD:raise ProviderError('payload_limit')
+    result=public.accept_payload(payload,now_ns,source)
+    result['source_hash_basis']='HASHED_RAW_FRAME'
+    return result
+   def accept_book():
+    return book._admit_frame(raw,now_ns,payload=payload,source_sha256=source)
    if is_status:
-    receipt=public.feed(raw,now_ns)
+    receipt=accept_public()
    else:
     if public.system!='online'or public.connection_id is None or public.reconnect_required:raise ProviderError('coordinator_online_status_required')
-    if payload.get('channel')=='trade':receipt=public.feed(raw,now_ns)
+    if payload.get('channel')=='trade':receipt=accept_public()
     elif payload.get('channel')in('book','heartbeat'):
      if public.phase in('UNSUBSCRIBE_PENDING','UNSUBSCRIBED'):raise ProviderError('coordinator_joint_trade_closed')
-     receipt=book.feed(raw,now_ns)
+     receipt=accept_book()
     elif payload.get('method')in('subscribe','unsubscribe'):
      req=bounded_integer(payload.get('req_id'),UINT64_MAX,'coordinator_ack_request_id')
      if req==book.book_subscription_request()['req_id']:
       if payload['method']!='subscribe':raise ProviderError('coordinator_book_unsubscribe_unsupported')
-      receipt=book.feed(raw,now_ns)
-     elif req==public.current_request_id(payload['method']):receipt=public.feed(raw,now_ns)
+      receipt=accept_book()
+     elif req==public.current_request_id(payload['method']):receipt=accept_public()
      else:raise ProviderError('coordinator_ack_request_id')
     else:raise ProviderError('coordinator_message_unsupported')
    if 'public_session_profile'in receipt:
@@ -155,18 +163,18 @@ class KrakenSessionCoordinator:
    event=events[0]if events else None
    if event is not None:
     if receipt.get('native_event')!=event or receipt['kind']not in('snapshot','update')or event.get('sequence')is not None:raise ProviderError('coordinator_native_receipt_binding')
-    native,image=self._native_candidate(event)
+    native,image=self._native_candidate(event);image_sha256=_digest(image)
    else:
     if 'native_event'in receipt:raise ProviderError('coordinator_native_receipt_binding')
-    native,image=self._native,self._native_image
+    native,image=self._native,self._native_image;image_sha256=self._native_image_sha256
    reconnect=self._reconnect_required or public.reconnect_required or public.phase=='UNSUBSCRIBED'
    eligible=(not reconnect and public.system=='online'and public.phase=='ACTIVE'and
      (not public.snapshot or public.snapshot_seen)and book._book_acknowledged and book.state=='LIVE'and image is not None)
-   result=self._make_receipt(receipt,source,token,now_ns,public,book,image,event,eligible,reconnect,len(body))
+   result=self._make_receipt(receipt,source,token,now_ns,public,book,image,image_sha256,event,eligible,reconnect,len(body))
    last_sha=result['sha256'];native_source=source if event is not None else self._native_source
   except (ProviderError,MemoryError)as exc:
    self._fence(exc.code if isinstance(exc,ProviderError)else'allocation_failed');raise
-  self._book=book;self._public=public;self._native=native;self._native_image=image
+  self._book=book;self._public=public;self._native=native;self._native_image=image;self._native_image_sha256=image_sha256
   self._native_source=native_source;self._last_receipt_sha256=last_sha;self._last_clock=now_ns
   self._eligible=bool(eligible);self._reconnect_required=bool(reconnect)
   if reconnect:
@@ -189,7 +197,7 @@ class KrakenSessionCoordinator:
    'capture':None if self._token is None else self._token.capture,'local_generation':str(self._generation),
    'connection_id':self._public.connection_id,'system':self._public.system,'book_eligible':bool(eligible),
    'book':book,'reconnect_required':self._reconnect_required,'reason':self._reason,
-   'native_book_sha256':None if self._native_image is None else _digest(self._native_image),
+   'native_book_sha256':self._native_image_sha256,
    'native_book_source_sha256':self._native_source,'last_frame_receipt_sha256':self._last_receipt_sha256,
    'source_sequence':None,'book_level':'L2','trade_observation_level':'EXECUTED_TRADES_NOT_L3_ORDERS',
    'generation_scope':'COORDINATOR_INSTANCE_ONLY','stale_detection':'LOCAL_GENERATION_AND_BOOK_RECEIVE_DEADLINE_ONLY',
