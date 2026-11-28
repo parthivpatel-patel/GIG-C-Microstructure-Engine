@@ -115,6 +115,18 @@ gig::Result<PartialGzipRecovery> resume_partial_gzip_source(
                      boundary.residual_sha256,uncompressed};
  return R::success({std::move(*owner.data),tail});
 }
+bool matches_partial_frame_prefix(std::span<const std::byte> payload,
+                                  std::size_t residual_bytes,const Sha256Digest& expected) noexcept {
+ if(payload.empty()||payload.size()>65535||residual_bytes==0||residual_bytes>=payload.size()+2)return false;
+ const std::array<std::byte,2> length{
+     std::byte{static_cast<unsigned char>(payload.size()>>8)},
+     std::byte{static_cast<unsigned char>(payload.size()&255)}};
+ Sha256 hash;
+ if(!hash.update(std::span{length}.first(residual_bytes<2?residual_bytes:2)))return false;
+ if(residual_bytes>2&&!hash.update(payload.first(residual_bytes-2)))return false;
+ return hash.finish()==expected;
+}
+
 gig::Result<SyntheticReconstructor> resume_complete_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
  return resume_source(bytes,trusted,source,a,r,true);
 }

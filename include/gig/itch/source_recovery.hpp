@@ -55,6 +55,10 @@ struct PartialGzipRecovery {
 gig::Result<PartialGzipRecovery> resume_partial_gzip_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
     std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+// Match the still-resident part of an unfinished BinaryFile frame against
+// an offered full payload. The supplied hash covers wire length bytes too.
+bool matches_partial_frame_prefix(std::span<const std::byte> payload,
+                                 std::size_t residual_bytes,const Sha256Digest&) noexcept;
 // Explicit complete-source profile. The durable input remains an accepted active
 // Version1 boundary; replay validates its committed prefix without applying it.
 // Require the BinaryFile zero-length terminator at exact EOF and,for gzip,the

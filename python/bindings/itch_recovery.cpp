@@ -35,6 +35,10 @@ class ItchRecovery {
  TrackedResource memory_;
  itch::DurableAdmission admission_;
  itch::SyntheticReconstructor engine_;
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+ struct PendingTail {itch::Location next;std::size_t bytes;itch::Sha256Digest digest;};
+ std::optional<PendingTail> pending_tail_;
+#endif
 public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
@@ -44,7 +48,8 @@ public:
               std::span<const std::byte> source,const itch::SourceRecoveryAdmission& spec,
               Tail& tail)
  :memory_(std::pmr::get_default_resource(),budget),admission_(admission),
-  engine_(partial_source_owner(b,admission,source,spec,tail,memory_)) {}
+  engine_(partial_source_owner(b,admission,source,spec,tail,memory_)),
+  pending_tail_(PendingTail{tail.next_location,tail.residual_bytes,tail.residual_sha256}) {}
 #endif
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  ItchRecovery(std::span<const std::byte>b,const itch::CompletionCapsuleAdmission&a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a.checkpoint),engine_(take(itch::restore_completion_capsule(b,a,&memory_))){}
@@ -82,7 +87,27 @@ public:
   return out;
  });}
  py::dict rebind(py::handle target){return api([&]()->py::object{const auto code=read<Digest>(target);auto state=take(engine_.hot_checkpoint(&memory_));auto b=take(itch::encode_hot_checkpoint(state,admission_.capture,admission_.generation,code,&memory_));return py::bytes(reinterpret_cast<const char*>(b.data()),b.size());});}
- py::dict process(py::handle payload,py::handle offset,py::handle ordinal){return api([&](){auto b=blob(payload,65535);auto frame=read<std::uint64_t>(offset);if(frame>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");auto step=engine_.process(b,{itch::ByteOffset{frame},itch::ByteOffset{frame+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}});py::dict out;out["committed"]=step.committed;out["disposition"]=write(static_cast<unsigned>(step.disposition));out["context_code"]=write(static_cast<unsigned>(step.context_error.code));out["native_code"]=write(static_cast<unsigned>(step.native_error.code));return out;});}
+ py::dict process(py::handle payload,py::handle offset,py::handle ordinal){return api([&](){
+  const auto bytes=blob(payload,65535);
+  const auto frame=read<std::uint64_t>(offset);
+  if(frame>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  const itch::Location location{itch::ByteOffset{frame},itch::ByteOffset{frame+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}};
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+  if(pending_tail_&&(location!=pending_tail_->next||
+     !itch::matches_partial_frame_prefix(bytes,pending_tail_->bytes,pending_tail_->digest)))
+   bad(ErrorCode::identity_mismatch,"itch.partial_tail_identity");
+#endif
+  const auto step=engine_.process(bytes,location);
+#ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+  if(step.committed)pending_tail_.reset();
+#endif
+  py::dict out;
+  out["committed"]=step.committed;
+  out["disposition"]=write(static_cast<unsigned>(step.disposition));
+  out["context_code"]=write(static_cast<unsigned>(step.context_error.code));
+  out["native_code"]=write(static_cast<unsigned>(step.native_error.code));
+  return out;
+ });}
 };
 }
 void bind_itch_recovery(py::module_&m){
