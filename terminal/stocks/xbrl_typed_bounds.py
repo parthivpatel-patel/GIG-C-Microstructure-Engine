@@ -7,7 +7,7 @@ Scalar checks preserve reported trees and never establish typed-value equality.
 import copy,re
 from .xbrl_instance import X,tag,canonical,digest,parse_xml,XBRLError,MAX_FACTS
 from .xbrl_types import XS,QN,_bound_sources
-from .xbrl_typed_dimensions import BOUNDS_PROFILE as SCALAR_PROFILE,QNAME_NIL_PROFILE,_scalar
+from .xbrl_typed_dimensions import BOUNDS_PROFILE as SCALAR_PROFILE,QNAME_NIL_PROFILE,TEMPORAL_PROFILE,_scalar
 from .xbrl_effective_cross_role import _schema_sources,_validate_schema_sources
 from .xbrl_dts import walk,uri
 
@@ -15,9 +15,12 @@ PROFILE='DIRECT_CLOSED_TYPED_BOUND_HYPERCUBE_V11'
 SCOPE='One original-DTS direct positive closed typed+explicit hypercube;numeric V6 inherited bounds and retained declaration/source/tree consistency;no typed equality,negative,inherited/cross-role cubes,context synthesis,financial promotion or source authentication'
 QNAME_NIL_DRS_PROFILE='DIRECT_CLOSED_TYPED_QNAME_NIL_HYPERCUBE_V12'
 QNAME_NIL_SCOPE=SCOPE+';direct xs:QName expansion and declared nillable scalar elements'
+TEMPORAL_DRS_PROFILE='DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'
+TEMPORAL_SCOPE=QNAME_NIL_SCOPE+';bounded direct XML Schema date,time,dateTime and whitespace-derived string lexicals'
 SCALAR_BY_DRS_PROFILE={
  PROFILE:(SCALAR_PROFILE,11,SCOPE),
  QNAME_NIL_DRS_PROFILE:(QNAME_NIL_PROFILE,12,QNAME_NIL_SCOPE),
+ TEMPORAL_DRS_PROFILE:(TEMPORAL_PROFILE,14,TEMPORAL_SCOPE),
 }
 MAX_OUTPUT=8*1024*1024
 D='http://xbrl.org/2005/xbrldt'
@@ -175,7 +178,7 @@ def _diagnostics(parsed,dts,type_kinds,domains,scalar_profile):
  issuer=parsed['source']['issuer_cik'];seen=set();selected=[];members={};used_domains=set();count=0
  if type(issuer)is not str or not re.fullmatch('[0-9]{10}',issuer)or int(issuer)==0:raise XBRLError('drs_typed_bound_source')
  if type(parsed['source'].get('source_sha256'))is not str or not SHA.fullmatch(parsed['source']['source_sha256']):raise XBRLError('drs_typed_bound_source')
- is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12')
+ is_set=parsed.get('schema')in('gig.sec.xbrl.inline_set.v1','gig.sec.xbrl.dimensional_inline_set.v11','gig.sec.xbrl.dimensional_inline_set.v12','gig.sec.xbrl.dimensional_inline_set.v14')
  original={**parsed,'schema':'gig.sec.xbrl.inline_set.v1'if is_set else'gig.sec.xbrl.instance.v1'}
  from .xbrl_instance import MAX_UNITS, _reported_numeric_value, _validate_fact_accuracy, selected_concepts
  units=parsed['units']
@@ -262,7 +265,9 @@ def validate_typed_bound_result(parsed):
  """Recompute the versioned typed proof in filing and collection consumers."""
  from .xbrl_dimensions import _typed_records
  try:
-  profile=QNAME_NIL_DRS_PROFILE if parsed['schema'].endswith('.v12') else PROFILE
+  version=parsed['schema'].rsplit('.',1)[1]
+  profiles={'v11':PROFILE,'v12':QNAME_NIL_DRS_PROFILE,'v14':TEMPORAL_DRS_PROFILE}
+  profile=profiles[version]
   scalar_profile,_,scope=SCALAR_BY_DRS_PROFILE[profile]
   p=parsed['dts_corroboration']['dimensional_validation']
   if type(p)is not dict or set(p)!={'profile','facts','schema_sources','type_sources','domain_sources','definition','complete_drs_validation','scope','source_declarations_sha256'}or p['profile']!=profile or p['scope']!=scope or p['complete_drs_validation']is not False or type(p['facts'])is not list or len(p['facts'])>MAX_FACTS or len(canonical(parsed))>MAX_OUTPUT:raise XBRLError('drs_typed_bound_result_contract')

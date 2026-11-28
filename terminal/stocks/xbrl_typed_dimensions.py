@@ -3,6 +3,7 @@
 Original contexts/facts/identities are not rewritten or promoted. Only the explicit
 profile is supported. Complex and anonymous domain types remain outside the supported profiles.
 """
+from datetime import date
 import re
 from urllib.parse import urljoin,urldefrag
 from .xbrl_instance import X,I,tag,qname,parse_xml,canonical,digest,XBRLError,MAX_CONTEXTS,MAX_FACTS
@@ -12,7 +13,10 @@ from .xbrl_types import XS,RESTRICTION_PROFILE,declaration,_resolve,_numeric_lex
 D='http://xbrl.org/2005/xbrldt';PROFILE='TYPED_DOMAIN_SCALAR_V1'
 BOUNDS_PROFILE='TYPED_DOMAIN_SCALAR_V2'
 QNAME_NIL_PROFILE='TYPED_DOMAIN_SCALAR_V3'
-SCALAR_PROFILES=(PROFILE,BOUNDS_PROFILE,QNAME_NIL_PROFILE)
+TEMPORAL_PROFILE='TYPED_DOMAIN_SCALAR_V4'
+SCALAR_PROFILES=(PROFILE,BOUNDS_PROFILE,QNAME_NIL_PROFILE,TEMPORAL_PROFILE)
+TEMPORAL_TYPES={tag(XS,k):k for k in ('date','dateTime','time')}
+STRING_TYPES={tag(XS,k):k for k in ('normalizedString','token','language')}
 XML_NAMESPACE='http://www.w3.org/XML/1998/namespace'
 NCNAME=re.compile('[A-Za-z_][A-Za-z0-9_.-]{0,127}')
 MAX_RECORDS=4096;MAX_OUTPUT=8*1024*1024;MAX_TEXT=4096
@@ -86,6 +90,28 @@ def _qname_value(lexical,namespaces):
   raise XBRLError('typed_qname_unbound_prefix')
  return {'namespace':namespace,'local_name':local}
 
+def _temporal(lexical,kind):
+ day=r'(?P<day>[0-9]{4}-[0-9]{2}-[0-9]{2})'
+ clock=r'(?P<h>[0-9]{2}):(?P<m>[0-9]{2}):(?P<s>[0-9]{2})(?:\.(?P<f>[0-9]{1,18}))?'
+ timezone=r'(?P<zone>Z|[+-][0-9]{2}:[0-9]{2})?'
+ shape=day if kind=='date' else clock if kind=='time' else day+'T'+clock
+ match=re.fullmatch(shape+timezone,lexical)
+ if match is None:raise XBRLError('typed_temporal_lexical_subset')
+ parts=match.groupdict();zone=parts['zone']
+ if zone not in (None,'Z'):
+  hours,minutes=int(zone[1:3]),int(zone[4:])
+  if hours>14 or minutes>59 or hours==14 and minutes:raise XBRLError('typed_temporal_timezone')
+ if 'day'in parts:
+  try:date.fromisoformat(parts['day'])
+  except ValueError:raise XBRLError('typed_temporal_calendar')from None
+ if 'h'in parts:
+  h,m,s=(int(parts[k])for k in ('h','m','s'))
+  fraction=parts['f'] or ''
+  if h>24 or m>59 or s>59 or h==24 and (m or s or any(c!='0'for c in fraction)):
+   raise XBRLError('typed_temporal_clock')
+ return {'validation':'TEMPORAL_LEXICAL_VALIDATED','timezone_present':zone is not None}
+
+
 def _scalar(member,domain,dts,types,*,profile=PROFILE):
  if type(member)is not dict or set(member)-{'name','attributes','namespaces','text','children','content_order'}or not {'name','attributes','namespaces','text','children'}<=set(member):raise XBRLError('typed_member_tree_contract')
  if type(member['name'])is not str or type(member['attributes'])is not dict or type(member['namespaces'])is not dict or type(member['text'])is not str or type(member['children'])is not list:raise XBRLError('typed_member_tree_contract')
@@ -96,7 +122,8 @@ def _scalar(member,domain,dts,types,*,profile=PROFILE):
  if member['children']:return 'TYPED_DOMAIN_COMPLEX_CONTENT_UNSUPPORTED',None
  attributes=member['attributes']
  nil_attribute=tag(I,'nil')
- if attributes and (profile!=QNAME_NIL_PROFILE or set(attributes)!={nil_attribute}):
+ expanded=profile in(QNAME_NIL_PROFILE,TEMPORAL_PROFILE)
+ if attributes and (not expanded or set(attributes)!={nil_attribute}):
   return 'TYPED_DOMAIN_ATTRIBUTES_OR_NIL_UNSUPPORTED',None
  nil_lexical=attributes.get(nil_attribute,'false')
  if nil_lexical not in ('true','false','1','0'):
@@ -108,11 +135,21 @@ def _scalar(member,domain,dts,types,*,profile=PROFILE):
  if nil:
   if text or dts['concepts'][domain['concept']]['declaration']['nillable'] is not True:
    raise XBRLError('typed_domain_nil_not_allowed')
-  if declared in (tag(XS,'string'),tag(XS,'boolean'),tag(XS,'QName')):
+  if declared in (tag(XS,'string'),tag(XS,'boolean'),tag(XS,'QName')) or (
+      profile==TEMPORAL_PROFILE and declared in TEMPORAL_TYPES.keys()|STRING_TYPES.keys()):
    return None,{'resolved_type':declared,'validation':'DECLARED_NIL_TYPED_SCALAR'}
  if declared==tag(XS,'string'):return None,{'resolved_type':declared,'validation':'STRING_LEXICAL_RETAINED'}
  lexical=text.strip(' \t\r\n')
- if declared==tag(XS,'QName') and profile==QNAME_NIL_PROFILE:
+ if profile==TEMPORAL_PROFILE:
+  if declared in TEMPORAL_TYPES:
+   return None,{'resolved_type':declared,**_temporal(lexical,TEMPORAL_TYPES[declared])}
+  if declared in STRING_TYPES:
+   kind=STRING_TYPES[declared]
+   normalized=re.sub('[ \t\r\n]+',' ',text).strip(' ') if kind!='normalizedString' else re.sub('[\t\r\n]',' ',text)
+   if kind=='language'and not re.fullmatch('[A-Za-z]{1,8}(?:-[A-Za-z0-9]{1,8})*',normalized):
+    raise XBRLError('typed_language_lexical')
+   return None,{'resolved_type':declared,'validation':'XML_WHITESPACE_NORMALIZED','normalized_value':normalized}
+ if declared==tag(XS,'QName') and expanded:
   return None,{'resolved_type':declared,'validation':'QNAME_LEXICAL_VALIDATED',
                'expanded_value':_qname_value(lexical,member['namespaces'])}
  if declared==tag(XS,'boolean'):
