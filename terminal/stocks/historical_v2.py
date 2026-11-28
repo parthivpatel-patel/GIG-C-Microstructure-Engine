@@ -40,7 +40,7 @@ def ns(value):
         base=dt.datetime.fromisoformat(m[1]+('+00:00' if m[3]=='Z' else m[3]))
         epoch=dt.datetime(1970,1,1,tzinfo=UTC);delta=base.astimezone(UTC)-epoch
         result=(delta.days*86400+delta.seconds)*10**9+int((m[2] or '').ljust(9,'0') or '0')
-    except ValueError:raise WireError('history_timestamp') from None
+    except (ValueError,OverflowError):raise WireError('history_timestamp') from None
     if not 0<=result<=MAX_NS:raise WireError('history_timestamp_boundary')
     return result
 
@@ -117,6 +117,7 @@ class HistoricalClient:
         self.identity=identity or (lambda s:{'symbol':s,'identity_authority':'REQUESTED_IDENTIFIER_NOT_LISTING_VERIFICATION'})
         self.schedule=schedule or SessionSchedule()
         self.lock=asyncio.Lock();self.cache=OrderedDict();self.backfill_cursors=OrderedDict();self.last_request=None;self.failures=0
+        self._cache_permission=permission;self._cache_transport=transport
     def readiness(self):
         self.prune()
         feeds=[];reasons=[]
@@ -125,6 +126,10 @@ class HistoricalClient:
             except WireError as e:reasons.append(e.code)
         return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'export_ready':type(self.transport)is FixtureWire or self.permission.export_approved,'licensing':'Specific cloud/display/feed permission must be configured;configuration is not independent provider qualification.'}
     def prune(self):
+        if self._cache_permission!=self.permission or self._cache_transport is not self.transport:
+            self.cache.clear()
+            self.backfill_cursors.clear()
+            self._cache_permission,self._cache_transport=self.permission,self.transport
         now=self.monotonic()
         for key,(accepted,_) in list(self.cache.items()):
             if not 0<=now-accepted<60:del self.cache[key]

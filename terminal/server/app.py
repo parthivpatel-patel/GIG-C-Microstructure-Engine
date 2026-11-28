@@ -190,15 +190,19 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     paper = PaperWorkspace(ROOT / '.gig-paper-demo') if paper_workspace is None else paper_workspace
     app.state.paper = paper
     from terminal.stocks.historical_v2 import HistoricalClient,HistoricalPermission,validate_plan as history_plan
-    from terminal.alpaca_wire import HTTPWire
+    from terminal.alpaca_wire import HTTPWire,WireError
     from terminal.stocks.auth import credentials
     history_permission=HistoricalPermission.configured(stocks.environment)
     # No credential callback is evaluated at construction. Only explicit future
     # historical permission can select the HTTP transport;no startup acquisition.
     history_transport=None
+    def require_history_transport():
+        current=HistoricalPermission.configured(stocks.environment)
+        if current!=history_permission:raise WireError('history_source_configuration_changed')
+        current.require('iex' if 'iex' in current.feeds else 'sip')
     try:
-        history_permission.require('iex' if 'iex' in history_permission.feeds else 'sip')
-        history_transport=HTTPWire(lambda:history_permission.require('iex' if 'iex' in history_permission.feeds else 'sip'),lambda:stocks.permission('alpaca'),history_plan)
+        require_history_transport()
+        history_transport=HTTPWire(require_history_transport,lambda:stocks.permission('alpaca'),history_plan)
     except ValueError:pass
     historical=historical_client or HistoricalClient(history_transport,permission=history_permission,identity=stocks.market_identity,schedule=stock_live.schedule)
     app.state.historical=historical
