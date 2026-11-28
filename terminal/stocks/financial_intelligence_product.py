@@ -70,5 +70,5 @@ def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=Non
  if action=='comparison':
   from .xbrl_statement_comparison import company_statement_vintage_comparison
   return company_statement_vintage_comparison(workspace,symbol,cutoffs,recipes,roles,form=form,
-                                             expected_collection_sha256=expected_collection_sha256)
+                                             expected_collection_sha256=expected_collection_sha256,require_matching_calculations=True)
  raise XBRLError('financial_intelligence_action')

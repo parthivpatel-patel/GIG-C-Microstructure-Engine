@@ -9,9 +9,10 @@ from . import sec
 from .financial_intelligence_product import company_source_accounting
 from .xbrl_instance import canonical,digest,XBRLError
 from .xbrl_statement_set import KINDS
-from .xbrl_types import COMPLEX_PROFILE,_resolve
+from .xbrl_types import BOUNDS_PROFILE,_resolve
 
 PROFILE='ORIGINAL_SOURCE_ADJACENT_VINTAGES_V1'
+CALCULATION_PROFILE='ORIGINAL_SOURCE_CALCULATION_COMPATIBLE_VINTAGES_V2'
 MAX_CUTOFFS=8
 MAX_ROWS=4096
 MAX_OUTPUT=4*1024*1024
@@ -61,7 +62,7 @@ def _aspects(packet,row):
 
 def _type_identity(packet,concept):
  graph=packet['dts'];declaration=graph['concepts'][concept]['declaration']
- base,path=_resolve(declaration['type'],graph.get('type_declarations',{}),COMPLEX_PROFILE)
+ base,path=_resolve(declaration['type'],graph.get('type_declarations',{}),BOUNDS_PROFILE)
  # Original document hashes remain in each envelope; a source document revision
  # alone does not change a numeric type. Its exact declarations/facets do.
  return {'declaration':declaration,'resolved_base':base,
@@ -98,7 +99,22 @@ def _calculation_index(section,packet):
  return result
 
 
-def _classify(old,new,left,right,roles_equal,left_calcs,right_calcs):
+def _calculation_relationships(packet,role):
+ by_concept={}
+ for network in packet['dts']['effective_relationships']['networks']:
+  if network['kind']!='calculation' or network['role']!=role:continue
+  groups={}
+  for arc in network['arcs']:
+   groups.setdefault(arc['from'],[]).append({'child':arc['to'],'weight':arc['weight']})
+  for parent,terms in groups.items():
+   fingerprint=canonical({'parent':parent,'terms':sorted(terms,key=lambda t:t['child']),
+                          'usable':network['usable'],'issues':sorted(network['issues'])})
+   for concept in {parent,*(term['child']for term in terms)}:
+    by_concept.setdefault(concept,set()).add(fingerprint)
+ return by_concept
+
+
+def _classify(old,new,left,right,roles_equal,left_calcs,right_calcs,calculation_relationships_equal=True):
  if not roles_equal:return 'ROLE_BINDING_CHANGED',False
  if left is None:return 'ROW_NOT_IN_PREVIOUS_VIEW',False
  if right is None:return 'ROW_NOT_IN_CURRENT_VIEW',False
@@ -124,6 +140,7 @@ def _classify(old,new,left,right,roles_equal,left_calcs,right_calcs):
   return 'ACCOUNTING_REQUIREMENT_UNSATISFIED',False
  if any(check.get('calculation',{}).get('status')=='DEFINITELY_INCONSISTENT'for check in left_calcs+right_calcs):
   return 'CALCULATION_INCONSISTENT',False
+ if not calculation_relationships_equal:return 'CALCULATION_RELATIONSHIP_CHANGED',False
  # This compares reported numeric values, not rounding intervals or an unknown
  # underlying exact value. The original lexical/accuracy evidence stays intact.
  return ('REPORTED_NUMERIC_VALUE_UNCHANGED'if Fraction(left['value'])==Fraction(right['value'])
@@ -143,12 +160,13 @@ def _source_relation(old,new):
 
 
 def company_statement_vintage_comparison(workspace,symbol,cutoffs,source_inputs,role_bindings,
-                                         *,form='10-K',expected_collection_sha256=None):
+                                         *,form='10-K',expected_collection_sha256=None,require_matching_calculations=False):
  """Reconstruct each supplied cutoff from originals and compare adjacent views.
 
  A private callable export only; no HTTP route/provider activation. Unavailable
  adjacent views are never replaced with an older available filing.
  """
+ if type(require_matching_calculations)is not bool:raise XBRLError('statement_comparison_profile')
  if type(cutoffs)is not list or not 1<=len(cutoffs)<=MAX_CUTOFFS:
   raise XBRLError('statement_comparison_cutoff_budget')
  instants=[sec.acceptance_ns(at)for at in cutoffs]
@@ -180,12 +198,14 @@ def company_statement_vintage_comparison(workspace,symbol,cutoffs,source_inputs,
     section['status']='ANALYZED_SOURCE_ROWS';left=_rows(before);right=_rows(after)
     roles_equal=section['previous_role_binding']==section['current_role_binding']
     left_calcs=_calculation_index(before,old);right_calcs=_calculation_index(after,new)
+    previous_relationships=_calculation_relationships(old,before['presentation_role']) if require_matching_calculations else {}
+    current_relationships=_calculation_relationships(new,after['presentation_role']) if require_matching_calculations else {}
     for key in sorted(left.keys()|right.keys(),key=lambda k:(k[1],k[0]or'',k[2]),reverse=True):
      count+=1
      if count>MAX_ROWS:raise XBRLError('statement_comparison_row_budget')
      a=left.get(key);b=right.get(key)
      ac=left_calcs.get(key,[]);bc=right_calcs.get(key,[])
-     status,comparable=_classify(old,new,a,b,roles_equal,ac,bc)
+     status,comparable=_classify(old,new,a,b,roles_equal,ac,bc,previous_relationships.get(key[2])==current_relationships.get(key[2]))
      comparison={'concept':key[2],'period':{'start':key[0],'end':key[1]},
        'status':status,'reported_values_comparable':comparable,
        'underlying_value_equality_established':False,'restatement_established':False,
@@ -200,7 +220,7 @@ def company_statement_vintage_comparison(workspace,symbol,cutoffs,source_inputs,
      'statements':sections})
   if len(canonical({'entries':entries,'comparisons':comparisons}))>MAX_OUTPUT:
    raise XBRLError('statement_comparison_output_budget')
- return _finish({'schema':'gig.backend.statement_vintage_comparison.v1','profile':PROFILE,
+ return _finish({'schema':'gig.backend.statement_vintage_comparison.v1','profile':CALCULATION_PROFILE if require_matching_calculations else PROFILE,
       'instrument':copy.deepcopy(entries[0]['instrument']),'form_family':form,
       'collection_sha256':identity,'entries':entries,'comparisons':comparisons,
       'status':'ANALYZED_BOUNDED_SUPPLIED_VINTAGES','complete_history':False,
