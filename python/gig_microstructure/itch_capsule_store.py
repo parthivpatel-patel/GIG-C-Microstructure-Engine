@@ -1,4 +1,4 @@
-"""POSIX create-only persistence for independently admitted native capsules.
+"""POSIX create-only persistence for independently admitted native artifacts.
 
 No trust metadata is loaded from disk. Exact capsule/source/native admission stays
 with ItchRecovery; this module only handles bounded descriptor-relative bytes.
@@ -9,6 +9,7 @@ from dataclasses import dataclass
 
 MAX_CAPSULE_BYTES=32*1024*1024
 PROFILE='POSIX_CREATE_ONLY_CAPSULE_V1'
+CHECKPOINT_PROFILE='POSIX_CREATE_ONLY_ITCH_CHECKPOINT_V1'
 # Capability sets store original functions. Inspect their declared names so
 # syscall tracing/fault wrappers do not turn a supported OS into an unsupported one.
 _DIRFD_SUPPORTED=all(hasattr(os,n)for n in('open','link','stat','unlink','supports_dir_fd','supports_follow_symlinks'))and {'open','link','stat','unlink'}<={getattr(f,'__name__',None)for f in os.supports_dir_fd}and 'link'in{getattr(f,'__name__',None)for f in os.supports_follow_symlinks}
@@ -19,6 +20,20 @@ class ItchCapsuleFileReceipt:
     profile:str
     file_name:str
     capsule_sha256:str
+    bytes:int
+    device:int
+    inode:int
+    link_count:int
+    file_fsync_completed:bool
+    directory_fsync_completed:bool
+    action:str
+
+
+@dataclass(frozen=True)
+class ItchCheckpointFileReceipt:
+    profile:str
+    file_name:str
+    artifact_sha256:str
     bytes:int
     device:int
     inode:int
@@ -75,17 +90,17 @@ def _parent(path):
         _raise(primary,cleanup)
 
 
-def _regular(info):
+def _regular(info,minimum_size=82):
     if not stat.S_ISREG(info.st_mode)or info.st_uid!=os.geteuid()or info.st_mode&0o022 or info.st_nlink<1:raise ValueError('itch_capsule_file_ownership_or_mode')
-    if not 82<=info.st_size<=MAX_CAPSULE_BYTES:raise ValueError('itch_capsule_file_byte_budget')
+    if not minimum_size<=info.st_size<=MAX_CAPSULE_BYTES:raise ValueError('itch_capsule_file_byte_budget')
 
 
 def _identity(info):
     return(info.st_dev,info.st_ino,info.st_size,info.st_uid,info.st_mode,info.st_nlink,info.st_mtime_ns,info.st_ctime_ns)
 
 
-def _read_verified(fd,expected,*,collect=True):
-    before=os.fstat(fd);_regular(before);os.lseek(fd,0,os.SEEK_SET)
+def _read_verified(fd,expected,*,collect=True,minimum_size=82):
+    before=os.fstat(fd);_regular(before,minimum_size);os.lseek(fd,0,os.SEEK_SET)
     # A fixed buffer bounds retained memory even if every legal read is short.
     # Per-read chunk lists could otherwise add one Python object per source byte.
     total=0;output=bytearray(before.st_size)if collect else None;sha=hashlib.sha256()
@@ -96,7 +111,7 @@ def _read_verified(fd,expected,*,collect=True):
         if total>before.st_size or total>MAX_CAPSULE_BYTES:raise ValueError('itch_capsule_file_changed')
         sha.update(raw)
         if collect:output[total-len(raw):total]=raw
-    after=os.fstat(fd);_regular(after)
+    after=os.fstat(fd);_regular(after,minimum_size)
     if total!=before.st_size or _identity(before)!=_identity(after):raise ValueError('itch_capsule_file_changed')
     if sha.hexdigest()!=expected:raise ValueError('itch_capsule_file_digest')
     return bytes(output)if collect else None,after
@@ -104,6 +119,11 @@ def _read_verified(fd,expected,*,collect=True):
 
 def _receipt(leaf,expected,info,*,action,file_synced=False,directory_synced=False):
     return ItchCapsuleFileReceipt(PROFILE,leaf,expected,info.st_size,info.st_dev,info.st_ino,info.st_nlink,file_synced,directory_synced,action)
+
+
+def _checkpoint_receipt(leaf,expected,info,*,action,file_synced=False,directory_synced=False):
+    return ItchCheckpointFileReceipt(CHECKPOINT_PROFILE,leaf,expected,info.st_size,info.st_dev,
+                                    info.st_ino,info.st_nlink,file_synced,directory_synced,action)
 
 
 def _raise(primary,cleanup,*,published=False,publication_unknown=False,file_synced=False,directory_synced=False):
@@ -128,13 +148,13 @@ def _raise(primary,cleanup,*,published=False,publication_unknown=False,file_sync
     raise error from primary
 
 
-def _persist_verified_capsule(path,payload,expected):
+def _persist_verified_capsule(path,payload,expected,*,minimum_size=82,receipt_factory=_receipt):
     """Caller must have natively admitted the exact immutable bytes first.
 
     Complete-write, readback SHA, file fsync, atomic no-overwrite link, unlink only
     this operation's staging inode, then directory fsync. No destination rollback.
     """
-    if type(payload)is not bytes or not 82<=len(payload)<=MAX_CAPSULE_BYTES or type(expected)is not str or not re.fullmatch('[0-9a-f]{64}',expected)or hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('itch_capsule_verified_bytes_required')
+    if type(payload)is not bytes or not minimum_size<=len(payload)<=MAX_CAPSULE_BYTES or type(expected)is not str or not re.fullmatch('[0-9a-f]{64}',expected)or hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('itch_capsule_verified_bytes_required')
     directory,leaf=_parent(path);fd=None;stage=None;created=False;original=None;published=False;file_synced=False;directory_synced=False;primary=None;cleanup=[];receipt=None
     link_attempted=False
     publication_unknown=False
@@ -158,18 +178,18 @@ def _persist_verified_capsule(path,payload,expected):
             if type(n)is not int or not 0<n<=len(view)-done:raise OSError(errno.EIO,'itch_capsule_short_write')
             done+=n
         os.fsync(fd);file_synced=True
-        _,verified=_read_verified(fd,expected,collect=False)
+        _,verified=_read_verified(fd,expected,collect=False,minimum_size=minimum_size)
         if(verified.st_dev,verified.st_ino)!=(original.st_dev,original.st_ino)or verified.st_nlink!=1:raise ValueError('itch_capsule_staging_identity')
         closing=fd;fd=None;os.close(closing)
         link_attempted=True
         os.link(stage,leaf,src_dir_fd=directory,dst_dir_fd=directory,follow_symlinks=False);published=True
-        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final)
+        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size)
         if(final.st_dev,final.st_ino)!=(original.st_dev,original.st_ino):raise ValueError('itch_capsule_publication_identity')
         os.unlink(stage,dir_fd=directory);created=False
         os.fsync(directory);directory_synced=True
-        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final)
+        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size)
         if(final.st_dev,final.st_ino)!=(original.st_dev,original.st_ino)or final.st_size!=len(payload):raise ValueError('itch_capsule_publication_identity')
-        receipt=_receipt(leaf,expected,final,action='PUBLISHED_CREATE_ONLY',file_synced=True,directory_synced=True)
+        receipt=receipt_factory(leaf,expected,final,action='PUBLISHED_CREATE_ONLY',file_synced=True,directory_synced=True)
     except BaseException as error:primary=error
     finally:
         if link_attempted and not published:
@@ -202,7 +222,7 @@ def _persist_verified_capsule(path,payload,expected):
     return receipt
 
 
-def _read_capsule(path,expected):
+def _read_capsule(path,expected,*,minimum_size=82,receipt_factory=_receipt):
     """Bound before allocation; O_NONBLOCK avoids opening a FIFO as a byte source.
 
     Stable positive link counts are allowed: a process may stop after the atomic
@@ -213,10 +233,10 @@ def _read_capsule(path,expected):
     directory,leaf=_parent(path);fd=None;primary=None;cleanup=[];out=None
     try:
         fd=os.open(leaf,os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC|os.O_NONBLOCK,dir_fd=directory)
-        payload,info=_read_verified(fd,expected)
-        named=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(named)
+        payload,info=_read_verified(fd,expected,minimum_size=minimum_size)
+        named=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(named,minimum_size)
         if _identity(named)!=_identity(info):raise ValueError('itch_capsule_path_changed')
-        out=payload,_receipt(leaf,expected,info,action='READ_VERIFIED_BYTES')
+        out=payload,receipt_factory(leaf,expected,info,action='READ_VERIFIED_BYTES')
     except BaseException as error:primary=error
     finally:
         if fd is not None:
@@ -226,3 +246,11 @@ def _read_capsule(path,expected):
         except BaseException as error:cleanup.append(error)
     if primary is not None or cleanup:_raise(primary,cleanup)
     return out
+
+
+def _persist_verified_checkpoint(path,payload,expected):
+    return _persist_verified_capsule(path,payload,expected,minimum_size=56,receipt_factory=_checkpoint_receipt)
+
+
+def _read_checkpoint(path,expected):
+    return _read_capsule(path,expected,minimum_size=56,receipt_factory=_checkpoint_receipt)

@@ -144,6 +144,26 @@ class ItchRecovery:
         result=ItchSourceCompletion.__new__(ItchSourceCompletion);result._owner=owner;result.original_admission=a;result.source_admission=s
         return result
     @classmethod
+    def persist_checkpoint_file(cls,path,payload,admission,*,resource_budget_bytes=128*1024*1024):
+        """Publish native-admitted active checkpoint bytes to a new absolute POSIX path."""
+        cls.restore(payload,admission,resource_budget_bytes=resource_budget_bytes)
+        from .itch_capsule_store import _persist_verified_checkpoint
+        return _persist_verified_checkpoint(path,payload,admission.artifact_sha256)
+
+    @classmethod
+    def restore_checkpoint_file(cls,path,admission,*,resource_budget_bytes=128*1024*1024):
+        """Open a pinned active image and independently admit it through the native SDK."""
+        if type(admission)is not ItchAdmission:raise ValueError('itch_admission_required')
+        admission.validate()
+        if type(resource_budget_bytes)is not int or not 0<resource_budget_bytes<=256*1024*1024:
+            raise ValueError('itch_resource_budget')
+        from .itch_capsule_store import _read_checkpoint
+        payload,receipt=_read_checkpoint(path,admission.artifact_sha256)
+        owner=cls.restore(payload,admission,resource_budget_bytes=resource_budget_bytes)
+        owner.persistence_receipt=receipt
+        return owner
+
+    @classmethod
     def persist_completion_capsule_file(cls,path,payload,admission,*,resource_budget_bytes=128*1024*1024):
         """POSIX create-only publication after full independent native admission.
 
