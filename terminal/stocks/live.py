@@ -198,7 +198,10 @@ class LiveIEX:
         self._observation_permission_reference=reference
 
     def process(self,raw,*,socket_owner=None):
+        if self.connector is None and (socket_owner is None or self._observation_permission_reference is None):
+            raise ProtocolError('observed_transport_token_required')
         if socket_owner is not None and socket_owner is not self.socket:raise ProtocolError('stale_transport_frame')
+        if not self.current_observation_scope():raise ProtocolError('provider_permission_changed')
         # Accepted event dictionaries are never edited by process();copy containers only.
         # All new rows/counters are staged until the complete frame validates.
         symbols,channels,generation=self.symbols,self.channels,self.generation
