@@ -67,7 +67,10 @@ gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> byt
    return bad(gig::ErrorCode::malformed,"source_recovery.partial_binary_tail_required");
   const auto residual=static_cast<std::size_t>(finish.residual_bytes);
   const auto offset=source.size()-residual;
-  const auto cursor=engine.context().next_location();
+  const auto& context=engine.context();
+  if(context.cursor_exhausted())
+   return bad(gig::ErrorCode::capacity,"source_recovery.partial_binary_cursor_exhausted");
+  const auto cursor=context.next_location();
   const auto boundary=framer.data->position().value()-finish.residual_bytes;
   if(cursor.frame_offset.value()!=boundary)
    return bad(gig::ErrorCode::inconsistent_state,"source_recovery.partial_binary_boundary");
