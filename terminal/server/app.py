@@ -312,6 +312,22 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         async with lock:
             return native.state()
 
+    @route('/api/v1/research/native-quote-flow',methods=['POST'])
+    @json_endpoint
+    async def native_quote_flow(request):
+        from .engine import authored_quote_flow
+        data=await bounded_json(request)
+        if set(data)!={'position'} or type(data['position'])is not int:
+            return error('NATIVE_FLOW_POSITION','Select an admitted authored replay position',422)
+        async with lock:
+            if (native.mode!='HISTORICAL_REPLAY' or native.dataset!='terminal-authored-v2' or
+                data['position']>native.position):
+                return error('NATIVE_FLOW_SOURCE','Current authored native replay source required',409)
+        try:return await analysis.run(authored_quote_flow,data['position'])
+        except ControlError as exc:return error(exc.code,str(exc),422)
+        except gig.EngineError:return error('NATIVE_FLOW_SOURCE','Native quote source or arithmetic unavailable',422)
+        except ValueError:return error('NATIVE_FLOW_BUSY','Native analytics worker unavailable',409)
+
     @route('/api/v2/research/concentration', methods=['GET'])
     @json_endpoint
     async def research_concentration(request):

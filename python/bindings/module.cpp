@@ -15,6 +15,12 @@ public:
     py::dict reset(py::handle event,py::handle plan){return mutate([&](){auto e=read<MarketEvent>(body(event,"gig.event"));auto p=read<RestartPlan>(plan);return engine_.reset(e,p);});}
     py::dict recover(py::handle event){return mutate([&](){auto e=read<MarketEvent>(body(event,"gig.event"));return engine_.recover(e);});}
     py::dict snapshot(py::handle depth){return api([&](){return snapshot_wire(take(engine_.depth(read<std::size_t>(depth))));});}
+    py::dict quote_observation(py::handle timestamp,py::handle clock) {
+        return api([&](){
+            auto snapshot=take(engine_.depth(1));
+            return write(take(analytics::quote_observation(snapshot,read<EventTimestamp>(timestamp),read<Identity>(clock))));
+        });
+    }
     py::dict metrics(py::handle depth){return api([&](){auto d=read<std::size_t>(depth);auto snapshot=take(engine_.depth(d));return book_metrics_wire(take(analytics::calculate(snapshot,d)));});}
     py::dict canonical(){return api([&]()->py::object{auto s=take(engine_.canonical());if(s.size()>33554432)bad(ErrorCode::capacity,"binding.canonical_export");return py::str(s.data(),s.size());});}
     py::dict status(){return api([&]()->py::object{py::dict d;d["needs_recovery"]=engine_.needs_recovery();d["journal_size"]=write(engine_.journal_size());d["pmr_live_bytes"]=write(memory_.stats().live_bytes);d["pmr_peak_bytes"]=write(memory_.stats().peak_bytes);d["pmr_allocations"]=write(memory_.stats().allocations);d["pmr_deallocations"]=write(memory_.stats().deallocations);return d;});}
@@ -35,7 +41,7 @@ void bind_depth(py::module_&);
 void bind_itch_recovery(py::module_&);
 PYBIND11_MODULE(_native,m){
     m.attr("__version__")="0.1.1";m.attr("schema_version")="1.0";m.attr("__compiler__")=__VERSION__;m.attr("__build_type__")=GIG_PYTHON_BUILD_TYPE;m.attr("__config_flags__")=GIG_PYTHON_CONFIG_FLAGS;m.attr("__target_flags__")=GIG_PYTHON_TARGET_FLAGS;m.attr("__core_flags__")=GIG_PYTHON_CORE_FLAGS;m.attr("__python__")=PY_VERSION;m.attr("__pybind11__")=std::to_string(PYBIND11_VERSION_MAJOR)+"."+std::to_string(PYBIND11_VERSION_MINOR)+"."+std::to_string(PYBIND11_VERSION_PATCH);
-    py::class_<NativeReplay>(m,"_Replay").def("checkpoint",&NativeReplay::checkpoint).def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
+    py::class_<NativeReplay>(m,"_Replay").def("checkpoint",&NativeReplay::checkpoint).def("apply",&NativeReplay::apply).def("reset",&NativeReplay::reset).def("recover",&NativeReplay::recover).def("snapshot",&NativeReplay::snapshot).def("metrics",&NativeReplay::metrics).def("quote_observation",&NativeReplay::quote_observation).def("canonical",&NativeReplay::canonical).def("status",&NativeReplay::status);
     py::class_<NativeSimulation>(m,"_Simulation").def("submit",&NativeSimulation::submit).def("cancel",&NativeSimulation::cancel).def("advance",&NativeSimulation::advance).def("snapshot",&NativeSimulation::snapshot).def("canonical",&NativeSimulation::canonical).def("queue",&NativeSimulation::queue);
     m.def("new_replay",[](py::handle rules,py::handle config,py::handle limits,py::handle budget){return api([&](){return py::cast(std::make_unique<NativeReplay>(read<InstrumentRules>(rules),read<ReplayConfig>(config),read<BookLimits>(limits),read<std::size_t>(budget)));});});
     m.def("restore_replay",[](py::handle image,py::handle rules,py::handle config,py::handle limits,py::handle canonical,py::handle budget){return api([&](){

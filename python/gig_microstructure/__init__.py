@@ -258,6 +258,9 @@ class Replay:
         return ResearchDocument(_checked(self._owner.snapshot(depth)))
     def metrics(self, depth='1'):
         return ResearchDocument(_checked(self._owner.metrics(depth)))
+    def quote_observation(self, timestamp, clock):
+        """Capture current exact native top levels and their replay reference."""
+        return deepcopy(_checked(self._owner.quote_observation(timestamp, clock)))
     def canonical(self):
         return _checked(self._owner.canonical())
     def status(self):

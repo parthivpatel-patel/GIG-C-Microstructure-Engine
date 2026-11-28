@@ -24,6 +24,32 @@ def exact_quantity(value):
     return value
 
 
+def authored_quote_flow(position):
+    if type(position)is not int or not 2<=position<=len(EVENTS):
+        raise ControlError('NATIVE_FLOW_POSITION','At least two admitted authored observations are required')
+    replay=gig.Replay(rules(),replay_config(),limits={'max_orders':'128','max_levels':'32','max_snapshot_depth':'20'},
+                      resource_budget_bytes='33554432')
+    interval=50_000_000
+    clock='terminal-authored-replay-clock-v2'
+    quotes=[]
+    for index,event in enumerate(EVENTS[:position]):
+        replay.apply(event)
+        quotes.append(replay.quote_observation(str(index*interval),clock))
+    window=min(20,position-1)*interval
+    config={'utc_clock':clock,'window':str(window),'quote_lag':'0','horizon':'0',
+            'max_quote_age':str(interval),'sampling_interval':str(interval),
+            'continuity_complete':True,'complete_top_updates':True}
+    result=gig.flow_analytics(quotes,[],config,str((position-1)*interval)).to_dict()['data']['result']
+    summary=result['summary']
+    return {'schema':'gig.terminal.authored_quote_flow.v1','origin':'HISTORICAL_SYNTHETIC',
+            'dataset':'terminal-authored-v2','fixture_sha256':FIXTURE_SHA256,'position':position,
+            'clock':'AUTHORED_LOGICAL_50MS','as_of_elapsed_ns':result['as_of'],'window_ns':str(window),
+            'quote_scope':'One exact top-of-book observation per committed authored event.',
+            'metrics':{key:summary[key]for key in ('ofi','quote_intensity','window_return','realized_variance')},
+            'parents':result['parents'],
+            'trade_observations_used':False,'provider_requested':False}
+
+
 class NativeSession:
     """Mutated only on the ASGI event loop, never shared with a background thread."""
     def __init__(self):
