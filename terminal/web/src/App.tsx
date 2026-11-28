@@ -1,4 +1,4 @@
-import {itchBookChoices,partialBinaryTail,replayMinimum,replayProgress} from './itchSession';
+import {itchBookChoices,partialSourceTail,replayMinimum,replayProgress} from './itchSession';
 import { ConcentrationPanel } from './ConcentrationPanel';
 import { Navigation } from './Navigation';
 import { TerminalHeader } from './TerminalHeader';
@@ -242,15 +242,16 @@ function Panel({ title, eyebrow, children }: {
     children: React.ReactNode;
 }) { return <section className="panel"><header className="panel-header"><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2></div></header><div className="panel-content">{children}</div></section>; }
 function PartialItchBoundary({state}:{state:TerminalState}){
-    const tail=partialBinaryTail(state);
+    const tail=partialSourceTail(state);
     if(!tail)return null;
     return <details className="source-controls"><summary>Unfinished ITCH source frame</summary>
       <p>The replay contains whole, accepted frames. The unfinished frame awaits more source bytes.</p>
       <dl>
         <dt>Next frame offset</dt><dd>{tail.next_frame}</dd>
         <dt>Next record ordinal</dt><dd>{tail.next_ordinal}</dd>
-        <dt>Unfinished bytes in the original source</dt><dd>{tail.residual_bytes} at offset {tail.source_offset}</dd>
+        <dt>Unfinished bytes in the {tail.decompressed_sha256?'decompressed':'original'} source</dt><dd>{tail.residual_bytes} at offset {tail.source_offset}</dd>
         <dt>Original source SHA-256</dt><dd><code>{tail.source_sha256}</code></dd>
+        {tail.decompressed_sha256&&<><dt>Decompressed source SHA-256</dt><dd><code>{tail.decompressed_sha256}</code></dd></>}
         <dt>Unfinished frame SHA-256</dt><dd><code>{tail.residual_sha256}</code></dd>
       </dl>
     </details>;

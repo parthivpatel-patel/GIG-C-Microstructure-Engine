@@ -23,21 +23,24 @@ export function replayProgress(state:TerminalState):number {
  return state.event_count>minimum?(state.position-minimum)/(state.event_count-minimum)*100:0;
 }
 
-type PartialBinaryTail = {
+type PartialSourceTail = {
  next_frame: string; next_ordinal: string; residual_bytes: string;
  source_offset: string; source_sha256: string; residual_sha256: string;
+ decompressed_sha256: string|null;
 };
 
-export function partialBinaryTail(state:TerminalState):PartialBinaryTail|null {
+export function partialSourceTail(state:TerminalState):PartialSourceTail|null {
  const lineage=state.provenance.source_recovery_history;
  if(!Array.isArray(lineage)||!lineage.length)return null;
  const row=lineage[lineage.length-1] as Record<string,unknown>|null;
- if(row?.source_profile!=='PARTIAL_BINARY_FILE_V1')return null;
+ if(!row)return null;
+ const gzip=row.source_profile==='PARTIAL_SINGLE_GZIP_V1';
+ if(!gzip&&row.source_profile!=='PARTIAL_BINARY_FILE_V1')return null;
  const reject=():never=>{throw Error('Invalid partial ITCH source receipt')};
  if(state.mode!=='HISTORICAL_REPLAY'||state.origin!=='HISTORICAL_SYNTHETIC'||
     state.provenance.dataset!=='itch-checkpoint-v1'||lineage.length>4||
     state.provenance.source_recovery_history_encoding!=='DECIMAL_STRINGS_V1'||
-    row.container!=='binary_file'||row.capture!==state.provenance.capture||
+    row.container!==(gzip?'single_gzip':'binary_file')||row.capture!==state.provenance.capture||
     row.generation!==state.provenance.generation)reject();
  const number=(key:string):bigint=>{
   const value=row[key];
@@ -46,11 +49,11 @@ export function partialBinaryTail(state:TerminalState):PartialBinaryTail|null {
   if(n>18446744073709551615n)return reject();
   return n;
  };
- for(const key of ['source_sha256','residual_sha256']){
+ for(const key of gzip?['source_sha256','residual_sha256','decompressed_sha256']:['source_sha256','residual_sha256']){
   const value=row[key];
   if(typeof value!=='string'||!/^[a-f0-9]{64}$/.test(value))reject();
  }
- const offset=number('source_offset'),residual=number('residual_bytes'),records=number('to_source_records');
+ const offset=number(gzip?'decompressed_offset':'source_offset'),residual=number('residual_bytes'),records=number('to_source_records');
  if(residual<1n||residual>65536n||offset+residual>33554432n||
     number('first_frame')+offset!==number('next_frame')||
     number('first_ordinal')+records!==number('next_ordinal')||
@@ -59,5 +62,6 @@ export function partialBinaryTail(state:TerminalState):PartialBinaryTail|null {
   source_offset:String(offset),residual_bytes:String(residual),next_frame:String(row.next_frame),
   next_ordinal:String(row.next_ordinal),source_sha256:String(row.source_sha256),
   residual_sha256:String(row.residual_sha256),
+  decompressed_sha256:gzip?String(row.decompressed_sha256):null,
  };
 }

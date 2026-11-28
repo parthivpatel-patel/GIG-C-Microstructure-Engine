@@ -1,4 +1,4 @@
-import {partialBinaryTail} from './itchSession.ts';
+import {partialSourceTail} from './itchSession.ts';
 export type Origin='LIVE_OBSERVED'|'LIVE_DELAYED'|'HISTORICAL_OBSERVED'|'HISTORICAL_SYNTHETIC'|'SIMULATED'|'ESTIMATED'|'UNAVAILABLE';
 export type Mode='HISTORICAL_REPLAY'|'SIMULATION'|'LIVE';
 export interface Fraction {numerator:string;denominator:string}
@@ -24,7 +24,7 @@ export function validateState(value:unknown):TerminalState {
  if(!Number.isSafeInteger(value.position)||!Number.isSafeInteger(value.event_count)||Number(value.position)<0||Number(value.event_count)<0||Number(value.position)>Number(value.event_count)||typeof value.playing!=='boolean'||typeof value.speed!=='number'||!Number.isFinite(value.speed))throw new Error('Invalid replay clock');
  if(value.replay_min_position!==undefined&&(!Number.isSafeInteger(value.replay_min_position)||Number(value.replay_min_position)<0||Number(value.replay_min_position)>Number(value.position)))throw new Error('Invalid checkpoint replay boundary');
  const state=value as unknown as TerminalState;
- partialBinaryTail(state);
+ partialSourceTail(state);
  return state;
 }
 
