@@ -140,6 +140,26 @@ function member(f:SourceFact,s:Source,g:Graph):{record:RecordValue;reason:string
   if(f.decimals!==null||f.precision!==null)return {record,reason:'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED',valueKey:null,exact:true};
   record.reported_value=f.lexical_value;record.value_kind='string';return {record,reason:null,valueKey:'string:'+f.lexical_value,exact:true};
  }
+ if(decl.type===`{${X}}dateItemType`){
+  if(f.unit_ref!==null)return {record,reason:'NONNUMERIC_UNIT_UNSUPPORTED',valueKey:null,exact:true};
+  if(f.decimals!==null||f.precision!==null)return {record,reason:'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED',valueKey:null,exact:true};
+  const lexical=f.lexical_value.replace(/^[\t\r\n ]+|[\t\r\n ]+$/g,'');
+  const match=/^([0-9]{4}-[0-9]{2}-[0-9]{2})(Z|[+-][0-9]{2}:[0-9]{2})?$/.exec(lexical);
+  const time=match?Date.parse(match[1]):NaN;
+  if(!match||match[1].startsWith('0000')||!Number.isFinite(time)||new Date(time).toISOString().slice(0,10)!==match[1]){
+   return {record,reason:'DATE_LEXICAL_UNSUPPORTED',valueKey:null,exact:true};
+  }
+  const zone=match[2];
+  if(zone){
+   if(zone!=='Z'){
+    const hours=Number(zone.slice(1,3)),minutes=Number(zone.slice(4));
+    if(hours>14||minutes>59||hours===14&&minutes!==0)return {record,reason:'DATE_LEXICAL_UNSUPPORTED',valueKey:null,exact:true};
+   }
+   return {record,reason:'DATE_TIMEZONE_EQUALITY_UNSUPPORTED',valueKey:null,exact:true};
+  }
+  record.reported_value=lexical;record.value_kind='date';
+  return {record,reason:null,valueKey:'date:'+lexical,exact:true};
+ }
  if(decl.type===`{${X}}booleanItemType`){
   if(f.unit_ref!==null)return {record,reason:'NONNUMERIC_UNIT_UNSUPPORTED',valueKey:null,exact:true};
   if(f.decimals!==null||f.precision!==null){

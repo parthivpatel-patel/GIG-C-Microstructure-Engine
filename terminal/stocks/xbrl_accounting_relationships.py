@@ -47,6 +47,18 @@ def _member(fact,parsed,dts):
   if fact['decimals'] is not None or fact['precision'] is not None:
    return result,'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED'
   result['reported_value']=fact['lexical_value'];result['value_kind']='string';return result,None
+ if typ==tag(X,'dateItemType'):
+  from .xbrl_typed_dimensions import _temporal
+  if fact['unit_ref']is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
+  if fact['decimals'] is not None or fact['precision'] is not None:
+   return result,'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED'
+  lexical=fact['lexical_value'].strip(' \t\r\n')
+  try:
+   if _temporal(lexical,'date')['timezone_present']:return result,'DATE_TIMEZONE_EQUALITY_UNSUPPORTED'
+  except XBRLError:
+   return result,'DATE_LEXICAL_UNSUPPORTED'
+  result.update(reported_value=lexical,value_kind='date')
+  return result,None
  if typ==tag(X,'booleanItemType'):
   if fact['unit_ref'] is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
   if fact['decimals'] is not None or fact['precision'] is not None:
