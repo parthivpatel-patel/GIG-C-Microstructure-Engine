@@ -7,7 +7,7 @@ type Axis={dimension:string;member:string};
 type SourceDocument={uri:string;sha256:string};
 type DefaultSource={member:string;role:string;arc_index:number;source_uri:string;source_sha256:string};
 type Binding={aspect_sha256?:string;source_context_sha256s?:string[];parent:string;aspects:{issuer_cik:string;context_sha256?:string;unit_sha256:string;period:{kind:string;start:string|null;end:string};dimensions:Axis[];effective_dimension_values?:Axis[];unit:{numerator:string[];denominator:string[];semantic_sha256:string}};data_points:Record<string,Point>;missing_concepts:string[];calculation:Check;relationship_provenance:unknown[]};
-export type CalculationPacket={schema:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string;drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];implicit_default_dimensions?:Record<string,string>}>;selected_reported_value:null};sha256:string};
+export type CalculationPacket={schema:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string;drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];implicit_default_dimensions?:Record<string,string>;numeric_type_provenance?:{base_type:string;derivation_path:string[];documents:SourceDocument[]}}>;selected_reported_value:null};sha256:string};
 function fail():never{throw Error('Invalid source-bound calculation report')}const hash=(v:unknown)=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);const ids=(a:unknown):a is string[]=>Array.isArray(a)&&a.length<=8&&new Set(a).size===a.length&&a.every(hash);
 const DIMENSIONS='INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3';
 const BOUNDS='NUMERIC_BOUND_RESTRICTIONS_V6';
@@ -26,7 +26,7 @@ function defaultDimensions(report:NonNullable<CalculationPacket['report']>){
  for(const axis of axes){
   const source=sources[axis];
   if(!qname(axis)||!qname(defaults[axis])||!source||source.member!==defaults[axis]||source.role!==report.definition_role||
-     !Number.isSafeInteger(source.arc_index)||source.arc_index<0||source.arc_index>=4096||docHashes.get(source.source_uri)!==source.source_sha256)fail();
+     !Number.isSafeInteger(source.arc_index)||source.arc_index<0||source.arc_index>=4096||!hash(source.source_sha256)||docHashes.get(source.source_uri)!==source.source_sha256)fail();
  }
  return defaults;
 }
@@ -89,6 +89,15 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
     const sourceAxes=axisValues(f.reported_dimensions), implicit=f.implicit_default_dimensions;
     if(sourceAxes.size!==reported.size||[...sourceAxes].some(([axis,member])=>reported.get(axis)!==member)||
        Object.keys(implicit).length!==expectedImplicit.length||expectedImplicit.some(([axis,member])=>implicit[axis]!==member))fail();
+    if(bounded){
+     const numeric=f.numeric_type_provenance;
+     if(!numeric||!qname(numeric.base_type)||!Array.isArray(numeric.derivation_path)||numeric.derivation_path.length>8||
+        new Set(numeric.derivation_path).size!==numeric.derivation_path.length||!numeric.derivation_path.every(qname)||
+        !Array.isArray(numeric.documents)||numeric.documents.length>16||
+        Boolean(numeric.documents.length)!==Boolean(numeric.derivation_path.length)||
+        new Set(numeric.documents.map(d=>d?.uri)).size!==numeric.documents.length||
+        numeric.documents.some(d=>!d||typeof d.uri!=='string'||!d.uri||!hash(d.sha256)))fail();
+    }
     sourceContexts.add(f.source_context_sha256);
    }
    if(!Array.isArray(b.source_context_sha256s)||!sourceContexts.size||

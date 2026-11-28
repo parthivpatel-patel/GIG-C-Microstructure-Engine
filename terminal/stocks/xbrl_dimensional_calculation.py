@@ -12,7 +12,7 @@ from .xbrl_binding import bind_declarations
 from .xbrl_dimensions import D,INHERITED_PROFILE,corroborate
 from .xbrl_accuracy import ROUNDING_MODES,calculation_duplicates,calculation_consistency
 from .xbrl_relationships import PROFILE as REL_PROFILE,SUM
-from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE,_resolve,_value_check
+from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE,_bound_sources,_resolve,_value_check
 from .xbrl_calculation_report import _identity,_source_fact,_context,HEX
 
 PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_CALCULATIONS_V1'
@@ -77,6 +77,12 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
  retained=parsed.get('dts_corroboration')
  if retained is not None and(type(retained)is not dict or retained.get('dts_sha256')!=dts['canonical_sha256']):raise XBRLError('dimcalc_original_binding')
  bound=bind_declarations(parsed,dts)
+ if numeric_profile==BOUNDS_PROFILE:
+  _bound_sources(bound)
+  if retained is not None:
+   expected=bound['dts_corroboration']
+   for key in ('documents','concept_declarations','type_declarations'):
+    if canonical(retained.get(key,{}))!=canonical(expected.get(key,{})):raise XBRLError('dimcalc_numeric_retained_graph_mismatch')
  if dts.get('structural_closure')is not True or dts.get('unresolved'):raise XBRLError('dimcalc_dependency_closure')
  if type(dts.get('unsupported_semantics'))is not list or any(u.get('feature')!='NON_PRESENTATION_LINK_NOT_INTERPRETED'for u in dts['unsupported_semantics']):raise XBRLError('dimcalc_unknown_source_semantics')
  documents=dts.get('documents')
@@ -110,7 +116,7 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
  parents={};participants=set();pairs=set()
  for a in net['arcs']:
   if (a['from'],a['to'])in pairs or a.get('weight')not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('dimcalc_calculation_arc_scope')
-  if type(a.get('provenance'))is not list or not a['provenance']or any(docmap.get(p.get('source_uri'))!=p.get('source_sha256')for p in a['provenance']):raise XBRLError('dimcalc_calculation_arc_lineage')
+  if type(a.get('provenance'))is not list or not a['provenance']or any(type(p)is not dict or p.get('source_uri')not in docmap or docmap[p['source_uri']]!=p.get('source_sha256')for p in a['provenance']):raise XBRLError('dimcalc_calculation_arc_lineage')
   _declaration(dts,a['from'],tag(X,'item'));_declaration(dts,a['to'],tag(X,'item'));pairs.add((a['from'],a['to']));parents.setdefault(a['from'],[]).append(a);participants.update((a['from'],a['to']))
  if any(len(a)>128 for a in parents.values()):raise XBRLError('dimcalc_term_budget')
  contexts=parsed.get('contexts');units=parsed.get('units');facts=parsed.get('facts')
@@ -148,14 +154,22 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
   decl=_declaration(dts,fact['concept'],tag(X,'item'))
   if decl['abstract']or decl['period_type']!=context['period']['kind']or(fact['nil']and not decl['nillable']):raise XBRLError('dimcalc_numeric_declaration_scope')
   try:
-   base,path=_resolve(decl['type'],dts.get('type_declarations',{}),numeric_profile or COMPLEX_PROFILE);value=None if fact['nil']else sec.exact(Decimal(fact['lexical_value'].strip(' \t\r\n')));_value_check({**fact,'value':value},base,path,units)
+   base,path=_resolve(decl['type'],dts.get('type_declarations',{}),numeric_profile or COMPLEX_PROFILE)
+   _value_check(fact,base,path,units)
+   value=None if fact['nil']else sec.exact(Decimal(fact['lexical_value'].strip(' \t\r\n')))
   except (XBRLError,ValueError,InvalidOperation):raise XBRLError('dimcalc_numeric_type_or_value_unsupported')from None
   aspect={'issuer_cik':issuer,'period':copy.deepcopy(context['period']),'dimensions':[{'dimension':k,'member':v}for k,v in sorted(reported.items())],'effective_dimension_values':[{'dimension':k,'member':v}for k,v in sorted(normalized.items())],'unit_sha256':unit['semantic_sha256'],'unit':copy.deepcopy(unit)};key=digest(aspect);aspects[key]=aspect;rows=groups.setdefault((fact['concept'],key),[]);rows.append({**fact,'value':value})
   if len(rows)>8:raise XBRLError('dimcalc_duplicate_budget')
   declsources=dts['concepts'][fact['concept']]['source_documents']
   if not declsources or any(u not in docmap for u in declsources):raise XBRLError('dimcalc_declaration_lineage')
   implicit={k:v for k,v in defaults.items()if k not in reported}
-  record={'concept':fact['concept'],'context_ref':fact['context_ref'],'source_context_sha256':context['semantic_sha256'],'unit_ref':fact['unit_ref'],'source_unit_sha256':unit['semantic_sha256'],'reported_dimensions':copy.deepcopy(context['dimensions']),'implicit_default_dimensions':implicit,'aspect_sha256':key,'reported_lexical_value':fact['lexical_value'],'reported_numeric_value':value,'raw_fact_value':fact['value'],'drs_validation':copy.deepcopy(r),'declaration_documents':[{'uri':u,'sha256':docmap[u]}for u in declsources],'inline_source_segments':copy.deepcopy(fact.get('inline_source_segments'))};lineage[fact['source_fact_id']]=record;footprint+=len(canonical(record))
+  record={'concept':fact['concept'],'context_ref':fact['context_ref'],'source_context_sha256':context['semantic_sha256'],'unit_ref':fact['unit_ref'],'source_unit_sha256':unit['semantic_sha256'],'reported_dimensions':copy.deepcopy(context['dimensions']),'implicit_default_dimensions':implicit,'aspect_sha256':key,'reported_lexical_value':fact['lexical_value'],'reported_numeric_value':value,'raw_fact_value':fact['value'],'drs_validation':copy.deepcopy(r),'declaration_documents':[{'uri':u,'sha256':docmap[u]}for u in declsources],'inline_source_segments':copy.deepcopy(fact.get('inline_source_segments'))};
+  if numeric_profile==BOUNDS_PROFILE:
+   dependencies=sorted({uri for step in path for uri in step['source_documents']})
+   if any(uri not in docmap for uri in dependencies):raise XBRLError('dimcalc_numeric_type_lineage')
+   record['numeric_type_provenance']={'base_type':base,'derivation_path':[step['type']for step in path],
+    'documents':[{'uri':uri,'sha256':docmap[uri]}for uri in dependencies]}
+  lineage[fact['source_fact_id']]=record;footprint+=len(canonical(record))
   if footprint>MAX_OUTPUT:raise XBRLError('dimcalc_output_budget')
  result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':'NO_SUPPORTED_PARENT_DATA_POINTS','rounding_mode':rounding_mode,'dimensional_profile':INHERITED_PROFILE,'role':net['role'],'definition_role':dts['definition'][0]['role'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'drs_proof_sha256':digest(drs),'definition_sha256':digest(dts['definition']),'source_filing':copy.deepcopy(source),'global_default_dimensions':defaults,'default_provenance':default_sources,'definition_documents':[{'uri':u,'sha256':docmap[u]}for u in sorted({a['source_uri']for a in dts['definition'][0]['arcs']})],'fact_provenance':lineage,'bindings':[],'selected_reported_value':None,'limitations':['Positive inherited/conjunctive explicit DRS V3 only;no typed,negative,opaque,forever,cross-role or mixed context placement','Global defaults are derived calculation aspects only;original source contexts and facts are unchanged','Not complete OIM/XDT/Calc1.1 conformance,independent source authentication or accounting equivalence']}
  if numeric_profile==BOUNDS_PROFILE:

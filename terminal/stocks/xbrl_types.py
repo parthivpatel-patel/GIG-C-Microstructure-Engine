@@ -77,6 +77,7 @@ def declaration(node):
 def _resolve(name,definitions,profile):
  path=[];seen=set();current=name
  while True:
+  if type(current)is not str or not QN.fullmatch(current):raise XBRLError('dts_selected_type_unsupported')
   if current in seen:raise XBRLError('dts_type_cycle')
   if len(path)>=8:raise XBRLError('dts_type_depth')
   seen.add(current)
