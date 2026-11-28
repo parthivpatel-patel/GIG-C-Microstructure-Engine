@@ -330,6 +330,7 @@ class LiveIEX:
         retention=self.retention_current()
         durable=self.store.cached if retention else {'enabled':False,'reason':'retention_permission_changed' if self.store else self.store_reason}
         allowed=(ready['ready'] and self.current_observation_scope()) or self.connector is not None
+        ready['retained_observation_scope_current']=allowed
         observations=self.history if allowed else ()
         live_eligible=allowed and (self.connector is not None or self._socket_scope_current(keys))
         rows=[present(e) for e in self.latest.values()]if live_eligible else []

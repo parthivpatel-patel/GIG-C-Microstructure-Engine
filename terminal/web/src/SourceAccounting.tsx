@@ -105,7 +105,7 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
     <label>Exact accounting relationship role (optional)<input value={roles[key]?.accounting_role??''} maxLength={512}
      onChange={e=>update(key,'accounting_role',e.target.value)}/></label>
    </fieldset>)}
-   <button disabled={pending!==null||!Object.values(roles).some(row=>row.presentation_role)}>Analyze statement roles</button>
+   <button disabled={pending!==null||!Object.values(roles).some(row=>row?.presentation_role)}>Analyze statement roles</button>
   </form>
   <button disabled={pending!==null} onClick={()=>void run('inline')}>Analyze original inline source</button>
   {pending&&<SourceImportFeedback kind={pending} busy error=""/>}
