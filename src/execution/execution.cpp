@@ -1,5 +1,7 @@
 #include "gig/execution/execution.hpp"
 #include <algorithm>
+#include <set>
+#include <tuple>
 namespace gig::execution {
 namespace {
 using exact::Wide;using exact::Unsigned;
@@ -88,17 +90,24 @@ Result<CostReport> transaction_costs(CostConfig c,std::span<const CostFill> fill
     if(!benchmark_valid(c.arrival) || !benchmark_valid(c.terminal) || c.terminal.available_at<c.arrival.available_at)return Result<CostReport>::failure(ErrorCode::invalid_range,"cost.benchmark");
     try{
         const Fraction sign(c.side==Side::buy?1:-1);std::uint64_t executed=0;Fraction notional,delay,spread,fees;
-        for(std::size_t i=0;i<fills.size();++i){const auto& row=fills[i];const auto& f=row.fill;
-            if(f.run_id!=c.simulation_run_id || f.seed==0 || (i && f.seed!=fills[0].fill.seed) || f.maker==f.taker || f.maker_command==f.taker_command || (row.child!=f.maker && row.child!=f.taker))return Result<CostReport>::failure(ErrorCode::identity_mismatch,"cost.fill_source",i);
-            const auto side=row.child==f.taker?f.taker_side:(f.taker_side==Side::buy?Side::sell:Side::buy);
-            if((f.taker_side!=Side::buy && f.taker_side!=Side::sell) || side!=c.side || f.quantity.value()==0 || f.quantity>c.rules.maximum_quantity || f.price<c.rules.minimum_price || f.price>c.rules.maximum_price)return Result<CostReport>::failure(ErrorCode::invalid_range,"cost.fill",i);
-            if(!benchmark_valid(row.decision_benchmark))return Result<CostReport>::failure(ErrorCode::invalid_range,"cost.decision_benchmark",i);
-            if(row.decision_benchmark.available_at>row.decision_time || c.arrival.available_at>row.decision_time || row.decision_time>f.matched_at || f.matched_at>f.reported_at || f.reported_at>c.as_of)return Result<CostReport>::failure(ErrorCode::ordering_error,"cost.future_information",i);
-            for(std::size_t j=0;j<i;++j)if(f.maker==fills[j].fill.maker && f.taker==fills[j].fill.taker && f.maker_command==fills[j].fill.maker_command && f.taker_command==fills[j].fill.taker_command)return Result<CostReport>::failure(ErrorCode::duplicate,"cost.fill",i);
-            auto sum=types::detail::add(executed,f.quantity.value());if(!sum || *sum.data>c.target.value())return Result<CostReport>::failure(ErrorCode::overflow,"cost.inventory",i);executed=*sum.data;
-            const auto q=Fraction::whole(f.quantity.value());notional=notional+Fraction(f.price.value())*q;
-            delay=delay+sign*(row.decision_benchmark.midpoint-c.arrival.midpoint)*q;
-            spread=spread+sign*(Fraction(f.price.value())-row.decision_benchmark.midpoint)*q;fees=fees+row.fee_ticks_per_lot*q;
+        {
+            // Bound identity lookup independently of input order. Release the
+            // index before allocating the retained fill rows in the report.
+            using FillKey=std::tuple<std::uint64_t,std::uint64_t,std::size_t,std::size_t>;
+            std::pmr::set<FillKey> accepted(r);
+            for(std::size_t i=0;i<fills.size();++i){const auto& row=fills[i];const auto& f=row.fill;
+                if(f.run_id!=c.simulation_run_id || f.seed==0 || (i && f.seed!=fills[0].fill.seed) || f.maker==f.taker || f.maker_command==f.taker_command || (row.child!=f.maker && row.child!=f.taker))return Result<CostReport>::failure(ErrorCode::identity_mismatch,"cost.fill_source",i);
+                const auto side=row.child==f.taker?f.taker_side:(f.taker_side==Side::buy?Side::sell:Side::buy);
+                if((f.taker_side!=Side::buy && f.taker_side!=Side::sell) || side!=c.side || f.quantity.value()==0 || f.quantity>c.rules.maximum_quantity || f.price<c.rules.minimum_price || f.price>c.rules.maximum_price)return Result<CostReport>::failure(ErrorCode::invalid_range,"cost.fill",i);
+                if(!benchmark_valid(row.decision_benchmark))return Result<CostReport>::failure(ErrorCode::invalid_range,"cost.decision_benchmark",i);
+                if(row.decision_benchmark.available_at>row.decision_time || c.arrival.available_at>row.decision_time || row.decision_time>f.matched_at || f.matched_at>f.reported_at || f.reported_at>c.as_of)return Result<CostReport>::failure(ErrorCode::ordering_error,"cost.future_information",i);
+                const auto key=FillKey{f.maker.value(),f.taker.value(),f.maker_command,f.taker_command};
+                if(!accepted.insert(key).second)return Result<CostReport>::failure(ErrorCode::duplicate,"cost.fill",i);
+                auto sum=types::detail::add(executed,f.quantity.value());if(!sum || *sum.data>c.target.value())return Result<CostReport>::failure(ErrorCode::overflow,"cost.inventory",i);executed=*sum.data;
+                const auto q=Fraction::whole(f.quantity.value());notional=notional+Fraction(f.price.value())*q;
+                delay=delay+sign*(row.decision_benchmark.midpoint-c.arrival.midpoint)*q;
+                spread=spread+sign*(Fraction(f.price.value())-row.decision_benchmark.midpoint)*q;fees=fees+row.fee_ticks_per_lot*q;
+            }
         }
         auto unfilled=c.target.value()-executed;auto slippage=delay+spread;auto opportunity=sign*(c.terminal.midpoint-c.arrival.midpoint)*Fraction::whole(unfilled);auto shortfall=slippage+fees+opportunity;
         auto currency=shortfall*Fraction::ratio(c.rules.tick_size.numerator,c.rules.tick_size.denominator)*Fraction::ratio(c.rules.lot_size.numerator,c.rules.lot_size.denominator);
