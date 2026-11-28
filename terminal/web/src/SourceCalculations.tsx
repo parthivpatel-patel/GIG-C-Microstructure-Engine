@@ -58,14 +58,19 @@ export function SourceCalculations({symbol,cik}:{symbol:string;cik:string|null})
    if(n===serial.current)setBusy(false);
   }
  }
- const report=packet?.report;
  return <section aria-label="Source-bound calculation report" aria-busy={busy}>
   <h4>Source-bound calculation diagnostics</h4>
   <label>Open calculation report<input type="file" accept="application/json,.json" disabled={busy||!cik}
    onChange={e=>{const file=e.target.files?.[0];e.target.value='';if(file)void load(file)}}/></label>
   {busy&&<p role="status">Validating calculation sources and exact intervals…</p>}
   {error&&<p role="alert">{error}</p>}
-  {packet&&<>
+  {packet&&<SourceCalculationView packet={packet}/>}
+ </section>;
+}
+
+export function SourceCalculationView({packet}:{packet:CalculationPacket}){
+ const report=packet.report;
+ return <>
    <p>Acceptance cutoff {packet.as_of} · {packet.rounding_mode} · {packet.status}</p>
    <p>Calculation role {packet.role??'unavailable'} · {packet.reason??'source-bound diagnostic available'}</p>
    {packet.weight_profile&&<p>Original decimal relationship weights are applied as exact fractions.</p>}
@@ -87,6 +92,5 @@ export function SourceCalculations({symbol,cik}:{symbol:string;cik:string|null})
      </tr>)}</tbody>
     </table>
    </div>}
-  </>}
- </section>;
+ </>;
 }

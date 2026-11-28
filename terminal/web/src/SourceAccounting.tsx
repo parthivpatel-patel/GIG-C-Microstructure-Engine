@@ -10,6 +10,10 @@ import {verifyStatementComparison} from './statementComparisonContract';
 import type {StatementComparisonPacket} from './statementComparisonContract';
 import {acceptanceNanoseconds} from './acceptanceContract';
 
+import {SourceCalculationView} from './SourceCalculations';
+import {verifyCalculationPacket} from './xbrlCalculationReport';
+import type {CalculationPacket} from './xbrlCalculationReport';
+
 type Kind='accounting'|'inline';
 type Packet=SourceAccountingPacket|InlineAuditPacket;
 type Slot={packet:Packet|null;busy:boolean;error:string};
@@ -58,14 +62,16 @@ export function SourceAccounting({symbol,cik}:{symbol:string;cik:string|null}){
 const statementKinds=[['balance_sheet','Balance sheet'],['income_statement','Income statement'],['cash_flow_statement','Cash flow statement']] as const;
 type RoleBinding={presentation_role:string;accounting_role:string};
 type KindKey=typeof statementKinds[number][0];
-type RetainedKind=Kind|'comparison';
+type RetainedKind=Kind|'comparison'|'calculation';
 
 export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presentationRoles}:{
  symbol:string;cik:string;asOf:string;form:string;collection:string;presentationRoles:string[];
 }){
  const [roles,setRoles]=useState<Partial<Record<KindKey,RoleBinding>>>({});
- const [packet,setPacket]=useState<Packet|StatementComparisonPacket|null>(null),[pending,setPending]=useState<RetainedKind|null>(null);
+ const [packet,setPacket]=useState<Packet|StatementComparisonPacket|CalculationPacket|null>(null),[pending,setPending]=useState<RetainedKind|null>(null);
  const [previous,setPrevious]=useState('');
+ const [calculationRole,setCalculationRole]=useState('');
+ const [calculationProfile,setCalculationProfile]=useState('exact');
  const [error,setError]=useState('');
  const active=useRef<AbortController|null>(null);
  useEffect(()=>()=>active.current?.abort(),[]);
@@ -88,11 +94,13 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
     throw Error('An earlier acceptance cutoff is required');
    }
    const raw=await requestV2('/sec-filings/analyze',{
-    symbol,as_of:asOf,form,action,collection_sha256:collection,...(action!=='inline'?{roles:bindings}:{}),
+    symbol,as_of:asOf,form,action,collection_sha256:collection,...(action==='accounting'||action==='comparison'?{roles:bindings}:{}),
     ...(action==='comparison'?{previous_as_of:previous}:{}),
+    ...(action==='calculation'?{calculation_role:calculationRole||null,calculation_profile:calculationProfile}:{}),
    },signal);
    const result=await (action==='accounting'?verifySourceAccounting(raw,symbol,cik):
-    action==='inline'?verifyInlineAudit(raw,symbol,cik):verifyStatementComparison(raw,symbol,cik));
+    action==='inline'?verifyInlineAudit(raw,symbol,cik):action==='calculation'?
+      verifyCalculationPacket(raw,symbol,cik):verifyStatementComparison(raw,symbol,cik));
    if(!signal.aborted){
     if(result.collection_sha256!==collection)throw Error('Filing analysis selection changed');
     if(result.schema==='gig.backend.statement_vintage_comparison.v1'){
@@ -128,12 +136,25 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
    onChange={e=>setPrevious(e.target.value)} placeholder="2024-02-10T12:00:00Z"/></label>
   <button disabled={pending!==null||!previous||!Object.values(roles).some(row=>row?.presentation_role)}
    onClick={()=>void run('comparison')}>Compare cutoffs using these exact roles</button>
+  <form onSubmit={e=>{e.preventDefault();void run('calculation')}}>
+   <label>Exact calculation role (optional)<input disabled={pending!==null} value={calculationRole}
+    onChange={e=>setCalculationRole(e.target.value)} maxLength={512}/></label>
+   <label>Calculation profile<select disabled={pending!==null} value={calculationProfile}
+    onChange={e=>setCalculationProfile(e.target.value)}>
+    <option value="exact">Signed-unit relationships</option>
+    <option value="decimal-weights">Original decimal weights</option>
+    <option value="effective-explicit">Effective explicit dimensions without defaults</option>
+   </select></label>
+   <button disabled={pending!==null}>Analyze calculation relationships</button>
+  </form>
   {pending==='comparison'?<p role="status">Comparing installed filing vintages…</p>:
+      pending==='calculation'?<p role="status">Binding exact calculation intervals to the installed source…</p>:
    pending&&<SourceImportFeedback kind={pending} busy error=""/>}
   {error&&<p role="alert">{error}</p>}
   {packet?.schema==='gig.backend.company_source_accounting.v1'&&<SourceAccountingView packet={packet}/>}
   {packet?.schema==='gig.backend.company_inline_source_audit.v1'&&<InlineAuditView packet={packet}/>}
   {packet?.schema==='gig.backend.statement_vintage_comparison.v1'&&<StatementComparisonView packet={packet}/>}
+  {packet&&'rounding_mode' in packet&&<SourceCalculationView packet={packet}/>}
  </details>;
 }
 
