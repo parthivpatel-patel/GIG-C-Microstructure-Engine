@@ -7,6 +7,9 @@ type DirectoryReconciliation={
  previous_snapshot_sha256:string|null;
  status:'FIRST_COMPARABLE_SNAPSHOT'|'SAME_SOURCE_REVISION'|'COMPARED_SOURCE_REVISIONS';
  added:number;no_longer_reported:number;changed:number;unchanged:number;
+ alias_matches?:{count:number;same_security_established:false;examples:{
+  previous_symbol:string;current_symbol:string;exchange:string;shared_aliases:{field:string;alias:string}[];
+ }[]};
  example_symbols:Record<'added'|'no_longer_reported'|'changed',string[]>;
 };
 export type DirectoryStatus={approved:boolean;catalog_count:number;actual_official_count:number;status:string;last_success:string|null;last_error:string|null;reconciliation?:DirectoryReconciliation;sec_ready?:boolean;sec_identity_count?:number;sec_identity_source?:{integrity?:SECIntegrity}|null;sec_reference_status?:string;asset_reference?:{ready:boolean;status:string;accepted_count:number;observed_provider_count:number;source?:{received_at?:string}|null}};
@@ -24,6 +27,19 @@ function validateReconciliation(r:DirectoryReconciliation,catalogCount:number){
  for(const change of ['added','no_longer_reported','changed'] as const){
   const examples=r.example_symbols[change];
   if(!symbols(examples)||examples.length!==Math.min(r[change],20))throw Error('Invalid listing reconciliation examples');
+ }
+ if(r.alias_matches!==undefined){
+  const a=r.alias_matches;
+  if(!a||r.status!=='COMPARED_SOURCE_REVISIONS'||a.same_security_established!==false||
+     !Number.isSafeInteger(a.count)||a.count<0||a.count>Math.min(r.added,r.no_longer_reported)||
+     !Array.isArray(a.examples)||a.examples.length!==Math.min(a.count,20)||
+     a.examples.some(pair=>!pair||!symbols([pair.previous_symbol,pair.current_symbol])||
+      typeof pair.exchange!=='string'||!pair.exchange||pair.exchange.length>64||
+      !Array.isArray(pair.shared_aliases)||!pair.shared_aliases.length||pair.shared_aliases.length>2||
+      pair.shared_aliases.some(item=>!item||!['CQS Symbol','NASDAQ Symbol'].includes(item.field)||
+       typeof item.alias!=='string'||!/^[A-Z][A-Z0-9._+/^-]{0,31}$/.test(item.alias))))throw Error('Invalid listing alias evidence');
+  if(new Set(a.examples.map(p=>p.previous_symbol)).size!==a.examples.length||
+     new Set(a.examples.map(p=>p.current_symbol)).size!==a.examples.length)throw Error('Ambiguous listing alias evidence');
  }
  if(r.status==='FIRST_COMPARABLE_SNAPSHOT'){
   if(r.previous_snapshot_sha256!==null||r.added||r.no_longer_reported||r.changed||r.unchanged)throw Error('Invalid first listing revision');

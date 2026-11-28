@@ -65,6 +65,33 @@ def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
  catalog=MarketCatalog();catalog.rows=rows;catalog.source={'reference':'Nasdaq Trader two-file symbol directory','as_of':None,'authority':'OFFICIAL_DIRECTORY_RESPONSE' if origin=='OBSERVED_OFFICIAL_RESPONSE' else 'AUTHORED_DIRECTORY_FIXTURE','sources':sources,'snapshot_sha256':hashlib.sha256(b''.join(bytes.fromhex(s['sha256'])for s in sources)).hexdigest(),'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':origin,'excluded':excluded,'coverage':'Accepted non-test symbols from both complete files;not delisted history,security subtype inference,SEC identity or feed entitlement'};catalog.index=[];catalog.search_index=SearchIndex(rows)
  return catalog
 
+def _alias_matches(previous,candidate):
+ """Detect shared unique labels without inferring a security rename."""
+ def index(rows):
+  claims={}
+  for symbol,row in rows.items():
+   for field,alias in row.get('aliases',{}).items():
+    if not re.fullmatch(r'[A-Z][A-Z0-9._+/^-]{0,31}',alias):continue
+    key=(row['source_directory'],row['exchange'],field,alias)
+    claims[key]=None if key in claims else symbol
+  return claims
+ before,after=index(previous),index(candidate)
+ matches={}
+ for key,old in before.items():
+  new=after.get(key)
+  if old is None or new is None or old in candidate or new in previous:continue
+  matches.setdefault((old,new),[]).append({'field':key[2],'alias':key[3]})
+ old_targets={};new_sources={}
+ for old,new in matches:
+  old_targets.setdefault(old,set()).add(new)
+  new_sources.setdefault(new,set()).add(old)
+ pairs=sorted((old,new) for old,new in matches if len(old_targets[old])==len(new_sources[new])==1)
+ return {'count':len(pairs),'examples':[
+  {'previous_symbol':old,'current_symbol':new,'exchange':candidate[new]['exchange'],
+   'shared_aliases':sorted(matches[old,new],key=lambda item:(item['field'],item['alias']))}
+  for old,new in pairs[:20]],'same_security_established':False}
+
+
 def reconcile_catalog(previous,candidate):
  source=candidate.source
  base=previous.source
@@ -85,6 +112,8 @@ def reconcile_catalog(previous,candidate):
   receipt[change]+=1
   examples=receipt['example_symbols'].get(change)
   if examples is not None and len(examples)<20:examples.append(symbol)
+ if receipt['status']=='COMPARED_SOURCE_REVISIONS' and receipt['added'] and receipt['no_longer_reported']:
+  receipt['alias_matches']=_alias_matches(previous.rows,candidate.rows)
  return receipt
 
 
@@ -95,11 +124,18 @@ def _build_catalog(files,origin,previous):
 class DirectoryService:
  def __init__(self,workspace,fetcher=None,clock=time.monotonic):
   self.workspace=workspace;self.fetcher=fetcher;self.clock=clock;self.last_attempt=None;self.lock=asyncio.Lock();self.state={'status':'NOT_LOADED','last_error':None,'accepted_count':0,'last_success':None}
- def approved(self):
+ def _permission_reference(self):
   e=self.workspace.environment;ref=e.get('GIG_DIRECTORY_PERMISSION_REFERENCE','')
-  return e.get('GIG_DIRECTORY_USE_APPROVED')=='1' and type(ref) is str and 1<=len(ref)<=256 and not any(ord(c)<32 for c in ref)
+  if e.get('GIG_DIRECTORY_USE_APPROVED')=='1' and type(ref) is str and 1<=len(ref)<=256 and not any(ord(c)<32 or ord(c)==127 for c in ref):
+   return ref
+  return None
+ def approved(self):
+  return self._permission_reference() is not None
  async def refresh(self):
-  if not self.approved():raise ValueError('directory_source_use_not_approved')
+  reference=self._permission_reference()
+  if reference is None:raise ValueError('directory_source_use_not_approved')
+  def require_grant():
+   if self._permission_reference()!=reference:raise ValueError('directory_source_use_not_approved')
   if self.lock.locked():raise ValueError('directory_refresh_busy')
   if self.last_attempt is not None and self.clock()-self.last_attempt<300:raise ValueError('directory_refresh_cooldown')
   async with self.lock:
@@ -107,22 +143,28 @@ class DirectoryService:
    try:
     async with asyncio.timeout(25):
      if self.fetcher:
-      for kind,url in URLS.items():files[kind]=await self.fetcher(url)
+      for kind,url in URLS.items():
+       require_grant()
+       files[kind]=await self.fetcher(url)
      else:
       async with httpx.AsyncClient(timeout=10,follow_redirects=False,trust_env=True) as client:
        for kind,url in URLS.items():
-        async with client.stream('GET',url) as response:
+        require_grant()
+        async with client.stream('GET',url,headers={'Accept-Encoding':'identity'}) as response:
          if response.status_code!=200:raise ValueError('directory_http_status')
-         if response.headers.get('content-length') and int(response.headers['content-length'])>MAX_BYTES:raise ValueError('directory_content_length')
+         if response.headers.get('content-encoding','identity').lower() not in ('identity',''):raise ValueError('directory_content_encoding')
+         length=response.headers.get('content-length')
+         if length is not None and (not re.fullmatch('[0-9]{1,9}',length) or not 0<int(length)<=MAX_BYTES):raise ValueError('directory_content_length')
          raw=bytearray()
-         async for block in response.aiter_bytes(65536):
+         async for block in response.aiter_raw(65536):
           if len(raw)+len(block)>MAX_BYTES:raise ValueError('directory_bytes')
           raw.extend(block)
+         if length is not None and len(raw)!=int(length):raise ValueError('directory_content_length')
          files[kind]=bytes(raw)
      previous=self.workspace.catalog
      catalog,change=await asyncio.to_thread(_build_catalog,files,'HISTORICAL_SYNTHETIC' if self.fetcher else 'OBSERVED_OFFICIAL_RESPONSE',previous)
      if self.workspace.catalog is not previous:raise ValueError('directory_snapshot_superseded')
-     if not self.approved():raise ValueError('directory_source_use_not_approved')
+     require_grant()
      self.workspace.catalog=catalog
      self.state={'status':'ACCEPTED','last_error':None,'accepted_count':len(catalog.rows),'last_success':catalog.source['received_at'],'reconciliation':change}
    except asyncio.CancelledError:raise

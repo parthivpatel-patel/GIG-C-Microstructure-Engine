@@ -17,6 +17,13 @@ export default function UniverseWorkspace({onOpen}:{onOpen:(s:string)=>void}){co
   <p>Current revision <code>{status.reconciliation.snapshot_sha256}</code></p>
   {status.reconciliation.previous_snapshot_sha256&&<p>Previous revision <code>{status.reconciliation.previous_snapshot_sha256}</code></p>}
   {Object.entries(status.reconciliation.example_symbols).map(([change,symbols])=>symbols.length?<p key={change}>{change.replaceAll('_',' ')} · {symbols.join(', ')}</p>:null)}
+  {!!status.reconciliation.alias_matches?.count&&<section aria-label="Shared listing aliases">
+   <h4>Shared aliases across listing revisions</h4>
+   <p>{status.reconciliation.alias_matches.count} unique symbol pairs share an original listing alias. Security continuity remains unresolved.</p>
+   <ul>{status.reconciliation.alias_matches.examples.map(pair=><li key={pair.previous_symbol}>
+    {pair.previous_symbol} → {pair.current_symbol} · {pair.exchange} · {pair.shared_aliases.map(a=>a.field+' '+a.alias).join(', ')}
+   </li>)}</ul>
+  </section>}
   <p>Listing-file absence alone cannot establish a delisting or a ticker change.</p>
  </details>}
  {status?.sec_identity_source?.integrity&&<p className="source-advisory" data-testid="sec-reference-accounting">SEC reference: {status.sec_identity_source.integrity.input_rows} source entries · {status.sec_identity_source.integrity.accepted_rows} usable mappings · {status.sec_identity_source.integrity.excluded_rows} explicitly excluded (unsupported symbol syntax). No alias conversion or exchange-listing completeness inferred.</p>}
