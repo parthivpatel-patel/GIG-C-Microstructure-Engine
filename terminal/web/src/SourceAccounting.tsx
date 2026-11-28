@@ -60,9 +60,13 @@ type Row=Statements[keyof Statements]['periods'][number]['rows'][number];
 
 export function SourceAccountingView({packet}:{packet:SourceAccountingPacket}){
  const a=packet.accounting;
+ const audit=a.accounting_report?.source_audit;
  return <section aria-label="Admitted source-accounting evidence"><h5>Source-accounting evidence · {packet.status}</h5><Confidence/><Cutoff packet={packet}/>
   <p role="status">{packet.reason??'Supported supplied-source accounting views'} · no missing values are filled and no contradictory reported fact is selected.</p>
   {a.source_filing&&<details><summary>Filing and original-source identities</summary><p>{a.source_filing.form} · filed {a.source_filing.filed} · accession {a.source_filing.accession}</p><p>Accepted {a.source_filing.accepted_at??'unavailable'} · received {a.source_filing.received_at??'unavailable'} · origin {a.source_filing.origin}</p><p>Original source SHA-256: <code>{a.source_filing.source_sha256}</code></p><p>Original parsed SHA-256: <code>{a.original_parsed_sha256??'unavailable'}</code></p><p>Admitted parsed SHA-256: <code>{a.admitted_parsed_sha256??'unavailable'}</code></p><p>Original DTS SHA-256: <code>{a.dts_sha256??'unavailable'}</code></p></details>}
+  {audit&&'inline_documents'in audit&&<details><summary>Original inline filing documents</summary>
+   {audit.inline_documents.map(doc=><p key={doc.uri}>{doc.uri} · <code>{doc.source_sha256}</code></p>)}
+  </details>}
   {a.lineage&&<details><summary>Explicit supplied amendment lineage · {a.lineage.status}</summary><p>Each supplied source remains separate. No additive amendment filling or complete-history claim.</p>{a.lineage.sources.map(s=><p key={s.source.accession}>{s.source.accession} · accepted {s.source.accepted_at??'unavailable'} · original <code>{s.source.source_sha256}</code> · admitted parsed <code>{s.parsed_sha256}</code></p>)}</details>}
   {Object.entries(a.statements).map(([kind,statement])=><section key={kind} aria-label={`${kind.replaceAll('_',' ')} source view`}><h6>{kind.replaceAll('_',' ')} · {statement.status}</h6><p>Caller-designated presentation role: {statement.presentation_role??'unavailable'} · accounting relationship role: {statement.accounting_role??'unavailable'}</p>{statement.reason&&<p role="status">{statement.reason}</p>}
    {statement.periods.map((period,index)=><section key={index} aria-label={`${kind.replaceAll('_',' ')} period ${index+1}`}><p><strong>Exact reported period: {period.start??'Instant'} → {period.end}</strong></p>
