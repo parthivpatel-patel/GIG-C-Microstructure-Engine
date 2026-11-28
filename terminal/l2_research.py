@@ -93,7 +93,7 @@ class ResearchWindow:
         quotes=list(self.quotes);anchor=[q for q in quotes if q['time']<=start]
         selected=([q for q in quotes if q['time']>=start] if start==self.started else ([anchor[-1]] if anchor else [])+[q for q in quotes if q['time']>start])
         trades=[t for t in self.trades if t['time']>=start]
-        complete_quotes=self.quote_dropped is None or self.quote_dropped<start
+        complete_quotes=(self.quote_dropped is None or self.quote_dropped<start) and bool(anchor)
         complete_trades=self.trade_dropped is None or self.trade_dropped<start
         elapsed=now-start;latest=quotes[-1] if quotes else None;top=self.top(latest)
         def ofi():

@@ -88,7 +88,12 @@ Result<FlowMetrics> calculate_flow(std::span<const FlowQuote> quotes,std::span<c
         if(config.continuity_complete) {
             summary.trade_intensity=Metric::known(Fraction::ratio(exact::checked_mul(static_cast<Wide>(trade_count),1000000000),config.window.value()));
             summary.quote_intensity=Metric::known(Fraction::ratio(exact::checked_mul(static_cast<Wide>(quote_count),1000000000),config.window.value()));
-            Wide ofi=0;bool valid=config.complete_top_updates;const FlowQuote* previous=nullptr;
+            // A complete interval still needs a fresh two-sided opening quote.
+            // Otherwise zero would be indistinguishable from missing flow context.
+            const auto first=midpoint(quote_at(quotes,start,age));
+            Wide ofi=0;
+            bool valid=config.complete_top_updates && first.has_value();
+            const FlowQuote* previous=nullptr;
             for(const auto& q:quotes) {
                 if(q.timestamp.value()>start) {
                     if(!previous || !midpoint(previous) || !midpoint(&q) || static_cast<Wide>(q.timestamp.value())-previous->timestamp.value()>age)valid=false;
@@ -100,10 +105,8 @@ Result<FlowMetrics> calculate_flow(std::span<const FlowQuote> quotes,std::span<c
                     }
                 }previous=&q;
             }
-            if(previous && end-static_cast<Wide>(previous->timestamp.value())>age)valid=false;
-            if(valid && previous && static_cast<Wide>(previous->timestamp.value())<=start) summary.ofi=Metric::known(Fraction(0));
-            else if(valid && previous)summary.ofi=Metric::known(Fraction::whole(ofi));
-            const auto first=midpoint(quote_at(quotes,start,age)),last=midpoint(quote_at(quotes,end,age));
+            const auto last=midpoint(quote_at(quotes,end,age));
+            if(valid && last)summary.ofi=Metric::known(Fraction::whole(ofi));
             if(first && last && first->numerator()>0 && last->numerator()>0) summary.window_return=safe_metric([&]{return *last/ *first-Fraction(1);});
             else if(first && last)summary.window_return=unavailable(first->numerator()==0?Unavailable::zero_denominator:Unavailable::nonpositive_reference);
             bool valid_sampling=true;Fraction variance;auto previous_mid=first;
