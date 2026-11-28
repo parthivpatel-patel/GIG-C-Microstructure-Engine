@@ -50,15 +50,24 @@ def checkpoint_version(plans):
  if any(type(p)is dict and 'history_key'in p for p in plans.values()):return 'gig.sec.filing_ingestion.checkpoint.v2'
  return 'gig.sec.filing_ingestion.checkpoint.v1'
 
+def taxonomy_allowlist(urls):
+ if type(urls) not in (tuple,list) or len(urls)>32:raise IngestError('sec_ingest_taxonomy_allowlist')
+ for url in urls:
+  if type(url)is not str or not 1<=len(url)<=512 or any(ord(c)<=32 or ord(c)==127 for c in url):
+   raise IngestError('sec_ingest_taxonomy_allowlist')
+  u=urlsplit(url)
+  if u.scheme!='https'or u.netloc not in('www.xbrl.org','xbrl.fasb.org','xbrl.sec.gov')or u.query or u.fragment or '%'in u.path or '..'in u.path or '\\'in url:
+   raise IngestError('sec_ingest_taxonomy_allowlist')
+ return frozenset(urls)
+
+
 class FilingIngestor:
  def __init__(self,cik,*,transport=None,permission=None,enabled=False,origin='HISTORICAL_SYNTHETIC',allow_observed=False,permission_reference=None,taxonomy_urls=(),clock=time.monotonic,receipt_clock=clock_utc,sleep=asyncio.sleep,random_source=random.random,rate_owner=None):
   self.collection=FilingCollection(cik,origin=origin,allow_observed=allow_observed)
-  if type(enabled)is not bool or type(taxonomy_urls)not in(tuple,list)or len(taxonomy_urls)>32:raise IngestError('sec_ingest_configuration')
+  if type(enabled)is not bool:raise IngestError('sec_ingest_configuration')
   if origin=='OBSERVED_OFFICIAL_RESPONSE'and(type(permission_reference)is not str or not 1<=len(permission_reference)<=256):raise IngestError('sec_ingest_processing_permission')
-  self.cik=cik;self.transport=transport;self.permission=permission;self.enabled=enabled;self.origin=origin;self.allow_observed=allow_observed;self.reference=permission_reference;self.taxonomy_urls=frozenset(taxonomy_urls)
-  for url in self.taxonomy_urls:
-   u=urlsplit(url)
-   if u.scheme!='https'or u.netloc not in('www.xbrl.org','xbrl.fasb.org','xbrl.sec.gov')or u.query or u.fragment or '%'in u.path or '..'in u.path:raise IngestError('sec_ingest_taxonomy_allowlist')
+  self.cik=cik;self.transport=transport;self.permission=permission;self.enabled=enabled;self.origin=origin;self.allow_observed=allow_observed;self.reference=permission_reference
+  self.taxonomy_urls=taxonomy_allowlist(taxonomy_urls)
   self.clock=clock;self.receipt_clock=receipt_clock;self.sleep=sleep;self.random=random_source;self.last_request=-1e20;self.sources={};self.plans={};self.cache={};self.lock=rate_owner.lock if rate_owner is not None else asyncio.Lock();self.rate_owner=rate_owner;self.state='IDLE';self.last_error=None;self.last_http_status=None;self.metrics={'attempts':0,'received_bytes':0,'cache_hits':0,'committed_filings':0,'failed_transactions':0}
  def status(self):
   return {'schema':'gig.sec.filing_ingestion.status.v1','state':self.state,'issuer_cik':self.cik,'enabled':self.enabled,'live_stream_connected':False,'retained_filings':len(self.plans),'source_records':len(self.sources),'last_error':self.last_error,'http_status':self.last_http_status,'metrics':{k:str(v)for k,v in self.metrics.items()},'counter_scope':'This coordinator process lifetime,not complete provider-source accounting'}

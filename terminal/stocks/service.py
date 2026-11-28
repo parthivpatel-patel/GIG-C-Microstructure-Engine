@@ -55,15 +55,26 @@ class StockWorkspace:
         self.permission('sec')
         return reference
 
+    def _sec_filing_taxonomy(self):
+        from .sec_filing_ingest import taxonomy_allowlist
+        configured=self.environment.get('GIG_SEC_XBRL_TAXONOMY_URLS','')
+        if type(configured) is not str or len(configured)>16384:
+            raise AccessError('sec_xbrl_taxonomy_allowlist')
+        try:
+            return taxonomy_allowlist(tuple(value.strip() for value in configured.split(',')) if configured else ())
+        except ValueError:
+            raise AccessError('sec_xbrl_taxonomy_allowlist')from None
+
     def sec_filing_readiness(self,symbol):
         issuer=self.resolve(symbol)
         try:
             if self.origin!='OBSERVED_OFFICIAL_RESPONSE' or not issuer.get('cik'):
                 raise AccessError('sec_issuer_identity_unavailable')
             reference=self._sec_filing_permission()
+            taxonomy=self._sec_filing_taxonomy()
             incumbent=self.filing_ingestors.get(symbol)
-            if incumbent is not None and incumbent.reference!=reference:
-                raise AccessError('sec_xbrl_processing_reference_changed')
+            if incumbent is not None and (incumbent.reference!=reference or incumbent.taxonomy_urls!=taxonomy):
+                raise AccessError('sec_xbrl_processing_scope_changed')
         except AccessError as exc:
             return {'schema':'gig.sec.filing_acquisition.readiness.v1','ready':False,
                     'symbol':symbol,'cik':issuer.get('cik'),'reason':str(exc)}
@@ -80,16 +91,13 @@ class StockWorkspace:
                 raise AccessError('sec_xbrl_coordinator_scope_changed')
             return known
         reference=self._sec_filing_permission()
-        configured=self.environment.get('GIG_SEC_XBRL_TAXONOMY_URLS','')
-        if type(configured) is not str or len(configured)>16384:
-            raise AccessError('sec_xbrl_taxonomy_allowlist')
-        urls=tuple(value.strip() for value in configured.split(',')) if configured else ()
+        urls=self._sec_filing_taxonomy()
         def permission():
-            if self._sec_filing_permission()!=reference:
-                raise AccessError('sec_xbrl_processing_reference_changed')
+            if self._sec_filing_permission()!=reference or self._sec_filing_taxonomy()!=urls:
+                raise AccessError('sec_xbrl_processing_scope_changed')
             return self.permission('sec')
         coordinator=self.create_sec_filing_ingestor(symbol,transport=SECReadWire(),enabled=True,
-            allow_observed=True,permission_reference=reference,taxonomy_urls=urls)
+            allow_observed=True,permission_reference=reference,taxonomy_urls=sorted(urls))
         coordinator.permission=permission
         self._managed_sec_filings[symbol]=coordinator
         return coordinator
@@ -98,7 +106,8 @@ class StockWorkspace:
         coordinator=self.filing_ingestors.get(symbol)
         if coordinator is not None and self._managed_sec_filings.get(symbol) is coordinator:
             try:
-                if self._sec_filing_permission()!=coordinator.reference:return None
+                if (self._sec_filing_permission()!=coordinator.reference
+                        or self._sec_filing_taxonomy()!=coordinator.taxonomy_urls):return None
             except AccessError:return None
         return coordinator
 
