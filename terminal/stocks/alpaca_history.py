@@ -1,5 +1,6 @@
 """Bounded IEX historical reads, without enabling disk retention or a trading client."""
 import asyncio
+import copy
 import datetime
 import hashlib
 import json
@@ -59,7 +60,10 @@ def metadata(row):
         result[key] = value
     if 'c' in row:
         value = row['c']
-        if value is not None and (type(value) is not list or len(value) > 32 or any(type(v) is not str or not 1 <= len(v) <= 16 or any(not 32 < ord(c) < 127 for c in v) for v in value)):
+        # Alpaca trade conditions may contain the printable blank code.
+        if value is not None and (type(value) is not list or len(value) > 32 or any(
+                type(v) is not str or not 1 <= len(v) <= 16 or any(not 32 <= ord(c) < 127 for c in v)
+                for v in value)):
             raise ValueError('market_history_conditions')
         result['conditions'] = value
     return result
@@ -89,7 +93,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
     headers = workspace.permission('alpaca')
     cached = workspace.market_history_cache.get(key)
     if cached and 0 <= workspace.clock()-cached[0] < 60:
-        return {**cached[1], 'cache_status':'ACCEPTED_REFERENCE_REUSED'}
+        return {**copy.deepcopy(cached[1]), 'cache_status':'ACCEPTED_REFERENCE_REUSED'}
     lower = start+'T00:00:00Z'
     upper = str(datetime.date.fromisoformat(end)+datetime.timedelta(days=1))+'T00:00:00Z'
     lo, hi = int(timestamp_ns(lower)), int(timestamp_ns(upper))
@@ -108,7 +112,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
         # A prior queued request may have published this exact interval.
         cached = workspace.market_history_cache.get(key)
         if cached and 0 <= workspace.clock()-cached[0] < 60:
-            return {**cached[1], 'cache_status':'ACCEPTED_REFERENCE_REUSED'}
+            return {**copy.deepcopy(cached[1]), 'cache_status':'ACCEPTED_REFERENCE_REUSED'}
         for page in range(max_pages):
             await asyncio.sleep(max(0,1.01-(workspace.clock()-workspace.last_request)))
             specific_permission()
@@ -163,7 +167,7 @@ async def acquire(workspace, symbol, kind, start, end, timeframe='1Day', max_pag
             'retention':'At most16 bounded queries in process memory;no disk storage enabled',
             'limitations':['No authoritative holiday/halt/session completeness','Quotes/trades are unreconciled source observations,not a corrected tape','Current provider symbol mapping does not prove historical security identity','Provider timestamps preserved;no clock-latency qualification']}
         accepted = workspace.clock()
-        workspace.market_history_cache[key] = (accepted,result)
+        workspace.market_history_cache[key] = (accepted,copy.deepcopy(result))
         workspace.market_history_cache.move_to_end(key)
         while len(workspace.market_history_cache) > 16:
             workspace.market_history_cache.popitem(last=False)
