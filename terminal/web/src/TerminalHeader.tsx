@@ -14,11 +14,19 @@ export function TerminalHeader(p:Props){
  useEffect(()=>{const keyboard=(e:KeyboardEvent)=>{const editing=e.target instanceof HTMLElement&&(e.target.isContentEditable||!!e.target.closest('input,textarea,select'));if(e.isComposing)return;if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'||e.key==='/'&&!editing&&!e.ctrlKey&&!e.metaKey&&!e.altKey){e.preventDefault();input.current?.focus()}};document.addEventListener('keydown',keyboard);return()=>document.removeEventListener('keydown',keyboard)},[]);
  return <header className="topbar gig-topbar">
   <div className="workspace-location"><button className="atlas-navigation-toggle" aria-label="Toggle workspace navigation" aria-controls="atlas-sections" aria-expanded={!p.collapsed} onClick={p.onCollapse}><svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="3" width="16" height="14" rx="2"/><path d="M7 3v14"/></svg><span>{p.collapsed?'Show navigation':'Compact navigation'}</span></button><span className="breadcrumb">GIG <span>/</span> <b>{p.section}</b></span></div>
-  <form className="atlas-global-search" role="search" aria-label="Global security search" onSubmit={e=>{e.preventDefault();clearActive();p.onSearch()}}>
+  <form className="atlas-global-search" role="search" aria-label="Global security search" onBlur={e=>{
+   if(!(e.relatedTarget instanceof Node)||!e.currentTarget.contains(e.relatedTarget)){
+    clearActive();p.onQuery(p.query);
+   }
+  }} onSubmit={e=>{e.preventDefault();clearActive();p.onSearch()}}>
    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
    <input ref={input} type="search" role="combobox" aria-label="Global company search" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded={p.results.length>0} aria-controls={p.results.length?resultId:undefined} aria-activedescendant={activeId} aria-describedby={instructionsId} placeholder="Search companies & securities" autoComplete="off" maxLength={80} value={p.query} onKeyDown={e=>{
     const action=searchKeyboard({key:e.key,altKey:e.altKey,ctrlKey:e.ctrlKey,metaKey:e.metaKey,shiftKey:e.shiftKey,isComposing:e.nativeEvent.isComposing},p.results.length,activeIndex);
-    if(action.kind==='none')return;e.preventDefault();
+    if(action.kind==='none'){
+     if(e.key==='Escape'&&!e.nativeEvent.isComposing){clearActive();p.onQuery(p.query)}
+     return;
+    }
+    e.preventDefault();
     if(action.kind==='move')setActive({signature,index:action.index});
     else if(action.kind==='select')select(action.index);
     else {clearActive();p.onQuery(p.query)}

@@ -292,7 +292,8 @@ class FeedSupervisor:
                 finally:
                     # Invalidate before fallible/awaiting close; no trusted publication window.
                     if epoch==self.epoch:
-                        self.state,self.reason='RESYNCING','stream_ended_snapshot_required'
+                        if self.reason!='provider_permission_changed':
+                            self.state,self.reason='RESYNCING','stream_ended_snapshot_required'
                         if self.coordinator:self.coordinator.disconnected()
                         self.capture_token=None
                         if self.capture is not None:await self.capture.abort('source_interrupted')

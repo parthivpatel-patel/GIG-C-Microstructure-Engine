@@ -67,7 +67,14 @@ export default function App() {
         setSearchResults([]);setSearchMessage('');
         return request<{results:{symbol:string;company_name:string}[]}>('/stocks/search?q='+encodeURIComponent(query));
     },value=>{setSearchResults(value.results);setSearchMessage(value.results.length?'':'No matches in the configured market directory.')},failure=>setError(failure instanceof Error?failure.message:'Company search unavailable.'));
-    const openCompany = (s: string) => { searchLifetime.invalidate();setSearchResults([]);setSearchMessage('');setStockSymbol(s); setStockSelectionRevision(v => v + 1); setSection('Stock Intelligence'); };
+    const heading=useRef<HTMLHeadingElement>(null);
+    const focusCompanyHeading=useRef(false);
+    useEffect(()=>{
+        if(!focusCompanyHeading.current)return;
+        focusCompanyHeading.current=false;
+        if(section==='Stock Intelligence')heading.current?.focus();
+    },[section,stockSelectionRevision]);
+    const openCompany = (s: string) => { focusCompanyHeading.current=true; searchLifetime.invalidate();setSearchResults([]);setSearchMessage('');setStockSymbol(s); setStockSelectionRevision(v => v + 1); setSection('Stock Intelligence'); };
     const help = useRef<HTMLDialogElement>(null);
     useEffect(() => { document.documentElement.dataset.theme = theme; try {
         localStorage.setItem('gig.atlas.theme', theme);
@@ -192,7 +199,7 @@ export default function App() {
   <Navigation selected={section} onSelect={setSection}/>
   <main id="workspace-main" tabIndex={-1}>
    <TerminalHeader section={section} collapsed={navCollapsed} onCollapse={() => setNavCollapsed(v => !v)} theme={theme} onTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} onHelp={() => help.current?.showModal()} transport={transport} query={globalQuery} message={searchMessage} results={searchResults} onQuery={changeSearchQuery} onSelect={symbol => runSearchSelection(searchLifetime,searchContext,symbol,openCompany)} onSearch={searchCompanies}/>
-   <div className="page-content"><WorkspaceHeading section={section} onNavigate={setSection}>{equityWorkspace || section === 'Command Center' ? <span className="private-badge">EQUITY RESEARCH · OBSERVATION-ONLY</span> : <label className="mode-selector">OPERATING MODE<select aria-label="Operating mode" value={state?.mode || 'HISTORICAL_REPLAY'} onChange={e => void control('mode', e.target.value)} disabled={busy || !state || equityWorkspace}>{Object.entries(modeNames).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>}</WorkspaceHeading>
+   <div className="page-content"><WorkspaceHeading section={section} onNavigate={setSection} headingRef={heading}>{equityWorkspace || section === 'Command Center' ? <span className="private-badge">EQUITY RESEARCH · OBSERVATION-ONLY</span> : <label className="mode-selector">OPERATING MODE<select aria-label="Operating mode" value={state?.mode || 'HISTORICAL_REPLAY'} onChange={e => void control('mode', e.target.value)} disabled={busy || !state || equityWorkspace}>{Object.entries(modeNames).map(([key, value]) => <option key={key} value={key}>{value}</option>)}</select></label>}</WorkspaceHeading>
    {!equityWorkspace && section !== 'Command Center' && <div className="source-strip"><div className="instrument"><span className="instrument-icon">{live ? '₿' : 'Σ'}</span><div><b>{state?.instrument || 'Awaiting engine'}</b><span>{state?.provider || 'UNAVAILABLE'} / {state?.venue || 'declared source scope'}</span></div></div><div className="source-mode"><span className={'origin ' + (live ? 'live-origin' : 'synthetic-origin')} data-testid="origin-label">{state?.origin || 'UNAVAILABLE'}</span><span className="muted">{bookTitle}</span></div><div className="feed-status"><Status value={state?.feed.state || 'DISCONNECTED'}/><span className="muted">{state?.feed.reason || 'Waiting for backend state'}</span></div></div>}
    {bootstrapErrors.length > 0 && <aside className="notice" role="alert" aria-label="Startup source diagnostics"><strong>Source metadata unavailable</strong>{bootstrapErrors.map(message => <p key={message}>{message}</p>)}<button onClick={() => setBootstrapErrors([])}>Dismiss startup diagnostics</button></aside>}
    {error && <div className="error-banner" role="alert"><b>Data boundary</b><span>{error}</span><button onClick={() => setError('')} aria-label="Dismiss error">×</button></div>}
