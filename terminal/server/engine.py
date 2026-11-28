@@ -3,6 +3,7 @@ from collections import deque
 from copy import deepcopy
 import hashlib
 import json
+import re
 import time
 
 import gig_microstructure as gig
@@ -22,6 +23,27 @@ def exact_quantity(value):
     if not 1 <= int(value) <= 1_000_000:
         raise ControlError('INVALID_QUANTITY', 'quantity exceeds simulation budget')
     return value
+
+
+def _simulation_volumes(profile,algorithm,slices):
+    if type(profile) is not dict or algorithm not in ('VWAP','POV'):
+        raise ControlError('INVALID_VOLUME_PROFILE','an explicit volume profile requires VWAP or POV')
+    key='weights' if algorithm=='VWAP' else 'lots_per_slice'
+    fields={key} if algorithm=='VWAP' else {key,'numerator','denominator'}
+    if set(profile)!=fields or type(profile[key]) is not list or len(profile[key])!=slices:
+        raise ControlError('INVALID_VOLUME_PROFILE','one bounded volume value per requested slice is required')
+    def volume(value):
+        if type(value) is not str or not re.fullmatch(r'0|[1-9][0-9]{0,18}',value):
+            raise ControlError('INVALID_VOLUME_PROFILE','volume parameters must be exact canonical decimal integers')
+        return int(value)
+    amounts=[volume(value) for value in profile[key]]
+    if not any(amounts) or sum(amounts)>2**64-1:
+        raise ControlError('INVALID_VOLUME_PROFILE','positive aggregate volume within the native bound is required')
+    if algorithm=='POV':
+        numerator,denominator=volume(profile['numerator']),volume(profile['denominator'])
+        if not 0<numerator<=denominator:
+            raise ControlError('INVALID_VOLUME_PROFILE','POV participation must be greater than zero and at most one')
+    return {name:profile[name] for name in fields}
 
 
 def authored_quote_flow(position):
@@ -322,7 +344,7 @@ class NativeSession:
         result['research_metrics']={'concentration':calculate(result)}
         return result
 
-    def simulation(self, algorithm, quantity='100', slices=5, side='buy', available_liquidity=None):
+    def simulation(self, algorithm, quantity='100', slices=5, side='buy', available_liquidity=None, volume_profile=None):
         if self.mode != 'SIMULATION':
             raise ControlError('MODE_RESTRICTION', 'simulation requires Simulation mode')
         if algorithm not in ('TWAP', 'VWAP', 'POV'):
@@ -340,6 +362,7 @@ class NativeSession:
                 raise ControlError('INVALID_SIMULATION_LIQUIDITY', 'available liquidity must not exceed target quantity')
         else:
             available_liquidity = quantity
+        custom_volume=_simulation_volumes(volume_profile,algorithm,slices) if volume_profile is not None else None
         config = plan_config(quantity, slices)
         is_sell = side == 'sell'
         if is_sell:
@@ -347,12 +370,18 @@ class NativeSession:
         if algorithm == 'TWAP':
             schedule = gig.twap(config)
         elif algorithm == 'VWAP':
-            schedule = gig.vwap(config, [str(i + 1) for i in range(slices)], 'authored-volume-profile-v1', '0')
+            weights=custom_volume['weights'] if custom_volume is not None else [str(i + 1) for i in range(slices)]
+            profile_id='terminal-user-authored-vwap-v1' if custom_volume is not None else 'authored-volume-profile-v1'
+            schedule = gig.vwap(config,weights,profile_id,'0')
         else:
             # These are authored causal volume observations, not observed market volume.
-            observations = [{'available_at': str(i * 1_000_000_000 // slices), 'lots': str(int(quantity) * 10),
-                             'source_artifact': 'authored-volume-v1', 'ordinal': str(i + 1)} for i in range(slices)]
-            schedule = gig.pov(config, observations, '1', '10')
+            amounts=custom_volume['lots_per_slice'] if custom_volume is not None else [str(int(quantity)*10)]*slices
+            profile_id='terminal-user-authored-pov-v1' if custom_volume is not None else 'authored-volume-v1'
+            observations=[{'available_at':str(i*1_000_000_000//slices),'lots':lots,
+                           'source_artifact':profile_id,'ordinal':str(i+1)}
+                          for i,lots in enumerate(amounts) if custom_volume is None or lots!='0']
+            participation=(custom_volume['numerator'],custom_volume['denominator']) if custom_volume is not None else ('1','10')
+            schedule=gig.pov(config,observations,*participation)
         liquidity = [{'id': '1', 'side': '0' if is_sell else '1',
                       'limit': '9899' if is_sell else '9903', 'quantity': available_liquidity,
                       'tif': '0', 'post_only': False}] if available_liquidity != '0' else []
@@ -385,6 +414,8 @@ class NativeSession:
                 available_liquidity_lots=available_liquidity,
                 terminal_midpoint_ticks=str(terminal_price),
                 assumptions='Authored available lots and adverse terminal mark; zero fees; execution-report delay 5 logical ns.')
+        if custom_volume is not None:
+            result['provenance']['authored_volume_profile']=custom_volume
         canonical = json.dumps(result, sort_keys=True, separators=(',', ':'))
         result['sha256'] = hashlib.sha256(canonical.encode()).hexdigest()
         self.last_simulation = result

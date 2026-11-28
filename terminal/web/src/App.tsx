@@ -168,6 +168,9 @@ export default function App() {
     finally {
         setBusy(false);
     } };
+    const [simulationVolumes,setSimulationVolumes]=useState('');
+    const [participationNumerator,setParticipationNumerator]=useState('1');
+    const [participationDenominator,setParticipationDenominator]=useState('10');
     const runSimulation = async () => { if (!/^[1-9][0-9]{0,6}$/.test(quantity) || Number(quantity) > 1_000_000) {
         setError('Quantity must be between 1 and 1,000,000 whole lots.');
         return;
@@ -176,9 +179,23 @@ export default function App() {
         setError('Available simulated liquidity must be a whole lot count between zero and the target quantity.');
         return;
     }
+    const configured=algorithm!=='TWAP'&&simulationVolumes.trim()!=='';
+    const values=configured?simulationVolumes.split(',').map(value=>value.trim()):[];
+    const integer=(value:string)=>/^(0|[1-9][0-9]{0,18})$/.test(value);
+    if(configured&&(values.length!==slices||values.some(value=>!integer(value))||values.every(value=>value==='0'))){
+        setError('Supply one exact nonnegative volume per slice with at least one positive value.');
+        return;
+    }
+    if(configured&&algorithm==='POV'&&(!integer(participationNumerator)||!integer(participationDenominator)||
+        participationNumerator==='0'||BigInt(participationNumerator)>BigInt(participationDenominator))){
+        setError('Participation must be an exact positive fraction no greater than one.');
+        return;
+    }
+    const volume_profile=!configured?undefined:algorithm==='VWAP'?{weights:values}:
+        {lots_per_slice:values,numerator:participationNumerator,denominator:participationDenominator};
     setBusy(true); setError(''); try {
         setSimulation(await request('/simulate', { algorithm, quantity, slices, side:simulationSide,
-            ...(simulationLiquidity ? {available_liquidity:simulationLiquidity} : {}) }));
+            ...(simulationLiquidity ? {available_liquidity:simulationLiquidity} : {}), ...(volume_profile?{volume_profile}:{}) }));
         accept(await getState());
     }
     catch (e) {
@@ -237,7 +254,14 @@ export default function App() {
    {(section === 'Order Flow' || section === 'Historical Replay') && <ItchExecutions state={state}/>}
    {(section === 'Order Flow' || section === 'Historical Replay') && <ResearchPanel state={state}/>}
    {section === 'Order Flow' && <div className="flow-workbench"><EventTape history={history}/><Panel title="Available flow observations" eyebrow="CAPABILITY-AWARE ANALYTICS"><p className="panel-note">This tape shows received source positions and displayed state. A change in aggregate depth alone does not identify an execution or cancellation. Signed trade flow is unavailable unless a validated trade source supplies it.</p>{state.mode==='HISTORICAL_REPLAY'&&state.provenance.dataset==='terminal-authored-v2'&&typeof state.provenance.fixture_sha256==='string'&&<NativeQuoteFlow position={state.position} fixture={state.provenance.fixture_sha256}/>}<JsonView value={state.last_event ?? state.flow ?? { status: 'UNAVAILABLE', reason: 'No normalized trade/event payload supplied in current snapshot' }} label="Inspect available native event metadata"/><JsonView value={state.capabilities || {}} label="Source capabilities"/></Panel></div>}
-   {section === 'Execution Simulator' && executionView==='Native simulator' && <div className="simulation-workbench"><Panel title="Execution laboratory" eyebrow="NATIVE OFFLINE SIMULATION"><div className="simulation-label">SIMULATED · NO EXTERNAL ORDERS</div><form onSubmit={e => { e.preventDefault(); void runSimulation(); }} className="simulation-form"><label>Execution algorithm<select aria-label="Execution algorithm" value={algorithm} onChange={e => setAlgorithm(e.target.value)}><option>TWAP</option><option>VWAP</option><option>POV</option></select></label><label>Simulated order side<select value={simulationSide} onChange={e=>setSimulationSide(e.target.value)}><option value="buy">Buy</option><option value="sell">Sell</option></select></label><label>Quantity (whole lots)<input aria-label="Simulation quantity" value={quantity} onChange={e => setQuantity(e.target.value)} inputMode="numeric" maxLength={7}/></label><label>Available lots (optional)<input value={simulationLiquidity} onChange={e=>setSimulationLiquidity(e.target.value)} inputMode="numeric" maxLength={7}/></label><label>Requested slices<input aria-label="Simulation slices" type="number" value={slices} min={1} max={16} onChange={e => setSlices(Number(e.target.value))}/></label><button className="primary-button" disabled={busy} type="submit">{busy ? 'Running native simulation…' : 'Run simulation'}</button></form><p className="panel-note">Schedules, matching, fills and costs are calculated by the native engine. VWAP/POV use declared authored volume profiles; they are not observed market forecasts.</p></Panel><Panel title="Native result" eyebrow="SIMULATION OUTPUT">{simulation ? <><div className="simulation-result" data-testid="simulation-result"><p className="bid-text">Native simulation response received</p><SimulationSummary value={simulation}/><JsonView value={simulation} label="Exact native simulation,costs and provenance"/></div><button onClick={() => download(simulation, 'gig-simulated-research.json')}>Export simulated report ↓</button></> : <div className="empty-state">Configure an authored scenario and run the native simulator.</div>}</Panel></div>}
+   {section === 'Execution Simulator' && executionView==='Native simulator' && <div className="simulation-workbench"><Panel title="Execution laboratory" eyebrow="NATIVE OFFLINE SIMULATION"><div className="simulation-label">SIMULATED · NO EXTERNAL ORDERS</div><form onSubmit={e => { e.preventDefault(); void runSimulation(); }} className="simulation-form"><label>Execution algorithm<select aria-label="Execution algorithm" value={algorithm} onChange={e => setAlgorithm(e.target.value)}><option>TWAP</option><option>VWAP</option><option>POV</option></select></label><label>Simulated order side<select value={simulationSide} onChange={e=>setSimulationSide(e.target.value)}><option value="buy">Buy</option><option value="sell">Sell</option></select></label><label>Quantity (whole lots)<input aria-label="Simulation quantity" value={quantity} onChange={e => setQuantity(e.target.value)} inputMode="numeric" maxLength={7}/></label><label>Available lots (optional)<input value={simulationLiquidity} onChange={e=>setSimulationLiquidity(e.target.value)} inputMode="numeric" maxLength={7}/></label><label>Requested slices<input aria-label="Simulation slices" type="number" value={slices} min={1} max={16} onChange={e => setSlices(Number(e.target.value))}/></label> {algorithm!=='TWAP'&&<label>{algorithm==='VWAP'?'Authored weights by slice':'Authored observed lots by slice'} (optional)
+   <input value={simulationVolumes} onChange={e=>setSimulationVolumes(e.target.value)} maxLength={320} placeholder="1, 2, 3, 4, 5"/>
+  </label>}
+  {algorithm==='POV'&&simulationVolumes.trim()!==''&&<>
+   <label>Participation numerator<input value={participationNumerator} onChange={e=>setParticipationNumerator(e.target.value)} inputMode="numeric" maxLength={19}/></label>
+   <label>Participation denominator<input value={participationDenominator} onChange={e=>setParticipationDenominator(e.target.value)} inputMode="numeric" maxLength={19}/></label>
+  </>}
+ <button className="primary-button" disabled={busy} type="submit">{busy ? 'Running native simulation…' : 'Run simulation'}</button></form><p className="panel-note">Schedules, matching, fills and costs are calculated by the native engine. VWAP/POV use declared authored volume profiles; they are not observed market forecasts.</p></Panel><Panel title="Native result" eyebrow="SIMULATION OUTPUT">{simulation ? <><div className="simulation-result" data-testid="simulation-result"><p className="bid-text">Native simulation response received</p><SimulationSummary value={simulation}/><JsonView value={simulation} label="Exact native simulation,costs and provenance"/></div><button onClick={() => download(simulation, 'gig-simulated-research.json')}>Export simulated report ↓</button></> : <div className="empty-state">Configure an authored scenario and run the native simulator.</div>}</Panel></div>}
    {(['Market Depth', 'Historical Replay', 'Order Flow'].includes(section)||section==='Research & Validation'&&researchView==='3D laboratory') && <OptionalBoundary><Suspense fallback={<p role="status">Loading research laboratory…</p>}><ResearchLab history={history} sourceStatus={visualPaused ? 'PARENT_DISPLAY_PAUSED' : transport === 'CONNECTED' ? state?.feed.state : transport}/></Suspense></OptionalBoundary>}
    {section === 'Execution Simulator' && executionView==='Offline paper sandbox' && <OptionalBoundary><Suspense fallback={<p role="status">Loading offline paper sandbox…</p>}><PaperSandbox /></Suspense></OptionalBoundary>}
    {section === 'Execution Simulator' && executionView==='Disabled paper boundary' && <OptionalBoundary><Suspense fallback={<p role="status">Loading disabled paper-provider boundary…</p>}><PaperProvider /></Suspense></OptionalBoundary>}

@@ -986,12 +986,13 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     @json_endpoint
     async def simulate(request: Request):
         data = await bounded_json(request)
-        if set(data) - {'algorithm', 'quantity', 'slices', 'side', 'available_liquidity'}:
+        if set(data) - {'algorithm', 'quantity', 'slices', 'side', 'available_liquidity', 'volume_profile'}:
             raise ControlError('INVALID_SIMULATION', 'unexpected simulation fields')
         async with lock:
             # Bounded native run; no await while native session is being accessed.
             return native.simulation(data.get('algorithm', 'TWAP'), data.get('quantity', '100'),
-                                     data.get('slices', 5), data.get('side', 'buy'), data.get('available_liquidity'))
+                                     data.get('slices', 5), data.get('side', 'buy'), data.get('available_liquidity'),
+                                     data.get('volume_profile'))
 
     @route('/api/v1/validate', methods=['POST'])
     @json_endpoint
