@@ -6,7 +6,7 @@ type Source=NonNullable<SourceAccountingPacket['source']>;
 type Graph=NonNullable<SourceAccountingPacket['dts']>;
 type RecordValue=Record<string,unknown>;
 type Numeric={fixed:string;coefficient:bigint;scale:number};
-type Facet={kind:string;value:string};
+type Facet={kind:string;value:string;fixed?:boolean};
 function bad():never{throw Error('Invalid original-source accounting relationship checks')}
 function canonical(v:unknown):string{
  if(v===null||typeof v!=='object')return JSON.stringify(v);
@@ -51,30 +51,69 @@ function resolve(type:string|null,g:Graph):Resolved|null{
  }
  bad();
 }
-function checkedNumeric(f:SourceFact,s:Source,resolved:Resolved):Numeric{
- const value=numeric(f.lexical_value),unit=s.units[f.unit_ref!];
- if(resolved.kind==='integer'){
-  if(!/^[+-]?[0-9]+$/.test(f.lexical_value.trim()))bad();
-  const [lo,hi]=resolved.bounds!;if(lo!==null&&value.coefficient<lo||hi!==null&&value.coefficient>hi)bad();
+function baseNumeric(lexical:string,resolved:Resolved):Numeric{
+ const value=numeric(lexical);
+ if(resolved.bounds){
+  if(!/^[+-]?[0-9]+$/.test(lexical.trim()))bad();
+  const [lo,hi]=resolved.bounds;
+  if((lo!==null&&value.coefficient<lo)||(hi!==null&&value.coefficient>hi))bad();
  }
- if(resolved.kind==='monetaryItemType'&&(unit.denominator.length||unit.numerator.length!==1||!/^\{http:\/\/www.xbrl.org\/2003\/iso4217\}[A-Z]{3}$/.test(unit.numerator[0])))bad();
- for(const kind of ['shares','pure'])if(resolved.kind===kind+'ItemType'&&(unit.denominator.length||unit.numerator.length!==1||unit.numerator[0]!==`{${X}}${kind}`))bad();
+ return value;
+}
+function digitLimit(facet:Facet):number{
+ if(!/^[0-9]+$/.test(facet.value)||facet.value.length>4)bad();
+ return Number(facet.value);
+}
+function checkFacets(value:Numeric,facets:Facet[][]):void{
  const unsigned=value.fixed.replace(/^[-+]/,''),[whole,fraction='']=unsigned.split('.'),trimmedFraction=fraction.replace(/0+$/,'');
  const totalDigits=Math.max(1,(whole.replace(/^0+/,'')+trimmedFraction).replace(/^0+/,'').length);
- for(const group of resolved.facets){
+ for(const group of facets){
   const enums=group.filter(v=>v.kind==='enumeration');
   if(enums.length&&!enums.some(v=>compare(value,numeric(v.value))===0n))bad();
   for(const facet of group){
    if(facet.kind==='whiteSpace'||facet.kind==='enumeration')continue;
    if(['totalDigits','fractionDigits'].includes(facet.kind)){
-    if(!/^[0-9]+$/.test(facet.value)||facet.value.length>4)bad();
-    const limit=Number(facet.value);if((facet.kind==='totalDigits'?totalDigits:trimmedFraction.length)>limit)bad();continue;
+    const limit=digitLimit(facet);if((facet.kind==='totalDigits'?totalDigits:trimmedFraction.length)>limit)bad();continue;
    }
    if(!['minInclusive','maxInclusive','minExclusive','maxExclusive'].includes(facet.kind))bad();
    const c=compare(value,numeric(facet.value));
    if(facet.kind==='minInclusive'&&c<0n||facet.kind==='maxInclusive'&&c>0n||facet.kind==='minExclusive'&&c<=0n||facet.kind==='maxExclusive'&&c>=0n)bad();
   }
  }
+}
+function checkRestrictionDefinitions(resolved:Resolved):void{
+ const digits=new Map<string,number>(),fixed=new Map<string,number>();
+ if(resolved.bounds){digits.set('fractionDigits',0);fixed.set('fractionDigits',0);}
+ for(const [index,group] of resolved.facets.entries()){
+  const byKind=new Map(group.map(facet=>[facet.kind,facet]));
+  if((byKind.has('minInclusive')&&byKind.has('minExclusive'))||
+     (byKind.has('maxInclusive')&&byKind.has('maxExclusive')))bad();
+  for(const key of ['totalDigits','fractionDigits']){
+   const facet=byKind.get(key);
+   if(!facet)continue;
+   const limit=digitLimit(facet),parent=digits.get(key);
+   if((fixed.has(key)&&fixed.get(key)!==limit)||(parent!==undefined&&limit>parent))bad();
+   digits.set(key,limit);
+   if(facet.fixed===true)fixed.set(key,limit);
+  }
+  if((digits.get('fractionDigits')??0)>(digits.get('totalDigits')??Infinity))bad();
+  const lower=byKind.get('minInclusive')??byKind.get('minExclusive');
+  const upper=byKind.get('maxInclusive')??byKind.get('maxExclusive');
+  const lo=lower&&baseNumeric(lower.value,resolved),hi=upper&&baseNumeric(upper.value,resolved);
+  if(lo&&hi){
+   const order=compare(lo,hi);
+   if(order>0n||(order===0n&&(lower!.kind==='minExclusive'||upper!.kind==='maxExclusive')))bad();
+  }
+  for(const facet of group)if(facet.kind==='enumeration'){
+   checkFacets(baseNumeric(facet.value,resolved),resolved.facets.slice(0,index));
+  }
+ }
+}
+function checkedNumeric(f:SourceFact,s:Source,resolved:Resolved):Numeric{
+ const value=baseNumeric(f.lexical_value,resolved),unit=s.units[f.unit_ref!];
+ if(resolved.kind==='monetaryItemType'&&(unit.denominator.length||unit.numerator.length!==1||!/^\{http:\/\/www.xbrl.org\/2003\/iso4217\}[A-Z]{3}$/.test(unit.numerator[0])))bad();
+ for(const kind of ['shares','pure'])if(resolved.kind===kind+'ItemType'&&(unit.denominator.length||unit.numerator.length!==1||unit.numerator[0]!==`{${X}}${kind}`))bad();
+ checkFacets(value,resolved.facets);
  return value;
 }
 function member(f:SourceFact,s:Source,g:Graph):{record:RecordValue;reason:string|null;valueKey:string|null;exact:boolean}{
@@ -88,6 +127,7 @@ function member(f:SourceFact,s:Source,g:Graph):{record:RecordValue;reason:string
  const resolved=resolve(decl.type,g);
  if(!resolved)return {record,reason:'ITEM_TYPE_VALUE_SEMANTICS_UNSUPPORTED',valueKey:null,exact:true};
  if(!f.unit_ref||!s.units[f.unit_ref])return {record,reason:'NUMERIC_UNIT_MISSING',valueKey:null,exact:true};
+ checkRestrictionDefinitions(resolved);
  const value=checkedNumeric(f,s,resolved);record.reported_value=value.fixed;record.value_kind='numeric';
  return {record,reason:null,valueKey:`numeric:${value.coefficient}/${value.scale}`,exact:f.decimals==='INF'||f.precision==='INF'};
 }
@@ -119,7 +159,7 @@ function checks(from:string,to:string,kind:string,s:Source,g:Graph):RecordValue[
 export function accountingNumericValue(f:SourceFact,s:Source,g:Graph):string|null{
  const d=g.concepts[f.concept]?.declaration,c=s.contexts[f.context_ref];
  if(!d||!c||d.abstract||d.substitution_group!==`{${X}}item`||c.period.kind!==d.period_type||c.period.end===null||c.dimensions.length||c.opaque_segment.length||!f.unit_ref||!s.units[f.unit_ref]||f.nil&&!d.nillable)bad();
- const resolved=resolve(d.type,g);if(!resolved)bad();return f.nil?null:checkedNumeric(f,s,resolved).fixed;
+ const resolved=resolve(d.type,g);if(!resolved)bad();checkRestrictionDefinitions(resolved);return f.nil?null:checkedNumeric(f,s,resolved).fixed;
 }
 
 /** Called after packet/source/DTS identity validation. No reported equality claim is trusted. */

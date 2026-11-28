@@ -25,6 +25,22 @@ def recipe(*,alias='100',exact=False,extra='',**metadata):
  addition=b'<l:loc xl:type="locator" xl:label="profit" xl:href="extension.xsd#profit"/><l:presentationArc xl:type="arc" xl:arcrole="http://www.xbrl.org/2003/arcrole/parent-child" xl:from="IncomeTotal" xl:to="profit" order="3"/>'
  e['documents'][1]=document('presentation.xml',raw[:end]+addition+raw[end:]);return e
 
+def restricted_statement_recipe(value='30'):
+ e=recipe()
+ schema=e['documents'][2]['raw']
+ marker=b'id="CashFlowTotal" name="CashFlowTotal" type="x:monetaryItemType"'
+ namespace=b'xmlns:money="'+EXT.encode()+b'" '
+ declared=(b'<s:simpleType name="ReportedCashType"><s:restriction base="x:monetaryItemType">'
+           b'<s:enumeration value="30"/><s:enumeration value="40"/>'
+           b'<s:fractionDigits value="0" fixed="true"/>'
+           b'</s:restriction></s:simpleType>')
+ schema=schema.replace(b'<s:schema ',b'<s:schema '+namespace,1)
+ schema=schema.replace(marker,marker.replace(b'x:monetaryItemType',b'money:ReportedCashType'))
+ e['documents'][2]=document('extension.xsd',schema.replace(b'</s:schema>',declared+b'</s:schema>'))
+ e['raw']=e['raw'].replace(b'>30</ext:CashFlowTotal>',b'>'+value.encode()+b'</ext:CashFlowTotal>')
+ e['manifest']['source_sha256']=hashlib.sha256(e['raw']).hexdigest()
+ return e
+
 def prepared(*entries):
  entries=entries or(recipe(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
  originals={e['manifest']['accession']:copy.deepcopy(e)for e in entries};roles={e['manifest']['accession']:{k:{'presentation_role':ROLES[k],'accounting_role':ACCOUNTING}for k in KINDS}for e in entries};return w,originals,roles
@@ -59,6 +75,24 @@ class AccountingStatements(unittest.TestCase):
   self.assertEqual(history['entries'][0]['packet'],packet)
   del inputs[A]['embedded_profile']
   with self.assertRaisesRegex(XBRLError,'admitted_dts_mismatch'):export(w,inputs,roles)
+ def test_statement_values_use_the_same_numeric_restrictions_as_source_relationships(self):
+  for amount,expected in [('30','SUPPORTED'),('31','UNSUPPORTED')]:
+   with self.subTest(amount=amount):
+    w,inputs,roles=prepared(restricted_statement_recipe(amount))
+    row=export(w,inputs,roles)['statements']['cash_flow_statement']['periods'][0]['rows'][0]
+    self.assertEqual(row['status'],expected)
+    self.assertEqual(row['value'],amount if expected=='SUPPORTED' else None)
+    self.assertEqual(row['facts'][0]['lexical_value'],amount)
+
+ def test_untyped_source_declaration_leaves_value_unavailable(self):
+  e=recipe()
+  schema=e['documents'][2]['raw'].replace(b'name="CashFlowTotal" type="x:monetaryItemType"',b'name="CashFlowTotal"')
+  e['documents'][2]=document('extension.xsd',schema)
+  w,inputs,roles=prepared(e)
+  row=export(w,inputs,roles)['statements']['cash_flow_statement']['periods'][0]['rows'][0]
+  self.assertIsNone(row['value'])
+  self.assertEqual(row['status'],'UNSUPPORTED')
+  self.assertEqual(row['facts'][0]['lexical_value'],'30')
  def test_accounting_history_cutoffs_and_whole_source_transitions(self):
   w,i,b=prepared(recipe(),recipe(alias=None,accession=B,form='10-K/A',filed='2024-02-10',accepted_at=LATE,amends_accession=A));r=company_accounting_history(w,'AAPL',['2024-01-01T00:00:00Z',EARLY,LATE],i,b);self.assertEqual([e['transition']for e in r['entries']],['UNAVAILABLE','FIRST_AVAILABLE','SOURCE_CHANGED']);self.assertEqual(aliasrow(r['entries'][2]['packet'])['status'],'MISSING');self.assertEqual(r['entries'][2]['previous_accession'],A);self.assertFalse(r['complete_history'])
   for cutoffs in([], [LATE,EARLY], [EARLY,EARLY], [EARLY]*9):

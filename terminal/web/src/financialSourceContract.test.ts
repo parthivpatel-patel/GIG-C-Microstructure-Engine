@@ -37,6 +37,17 @@ test('embedded accounting profiles and schema receipts must agree after rehashin
  await rejected('accounting','embedded',p=>{p.dts.embedded_linkbases.push(structuredClone(p.dts.embedded_linkbases[0]))});
 });
 
+test('rejects a rehashed widening of a fixed restriction used by a reported row',async()=>{
+ await rejected('accounting','restricted_30',p=>{
+  const entry=Object.values(p.dts.type_declarations).find((item:any)=>item.declaration.facets.some((facet:any)=>facet.kind==='fractionDigits')) as any;
+  const base=entry.declaration.base;
+  entry.declaration.base='{https://authored.invalid/types}FixedAncestor';
+  p.dts.type_declarations[entry.declaration.base]={source_documents:entry.source_documents,
+    declaration:{base,unsupported:[],facets:[{kind:'fractionDigits',value:'0',fixed:true}]}};
+  entry.declaration.facets.find((facet:any)=>facet.kind==='fractionDigits').value='1';
+ });
+});
+
 const accountingAttacks:[string,string,(p:Packet)=>void][]=[
  ['reported','fabricated supported row amount',p=>{rows(p)[0].value='999999'}],
  ['reported','fabricated source numeric amount',p=>{rows(p)[0].numeric_facts[0].value='999999'}],
