@@ -37,6 +37,39 @@ void plain_and_gzip(){
  for(std::size_t n=0;n<count;++n){gig::TrackedResource memory;memory.fail_after(n);{auto r=resume_hot_source(checkpoint,a,source_gzip,spec,&memory);expect(!r,"allocation fault cannot publish candidate");}expect(memory.stats().live_bytes==0,"all source/gzip/native allocations released");}
  std::cout<<"source_restore_failpoints="<<count<<'\n';
 }
+void source_failure_categories(){
+ Harness harness;
+ const std::vector<std::vector<std::byte>> prefix{system(),directory(),add()};
+ for(const auto& record:prefix)harness.accept(record);
+ const auto checkpoint=save(harness.reconstruction);
+ const auto admission=trust(checkpoint,harness.reconstruction);
+ const auto raw=framed_records(prefix,true);
+ auto binary=source(raw,RecoveryContainer::binary_file);
+ binary.framing.max_payload_bytes=0;
+ expect(resume_complete_source(checkpoint,admission,raw,binary).error.code==gig::ErrorCode::invalid_range,
+        "invalid framer configuration is not an allocation failure");
+ binary=source(raw,RecoveryContainer::binary_file);
+ binary.framing.max_records=1;
+ expect(resume_hot_source(checkpoint,admission,raw,binary).error.code==gig::ErrorCode::capacity,
+        "record budget exhausted during partial replay");
+ binary.framing.max_records=4096;
+ binary.framing.max_stream_bytes=raw.size()-1;
+ expect(resume_complete_source(checkpoint,admission,raw,binary).error.code==gig::ErrorCode::capacity,
+        "stream budget exhausted during terminal replay");
+ auto compressed=stored_gzip(raw);
+ auto gzip=source(compressed,RecoveryContainer::single_gzip);
+ gzip.gzip.max_decompressed_bytes=1;
+ expect(resume_complete_source(checkpoint,admission,compressed,gzip).error.code==gig::ErrorCode::capacity,
+        "gzip output budget exhausted during terminal replay");
+ gzip=source(compressed,RecoveryContainer::single_gzip);
+ gzip.gzip.max_compressed_bytes=compressed.size()-1;
+ expect(resume_complete_source(checkpoint,admission,compressed,gzip).error.code==gig::ErrorCode::capacity,
+        "gzip input budget exhausted during terminal replay");
+ compressed[compressed.size()-8]^=std::byte{1};
+ gzip=source(compressed,RecoveryContainer::single_gzip);
+ expect(resume_complete_source(checkpoint,admission,compressed,gzip).error.code==gig::ErrorCode::malformed,
+        "gzip CRC failure remains malformed source");
+}
 void completed_sources(){
  const std::vector<std::vector<std::byte>> prefix{system(),directory(),directory(2,"TWO     "),add(),add(201,9,200,2)};
  Harness h;for(const auto&b:prefix)h.accept(b);auto checkpoint=save(h.reconstruction);auto a=trust(checkpoint,h.reconstruction);
@@ -63,4 +96,4 @@ void completed_sources(){
 }
 void seeded(){SeedFixture f;auto original=f.create();expect(bool(original),"seed create");auto checkpoint=save(*original.data);auto a=trust(checkpoint,*original.data);auto raw=framed_records({reduce('E',11,2,71),replace(12,13,9,101)},false);auto gz=stored_gzip(raw);auto s=source(gz,RecoveryContainer::single_gzip,f.boundary);s.gzip.output_buffer_bytes=1;auto restored=resume_hot_source(checkpoint,a,gz,s);if(!restored)std::cerr<<restored.error.field<<'\n';expect(bool(restored),"seeded gzip source boundary");expect(restored.data->summary().context_committed==2&&restored.data->engine(0)->journal_size()==3,"seed plus two source events exactly once");expect(restored.data->engine(0)->book().remaining()==17,"seeded result exact");}
 }
-int main(){try{plain_and_gzip();completed_sources();seeded();std::cout<<"checks="<<checks<<" failures=0\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(){try{plain_and_gzip();source_failure_categories();completed_sources();seeded();std::cout<<"checks="<<checks<<" failures=0\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}}

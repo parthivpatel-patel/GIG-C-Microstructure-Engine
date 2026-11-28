@@ -15,6 +15,13 @@ void run(){
   auto source=gzip?stored_gzip(plain):plain;SourceRecoveryAdmission spec{gzip?RecoveryContainer::single_gzip:RecoveryContainer::binary_file,sha256(source),capture,7,{ByteOffset{0},ByteOffset{2},RecordOrdinal{0}}};spec.gzip.output_buffer_bytes=1;
   auto capsule=encode_completion_capsule(*image.data,trusted,source,spec);expect(bool(capsule),"encode verified terminal capsule");CompletionCapsuleAdmission admission{sha256(*capsule.data),trusted,spec};
   auto restored=restore_completion_capsule(*capsule.data,admission);auto direct=resume_complete_source(*image.data,trusted,source,spec);expect(bool(restored)&&bool(direct),"capsule restore and direct completion");expect(state(*restored.data)==state(*direct.data)&&restored.data->summary()==direct.data->summary(),"deterministic finished replay");expect(restored.data->summary().finished&&restored.data->summary().input_complete,"finished capsule owner");expect(!restored.data->hot_checkpoint(),"finished state never relabeled active v1");
+  auto limited=admission;
+  if(gzip)limited.source.gzip.max_decompressed_bytes=1;
+  else limited.source.framing.max_records=1;
+  expect(restore_completion_capsule(*capsule.data,limited).error.code==gig::ErrorCode::capacity,
+         "valid capsule restore preserves the configured source capacity failure");
+  expect(encode_completion_capsule(*image.data,trusted,source,limited.source).error.code==gig::ErrorCode::capacity,
+         "capsule encoding preserves the configured source capacity failure");
   auto repeated=encode_completion_capsule(*image.data,trusted,source,spec);expect(bool(repeated)&&*repeated.data==*capsule.data,"canonical capsule bytes");
   auto stale=admission;stale.checkpoint.generation=8;expect(!restore_completion_capsule(*capsule.data,stale),"stale checkpoint admission rejected");stale=admission;stale.source.generation=8;expect(!restore_completion_capsule(*capsule.data,stale),"stale source admission rejected");
   for(std::size_t offset:{std::size_t{0},std::size_t{7},std::size_t{8},std::size_t{16},std::size_t{24},capsule.data->size()-1}){auto bad=*capsule.data;bad[offset]^=std::byte{1};gig::TrackedResource mem;mem.fail_after(0);expect(!restore_completion_capsule(bad,admission,&mem)&&mem.stats().attempts==0,"capsule hash fails before allocation");auto forged=admission;forged.capsule_sha256=sha256(bad);expect(!restore_completion_capsule(bad,forged),"rehashing malformed capsule cannot change trusted originals");}
