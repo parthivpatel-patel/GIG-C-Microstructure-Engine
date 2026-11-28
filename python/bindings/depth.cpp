@@ -21,13 +21,12 @@ class NativeAggregate {
 public:
     NativeAggregate(std::size_t n,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),book_(n,&memory_),budget_(budget){if(budget>67108864)throw std::invalid_argument("aggregate.memory_budget");}
     NativeAggregate(const market_data::AggregateStateImage& image,std::size_t n,std::size_t budget):NativeAggregate(n,budget){book_=take(market_data::AggregateDepth::restore(image,n,&memory_));}
+    NativeAggregate(const market_data::AggregateDepth& source,std::size_t budget):NativeAggregate(source.max_levels(),budget){
+        book_=take(source.clone(&memory_));
+    }
     py::dict snapshot(py::handle b,py::handle a,py::handle seq){return mutate([&](){auto bids=levels(b),asks=levels(a);return book_.snapshot(bids,asks,read<std::optional<std::uint64_t>>(seq));});}
     py::dict update(py::handle b,py::handle a,py::handle seq){return mutate([&](){auto bids=levels(b),asks=levels(a);return book_.update(bids,asks,read<std::optional<std::uint64_t>>(seq));});}
-    py::dict fork(){return api([&](){
-        auto image=take(book_.checkpoint());
-        // Construct the isolated destination before the caller stages its update.
-        return py::cast(std::make_unique<NativeAggregate>(image,image.max_levels,budget_));
-    });}
+    py::dict fork(){return api([&](){return py::cast(std::make_unique<NativeAggregate>(book_,budget_));});}
     py::dict state(){return api([&](){return value();});}
     py::dict checkpoint(){return api([&](){auto image=take(book_.checkpoint(&memory_));py::dict out;
         auto side=[](const auto& rows){py::list out;for(const auto l:rows){py::dict d;d["price_ticks"]=write(l.price_ticks);d["quantity"]=write(l.quantity);out.append(d);}return out;};

@@ -34,11 +34,14 @@ public:
     Error update(std::span<const Level> bids,std::span<const Level> asks,std::optional<std::uint64_t> sequence={}) {return apply(bids,asks,sequence,false);}
     std::span<const Level> bids()const noexcept{return bids_;}
     std::span<const Level> asks()const noexcept{return asks_;}
+    std::size_t max_levels()const noexcept{return limit_;}
     std::uint64_t revision()const noexcept{return revision_;}
     std::optional<std::uint64_t> sequence()const noexcept{return sequence_;}
     bool initialized()const noexcept{return initialized_;}
     Result<Metrics> metrics()const;
     Result<AggregateStateImage> checkpoint(std::pmr::memory_resource* resource=std::pmr::get_default_resource())const noexcept;
+    // Copy an already admitted state into an independent transaction owner.
+    Result<AggregateDepth> clone(std::pmr::memory_resource* resource=std::pmr::get_default_resource())const noexcept;
     static Result<AggregateDepth> restore(const AggregateStateImage&,std::size_t expected_max_levels,
         std::pmr::memory_resource* resource=std::pmr::get_default_resource()) noexcept;
 };

@@ -100,6 +100,18 @@ Result<AggregateStateImage> AggregateDepth::checkpoint(std::pmr::memory_resource
         return Result<AggregateStateImage>::success(std::move(image));
     }catch(const std::bad_alloc&){return Result<AggregateStateImage>::failure(ErrorCode::resource_exhausted,"aggregate.checkpoint_memory");}
 }
+Result<AggregateDepth> AggregateDepth::clone(std::pmr::memory_resource* resource)const noexcept {
+    if(!resource)return Result<AggregateDepth>::failure(ErrorCode::invalid_range,"aggregate.clone_resource");
+    try {
+        AggregateDepth owner(limit_,resource);
+        if(initialized_){
+            owner.bids_.reserve(limit_);owner.asks_.reserve(limit_);
+            owner.bids_.assign(bids_.begin(),bids_.end());owner.asks_.assign(asks_.begin(),asks_.end());
+        }
+        owner.sequence_=sequence_;owner.revision_=revision_;owner.initialized_=initialized_;
+        return Result<AggregateDepth>::success(std::move(owner));
+    }catch(const std::bad_alloc&){return Result<AggregateDepth>::failure(ErrorCode::resource_exhausted,"aggregate.clone_memory");}
+}
 Result<AggregateDepth> AggregateDepth::restore(const AggregateStateImage& image,std::size_t expected,std::pmr::memory_resource* resource)noexcept {
     if(!resource||expected==0||expected>4096||image.version!=1||image.max_levels!=expected)
         return Result<AggregateDepth>::failure(ErrorCode::inconsistent_metadata,"aggregate.checkpoint_contract");
