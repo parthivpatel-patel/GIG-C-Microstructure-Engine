@@ -100,6 +100,7 @@ class LiveIEX:
             except (ValueError,KeyError,OSError):self.store_reason='unapproved_or_invalid_storage_configuration'
         self.capture_id=self.source_session_id if self.store else None
         self.restored_control=None
+        self.restored_backfill_endpoints={}
         if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
     def control(self,*,symbols=None,channels=None,generation=None,receipt=None,phase=None,pending=None):
         pending=self.pending if pending is None else pending
@@ -118,7 +119,22 @@ class LiveIEX:
             if self.generation!=self.restored_control['generation']:raise ValueError('live_recovery_already_consumed')
             return dict(self.restored_control)
         if not self.store:raise ValueError('live_recovery_store_required')
-        envelope=self.store.recover_control()
+        from .iex_backfill import KINDS
+        endpoints={}
+        def retain_endpoint(control,value):
+            event=value['event']
+            symbol,kind=event.get('symbol'),event.get('kind')
+            if (type(symbol) is not str or symbol not in control['symbols'] or
+                type(kind) is not str or KINDS.get(kind) not in control['channels'] or
+                event.get('source_session_id')!=control['source_session_id'] or
+                event.get('out_of_order') is not False or
+                type(event.get('generation')) is not int or not 0<=event['generation']<=control['generation'] or
+                type(event.get('timestamp')) is not str or len(event['timestamp'])>40):
+                return
+            endpoints[symbol,KINDS[kind]]={key:event[key] for key in
+                ('timestamp','receipt_index','origin','source_session_id','generation')}
+            endpoints[symbol,KINDS[kind]]['expires_seconds']=value['expires_seconds']
+        envelope=self.store.recover_control(visit=retain_endpoint)
         if envelope is None:return {'status':'NO_CONTROL_CHECKPOINT','requires_fresh_observation':True}
         old=envelope['control']
         if len(old['symbols'])>self.symbol_limit():raise ValueError('live_recovery_symbol_budget')
@@ -128,6 +144,7 @@ class LiveIEX:
         receipt={'status':'RESTORED_INTENT_ONLY','checkpoint_sha256':envelope['checkpoint_sha256'],'previous_source_session_id':old['source_session_id'],'previous_accepted_receipt':old['accepted_receipt'],'observation_boundary':{'capture':envelope['capture'],'receipt':envelope['receipt'],'tail_sha256':envelope['observation_tail']},'generation':old['generation'],'was_active':old['active'],'requires_fresh_observation':True,'hot_l3_restored':False}
         candidate=(tuple(old['symbols']),tuple(old['channels']),old['generation'],old['failures'],old['connection_count'],receipt);returned=dict(receipt)
         self.symbols,self.channels,self.generation,self.failures,self.connection_count,self.restored_control=candidate
+        self.restored_backfill_endpoints=endpoints
         self.pending=None;self.phase='DISCONNECTED';self.state='RECOVERY_REQUIRED';self.reason='restored_intent_requires_explicit_start'
         return returned
     def symbol_limit(self):

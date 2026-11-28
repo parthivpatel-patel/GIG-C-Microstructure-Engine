@@ -169,13 +169,20 @@ class ObservationStore:
   with self.connect() as db:
    db.execute('BEGIN IMMEDIATE');meta=self._metadata(db);live_checkpoint.read(db,meta);live_checkpoint.write(db,control,meta)
    if self.before_commit:self.before_commit()
- def recover_control(self):
+ def recover_control(self,*,visit=None):
   from . import live_checkpoint
   with self.connect() as db:
    # Verify the source ledger and checkpoint under one SQLite read snapshot.
-   db.execute('BEGIN');self._recover_rows(db,materialize=False)
-   return live_checkpoint.read(db,self._metadata(db))
- def _recover_rows(self,db,*,materialize=True):
+   db.execute('BEGIN')
+   envelope=live_checkpoint.read(db,self._metadata(db))
+   def visit_capture(value):
+    control=envelope['control']
+    if (value['capture']==control['source_session_id'] and
+        value['event']['receipt_index']<=control['accepted_receipt']):
+     visit(control,value)
+   self._recover_rows(db,materialize=False,visit=visit_capture if envelope and visit is not None else None)
+   return envelope
+ def _recover_rows(self,db,*,materialize=True,visit=None):
   self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
   seen=set();last_capture=None;last_receipt=None
   for row in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
@@ -187,7 +194,9 @@ class ObservationStore:
     if capture in seen:raise ValueError('observation_retired_capture')
     seen.add(capture)
    last_capture,last_receipt=capture,receipt
-   if materialize and expires>self.clock():result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
+   if (materialize or visit is not None) and expires>self.clock():
+    if materialize:result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
+    if visit is not None:visit(value)
    previous=digest
   if previous!=meta['tail']:raise ValueError('observation_truncated_tail')
   if last_capture is not None and (meta.get('capture')!=last_capture or meta.get('receipt')!=str(last_receipt)):raise ValueError('observation_metadata_tail_mismatch')

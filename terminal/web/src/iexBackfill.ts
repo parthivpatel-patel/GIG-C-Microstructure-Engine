@@ -3,7 +3,7 @@ import {historicalCore} from './historicalResearch.ts';
 
 type Gap = {
  gap_id:string; symbol:string; kind:'quotes'|'trades'; start:string; end:string;
- capture:string; generation:number; origin:string; previous_receipt:number; current_receipt:number;
+ capture:string; generation:number; origin:string; previous_capture?:string; previous_receipt:number; current_receipt:number;
 };
 const count = (value:unknown):value is number =>
  typeof value==='number' && Number.isSafeInteger(value) && value>0;
@@ -18,7 +18,9 @@ export function backfillCandidates(raw:unknown,capture:string,generation:number)
      gap.capture!==capture||gap.generation!==generation||!count(gap.generation)||
      typeof gap.symbol!=='string'||!/^[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?$/.test(gap.symbol)||
      !['quotes','trades'].includes(gap.kind)||!['HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE'].includes(gap.origin)||
-     !count(gap.previous_receipt)||!count(gap.current_receipt)||gap.previous_receipt>=gap.current_receipt)reject();
+     !count(gap.previous_receipt)||!count(gap.current_receipt)||
+     (gap.previous_capture===undefined?gap.previous_receipt>=gap.current_receipt:
+      !/^[a-f0-9]{32}$/.test(gap.previous_capture)||gap.previous_capture===capture))reject();
   const span=historyNanoseconds(gap.end)-historyNanoseconds(gap.start);
   if(span<=0n||span>172800000000000n)reject();
   seen.add(gap.gap_id);
@@ -29,7 +31,7 @@ export function backfillCandidates(raw:unknown,capture:string,generation:number)
 export function backfillHistory(raw:unknown,expected:Gap,maxPages:number){
  const value=raw as {schema:string;gap:Gap;history:unknown;coverage:string;observation_loss:string;merged_into_live:boolean};
  if(value?.schema!=='gig.iex.backfill.v1'||value.merged_into_live!==false||
-    value.observation_loss!=='UNKNOWN_NO_EXCHANGE_SEQUENCE'||!value.gap||
+    value.observation_loss!=='UNKNOWN_NO_EXCHANGE_SEQUENCE'||!value.gap||value.gap.previous_capture!==expected.previous_capture||
     (Object.keys(expected) as (keyof Gap)[]).some(key=>value.gap[key]!==expected[key]))reject();
  const {symbol,kind,start,end}=expected;
  const history=historicalCore(value.history,{symbol,kind,start,end,feed:'iex',adjustment:'raw',timeframe:'1Day',max_pages:maxPages});

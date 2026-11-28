@@ -1,5 +1,6 @@
 import asyncio
 import copy
+import tempfile
 import unittest
 from types import SimpleNamespace
 import msgpack
@@ -9,6 +10,7 @@ from terminal.alpaca_wire import FixtureWire, WireError
 from .historical_v2 import HistoricalClient, HistoricalPermission, ns
 from .iex_backfill import backfill, gaps
 from .live import LiveIEX
+from .observation_store import ObservationStore
 from .test_sprint4_history import PERMISSION, response
 
 
@@ -16,13 +18,18 @@ def quote(timestamp):
     return {'T': 'q', 'S': 'AAPL', 't': timestamp, 'bp': 100, 'ap': 101, 'bs': 4, 'as': 5}
 
 
-def observations():
+def fixture_live(store=None):
     workspace = SimpleNamespace(environment={'GIG_ALPACA_LIVE_ENABLED': '1'}, catalog=None,
                                 permission=lambda _: {}, market_identity=lambda symbol: {'symbol': symbol})
-    live = LiveIEX(workspace, connector=lambda: None, clock=lambda: 100., wall=lambda: 1704205801.)
+    live = LiveIEX(workspace, connector=lambda: None, clock=lambda: 100., wall=lambda: 1704205801., store=store)
     live.phase = 'SUBSCRIBED'
     live.symbols = ('AAPL',)
     live.generation = 1
+    return live
+
+
+def observations():
+    live = fixture_live()
     live.process(msgpack.packb([quote('2024-01-02T14:30:00.000000001Z')]))
     live.generation += 1
     live.latest = {}
@@ -68,6 +75,31 @@ class Backfill(unittest.IsolatedAsyncioTestCase):
         with self.assertRaisesRegex(WireError, 'gap_unavailable'):
             await backfill(live, historical(wire), gap['gap_id'])
         self.assertEqual(wire.calls, [])
+
+    async def test_restored_checkpoint_contributes_only_an_unexpired_previous_capture_boundary(self):
+        with tempfile.TemporaryDirectory() as directory:
+            now = [100.]
+            previous = fixture_live(ObservationStore(directory, clock=lambda: now[0], retention_seconds=15))
+            previous.process(msgpack.packb([quote('2024-01-02T14:30:00.000000001Z')]))
+            current = fixture_live(ObservationStore(directory, clock=lambda: now[0], retention_seconds=30))
+            current.restore_control()
+            self.assertEqual((current.history, current.latest, current.receipts), ([], {}, 0))
+            self.assertEqual(gaps(current), [])
+            current.generation += 1
+            current.phase = 'SUBSCRIBED'
+            current.process(msgpack.packb([quote('2024-01-02T14:30:00.000000003Z')]))
+            gap, = gaps(current)
+            self.assertEqual(gap['previous_capture'], previous.source_session_id)
+            self.assertEqual(gap['capture'], current.source_session_id)
+            self.assertEqual((gap['previous_receipt'], gap['current_receipt']), (1, 1))
+            self.assertEqual([r['source_session_id'] for r in current.history], [current.source_session_id])
+            wire = FixtureWire(lambda *_:response({'quotes': {'AAPL': []}}))
+            self.assertEqual((await backfill(current, historical(wire), gap['gap_id']))['coverage'],
+                             'SOURCE_RESPONSE_EXHAUSTED')
+            now[0] = 115.
+            self.assertEqual(gaps(current), [])
+            with self.assertRaisesRegex(WireError, 'gap_unavailable'):
+                await backfill(current, historical(wire), gap['gap_id'])
 
     async def test_generation_change_during_acquisition_rejects_result(self):
         live = observations()

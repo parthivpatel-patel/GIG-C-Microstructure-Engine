@@ -36,3 +36,11 @@ test('rejects stale capture, changed origin, boundary overlap and live promotion
   assert.throws(()=>backfillHistory(packet,gap,1));
  }
 });
+
+test('retired capture may have overlapping receipt numbers without relabeling the current capture',()=>{
+ const retired={...gap,previous_capture:'a'.repeat(32),previous_receipt:gap.current_receipt};
+ const candidates={...fixture.candidates,gaps:[retired]};
+ assert.deepEqual(backfillCandidates(candidates,gap.capture,gap.generation),[retired]);
+ assert.throws(()=>backfillCandidates({...candidates,gaps:[{...retired,previous_capture:gap.capture}]},gap.capture,gap.generation));
+ assert.throws(()=>backfillHistory({...fixture.packet,gap:retired},gap,1));
+});

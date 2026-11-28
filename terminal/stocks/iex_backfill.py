@@ -13,6 +13,11 @@ def gaps(live):
     if live.phase != 'SUBSCRIBED' or live.pending:
         return []
     previous, current = {}, {}
+    if live.store and live.restored_backfill_endpoints:
+        now = live.store.clock()
+        previous.update((key, row) for key, row in live.restored_backfill_endpoints.items()
+                        if row['expires_seconds'] > now and row['generation'] < live.generation
+                        and key[0] in live.symbols and key[1] in live.channels)
     for row in live.history:
         kind = KINDS.get(row['kind'])
         if kind not in live.channels or row['symbol'] not in live.symbols or row['out_of_order']:
@@ -41,6 +46,8 @@ def gaps(live):
             'origin': left['origin'],
             'previous_receipt': left['receipt_index'], 'current_receipt': right['receipt_index'],
         }
+        if left['source_session_id'] != live.source_session_id:
+            gap['previous_capture'] = left['source_session_id']
         gap['gap_id'] = hashlib.sha256(canonical(gap)).hexdigest()
         result.append(gap)
     return result
