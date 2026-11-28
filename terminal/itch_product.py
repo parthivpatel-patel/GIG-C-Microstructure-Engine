@@ -8,7 +8,7 @@ import base64,dataclasses,hashlib,json,os,stat,zlib
 from fractions import Fraction
 from pathlib import Path
 import gig_microstructure as gig
-from gig_microstructure.itch_recovery import ItchRecovery,ItchAdmission,ItchSourceAdmission,MAX_BYTES
+from gig_microstructure.itch_recovery import ItchRecovery,ItchAdmission,ItchSourceAdmission,MAX_BYTES,SOURCE_CONTAINERS
 from terminal.native_recovery import native_binary_identity
 from terminal.verification.artifacts import read_bytes,decode
 from terminal.session_recovery import _private_parent
@@ -45,7 +45,9 @@ def frames(raw):
 def _packet(records):return b''.join(len(p).to_bytes(2,'big')+p for p in records)
 PARTIAL_BINARY_PROFILE='PARTIAL_BINARY_FILE_V1'
 PARTIAL_GZIP_PROFILE='PARTIAL_SINGLE_GZIP_V1'
-PARTIAL_PROFILES=(PARTIAL_BINARY_PROFILE,PARTIAL_GZIP_PROFILE)
+PARTIAL_GZIP_MEMBERS_PROFILE='PARTIAL_GZIP_MEMBERS_V1'
+PARTIAL_PROFILES=(PARTIAL_BINARY_PROFILE,PARTIAL_GZIP_PROFILE,PARTIAL_GZIP_MEMBERS_PROFILE)
+GZIP_PARTIAL_PROFILES=(PARTIAL_GZIP_PROFILE,PARTIAL_GZIP_MEMBERS_PROFILE)
 PARTIAL_HISTORY_FIELDS={'source_profile','residual_bytes','residual_sha256','next_frame','next_ordinal'}
 
 def _admit(raw,expected_sha256,*,migration=False):
@@ -78,10 +80,12 @@ def _admit(raw,expected_sha256,*,migration=False):
         partial=binary_partial or gzip_partial
         if set(row)!=basic and (version!=3 or not partial):raise ItchProductError('itch_product_source_history')
         if any(type(row[k])is not str or len(row[k])!=64 or any(c not in '0123456789abcdef'for c in row[k])for k in hashes)or any(type(row[k])is not int or not 0<=row[k]<=2**64-1 for k in numbers):raise ItchProductError('itch_product_source_history')
-        if row['container']not in('binary_file','single_gzip')or row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
+        if row['container']not in SOURCE_CONTAINERSor row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
         if partial:
             has_partial=True
             expected_container,expected_profile,offset_key=(
+                ('gzip_members',PARTIAL_GZIP_MEMBERS_PROFILE,'decompressed_offset')
+                if gzip_partial and row['source_profile']==PARTIAL_GZIP_MEMBERS_PROFILE else
                 ('single_gzip',PARTIAL_GZIP_PROFILE,'decompressed_offset') if gzip_partial else
                 ('binary_file',PARTIAL_BINARY_PROFILE,'source_offset'))
             if row['container']!=expected_container or row['source_profile']!=expected_profile:
@@ -204,13 +208,14 @@ def migrate(raw,expected_sha256):
     history=value['migration_history']+[{'from_bundle_sha256':expected_sha256,'from_image_sha256':a.artifact_sha256,'from_implementation_sha256':a.implementation_sha256,'from_native_binary_sha256':value['native_binary_sha256']}]
     return build_bundle(new,new_a,tail,selected_book=value['selected_book'],speed=value['speed'],history=history,source_history=value.get('source_history',()))
 
-def _decompressed_prefix_digest(source,length):
+def _decompressed_prefix_digest(source,length,*,members=False):
     # Compare the previous decompressed prefix using capped output. Native
     # admission still verifies the complete new source and its gzip trailer.
     decoder=zlib.decompressobj(16+zlib.MAX_WBITS)
     sha=hashlib.sha256()
     offset=0
     pending=b''
+    member_count=1
     try:
         while length:
             if not pending and offset<len(source):
@@ -221,7 +226,12 @@ def _decompressed_prefix_digest(source,length):
             if output:
                 sha.update(output)
                 length-=len(output)
-            elif decoder.eof or (not pending and offset==len(source)):
+            if decoder.eof and length:
+                pending=decoder.unused_data
+                if not members or member_count>=16 or not pending and offset==len(source):return None
+                member_count+=1
+                decoder=zlib.decompressobj(16+zlib.MAX_WBITS)
+            elif not output and not pending and offset==len(source):
                 return None
     except zlib.error:
         return None
@@ -237,14 +247,14 @@ def _admit_source_successor(product,source,source_admission):
         raise ItchProductError('itch_product_source_digest')
     if product.source_history and product.source_history[-1].get('source_profile') in PARTIAL_PROFILES:
         prior=product.source_history[-1]
-        if prior['source_profile']==PARTIAL_GZIP_PROFILE:
+        if prior['source_profile'] in GZIP_PARTIAL_PROFILES:
             length=prior['decompressed_offset']+prior['residual_bytes']
             expected=prior['decompressed_sha256']
         else:
             length=prior['source_offset']+prior['residual_bytes']
             expected=prior['source_sha256']
-        if source_admission.container=='single_gzip':
-            actual=_decompressed_prefix_digest(source,length)
+        if source_admission.container!='binary_file':
+            actual=_decompressed_prefix_digest(source,length,members=source_admission.container=='gzip_members')
         else:
             actual=digest(memoryview(source)[:length]) if len(source)>=length else None
         if actual!=expected:
@@ -262,10 +272,10 @@ def complete_product_source(raw,expected_sha256,source,source_admission):
 def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial=False):
     product=ItchProduct.restore(raw,expected_sha256)
     _admit_source_successor(product,source,source_admission)
-    profile=PARTIAL_GZIP_PROFILE if source_admission.container=='single_gzip' else PARTIAL_BINARY_PROFILE
+    profile=PARTIAL_PROFILES[SOURCE_CONTAINERS.index(source_admission.container)]
     image=product.owner.checkpoint();a=dataclasses.replace(product.owner.admission,artifact_sha256=digest(image))
     if partial:
-        resume=ItchRecovery.resume_partial_gzip_source if profile==PARTIAL_GZIP_PROFILE else ItchRecovery.resume_partial_binary_source
+        resume=ItchRecovery.resume_partial_gzip_source if profile in GZIP_PARTIAL_PROFILES else ItchRecovery.resume_partial_binary_source
         candidate,tail=resume(image,a,source,source_admission)
     else:
         candidate=ItchRecovery.resume_source(image,a,source,source_admission)

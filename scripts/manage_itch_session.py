@@ -8,10 +8,10 @@ import argparse,dataclasses,json,sys
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from terminal.itch_product import load,migrate,save_new,digest,read_private,continue_source,continue_partial_source,complete_product_source
-from gig_microstructure.itch_recovery import ItchSourceAdmission,MAX_BYTES
+from gig_microstructure.itch_recovery import ItchSourceAdmission,MAX_BYTES,SOURCE_CONTAINERS
 
 def main(argv=None):
- p=argparse.ArgumentParser();p.add_argument('action',choices=['inspect','migrate','continue-source','continue-partial-source','complete-source']);p.add_argument('--input',required=True);p.add_argument('--expected-sha256',required=True);p.add_argument('--output');p.add_argument('--admission-output');p.add_argument('--source');p.add_argument('--source-sha256');p.add_argument('--container',choices=['binary_file','single_gzip']);p.add_argument('--first-frame',type=int);p.add_argument('--first-ordinal',type=int);a=p.parse_args(argv)
+ p=argparse.ArgumentParser();p.add_argument('action',choices=['inspect','migrate','continue-source','continue-partial-source','complete-source']);p.add_argument('--input',required=True);p.add_argument('--expected-sha256',required=True);p.add_argument('--output');p.add_argument('--admission-output');p.add_argument('--source');p.add_argument('--source-sha256');p.add_argument('--container',choices=SOURCE_CONTAINERS);p.add_argument('--first-frame',type=int);p.add_argument('--first-ordinal',type=int);a=p.parse_args(argv)
  if a.action not in ('continue-source','continue-partial-source','complete-source')and any(v is not None for v in(a.source,a.source_sha256,a.container,a.first_frame,a.first_ordinal)):p.error('source arguments require a continuation action')
  if a.admission_output is not None and a.action!='complete-source':p.error('--admission-output requires complete-source')
  try:
@@ -45,7 +45,7 @@ def main(argv=None):
    result={'schema':'gig.itch.product_operation.v1','status':'SOURCE_CONTINUED','output_sha256':sha,'from_bundle_sha256':a.expected_sha256,'source_sha256':a.source_sha256,'provider_connected':False}
    if tail is not None:
     result['status']='PARTIAL_SOURCE_CONTINUED'
-    key='partial_gzip_tail' if a.container=='single_gzip' else 'partial_binary_tail'
+    key='partial_gzip_tail' if a.container!='binary_file' else 'partial_binary_tail'
     result[key]=dataclasses.asdict(tail)
   print(json.dumps(result,sort_keys=True));return 0
  except (ValueError,OSError,RuntimeError):

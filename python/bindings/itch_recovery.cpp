@@ -117,7 +117,7 @@ void bind_itch_recovery(py::module_&m){
  m.def("resume_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
   auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
   itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
-  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");
+  const auto kind=read<unsigned>(container);if(kind>static_cast<unsigned>(itch::RecoveryContainer::gzip_members))bad(ErrorCode::unsupported,"itch.source_container");
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s));
@@ -156,10 +156,11 @@ void bind_itch_recovery(py::module_&m){
  };
  bind_partial.operator()<itch::PartialBinaryTail>("resume_itch_partial_binary_source",itch::RecoveryContainer::binary_file);
  bind_partial.operator()<itch::PartialGzipTail>("resume_itch_partial_gzip_source",itch::RecoveryContainer::single_gzip);
+ bind_partial.operator()<itch::PartialGzipTail>("resume_itch_partial_gzip_members",itch::RecoveryContainer::gzip_members);
  m.def("complete_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
   auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
   itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
-  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");
+  const auto kind=read<unsigned>(container);if(kind>static_cast<unsigned>(itch::RecoveryContainer::gzip_members))bad(ErrorCode::unsupported,"itch.source_container");
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s,true));
@@ -167,7 +168,7 @@ void bind_itch_recovery(py::module_&m){
  m.def("encode_itch_completion_capsule",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
   const auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
   itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
-  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  const auto kind=read<unsigned>(container);if(kind>static_cast<unsigned>(itch::RecoveryContainer::gzip_members))bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission spec{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   TrackedResource memory(std::pmr::get_default_resource(),n);const auto result=take(itch::encode_completion_capsule(blob(bytes,itch::durable_max_bytes),a,blob(source,32U*1024U*1024U),spec,&memory));
   return py::bytes(reinterpret_cast<const char*>(result.data()),result.size());
@@ -175,7 +176,7 @@ void bind_itch_recovery(py::module_&m){
  m.def("restore_itch_completion_capsule",[](py::handle bytes,py::handle capsule_hash,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
   const auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
   itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
-  const auto kind=read<unsigned>(container);if(kind>1)bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  const auto kind=read<unsigned>(container);if(kind>static_cast<unsigned>(itch::RecoveryContainer::gzip_members))bad(ErrorCode::unsupported,"itch.source_container");const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission spec{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::completion_capsule_max_bytes),itch::CompletionCapsuleAdmission{digest(capsule_hash),a,spec},n));
  });});

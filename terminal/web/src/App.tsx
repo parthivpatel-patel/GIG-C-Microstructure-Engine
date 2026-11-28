@@ -269,7 +269,7 @@ function CompletedItchBoundary({state}:{state:TerminalState}){
     const source=completedItchSource(state);
     if(!source)return null;
     return <details className="source-controls"><summary>Completed authored ITCH source</summary>
-      <p>The replay is at the final state of the supplied {source.container==='single_gzip'?'gzip':'BinaryFile'} container. Exchange completeness remains unavailable.</p>
+      <p>The replay is at the final state of the supplied {source.container==='binary_file'?'BinaryFile':'gzip'} container. Exchange completeness remains unavailable.</p>
       <dl><dt>Admitted source records</dt><dd>{source.source_records}</dd>
       <dt>Source SHA-256</dt><dd><code>{source.source_sha256}</code></dd>
       <dt>Capsule SHA-256</dt><dd><code>{source.capsule_sha256}</code></dd>

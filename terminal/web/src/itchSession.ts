@@ -35,13 +35,14 @@ export function partialSourceTail(state:TerminalState):PartialSourceTail|null {
  if(!Array.isArray(lineage)||!lineage.length)return null;
  const row=lineage[lineage.length-1] as Record<string,unknown>|null;
  if(!row)return null;
- const gzip=row.source_profile==='PARTIAL_SINGLE_GZIP_V1';
+ const members=row.source_profile==='PARTIAL_GZIP_MEMBERS_V1';
+ const gzip=members||row.source_profile==='PARTIAL_SINGLE_GZIP_V1';
  if(!gzip&&row.source_profile!=='PARTIAL_BINARY_FILE_V1')return null;
  const reject=():never=>{throw Error('Invalid partial ITCH source receipt')};
  if(state.mode!=='HISTORICAL_REPLAY'||state.origin!=='HISTORICAL_SYNTHETIC'||
     state.provenance.dataset!=='itch-checkpoint-v1'||lineage.length>4||
     state.provenance.source_recovery_history_encoding!=='DECIMAL_STRINGS_V1'||
-    row.container!==(gzip?'single_gzip':'binary_file')||row.capture!==state.provenance.capture||
+    row.container!==(members?'gzip_members':gzip?'single_gzip':'binary_file')||row.capture!==state.provenance.capture||
     row.generation!==state.provenance.generation)reject();
  const number=(key:string):bigint=>{
   const value=row[key];
@@ -71,7 +72,7 @@ type CompletedSource={
  capsule_sha256:string;
  source_sha256:string;
  checkpoint_sha256:string;
- container:'binary_file'|'single_gzip';
+ container:'binary_file'|'single_gzip'|'gzip_members';
  source_records:string;
  exchange_completeness:false;
 };
@@ -86,7 +87,7 @@ export function completedItchSource(state:TerminalState):CompletedSource|null{
     state.playing||state.position!==state.event_count||state.replay_min_position!==state.position||
     state.feed.state!=='COMPLETE'||state.feed.capture_complete!==true||
     !validHash(source.capsule_sha256)||!validHash(source.source_sha256)||!validHash(source.checkpoint_sha256)||
-    source.source_records!==String(state.position)||!['binary_file','single_gzip'].includes(source.container)||
+    source.source_records!==String(state.position)||!['binary_file','single_gzip','gzip_members'].includes(source.container)||
     source.exchange_completeness!==false)throw Error('Invalid completed ITCH source receipt');
  return source;
 }
