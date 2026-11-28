@@ -9,9 +9,11 @@ EXCHANGES={'A':'NYSE American','N':'NYSE','P':'NYSE Arca','Z':'Cboe BZX','V':'IE
 MAX_BYTES=8*1024*1024;MAX_ROWS=100000
 class SearchIndex:
  def __init__(self,rows):
-  self.rows=rows;self.symbols=sorted(rows);self.tokens={}
+  self.rows=rows;self.symbols=sorted(rows);self.tokens={};self.aliases={}
   for s,r in rows.items():
    for token in set(re.findall(r'[a-z0-9]+',r['name'].casefold())):self.tokens.setdefault(token,set()).add(s)
+   for alias in r.get('aliases',{}).values():
+    if alias and alias!=s:self.aliases.setdefault(alias.upper(),set()).add(s)
   self.words=sorted(self.tokens)
   self.filter_options={key:sorted({r.get(key,'UNVERIFIED') for r in rows.values()}) for key in ('exchange','security_type','listing_status')}
  def search(self,query,offset=0,limit=20,filters=None):
@@ -24,11 +26,14 @@ class SearchIndex:
    found=set()
    for word in self.words[bisect.bisect_left(self.words,term):bisect.bisect_right(self.words,term+'\uffff')]:found.update(self.tokens[word])
    names=found if names is None else names&found
-  ordered=list(prefix)+sorted((names or set())-hits)
+  alias_hits=self.aliases.get(q,set())-hits
+  ordered=list(prefix)+sorted(alias_hits)+sorted((names or set())-hits-alias_hits)
   if filters:ordered=[s for s in ordered if all(self.rows[s].get(k,'UNVERIFIED')==v for k,v in filters.items())]
   chosen=ordered[offset:offset+limit]
-  return {'results':[dict(self.rows[s]) for s in chosen],'matches':len(ordered),'returned':len(chosen),'offset':offset,'limit':limit,'next_offset':offset+limit if offset+limit<len(ordered) else None,'search_method':'exact ticker, ticker prefix, all company-name word prefixes','filters_applied':filters,'available_filters':{k:v[:64] for k,v in self.filter_options.items()},'filter_options_truncated':any(len(v)>64 for v in self.filter_options.values())}
+  return {'results':[dict(self.rows[s]) for s in chosen],'matches':len(ordered),'returned':len(chosen),'offset':offset,'limit':limit,'next_offset':offset+limit if offset+limit<len(ordered) else None,'search_method':'exact ticker, ticker prefix, exact directory alias, all company-name word prefixes','filters_applied':filters,'available_filters':{k:v[:64] for k,v in self.filter_options.items()},'filter_options_truncated':any(len(v)>64 for v in self.filter_options.values())}
 def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
+ if type(files)is not dict or set(files)!=set(URLS)or origin not in ('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE'):
+  raise ValueError('directory_source_contract')
  rows={};excluded={'test_issue':0,'unsupported_symbol':0};sources=[]
  for kind in ('nasdaq','other'):
   raw=files[kind]
@@ -38,6 +43,7 @@ def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
   if lines[0].split('|')!=HEADERS[kind]:raise ValueError('directory_header')
   footer=lines[-1].split('|');stamp=footer[0]
   if len(footer)!=len(HEADERS[kind]) or any(footer[1:]) or not stamp.startswith('File Creation Time: '):raise ValueError('directory_footer')
+  if not re.fullmatch(r'[0-9]{12}',stamp[20:]):raise ValueError('directory_footer')
   created=datetime.datetime.strptime(stamp[20:],'%m%d%Y%H:%M').isoformat()
   for line in lines[1:-1]:
    values=line.split('|')
@@ -46,6 +52,8 @@ def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
    if not 1<=len(name)<=256 or any(ord(c)<32 for c in name) or r['Test Issue'] not in ('Y','N') or r['ETF'] not in ('Y','N') or not re.fullmatch(r'[1-9][0-9]{0,8}',r['Round Lot Size']):raise ValueError('directory_fields')
    if kind=='nasdaq' and (r['Market Category'] not in ('Q','G','S') or r['Financial Status'] not in tuple('NDEQGHJK') or r['NextShares'] not in ('Y','N')):raise ValueError('directory_nasdaq_enum')
    if kind=='other' and r['Exchange'] not in EXCHANGES:raise ValueError('directory_exchange')
+   if kind=='other' and any(len(r[k])>32 or any(not 32<=ord(c)<=126 for c in r[k]) for k in ('CQS Symbol','NASDAQ Symbol')):
+    raise ValueError('directory_alias')
    if r['Test Issue']=='Y':excluded['test_issue']+=1;continue
    if not re.fullmatch(SYMBOL_PATTERN,symbol):excluded['unsupported_symbol']+=1;continue
    if symbol in rows:raise ValueError('directory_symbol_collision')
@@ -54,8 +62,36 @@ def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
   sources.append({'url':URLS[kind],'sha256':hashlib.sha256(raw).hexdigest(),'file_creation_local_time':created,'clock_zone':'UNSPECIFIED_BY_FILE','source_records':len(lines)-2})
  if len({s['file_creation_local_time'][:10] for s in sources})!=1:raise ValueError('directory_date_mismatch')
  if not rows:raise ValueError('directory_empty')
- catalog=MarketCatalog();catalog.rows=rows;catalog.source={'reference':'Nasdaq Trader two-file symbol directory','as_of':None,'authority':'OFFICIAL_DIRECTORY_RESPONSE' if origin=='OBSERVED_OFFICIAL_RESPONSE' else 'AUTHORED_DIRECTORY_FIXTURE','sources':sources,'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':origin,'excluded':excluded,'coverage':'Accepted non-test symbols from both complete files;not delisted history,security subtype inference,SEC identity or feed entitlement'};catalog.index=[];catalog.search_index=SearchIndex(rows)
+ catalog=MarketCatalog();catalog.rows=rows;catalog.source={'reference':'Nasdaq Trader two-file symbol directory','as_of':None,'authority':'OFFICIAL_DIRECTORY_RESPONSE' if origin=='OBSERVED_OFFICIAL_RESPONSE' else 'AUTHORED_DIRECTORY_FIXTURE','sources':sources,'snapshot_sha256':hashlib.sha256(b''.join(bytes.fromhex(s['sha256'])for s in sources)).hexdigest(),'received_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'classification':origin,'excluded':excluded,'coverage':'Accepted non-test symbols from both complete files;not delisted history,security subtype inference,SEC identity or feed entitlement'};catalog.index=[];catalog.search_index=SearchIndex(rows)
  return catalog
+
+def reconcile_catalog(previous,candidate):
+ source=candidate.source
+ base=previous.source
+ receipt={'schema':'gig.market.directory_reconciliation.v1','snapshot_sha256':source['snapshot_sha256'],
+          'previous_snapshot_sha256':None,'status':'FIRST_COMPARABLE_SNAPSHOT',
+          'added':0,'no_longer_reported':0,'changed':0,'unchanged':0,
+          'example_symbols':{'added':[],'no_longer_reported':[],'changed':[]}}
+ if base.get('classification')!=source['classification'] or not base.get('snapshot_sha256'):
+  return receipt
+ receipt['previous_snapshot_sha256']=base['snapshot_sha256']
+ for old,new in zip(base['sources'],source['sources']):
+  if old['url']!=new['url'] or new['file_creation_local_time']<old['file_creation_local_time']:
+   raise ValueError('directory_snapshot_time_regression')
+ receipt['status']='SAME_SOURCE_REVISION' if source['snapshot_sha256']==base['snapshot_sha256'] else 'COMPARED_SOURCE_REVISIONS'
+ for symbol in sorted(previous.rows.keys()|candidate.rows.keys()):
+  old,new=previous.rows.get(symbol),candidate.rows.get(symbol)
+  change='added' if old is None else 'no_longer_reported' if new is None else 'changed' if old!=new else 'unchanged'
+  receipt[change]+=1
+  examples=receipt['example_symbols'].get(change)
+  if examples is not None and len(examples)<20:examples.append(symbol)
+ return receipt
+
+
+def _build_catalog(files,origin,previous):
+ catalog=parse_files(files,origin)
+ return catalog,reconcile_catalog(previous,catalog)
+
 class DirectoryService:
  def __init__(self,workspace,fetcher=None,clock=time.monotonic):
   self.workspace=workspace;self.fetcher=fetcher;self.clock=clock;self.last_attempt=None;self.lock=asyncio.Lock();self.state={'status':'NOT_LOADED','last_error':None,'accepted_count':0,'last_success':None}
@@ -83,9 +119,12 @@ class DirectoryService:
           if len(raw)+len(block)>MAX_BYTES:raise ValueError('directory_bytes')
           raw.extend(block)
          files[kind]=bytes(raw)
-     catalog=await asyncio.to_thread(parse_files,files,'HISTORICAL_SYNTHETIC' if self.fetcher else 'OBSERVED_OFFICIAL_RESPONSE')
+     previous=self.workspace.catalog
+     catalog,change=await asyncio.to_thread(_build_catalog,files,'HISTORICAL_SYNTHETIC' if self.fetcher else 'OBSERVED_OFFICIAL_RESPONSE',previous)
+     if self.workspace.catalog is not previous:raise ValueError('directory_snapshot_superseded')
+     if not self.approved():raise ValueError('directory_source_use_not_approved')
      self.workspace.catalog=catalog
-     self.state={'status':'ACCEPTED','last_error':None,'accepted_count':len(catalog.rows),'last_success':catalog.source['received_at']}
+     self.state={'status':'ACCEPTED','last_error':None,'accepted_count':len(catalog.rows),'last_success':catalog.source['received_at'],'reconciliation':change}
    except asyncio.CancelledError:raise
    except (ValueError,OSError,UnicodeError,httpx.HTTPError,TimeoutError):
     self.state={**self.state,'status':'STALE_LAST_ACCEPTED' if self.state['accepted_count'] else 'UNAVAILABLE','last_error':'directory_refresh_rejected;previous_identity_snapshot_preserved'}
