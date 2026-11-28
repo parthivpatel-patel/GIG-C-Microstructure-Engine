@@ -98,6 +98,56 @@ public:
   out["journal_size"]=write(native->journal_size());
   return out;
  });}
+ py::dict recent_executions(py::handle index,py::handle limit){return api([&](){
+  const auto book_index=read<std::size_t>(index),count=read<std::size_t>(limit);
+  if(book_index>=engine_.config().book_count||count==0||count>64)bad(ErrorCode::invalid_range,"itch.execution_receipt_scope");
+  const auto locate=engine_.config().bindings[book_index]->locate;
+  const auto receipts=engine_.receipts();
+  const auto scan=std::min(receipts.size(),std::size_t{256});
+  py::list rows;
+  for(std::size_t offset=0;offset<scan&&rows.size()<count;++offset){
+   const auto& receipt=receipts[receipts.size()-offset-1];
+   const auto& record=receipt.source;
+   const bool unassigned_break=record.type=='B'&&record.header.stock_locate.value()==0;
+   if(!unassigned_break&&record.header.stock_locate!=locate)continue;
+   std::uint64_t match=0;
+   std::optional<std::uint64_t> shares,order_reference;
+   std::optional<std::uint32_t> price;
+   std::optional<char> printable,side,cross;
+   if(const auto* executed=std::get_if<itch::OrderExecuted>(&record.message)){
+    match=executed->match_number.value();shares=executed->executed_shares.value();order_reference=executed->order_reference.value();
+   }else if(const auto* priced=std::get_if<itch::OrderExecutedWithPrice>(&record.message)){
+    const auto& details=priced->execution;
+    match=details.match_number.value();shares=details.executed_shares.value();order_reference=details.order_reference.value();
+    printable=priced->printable;price=priced->execution_price.value();
+   }else if(const auto* trade=std::get_if<itch::Trade>(&record.message)){
+    match=trade->match_number.value();shares=trade->shares.value();price=trade->price.value();
+    order_reference=trade->order_reference.value();side=static_cast<char>(trade->side);
+   }else if(const auto* cross_trade=std::get_if<itch::CrossTrade>(&record.message)){
+    match=cross_trade->match_number.value();shares=cross_trade->shares.value();
+    price=cross_trade->cross_price.value();cross=cross_trade->cross_type;
+   }else if(const auto* broken=std::get_if<itch::BrokenTrade>(&record.message)){
+    match=broken->match_number.value();
+   }else continue;
+   const auto character=[](std::optional<char> value)->py::object{
+    if(!value)return py::none();
+    return py::str(&*value,1);
+   };
+   const auto type=static_cast<char>(record.type);
+   py::dict row;row["message_type"]=py::str(&type,1);row["match_number"]=write(match);
+   row["stock_locate"]=write(record.header.stock_locate.value());
+   row["ordinal"]=write(record.location.ordinal.value());row["frame_offset"]=write(record.location.frame_offset.value());
+   row["source_timestamp_ns"]=write(record.header.timestamp.value());
+   row["shares"]=write(shares);row["order_reference"]=write(order_reference);row["price4"]=write(price);
+   row["printable"]=character(printable);row["reported_side"]=character(side);row["cross_type"]=character(cross);
+   row["book_attribution"]=unassigned_break?"SESSION_UNASSIGNED":"SELECTED_LOCATE";
+   row["native_book_committed"]=receipt.disposition==itch::SourceDisposition::native_committed;
+   rows.append(std::move(row));
+  }
+  py::dict out;out["rows"]=std::move(rows);out["scanned_records"]=write(scan);
+  out["source_records"]=write(receipts.size());out["selected_locate"]=write(locate.value());
+  return out;
+ });}
  py::dict rebind(py::handle target){return api([&]()->py::object{const auto code=read<Digest>(target);auto state=take(engine_.hot_checkpoint(&memory_));auto b=take(itch::encode_hot_checkpoint(state,admission_.capture,admission_.generation,code,&memory_));return py::bytes(reinterpret_cast<const char*>(b.data()),b.size());});}
  py::dict process(py::handle payload,py::handle offset,py::handle ordinal){return api([&](){
   const auto bytes=blob(payload,65535);
@@ -123,7 +173,7 @@ public:
 };
 }
 void bind_itch_recovery(py::module_&m){
- py::class_<ItchRecovery>(m,"_ItchRecovery").def("describe",&ItchRecovery::describe).def("book",&ItchRecovery::book).def("rebind",&ItchRecovery::rebind).def("status",&ItchRecovery::status).def("completion",&ItchRecovery::completion).def("canonical",&ItchRecovery::canonical).def("checkpoint",&ItchRecovery::checkpoint).def("process",&ItchRecovery::process);
+ py::class_<ItchRecovery>(m,"_ItchRecovery").def("describe",&ItchRecovery::describe).def("book",&ItchRecovery::book).def("recent_executions",&ItchRecovery::recent_executions).def("rebind",&ItchRecovery::rebind).def("status",&ItchRecovery::status).def("completion",&ItchRecovery::completion).def("canonical",&ItchRecovery::canonical).def("checkpoint",&ItchRecovery::checkpoint).def("process",&ItchRecovery::process);
  m.def("restore_itch_checkpoint",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget){return api([&](){auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n));});});
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  m.def("resume_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){

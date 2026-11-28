@@ -222,6 +222,14 @@ class ItchProduct:
         from terminal.server.concentration import calculate
         result['provenance']['source_recovery_history']=[{k:str(v)if type(v)is int else v for k,v in row.items()}for row in self.source_history]
         result['provenance']['source_recovery_history_encoding']='DECIMAL_STRINGS_V1'
+        try:
+            executions=self.owner.recent_executions(self.selected_book)
+        except ValueError:
+            executions=None
+        if executions is not None:
+            result['flow']={'schema':'gig.itch.execution_receipts.v1','origin':'HISTORICAL_SYNTHETIC',
+                            'capture':s['capture'],'generation':s['generation'],'complete_tape':False,
+                            **executions}
         result['research_metrics']={'concentration':calculate(result)};return result
 
 def migrate(raw,expected_sha256):

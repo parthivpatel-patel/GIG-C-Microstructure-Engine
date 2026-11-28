@@ -84,6 +84,14 @@ class ItchSourceBoundary:
     decoded_sha256:str
 
 
+def _execution_receipts(owner,index,limit):
+    if type(index) is not int or not 0<=index<2 or type(limit) is not int or not 1<=limit<=64:
+        raise ValueError('itch_execution_receipt_scope')
+    if not hasattr(owner,'recent_executions'):
+        raise ValueError('itch_execution_receipt_binding_unavailable')
+    return _checked(owner.recent_executions(str(index),str(limit)))
+
+
 class ItchRecovery:
     @classmethod
     def restore(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
@@ -250,6 +258,10 @@ class ItchRecovery:
     def book(self,index,depth=10):
         if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')
         return _checked(self._owner.book(str(index),str(depth)))
+    def recent_executions(self,index,limit=40):
+        """Return raw execution-related receipts newest first, with no tape inference."""
+        return _execution_receipts(self._owner,index,limit)
+
     @classmethod
     def migrate(cls,payload,admission,target_implementation_sha256):
         # Explicitly validate old state with the current native implementation,
@@ -284,3 +296,7 @@ class ItchSourceCompletion:
     def book(self,index,depth=10):
         if type(index)is not int or not 0<=index<2 or type(depth)is not int or not 1<=depth<=4096:raise ValueError('itch_book_depth')
         return _checked(self._owner.book(str(index),str(depth)))
+    def recent_executions(self,index,limit=40):
+        """Return raw execution-related receipts newest first, with no tape inference."""
+        return _execution_receipts(self._owner,index,limit)
+
