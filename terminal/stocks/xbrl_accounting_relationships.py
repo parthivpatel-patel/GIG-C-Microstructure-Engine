@@ -43,6 +43,14 @@ def _member(fact,parsed,dts):
  if typ==tag(X,'stringItemType'):
   if fact['unit_ref']is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
   result['reported_value']=fact['lexical_value'];result['value_kind']='string';return result,None
+ if typ==tag(X,'booleanItemType'):
+  if fact['unit_ref'] is not None:return result,'NONNUMERIC_UNIT_UNSUPPORTED'
+  if fact['decimals'] is not None or fact['precision'] is not None:
+   return result,'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED'
+  lexical=fact['lexical_value'].strip(' \t\r\n')
+  if lexical not in ('true','false','1','0'):return result,'BOOLEAN_LEXICAL_UNSUPPORTED'
+  result.update(reported_value='true' if lexical in ('true','1') else 'false',value_kind='boolean')
+  return result,None
  try:base,path=_resolve(typ,dts.get('type_declarations',{}),RESTRICTION_PROFILE)
  except XBRLError as exc:
   if 'unsupported'in str(exc):return result,'ITEM_TYPE_VALUE_SEMANTICS_UNSUPPORTED'

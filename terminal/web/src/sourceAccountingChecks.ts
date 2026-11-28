@@ -124,6 +124,20 @@ function member(f:SourceFact,s:Source,g:Graph):{record:RecordValue;reason:string
   if(f.unit_ref!==null)return {record,reason:'NONNUMERIC_UNIT_UNSUPPORTED',valueKey:null,exact:true};
   record.reported_value=f.lexical_value;record.value_kind='string';return {record,reason:null,valueKey:'string:'+f.lexical_value,exact:true};
  }
+ if(decl.type===`{${X}}booleanItemType`){
+  if(f.unit_ref!==null)return {record,reason:'NONNUMERIC_UNIT_UNSUPPORTED',valueKey:null,exact:true};
+  if(f.decimals!==null||f.precision!==null){
+   return {record,reason:'NONNUMERIC_ACCURACY_ATTRIBUTES_UNSUPPORTED',valueKey:null,exact:true};
+  }
+  const lexical=f.lexical_value.replace(/^[\t\r\n ]+|[\t\r\n ]+$/g,'');
+  if(!['true','false','1','0'].includes(lexical)){
+   return {record,reason:'BOOLEAN_LEXICAL_UNSUPPORTED',valueKey:null,exact:true};
+  }
+  const value=lexical==='true'||lexical==='1'?'true':'false';
+  record.reported_value=value;
+  record.value_kind='boolean';
+  return {record,reason:null,valueKey:'boolean:'+value,exact:true};
+ }
  const resolved=resolve(decl.type,g);
  if(!resolved)return {record,reason:'ITEM_TYPE_VALUE_SEMANTICS_UNSUPPORTED',valueKey:null,exact:true};
  if(!f.unit_ref||!s.units[f.unit_ref])return {record,reason:'NUMERIC_UNIT_MISSING',valueKey:null,exact:true};
