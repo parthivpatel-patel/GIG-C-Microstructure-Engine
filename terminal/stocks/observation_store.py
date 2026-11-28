@@ -15,11 +15,15 @@ class ObservationStore:
   root=Path(directory).absolute()
   if any(p.is_symlink() for p in (root,*root.parents)):raise ValueError('observation_symlink')
   root.mkdir(mode=0o700,parents=True,exist_ok=True)
-  if root.stat().st_uid!=os.getuid() or stat.S_IMODE(root.stat().st_mode)&0o077:raise ValueError('observation_private_directory')
+  identity=root.lstat()
+  if not stat.S_ISDIR(identity.st_mode) or identity.st_uid!=os.getuid() or stat.S_IMODE(identity.st_mode)&0o077:
+   raise ValueError('observation_private_directory')
+  self.directory_identity=identity.st_dev,identity.st_ino
   self.path=root/'observations.sqlite3';fd=os.open(self.path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
   try:
    s=os.fstat(fd)
    if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or stat.S_IMODE(s.st_mode)&0o077:raise ValueError('observation_private_file')
+   self.database_identity=s.st_dev,s.st_ino
   finally:os.close(fd)
   with self.connect() as db:
    # The SQLite write lock covers both the identity check and all bootstrap
@@ -40,17 +44,30 @@ class ObservationStore:
  def connect(self):
   with self.lock:
    with self._connect() as db:yield db
+ def _check_location(self):
+  parent=self.path.parent.lstat();file=self.path.lstat()
+  if ((parent.st_dev,parent.st_ino)!=self.directory_identity or not stat.S_ISDIR(parent.st_mode)
+      or parent.st_uid!=os.getuid() or stat.S_IMODE(parent.st_mode)&0o077
+      or (file.st_dev,file.st_ino)!=self.database_identity or not stat.S_ISREG(file.st_mode)
+      or file.st_nlink!=1 or file.st_uid!=os.getuid() or stat.S_IMODE(file.st_mode)&0o077):
+   raise ValueError('observation_database_identity_changed')
+  if file.st_size>32*1024*1024:raise ValueError('observation_disk_budget')
+
  @contextmanager
  def _connect(self):
   try:
-   if self.path.stat().st_size>32*1024*1024:raise ValueError('observation_disk_budget')
-   db=sqlite3.connect(self.path,timeout=2)
+   self._check_location()
+   db=sqlite3.connect(self.path.as_uri()+'?mode=rw',uri=True,timeout=2)
    try:
+    self._check_location()
+    db.execute('PRAGMA trusted_schema=OFF')
     if db.execute('PRAGMA page_size').fetchone()[0]!=4096:raise ValueError('observation_page_size')
     db.execute('PRAGMA journal_mode=DELETE');db.execute('PRAGMA synchronous=FULL');db.execute('PRAGMA secure_delete=ON');db.execute('PRAGMA max_page_count=8192')
-    with db:yield db
+    with db:
+     yield db
+     self._check_location()
    finally:db.close()
-  except sqlite3.Error:raise ValueError('observation_storage_failure') from None
+  except (OSError,sqlite3.Error):raise ValueError('observation_storage_failure') from None
  @staticmethod
  def encode(v):return json.dumps(v,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
  @staticmethod
@@ -183,7 +200,7 @@ class ObservationStore:
    return envelope
  def _recover_rows(self,db,*,materialize=True,visit=None):
   self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
-  seen=set();last_capture=None;last_receipt=None
+  seen=set();last_capture=None;last_receipt=None;now=self.clock()
   for row in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
    capture,receipt,_,expires,_,_,digest=row
    value=self._verified_record(row,previous)
@@ -193,7 +210,8 @@ class ObservationStore:
     if capture in seen:raise ValueError('observation_retired_capture')
     seen.add(capture)
    last_capture,last_receipt=capture,receipt
-   if (materialize or visit is not None) and expires>self.clock():
+   allowed=value['event']['origin']=='HISTORICAL_SYNTHETIC' or value['retention_policy']['permission_reference_sha256']==self.policy_hash
+   if allowed and (materialize or visit is not None) and expires>now:
     if materialize:result.append({**value,'classification':'RETAINED_HISTORICAL_NOT_CURRENT'})
     if visit is not None:visit(value)
    previous=digest
