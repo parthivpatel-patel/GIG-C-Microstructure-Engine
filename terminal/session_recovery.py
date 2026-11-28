@@ -3,7 +3,7 @@
 Stable schema/canonical checks before hot restoration. Versioned migration is an
 explicit owner operation,not auto-relabeling old native/source evidence.
 """
-import copy,hashlib,json,os,re,stat,tempfile
+import copy,hashlib,json,os,re,stat
 from pathlib import Path
 import gig_microstructure as gig
 from terminal.native_recovery import native_binary_identity
@@ -75,23 +75,26 @@ def _private_parent(path):
  if info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:raise SessionRecoveryError('session_private_directory_required')
  return path
 
+def _publish_revision(path,raw,*,maximum_size,exists,uncertain,error_type,before_publish=None,after_publish=None):
+ from gig_microstructure.itch_capsule_store import _parent,_persist_verified_capsule,ItchCapsulePersistenceError
+ path=_private_parent(path)
+ def open_private(value):
+  return _parent(value,strict_leaf=False,private_directory=True)
+ try:
+  _persist_verified_capsule(path,raw,hashlib.sha256(raw).hexdigest(),minimum_size=1,maximum_size=maximum_size,
+      parent_opener=open_private,before_publish=before_publish,after_publish=after_publish)
+ except ItchCapsulePersistenceError as exc:
+  if exc.published or exc.publication_unknown:raise error_type(uncertain)from exc
+  if isinstance(exc.primary_error,FileExistsError):raise error_type(exists)from exc
+  if exc.primary_error is not None and not exc.cleanup_errors:raise exc.primary_error from None
+  raise
+
 def save_new(path,payload,expected_sha256,implementation_sha256,*,before_publish=None,after_publish=None):
  # Exclusive immutable revisions:upgrade writes a different file,never overwrites rollback input.
- value=_admit(payload,expected_sha256,implementation_sha256,require_current_binary=True);_native(value);raw=encoded(value);path=_private_parent(path)
- fd,temporary=tempfile.mkstemp(prefix='.gig-session-',dir=path.parent);published=False
- try:
-  with os.fdopen(fd,'wb')as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
-  if before_publish:before_publish()
-  os.link(temporary,path,follow_symlinks=False);published=True
-  if after_publish:after_publish()
-  directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)
-  try:os.fsync(directory)
-  finally:os.close(directory)
- except FileExistsError:raise SessionRecoveryError('session_checkpoint_exists')from None
- except BaseException:
-  if published:raise SessionRecoveryError('session_publication_uncertain_reopen')from None
-  raise
- finally:os.unlink(temporary)
+ value=_admit(payload,expected_sha256,implementation_sha256,require_current_binary=True);_native(value);raw=encoded(value)
+ _publish_revision(path,raw,maximum_size=MAX_BYTES,exists='session_checkpoint_exists',
+     uncertain='session_publication_uncertain_reopen',error_type=SessionRecoveryError,
+     before_publish=before_publish,after_publish=after_publish)
  return expected_sha256
 
 def load(path,expected_sha256,implementation_sha256):

@@ -68,11 +68,11 @@ def _platform():
         raise NotImplementedError('itch_capsule_posix_store_unsupported')
 
 
-def _parent(path):
+def _parent(path,*,strict_leaf=True,private_directory=False):
     _platform();value=os.fspath(path)
     if type(value)is not str or not value.startswith('/')or len(value)>4096 or '\0'in value:raise ValueError('itch_capsule_absolute_path_required')
     parts=value.split('/')[1:]
-    if not parts or any(not p or p in('.','..')for p in parts)or not re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]{0,127}',parts[-1]):raise ValueError('itch_capsule_path_components')
+    if not parts or any(not p or p in('.','..')for p in parts)or strict_leaf and not re.fullmatch('[A-Za-z0-9][A-Za-z0-9._-]{0,127}',parts[-1]):raise ValueError('itch_capsule_path_components')
     flags=os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC
     fd=os.open('/',flags)
     try:
@@ -81,7 +81,7 @@ def _parent(path):
             old_fd=fd;fd=next_fd
             os.close(old_fd)
         info=os.fstat(fd)
-        if not stat.S_ISDIR(info.st_mode)or info.st_uid!=os.geteuid()or info.st_mode&0o022 or info.st_nlink<1:raise ValueError('itch_capsule_parent_ownership_or_mode')
+        if not stat.S_ISDIR(info.st_mode)or info.st_uid!=os.geteuid()or info.st_mode&(0o077 if private_directory else 0o022) or info.st_nlink<1:raise ValueError('itch_capsule_parent_ownership_or_mode')
         return fd,parts[-1]
     except BaseException as primary:
         cleanup=[]
@@ -90,17 +90,17 @@ def _parent(path):
         _raise(primary,cleanup)
 
 
-def _regular(info,minimum_size=82):
+def _regular(info,minimum_size=82,maximum_size=MAX_CAPSULE_BYTES):
     if not stat.S_ISREG(info.st_mode)or info.st_uid!=os.geteuid()or info.st_mode&0o022 or info.st_nlink<1:raise ValueError('itch_capsule_file_ownership_or_mode')
-    if not minimum_size<=info.st_size<=MAX_CAPSULE_BYTES:raise ValueError('itch_capsule_file_byte_budget')
+    if not minimum_size<=info.st_size<=maximum_size:raise ValueError('itch_capsule_file_byte_budget')
 
 
 def _identity(info):
     return(info.st_dev,info.st_ino,info.st_size,info.st_uid,info.st_mode,info.st_nlink,info.st_mtime_ns,info.st_ctime_ns)
 
 
-def _read_verified(fd,expected,*,collect=True,minimum_size=82):
-    before=os.fstat(fd);_regular(before,minimum_size);os.lseek(fd,0,os.SEEK_SET)
+def _read_verified(fd,expected,*,collect=True,minimum_size=82,maximum_size=MAX_CAPSULE_BYTES):
+    before=os.fstat(fd);_regular(before,minimum_size,maximum_size);os.lseek(fd,0,os.SEEK_SET)
     # A fixed buffer bounds retained memory even if every legal read is short.
     # Per-read chunk lists could otherwise add one Python object per source byte.
     total=0;output=bytearray(before.st_size)if collect else None;sha=hashlib.sha256()
@@ -108,10 +108,10 @@ def _read_verified(fd,expected,*,collect=True,minimum_size=82):
         raw=os.read(fd,min(65536,before.st_size-total+1))
         if not raw:break
         total+=len(raw)
-        if total>before.st_size or total>MAX_CAPSULE_BYTES:raise ValueError('itch_capsule_file_changed')
+        if total>before.st_size or total>maximum_size:raise ValueError('itch_capsule_file_changed')
         sha.update(raw)
         if collect:output[total-len(raw):total]=raw
-    after=os.fstat(fd);_regular(after,minimum_size)
+    after=os.fstat(fd);_regular(after,minimum_size,maximum_size)
     if total!=before.st_size or _identity(before)!=_identity(after):raise ValueError('itch_capsule_file_changed')
     if sha.hexdigest()!=expected:raise ValueError('itch_capsule_file_digest')
     return bytes(output)if collect else None,after
@@ -148,14 +148,15 @@ def _raise(primary,cleanup,*,published=False,publication_unknown=False,file_sync
     raise error from primary
 
 
-def _persist_verified_capsule(path,payload,expected,*,minimum_size=82,receipt_factory=_receipt):
+def _persist_verified_capsule(path,payload,expected,*,minimum_size=82,maximum_size=MAX_CAPSULE_BYTES,
+                              receipt_factory=_receipt,parent_opener=_parent,before_publish=None,after_publish=None):
     """Caller must have natively admitted the exact immutable bytes first.
 
     Complete-write, readback SHA, file fsync, atomic no-overwrite link, unlink only
     this operation's staging inode, then directory fsync. No destination rollback.
     """
-    if type(payload)is not bytes or not minimum_size<=len(payload)<=MAX_CAPSULE_BYTES or type(expected)is not str or not re.fullmatch('[0-9a-f]{64}',expected)or hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('itch_capsule_verified_bytes_required')
-    directory,leaf=_parent(path);fd=None;stage=None;created=False;original=None;published=False;file_synced=False;directory_synced=False;primary=None;cleanup=[];receipt=None
+    if type(payload)is not bytes or not minimum_size<=len(payload)<=maximum_size or type(expected)is not str or not re.fullmatch('[0-9a-f]{64}',expected)or hashlib.sha256(payload).hexdigest()!=expected:raise ValueError('itch_capsule_verified_bytes_required')
+    directory,leaf=parent_opener(path);fd=None;stage=None;created=False;original=None;published=False;file_synced=False;directory_synced=False;primary=None;cleanup=[];receipt=None
     link_attempted=False
     publication_unknown=False
     try:
@@ -178,16 +179,18 @@ def _persist_verified_capsule(path,payload,expected,*,minimum_size=82,receipt_fa
             if type(n)is not int or not 0<n<=len(view)-done:raise OSError(errno.EIO,'itch_capsule_short_write')
             done+=n
         os.fsync(fd);file_synced=True
-        _,verified=_read_verified(fd,expected,collect=False,minimum_size=minimum_size)
+        _,verified=_read_verified(fd,expected,collect=False,minimum_size=minimum_size,maximum_size=maximum_size)
         if(verified.st_dev,verified.st_ino)!=(original.st_dev,original.st_ino)or verified.st_nlink!=1:raise ValueError('itch_capsule_staging_identity')
         closing=fd;fd=None;os.close(closing)
+        if before_publish:before_publish()
         link_attempted=True
         os.link(stage,leaf,src_dir_fd=directory,dst_dir_fd=directory,follow_symlinks=False);published=True
-        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size)
+        if after_publish:after_publish()
+        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size,maximum_size)
         if(final.st_dev,final.st_ino)!=(original.st_dev,original.st_ino):raise ValueError('itch_capsule_publication_identity')
         os.unlink(stage,dir_fd=directory);created=False
         os.fsync(directory);directory_synced=True
-        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size)
+        final=os.stat(leaf,dir_fd=directory,follow_symlinks=False);_regular(final,minimum_size,maximum_size)
         if(final.st_dev,final.st_ino)!=(original.st_dev,original.st_ino)or final.st_size!=len(payload):raise ValueError('itch_capsule_publication_identity')
         receipt=receipt_factory(leaf,expected,final,action='PUBLISHED_CREATE_ONLY',file_synced=True,directory_synced=True)
     except BaseException as error:primary=error

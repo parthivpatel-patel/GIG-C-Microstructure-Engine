@@ -4,9 +4,9 @@ Only native-admitted authored ITCH images are supported. The independently
 retained admission includes capture/generation/config/code and the artifact hash.
 No automatic migration,old-generation promotion or arbitrary gzip seek exists.
 """
-import os,tempfile,stat
+import os,stat
 from gig_microstructure.itch_recovery import ItchAdmission,ItchRecovery,MAX_BYTES
-from terminal.session_recovery import _private_parent
+from terminal.session_recovery import _private_parent,_publish_revision
 from terminal.verification.artifacts import read_bytes
 
 class ItchFileError(ValueError):pass
@@ -18,23 +18,9 @@ def save_new(path,payload,admission,*,before_publish=None,after_publish=None):
 
 def publish_new(path,payload,*,before_publish=None,after_publish=None):
     # Callers must complete their own admission before this shared immutable writer.
-    path=_private_parent(path)
-    fd,temporary=tempfile.mkstemp(prefix='.gig-itch-',dir=path.parent);published=False
-    try:
-        with os.fdopen(fd,'wb')as stream:
-            if stream.write(payload)!=len(payload):raise ItchFileError('itch_short_write')
-            stream.flush();os.fsync(stream.fileno())
-        if before_publish:before_publish()
-        os.link(temporary,path,follow_symlinks=False);published=True
-        if after_publish:after_publish()
-        directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)
-        try:os.fsync(directory)
-        finally:os.close(directory)
-    except FileExistsError:raise ItchFileError('itch_revision_exists')from None
-    except BaseException:
-        if published:raise ItchFileError('itch_publication_uncertain_reopen')from None
-        raise
-    finally:os.unlink(temporary)
+    _publish_revision(path,payload,maximum_size=64*1024*1024,exists='itch_revision_exists',
+        uncertain='itch_publication_uncertain_reopen',error_type=ItchFileError,
+        before_publish=before_publish,after_publish=after_publish)
 
 def load(path,admission):
     path=_private_parent(path);info=path.stat()
