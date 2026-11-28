@@ -24,6 +24,9 @@ from .session_schedule import SessionSchedule
 UTC=dt.timezone.utc
 BASE='https://data.alpaca.markets/v2/stocks/'
 MAX_NS=2**63-1
+DAY_NS=86400*10**9
+BAR_DAYS={'1Day':366,'1Hour':31,'1Min':7}
+ADJUSTMENTS=('raw','split','dividend','all')
 
 def ns(value):
     # RFC3339 with explicit offset;exact nanoseconds retained independently of datetime.
@@ -70,11 +73,11 @@ def validate_query(q,now_ns):
     if type(q) is not dict or set(q)!={'symbol','kind','feed','start','end','timeframe','adjustment','max_pages'}:raise WireError('history_query_fields')
     try:symbol(q['symbol'])
     except (ValueError,TypeError):raise WireError('history_symbol') from None
-    if q['kind'] not in ('bars','quotes','trades') or q['feed'] not in ('iex','sip') or q['timeframe'] not in ('1Day','1Hour','1Min') or q['adjustment'] not in ('raw','split','dividend','all') or (q['kind']!='bars' and q['adjustment']!='raw'):
+    if q['kind'] not in ('bars','quotes','trades') or q['feed'] not in ('iex','sip') or type(q['timeframe']) is not str or q['timeframe'] not in BAR_DAYS or q['adjustment'] not in ADJUSTMENTS or (q['kind']!='bars' and q['adjustment']!='raw'):
         raise WireError('history_query_profile')
     if type(q['max_pages']) is not int or not 1<=q['max_pages']<=4:raise WireError('history_page_budget')
     lo,hi=ns(q['start']),ns(q['end'])
-    maximum=({'1Day':366,'1Hour':31,'1Min':7}[q['timeframe']] if q['kind']=='bars' else 2)*86400*10**9
+    maximum=(BAR_DAYS[q['timeframe']] if q['kind']=='bars' else 2)*DAY_NS
     if not lo<hi or hi-lo>maximum or hi>now_ns:raise WireError('history_interval')
     if q['feed']=='sip' and hi>now_ns-900*10**9:raise WireError('history_sip_minimum_delay_900_seconds')
     return {**q,'start':utc(lo),'end':utc(hi)}
@@ -88,7 +91,18 @@ def validate_plan(method,url,body=None):
     if not required<=set(query) or set(query)-allowed or query.get('limit')!=['64'] or query.get('sort')!=['asc'] or query.get('feed') not in (['iex'],['sip']):raise WireError('history_wire_query')
     try:symbol(query['symbols'][0]);lo=ns(query['start'][0]);hi=ns(query['end'][0])
     except (ValueError,KeyError,TypeError):raise WireError('history_wire_query') from None
-    if hi<lo or 'page_token' in query and (len(query['page_token'][0])>512 or any(not 32<ord(c)<127 for c in query['page_token'][0])):raise WireError('history_wire_query')
+    maximum=2*DAY_NS
+    if u.path.endswith('bars'):
+        timeframe=query['timeframe'][0]
+        if timeframe not in BAR_DAYS or query['adjustment'][0] not in ADJUSTMENTS:
+            raise WireError('history_wire_query')
+        maximum=BAR_DAYS[timeframe]*DAY_NS
+    if not 1<=hi-lo+1<=maximum:
+        raise WireError('history_wire_query')
+    if 'page_token' in query:
+        cursor=query['page_token'][0]
+        if not 1<=len(cursor)<=512 or any(not 32<ord(c)<127 for c in cursor):
+            raise WireError('history_wire_query')
 
 
 class HistoricalClient:

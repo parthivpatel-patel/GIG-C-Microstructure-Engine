@@ -123,6 +123,9 @@ class LiveIEX:
         endpoints={}
         def retain_endpoint(control,value):
             event=value['event']
+            if (event['origin']=='OBSERVED_OFFICIAL_RESPONSE' and
+                value['retention_policy']['permission_reference_sha256']!=self.store.policy_hash):
+                return
             symbol,kind=event.get('symbol'),event.get('kind')
             if (type(symbol) is not str or symbol not in control['symbols'] or
                 type(kind) is not str or KINDS.get(kind) not in control['channels'] or
