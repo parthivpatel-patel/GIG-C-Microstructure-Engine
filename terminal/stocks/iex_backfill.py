@@ -22,7 +22,7 @@ def retain_anchor(anchors, event, channel):
 
 
 def gaps(live):
-    if live.phase != 'SUBSCRIBED' or live.pending:
+    if live.phase != 'SUBSCRIBED' or live.pending or not live.current_observation_scope():
         return []
     previous, current = {}, {}
     if live.store and live.restored_backfill_endpoints:
@@ -86,6 +86,7 @@ async def backfill(live, historical, gap_id, max_pages=4, *, after_revision=None
     if type(max_pages) is not int or not 1 <= max_pages <= 4:
         raise WireError('iex_backfill_page_budget')
     live.require()
+    reference=live.permission_reference()
     gap = next((item for item in gaps(live) if item['gap_id'] == gap_id), None)
     if gap is None:
         raise WireError('iex_backfill_gap_unavailable')
@@ -103,6 +104,8 @@ async def backfill(live, historical, gap_id, max_pages=4, *, after_revision=None
             raise WireError('iex_backfill_continuation_unavailable')
         history, continuation = await historical.acquire(query), None
     live.require()
+    if live.permission_reference()!=reference:
+        raise WireError('iex_backfill_permission_changed')
     if not any(item == gap for item in gaps(live)):
         raise WireError('iex_backfill_gap_changed')
     if history['origin'] != gap['origin'] or history['query'] != query:

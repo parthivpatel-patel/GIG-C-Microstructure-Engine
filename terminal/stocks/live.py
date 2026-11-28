@@ -102,6 +102,7 @@ class LiveIEX:
         self.restored_control=None
         self.restored_backfill_endpoints={}
         self.backfill_anchors={}
+        self._observation_permission_reference=None
         if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
     def control(self,*,symbols=None,channels=None,generation=None,receipt=None,phase=None,pending=None):
         pending=self.pending if pending is None else pending
@@ -163,6 +164,21 @@ class LiveIEX:
         if self.workspace.environment.get('GIG_ALPACA_IEX_CANCEL_PROFILE') not in (None,ALPACA_CANCEL_PROFILE):
             raise ValueError('live_cancel_profile_unsupported')
         return keys
+    def permission_reference(self):
+        return self.workspace.environment.get('GIG_ALPACA_PERMISSION_REFERENCE')
+
+    def current_observation_scope(self):
+        return self.connector is not None or self._observation_permission_reference in (None,self.permission_reference())
+
+    def _bind_observation_scope(self,reference):
+        if self.connector is not None:return
+        prior=self._observation_permission_reference
+        if prior is not None and prior!=reference:
+            self.evicted+=len(self.history)
+            self.history=[];self.seen=[];self.latest={}
+            self.backfill_anchors={};self.restored_backfill_endpoints={}
+        self._observation_permission_reference=reference
+
     def process(self,raw,*,socket_owner=None):
         if socket_owner is not None and socket_owner is not self.socket:raise ProtocolError('stale_transport_frame')
         # Accepted event dictionaries are never edited by process();copy containers only.
@@ -269,7 +285,7 @@ class LiveIEX:
             return row
         try:self.require();ready={'ready':True,'reason':None,'symbol_limit':self.symbol_limit()}
         except ValueError as exc:ready={'ready':False,'reason':str(exc)[:128],'symbol_limit':None}
-        allowed=ready['ready'] or self.connector is not None
+        allowed=(ready['ready'] and self.current_observation_scope()) or self.connector is not None
         observations=self.history if allowed else ()
         rows=[present(e) for e in self.latest.values()]if allowed else []
         history=[present(e) for e in observations if e['symbol'] in self.symbols]
@@ -330,6 +346,8 @@ class LiveIEX:
             while not self.stop_event.is_set():
                 try:
                     keys=self.require()
+                    reference=self.permission_reference()
+                    self._bind_observation_scope(reference)
                     if self.pending:self.symbols,self.channels=self.pending['symbols'],self.pending['channels'];self.pending=None
                     if self.generation>=2**53-2:raise ProtocolError('generation_exhausted')
                     self.generation+=1;self.phase='CONNECTED_PENDING';self.latest={};self.state='CONNECTING';self.last_data=None
@@ -340,7 +358,7 @@ class LiveIEX:
                         while not self.stop_event.is_set():
                             try:raw=await asyncio.wait_for(ws.recv(),15 if self.phase!='SUBSCRIBED' or self.pending else 30)
                             except asyncio.TimeoutError:
-                                if self.require()!=keys:raise ProtocolError('provider_permission_changed')
+                                if self.require()!=keys or self.permission_reference()!=reference:raise ProtocolError('provider_permission_changed')
                                 if self.phase=='SUBSCRIBED' and not self.pending:
                                     # Silence is not proof of transport failure or market closure.
                                     # WebSocket ping/pong still enforces transport liveness.
@@ -348,7 +366,7 @@ class LiveIEX:
                                     if subscribed_at is not None and self.clock()-subscribed_at>=self.stable_seconds:self.failures=0
                                     continue
                                 raise
-                            if self.require()!=keys:raise ProtocolError('provider_permission_changed')
+                            if self.require()!=keys or self.permission_reference()!=reference:raise ProtocolError('provider_permission_changed')
                             if self.pending and self.clock()-self.pending['started']>15:raise TimeoutError('subscription_ack_timeout')
                             accepted=self.process(raw,socket_owner=ws)
                             if accepted and subscribed_at is not None and self.clock()-subscribed_at>=self.stable_seconds:self.failures=0
