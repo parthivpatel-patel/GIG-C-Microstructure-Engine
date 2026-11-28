@@ -48,7 +48,7 @@ class FeedSupervisor:
         self.permission=None;self.pending=False;self.capture=None
         self.subscribed_depth=10
         self.session_profile=None;self.coordinator=None;self.capture_token=None
-        self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
+        self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={};self.joint_book_ordinal=None
 
     def _configured_joint_depth(self, profile):
         token = self.environment.get('GIG_LIVE_KRAKEN_BOOK_DEPTH')
@@ -94,7 +94,7 @@ class FeedSupervisor:
                     symbol=self.symbol,price_scale=self.price_scale,quantity_scale=self.quantity_scale,
                     origin='LIVE_OBSERVED' if self.observed_transport else 'HISTORICAL_SYNTHETIC')
             self.aggregate=None;self.adapter=self.coordinator._book
-            self.capture_token=None;self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
+            self.capture_token=None;self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={};self.joint_book_ordinal=None
             self.exchange_ns=self.received_at_ns=None
             from terminal.l2_research import ResearchWindow
             self.research=ResearchWindow(aggressor_side_confirmed=self.environment.get('GIG_LIVE_AGGRESSOR_SIDE_REVIEWED')=='1')
@@ -228,18 +228,33 @@ class FeedSupervisor:
                             if joint['reconnect_required']:raise ProviderError('coordinated_session_reconnect_required')
                             if kind in ('snapshot','update'):
                                 self.received_at_ns=unix;self.exchange_ns=observed.get('source_timestamp_ns')
+                                self.joint_book_ordinal=self.messages+1
                             if joint['book_eligible']:
                                 self.state='LIVE_VERIFIED' if self.observed_transport else 'TESTED_WITH_FIXTURES'
                                 self.reason='provisional_joint_L2_and_trade_not_full_market_or_L3'
                             if not joint['book_eligible'] and now>deadline:raise ProviderError('snapshot_deadline')
-                            if joint['book_eligible'] and observed['kind']=='snapshot':self.joint_research_ready=True
+                            seeded_research=False
+                            if joint['book_eligible'] and not self.joint_research_ready:
+                                # The initial book can arrive before the trade subscription
+                                # becomes eligible. Seed from its admitted state and receive
+                                # boundary, independent of the frame that unlocked the joint view.
+                                native=joint['book']
+                                baseline={side:native[side][:self.depth] for side in ('bids','asks')}
+                                self.research.observe({'kind':'snapshot'},baseline,
+                                                      self.adapter.last_book_receive_ns,self.joint_book_ordinal)
+                                self.joint_research_ready=True
+                                seeded_research=True
                         else:
+                            seeded_research=False
                             receipt=self.adapter.feed(raw,now)
                             observed=receipt
                         if self.provider=='coinbase':
                             from .coinbase_transport import research_receipt
                             observed=research_receipt(receipt)
-                        if observed['kind'] in ('snapshot','update','trades') and (not self.coordinator or joint['book_eligible'] and self.joint_research_ready):
+                        researchable=observed['kind'] in ('snapshot','update','trades')
+                        if seeded_research and observed['kind'] in ('snapshot','update'):
+                            researchable=False  # The same native state already seeded the window.
+                        if researchable and (not self.coordinator or joint['book_eligible'] and self.joint_research_ready):
                             historical=observed.get('type')=='snapshot' if self.coordinator else getattr(self.adapter,'last_trade_snapshot',False)
                             research_event={**observed,'historical_snapshot':historical} if self.provider=='kraken' and observed['kind']=='trades' else observed
                             state=gig._checked(self.aggregate.state()) if observed['kind']!='trades' else None
