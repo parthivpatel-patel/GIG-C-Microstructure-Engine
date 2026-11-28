@@ -30,7 +30,7 @@ gig::ErrorCode gzip_code(GzipCode code) noexcept {
  }
 }
 
-gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete,PartialBinaryTail* partial=nullptr,Sha256Digest* decompressed=nullptr)noexcept {
+gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete,PartialBinaryTail* partial=nullptr,Sha256Digest* decompressed=nullptr,SourceRecoveryBoundary* boundary_receipt=nullptr)noexcept {
  using R=gig::Result<SyntheticReconstructor>;
  const auto bad=[](gig::ErrorCode c,std::string_view f){return R::failure(c,f);};
  const bool compressed=a.container==RecoveryContainer::single_gzip||a.container==RecoveryContainer::gzip_members;
@@ -44,11 +44,13 @@ gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> byt
  auto framer=BinaryFileFramer::create(a.framing,a.first_location.frame_offset,a.first_location.ordinal,r);if(!framer)return bad(framing_code(framer.error.code),"source_recovery.framer");
  const auto prefix_count=engine.receipts().size();std::size_t seen=0;gig::Error error{};
  Sha256 decompressed_hash;
+ std::size_t decoded_bytes=0;
  const auto consume=[&](std::span<const std::byte>b){
-  if(decompressed && !decompressed_hash.update(b)){
+  if((decompressed||boundary_receipt) && !decompressed_hash.update(b)){
    error={gig::ErrorCode::capacity,"source_recovery.decompressed_hash"};
    return;
   }
+  if(boundary_receipt)decoded_bytes+=b.size();
   while(!b.empty()&&!error){auto frame=framer.data->feed(b);if(frame.error||!frame.consumed){error={framing_code(frame.error.code),"source_recovery.framing"};break;}b=b.subspan(frame.consumed);
    if(frame.status==FrameStatus::terminal&&!complete){error={gig::ErrorCode::unsupported,"source_recovery.terminal_position"};break;}
    if(frame.frame){if(seen<prefix_count){const auto&receipt=engine.receipts()[seen];auto decoded=decode(frame.frame->payload,frame.frame->location,receipt.source.provenance,engine.config().context_policy.decode_profile);
@@ -126,11 +128,21 @@ gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> byt
   if(decompressed)*decompressed=decompressed_hash.finish();
  }
  if(complete){const auto summary=engine.finish(ContextEnd::declared_source_complete);if(!summary.finished||!summary.input_complete)return bad(gig::ErrorCode::recovery_required,"source_recovery.incomplete_context");}
+ if(boundary_receipt)*boundary_receipt={decoded_bytes,decompressed_hash.finish()};
  return candidate;
 }
 }
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r)noexcept {
  return resume_source(bytes,trusted,source,a,r,false);
+}
+gig::Result<BoundSourceRecovery> resume_source_with_boundary(
+    std::span<const std::byte> bytes,const DurableAdmission& trusted,std::span<const std::byte> source,
+    const SourceRecoveryAdmission& admission,std::pmr::memory_resource* resource) noexcept {
+ using R=gig::Result<BoundSourceRecovery>;
+ SourceRecoveryBoundary boundary{};
+ auto owner=resume_source(bytes,trusted,source,admission,resource,false,nullptr,nullptr,&boundary);
+ if(!owner)return R::failure(owner.error.code,owner.error.field,owner.error.index);
+ return R::success({std::move(*owner.data),boundary});
 }
 gig::Result<PartialBinaryRecovery> resume_partial_binary_source(
     std::span<const std::byte> bytes,const DurableAdmission& trusted,std::span<const std::byte> source,

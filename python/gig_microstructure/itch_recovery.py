@@ -78,6 +78,12 @@ class ItchPartialGzipTail:
     decompressed_sha256:str
 
 
+@dataclass(frozen=True)
+class ItchSourceBoundary:
+    decoded_bytes:int
+    decoded_sha256:str
+
+
 class ItchRecovery:
     @classmethod
     def restore(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
@@ -86,17 +92,34 @@ class ItchRecovery:
         result=cls.__new__(cls);result._owner=owner;result.admission=admission;return result
     @classmethod
     def resume_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        owner=cls._source_owner(payload,admission,source,source_admission,resource_budget_bytes,'resume_itch_source')
+        return cls._advanced_owner(owner,admission)
+
+    @staticmethod
+    def _source_owner(payload,admission,source,source_admission,resource_budget_bytes,method):
         _validate_image(payload,admission,resource_budget_bytes)
         if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
         source_admission.validate()
         if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
         if type(source)is not bytes or len(source)>MAX_BYTES:raise ValueError('itch_source_byte_budget')
         if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
-        if not hasattr(_native,'resume_itch_source'):raise ValueError('itch_source_sdk_streaming_disabled')
-        owner=_checked(_native.resume_itch_source(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(SOURCE_CONTAINERS.index(source_admission.container)),str(source_admission.first_frame),str(source_admission.first_ordinal)))
-        result=cls.__new__(cls);result._owner=owner
+        if not hasattr(_native,method):raise ValueError('itch_source_sdk_streaming_disabled')
+        return _checked(getattr(_native,method)(payload,admission.artifact_sha256,admission.contract_sha256,admission.implementation_sha256,admission.capture,str(admission.generation),str(resource_budget_bytes),source,source_admission.source_sha256,str(SOURCE_CONTAINERS.index(source_admission.container)),str(source_admission.first_frame),str(source_admission.first_ordinal)))
+
+    @classmethod
+    def resume_bound_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        """Resume at a whole frame boundary and retain the exact decoded source receipt."""
+        owner,size,sha256=cls._source_owner(payload,admission,source,source_admission,resource_budget_bytes,
+                                          'resume_bound_itch_source')
+        return cls._advanced_owner(owner,admission),ItchSourceBoundary(int(size),sha256)
+
+    @classmethod
+    def _advanced_owner(cls,owner,admission):
+        result=cls.__new__(cls)
+        result._owner=owner
         result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
         return result
+
     @classmethod
     def resume_partial_binary_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
         """Resume whole BinaryFile frames and return a receipt for the unfinished frame."""

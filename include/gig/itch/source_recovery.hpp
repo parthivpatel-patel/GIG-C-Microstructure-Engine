@@ -24,6 +24,19 @@ struct SourceRecoveryAdmission {
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
     std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
+struct SourceRecoveryBoundary {
+    std::size_t decoded_bytes;
+    Sha256Digest decoded_sha256;
+};
+struct BoundSourceRecovery {
+    SyntheticReconstructor owner;
+    SourceRecoveryBoundary boundary;
+};
+// Return the exact BinaryFile bytes consumed from byte zero of the supplied
+// container. For gzip this receipt is emitted only after all trailers verify.
+gig::Result<BoundSourceRecovery> resume_source_with_boundary(std::span<const std::byte> checkpoint,
+    const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
+    std::pmr::memory_resource* =std::pmr::get_default_resource()) noexcept;
 struct PartialBinaryTail {
     Location next_location;
     std::size_t source_offset;  // Relative to the supplied container, not the source's absolute cursor.

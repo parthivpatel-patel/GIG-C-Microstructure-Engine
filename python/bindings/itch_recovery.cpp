@@ -16,6 +16,13 @@ itch::Sha256Digest digest(py::handle h){auto s=text(h,64);if(s.size()!=64)bad(Er
 }
 itch::SourceIdentity capture_id(py::handle h){auto v=itch::SourceIdentity::make(text(h,128));if(!v)bad(ErrorCode::malformed,"itch.capture_identity");return *v.data;}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
+itch::SyntheticReconstructor bound_source_owner(std::span<const std::byte> checkpoint,
+    const itch::DurableAdmission& admission,std::span<const std::byte> source,
+    const itch::SourceRecoveryAdmission& spec,itch::SourceRecoveryBoundary& boundary,TrackedResource& memory){
+ auto result=take(itch::resume_source_with_boundary(checkpoint,admission,source,spec,&memory));
+ boundary=result.boundary;
+ return std::move(result.owner);
+}
 itch::SyntheticReconstructor partial_source_owner(std::span<const std::byte> checkpoint,
     const itch::DurableAdmission& admission,std::span<const std::byte> source,
     const itch::SourceRecoveryAdmission& spec,itch::PartialBinaryTail& tail,TrackedResource& memory){
@@ -43,6 +50,11 @@ public:
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(itch::restore_durable_checkpoint(b,a,&memory_))){}
 #ifdef GIG_PYTHON_ITCH_SOURCE_RECOVERY
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission a,std::size_t budget,std::span<const std::byte>s,const itch::SourceRecoveryAdmission&source,bool complete=false):memory_(std::pmr::get_default_resource(),budget),admission_(a),engine_(take(complete?itch::resume_complete_source(b,a,s,source,&memory_):itch::resume_hot_source(b,a,s,source,&memory_))){}
+ ItchRecovery(std::span<const std::byte> checkpoint,itch::DurableAdmission admission,std::size_t budget,
+              std::span<const std::byte> source,const itch::SourceRecoveryAdmission& spec,
+              itch::SourceRecoveryBoundary& boundary)
+ :memory_(std::pmr::get_default_resource(),budget),admission_(admission),
+  engine_(bound_source_owner(checkpoint,admission,source,spec,boundary,memory_)) {}
  template<class Tail>
  ItchRecovery(std::span<const std::byte>b,itch::DurableAdmission admission,std::size_t budget,
               std::span<const std::byte> source,const itch::SourceRecoveryAdmission& spec,
@@ -121,6 +133,18 @@ void bind_itch_recovery(py::module_&m){
   const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
   itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
   return py::cast(std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,blob(source,32U*1024U*1024U),s));
+ });});
+ m.def("resume_bound_itch_source",[](py::handle bytes,py::handle artifact,py::handle contract,py::handle code,py::handle capture,py::handle generation,py::handle budget,py::handle source,py::handle source_hash,py::handle container,py::handle frame,py::handle ordinal){return api([&](){
+  auto n=read<std::size_t>(budget);if(n==0||n>256U*1024U*1024U)bad(ErrorCode::capacity,"itch.resource_budget");
+  itch::DurableAdmission a{digest(artifact),digest(contract),read<Digest>(code),capture_id(capture),read<std::uint64_t>(generation)};
+  const auto kind=read<unsigned>(container);if(kind>static_cast<unsigned>(itch::RecoveryContainer::gzip_members))bad(ErrorCode::unsupported,"itch.source_container");
+  const auto offset=read<std::uint64_t>(frame);if(offset>UINT64_MAX-2)bad(ErrorCode::overflow,"itch.source_position");
+  itch::SourceRecoveryAdmission s{static_cast<itch::RecoveryContainer>(kind),digest(source_hash),a.capture,a.generation,{itch::ByteOffset{offset},itch::ByteOffset{offset+2},itch::RecordOrdinal{read<std::uint64_t>(ordinal)}}};
+  itch::SourceRecoveryBoundary boundary{};
+  auto owner=std::make_unique<ItchRecovery>(blob(bytes,itch::durable_max_bytes),a,n,
+                                            blob(source,32U*1024U*1024U),s,boundary);
+  const auto hash=itch::hex_digest(boundary.decoded_sha256);
+  return py::make_tuple(py::cast(std::move(owner)),write(boundary.decoded_bytes),py::str(hash.data(),hash.size()));
  });});
  const auto bind_partial=[&m]<class Tail>(const char* name,itch::RecoveryContainer container){
   m.def(name,[container](py::handle bytes,py::handle artifact,py::handle contract,
