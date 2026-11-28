@@ -77,6 +77,27 @@ with patch('sqlite3.connect',side_effect=lambda *a,**kw:connect(*a,**kw,factory=
    with self.assertRaises(ValueError):s.recover()
   with tempfile.TemporaryDirectory() as d:
    s=ObservationStore(d,clock=lambda:100.,retention_seconds=10);s.append('a'*32,self.events());self.assertEqual(ObservationStore(d,clock=lambda:110.,retention_seconds=86400).recover(),[])
+ def test_expiration_cannot_hide_a_corrupted_retained_record(self):
+  with tempfile.TemporaryDirectory() as d:
+   now=[100.]
+   s=ObservationStore(d,clock=lambda:now[0],retention_seconds=10)
+   s.append('a'*32,self.events(2))
+   with sqlite3.connect(s.path) as db:db.execute('UPDATE records SET payload=? WHERE receipt=1',(b'corrupt',))
+   now[0]=111.
+   with self.assertRaisesRegex(ValueError,'observation_corrupt_chain'):s.prune()
+   with self.assertRaisesRegex(ValueError,'observation_corrupt_chain'):s.append('a'*32,self.events(3)[2:])
+   self.assertEqual(s.summary()['records'],2)
+   self.assertEqual(s.cached['records'],2)
+
+ def test_truncated_ledger_cannot_be_extended_or_pruned(self):
+  with tempfile.TemporaryDirectory() as d:
+   s=ObservationStore(d);rows=self.events(3);s.append('a'*32,rows[:2])
+   with sqlite3.connect(s.path) as db:db.execute('DELETE FROM records WHERE receipt=2')
+   with self.assertRaisesRegex(ValueError,'observation_truncated_tail'):s.append('a'*32,rows[2:])
+   with self.assertRaisesRegex(ValueError,'observation_truncated_tail'):s.prune()
+   self.assertEqual(s.summary()['records'],1)
+   self.assertEqual(s.cached['records'],2)
+
  def test_source_rejection_cannot_publish_partial_accepted_state(self):
   with tempfile.TemporaryDirectory() as d:
    s=ObservationStore(d);c=client();c.store=s;c.capture_id='a'*32;ready(c);before=copy.deepcopy(c.view());s.before_commit=lambda:(_ for _ in ()).throw(OSError('authored disk failure'))

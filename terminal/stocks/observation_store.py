@@ -101,6 +101,10 @@ class ObservationStore:
   if event.get('origin')not in('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE'):raise ValueError('observation_origin')
   if event['origin']=='OBSERVED_OFFICIAL_RESPONSE' and (not self.allow_observed or not policy['observed_allowed']):raise ValueError('observation_retention_not_approved')
   return value
+ def _verified_record(self,row,previous):
+  capture,receipt,created,expires,raw,parent,digest=row
+  if parent!=previous or type(digest)is not str or not re.fullmatch('[0-9a-f]{64}',digest) or self.digest(previous,raw)!=digest:raise ValueError('observation_corrupt_chain')
+  return self._payload(raw,capture,receipt,created,expires)
  def trim(self,db):
   self._admit_rows(db,MAX_RECORDS+128,MAX_BYTES+128*MAX_RECORD_BYTES)
   rows=list(db.execute('SELECT ordinal,expires,length(payload),digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+128,)));total=sum(r[2] for r in rows);count=len(rows);last=None
@@ -109,10 +113,24 @@ class ObservationStore:
    if row[0]>expired_through and count<=MAX_RECORDS and total<=MAX_BYTES:break
    total-=row[2];count-=1;last=row
   if last:
-   db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('anchor',last[3]));db.execute('DELETE FROM records WHERE ordinal<=?',(last[0],))
+   # Verify discarded bytes before turning their last digest into the new trust
+   # anchor. Expiration must not turn an unreadable ledger into a valid suffix.
+   previous=self._metadata(db)['anchor']
+   for row in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records WHERE ordinal<=? ORDER BY ordinal',(last[0],)):
+    self._verified_record(row,previous)
+    previous=row[-1]
+   following=db.execute('SELECT previous FROM records WHERE ordinal>? ORDER BY ordinal LIMIT 1',(last[0],)).fetchone()
+   if following is not None and following[0]!=previous:raise ValueError('observation_corrupt_chain')
+   db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('anchor',previous));db.execute('DELETE FROM records WHERE ordinal<=?',(last[0],))
  def prune(self):
   with self.lock:
-   with self.connect() as db:db.execute('BEGIN IMMEDIATE');self.trim(db);new_cached=self._summary(db)
+   with self.connect() as db:
+    db.execute('BEGIN IMMEDIATE')
+    meta=self._metadata(db)
+    last=db.execute('SELECT digest FROM records ORDER BY ordinal DESC LIMIT 1').fetchone()
+    if (last[0] if last else meta['anchor'])!=meta['tail']:raise ValueError('observation_truncated_tail')
+    self.trim(db)
+    new_cached=self._summary(db)
    self.cached=new_cached
  def append(self,capture,events,*,control=None):
   if type(capture) is not str or not re.fullmatch('[0-9a-f]{32}',capture) or not 1<=len(events)<=128:raise ValueError('observation_batch')
@@ -133,6 +151,7 @@ class ObservationStore:
      if rows[0][0]!=int(meta['receipt'])+1:raise ValueError('observation_receipt_order')
     elif db.execute('SELECT 1 FROM records WHERE capture=? LIMIT 1',(capture,)).fetchone():raise ValueError('observation_retired_capture')
     last=db.execute('SELECT digest FROM records ORDER BY ordinal DESC LIMIT 1').fetchone();previous=last[0] if last else meta['anchor']
+    if previous!=meta['tail']:raise ValueError('observation_truncated_tail')
     for receipt,created,raw in rows:
      digest=self.digest(previous,raw);db.execute('INSERT INTO records(capture,receipt,created,expires,payload,previous,digest) VALUES(?,?,?,?,?,?,?)',(capture,receipt,created,created+self.ttl,raw,previous,digest));previous=digest
     db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('capture',capture));db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('receipt',str(rows[-1][0])));self.trim(db);db.execute('INSERT OR REPLACE INTO meta VALUES(?,?)',('tail',previous));new_cached=self._summary(db)
@@ -159,9 +178,9 @@ class ObservationStore:
  def _recover_rows(self,db,*,materialize=True):
   self._admit_rows(db);meta=self._metadata(db);previous=meta['anchor'];result=[]
   seen=set();last_capture=None;last_receipt=None
-  for capture,receipt,created,expires,raw,parent,digest in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
-   if parent!=previous or type(digest)is not str or not re.fullmatch('[0-9a-f]{64}',digest) or self.digest(previous,raw)!=digest:raise ValueError('observation_corrupt_chain')
-   value=self._payload(raw,capture,receipt,created,expires)
+  for row in db.execute('SELECT capture,receipt,created,expires,payload,previous,digest FROM records ORDER BY ordinal LIMIT ?',(MAX_RECORDS+1,)):
+   capture,receipt,_,expires,_,_,digest=row
+   value=self._verified_record(row,previous)
    if capture==last_capture:
     if receipt!=last_receipt+1:raise ValueError('observation_receipt_order')
    else:
