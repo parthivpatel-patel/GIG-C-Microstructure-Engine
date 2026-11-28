@@ -3,7 +3,7 @@ import type {Fraction} from './contracts.ts';import type {ResearchSource} from '
 type WireMetadata={x?:string;bx?:string;ax?:string;z?:string;i?:string;conditions?:string[]|null};
 type HistoricalSourceRow={timestamp:string;source_timestamp_ns:string;source_record_sha256:string;source_timestamp_text?:string;wire_metadata?:WireMetadata;close?:string;bid?:string;ask?:string;bid_size?:string;ask_size?:string;price?:string;size?:string;[key:string]:unknown};
 export type HistoricalCore={schema:string;symbol:string;kind:string;feed:string;origin:string;adjustment:string;canonical_sha256:string;record_count:number;freshness:string;duplicate_records_removed:number;source_records:{endpoint:string;sha256:string;page:number;records:number;received_at:string}[];records:HistoricalSourceRow[];query:Record<string,string|number>;has_more:boolean;complete_history:false;received_at:string};
-export type HistoricalAnalysis={schema:string;source_revision:string;symbol:string;origin:string;feed:string;adjustment:string;canonical_sha256:string;record_count:number;eligible_return_count:number;parameters:{window:number;gap_policy:string;max_gap_seconds:number|null};series:{timestamp:string;source_timestamp_ns:string;close:string;simple_return:Fraction|null;log_return:number|null;trailing_sma:Fraction|null;rolling_log_variation:number|null;close_drawdown:Fraction;source_volume:string}[];summary:Record<string,number|Fraction|null>;source_records:{endpoint:string;page:number;sha256:string;records:number;received_at:string}[];received_at:string;limitations:string[];units:Record<string,string>};
+export type HistoricalAnalysis={schema:string;source_revision:string;symbol:string;origin:string;feed:string;adjustment:string;canonical_sha256:string;record_count:number;eligible_return_count:number;parameters:{window:number;gap_policy:string;max_gap_seconds:number|null};series:{timestamp:string;source_timestamp_ns:string;close:string;simple_return:Fraction|null;log_return:number|null;trailing_sma:Fraction|null;rolling_log_variation:number|null;close_drawdown:Fraction;source_volume:string}[];summary:Record<string,number|Fraction|null>;source_records:{endpoint:string;page:number;sha256:string;records:number;received_at:string}[];received_at:string;gap_candidates?:{before_index:number;elapsed_ns:string;authority:string}[];limitations:string[];units:Record<string,string>};
 function checkWireMetadata(value:unknown){
  if(value===undefined)return;
  if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Historical source metadata rejected');
@@ -35,11 +35,32 @@ export function historicalQuoteSource(c:HistoricalCore):ResearchSource{
  return {id:'historical-quotes:'+c.canonical_sha256,origin:c.origin,provider:'alpaca / '+c.feed+' / HISTORICAL QUOTES',coverage:`${c.symbol} · ${c.record_count} historical quotes · ${excluded} zero/crossed quotes ineligible for geometry · not current/live`,symbols:[c.symbol],books:[],events:[],quotes,notes:['Only reported historical best quotes;never depth,queues or signed flow.','Exact source decimals scaled by10^12 for geometry;source rows and units remain authoritative.',`Source revision ${c.canonical_sha256};receive ${c.received_at};display ordinals are not exchange sequence numbers.`]};
 }
 
-export type HistoricalComparison={schema:string;state:string;timestamps_ns:string[];symbols:string[];source_revisions:string[];series:{symbol:string;percentage_change:Fraction[]}[];policy:string};
+export type HistoricalComparison={schema:string;state:string;excluded_shared_endpoints_before_gap?:number;timestamps_ns:string[];symbols:string[];source_revisions:string[];series:{symbol:string;percentage_change:Fraction[]}[];policy:string};
 export function historicalComparison(raw:unknown,analyses:HistoricalAnalysis[]):HistoricalComparison{
  const c=raw as HistoricalComparison;
  if(!c||c.schema!=='gig.historical.comparison.v1'||!['AVAILABLE','INSUFFICIENT_SHARED_ENDPOINTS'].includes(c.state)||!Array.isArray(c.symbols)||c.symbols.length<2||c.symbols.length>4||new Set(c.symbols).size!==c.symbols.length||!Array.isArray(c.source_revisions)||c.source_revisions.length!==c.symbols.length||c.symbols.some((s,i)=>s!==analyses[i]?.symbol||c.source_revisions[i]!==analyses[i]?.source_revision)||!Array.isArray(c.timestamps_ns)||c.timestamps_ns.length>256||!Array.isArray(c.series)||c.series.length!==c.symbols.length||typeof c.policy!=='string')throw Error('Historical comparison scope rejected');
  let prior=-1n;for(const t of c.timestamps_ns){if(typeof t!=='string'||! /^\d{1,19}$/.test(t)||BigInt(t)<=prior||analyses.some(a=>!a.series.some(r=>r.source_timestamp_ns===t)))throw Error('Historical comparison time rejected');prior=BigInt(t)}
+ const excluded=c.excluded_shared_endpoints_before_gap;
+ const gapPolicy=analyses[0]?.parameters.gap_policy;
+ if(excluded!==undefined&&(!Number.isSafeInteger(excluded)||excluded<1||excluded+c.timestamps_ns.length>256||gapPolicy!=='break')){
+  throw Error('Historical comparison gap scope rejected');
+ }
+ if(gapPolicy==='break'&&analyses.every(a=>Array.isArray(a.gap_candidates))){
+  const boundaries=analyses.flatMap(a=>{
+   const last=a.gap_candidates?.at(-1);
+   if(!last)return [];
+   const sample=a.series[last.before_index];
+   if(!sample)throw Error('Historical comparison gap boundary rejected');
+   return [BigInt(sample.source_timestamp_ns)];
+  });
+  const shared=analyses[0].series.map(r=>r.source_timestamp_ns)
+    .filter(t=>analyses.every(a=>a.series.some(row=>row.source_timestamp_ns===t)));
+  const latest=boundaries.reduce((best,current)=>current>best?current:best,0n);
+  const effective=shared.filter(t=>BigInt(t)>=latest);
+  if(shared.length-effective.length!==(excluded??0)||JSON.stringify(c.timestamps_ns)!==JSON.stringify(effective)){
+   throw Error('Historical comparison crosses a declared gap');
+  }
+ }
  if((c.timestamps_ns.length>=2)!==(c.state==='AVAILABLE'))throw Error('Historical comparison coverage rejected');
  c.series.forEach((s,i)=>{if(s.symbol!==c.symbols[i]||!Array.isArray(s.percentage_change)||s.percentage_change.length!==c.timestamps_ns.length||s.percentage_change.some(v=>!v||typeof v.numerator!=='string'||typeof v.denominator!=='string'||! /^-?\d{1,128}$/.test(v.numerator)||! /^[1-9]\d{0,127}$/.test(v.denominator)||!Number.isFinite(Number(v.numerator)/Number(v.denominator))))throw Error('Historical comparison values rejected')});return c;
 }
