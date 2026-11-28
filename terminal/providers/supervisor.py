@@ -190,11 +190,21 @@ class FeedSupervisor:
         epoch=self.epoch
         self.task=asyncio.create_task(self._run(epoch),name='gig-one-public-feed')
 
+    def _require_active_permission(self):
+        enabled='GIG_LIVE_ENABLED' if self.provider=='kraken' else 'GIG_COINBASE_ENABLED'
+        try:
+            current=configured_permission(self.environment,self.provider)
+            current.require_live()
+            if current!=self.permission or self.environment.get(enabled)!='1':raise ProviderError('provider_permission_changed')
+        except ProviderError:
+            raise ProviderError('provider_permission_changed')from None
+
     async def _run(self,epoch):
         attempt=0
         while epoch==self.epoch and not self.stop_event.is_set():
             self.pending=True
             try:
+                self._require_active_permission()
                 self._new_book()
                 self.state,self.reason='SYNCHRONIZING','fresh_snapshot_required'
                 deadline=self.clock()+15_000_000_000;stable_since=None
@@ -212,6 +222,7 @@ class FeedSupervisor:
                         first=await anext(stream)
                     raw=first
                     while epoch==self.epoch and not self.stop_event.is_set():
+                        self._require_active_permission()
                         self.pending=False
                         if self.messages>=1_000_000_000:raise ProviderError('session_record_budget')
                         now=self.clock();unix=str(self.wall_clock())
@@ -295,7 +306,7 @@ class FeedSupervisor:
                 if epoch!=self.epoch:return
                 self.failures+=1;self.consecutive_failures+=1
                 self.reason=error.code if isinstance(error,ProviderError) else 'provider_transport_or_integrity_failure'
-                terminal=isinstance(error,ProviderError) and error.code=='session_record_budget'
+                terminal=isinstance(error,ProviderError) and error.code in ('session_record_budget','provider_permission_changed')
                 self.state='ERROR' if terminal else 'RESYNCING'
                 if self.adapter:self.adapter.disconnected()
                 self.received_at_ns=self.exchange_ns=None
@@ -314,6 +325,15 @@ class FeedSupervisor:
     def view(self):
         now=self.clock()
         trusted=self.state in ('LIVE_VERIFIED','TESTED_WITH_FIXTURES')
+        if trusted and self.observed_transport:
+            try:self._require_active_permission()
+            except ProviderError:
+                trusted=False
+                self.state,self.reason='ERROR','provider_permission_changed'
+                self.received_at_ns=self.exchange_ns=None
+                self.joint_sources={}
+                if self.coordinator:self.coordinator.disconnected()
+                if self.task and not self.task.done():self.task.cancel()
         joint=None
         if self.coordinator:
             try:joint=self.coordinator.view(now)

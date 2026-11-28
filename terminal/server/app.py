@@ -587,6 +587,8 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         from terminal.stocks.iex_backfill import backfill,gaps
         if request.method=='GET':
             if request.query_params:return error('IEX_BACKFILL_QUERY','no query parameters accepted',422)
+            try:stock_live.require()
+            except ValueError:return {'schema':'gig.iex.backfill_candidates.v1','gaps':[]}
             return {'schema':'gig.iex.backfill_candidates.v1','gaps':gaps(stock_live)}
         data=await bounded_json(request)
         if not {'gap_id'}<=set(data)<= {'gap_id','max_pages','after_revision'}:
