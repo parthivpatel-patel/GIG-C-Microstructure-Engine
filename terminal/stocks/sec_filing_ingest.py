@@ -176,7 +176,10 @@ class FilingIngestor:
      if local not in available or available[local]['type']!='file'or available[local]['size']!=len(resource['body']):raise IngestError('sec_ingest_dependency_binding')
    docs=[{'uri':sources[k]['url'],'raw':sources[k]['body'],'sha256':sources[k]['sha256']}for k in plan['document_keys']]
    entry={'raw':raw['body'],'manifest':manifest,'concepts':selected_concepts(plan['gaap_namespace']),'instance_uri':raw['url'],'documents':docs}
-   if 'inline_manifest'in plan:entry['inline_documents']=self._inline_inputs(plan,sources,available,prefix)
+   if 'inline_manifest'in plan:
+    entry['inline_documents']=self._inline_inputs(plan,sources,available,prefix)
+   elif parse_xml(raw['body']).name==tag('http://www.w3.org/1999/xhtml','html'):
+    entry['inline_documents']=[{'uri':entry['instance_uri'],'raw':entry['raw'],'manifest':entry['manifest']}]
    if 'transformation_profile'in plan:entry['transformation_profile']=plan['transformation_profile']
    entries.append(entry)
   return entries
@@ -189,12 +192,12 @@ class FilingIngestor:
    expected=next(iter(entry['concepts'])).split('}',1)[0][1:]
    if namespaces!={expected}:raise IngestError('sec_ingest_checkpoint_taxonomy_scope')
   for entry in entries:
-   if 'inline_documents'not in entry and parse_xml(entry['raw']).name==tag(X,'xbrl'):
+   if 'inline_documents'not in entry:
     c.ingest_dts_batch([entry],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE)
    else:
     # A single acquired original is an explicit one-document set. Never repair
     # HTML or discover sibling documents from arbitrary hyperlinks.
-    c.ingest_inline_set_batch([{'documents':entry.get('inline_documents',[{'uri':entry['instance_uri'],'raw':entry['raw'],'manifest':entry['manifest']}]),'concepts':entry['concepts'],'taxonomy_documents':entry['documents']}],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE,transformation_profile=entry.get('transformation_profile'))
+    c.ingest_inline_set_batch([{'documents':entry['inline_documents'],'concepts':entry['concepts'],'taxonomy_documents':entry['documents']}],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE,transformation_profile=entry.get('transformation_profile'))
   return c
  async def discover_filings(self,*,start,end,max_shards=2,max_filings=8):
   """Explicit bounded metadata scan. Returns a plan; never executes filings.
@@ -272,6 +275,8 @@ class FilingIngestor:
        inline_keys.append(key)
       temporary={'inline_manifest':inline_manifest,'inline_manifest_sha256':digest(inline_manifest),'inline_keys':inline_keys,'metadata':row,'instance_key':instance,'amends_accession':amends_accession}
       entry['inline_documents']=self._inline_inputs(temporary,stage,items,prefix)
+     elif root.name==tag('http://www.w3.org/1999/xhtml','html'):
+      entry['inline_documents']=[{'uri':entry['instance_uri'],'raw':entry['raw'],'manifest':entry['manifest']}]
      docs={};graph=None
      for _ in range(17):
       graph=self._graph(entry,list(docs.values()))
