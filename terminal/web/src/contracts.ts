@@ -1,4 +1,4 @@
-import {partialSourceTail} from './itchSession.ts';
+import {completedItchSource,partialSourceTail} from './itchSession.ts';
 export type Origin='LIVE_OBSERVED'|'LIVE_DELAYED'|'HISTORICAL_OBSERVED'|'HISTORICAL_SYNTHETIC'|'SIMULATED'|'ESTIMATED'|'UNAVAILABLE';
 export type Mode='HISTORICAL_REPLAY'|'SIMULATION'|'LIVE';
 export interface Fraction {numerator:string;denominator:string}
@@ -29,6 +29,7 @@ export function validateState(value:unknown):TerminalState {
  }
  const state=value as unknown as TerminalState;
  partialSourceTail(state);
+ completedItchSource(state);
  return state;
 }
 

@@ -20,6 +20,7 @@ export function replayMinimum(state:TerminalState):number {
 
 export function replayProgress(state:TerminalState):number {
  const minimum=replayMinimum(state);
+ if(state.capabilities?.itch_source_finished===true)return 100;
  return state.event_count>minimum?(state.position-minimum)/(state.event_count-minimum)*100:0;
 }
 
@@ -64,4 +65,28 @@ export function partialSourceTail(state:TerminalState):PartialSourceTail|null {
   residual_sha256:String(row.residual_sha256),
   decompressed_sha256:gzip?String(row.decompressed_sha256):null,
  };
+}
+
+type CompletedSource={
+ capsule_sha256:string;
+ source_sha256:string;
+ checkpoint_sha256:string;
+ container:'binary_file'|'single_gzip';
+ source_records:string;
+ exchange_completeness:false;
+};
+
+export function completedItchSource(state:TerminalState):CompletedSource|null{
+ const source=state.provenance.completed_source as CompletedSource|undefined;
+ if(state.capabilities?.itch_source_finished!==true&&source===undefined)return null;
+ const validHash=(value:unknown)=>typeof value==='string'&&/^[0-9a-f]{64}$/.test(value);
+ if(!source||state.capabilities?.itch_source_finished!==true||state.capabilities?.itch_completion_available!==true||
+    state.mode!=='HISTORICAL_REPLAY'||state.origin!=='HISTORICAL_SYNTHETIC'||state.provider!=='authored-itch'||
+    state.provenance.dataset!=='itch-completed-v1'||state.provenance.session_segment!==source.capsule_sha256||
+    state.playing||state.position!==state.event_count||state.replay_min_position!==state.position||
+    state.feed.state!=='COMPLETE'||state.feed.capture_complete!==true||
+    !validHash(source.capsule_sha256)||!validHash(source.source_sha256)||!validHash(source.checkpoint_sha256)||
+    source.source_records!==String(state.position)||!['binary_file','single_gzip'].includes(source.container)||
+    source.exchange_completeness!==false)throw Error('Invalid completed ITCH source receipt');
+ return source;
 }
