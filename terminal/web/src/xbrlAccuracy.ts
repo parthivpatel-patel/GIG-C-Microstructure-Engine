@@ -9,7 +9,12 @@ export type Mapping={kind:string;concept:string;accounting_metric:null;basis:str
 export type DuplicateDiagnostic={profile:'DUPLICATE_ACCURACY_DIAGNOSTICS_V1';status:string;source_fact_ids:string[];numeric_values_equal:boolean|null;intersection_interval:Interval|null;facts:{source_fact_id:string;reported_value:string|null;interval:Interval|null}[];selection_policy:string};
 export type AccuracyRow=Omit<XbrlRow,'status'>&{status:XbrlRow['status']|'REPORTED_EXTENSION';statement_mapping:Mapping;duplicate_diagnostic?:DuplicateDiagnostic|null;accuracy:RowAccuracy|null;mapping_diagnostics:string[];numeric_facts:{source_fact_id:string;concept:string;value:string|null;declared_type:string;resolved_numeric_base:string;numeric_profile:string;derived_from:string;filing_accession:string;instance_sha256:string}[]};
 export type AccuracyCheck={parent?:string;status:string;issues?:string[];accuracy_validation:null|{profile:string;status:string;reason:string|null;parent_interval:Interval|null;weighted_sum_interval:Interval|null;residual_interval:Interval|null;terms:{concept:string;weight:number;source_fact_ids:string[];weighted_interval:Interval}[]};exact_diagnostic:null|{status:string;reported:Rational;weighted_sum:Rational;residual:Rational}};
-export type AccuracyCompany=Omit<XbrlCompany,'schema'|'statement_view'>&{schema:'gig.backend.company_xbrl.v2';profile:'accuracy-extension-v2';statement_view:Omit<XbrlCompany['statement_view'],'schema'|'periods'>&{schema:'gig.sec.xbrl.statement_view.v2';profile:'accuracy-extension-v2';relationships:{from:string;to:string}[];mapping_policy?:string;source_contexts:Record<string,{semantic_sha256:string;period:{kind:string;start:string|null;end:string|null};dimensions:unknown[];opaque_segment:unknown[]}>;source_units:Record<string,{semantic_sha256:string;numerator:string[];denominator:string[]}>;periods:{start:string|null;end:string;kind:string;rows:AccuracyRow[];calculations:AccuracyCheck[]}[]}};
+type DimensionalAdmission={
+ profile:'ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13'|'DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14';
+ accession:string;selected_instance_sha256:string;dts_sha256:string;proof_sha256:string;
+ admitted_fact_count:number;valid_role_assignments:number;complete_drs_validation:false;dimensional_values_promoted:false;
+};
+export type AccuracyCompany=Omit<XbrlCompany,'schema'|'statement_view'>&{schema:'gig.backend.company_xbrl.v2';profile:'accuracy-extension-v2';dimensional_admission?:DimensionalAdmission;statement_view:Omit<XbrlCompany['statement_view'],'schema'|'periods'>&{schema:'gig.sec.xbrl.statement_view.v2';profile:'accuracy-extension-v2';relationships:{from:string;to:string}[];mapping_policy?:string;source_contexts:Record<string,{semantic_sha256:string;period:{kind:string;start:string|null;end:string|null};dimensions:unknown[];opaque_segment:unknown[]}>;source_units:Record<string,{semantic_sha256:string;numerator:string[];denominator:string[]}>;periods:{start:string|null;end:string;kind:string;rows:AccuracyRow[];calculations:AccuracyCheck[]}[]}};
 function bad():never{throw Error('Invalid accuracy/extension statement contract')}
 const text=(v:unknown,n=640):v is string=>typeof v==='string'&&v.length<=n;
 const hash=(v:unknown)=>typeof v==='string'&&/^[0-9a-f]{64}$/.test(v);
@@ -25,6 +30,18 @@ function accuracy(a:RowAccuracy,row:AccuracyRow){
 export function validateAccuracyXbrl(raw:unknown,symbol:string,cik:string|null):AccuracyCompany{
  const p=raw as AccuracyCompany,s=p?.statement_view;
  if(!p||p.schema!=='gig.backend.company_xbrl.v2'||p.profile!=='accuracy-extension-v2'||!s||s.schema!=='gig.sec.xbrl.statement_view.v2'||s.profile!==p.profile||!s.source_contexts||typeof s.source_contexts!=='object'||Array.isArray(s.source_contexts)||Object.keys(s.source_contexts).length>512||!s.source_units||typeof s.source_units!=='object'||Array.isArray(s.source_units)||Object.keys(s.source_units).length>128||!Array.isArray(s.periods)||s.periods.length>12)bad();
+ const dimensional=p.dimensional_admission;
+ if(dimensional!==undefined){
+  if(!dimensional||!['ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13','DIRECT_CLOSED_TYPED_TEMPORAL_HYPERCUBE_V14'].includes(dimensional.profile)||
+     dimensional.accession!==s.source_filing?.accession||dimensional.selected_instance_sha256!==s.selected_instance_sha256||
+     !hash(dimensional.selected_instance_sha256)||!hash(dimensional.dts_sha256)||!hash(dimensional.proof_sha256)||
+     !Number.isSafeInteger(dimensional.admitted_fact_count)||dimensional.admitted_fact_count<0||dimensional.admitted_fact_count>4096||
+     !Number.isSafeInteger(dimensional.valid_role_assignments)||dimensional.valid_role_assignments<0||
+     (dimensional.profile==='ORIGINAL_DTS_ALTERNATIVE_CLOSED_EXPLICIT_V13'?
+      dimensional.valid_role_assignments<dimensional.admitted_fact_count||dimensional.valid_role_assignments>8*dimensional.admitted_fact_count:
+      dimensional.valid_role_assignments!==0)||
+     dimensional.complete_drs_validation!==false||dimensional.dimensional_values_promoted!==false)bad();
+ }
  // Reuse unchanged V1 structural admission on a detached projection. The actual
  // V2 data and raw facts remain untouched and their own hashes are verified below.
  const projected=structuredClone(p) as unknown as XbrlCompany;projected.schema='gig.backend.company_xbrl.v1';projected.statement_view.schema='gig.sec.xbrl.statement_view.v1';

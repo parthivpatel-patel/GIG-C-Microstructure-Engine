@@ -34,7 +34,22 @@ def company_contract(workspace,symbol,as_of,*,role=None,form='10-K',profile='leg
  result={'schema':'gig.backend.company_xbrl.v1','instrument':identity,'data_origin':statement['origin'],'statement_view':statement,'read_only':True,'provider_requested':False,'limitations':['Supplied XBRL profile,not complete financial statements or history','No companyfacts replacement or source authentication inferred','Missing source receipt stays unknown;exact values are not browser recalculations']}
  coordinator=workspace.filing_ingestors.get(symbol)
  if coordinator is not None:result['source_ingestion']={**coordinator.status(),'collection_sha256':coordinator.collection._identity(coordinator.collection._filings),'installed_collection_matches':collection is not None and coordinator.collection._identity(coordinator.collection._filings)==statement['collection_sha256']}
- if profile=='accuracy-extension-v2':result['schema']='gig.backend.company_xbrl.v2';result['profile']=profile
+ if profile=='accuracy-extension-v2':
+  result['schema']='gig.backend.company_xbrl.v2';result['profile']=profile
+  source=statement['source_filing']
+  if collection is not None and source is not None:
+   value=collection._filings[source['accession']]
+   retained=value.get('dts_corroboration',{})
+   proof=retained.get('dimensional_validation')
+   if proof is not None:
+    from .xbrl_dimensions import ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE
+    if proof['profile'] in (ALTERNATIVE_CROSS_ROLE_PROFILE,TYPED_TEMPORAL_PROFILE):
+     rows=proof['facts']
+     result['dimensional_admission']={
+      'profile':proof['profile'],'accession':source['accession'],'selected_instance_sha256':value['canonical_sha256'],
+      'dts_sha256':retained['dts_sha256'],'proof_sha256':digest(proof),'admitted_fact_count':len(rows),
+      'valid_role_assignments':sum(sum(a['valid'] for a in row.get('alternatives',())) for row in rows),
+      'complete_drs_validation':False,'dimensional_values_promoted':False}
  result['sha256']=digest(result)
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('xbrl_product_output_budget')
  return result
