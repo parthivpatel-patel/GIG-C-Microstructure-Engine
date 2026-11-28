@@ -9,9 +9,9 @@ def analyze(quote):
         b=decimal_wire(quote['bid'],maximum=PRICE_MAX,scale=scale)[0];a=decimal_wire(quote['ask'],maximum=PRICE_MAX,scale=scale)[0]
         bs=decimal_wire(quote['bid_size'],maximum=UINT64_MAX,scale=scale)[0];az=decimal_wire(quote['ask_size'],maximum=UINT64_MAX,scale=scale)[0]
         if not all(int(v)>0 for v in (b,a,bs,az)):return {'status':'UNAVAILABLE','reason':'positive_two_sided_quote_and_reported_sizes_required'}
-        native=gig._native.AggregateDepth(1,1048576)
-        gig._checked(native.snapshot([{'price_ticks':b,'quantity':bs}],[{'price_ticks':a,'quantity':az}],None))
-        state=gig._checked(native.state());metrics={}
+        native=gig.AggregateDepth(1)
+        native.snapshot([{'price_ticks':b,'quantity':bs}],[{'price_ticks':a,'quantity':az}])
+        state=native.state();metrics={}
         for name,v in state['metrics'].items():
             if v is None:metrics[name]=None;continue
             n=Fraction(int(v['numerator']),int(v['denominator']))

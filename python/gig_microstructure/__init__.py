@@ -272,6 +272,64 @@ def book_analytics(snapshot, depth='1'):
 def flow_analytics(quotes, trades, config, as_of):
     return ResearchDocument(_checked(_native.flow_analytics(quotes, trades, config, as_of)))
 
+class AggregateDepth:
+    """Bounded absolute price-level state with exact aggregate metrics.
+
+    Snapshots and patches use canonical decimal strings for ticks and quantity.
+    A sequence is optional; it tracks caller-supplied continuity only.
+    """
+    def __init__(self, max_levels=1024, *, resource_budget_bytes=1048576):
+        self._limits(max_levels,resource_budget_bytes)
+        self._owner=_native.AggregateDepth(max_levels,resource_budget_bytes)
+        self._max_levels=max_levels
+        self._resource_budget=resource_budget_bytes
+
+    @staticmethod
+    def _limits(max_levels,resource_budget_bytes):
+        if type(max_levels) is not int or not 1<=max_levels<=4096:
+            raise SchemaError('aggregate.max_levels')
+        if type(resource_budget_bytes) is not int or not 1<=resource_budget_bytes<=67108864:
+            raise SchemaError('aggregate.memory_budget')
+        if not hasattr(_native,'AggregateDepth'):
+            raise SchemaError('aggregate.binding_unavailable')
+
+    def snapshot(self,bids,asks,sequence=None):
+        _checked(self._owner.snapshot(bids,asks,sequence))
+
+    def update(self,bids,asks,sequence=None):
+        _checked(self._owner.update(bids,asks,sequence))
+
+    def state(self):
+        return _checked(self._owner.state())
+
+    def checkpoint(self):
+        """Return a detached native image. Provider identity is separate."""
+        return _checked(self._owner.checkpoint())
+
+    @classmethod
+    def restore(cls,image,*,max_levels,resource_budget_bytes=1048576):
+        cls._limits(max_levels,resource_budget_bytes)
+        if not hasattr(_native,'restore_aggregate'):
+            raise SchemaError('aggregate.restore_unavailable')
+        owner=_checked(_native.restore_aggregate(image,str(max_levels),str(resource_budget_bytes)))
+        instance=cls.__new__(cls)
+        instance._owner=owner
+        instance._max_levels=max_levels
+        instance._resource_budget=resource_budget_bytes
+        return instance
+
+    def fork(self):
+        if not hasattr(self._owner,'fork'):
+            return type(self).restore(self.checkpoint(),max_levels=self._max_levels,
+                                      resource_budget_bytes=self._resource_budget)
+        owner=_checked(self._owner.fork())
+        instance=type(self).__new__(type(self))
+        instance._owner=owner
+        instance._max_levels=self._max_levels
+        instance._resource_budget=self._resource_budget
+        return instance
+
+
 class Simulation:
     """Offline synthetic matching. Internal exchange truth differs from delayed client reports."""
     def __init__(self, config, *, resource_budget_bytes='134217728'):
