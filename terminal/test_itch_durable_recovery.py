@@ -23,6 +23,10 @@ class DurableItch(unittest.TestCase):
   # A real partial cancellation from the published complete-frame boundary.
   p=bytearray(23);p[0]=ord('X');p[1:3]=(1).to_bytes(2,'big');p[5:11]=(1).to_bytes(6,'big');p[11:19]=(103).to_bytes(8,'big');p[19:23]=(1).to_bytes(4,'big')
   another=self.restore();a=owner.process(bytes(p),frame_offset=self.meta['next_frame'],ordinal=self.meta['records']);b=another.process(bytes(p),frame_offset=self.meta['next_frame'],ordinal=self.meta['records']);self.assertTrue(a['committed']);self.assertEqual(a,b);self.assertEqual(owner.canonical(),another.canonical());self.assertNotEqual(owner.checkpoint(),self.payload)
+  next_status=owner.status()
+  self.assertEqual(int(next_status['next_frame']),self.meta['next_frame']+len(p)+2)
+  self.assertEqual(int(next_status['next_ordinal']),self.meta['records']+1)
+  self.assertEqual(owner.status(),next_status)
  def test_capture_generation_contract_code_and_hash_are_independent(self):
   for change in({'capture':'another'},{'generation':18},{'contract_sha256':'0'*64},{'implementation_sha256':'a'*64},{'artifact_sha256':'0'*64}):
    with self.subTest(change=change),self.assertRaises((ValueError,gig.EngineError)):self.restore(admission=dataclasses.replace(self.admission,**change))

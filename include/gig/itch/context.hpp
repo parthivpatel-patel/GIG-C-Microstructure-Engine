@@ -157,6 +157,7 @@ public:
     ContextResult disposition(const Error& source_error,Location)const noexcept;
     ContextSummary finish(ContextEnd) noexcept;
     const ContextSummary& summary()const noexcept{return summary_;}
+    Location next_location()const noexcept{return next_location_;}
     const SourceManifest& manifest()const noexcept{return manifest_;}
     std::span<const DirectoryState> directories()const noexcept{return directories_;}
     std::span<const OrderState> orders()const noexcept{return orders_;}
