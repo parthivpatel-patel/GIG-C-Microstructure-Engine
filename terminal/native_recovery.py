@@ -52,16 +52,15 @@ class NativeSourceRecovery:
         if info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:raise RecoveryError('checkpoint_private_directory')
         self.path=root/'native-source.sqlite3';fd=os.open(self.path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
         try:
-            info=os.fstat(fd);new=info.st_size==0
+            info=os.fstat(fd)
             if not stat.S_ISREG(info.st_mode)or info.st_nlink!=1 or info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:raise RecoveryError('checkpoint_private_file')
         finally:os.close(fd)
         with self._connect()as db:
-            if new:
-                db.execute('CREATE TABLE checkpoint(singleton INTEGER PRIMARY KEY CHECK(singleton=1),payload BLOB NOT NULL,digest TEXT NOT NULL)');db.execute('PRAGMA user_version=1');db.execute(f'PRAGMA application_id={APP_ID}');db.commit()
-            elif db.execute('PRAGMA user_version').fetchone()[0]!=1 or db.execute('PRAGMA application_id').fetchone()[0]!=APP_ID:raise RecoveryError('checkpoint_database_contract')
-            saved=self._read(db)
+            db.execute('BEGIN')
+            initialized=self._database_initialized(db)
+            saved=self._read(db) if initialized else None
         if saved is None:
-            if not new:raise RecoveryError('checkpoint_missing_committed_state')
+            if initialized:raise RecoveryError('checkpoint_missing_committed_state')
             native=gig.Replay(rules,config,limits=limits,resource_budget_bytes=resource_budget_bytes)
             state={'schema':'gig.native_source.state.v1','contract_sha256':self.contract_sha256,'generation':source['generation'],'capture_session':source['capture_session'],'capture_index':None,'prefix_sha256':'0'*64,'recent':[],'state':'READY','diagnostic':None,'image':native.checkpoint(),'canonical':native.canonical()}
             self._publish(state,native,initial=True)
@@ -77,6 +76,14 @@ class NativeSourceRecovery:
             yield db
         except sqlite3.Error:raise RecoveryError('checkpoint_storage_failure')from None
         finally:db.close()
+    @staticmethod
+    def _database_initialized(db):
+        version=db.execute('PRAGMA user_version').fetchone()[0]
+        application=db.execute('PRAGMA application_id').fetchone()[0]
+        if (version,application)==(1,APP_ID):return True
+        if (version,application)==(0,0) and db.execute('SELECT 1 FROM sqlite_master LIMIT 1').fetchone() is None:
+            return False
+        raise RecoveryError('checkpoint_database_contract')
     def _read(self,db):
         n=db.execute('SELECT count(*) FROM (SELECT 1 FROM checkpoint LIMIT 2)').fetchone()[0]
         if n==0:return None
@@ -110,16 +117,26 @@ class NativeSourceRecovery:
         digest=hashlib.sha256(raw).hexdigest();stage='prepare'
         with self._connect()as db:
             try:
-                db.execute('BEGIN IMMEDIATE');prior=self._read(db)
-                if (prior is not None if initial else prior is None or prior[1]!=self._digest):raise RecoveryError('checkpoint_stale_writer')
-                db.execute('INSERT OR REPLACE INTO checkpoint VALUES(1,?,?)',(raw,digest))
+                db.execute('BEGIN IMMEDIATE')
+                initialized=self._database_initialized(db)
+                if initial:
+                    if initialized:raise RecoveryError('checkpoint_stale_writer')
+                    db.execute('CREATE TABLE checkpoint(singleton INTEGER PRIMARY KEY CHECK(singleton=1),payload BLOB NOT NULL,digest TEXT NOT NULL)')
+                    db.execute('PRAGMA user_version=1')
+                    db.execute(f'PRAGMA application_id={APP_ID}')
+                    db.execute('INSERT INTO checkpoint VALUES(1,?,?)',(raw,digest))
+                else:
+                    if not initialized:raise RecoveryError('checkpoint_stale_writer')
+                    prior=self._read(db)
+                    if prior is None or prior[1]!=self._digest:raise RecoveryError('checkpoint_stale_writer')
+                    db.execute('UPDATE checkpoint SET payload=?,digest=? WHERE singleton=1',(raw,digest))
                 if self.before_commit:self.before_commit()
                 stage='commit';db.commit();stage='published'
                 if self.after_commit:self.after_commit()
             except BaseException as exc:
-                if db.in_transaction:db.rollback()
                 if stage in ('commit','published'):self.uncertain=True;self.local_reason='checkpoint_publication_uncertain'
                 elif isinstance(exc,RecoveryError)and str(exc)=='checkpoint_stale_writer':self.uncertain=True;self.local_reason='stale_checkpoint_owner'
+                if db.in_transaction:db.rollback()
                 raise
         # All fallible preparation and durable publication precede owner replacement.
         self._state,self._native,self._digest=state,native,digest
