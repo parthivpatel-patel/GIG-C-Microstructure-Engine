@@ -1,6 +1,6 @@
 import {validateState} from './contracts';import type {TerminalState} from './contracts';
 import {decoded} from './response';
-import {parseOfflineJson} from './offlineJson';
+import {parseBoundedOfflineJson,parseOfflineJson} from './offlineJson';
 export async function request<T=unknown>(path:string,body?:unknown,timeoutMs=10000,signal?:AbortSignal):Promise<T>{
  const controller=new AbortController(),cancel=()=>controller.abort();
  const timer=setTimeout(cancel,Math.min(30000,Math.max(1000,timeoutMs)));
@@ -68,7 +68,8 @@ export async function requestV2<T=unknown>(path:string,body?:unknown,signal?:Abo
  if(signal?.aborted)cancel();
  try{const headers:Record<string,string>={'Content-Type':'application/json'};
  if(body!==undefined){const proof=await decoded(await fetch('/api/v1/request-proof',{headers:{'X-GIG-Bootstrap':'same-origin-v1','X-GIG-Browser-Origin':location.origin,'X-GIG-Target':target},signal:c.signal}),c.signal);if(!/^[A-Za-z0-9_-]{43}$/.test(proof.proof))throw Error('Invalid research request proof');headers['X-GIG-Request-Proof']=proof.proof}
- return await decoded(await fetch(target,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:c.signal}),c.signal) as T;
+ const parse=path==='/sec-filings/analyze'?(text:string)=>parseBoundedOfflineJson(text,2*1024*1024,320000,36):undefined;
+ return await decoded(await fetch(target,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:headers,body:body===undefined?undefined:JSON.stringify(body),signal:c.signal}),c.signal,parse) as T;
  }finally{clearTimeout(timer);signal?.removeEventListener('abort',cancel)}
 }
 

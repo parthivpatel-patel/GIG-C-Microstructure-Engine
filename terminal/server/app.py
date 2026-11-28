@@ -760,12 +760,14 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
     @json_endpoint
     async def sec_filing_analyze(request: Request):
         from functools import partial
+        from terminal.stocks.xbrl_instance import canonical
         from terminal.stocks.financial_intelligence_product import admitted_filing_analysis
         value=await bounded_json(request)
         action=value.get('action')
         required={'symbol','as_of','form','action','collection_sha256'}
-        if action=='accounting':required.add('roles')
-        if action not in ('accounting','inline') or set(value)!=required:
+        if action in ('accounting','comparison'):required.add('roles')
+        if action=='comparison':required.add('previous_as_of')
+        if action not in ('accounting','inline','comparison') or set(value)!=required:
             return error('SEC_FILING_ANALYSIS_QUERY','explicit cutoff, filing family and analysis selection required',422)
         if analysis.busy:return error('XBRL_STATEMENT_BUSY','one bounded analytical request at a time',429)
         try:
@@ -777,9 +779,12 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
                 return error('SEC_FILING_ANALYSIS_QUERY','exact accepted collection identity required',422)
             collection=stocks.visible_xbrl_collection(symbol)
             packet=await analysis.run(partial(admitted_filing_analysis,stocks,symbol,value['as_of'],
-                                             value['form'],action,value.get('roles'),expected_collection_sha256=digest))
+                                             value['form'],action,value.get('roles'),expected_collection_sha256=digest,
+                                             previous_as_of=value.get('previous_as_of')))
             if not stocks.sec_filing_readiness(symbol)['ready'] or stocks.visible_xbrl_collection(symbol) is not collection:
                 return error('SEC_FILING_ANALYSIS_UNAVAILABLE','source or authorization changed during analysis',409)
+            if len(canonical(packet))>2*1024*1024:
+                return error('SEC_FILING_ANALYSIS_BUDGET','bounded analysis response exceeds the browser limit',422)
             return packet
         except (ValueError,TypeError,KeyError,OverflowError):
             return error('SEC_FILING_ANALYSIS_UNAVAILABLE','accepted originals or exact report relationships unavailable',422)

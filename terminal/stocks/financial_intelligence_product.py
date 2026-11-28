@@ -37,27 +37,38 @@ def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected
  return _finish(result)
 
 
-def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None,*,expected_collection_sha256):
+def admitted_filing_analysis(workspace,symbol,as_of,form,action,role_binding=None,*,expected_collection_sha256,previous_as_of=None):
  """Analyze the same authorized bytes that produced the installed collection."""
+ from .sec import acceptance_ns
  collection=workspace.visible_xbrl_collection(symbol)
  coordinator=workspace.visible_filing_ingestor(symbol)
  if collection is None or coordinator is None:
   raise XBRLError('financial_intelligence_admitted_source_required')
- selected=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view']
- source=selected['source_filing']
- identity=selected['collection_sha256']
- if identity!=expected_collection_sha256:raise XBRLError('financial_intelligence_stale_collection')
+ cutoffs=[as_of]
+ if action=='comparison':
+  if acceptance_ns(previous_as_of)>=acceptance_ns(as_of):
+   raise XBRLError('statement_comparison_cutoff_order')
+  cutoffs.insert(0,previous_as_of)
  recipes={}
- if source is not None and selected['status']!='AMBIGUOUS':
-  accession=source['accession']
-  candidate=coordinator.original_recipe(accession,inline_required=action=='inline')
-  if candidate is not None:
-   recipes[accession]=candidate
+ for cutoff in cutoffs:
+  selected=company_contract(workspace,symbol,cutoff,form=form,profile='accuracy-extension-v2')['statement_view']
+  source=selected['source_filing']
+  if selected['collection_sha256']!=expected_collection_sha256:
+   raise XBRLError('financial_intelligence_stale_collection')
+  if source is not None and selected['status']!='AMBIGUOUS':
+   accession=source['accession']
+   if accession not in recipes:
+    candidate=coordinator.original_recipe(accession,inline_required=action=='inline')
+    if candidate is not None:recipes[accession]=candidate
  if action=='inline':
   return company_inline_audit(workspace,symbol,as_of,recipes,form=form,
-                             expected_collection_sha256=identity)
+                             expected_collection_sha256=expected_collection_sha256)
+ roles={accession:role_binding for accession in recipes}
  if action=='accounting':
-  roles={accession:role_binding for accession in recipes}
   return company_source_accounting(workspace,symbol,as_of,recipes,roles,form=form,
-                                   expected_collection_sha256=identity)
+                                   expected_collection_sha256=expected_collection_sha256)
+ if action=='comparison':
+  from .xbrl_statement_comparison import company_statement_vintage_comparison
+  return company_statement_vintage_comparison(workspace,symbol,cutoffs,recipes,roles,form=form,
+                                             expected_collection_sha256=expected_collection_sha256)
  raise XBRLError('financial_intelligence_action')

@@ -1,10 +1,14 @@
 import {useEffect,useRef,useState} from 'react';
 import {requestV2} from './api';
-import {StatementComparison} from './StatementComparison';
+import {StatementComparison,StatementComparisonView} from './StatementComparison';
 import {readOfflineJson,MAX_OFFLINE_BYTES} from './offlineJson';
 import {verifySourceAccounting,verifyInlineAudit} from './financialSourceContract';
 import type {SourceAccountingPacket,InlineAuditPacket} from './financialSourceContract';
 import {createSourceImportGuard} from './sourceImportGuard';
+
+import {verifyStatementComparison} from './statementComparisonContract';
+import type {StatementComparisonPacket} from './statementComparisonContract';
+import {acceptanceNanoseconds} from './acceptanceContract';
 
 type Kind='accounting'|'inline';
 type Packet=SourceAccountingPacket|InlineAuditPacket;
@@ -54,12 +58,14 @@ export function SourceAccounting({symbol,cik}:{symbol:string;cik:string|null}){
 const statementKinds=[['balance_sheet','Balance sheet'],['income_statement','Income statement'],['cash_flow_statement','Cash flow statement']] as const;
 type RoleBinding={presentation_role:string;accounting_role:string};
 type KindKey=typeof statementKinds[number][0];
+type RetainedKind=Kind|'comparison';
 
 export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presentationRoles}:{
  symbol:string;cik:string;asOf:string;form:string;collection:string;presentationRoles:string[];
 }){
  const [roles,setRoles]=useState<Partial<Record<KindKey,RoleBinding>>>({});
- const [packet,setPacket]=useState<Packet|null>(null),[pending,setPending]=useState<Kind|null>(null);
+ const [packet,setPacket]=useState<Packet|StatementComparisonPacket|null>(null),[pending,setPending]=useState<RetainedKind|null>(null);
+ const [previous,setPrevious]=useState('');
  const [error,setError]=useState('');
  const active=useRef<AbortController|null>(null);
  useEffect(()=>()=>active.current?.abort(),[]);
@@ -69,7 +75,7 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
    return {...current,[kind]:{...row,[field]:value}};
   });
  }
- async function run(action:Kind){
+ async function run(action:RetainedKind){
   active.current?.abort();
   const controller=new AbortController();active.current=controller;
   const {signal}=controller;
@@ -78,12 +84,22 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
    const bindings=Object.fromEntries(statementKinds.map(([kind])=>[kind,{
     presentation_role:roles[kind]?.presentation_role||null,accounting_role:roles[kind]?.accounting_role||null,
    }]));
+   if(action==='comparison'&&acceptanceNanoseconds(previous)>=acceptanceNanoseconds(asOf)){
+    throw Error('An earlier acceptance cutoff is required');
+   }
    const raw=await requestV2('/sec-filings/analyze',{
-    symbol,as_of:asOf,form,action,collection_sha256:collection,...(action==='accounting'?{roles:bindings}:{}),
+    symbol,as_of:asOf,form,action,collection_sha256:collection,...(action!=='inline'?{roles:bindings}:{}),
+    ...(action==='comparison'?{previous_as_of:previous}:{}),
    },signal);
-   const result=await (action==='accounting'?verifySourceAccounting(raw,symbol,cik):verifyInlineAudit(raw,symbol,cik));
+   const result=await (action==='accounting'?verifySourceAccounting(raw,symbol,cik):
+    action==='inline'?verifyInlineAudit(raw,symbol,cik):verifyStatementComparison(raw,symbol,cik));
    if(!signal.aborted){
-    if(result.as_of!==asOf||result.collection_sha256!==collection)throw Error('Filing analysis selection changed');
+    if(result.collection_sha256!==collection)throw Error('Filing analysis selection changed');
+    if(result.schema==='gig.backend.statement_vintage_comparison.v1'){
+     if(result.entries.length!==2||result.entries[0].as_of!==previous||result.entries[1].as_of!==asOf||result.form_family!==form){
+      throw Error('Filing comparison cutoffs changed');
+     }
+    }else if(result.as_of!==asOf)throw Error('Filing analysis cutoff changed');
     setPacket(result);
    }
   }catch{
@@ -108,10 +124,16 @@ export function RetainedSourceAnalysis({symbol,cik,asOf,form,collection,presenta
    <button disabled={pending!==null||!Object.values(roles).some(row=>row?.presentation_role)}>Analyze statement roles</button>
   </form>
   <button disabled={pending!==null} onClick={()=>void run('inline')}>Analyze original inline source</button>
-  {pending&&<SourceImportFeedback kind={pending} busy error=""/>}
+  <label>Earlier acceptance cutoff<input disabled={pending!==null} maxLength={40} value={previous}
+   onChange={e=>setPrevious(e.target.value)} placeholder="2024-02-10T12:00:00Z"/></label>
+  <button disabled={pending!==null||!previous||!Object.values(roles).some(row=>row?.presentation_role)}
+   onClick={()=>void run('comparison')}>Compare cutoffs using these exact roles</button>
+  {pending==='comparison'?<p role="status">Comparing installed filing vintages…</p>:
+   pending&&<SourceImportFeedback kind={pending} busy error=""/>}
   {error&&<p role="alert">{error}</p>}
   {packet?.schema==='gig.backend.company_source_accounting.v1'&&<SourceAccountingView packet={packet}/>}
   {packet?.schema==='gig.backend.company_inline_source_audit.v1'&&<InlineAuditView packet={packet}/>}
+  {packet?.schema==='gig.backend.statement_vintage_comparison.v1'&&<StatementComparisonView packet={packet}/>}
  </details>;
 }
 
