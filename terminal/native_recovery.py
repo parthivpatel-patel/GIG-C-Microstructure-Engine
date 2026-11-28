@@ -8,7 +8,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from functools import lru_cache
 import gig_microstructure as gig
-from terminal.verification.artifacts import decode
+from terminal.verification.artifacts import decode,sync_private_parent
 
 MAX_PAYLOAD=8*1024*1024
 MAX_RECORD=65536
@@ -50,6 +50,7 @@ class NativeSourceRecovery:
         if any(p.is_symlink()for p in (root,*root.parents)):raise RecoveryError('checkpoint_symlink')
         root.mkdir(parents=True,exist_ok=True,mode=0o700);info=root.stat()
         if info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:raise RecoveryError('checkpoint_private_directory')
+        self.directory_identity=info.st_dev,info.st_ino
         self.path=root/'native-source.sqlite3';fd=os.open(self.path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
         try:
             info=os.fstat(fd)
@@ -68,6 +69,9 @@ class NativeSourceRecovery:
         else:
             state,digest=saved;native=self._restore(state);self._state=state;self._native=native;self._digest=digest
     def _check_location(self):
+        parent=self.path.parent.lstat()
+        if (parent.st_dev,parent.st_ino)!=self.directory_identity or not stat.S_ISDIR(parent.st_mode)or parent.st_uid!=os.getuid()or stat.S_IMODE(parent.st_mode)&0o077:
+            raise RecoveryError('checkpoint_directory_identity_changed')
         info=self.path.lstat()
         if (info.st_dev,info.st_ino)!=self.database_identity or not stat.S_ISREG(info.st_mode)or info.st_nlink!=1 or info.st_uid!=os.getuid()or stat.S_IMODE(info.st_mode)&0o077:
             raise RecoveryError('checkpoint_file_identity_changed')
@@ -142,6 +146,10 @@ class NativeSourceRecovery:
                     db.execute('UPDATE checkpoint SET payload=?,digest=? WHERE singleton=1',(raw,digest))
                 if self.before_commit:self.before_commit()
                 stage='commit';db.commit();stage='published'
+                if initial:
+                    try:sync_private_parent(self.path,self.directory_identity)
+                    except (OSError,ValueError,NotImplementedError):
+                        raise RecoveryError('checkpoint_directory_sync_failed')from None
                 if self.after_commit:self.after_commit()
                 self._check_location()
             except BaseException as exc:

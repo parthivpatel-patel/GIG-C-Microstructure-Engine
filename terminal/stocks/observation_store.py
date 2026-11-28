@@ -1,6 +1,6 @@
 """Opt-in private bounded SQLite observation ledger;never a hot/live book snapshot."""
 import os,stat,sqlite3,json,hashlib,time,re,threading,math
-from terminal.verification.artifacts import decode
+from terminal.verification.artifacts import decode,sync_private_parent
 from pathlib import Path
 from contextlib import contextmanager
 MAX_BYTES=16*1024*1024
@@ -25,6 +25,7 @@ class ObservationStore:
    if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or stat.S_IMODE(s.st_mode)&0o077:raise ValueError('observation_private_file')
    self.database_identity=s.st_dev,s.st_ino
   finally:os.close(fd)
+  initialized=False
   with self.connect() as db:
    # The SQLite write lock covers both the identity check and all bootstrap
    # writes. Another process can only observe an empty or a complete ledger.
@@ -37,8 +38,11 @@ class ObservationStore:
     db.execute('CREATE TABLE meta(key TEXT PRIMARY KEY,value TEXT)')
     db.executemany('INSERT INTO meta VALUES(?,?)',((key,'0'*64)for key in ('anchor','tail')))
     db.execute('PRAGMA user_version=1')
-    db.execute('PRAGMA application_id=1195984719')
+    db.execute('PRAGMA application_id=1195984719');initialized=True
    elif (version,app)!=(1,1195984719):raise ValueError('observation_schema')
+  if initialized:
+   try:sync_private_parent(self.path,self.directory_identity)
+   except (OSError,ValueError,NotImplementedError):raise ValueError('observation_directory_sync_failed')from None
   self.recover();self.prune();self.cached=self.summary()
  @contextmanager
  def connect(self):

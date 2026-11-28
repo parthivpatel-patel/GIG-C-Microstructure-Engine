@@ -102,6 +102,19 @@ def decode(raw,*,numeric_policy='finite-float'):
     except (UnicodeError,ValueError,RecursionError):raise EvidenceError('invalid_json')from None
 
 
+def sync_private_parent(path,identity):
+    """Persist a new database directory entry using its pinned private parent."""
+    from gig_microstructure.itch_capsule_store import _parent
+    descriptor,_=_parent(path,private_directory=True)
+    try:
+        info=os.fstat(descriptor)
+        if (info.st_dev,info.st_ino)!=identity:
+            raise OSError('private_parent_identity_changed')
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
 def write_private(path,value,*,maximum_bytes=256*1024,compact=False):
     path=Path(path).absolute()
     if any(p.is_symlink()for p in (path,*path.parents)):raise EvidenceError('output_symlink')
