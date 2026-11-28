@@ -80,7 +80,7 @@ def _admit(raw,expected_sha256,*,migration=False):
         partial=binary_partial or gzip_partial
         if set(row)!=basic and (version!=3 or not partial):raise ItchProductError('itch_product_source_history')
         if any(type(row[k])is not str or len(row[k])!=64 or any(c not in '0123456789abcdef'for c in row[k])for k in hashes)or any(type(row[k])is not int or not 0<=row[k]<=2**64-1 for k in numbers):raise ItchProductError('itch_product_source_history')
-        if row['container']not in SOURCE_CONTAINERSor row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
+        if row['container']not in SOURCE_CONTAINERS or row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
         if partial:
             has_partial=True
             expected_container,expected_profile,offset_key=(
