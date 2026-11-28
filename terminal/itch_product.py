@@ -43,13 +43,16 @@ def frames(raw):
         result.append(raw[at:at+size]);at+=size
     return tuple(result)
 def _packet(records):return b''.join(len(p).to_bytes(2,'big')+p for p in records)
+PARTIAL_BINARY_PROFILE='PARTIAL_BINARY_FILE_V1'
+PARTIAL_HISTORY_FIELDS={'source_profile','source_offset','residual_bytes','residual_sha256','next_frame','next_ordinal'}
+
 def _admit(raw,expected_sha256,*,migration=False):
     if type(raw)is not bytes or not 1<=len(raw)<=MAX_BUNDLE or type(expected_sha256)is not str or digest(raw)!=expected_sha256:raise ItchProductError('itch_product_digest_or_budget')
     v=decode(raw)
     keys={'schema','version','image','admission','tail','tail_sha256','selected_book','speed','native_binary_sha256','migration_history'}
     version=v.get('version')
-    if type(version)is not int or version not in(1,2):raise ItchProductError('itch_product_schema')
-    if version==2:keys.add('source_history')
+    if type(version)is not int or version not in(1,2,3):raise ItchProductError('itch_product_schema')
+    if version>=2:keys.add('source_history')
     if set(v)!=keys or v['schema']!='gig.itch.product_session':raise ItchProductError('itch_product_schema')
     try:
         if type(v['admission'])is not dict or set(v['admission'])!={f.name for f in dataclasses.fields(ItchAdmission)}:raise ValueError()
@@ -62,14 +65,31 @@ def _admit(raw,expected_sha256,*,migration=False):
     for row in history:
         if type(row)is not dict or set(row)!={'from_bundle_sha256','from_image_sha256','from_implementation_sha256','from_native_binary_sha256'}or any(type(x)is not str or len(x)!=64 or any(c not in '0123456789abcdef'for c in x)for x in row.values()):raise ItchProductError('itch_product_migration_lineage')
     source_history=v.get('source_history',[])
-    if type(source_history)is not list or not (1 if version==2 else 0)<=len(source_history)<=4:raise ItchProductError('itch_product_source_history_budget')
-    previous=0
+    if type(source_history)is not list or not (1 if version>=2 else 0)<=len(source_history)<=4:raise ItchProductError('itch_product_source_history_budget')
+    previous=0;has_partial=False
     for row in source_history:
         hashes={'source_sha256','from_bundle_sha256','from_image_sha256'};numbers={'first_frame','first_ordinal','from_source_records','to_source_records','generation'}
-        if type(row)is not dict or set(row)!=hashes|numbers|{'container','capture'}:raise ItchProductError('itch_product_source_history')
+        basic=hashes|numbers|{'container','capture'}
+        if type(row)is not dict:raise ItchProductError('itch_product_source_history')
+        partial=set(row)==basic|PARTIAL_HISTORY_FIELDS
+        if set(row)!=basic and (version!=3 or not partial):raise ItchProductError('itch_product_source_history')
         if any(type(row[k])is not str or len(row[k])!=64 or any(c not in '0123456789abcdef'for c in row[k])for k in hashes)or any(type(row[k])is not int or not 0<=row[k]<=2**64-1 for k in numbers):raise ItchProductError('itch_product_source_history')
         if row['container']not in('binary_file','single_gzip')or row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
+        if partial:
+            has_partial=True
+            if row['container']!='binary_file' or row['source_profile']!=PARTIAL_BINARY_PROFILE:
+                raise ItchProductError('itch_product_partial_source_profile')
+            if any(type(row[key]) is not int or not 0<=row[key]<=2**64-1
+                   for key in ('source_offset','residual_bytes','next_frame','next_ordinal')):
+                raise ItchProductError('itch_product_partial_source_position')
+            sha=row['residual_sha256']
+            if (type(sha) is not str or len(sha)!=64 or any(c not in '0123456789abcdef' for c in sha)
+                    or not 1<=row['residual_bytes']<=65536 or row['source_offset']+row['residual_bytes']>MAX_BYTES
+                    or row['next_frame']!=row['first_frame']+row['source_offset']
+                    or row['next_ordinal']!=row['first_ordinal']+row['to_source_records']):
+                raise ItchProductError('itch_product_partial_source_receipt')
         previous=row['to_source_records']
+    if version==3 and not has_partial:raise ItchProductError('itch_product_partial_source_profile')
     if not migration and(a.implementation_sha256!=implementation_identity()or v['native_binary_sha256']!=native_binary_identity()):raise ItchProductError('itch_product_explicit_migration_required')
     image=_b64(v['image'],MAX_BYTES);tail=_b64(v['tail'],MAX_TAIL)
     if digest(tail)!=v['tail_sha256']:raise ItchProductError('itch_product_tail_digest')
@@ -82,7 +102,10 @@ def build_bundle(image,admission,tail=b'',*,selected_book=0,speed=1,history=(),s
     if type(history)not in(list,tuple)or len(history)>4:raise ItchProductError('itch_product_migration_budget')
     value={'schema':'gig.itch.product_session','version':1,'image':base64.b64encode(image).decode(),'admission':dataclasses.asdict(admission),'tail':base64.b64encode(tail).decode(),'tail_sha256':digest(tail),'selected_book':selected_book,'speed':speed,'native_binary_sha256':native_binary_identity(),'migration_history':list(history)}
     if type(source_history)not in(list,tuple)or len(source_history)>4:raise ItchProductError('itch_product_source_history_budget')
-    if source_history:value.update(version=2,source_history=list(source_history))
+    if source_history:
+        version=3 if any(type(row) is dict and row.get('source_profile')==PARTIAL_BINARY_PROFILE
+                         for row in source_history) else 2
+        value.update(version=version,source_history=list(source_history))
     raw=encoded(value);ItchProduct.restore(raw,digest(raw));return raw
 
 class ItchProduct:
@@ -171,16 +194,46 @@ def migrate(raw,expected_sha256):
     history=value['migration_history']+[{'from_bundle_sha256':expected_sha256,'from_image_sha256':a.artifact_sha256,'from_implementation_sha256':a.implementation_sha256,'from_native_binary_sha256':value['native_binary_sha256']}]
     return build_bundle(new,new_a,tail,selected_book=value['selected_book'],speed=value['speed'],history=history,source_history=value.get('source_history',()))
 
-def continue_source(raw,expected_sha256,source,source_admission):
+def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial=False):
     product=ItchProduct.restore(raw,expected_sha256)
     if product.position!=product.total:raise ItchProductError('itch_product_pending_continuation')
+    if product.source_history and product.source_history[-1].get('source_profile')==PARTIAL_BINARY_PROFILE:
+        prior=product.source_history[-1]
+        end=prior['source_offset']+prior['residual_bytes']
+        if (type(source) is not bytes or type(source_admission) is not ItchSourceAdmission
+                or source_admission.container!='binary_file' or len(source)<end
+                or digest(memoryview(source)[:end])!=prior['source_sha256']):
+            raise ItchProductError('itch_product_partial_source_prefix_changed')
     image=product.owner.checkpoint();a=dataclasses.replace(product.owner.admission,artifact_sha256=digest(image))
-    candidate=ItchRecovery.resume_source(image,a,source,source_admission)
+    if partial:
+        candidate,tail=ItchRecovery.resume_partial_binary_source(image,a,source,source_admission)
+    else:
+        candidate=ItchRecovery.resume_source(image,a,source,source_admission)
+        tail=None
     advanced=candidate.checkpoint()
-    if advanced==image and product.source_history and all(product.source_history[-1][key]==value for key,value in dataclasses.asdict(source_admission).items()):return raw
+    admission_fields=dataclasses.asdict(source_admission)
+    if advanced==image and product.source_history:
+        prior=product.source_history[-1]
+        same_profile=(prior.get('source_profile')==PARTIAL_BINARY_PROFILE)==partial
+        if same_profile and all(prior[key]==value for key,value in admission_fields.items()):
+            return raw,tail
     if len(product.source_history)>=4:raise ItchProductError('itch_product_source_history_budget')
-    record={**dataclasses.asdict(source_admission),'from_bundle_sha256':expected_sha256,'from_image_sha256':a.artifact_sha256,'from_source_records':product.position,'to_source_records':int(candidate.status()['source_records'])}
-    return build_bundle(advanced,candidate.admission,selected_book=product.selected_book,speed=product.speed,history=product.history,source_history=product.source_history+[record])
+    record={**admission_fields,'from_bundle_sha256':expected_sha256,'from_image_sha256':a.artifact_sha256,
+            'from_source_records':product.position,'to_source_records':int(candidate.status()['source_records'])}
+    if tail is not None:
+        receipt=dataclasses.asdict(tail)
+        record.update(receipt,source_profile=PARTIAL_BINARY_PROFILE)
+    bundle=build_bundle(advanced,candidate.admission,selected_book=product.selected_book,
+                        speed=product.speed,history=product.history,source_history=product.source_history+[record])
+    return bundle,tail
+
+def continue_source(raw,expected_sha256,source,source_admission):
+    bundle,_=_resume_product_source(raw,expected_sha256,source,source_admission)
+    return bundle
+
+def continue_partial_source(raw,expected_sha256,source,source_admission):
+    return _resume_product_source(raw,expected_sha256,source,source_admission,partial=True)
+
 
 def save_new(path,raw,expected_sha256,**hooks):
     ItchProduct.restore(raw,expected_sha256);publish_new(path,raw,**hooks);return expected_sha256
