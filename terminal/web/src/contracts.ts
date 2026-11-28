@@ -1,3 +1,4 @@
+import {partialBinaryTail} from './itchSession.ts';
 export type Origin='LIVE_OBSERVED'|'LIVE_DELAYED'|'HISTORICAL_OBSERVED'|'HISTORICAL_SYNTHETIC'|'SIMULATED'|'ESTIMATED'|'UNAVAILABLE';
 export type Mode='HISTORICAL_REPLAY'|'SIMULATION'|'LIVE';
 export interface Fraction {numerator:string;denominator:string}
@@ -22,7 +23,9 @@ export function validateState(value:unknown):TerminalState {
  for(const k of ['spread','midprice','microprice','imbalance']){const f=value.metrics[k];if(f!==null&&(!isRecord(f)||typeof f.numerator!=='string'||typeof f.denominator!=='string'||!signed.test(f.numerator)||!unsigned.test(f.denominator)||BigInt(f.denominator)===0n))throw new Error('Inexact metric')}
  if(!Number.isSafeInteger(value.position)||!Number.isSafeInteger(value.event_count)||Number(value.position)<0||Number(value.event_count)<0||Number(value.position)>Number(value.event_count)||typeof value.playing!=='boolean'||typeof value.speed!=='number'||!Number.isFinite(value.speed))throw new Error('Invalid replay clock');
  if(value.replay_min_position!==undefined&&(!Number.isSafeInteger(value.replay_min_position)||Number(value.replay_min_position)<0||Number(value.replay_min_position)>Number(value.position)))throw new Error('Invalid checkpoint replay boundary');
- return value as unknown as TerminalState;
+ const state=value as unknown as TerminalState;
+ partialBinaryTail(state);
+ return state;
 }
 
 // Observed export needs a separate rights decision; replay mode alone cannot grant it.
