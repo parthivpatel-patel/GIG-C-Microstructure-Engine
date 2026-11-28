@@ -580,6 +580,21 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             return stock_live.view()
         except (ValueError,TypeError):return error('ALPACA_LIVE_BLOCKED','explicit permissions,live enable and bounded known market identities required',422)
 
+    @route('/api/v1/stocks/live-backfill', methods=['GET','POST'])
+    @json_endpoint
+    async def stock_live_backfill(request):
+        from terminal.alpaca_wire import WireError
+        from terminal.stocks.iex_backfill import backfill,gaps
+        if request.method=='GET':
+            if request.query_params:return error('IEX_BACKFILL_QUERY','no query parameters accepted',422)
+            return {'schema':'gig.iex.backfill_candidates.v1','gaps':gaps(stock_live)}
+        data=await bounded_json(request)
+        if not {'gap_id'}<=set(data)<= {'gap_id','max_pages'}:
+            return error('IEX_BACKFILL_QUERY','retained gap identity and optional page limit required',422)
+        try:return await backfill(stock_live,historical,data['gap_id'],data.get('max_pages',4))
+        except WireError as exc:return error('IEX_BACKFILL_REJECTED',exc.code,422)
+        except (ValueError,TypeError,TimeoutError):return error('IEX_BACKFILL_REJECTED','iex_backfill_unavailable',422)
+
     @route('/api/v1/stocks/history-ingest', methods=['POST'])
     @json_endpoint
     async def history_ingest(request):

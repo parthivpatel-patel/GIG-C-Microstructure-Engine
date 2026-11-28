@@ -88,7 +88,7 @@ def validate_plan(method,url,body=None):
     if not required<=set(query) or set(query)-allowed or query.get('limit')!=['64'] or query.get('sort')!=['asc'] or query.get('feed') not in (['iex'],['sip']):raise WireError('history_wire_query')
     try:symbol(query['symbols'][0]);lo=ns(query['start'][0]);hi=ns(query['end'][0])
     except (ValueError,KeyError,TypeError):raise WireError('history_wire_query') from None
-    if hi<=lo or 'page_token' in query and (len(query['page_token'][0])>512 or any(not 32<ord(c)<127 for c in query['page_token'][0])):raise WireError('history_wire_query')
+    if hi<lo or 'page_token' in query and (len(query['page_token'][0])>512 or any(not 32<ord(c)<127 for c in query['page_token'][0])):raise WireError('history_wire_query')
 
 
 class HistoricalClient:
@@ -155,7 +155,8 @@ class HistoricalClient:
                 for page in range(q['max_pages']):
                     # Delay is checked again before every request;never change feed.
                     self.permission.require(q['feed']);validate_query(q,self.now_ns())
-                    params={'symbols':q['symbol'],'start':q['start'],'end':q['end'],'feed':q['feed'],'limit':64,'sort':'asc'}
+                    # Alpaca's wire end is inclusive. Keep the public query half-open.
+                    params={'symbols':q['symbol'],'start':q['start'],'end':utc(ns(q['end'])-1),'feed':q['feed'],'limit':64,'sort':'asc'}
                     if q['kind']=='bars':params.update(timeframe=q['timeframe'],adjustment=q['adjustment'])
                     if token:params['page_token']=token
                     url=BASE+q['kind']+'?'+urlencode(params);validate_plan('GET',url)

@@ -33,8 +33,9 @@ names += ['terminal.test_kraken_joint_recording','terminal.test_l2_playback.Play
 names += ['terminal.stocks.test_xbrl_bound_restrictions']
 names += ['terminal.stocks.test_xbrl_mixed_cross_role']
 names += ['terminal.stocks.test_xbrl_typed_bounds','terminal.providers.test_kraken_large_depth']
+names += ['terminal.stocks.test_iex_backfill']
 suite=unittest.defaultTestLoader.loadTestsFromNames(names)
-expected=1452
+expected=1455
 assert suite.countTestCases()==expected,('Unexpected no-launch cohort',suite.countTestCases())
 result=unittest.TextTestRunner(verbosity=2).run(suite)
 report={'schema':'gig.no_launch.developer_tests.v1','selected_names':names,'expected':expected,'tests':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped),'socket_attempts_allowed':False,'app_factory_allowed':False,'application_constructed':app._application is not None,'scope':'Explicit developer subset;not full API,browser,provider or final acceptance'}
