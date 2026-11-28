@@ -11,11 +11,11 @@ def _log_mid_distance(left, right):
     return math.log(ratio.numerator) - math.log(ratio.denominator)
 
 
-def metrics(history,symbol,generation):
+def metrics(history,symbol,generation,*,trade_actions_retained=False):
     rows=[r for r in history if r['symbol']==symbol and r['generation']==generation]
     quotes=[r for r in rows if r['kind']=='quote' and not r['out_of_order'] and Fraction(r['data']['bid'])>0 and Fraction(r['data']['ask'])>=Fraction(r['data']['bid'])]
     trades=[r for r in rows if r['kind']=='trade' and not r['out_of_order']]
-    corrected=any(r['kind'] in ('correction','cancel') for r in rows)
+    corrected=trade_actions_retained or any(r['kind'] in ('correction','cancel') for r in rows)
     wire=lambda f:{'numerator':str(f.numerator),'denominator':str(f.denominator)}
     def frequency(events):
         span=int(events[-1]['source_timestamp_ns'])-int(events[0]['source_timestamp_ns']) if len(events)>1 else 0
