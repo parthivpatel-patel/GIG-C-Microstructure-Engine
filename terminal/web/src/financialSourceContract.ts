@@ -1,5 +1,5 @@
 /** Private original-source exports. Integrity and semantic checks are not issuer authentication. */
-import {verifyXbrlDigest} from './xbrlStatements.ts';
+import {verifyXbrlDigest,verifyXbrlValueDigest} from './xbrlStatements.ts';
 import {acceptanceNanoseconds} from './acceptanceContract.ts';
 import {verifyAccountingSourceChecks,accountingNumericValue} from './sourceAccountingChecks.ts';
 export type Rational={numerator:string;denominator:string};
@@ -94,9 +94,7 @@ async function verifyInlineAccounting(s:Parsed,g:Graph,audit:InlineReceipt,cutof
     !Array.isArray(set.documents)||!set.documents.length||set.documents.length>8||
     !Array.isArray(set.facts)||set.facts.length!==s.facts.length)bad();
  // A set identity hashes the ordered array itself, unlike an artifact envelope.
- const raw=new TextEncoder().encode(canonical(set.documents));
- const actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',raw)),b=>b.toString(16).padStart(2,'0')).join('');
- if(actual!==set.sha256)bad();
+ await verifyXbrlValueDigest(set.documents,set.sha256);
  const uris=set.documents.map(d=>d.uri);
  if(new Set(uris).size!==uris.length||uris.some(u=>typeof u!=='string'||u.length>512||!u.startsWith('https://')))bad();
  equal(uris,[...uris].sort());

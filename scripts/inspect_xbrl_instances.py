@@ -11,7 +11,7 @@ from terminal.stocks.xbrl_dimensional_calculation import PROFILE as DIMENSIONAL_
 from terminal.stocks.xbrl_types import BOUNDS_PROFILE
 from terminal.stocks.inline_set import TRANSFORMATION_PROFILE
 
-def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1',embedded_profile=None,inline_transformation_profile=None,calculation_profile=None,calculation_role=None):
+def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1',embedded_profile=None,inline_transformation_profile=None,calculation_profile=None,calculation_role=None,accounting_roles=None):
  from terminal.stocks.xbrl_dts import EMBEDDED_PROFILE
  if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
  if statement_profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
@@ -23,11 +23,13 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
   raise XBRLError('xbrl_calculation_export_requires_company_and_original_artifact')
  if calculation_role is not None and calculation_profile is None:
   raise XBRLError('xbrl_calculation_role_requires_profile')
+ if accounting_roles is not None and (company_symbol is None or statement_role is not None or calculation_profile is not None):
+  raise XBRLError('xbrl_accounting_export_requires_exclusive_company_mode')
  path=Path(batch_path).absolute();batch=decode(read_bytes(path,128*1024),numeric_policy='exact-integer')
- if batch.get('schema')=='gig.sec.xbrl.input_inline_set_batch.v1':return inspect_inline_sets(path,batch,as_of,allow_observed=allow_observed,dimensional_profile=dimensional_profile,company_symbol=company_symbol,statement_role=statement_role,statement_form=statement_form,statement_profile=statement_profile,embedded_profile=embedded_profile,inline_transformation_profile=inline_transformation_profile,calculation_profile=calculation_profile,calculation_role=calculation_role)
+ if batch.get('schema')=='gig.sec.xbrl.input_inline_set_batch.v1':return inspect_inline_sets(path,batch,as_of,allow_observed=allow_observed,dimensional_profile=dimensional_profile,company_symbol=company_symbol,statement_role=statement_role,statement_form=statement_form,statement_profile=statement_profile,embedded_profile=embedded_profile,inline_transformation_profile=inline_transformation_profile,calculation_profile=calculation_profile,calculation_role=calculation_role,accounting_roles=accounting_roles)
  if inline_transformation_profile is not None:raise XBRLError('xbrl_inline_transformation_requires_document_set')
  dts=batch.get('schema')=='gig.sec.xbrl.input_dts_batch.v1'
- if (dimensional_profile is not None or embedded_profile is not None or calculation_profile is not None)and not dts:raise XBRLError('xbrl_dimensional_profile_requires_dts')
+ if (dimensional_profile is not None or embedded_profile is not None or calculation_profile is not None or accounting_roles is not None)and not dts:raise XBRLError('xbrl_dimensional_profile_requires_dts')
  fields={'schema','issuer_cik','origin','entries'}|({'numeric_profile'}if dts else set())
  if set(batch)!=fields or batch['schema']not in('gig.sec.xbrl.input_batch.v1','gig.sec.xbrl.input_dts_batch.v1')or type(batch['entries'])is not list or not 1<=len(batch['entries'])<=MAX_BATCH:raise XBRLError('xbrl_input_batch_contract')
  if dts:
@@ -59,11 +61,14 @@ def inspect(batch_path,as_of,*,allow_observed=False,dimensional_profile=None,com
  if calculation_profile is not None:
   return calculation_export(collection,entries,as_of,company_symbol,statement_form,calculation_profile,
                             calculation_role,embedded_profile,inline=False)
+ if accounting_roles is not None:
+  return accounting_export(collection,entries,as_of,company_symbol,statement_form,accounting_roles,
+                           embedded_profile,inline=False)
  result=collection.at_acceptance_time(as_of)
  summary={'schema':'gig.sec.xbrl.offline_summary.v1','status':'OFFLINE_PROFILE_VALIDATED','origin':collection.origin,'supplied_filings':len(entries),'source_bytes':total,'collection_sha256':result['collection_sha256'],'selection_sha256':result['selection_sha256'],'selected_facts':sum(map(len,result['history'].values())),'exclusions':result['exclusions'],'unresolved_amendment_count':len(result['unresolved_amendment_filings']),'complete_statements_or_history':False,'provider_requested':False,'raw_source_retained':False}
  return company_export(collection,as_of,company_symbol,statement_role,statement_form,statement_profile)if company_symbol is not None else(summary,result)
 
-def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1',embedded_profile=None,inline_transformation_profile=None,calculation_profile=None,calculation_role=None):
+def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_profile=None,company_symbol=None,statement_role=None,statement_form='10-K',statement_profile='legacy-v1',embedded_profile=None,inline_transformation_profile=None,calculation_profile=None,calculation_role=None,accounting_roles=None):
  from terminal.stocks.xbrl_dts import EMBEDDED_PROFILE
  if embedded_profile not in(None,EMBEDDED_PROFILE):raise XBRLError('dts_embedded_profile_unsupported')
  if statement_profile not in('legacy-v1','accuracy-extension-v2'):raise XBRLError('statement_profile_unsupported')
@@ -96,9 +101,33 @@ def inspect_inline_sets(path,batch,as_of,*,allow_observed=False,dimensional_prof
  if calculation_profile is not None:
   return calculation_export(collection,entries,as_of,company_symbol,statement_form,calculation_profile,
                             calculation_role,embedded_profile,inline=True)
+ if accounting_roles is not None:
+  return accounting_export(collection,entries,as_of,company_symbol,statement_form,accounting_roles,
+                           embedded_profile,inline=True,transformation_profile=inline_transformation_profile)
  result=collection.at_acceptance_time(as_of)
  summary={'schema':'gig.sec.xbrl.offline_summary.v1','status':'OFFLINE_PROFILE_VALIDATED','origin':collection.origin,'supplied_filings':len(entries),'supplied_inline_documents':count,'source_bytes':total,'collection_sha256':result['collection_sha256'],'selection_sha256':result['selection_sha256'],'selected_facts':sum(map(len,result['history'].values())),'exclusions':result['exclusions'],'unresolved_amendment_count':len(result['unresolved_amendment_filings']),'complete_statements_or_history':False,'provider_requested':False,'raw_source_retained':False}
  return company_export(collection,as_of,company_symbol,statement_role,statement_form,statement_profile)if company_symbol is not None else(summary,result)
+
+def accounting_export(collection,entries,as_of,symbol,form,role_bindings,embedded_profile,*,inline,transformation_profile=None):
+ from terminal.stocks.service import StockWorkspace
+ from terminal.stocks.financial_intelligence_product import company_source_accounting
+ workspace=StockWorkspace(environment={})
+ workspace.admit_xbrl_collection(symbol,collection)
+ originals={}
+ for entry in entries:
+  if inline:
+   if entry['taxonomy_documents'] is None:continue
+   accession=entry['documents'][0]['manifest']['accession']
+   originals[accession]={**entry,'transformation_profile':transformation_profile,
+       'embedded_profile':embedded_profile,'acquisition_manifest':None,'expected_acquisition_manifest_sha256':None}
+  else:
+   accession=entry['manifest']['accession']
+   originals[accession]={**entry,'embedded_profile':embedded_profile}
+ result=company_source_accounting(workspace,symbol,as_of,originals,role_bindings,form=form)
+ return {'schema':'gig.sec.xbrl.company_source_accounting_summary.v1','status':result['status'],
+         'reason':result['reason'],'symbol':symbol,'issuer_cik':collection.cik,'sha256':result['sha256'],
+         'provider_requested':False,'raw_source_retained':False},result
+
 
 def calculation_export(collection,entries,as_of,symbol,form,profile,role,embedded_profile,*,inline):
  from terminal.stocks.service import StockWorkspace
@@ -147,6 +176,7 @@ def main(argv=None):
  parser.add_argument('--inline-transformation-profile',choices=[TRANSFORMATION_PROFILE])
  parser.add_argument('--calculation-profile',choices=[DIMENSIONAL_CALCULATIONS,BOUND_NUMERIC_PROFILE])
  parser.add_argument('--calculation-role')
+ parser.add_argument('--accounting-roles',help='Local JSON mapping from filing accessions to explicit statement and accounting roles')
  parser.add_argument('--company-symbol');parser.add_argument('--statement-role');parser.add_argument('--statement-form',choices=['10-K','10-Q'],default='10-K')
  parser.add_argument('--statement-profile',choices=['legacy-v1','accuracy-extension-v2'],default='legacy-v1')
  from terminal.stocks.xbrl_dts import EMBEDDED_PROFILE
@@ -154,7 +184,11 @@ def main(argv=None):
  args=parser.parse_args(argv)
  if args.statement_role is not None and args.company_symbol is None:parser.error('--statement-role requires --company-symbol')
  try:
-  summary,result=inspect(args.batch,args.as_of,allow_observed=args.allow_observed,dimensional_profile=args.dimensional_profile,company_symbol=args.company_symbol,statement_role=args.statement_role,statement_form=args.statement_form,statement_profile=args.statement_profile,embedded_profile=args.embedded_linkbase_profile,inline_transformation_profile=args.inline_transformation_profile,calculation_profile=args.calculation_profile,calculation_role=args.calculation_role)
+  accounting_roles=None
+  if args.accounting_roles is not None:
+   accounting_roles=decode(read_bytes(args.accounting_roles,128*1024),numeric_policy='exact-integer')
+   if type(accounting_roles)is not dict:raise XBRLError('xbrl_accounting_roles_mapping')
+  summary,result=inspect(args.batch,args.as_of,allow_observed=args.allow_observed,dimensional_profile=args.dimensional_profile,company_symbol=args.company_symbol,statement_role=args.statement_role,statement_form=args.statement_form,statement_profile=args.statement_profile,embedded_profile=args.embedded_linkbase_profile,inline_transformation_profile=args.inline_transformation_profile,calculation_profile=args.calculation_profile,calculation_role=args.calculation_role,accounting_roles=accounting_roles)
   if args.output:write_private(args.output,result)
  except (ValueError,TypeError,KeyError,OSError,MemoryError)as exc:
   reason=str(exc)if isinstance(exc,XBRLError)else'resource_exhausted'if isinstance(exc,MemoryError)else'input_contract_or_resource_failure'
