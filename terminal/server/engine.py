@@ -322,7 +322,7 @@ class NativeSession:
         result['research_metrics']={'concentration':calculate(result)}
         return result
 
-    def simulation(self, algorithm, quantity='100', slices=5, side='buy'):
+    def simulation(self, algorithm, quantity='100', slices=5, side='buy', available_liquidity=None):
         if self.mode != 'SIMULATION':
             raise ControlError('MODE_RESTRICTION', 'simulation requires Simulation mode')
         if algorithm not in ('TWAP', 'VWAP', 'POV'):
@@ -332,6 +332,14 @@ class NativeSession:
         quantity = exact_quantity(quantity)
         if type(slices) is not int or not 1 <= slices <= 16 or slices > int(quantity):
             raise ControlError('INVALID_SLICES', 'slices must be between 1 and 16 and no greater than quantity')
+        bounded_liquidity = available_liquidity is not None
+        if bounded_liquidity:
+            if available_liquidity != '0':
+                available_liquidity = exact_quantity(available_liquidity)
+            if int(available_liquidity) > int(quantity):
+                raise ControlError('INVALID_SIMULATION_LIQUIDITY', 'available liquidity must not exceed target quantity')
+        else:
+            available_liquidity = quantity
         config = plan_config(quantity, slices)
         is_sell = side == 'sell'
         if is_sell:
@@ -346,8 +354,10 @@ class NativeSession:
                              'source_artifact': 'authored-volume-v1', 'ordinal': str(i + 1)} for i in range(slices)]
             schedule = gig.pov(config, observations, '1', '10')
         liquidity = [{'id': '1', 'side': '0' if is_sell else '1',
-                      'limit': '9899' if is_sell else '9903', 'quantity': quantity,
-                      'tif': '0', 'post_only': False}]
+                      'limit': '9899' if is_sell else '9903', 'quantity': available_liquidity,
+                      'tif': '0', 'post_only': False}] if available_liquidity != '0' else []
+        # An authored adverse move gives the unfilled component a deterministic mark.
+        terminal_price = (9897 if is_sell else 9905) if bounded_liquidity else 9901
         run = gig.simulate_plan(schedule, sim_config(), liquidity, '1000000005')
         simulation = run.simulation.to_dict()
         plan = run.plan.to_dict()
@@ -361,7 +371,7 @@ class NativeSession:
                                'fee_ticks_per_lot': {'numerator': '0', 'denominator': '1'}})
         costs = gig.transaction_costs({'run_id': 'terminal-tca-v1', 'simulation_run_id': 'terminal-simulation-v1',
             'rules': rules(), 'side': config['side'], 'target': quantity, 'arrival': benchmark(9901),
-            'terminal': benchmark(9901, '1000000005'), 'as_of': '1000000005'}, cost_fills).to_dict()
+            'terminal': benchmark(terminal_price, '1000000005'), 'as_of': '1000000005'}, cost_fills).to_dict()
         result = {'schema_version': '1', 'origin': 'SIMULATED', 'algorithm': algorithm,
                   'plan': plan, 'simulation': simulation, 'costs': costs,
                   'provenance': {'category': 'SIMULATED', 'scenario': 'authored-fixed-liquidity-v1',
@@ -369,6 +379,12 @@ class NativeSession:
                     'assumptions': 'No observed market data; zero fees; fixed supplied liquidity; execution-report delay 5 logical ns.'}}
         if is_sell:
             result['provenance']['scenario'] = 'authored-fixed-sell-liquidity-v1'
+        if bounded_liquidity:
+            result['provenance'].update(
+                scenario='authored-bounded-liquidity-v1',
+                available_liquidity_lots=available_liquidity,
+                terminal_midpoint_ticks=str(terminal_price),
+                assumptions='Authored available lots and adverse terminal mark; zero fees; execution-report delay 5 logical ns.')
         canonical = json.dumps(result, sort_keys=True, separators=(',', ':'))
         result['sha256'] = hashlib.sha256(canonical.encode()).hexdigest()
         self.last_simulation = result
