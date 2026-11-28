@@ -34,7 +34,9 @@ def main(argv=None):
    sha=digest(new);save_new(a.output,new,sha)
    result={'schema':'gig.itch.product_operation.v1','status':'SOURCE_CONTINUED','output_sha256':sha,'from_bundle_sha256':a.expected_sha256,'source_sha256':a.source_sha256,'provider_connected':False}
    if tail is not None:
-    result.update(status='PARTIAL_SOURCE_CONTINUED',partial_binary_tail=dataclasses.asdict(tail))
+    result['status']='PARTIAL_SOURCE_CONTINUED'
+    key='partial_gzip_tail' if a.container=='single_gzip' else 'partial_binary_tail'
+    result[key]=dataclasses.asdict(tail)
   print(json.dumps(result,sort_keys=True));return 0
  except (ValueError,OSError,RuntimeError):
   print(json.dumps({'schema':'gig.itch.product_operation.v1','status':'REJECTED','reason':'private_input_integrity_schema_or_migration_admission','raw_retained':False,'provider_connected':False}));return 1

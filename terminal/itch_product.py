@@ -4,7 +4,7 @@ An immutable bundle carries the full native/context artifact and a bounded autho
 continuation. The owner pins the bundle digest outside it. Unknown schema/code or
 binary changes require explicit migration; no fallback to a different dataset.
 """
-import base64,dataclasses,hashlib,json,os,stat
+import base64,dataclasses,hashlib,json,os,stat,zlib
 from fractions import Fraction
 from pathlib import Path
 import gig_microstructure as gig
@@ -44,7 +44,9 @@ def frames(raw):
     return tuple(result)
 def _packet(records):return b''.join(len(p).to_bytes(2,'big')+p for p in records)
 PARTIAL_BINARY_PROFILE='PARTIAL_BINARY_FILE_V1'
-PARTIAL_HISTORY_FIELDS={'source_profile','source_offset','residual_bytes','residual_sha256','next_frame','next_ordinal'}
+PARTIAL_GZIP_PROFILE='PARTIAL_SINGLE_GZIP_V1'
+PARTIAL_PROFILES=(PARTIAL_BINARY_PROFILE,PARTIAL_GZIP_PROFILE)
+PARTIAL_HISTORY_FIELDS={'source_profile','residual_bytes','residual_sha256','next_frame','next_ordinal'}
 
 def _admit(raw,expected_sha256,*,migration=False):
     if type(raw)is not bytes or not 1<=len(raw)<=MAX_BUNDLE or type(expected_sha256)is not str or digest(raw)!=expected_sha256:raise ItchProductError('itch_product_digest_or_budget')
@@ -71,21 +73,28 @@ def _admit(raw,expected_sha256,*,migration=False):
         hashes={'source_sha256','from_bundle_sha256','from_image_sha256'};numbers={'first_frame','first_ordinal','from_source_records','to_source_records','generation'}
         basic=hashes|numbers|{'container','capture'}
         if type(row)is not dict:raise ItchProductError('itch_product_source_history')
-        partial=set(row)==basic|PARTIAL_HISTORY_FIELDS
+        binary_partial=set(row)==basic|PARTIAL_HISTORY_FIELDS|{'source_offset'}
+        gzip_partial=set(row)==basic|PARTIAL_HISTORY_FIELDS|{'decompressed_offset','decompressed_sha256'}
+        partial=binary_partial or gzip_partial
         if set(row)!=basic and (version!=3 or not partial):raise ItchProductError('itch_product_source_history')
         if any(type(row[k])is not str or len(row[k])!=64 or any(c not in '0123456789abcdef'for c in row[k])for k in hashes)or any(type(row[k])is not int or not 0<=row[k]<=2**64-1 for k in numbers):raise ItchProductError('itch_product_source_history')
         if row['container']not in('binary_file','single_gzip')or row['capture']!=a.capture or row['generation']!=a.generation or row['first_frame']>2**64-3 or not previous<=row['from_source_records']<=row['to_source_records']:raise ItchProductError('itch_product_source_history_scope')
         if partial:
             has_partial=True
-            if row['container']!='binary_file' or row['source_profile']!=PARTIAL_BINARY_PROFILE:
+            expected_container,expected_profile,offset_key=(
+                ('single_gzip',PARTIAL_GZIP_PROFILE,'decompressed_offset') if gzip_partial else
+                ('binary_file',PARTIAL_BINARY_PROFILE,'source_offset'))
+            if row['container']!=expected_container or row['source_profile']!=expected_profile:
                 raise ItchProductError('itch_product_partial_source_profile')
             if any(type(row[key]) is not int or not 0<=row[key]<=2**64-1
-                   for key in ('source_offset','residual_bytes','next_frame','next_ordinal')):
+                   for key in (offset_key,'residual_bytes','next_frame','next_ordinal')):
                 raise ItchProductError('itch_product_partial_source_position')
-            sha=row['residual_sha256']
-            if (type(sha) is not str or len(sha)!=64 or any(c not in '0123456789abcdef' for c in sha)
-                    or not 1<=row['residual_bytes']<=65536 or row['source_offset']+row['residual_bytes']>MAX_BYTES
-                    or row['next_frame']!=row['first_frame']+row['source_offset']
+            offset=row[offset_key]
+            hashes=('residual_sha256','decompressed_sha256') if gzip_partial else ('residual_sha256',)
+            if (any(type(row[key]) is not str or len(row[key])!=64 or
+                    any(c not in '0123456789abcdef' for c in row[key]) for key in hashes)
+                    or not 1<=row['residual_bytes']<=65536 or offset+row['residual_bytes']>MAX_BYTES
+                    or row['next_frame']!=row['first_frame']+offset
                     or row['next_ordinal']!=row['first_ordinal']+row['to_source_records']):
                 raise ItchProductError('itch_product_partial_source_receipt')
         previous=row['to_source_records']
@@ -103,7 +112,7 @@ def build_bundle(image,admission,tail=b'',*,selected_book=0,speed=1,history=(),s
     value={'schema':'gig.itch.product_session','version':1,'image':base64.b64encode(image).decode(),'admission':dataclasses.asdict(admission),'tail':base64.b64encode(tail).decode(),'tail_sha256':digest(tail),'selected_book':selected_book,'speed':speed,'native_binary_sha256':native_binary_identity(),'migration_history':list(history)}
     if type(source_history)not in(list,tuple)or len(source_history)>4:raise ItchProductError('itch_product_source_history_budget')
     if source_history:
-        version=3 if any(type(row) is dict and row.get('source_profile')==PARTIAL_BINARY_PROFILE
+        version=3 if any(type(row) is dict and row.get('source_profile') in PARTIAL_PROFILES
                          for row in source_history) else 2
         value.update(version=version,source_history=list(source_history))
     raw=encoded(value);ItchProduct.restore(raw,digest(raw));return raw
@@ -194,19 +203,54 @@ def migrate(raw,expected_sha256):
     history=value['migration_history']+[{'from_bundle_sha256':expected_sha256,'from_image_sha256':a.artifact_sha256,'from_implementation_sha256':a.implementation_sha256,'from_native_binary_sha256':value['native_binary_sha256']}]
     return build_bundle(new,new_a,tail,selected_book=value['selected_book'],speed=value['speed'],history=history,source_history=value.get('source_history',()))
 
+def _decompressed_prefix_digest(source,length):
+    # Compare the previous decompressed prefix using capped output. Native
+    # admission still verifies the complete new source and its gzip trailer.
+    decoder=zlib.decompressobj(16+zlib.MAX_WBITS)
+    sha=hashlib.sha256()
+    offset=0
+    pending=b''
+    try:
+        while length:
+            if not pending and offset<len(source):
+                pending=source[offset:offset+65536]
+                offset+=len(pending)
+            output=decoder.decompress(pending,min(length,65536))
+            pending=decoder.unconsumed_tail
+            if output:
+                sha.update(output)
+                length-=len(output)
+            elif decoder.eof or (not pending and offset==len(source)):
+                return None
+    except zlib.error:
+        return None
+    return sha.hexdigest()
+
+
 def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial=False):
     product=ItchProduct.restore(raw,expected_sha256)
     if product.position!=product.total:raise ItchProductError('itch_product_pending_continuation')
-    if product.source_history and product.source_history[-1].get('source_profile')==PARTIAL_BINARY_PROFILE:
+    if type(source) is not bytes or len(source)>MAX_BYTES or type(source_admission) is not ItchSourceAdmission:
+        raise ItchProductError('itch_product_source_admission')
+    profile=PARTIAL_GZIP_PROFILE if source_admission.container=='single_gzip' else PARTIAL_BINARY_PROFILE
+    if product.source_history and product.source_history[-1].get('source_profile') in PARTIAL_PROFILES:
         prior=product.source_history[-1]
-        end=prior['source_offset']+prior['residual_bytes']
-        if (type(source) is not bytes or type(source_admission) is not ItchSourceAdmission
-                or source_admission.container!='binary_file' or len(source)<end
-                or digest(memoryview(source)[:end])!=prior['source_sha256']):
+        if prior['source_profile']==PARTIAL_GZIP_PROFILE:
+            length=prior['decompressed_offset']+prior['residual_bytes']
+            expected=prior['decompressed_sha256']
+        else:
+            length=prior['source_offset']+prior['residual_bytes']
+            expected=prior['source_sha256']
+        if source_admission.container=='single_gzip':
+            actual=_decompressed_prefix_digest(source,length)
+        else:
+            actual=digest(memoryview(source)[:length]) if len(source)>=length else None
+        if actual!=expected:
             raise ItchProductError('itch_product_partial_source_prefix_changed')
     image=product.owner.checkpoint();a=dataclasses.replace(product.owner.admission,artifact_sha256=digest(image))
     if partial:
-        candidate,tail=ItchRecovery.resume_partial_binary_source(image,a,source,source_admission)
+        resume=ItchRecovery.resume_partial_gzip_source if profile==PARTIAL_GZIP_PROFILE else ItchRecovery.resume_partial_binary_source
+        candidate,tail=resume(image,a,source,source_admission)
     else:
         candidate=ItchRecovery.resume_source(image,a,source,source_admission)
         tail=None
@@ -214,7 +258,7 @@ def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial
     admission_fields=dataclasses.asdict(source_admission)
     if advanced==image and product.source_history:
         prior=product.source_history[-1]
-        same_profile=(prior.get('source_profile')==PARTIAL_BINARY_PROFILE)==partial
+        same_profile=prior.get('source_profile')==(profile if partial else None)
         if same_profile and all(prior[key]==value for key,value in admission_fields.items()):
             return raw,tail
     if len(product.source_history)>=4:raise ItchProductError('itch_product_source_history_budget')
@@ -222,7 +266,7 @@ def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial
             'from_source_records':product.position,'to_source_records':int(candidate.status()['source_records'])}
     if tail is not None:
         receipt=dataclasses.asdict(tail)
-        record.update(receipt,source_profile=PARTIAL_BINARY_PROFILE)
+        record.update(receipt,source_profile=profile)
     bundle=build_bundle(advanced,candidate.admission,selected_book=product.selected_book,
                         speed=product.speed,history=product.history,source_history=product.source_history+[record])
     return bundle,tail
