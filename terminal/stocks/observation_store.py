@@ -20,15 +20,21 @@ class ObservationStore:
   try:
    s=os.fstat(fd)
    if not stat.S_ISREG(s.st_mode) or s.st_nlink!=1 or s.st_uid!=os.getuid() or stat.S_IMODE(s.st_mode)&0o077:raise ValueError('observation_private_file')
-   new=s.st_size==0
   finally:os.close(fd)
   with self.connect() as db:
-   version=db.execute('PRAGMA user_version').fetchone()[0];app=db.execute('PRAGMA application_id').fetchone()[0];tables=db.execute("SELECT count(*) FROM sqlite_master WHERE type='table'").fetchone()[0]
-   if new:
-    if version!=0 or app!=0 or tables:raise ValueError('observation_schema')
-    db.execute('CREATE TABLE IF NOT EXISTS records(ordinal INTEGER PRIMARY KEY AUTOINCREMENT,capture TEXT,receipt INTEGER,created REAL,expires REAL,payload BLOB,previous TEXT,digest TEXT,UNIQUE(capture,receipt))')
-    db.execute('CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY,value TEXT)');db.execute('INSERT OR IGNORE INTO meta VALUES(?,?)',('anchor','0'*64));db.execute('INSERT OR IGNORE INTO meta VALUES(?,?)',('tail','0'*64));db.execute('PRAGMA user_version=1');db.execute('PRAGMA application_id=1195984719')
-   elif version!=1 or app!=1195984719:raise ValueError('observation_schema')
+   # The SQLite write lock covers both the identity check and all bootstrap
+   # writes. Another process can only observe an empty or a complete ledger.
+   db.execute('BEGIN IMMEDIATE')
+   version=db.execute('PRAGMA user_version').fetchone()[0]
+   app=db.execute('PRAGMA application_id').fetchone()[0]
+   if (version,app)==(0,0):
+    if db.execute('SELECT 1 FROM sqlite_master LIMIT 1').fetchone():raise ValueError('observation_schema')
+    db.execute('CREATE TABLE records(ordinal INTEGER PRIMARY KEY AUTOINCREMENT,capture TEXT,receipt INTEGER,created REAL,expires REAL,payload BLOB,previous TEXT,digest TEXT,UNIQUE(capture,receipt))')
+    db.execute('CREATE TABLE meta(key TEXT PRIMARY KEY,value TEXT)')
+    db.executemany('INSERT INTO meta VALUES(?,?)',((key,'0'*64)for key in ('anchor','tail')))
+    db.execute('PRAGMA user_version=1')
+    db.execute('PRAGMA application_id=1195984719')
+   elif (version,app)!=(1,1195984719):raise ValueError('observation_schema')
   self.recover();self.prune();self.cached=self.summary()
  @contextmanager
  def connect(self):

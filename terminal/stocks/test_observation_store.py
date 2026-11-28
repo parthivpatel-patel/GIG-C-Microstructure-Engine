@@ -6,6 +6,53 @@ class Store(unittest.TestCase):
   c=client();ready(c);out=[]
   for i in range(n):q=quote();q['bs']=i+1;out+=c.process(packet(q))
   return out
+ def test_interrupted_bootstrap_is_recoverable_in_a_new_process(self):
+  import subprocess,sys
+  from pathlib import Path
+  with tempfile.TemporaryDirectory() as d:
+   code="""
+import os,socket,sqlite3,sys
+from unittest.mock import patch
+from terminal.stocks.observation_store import ObservationStore
+def forbidden(*args,**kwargs):raise AssertionError('NO_APPLICATION_OR_NETWORK')
+socket.socket.bind=socket.socket.connect=socket.socket.connect_ex=forbidden
+from terminal.server import app
+assert app._application is None
+app.create_app=forbidden
+class Interrupted(sqlite3.Connection):
+ def execute(self,sql,*args):
+  result=super().execute(sql,*args)
+  if sql.startswith('CREATE TABLE records'):os._exit(77)
+  return result
+connect=sqlite3.connect
+with patch('sqlite3.connect',side_effect=lambda *a,**kw:connect(*a,**kw,factory=Interrupted)):
+ ObservationStore(sys.argv[1])
+"""
+   result=subprocess.run([sys.executable,'-c',code,d],timeout=15,capture_output=True)
+   self.assertEqual(result.returncode,77,result.stderr)
+   self.assertTrue((Path(d)/'observations.sqlite3').is_file())
+   store=ObservationStore(d)
+   store.append('a'*32,self.events())
+   self.assertEqual(len(ObservationStore(d).recover()),1)
+
+ def test_concurrent_bootstrap_uses_the_identity_under_the_database_lock(self):
+  from concurrent.futures import ThreadPoolExecutor
+  from contextlib import contextmanager
+  from threading import Barrier
+  with tempfile.TemporaryDirectory() as d:
+   barrier=Barrier(2,timeout=5)
+   class Simultaneous(ObservationStore):
+    @contextmanager
+    def _connect(self):
+     if not hasattr(self,'cached') and not getattr(self,'opening',False):
+      self.opening=True
+      barrier.wait()
+     with super()._connect() as db:yield db
+   with ThreadPoolExecutor(max_workers=2) as pool:
+    first,second=[future.result(timeout=10) for future in [pool.submit(Simultaneous,d) for _ in range(2)]]
+   first.append('a'*32,self.events())
+   self.assertEqual(len(second.recover()),1)
+
  def test_restart_integrity_and_historical_only(self):
   with tempfile.TemporaryDirectory() as d:
    s=ObservationStore(d);s.append('a'*32,self.events(3));r=ObservationStore(d).recover();self.assertEqual([v['event']['receipt_index'] for v in r],[1,2,3]);self.assertTrue(all(v['classification']=='RETAINED_HISTORICAL_NOT_CURRENT' for v in r));self.assertNotIn('received_monotonic',r[0]['event'])
