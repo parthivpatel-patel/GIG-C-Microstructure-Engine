@@ -64,6 +64,17 @@ class ItchPartialBinaryTail:
     next_ordinal:int
     residual_sha256:str
 
+@dataclass(frozen=True)
+class ItchPartialGzipTail:
+    source_sha256:str
+    decompressed_offset:int
+    residual_bytes:int
+    next_frame:int
+    next_ordinal:int
+    residual_sha256:str
+    decompressed_sha256:str
+
+
 class ItchRecovery:
     @classmethod
     def restore(cls,payload,admission,*,resource_budget_bytes=128*1024*1024):
@@ -86,14 +97,37 @@ class ItchRecovery:
     @classmethod
     def resume_partial_binary_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
         """Resume whole BinaryFile frames and return a receipt for the unfinished frame."""
+        owner,receipt=cls._resume_partial_source(payload,admission,source,source_admission,
+            resource_budget_bytes,'binary_file','resume_itch_partial_binary_source')
+        tail=ItchPartialBinaryTail(source_admission.source_sha256,int(receipt['source_offset']),
+            int(receipt['residual_bytes']),int(receipt['next_frame']),int(receipt['next_ordinal']),
+            receipt['residual_sha256'])
+        return owner,tail
+
+    @classmethod
+    def resume_partial_gzip_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
+        """Admit one verified gzip member and report its unfinished BinaryFile frame."""
+        owner,receipt=cls._resume_partial_source(payload,admission,source,source_admission,
+            resource_budget_bytes,'single_gzip','resume_itch_partial_gzip_source')
+        tail=ItchPartialGzipTail(source_admission.source_sha256,int(receipt['decompressed_offset']),
+            int(receipt['residual_bytes']),int(receipt['next_frame']),int(receipt['next_ordinal']),
+            receipt['residual_sha256'],receipt['decompressed_sha256'])
+        return owner,tail
+
+    @classmethod
+    def _resume_partial_source(cls,payload,admission,source,source_admission,resource_budget_bytes,
+                               required_container,native_method):
         _validate_image(payload,admission,resource_budget_bytes)
         if type(source_admission)is not ItchSourceAdmission:raise ValueError('itch_source_admission_required')
         source_admission.validate()
-        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):raise ValueError('itch_source_scope')
-        if source_admission.container!='binary_file':raise ValueError('itch_partial_source_requires_binary_file')
+        if(source_admission.capture,source_admission.generation)!=(admission.capture,admission.generation):
+            raise ValueError('itch_source_scope')
+        if source_admission.container!=required_container:
+            raise ValueError('itch_partial_source_requires_'+required_container)
         if type(source)is not bytes or len(source)>MAX_BYTES:raise ValueError('itch_source_byte_budget')
-        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:raise ValueError('itch_source_digest')
-        resume=getattr(_native,'resume_itch_partial_binary_source',None)
+        if hashlib.sha256(source).hexdigest()!=source_admission.source_sha256:
+            raise ValueError('itch_source_digest')
+        resume=getattr(_native,native_method,None)
         if resume is None:raise ValueError('itch_source_sdk_streaming_disabled')
         owner,receipt=_checked(resume(payload,admission.artifact_sha256,admission.contract_sha256,
             admission.implementation_sha256,admission.capture,str(admission.generation),
@@ -102,10 +136,8 @@ class ItchRecovery:
         result=cls.__new__(cls)
         result._owner=owner
         result.admission=replace(admission,artifact_sha256=hashlib.sha256(result.checkpoint()).hexdigest())
-        tail=ItchPartialBinaryTail(source_admission.source_sha256,int(receipt['source_offset']),
-            int(receipt['residual_bytes']),int(receipt['next_frame']),int(receipt['next_ordinal']),
-            receipt['residual_sha256'])
-        return result,tail
+        return result,receipt
+
     @classmethod
     def complete_source(cls,payload,admission,source,source_admission,*,resource_budget_bytes=128*1024*1024):
         """Verify and finish one complete supplied container; no terminal V1 image."""
