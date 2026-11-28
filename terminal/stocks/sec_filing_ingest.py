@@ -84,8 +84,9 @@ class FilingIngestor:
    self.metrics['cache_hits']+=1;stage[cached[1]]=self.sources[cached[1]];return cached[1]
   for attempt in range(2):
    if budget['requests']>=MAX_REQUESTS:raise IngestError('sec_ingest_request_budget')
-   headers=self._headers();previous=max(self.last_request,self.rate_owner.last_request)if self.rate_owner is not None else self.last_request
-   await self.sleep(max(0,1.01-(self.clock()-previous)));self.last_request=self.clock()
+   previous=max(self.last_request,self.rate_owner.last_request)if self.rate_owner is not None else self.last_request
+   await self.sleep(max(0,1.01-(self.clock()-previous)))
+   headers=self._headers();self.last_request=self.clock()
    if self.rate_owner is not None:self.rate_owner.last_request=self.last_request
    budget['requests']+=1;self.metrics['attempts']+=1
    try:
@@ -105,18 +106,22 @@ class FilingIngestor:
       if length is not None:
        if not re.fullmatch('[0-9]{1,10}',length)or not 0<int(length)<=MAX_SOURCE:raise IngestError('sec_ingest_content_length')
        declared=int(length)
-      blocks=[];size=0
+      buffer=bytearray()
       while True:
-       remaining=min(MAX_SOURCE-size,MAX_TOTAL-budget['bytes'])
-       if remaining<=0:raise IngestError('sec_ingest_body_budget')
-       block=await asyncio.wait_for(response.read(min(65536,remaining)),8)
-       if type(block)is not bytes or len(block)>min(65536,remaining):raise IngestError('sec_ingest_transport_read_contract')
+       remaining=min(MAX_SOURCE-len(buffer),MAX_TOTAL-budget['bytes'])
+       # A one-byte EOF probe differentiates a legal exact bound from overflow
+       # without retaining anything beyond either configured byte budget.
+       read_size=min(65536,remaining) if remaining else 1
+       block=await asyncio.wait_for(response.read(read_size),8)
+       if type(block)is not bytes or len(block)>read_size:raise IngestError('sec_ingest_transport_read_contract')
        if not block:break
-       size+=len(block);budget['bytes']+=len(block);self.metrics['received_bytes']+=len(block)
-       if declared is not None and size>declared:raise IngestError('sec_ingest_length_mismatch')
-       blocks.append(block)
-      if size==0 or declared is not None and size!=declared:raise IngestError('sec_ingest_length_mismatch')
-      body=b''.join(blocks);received=self.receipt_clock();sec.acceptance_ns(received);record={'url':url,'sha256':hashlib.sha256(body).hexdigest(),'received_at':received,'body':body};key=digest({'url':url,'sha256':record['sha256']})
+       self.metrics['received_bytes']+=len(block)
+       if not remaining:raise IngestError('sec_ingest_body_budget')
+       budget['bytes']+=len(block);buffer.extend(block)
+       if declared is not None and len(buffer)>declared:raise IngestError('sec_ingest_length_mismatch')
+      if not buffer or declared is not None and len(buffer)!=declared:raise IngestError('sec_ingest_length_mismatch')
+      if self._headers()!=headers:raise IngestError('sec_ingest_source_permission_changed')
+      body=bytes(buffer);received=self.receipt_clock();sec.acceptance_ns(received);record={'url':url,'sha256':hashlib.sha256(body).hexdigest(),'received_at':received,'body':body};key=digest({'url':url,'sha256':record['sha256']})
       if key in self.sources:record=self.sources[key]
       stage[key]=record;return key
    except TimeoutError:
@@ -318,13 +323,14 @@ class FilingIngestor:
   if self.lock.locked():raise IngestError('sec_ingest_busy')
   if type(raw)is not bytes or len(raw)>MAX_IMAGE or hashlib.sha256(raw).hexdigest()!=expected_sha256:raise IngestError('sec_ingest_checkpoint_integrity')
   v=decode(raw)
-  if set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']not in('gig.sec.filing_ingestion.checkpoint.v1','gig.sec.filing_ingestion.checkpoint.v2','gig.sec.filing_ingestion.checkpoint.v3','gig.sec.filing_ingestion.checkpoint.v4')or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
+  if type(v)is not dict or set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']not in('gig.sec.filing_ingestion.checkpoint.v1','gig.sec.filing_ingestion.checkpoint.v2','gig.sec.filing_ingestion.checkpoint.v3','gig.sec.filing_ingestion.checkpoint.v4')or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
   if type(v['sources'])is not dict or len(v['sources'])>MAX_SOURCES or type(v['plans'])is not dict or len(v['plans'])>8:raise IngestError('sec_ingest_checkpoint_counts')
   sources={};total=0
   for key,r in v['sources'].items():
    if type(r)is not dict or set(r)!={'url','sha256','received_at','body_base64'}or type(r['body_base64'])is not str or len(r['body_base64'])>4*((MAX_SOURCE+2)//3):raise IngestError('sec_ingest_checkpoint_source')
    try:body=base64.b64decode(r['body_base64'],validate=True)
    except ValueError:raise IngestError('sec_ingest_checkpoint_base64')from None
+   if base64.b64encode(body).decode('ascii')!=r['body_base64']:raise IngestError('sec_ingest_checkpoint_base64')
    total+=len(body)
    if len(body)>MAX_SOURCE or total>MAX_TOTAL or hashlib.sha256(body).hexdigest()!=r['sha256']or key!=digest({'url':r['url'],'sha256':r['sha256']}):raise IngestError('sec_ingest_checkpoint_source_integrity')
    sec.acceptance_ns(r['received_at']);sources[key]={k:r[k]for k in('url','sha256','received_at')};sources[key]['body']=body
@@ -342,7 +348,7 @@ class FilingIngestor:
    if 'inline_manifest'in plan:required.update(('inline_manifest','inline_manifest_sha256','inline_keys'))
    if set(plan)!=required or type(plan['metadata'])is not dict or plan['metadata'].get('accession')!=accession:raise IngestError('sec_ingest_checkpoint_plan')
    if 'inline_manifest'in plan and(type(plan['inline_keys'])is not list or not 1<=len(plan['inline_keys'])<=8):raise IngestError('sec_inline_manifest_sources')
-   if type(plan['document_keys'])is not list or len(plan['document_keys'])>16 or len(set(plan['document_keys']))!=len(plan['document_keys']):raise IngestError('sec_ingest_checkpoint_document_budget')
+   if type(plan['document_keys'])is not list or len(plan['document_keys'])>16 or any(type(k)is not str for k in plan['document_keys'])or len(set(plan['document_keys']))!=len(plan['document_keys']):raise IngestError('sec_ingest_checkpoint_document_budget')
    for key in source_keys(plan):
     if type(key)is not str or key not in sources:raise IngestError('sec_ingest_checkpoint_source_reference')
     self._url(sources[key]['url'],accession,submission_shard=key==plan.get('history_key'));used.add(key)
