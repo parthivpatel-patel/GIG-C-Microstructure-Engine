@@ -2,7 +2,8 @@
 #include "gig/itch/durable_checkpoint.hpp"
 #include "gig/itch/gzip.hpp"
 namespace gig::itch {
-enum class RecoveryContainer : std::uint8_t { binary_file, single_gzip };
+enum class RecoveryContainer : std::uint8_t { binary_file, single_gzip, gzip_members };
+inline constexpr std::size_t recovery_max_gzip_members=16;
 struct SourceRecoveryAdmission {
     RecoveryContainer container;
     Sha256Digest source_sha256;
@@ -15,8 +16,9 @@ struct SourceRecoveryAdmission {
 // Isolated candidate only. Authenticate the supplied immutable source first,then
 // start the container at byte0,check the already-committed frames against receipts
 // WITHOUT applying them,and apply only the continuation. No gzip/internal inflate
-// pointer snapshot or arbitrary compressed seek. Single complete CRC-verified gzip
-// member;BinaryFile must end at a complete nonterminal bounded-prefix boundary.
+// pointer snapshot or arbitrary compressed seek. Gzip requires complete CRC-verified
+// members, either exactly one or an explicit bounded concatenation. BinaryFile must
+// end at a complete nonterminal bounded-prefix boundary.
 // Configured starting Location supports authored seeded tails. Missing prefix,
 // partial frames,terminal positions,source mismatch,gaps and stale generations fail.
 gig::Result<SyntheticReconstructor> resume_hot_source(std::span<const std::byte> checkpoint,
@@ -49,8 +51,8 @@ struct PartialGzipRecovery {
     SyntheticReconstructor owner;
     PartialGzipTail tail;
 };
-// Admit a complete single gzip member whose decompressed BinaryFile stops inside
-// a frame. Every compressed byte and the gzip trailer must verify. The returned
+// Admit a complete gzip container whose concatenated decompressed BinaryFile stops
+// inside a frame. Every compressed byte and each gzip trailer must verify. The returned
 // boundary is in the decompressed stream and grants no compressed seek position.
 gig::Result<PartialGzipRecovery> resume_partial_gzip_source(std::span<const std::byte> checkpoint,
     const DurableAdmission&,std::span<const std::byte> source,const SourceRecoveryAdmission&,
@@ -62,7 +64,7 @@ bool matches_partial_frame_prefix(std::span<const std::byte> payload,
 // Explicit complete-source profile. The durable input remains an accepted active
 // Version1 boundary; replay validates its committed prefix without applying it.
 // Require the BinaryFile zero-length terminator at exact EOF and,for gzip,the
-// verified complete single-member trailer before sealing the isolated candidate.
+// verified complete member trailers before sealing the isolated candidate.
 // Completion is a supplied-container fact,not observed exchange completeness.
 // The returned owner is finished;further process/hot_checkpoint calls fail. This
 // does not introduce terminal-image serialization or migrate Version1 images.

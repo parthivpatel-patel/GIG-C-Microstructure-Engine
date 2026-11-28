@@ -33,11 +33,12 @@ gig::ErrorCode gzip_code(GzipCode code) noexcept {
 gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> bytes,const DurableAdmission&trusted,std::span<const std::byte> source,const SourceRecoveryAdmission&a,std::pmr::memory_resource*r,bool complete,PartialBinaryTail* partial=nullptr,Sha256Digest* decompressed=nullptr)noexcept {
  using R=gig::Result<SyntheticReconstructor>;
  const auto bad=[](gig::ErrorCode c,std::string_view f){return R::failure(c,f);};
- if(partial && a.container!=(decompressed?RecoveryContainer::single_gzip:RecoveryContainer::binary_file))
+ const bool compressed=a.container==RecoveryContainer::single_gzip||a.container==RecoveryContainer::gzip_members;
+ if(partial && (decompressed?!compressed:a.container!=RecoveryContainer::binary_file))
   return bad(gig::ErrorCode::unsupported,"source_recovery.partial_container");
  if(!r||source.size()>32U*1024U*1024U||a.gzip.max_decompressed_bytes>32U*1024U*1024U||a.gzip.max_compressed_bytes>32U*1024U*1024U||a.framing.max_records>4096||a.framing.max_stream_bytes>32U*1024U*1024U)return bad(gig::ErrorCode::capacity,"source_recovery.budget");
  if(a.capture!=trusted.capture||a.generation!=trusted.generation||sha256(source)!=a.source_sha256)return bad(gig::ErrorCode::identity_mismatch,"source_recovery.capture_generation_digest");
- if(a.container!=RecoveryContainer::binary_file&&a.container!=RecoveryContainer::single_gzip)return bad(gig::ErrorCode::unsupported,"source_recovery.container");
+ if(a.container!=RecoveryContainer::binary_file&&!compressed)return bad(gig::ErrorCode::unsupported,"source_recovery.container");
  auto candidate=restore_durable_checkpoint(bytes,trusted,r);if(!candidate)return candidate;auto&engine=*candidate.data;
  if(a.first_location!=engine.config().context_policy.first_location||a.first_location.frame_offset.value()>UINT64_MAX-2||a.first_location.payload_offset.value()!=a.first_location.frame_offset.value()+2)return bad(gig::ErrorCode::identity_mismatch,"source_recovery.boundary");
  auto framer=BinaryFileFramer::create(a.framing,a.first_location.frame_offset,a.first_location.ordinal,r);if(!framer)return bad(framing_code(framer.error.code),"source_recovery.framer");
@@ -58,6 +59,43 @@ gig::Result<SyntheticReconstructor> resume_source(std::span<const std::byte> byt
   }
  };
  if(a.container==RecoveryContainer::binary_file)consume(source);
+ else if(a.container==RecoveryContainer::gzip_members) {
+  if(source.empty())return bad(gig::ErrorCode::malformed,"source_recovery.gzip_truncated");
+  if(source.size()>a.gzip.max_compressed_bytes)
+   return bad(gig::ErrorCode::capacity,"source_recovery.gzip_compressed_budget");
+  std::uint64_t compressed_bytes=0,decompressed_bytes=0;
+  for(std::size_t member=0;!source.empty()&&!error;++member){
+   if(member>=recovery_max_gzip_members)
+    return bad(gig::ErrorCode::capacity,"source_recovery.gzip_member_budget");
+   auto limits=a.gzip;
+   limits.max_compressed_bytes-=compressed_bytes;
+   limits.max_decompressed_bytes-=decompressed_bytes;
+   auto gzip=GzipReader::create(limits,r);
+   if(!gzip)return bad(gzip.error.code,gzip.error.field);
+   const auto accept=[&](const GzipFeed& feed){
+    compressed_bytes+=feed.consumed;
+    decompressed_bytes+=feed.output.size();
+    if(decompressed_bytes>a.gzip.expansion_slack_bytes &&
+       (decompressed_bytes-a.gzip.expansion_slack_bytes-1)/a.gzip.max_expansion_ratio>=compressed_bytes){
+     error={gig::ErrorCode::capacity,"source_recovery.gzip_expansion_budget"};
+     return;
+    }
+    consume(feed.output);
+   };
+   while(!gzip.data->member_verified()&&!error){
+    const auto feed=gzip.data->feed(source);
+    if(feed.error)return bad(gzip_code(feed.error.code),"source_recovery.gzip_integrity");
+    source=source.subspan(feed.consumed);
+    accept(feed);
+    if(!feed.consumed&&feed.output.empty()&&!feed.member_ended)break;
+   }
+   if(!error){
+    const auto finish=gzip.data->finish(EndKind::source_eof);
+    if(finish.error||!finish.member_verified||!finish.complete)
+     return bad(gzip_code(finish.error.code),"source_recovery.gzip_truncated");
+   }
+  }
+ }
  else {
   auto gzip=GzipReader::create(a.gzip,r);if(!gzip)return bad(gzip.error.code,gzip.error.field);
   while(!source.empty()&&!error){auto feed=gzip.data->feed(source);source=source.subspan(feed.consumed);if(feed.error)return bad(gzip_code(feed.error.code),"source_recovery.gzip_integrity");consume(feed.output);if(!feed.consumed&&feed.output.empty())return bad(gig::ErrorCode::malformed,"source_recovery.gzip_progress");}
