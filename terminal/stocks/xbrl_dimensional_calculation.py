@@ -13,12 +13,14 @@ from .xbrl_dimensions import D,INHERITED_PROFILE,corroborate
 from .xbrl_accuracy import ROUNDING_MODES,calculation_duplicates,calculation_consistency
 from .xbrl_relationships import PROFILE as REL_PROFILE,SUM
 from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE,_bound_sources,_resolve,_value_check
-from .xbrl_calculation_report import _identity,_source_fact,_context,HEX
+from .xbrl_calculation_report import _identity,_source_fact,_context,_original_decimal_weight,WEIGHTED_PROFILE,HEX
 
 PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_CALCULATIONS_V1'
 SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v1'
 BOUND_NUMERIC_PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_BOUND_NUMERIC_CALCULATIONS_V2'
 BOUND_NUMERIC_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v2'
+WEIGHTED_DIMENSIONAL_PROFILE='POSITIVE_EXPLICIT_DIMENSIONAL_DECIMAL_WEIGHT_CALCULATIONS_V3'
+WEIGHTED_DIMENSIONAL_SCHEMA='gig.sec.xbrl.dimensional_calculation_report.v3'
 MAX_OUTPUT=4*1024*1024;MAX_BINDINGS=128
 QNAME=re.compile(r'\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}\Z')
 
@@ -67,7 +69,9 @@ def _global_defaults(dts,docmap):
   if default not in members:raise XBRLError('dimcalc_default_outside_domain')
  return defaults,sources
 
-def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE,numeric_profile=None):
+def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',dimensional_profile=INHERITED_PROFILE,numeric_profile=None,weight_profile=None):
+ if weight_profile not in (None,WEIGHTED_PROFILE):raise XBRLError('dimcalc_weight_profile_unsupported')
+ weighted=weight_profile==WEIGHTED_PROFILE
  if numeric_profile not in (None,BOUNDS_PROFILE):raise XBRLError('dimcalc_numeric_profile_unsupported')
  if dimensional_profile!=INHERITED_PROFILE:raise XBRLError('dimcalc_profile_unsupported')
  if type(rounding_mode)is not str or rounding_mode not in ROUNDING_MODES:raise XBRLError('dimcalc_rounding_mode')
@@ -117,12 +121,15 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
  nets=[n for n in rels['networks']if n.get('kind')=='calculation'and(role is None or n.get('role')==role)]
  if len(nets)!=1:raise XBRLError('dimcalc_calculation_role_ambiguous')
  net=nets[0]
- if net.get('usable')is not True or net.get('issues')or net.get('arcrole')!=SUM or net.get('link_qname')!=tag(L,'calculationLink')or net.get('arc_qname')!=tag(L,'calculationArc')or type(net.get('arcs'))is not list or not 1<=len(net['arcs'])<=4096:raise XBRLError('dimcalc_calculation_network_scope')
+ issues=net.get('issues')
+ if type(issues)is not list or net.get('usable')is not (not issues) or any(issue!='WEIGHT_OUTSIDE_SIGNED_UNIT_PROFILE' or not weighted for issue in issues)or net.get('arcrole')!=SUM or net.get('link_qname')!=tag(L,'calculationLink')or net.get('arc_qname')!=tag(L,'calculationArc')or type(net.get('arcs'))is not list or not 1<=len(net['arcs'])<=4096:raise XBRLError('dimcalc_calculation_network_scope')
  parents={};participants=set();pairs=set()
  for a in net['arcs']:
-  if (a['from'],a['to'])in pairs or a.get('weight')not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('dimcalc_calculation_arc_scope')
+  if (a['from'],a['to'])in pairs or not weighted and a.get('weight')not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('dimcalc_calculation_arc_scope')
   if type(a.get('provenance'))is not list or not a['provenance']or any(type(p)is not dict or p.get('source_uri')not in docmap or docmap[p['source_uri']]!=p.get('source_sha256')for p in a['provenance']):raise XBRLError('dimcalc_calculation_arc_lineage')
-  _declaration(dts,a['from'],tag(X,'item'));_declaration(dts,a['to'],tag(X,'item'));pairs.add((a['from'],a['to']));parents.setdefault(a['from'],[]).append(a);participants.update((a['from'],a['to']))
+  _declaration(dts,a['from'],tag(X,'item'));_declaration(dts,a['to'],tag(X,'item'))
+  if weighted:_original_decimal_weight(a,dts['concepts'])
+  pairs.add((a['from'],a['to']));parents.setdefault(a['from'],[]).append(a);participants.update((a['from'],a['to']))
  if any(len(a)>128 for a in parents.values()):raise XBRLError('dimcalc_term_budget')
  contexts=parsed.get('contexts');units=parsed.get('units');facts=parsed.get('facts')
  if type(contexts)is not dict or len(contexts)>512 or type(units)is not dict or len(units)>128 or type(facts)is not list or len(facts)>4096 or parsed.get('unsupported_nodes'):raise XBRLError('dimcalc_original_scope')
@@ -179,6 +186,8 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
  result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':'NO_SUPPORTED_PARENT_DATA_POINTS','rounding_mode':rounding_mode,'dimensional_profile':INHERITED_PROFILE,'role':net['role'],'definition_role':dts['definition'][0]['role'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'drs_proof_sha256':digest(drs),'definition_sha256':digest(dts['definition']),'source_filing':copy.deepcopy(source),'global_default_dimensions':defaults,'default_provenance':default_sources,'definition_documents':[{'uri':u,'sha256':docmap[u]}for u in sorted({a['source_uri']for a in dts['definition'][0]['arcs']})],'fact_provenance':lineage,'bindings':[],'selected_reported_value':None,'limitations':['Positive inherited/conjunctive explicit DRS V3 only;no typed,negative,opaque,forever,cross-role or mixed context placement','Global defaults are derived calculation aspects only;original source contexts and facts are unchanged','Not complete OIM/XDT/Calc1.1 conformance,independent source authentication or accounting equivalence']}
  if numeric_profile==BOUNDS_PROFILE:
   result.update(schema=BOUND_NUMERIC_SCHEMA,profile=BOUND_NUMERIC_PROFILE,numeric_profile=numeric_profile)
+ if weighted:
+  result.update(schema=WEIGHTED_DIMENSIONAL_SCHEMA,profile=WEIGHTED_DIMENSIONAL_PROFILE,weight_profile=weight_profile)
  for parent,arcs in sorted(parents.items()):
   for (concept,key),rows in sorted(groups.items()):
    if concept!=parent:continue
@@ -187,7 +196,7 @@ def bind_dimensional_calculation_report(parsed,dts,*,role=None,rounding_mode='ro
     child=groups.get((arc['to'],key));accuracy=calculation_duplicates(child,rounding_mode=rounding_mode)if child else None
     if accuracy is None:missing.append(arc['to'])
     else:points[arc['to']]=accuracy
-    terms.append({'concept':arc['to'],'weight':int(arc['weight']['numerator']),'accuracy':accuracy})
+    terms.append({'concept':arc['to'],'weight':arc['provenance'][0]['weight_lexical'] if weighted else int(arc['weight']['numerator']),'accuracy':accuracy})
    allids=[i for p in points.values()for i in p['source_fact_ids']]
    result['bindings'].append({'parent':parent,'aspect_sha256':key,'aspects':aspects[key],'source_context_sha256s':sorted({lineage[i]['source_context_sha256']for i in allids}),'data_points':points,'missing_concepts':missing,'calculation':calculation_consistency(points[parent],terms,rounding_mode=rounding_mode),'relationship_provenance':[copy.deepcopy(a['provenance'])for a in arcs]})
    if len(result['bindings'])>MAX_BINDINGS or len(canonical(result))>MAX_OUTPUT:raise XBRLError('dimcalc_output_budget')

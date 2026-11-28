@@ -22,6 +22,15 @@ HEX=re.compile('[0-9a-f]{64}\\Z')
 def _identity(value,key,code):
  if type(value)is not dict or len(canonical(value))>MAX_INPUT or type(value.get(key))is not str or not HEX.fullmatch(value[key])or digest({k:v for k,v in value.items()if k!=key})!=value[key]:raise XBRLError(code)
 
+def _original_decimal_weight(arc, declarations):
+ weight=arc.get('weight')
+ for origin in arc['provenance']:
+  exact=number(origin.get('weight_lexical'),'calculation_source_weight')
+  if not exact or rational(exact)!=weight:raise XBRLError('calculation_source_weight')
+ parent=declarations[arc['from']]['declaration']['balance']
+ child=declarations[arc['to']]['declaration']['balance']
+ if parent is not None and child is not None and (exact>0)!=(parent==child):raise XBRLError('calculation_source_weight_balance')
+
 def _source_fact(parsed,fact):
  core={k:v for k,v in fact.items()if k!='source_fact_id'}
  if parsed['schema']=='gig.sec.xbrl.inline_set.v1':
@@ -101,15 +110,10 @@ def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-neare
  parents={};concepts=set();pairs=set();declarations=dts['concepts']
  for arc in net['arcs']:
   parent,child=arc['from'],arc['to'];weight=arc.get('weight')
-  if parent not in declarations or child not in declarations or(parent,child)in pairs or type(weight)is not dict or set(weight)!={'numerator','denominator'}or weight not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('calculation_report_arc_contract')
+  if parent not in declarations or child not in declarations or(parent,child)in pairs or type(weight)is not dict or set(weight)!={'numerator','denominator'}or not weighted and weight not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('calculation_report_arc_contract')
   provenance=arc.get('provenance')
   if type(provenance)is not list or not 1<=len(provenance)<=4096 or any(type(p)is not dict or p.get('source_uri')not in docmap or docmap[p['source_uri']]!=p.get('source_sha256')for p in provenance):raise XBRLError('calculation_report_arc_lineage')
-  if weighted:
-   for origin in provenance:
-    exact=number(origin.get('weight_lexical'),'calculation_source_weight')
-    if not exact or rational(exact)!=weight:raise XBRLError('calculation_source_weight')
-   base=declarations[parent]['declaration']['balance'];contribution=declarations[child]['declaration']['balance']
-   if base is not None and contribution is not None and (exact>0)!=(base==contribution):raise XBRLError('calculation_source_weight_balance')
+  if weighted:_original_decimal_weight(arc,declarations)
   pairs.add((parent,child));parents.setdefault(parent,[]).append(arc);concepts.update((parent,child))
  if any(len(v)>128 for v in parents.values()):raise XBRLError('calculation_report_term_budget')
  contexts=parsed.get('contexts');units=parsed.get('units');facts=parsed.get('facts')
