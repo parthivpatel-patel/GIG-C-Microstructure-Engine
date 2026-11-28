@@ -39,7 +39,7 @@ export function FilingAcquisition({symbol,cik}:{symbol:string;cik:string|null}){
  const [ready,setReady]=useState(false),[start,setStart]=useState(''),[end,setEnd]=useState('');
  const [schedule,setSchedule]=useState<Schedule|null>(null),[accession,setAccession]=useState('');
  const [amends,setAmends]=useState(''),[manifest,setManifest]=useState<File|null>(null);
- const [transform,setTransform]=useState(false),[busy,setBusy]=useState(false);
+ const [transform,setTransform]=useState(false),[numericBounds,setNumericBounds]=useState(false),[busy,setBusy]=useState(false);
  const [error,setError]=useState(''),[receipt,setReceipt]=useState('');
  const active=useRef<AbortController|null>(null);
  useEffect(()=>{
@@ -73,7 +73,8 @@ export function FilingAcquisition({symbol,cik}:{symbol:string;cik:string|null}){
     const shard=schedule?.rows.find(row=>row.accession===accession)?.shard;
     const result=await requestV2<{schema:string;status:string;issuer_cik:string;accession:string;installed:boolean;collection_sha256:string}>(
      '/sec-filings/acquire',{action,symbol,accession,...(shard?{metadata_shard:shard}:{}),...(amends?{amends_accession:amends}:{}),
-     ...(manifest?{inline_manifest,...(transform?{transformation_profile:'REGISTRY_2015_NUMERIC_V2'}:{})}:{})},signal);
+     ...(manifest?{inline_manifest,...(transform?{transformation_profile:'REGISTRY_2015_NUMERIC_V2'}:{})}:{}),
+      ...(numericBounds?{numeric_profile:'NUMERIC_BOUND_RESTRICTIONS_V6'}:{})},signal);
     if(signal.aborted)return;
     if(result?.schema!=='gig.sec.filing_ingestion.v1'||result.status!=='ACCEPTED'||result.issuer_cik!==issuer||
        result.accession!==accession||result.installed!==true||!hashPattern.test(result.collection_sha256))throw Error('Invalid filing receipt');
@@ -103,6 +104,9 @@ export function FilingAcquisition({symbol,cik}:{symbol:string;cik:string|null}){
    <label>Original inline document manifest (optional)<input type="file" accept="application/json,.json" disabled={busy}
     onChange={e=>{setManifest(e.target.files?.[0]??null);setTransform(false)}}/></label>
    {manifest&&<label><input type="checkbox" checked={transform} disabled={busy} onChange={e=>setTransform(e.target.checked)}/>Use the 2015 numeric transformation profile</label>}
+   <label><input type="checkbox" checked={numericBounds} disabled={busy} onChange={e=>setNumericBounds(e.target.checked)}/>
+    Apply inherited numeric bounds from supplied schemas
+   </label>
    <button disabled={busy}>Acquire selected filing</button>
   </form>
   {busy&&<p role="status">Reading authorized SEC sources…</p>}

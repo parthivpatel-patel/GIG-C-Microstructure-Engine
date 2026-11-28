@@ -734,7 +734,7 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
             optional={'max_shards','max_filings'}
         elif action=='ingest':
             required={'action','symbol','accession'}
-            optional={'document','amends_accession','metadata_shard','inline_manifest','transformation_profile'}
+            optional={'document','amends_accession','metadata_shard','inline_manifest','transformation_profile','numeric_profile'}
         else:
             return error('SEC_FILING_QUERY','expected explicit discovery or filing acquisition',422)
         if not required<=value.keys()<=required|optional:

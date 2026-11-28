@@ -13,7 +13,7 @@ from .sec_config import user_agent_valid
 from .xbrl_instance import X,L,tag,parse_xml,digest,canonical,selected_concepts,XBRLError
 from .xbrl_dts import discover,EMBEDDED_PROFILE
 from .xbrl_collection import FilingCollection
-from .xbrl_types import COMPLEX_PROFILE
+from .xbrl_types import BOUNDS_PROFILE,COMPLEX_PROFILE
 from terminal.verification.artifacts import decode as _decode_artifact,read_bytes
 
 def decode(raw):return _decode_artifact(raw,numeric_policy='exact-integer')
@@ -44,6 +44,7 @@ def directory(payload,cik,accession):
 def source_keys(plan):return [plan['metadata_key'],plan['index_key'],plan['instance_key'],*plan['document_keys']]+([plan['history_key']]if 'history_key'in plan else[])+plan.get('inline_keys',[])
 
 def checkpoint_version(plans):
+ if any(type(p)is dict and 'numeric_profile'in p for p in plans.values()):return 'gig.sec.filing_ingestion.checkpoint.v5'
  if any(type(p)is dict and 'transformation_profile'in p for p in plans.values()):return 'gig.sec.filing_ingestion.checkpoint.v4'
  if any(type(p)is dict and 'inline_manifest'in p for p in plans.values()):return 'gig.sec.filing_ingestion.checkpoint.v3'
  if any(type(p)is dict and 'history_key'in p for p in plans.values()):return 'gig.sec.filing_ingestion.checkpoint.v2'
@@ -181,6 +182,7 @@ class FilingIngestor:
    elif parse_xml(raw['body']).name==tag('http://www.w3.org/1999/xhtml','html'):
     entry['inline_documents']=[{'uri':entry['instance_uri'],'raw':entry['raw'],'manifest':entry['manifest']}]
    if 'transformation_profile'in plan:entry['transformation_profile']=plan['transformation_profile']
+   if 'numeric_profile'in plan:entry['numeric_profile']=plan['numeric_profile']
    entries.append(entry)
   return entries
  def original_recipe(self,accession,*,inline_required=False):
@@ -193,7 +195,7 @@ class FilingIngestor:
            'embedded_profile':EMBEDDED_PROFILE,'acquisition_manifest':copy.deepcopy(plan.get('inline_manifest')),
            'expected_acquisition_manifest_sha256':plan.get('inline_manifest_sha256')}
   if inline_required:return None
-  return {**entry,'embedded_profile':EMBEDDED_PROFILE}
+  return {k:v for k,v in {**entry,'embedded_profile':EMBEDDED_PROFILE}.items() if k!='numeric_profile'}
 
  def _rebuild(self,plans,sources):
   c=FilingCollection(self.cik,origin=self.origin,allow_observed=self.allow_observed);entries=self._entries(plans,sources)
@@ -204,12 +206,14 @@ class FilingIngestor:
    expected=next(iter(entry['concepts'])).split('}',1)[0][1:]
    if namespaces!={expected}:raise IngestError('sec_ingest_checkpoint_taxonomy_scope')
   for entry in entries:
+   selected_profile=entry.get('numeric_profile',COMPLEX_PROFILE)
    if 'inline_documents'not in entry:
-    c.ingest_dts_batch([entry],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE)
+    original={k:v for k,v in entry.items()if k!='numeric_profile'}
+    c.ingest_dts_batch([original],numeric_profile=selected_profile,embedded_profile=EMBEDDED_PROFILE)
    else:
     # A single acquired original is an explicit one-document set. Never repair
     # HTML or discover sibling documents from arbitrary hyperlinks.
-    c.ingest_inline_set_batch([{'documents':entry['inline_documents'],'concepts':entry['concepts'],'taxonomy_documents':entry['documents']}],numeric_profile=COMPLEX_PROFILE,embedded_profile=EMBEDDED_PROFILE,transformation_profile=entry.get('transformation_profile'))
+    c.ingest_inline_set_batch([{'documents':entry['inline_documents'],'concepts':entry['concepts'],'taxonomy_documents':entry['documents']}],numeric_profile=selected_profile,embedded_profile=EMBEDDED_PROFILE,transformation_profile=entry.get('transformation_profile'))
   return c
  async def discover_filings(self,*,start,end,max_shards=2,max_filings=8):
   """Explicit bounded metadata scan. Returns a plan; never executes filings.
@@ -237,10 +241,11 @@ class FilingIngestor:
      row_truncated|=parsed['integrity']['truncated'];groups.append((parsed['filings'],source(k)))
     rows,truncated=schedule(groups,start,end,max_filings)
     return {'schema':'gig.sec.filing_schedule.v1','issuer_cik':self.cik,'start':start,'end':end,'entries':rows,'shards_read':min(len(advertised),max_shards),'shards_deferred':max(0,len(advertised)-max_shards),'truncated':truncated or row_truncated or len(advertised)>max_shards,'complete_history':False,'requests':budget['requests'],'response_bytes':budget['bytes'],'scope':'Explicit metadata plan only;explicit ingest requires advertised shard name and independent source revalidation'}
- async def ingest(self,accession,*,document=None,amends_accession=None,fresh=False,store=None,metadata_shard=None,inline_manifest=None,transformation_profile=None):
+ async def ingest(self,accession,*,document=None,amends_accession=None,fresh=False,store=None,metadata_shard=None,inline_manifest=None,transformation_profile=None,numeric_profile=None):
   if type(accession)is not str or not re.fullmatch('[0-9]{10}-[0-9]{2}-[0-9]{6}',accession):raise IngestError('sec_ingest_accession')
   if document is not None:filename(document)
   from .inline_set import TRANSFORMATION_PROFILE
+  if numeric_profile not in (None,BOUNDS_PROFILE):raise IngestError('sec_ingest_numeric_profile_unsupported')
   if transformation_profile not in(None,TRANSFORMATION_PROFILE):raise IngestError('sec_inline_transformation_profile_unsupported')
   if transformation_profile is not None and inline_manifest is None:raise IngestError('sec_inline_transformation_manifest_required')
   if inline_manifest is not None:
@@ -257,6 +262,7 @@ class FilingIngestor:
     async with asyncio.timeout(30):
      previous=self.plans.get(accession)
      if previous is not None and previous.get('transformation_profile')!=transformation_profile:raise IngestError('sec_inline_transformation_profile_immutable')
+     if previous is not None and previous.get('numeric_profile')!=numeric_profile:raise IngestError('sec_ingest_numeric_profile_immutable')
      meta=await self._read(f'https://data.sec.gov/submissions/CIK{self.cik}.json',accession,stage,budget,fresh=fresh);payload=decode(stage[meta]['body']);rows=sec.filings(payload,self.cik,limit=1024)['filings'];history=None
      if metadata_shard is not None:
       from .sec_filing_schedule import shards,historical_rows
@@ -311,6 +317,7 @@ class FilingIngestor:
      if history is not None:plan['history_key']=history
      if inline_manifest is not None:plan.update(inline_manifest=inline_manifest,inline_manifest_sha256=digest(inline_manifest),inline_keys=inline_keys)
      if transformation_profile is not None:plan['transformation_profile']=transformation_profile
+     if numeric_profile is not None:plan['numeric_profile']=numeric_profile
      plans={**self.plans,accession:plan};sources={**self.sources,**stage}
      used={k for p in plans.values()for k in source_keys(p)}
      sources={k:v for k,v in sources.items()if k in used}
@@ -340,7 +347,7 @@ class FilingIngestor:
   if self.lock.locked():raise IngestError('sec_ingest_busy')
   if type(raw)is not bytes or len(raw)>MAX_IMAGE or hashlib.sha256(raw).hexdigest()!=expected_sha256:raise IngestError('sec_ingest_checkpoint_integrity')
   v=decode(raw)
-  if type(v)is not dict or set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']not in('gig.sec.filing_ingestion.checkpoint.v1','gig.sec.filing_ingestion.checkpoint.v2','gig.sec.filing_ingestion.checkpoint.v3','gig.sec.filing_ingestion.checkpoint.v4')or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
+  if type(v)is not dict or set(v)!={'schema','issuer_cik','origin','permission_reference_sha256','taxonomy_urls','plans','sources','collection_sha256'}or v['schema']not in('gig.sec.filing_ingestion.checkpoint.v1','gig.sec.filing_ingestion.checkpoint.v2','gig.sec.filing_ingestion.checkpoint.v3','gig.sec.filing_ingestion.checkpoint.v4','gig.sec.filing_ingestion.checkpoint.v5')or v['issuer_cik']!=self.cik or v['origin']!=self.origin or v['taxonomy_urls']!=sorted(self.taxonomy_urls)or v['permission_reference_sha256']!=(hashlib.sha256(self.reference.encode()).hexdigest()if self.reference is not None else None):raise IngestError('sec_ingest_checkpoint_scope')
   if type(v['sources'])is not dict or len(v['sources'])>MAX_SOURCES or type(v['plans'])is not dict or len(v['plans'])>8:raise IngestError('sec_ingest_checkpoint_counts')
   sources={};total=0
   for key,r in v['sources'].items():
@@ -361,6 +368,9 @@ class FilingIngestor:
     from .inline_set import TRANSFORMATION_PROFILE
     if plan['transformation_profile']!=TRANSFORMATION_PROFILE or 'inline_manifest'not in plan:raise IngestError('sec_inline_checkpoint_transformation_profile')
     required.add('transformation_profile')
+   if 'numeric_profile'in plan:
+    if plan['numeric_profile']!=BOUNDS_PROFILE:raise IngestError('sec_ingest_checkpoint_numeric_profile')
+    required.add('numeric_profile')
    if 'history_key'in plan:required.add('history_key')
    if 'inline_manifest'in plan:required.update(('inline_manifest','inline_manifest_sha256','inline_keys'))
    if set(plan)!=required or type(plan['metadata'])is not dict or plan['metadata'].get('accession')!=accession:raise IngestError('sec_ingest_checkpoint_plan')
