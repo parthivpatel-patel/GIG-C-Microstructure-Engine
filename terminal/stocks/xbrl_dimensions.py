@@ -15,7 +15,8 @@ INHERITED_CROSS_ROLE_PROFILE='ORIGINAL_DTS_INHERITED_CLOSED_EXPLICIT_V8'
 EFFECTIVE_CROSS_ROLE_PROFILE='ORIGINAL_DTS_EFFECTIVE_CLOSED_EXPLICIT_V9'
 MIXED_CROSS_ROLE_PROFILE='ORIGINAL_DTS_MIXED_CLOSED_EXPLICIT_V10'
 TYPED_BOUND_PROFILE='DIRECT_CLOSED_TYPED_BOUND_HYPERCUBE_V11'
-PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE,TYPED_BOUND_PROFILE)
+TYPED_QNAME_NIL_PROFILE='DIRECT_CLOSED_TYPED_QNAME_NIL_HYPERCUBE_V12'
+PROFILES=(PROFILE,OPEN_PROFILE,INHERITED_PROFILE,NEGATIVE_PROFILE,NEGATIVE_ONLY_PROFILE,TYPED_PROFILE,CROSS_ROLE_PROFILE,INHERITED_CROSS_ROLE_PROFILE,EFFECTIVE_CROSS_ROLE_PROFILE,MIXED_CROSS_ROLE_PROFILE,TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE)
 ROLES={'all','notAll','hypercube-dimension','dimension-domain','domain-member','dimension-default'}
 
 def networks(linkbases,locators,*,node_provenance=False):
@@ -56,9 +57,9 @@ def networks(linkbases,locators,*,node_provenance=False):
 
 def corroborate(parsed,dts,*,profile=PROFILE,documents=None,allow_observed=False,instance_uri=None):
  if profile not in PROFILES:raise XBRLError('drs_profile_unsupported')
- if profile==TYPED_BOUND_PROFILE:
+ if profile in (TYPED_BOUND_PROFILE,TYPED_QNAME_NIL_PROFILE):
   from .xbrl_typed_bounds import corroborate_typed_bounds
-  return corroborate_typed_bounds(parsed,dts,documents,allow_observed,instance_uri)
+  return corroborate_typed_bounds(parsed,dts,documents,allow_observed,instance_uri,profile=profile)
  if profile==MIXED_CROSS_ROLE_PROFILE:
   from .xbrl_mixed_cross_role import corroborate_mixed_cross_role
   return corroborate_mixed_cross_role(parsed,dts,documents,allow_observed,instance_uri)

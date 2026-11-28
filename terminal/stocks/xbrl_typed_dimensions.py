@@ -1,7 +1,7 @@
 """Standalone source-bound typed-domain scalar checks; never full DRS acceptance.
 
 Original contexts/facts/identities are not rewritten or promoted. Only the explicit
-profile is supported. Complex/nil/QName/anonymous domain semantics remain unknown.
+profile is supported. Complex and anonymous domain types remain outside the supported profiles.
 """
 import re
 from urllib.parse import urljoin,urldefrag
@@ -11,6 +11,10 @@ from .xbrl_types import XS,RESTRICTION_PROFILE,declaration,_resolve,_numeric_lex
 
 D='http://xbrl.org/2005/xbrldt';PROFILE='TYPED_DOMAIN_SCALAR_V1'
 BOUNDS_PROFILE='TYPED_DOMAIN_SCALAR_V2'
+QNAME_NIL_PROFILE='TYPED_DOMAIN_SCALAR_V3'
+SCALAR_PROFILES=(PROFILE,BOUNDS_PROFILE,QNAME_NIL_PROFILE)
+XML_NAMESPACE='http://www.w3.org/XML/1998/namespace'
+NCNAME=re.compile('[A-Za-z_][A-Za-z0-9_.-]{0,127}')
 MAX_RECORDS=4096;MAX_OUTPUT=8*1024*1024;MAX_TEXT=4096
 
 def _identity(value):
@@ -70,41 +74,71 @@ def _domain(axis,dts,elements,schema_uris):
  if decl['type']is None:return None,'TYPED_DOMAIN_ANONYMOUS_TYPE_UNSUPPORTED'
  return {'concept':concept,'type':decl['type'],'schema_uri':key,'schema_id':node.attrs['id'],'typed_domain_ref':reference},None
 
+def _qname_value(lexical,namespaces):
+ parts=lexical.split(':')
+ if len(parts)>2 or not all(NCNAME.fullmatch(part) for part in parts):
+  raise XBRLError('typed_qname_lexical')
+ if len(parts)==1:
+  return {'namespace':namespaces.get('') or None,'local_name':parts[0]}
+ prefix,local=parts
+ namespace=XML_NAMESPACE if prefix=='xml' else namespaces.get(prefix)
+ if not namespace or prefix=='xmlns':
+  raise XBRLError('typed_qname_unbound_prefix')
+ return {'namespace':namespace,'local_name':local}
+
 def _scalar(member,domain,dts,types,*,profile=PROFILE):
  if type(member)is not dict or set(member)-{'name','attributes','namespaces','text','children','content_order'}or not {'name','attributes','namespaces','text','children'}<=set(member):raise XBRLError('typed_member_tree_contract')
  if type(member['name'])is not str or type(member['attributes'])is not dict or type(member['namespaces'])is not dict or type(member['text'])is not str or type(member['children'])is not list:raise XBRLError('typed_member_tree_contract')
- if profile==BOUNDS_PROFILE:
+ if profile!=PROFILE:
   namespaces=member['namespaces']
   if len(namespaces)>32 or any(type(k)is not str or k and not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',k)or type(v)is not str or len(v)>512 for k,v in namespaces.items())or 'content_order'in member and not member['children']:raise XBRLError('typed_member_tree_contract')
  if member['name']!=domain['concept']:raise XBRLError('typed_domain_element_mismatch')
  if member['children']:return 'TYPED_DOMAIN_COMPLEX_CONTENT_UNSUPPORTED',None
- if member['attributes']:return 'TYPED_DOMAIN_ATTRIBUTES_OR_NIL_UNSUPPORTED',None
+ attributes=member['attributes']
+ nil_attribute=tag(I,'nil')
+ if attributes and (profile!=QNAME_NIL_PROFILE or set(attributes)!={nil_attribute}):
+  return 'TYPED_DOMAIN_ATTRIBUTES_OR_NIL_UNSUPPORTED',None
+ nil_lexical=attributes.get(nil_attribute,'false')
+ if nil_lexical not in ('true','false','1','0'):
+  raise XBRLError('typed_domain_nil_lexical')
+ nil=nil_lexical in ('true','1')
  text=member['text']
  if type(text)is not str or len(text)>MAX_TEXT:raise XBRLError('typed_scalar_text_budget')
  declared=domain['type']
+ if nil:
+  if text or dts['concepts'][domain['concept']]['declaration']['nillable'] is not True:
+   raise XBRLError('typed_domain_nil_not_allowed')
+  if declared in (tag(XS,'string'),tag(XS,'boolean'),tag(XS,'QName')):
+   return None,{'resolved_type':declared,'validation':'DECLARED_NIL_TYPED_SCALAR'}
  if declared==tag(XS,'string'):return None,{'resolved_type':declared,'validation':'STRING_LEXICAL_RETAINED'}
  lexical=text.strip(' \t\r\n')
+ if declared==tag(XS,'QName') and profile==QNAME_NIL_PROFILE:
+  return None,{'resolved_type':declared,'validation':'QNAME_LEXICAL_VALIDATED',
+               'expanded_value':_qname_value(lexical,member['namespaces'])}
  if declared==tag(XS,'boolean'):
   if lexical not in('true','false','1','0'):raise XBRLError('typed_boolean_lexical')
   return None,{'resolved_type':declared,'validation':'BOOLEAN_LEXICAL_VALIDATED'}
  numeric_profile=RESTRICTION_PROFILE
- if profile==BOUNDS_PROFILE:
+ if profile!=PROFILE:
   from .xbrl_types import BOUNDS_PROFILE as numeric_profile
  try:base,path=_resolve(declared,dts.get('type_declarations',{}),numeric_profile)
  except XBRLError as exc:
   if 'unsupported'in str(exc):return 'TYPED_DOMAIN_TYPE_UNSUPPORTED',None
   raise
  if not base.startswith('{'+XS+'}')or any(kind!=tag(XS,'simpleType')for row in path for kind in types.get(row['type'],[])):return 'TYPED_DOMAIN_NUMERIC_COMPLEX_OR_ITEM_TYPE_UNSUPPORTED',None
- _enumeration_definitions(base,path);value=_numeric_lexical(lexical,base);_facet_checks(value,lexical,path)
+ _enumeration_definitions(base,path)
+ if nil:
+  return None,{'resolved_type':base,'declared_type':declared,'validation':'DECLARED_NIL_TYPED_SCALAR'}
+ value=_numeric_lexical(lexical,base);_facet_checks(value,lexical,path)
  result={'resolved_type':base,'validation':'NUMERIC_SCALAR_VALIDATED','numeric_profile':numeric_profile,'restriction_types':[row['type']for row in path]}
- if profile==BOUNDS_PROFILE:
+ if profile!=PROFILE:
   from .xbrl_types import _bound_restrictions
   result.update(declared_type=declared,restrictions=path,effective_bounds=_bound_restrictions(base,path))
  return None,result
 
 def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=False):
  """Return separate typed-scalar diagnostics;do not mutate or accept a filing."""
- if profile not in(PROFILE,BOUNDS_PROFILE):raise XBRLError('typed_profile_unsupported')
+ if profile not in SCALAR_PROFILES:raise XBRLError('typed_profile_unsupported')
  if not _identity(parsed)or not _identity(dts):raise XBRLError('typed_input_identity')
  origin=parsed.get('origin')
  if type(allow_observed)is not bool or origin not in('HISTORICAL_SYNTHETIC','OBSERVED_OFFICIAL_RESPONSE')or dts.get('origin')!=origin or type(parsed.get('source'))is not dict or parsed['source'].get('origin')!=origin:raise XBRLError('typed_origin_scope')
@@ -122,13 +156,13 @@ def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=F
  if parsed.get('schema')not in('gig.sec.xbrl.instance.v1','gig.sec.xbrl.inline_set.v1'):raise XBRLError('typed_input_schema_unsupported')
  contexts=parsed.get('contexts');facts=parsed.get('facts')
  if type(contexts)is not dict or len(contexts)>MAX_CONTEXTS or type(facts)is not list or len(facts)>MAX_FACTS:raise XBRLError('typed_input_counts')
- if profile==BOUNDS_PROFILE:
+ if profile!=PROFILE:
   from .xbrl_types import _bound_sources
   proof,_,_=_bound_sources(parsed)
   for key,expected in(('documents',dts['documents']),('concept_declarations',dts['concepts']),('type_declarations',dts.get('type_declarations',{}))):
    if canonical(proof.get(key,{}))!=canonical(expected):raise XBRLError('typed_bound_retained_graph_mismatch')
  elements,types,sources=_sources(dts,documents)
- if profile==BOUNDS_PROFILE:
+ if profile!=PROFILE:
   from .xbrl_typed_bounds import _declarations
   from .xbrl_effective_cross_role import _schema_sources,_validate_schema_sources
   schemas=_schema_sources(_supplied_documents(documents),dts['documents'])
@@ -161,6 +195,6 @@ def check_typed_contexts(parsed,dts,documents,*,profile=PROFILE,allow_observed=F
    members.append(record);size+=len(canonical(record))
    if size>MAX_OUTPUT:raise XBRLError('typed_output_budget')
   if members:output.append({'context_id':context_id,'context_semantic_sha256':context['semantic_sha256'],'source_fact_ids':list(used[context_id]),'typed_members':members})
- result={'schema':'gig.sec.xbrl.typed_context_diagnostics.v2'if profile==BOUNDS_PROFILE else'gig.sec.xbrl.typed_context_diagnostics.v1','profile':profile,'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_schemas':sources,'contexts':output,'typed_member_count':count,'unsupported_member_count':unsupported,'status':'UNSUPPORTED_TYPED_DOMAIN_SEMANTICS'if unsupported else'VALIDATED_SUPPORTED_TYPED_SCALARS'if count else'NO_TYPED_MEMBERS','complete_drs_validation':False,'financial_admission_changed':False,'provider_requested':False,'scope':'Supplied original schema and typed scalar validation only;no hypercube validity,typed equality,context normalization,fact selection or financial promotion'}
+ result={'schema':f'gig.sec.xbrl.typed_context_diagnostics.v{SCALAR_PROFILES.index(profile)+1}','profile':profile,'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'source_schemas':sources,'contexts':output,'typed_member_count':count,'unsupported_member_count':unsupported,'status':'UNSUPPORTED_TYPED_DOMAIN_SEMANTICS'if unsupported else'VALIDATED_SUPPORTED_TYPED_SCALARS'if count else'NO_TYPED_MEMBERS','complete_drs_validation':False,'financial_admission_changed':False,'provider_requested':False,'scope':'Supplied original schema and typed scalar validation only;no hypercube validity,typed equality,context normalization,fact selection or financial promotion'}
  if len(canonical(result))>MAX_OUTPUT:raise XBRLError('typed_output_budget')
  result['sha256']=digest(result);return result
