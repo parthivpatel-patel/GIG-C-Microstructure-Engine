@@ -7,10 +7,11 @@ type Axis={dimension:string;member:string};
 type SourceDocument={uri:string;sha256:string};
 type DefaultSource={member:string;role:string;arc_index:number;source_uri:string;source_sha256:string};
 type Binding={aspect_sha256?:string;source_context_sha256s?:string[];parent:string;aspects:{issuer_cik:string;context_sha256?:string;unit_sha256:string;period:{kind:string;start:string|null;end:string};dimensions:Axis[];effective_dimension_values?:Axis[];unit:{numerator:string[];denominator:string[];semantic_sha256:string}};data_points:Record<string,Point>;missing_concepts:string[];calculation:Check;relationship_provenance:unknown[]};
-export type CalculationPacket={schema:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string;drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];implicit_default_dimensions?:Record<string,string>;numeric_type_provenance?:{base_type:string;derivation_path:string[];documents:SourceDocument[]}}>;selected_reported_value:null};sha256:string};
+export type CalculationPacket={schema:string;weight_profile?:string;dimensional_profile?:string;numeric_profile?:string|null;instrument:{symbol:string;cik:string|null};as_of:string;cutoff_ns:string;form_family:string;role:string|null;rounding_mode:string;collection_sha256:string;status:string;reason:string|null;read_only:true;provider_requested:false;complete_statements:false;lineage:null|{issuer_cik:string;collection_sha256:string;as_of:string;cutoff_ns:string;status:string;complete_history:false;sources:{source:{accession:string;source_sha256:string;accepted_at:string;issuer_cik:string;form:string;filed:string;amends_accession:string|null};parsed_sha256:string}[];sha256:string};report:null|{schema:string;dimensional_profile?:string;numeric_profile?:string;definition_role?:string;drs_proof_sha256?:string;definition_sha256?:string;global_default_dimensions?:Record<string,string>;default_provenance?:Record<string,DefaultSource>;definition_documents?:SourceDocument[];profile:string;sha256:string;role:string;rounding_mode:string;status:string;parsed_sha256:string;dts_sha256:string;relationships_sha256:string;source_filing:{accession:string;issuer_cik:string;source_sha256:string;accepted_at:string};bindings:Binding[];fact_provenance:Record<string,{concept:string;context_ref:string;unit_ref:string;declaration_documents:SourceDocument[];aspect_sha256?:string;source_context_sha256?:string;source_unit_sha256?:string;reported_dimensions?:Axis[];implicit_default_dimensions?:Record<string,string>;numeric_type_provenance?:{base_type:string;derivation_path:string[];documents:SourceDocument[]}}>;selected_reported_value:null};sha256:string};
 function fail():never{throw Error('Invalid source-bound calculation report')}const hash=(v:unknown)=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);const ids=(a:unknown):a is string[]=>Array.isArray(a)&&a.length<=8&&new Set(a).size===a.length&&a.every(hash);
 const DIMENSIONS='INHERITED_POSITIVE_EXPLICIT_HYPERCUBES_V3';
 const BOUNDS='NUMERIC_BOUND_RESTRICTIONS_V6';
+const DECIMAL_WEIGHTS='SOURCE_BOUND_DECIMAL_WEIGHT_CALCULATIONS_V2';
 const qname=(value:unknown):value is string=>typeof value==='string'&&/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(value);
 function defaultDimensions(report:NonNullable<CalculationPacket['report']>){
  const defaults=report.global_default_dimensions, sources=report.default_provenance, documents=report.definition_documents;
@@ -41,11 +42,21 @@ function axisValues(axes:Axis[]){
 }
 type Q=[bigint,bigint];function q(r:R):Q{if(!r||typeof r.numerator!=='string'||! /^-?[0-9]{1,512}$/.test(r.numerator)||typeof r.denominator!=='string'||!/^[0-9]{1,256}$/.test(r.denominator)||BigInt(r.denominator)<=0n)fail();return [BigInt(r.numerator),BigInt(r.denominator)]}
 const cmp=(a:Q,b:Q)=>a[0]*b[1]-b[0]*a[1];const eq=(a:Q,b:Q)=>cmp(a,b)===0n;function add(a:Q,b:Q):Q{let n=a[0]*b[1]+b[0]*a[1],d=a[1]*b[1],x=n<0n?-n:n,y=d;while(y){const r=x%y;x=y;y=r}if(x){n/=x;d/=x}return[n,d]}
+function lexicalWeight(value:unknown):Q{
+ if(typeof value!=='string'||! /^[+-]?(?:[0-9]{1,24}(?:\.[0-9]{0,12})?|\.[0-9]{1,12})$/.test(value))fail();
+ const [whole,part='']=value.replace(/^[+-]/,'').split('.');
+ const numerator=BigInt((whole||'0')+part)*(value.startsWith('-')?-1n:1n);
+ if(numerator===0n)fail();
+ return[numerator,10n**BigInt(part.length)];
+}
 type Bounds=[Q,Q,boolean,boolean];function interval(i:I):Bounds{if(!i||typeof i.lower_closed!=='boolean'||typeof i.upper_closed!=='boolean')fail();const a=q(i.lower),b=q(i.upper);if(cmp(a,b)>0n||eq(a,b)&&!(i.lower_closed&&i.upper_closed))fail();return[a,b,i.lower_closed,i.upper_closed]}
 function same(i:I|null,b:Bounds){if(!i)fail();const v=interval(i);if(!eq(v[0],b[0])||!eq(v[1],b[1])||v[2]!==b[2]||v[3]!==b[3])fail()}
 export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:string|null):Promise<CalculationPacket>{
  const pending:[unknown,number][]=[[raw,0]];let nodes=0;while(pending.length){const [v,d]=pending.pop()!;if(++nodes>40000||d>32)fail();if(typeof v==='string'&&v.length>16384)fail();if(v&&typeof v==='object')for(const x of Object.values(v))pending.push([x,d+1])}
- const p=raw as CalculationPacket;const dimensional=p?.schema==='gig.backend.company_dimensional_calculations.v1';if(!p||(!dimensional&&p.schema!=='gig.backend.company_calculations.v1')||p.instrument?.symbol!==symbol||p.instrument.cik!==cik||p.read_only!==true||p.provider_requested!==false||p.complete_statements!==false||!hash(p.collection_sha256)||!['AVAILABLE','UNAVAILABLE'].includes(p.status)||!['10-K','10-Q'].includes(p.form_family)||!['round-to-nearest','truncation'].includes(p.rounding_mode)||acceptanceNanoseconds(p.as_of).toString()!==p.cutoff_ns)fail();await verifyXbrlDigest(p as unknown as Record<string,unknown>);
+ const p=raw as CalculationPacket;const dimensional=p?.schema==='gig.backend.company_dimensional_calculations.v1';
+ const reweighted=p?.schema==='gig.backend.company_weighted_calculations.v1';
+ if(!p||(!dimensional&&!reweighted&&p.schema!=='gig.backend.company_calculations.v1')||p.instrument?.symbol!==symbol||p.instrument.cik!==cik||p.read_only!==true||p.provider_requested!==false||p.complete_statements!==false||!hash(p.collection_sha256)||!['AVAILABLE','UNAVAILABLE'].includes(p.status)||!['10-K','10-Q'].includes(p.form_family)||!['round-to-nearest','truncation'].includes(p.rounding_mode)||acceptanceNanoseconds(p.as_of).toString()!==p.cutoff_ns)fail();await verifyXbrlDigest(p as unknown as Record<string,unknown>);
+ if(p.weight_profile!==(reweighted?DECIMAL_WEIGHTS:undefined))fail();
  if(dimensional&&(p.dimensional_profile!==DIMENSIONS||p.numeric_profile!==null&&p.numeric_profile!==BOUNDS))fail();
  const l=p.lineage;if(l){await verifyXbrlDigest(l as unknown as Record<string,unknown>);if(l.issuer_cik!==cik||l.collection_sha256!==p.collection_sha256||l.as_of!==p.as_of||l.cutoff_ns!==p.cutoff_ns||l.complete_history!==false||!['SUPPLIED_CHAIN_RESOLVED','UNRESOLVED'].includes(l.status)||!Array.isArray(l.sources)||l.sources.length>32)fail();for(const s of l.sources)if(!hash(s.parsed_sha256)||!hash(s.source.source_sha256)||!/^[0-9]{10}-[0-9]{2}-[0-9]{6}$/.test(s.source.accession)||s.source.issuer_cik!==cik||acceptanceNanoseconds(s.source.accepted_at)>BigInt(p.cutoff_ns))fail()}
  const r=p.report;if(!r){if(p.status!=='UNAVAILABLE')fail();return p}
@@ -55,7 +66,8 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
   if(r.dimensional_profile!==DIMENSIONS||r.numeric_profile!==(bounded?BOUNDS:undefined)||
      r.schema!==(bounded?'gig.sec.xbrl.dimensional_calculation_report.v2':'gig.sec.xbrl.dimensional_calculation_report.v1')||
      r.profile!==(bounded?'POSITIVE_EXPLICIT_DIMENSIONAL_BOUND_NUMERIC_CALCULATIONS_V2':'POSITIVE_EXPLICIT_DIMENSIONAL_CALCULATIONS_V1'))fail();
- }else if(r.schema!=='gig.sec.xbrl.calculation_report.v1'||r.profile!=='SOURCE_BOUND_CALCULATIONS_V1')fail();
+ }else if(r.schema!==(reweighted?'gig.sec.xbrl.calculation_report.v2':'gig.sec.xbrl.calculation_report.v1')||
+          r.profile!==(reweighted?DECIMAL_WEIGHTS:'SOURCE_BOUND_CALCULATIONS_V1'))fail();
  const defaults=dimensional?defaultDimensions(r):null;
  const sourceKeys=new Set<string>();for(let i=0;i<l.sources.length;i++){const current=l.sources[i].source,next=l.sources[i+1]?.source;if(sourceKeys.has(current.accession)||current.form.replace(/\/A$/,'')!==p.form_family)fail();sourceKeys.add(current.accession);if(next){if(!current.form.endsWith('/A')||current.amends_accession!==next.accession||acceptanceNanoseconds(next.accepted_at)>acceptanceNanoseconds(current.accepted_at))fail()}else if(current.form.endsWith('/A')||current.amends_accession!==null)fail()}
  for(const [id,f]of Object.entries(r.fact_provenance)){if(!hash(id)||typeof f.concept!=='string'||!/^\{[^{}]{1,512}\}[A-Za-z_][A-Za-z0-9_.-]{0,127}$/.test(f.concept)||!Array.isArray(f.declaration_documents)||f.declaration_documents.length>16||!f.declaration_documents.length||f.declaration_documents.some(d=>typeof d.uri!=='string'||!hash(d.sha256)))fail()}
@@ -103,9 +115,34 @@ export async function verifyCalculationPacket(raw:unknown,symbol:string,cik:stri
    if(!Array.isArray(b.source_context_sha256s)||!sourceContexts.size||
       JSON.stringify(b.source_context_sha256s)!==JSON.stringify([...sourceContexts].sort()))fail();
   }
+  const relationshipWeights:Q[]=[];
+  if(reweighted){
+   for(const line of b.relationship_provenance){
+    if(!Array.isArray(line)||!line.length||line.length>4096)fail();
+    let weight:Q|undefined;
+    for(const ref of line){
+     if(!ref||typeof ref.source_uri!=='string'||!ref.source_uri||!hash(ref.source_sha256))fail();
+     const candidate=lexicalWeight(ref.weight_lexical);
+     if(weight&&!eq(weight,candidate))fail();
+     weight=candidate;
+    }
+    if(!weight)fail();
+    relationshipWeights.push(weight);
+   }
+  }
   const c=b.calculation;if(!c||!['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT','INCOMPLETE','UNSUPPORTED_ACCURACY'].includes(c.status)||!Array.isArray(c.terms)||c.terms.length>128)fail();
-  if(['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT'].includes(c.status)){const parent=b.data_points[b.parent]?.interval;if(!parent||b.missing_concepts.length)fail();const a=interval(parent);same(c.parent_interval,a);let lo:Q=[0n,1n],hi:Q=[0n,1n],lc=true,uc=true;const concepts=new Set<string>();
-   for(const t of c.terms){if(concepts.has(t.concept))fail();concepts.add(t.concept);const point=b.data_points[t.concept];if(!point?.interval||!ids(t.source_fact_ids)||JSON.stringify(t.source_fact_ids)!==JSON.stringify(point.source_fact_ids))fail();const v=interval(point.interval),w=q(t.weight);if(w[1]!==1n||![-1n,1n].includes(w[0]))fail();const weighted:Bounds=w[0]===1n?v:[[-v[1][0],v[1][1]],[-v[0][0],v[0][1]],v[3],v[2]];same(t.weighted_interval,weighted);lo=add(lo,weighted[0]);hi=add(hi,weighted[1]);lc&&=weighted[2];uc&&=weighted[3]}
+  if(['CALCULATION_COMPATIBLE','DEFINITELY_INCONSISTENT'].includes(c.status)){const parent=b.data_points[b.parent]?.interval;if(!parent||b.missing_concepts.length||reweighted&&relationshipWeights.length!==c.terms.length)fail();const a=interval(parent);same(c.parent_interval,a);let lo:Q=[0n,1n],hi:Q=[0n,1n],lc=true,uc=true;const concepts=new Set<string>();
+   for(const [i,t] of c.terms.entries()){
+    if(concepts.has(t.concept))fail();concepts.add(t.concept);
+    const point=b.data_points[t.concept];
+    if(!point?.interval||!ids(t.source_fact_ids)||JSON.stringify(t.source_fact_ids)!==JSON.stringify(point.source_fact_ids))fail();
+    const v=interval(point.interval),w=q(t.weight);
+    if(reweighted?!eq(w,relationshipWeights[i]):w[1]!==1n||![-1n,1n].includes(w[0]))fail();
+    const scale=(a:Q):Q=>[a[0]*w[0],a[1]*w[1]];
+    const weighted:Bounds=w[0]>0n?[scale(v[0]),scale(v[1]),v[2],v[3]]:[scale(v[1]),scale(v[0]),v[3],v[2]];
+    same(t.weighted_interval,weighted);lo=add(lo,weighted[0]);hi=add(hi,weighted[1]);lc&&=weighted[2];uc&&=weighted[3];
+   }
+
    same(c.weighted_sum_interval,[lo,hi,lc,uc]);same(c.residual_interval,[add(a[0],[-hi[0],hi[1]]),add(a[1],[-lo[0],lo[1]]),a[2]&&uc,a[3]&&lc]);const lower=cmp(a[0],lo)>0n?a[0]:lo,upper=cmp(a[1],hi)<0n?a[1]:hi;const closedLower=(!eq(lower,a[0])||a[2])&&(!eq(lower,lo)||lc),closedUpper=(!eq(upper,a[1])||a[3])&&(!eq(upper,hi)||uc);const compatible=cmp(lower,upper)<0n||eq(lower,upper)&&closedLower&&closedUpper;if(compatible!==(c.status==='CALCULATION_COMPATIBLE'))fail();
   }else if(c.parent_interval!==null||c.weighted_sum_interval!==null||c.residual_interval!==null)fail();
  }
