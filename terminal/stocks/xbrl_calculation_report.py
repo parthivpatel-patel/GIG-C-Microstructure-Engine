@@ -11,9 +11,11 @@ from .xbrl_instance import X,L,tag,digest,canonical,XBRLError
 from .xbrl_binding import bind_declarations
 from .xbrl_types import _resolve,_value_check,COMPLEX_PROFILE
 from .xbrl_accuracy import calculation_duplicates,calculation_consistency,ROUNDING_MODES
-from .xbrl_relationships import PROFILE as REL_PROFILE,SUM
+from .xbrl_relationships import PROFILE as REL_PROFILE,SUM,number,rational
 
 PROFILE='SOURCE_BOUND_CALCULATIONS_V1';SCHEMA='gig.sec.xbrl.calculation_report.v1'
+WEIGHTED_PROFILE='SOURCE_BOUND_DECIMAL_WEIGHT_CALCULATIONS_V2'
+WEIGHTED_SCHEMA='gig.sec.xbrl.calculation_report.v2'
 MAX_INPUT=8*1024*1024;MAX_OUTPUT=4*1024*1024;MAX_BINDINGS=128
 HEX=re.compile('[0-9a-f]{64}\\Z')
 
@@ -50,12 +52,14 @@ def _context(ctx,issuer):
  if type(ctx['dimensions'])is not list or len(ctx['dimensions'])>32 or type(ctx['opaque_segment'])is not list or len(ctx['opaque_segment'])>32:raise XBRLError('calculation_report_context_budget')
  return not(ctx['dimensions']or ctx['opaque_segment']or p['kind']=='forever')
 
-def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest'):
+def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-nearest',weight_profile=None):
  """Bind exact calculation math to canonical original facts and one supplied DTS.
 
  Explicit original DTS is required;an abbreviated retained proof cannot substitute
  for its graph identity. Source hashes demonstrate integrity,not authentication.
  """
+ if weight_profile not in(None,WEIGHTED_PROFILE):raise XBRLError('calculation_weight_profile_unsupported')
+ weighted=weight_profile==WEIGHTED_PROFILE
  if type(rounding_mode)is not str or rounding_mode not in ROUNDING_MODES:raise XBRLError('calculation_report_rounding_mode')
  if role is not None and(type(role)is not str or not 1<=len(role)<=512):raise XBRLError('calculation_report_role')
  _identity(parsed,'canonical_sha256','calculation_report_parsed_identity');_identity(dts,'canonical_sha256','calculation_report_dts_identity')
@@ -91,13 +95,21 @@ def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-neare
  networks=[n for n in rels['networks']if n.get('kind')=='calculation'and(role is None or n.get('role')==role)]
  if len(networks)!=1:raise XBRLError('calculation_report_role_ambiguous_or_missing')
  net=networks[0]
- if net.get('usable')is not True or net.get('issues')or net.get('arcrole')!=SUM or net.get('link_qname')!=tag(L,'calculationLink')or net.get('arc_qname')!=tag(L,'calculationArc')or type(net.get('arcs'))is not list or not 1<=len(net['arcs'])<=4096:raise XBRLError('calculation_report_network_unsupported')
+ issues=net.get('issues')
+ if type(issues)is not list or net.get('usable')is not (not issues):raise XBRLError('calculation_report_network_unsupported')
+ if any(issue!='WEIGHT_OUTSIDE_SIGNED_UNIT_PROFILE' or not weighted for issue in issues)or net.get('arcrole')!=SUM or net.get('link_qname')!=tag(L,'calculationLink')or net.get('arc_qname')!=tag(L,'calculationArc')or type(net.get('arcs'))is not list or not 1<=len(net['arcs'])<=4096:raise XBRLError('calculation_report_network_unsupported')
  parents={};concepts=set();pairs=set();declarations=dts['concepts']
  for arc in net['arcs']:
   parent,child=arc['from'],arc['to'];weight=arc.get('weight')
   if parent not in declarations or child not in declarations or(parent,child)in pairs or type(weight)is not dict or set(weight)!={'numerator','denominator'}or weight not in({'numerator':'1','denominator':'1'},{'numerator':'-1','denominator':'1'}):raise XBRLError('calculation_report_arc_contract')
   provenance=arc.get('provenance')
-  if type(provenance)is not list or not 1<=len(provenance)<=4096 or any(type(p)is not dict or docmap.get(p.get('source_uri'))!=p.get('source_sha256')for p in provenance):raise XBRLError('calculation_report_arc_lineage')
+  if type(provenance)is not list or not 1<=len(provenance)<=4096 or any(type(p)is not dict or p.get('source_uri')not in docmap or docmap[p['source_uri']]!=p.get('source_sha256')for p in provenance):raise XBRLError('calculation_report_arc_lineage')
+  if weighted:
+   for origin in provenance:
+    exact=number(origin.get('weight_lexical'),'calculation_source_weight')
+    if not exact or rational(exact)!=weight:raise XBRLError('calculation_source_weight')
+   base=declarations[parent]['declaration']['balance'];contribution=declarations[child]['declaration']['balance']
+   if base is not None and contribution is not None and (exact>0)!=(base==contribution):raise XBRLError('calculation_source_weight_balance')
   pairs.add((parent,child));parents.setdefault(parent,[]).append(arc);concepts.update((parent,child))
  if any(len(v)>128 for v in parents.values()):raise XBRLError('calculation_report_term_budget')
  contexts=parsed.get('contexts');units=parsed.get('units');facts=parsed.get('facts')
@@ -135,6 +147,9 @@ def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-neare
   footprint+=len(canonical(provenance[fact['source_fact_id']]))+len(fact['source_fact_id'])
   if footprint>MAX_OUTPUT:raise XBRLError('calculation_report_output_budget')
  result={'schema':SCHEMA,'profile':PROFILE,'status':'UNAVAILABLE','reason':None,'rounding_mode':rounding_mode,'role':net['role'],'parsed_sha256':parsed['canonical_sha256'],'dts_sha256':dts['canonical_sha256'],'relationships_sha256':rels['sha256'],'source_filing':copy.deepcopy(source),'bindings':[],'fact_provenance':provenance,'excluded_facts':excluded,'selected_reported_value':None,'limitations':['Only one supported effective signed-unit summation-item network;no definition/default or dimensional/opaque contexts','Canonical artifact integrity is not source authentication or full OIM/Calc1.1 conformance','No reported fact selection,missing-zero synthesis,period/unit aggregation or accounting equivalence']}
+ if weighted:
+  result.update(schema=WEIGHTED_SCHEMA,profile=WEIGHTED_PROFILE)
+  result['limitations'][0]='One supported effective summation-item network with original nonzero decimal weights;no definition/default or dimensional/opaque contexts'
  for parent,arcs in sorted(parents.items()):
   for key,parent_facts in sorted(groups.items()):
    if key[0]!=parent:continue
@@ -144,7 +159,7 @@ def bind_calculation_report(parsed,dts,*,role=None,rounding_mode='round-to-neare
     rows=groups.get((arc['to'],key[1],key[2]));accuracy=calculation_duplicates(rows,rounding_mode=rounding_mode)if rows else None
     if rows:points[arc['to']]=accuracy
     else:missing.append(arc['to'])
-    terms.append({'concept':arc['to'],'weight':int(arc['weight']['numerator']),'accuracy':accuracy})
+    terms.append({'concept':arc['to'],'weight':arc['provenance'][0]['weight_lexical']if weighted else int(arc['weight']['numerator']),'accuracy':accuracy})
    check=calculation_consistency(points[parent],terms,rounding_mode=rounding_mode)
    result['bindings'].append({'parent':parent,'aspects':aspects,'data_points':points,'missing_concepts':missing,'calculation':check,'relationship_provenance':[copy.deepcopy(a['provenance'])for a in arcs]})
    if len(result['bindings'])>MAX_BINDINGS or len(canonical(result))>MAX_OUTPUT:raise XBRLError('calculation_report_output_budget')
