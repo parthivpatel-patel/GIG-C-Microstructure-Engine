@@ -1,5 +1,7 @@
 #include "gig/market_data/aggregate_depth.hpp"
 #include <algorithm>
+#include <array>
+#include <numeric>
 #include <limits>
 #include <stdexcept>
 namespace gig::market_data {
@@ -43,25 +45,49 @@ Error AggregateDepth::apply(std::span<const Level> bids,std::span<const Level>as
     try {
         std::pmr::vector<Level> next_bids(resource_),next_asks(resource_);
         next_bids.reserve(limit_);next_asks.reserve(limit_);
-        if(!snapshot){next_bids.assign(bids_.begin(),bids_.end());next_asks.assign(asks_.begin(),asks_.end());}
-        auto modify=[&](auto& out,std::span<const Level> updates,bool descending)->Error {
+        std::array<std::size_t,4096> order;
+        auto merge=[&](auto& out,std::span<const Level> before,std::span<const Level> updates,bool descending)->Error {
+            const auto precedes=[&](std::int64_t left,std::int64_t right){return descending?left>right:left<right;};
+            Error invalid{};
+            std::size_t first_invalid=updates.size();
             for(std::size_t i=0;i<updates.size();++i){
-                const auto x=updates[i];if(x.price_ticks<=0)return {ErrorCode::invalid_range,"aggregate.price",i};
-                if(snapshot&&x.quantity==0)return {ErrorCode::invalid_range,"aggregate.snapshot_quantity",i};
-                for(std::size_t j=0;j<i;++j)if(updates[j].price_ticks==x.price_ticks)return {ErrorCode::duplicate,"aggregate.price",i};
+                if(updates[i].price_ticks<=0){invalid={ErrorCode::invalid_range,"aggregate.price",i};first_invalid=i;break;}
+                if(snapshot&&updates[i].quantity==0){invalid={ErrorCode::invalid_range,"aggregate.snapshot_quantity",i};first_invalid=i;break;}
             }
-            // Absolute updates are a single transaction; delete first so a full
-            // book can replace a level regardless of update-list ordering.
-            for(const auto x:updates)if(x.quantity==0){const auto it=std::find_if(out.begin(),out.end(),[&](const auto&v){return v.price_ticks==x.price_ticks;});if(it!=out.end())out.erase(it);}
-            for(const auto x:updates)if(x.quantity!=0){
-                auto it=std::find_if(out.begin(),out.end(),[&](const auto&v){return v.price_ticks==x.price_ticks;});
-                if(it!=out.end())it->quantity=x.quantity;
-                else {if(out.size()==limit_)return {ErrorCode::capacity,"aggregate.depth"};out.push_back(x);}
+            auto end=order.begin()+static_cast<std::ptrdiff_t>(first_invalid);
+            std::iota(order.begin(),end,std::size_t{0});
+            std::sort(order.begin(),end,[&](auto i,auto j){
+                const auto left=updates[i].price_ticks,right=updates[j].price_ticks;
+                return left==right?i<j:precedes(left,right);
+            });
+            auto duplicate=first_invalid;
+            for(std::size_t i=1;i<first_invalid;++i)
+                if(updates[order[i]].price_ticks==updates[order[i-1]].price_ticks)
+                    duplicate=std::min(duplicate,order[i]);
+            if(duplicate<first_invalid)return {ErrorCode::duplicate,"aggregate.price",duplicate};
+            if(invalid)return invalid;
+            if(snapshot)before={};
+
+            // Merge one sorted patch with the existing sorted side. The patch
+            // already includes deletions, so the bound applies to the final side.
+            std::size_t previous=0,change=0;
+            while(previous<before.size()||change<updates.size()){
+                Level next;
+                if(change==updates.size()||(previous<before.size()&&
+                    precedes(before[previous].price_ticks,updates[order[change]].price_ticks))){
+                    next=before[previous++];
+                }else{
+                    next=updates[order[change++]];
+                    if(previous<before.size()&&before[previous].price_ticks==next.price_ticks)++previous;
+                }
+                if(!next.quantity)continue;
+                if(out.size()==limit_)return {ErrorCode::capacity,"aggregate.depth"};
+                out.push_back(next);
             }
-            std::sort(out.begin(),out.end(),[&](const auto&a,const auto&b){return descending?a.price_ticks>b.price_ticks:a.price_ticks<b.price_ticks;});return {};
+            return {};
         };
-        if(auto e=modify(next_bids,bids,true))return e;
-        if(auto e=modify(next_asks,asks,false))return e;
+        if(auto e=merge(next_bids,bids_,bids,true))return e;
+        if(auto e=merge(next_asks,asks_,asks,false))return e;
         if(auto m=calculate(next_bids,next_asks);!m)return m.error;
         bids_.swap(next_bids);asks_.swap(next_asks);sequence_=sequence;++revision_;initialized_=true;return {};
     }catch(const std::bad_alloc&){return {ErrorCode::resource_exhausted,"aggregate.memory"};}
