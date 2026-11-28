@@ -39,15 +39,33 @@ def _originals(parsed,dts,documents,allow_observed,instance_uri):
 
 def _read(parsed,dts,supplied,*,effective=False,negative=False):
  assignment_kinds=('all','notAll')if negative else('all',);kinds_allowed=KINDS|{'notAll'}if negative else KINDS
- roots={key:parse_xml(doc['raw'])for key,doc in sorted(supplied.items())};kinds={d['uri']:d['kind']for d in dts['documents']};locators={};role_types={};role_uris=set()
+ roots={key:parse_xml(doc['raw'])for key,doc in sorted(supplied.items())};kinds={d['uri']:d['kind']for d in dts['documents']};locators={};role_types={};role_uris=set();dimensional_arcrole_types={}
  for key,root in roots.items():
   if kinds[key]!='schema':continue
-  ids=set();allowed_role_types={id(c)for a in root.children if a.name==tag(XS,'annotation')for app in a.children if app.name==tag(XS,'appinfo')for c in app.children if c.name==tag(L,'roleType')}
+  ids=set()
+  appinfo=[c for a in root.children if a.name==tag(XS,'annotation')
+           for app in a.children if app.name==tag(XS,'appinfo')for c in app.children]
+  allowed_arcrole_types={id(c)for c in appinfo if c.name==tag(L,'arcroleType')}
+  allowed_role_types={id(c)for c in appinfo if c.name==tag(L,'roleType')}
   for node in walk(root):
    id_=node.attrs.get('id')
    if id_ is not None:
     if not re.fullmatch('[A-Za-z_][A-Za-z0-9_.-]{0,127}',id_)or id_ in ids:raise XBRLError('drs_cross_duplicate_schema_id')
     ids.add(id_)
+   if node.name==tag(L,'arcroleType'):
+    arcrole=node.attrs.get('arcroleURI','')
+    if arcrole.startswith(ARC) and arcrole.removeprefix(ARC) in KINDS|{'notAll'}:
+     if (id(node) not in allowed_arcrole_types or id_ is None or set(node.attrs)!={'id','arcroleURI','cyclesAllowed'}
+         or node.attrs['cyclesAllowed'] not in ('any','undirected','none') or node.text().strip()
+         or not 1<=len(node.children)<=32):raise XBRLError('drs_cross_arcrole_type_structure')
+     definitions=[c for c in node.children if c.name==tag(L,'definition')]
+     used=[c for c in node.children if c.name==tag(L,'usedOn')]
+     if (len(definitions)>1 or node.children!=definitions+used or
+         any(c.attrs or c.children for c in node.children) or
+         [qname(c.text().strip(),c)for c in used]!=[tag(L,'definitionArc')]):
+      raise XBRLError('drs_cross_arcrole_used_on')
+     dimensional_arcrole_types[key+'#'+id_]=arcrole
+     if len(dimensional_arcrole_types)>128:raise XBRLError('drs_cross_arcrole_type_budget')
    if node.name==tag(L,'roleType'):
     if id(node)not in allowed_role_types:raise XBRLError('drs_cross_role_type_location')
     if set(node.attrs)-{'id','roleURI'}or 'roleURI'not in node.attrs or node.text().strip()or not 1<=len(node.children)<=32 or [c.name for c in node.children]not in([tag(L,'usedOn')]*len(node.children),[tag(L,'definition')]+[tag(L,'usedOn')]*(len(node.children)-1)):raise XBRLError('drs_cross_role_type_structure')
@@ -68,8 +86,17 @@ def _read(parsed,dts,supplied,*,effective=False,negative=False):
  arcs=[];refs=[];links=0
  for key,root in roots.items():
   if kinds[key]!='linkbase':continue
-  declared={};all_roles=set()
+  declared={};all_roles=set();arcrole_refs=set()
   for child in root.children:
+   if child.name==tag(L,'arcroleRef'):
+    if set(child.attrs)!={'arcroleURI',tag(XL,'type'),tag(XL,'href')}or child.attrs[tag(XL,'type')]!='simple'or child.children or child.text().strip():
+     raise XBRLError('drs_cross_arcrole_ref_structure')
+    arcrole=_role(child.attrs['arcroleURI'])
+    target=uri(urljoin(key,child.attrs[tag(XL,'href')]),fragment=True)
+    if arcrole in arcrole_refs or dimensional_arcrole_types.get(target)!=arcrole:
+     raise XBRLError('drs_cross_arcrole_not_resolved')
+    arcrole_refs.add(arcrole)
+    continue
    if child.name!=tag(L,'roleRef'):continue
    if set(child.attrs)!={'roleURI',tag(XL,'type'),tag(XL,'href')}or child.attrs[tag(XL,'type')]!='simple'or child.children or child.text().strip():raise XBRLError('drs_cross_role_ref_structure')
    role=_role(child.attrs['roleURI']);target=uri(urljoin(key,child.attrs[tag(XL,'href')]),fragment=True);schema,id_=urldefrag(target)
@@ -80,7 +107,7 @@ def _read(parsed,dts,supplied,*,effective=False,negative=False):
    declared[role]=target;refs.append({'source_uri':key,'source_sha256':supplied[key]['sha256'],'role':role,'role_type_uri':target,'schema_sha256':supplied[schema]['sha256'],'role_type_node_ordinal':role_types[target][1]})
    if len(refs)>128:raise XBRLError('drs_cross_role_ref_budget')
   for link in root.children:
-   if link.name==tag(L,'roleRef'):continue
+   if link.name in (tag(L,'roleRef'),tag(L,'arcroleRef')):continue
    if link.name in OTHER_LINKS:
     if link.attrs.get(tag(XL,'type'))!='extended':raise XBRLError('drs_cross_non_definition_link')
     continue
