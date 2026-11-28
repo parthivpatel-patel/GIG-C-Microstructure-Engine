@@ -7,7 +7,7 @@ const groups: {label:string;items:Workspace[]}[] = [
  {label:'Laboratory',items:['Historical Replay','Execution Simulator','Research & Validation']},
  {label:'System',items:['Operations']}
 ];
-export function Navigation({selected,onSelect}:{selected:Workspace;onSelect:(name:Workspace)=>void}){
+export function Navigation({selected,onSelect}:{selected:Workspace;onSelect:(name:Workspace,focusHeading:boolean)=>void}){
  return <aside className="sidebar gig-navigation">
   <a className="brand" href="#workspace-main" aria-label="GIG Order Book & Market Microstructure Terminal">
    <span className="brand-mark" aria-hidden="true"><i/><i/><i/></span>
@@ -18,7 +18,7 @@ export function Navigation({selected,onSelect}:{selected:Workspace;onSelect:(nam
     <span className="navigation-heading">{group.label}</span>
     {group.items.map(name=><button key={name} title={name} aria-label={name}
       aria-current={selected===name?'page':undefined} className={selected===name?'active':''}
-      onClick={()=>onSelect(name)}>
+      onClick={e=>onSelect(name,e.detail===0)}>
      <span className="nav-icon"><WorkspaceIcon name={name}/></span>
      <span className="navigation-label">{name}</span>
     </button>)}
