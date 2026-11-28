@@ -233,6 +233,9 @@ def _resume_product_source(raw,expected_sha256,source,source_admission,*,partial
     if product.position!=product.total:raise ItchProductError('itch_product_pending_continuation')
     if type(source) is not bytes or len(source)>MAX_BYTES or type(source_admission) is not ItchSourceAdmission:
         raise ItchProductError('itch_product_source_admission')
+    source_admission.validate()
+    if digest(source)!=source_admission.source_sha256:
+        raise ItchProductError('itch_product_source_digest')
     profile=PARTIAL_GZIP_PROFILE if source_admission.container=='single_gzip' else PARTIAL_BINARY_PROFILE
     if product.source_history and product.source_history[-1].get('source_profile') in PARTIAL_PROFILES:
         prior=product.source_history[-1]

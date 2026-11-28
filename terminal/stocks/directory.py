@@ -43,7 +43,7 @@ def parse_files(files,origin='HISTORICAL_SYNTHETIC'):
   if lines[0].split('|')!=HEADERS[kind]:raise ValueError('directory_header')
   footer=lines[-1].split('|');stamp=footer[0]
   if len(footer)!=len(HEADERS[kind]) or any(footer[1:]) or not stamp.startswith('File Creation Time: '):raise ValueError('directory_footer')
-  if not re.fullmatch(r'[0-9]{12}',stamp[20:]):raise ValueError('directory_footer')
+  if not re.fullmatch(r'[0-9]{10}:[0-9]{2}',stamp[20:]):raise ValueError('directory_footer')
   created=datetime.datetime.strptime(stamp[20:],'%m%d%Y%H:%M').isoformat()
   for line in lines[1:-1]:
    values=line.split('|')

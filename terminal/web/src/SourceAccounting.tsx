@@ -67,6 +67,9 @@ export function SourceAccountingView({packet}:{packet:SourceAccountingPacket}){
   {audit&&'inline_documents'in audit&&<details><summary>Original inline filing documents</summary>
    {audit.inline_documents.map(doc=><p key={doc.uri}>{doc.uri} · <code>{doc.source_sha256}</code></p>)}
   </details>}
+  {a.accounting_report?.excluded_source_content&&<details><summary>Other taxonomy relationships</summary>
+   <ul>{a.accounting_report.excluded_source_content.map(entry=><li key={JSON.stringify([entry.source_uri,entry.kind])}>{entry.count} {entry.kind} · {entry.source_uri} · <code>{entry.source_sha256}</code></li>)}</ul>
+  </details>}
   {a.lineage&&<details><summary>Explicit supplied amendment lineage · {a.lineage.status}</summary><p>Each supplied source remains separate. No additive amendment filling or complete-history claim.</p>{a.lineage.sources.map(s=><p key={s.source.accession}>{s.source.accession} · accepted {s.source.accepted_at??'unavailable'} · original <code>{s.source.source_sha256}</code> · admitted parsed <code>{s.parsed_sha256}</code></p>)}</details>}
   {Object.entries(a.statements).map(([kind,statement])=><section key={kind} aria-label={`${kind.replaceAll('_',' ')} source view`}><h6>{kind.replaceAll('_',' ')} · {statement.status}</h6><p>Caller-designated presentation role: {statement.presentation_role??'unavailable'} · accounting relationship role: {statement.accounting_role??'unavailable'}</p>{statement.reason&&<p role="status">{statement.reason}</p>}
    {statement.periods.map((period,index)=><section key={index} aria-label={`${kind.replaceAll('_',' ')} period ${index+1}`}><p><strong>Exact reported period: {period.start??'Instant'} → {period.end}</strong></p>
