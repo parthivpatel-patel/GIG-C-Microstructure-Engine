@@ -28,8 +28,10 @@ export function backfillCandidates(raw:unknown,capture:string,generation:number)
  return value.gaps;
 }
 
-export function backfillHistory(raw:unknown,expected:Gap,maxPages:number){
- const value=raw as {schema:string;gap:Gap;history:unknown;coverage:string;observation_loss:string;merged_into_live:boolean};
+type Continuation={after_revision:string|null;next_revision:string|null;pages_seen:number;page_limit:number};
+const revision=(value:unknown):value is string=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+export function backfillPage(raw:unknown,expected:Gap,maxPages:number,after:string|null=null,seenPages=0){
+ const value=raw as {schema:string;gap:Gap;history:unknown;coverage:string;observation_loss:string;merged_into_live:boolean;continuation?:Continuation};
  if(value?.schema!=='gig.iex.backfill.v1'||value.merged_into_live!==false||
     value.observation_loss!=='UNKNOWN_NO_EXCHANGE_SEQUENCE'||!value.gap||value.gap.previous_capture!==expected.previous_capture||
     (Object.keys(expected) as (keyof Gap)[]).some(key=>value.gap[key]!==expected[key]))reject();
@@ -37,5 +39,17 @@ export function backfillHistory(raw:unknown,expected:Gap,maxPages:number){
  const history=historicalCore(value.history,{symbol,kind,start,end,feed:'iex',adjustment:'raw',timeframe:'1Day',max_pages:maxPages});
  if(history.origin!==expected.origin||history.source_records.length>maxPages||
     value.coverage!==(history.has_more?'BOUNDED_PREFIX':'SOURCE_RESPONSE_EXHAUSTED'))reject();
- return history;
+ const continuation=value.continuation;
+ if(continuation!==undefined){
+  if(!continuation||Object.keys(continuation).sort().join(',')!=='after_revision,next_revision,page_limit,pages_seen'||
+     continuation.after_revision!==after||continuation.page_limit!==32||
+     continuation.pages_seen!==seenPages+history.source_records.length||!count(continuation.pages_seen)||continuation.pages_seen>32||
+     (history.has_more&&continuation.pages_seen<32
+       ?!revision(continuation.next_revision)||continuation.next_revision!==history.canonical_sha256||continuation.next_revision===after
+       :continuation.next_revision!==null))reject();
+ }else if(after!==null)reject();
+ return {history,continuation};
+}
+export function backfillHistory(raw:unknown,expected:Gap,maxPages:number){
+ return backfillPage(raw,expected,maxPages).history;
 }
