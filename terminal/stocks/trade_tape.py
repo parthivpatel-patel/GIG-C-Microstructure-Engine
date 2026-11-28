@@ -1,12 +1,19 @@
 """Pure bounded reference reconciliation,not an exchange-complete or executable tape.
 
-Consumes the existing normalized observation contract in capture order. Cancellation
-removal requires an explicit authored-fixture contract;observed action codes remain
-unsupported until an authoritative provider profile is qualified. No native mutation.
+Consumes normalized observations in capture order. Cancellation removal requires
+an explicit profile tied to the source origin. The Alpaca stock v2 profile covers
+action C only and changes the retained derivation. Raw observations stay intact.
 """
 import copy,hashlib,json,re
 from fractions import Fraction
 from .prices import decimal
+
+AUTHORED_CANCEL_PROFILE = 'AUTHORED_CANCEL_C_V1'
+ALPACA_CANCEL_PROFILE = 'ALPACA_STOCK_V2_CANCEL_C_V1'
+CANCEL_ORIGINS = {
+ AUTHORED_CANCEL_PROFILE: 'HISTORICAL_SYNTHETIC',
+ ALPACA_CANCEL_PROFILE: 'OBSERVED_OFFICIAL_RESPONSE',
+}
 
 class Rejected(ValueError):pass
 
@@ -23,7 +30,7 @@ def _wire(value):return {'numerator':str(value.numerator),'denominator':str(valu
 def reconcile(history,symbol,generation,*,cancellation_contract=None):
  if type(history)is not list or len(history)>256:raise ValueError('trade_tape_record_budget')
  if type(symbol)is not str or not re.fullmatch(r'[A-Z][A-Z0-9]{0,9}(?:[.-][A-Z0-9]{1,3})?',symbol) or type(generation)is not int or not 0<=generation<2**53:raise ValueError('trade_tape_scope')
- if cancellation_contract not in (None,'AUTHORED_CANCEL_C_V1'):raise ValueError('trade_tape_cancel_contract')
+ if cancellation_contract is not None and (type(cancellation_contract) is not str or cancellation_contract not in CANCEL_ORIGINS):raise ValueError('trade_tape_cancel_contract')
  active={};retired=set();seen={};parents=[];prior=0;origin=None;session=None;duplicates=corrections=cancels=processed=relevant=0;error=None
  for row in history:
   receipt=None
@@ -72,7 +79,9 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
     old_price=_amount(data.get('original_price'if kind=='correction'else'price'));old_size=_amount(data.get('original_size'if kind=='correction'else'size'))
     if old_price!=_amount(original['price'])or old_size!=_amount(original['size']):raise Rejected('ORIGINAL_MISMATCH')
     if kind=='cancel':
-     if cancellation_contract!='AUTHORED_CANCEL_C_V1'or origin!='HISTORICAL_SYNTHETIC'or data.get('action')!='C':raise Rejected('UNSUPPORTED_CANCEL_PROFILE')
+     # https://docs.alpaca.markets/us/docs/real-time-stock-pricing-data
+     # C is a cancel. E remains unresolved in this restricted profile.
+     if CANCEL_ORIGINS.get(cancellation_contract)!=origin or data.get('action')!='C':raise Rejected('UNSUPPORTED_CANCEL_PROFILE')
      del active[key];retired.add(key);cancels+=1
     else:
      replacement=_reference(data.get('corrected_id'));new_key=(*scope,replacement)
@@ -87,5 +96,7 @@ def reconcile(history,symbol,generation,*,cancellation_contract=None):
    error={'code':str(exc)if isinstance(exc,Rejected)else'SCHEMA','receipt_index':receipt if type(receipt)is int and 0<=receipt<2**53 else None};break
  trades=sorted(active.values(),key=lambda r:r['original_receipt'])
  result={'schema':'gig.bounded.trade_reconciliation.v2','source_session_id':session,'symbol':symbol,'generation':generation,'state':'UNRESOLVED'if error else'CONSISTENT_RETAINED_WINDOW'if seen else'NO_TRADE_INPUT','origin':origin or'UNAVAILABLE','input_records':len(history),'relevant_records':relevant,'accepted_prefix_records':processed,'duplicate_records':duplicates,'applied_corrections':corrections,'applied_cancels':cancels,'active_count':len(trades),'trades':trades,'error':error,'corrected_size_sum':None if error or not seen else _wire(sum((_amount(r['size'])for r in trades),Fraction())),'source_sha256':parents,'complete_tape':False,'order_book_mutations':0,'cancellation_contract':cancellation_contract,'policy':'Exact normalized references in capture order;source time retained,not reordered. No complete initial tape,exchange sequence,aggressor,lot conversion or L3 state inferred. Observed cancellation codes unqualified.'}
+ if cancellation_contract==ALPACA_CANCEL_PROFILE:
+  result['policy']='Alpaca stock v2 action C on the exact matching retained IEX trade. Action E stays unresolved. Derivation covers one bounded capture generation;original observations and book state are preserved.'
  result['canonical_sha256']=hashlib.sha256(json.dumps(result,sort_keys=True,separators=(',',':')).encode()).hexdigest()
  return result

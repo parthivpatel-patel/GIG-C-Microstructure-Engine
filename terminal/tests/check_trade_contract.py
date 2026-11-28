@@ -14,6 +14,13 @@ c.process(packet({'T':'x','S':'AAPL','t':stamp,'i':8,'p':101.,'s':1,'a':'C','x':
 canceled=c.view();assert canceled['trade_reconciliation']['AAPL']['active_count']==0
 c.pending={'step':'SUBSCRIBE_SENT','symbols':('NVDA',),'channels':('quotes','trades'),'started':100}
 c.process(packet({'T':'subscription','quotes':['NVDA'],'trades':['NVDA']}));handover=c.view()
+# Exercise the live decoder shape offline with an authored frame pair.
+from terminal.stocks.trade_tape import ALPACA_CANCEL_PROFILE
+live_shape=client();ready(live_shape);live_shape.connector=None
+live_shape.workspace.environment['GIG_ALPACA_IEX_CANCEL_PROFILE']=ALPACA_CANCEL_PROFILE
+trade={'T':'t','S':'AAPL','t':stamp,'p':100.,'s':2,'i':7,'x':'V','z':'C'}
+live_shape.process(packet(trade,{**trade,'T':'x','a':'C'}))
+live_cancel=live_shape.view()
 module=(ROOT/'terminal/web/src/marketContract.ts').as_uri()
 code="""import fs from 'node:fs';import assert from 'node:assert/strict';
 const {validateMarketState}=await import(process.argv[2]);
@@ -22,12 +29,17 @@ for(const s of samples)assert.equal(validateMarketState(s),s);
 assert.equal(samples[0].trade_reconciliation.AAPL.trades[0].trade_id,'8');
 assert.equal(samples[1].trade_reconciliation.AAPL.corrected_size_sum.numerator,'0');
 assert.equal(samples[2].history.length,0);
+assert.equal(samples[3].trade_reconciliation.AAPL.applied_cancels,1);
+const wrongProfile=structuredClone(samples[3]);
+wrongProfile.trade_reconciliation.AAPL.cancellation_contract='AUTHORED_CANCEL_C_V1';
+assert.throws(()=>validateMarketState(wrongProfile));
+
 const bad=structuredClone(samples[0]);bad.trade_reconciliation.AAPL.trades[0].lineage_receipts=[1,99];assert.throws(()=>validateMarketState(bad));
 bad.trade_reconciliation.AAPL.complete_tape=true;assert.throws(()=>validateMarketState(bad));
-console.log(JSON.stringify({schema:'gig.trade.cross_language.v1',passed:8,failed:0,scope:'Authored packets,actual normalized view,TypeScript admission;no application or provider'}));
+console.log(JSON.stringify({schema:'gig.trade.cross_language.v1',passed:11,failed:0,scope:'Authored packets,actual normalized view,TypeScript admission;no application or provider'}));
 """
 with tempfile.TemporaryDirectory(prefix='gig-trade-contract-')as directory:
- fixture=pathlib.Path(directory)/'authored.json';fixture.write_text(json.dumps([corrected,canceled,handover]))
+ fixture=pathlib.Path(directory)/'authored.json';fixture.write_text(json.dumps([corrected,canceled,handover,live_cancel]))
  script=pathlib.Path(directory)/'check.mjs';script.write_text(code)
  subprocess.run(['node','--experimental-strip-types',str(script),module,str(fixture)],cwd=ROOT,check=True,timeout=30)
 

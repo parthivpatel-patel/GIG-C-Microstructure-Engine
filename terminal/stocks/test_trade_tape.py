@@ -2,7 +2,7 @@
 import copy,hashlib,json,random,unittest
 from fractions import Fraction
 from unittest.mock import patch
-from .trade_tape import reconcile
+from .trade_tape import ALPACA_CANCEL_PROFILE,reconcile
 
 def event(n,kind='trade',symbol='AAPL',generation=1,**data):
  payload={'price':'100','size':'2'}if kind=='trade'else{}
@@ -30,6 +30,43 @@ class TradeTape(unittest.TestCase):
    observed=copy.deepcopy(rows)
    for x in observed:x['origin']='OBSERVED_OFFICIAL_RESPONSE'
    r=reconcile(observed,'AAPL',1,cancellation_contract=profile);self.assertEqual(r['error']['code'],'UNSUPPORTED_CANCEL_PROFILE');self.assertIsNone(r['corrected_size_sum'])
+ def test_explicit_provider_cancel_is_capture_scoped_and_keeps_raw_rows(self):
+  rows=[event(1),correction(2,1,8),event(3,'cancel',trade_id=8,price=101,size=1,action='C')]
+  for row in rows:row['origin']='OBSERVED_OFFICIAL_RESPONSE'
+  original=copy.deepcopy(rows)
+  r=reconcile(rows,'AAPL',1,cancellation_contract=ALPACA_CANCEL_PROFILE)
+  check(r,{})
+  self.assertEqual(r['applied_cancels'],1)
+  self.assertEqual(r['applied_corrections'],1)
+  self.assertEqual(rows,original)
+  for field,value,reason in [('action','E','UNSUPPORTED_CANCEL_PROFILE'),('price','100','ORIGINAL_MISMATCH'),
+                             ('trade_id','1','UNKNOWN_REFERENCE')]:
+   with self.subTest(field=field):
+    bad=copy.deepcopy(rows);bad[-1]['data'][field]=value
+    result=reconcile(bad,'AAPL',1,cancellation_contract=ALPACA_CANCEL_PROFILE)
+    self.assertEqual(result['error']['code'],reason)
+    self.assertIsNone(result['corrected_size_sum'])
+
+ def test_wire_cancel_profile_is_explicit_and_never_relabels_synthetic_input(self):
+  from .test_final import client,ready,packet,quote
+  c=client();ready(c)
+  c.connector=None
+  at=quote()['t']
+  trade={'T':'t','S':'AAPL','i':8,'p':101.,'s':1,'t':at,'x':'V','z':'C'}
+  cancel={**trade,'T':'x','a':'C'}
+  c.process(packet(trade,cancel))
+  self.assertEqual(c.view()['trade_reconciliation']['AAPL']['error']['code'],'UNSUPPORTED_CANCEL_PROFILE')
+  c.workspace.environment['GIG_ALPACA_IEX_CANCEL_PROFILE']=ALPACA_CANCEL_PROFILE
+  tape=c.view()['trade_reconciliation']['AAPL']
+  self.assertEqual(tape['applied_cancels'],1)
+  self.assertEqual([row['kind'] for row in c.view()['history']],['trade','cancel'])
+  synthetic=client();ready(synthetic)
+  synthetic.workspace.environment['GIG_ALPACA_IEX_CANCEL_PROFILE']=ALPACA_CANCEL_PROFILE
+  synthetic.process(packet(trade,cancel))
+  tape=synthetic.view()['trade_reconciliation']['AAPL']
+  self.assertEqual(tape['origin'],'HISTORICAL_SYNTHETIC')
+  self.assertEqual(tape['cancellation_contract'],'AUTHORED_CANCEL_C_V1')
+
  def test_unknown_original_collisions_mismatches_and_retired_ids_fail_closed(self):
   candidates=[[correction(1,9,10)],[event(1),correction(2,1,8,op=99)],[event(1),event(2),correction(3,1,2)],[event(1),correction(2,1,8),correction(3,1,9)]]
   for rows in candidates:
