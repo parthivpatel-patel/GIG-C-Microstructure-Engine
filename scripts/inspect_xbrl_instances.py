@@ -199,7 +199,14 @@ def main(argv=None):
    accounting_roles=decode(read_bytes(args.accounting_roles,128*1024),numeric_policy='exact-integer')
    if type(accounting_roles)is not dict:raise XBRLError('xbrl_accounting_roles_mapping')
   summary,result=inspect(args.batch,args.as_of,allow_observed=args.allow_observed,dimensional_profile=args.dimensional_profile,company_symbol=args.company_symbol,statement_role=args.statement_role,statement_form=args.statement_form,statement_profile=args.statement_profile,embedded_profile=args.embedded_linkbase_profile,inline_transformation_profile=args.inline_transformation_profile,calculation_profile=args.calculation_profile,calculation_role=args.calculation_role,accounting_roles=accounting_roles,compare_at=args.compare_at)
-  if args.output:write_private(args.output,result)
+  if args.output:
+   if args.compare_at:
+    from terminal.stocks.xbrl_statement_comparison import MAX_OUTPUT
+    write_private(args.output,result,maximum_bytes=MAX_OUTPUT,compact=True)
+   elif args.accounting_roles or args.calculation_profile:
+    write_private(args.output,result,compact=True)
+   else:
+    write_private(args.output,result)
  except (ValueError,TypeError,KeyError,OSError,MemoryError)as exc:
   reason=str(exc)if isinstance(exc,XBRLError)else'resource_exhausted'if isinstance(exc,MemoryError)else'input_contract_or_resource_failure'
   print(json.dumps({'schema':'gig.sec.xbrl.offline_summary.v1','status':'REJECTED','reason':reason,'provider_requested':False,'raw_source_retained':False}));return 2

@@ -91,11 +91,16 @@ def decode(raw,*,numeric_policy='finite-float'):
     except (UnicodeError,ValueError,RecursionError):raise EvidenceError('invalid_json')from None
 
 
-def write_private(path,value):
+def write_private(path,value,*,maximum_bytes=256*1024,compact=False):
     path=Path(path).absolute()
     if any(p.is_symlink()for p in (path,*path.parents)):raise EvidenceError('output_symlink')
-    raw=(json.dumps(value,sort_keys=True,indent=2,allow_nan=False)+'\n').encode()
-    if len(raw)>256*1024:raise EvidenceError('output_byte_budget')
+    if type(maximum_bytes)is not int or not 1<=maximum_bytes<=4*1024*1024 or type(compact)is not bool:
+        raise EvidenceError('output_byte_budget')
+    if compact:
+        raw=json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+    else:
+        raw=(json.dumps(value,sort_keys=True,indent=2,allow_nan=False)+'\n').encode()
+    if len(raw)>maximum_bytes:raise EvidenceError('output_byte_budget')
     try:
         fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
     except FileExistsError:raise EvidenceError('output_exists')from None
