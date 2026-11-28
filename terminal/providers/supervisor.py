@@ -10,7 +10,8 @@ import random
 import math
 import time
 import gig_microstructure as gig
-from .kraken import KrakenBookAdapter, Permission, ProviderError, live_messages
+from .kraken import (BOOK_SESSION_PROFILE, BOOK_DEPTH_SESSION_PROFILE, BOOK_LARGE_DEPTH_PROFILE,
+                     LARGE_DEPTHS, KrakenBookAdapter, Permission, ProviderError, live_messages)
 
 SYMBOLS=('BTC/USD','ETH/USD')
 
@@ -45,8 +46,17 @@ class FeedSupervisor:
         self.exchange_ns=None;self.kind=None;self.epoch=0;self.depth=10
         self.price_scale=100000000;self.quantity_scale=100000000
         self.permission=None;self.pending=False;self.capture=None
+        self.subscribed_depth=10
         self.session_profile=None;self.coordinator=None;self.capture_token=None
         self.coordinated_receipt=None;self.joint_research_ready=False;self.joint_sources={}
+
+    def _configured_joint_depth(self, profile):
+        token = self.environment.get('GIG_LIVE_KRAKEN_BOOK_DEPTH')
+        if token is None:
+            return 10
+        if profile is None or token not in ('10', '25', '100', '500', '1000'):
+            raise ProviderError('coordinator_depth_configuration')
+        return int(token)
 
     def recording_writer_type(self):
         """Select a versioned writer before allocation; never reuse legacy receipts."""
@@ -55,6 +65,8 @@ class FeedSupervisor:
         from .kraken_coordinator import PROFILE as JOINT_PROFILE
         profile=self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')
         if self.provider!='kraken' or profile not in(None,JOINT_PROFILE):raise ProviderError('provider_recording_profile_unavailable')
+        if self.subscribed_depth != 10 or self._configured_joint_depth(profile) != 10:
+            raise ProviderError('provider_recording_profile_unavailable')
         return JointL2Writer if profile==JOINT_PROFILE else L2Writer
 
     def require_recording_profile(self,capture=None):
@@ -62,7 +74,7 @@ class FeedSupervisor:
         joint=isinstance(getattr(capture,'writer',None),JointL2Writer)
         if self.session_profile is not None:
             from .kraken_coordinator import PROFILE as JOINT_PROFILE
-            if self.session_profile!=JOINT_PROFILE or not joint:raise ProviderError('provider_recording_profile_unavailable')
+            if self.session_profile!=JOINT_PROFILE or not joint or self.subscribed_depth != 10:raise ProviderError('provider_recording_profile_unavailable')
         elif joint or self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE')is not None:
             raise ProviderError('provider_recording_profile_unavailable')
 
@@ -70,7 +82,15 @@ class FeedSupervisor:
         if self.session_profile is not None:
             from .kraken_coordinator import KrakenSessionCoordinator
             if self.coordinator is None:
+                if self.subscribed_depth in LARGE_DEPTHS:
+                    book_profile = BOOK_LARGE_DEPTH_PROFILE
+                elif self.subscribed_depth == 10:
+                    book_profile = BOOK_SESSION_PROFILE
+                else:
+                    book_profile = BOOK_DEPTH_SESSION_PROFILE
                 self.coordinator=KrakenSessionCoordinator(profile=self.session_profile,
+                    depth=self.subscribed_depth,book_profile=book_profile,
+                    native_capacity=max(256, 2 * self.subscribed_depth),
                     symbol=self.symbol,price_scale=self.price_scale,quantity_scale=self.quantity_scale,
                     origin='LIVE_OBSERVED' if self.observed_transport else 'HISTORICAL_SYNTHETIC')
             self.aggregate=None;self.adapter=self.coordinator._book
@@ -157,6 +177,11 @@ class FeedSupervisor:
         profile=self.environment.get('GIG_LIVE_KRAKEN_SESSION_PROFILE') if provider=='kraken' else None
         if profile not in(None,JOINT_PROFILE):
             self.state,self.reason='ERROR','coordinator_profile';raise ProviderError(self.reason)
+        try:
+            self.subscribed_depth = self._configured_joint_depth(profile) if provider == 'kraken' else 10
+        except ProviderError as error:
+            self.state, self.reason = 'ERROR', error.code
+            raise
         self.session_profile=profile;self.coordinator=None;self.capture_token=None;self.coordinated_receipt=None;self.joint_sources={}
         if profile is not None:self.capture=None
         self.reconnects=self.messages=self.failures=self.consecutive_failures=0
@@ -178,6 +203,8 @@ class FeedSupervisor:
                     token=self.coordinator.connect(f'kraken:{epoch}:{self.reconnects}')
                     self.capture_token=token;self.adapter=self.coordinator._book
                     options['subscriptions']=self.coordinator.subscription_requests(token)
+                    if self.subscribed_depth in LARGE_DEPTHS:
+                        options['book_profile'] = BOOK_LARGE_DEPTH_PROFILE
                 stream=self.transport(self.permission,stop=self.stop_event,symbol=self.symbol,**options)
                 try:
                     async with asyncio.timeout(15):
@@ -331,5 +358,5 @@ class FeedSupervisor:
                 'source_sequence':None,'session_segment':f'{self.provider}:{self.epoch}:{self.reconnects}',
                 'session_segment_scope':'local_capture_boundary_not_exchange_session_or_sequence','redistribution_permitted':False},
             'capabilities':{'live':self.observed_transport and self.permission is not None,'aggregate_l2':True,
-                'native_replay':True,'simulation':True,'recording':bool(self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
+                'native_replay':True,'simulation':True,'recording':bool(self.subscribed_depth == 10 and self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
                 'observed_itch':False,'order_ids':False,'fifo':False}}

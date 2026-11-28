@@ -19,6 +19,9 @@ from typing import Callable, AsyncIterator
 
 BOOK_SESSION_PROFILE = 'BOOK_SESSION_V1'
 BOOK_DEPTH_SESSION_PROFILE = 'BOOK_SESSION_DEPTH_V2'
+BOOK_LARGE_DEPTH_PROFILE = 'BOOK_SESSION_LARGE_DEPTH_V3'
+LARGE_DEPTHS = (500, 1000)
+LARGE_BOOK_PAYLOAD = 256 * 1024
 MAX_PAYLOAD = 65536
 UINT64_MAX = 2**64 - 1
 PRICE_MAX = 2**63 - 1
@@ -55,9 +58,16 @@ def _pairs(items):
 
 
 def decode(raw: str) -> dict:
-    if type(raw) is not str or len(raw) > MAX_PAYLOAD or len(raw.encode('utf-8')) > MAX_PAYLOAD:
+    return _decode_frame(raw, MAX_PAYLOAD)
+
+
+def _decode_frame(raw: str, limit: int) -> dict:
+    if type(raw) is not str or len(raw) > limit:
         raise ProviderError('payload_limit')
     try:
+        size = len(raw.encode('utf-8'))
+        if size > limit:
+            raise ProviderError('payload_limit')
         value = json.loads(raw, parse_float=Decimal, parse_int=Decimal,
                            parse_constant=lambda _: (_ for _ in ()).throw(ProviderError('nonfinite_number')),
                            object_pairs_hook=_pairs)
@@ -67,6 +77,8 @@ def decode(raw: str) -> dict:
         raise ProviderError('malformed_json') from error
     if type(value) is not dict:
         raise ProviderError('object_required')
+    if size > MAX_PAYLOAD and value.get('channel') != 'book':
+        raise ProviderError('payload_limit')
     return value
 
 
@@ -153,7 +165,10 @@ class KrakenBookAdapter:
     def __init__(self, apply_native: Callable, *, symbol='BTC/USD', price_scale=100,
                  quantity_scale=100000000, depth=10, stale_ns=10_000_000_000, origin='HISTORICAL_SYNTHETIC', ordered_updates=False,
                  book_session_profile=None, book_request_id=None):
-        supported_depths=(10,25,100) if book_session_profile==BOOK_DEPTH_SESSION_PROFILE else (10,)
+        if book_session_profile == BOOK_LARGE_DEPTH_PROFILE:
+            supported_depths = LARGE_DEPTHS
+        else:
+            supported_depths=(10,25,100) if book_session_profile==BOOK_DEPTH_SESSION_PROFILE else (10,)
         if (type(depth) is not int or depth not in supported_depths or type(price_scale) is not int or
                 type(quantity_scale) is not int or not 1 <= price_scale <= 10**9 or
                 not 1 <= quantity_scale <= 10**9 or type(stale_ns) is not int or
@@ -161,12 +176,14 @@ class KrakenBookAdapter:
             raise ProviderError('configuration')
         if type(ordered_updates)is not bool:raise ProviderError('configuration')
         self.ordered_updates=ordered_updates
-        if book_session_profile not in(None,BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE):raise ProviderError('book_session_profile')
-        if book_session_profile==BOOK_DEPTH_SESSION_PROFILE and not ordered_updates:raise ProviderError('book_depth_ordered_updates_required')
+        if book_session_profile not in(None,BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,BOOK_LARGE_DEPTH_PROFILE):raise ProviderError('book_session_profile')
+        if book_session_profile in (BOOK_DEPTH_SESSION_PROFILE, BOOK_LARGE_DEPTH_PROFILE) and not ordered_updates:raise ProviderError('book_depth_ordered_updates_required')
         if book_session_profile is None:
             if book_request_id is not None:raise ProviderError('book_session_profile')
         elif type(book_request_id)is not int or not 0<=book_request_id<=UINT64_MAX:
             raise ProviderError('book_request_id')
+        self.frame_limit = LARGE_BOOK_PAYLOAD if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else MAX_PAYLOAD
+        self.levels_per_message = depth if book_session_profile == BOOK_LARGE_DEPTH_PROFILE else 100
         self.book_session_profile=book_session_profile;self.book_request_id=book_request_id
         self._book_generation=0;self._book_acknowledged=False
         if origin not in ('HISTORICAL_SYNTHETIC','LIVE_OBSERVED'):raise ProviderError('origin')
@@ -247,7 +264,7 @@ class KrakenBookAdapter:
             raise
 
     def _feed(self, raw: str, now_ns: int) -> dict:
-        payload = decode(raw)
+        payload = _decode_frame(raw, self.frame_limit)
         if payload.get('method') == 'subscribe':
             if payload.get('success') is not True:
                 raise ProviderError('subscription_rejected')
@@ -289,14 +306,12 @@ class KrakenBookAdapter:
             self.duplicates += 1
             return {'kind': 'duplicate', 'source_sequence': None}
         candidate = [{}, {}] if snapshot else [self.bids.copy(), self.asks.copy()]
-        normalized = []
         for cache, side in zip(candidate, ('bids', 'asks')):
             levels = data[side]
-            if type(levels) is not list or len(levels) > 100:
+            if type(levels) is not list or len(levels) > self.levels_per_message:
                 raise ProviderError('update_budget')
             if snapshot and len(levels) > self.depth:
                 raise ProviderError('snapshot_depth')
-            converted = []
             seen = set()
             for item in levels:
                 price, qty, pt, qt = self._level(item)
@@ -309,13 +324,11 @@ class KrakenBookAdapter:
                     cache.pop(price, None)
                 else:
                     cache[price] = (pt, qt)
-                converted.append({'price_ticks': price, 'quantity': qty})
             # Retain only subscribed depth after all wire-ordered absolute updates.
             # The official CRC remains top ten even for the opt-in deeper profile.
             retained = sorted(cache, key=int, reverse=side == 'bids')[:self.depth]
             cache_copy = {k: cache[k] for k in retained}
             cache.clear(); cache.update(cache_copy)
-            normalized.append(converted)
         if candidate[0] and candidate[1] and max(map(int,candidate[0])) > min(map(int,candidate[1])):
             raise ProviderError('crossed_book')
         if checksum(*candidate) != wire_checksum:
@@ -337,7 +350,7 @@ class KrakenBookAdapter:
                    'source_timestamp_ns': source_ns, 'source_sequence': None,
                    'receive_monotonic_ns': str(now_ns), 'origin': self.origin,
                    'integration_profile': 'unverified_kraken_v2_authored_v1'}
-        if self.book_session_profile==BOOK_DEPTH_SESSION_PROFILE:
+        if self.book_session_profile in (BOOK_DEPTH_SESSION_PROFILE, BOOK_LARGE_DEPTH_PROFILE):
             receipt.update(book_session_profile=self.book_session_profile,subscribed_depth=self.depth,
                            checksum_depth=10,checksum_scope='top_10_per_side_only',
                            retained_levels={'bids':len(candidate[0]),'asks':len(candidate[1])})
@@ -424,41 +437,46 @@ class KrakenBookAdapter:
         return receipt
 
 
-def transport_subscriptions(symbol, subscriptions=None):
+def transport_subscriptions(symbol, subscriptions=None, *, book_profile=None):
     """Bounded subscription intent only; no permission or provider qualification."""
     if symbol not in ('BTC/USD', 'ETH/USD'):raise ProviderError('configuration')
+    if book_profile not in (None, BOOK_LARGE_DEPTH_PROFILE):
+        raise ProviderError('transport_subscriptions')
+    if subscriptions is None and book_profile is not None:
+        raise ProviderError('transport_subscriptions')
     if subscriptions is None:
         return [{'method':'subscribe','params':{'channel':'book','symbol':[symbol],'depth':10,'snapshot':True}},
                 {'method':'subscribe','params':{'channel':'trade','symbol':[symbol],'snapshot':False}}]
     if type(subscriptions)is not list or len(subscriptions)!=2:raise ProviderError('transport_subscriptions')
     from copy import deepcopy
     result=deepcopy(subscriptions)
+    allowed_depths = LARGE_DEPTHS if book_profile == BOOK_LARGE_DEPTH_PROFILE else (10, 25, 100)
     for request,channel in zip(result,('book','trade')):
         if type(request)is not dict or set(request)!={'method','params','req_id'}:raise ProviderError('transport_subscriptions')
         params=request['params'];required={'channel','symbol','snapshot'}|({'depth'}if channel=='book'else set())
         if request['method']!='subscribe' or type(params)is not dict or set(params)!=required:raise ProviderError('transport_subscriptions')
         if params['channel']!=channel or params['symbol']!=[symbol] or type(params['snapshot'])is not bool:raise ProviderError('transport_subscriptions')
-        if channel=='book' and (params['snapshot']is not True or type(params['depth'])is not int or params['depth']not in(10,25,100)):raise ProviderError('transport_subscriptions')
+        if channel=='book' and (params['snapshot']is not True or type(params['depth'])is not int or params['depth']not in allowed_depths):raise ProviderError('transport_subscriptions')
         if type(request['req_id'])is not int or not 0<=request['req_id']<=UINT64_MAX:raise ProviderError('transport_subscriptions')
     if result[0]['req_id']==result[1]['req_id']:raise ProviderError('transport_subscriptions')
     return result
 
 
-async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='BTC/USD', subscriptions=None) -> AsyncIterator[str]:
+async def live_messages(permission: Permission, *, stop: asyncio.Event, symbol='BTC/USD', subscriptions=None, book_profile=None) -> AsyncIterator[str]:
     """Explicit future opt-in transport; NEVER invoked by synthetic/default startup.
 
     Requires reviewed current protocol and legal evidence. Retains no market payload.
     No retries beyond caller-controlled lifecycle. ws client honors inherited proxy.
     """
     permission.require_live()
-    requests=transport_subscriptions(symbol,subscriptions)
+    requests=transport_subscriptions(symbol,subscriptions,book_profile=book_profile)
     import websockets.asyncio.client
     class FixedEndpoint(websockets.asyncio.client.connect):
         def process_redirect(self,error):
             # A provider redirect must not expand this explicit outbound allowlist.
             return error
     async with FixedEndpoint(
-            'wss://ws.kraken.com/v2', max_size=MAX_PAYLOAD, max_queue=4,
+            'wss://ws.kraken.com/v2', max_size=LARGE_BOOK_PAYLOAD if book_profile == BOOK_LARGE_DEPTH_PROFILE else MAX_PAYLOAD, max_queue=4,
             open_timeout=10, close_timeout=3, ping_interval=20, ping_timeout=10) as ws:
         for request in requests:await ws.send(json.dumps(request))
         while not stop.is_set():

@@ -9,8 +9,8 @@ import hashlib
 import json
 import re
 import gig_microstructure as gig
-from .kraken import (BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,KrakenBookAdapter,
-                     ProviderError,decode,bounded_integer,MAX_PAYLOAD,UINT64_MAX)
+from .kraken import (BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,BOOK_LARGE_DEPTH_PROFILE,KrakenBookAdapter,
+                     ProviderError,_decode_frame,bounded_integer,UINT64_MAX)
 from .kraken_public_session import KrakenPublicSession,PROFILE as PUBLIC_PROFILE
 
 PROFILE='NATIVE_JOINT_SESSION_V1'
@@ -37,13 +37,16 @@ class KrakenSessionCoordinator:
               book_request_id=100,trade_request_id=200,trade_snapshot=False,
               price_scale=100,quantity_scale=100000000,stale_ns=10000000000,
               origin='HISTORICAL_SYNTHETIC',native_capacity=256,native_budget=1048576):
-  if profile!=PROFILE or book_profile not in(BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE):raise ProviderError('coordinator_profile')
+  if profile!=PROFILE or book_profile not in(BOOK_SESSION_PROFILE,BOOK_DEPTH_SESSION_PROFILE,BOOK_LARGE_DEPTH_PROFILE):raise ProviderError('coordinator_profile')
   if type(book_request_id)is not int or type(trade_request_id)is not int or not 0<=book_request_id<trade_request_id<=UINT64_MAX-2:raise ProviderError('coordinator_request_ids')
-  if type(native_capacity)is not int or not 1<=native_capacity<=256 or type(native_budget)is not int or not 1<=native_budget<=67108864:raise ProviderError('coordinator_native_budget')
+  capacity_limit = 2000 if book_profile == BOOK_LARGE_DEPTH_PROFILE else 256
+  if type(native_capacity)is not int or not 1<=native_capacity<=capacity_limit or type(native_budget)is not int or not 1<=native_budget<=67108864:raise ProviderError('coordinator_native_budget')
   if not all(hasattr(gig._native,name)for name in('AggregateDepth','restore_aggregate')):raise ProviderError('coordinator_native_unsupported')
   self._book=KrakenBookAdapter(lambda **_:None,symbol=symbol,depth=depth,
    ordered_updates=True,book_session_profile=book_profile,book_request_id=book_request_id,
    price_scale=price_scale,quantity_scale=quantity_scale,stale_ns=stale_ns,origin=origin)
+  if book_profile == BOOK_LARGE_DEPTH_PROFILE and native_capacity < 2 * depth:
+   raise ProviderError('coordinator_native_budget')
   self._public=KrakenPublicSession(symbol=symbol,price_scale=price_scale,
    quantity_scale=quantity_scale,request_id=trade_request_id,snapshot=trade_snapshot,origin=origin)
   self.symbol=symbol;self.origin=origin;self.native_capacity=native_capacity;self.native_budget=native_budget
@@ -118,10 +121,10 @@ class KrakenSessionCoordinator:
  def feed(self,raw,now_ns,*,token):
   try:
    self._current(token);self._clock(now_ns)
-   if type(raw)is not str or len(raw)>MAX_PAYLOAD:raise ProviderError('payload_limit')
+   if type(raw)is not str or len(raw)>self._book.frame_limit:raise ProviderError('payload_limit')
    try:body=raw.encode('utf-8')
    except UnicodeError as exc:raise ProviderError('malformed_json')from exc
-   payload=decode(raw);source=hashlib.sha256(body).hexdigest()
+   payload=_decode_frame(raw,self._book.frame_limit);source=hashlib.sha256(body).hexdigest()
    is_status=payload.get('channel')=='status'
    if self._reconnect_required and not is_status:raise ProviderError('coordinator_reconnect_required')
    book=copy.deepcopy(self._book);public=copy.deepcopy(self._public);events=[]
