@@ -34,12 +34,11 @@ def _number(fact,parsed,graph):
  value=None if fact['nil']else sec.exact(Decimal(lexical));_value_check({**fact,'value':value},base,path,parsed['units'])
  return value
 
-def _rows(concepts,period,parsed,graph,networks):
- rows=[];points={};ctx_by_sha={v['semantic_sha256']:v for v in parsed['contexts'].values()}
+def _rows(concepts,period,period_facts,parsed,graph,networks,ctx_by_sha,document_hashes):
+ rows=[];points={}
  for concept in concepts:
-  entry=graph['concepts'][concept];decl=entry['declaration'];facts=[f for f in parsed['facts']if f['concept']==concept and tuple(parsed['contexts'][f['context_ref']]['period'][k]for k in('start','end'))==period]
-  if len(facts)>8:raise XBRLError('accounting_statement_fact_budget')
-  row={'concept':concept,'status':'MISSING','reason':'NO_REPORTED_FACT','value':None,'unit':None,'facts':copy.deepcopy(facts),'numeric_facts':[],'classification':{'basis':'ORIGINAL_SOURCE_DECLARATION','concept':concept,'declared_type':decl['type'],'period_type':decl['period_type'],'balance':decl['balance'],'accounting_metric':None,'declaration_documents':[{'uri':u,'sha256':next(d['sha256']for d in graph['documents']if d['uri']==u)}for u in entry['source_documents']]},'essence_concept':None,'equivalence_status':'NO_SOURCE_EQUIVALENCE','accounting_relationships':[]}
+  entry=graph['concepts'][concept];decl=entry['declaration'];facts=period_facts.get(concept,[])
+  row={'concept':concept,'status':'MISSING','reason':'NO_REPORTED_FACT','value':None,'unit':None,'facts':copy.deepcopy(facts),'numeric_facts':[],'classification':{'basis':'ORIGINAL_SOURCE_DECLARATION','concept':concept,'declared_type':decl['type'],'period_type':decl['period_type'],'balance':decl['balance'],'accounting_metric':None,'declaration_documents':[{'uri':u,'sha256':document_hashes[u]}for u in entry['source_documents']]},'essence_concept':None,'equivalence_status':'NO_SOURCE_EQUIVALENCE','accounting_relationships':[]}
   values={};unsupported=False
   for f in facts:
    try:value=_number(f,parsed,graph)
@@ -88,10 +87,22 @@ def _section(parsed,graph,relations,binding):
   if concept in seen:continue
   seen.add(concept);order.append(concept);pending.extend(reversed(children.get(concept,[])))
  if seen!=concepts:raise XBRLError('accounting_statement_unreachable_concept')
- periods={tuple(parsed['contexts'][f['context_ref']]['period'][k]for k in('start','end'))for f in parsed['facts']if f['concept']in concepts and parsed['contexts'][f['context_ref']]['period']['end']is not None}
- if len(periods)>MAX_PERIODS:raise XBRLError('accounting_statement_period_budget')
- for period in sorted(periods,key=lambda p:(p[1],p[0]or''),reverse=True):
-  rows,points=_rows(order,period,parsed,graph,accounting);checks=[]
+ facts_by_period={}
+ for fact in parsed['facts']:
+  if fact['concept'] not in concepts:continue
+  aspect=parsed['contexts'][fact['context_ref']]['period']
+  if aspect['end'] is None:continue
+  key=(aspect['start'],aspect['end'])
+  if key not in facts_by_period:
+   if len(facts_by_period)>=MAX_PERIODS:raise XBRLError('accounting_statement_period_budget')
+   facts_by_period[key]={}
+  reported=facts_by_period[key].setdefault(fact['concept'],[])
+  if len(reported)>=8:raise XBRLError('accounting_statement_fact_budget')
+  reported.append(fact)
+ ctx_by_sha={value['semantic_sha256']:value for value in parsed['contexts'].values()}
+ document_hashes={source['uri']:source['sha256'] for source in graph['documents']}
+ for period in sorted(facts_by_period,key=lambda p:(p[1],p[0]or''),reverse=True):
+  rows,points=_rows(order,period,facts_by_period[period],parsed,graph,accounting,ctx_by_sha,document_hashes);checks=[]
   for cn in graph['effective_relationships']['networks']:
    if cn['kind']!='calculation'or cn['role']!=role:continue
    if not cn['usable']:checks.append({'status':'UNSUPPORTED','issues':copy.deepcopy(cn['issues'])});continue
@@ -108,7 +119,7 @@ def _section(parsed,graph,relations,binding):
      checks.append({'parent':parent,'context_sha256':context,'identifier_lexical':identifier,'unit_sha256':unit,'calculation':check,'relationship_provenance':[copy.deepcopy(a['provenance'])for a in arcs]})
      if len(checks)>128:raise XBRLError('accounting_statement_calculation_budget')
   result['periods'].append({'start':period[0],'end':period[1],'rows':rows,'calculations':checks})
- result.update(status='AVAILABLE'if periods else'UNAVAILABLE',reason=None if periods else'NO_SOURCE_PERIODS',relationships=copy.deepcopy(net['arcs']))
+ result.update(status='AVAILABLE'if facts_by_period else'UNAVAILABLE',reason=None if facts_by_period else'NO_SOURCE_PERIODS',relationships=copy.deepcopy(net['arcs']))
  return result
 
 def company_accounting_statements(workspace,symbol,as_of,source_inputs,role_bindings,*,form='10-K',expected_collection_sha256=None):
