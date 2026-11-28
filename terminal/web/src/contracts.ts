@@ -7,6 +7,7 @@ export interface TerminalState {
  schema_version:'1';mode:Mode;origin:Origin;instrument:string;provider:string;venue?:string;price_scale:string;
  book:{bids:Level[];asks:Level[]};metrics:{spread:Fraction|null;midprice:Fraction|null;microprice:Fraction|null;imbalance:Fraction|null;[key:string]:unknown};
  replay_min_position?:number;position:number;event_count:number;playing:boolean;speed:number;feed:{state:string;reason?:string;[key:string]:unknown};
+ subscribed_depth?:number|null;checksum_depth?:number|null;checksum_scope?:'top_10_per_side_only'|null;
  provenance:Record<string,unknown>;source_timestamp_ns?:string|null;replay_time_ns?:string|null;received_at_ns?:string|null;
  capabilities?:Record<string,unknown>;engine?:Record<string,unknown>;diagnostics?:Record<string,unknown>;[key:string]:unknown;
 }
@@ -23,6 +24,9 @@ export function validateState(value:unknown):TerminalState {
  for(const k of ['spread','midprice','microprice','imbalance']){const f=value.metrics[k];if(f!==null&&(!isRecord(f)||typeof f.numerator!=='string'||typeof f.denominator!=='string'||!signed.test(f.numerator)||!unsigned.test(f.denominator)||BigInt(f.denominator)===0n))throw new Error('Inexact metric')}
  if(!Number.isSafeInteger(value.position)||!Number.isSafeInteger(value.event_count)||Number(value.position)<0||Number(value.event_count)<0||Number(value.position)>Number(value.event_count)||typeof value.playing!=='boolean'||typeof value.speed!=='number'||!Number.isFinite(value.speed))throw new Error('Invalid replay clock');
  if(value.replay_min_position!==undefined&&(!Number.isSafeInteger(value.replay_min_position)||Number(value.replay_min_position)<0||Number(value.replay_min_position)>Number(value.position)))throw new Error('Invalid checkpoint replay boundary');
+ if(value.subscribed_depth!==undefined&&value.subscribed_depth!==null){
+  if(![10,25,100,500,1000].includes(value.subscribed_depth as number)||value.checksum_depth!==10||value.checksum_scope!=='top_10_per_side_only')throw new Error('Invalid declared book depth');
+ }
  const state=value as unknown as TerminalState;
  partialSourceTail(state);
  return state;

@@ -348,6 +348,9 @@ class FeedSupervisor:
         age=None if not self.adapter or self.adapter.last_book_receive_ns is None else str(max(0,now-self.adapter.last_book_receive_ns))
         return {'origin':origin,'instrument':self.symbol,'source_instrument':self.symbol if self.provider=='kraken' else self.symbol.replace('/','-'),'provider':self.provider,'venue':'Kraken' if self.provider=='kraken' else 'Coinbase Exchange',
             'feed_type':'L2_AGGREGATE','price_scale':str(self.price_scale),'quantity_scale':str(self.quantity_scale),
+            'subscribed_depth':self.subscribed_depth if self.provider=='kraken' else None,
+            'checksum_depth':10 if self.provider=='kraken' else None,
+            'checksum_scope':'top_10_per_side_only' if self.provider=='kraken' else None,
             'book':{'bids':native['bids'][:self.depth] if native else [],'asks':native['asks'][:self.depth] if native else []},
             'revision':native['revision'] if native else '0','metrics':metrics,'source_timestamp_ns':self.exchange_ns,
             'received_at_ns':self.received_at_ns,'position':0,'event_count':0,'playing':False,
@@ -373,5 +376,5 @@ class FeedSupervisor:
                 'source_sequence':None,'session_segment':f'{self.provider}:{self.epoch}:{self.reconnects}',
                 'session_segment_scope':'local_capture_boundary_not_exchange_session_or_sequence','redistribution_permitted':False},
             'capabilities':{'live':self.observed_transport and self.permission is not None,'aggregate_l2':True,
-                'native_replay':True,'simulation':True,'recording':bool(self.subscribed_depth == 10 and self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
+                'native_replay':True,'simulation':True,'recording':bool(self.observed_transport and self.provider=='kraken' and self.permission and self.permission.recording_approved and self.environment.get('GIG_LIVE_RECORDING_ENABLED')=='1'),'observed_lobster':False,
                 'observed_itch':False,'order_ids':False,'fifo':False}}

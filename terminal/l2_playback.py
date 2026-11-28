@@ -39,7 +39,12 @@ def discover(directory,*,allow_observed=False):
                 'instrument':m.get('symbol'),'venue':'Kraken','records':m.get('records'),'sha256':m.get('sha256'),
                 'status':'AVAILABLE' if origin=='HISTORICAL_SYNTHETIC' or allow_observed else 'BLOCKED_PERMISSION',
                 'market_session_complete':False}
-            if m['schema'] in JOINT_SCHEMAS:item['recording_profile']=m['profile']
+            if m['schema'] in JOINT_SCHEMAS:
+                from .kraken_joint_recording import RECORDING_DEPTHS
+                session=m.get('joint_session')
+                depth=session.get('depth') if type(session)is dict else None
+                if type(depth)is not int or depth not in RECORDING_DEPTHS:raise ValueError('recording_joint_depth')
+                item.update(recording_profile=m['profile'],subscribed_depth=depth)
             result.append(item)
         except (ValueError,OSError):
             rejected.append({'identity':path.name if path.name.isascii() and len(path.name)<=48 else '<invalid>','reason':'invalid_or_unreadable_manifest'})
