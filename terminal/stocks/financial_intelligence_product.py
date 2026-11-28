@@ -1,9 +1,9 @@
 """Explicit private financial-intelligence exports; no route or source activation."""
 import copy
-from .xbrl_instance import canonical,digest,parse_instance,XBRLError
-from .xbrl_dts import discover,discover_inline_set,uri,_supplied_documents,EMBEDDED_PROFILE
+from .xbrl_instance import canonical,digest,XBRLError
+from .xbrl_dts import discover_inline_set,uri,_supplied_documents,EMBEDDED_PROFILE
 from .inline_set import parse_document_set,TRANSFORMATION_PROFILE
-from .xbrl_accounting_statements import company_accounting_statements
+from .xbrl_accounting_statements import _accounting_sources
 from .xbrl_dts_source_audit import audit_inline_dts_sources
 from .xbrl_product import company_contract
 from .xbrl_lineage import filing_lineage
@@ -60,13 +60,7 @@ def _inline_preflight(entry,stored,allow_observed,planned_identity=None,has_plan
  elif expected is not None:raise XBRLError('financial_intelligence_inline_acquisition_manifest_required')
 
 def company_source_accounting(workspace,symbol,as_of,source_inputs,role_bindings,*,form='10-K',expected_collection_sha256=None):
- packet=company_accounting_statements(workspace,symbol,as_of,source_inputs,role_bindings,form=form,expected_collection_sha256=expected_collection_sha256)
- parsed=None;graph=None
- if packet['accounting_report']is not None:
-  entry=source_inputs[packet['source_filing']['accession']];collection=workspace.xbrl_collections[symbol]
-  parsed=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=collection.allow_observed)
-  graph=discover(entry['raw'],entry['instance_uri'],parsed['source']['source_sha256'],entry['documents'],origin=collection.origin,allow_observed=collection.allow_observed,permission_reference=entry['manifest']['permission_reference'])
-  if parsed['canonical_sha256']!=packet['original_parsed_sha256']or graph['canonical_sha256']!=packet['dts_sha256']:raise XBRLError('financial_intelligence_source_changed')
+ packet,parsed,graph=_accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,form=form,expected_collection_sha256=expected_collection_sha256)
  return _finish({'schema':'gig.backend.company_source_accounting.v1','instrument':copy.deepcopy(packet['instrument']),'as_of':as_of,'cutoff_ns':packet['cutoff_ns'],'collection_sha256':packet['collection_sha256'],'status':packet['status'],'reason':packet['reason'],'accounting':packet,'source':parsed,'dts':graph,'source_confidence':copy.deepcopy(CONFIDENCE),'read_only':True,'provider_requested':False})
 
 def company_inline_audit(workspace,symbol,as_of,originals,*,form='10-K',expected_collection_sha256=None):

@@ -28,12 +28,37 @@ def recipe(*,alias='100',exact=False,extra='',**metadata):
 def prepared(*entries):
  entries=entries or(recipe(),);w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',collection(*entries))
  originals={e['manifest']['accession']:copy.deepcopy(e)for e in entries};roles={e['manifest']['accession']:{k:{'presentation_role':ROLES[k],'accounting_role':ACCOUNTING}for k in KINDS}for e in entries};return w,originals,roles
+def prepared_embedded():
+ from .xbrl_collection import FilingCollection
+ from .xbrl_dts import EMBEDDED_PROFILE
+ entry=recipe(exact=True)
+ linkbase=entry['documents'].pop()['raw']
+ schema=entry['documents'][2]['raw']
+ reference=b'<l:linkbaseRef xl:type="simple" xl:href="accounting.xml"/>'
+ assert schema.count(reference)==1
+ entry['documents'][2]=document('extension.xsd',schema.replace(reference,linkbase))
+ filings=FilingCollection('0000320193')
+ filings.ingest_dts_batch([entry],embedded_profile=EMBEDDED_PROFILE)
+ w=StockWorkspace(environment={});w.admit_xbrl_collection('AAPL',filings)
+ entry['embedded_profile']=EMBEDDED_PROFILE
+ return w,{A:entry},{A:{k:{'presentation_role':ROLES[k],'accounting_role':ACCOUNTING}for k in KINDS}}
+
 def export(w=None,inputs=None,roles=None,at=LATE,**kw):
  if w is None:w,inputs,roles=prepared()
  return company_accounting_statements(w,'AAPL',at,inputs,roles,**kw)
 def aliasrow(packet):return packet['statements'][KINDS[1]]['periods'][0]['rows'][-1]
 
 class AccountingStatements(unittest.TestCase):
+ def test_embedded_source_reconstructs_and_omitted_profile_rejects(self):
+  w,inputs,roles=prepared_embedded()
+  packet=export(w,inputs,roles)
+  self.assertEqual(packet['status'],'AVAILABLE')
+  self.assertEqual(aliasrow(packet)['equivalence_status'],'SOURCE_EQUIVALENCE_VERIFIED')
+  self.assertTrue(aliasrow(packet)['accounting_relationships'][0]['provenance'][0]['source_uri'].endswith('/extension.xsd'))
+  history=company_accounting_history(w,'AAPL',[LATE],inputs,roles)
+  self.assertEqual(history['entries'][0]['packet'],packet)
+  del inputs[A]['embedded_profile']
+  with self.assertRaisesRegex(XBRLError,'admitted_dts_mismatch'):export(w,inputs,roles)
  def test_accounting_history_cutoffs_and_whole_source_transitions(self):
   w,i,b=prepared(recipe(),recipe(alias=None,accession=B,form='10-K/A',filed='2024-02-10',accepted_at=LATE,amends_accession=A));r=company_accounting_history(w,'AAPL',['2024-01-01T00:00:00Z',EARLY,LATE],i,b);self.assertEqual([e['transition']for e in r['entries']],['UNAVAILABLE','FIRST_AVAILABLE','SOURCE_CHANGED']);self.assertEqual(aliasrow(r['entries'][2]['packet'])['status'],'MISSING');self.assertEqual(r['entries'][2]['previous_accession'],A);self.assertFalse(r['complete_history'])
   for cutoffs in([], [LATE,EARLY], [EARLY,EARLY], [EARLY]*9):

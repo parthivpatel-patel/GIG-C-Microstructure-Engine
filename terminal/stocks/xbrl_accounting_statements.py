@@ -7,8 +7,8 @@ import copy,re
 from decimal import Decimal,InvalidOperation
 from fractions import Fraction
 from . import sec
-from .xbrl_instance import X,tag,digest,canonical,parse_instance,XBRLError
-from .xbrl_dts import discover
+from .xbrl_instance import X,tag,digest,canonical,parse_instance,validate_manifest,XBRLError
+from .xbrl_dts import EMBEDDED_PROFILE,_supplied_documents,discover,uri
 from .xbrl_product import company_contract
 from .xbrl_lineage import filing_lineage
 from .xbrl_statement_set import KINDS,ACCESSION
@@ -111,6 +111,11 @@ def _section(parsed,graph,relations,binding):
  return result
 
 def company_accounting_statements(workspace,symbol,as_of,source_inputs,role_bindings,*,form='10-K',expected_collection_sha256=None):
+ packet,_,_=_accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,form=form,expected_collection_sha256=expected_collection_sha256)
+ return packet
+
+def _accounting_sources(workspace,symbol,as_of,source_inputs,role_bindings,*,form,expected_collection_sha256):
+ """Return the packet and the very same source artifacts that passed the audit."""
  for mapping in(source_inputs,role_bindings):
   if type(mapping)is not dict or len(mapping)>32 or any(type(k)is not str or not ACCESSION.fullmatch(k)for k in mapping):raise XBRLError('accounting_statement_input_mapping')
  for bindings in role_bindings.values():
@@ -122,26 +127,45 @@ def company_accounting_statements(workspace,symbol,as_of,source_inputs,role_bind
  view=company_contract(workspace,symbol,as_of,form=form,profile='accuracy-extension-v2')['statement_view'];collection=workspace.xbrl_collections.get(symbol);identity=view['collection_sha256']
  if expected_collection_sha256 is not None and expected_collection_sha256!=identity:raise XBRLError('accounting_statement_stale_collection')
  result={'schema':'gig.backend.company_accounting_statements.v1','instrument':copy.deepcopy(workspace.resolve(symbol)),'as_of':as_of,'cutoff_ns':view['cutoff_ns'],'form_family':form,'collection_sha256':identity,'status':'UNAVAILABLE','reason':view['reason'],'source_filing':copy.deepcopy(view['source_filing']),'admitted_parsed_sha256':None,'original_parsed_sha256':None,'dts_sha256':None,'lineage':None,'accounting_report':None,'statements':{},'read_only':True,'provider_requested':False,'complete_statements':False,'complete_history':False,'policy':'Explicit original-source relationships and role designations;no GAAP aliases,fact filling or additive amendment reconstruction'}
- if view['status']=='AMBIGUOUS':result['reason']='AMBIGUOUS_LATEST_FILING';return _finish(result)
+ if view['status']=='AMBIGUOUS':result['reason']='AMBIGUOUS_LATEST_FILING';return _finish(result),None,None
  source=view['source_filing']
- if source is None or collection is None:return _finish(result)
+ if source is None or collection is None:return _finish(result),None,None
  accession=source['accession'];result['lineage']=filing_lineage(collection,accession,as_of)
- if result['lineage']['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED';return _finish(result)
- if accession not in source_inputs or accession not in role_bindings:result['reason']='SELECTED_ORIGINALS_OR_ROLE_BINDINGS_NOT_SUPPLIED';return _finish(result)
+ if result['lineage']['status']!='SUPPLIED_CHAIN_RESOLVED':result['reason']='EXPLICIT_AMENDMENT_CHAIN_UNRESOLVED';return _finish(result),None,None
+ if accession not in source_inputs or accession not in role_bindings:result['reason']='SELECTED_ORIGINALS_OR_ROLE_BINDINGS_NOT_SUPPLIED';return _finish(result),None,None
  entry=source_inputs[accession]
- if type(entry)is not dict or set(entry)!={'raw','manifest','concepts','instance_uri','documents'}:raise XBRLError('accounting_statement_original_recipe')
+ required={'raw','manifest','concepts','instance_uri','documents'}
+ if type(entry)is not dict or not required<=entry.keys()<=required|{'embedded_profile'}:
+  raise XBRLError('accounting_statement_original_recipe')
+ embedded=entry.get('embedded_profile')
+ if embedded not in (None,EMBEDDED_PROFILE):raise XBRLError('accounting_statement_embedded_profile')
  if type(entry['raw'])is not bytes or len(entry['raw'])>2*1024*1024 or type(entry['documents'])is not list or len(entry['documents'])>16:raise XBRLError('accounting_statement_original_budget')
  if any(type(d)is not dict or type(d.get('raw'))is not bytes for d in entry['documents'])or len(entry['raw'])+sum(len(d['raw'])for d in entry['documents'])>8*1024*1024:raise XBRLError('accounting_statement_original_budget')
- parsed=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=collection.allow_observed);stored=collection._filings[accession]
+ # Compare immutable source and grant receipts before interpreting supplied XML.
+ stored=collection._filings[accession]
+ receipt=validate_manifest(entry['raw'],entry['manifest'],collection.allow_observed)
+ if canonical(receipt)!=canonical(source):raise XBRLError('accounting_statement_admitted_source_mismatch')
+ instance_uri=uri(entry['instance_uri'])
+ if source['source_url'] is not None and instance_uri!=source['source_url']:
+  raise XBRLError('dts_audit_original_uri_scope')
+ supplied=_supplied_documents(entry['documents'])
+ if len(supplied)!=len(entry['documents']):raise XBRLError('dts_audit_duplicate_original_uri')
+ if 'dts_corroboration' in stored:
+  retained=stored['dts_corroboration']['documents']
+  if {r['uri']:r['sha256'] for r in retained}!={key:r['sha256'] for key,r in supplied.items()}:
+   raise XBRLError('accounting_statement_admitted_dts_mismatch')
+ parsed=parse_instance(entry['raw'],entry['manifest'],entry['concepts'],allow_observed=collection.allow_observed)
+ if parsed['concept_profile_sha256']!=stored['concept_profile_sha256']:
+  raise XBRLError('accounting_statement_admitted_concept_profile_mismatch')
  if canonical(parsed['source'])!=canonical(source)or any(canonical(parsed[k])!=canonical(stored[k])for k in('facts','contexts','units')):raise XBRLError('accounting_statement_admitted_source_mismatch')
- graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=collection.allow_observed,permission_reference=entry['manifest']['permission_reference'])
+ graph=discover(entry['raw'],entry['instance_uri'],source['source_sha256'],entry['documents'],origin=source['origin'],allow_observed=collection.allow_observed,permission_reference=entry['manifest']['permission_reference'],embedded_profile=embedded)
  if 'dts_corroboration'in stored and stored['dts_corroboration']['dts_sha256']!=graph['canonical_sha256']:raise XBRLError('accounting_statement_admitted_dts_mismatch')
- relations=extract_accounting_relationships(parsed,graph,entry['raw'],entry['documents'],manifest=entry['manifest'],concepts=entry['concepts'],instance_uri=entry['instance_uri'],allow_observed=collection.allow_observed)
+ relations=extract_accounting_relationships(parsed,graph,entry['raw'],entry['documents'],manifest=entry['manifest'],concepts=entry['concepts'],instance_uri=instance_uri,allow_observed=collection.allow_observed,embedded_profile=embedded)
  if relations.get('complete_definition_scope')is not True:raise XBRLError('accounting_statement_definition_scope')
  result.update(accounting_report=relations,original_parsed_sha256=parsed['canonical_sha256'],admitted_parsed_sha256=stored['canonical_sha256'],dts_sha256=graph['canonical_sha256'])
  for kind in KINDS:result['statements'][kind]=_section(parsed,graph,relations,role_bindings[accession][kind])
  available=sum(v['status']=='AVAILABLE'for v in result['statements'].values());result.update(status='AVAILABLE'if available==3 else'PARTIAL'if available else'UNAVAILABLE',reason=None if available==3 else'SOME_SOURCE_VIEWS_UNAVAILABLE')
- return _finish(result)
+ return _finish(result),parsed,graph
 
 def company_accounting_history(workspace,symbol,cutoffs,source_inputs,role_bindings,*,form='10-K',expected_collection_sha256=None):
  if type(cutoffs)is not list or not 1<=len(cutoffs)<=8:raise XBRLError('accounting_history_cutoff_budget')

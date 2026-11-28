@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 def forbidden(*args,**kwargs):raise AssertionError('NO_APPLICATION_OR_NETWORK')
 socket.socket.bind=forbidden;socket.socket.connect=forbidden;socket.socket.connect_ex=forbidden
-from terminal.stocks.test_xbrl_accounting_statements import recipe,prepared,EARLY,LATE,A,B
+from terminal.stocks.test_xbrl_accounting_statements import recipe,prepared,prepared_embedded,EARLY,LATE,A,B
 from terminal.stocks.test_xbrl_dts import document
 from terminal.stocks.test_inline_dts_source_audit import inputs
 from terminal.stocks.xbrl_collection import FilingCollection
@@ -22,6 +22,7 @@ def fixtures():
  accounting=[]
  for name,entry in [('reported',recipe()),('exact',recipe(exact=True)),('conflicting',recipe(alias='101')),('missing',recipe(alias=None))]:
   w,i,b=prepared(entry);accounting.append([name,company_source_accounting(w,'AAPL',LATE,i,b)])
+ w,i,b=prepared_embedded();accounting.append(['embedded',company_source_accounting(w,'AAPL',LATE,i,b)])
  e=recipe();d=e['documents'][2];e['documents'][2]=document('extension.xsd',d['raw'].replace(b'id="CashFlowTotal" name="CashFlowTotal" type="x:monetaryItemType"',b'id="CashFlowTotal" name="CashFlowTotal" type="x:stringItemType"'))
  w,i,b=prepared(e);accounting.append(['unsupported',company_source_accounting(w,'AAPL',LATE,i,b)])
  w,i,b=prepared(recipe(),recipe(alias=None,accession=B,form='10-K/A',filed='2024-02-10',accepted_at=LATE,amends_accession=A))

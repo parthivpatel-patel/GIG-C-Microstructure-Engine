@@ -31,6 +31,12 @@ for(const [name,p]of generated.inline)test(`full strict admission of actual Pyth
 
 test('rehash helper retains every unmodified valid Python export',async()=>{for(const [kind,entries]of [['accounting',generated.accounting],['inline',generated.inline]]as const)for(const [name,original]of entries){const packet=seal(clone(kind,name));assert.deepEqual(packet,original);await(kind==='accounting'?verifySourceAccounting(strict(packet),'AAPL','0000320193'):verifyInlineAudit(strict(packet),'AAPL','0000320193'))}});
 
+test('embedded accounting profiles and schema receipts must agree after rehashing',async()=>{
+ await rejected('accounting','embedded',p=>{p.accounting.accounting_report.source_audit.embedded_profile=null});
+ await rejected('accounting','embedded',p=>{p.dts.embedded_linkbases[0].source_sha256='0'.repeat(64)});
+ await rejected('accounting','embedded',p=>{p.dts.embedded_linkbases.push(structuredClone(p.dts.embedded_linkbases[0]))});
+});
+
 const accountingAttacks:[string,string,(p:Packet)=>void][]=[
  ['reported','fabricated supported row amount',p=>{rows(p)[0].value='999999'}],
  ['reported','fabricated source numeric amount',p=>{rows(p)[0].numeric_facts[0].value='999999'}],
