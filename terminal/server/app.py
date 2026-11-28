@@ -204,7 +204,8 @@ def create_app(stock_workspace=None, *, paper_workspace=None, historical_client=
         require_history_transport()
         history_transport=HTTPWire(require_history_transport,lambda:stocks.permission('alpaca'),history_plan)
     except ValueError:pass
-    historical=historical_client or HistoricalClient(history_transport,permission=history_permission,identity=stocks.market_identity,schedule=stock_live.schedule)
+    historical=historical_client or HistoricalClient(history_transport,permission=history_permission,identity=stocks.market_identity,schedule=stock_live.schedule,
+        permission_source=lambda:HistoricalPermission.configured(stocks.environment))
     app.state.historical=historical
     from terminal.paper.provider_workspace import PaperProviderWorkspace
     def current_paper_reference(symbol):

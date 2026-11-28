@@ -108,9 +108,10 @@ def validate_plan(method,url,body=None):
 
 
 class HistoricalClient:
-    def __init__(self,transport=None,*,permission=HistoricalPermission(),clock=time.time,monotonic=time.monotonic,sleep=asyncio.sleep,identity=None,schedule=None,clock_ns=None,random_source=random.random):
+    def __init__(self,transport=None,*,permission=HistoricalPermission(),clock=time.time,monotonic=time.monotonic,sleep=asyncio.sleep,identity=None,schedule=None,clock_ns=None,random_source=random.random,permission_source=None):
         if transport is not None and type(transport) not in (FixtureWire,HTTPWire):raise WireError('history_transport_boundary')
         self.transport,self.permission=transport,permission
+        self.permission_source=permission_source
         self.clock,self.monotonic,self.sleep=clock,monotonic,sleep
         self.random_source=random_source
         self.now_ns=clock_ns or (time.time_ns if clock is time.time else lambda:int(Decimal(str(clock()))*10**9))
@@ -118,18 +119,28 @@ class HistoricalClient:
         self.schedule=schedule or SessionSchedule()
         self.lock=asyncio.Lock();self.cache=OrderedDict();self.backfill_cursors=OrderedDict();self.last_request=None;self.failures=0
         self._cache_permission=permission;self._cache_transport=transport
+    def _current_permission(self):
+        return self.permission if self.permission_source is None else self.permission_source()
+
+    def _require(self,feed):
+        if self._current_permission()!=self.permission:
+            self.prune()
+            raise WireError('history_source_configuration_changed')
+        self.permission.require(feed)
+
     def readiness(self):
         self.prune()
         feeds=[];reasons=[]
         for f in ('iex','sip'):
-            try:self.permission.require(f);feeds.append(f)
+            try:self._require(f);feeds.append(f)
             except WireError as e:reasons.append(e.code)
         return {'schema':'gig.history.readiness.v2','ready':bool(feeds and self.transport),'feeds':feeds,'provider_access_enabled':bool(feeds and self.transport),'transport':'AUTHORED_FIXTURE' if type(self.transport)is FixtureWire else 'DISABLED' if self.transport is None else 'CONFIGURED_HTTP_NOT_QUALIFIED','reason':None if feeds and self.transport else reasons[0] if reasons else 'explicit_server_transport_required','cache_entries':len(self.cache),'cache_limit':16,'ttl_seconds':60,'observed_disk_retention_enabled':False,'export_ready':type(self.transport)is FixtureWire or self.permission.export_approved,'licensing':'Specific cloud/display/feed permission must be configured;configuration is not independent provider qualification.'}
     def prune(self):
-        if self._cache_permission!=self.permission or self._cache_transport is not self.transport:
+        permission=self._current_permission()
+        if self._cache_permission!=permission or self._cache_transport is not self.transport:
             self.cache.clear()
             self.backfill_cursors.clear()
-            self._cache_permission,self._cache_transport=self.permission,self.transport
+            self._cache_permission,self._cache_transport=permission,self.transport
         now=self.monotonic()
         for key,(accepted,_) in list(self.cache.items()):
             if not 0<=now-accepted<60:del self.cache[key]
@@ -147,14 +158,14 @@ class HistoricalClient:
         self.prune()
         for _,v in self.cache.values():
             if v['canonical_sha256']==identity:
-                self.permission.require(v['feed'])
+                self._require(v['feed'])
                 return json.loads(canonical(v))
         raise WireError('history_accepted_revision_unavailable_or_expired')
     async def _fetch(self,url,query,transport,permission):
         def require_current():
             if self.transport is not transport or self.permission!=permission:
                 raise WireError('history_source_configuration_changed')
-            permission.require(query['feed'])
+            self._require(query['feed'])
         for attempt in range(3):
             now=self.monotonic()
             if self.last_request is not None:
@@ -184,7 +195,7 @@ class HistoricalClient:
         return await self._acquire(query,scope=gap_id,after_revision=after_revision)
 
     async def _acquire(self,query,*,scope=None,after_revision=None):
-        now_ns=self.now_ns();q=validate_query(query,now_ns);self.permission.require(q['feed'])
+        now_ns=self.now_ns();q=validate_query(query,now_ns);self._require(q['feed'])
         transport,permission=self.transport,self.permission
         if transport is None:raise WireError('history_provider_transport_disabled')
         self.identity(q['symbol'])
@@ -212,7 +223,7 @@ class HistoricalClient:
                 start,end=ns(q['start']),ns(q['end'])
                 for page in range(limit):
                     # Delay is checked again before every request;never change feed.
-                    self.permission.require(q['feed']);validate_query(q,self.now_ns())
+                    self._require(q['feed']);validate_query(q,self.now_ns())
                     # Alpaca's wire end is inclusive. Keep the public query half-open.
                     params={'symbols':q['symbol'],'start':q['start'],'end':utc(end-1),'feed':q['feed'],'limit':64,'sort':'asc'}
                     if q['kind']=='bars':params.update(timeframe=q['timeframe'],adjustment=q['adjustment'])
