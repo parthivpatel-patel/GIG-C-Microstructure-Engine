@@ -104,7 +104,7 @@ class LiveIEX:
         self.restored_control=None
         self.restored_backfill_endpoints={}
         self.backfill_anchors={}
-        self.trade_history=[]
+        self.trade_history={};self.trade_seen={}
         self._observation_permission_reference=None
         self._socket_permission=None
         if self.store and workspace.environment.get('GIG_ALPACA_RECOVER_CONTROL')=='1':self.restore_control()
@@ -194,7 +194,7 @@ class LiveIEX:
         prior=self._observation_permission_reference
         if prior is not None and prior!=reference:
             self.evicted+=len(self.history)
-            self.history=[];self.trade_history=[];self.seen=[];self.latest={}
+            self.history=[];self.trade_history={};self.trade_seen={};self.seen=[];self.latest={}
             self.backfill_anchors={};self.restored_backfill_endpoints={}
         self._observation_permission_reference=reference
 
@@ -214,7 +214,7 @@ class LiveIEX:
         phase,latest,seen,count,dups,last,history,late_count,evicted=candidate;out=[];received=self.clock();wall_ns=int(self.wall()*10**9)
         rows=unpack(raw)
         anchors=dict(self.backfill_anchors)
-        trade_history=list(self.trade_history)
+        trade_history=dict(self.trade_history);trade_seen=dict(self.trade_seen)
         from .iex_backfill import retain_anchor
         import msgpack
         frame_sha256=hashlib.sha256(raw).hexdigest()
@@ -244,8 +244,10 @@ class LiveIEX:
                     phase='SUBSCRIBED'
                 if pending is None:
                     anchors={key:points for key,points in anchors.items() if key[0] in symbols and key[1] in channels}
-                    trade_history=[event for event in trade_history
-                                   if 'trades'in channels and event['generation']==generation and event['symbol']in symbols]
+                    allowed_trade_symbols=set(symbols) if 'trades'in channels else set()
+                    trade_history={symbol:window for symbol,window in trade_history.items()
+                                   if symbol in allowed_trade_symbols and window and window[-1]['generation']==generation}
+                    trade_seen={symbol:keys for symbol,keys in trade_seen.items() if symbol in trade_history}
             elif t in ('q','t','b','c','x'):
                 if phase!='SUBSCRIBED' or row.get('S') not in symbols:raise ProtocolError('unsubscribed_observation')
                 source_time=stamp(row.get('t'));ns=int(timestamp_ns(source_time))
@@ -274,8 +276,11 @@ class LiveIEX:
                 # deterministic map-key order so a provider reordering fields
                 # cannot repeat an otherwise identical trade or correction.
                 dedup_key=hashlib.sha256(msgpack.packb(dict(sorted(row.items())))).hexdigest()
-                if dedup_key in seen:dups+=1;continue
+                retained_trade_keys=trade_seen.get(ticker,()) if channel=='trades' else ()
+                if dedup_key in seen or dedup_key in retained_trade_keys:dups+=1;continue
                 seen=(seen+[dedup_key])[-256:]
+                if channel=='trades':
+                    trade_seen[ticker]=(*retained_trade_keys[-255:],dedup_key)
                 identity=hashlib.sha256(msgpack.packb(row)).hexdigest()
                 if count>=2**53-2:raise ProtocolError('receipt_exhausted')
                 count+=1;last=received
@@ -284,8 +289,8 @@ class LiveIEX:
                 if not late:latest[ticker+':'+kind]=event
                 retain_anchor(anchors,event,channel)
                 if channel=='trades':
-                    trade_history.append(event)
-                    if len(trade_history)>256:trade_history.pop(0)
+                    retained=trade_history.get(ticker,())
+                    trade_history[ticker]=(*retained[-255:],event)
                 history.append(event)
                 if len(history)>256:history.pop(0);evicted+=1
                 out.append(event)
@@ -300,7 +305,7 @@ class LiveIEX:
             except (ValueError,OSError):raise ProtocolError('observation_storage_rejected_frame') from None
         self.phase,self.latest,self.seen,self.receipts,self.duplicates,self.last_data,self.history,self.out_of_order,self.evicted,self.symbols,self.channels,self.generation,self.pending=prepared
         self.backfill_anchors=anchors
-        self.trade_history=trade_history
+        self.trade_history=trade_history;self.trade_seen=trade_seen
         return out
     def view(self):
         from .live_metrics import metrics
@@ -329,9 +334,10 @@ class LiveIEX:
         live_eligible=allowed and (self.connector is not None or self._socket_scope_current(keys))
         rows=[present(e) for e in self.latest.values()]if live_eligible else []
         history=[present(e) for e in observations if e['symbol'] in self.symbols]
-        trade_rows=[e for e in self.trade_history if e['symbol'] in self.symbols and e['generation']==self.generation]if allowed else []
-        adjusted={e['symbol']for e in trade_rows if e['kind']in('correction','cancel')}
-        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':durable,'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'trade_reconciliation_history_limit':256,'retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(trade_rows,s,self.generation,cancellation_contract=cancel_profile) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts,'control_checkpoint':self.restored_control,'durable_control_enabled':retention},'metrics':{s:metrics(observations,s,self.generation,trade_actions_retained=s in adjusted) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'last_failure':dict(self.failure_context)if self.failure_context else None,'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['256-identity dedup and256-event retention,not complete tape/exactly-once','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
+        trade_rows={s:[event for event in self.trade_history.get(s,())
+                       if event['generation']==self.generation] for s in self.symbols} if allowed else {}
+        adjusted={s for s,window in trade_rows.items() if any(e['kind']in('correction','cancel') for e in window)}
+        return {'schema':'gig.alpaca.live.v1','source_session_id':self.source_session_id,'durable_observations':durable,'state':self.state,'phase':self.phase,'symbols':list(self.symbols),'channels':list(self.channels),'generation':self.generation,'connection_count':self.connection_count,'subscription_transition':{'state':self.pending['step'],'symbols':list(self.pending['symbols'])} if self.pending else None,'accepted_observations':self.receipts,'duplicate_observations':self.duplicates,'out_of_order_observations':self.out_of_order,'retained_history_limit':256,'trade_reconciliation_history_limit':256,'trade_reconciliation_history_scope':'PER_SYMBOL_CURRENT_GENERATION','retention_evictions':self.evicted,'history':history,'readiness':ready,'trade_reconciliation':{s:reconcile(trade_rows.get(s,[]),s,self.generation,cancellation_contract=cancel_profile) for s in self.symbols},'recovery':{'worker_state':self.state,'phase':self.phase,'generation':self.generation,'requires_fresh_observation':not any(r['state']in ('LIVE','SIMULATED')for r in rows),'hot_l3_restored':False,'source_loss':'UNKNOWN_NO_EXCHANGE_SEQUENCE','accepted_receipt':self.receipts,'control_checkpoint':self.restored_control,'durable_control_enabled':retention},'metrics':{s:metrics(observations,s,self.generation,trade_actions_retained=s in adjusted) for s in self.symbols},'session_evidence':{s:self.schedule.at(s,next((r['timestamp'] for r in reversed(history) if r['symbol']==s and r['generation']==self.generation),None)) for s in self.symbols},'sessions':{s:market_window(next(r['timestamp'] for r in reversed(history) if r['symbol']==s)) if any(r['symbol']==s for r in history) else {'authority':'No source observations;market open/closed unavailable'} for s in self.symbols},'symbol_health':{s:{'state':next((state for state in ('LIVE','SIMULATED','STALE') if any(r['symbol']==s and r['state']==state for r in rows)),'WAITING_OR_UNAVAILABLE'),'retained_current_generation':sum(r['symbol']==s and r['generation']==self.generation for r in history),'clock_authority':'Source/receive clocks unsynchronized;no exchange latency claim'} for s in self.symbols},'retry_policy':{'maximum_consecutive_failures':self.retry_budget,'reset_after_stable_subscribed_seconds':self.stable_seconds,'one_observation_is_not_stability':True},'last_failure':dict(self.failure_context)if self.failure_context else None,'consecutive_failures':self.failures,'reason':self.reason,'observations':rows,'authorization':'existing provider gates plus explicit live enable;not independent entitlement verification','backpressure':{'websocket_frame_capacity':4,'frame_bytes_limit':32768,'queue_depth':'NOT_INSTRUMENTED','missing_source_observations':'UNKNOWN_NO_EXCHANGE_SEQUENCE'},'limitations':['Bounded 256-event display window and 256 trade/action identities per subscribed symbol;no complete tape or exactly-once claim','No exchange sequence or market-open/calendar authority inferred','Corrections/cancels are observations;trade-derived volume not reconciled','In-place unsubscribe-all/subscribe handover has an explicit observation gap;not atomic exchange capture','No observed acceptance from offline fixtures']}
     async def start(self,symbols,channels=None):
         async with self.command_lock:return await self._start(symbols,channels)
     async def _start(self,symbols,channels=None):
